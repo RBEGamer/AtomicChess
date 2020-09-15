@@ -42,7 +42,40 @@ The goal of the buildroot system for the ATC Project is, to build a working/ rea
 * make and make clean
 
 ## BASIC CONFIGURATION
-* file system size
+
+To create a basic configuration buildroot provied a set of template boards/architectures to setup a minimal running configuration.
+All avariable configuration can be found in the boards folder `./buildroot/board`. Our Target Sytem is the RaspberryPi 3b+, there is a template for this already in the board folder and can be loaded with the `make <BOARD_NAME>_defconfig`. After running `$ make raspberrypi3_defconfig`, the buildroot config file `./buildroot/.config` contains all needed parameters and packages.
+
+The important basic configuration points are the following:
+* `Target options -> Target Architecture`, the RPI uses an ARM CPU, so the setting is set to `ARM (little endian)`
+* `Target options -> Target Architecture Variant`, defines the specific CPU Model. In the RPI3b+ case its an `Cortex A53`
+
+
+?? WHAT IS A DEVICE TREE ??
+* `Kernel -> Device Tree Settings`, this point defines which device tree to build. In this case the predefined device tree `bcm-2710-rpi3b` is used. The DTB (DeviceTreeBinary) Files are downloaded from the RaspberryPi-Firmware GitHub-Repository automaticly form buildroot.
+
+* `Kernel -> Kernel Version`, in this case the precompiled kernel was used which are downloaded form the RaspberryPi-GitHub-Repository.
+
+These a re basic nedded configuration items to setup a minimum booting system. Also buildroot generates a cross-compiler for the host syetem. So its possible to build software for the target-system. 
+
+The next step is the system configuration adn the target packages configuration
+
+
+## SYSTEM CONFIGURATION,
+The system configuration allows to setup a root user, password, which keyboard layout should be used,...
+
+
+# TARGET PACKAGES CONFIGURATION
+
+
+
+### FILE SYSTEM SIZE
+The QT libraries and the other needed libraries are quite large in size. For the full QT5 with QT3D and the Virtual Keyboard and the nedded QuickControls II the rootfs file system is about 230MB. The default setting is about 128MB. So buildroot can not build the final image beacuas its not enought space. To increase the rootfs maximum size, buildroot provides a size option under `Filesystem images -> root filesystem -> exact size`. With the SPACEBAR_KEY its possible to edit the default value to 512M. A Zero for automatic determination is not supported.
+
+The `Fileystem images` category, provides several other options for the rootfs. Its also possible to create a readonly filesystem or a compressed one. For debudding purposes, the readonly filesystem option is disabled. All other settings are the default settings.
+
+After building a complete image the size is about 270mb in Size, this includes the bootloader, os with all libraries and packages with the ATC needed programs (UI, Communication Client).
+
 * networking
 * ssh enable; audio_enable, qt5 enable
 * disable password
