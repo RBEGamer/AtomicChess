@@ -58,11 +58,25 @@ The important basic configuration points are the following:
 
 These a re basic nedded configuration items to setup a minimum booting system. Also buildroot generates a cross-compiler for the host syetem. So its possible to build software for the target-system. 
 
-The next step is the system configuration adn the target packages configuration
+The next step is the system configuration and the target packages configuration.
+
+## TOOLCHAIN
+
+The buildroot framework does not only build a image for the target device, it also build all nessessary tools for build software for the target. This software collection is called toolchain and in runnung on the host system. On the target plattform is no compiler or build system installed, so its nit possible to compile software directly on the target, with an buildroot image.
+
+** SITENOTE:
+With the standart raspian os for the raspberry pi, its possible to install an compiler like gcc and a buildsystem like make, directly on the raspberry pi.
+
 
 
 ## SYSTEM CONFIGURATION,
 The system configuration allows to setup a root user, password, which keyboard layout should be used,...
+
+The `System-Configuration` Settings comes also with predefined values. There are only some which needed to be modified.
+
+* `System-Configuration -> Networkinterface DHCP`, this setting defined the Ethernet Interface to enable at startup and using a DHCP Server to obtain a IPv4 Adress. The value on a stock RPI3b+ can be ETH0 (LAN) or wlan0 for Wifi. The ATC_Table is using ethernet as its main network interface so `eth0` is the right choice.
+
+* `System-Configuration -> Root filesystem overlay dir`, this filepath represents the Overlay Directory and is a custom Folder. All files in this directory will be copies into the final image rootfs and replaces existing files. In our case, this will be used for the wifi configuration and other ssh configuration files. ?? WHICH ONE
 
 
 # TARGET PACKAGES CONFIGURATION
