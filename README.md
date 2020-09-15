@@ -58,6 +58,8 @@ The important basic configuration points are the following:
 
 These a re basic nedded configuration items to setup a minimum booting system. Also buildroot generates a cross-compiler for the host syetem. So its possible to build software for the target-system. 
 
+
+
 The next step is the system configuration and the target packages configuration.
 
 ## TOOLCHAIN
@@ -74,7 +76,7 @@ For development, we need a C++ compiler and a debugger. The GDB Debugger has to 
 * `Toolchain -> Enable C++ support` -> enables the gcc and g++ compiler with the make build system
 * `Toolchain -> Build Cross GDB` -> build the GDB Debugger for host and target
 
-All other settings are the default settings. Its also possible to register the toolchain to an IDE linke Eclipse for easier setup on the hist side.
+All other settings are the default settings. Its also possible to register the toolchain to an IDE linke Eclipse for easier setup on the host side.
  
 
 ## SYSTEM CONFIGURATION,
@@ -84,15 +86,66 @@ The `System-Configuration` Settings comes also with predefined values. There are
 
 * `System-Configuration -> Networkinterface DHCP`, this setting defined the Ethernet Interface to enable at startup and using a DHCP Server to obtain a IPv4 Adress. The value on a stock RPI3b+ can be ETH0 (LAN) or wlan0 for Wifi. The ATC_Table is using ethernet as its main network interface so `eth0` is the right choice.
 
-* `System-Configuration -> Root filesystem overlay dir`, this filepath represents the Overlay Directory and is a custom Folder. All files in this directory will be copies into the final image rootfs and replaces existing files. In our case, this will be used for the wifi configuration and other ssh configuration files. ?? WHICH ONE
+* `System-Configuration -> Root filesystem overlay dir`, this filepath represents the Overlay Directory and is a custom Folder. All files in this directory will be copies into the final image rootfs and replaces existing files. In our case, this will be used for the wifi configuration and other ssh configuration files.
+
+?? WHICH ONE ??
+### /DEV MANAGEMENT
+
+The setting for the /dev managemtns is very important! The ATC_OS need user interaction thought an input device, like a mouse, keyboard or a touchscreen. By default the udev is disbaled on the system, so its not possible to simply adding a touchscreen input to the system.
+
+* `System Configuration -> /dev management (devtmpfs + eudev)`, enables udev subsystem
+
+UDEV basicly handles the events coming from an input source (Keyboard,.., plugged Harddrive) and performing tasks based in this inputs.
+On task is to load a driver if can keyboard is attached though an usb port. In our case its used to access the touchscreen, after connecting the display via the DSI Interface to the Raspberry Pi, udev loads the FT5406 Touchscreen IC driver and make it accessable as `/dev/input/mouse1`.
 
 
-# TARGET PACKAGES CONFIGURATION
+
+## TARGET PACKAGES CONFIGURATION
 
 The target package configuration allows to install software and libraries on the target. For example we want to install an ftp server onto the target. In the target packages we can select the ftpserver packe and all other needed dependencies will be installed too.
 Its a very simple process, just select the software and all other needed packages will selected too.
 
-In the case of the ATC_Os
+### QT5
+The most important library is the QT5 framework.
+The UserInterface of the ATC_OS is based on QT5 with the QuickControls II extention, so a QT Version > 5.7 is needed to enable this feature.
+Buildroot supports the QT5.6 LTS version and the latest QT5.12 version by default. So here we have simply to enable the QT5 packge with all extetion packages.
+
+After enabling the QT5 packge, buildroot automaticly enabled EGLFS as grahpics backend. The backend is needed to enable application to render and show graphics on the screen. EGLFS is able to make use of the GPU for graphics acceleration and is needed by the QT5 QuickControl II Extention to render animations.
+
+QT5 alone is able to use other graphics backend too, for example the directfb. the directfb is the simplest graphics backend provied by the linux system, and it can be used for very simple applications.
+
+
+?? WHAT IS AGRAPIC BACKEND ??
+?? IMAGE OF ALL SELECTED PACKAGES ??
+
+
+* `Target Packages -> Graphic -> QT5`, enabled QT5 
+* `Target Packages -> Graphic -> QT5 -> Default Graphic Plattform (ELGFS)`, set the default graphic backend to ELGFS for Hardware Graphics Acceleration
+
+
+### SSH
+In the case of the ATC_OS we need a ssh server to connect to the target via ethernet. This allows the remote debugging and development of the software. Most IDE support the deployment of the build software over ssh to a target system. So a ssh and sftp server is essential for development.
+
+Buildroot provides the SSH and SFTP server in seperate packages:
+
+* `Target Packages -> Networking Applications -> gsftpserver`, enable the SFTP Server, for file transfers
+* `Target Packages -> Networking Applications -> dropbear`, ebake the SSH Server, for a secure shell
+
+A NTP client will also be installed, so the target system can fetch the correct time over a NTP Server.
+This is needed for a successful SSH HTTP Request the ATC_CommuncicationClient is used to the chess server.
+With incorrect time setting, the Client/Server is not able to verify a SSL Certificate.
+
+
+
+### MISC PACKAGES
+In the development phase its useful to install some other software packages to the target system:
+
+* `Target Packages -> Text editors -> nano`, install a simple text editor
+* `Target Packages -> Networking Applications -> rsync`, proves simple file sync (also used by QT if avariable)
+* `Target Packages -> System Tools -> htop`, a better taskmanager as the top application
+
+There are some more applications and libraries for development and testing installed, but the system is working with these mentioned above.
+
 
 
 ### FILE SYSTEM SIZE
@@ -102,9 +155,7 @@ The `Fileystem images` category, provides several other options for the rootfs. 
 
 After building a complete image the size is about 270mb in Size, this includes the bootloader, os with all libraries and packages with the ATC needed programs (UI, Communication Client).
 
-* networking
-* ssh enable; audio_enable, qt5 enable
-* disable password
+
 
 ## ADDING OWN PACKAGES 
 * how to create a own packes
@@ -115,8 +166,10 @@ After building a complete image the size is about 270mb in Size, this includes t
 * usage in buildroot to modify the final filesystem
 * concrete usage here, with ssh keys
 
+?? IMAGE OF THE OVERLAY DIAGRAM ??
 
 ## TOUCHSCREEN CONFIGURATION
+* /dev managemtnw wurde eingerichtet
 * which type
 * what is a device tree
 * how to modify
