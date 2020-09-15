@@ -64,10 +64,18 @@ The next step is the system configuration and the target packages configuration.
 
 The buildroot framework does not only build a image for the target device, it also build all nessessary tools for build software for the target. This software collection is called toolchain and in runnung on the host system. On the target plattform is no compiler or build system installed, so its nit possible to compile software directly on the target, with an buildroot image.
 
-** SITENOTE:
+### SITENOTE_TOOLCHAIN:
 With the standart raspian os for the raspberry pi, its possible to install an compiler like gcc and a buildsystem like make, directly on the raspberry pi.
 
+In the `Toolchain` Menu, its possible to setup, all parameters for the host toolchain that buildroot builds, together with the target image.
+For example its possible to install a GCC or a Fortran compiler into the toolchain.
+For development, we need a C++ compiler and a debugger. The GDB Debugger has to be installed on the target and on the host. Buildroot selects the right version for host and target.
 
+* `Toolchain -> Enable C++ support` -> enables the gcc and g++ compiler with the make build system
+* `Toolchain -> Build Cross GDB` -> build the GDB Debugger for host and target
+
+All other settings are the default settings. Its also possible to register the toolchain to an IDE linke Eclipse for easier setup on the hist side.
+ 
 
 ## SYSTEM CONFIGURATION,
 The system configuration allows to setup a root user, password, which keyboard layout should be used,...
@@ -81,6 +89,10 @@ The `System-Configuration` Settings comes also with predefined values. There are
 
 # TARGET PACKAGES CONFIGURATION
 
+The target package configuration allows to install software and libraries on the target. For example we want to install an ftp server onto the target. In the target packages we can select the ftpserver packe and all other needed dependencies will be installed too.
+Its a very simple process, just select the software and all other needed packages will selected too.
+
+In the case of the ATC_Os
 
 
 ### FILE SYSTEM SIZE
