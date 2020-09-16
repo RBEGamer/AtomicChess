@@ -1,2 +1,21 @@
 # AtomicChessOS
-The RPI OS for the Atomic Chess Project
+
+## ATC Server
+
+This branch contains the main server application for the ATC System.
+The server contains several microservices:
+
+* BACKEND (COORDINATES MATCHMAKING AND PLAYER COMMUNICATION)
+* AI PLAYER ()
+* CHESS RULE MOVEMENT VALIDATOR (CHECKS THE PLAYERS MOVEMENT AGAINST THE CHESS RULES)
+* MONGO DATABSE (PLAYER DATA STORAGE)
+* REDIS DATABASE (SESSION STORAGE)
+
+Every service is running in a docker container for easy deployment.
+
+## GENERAL OVERVIEW DIAGRAM
+## DESCIBE EVERY SERVICE
+### MAIN TASK; COMMINUCATION WITH THE OTHER SERVICES
+### FOR BACKEND FUNKTION DIAGRAM
+
+## BASIC ABLAUF DIAGRAMM FOR TWO PLAYERS
