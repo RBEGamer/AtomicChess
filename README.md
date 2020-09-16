@@ -19,3 +19,5 @@ Every service is running in a docker container for easy deployment.
 ### FOR BACKEND FUNKTION DIAGRAM
 
 ## BASIC ABLAUF DIAGRAMM FOR TWO PLAYERS
+
+## HOW TO RUN EVERYTHING
