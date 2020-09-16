@@ -1,0 +1,7 @@
+config BR2_PACKAGE_ATCTP
+    bool "ATC_TEST_PACKAGE"
+    help
+        This package is a test package for verify the buildroot build process using git fetch
+
+        http://marcelochsendorf.com
+
