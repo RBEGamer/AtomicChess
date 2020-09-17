@@ -1,6 +1,7 @@
 menu "AtomicChessPackages"
 	source "package/atcgui/Config.in"
 	source "package/atctp/Config.in"
+	source "package/atcctl/Config.in"
 endmenu
 
 
