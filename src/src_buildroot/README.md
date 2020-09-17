@@ -1,6 +1,3 @@
-# AtomicChessOS
-
-
 # BRANCH - BUILDROOT
 
 This branch contains the buildroot framework to build the AtomicChessOS.
@@ -9,12 +6,16 @@ The buildroot configuration is stored under `./buildroot/.config`
 
 
 
-## CONFIGURATION NOTES
+# NOTES
 
-The configuration of the buildroot system was a bit difficult. There are a few dependencies eg for the touchscreen which have to be checkes manually.
+The configuration of the buildroot system was a bit difficult. 
+There are a few dependencies eg for the touchscreen which have to be checkes manually.
 The goal of the buildroot system for the ATC Project is, to build a working/ ready to use image, which contains all needed software to drive a ATC Table.
+
 For this purpose, three custom buildroot packages were created, to intregrate the needed ATC Software into the final SD-Card image.
-The final SD Card image, can directly flashed to the RaspberryPi and the build cross plattform compiler toolchain can be used to develop software on the host computer and run it on the target hardware. This setup was used in the whole software development process. Especially for the gui application. QT5 needs this cross compile toolchain to compile the application successful.
+The final SD Card image, can directly flashed to the RaspberryPi and the build cross plattform compiler toolchain can be used to develop software on the host computer and run it on the target hardware. 
+
+This setup was used in the whole software development process. Especially for the gui application. QT5 needs this cross compile toolchain to compile the application successful.
 
 
 ## OVERVIEW BUILDROOT
@@ -44,6 +45,12 @@ Buildroot supports numerous processors and their variants; it also comes with de
 
 To create a basic configuration buildroot provied a set of template boards/architectures to setup a minimal running configuration.
 All avariable configuration can be found in the boards folder `./buildroot/board`. Our Target Sytem is the RaspberryPi 3b+, there is a template for this already in the board folder and can be loaded with the `make <BOARD_NAME>_defconfig`. After running `$ make raspberrypi3_defconfig`, the buildroot config file `./buildroot/.config` contains all needed parameters and packages.
+
+Buildroot offer a terminal based grahpical menu, to select the right options and packages to install.
+To access the menu, simply call `$ make menuconfig` inside of the buildroot root folder.
+
+![make menuconfig][./documentation_images/buildroot_make_config.png]
+
 
 The important basic configuration points are the following:
 * `Target options -> Target Architecture`, the RPI uses an ARM CPU, so the setting is set to `ARM (little endian)`
