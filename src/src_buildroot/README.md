@@ -56,6 +56,7 @@ The following screen appears in the current terminal window:
 The menu is split into several categories and the most important basic configuration points are explained below.
 
 ### Target options
+
 * `Target options -> Target Architecture`, the RPI uses an ARM CPU, so the setting is set to `ARM (little endian)`
 * `Target options -> Target Architecture Variant`, defines the specific CPU Model. In the RPI3b+ case its an `Cortex A53`
 
@@ -63,6 +64,7 @@ The menu is split into several categories and the most important basic configura
 
 ### Kernel
 
+![make menuconfig](./documentation_images/buildroot_kernel.png)
 ?? WHAT IS A DEVICE TREE ??
 
 * `Kernel -> Device Tree Settings`, this point defines which device tree to build. In this case the predefined device tree `bcm-2710-rpi3b` is used. The DTB (DeviceTreeBinary) Files are downloaded from the RaspberryPi-Firmware GitHub-Repository automaticly form buildroot.
@@ -74,6 +76,8 @@ These a re basic nedded configuration items to setup a minimum booting system. A
 The next step is the system configuration and the target packages configuration.
 
 ### TOOLCHAIN
+
+![make menuconfig](./documentation_images/buildroot_toolchain.png)
 
 The buildroot framework does not only build a image for the target device, it also build all nessessary tools for build software for the target. This software collection is called toolchain and in runnung on the host system. On the target plattform is no compiler or build system installed, so its nit possible to compile software directly on the target, with an buildroot image.
 
@@ -91,6 +95,9 @@ All other settings are the default settings. Its also possible to register the t
  
 
 ### SYSTEM CONFIGURATION,
+
+![make menuconfig](./documentation_images/buildroot_system_config.png)
+
 The system configuration allows to setup a root user, password, which keyboard layout should be used,...
 
 The `System-Configuration` Settings comes also with predefined values. There are only some which needed to be modified.
@@ -112,6 +119,8 @@ On task is to load a driver if can keyboard is attached though an usb port. In o
 
 
 ### TARGET PACKAGES CONFIGURATION
+
+
 
 The target package configuration allows to install software and libraries on the target. For example we want to install an ftp server onto the target. In the target packages we can select the ftpserver packe and all other needed dependencies will be installed too.
 Its a very simple process, just select the software and all other needed packages will selected too.
@@ -160,6 +169,9 @@ There are some more applications and libraries for development and testing insta
 
 
 ### FILE SYSTEM SIZE
+
+![make menuconfig](./documentation_images/buildroot_file_system.png)
+
 The QT libraries and the other needed libraries are quite large in size. For the full QT5 with QT3D and the Virtual Keyboard and the nedded QuickControls II the rootfs file system is about 230MB. The default setting is about 128MB. So buildroot can not build the final image beacuas its not enought space. To increase the rootfs maximum size, buildroot provides a size option under `Filesystem images -> root filesystem -> exact size`. With the SPACEBAR_KEY its possible to edit the default value to 512M. A Zero for automatic determination is not supported.
 
 The `Fileystem images` category, provides several other options for the rootfs. Its also possible to create a readonly filesystem or a compressed one. For debudding purposes, the readonly filesystem option is disabled. All other settings are the default settings.
