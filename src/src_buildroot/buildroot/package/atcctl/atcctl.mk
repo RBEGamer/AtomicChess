@@ -18,7 +18,7 @@ define ATCCTL_BUILD_CMDS
 endef
 
 
-define ATCTP_INSTALL_TARGET_CMDS
+define ATCCTL_INSTALL_TARGET_CMDS
 	@echo ATCCTL_INSTALL!
 	$(INSTALL) -D -m 0755 $(@D)/src/src_controller/controller $(TARGET_DIR)/usr/ATC/atc_controller
 endef
