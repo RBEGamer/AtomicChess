@@ -48,31 +48,36 @@ All avariable configuration can be found in the boards folder `./buildroot/board
 
 Buildroot offer a terminal based grahpical menu, to select the right options and packages to install.
 To access the menu, simply call `$ make menuconfig` inside of the buildroot root folder.
+The following screen appears in the current terminal window:
 
 ![make menuconfig](./documentation_images/buildroot_make_config.png)
 
 
-The important basic configuration points are the following:
+The menu is split into several categories and the most important basic configuration points are explained below.
+
+### Target options
 * `Target options -> Target Architecture`, the RPI uses an ARM CPU, so the setting is set to `ARM (little endian)`
 * `Target options -> Target Architecture Variant`, defines the specific CPU Model. In the RPI3b+ case its an `Cortex A53`
 
 
+
+### Kernel
+
 ?? WHAT IS A DEVICE TREE ??
+
 * `Kernel -> Device Tree Settings`, this point defines which device tree to build. In this case the predefined device tree `bcm-2710-rpi3b` is used. The DTB (DeviceTreeBinary) Files are downloaded from the RaspberryPi-Firmware GitHub-Repository automaticly form buildroot.
 
 * `Kernel -> Kernel Version`, in this case the precompiled kernel was used which are downloaded form the RaspberryPi-GitHub-Repository.
 
 These a re basic nedded configuration items to setup a minimum booting system. Also buildroot generates a cross-compiler for the host syetem. So its possible to build software for the target-system. 
 
-
-
 The next step is the system configuration and the target packages configuration.
 
-## TOOLCHAIN
+### TOOLCHAIN
 
 The buildroot framework does not only build a image for the target device, it also build all nessessary tools for build software for the target. This software collection is called toolchain and in runnung on the host system. On the target plattform is no compiler or build system installed, so its nit possible to compile software directly on the target, with an buildroot image.
 
-### SITENOTE_TOOLCHAIN:
+#### SITENOTE_TOOLCHAIN:
 With the standart raspian os for the raspberry pi, its possible to install an compiler like gcc and a buildsystem like make, directly on the raspberry pi.
 
 In the `Toolchain` Menu, its possible to setup, all parameters for the host toolchain that buildroot builds, together with the target image.
@@ -85,7 +90,7 @@ For development, we need a C++ compiler and a debugger. The GDB Debugger has to 
 All other settings are the default settings. Its also possible to register the toolchain to an IDE linke Eclipse for easier setup on the host side.
  
 
-## SYSTEM CONFIGURATION,
+### SYSTEM CONFIGURATION,
 The system configuration allows to setup a root user, password, which keyboard layout should be used,...
 
 The `System-Configuration` Settings comes also with predefined values. There are only some which needed to be modified.
@@ -95,7 +100,7 @@ The `System-Configuration` Settings comes also with predefined values. There are
 * `System-Configuration -> Root filesystem overlay dir`, this filepath represents the Overlay Directory and is a custom Folder. All files in this directory will be copies into the final image rootfs and replaces existing files. In our case, this will be used for the wifi configuration and other ssh configuration files.
 
 ?? WHICH ONE ??
-### /DEV MANAGEMENT
+#### /DEV MANAGEMENT
 
 The setting for the /dev managemtns is very important! The ATC_OS need user interaction thought an input device, like a mouse, keyboard or a touchscreen. By default the udev is disbaled on the system, so its not possible to simply adding a touchscreen input to the system.
 
@@ -106,12 +111,12 @@ On task is to load a driver if can keyboard is attached though an usb port. In o
 
 
 
-## TARGET PACKAGES CONFIGURATION
+### TARGET PACKAGES CONFIGURATION
 
 The target package configuration allows to install software and libraries on the target. For example we want to install an ftp server onto the target. In the target packages we can select the ftpserver packe and all other needed dependencies will be installed too.
 Its a very simple process, just select the software and all other needed packages will selected too.
 
-### QT5
+#### QT5
 The most important library is the QT5 framework.
 The UserInterface of the ATC_OS is based on QT5 with the QuickControls II extention, so a QT Version > 5.7 is needed to enable this feature.
 Buildroot supports the QT5.6 LTS version and the latest QT5.12 version by default. So here we have simply to enable the QT5 packge with all extetion packages.
@@ -129,7 +134,7 @@ QT5 alone is able to use other graphics backend too, for example the directfb. t
 * `Target Packages -> Graphic -> QT5 -> Default Graphic Plattform (ELGFS)`, set the default graphic backend to ELGFS for Hardware Graphics Acceleration
 
 
-### SSH
+#### SSH
 In the case of the ATC_OS we need a ssh server to connect to the target via ethernet. This allows the remote debugging and development of the software. Most IDE support the deployment of the build software over ssh to a target system. So a ssh and sftp server is essential for development.
 
 Buildroot provides the SSH and SFTP server in seperate packages:
@@ -143,7 +148,7 @@ With incorrect time setting, the Client/Server is not able to verify a SSL Certi
 
 
 
-### MISC PACKAGES
+#### MISC PACKAGES
 In the development phase its useful to install some other software packages to the target system:
 
 * `Target Packages -> Text editors -> nano`, install a simple text editor
@@ -161,16 +166,16 @@ The `Fileystem images` category, provides several other options for the rootfs. 
 
 After building a complete image the size is about 270mb in Size, this includes the bootloader, os with all libraries and packages with the ATC needed programs (UI, Communication Client).
 
-## FILE SYSTEM OVERLAY
+### FILE SYSTEM OVERLAY
 * general function and usage
 * usage in buildroot to modify the final filesystem
 * concrete usage here, with ssh keys
 ?? IMAGE OF THE OVERLAY DIAGRAM ??
 
 
-### AUTOBOOT
+#### AUTOBOOT
 *initrd file
-### SSH KNOWN HOSTS
+#### SSH KNOWN HOSTS
 * ssh file
 
 
