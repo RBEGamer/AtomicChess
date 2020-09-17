@@ -1,0 +1,14 @@
+  AtomicChessAutoPlayer:
+    depends_on:
+      - AtomicChessBackend
+    container_name: atcautoplayer
+    build:
+      context: ../ATC_AutoPlayer/
+    image: atcautoplayer:latest
+    #network_mode: "host"
+    links:
+      - "AtomicChessBackend:AtomicChessBackend"
+    restart: "no"
+    environment:
+      - PRODUCTION
+      - BACKEND_IP=AtomicChessBackend:3000

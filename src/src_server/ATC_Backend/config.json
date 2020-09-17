@@ -1,0 +1,11 @@
+{
+  "webserver_default_port":3000,
+  "app_name":"AtomicChessBackend",
+  "session_lifetime_in_seconds": -1,
+  "session_cleanup_loop_interval": 10,
+  "matchmaking_runner_interval": 5,
+  "mongodb_database_name": "ATC",
+  "mongodb_collection_profiles": "profiles",
+  "mongodb_collection_games": "games",
+  "mongodb_collection_lobby": "lobby"
+}

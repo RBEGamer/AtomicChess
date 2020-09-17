@@ -1,0 +1,106 @@
+version: "3"
+services:
+  AtomicChessBackend:
+    container_name: atcbackend
+    depends_on:
+      - AtomicChessRedisDatabase
+      - AtomicChessMongoDatabase
+      - AtomicChessMoveValidator
+    links: 
+      - "AtomicChessRedisDatabase:AtomicChessRedisDatabase"
+      - "AtomicChessMongoDatabase:AtomicChessMongoDatabase"
+      - "AtomicChessMoveValidator:AtomicChessMoveValidator"
+
+    image: atcbackend:latest
+    build: 
+      context: ../ATC_Backend/
+    #network_mode: "host"
+    restart: always
+    ports:
+      - 3000:3000
+    environment:
+      - PRODUCTION=1
+      - REDIS_IP=AtomicChessRedisDatabase:6379
+      - MONGO_IP=AtomicChessMongoDatabase:27017
+      - MVVALIDATOR_IP=AtomicChessMoveValidator:5000
+      
+  AtomicChessMoveValidator:
+    container_name: atcmovevalidator
+    build:
+      context: ../ATC_MoveValidator/
+    image: atcmovevalidator:latest
+    #network_mode: "host"
+    restart: always
+    ports:
+      - 3001:3001
+    environment:
+      - PRODUCTION
+
+ 
+
+  AtomicChessRedisDatabase:
+    image: redis:latest
+    restart: always
+    container_name: atcredis
+    ports:
+      - 6379:6379
+    #network_mode: "host"
+
+  AtomicChessMongoDatabase:
+    image: mongo:latest
+    container_name: atcmongo
+    restart: always
+    #network_mode: "host"
+      #environment:
+      #  - MONGO_DATA_DIR=/data/db
+      #  - MONGO_LOG_DIR=/dev/null
+      #volumes:
+     #   - ./data/db:/data/db
+    ports:
+      - 27017:27017
+    command: mongod --logpath=/dev/null # --quiet
+
+
+
+  AtomicChessAutoPlayer:
+    depends_on:
+      - AtomicChessBackend
+    container_name: atcautoplayer
+    build:
+      context: ../ATC_AutoPlayer/
+    image: atcautoplayer:latest
+    #network_mode: "host"
+    links:
+      - "AtomicChessBackend:AtomicChessBackend"
+    restart: "no"
+    environment:
+      - PRODUCTION
+      - BACKEND_IP=AtomicChessBackend:3000
+
+
+
+ # AtomicChessAutoPlayerSpanwer:
+ #   depends_on:
+ #     - AtomicChessBackend
+ #   links:
+ #     - "AtomicChessBackend:AtomicChessBackend"
+ #   container_name: atcautoplayerspawner
+ #   build:
+ #     context: ../ATC_AutoPlayerSpawner/
+ #   image: atcautoplayerspawner:latest
+ #   #network_mode: "host"
+ #   restart: "no"
+ #   volumes:
+ #   - /var/run/docker.sock:/var/run/docker.sock
+ #   environment:
+ #     - PRODUCTION
+ #     - BACKEND_IP=AtomicChessBackend:3000
+
+
+ # watchtower:
+ #   image: v2tec/watchtower
+ #   volumes:
+ #     - /var/run/docker.sock:/var/run/docker.sock
+ #     - /root/.docker/config.json:"$(pwd)/watchtower_config.json"
+ #   command: --interval 30
+

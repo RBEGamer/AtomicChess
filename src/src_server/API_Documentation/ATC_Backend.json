@@ -1,0 +1,297 @@
+{
+	"info": {
+		"_postman_id": "5ae2fe1c-2edc-4a74-a4e0-ff677ae333ac",
+		"name": "AtomicChessBackend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "HEARTBEAT",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ATC_BACKEND_URL}}/rest/heartbeat?hwid={{PLAYER_HWID}}&sid={{PLAYER_SID}}",
+					"protocol": "http",
+					"host": [
+						"{{ATC_BACKEND_URL}}"
+					],
+					"path": [
+						"rest",
+						"heartbeat"
+					],
+					"query": [
+						{
+							"key": "hwid",
+							"value": "{{PLAYER_HWID}}"
+						},
+						{
+							"key": "sid",
+							"value": "{{PLAYER_SID}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LOGIN",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ATC_BACKEND_URL}}/rest/login?hwid={{PLAYER_HWID}}&playertype=1",
+					"protocol": "http",
+					"host": [
+						"{{ATC_BACKEND_URL}}"
+					],
+					"path": [
+						"rest",
+						"login"
+					],
+					"query": [
+						{
+							"key": "hwid",
+							"value": "{{PLAYER_HWID}}"
+						},
+						{
+							"key": "playertype",
+							"value": "1",
+							"description": "0=HUMAN_PLAYER 1=AI_PLAYER used for automatchmaking"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PLAYER_STATE",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ATC_BACKEND_URL}}/rest/set_player_state?hwid={{PLAYER_HWID}}&sid={{PLAYER_SID}}&ps=4",
+					"protocol": "http",
+					"host": [
+						"{{ATC_BACKEND_URL}}"
+					],
+					"path": [
+						"rest",
+						"set_player_state"
+					],
+					"query": [
+						{
+							"key": "hwid",
+							"value": "{{PLAYER_HWID}}"
+						},
+						{
+							"key": "sid",
+							"value": "{{PLAYER_SID}}"
+						},
+						{
+							"key": "ps",
+							"value": "4",
+							"description": "PLAYER_STATE 0=IDLE 3=SEARCHING_MATCHMAKING"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PLAYER_SETUP_CONFIRMATION",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ATC_BACKEND_URL}}/rest/player_setup_confirmation?hwid={{PLAYER_HWID}}&sid={{PLAYER_SID}}",
+					"protocol": "http",
+					"host": [
+						"{{ATC_BACKEND_URL}}"
+					],
+					"path": [
+						"rest",
+						"player_setup_confirmation"
+					],
+					"query": [
+						{
+							"key": "hwid",
+							"value": "{{PLAYER_HWID}}"
+						},
+						{
+							"key": "sid",
+							"value": "{{PLAYER_SID}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET_PLAYERS_AVARIABLE",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ATC_BACKEND_URL}}/rest/get_players_avariable?hwid={{PLAYER_HWID}}&sid={{PLAYER_SID}}",
+					"protocol": "http",
+					"host": [
+						"{{ATC_BACKEND_URL}}"
+					],
+					"path": [
+						"rest",
+						"get_players_avariable"
+					],
+					"query": [
+						{
+							"key": "hwid",
+							"value": "{{PLAYER_HWID}}"
+						},
+						{
+							"key": "sid",
+							"value": "{{PLAYER_SID}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TEST",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ATC_BACKEND_URL}}/rest/gmm?hwid={{PLAYER_HWID}}&sid={{PLAYER_SID}}",
+					"protocol": "http",
+					"host": [
+						"{{ATC_BACKEND_URL}}"
+					],
+					"path": [
+						"rest",
+						"gmm"
+					],
+					"query": [
+						{
+							"key": "hwid",
+							"value": "{{PLAYER_HWID}}",
+							"description": "NOT NEEDED"
+						},
+						{
+							"key": "sid",
+							"value": "{{PLAYER_SID}}",
+							"description": "NOT NEEDED"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET_AI_PLAYER_COUNT",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ATC_BACKEND_URL}}/rest/get_avariable_ai_players?hwid={{PLAYER_HWID}}&sid={{PLAYER_SID}}",
+					"protocol": "http",
+					"host": [
+						"{{ATC_BACKEND_URL}}"
+					],
+					"path": [
+						"rest",
+						"get_avariable_ai_players"
+					],
+					"query": [
+						{
+							"key": "hwid",
+							"value": "{{PLAYER_HWID}}",
+							"description": "NOT NEEDED"
+						},
+						{
+							"key": "sid",
+							"value": "{{PLAYER_SID}}",
+							"description": "NOT NEEDED"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET_PLAYER_STATE",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ATC_BACKEND_URL}}/rest/get_player_state?hwid={{PLAYER_HWID}}&sid={{PLAYER_SID}}&simplified=1",
+					"protocol": "http",
+					"host": [
+						"{{ATC_BACKEND_URL}}"
+					],
+					"path": [
+						"rest",
+						"get_player_state"
+					],
+					"query": [
+						{
+							"key": "hwid",
+							"value": "{{PLAYER_HWID}}"
+						},
+						{
+							"key": "sid",
+							"value": "{{PLAYER_SID}}"
+						},
+						{
+							"key": "simplified",
+							"value": "1",
+							"description": "RETURN ONLY NEEDED INFORAMTION "
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET_PLAYER_STATE Copy",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ATC_BACKEND_URL}}/rest/make_move?hwid={{PLAYER_HWID}}&sid={{PLAYER_SID}}&move=e2e4",
+					"protocol": "http",
+					"host": [
+						"{{ATC_BACKEND_URL}}"
+					],
+					"path": [
+						"rest",
+						"make_move"
+					],
+					"query": [
+						{
+							"key": "hwid",
+							"value": "{{PLAYER_HWID}}"
+						},
+						{
+							"key": "sid",
+							"value": "{{PLAYER_SID}}"
+						},
+						{
+							"key": "move",
+							"value": "e2e4"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"id": "365a5bf7-b3c9-41f7-b07b-e27e515e973a",
+			"key": "BASE_URL",
+			"value": "127.0.0.1:3000"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
