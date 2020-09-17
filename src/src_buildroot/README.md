@@ -49,7 +49,7 @@ All avariable configuration can be found in the boards folder `./buildroot/board
 Buildroot offer a terminal based grahpical menu, to select the right options and packages to install.
 To access the menu, simply call `$ make menuconfig` inside of the buildroot root folder.
 
-![make menuconfig][src/src_buildroot/documentation_images/buildroot_make_config.png]
+![make menuconfig](./documentation_images/buildroot_make_config.png)
 
 
 The important basic configuration points are the following:
