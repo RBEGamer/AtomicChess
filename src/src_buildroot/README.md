@@ -90,8 +90,8 @@ The next step is the system configuration and the target packages configuration.
 
 The buildroot framework does not only build a image for the target device, it also build all nessessary tools for build software for the target. This software collection is called toolchain and in runnung on the host system. On the target plattform is no compiler or build system installed, so its nit possible to compile software directly on the target, with an buildroot image.
 
-#### SITENOTE_TOOLCHAIN:
-With the standart raspian os for the raspberry pi, its possible to install an compiler like gcc and a buildsystem like make, directly on the raspberry pi.
+#### SITENOTE_TOOLCHAIN
+With the standard raspian os for the raspberry pi, its possible to install an compiler like gcc and a buildsystem like make, directly on the raspberry pi.
 
 In the `Toolchain` Menu, its possible to setup, all parameters for the host toolchain that buildroot builds, together with the target image.
 For example its possible to install a GCC or a Fortran compiler into the toolchain.
@@ -102,9 +102,8 @@ The GDB Debugger has to be installed on the target and on the host. Buildroot se
 * `Toolchain -> Build Cross GDB` -> build the GDB Debugger for host and target
 
 All other settings are the default settings. Its also possible to register the toolchain to an IDE linke Eclipse for easier setup on the host side.
- 
 
-### SYSTEM CONFIGURATION,
+### SYSTEM CONFIGURATION
 
 ![make menuconfig](./documentation_images/buildroot_system_config.png)
 
@@ -123,10 +122,12 @@ For debugging purposes, the access to the root aacount though a password is acce
 
 The setting for the /dev managemtns is very important! The ATC_OS need user interaction thought an input device, like a mouse, keyboard or a touchscreen. By default the udev is disbaled on the system, so its not possible to simply adding a touchscreen input to the system.
 
-* `System Configuration -> /dev management (devtmpfs + eudev)`, enables udev subsystem
+* `System Configuration -> /dev management (devtmpfs + eudev)`, enables udev subsystem.
 
 UDEV basicly handles the events coming from an input source (Keyboard,.., plugged Harddrive) and performing tasks based in this inputs.
-On task is to load a driver if can keyboard is attached though an usb port. In our case its used to access the touchscreen, after connecting the display via the DSI Interface to the Raspberry Pi, udev loads the FT5406 Touchscreen IC driver and make it accessable as `/dev/input/mouse1`.
+On task is to load a driver if can keyboard is attached though an usb port. In our case its used to access the touchscreen, after connecting the display via the DSI Interface to the Raspberry Pi, udev loads the FT5406 Touchscreen IC driver and make it accessable as `/dev/input/mouse1` (a usb mice is already plugged in).
+
+![/DEV_FOLDER](./documentation_images/rpi_input_methods.png)
 
 ### TARGET PACKAGES CONFIGURATION
 
@@ -149,7 +150,7 @@ QT5 alone is able to use other graphics backend too, for example the directfb. t
 ?? IMAGE OF ALL SELECTED PACKAGES ??
 
 * `Target Packages -> Graphic -> QT5`, enables QT5, with the QT5_BASIC package. Use the `Return` Key to access all QT5 packages.
-* `Target Packages -> Graphic -> QT5 -> Default Graphic Plattform (ELGFS)`, set the default graphic backend to ELGFS for Hardware Graphics Acceleration
+* `Target Packages -> Graphic -> QT5 -> Default Graphic Plattform (ELGFS)`, set the default graphic backend to ELGFS for Hardware Graphics Acceleration.
   
 The `Default Graphic Plattform (ELGFS)` entry is important to check, if its not set, the ATC_UI Application will not start. The setting sets a environment variable called `QT_QPA_PLATFORM`, which tells the QT5 application to use the ELGFS backend.
 
@@ -159,11 +160,11 @@ In the case of the ATC_OS we need a ssh server to connect to the target via ethe
 
 Buildroot provides the SSH and SFTP server in seperate packages:
 
-* `Target Packages -> Networking Applications -> gsftpserver`, enable the SFTP Server, for file transfers
-* `Target Packages -> Networking Applications -> dropbear`, ebake the SSH Server, for a secure shell
+* `Target Packages -> Networking Applications -> gsftpserver`, enable the SFTP Server, for file transfers.
+* `Target Packages -> Networking Applications -> dropbear`, enable the SSH Server, for a secure shell
 
 A NTP client will also be installed, so the target system can fetch the correct time over a NTP Server.
-This is needed for a successful SSH HTTP Request the ATC_CommuncicationClient is used to the chess server.
+This is needed for a successful SSH HTTP Request of ATC_Controller application to the chess ATC_Server.
 With incorrect time setting, the Client/Server is not able to verify a SSL Certificate.
 
 #### MISC PACKAGES
@@ -171,12 +172,10 @@ With incorrect time setting, the Client/Server is not able to verify a SSL Certi
 In the development phase its useful to install some other software packages to the target system:
 
 * `Target Packages -> Text editors -> nano`, install a simple text editor
-* `Target Packages -> Networking Applications -> rsync`, proves simple file sync (also used by QT if avariable)
+* `Target Packages -> Networking Applications -> rsync`, proves simple file sync (also used by QT if avariable).
 * `Target Packages -> System Tools -> htop`, a better taskmanager as the top application
 
 There are some more applications and libraries for development and testing installed, but the system is working with these mentioned above.
-
-
 
 ### FILE SYSTEM SIZE
 
