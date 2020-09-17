@@ -137,22 +137,22 @@ Its a very simple process, just select the software and all other needed package
 #### QT5
 
 The most important library is the QT5 framework.
-The UserInterface of the ATC_OS is based on QT5 with the QuickControls II extention, so a QT Version > 5.7 is needed to enable this feature.
+The userinterface of the ATC_OS  called ATC_UI is based on QT5 with the QuickControls II extention, so a QT Version >=5.7 is needed to enable this feature.
 Buildroot supports the QT5.6 LTS version and the latest QT5.12 version by default. So here we have simply to enable the QT5 packge with all extetion packages.
 
 ![QT_PACKAGES_SELECTED](./documentation_images/buildroot_qt_backages.png)
 
 After enabling the QT5 packge, buildroot automaticly enabled EGLFS as grahpics backend. The backend is needed to enable application to render and show graphics on the screen. EGLFS is able to make use of the GPU for graphics acceleration and is needed by the QT5 QuickControl II Extention to render animations.
 
-QT5 alone is able to use other graphics backend too, for example the directfb. the directfb is the simplest graphics backend provied by the linux system, and it can be used for very simple applications.
+QT5 alone is able to use other graphics backend too, for example the directfb. the directfb is the simplest graphics backend provided by the linux system, and it can be used for very simple applications.
 
-?? WHAT IS AGRAPIC BACKEND ??
-?? IMAGE OF ALL SELECTED PACKAGES ??
+#### WHAT IS AGRAPIC BACKEND
 
-* `Target Packages -> Graphic -> QT5`, enables QT5, with the QT5_BASIC package. Use the `Return` Key to access all QT5 packages.
+
+* `Target Packages -> Graphic -> QT5`, enables QT5, with the QT5_BASIC package. Use the `Return-Key` to access all QT5 packages.
 * `Target Packages -> Graphic -> QT5 -> Default Graphic Plattform (ELGFS)`, set the default graphic backend to ELGFS for Hardware Graphics Acceleration.
   
-The `Default Graphic Plattform (ELGFS)` entry is important to check, if its not set, the ATC_UI Application will not start. The setting sets a environment variable called `QT_QPA_PLATFORM`, which tells the QT5 application to use the ELGFS backend.
+The `Default Graphic Plattform (ELGFS)` entry is important to check, if its not set, the ATC_UI application will not start. The setting sets a environment variable called `QT_QPA_PLATFORM`, which tells the QT5 application to use the ELGFS backend.
 
 #### SSH
 
@@ -181,11 +181,11 @@ There are some more applications and libraries for development and testing insta
 
 ![make menuconfig](./documentation_images/buildroot_file_system.png)
 
-The QT libraries and the other needed libraries are quite large in size. For the full QT5 with QT3D and the Virtual Keyboard and the nedded QuickControls II the rootfs file system is about 230MB. The default setting is about 128MB. So buildroot can not build the final image beacuas its not enought space. To increase the rootfs maximum size, buildroot provides a size option under `Filesystem images -> root filesystem -> exact size`. With the SPACEBAR_KEY its possible to edit the default value to 512M. A Zero for automatic determination is not supported.
+The QT libraries and the other needed libraries are quite large in size. For the full QT5 with QT3D and the Virtual Keyboard and the nedded QuickControls II the rootfs file system is about 230MB. The default setting is 128MB. So buildroot can not build the final image beacuas its not enought space. To increase the rootfs maximum size, buildroot provides a size option under `Filesystem images -> root filesystem -> exact size`. With the `Space-Key` it is possible to edit the default value to 512M. A Zero for automatic determination is not supported.
 
-The `Fileystem images` category, provides several other options for the rootfs. Its also possible to create a readonly filesystem or a compressed one. For debudding purposes, the readonly filesystem option is disabled. All other settings are the default settings.
+The `Fileystem images` category, provides several other options for the rootfs. Its also possible to create a readonly filesystem or a compressed one. For debugging purposes, the readonly filesystem option is disabled. All other settings are the default settings.
 
-After building a complete image the size is about 270mb in Size, this includes the bootloader, os with all libraries and packages with the ATC needed programs (UI, Communication Client).
+After building a complete image the size is about 310MB in Size, this includes the bootloader, os with all libraries and packages with the ATC needed programs (ATC_UI, ATC_Client).
 
 ### FILE SYSTEM OVERLAY
 * general function and usage
@@ -201,6 +201,22 @@ After building a complete image the size is about 270mb in Size, this includes t
 
 
 ## HOW TO FINALLY BUILD
+
+Now everything is setup, so its possible to build the image. From a fresh buildroot installation it can take serveral hours to build the image. After a
+
+
+#### CAUTION
+Editing some settings can require a complete requild, for example `Kernel` and  `Target Options` settings.
+To cleanup the buildroot cache and output folders, run `$ make clean`
+
+
+#### BUILD A SINGLE PACKAGE
+
+For building a single package, for example to debug the buildprocess if a new created package, buildroot provedes a make command.
+`$ make <PACKAGE_NAME>-rebuild`
+The package name can be found in the package folder of buildroot `buildroot/packages`.
+A rebuild does not downloads the source again if a fixed commit id is present in the `.mk` File of the package.
+Instead the already downloaded source in `buildroot/dl` will be used.
 
 ### HOST BUILD RESULT
 
