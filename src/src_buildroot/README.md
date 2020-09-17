@@ -128,34 +128,33 @@ The setting for the /dev managemtns is very important! The ATC_OS need user inte
 UDEV basicly handles the events coming from an input source (Keyboard,.., plugged Harddrive) and performing tasks based in this inputs.
 On task is to load a driver if can keyboard is attached though an usb port. In our case its used to access the touchscreen, after connecting the display via the DSI Interface to the Raspberry Pi, udev loads the FT5406 Touchscreen IC driver and make it accessable as `/dev/input/mouse1`.
 
-
-
 ### TARGET PACKAGES CONFIGURATION
-
-
 
 The target package configuration allows to install software and libraries on the target. For example we want to install an ftp server onto the target. In the target packages we can select the ftpserver packe and all other needed dependencies will be installed too.
 Its a very simple process, just select the software and all other needed packages will selected too.
 
 #### QT5
+
 The most important library is the QT5 framework.
 The UserInterface of the ATC_OS is based on QT5 with the QuickControls II extention, so a QT Version > 5.7 is needed to enable this feature.
 Buildroot supports the QT5.6 LTS version and the latest QT5.12 version by default. So here we have simply to enable the QT5 packge with all extetion packages.
+
+![QT_PACKAGES_SELECTED](./documentation_images/buildroot_qt_backages.png)
 
 After enabling the QT5 packge, buildroot automaticly enabled EGLFS as grahpics backend. The backend is needed to enable application to render and show graphics on the screen. EGLFS is able to make use of the GPU for graphics acceleration and is needed by the QT5 QuickControl II Extention to render animations.
 
 QT5 alone is able to use other graphics backend too, for example the directfb. the directfb is the simplest graphics backend provied by the linux system, and it can be used for very simple applications.
 
-
 ?? WHAT IS AGRAPIC BACKEND ??
 ?? IMAGE OF ALL SELECTED PACKAGES ??
 
-
-* `Target Packages -> Graphic -> QT5`, enabled QT5 
+* `Target Packages -> Graphic -> QT5`, enables QT5, with the QT5_BASIC package. Use the `Return` Key to access all QT5 packages.
 * `Target Packages -> Graphic -> QT5 -> Default Graphic Plattform (ELGFS)`, set the default graphic backend to ELGFS for Hardware Graphics Acceleration
-
+  
+The `Default Graphic Plattform (ELGFS)` entry is important to check, if its not set, the ATC_UI Application will not start. The setting sets a environment variable called `QT_QPA_PLATFORM`, which tells the QT5 application to use the ELGFS backend.
 
 #### SSH
+
 In the case of the ATC_OS we need a ssh server to connect to the target via ethernet. This allows the remote debugging and development of the software. Most IDE support the deployment of the build software over ssh to a target system. So a ssh and sftp server is essential for development.
 
 Buildroot provides the SSH and SFTP server in seperate packages:
@@ -167,9 +166,8 @@ A NTP client will also be installed, so the target system can fetch the correct 
 This is needed for a successful SSH HTTP Request the ATC_CommuncicationClient is used to the chess server.
 With incorrect time setting, the Client/Server is not able to verify a SSL Certificate.
 
-
-
 #### MISC PACKAGES
+
 In the development phase its useful to install some other software packages to the target system:
 
 * `Target Packages -> Text editors -> nano`, install a simple text editor
