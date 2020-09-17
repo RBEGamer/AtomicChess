@@ -20,7 +20,10 @@ This setup was used in the whole software development process. Especially for th
 
 ## OVERVIEW BUILDROOT
 
+
+
 ### WHAT IS BUILDROOT
+
 Buildroot is s software framework that automates the process of building a complete Linux Images for many embedded systems.
 It also generate a cross compilation toolchain for the host system.
 Buildroot not only generates a host site toolchain, it also generates the target file system with compiled kernel and bootloader.
@@ -33,14 +36,11 @@ Buildroot supports numerous processors and their variants; it also comes with de
 ### SYSTEM REQUIREMENTS
 
 
-
-
-
 * how its works
 * packages
 * configuration +  screenshot
 * make and make clean
-
+ 
 ## BASIC CONFIGURATION
 
 To create a basic configuration buildroot provied a set of template boards/architectures to setup a minimal running configuration.
@@ -52,7 +52,6 @@ The following screen appears in the current terminal window:
 
 ![make menuconfig](./documentation_images/buildroot_make_config.png)
 
-
 The menu is split into several categories and the most important basic configuration points are explained below.
 
 ### Target options
@@ -60,18 +59,28 @@ The menu is split into several categories and the most important basic configura
 * `Target options -> Target Architecture`, the RPI uses an ARM CPU, so the setting is set to `ARM (little endian)`
 * `Target options -> Target Architecture Variant`, defines the specific CPU Model. In the RPI3b+ case its an `Cortex A53`
 
-
-
 ### Kernel
+
+#### WHAT IS A KERNEL
+
+#### WHAT IS A DEVICE TREE
+
+#### KERNEL CONFIGURATION
 
 ![make menuconfig](./documentation_images/buildroot_kernel.png)
 ?? WHAT IS A DEVICE TREE ??
 
-* `Kernel -> Device Tree Settings`, this point defines which device tree to build. In this case the predefined device tree `bcm-2710-rpi3b` is used. The DTB (DeviceTreeBinary) Files are downloaded from the RaspberryPi-Firmware GitHub-Repository automaticly form buildroot.
+* `Kernel -> Device Tree Settings`, this point defines which device tree to build. In this case the predefined device tree `bcm-2710-rpi3b` is used. The DTB `DeviceTreeBinary` Files are downloaded from the RaspberryPi-Firmware Repository automaticly form buildroot.
+
+Its also possible to add additional Device Tree Overlays in additon to the predefined overlay. This is the case if we want to add additional hardware to the target system. In our case, we add a an DTD Overlay to the system, to access the Touchscreen.
+The tocuhscreen controller used, is the FT 5406. This controller is also used in the original 7" Raspberry Pi FTF Display, so there is a DTD Overlayfile already existing for loading.
+The DTB File can be found in the RaspverryPi-Firmware Repository `rpi-firmware/overlays/rpi-ft5406-overlay.dtb`. We have to make shure that this file exists in the boot partition `/boot/overlays/` of the final image.
+All DTB files will be loaded at startup if nessessarry. Its also possible to load additional DTB files with the configuration file `/boot/config.txt` of the Raspberry-Pi firmware.
 
 * `Kernel -> Kernel Version`, in this case the precompiled kernel was used which are downloaded form the RaspberryPi-GitHub-Repository.
 
-These a re basic nedded configuration items to setup a minimum booting system. Also buildroot generates a cross-compiler for the host syetem. So its possible to build software for the target-system. 
+These are basic nedded configuration items to setup a minimum booting system.
+Also buildroot generates a cross-compiler for the host system. So its possible to build software for the target-system.
 
 The next step is the system configuration and the target packages configuration.
 
