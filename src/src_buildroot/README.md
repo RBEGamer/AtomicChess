@@ -95,7 +95,8 @@ With the standart raspian os for the raspberry pi, its possible to install an co
 
 In the `Toolchain` Menu, its possible to setup, all parameters for the host toolchain that buildroot builds, together with the target image.
 For example its possible to install a GCC or a Fortran compiler into the toolchain.
-For development, we need a C++ compiler and a debugger. The GDB Debugger has to be installed on the target and on the host. Buildroot selects the right version for host and target.
+For development, we need a C++ compiler and a debugger.
+The GDB Debugger has to be installed on the target and on the host. Buildroot selects the right version for host and target.
 
 * `Toolchain -> Enable C++ support` -> enables the gcc and g++ compiler with the make build system
 * `Toolchain -> Build Cross GDB` -> build the GDB Debugger for host and target
@@ -107,15 +108,17 @@ All other settings are the default settings. Its also possible to register the t
 
 ![make menuconfig](./documentation_images/buildroot_system_config.png)
 
-The system configuration allows to setup a root user, password, which keyboard layout should be used,...
+The system configuration allows to setup a root user, password or which keyboard layout should be used. Its like the `$ sudo raspi-config` command in a regular Raspbian installation.
 
 The `System-Configuration` Settings comes also with predefined values. There are only some which needed to be modified.
 
-* `System-Configuration -> Networkinterface DHCP`, this setting defined the Ethernet Interface to enable at startup and using a DHCP Server to obtain a IPv4 Adress. The value on a stock RPI3b+ can be ETH0 (LAN) or wlan0 for Wifi. The ATC_Table is using ethernet as its main network interface so `eth0` is the right choice.
+* `System-Configuration -> Networkinterface DHCP`, this setting defined the Ethernet Interface to enable at startup and using a DHCP Server to obtain a IPv4 Adress. The value on a stock RPI3b+ can be ETH0 (LAN) or wlan0 (WIFI). The ATC_Table is using ethernet as its main network interface so `eth0` is the right choice.
 
 * `System-Configuration -> Root filesystem overlay dir`, this filepath represents the Overlay Directory and is a custom Folder. All files in this directory will be copies into the final image rootfs and replaces existing files. In our case, this will be used for the wifi configuration and other ssh configuration files.
 
-?? WHICH ONE ??
+For debugging purposes, the access to the root aacount though a password is acceptable. In the production build of the image, the root access is disbaled.
+
+
 #### /DEV MANAGEMENT
 
 The setting for the /dev managemtns is very important! The ATC_OS need user interaction thought an input device, like a mouse, keyboard or a touchscreen. By default the udev is disbaled on the system, so its not possible to simply adding a touchscreen input to the system.
