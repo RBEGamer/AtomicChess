@@ -30,12 +30,29 @@ The sysroot of the target system (needed for the QT Kit Sysroot Setting) is loca
 ## CONFIGURATION NOTES
 
 The configuration of the buildroot system was a bit difficult. There are a few dependencies eg for the touchscreen which have to be checkes manually.
-
 The goal of the buildroot system for the ATC Project is, to build a working/ ready to use image, which contains all needed software to drive a ATC Table.
-
+For this purpose, three custom buildroot packages were created, to intregrate the needed ATC Software into the final SD-Card image.
+The final SD Card image, can directly flashed to the RaspberryPi and the build cross plattform compiler toolchain can be used to develop software on the host computer and run it on the target hardware. This setup was used in the whole software development process. Especially for the gui application. QT5 needs this cross compile toolchain to compile the application successful.
 
 
 ## OVERVIEW BUILDROOT
+
+### WHAT IS BUILDROOT
+Buildroot is s software framework that automates the process of building a complete Linux Images for many embedded systems.
+It also generate a cross compilation toolchain for the host system.
+Buildroot not only generates a host site toolchain, it also generates the target file system with compiled kernel and bootloader.
+
+"Buildroot is useful mainly for people working with embedded systems. Embedded systems often use processors that are not the regular x86 processors everyone is used to having in his PC. They can be PowerPC processors, MIPS processors, ARM processors, etc.
+Buildroot supports numerous processors and their variants; it also comes with default configurations for several boards available off-the-shelf."
+
+[SOURCE](https://buildroot.org/downloads/manual/manual.html#_about_buildroot)
+
+### SYSTEM REQUIREMENTS
+
+
+
+
+
 * how its works
 * packages
 * configuration +  screenshot
