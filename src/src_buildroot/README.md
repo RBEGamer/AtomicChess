@@ -7,24 +7,6 @@ This branch contains the buildroot framework to build the AtomicChessOS.
 
 The buildroot configuration is stored under `./buildroot/.config`
 
-## BUILD THE IMAGE AND HOST BINARIES
-
-`$ cd ./buildroot/ && make` - build the image and the host binaries.
-
-The build image can be found in `./buildroot/output/images/sdcard.img`
-
-
-## CROSS COMPILER
-
-The crosscompiler (gcc,g++,gdb and qt stuff) can be found in the sysroot directory `./buildroot/output/host/bin/`
-
-* G++ `arm-buildroot-linux-gnueabihf-g++`
-* GCC `arm-buildroot-linux-gnueabihf-gcc`
-* GDB `arm-buildroot-linux-gnueabihf-gdb`
-* CMAKE `cmake`
-* QT_QMAKE `qmake`
-
-The sysroot of the target system (needed for the QT Kit Sysroot Setting) is located in the  `./buildroot/output/host/arm-buildroot-linux-gnueabihf/sysroot` Folder.
 
 
 ## CONFIGURATION NOTES
@@ -188,11 +170,37 @@ After building a complete image the size is about 270mb in Size, this includes t
 ## HOW TO FINALLY BUILD
 
 ### HOST BUILD RESULT
-* cross compiler stuff
+
+### BUILD THE IMAGE AND HOST BINARIES
+
+`$ cd ./buildroot/ && make` - build the image and the host binaries.
+
+
+
+
+### HOST CROSS COMPILER
+
+The crosscompiler (gcc,g++,gdb and qt stuff) can be found in the sysroot directory `./buildroot/output/host/bin/`
+
+* G++ `arm-buildroot-linux-gnueabihf-g++`
+* GCC `arm-buildroot-linux-gnueabihf-gcc`
+* GDB `arm-buildroot-linux-gnueabihf-gdb`
+* CMAKE `cmake`
+* QT_QMAKE `qmake`
+
+The sysroot of the target system (needed for the QT Kit Sysroot Setting) is located in the  `./buildroot/output/host/arm-buildroot-linux-gnueabihf/sysroot` Folder.
 
 ### TARGET BUILD RESULT
-* sd card image
-* file system
+The build image can be found in `./buildroot/output/images/sdcard.img`. This image already contains the root filesystem, the boot partition with bootloader and firmware espacially for the RPI.
+
+It can be flashed using the linux `dd` command
+`$ dd bs=4M if=./sdcard.img of=/dev/<SD_CARD> conv=fsync`
+or by using a gui based utility like [Win32DiskImager](https://github.com/znone/Win32DiskImager) or the [Etcher](https://www.balena.io/etcher/).
+
+After flashing the image to an sd card, the device is ready for booting.
+If the device boot sequence finsihed, its possible to connect with the taerget board over SSH with the in the `System-Settings` Chapter given settings.
+On the development pc its also possible to connect without a user password. This is possible though host public key signature the `/root/.ssh/known_hosts` file, given though the `FILE SYSTEM OVERLAY` system in the build process.
+
 
 
 
