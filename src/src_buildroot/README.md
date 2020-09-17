@@ -155,18 +155,36 @@ The `Fileystem images` category, provides several other options for the rootfs. 
 
 After building a complete image the size is about 270mb in Size, this includes the bootloader, os with all libraries and packages with the ATC needed programs (UI, Communication Client).
 
+## FILE SYSTEM OVERLAY
+* general function and usage
+* usage in buildroot to modify the final filesystem
+* concrete usage here, with ssh keys
+?? IMAGE OF THE OVERLAY DIAGRAM ??
+
+
+### AUTOBOOT
+*initrd file
+### SSH KNOWN HOSTS
+* ssh file
+
+
+## HOW TO FINALLY BUILD
+
+### HOST BUILD RESULT
+* cross compiler stuff
+
+### TARGET BUILD RESULT
+* sd card image
+* file system
+
 
 
 ## ADDING OWN PACKAGES 
 * how to create a own packes
 * which packaes are needed for the ATC OS
+* which file needs to be created and where (screenshot)
+* screenshot new meu items
 
-## FILE SYSTEM OVERLAY
-* general function and usage
-* usage in buildroot to modify the final filesystem
-* concrete usage here, with ssh keys
-
-?? IMAGE OF THE OVERLAY DIAGRAM ??
 
 ## TOUCHSCREEN CONFIGURATION
 * /dev managemtnw wurde eingerichtet
@@ -178,8 +196,17 @@ After building a complete image the size is about 270mb in Size, this includes t
 * testing the touchscreen
 
 
-## AUTOBOOT
+
+
+
 
 ## HOWTO INTEGRATE INTO JENKINS
+* whta is jenkins
+* setup jenkins itself (simple docker setup ( persiest config storage / worker on host itself)
 * setup instructions
+* when to trigger a build
+
+# HOW TO HANDLE ARTEFACTS
+* what are artefacts
 * using ftp to upload final image
+* tag the git commit thats build
