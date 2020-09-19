@@ -264,6 +264,19 @@ All avariable pacakges definitions are located in the package directory `./build
 
 
 
+## PREPERATION WORK FOR CI
+
+At this point the whole buildroot setup is working on our development machine.
+The final goal of the installation is, to automate the build process further more using a continous integtation (CI) system like jenkins.
+To make the integration into the CI system easier, a single bash file was created to handle all for a build nessessary commands.
+The file is placed in the buildroot-root directory `./buildroot/build.sh` and invokes the make comand in order to run a buildroot build.
+
+On step is important before make can be called. After a fresh download of the buildroot directory from the git server, it is not possible to directy call make. The `.config` file will not be synchronizes by the `.gitignore` file, so the file is missing in the buildroot-root directory.
+To solve this issue, the buildroot configuration is stored under a different file name `./buildroot/config_backup`. The `build.sh` file renames the `config_backup` to `.config`, and invoke the make command sucessfully.
+
+Later the CI system simply have to call the `build.sh` file in order to start the build process.
+
+In addition, later its also possible to add new features to the `build.sh`. For example to upload the final image to an FTP Server.
 
 
 
@@ -277,7 +290,8 @@ For this purpose, three custom buildroot packages were created, to intregrate th
 The final SD Card image, can directly flashed to the RaspberryPi and the build cross plattform compiler toolchain can be used to develop software on the host computer and run it on the target hardware.
 
 This setup was used in the whole software development process. Especially for the gui application. QT5 needs this cross compile toolchain to compile the application successful.
- ?? MORE TODO ??
+
+ ?? MORE CONCLUSION ??
 
 
 
