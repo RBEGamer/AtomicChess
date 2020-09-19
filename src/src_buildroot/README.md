@@ -258,15 +258,15 @@ On the development pc its also possible to connect without a user password. This
 
 #### HOST CROSS COMPILER
 
-The crosscompiler (gcc,g++,gdb and qt stuff) can be found in the sysroot directory `./output/host/bin/`
+The crosscompiler (gcc,g++,gdb, ...) can be found in the sysroot directory `./output/host/bin/`
 
 * G++ `arm-buildroot-linux-gnueabihf-g++`
 * GCC `arm-buildroot-linux-gnueabihf-gcc`
 * GDB `arm-buildroot-linux-gnueabihf-gdb`
 * CMAKE `cmake`
-* QT_QMAKE `qmake`
+* QT_QMAKE `qmake`, if qt was selected
 
-The sysroot of the target system (needed for the QT Kit Sysroot Setting) is located in the  `./output/host/arm-buildroot-linux-gnueabihf/sysroot` Folder.
+The sysroot of the target system (needed for the QT Kit Sysroot Setting) is located in the  `./output/host/arm-buildroot-linux-gnueabihf/sysroot` folder.
 
 #### BUILD A SINGLE PACKAGE
 
