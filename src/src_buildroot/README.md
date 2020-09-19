@@ -228,7 +228,7 @@ After building a complete image the size is about 310MB in Size, this includes t
 Now everything is setup, so its possible to build the image. From a fresh buildroot installation it can take serveral hours to build the image. Buildroot download the sourcefiles only once to the dowload folder `./dl`. The generated output files can be found in the output directory `./output`. This folder contains several subfolder with the build results.
 
 The `$ make` command starts the build process.
-On the development pc (Ubuntu 20.04, IntelCore i9 with 24GB RAM), the a fresh build took about 2h43m.
+On the development pc (Ubuntu 20.04, IntelCore i9 9900K with 24GB RAM), the a fresh build took about 2h43m.
 
 #### CAUTION
 Editing some settings can require a complete requild, for example `Kernel` and  `Target Options` settings.
