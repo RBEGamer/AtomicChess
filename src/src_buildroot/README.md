@@ -26,18 +26,45 @@ Buildroot supports numerous processors and their variants; it also comes with de
 
 [SOURCE](https://buildroot.org/downloads/manual/manual.html#_about_buildroot)
 
+
+### HOW BUILDROOT WORKS
+
+* image
+
+
 ### SYSTEM REQUIREMENTS
 
+In order to get the buildrootpackage running, the host linux system need some packages.
+These packages can be installed with the `$ sudo apt install <PACKAGE>` command, the `$ sudo apt  update` command might be necessary, to get the latest versions.
 
-* how its works
-* packages
-* configuration +  screenshot
-* make and make clean
+`$ sudo apt  update`
+`$ sudo apt install sed make binutils build-essential gcc g++ gzip bzip2 perl tar cpio unzip rsync bc wget git python -y`
+`$ sudo apt install gtk2.0 gtk2.0-dev csv python-glade2 libncurses5 libncurses5-dev -y`
+
+The installation took place on a fresh installed Ubuntu 20.04, where most of the packages are already installed.
+
+[SOURCE](https://buildroot.org/downloads/manual/manual.html#requirement)
+
+#### INSTALL BUILDROOT
+
+For this project a complete configured buildroot installation can be found in the git repository locatate in Folder:
+`/src/src_buildroot/buildroot`. All commands listed in this chapter are relative to this path.
+
+Its also possible to create a fresh installation of buildroot. The base version of buildroot used in this project, was the release number `2020.02` which can be found on the buildroot download page `https://buildroot.org/download.html`.
+
+
+After downloading the `tar.gt` file from the downloadpage. The archive must be unpacked using the `tar` command:
+
+`$ tar -xf Downloads/buildroot-2020.02.tar.gz`
+
+The setup of buildroot is finished ater extraction process finished.
+
+
  
 ## BASIC CONFIGURATION
 
 To create a basic configuration buildroot provied a set of template boards/architectures to setup a minimal running configuration.
-All avariable configuration can be found in the boards folder `./buildroot/board`. Our Target Sytem is the RaspberryPi 3b+, there is a template for this already in the board folder and can be loaded with the `make <BOARD_NAME>_defconfig`. After running `$ make raspberrypi3_defconfig`, the buildroot config file `./buildroot/.config` contains all needed parameters and packages.
+All avariable configuration can be found in the boards folder `./board`. Our Target Sytem is the RaspberryPi 3b+, there is a template for this already in the board folder and can be loaded with the `make <BOARD_NAME>_defconfig`. After running `$ make raspberrypi3_defconfig`, the buildroot config file `./.config` contains all needed parameters and packages.
 
 Buildroot offer a terminal based grahpical menu, to select the right options and packages to install.
 To access the menu, simply call `$ make menuconfig` inside of the buildroot root folder.
