@@ -37,11 +37,9 @@ Buildroot supports numerous processors and their variants; it also comes with de
 In order to get the buildrootpackage running, the host linux system need some packages.
 These packages can be installed with the `$ sudo apt install <PACKAGE>` command, the `$ sudo apt  update` command might be necessary, to get the latest versions.
 
-`$ sudo apt  update`
-
-`$ sudo apt install sed make binutils build-essential gcc g++ gzip bzip2 perl tar cpio unzip rsync bc wget git python -y`
-
-`$ sudo apt install gtk2.0 gtk2.0-dev csv python-glade2 libncurses5 libncurses5-dev -y`
+* `$ sudo apt  update`
+* `$ sudo apt install sed make binutils build-essential gcc g++ gzip bzip2 perl tar cpio unzip rsync bc wget git python -y`
+* `$ sudo apt install gtk2.0 gtk2.0-dev csv python-glade2 libncurses5 libncurses5-dev -y`
 
 The installation took place on a fresh installed Ubuntu 20.04, where most of the packages are already installed.
 
