@@ -8,18 +8,11 @@ The buildroot configuration is stored under `./buildroot/.config`
 
 # NOTES
 
-The configuration of the buildroot system was a bit difficult. 
-There are a few dependencies eg for the touchscreen which have to be checkes manually.
-The goal of the buildroot system for the ATC Project is, to build a working/ ready to use image, which contains all needed software to drive a ATC Table.
-
-For this purpose, three custom buildroot packages were created, to intregrate the needed ATC Software into the final SD-Card image.
-The final SD Card image, can directly flashed to the RaspberryPi and the build cross plattform compiler toolchain can be used to develop software on the host computer and run it on the target hardware. 
-
-This setup was used in the whole software development process. Especially for the gui application. QT5 needs this cross compile toolchain to compile the application successful.
 
 
 ## OVERVIEW BUILDROOT
 
+### GOAL OF THIS CHAPTER
 
 
 ### WHAT IS BUILDROOT
@@ -91,7 +84,10 @@ The next step is the system configuration and the target packages configuration.
 The buildroot framework does not only build a image for the target device, it also build all nessessary tools for build software for the target. This software collection is called toolchain and in runnung on the host system. On the target plattform is no compiler or build system installed, so its nit possible to compile software directly on the target, with an buildroot image.
 
 #### SITENOTE_TOOLCHAIN
+
 With the standard raspian os for the raspberry pi, its possible to install an compiler like gcc and a buildsystem like make, directly on the raspberry pi.
+
+#### END SITENOTE
 
 In the `Toolchain` Menu, its possible to setup, all parameters for the host toolchain that buildroot builds, together with the target image.
 For example its possible to install a GCC or a Fortran compiler into the toolchain.
@@ -202,32 +198,38 @@ After building a complete image the size is about 310MB in Size, this includes t
 
 ## HOW TO FINALLY BUILD
 
-Now everything is setup, so its possible to build the image. From a fresh buildroot installation it can take serveral hours to build the image. After a
+Now everything is setup, so its possible to build the image. From a fresh buildroot installation it can take serveral hours to build the image. Buildroot download the sourcefiles only once to the dowload folder `./buildroot/dl`. The generated output files can be found in the output directory `./buildroot/output`. This folder contains several subfolder with the build results.
 
+The `$ make` command starts the build process.
+On the development pc (Ubuntu 20.04, IntelCore i9 with 24GB RAM), the a fresh build took about 2h43m.
 
 #### CAUTION
 Editing some settings can require a complete requild, for example `Kernel` and  `Target Options` settings.
 To cleanup the buildroot cache and output folders, run `$ make clean`
 
+After some time, the process output should end with `INFO: adding roofs partition; INFO: writing MBR`, so everything is finished.
+The result can be found in the output directory:
 
-#### BUILD A SINGLE PACKAGE
+![OUTBUT_FOLDERS](./documentation_images/buildroot_output.png)
 
-For building a single package, for example to debug the buildprocess if a new created package, buildroot provedes a make command.
-`$ make <PACKAGE_NAME>-rebuild`
-The package name can be found in the package folder of buildroot `buildroot/packages`.
-A rebuild does not downloads the source again if a fixed commit id is present in the `.mk` File of the package.
-Instead the already downloaded source in `buildroot/dl` will be used.
+* `build`, contains the compiled libraries and other compile software
+* `host`, contains the build software for the host, including the cross compile toolchain
+* `images`, contains the final sd card image
+* `target`, this is a copy of the rootfs of the target device
 
-### HOST BUILD RESULT
+#### TARGET BUILD RESULT
 
-### BUILD THE IMAGE AND HOST BINARIES
+The build image can be found in `./buildroot/output/images/sdcard.img`. This image already contains the root filesystem, the boot partition with bootloader and firmware espacially for the RPI.
 
-`$ cd ./buildroot/ && make` - build the image and the host binaries.
+It can be flashed using the linux `dd` command
+`$ dd bs=4M if=./sdcard.img of=/dev/<SD_CARD> conv=fsync`
+or by using a gui based utility like [Win32DiskImager](https://github.com/znone/Win32DiskImager) or the [Etcher](https://www.balena.io/etcher/).
 
+After flashing the image to an sd card, the device is ready for booting.
+If the device boot sequence finsihed, its possible to connect with the taerget board over SSH with the in the `System-Settings` Chapter given settings.
+On the development pc its also possible to connect without a user password. This is possible though host public key signature the `/root/.ssh/known_hosts` file, given though the `FILE SYSTEM OVERLAY` system in the build process.
 
-
-
-### HOST CROSS COMPILER
+#### HOST CROSS COMPILER
 
 The crosscompiler (gcc,g++,gdb and qt stuff) can be found in the sysroot directory `./buildroot/output/host/bin/`
 
@@ -239,48 +241,44 @@ The crosscompiler (gcc,g++,gdb and qt stuff) can be found in the sysroot directo
 
 The sysroot of the target system (needed for the QT Kit Sysroot Setting) is located in the  `./buildroot/output/host/arm-buildroot-linux-gnueabihf/sysroot` Folder.
 
-### TARGET BUILD RESULT
-The build image can be found in `./buildroot/output/images/sdcard.img`. This image already contains the root filesystem, the boot partition with bootloader and firmware espacially for the RPI.
+#### BUILD A SINGLE PACKAGE
 
-It can be flashed using the linux `dd` command
-`$ dd bs=4M if=./sdcard.img of=/dev/<SD_CARD> conv=fsync`
-or by using a gui based utility like [Win32DiskImager](https://github.com/znone/Win32DiskImager) or the [Etcher](https://www.balena.io/etcher/).
+For building a single package, for example to debug the buildprocess if a new created package, buildroot provedes a make command.
 
-After flashing the image to an sd card, the device is ready for booting.
-If the device boot sequence finsihed, its possible to connect with the taerget board over SSH with the in the `System-Settings` Chapter given settings.
-On the development pc its also possible to connect without a user password. This is possible though host public key signature the `/root/.ssh/known_hosts` file, given though the `FILE SYSTEM OVERLAY` system in the build process.
+`$ make <PACKAGE_NAME>-rebuild`
 
+The package name can be found in the package folder of buildroot `./buildroot/packages`.
+A rebuild does not downloads the source again if a fixed commit id is present in the `.mk` File of the package.
+Instead the already downloaded source in `./buildroot/dl` will be used.
 
+## ADDING OWN PACKAGES
 
+After building the first image successfully, our goal is to add custom software packages to the buildroot configuration.
+All avariable pacakges definitions are located in the package directory `./buildroot/packages`.
 
-## ADDING OWN PACKAGES 
 * how to create a own packes
 * which packaes are needed for the ATC OS
 * which file needs to be created and where (screenshot)
 * screenshot new meu items
 
 
-## TOUCHSCREEN CONFIGURATION
-* /dev managemtnw wurde eingerichtet
-* which type
-* what is a device tree
-* how to modify
-* rpi overlay loading using modprobe
-* including into buildroot (kernel->evdev libsci)
-* testing the touchscreen
 
 
 
 
 
 
-## HOWTO INTEGRATE INTO JENKINS
-* whta is jenkins
-* setup jenkins itself (simple docker setup ( persiest config storage / worker on host itself)
-* setup instructions
-* when to trigger a build
+## CONCLUSION BUILDROOT
+The configuration of the buildroot system was a bit difficult. 
+There are a few dependencies eg for the touchscreen which have to be checkes manually.
+The goal of the buildroot system for the ATC Project is, to build a working/ ready to use image, which contains all needed software to drive a ATC Table.
 
-# HOW TO HANDLE ARTEFACTS
-* what are artefacts
-* using ftp to upload final image
-* tag the git commit thats build
+For this purpose, three custom buildroot packages were created, to intregrate the needed ATC Software into the final SD-Card image.
+The final SD Card image, can directly flashed to the RaspberryPi and the build cross plattform compiler toolchain can be used to develop software on the host computer and run it on the target hardware.
+
+This setup was used in the whole software development process. Especially for the gui application. QT5 needs this cross compile toolchain to compile the application successful.
+ ?? MORE TODO ??
+
+
+
+
