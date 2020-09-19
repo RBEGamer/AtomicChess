@@ -280,8 +280,65 @@ Instead the already downloaded source in `./buildroot/dl` will be used.
 
 ## ADDING OWN PACKAGES
 
+This chapter only explains the basics about creating packages. Buildroot has a very powerful packages system, which is not needed for this project.
+Here also the system dependencies are not considered.
+
 After building the first image successfully, our goal is to add custom software packages to the buildroot configuration.
 All avariable pacakges definitions are located in the package directory `./packages`.
+Each package is located in a seperate folder inside the `./packages` folder.
+The folder is called like the package name.
+
+The package folder contains at least two files:
+
+* `<PACKAGE_NAME>.mk`
+* `Config.in`
+
+The `Config.in` file contains the information, that are visible on the configuration menu `make menuconfig`.
+
+Listed below is the simplest package information, which the `Config.in` can contains:
+
+```bash
+
+config BR2_PACKAGE_PACKAGENAME
+    bool "PACKAGENAME"
+    help
+        INFORMATION ABOUT THE PACKAGE
+
+```
+
+The first line is the start configuration for the specific package, Important is `PACKAGENAME` at the end of the line.
+Followed by the bool option. This option is visible under the buildroot configuration menu.
+The `help` section, can contains several information about the author / functionallity of the package.
+
+![BUILDROOT_PACKAGE_1](./documentation_images/buildroot_packages_1.png)
+
+The `<PACKAGENAME>.mk` is the makefile or build reciepe for the package.
+The file contains the build and install instruction for the package.
+
+![BUILDROOT_PACKAGE_2](./documentation_images/buildroot_package_2.png)
+
+
+The first information, is the location of the sourcefiles of the package.
+Buildroot always downloads the package sources from an other location.
+
+
+Its possible to store the sources local but its not recommended, so its not explained here.
+The source files of the custom packages are stored in a git repository.
+
+
+* `<PACKAGESNAME>_VERSION = origin/master`, is the commitid or branch of the git repository.
+* `<PACKAGESNAME>_SITE = git@github.com:RBEGamer/AtomicChessOS.git`, is the git server url
+* `<PACKAGESNAME>_SITE_METHOD = git`, use git.
+
+It is also possible to download the source as a zip or tarball archive from a webserver.
+In this case the `<PACKAGESNAME>_SITE` key is the url without the filename and the `<PACKAGESNAME>_VERSION` the filename.
+
+Next step is the definition of the build steps.
+
+The `define <PACKAGENAME>_BUILD_CMDS` starts a block of shell commands, which will executed during the build phase.
+
+
+
 
 * how to create a own packes
 * which packaes are needed for the ATC OS
