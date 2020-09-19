@@ -18,7 +18,7 @@ This Repository contains all software and hardware parts for the ATC Project.
 * documentation
 * qtui
 * server
-
+* CI
 
 # VIDEO / FINAL IMAGE
 
