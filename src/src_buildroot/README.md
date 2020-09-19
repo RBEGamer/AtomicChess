@@ -337,15 +337,47 @@ Next step is the definition of the build steps.
 
 The `define <PACKAGENAME>_BUILD_CMDS` starts a block of shell commands, which will executed during the build phase.
 
+Buildroot defines some environment variables, for example the directory of the downloaded source or the location of the make executable.
+
+* `$(@D)`, defines the directory of the source files
+* `$(TARGET_DIR)`, defines the sysroot of the target device. Its mainly used for the installation process of the compile binaries.
+* `$(MAKE)`, defines the actual make executable
+
+Variables for compiler, qmake, cmake are also defined by buildroot, using the cross compile toolchain.
+
+* `$(QT5_QMAKE)`, defines the QT Qmake executable
+* `$(CAMKE)`, define the CMAKE executable
+* `$(CC)`, defines the GCC compiler
+  
+The install block has to be closed with an `endef` line.
+
+After the build instructions, the install steps follows.
+The installation steps in general, copies the the build results from the package, like the executables or shared libraries to the target filesystem.
+
+The `define <PACKAGENAME>_INSTALL_TARGET_CMDS` follows the concepts as the build commands.
+Here the defines become useful, especially the `$(TARGET_DIR)`.
+
+Now the configuration of the package is complete, but if the configuration menu is opened, there is no entry with the new pacakge.
+The reason for that is, that we have to tell buildroot where to show the new package in the menu.
+To do this there is a configuration file located in the packages folder `./packages/Config.in`.
 
 
+```bash
+menu "AtomicChessPackages"
+	source "package/atcgui/Config.in"
+	source "package/atctp/Config.in"
+	source "package/atcctl/Config.in"
+endmenu
+```
 
-* how to create a own packes
-* which packaes are needed for the ATC OS
-* which file needs to be created and where (screenshot)
-* screenshot new meu items
+To add the new package to a existing menu, simply to use the source command.
+The path behinf the source prefix is the relative path to the `Config.in` file of the package that should be added.
 
+It is also possible to add new menu structures, as shown above. In this example a new entry called `AtomicChessPackages` was added with three packages inside of the menu.
 
+![BUILDROOT_PACKAGE_1](./documentation_images/buildroot_package_4.png)
+
+To test the new created package, its is also possible to build the single package by using its name, as described in the chapter `BUILD A SINGLE PACKAGE`.
 
 
 ## PREPERATION WORK FOR CI
