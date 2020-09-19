@@ -94,7 +94,7 @@ The menu is split into several categories and the most important basic configura
 
 Its also possible to add additional Device Tree Overlays in additon to the predefined overlay. This is the case if we want to add additional hardware to the target system. In our case, we add a an DTD Overlay to the system, to access the Touchscreen.
 The tocuhscreen controller used, is the FT 5406. This controller is also used in the original 7" Raspberry Pi FTF Display, so there is a DTD Overlayfile already existing for loading.
-The DTB File can be found in the RaspverryPi-Firmware Repository `rpi-firmware/overlays/rpi-ft5406-overlay.dtb`. We have to make shure that this file exists in the boot partition `/boot/overlays/` of the final image.
+The DTB File can be found in the RaspverryPi-Firmware Repository `rpi-firmware/overlays/rpi-ft5406-overlay.dtb`. We have to make shure that this file exists in the boot partition `<SD_CARD>/boot/overlays/` of the final image.
 All DTB files will be loaded at startup if nessessarry. Its also possible to load additional DTB files with the configuration file `/boot/config.txt` of the Raspberry-Pi firmware.
 
 * `Kernel -> Kernel Version`, in this case the precompiled kernel was used which are downloaded form the RaspberryPi-GitHub-Repository.
@@ -225,7 +225,7 @@ After building a complete image the size is about 310MB in Size, this includes t
 
 ## HOW TO FINALLY BUILD
 
-Now everything is setup, so its possible to build the image. From a fresh buildroot installation it can take serveral hours to build the image. Buildroot download the sourcefiles only once to the dowload folder `./buildroot/dl`. The generated output files can be found in the output directory `./buildroot/output`. This folder contains several subfolder with the build results.
+Now everything is setup, so its possible to build the image. From a fresh buildroot installation it can take serveral hours to build the image. Buildroot download the sourcefiles only once to the dowload folder `./dl`. The generated output files can be found in the output directory `./output`. This folder contains several subfolder with the build results.
 
 The `$ make` command starts the build process.
 On the development pc (Ubuntu 20.04, IntelCore i9 with 24GB RAM), the a fresh build took about 2h43m.
@@ -246,7 +246,7 @@ The result can be found in the output directory:
 
 #### TARGET BUILD RESULT
 
-The build image can be found in `./buildroot/output/images/sdcard.img`. This image already contains the root filesystem, the boot partition with bootloader and firmware espacially for the RPI.
+The build image can be found in `./output/images/sdcard.img`. This image already contains the root filesystem, the boot partition with bootloader and firmware espacially for the RPI.
 
 It can be flashed using the linux `dd` command
 `$ dd bs=4M if=./sdcard.img of=/dev/<SD_CARD> conv=fsync`
@@ -258,7 +258,7 @@ On the development pc its also possible to connect without a user password. This
 
 #### HOST CROSS COMPILER
 
-The crosscompiler (gcc,g++,gdb and qt stuff) can be found in the sysroot directory `./buildroot/output/host/bin/`
+The crosscompiler (gcc,g++,gdb and qt stuff) can be found in the sysroot directory `./output/host/bin/`
 
 * G++ `arm-buildroot-linux-gnueabihf-g++`
 * GCC `arm-buildroot-linux-gnueabihf-gcc`
@@ -266,7 +266,7 @@ The crosscompiler (gcc,g++,gdb and qt stuff) can be found in the sysroot directo
 * CMAKE `cmake`
 * QT_QMAKE `qmake`
 
-The sysroot of the target system (needed for the QT Kit Sysroot Setting) is located in the  `./buildroot/output/host/arm-buildroot-linux-gnueabihf/sysroot` Folder.
+The sysroot of the target system (needed for the QT Kit Sysroot Setting) is located in the  `./output/host/arm-buildroot-linux-gnueabihf/sysroot` Folder.
 
 #### BUILD A SINGLE PACKAGE
 
@@ -274,14 +274,14 @@ For building a single package, for example to debug the buildprocess if a new cr
 
 `$ make <PACKAGE_NAME>-rebuild`
 
-The package name can be found in the package folder of buildroot `./buildroot/packages`.
+The package name can be found in the package folder of buildroot `./packages`.
 A rebuild does not downloads the source again if a fixed commit id is present in the `.mk` File of the package.
 Instead the already downloaded source in `./buildroot/dl` will be used.
 
 ## ADDING OWN PACKAGES
 
 After building the first image successfully, our goal is to add custom software packages to the buildroot configuration.
-All avariable pacakges definitions are located in the package directory `./buildroot/packages`.
+All avariable pacakges definitions are located in the package directory `./packages`.
 
 * how to create a own packes
 * which packaes are needed for the ATC OS
@@ -296,10 +296,10 @@ All avariable pacakges definitions are located in the package directory `./build
 At this point the whole buildroot setup is working on our development machine.
 The final goal of the installation is, to automate the build process further more using a continous integtation (CI) system like jenkins.
 To make the integration into the CI system easier, a single bash file was created to handle all for a build nessessary commands.
-The file is placed in the buildroot-root directory `./buildroot/build.sh` and invokes the make comand in order to run a buildroot build.
+The file is placed in the buildroot-root directory `./build.sh` and invokes the make comand in order to run a buildroot build.
 
 On step is important before make can be called. After a fresh download of the buildroot directory from the git server, it is not possible to directy call make. The `.config` file will not be synchronizes by the `.gitignore` file, so the file is missing in the buildroot-root directory.
-To solve this issue, the buildroot configuration is stored under a different file name `./buildroot/config_backup`. The `build.sh` file renames the `config_backup` to `.config`, and invoke the make command sucessfully.
+To solve this issue, the buildroot configuration is stored under a different file name `./config_backup`. The `build.sh` file renames the `config_backup` to `.config`, and invoke the make command sucessfully.
 
 Later the CI system simply have to call the `build.sh` file in order to start the build process.
 
@@ -310,7 +310,7 @@ In addition, later its also possible to add new features to the `build.sh`. For 
 
 ## CONCLUSION BUILDROOT
 The configuration of the buildroot system was a bit difficult. 
-There are a few dependencies eg for the touchscreen which have to be checkes manually.
+There are a few dependencies eg for the touchscreen which have to be checked manually.
 The goal of the buildroot system for the ATC Project is, to build a working/ ready to use image, which contains all needed software to drive a ATC Table.
 
 For this purpose, three custom buildroot packages were created, to intregrate the needed ATC Software into the final SD-Card image.
@@ -318,7 +318,11 @@ The final SD Card image, can directly flashed to the RaspberryPi and the build c
 
 This setup was used in the whole software development process. Especially for the gui application. QT5 needs this cross compile toolchain to compile the application successful.
 
- ?? MORE CONCLUSION ??
+
+In summary buildroot was a great choice to work with. The process of integration of own packages was straight forward. In the end building an linux image for an embedded device that simply works, including all needed software for the project is very great.
+This system also has advantages as not every image has to be adjusted manually, especially if the number of embedded systems to be installed increases.
+
+
 
 
 
