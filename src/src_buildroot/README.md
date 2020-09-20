@@ -196,12 +196,16 @@ With incorrect time setting, the Client/Server is not able to verify a SSL Certi
 For communication of the gui and the control software a inter process communication system is nessessary.
 It uses the ZeroMQ protocol, so it is needed so install the zeromq library.
 
-* `Target Pacakges -> Libraries -> Networking -> zeromq`, enable zeromq messaging library to use the ZeroMQ protocol. (GUI communication)
+* `Target Pacakges -> Libraries -> Networking -> zeromq`, enable zeromq messaging library to use the ZeroMQ protocol. (GUI communication).
+* `Target Packages -> Libraries -> Networking -> czmq`, client library for ZeroMQ.
+* `Target Packages -> Libraries -> Crypto -> libsodium`, enables crypto functions for ZeroMQ.
 
 #### MISC PACKAGES
+
+These packages are not required, but used for development.
+
 * `Target Packages -> Text editors -> nano`, install a simple text editor
 * `Target Packages -> Networking Applications -> rsync`, proves simple file sync (also used by QT if avariable).
-
 
 There are some more applications and libraries for development and testing installed, but the system is working with these mentioned above.
 
