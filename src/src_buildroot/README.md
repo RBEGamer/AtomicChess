@@ -13,7 +13,8 @@ The buildroot configuration is stored under `./buildroot/.config`
 ## OVERVIEW BUILDROOT
 
 ### GOAL OF THIS CHAPTER
-
+The setup of buildroot framework is nessessarcy in order to build the other software components.
+* cross compile toolchain is nessessarcy
 
 ### WHAT IS BUILDROOT
 
