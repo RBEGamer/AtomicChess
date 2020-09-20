@@ -191,10 +191,14 @@ A NTP client will also be installed, so the target system can fetch the correct 
 This is needed for a successful SSH HTTP Request of ATC_Controller application to the chess ATC_Server.
 With incorrect time setting, the Client/Server is not able to verify a SSL Certificate.
 
-#### MISC PACKAGES
+#### INTER PROCESS COMMUNICATION
 
+For communication of the gui and the control software a inter process communication system is nessessary.
+It uses the ZeroMQ protocol, so it is needed so install the zeromq library.
 
 * `Target Pacakges -> Libraries -> Networking -> zeromq`, enable zeromq messaging library to use the ZeroMQ protocol. (GUI communication)
+
+#### MISC PACKAGES
 * `Target Packages -> Text editors -> nano`, install a simple text editor
 * `Target Packages -> Networking Applications -> rsync`, proves simple file sync (also used by QT if avariable).
 
