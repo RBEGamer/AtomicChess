@@ -193,11 +193,11 @@ With incorrect time setting, the Client/Server is not able to verify a SSL Certi
 
 #### MISC PACKAGES
 
-In the development phase its useful to install some other software packages to the target system:
 
+* `Target Pacakges -> Libraries -> Networking -> zeromq`, enable zeromq messaging library to use the ZeroMQ protocol. (GUI communication)
 * `Target Packages -> Text editors -> nano`, install a simple text editor
 * `Target Packages -> Networking Applications -> rsync`, proves simple file sync (also used by QT if avariable).
-* `Target Packages -> System Tools -> htop`, a better taskmanager as the top application
+
 
 There are some more applications and libraries for development and testing installed, but the system is working with these mentioned above.
 
