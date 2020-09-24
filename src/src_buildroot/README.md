@@ -200,6 +200,10 @@ It uses the ZeroMQ protocol, so it is needed so install the zeromq library.
 * `Target Packages -> Libraries -> Networking -> czmq`, client library for ZeroMQ.
 * `Target Packages -> Libraries -> Crypto -> libsodium`, enables crypto functions for ZeroMQ.
 
+For message serialization, the google protobuf project was used. Here buildroot offers the `libprotobuf`.
+
+* `Target Packaged -> Libraries -> Others -> protobuf`, enable the protobuf library.
+
 #### MISC PACKAGES
 
 These packages are not required, but used for development.
