@@ -291,6 +291,7 @@ Instead the already downloaded source in `./buildroot/dl` will be used.
 
 ## ADDING OWN PACKAGES
 
+### PACKAGE STRUCTURE
 This chapter only explains the basics about creating packages. Buildroot has a very powerful packages system, which is not needed for this project.
 Here also the system dependencies are not considered.
 
@@ -304,6 +305,8 @@ The package folder contains at least two files:
 * `<PACKAGE_NAME>.mk`
 * `Config.in`
 
+
+### PACKAGE CONFIG FILE
 The `Config.in` file contains the information, that are visible on the configuration menu `make menuconfig`.
 
 Listed below is the simplest package information, which the `Config.in` can contains:
@@ -323,12 +326,14 @@ The `help` section, can contains several information about the author / function
 
 ![BUILDROOT_PACKAGE_1](./documentation_images/buildroot_packages_1.png)
 
+### PACKAGE MAKEFILE
+
 The `<PACKAGENAME>.mk` is the makefile or build reciepe for the package.
 The file contains the build and install instruction for the package.
 
 ![BUILDROOT_PACKAGE_2](./documentation_images/buildroot_package_2.png)
 
-
+#### SOURCE FILE LOCATIONS
 The first information, is the location of the sourcefiles of the package.
 Buildroot always downloads the package sources from an other location.
 
@@ -344,6 +349,7 @@ The source files of the custom packages are stored in a git repository.
 It is also possible to download the source as a zip or tarball archive from a webserver.
 In this case the `<PACKAGESNAME>_SITE` key is the url without the filename and the `<PACKAGESNAME>_VERSION` the filename.
 
+#### BUILD COMMANDS
 Next step is the definition of the build steps.
 
 The `define <PACKAGENAME>_BUILD_CMDS` starts a block of shell commands, which will executed during the build phase.
@@ -362,6 +368,27 @@ Variables for compiler, qmake, cmake are also defined by buildroot, using the cr
   
 The install block has to be closed with an `endef` line.
 
+##### SITENOTE C++17
+
+After adding more features to the ATC_GUI userinterface. The project can not be build with builroot, but manually with the QT Creator.
+After investigating the error log of the make command, it turns out that the g++ compiler does not run with the C++17 option.
+The ATC_GUI requires C++ Version 17 for the enum types, so in the qt projectfile `rpidisplay.pro` the c++ compiler flag was already set.
+
+* `CONFIG += c++17 c++1z`
+* `QMAKE_CXXFLAGS += -std=c++17`
+
+These settings worked in the QtCreator environment just fine, but with the buildprocess in buildroot (qmake,make), qmake overrides the set config options in the project file.
+
+The solution for this problem is, to define the `-std=c++17` compiler option manually in the buildroot package makefile `./packages/atcgui/atcgui.mk`.
+After the modification, the buildprocess runs without a problem.
+
+![C++17Fix](./documentation_images/buidroot_c++17_fix.png)
+
+After
+##### END SITENOTE
+
+
+#### INSTALL COMMANDS
 After the build instructions, the install steps follows.
 The installation steps in general, copies the the build results from the package, like the executables or shared libraries to the target filesystem.
 
