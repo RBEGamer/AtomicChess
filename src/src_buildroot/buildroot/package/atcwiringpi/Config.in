@@ -1,8 +1,0 @@
-config BR2_PACKAGE_ATCWIRINGPI
-    bool "ATC_WIRING_PI"
-    help
-        This package is a custom install of the popular wiringpi library.
-	Its needed for the other ATC packages
-
-        http://marcelochsendorf.com
-

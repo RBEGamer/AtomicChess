@@ -2,7 +2,7 @@ menu "AtomicChessPackages"
 	source "package/atcgui/Config.in"
 	source "package/atctp/Config.in"
 	source "package/atcctl/Config.in"
-	source "package/atcwiringpi/Config.in"
+	source "package/atcmisc/Config.in"
 endmenu
 
 

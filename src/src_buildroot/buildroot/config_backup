@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Buildroot jenkinsbuild-7-g89f28670-dirty Configuration
+# Buildroot jenkinsbuild-11-g113fa962-dirty Configuration
 #
 BR2_HAVE_DOT_CONFIG=y
 BR2_HOST_GCC_AT_LEAST_4_9=y
@@ -580,7 +580,7 @@ BR2_PACKAGE_LINUX_TOOLS_GPIO=y
 BR2_PACKAGE_ATCGUI=y
 BR2_PACKAGE_ATCTP=y
 BR2_PACKAGE_ATCCTL=y
-# BR2_PACKAGE_ATCWIRINGPI is not set
+# BR2_PACKAGE_ATCMISC is not set
 
 #
 # Target packages
