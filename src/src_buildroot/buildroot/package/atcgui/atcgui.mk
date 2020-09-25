@@ -10,7 +10,7 @@ ATCGUI_SITE_METHOD = git
 ATCGUI_LICENSE = GPL-2.0+
 
 # NOW ADD QT DEPENDENCIES
-ATCGUI_DEPENDENCIES = qt5quickcontrols2 qt5base qt5quickcontrols qt5declarative
+ATCGUI_DEPENDENCIES = qt5quickcontrols2 qt5base qt5quickcontrols qt5declarative zeromq czmq protobuf 
 
 define ATCGUI_BUILD_CMDS
 	@echo ATCGUI_BUILD!
@@ -19,11 +19,14 @@ define ATCGUI_BUILD_CMDS
 	@echo -----------------
 	@echo ATCGUI_BUILD_QMAKE!
 	@echo -----------------
-	$(QT5_QMAKE) -d -o $(@D)/src/src_qtui/rpidisplayqt/Makefile $(@D)/src/src_qtui/rpidisplayqt/rpidisplayqt.pro 
+	cat $(@D)/src/src_qtui/rpidisplayqt/rpidisplayqt.pro
+	@echo -----------------
+	
+	$(QT5_QMAKE) -d -o $(@D)/src/src_qtui/rpidisplayqt/Makefile $(@D)/src/src_qtui/rpidisplayqt/rpidisplayqt.pro  
 	@echo -----------------
 	@echo ATCGUI_BUILD_MAKE!
 	@echo -----------------
-	$(MAKE) $(TARGET_CONFIGURE_OPTS) -C $(@D)/src/src_qtui/rpidisplayqt/
+	$(MAKE) $(TARGET_CONFIGURE_OPTS) CXXFLAGS="-std=c++17" -C $(@D)/src/src_qtui/rpidisplayqt/
 	@echo -----------------
 endef
 
