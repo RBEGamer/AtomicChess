@@ -26,7 +26,7 @@ define ATCGUI_BUILD_CMDS
 	@echo -----------------
 	@echo ATCGUI_BUILD_MAKE!
 	@echo -----------------
-	$(MAKE) $(TARGET_CONFIGURE_OPTS) CXXFLAGS="-std=c++17" -C $(@D)/src/src_qtui/rpidisplayqt/
+	$(MAKE) $(TARGET_CONFIGURE_OPTS) CXXFLAGS="-std=c++17 -DUSES_QT" -C $(@D)/src/src_qtui/rpidisplayqt/
 	@echo -----------------
 endef
 
