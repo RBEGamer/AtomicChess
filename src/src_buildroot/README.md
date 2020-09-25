@@ -393,6 +393,12 @@ It is also possible to add new menu structures, as shown above. In this example 
 To test the new created package, its is also possible to build the single package by using its name, as described in the chapter `BUILD A SINGLE PACKAGE`.
 
 
+## HARDWARE SUPPORT I2C SPI
+
+* config txt patch manual 
+* modprobe i2c
+* linux menuconfig to check if i2c is general in kernel enabled (images)
+
 ## PREPERATION WORK FOR CI
 
 At this point the whole buildroot setup is working on our development machine.
