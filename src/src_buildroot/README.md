@@ -82,10 +82,6 @@ The menu is split into several categories and the most important basic configura
 
 ### Kernel
 
-#### WHAT IS A KERNEL
-
-#### WHAT IS A DEVICE TREE
-
 #### KERNEL CONFIGURATION
 
 ![make menuconfig](./documentation_images/buildroot_kernel.png)
@@ -231,9 +227,11 @@ After building a complete image the size is about 310MB in Size, this includes t
 
 
 #### AUTOBOOT
-*initrd file
+*init.d -> file called S (service) 99 (priority=latest)
+* sudo chmod +x for rights
+
 #### SSH KNOWN HOSTS
-* ssh file
+* using the overlay to insert a known hosts file with the already known ssh keys 
 
 
 ## HOW TO FINALLY BUILD
