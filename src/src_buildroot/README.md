@@ -82,10 +82,6 @@ The menu is split into several categories and the most important basic configura
 
 ### Kernel
 
-#### WHAT IS A KERNEL
-
-#### WHAT IS A DEVICE TREE
-
 #### KERNEL CONFIGURATION
 
 ![make menuconfig](./documentation_images/buildroot_kernel.png)
@@ -231,9 +227,11 @@ After building a complete image the size is about 310MB in Size, this includes t
 
 
 #### AUTOBOOT
-*initrd file
+*init.d -> file called S (service) 99 (priority=latest)
+* sudo chmod +x for rights
+
 #### SSH KNOWN HOSTS
-* ssh file
+* using the overlay to insert a known hosts file with the already known ssh keys 
 
 
 ## HOW TO FINALLY BUILD
@@ -393,6 +391,13 @@ It is also possible to add new menu structures, as shown above. In this example 
 To test the new created package, its is also possible to build the single package by using its name, as described in the chapter `BUILD A SINGLE PACKAGE`.
 
 
+## HARDWARE SUPPORT I2C SPI
+
+The ATC Project uses the SPI bus of the Embedded System to communicate with the motor drivers. To use the SPI bus 
+* config txt patch manual 
+* modprobe i2c
+* linux menuconfig to check if i2c is general in kernel enabled (images)
+
 ## PREPERATION WORK FOR CI
 
 At this point the whole buildroot setup is working on our development machine.
@@ -403,7 +408,7 @@ The file is placed in the buildroot-root directory `./build.sh` and invokes the 
 On step is important before make can be called. After a fresh download of the buildroot directory from the git server, it is not possible to directy call make. The `.config` file will not be synchronizes by the `.gitignore` file, so the file is missing in the buildroot-root directory.
 To solve this issue, the buildroot configuration is stored under a different file name `./config_backup`. The `build.sh` file renames the `config_backup` to `.config`, and invoke the make command sucessfully.
 
-Later the CI system simply have to call the `build.sh` file in order to start the build process.
+Later the CI system simply have to call the `build.sh` file in order to start the build complete process.
 
 In addition, later its also possible to add new features to the `build.sh`. For example to upload the final image to an FTP Server.
 
@@ -424,6 +429,12 @@ This setup was used in the whole software development process. Especially for th
 In summary buildroot was a great choice to work with. The process of integration of own packages was straight forward. In the end building an linux image for an embedded device that simply works, including all needed software for the project is very great.
 This system also has advantages as not every image has to be adjusted manually, especially if the number of embedded systems to be installed increases.
 
+??
+The now created configuration and patching of buildroot allowes delivers a complete running system for QT and Hardware apllications.
+The system is very easy to use, by simply calling the `./build.sh` script and flashing the `sdcard.img` file to an sdcard.
+The RaspberryPi boots with ssh server, configures I2C and SPI and boots up the ATC software services.
+
+??
 
 
 
