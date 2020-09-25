@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Buildroot jenkinsbuild-2-g088a8b4d-dirty Configuration
+# Buildroot jenkinsbuild-7-g89f28670-dirty Configuration
 #
 BR2_HAVE_DOT_CONFIG=y
 BR2_HOST_GCC_AT_LEAST_4_9=y
@@ -577,7 +577,7 @@ BR2_PACKAGE_LINUX_TOOLS_GPIO=y
 #
 # AtomicChessPackages
 #
-# BR2_PACKAGE_ATCGUI is not set
+BR2_PACKAGE_ATCGUI=y
 BR2_PACKAGE_ATCTP=y
 BR2_PACKAGE_ATCCTL=y
 # BR2_PACKAGE_ATCWIRINGPI is not set
