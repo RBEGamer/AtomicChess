@@ -5,10 +5,17 @@ ls
 env
 
 
-make clean
+make distclean
 echo "-- COPY CONFIG FILE --"
 cp ./config_backup ./.config
 
+
+# make clean stuff
+rm -Rf ./output/build/.root
+
+make atcgui-dirclean && rm -Rf ./dl/atcgui/
+make atcctl-dirclean && rm -Rf ./dl/atcctl/
+make atctp-dirclean && rm -Rf ./dl/atctp/
 
 
 echo "--BUILD FIRT ITERATION --"
