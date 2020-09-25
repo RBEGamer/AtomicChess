@@ -384,7 +384,7 @@ After the modification, the buildprocess runs without a problem.
 
 ![C++17Fix](./documentation_images/buidroot_c++17_fix.png)
 
-After
+
 ##### END SITENOTE
 
 
