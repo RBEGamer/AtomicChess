@@ -20,6 +20,7 @@ endef
 
 define ATCCTL_INSTALL_TARGET_CMDS
 	@echo ATCCTL_INSTALL!
+	ls $(@D)/src/src_controller/controller/controller
 	#$(INSTALL) -D -m 0755 $(@D)/src/src_controller/controller $(TARGET_DIR)/usr/ATC/atc_controller
 endef
 
