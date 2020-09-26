@@ -11,7 +11,7 @@ cp ./config_backup ./.config
 
 
 # make clean stuff
-#rm -Rf ./output/build/.root
+rm -Rf ./output/build/.root
 
 make atcgui-dirclean && rm -Rf ./dl/atcgui/
 make atcctl-dirclean && rm -Rf ./dl/atcctl/
