@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Buildroot CI_BUILD-6-g738e7168 Configuration
+# Buildroot CI_BUILD-7-g6331c8a7 Configuration
 #
 BR2_HAVE_DOT_CONFIG=y
 BR2_HOST_GCC_AT_LEAST_4_9=y
@@ -2439,7 +2439,7 @@ BR2_PACKAGE_JEMALLOC_ARCH_SUPPORTS=y
 # lapack/blas needs a toolchain w/ fortran
 #
 BR2_PACKAGE_LIBABSEIL_CPP_ARCH_SUPPORTS=y
-BR2_PACKAGE_LIBABSEIL_CPP=y
+# BR2_PACKAGE_LIBABSEIL_CPP is not set
 # BR2_PACKAGE_LIBARGTABLE2 is not set
 BR2_PACKAGE_LIBATOMIC_OPS_ARCH_SUPPORTS=y
 # BR2_PACKAGE_LIBATOMIC_OPS is not set
