@@ -10,8 +10,16 @@ echo "-- COPY CONFIG FILE --"
 cp ./config_backup ./.config
 
 
-# make clean stuff
-rm -Rf ./output/build/.root
+
+FILEA=./DELETE_FOR_REBUILD
+if test -f "$FILEA"; then
+    echo "$FILEA exists."
+    # make clean stuff
+    rm -Rf ./output/build/.root
+else
+    make clean
+    touch ./DELETE_FOR_REBUILD
+fi
 
 make atcgui-dirclean && rm -Rf ./dl/atcgui/
 make atcctl-dirclean && rm -Rf ./dl/atcctl/
@@ -46,5 +54,5 @@ echo "-- PATCH config.txt --"
 
 
 
-echo "--BUILD FINAL --"
+echo "--BUILD FINAL WITH PATCHED config.txt--"
 make
