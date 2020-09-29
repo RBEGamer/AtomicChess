@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Buildroot CI_BUILD-7-g6331c8a7 Configuration
+# Buildroot CI_BUILD-2-ga4f6f200 Configuration
 #
 BR2_HAVE_DOT_CONFIG=y
 BR2_HOST_GCC_AT_LEAST_4_9=y
@@ -579,10 +579,11 @@ BR2_PACKAGE_LINUX_TOOLS_GPIO=y
 #
 # AtomicChessPackages
 #
-BR2_PACKAGE_ATCGUI=y
+# BR2_PACKAGE_ATCGUI is not set
 BR2_PACKAGE_ATCTP=y
 # BR2_PACKAGE_ATCCTL is not set
 # BR2_PACKAGE_ATCMISC is not set
+BR2_PACKAGE_ATCMRPC=y
 
 #
 # Target packages
