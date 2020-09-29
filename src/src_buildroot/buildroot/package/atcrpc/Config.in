@@ -3,6 +3,7 @@ config BR2_PACKAGE_ATCMRPC
     help
         This package contians a custom rpc lib based on
         https://github.com/rpclib/rpclib
+        http://rpclib.net/
         
         http://marcelochsendorf.com
 
