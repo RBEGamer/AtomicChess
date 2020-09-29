@@ -19,21 +19,21 @@ define ATCGUI_BUILD_CMDS
 	@echo -----------------
 	@echo ATCGUI_BUILD_QMAKE!
 	@echo -----------------
-	cat $(@D)/src/src_qtui/rpidisplayqt/rpidisplayqt.pro
+	cat $(@D)/src/src_qtui/atcgui/atcgui.pro
 	@echo -----------------
 	
-	$(QT5_QMAKE) -d -o $(@D)/src/src_qtui/rpidisplayqt/Makefile $(@D)/src/src_qtui/rpidisplayqt/rpidisplayqt.pro  
+	$(QT5_QMAKE) -d -o $(@D)/src/src_qtui/atcgui/Makefile $(@D)/src/src_qtui/atcgui/atcgui.pro  
 	@echo -----------------
 	@echo ATCGUI_BUILD_MAKE!
 	@echo -----------------
-	$(MAKE) $(TARGET_CONFIGURE_OPTS) CXXFLAGS="-std=c++17 -DUSES_QT" -C $(@D)/src/src_qtui/rpidisplayqt/
+	$(MAKE) $(TARGET_CONFIGURE_OPTS) CXXFLAGS="-std=c++17 -DUSES_QT" -C $(@D)/src/src_qtui/atcgui/
 	@echo -----------------
 endef
 
 
 define ATCGUI_INSTALL_TARGET_CMDS
 	@echo ATCGUI_INSTALL!
-	$(INSTALL) -D -m 0755 $(@D)/src/src_qtui/rpidisplayqt/rpidisplayqt $(TARGET_DIR)/usr/ATC/atc_ui
+	$(INSTALL) -D -m 0755 $(@D)/src/src_qtui/atcgui/atcgui $(TARGET_DIR)/usr/ATC/atc_ui
 endef
 
 $(eval $(generic-package))
