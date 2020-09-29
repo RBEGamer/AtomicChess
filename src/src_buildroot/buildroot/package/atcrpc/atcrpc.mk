@@ -4,8 +4,8 @@
 #
 ################################################################################
 
-ATCRPC_VERSION = origin/master
-ATCRPC_SITE = git@github.com:RBEGamer/rpclib.git
+ATCRPC_VERSION = origin/rpclib
+ATCRPC_SITE = git@github.com:RBEGamer/AtomicChessOS.git
 ATCRPC_SITE_METHOD = git
 ATCRPC_LICENSE = MIT
 ATCRPC_INSTALL_TARGET = YES
