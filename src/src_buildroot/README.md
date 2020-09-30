@@ -318,9 +318,26 @@ Especially for a long term test of the running system, logs are nessessary for d
 Logrotate offers two ways of configuration, the first thought the configuration file located in `/etc/logrotate.conf`.
 At the start of the file, other configuration files are included located in the `/etc/logrotate.d/`
 
-?? CONFIG 
+```bash
+/var/log/apt/atc.log {
+  rotate 10
+  hourly
+  missingok
+  notifempty
+}
+```
 
-The pre configured logrotate configuration for the ATC applications can be found in the overlay fs folder of buildroot `./OVERLAY_FS/etc/logrotate.d/atc`
+* `rotate`, keeps 10 logfiles stored
+* `hourly`, interval of the rotation, also other intervals possible `daily, monthly,..`
+* `missingok`, if the application has no logfiles, logrotate will print an error. The `missingok` attribute disables this behavior.
+* `notifempty`, do not create a new logfile or roate the logfile, if the logfile of the application is empty.
+
+It is also possible to set several different other attributes like `compress`. This compresses the logfile to an `.gz` archive.
+
+
+The preconfigured logrotate configuration for the ATC applications can be found in the overlay fs folder of buildroot `./OVERLAY_FS/etc/logrotate.d/atc`
+
+Its also possible to manually reload the logrotate configuration by using the. `logrotate /etc/logrotate.conf --debug` command, which loads the configuration and displays the loaded configuration.
 
 
 #### SSH KNOWN HOSTS
