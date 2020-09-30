@@ -231,8 +231,79 @@ After building a complete image the size is about 310MB in Size, this includes t
 
 
 #### AUTOBOOT
-*init.d -> file called S (service) 99 (priority=latest)
-* sudo chmod +x for rights
+
+All ATC applications, like the ATC_GUI and the ATC_Controller, have to start with the system automaticly.
+For this purpose the linux system offers several different methods to accomplish this task.
+
+
+In this case, the goal is to start the Applications as service, after the the rest of the system is booted up.
+The `init.d` system offers a priority handling for startup scripts, placed inside if the `/etc/init.d` folder of the system.
+The startup script has defined parameters (`start`,`stop`,`restart`) which handle the start and stop procedure of the applications to run.
+
+The body of an `init.d` script is listed below.
+
+```bash
+#!/bin/sh
+#
+# atc        Starts all atc pacakges.
+#
+umask 077
+
+start() {
+	modprobe i2c-dev
+   	/usr/ATC/atc_ui &
+	/usr/ATC/atc_controller &
+	printf "Starting atc: "
+	touch /usr/ATC/ATC_LOCK
+	echo "OK"
+}
+stop() {
+	printf "Stopping atc: "
+	killall atc_ui
+	killall atc_controller
+	rm -f /usr/ATC/ATC_LOCK
+	echo "OK"
+}
+restart() {
+	stop
+	start
+}
+
+case "$1" in
+  start)
+	start
+	;;
+  stop)
+	stop
+	;;
+  restart|reload)
+	restart
+	;;
+  *)
+	echo "Usage: $0 {start|stop|restart}"
+	exit 1
+esac
+exit $?
+
+```
+
+The naming of the script is important. As mentioned `init.d` offers a priority system, which is defined in the name of the script.
+
+In the case of the ATC applications the startupscript is called `/etc/init.d/S99atc`.
+The naming convention is the following:
+
+`/etc/init.d/<TYPE><PRIORITY>name`
+
+The type charakter is `S` which stands for service.
+`init.d` offers priorities from `0` to `99` and the name can be a visible name to identifiy the service.
+The goal is to start the script at the end of the startup routine, so the priority of `99` is set.
+
+A last step is reuqired. Its nessessary to make the script executable, which is possible thought the `chmod` command.
+
+`$ sudo chmod +x ./OVERLAY_FS/etc/init.d/S99atc`, marks the the script as executable.
+
+After rebuilding the image, the embedded system shouls start the ATC Applications automaticly, with no need for an console login.
+
 
 #### SSH KNOWN HOSTS
 * using the overlay to insert a known hosts file with the already known ssh keys 
