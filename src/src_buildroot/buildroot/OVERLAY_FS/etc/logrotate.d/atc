@@ -1,0 +1,15 @@
+/var/log/apt/atc.log {
+  rotate 10
+  hourly
+  compress
+  missingok
+  notifempty
+}
+
+/var/log/apt/S99atc.log {
+  rotate 10
+  hourly
+  compress
+  missingok
+  notifempty
+}
