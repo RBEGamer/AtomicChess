@@ -31,6 +31,8 @@ Buildroot supports numerous processors and their variants; it also comes with de
 ### HOW BUILDROOT WORKS
 
 * image
+* configration files
+
 
 
 ### SYSTEM REQUIREMENTS
@@ -543,7 +545,8 @@ To make the integration into the CI system easier, a single bash file was create
 The file is placed in the buildroot-root directory `./build.sh` and invokes the make comand in order to run a buildroot build.
 
 On step is important before make can be called. After a fresh download of the buildroot directory from the git server, it is not possible to directy call make. The `.config` file will not be synchronizes by the `.gitignore` file, so the file is missing in the buildroot-root directory.
-To solve this issue, the buildroot configuration is stored under a different file name `./config_backup`. The `build.sh` file renames the `config_backup` to `.config`, and invoke the make command sucessfully.
+To solve this issue, the buildroot configuration is stored under a different file name `./config_backup`. The `build.sh` file copies the `config_backup` to `.config`, and invoke the make command sucessfully.
+
 
 Later the CI system simply have to call the `build.sh` file in order to start the build complete process.
 
