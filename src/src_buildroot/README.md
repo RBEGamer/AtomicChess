@@ -230,7 +230,7 @@ After building a complete image the size is about 310MB in Size, this includes t
 ?? IMAGE OF THE OVERLAY DIAGRAM ??
 
 
-#### AUTOBOOT
+#### AUTOBOOT AND LOG ROATION
 
 All ATC applications, like the ATC_GUI and the ATC_Controller, have to start with the system automaticly.
 For this purpose the linux system offers several different methods to accomplish this task.
@@ -298,11 +298,29 @@ The type charakter is `S` which stands for service.
 `init.d` offers priorities from `0` to `99` and the name can be a visible name to identifiy the service.
 The goal is to start the script at the end of the startup routine, so the priority of `99` is set.
 
+
 A last step is reuqired. Its nessessary to make the script executable, which is possible thought the `chmod` command.
 
 `$ sudo chmod +x ./OVERLAY_FS/etc/init.d/S99atc`, marks the the script as executable.
 
 After rebuilding the image, the embedded system shouls start the ATC Applications automaticly, with no need for an console login.
+Its also possible to start and stop the script by calling `$ /etc/init.d/S99atc {start|stop}`.
+
+The log that the applications generated, started with `init.d` can be found in the `/var/log/<FILENAME>.log` folder, where the name matches the `init.d` filename.
+
+##### LOG ROATION
+
+Logrotate is a system utility that manages the automatic rotation and compression of log files.
+If log files were not rotated, compressed, and periodically pruned, they could eventually consume all available disk space on a system. 
+In this case we dont have much space left on the partition, one options is to simply do not log anything or redirect the logoutput to `/dev/null`.
+Especially for a long term test of the running system, logs are nessessary for debugging. 
+
+Logrotate offers two ways of configuration, the first thought the configuration file located in `/etc/logrotate.conf`.
+At the start of the file, other configuration files are included located in the `/etc/logrotate.d/`
+
+?? CONFIG 
+
+The pre configured logrotate configuration for the ATC applications can be found in the overlay fs folder of buildroot `./OVERLAY_FS/etc/logrotate.d/atc`
 
 
 #### SSH KNOWN HOSTS
