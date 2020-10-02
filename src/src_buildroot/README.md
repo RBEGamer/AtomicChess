@@ -60,11 +60,11 @@ For this project a complete configured buildroot installation can be found in th
 Its also possible to create a fresh installation of buildroot. The base version of buildroot used in this project, was the release number `2020.02` which can be found on the buildroot download page `https://buildroot.org/download.html`.
 
 
-After downloading the `tar.gt` file from the downloadpage. The archive must be unpacked using the `tar` command:
+After downloading the `tar.gz` file from the downloadpage. The archive must be unpacked using the `tar` command:
 
 `$ tar -xf Downloads/buildroot-2020.02.tar.gz`
 
-The setup of buildroot is finished ater extraction process finished.
+The setup of buildroot is finished after extraction process is complete.
 
 
  
@@ -532,9 +532,13 @@ To test the new created package, its is also possible to build the single packag
 
 ## HARDWARE SUPPORT I2C SPI
 
-The ATC Project uses the SPI bus of the Embedded System to communicate with the motor drivers. To use the SPI bus 
-* config txt patch manual 
-* modprobe i2c
+The ATC Project uses the SPI bus of the Embedded System to communicate with the motor drivers. 
+In addition the I2C bus is used to communicate with the nfc reader. In order to use the bus, the `i2c` kernel module has to be loaded with the `modprobe` command.
+
+An other solution for automatic module loading, is `/boot/config.txt` file on the boot partition, but the embedded system is not loading kernel modules specified in the file. This is an issue of the integrated bootloader that buildroot builds. 
+To solve this issue an option is to replace the bootloader with the original bootloader from the RaspberryPi system, but in this case, loading the module by hand or script is acceptable.
+
+
 * linux menuconfig to check if i2c is general in kernel enabled (images)
 
 ## PREPERATION WORK FOR CI
