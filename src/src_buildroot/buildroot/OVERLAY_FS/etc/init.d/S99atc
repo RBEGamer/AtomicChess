@@ -8,11 +8,11 @@
 umask 077
 
 start() {
-
+	printf "MODPROBE i2c "
 	modprobe i2c-dev
-    	/usr/ATC/atc_ui &
-	/usr/ATC/atc_controller &
 	printf "Starting ATC "
+    	/usr/ATC/start_atc_gui.sh &
+	/usr/ATC/start_atc_controller.sh &
 	touch /usr/ATC/ATC_LOCK
 	echo "OK"
 }
