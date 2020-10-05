@@ -172,8 +172,6 @@ After enabling the QT5 packge, buildroot automaticly enabled EGLFS as grahpics b
 
 QT5 alone is able to use other graphics backend too, for example the directfb. the directfb is the simplest graphics backend provided by the linux system, and it can be used for very simple applications.
 
-#### WHAT IS AGRAPIC BACKEND
-
 
 * `Target Packages -> Graphic -> QT5`, enables QT5, with the QT5_BASIC package. Use the `Return-Key` to access all QT5 packages.
 * `Target Packages -> Graphic -> QT5 -> Default Graphic Plattform (ELGFS)`, set the default graphic backend to ELGFS for Hardware Graphics Acceleration.
@@ -221,7 +219,10 @@ There are some more applications and libraries for development and testing insta
 
 The QT libraries and the other needed libraries are quite large in size. For the full QT5 with QT3D and the Virtual Keyboard and the nedded QuickControls II the rootfs file system is about 230MB. The default setting is 128MB. So buildroot can not build the final image beacuas its not enought space. To increase the rootfs maximum size, buildroot provides a size option under `Filesystem images -> root filesystem -> exact size`. With the `Space-Key` it is possible to edit the default value to 512M. A Zero for automatic determination is not supported.
 
-The `Fileystem images` category, provides several other options for the rootfs. Its also possible to create a readonly filesystem or a compressed one. For debugging purposes, the readonly filesystem option is disabled. All other settings are the default settings.
+The `Fileystem images` category, provides several other options for the rootfs. Its also possible to create a readonly filesystem or a compressed one. For debugging purposes, the readonly filesystem option is disabled. 
+For deploying new versions of the image, the compression method is set to `.gz` with the option `Filesystem images -> Compressionmethod (gzip)` for a smaller rootfs partition. After a build the normal image `sdcard.img` was created, also the compressed version of the rootfs `rootfs.ext2.gz`.
+
+All other settings are the default settings.
 
 After building a complete image the size is about 310MB in Size, this includes the bootloader, os with all libraries and packages with the ATC needed programs (ATC_UI, ATC_Client).
 
