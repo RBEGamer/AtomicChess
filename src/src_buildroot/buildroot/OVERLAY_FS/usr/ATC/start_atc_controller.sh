@@ -1,5 +1,6 @@
 #! /bin/sh
 while true; do
 echo "STARTING ATC CONTROLLER"
-./controller
+#$(pwd)/atc_controller
+sleep 10
 done
