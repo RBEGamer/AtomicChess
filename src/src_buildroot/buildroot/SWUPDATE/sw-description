@@ -1,0 +1,36 @@
+software =
+{
+	version = "1.1";
+        files: (
+                {
+                        filename = "updatefactoryinfo";
+                        path = "/mnt/root/usr/bin/updatefactoryinfo";
+                },
+                {
+                        filename = "OS_VERSION.txt";
+                        path = "/mnt/root/home/root/OS_VERSION.txt";
+                },
+                {
+                        filename = "index.html";
+                        path = "/mnt/root/www/pages/index.html";
+                },
+                {
+                        filename = "style.css";
+                        path = "/mnt/root/www/pages/style.css";
+                },
+                {
+                        filename = "UF-logo-sm.png";
+                        path = "/mnt/root/www/pages/UF-logo-sm.png";
+                },
+								{
+                        filename = "california-beach.jpg";
+                        path = "/mnt/root/www/pages/california-beach.jpg";
+                }
+        );
+        scripts: (
+                {
+                        filename = "update.sh";
+                        type = "shellscript";
+                }
+        );
+}
