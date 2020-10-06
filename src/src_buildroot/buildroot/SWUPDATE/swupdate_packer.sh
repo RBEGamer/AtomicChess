@@ -1,13 +1,37 @@
 #!/bin/bash
 
+
+echo "--- GENERATE SHA256 from rootfs.ext2 ---"
+RFSHASHA=$(sha256sum ../output/images/rootfs.ext2.gz | awk '{ print $1 }')
+echo "rootfs hash ${RFSHASHA}"
+
+echo "--- PATCH sw-description from sw-description_template"
+cp -rf ./sw-description_template ./sw-description
+sed -i 's|RFSHASH|'"$RFSHASHA"'|g' ./sw-description
+cat ./sw-description
+
+
+
+echo "--- SIGN sw-description ---"
+openssl dgst -sha256 -sign ./swupdatekey_private.pem ./sw-description > ./sw-description.sig
+
+
+
 echo "--- COPY sw-description to ../output/images/ ---"
-cp ./sw-description ../output/images
+#cp ./sw-description ../output/images
+cp ./sw-description.sig ../output/images
 echo "--- RUN PACKAGE to .swu in ../output/images/ ---"
+
+
 cd ../output/images
+
+
 echo ${pwd}
 CONTAINER_VER="1.0.2"
 PRODUCT_NAME="atctable"
-FILES="sw-description rootfs.ext2"
+FILES="sw-description.sig rootfs.ext2.gz"
 
 for i in $FILES;do
 	echo $i;done | cpio -ov -H crc > ${PRODUCT_NAME}_${CONTAINER_VER}.swu
+
+ls

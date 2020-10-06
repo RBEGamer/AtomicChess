@@ -11,16 +11,16 @@ start() {
 	printf "MODPROBE i2c "
 	modprobe i2c-dev
 	printf "Starting ATC "
+	touch /usr/ATC/ATC_LOCK
     	/usr/ATC/start_atc_gui.sh &
 	/usr/ATC/start_atc_controller.sh &
-	touch /usr/ATC/ATC_LOCK
 	echo "OK"
 }
 stop() {
 	printf "Stopping ATC"
+	rm -f /usr/ATC/ATC_LOCK
 	killall atc_ui
 	killall atc_controller
-	rm -f /usr/ATC/ATC_LOCK
 	echo "OK"
 }
 restart() {
