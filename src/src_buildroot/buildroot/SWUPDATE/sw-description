@@ -7,7 +7,7 @@ software =
                         filename = "rootfs.ext2.gz";
                         device = "/dev/mmcblk0p2";
                         type = "raw";
-                        sha256 = "ecf967a30da7b5fd37cfe5d88ea920cc36b5ee5bd38ff334a1c32c57b2eb95dd";
+                        sha256 = "616555310835e64e29f20eddf514c16948a59a1181585901542dac8c6c123aec";
                         compressed = true;
                 }
         );
