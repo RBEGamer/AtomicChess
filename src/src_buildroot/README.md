@@ -43,7 +43,7 @@ These packages can be installed with the `$ sudo apt install <PACKAGE>` command,
 
 * `$ sudo apt  update && apt  upgrade -y`
 * `$ sudo apt install software-properties-common`
-* `$ sudo apt install sed make binutils build-essential gcc g++ gzip bzip2 perl tar cpio unzip rsync bc wget git python cmake cpio -y`
+* `$ sudo apt install sed make binutils build-essential gcc g++ gzip bzip2 perl tar cpio unzip rsync bc wget git python cpio sed cmake -y`
 * `$ sudo apt install gtk2.0 gtk2.0-dev csv python-glade2 libncurses5 libncurses5-dev -y`
 
 
@@ -54,7 +54,7 @@ The installation took place on a fresh installed Ubuntu 20.04, where most of the
 
 #### INSTALL BUILDROOT
 
-For this project a complete configured buildroot installation can be found in the git repository locatate in Folder:
+For this project a complete configured buildroot installation can be found in the git repository:
 `/src/src_buildroot/buildroot`. All commands listed in this chapter are relative to this path.
 
 Its also possible to create a fresh installation of buildroot. The base version of buildroot used in this project, was the release number `2020.02` which can be found on the buildroot download page `https://buildroot.org/download.html`.
