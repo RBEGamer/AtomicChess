@@ -4,6 +4,8 @@ menu "AtomicChessPackages"
 	source "package/atcctl/Config.in"
 	source "package/atcmisc/Config.in"
 	source "package/atcrpc/Config.in"
+	
+	source "package/curl/Config.in"
 endmenu
 
 

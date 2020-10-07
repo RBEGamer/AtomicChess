@@ -1,0 +1,5 @@
+config BR2_PACKAGE_ATCCURL
+	bool "curl binary"
+	depends on BR2_PACKAGE_LIBCURL
+	help
+	  Install curl binary as well

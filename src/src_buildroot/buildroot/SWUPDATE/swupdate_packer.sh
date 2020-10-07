@@ -18,8 +18,8 @@ openssl dgst -sha256 -sign ./swupdatekey_private.pem ./sw-description > ./sw-des
 
 
 echo "--- COPY sw-description to ../output/images/ ---"
-#cp ./sw-description ../output/images
-cp ./sw-description.sig ../output/images
+cp ./sw-description.sig ../output/images/
+cp ./sw-description ../output/images/
 echo "--- RUN PACKAGE to .swu in ../output/images/ ---"
 
 
@@ -29,9 +29,9 @@ cd ../output/images
 echo ${pwd}
 CONTAINER_VER="1.0.2"
 PRODUCT_NAME="atctable"
-FILES="sw-description.sig rootfs.ext2.gz"
+FILES="sw-description sw-description.sig rootfs.ext2.gz"
 
 for i in $FILES;do
-	echo $i;done | cpio -ov -H crc > ${PRODUCT_NAME}_${CONTAINER_VER}.swu
-
+	echo $i;done | cpio -ov -H crc > ${PRODUCT_NAME}_${CONTAINER_VER}_signed.swu
 ls
+
