@@ -1,23 +1,14 @@
 software =
 {
-        version = "1.0.0";
-        hardware-compatibility: ["atctable"];
-        stable :
-        {
-                copy1 :
+        version = "1.0";
+        images: (
                 {
-                        images:
-                        (
-                                {
-                                        filename = "rootfs.ext2.gz";
-                                        type = "raw";
-                                        device = "/dev/mmcblk0p2";
-                                        sha256 = "RFSHASH";
-                                        compressed = true;
-                                }
-                        );
-                        
-
-                };
-        };
+                        filename = "rootfs.ext2.gz";
+                        device = "/dev/mmcblk0p2";
+                        type = "raw";
+                        sha256 = "RFSHASH";
+                        compressed = "true";
+                }
+        );
 }
+
