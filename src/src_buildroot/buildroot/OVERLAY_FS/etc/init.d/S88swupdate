@@ -11,6 +11,7 @@ start() {
 	
 	touch /etc/swupdate/SWUPDATE_WEBSERVER_LOCK
     	/etc/swupdate/run_swupdate_webserver.sh &
+    	/etc/swupdate/run_swupdate_hawkbit.sh &
 	echo "OK"
 }
 stop() {
