@@ -1,13 +1,13 @@
 software =
 {
-        version = "1.0";
+        version = "1.1";
         images: (
                 {
                         filename = "rootfs.ext2.gz";
                         device = "/dev/mmcblk0p2";
                         type = "raw";
                         sha256 = "RFSHASH";
-                        compressed = "true";
+                        compressed = true;
                 }
         );
 }
