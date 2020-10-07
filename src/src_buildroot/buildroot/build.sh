@@ -18,6 +18,10 @@ fi
 
 
 
+# INCREMENT VERSION
+cd ./VERSIONING && ./increment_version.sh && cd ..
+
+
 # make distclean
 echo "-- COPY CONFIG FILE --"
 cp ./config_backup ./.config

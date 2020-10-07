@@ -1,12 +1,10 @@
-#!/usr/bin/python
+#!/usr/bin/bash
 # ATC Project Marcel Ochsendorf marcelochsendorf.com
 # This script increments a versionnumber before each build
 # its normally called by the ../build.sh script
-print("INCREMENT VERSION SCRIPT")
+
+python ./increment_version.py
 
 
-def increment_ver(version):
-    version = version.split('.')
-    version[2] = str(int(version[2]) + 1)
-    return '.'.join(version)
-
+cp ./VERSION ../OVERLAY_FS/VERSION
+cp ./VERSION ../SWUPDATE/VERSION
