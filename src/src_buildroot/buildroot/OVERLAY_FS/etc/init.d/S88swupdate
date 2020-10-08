@@ -1,15 +1,15 @@
 #!/bin/sh
+# /etc/init.d/S88swpdate ATCProject Marcel Ochsendorf marcel.ochsendorf.com
 #
-# atc        Starts the swupdate webserver
+# atc        Start the swupdate service 1)As webserver 2) using the hawkbit server
 #
-
-
 
 umask 077
 
 start() {
 	
 	touch /etc/swupdate/SWUPDATE_WEBSERVER_LOCK
+	/etc/swupdate/create_swupdate.cfg.sh
     	/etc/swupdate/run_swupdate_webserver.sh &
     	/etc/swupdate/run_swupdate_hawkbit.sh &
 	echo "OK"

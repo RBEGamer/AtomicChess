@@ -1,12 +1,12 @@
 software =
 {
-        version = "0.0.4";
+        version = "4.0.7";
         images: (
                 {
                         filename = "rootfs.ext2.gz";
                         device = "/dev/mmcblk0p2";
                         type = "raw";
-                        sha256 = "98aecf41a52434a46cb265f4d58d0e5a4beb41ed27e2dfcb38a02884e7ba614d";
+                        sha256 = "da9f0cd4c5fc09cf80a34a5102cbfba945468ffcfaf5f0fee5e693ceded26ae2";
                         compressed = true;
                 }
         );

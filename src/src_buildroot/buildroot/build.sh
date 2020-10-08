@@ -1,4 +1,5 @@
 #!/bin/bash
+# build.sh ATCProject Marcel Ochsendorf marcel.ochsendorf.com
 echo "--- STARTING BUILD ---"
 pwd
 ls

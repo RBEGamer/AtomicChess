@@ -1,4 +1,5 @@
 #!/bin/sh
+# /etc/init.d/S99atc ATCProject Marcel Ochsendorf marcel.ochsendorf.com
 #
 # atc        Starts all ATC pacakges.
 #
@@ -19,7 +20,7 @@ start() {
 stop() {
 	printf "Stopping ATC"
 	rm -f /usr/ATC/ATC_LOCK
-	killall atc_ui
+	#killall atc_ui
 	#killall atc_controller
 	echo "OK"
 }

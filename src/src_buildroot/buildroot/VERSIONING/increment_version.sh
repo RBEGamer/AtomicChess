@@ -8,3 +8,4 @@ python ./increment_version.py
 
 cp ./VERSION ../OVERLAY_FS/VERSION
 cp ./VERSION ../SWUPDATE/VERSION
+cp ./VERSION ../output/images

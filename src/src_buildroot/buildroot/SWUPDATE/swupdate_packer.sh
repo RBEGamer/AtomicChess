@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# swupdate_packer.sh ATCProject Marcel Ochsendorf marcel.ochsendorf.com
 
 echo "--- READ VERSION ---"
 SWVERSION="$(cat ./VERSION)"
@@ -38,6 +38,6 @@ PRODUCT_NAME="atctable"
 FILES="sw-description sw-description.sig rootfs.ext2.gz"
 
 for i in $FILES;do
-	echo $i;done | cpio -ov -H crc > ${PRODUCT_NAME}_${CONTAINER_VER}_signed.swu
+	echo $i;done | cpio -ov -H crc > ${PRODUCT_NAME}_signed.swu
 ls
 
