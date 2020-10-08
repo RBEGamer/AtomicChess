@@ -600,7 +600,48 @@ After flashing the image to an empty sd card, the partition scheme looks as the 
 ![DUAL_COPY_PARTITION_SCHEME](./documentation_images/swupdate_new_partition.png)
 
 ### SWITCHING BETWEEN PARTITIONS
+In the current boot configuration, the system boots up, mount the `rootfs` partition and continuous the startup process.
+The dual copy update strategy, updates one of the two partitions alternating.
+In the current setup, after updateing the `rootfsbackup` partition, the system still boots from the `rootfs` partition and the new firmwar never starts.
+So a possibility is needed to swicht between both partitions.
+In order to archive this functionallity, the `boot`partition comes handy.
 
+First information is needed from which is the root partition.
+A simple solution is to parse the kernels `cmdline` and get the `root=` attribute.
+
+The easiest way is to get the current cmdline with `$ cat /proc/cmdline` or parse it directly from the `boot` partition.
+
+```text
+cat /proc/cmdline
+... vc_mem.mem_size=0x40000000  root=/dev/mmcblk0p2 rootwait console=tty1 console=ttyAMA0,115200
+```
+
+Finally parse the `root` attribute.
+```bash
+$ cat /proc/cmdline | sed -e 's/^.*root=//' -e 's/ .*$//'
+$ /dev/mmcblk0p2
+```
+
+Also we need to modifiy the `cmdline` in order to change the `root` attribute to the new root partition. 
+This can be archived with mounting the `root` partition into a folder.
+
+On the target device the partitions can be found in the `/dev` folder:
+
+* `/dev/mmcblk0p1` -> `boot` partition
+* `/dev/mmcblk0p2` ->`rootfs` partation
+* `/dev/mmcblk0p3` -> `rootfsbackup` partition
+
+With the mount command a parition can be mounted to a specified folder.
+In this example the goal is to mount the `boot` partition into a folder called `boot`
+`$ mkdir /boot && mount /dev/mmcblk0p1 /boot`.
+
+* startup
+*
+
+
+
+
+In the current boot configuration
 
 ### SWUPDATE
 
@@ -650,6 +691,36 @@ For this reason a script `OVERLAY_FS/etc/init.d/S88swupdate` was created, which 
 
 #### UPDATE PACKAGE CREATION
 
+```cfg
+software =
+{
+        version = "VERSION";
+        rootfs:
+        {
+        	images: (
+                {
+                        filename = "rootfs.ext2.gz";
+                        device = "/dev/mmcblk0p2";
+                        type = "raw";
+                        sha256 = "RFSHASH";
+                        compressed = true;
+                }
+        	);
+        };
+        rootfsbackup:
+        {
+        	images: (
+                {
+                        filename = "rootfs.ext2.gz";
+                        device = "/dev/mmcblk0p3";
+                        type = "raw";
+                        sha256 = "RFSHASH";
+                        compressed = true;
+                }
+        	);
+        };
+}
+```
 
 #### HAWKBIT CONFIGURATION
 In order to use the `hawkBit` client, `swupdate` can be configurated with an additional configuration file, located in `./OVERLAY_FS/etc/swupdate/swupdate.cfg`.
