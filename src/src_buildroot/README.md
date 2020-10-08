@@ -45,6 +45,7 @@ These packages can be installed with the `$ sudo apt install <PACKAGE>` command,
 * `$ sudo apt install software-properties-common`
 * `$ sudo apt install sed make binutils build-essential gcc g++ gzip bzip2 perl tar cpio unzip rsync bc wget git python cpio sed cmake -y`
 * `$ sudo apt install gtk2.0 gtk2.0-dev csv python-glade2 libncurses5 libncurses5-dev -y`
+* `$ sudo apt install genext2fs -y`
 
 
 
@@ -196,7 +197,7 @@ With incorrect time setting, the Client/Server is not able to verify a SSL Certi
 For communication of the gui and the control software a inter process communication system is nessessary.
 It uses the ZeroMQ protocol, so it is needed so install the zeromq library.
 
-* `Target Pacakges -> Libraries -> Networking -> zeromq`, enable zeromq messaging library to use the ZeroMQ protocol. (GUI communication).
+* `Target Packages -> Libraries -> Networking -> zeromq`, enable zeromq messaging library to use the ZeroMQ protocol. (GUI communication).
 * `Target Packages -> Libraries -> Networking -> czmq`, client library for ZeroMQ.
 * `Target Packages -> Libraries -> Crypto -> libsodium`, enables crypto functions for ZeroMQ.
 
@@ -540,7 +541,158 @@ An other solution for automatic module loading, is `/boot/config.txt` file on th
 To solve this issue an option is to replace the bootloader with the original bootloader from the RaspberryPi system, but in this case, loading the module by hand or script is acceptable.
 
 
-* linux menuconfig to check if i2c is general in kernel enabled (images)
+## FIRMWARE UPDATE
+
+
+### UPDATE STRATEGY
+
+#### SINGLE COPY
+#### DOUBLE COPY
+
+### ADDING A SECOND 'rootfs' partition
+In order to implement the `double copy` update strategy, a third partition has to be added to the image.
+The first partition is the `boot partition`, followed by the `rootfs`.
+The goal is to add a third partition called `rootfsbackup` to the image.
+Each board definition, contains a file `genimage.cfg`, which contains partition description.
+
+```cfg
+// board/raspberrypi3/genimage-raspberrypi3.cfg
+image boot.vfat {
+ ...
+ ...
+ ...
+}
+//--- CREATE EMPTY 1024MB EXT4 IMAGE
+image backup.ext4 {
+  ext4 {}
+  size = 1024M
+}
+image sdcard.img {
+  hdimage {
+  }
+
+  partition boot {
+    partition-type = 0xC
+    bootable = "true"
+    image = "boot.vfat"
+  }
+
+  partition rootfs {
+    partition-type = 0x83
+    image = "rootfs.ext4"
+    size = 1024M
+  }
+  //------ ADDED ROOTFSBACKUP PARTITION ------//
+  partition rootfsbackup {
+    partition-type = 0x83
+    image = "backup.ext4" //USE CREATED EMPTY IMAGE FROM ABOVE
+    size = 1024M
+  }
+}
+```
+The `rootfsbackup` was added in the file and has the same size as the `rootfs` partition. The size of `rootfs` and `rootfsbackup` was increased to 1024MB to have enought space for later
+
+Also the partation size was increased for `rootfs` and `rootfsbackup` in the `genimage.cfg` file using the `size` attribute.
+
+
+After flashing the image to an empty sd card, the partition scheme looks as the following.
+
+![DUAL_COPY_PARTITION_SCHEME](./documentation_images/swupdate_new_partition.png)
+
+### SWITCHING BETWEEN PARTITIONS
+
+
+### SWUPDATE
+
+* update methods
+* update strategie single dual copy
+*
+
+
+`swupdate` is already avariable as package in buildroot:
+
+* `Target Packages ->System tools -> swupdate`, enable swupdate package.
+
+Also a few support-packages are needed to automate the update process:
+
+
+* `Target Packages ->Filesystem and flash utilities -> e2fsprogs`, to check the updated filesystem for errors.
+* `Target Packages ->Libraries -> JSON/XML -> libjson`, json support for communicating with hawkbit server.
+* `Target Packages ->Libraries -> JSON/XML -> json-c`
+* `Target Packages ->Libraries -> Networking -> libcurl`, for swupdate download feature.
+
+
+The `swupdate` package offers a more advanced configuration menu. In after selecting the `swupdate` package only the basic configuration is set by default.
+For this project, a update using a local webserver or using a `hawkBit` server is a good way to updating over a remote server, with no need for a USB drive.
+
+`$ make swupdate-menuconfig`, open the menu and the following changes were made:
+
+* `Swupdate Configuration -> Enable image downloading`, enables downloading of updates from a webserver.
+* `Swupdate Configuration -> Web Server`, enables downloading of updates from a webserver.
+* `Swupdate Configuration -> Enable verification of signed images`, enables signed updates.
+* `Swupdate Configuration -> Scricatta -> Server ->Server Type (hawkBit)`, enables automated rollout using a `hawkBit` server.
+
+
+All changes after selecting `<SAVE>` will be discarded, to save the changes permanently in the `.config` file, the `$ make swupdate-update-defconfig` command has to be executed.
+After rebuilding the image with `$ make` or using the build script `$ ./build.sh`, the `swupdate` command is avariable on the target.
+The one of simplest methods of using `swupdate` is to start a webserver, where a update package can be uploaded.
+
+`$ swupdate -v -w "--document-root /var/www/swupdate --port 8081"`, which start the webserver on port `8081`.
+
+
+
+
+
+On the target system, the `swupdate` starts automatically by using the previously described `init.d` method.
+For this reason a script `OVERLAY_FS/etc/init.d/S88swupdate` was created, which starts the `swupdate` webserver and the `hawkBit` client which is integrated in `swupdate`.
+
+
+
+#### UPDATE PACKAGE CREATION
+
+
+#### HAWKBIT CONFIGURATION
+In order to use the `hawkBit` client, `swupdate` can be configurated with an additional configuration file, located in `./OVERLAY_FS/etc/swupdate/swupdate.cfg`.
+The config file contains the configuration for the `hawkBit` client.
+The essentials detailes in the config file, is the `id` of the device and the `url` to the `hawkBit` server.
+
+```cfg
+// /etc/swupdate/swupdate_template.cfg
+...
+...
+suricatta :
+{
+	tenant = "default";
+	id = "ATCTABLE"; //DEVICE ID
+	url = "http://192.168.178.125:8082"; //hawkBit Server URL
+	nocheckcert	= true;
+	enable		= true;
+};
+```
+The `id` should be unique for every device. For easy setup the unique mac adress for the ethernet interface `eth0` on the target was used for this id.
+To simplify the process a script `OVERLAY_FS/etc/swupdate/create_swupdate_cfg.sh` was created to automaticly replace the `id` with the mac adress at system startup. A template configuration `swupdate_template.cfg` in addition with the `sed` command to replace the placeholder `ATCTABLE` with the mac adress.
+
+```bash
+#!/bin/sh
+# /etc/swupdate/create_swupdate_cfg.sh
+#GET MAC ADDRESS
+HWID=$(cat /sys/class/net/eth0/address)
+#REMOVE THE : OF THE MAC ADDRESS TO GET A CLEANED ONE
+HWIDCLEANED=${HWID//:/}
+cp /etc/swupdate/swupdate_template.cfg /etc/swupdate/swupdate.cfg
+sed -i 's|DEVICEID|'"$DEVICEID"'|g' /etc/swupdate/swupdate.cfg
+```
+
+With this method its simple to deploy one image, to serveral different devices, and the device setup itself automaticly.
+Now the configuration is compl
+
+
+### HAWKBIT
+` $ sudo docker run -itd -p 8082:8080 --restart always hawkbit/hawkbit-update-server:latest --hawkbit.dmf.rabbitmq.enabled=false --hawkbit.server.ddi.security.authentication.anonymous.enabled=true`
+
+To open the configuration website, navigate to `http://<IP>:8082/` with username `admin` and password `admin`.
+
+
 
 ## PREPERATION WORK FOR CI
 
