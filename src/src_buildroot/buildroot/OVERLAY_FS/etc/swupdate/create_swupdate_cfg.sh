@@ -2,6 +2,13 @@
 # /etc/swupdate/create_swupdate_cfg.sh ATCProject Marcel Ochsendorf marcel.ochsendorf.com
 echo "-- CREATE SWUPODATE CFG---"
 
+#GET MAC ADDRESS
+HWID=$(cat /sys/class/net/eth0/address)
+#REMOVE THE : OF THE MAC ADDRESS TO GET A CLEANED ONE
+HWIDCLEANED=${HWID//:/}
+echo "$HWIDCLEANED" > "/HWID"
+
+
 #CHECK IF AN swupdate.cfg already exists
 FILEA=/etc/swupdate/swupdate.cfg
 if test -f "$FILEA"; then
@@ -10,10 +17,7 @@ if test -f "$FILEA"; then
 else
 	#IF NOT CREATE ONE
 	
-	#GET MAC ADDRESS
-    	HWID=$(cat /sys/class/net/eth0/address)
-    	#REMOVE THE : OF THE MAC ADDRESS TO GET A CLEANED ONE
-    	HWIDCLEANED=${HWID//:/}
+	
 
     	DEVICEID="ATCTABLE_${HWIDCLEANED}"
     	echo "USING $HWID ($HWIDCLEANED) AS DEVICEID $DEVICEID"
