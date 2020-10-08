@@ -45,6 +45,7 @@ These packages can be installed with the `$ sudo apt install <PACKAGE>` command,
 * `$ sudo apt install software-properties-common`
 * `$ sudo apt install sed make binutils build-essential gcc g++ gzip bzip2 perl tar cpio unzip rsync bc wget git python cpio sed cmake -y`
 * `$ sudo apt install gtk2.0 gtk2.0-dev csv python-glade2 libncurses5 libncurses5-dev -y`
+* `$ sudo apt install genext2fs -y`
 
 
 
@@ -541,6 +542,65 @@ To solve this issue an option is to replace the bootloader with the original boo
 
 
 ## FIRMWARE UPDATE
+
+
+### UPDATE STRATEGY
+
+#### SINGLE COPY
+#### DOUBLE COPY
+
+### ADDING A SECOND 'rootfs' partition
+In order to implement the `double copy` update strategy, a third partition has to be added to the image.
+The first partition is the `boot partition`, followed by the `rootfs`.
+The goal is to add a third partition called `rootfsbackup` to the image.
+Each board definition, contains a file `genimage.cfg`, which contains partition description.
+
+```cfg
+// board/raspberrypi3/genimage-raspberrypi3.cfg
+image boot.vfat {
+ ...
+ ...
+ ...
+}
+//--- CREATE EMPTY 1024MB EXT4 IMAGE
+image backup.ext4 {
+  ext4 {}
+  size = 1024M
+}
+image sdcard.img {
+  hdimage {
+  }
+
+  partition boot {
+    partition-type = 0xC
+    bootable = "true"
+    image = "boot.vfat"
+  }
+
+  partition rootfs {
+    partition-type = 0x83
+    image = "rootfs.ext4"
+    size = 1024M
+  }
+  //------ ADDED ROOTFSBACKUP PARTITION ------//
+  partition rootfsbackup {
+    partition-type = 0x83
+    image = "backup.ext4" //USE CREATED EMPTY IMAGE FROM ABOVE
+    size = 1024M
+  }
+}
+```
+The `rootfsbackup` was added in the file and has the same size as the `rootfs` partition. The size of `rootfs` and `rootfsbackup` was increased to 1024MB to have enought space for later
+
+Also the partation size was increased for `rootfs` and `rootfsbackup` in the `genimage.cfg` file using the `size` attribute.
+
+
+After flashing the image to an empty sd card, the partition scheme looks as the following.
+
+![DUAL_COPY_PARTITION_SCHEME](./documentation_images/swupdate_new_partition.png)
+
+### SWITCHING BETWEEN PARTITIONS
+
 
 ### SWUPDATE
 
