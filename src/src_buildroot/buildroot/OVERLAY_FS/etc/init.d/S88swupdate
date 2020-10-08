@@ -9,7 +9,7 @@ umask 077
 start() {
 	
 	touch /etc/swupdate/SWUPDATE_WEBSERVER_LOCK
-	/etc/swupdate/create_swupdate.cfg.sh
+	/etc/swupdate/create_swupdate_cfg.sh
     	/etc/swupdate/run_swupdate_webserver.sh &
     	/etc/swupdate/run_swupdate_hawkbit.sh &
 	echo "OK"
