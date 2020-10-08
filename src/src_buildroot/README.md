@@ -196,7 +196,7 @@ With incorrect time setting, the Client/Server is not able to verify a SSL Certi
 For communication of the gui and the control software a inter process communication system is nessessary.
 It uses the ZeroMQ protocol, so it is needed so install the zeromq library.
 
-* `Target Pacakges -> Libraries -> Networking -> zeromq`, enable zeromq messaging library to use the ZeroMQ protocol. (GUI communication).
+* `Target Packages -> Libraries -> Networking -> zeromq`, enable zeromq messaging library to use the ZeroMQ protocol. (GUI communication).
 * `Target Packages -> Libraries -> Networking -> czmq`, client library for ZeroMQ.
 * `Target Packages -> Libraries -> Crypto -> libsodium`, enables crypto functions for ZeroMQ.
 
@@ -540,15 +540,91 @@ An other solution for automatic module loading, is `/boot/config.txt` file on th
 To solve this issue an option is to replace the bootloader with the original bootloader from the RaspberryPi system, but in this case, loading the module by hand or script is acceptable.
 
 
-?? linux menuconfig to check if i2c is general in kernel enabled (images) ??
 ## FIRMWARE UPDATE
 
 ### SWUPDATE
-* build simpliefied script for gerneating update package in SWUPDATE
-`$ make swupdate-menuconfig`
-`$ make swupdate-update-defconfig`
+
+* update methods
+* update strategie single dual copy
+*
 
 
+`swupdate` is already avariable as package in buildroot:
+
+* `Target Packages ->System tools -> swupdate`, enable swupdate package.
+
+Also a few support-packages are needed to automate the update process:
+
+
+* `Target Packages ->Filesystem and flash utilities -> e2fsprogs`, to check the updated filesystem for errors.
+* `Target Packages ->Libraries -> JSON/XML -> libjson`, json support for communicating with hawkbit server.
+* `Target Packages ->Libraries -> JSON/XML -> json-c`
+* `Target Packages ->Libraries -> Networking -> libcurl`, for swupdate download feature.
+
+
+The `swupdate` package offers a more advanced configuration menu. In after selecting the `swupdate` package only the basic configuration is set by default.
+For this project, a update using a local webserver or using a `hawkBit` server is a good way to updating over a remote server, with no need for a USB drive.
+
+`$ make swupdate-menuconfig`, open the menu and the following changes were made:
+
+* `Swupdate Configuration -> Enable image downloading`, enables downloading of updates from a webserver.
+* `Swupdate Configuration -> Web Server`, enables downloading of updates from a webserver.
+* `Swupdate Configuration -> Enable verification of signed images`, enables signed updates.
+* `Swupdate Configuration -> Scricatta -> Server ->Server Type (hawkBit)`, enables automated rollout using a `hawkBit` server.
+
+
+All changes after selecting `<SAVE>` will be discarded, to save the changes permanently in the `.config` file, the `$ make swupdate-update-defconfig` command has to be executed.
+After rebuilding the image with `$ make` or using the build script `$ ./build.sh`, the `swupdate` command is avariable on the target.
+The one of simplest methods of using `swupdate` is to start a webserver, where a update package can be uploaded.
+
+`$ swupdate -v -w "--document-root /var/www/swupdate --port 8081"`, which start the webserver on port `8081`.
+
+
+
+
+
+On the target system, the `swupdate` starts automatically by using the previously described `init.d` method.
+For this reason a script `OVERLAY_FS/etc/init.d/S88swupdate` was created, which starts the `swupdate` webserver and the `hawkBit` client which is integrated in `swupdate`.
+
+
+
+#### UPDATE PACKAGE CREATION
+
+
+#### HAWKBIT CONFIGURATION
+In order to use the `hawkBit` client, `swupdate` can be configurated with an additional configuration file, located in `./OVERLAY_FS/etc/swupdate/swupdate.cfg`.
+The config file contains the configuration for the `hawkBit` client.
+The essentials detailes in the config file, is the `id` of the device and the `url` to the `hawkBit` server.
+
+```cfg
+// /etc/swupdate/swupdate_template.cfg
+...
+...
+suricatta :
+{
+	tenant = "default";
+	id = "ATCTABLE"; //DEVICE ID
+	url = "http://192.168.178.125:8082"; //hawkBit Server URL
+	nocheckcert	= true;
+	enable		= true;
+};
+```
+The `id` should be unique for every device. For easy setup the unique mac adress for the ethernet interface `eth0` on the target was used for this id.
+To simplify the process a script `OVERLAY_FS/etc/swupdate/create_swupdate_cfg.sh` was created to automaticly replace the `id` with the mac adress at system startup. A template configuration `swupdate_template.cfg` in addition with the `sed` command to replace the placeholder `ATCTABLE` with the mac adress.
+
+```bash
+#!/bin/sh
+# /etc/swupdate/create_swupdate_cfg.sh
+#GET MAC ADDRESS
+HWID=$(cat /sys/class/net/eth0/address)
+#REMOVE THE : OF THE MAC ADDRESS TO GET A CLEANED ONE
+HWIDCLEANED=${HWID//:/}
+cp /etc/swupdate/swupdate_template.cfg /etc/swupdate/swupdate.cfg
+sed -i 's|DEVICEID|'"$DEVICEID"'|g' /etc/swupdate/swupdate.cfg
+```
+
+With this method its simple to deploy one image, to serveral different devices, and the device setup itself automaticly.
+Now the configuration is compl
 
 
 ### HAWKBIT
