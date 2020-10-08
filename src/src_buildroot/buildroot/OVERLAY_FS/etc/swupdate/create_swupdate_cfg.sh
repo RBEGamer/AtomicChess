@@ -10,7 +10,7 @@ echo "$HWIDCLEANED" > "/HWID"
 
 
 #CHECK IF AN swupdate.cfg already exists
-FILEA=/etc/swupdate/swupdate.cfg
+FILEA=/etc/swupdate/SWUPDATE_CFG_GENERATED
 if test -f "$FILEA"; then
     	echo "$FILEA exists."
     	echo "swupdate.cfg already created"
@@ -24,6 +24,7 @@ else
     	#COPY THE TEMPLATE FILE AND REPLACE THE DEVICEID WITH THE GENERATED DEVICEID TO GET AN UNIQUE ID
     	cp /etc/swupdate/swupdate_template.cfg /etc/swupdate/swupdate.cfg
     	sed -i 's|DEVICEID|'"$DEVICEID"'|g' /etc/swupdate/swupdate.cfg
+    	touch /etc/swupdate/SWUPDATE_CFG_GENERATED
 fi
 
 
