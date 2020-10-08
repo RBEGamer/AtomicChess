@@ -540,7 +540,23 @@ An other solution for automatic module loading, is `/boot/config.txt` file on th
 To solve this issue an option is to replace the bootloader with the original bootloader from the RaspberryPi system, but in this case, loading the module by hand or script is acceptable.
 
 
-* linux menuconfig to check if i2c is general in kernel enabled (images)
+?? linux menuconfig to check if i2c is general in kernel enabled (images) ??
+## FIRMWARE UPDATE
+
+### SWUPDATE
+* build simpliefied script for gerneating update package in SWUPDATE
+`$ make swupdate-menuconfig`
+`$ make swupdate-update-defconfig`
+
+
+
+
+### HAWKBIT
+` $ sudo docker run -itd -p 8082:8080 --restart always hawkbit/hawkbit-update-server:latest --hawkbit.dmf.rabbitmq.enabled=false --hawkbit.server.ddi.security.authentication.anonymous.enabled=true`
+
+To open the configuration website, navigate to `http://<IP>:8082/` with username `admin` and password `admin`.
+
+
 
 ## PREPERATION WORK FOR CI
 
