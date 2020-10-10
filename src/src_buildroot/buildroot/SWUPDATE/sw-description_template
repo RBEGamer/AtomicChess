@@ -1,14 +1,29 @@
 software =
 {
         version = "VERSION";
-        images: (
+   	A : {
+        	images: (
                 {
-                        filename = "rootfs.ext2.gz";
+                        filename = "rootfs.ext2";
                         device = "/dev/mmcblk0p2";
                         type = "raw";
                         sha256 = "RFSHASH";
-                        compressed = true;
+                        compressed = false;
                 }
-        );
+        	);
+        	};
+        B : {
+        	images: (
+                {
+                        filename = "rootfs.ext2";
+                        device = "/dev/mmcblk0p3";
+                        type = "raw";
+                        sha256 = "RFSHASH";
+                        compressed = false;
+                }
+        	);
+        	};
+        
+       
 }
 

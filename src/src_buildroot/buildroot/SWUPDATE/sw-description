@@ -1,14 +1,29 @@
 software =
 {
-        version = "4.0.9";
-        images: (
+        version = "4.1.11";
+   	A : {
+        	images: (
                 {
-                        filename = "rootfs.ext2.gz";
+                        filename = "rootfs.ext2";
                         device = "/dev/mmcblk0p2";
                         type = "raw";
-                        sha256 = "a86b7a18e6b65a98ffbbaac811b1864642b11d05c9cf6a090d9957bfcf424822";
-                        compressed = true;
+                        sha256 = "30ff2d6e87696f38387afdbd2983b0894f5c99d4b38c26a46122be222d6dd69f";
+                        compressed = false;
                 }
-        );
+        	);
+        	};
+        B : {
+        	images: (
+                {
+                        filename = "rootfs.ext2";
+                        device = "/dev/mmcblk0p3";
+                        type = "raw";
+                        sha256 = "30ff2d6e87696f38387afdbd2983b0894f5c99d4b38c26a46122be222d6dd69f";
+                        compressed = false;
+                }
+        	);
+        	};
+        
+       
 }
 

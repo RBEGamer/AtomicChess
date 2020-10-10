@@ -10,5 +10,5 @@ if test -f "$FILEA"; then
 else
 	echo "----  STARTING SWUPDATE HAWKBIT ----"
 	touch /tmp/SWUPDATE_HAWKBIT
-	swupdate -v -f /etc/swupdate/swupdate.cfg -u "${SURICATTA_ARGS}"
+	swupdate -v -f /etc/swupdate/swupdate.cfg -e B -u "${SURICATTA_ARGS}"
 fi

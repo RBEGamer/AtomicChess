@@ -23,10 +23,6 @@ fi
 cd ./VERSIONING && ./increment_version.sh && cd ..
 
 
-# make distclean
-echo "-- COPY CONFIG FILE --"
-cp ./config_backup ./.config
-
 
 
 FILEA=./DELETE_FOR_REBUILD
@@ -34,11 +30,24 @@ if test -f "$FILEA"; then
     echo "$FILEA exists."
     # make clean stuff
     rm -Rf ./output/build/.root
+    rm -Rf ./output/
+    make jumpnow_rpi3_defconfig
+    make
 else
+    echo "--- PERFORM A CLEAN BUILD ---"
     make clean
     touch ./DELETE_FOR_REBUILD
 fi
 
+
+
+# make distclean
+echo "-- COPY CONFIG FILE --"
+cp ./config_backup ./.config
+
+
+
+# FORCE TO BUILD THE ATC PACKAGES
 make atcgui-dirclean && rm -Rf ./dl/atcgui/
 make atcctl-dirclean && rm -Rf ./dl/atcctl/
 make atctp-dirclean && rm -Rf ./dl/atctp/
