@@ -43,9 +43,12 @@ These packages can be installed with the `$ sudo apt install <PACKAGE>` command,
 
 * `$ sudo apt  update && apt  upgrade -y`
 * `$ sudo apt install software-properties-common`
-* `$ sudo apt install sed make binutils build-essential gcc g++ gzip bzip2 perl tar cpio unzip rsync bc wget git python cpio sed cmake doxygen -y`
+* `$ sudo apt install sed make binutils build-essential gcc g++ gzip bzip2 perl tar cpio unzip rsync bc wget git python cpio sed cmake -y`
 * `$ sudo apt install gtk2.0 gtk2.0-dev csv python-glade2 libncurses5 libncurses5-dev -y`
 
+For documentation using `Doxygen` the `doxygen` packages is needed. Also the `graphviz` is nessessary, to allow `doxygen` to generate visual call-graphs.
+
+* `$ sudo apt install doxygen doxygen-gui graphviz -y`
 
 
 The installation took place on a fresh installed Ubuntu 20.04, where most of the packages are already installed.
