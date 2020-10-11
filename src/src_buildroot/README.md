@@ -2,7 +2,7 @@
 
 This branch contains the buildroot framework to build the AtomicChessOS.
 
-The buildroot configuration is stored under `./buildroot/.config`
+The buildroot configuration is stored under `./buildroot/config_backup`
 
 
 
