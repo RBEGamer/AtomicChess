@@ -8,6 +8,9 @@ HWID=$(cat /sys/class/net/eth0/address)
 HWIDCLEANED=${HWID//:/}
 echo "$HWIDCLEANED" > "/HWID"
 
+#GET UPDATE SELECTION ID
+
+
 
 #CHECK IF AN swupdate.cfg already exists
 FILEA=/etc/swupdate/SWUPDATE_CFG_GENERATED

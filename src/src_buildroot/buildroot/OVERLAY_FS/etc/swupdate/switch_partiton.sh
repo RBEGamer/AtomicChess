@@ -13,17 +13,19 @@ if test -f "$FILEA"; then
 fi
 
 
-echo "$CURRBOOTPART" > /BOOTPART
+echo "$CURRBOOTPART" > /etc/swupdate/BOOTPART
 
 if [ "$CURRBOOTPART" = "/dev/mmcblk0p2" ]; then
                echo "$CURRBOOTPART IS PARTITION A"
-               echo "/dev/mmcblk0p3" > /NEXT_BOOTPART
+               echo "B" > /etc/swupdate/UPDATE_CHANNEL
+               echo "/dev/mmcblk0p3" > /etc/swupdate/NEXT_BOOTPART
                echo "NEXT PARTITON TO BOOT IS IS PARTITION B /dev/mmcblk0p3"
 fi
 
 if [ "$CURRBOOTPART" = "/dev/mmcblk0p3" ]; then
                echo "$CURRBOOTPART IS PARTITION B"
-               echo "/dev/mmcblk0p2" > /NEXT_BOOTPART
+               echo "A" > /etc/swupdate/UPDATE_CHANNEL
+               echo "/dev/mmcblk0p2" > /etc/swupdate/NEXT_BOOTPART
                echo "NEXT PARTITON TO BOOT IS IS PARTITION A /dev/mmcblk0p2"
 fi
 

@@ -31,7 +31,7 @@ if test -f "$FILEA"; then
     # make clean stuff
     rm -Rf ./output/build/.root
     rm -Rf ./output/
-    make jumpnow_rpi3_defconfig
+    make raspberrypi_defconfig
     make
 else
     echo "--- PERFORM A CLEAN BUILD ---"

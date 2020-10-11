@@ -1,29 +1,34 @@
 software =
 {
         version = "4.1.11";
-   	A : {
-        	images: (
-                {
-                        filename = "rootfs.ext2";
-                        device = "/dev/mmcblk0p2";
-                        type = "raw";
-                        sha256 = "30ff2d6e87696f38387afdbd2983b0894f5c99d4b38c26a46122be222d6dd69f";
-                        compressed = false;
-                }
-        	);
-        	};
-        B : {
-        	images: (
-                {
-                        filename = "rootfs.ext2";
-                        device = "/dev/mmcblk0p3";
-                        type = "raw";
-                        sha256 = "30ff2d6e87696f38387afdbd2983b0894f5c99d4b38c26a46122be222d6dd69f";
-                        compressed = false;
-                }
-        	);
-        	};
-        
-       
-}
 
+
+        stable:
+        {
+                A:
+                {
+                        images: (
+                        {
+                                filename = "rootfs.ext2";
+                        	device = "/dev/mmcblk0p2";
+                        	type = "raw";
+                        	sha256 = "e915d22b7750a29d6fd80b688cc276f6b9d89128b9329f5c22e3cefc95746f8e";
+                        	compressed = false;
+                        }
+                        );
+
+                };
+                B:
+                {
+                        images: (
+                        {
+                                filename = "rootfs.ext2";
+                        	device = "/dev/mmcblk0p3";
+                        	type = "raw";
+                        	sha256 = "e915d22b7750a29d6fd80b688cc276f6b9d89128b9329f5c22e3cefc95746f8e";
+                        	compressed = false;
+                        }
+                        );
+                };
+        };
+}

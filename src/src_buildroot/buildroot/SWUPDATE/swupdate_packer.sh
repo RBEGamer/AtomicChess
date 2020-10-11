@@ -3,12 +3,13 @@
 
 echo "--- READ VERSION ---"
 SWVERSION="$(cat ./VERSION)"
-
+echo "build updatepacke for version ${SWVERSION}"
 
 
 echo "--- GENERATE SHA256 from rootfs.ext2 ---"
-RFSHASHA=$(sha256sum ../output/images/rootfs.ext2.gz | awk '{ print $1 }')
+RFSHASHA=$(sha256sum ../output/images/rootfs.ext2 | awk '{ print $1 }')
 echo "rootfs hash ${RFSHASHA}"
+sha256sum ../output/images/rootfs.ext2
 
 echo "--- PATCH sw-description from sw-description_template"
 cp -rf ./sw-description_template ./sw-description
@@ -35,7 +36,7 @@ cd ../output/images
 echo ${pwd}
 CONTAINER_VER="${SWVERSION}"
 PRODUCT_NAME="atctable"
-FILES="sw-description sw-description.sig rootfs.ext2.gz"
+FILES="sw-description sw-description.sig rootfs.ext2"
 
 for i in $FILES;do
 	echo $i;done | cpio -ov -H crc > ${PRODUCT_NAME}_signed.swu
