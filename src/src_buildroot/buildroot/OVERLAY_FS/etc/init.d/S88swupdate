@@ -12,7 +12,7 @@ start() {
 	/etc/swupdate/switch_partiton.sh
 	/etc/swupdate/create_swupdate_cfg.sh
     	/etc/swupdate/run_swupdate_webserver.sh &
-    	# /etc/swupdate/run_swupdate_hawkbit.sh &
+    	/etc/swupdate/run_swupdate_hawkbit.sh &
 	echo "OK"
 }
 stop() {
