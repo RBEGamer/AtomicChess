@@ -14,4 +14,4 @@ sleep 10
 #echo 1 > /proc/sys/kernel/sysrq
 #echo b > /proc/sysrq-trigger
 
-./patch_cmdline.sh && reboot
+/etc/swupdate/patch_cmdline.sh && reboot
