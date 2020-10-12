@@ -31,8 +31,8 @@ if test -f "$FILEA"; then
     # make clean stuff
     rm -Rf ./output/build/.root
     rm -Rf ./output/
-    make raspberrypi_defconfig
-    make
+    #make raspberrypi_defconfig
+    make clean
 else
     echo "--- PERFORM A CLEAN BUILD ---"
     make clean
