@@ -10,8 +10,8 @@ echo "$HWIDCLEANED" > "/HWID"
 
 #GET UPDATE SELECTION ID
 
-
-
+BOOTPART=$(cat /etc/swupdate/BOOTPART)
+SWVERSION=$(cat /VERSION)
 #CHECK IF AN swupdate.cfg already exists
 FILEA=/etc/swupdate/SWUPDATE_CFG_GENERATED
 if test -f "$FILEA"; then
@@ -27,6 +27,9 @@ else
     	#COPY THE TEMPLATE FILE AND REPLACE THE DEVICEID WITH THE GENERATED DEVICEID TO GET AN UNIQUE ID
     	cp /etc/swupdate/swupdate_template.cfg /etc/swupdate/swupdate.cfg
     	sed -i 's|DEVICEID|'"$DEVICEID"'|g' /etc/swupdate/swupdate.cfg
+    	
+    	sed -i 's|BOOTPART|'"$BOOTPART"'|g' /etc/swupdate/swupdate.cfg
+    	sed -i 's|SWVERSION|'"$SWVERSION"'|g' /etc/swupdate/swupdate.cfg
     	touch /etc/swupdate/SWUPDATE_CFG_GENERATED
 fi
 
