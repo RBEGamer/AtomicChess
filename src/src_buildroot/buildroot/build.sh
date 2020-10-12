@@ -29,12 +29,13 @@ FILEA=./DELETE_FOR_REBUILD
 if test -f "$FILEA"; then
     echo "$FILEA exists."
     # make clean stuff
-    rm -Rf ./output/build/.root
-    rm -Rf ./output/
+    
+    #rm -Rf ./output/images
     #make raspberrypi_defconfig
-    make clean
 else
     echo "--- PERFORM A CLEAN BUILD ---"
+    rm -Rf ./output/build/.root
+    rm -Rf ./output/images
     make clean
     touch ./DELETE_FOR_REBUILD
 fi
