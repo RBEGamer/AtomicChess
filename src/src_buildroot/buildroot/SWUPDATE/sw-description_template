@@ -9,11 +9,11 @@ software =
                 {
                         images: (
                         {
-                                filename = "rootfs.ext2";
+                                filename = "rootfs.ext2.gz";
                         	device = "/dev/mmcblk0p2";
                         	type = "raw";
                         	sha256 = "RFSHASH";
-                        	compressed = false;
+                        	compressed = true;
                         }
                         );
 
@@ -22,11 +22,11 @@ software =
                 {
                         images: (
                         {
-                                filename = "rootfs.ext2";
+                                filename = "rootfs.ext2.gz";
                         	device = "/dev/mmcblk0p3";
                         	type = "raw";
                         	sha256 = "RFSHASH";
-                        	compressed = false;
+                        	compressed = true;
                         }
                         );
                 };

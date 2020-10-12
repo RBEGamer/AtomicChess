@@ -39,11 +39,11 @@ fi
 
 
 # NOW PATCH THE CMDLINE.TXT IN THE BOOT PARTITON
-CURRPB=$(cat /proc/cmdline | sed -e 's/^.*root=//' -e 's/ .*$//')
-#CURRBP="$(cat /etc/swupdate/BOOTPART)"
+#CURRPB=$(cat /proc/cmdline | sed -e 's/^.*root=//' -e 's/ .*$//')
+CURRBP="$(cat /etc/swupdate/BOOTPART)"
 NEXTBP="$(cat /etc/swupdate/NEXT_BOOTPART)"
 
-echo "${CURRBP} -> ${NEXTBP} "
+echo "${CURRPB} -> ${NEXTBP} "
 
 cat /boot/cmdline.txt
 sed -i 's|'"$CURRBP"'|'"$NEXTBP"'|g' /boot/cmdline.txt
