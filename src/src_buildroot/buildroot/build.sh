@@ -52,7 +52,6 @@ cp ./config_backup ./.config
 make atcgui-dirclean && rm -Rf ./dl/atcgui/
 make atcctl-dirclean && rm -Rf ./dl/atcctl/
 make atctp-dirclean && rm -Rf ./dl/atctp/
-make atrpc-dirclean && rm -Rf ./dl/atcrpc/
 
 echo "--BUILD FIRT ITERATION --"
 
