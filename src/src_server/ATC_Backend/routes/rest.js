@@ -114,7 +114,7 @@ router.get('/heartbeat', function(req, res, next) {
 router.get('/login',function(req,res,next){
     var hwid = req.queryString("hwid");
     var playertype = req.queryInt("playertype");
-    if(!hwid || !playertype){
+    if(!hwid){
         res.status(500);
         res.json({err:true, status:"err_hwid_or_playertype_not_set",sid:null,profile:null});
         return;
