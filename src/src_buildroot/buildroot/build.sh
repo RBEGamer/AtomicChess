@@ -73,9 +73,15 @@ else
     
     echo 'dtoverlay=spi1-1cs' >> ./output/images/rpi-firmware/config.txt  #1 chip select
     echo 'dtoverlay=spi1-2cs' >> ./output/images/rpi-firmware/config.txt  #2 chip select
-
-
+    
     cat ./output/images/rpi-firmware/config.txt
+    
+    # PATCH CMDLINE.txt
+    echo ' fsck.repair=yes ' >> ./output/images/rpi-firmware/cmdline.txt #FILE SYSTEM REPAIR
+    echo ' rootfstype=ext2 ' >> ./output/images/rpi-firmware/cmdline.txt #FILE SYSTEM REPAIR
+    
+    cat ./output/images/rpi-firmware/cmdline.txt
+    
     touch ./output/images/rpi-firmware/PATCHED
 fi
 
