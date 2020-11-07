@@ -2,7 +2,7 @@
 
 
 ## PURPOSE
-
+For testing and at the beginning of the development, the motor drivers were connected to the embedded system over a breadboard.
 
 
 
@@ -13,6 +13,8 @@
 
 
 ## JUMPER SETTINGS
+The PCB is equipped with serveral jumpers for testing and toubleshooting. Its possible to disconnect every section (MotorDriver, Logic, SPI-Bus) from the Embedded-System. After soldering the board, the jumpers were use to test every section of the board, to make shure that the selected section is working correctly.
+
 
 ## SOFTWARE SPI SLVAE
 
