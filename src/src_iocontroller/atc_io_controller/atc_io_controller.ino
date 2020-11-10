@@ -170,13 +170,8 @@ void setup(void) {
     pixels.begin();
     pixels.show(); 
     set_neopixel(0);
-    delay(2000);
-     set_neopixel(4);
-     delay(2000);
-     set_neopixel(2);
-     delay(2000);
-     set_neopixel(3);
-     delay(2000);
+
+    
     //  set_neopixel(2);
     pinMode(MISO,OUTPUT);  
     SPCR=(1<<SPE)|(1<<SPIE);       //Enable SPI && interrupt enable bit
@@ -194,7 +189,11 @@ void setup(void) {
   delay(200);
   digitalWrite(STATE_LED,LOW);
   Serial.println("== ENTER LOOP ==");
+ 
+ set_neopixel(4);
+ 
 }
+
 
 void loop(void) {
   
