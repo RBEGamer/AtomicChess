@@ -18,3 +18,5 @@ The PCB is equipped with serveral jumpers for testing and toubleshooting. Its po
 
 ## SOFTWARE SPI SLVAE
 
+## MAGNET AND COILS
+* using electro magnets not quite strenght enough -> using a solanoid and a neodym magnet was good
