@@ -42,6 +42,7 @@ All follwing steps are tested on a `Ubuntu 20.04 x64`
 These packages can be installed with the `$ sudo apt install <PACKAGE>` command, the `$ sudo apt  update` command might be necessary, to get the latest versions.
 
 * `$ sudo apt  update && apt  upgrade -y`
+* `$ sudo apt install git-all`
 * `$ sudo apt install software-properties-common`
 * `$ sudo apt install sed make binutils build-essential gcc g++ gzip bzip2 perl tar cpio unzip rsync bc wget git python cpio sed cmake genext2fs -y`
 * `$ sudo apt install gtk2.0 gtk2.0-dev csv python-glade2 libncurses5 libncurses5-dev -y`
