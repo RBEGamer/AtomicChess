@@ -12,7 +12,7 @@
   "mongodb_collection_games": "games",
   "mongodb_collection_lobby": "lobby",
 
-  "chess_move_validator_api_url": "http://127.0.0.1:5000"
+  "chess_move_validator_api_url": "http://127.0.0.1:5001"
 
 
 
