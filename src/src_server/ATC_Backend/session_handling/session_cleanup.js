@@ -2,7 +2,7 @@ var CronJob = require('cron').CronJob;
 var redisDbConnection = require('../session_handling/redis_db_connection');
 var CONFIG = require('../config'); //LOAD GLOABAL CONFIG FILE
 var LH = require("./lobby_handling");
-
+var GH = require("./game_handler");
 
 
 
@@ -50,6 +50,9 @@ var cleanup_job = new CronJob('*/'+CONFIG.getConfig().session_cleanup_loop_inter
                                         LH.remove_player_from_lobby(val2json.hwid,function (lhrm_err,lhrm_res) {
 
                                         },false); //FALSE -> SET PLAYER ONLY OFFLINE
+                                        GH.cancel_match_for_player(val2json.hwid,function (cmp_err,cmp_res){
+
+                                        });
                                         //REMOVE KEY FROM DB
                                         redisDbConnection.getRedisConnection().del(k,function (err, reply) {
                                             if(err || !reply){

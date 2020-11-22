@@ -384,6 +384,7 @@ module.exports = {
     get_player_active_game_state,
     set_player_setup_confirmation,
     make_move,
+    cancel_match_for_player,
     //EXPOSED VARIABLED
     GAME_STATE,
     PLAYER_TURN_STATE

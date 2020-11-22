@@ -181,6 +181,56 @@ router.get('/login',function(req,res,next){
     //CHECK MONGO PROFILE DB
 });
 
+
+
+
+router.get('/logout',function(req,res,next){
+    var hwid = req.queryString("hwid");
+    var playertype = req.queryInt("playertype");
+    if(!hwid){
+        res.status(500);
+        res.json({err:true, status:"err_hwid_or_playertype_not_set",sid:null,profile:null});
+        return;
+    }
+    //CHECK REDIS FOR EXISTING SESSION
+    redisClient.getRedisConnection().get("session:"+hwid, function(err, reply) {
+        if(err){
+            res.status(500);
+            res.json({err:err,status:"err_db_read_error",sid:null,profile:null});
+            return;
+        }
+
+        if(reply){//ACTIVE SESSION FOUND
+            //TODO DELETE REDIS KEY
+            //SET PLAYER STATE TO OFFLINE / NOT LISTED = 0
+            //CANCEL MATCHES
+            redisClient.getRedisConnection().del("session:"+hwid,function (err, reply) {
+                if(err || !reply){
+                    console.error("db_del_failed");
+                }
+                //SET PLAYER TO OFFLINE
+                lobby_handling.remove_player_from_lobby(hwid,function (spl_err,spl_res) {
+                    //CANCEL MATCH IF A MATCH IS RUNNING
+                    game_handling.cancel_match_for_player(hwid,function (cmp_err,cmp_res){
+                        res.status(200);
+                        res.json({err:err,cmp_err:cmp_err,spl_err:spl_err,status:"ok",sid:null, profile:null});
+                        return;
+                    });
+                },false);
+            });
+        }else{ //IF A ENTRY ALREADY EXISTS -> USER LOGGED IN
+            res.status(500);
+            res.json({err:err,status:"err_already_logged_out",sid:null, profile:null});
+            return;
+        }
+    });
+    //CHECK MONGO PROFILE DB
+});
+
+
+
+
+
 /**
  # @INPUT_QUERY
  - table_id (=hwid)

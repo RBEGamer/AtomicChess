@@ -152,15 +152,11 @@ module.exports = {
         if(_set_only_offline){
             this.set_player_lobby_state(_hwid,player_state.offline,_callback);
         }else{
-            mdb.getLobbyCollection().deleteOne({DOCTYPE: "LOBBY",hwid:_hwid},function (err,res) {
-                _callback(err,res);
-            });
+            mdb.getLobbyCollection().deleteOne({DOCTYPE: "LOBBY",hwid:_hwid},_callback);
         }
-
     },
     //EXPOSED VARAIBLES
     player_state,
     get_player_matchmaking_state
-
 }
 
