@@ -22,7 +22,7 @@ services:
       - PRODUCTION=1
       - REDIS_IP=AtomicChessRedisDatabase:6379
       - MONGO_IP=AtomicChessMongoDatabase:27017
-      - MVVALIDATOR_IP=AtomicChessMoveValidator:5000
+      - MVVALIDATOR_IP=AtomicChessMoveValidator:5001
       
   AtomicChessMoveValidator:
     container_name: atcmovevalidator
@@ -32,7 +32,7 @@ services:
     #network_mode: "host"
     restart: always
     ports:
-      - 3001:3001
+      - 5001:5001
     environment:
       - PRODUCTION
 
@@ -63,19 +63,20 @@ services:
 
 
   AtomicChessAutoPlayer:
-    depends_on:
-      - AtomicChessBackend
-    container_name: atcautoplayer
+    #depends_on:
+    #  - AtomicChessBackend
+    #container_name: atcautoplayer
     build:
       context: ../ATC_AutoPlayer/
     image: atcautoplayer:latest
-    #network_mode: "host"
-    links:
-      - "AtomicChessBackend:AtomicChessBackend"
-    restart: "no"
+    network_mode: "host"
+    #links:
+    #  - "AtomicChessBackend:AtomicChessBackend"
+    restart: "always"
+    scale: 1
     environment:
       - PRODUCTION
-      - BACKEND_IP=AtomicChessBackend:3000
+      - BACKEND_IP=127.0.0.1:3000 #HOST IP OF BACKEND
 
   redis-commander:
     container_name: redis-commander

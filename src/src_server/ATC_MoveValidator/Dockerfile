@@ -1,17 +1,13 @@
-FROM python:3.7-alpine as base
+FROM python:3.7-alpine
 LABEL maintainer="Marcel Ochsendorf info@marcelochsendorf.com"
-
-FROM base as builder
-RUN mkdir /install
-WORKDIR /install
-COPY requirements.txt /requirements.txt
-RUN pip3 install -r /requirements.txt
-
-FROM base
-
-COPY --from=builder /install /usr/local
-COPY . /app
 WORKDIR /app
+COPY . /app
+RUN pwd
+RUN ls -la
+RUN pip3 install -r /app/requirements.txt
+RUN pip3 install python-chess
+
+
 RUN rm -f ./RUN_IN_CONTAINER
-EXPOSE 5000
-CMD ["python", "app.py"]
+EXPOSE 5001
+CMD ["python3", "./app.py"]

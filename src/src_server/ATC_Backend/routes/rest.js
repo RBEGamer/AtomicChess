@@ -12,6 +12,14 @@ var game_handling = require("../session_handling/game_handler");
 var CBL = require("../chess_related_logic/chess_board_logic");
 
 
+/*
+list all player profiles
+list all games
+list game with id
+logout
+client version
+ */
+
 /**
  # @INPUT_QUERY
  # @PROCESSING

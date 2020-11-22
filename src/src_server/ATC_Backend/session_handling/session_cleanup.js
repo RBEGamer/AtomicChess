@@ -25,7 +25,7 @@ var cleanup_job = new CronJob('*/'+CONFIG.getConfig().session_cleanup_loop_inter
                 //CHECK IF KEYS FOUND
                 if(found_keys.length > 0){
                     //console.log('has_data');
-                    console.log(found_keys);
+                    //console.log(found_keys);
                     //ITERATE THOUGH EACH KEY TO GET THE DATA
                     for(var i = 0; i < found_keys.length;i++){
                         var k = found_keys[i];
@@ -63,7 +63,8 @@ var cleanup_job = new CronJob('*/'+CONFIG.getConfig().session_cleanup_loop_inter
                                     throw "value doesn not contain a timestamp attribute";
                                 }
                             }catch (e) {
-                               // console.log("json_parse_failed_of_redis_content");
+                                console.log("json_parse_failed_of_redis_content");
+                                console.log(e);
                             }
                         });
                     }

@@ -26,7 +26,7 @@ function init_config(){
         console.log(config.redis_connection_url)
     }else{
         console.error("REDIS_IP does not exists in environment variables");
-        process.exit(-1);
+        //process.exit(-1);
     }
 
     //LOADING IP FOR MONGODB
@@ -36,7 +36,7 @@ function init_config(){
         console.log(config.mongodb_connection_url)
     }else{
         console.error("MONGO_IP does not exists in environment variables");
-        process.exit(-1);
+        //process.exit(-1);
     }
 
     //LOADING IP FOR MOVE VALIDATOR IP

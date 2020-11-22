@@ -109,6 +109,8 @@ type SetPlayerStateResult struct{
 	status string
 }
 
+var BACKEND_IP = "127.0.0.1:3000"
+
 const charset = "abcdefghijklmnopqrstuvwxyz" +
 	"ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
@@ -128,10 +130,11 @@ func RandomString(length int) string {
 }
 
 func RestLogin(_hwid string) (error,LoginResult){
+	fmt.Println("AutPlayer ["+_hwid+"]  LOGIN")
 	var lr LoginResult
 
 	//LOGIN AS e PLAYER
-	resp, err := http.Get("http://127.0.0.1:3000/rest/login?hwid="+_hwid+"&playertype=1")
+	resp, err := http.Get("http://"+BACKEND_IP+"/rest/login?hwid="+_hwid+"&playertype=1")
 	check(err)
 	body, err := ioutil.ReadAll(resp.Body)
 	check(err)
@@ -167,10 +170,11 @@ func RestLogin(_hwid string) (error,LoginResult){
 }
 
 func RestSetPlayerState(_hwid string, _sid string, _ps  string)(error,SetPlayerStateResult){
+	fmt.Println("AutPlayer ["+_hwid+"] WITH SID:"+_sid+" SET_PLAYER_STATE TO" + _ps)
 	var lr SetPlayerStateResult
 
 	//LOGIN AS e PLAYER
-	resp, err := http.Get("http://127.0.0.1:3000/rest/set_player_state?hwid="+_hwid+"&sid="+_sid+"&ps=" + _ps)
+	resp, err := http.Get("http://"+BACKEND_IP+"/rest/set_player_state?hwid="+_hwid+"&sid="+_sid+"&ps=" + _ps)
 	check(err)
 	body, err := ioutil.ReadAll(resp.Body)
 	check(err)
@@ -201,8 +205,9 @@ func RestSetPlayerState(_hwid string, _sid string, _ps  string)(error,SetPlayerS
 }
 
 func RestHeartbeat(_hwid string, _sid string, _interval time.Duration){
+	fmt.Println("RestHeartbeat")
 	for range time.Tick(time.Second*_interval){
-		resp, err := http.Get("http://127.0.0.1:3000/rest/heartbeat?hwid="+_hwid+"&sid="+_sid)
+		resp, err := http.Get("http://"+BACKEND_IP+"/rest/heartbeat?hwid="+_hwid+"&sid="+_sid)
 		check(err)
 		body, err := ioutil.ReadAll(resp.Body)
 		check(err)
@@ -210,19 +215,20 @@ func RestHeartbeat(_hwid string, _sid string, _interval time.Duration){
 		if !strings.Contains(string(body),"ok"){
 			fmt.Println(string(body))
 		}
-
+		//fmt.Println(".")
 	}
 }
 
 func RestGetPlayerState(_hwid string, _sid string)(error,PlayerState){
-	resp, err := http.Get("http://127.0.0.1:3000/rest/get_player_state?hwid="+_hwid+"&sid="+_sid+"&simplified=1")
+	fmt.Println("AutPlayer ["+_hwid+"] WITH SID:"+_sid+" GET_PLAYER_STATE")
+	resp, err := http.Get("http://"+BACKEND_IP+"/rest/get_player_state?hwid="+_hwid+"&sid="+_sid+"&simplified=1")
 	check(err)
 	body, err := ioutil.ReadAll(resp.Body)
 	check(err)
 	//fmt.Println(body)
 	//fmt.Println(string(body))
 	b := string(body)
-	fmt.Print(b)
+	fmt.Println(b)
 	var app PlayerState
 	eerr := json.Unmarshal(body, &app)
 	if eerr != nil{
@@ -240,8 +246,8 @@ func RestGetPlayerState(_hwid string, _sid string)(error,PlayerState){
 }
 
 func RestPlayerSetupConfirmation(_hwid string, _sid string)(error){
-
-	resp, err := http.Get("http://127.0.0.1:3000/rest/player_setup_confirmation?hwid="+_hwid+"&sid="+_sid+"")
+	fmt.Println("AutPlayer ["+_hwid+"] WITH SID:"+_sid+" PLAYER_SETUP_CONFIRMATION")
+	resp, err := http.Get("http://"+BACKEND_IP+"/rest/player_setup_confirmation?hwid="+_hwid+"&sid="+_sid+"")
 	check(err)
 	body, err := ioutil.ReadAll(resp.Body)
 	check(err)
@@ -251,8 +257,8 @@ func RestPlayerSetupConfirmation(_hwid string, _sid string)(error){
 }
 
 func RestExecuteMove(_hwid string, _sid string, _move string)(error){
-
-	resp, err := http.Get("http://127.0.0.1:3000/rest/make_move?hwid="+_hwid+"&sid="+_sid+"&move=" +_move)
+	fmt.Println("AutPlayer ["+_hwid+"] WITH SID:"+_sid+" EXECUTE MOVE:" + _move)
+	resp, err := http.Get("http://"+BACKEND_IP+"/rest/make_move?hwid="+_hwid+"&sid="+_sid+"&move=" +_move)
 	check(err)
 	_, err = ioutil.ReadAll(resp.Body)
 	check(err)
@@ -262,6 +268,14 @@ func RestExecuteMove(_hwid string, _sid string, _move string)(error){
 }
 
 func main() {
+	fmt.Println("----- LOOKING FOR AN ENV VAR:  BACKEND_IP------")
+	//PARSE GAME SERVER URL
+	val, is_present := os.LookupEnv("BACKEND_IP")
+	if is_present {
+		BACKEND_IP = val
+	}
+	fmt.Println("----- BACKEND ID ------")
+	fmt.Println(BACKEND_IP)
 	//GET WORKSPACE
 	workspace_path, err := os.Getwd()
 	if err != nil {
@@ -277,19 +291,23 @@ func main() {
 
 	time.Sleep(time.Millisecond*5000)
 
-
-
 	HWID := RandomString(10)
+	name, err := os.Hostname()
+	if err == nil {
+		fmt.Println("hostname:", name)
+		HWID = name
+	}
 	fmt.Println("--- OUR USED HARDWARE ID ---")
 	fmt.Println(HWID)
 	var SID string
+	
 
 	//FIRST LOGIN AT THE SERVER AS CPU PLAYER
 	err,LoginResultDetails := RestLogin(HWID)
 	if err != nil{
 		fmt.Println(LoginResultDetails)
 		fmt.Println(err)
-		//		return
+		return
 	}
 
 	SID = LoginResultDetails.sid
@@ -298,7 +316,7 @@ func main() {
 
 	//ENABLE HEARTBEAT
 	//SEND A HEARBEAT REQUEST EACH SECOND TO AVOID THAT THE CLIENT WILL BE REMOVED FROM THE GAME
-	//go RestHeartbeat(HWID,SID,5)
+	go RestHeartbeat(HWID,SID,5)
 
 
 	//SET OWN STATUS TO MATCHMAKING
@@ -308,7 +326,7 @@ func main() {
 		fmt.Println(err)
 		return
 	}
-
+	RestHeartbeat(HWID,SID,1000)
 	//MAIN GAME LOOP
 	//TODO GAME START ABBORT
 	//GAME STATE FINISHED
