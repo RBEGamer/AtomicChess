@@ -15,16 +15,20 @@ module.exports = {
    },
 
     create_profile: function(_hwid, _playertype ,_callback){
-        if(!_playertype){
-            _playertype = false; // HUMAN PLAYER / TABLE
-        }
-        var fn = "AWESOME_CHESS_PLAYER";
-        if(_playertype){
-            _playertype = true; //CPU PLAYER
-            fn = "AI";
+
+        //GENERATE VIRTUAL ID
+        var vid = String(UUID.v1());
+        var fn = "INVALID_NAME";
+
+        if(_playertype || _playertype === 1){
+            _playertype = LH.PLAYER_TYPE.AI; //CPU PLAYER
+            fn = "AI_" + vid.substr(0,5); //USE FIRST 5 CHARS OF VIRTUAL ID AS AN IDENTIFIER
+        }else  if(!_playertype || _playertype === 0){
+            _playertype = LH.PLAYER_TYPE.HUMAN; // HUMAN PLAYER / TABLE
+            fn = "AWESOME_CHESS_PLAYER_" + vid.substr(0,5); //USE FIRST 5 CHARS OF VIRTUAL ID AS AN IDENTIFIER
         }
 
-        var profile={hwid:_hwid, DOCTYPE:"PROFILE",account_created:Date.now(), rank:0,elo_rank_readable:CR.rank_to_elo_rating_name(0), friendly_name:fn,virtual_player_id:UUID.v1(),player_type:_playertype};
+        var profile={hwid:_hwid, DOCTYPE:"PROFILE",account_created:Date.now(), rank:0,elo_rank_readable:CR.rank_to_elo_rating_name(0), friendly_name:fn,virtual_player_id:vid,player_type:_playertype};
         MDB.getProfileCollection().insertOne(profile,function(err,res){
             if(err){
                 _callback(err,res,profile);

@@ -18,7 +18,11 @@ const player_state = Object.freeze({
     ingame:7
 
 });
+const PLAYER_TYPE = Object.freeze({
+    HUMAN:0,
+    AI:1
 
+});
 function get_avariable_players(_own_hwid,_callback, _ps = player_state.searching_matchmake, _include_hwid = false){
     //GET ALL PLAYERS IN THE LOBBY JOIN THE PROFILE TABLE INTO TO GET THEIR PROFILE NAMES AND RANK TOO
     mdb.getLobbyCollection().aggregate([{ $lookup:
@@ -73,25 +77,29 @@ function get_avariable_players(_own_hwid,_callback, _ps = player_state.searching
     });
 }
 
-//TODO SIMPLYFY FOR ONLY SEARCHING_MATCHMAKE
+
 function get_player_for_matchmaking(_callback, _include_hwid =false){
-    //alle hosts und searching for matchmaking
+    //GET ALL PLAYERS AVARIABLE IN THE LOBBY
+    //SORT THEM BETWEEN HUMAN AND AI PLAYER
     get_avariable_players(null,function (err_sm,res_sm) {
-        //GET ALL PLAYER SEARCHING_MATCHMAKE
-        get_avariable_players(null,function (err_hm, res_hm) {
             //CHECK ERR
-            if(err_sm || err_hm){
-                _callback({err_hm:err_hm,err_sm:err_sm},{combined_player_searching:[], player_searching_mm: res_sm,player_hosting_mm:res_hm});
+            if(err_sm){
+                _callback(err_sm,{combined_player_searching:[], player_searching_human: [],player_searching_ai:[]});
                 return;
             }
-     //       console.log("-- get_player_for_matchmaking --")
-    //        console.log(res_hm);
-            //CHECK ERR
-            //->COMPBINE
-            //DEBUG RESULT
-            var tmp = res_sm.concat(res_hm);
-            _callback(null,{combined_player_searching:tmp, player_searching_mm: res_sm,player_hosting_mm:res_hm});
-        },player_state.searching_matchmake,_include_hwid);
+            //res_sm -> ALL PLAYERS
+            //SORT PLAYER TYPES AI HUMAN
+            var tmp_player_ai = [];
+            var tmp_player_human = [];
+            for(var i=0;i < res_sm.length;i++){
+                if(res_sm[i].player_type === PLAYER_TYPE.AI){ // TYPE 1 => AI
+                    tmp_player_ai.push(res_sm[i]);
+                }else  if(res_sm[i].player_type === PLAYER_TYPE.HUMAN) { // TYPE 0 => HUMAN
+                    tmp_player_human.push(res_sm[i]);
+                }
+            }
+            //RETURN PLAYERS
+            _callback(null,{combined_player_searching:res_sm, player_searching_human:tmp_player_human,player_searching_ai:tmp_player_ai});
     },player_state.searching_matchmake,_include_hwid)
 }
 
@@ -99,17 +107,12 @@ function get_player_for_matchmaking(_callback, _include_hwid =false){
 
 function get_avariable_ai_player(_callback){
     get_player_for_matchmaking(function (err_sm,res_sm) {
-        if(err_sm){
+        if(err_sm || !res_sm || !res_sm.player_searching_ai){
             _callback(err_sm,[]);
             return;
         }
-        var tmp = [];
-        for(var i=0;i < res_sm.combined_player_searching.length;i++){
-            if(res_sm.combined_player_searching[i] && res_sm.combined_player_searching[i].player_type){
-                tmp.push(res_sm.combined_player_searching[i]);
-            }
-        }
-        _callback(null,tmp);
+
+        _callback(null,res_sm.player_searching_ai);
         return;
 
     });
@@ -157,6 +160,7 @@ module.exports = {
     },
     //EXPOSED VARAIBLES
     player_state,
-    get_player_matchmaking_state
+    get_player_matchmaking_state,
+    PLAYER_TYPE
 }
 

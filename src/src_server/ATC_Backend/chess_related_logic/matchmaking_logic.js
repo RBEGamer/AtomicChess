@@ -21,35 +21,48 @@ var matchmaking_job = new CronJob('*/'+CONFIG.matchmaking_runner_interval+' * * 
    // console.log("matchmaking_job");
     //GET ALL SEARCHING PLAYERS
  LH.get_player_for_matchmaking(function (gpfm_err,gpfm_res) {
- //   console.log(gpfm_res);
+    //CHECK ERROR
     if(gpfm_err){
         console.error(gpfm_err);
         return;
     }
-    //TODO CREATE TWO LISTS WITH HUMAN AND AI PLAYER
-     // IF
-     //for each human where the is in state is over 10seconds combine with an
-    //CHECK IF MORE THEN TWO PLAYERS ARE SEARCHING
+    //CHECK IF MORE THEN TWO PLAYERS ARE SEARCHING (HUMAN + AI)
     if(!gpfm_res || gpfm_res.combined_player_searching.length <= 1){
        // console.log("matchmakingjob only 1 player in lobby...");
         return;
     }
-    //SORT PLAYERS BY WAITING TIME IN THE LOBBY
-    gpfm_res.combined_player_searching.sort(player_sort_function_swt);
-    //SELECT THE MOST WAITING PLAYER
-    var p1 = gpfm_res.combined_player_searching[0];
-    //CHOSE AN OTHER RANDOM ONE PLAYER
-     //TODO ADD RANK ??
-    var p2  = gpfm_res.combined_player_searching[HELPER_FUNCTIONS.randomInteger(1,gpfm_res.combined_player_searching.length-1)];
-    //START A MATCH
-    GH.start_match(p1.hwid,p2.hwid,function (sm_err,sm_res) {
-        if(sm_err){
-            console.error(sm_err);
-        }
-    });
 
+
+        //EASIEST CASE 1 HUMAN AND 1 AI
+     if(gpfm_res.player_searching_human.length === 1 && gpfm_res.player_searching_ai.length  >= 1){
+        //THEN START ;ATCH BETWEEN THEM
+         GH.start_match(gpfm_res.player_searching_human[0].hwid,gpfm_res.player_searching_ai[0].hwid,function (sm_err,sm_res) {
+             if(sm_err){
+                 console.error(sm_err);
+             }
+         });
+
+
+
+        //MORE THAN 1 HUMAN PLAYER WAITING
+     }else if(gpfm_res.player_searching_human.length > 1){
+         //THEN MAKE A MATCH BEWEEN THE TWO HUMAN PLAYER
+         //SORT PLAYER WITH THE LONGEST WAIT TIME IN THE LOBBY
+         gpfm_res.player_searching_human.sort(player_sort_function_swt);
+         //SELECT THE MOST WAITING PLAYER
+         var p1 = gpfm_res.combined_player_searching[0];
+         var p2  = gpfm_res.combined_player_searching[HELPER_FUNCTIONS.randomInteger(1,gpfm_res.combined_player_searching.length-1)];
+         if(p1.hwid === p2.hwid){
+             return;
+         }
+         //START A MATCH
+         GH.start_match(p1.hwid,p2.hwid,function (sm_err,sm_res) {
+             if(sm_err){
+                 console.error(sm_err);
+             }
+         });
+     }
  },true);
-
 });
 
 

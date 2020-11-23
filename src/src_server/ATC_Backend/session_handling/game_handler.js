@@ -345,11 +345,11 @@ function start_match(_player_a_hwid, _player_b_hwid, _callback) {
                 return;
             }
             //WHICH PLAYER IS BLACK/WHITE
-            var rnd =HELPER_FUNCTIONS.randomInteger(0,1);
-            var white_player = [_player_a_hwid,_player_b_hwid][rnd];
+            var rnd =HELPER_FUNCTIONS.randomInteger(0,1); //GET A RANDOM MUMBER
+            var white_player = [_player_a_hwid,_player_b_hwid][rnd]; //ASSIGN A PLAYER ID TO THE RANDOM NUMBER TO DETERM BLACK OR WHITE
             var black_player =[_player_b_hwid,_player_a_hwid][rnd];
             //GET OUR STARTING POSITION
-            var start_fen = CBL.get_start_opening_fen();
+            var start_fen = CBL.get_start_opening_fen(); //GET STARTING FEN FROM STORAGE => STARTING POSITION
             //generate our first board, its an intialboard with player white starts
             //this board will be used to sync the tables of the players
             CBL.get_board(start_fen,CBL.PLAYER_TURN.WHITE,null,true,1,function (gb_err,gb_board) {
