@@ -72,7 +72,7 @@ function check_player_state_to_determ_new_game_state(_game_id ,_callback){
                 }
                 //LESS TIME NEEDED MORE POINTS
                 gpp_res *= (1.0 / (Date.now()-res.game_init_timestamp))*1000.0;
-
+                //SAVE POINTS IN PROFILE
                 PH.apply_points_to_profile(gpp_res,_game_id,player_won_hwid,function (ap_err,ap_res) {
                     //SET PLAYER STATE FOR EACH PLAYER
                     LH.set_player_lobby_state(res.player_black_hwid,LH.player_state.idle,function (spb_err,spb_res){
@@ -317,6 +317,11 @@ function start_match(_player_a_hwid, _player_b_hwid, _callback) {
     console.log("-------- STARTING MATCH FOR --------------")
     console.log(_player_a_hwid);
     console.log(_player_b_hwid);
+    if(_player_a_hwid === _player_b_hwid){
+        console.log("CANT START A PATCH WITH THE SAME PLAYER " + _player_a_hwid + " " + _player_b_hwid);
+        _callback("CANT START A PATCH WITH THE SAME PLAYER");
+        return;
+    }
     //TODO CHECK EXISTSING GAME
     //DO NOTHING IF A GAME IS RUNNING
     check_active_player_game(_player_a_hwid,_player_b_hwid,function (cap_err,cap_is_game_running) {

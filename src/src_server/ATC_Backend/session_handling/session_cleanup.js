@@ -35,7 +35,7 @@ var cleanup_job = new CronJob('*/'+CONFIG.getConfig().session_cleanup_loop_inter
                                 console.error("db_fetch_failed");
                                 return;
                             }
-                            console.log(JSON.parse(reply).timestamp);
+                           // console.log(JSON.parse(reply).timestamp);
                             try {
                                 var val2json = JSON.parse(reply);
                                 //CEHCK FOR TIMESTAMP ENTRY

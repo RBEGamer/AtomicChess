@@ -9,10 +9,9 @@ var cr = require("../chess_related_logic/chess_ranking");
 // searching_matchmake -> freier spieler; wird per matchmaking zugewiesen
 // searching_manual -> freier psiler; kann nicht zugewiesen werden (= sieht hosting spieler)
 const player_state = Object.freeze({
-    offline:0,
+    INVALID:0,
     idle: 1,
     hosting_game_manual: 2,
-   // hosting_game_matchmake: 3, //TODO ------------- DELTE --------------------- NUR NOCH SEARCHING_MATCHMAKE
     searching_matchmake: 4,
     searching_manual:5,
     preparing_ingame:6,
@@ -20,7 +19,7 @@ const player_state = Object.freeze({
 
 });
 
-function get_avariable_players(_own_hwid,_callback, _ps = player_state.searching_manual, _include_hwid = false){
+function get_avariable_players(_own_hwid,_callback, _ps = player_state.searching_matchmake, _include_hwid = false){
     //GET ALL PLAYERS IN THE LOBBY JOIN THE PROFILE TABLE INTO TO GET THEIR PROFILE NAMES AND RANK TOO
     mdb.getLobbyCollection().aggregate([{ $lookup:
             {
@@ -85,13 +84,14 @@ function get_player_for_matchmaking(_callback, _include_hwid =false){
                 _callback({err_hm:err_hm,err_sm:err_sm},{combined_player_searching:[], player_searching_mm: res_sm,player_hosting_mm:res_hm});
                 return;
             }
-            console.log(res_hm);
+     //       console.log("-- get_player_for_matchmaking --")
+    //        console.log(res_hm);
             //CHECK ERR
             //->COMPBINE
             //DEBUG RESULT
             var tmp = res_sm.concat(res_hm);
             _callback(null,{combined_player_searching:tmp, player_searching_mm: res_sm,player_hosting_mm:res_hm});
-        },player_state.hosting_game_matchmake,_include_hwid);
+        },player_state.searching_matchmake,_include_hwid);
     },player_state.searching_matchmake,_include_hwid)
 }
 

@@ -30,14 +30,14 @@ client version
  # @EXAMPLE
  - /rest/status -> {"err":false, "status":"ok"}
  */
-router.get('/status',function (req,res,next) {
+router.get('/client_status',function (req,res,next) {
     var sysok = true;
     //TODO CHECK DB CONNECTIONS ...
     if(sysok){
         res.json({"err": !sysok, "status":"ok"});
         return;
     }else{
-        res.status(500);
+       // res.status(2);
         res.json({"err": !sysok, "status":"sysok error"})
     }
 });
@@ -62,14 +62,14 @@ router.get('/heartbeat', function(req, res, next) {
     var sid = req.queryString("sid");
     //CHECK IF EVERY NEEDED IS SET
     if(!hwid || !sid){
-        res.status(500);
+       // res.status(500);
         res.json({err:true, status:"err_query_paramter_hwid_or_sid_not_set",reply:null});
         return;
     }
     redisClient.getRedisConnection().get("session:"+hwid, function(err, reply) {
         //CHECK FOR KEY EXISTS
         if(err || !reply){
-            res.status(500);
+         //   res.status(500);
             res.json({err:err,status:"err_db_read_error",reply:null});
             return;
         }
@@ -81,13 +81,13 @@ router.get('/heartbeat', function(req, res, next) {
                 throw "err_json_parse_data_failed_or_data_are_null";
             }
         } catch (e) {
-            res.status(500);
+           // res.status(500);
             res.json({err:e,status:e,reply:null});
             return;
         }
         //CHECK SESSION_ID
         if(!data.session_id || data.session_id !== sid){
-            res.status(500);
+            //res.status(500);
             res.json({err:true,status:"err_session_id_wrong",reply:null});
             return;
         }
@@ -95,7 +95,7 @@ router.get('/heartbeat', function(req, res, next) {
         data.timestamp = Date.now();
         redisClient.getRedisConnection().set("session:"+hwid, JSON.stringify(data),function (err_set,replay_set) {
             if(err || !reply){
-                res.status(500);
+              //  res.status(500);
                 res.json({err:err,status:"err_db_update_failed",reply:null});
                 return;
             }
@@ -123,14 +123,14 @@ router.get('/login',function(req,res,next){
     var hwid = req.queryString("hwid");
     var playertype = req.queryInt("playertype");
     if(!hwid){
-        res.status(500);
+        //res.status(500);
         res.json({err:true, status:"err_hwid_or_playertype_not_set",sid:null,profile:null});
         return;
     }
     //CHECK REDIS FOR EXISTING SESSION
     redisClient.getRedisConnection().get("session:"+hwid, function(err, reply) {
         if(err){
-            res.status(500);
+            //res.status(500);
             res.json({err:err,status:"err_db_read_error",sid:null,profile:null});
             return;
         }
@@ -139,7 +139,7 @@ router.get('/login',function(req,res,next){
             //CHECK IF THE PROFILE EXISTS
             profile_handling.get_profile(hwid,function (pe_err,pe_result) {
                 if(pe_err){
-                    res.status(500);
+                    //res.status(500);
                     res.json({err:pe_err,status:"err_db_get_profile_failed",sid:null});
                     return;
                 }
@@ -151,7 +151,7 @@ router.get('/login',function(req,res,next){
                 if(!pe_result){
                     profile_handling.create_profile(hwid,playertype,function (cp_err,cp_result,cp_profile) {
                         if(cp_err){
-                            res.status(500);
+                            //res.status(500);
                             res.json({err:pe_err,status:"err_profile_creation_failed",sid:null});
                             return;
                         }
@@ -173,7 +173,7 @@ router.get('/login',function(req,res,next){
 
 
         }else{ //IF A ENTRY ALREADY EXISTS -> USER LOGGED IN
-            res.status(500);
+            //res.status(500);
             res.json({err:err,status:"err_already_logged_in",sid:null, profile:null});
             return;
         }
@@ -188,14 +188,14 @@ router.get('/logout',function(req,res,next){
     var hwid = req.queryString("hwid");
     var playertype = req.queryInt("playertype");
     if(!hwid){
-        res.status(500);
+        //res.status(500);
         res.json({err:true, status:"err_hwid_or_playertype_not_set",sid:null,profile:null});
         return;
     }
     //CHECK REDIS FOR EXISTING SESSION
     redisClient.getRedisConnection().get("session:"+hwid, function(err, reply) {
         if(err){
-            res.status(500);
+            //res.status(500);
             res.json({err:err,status:"err_db_read_error",sid:null,profile:null});
             return;
         }
@@ -212,14 +212,14 @@ router.get('/logout',function(req,res,next){
                 lobby_handling.remove_player_from_lobby(hwid,function (spl_err,spl_res) {
                     //CANCEL MATCH IF A MATCH IS RUNNING
                     game_handling.cancel_match_for_player(hwid,function (cmp_err,cmp_res){
-                        res.status(200);
+              //          res.status(200);
                         res.json({err:err,cmp_err:cmp_err,spl_err:spl_err,status:"ok",sid:null, profile:null});
                         return;
                     });
                 },false);
             });
         }else{ //IF A ENTRY ALREADY EXISTS -> USER LOGGED IN
-            res.status(500);
+            //res.status(500);
             res.json({err:err,status:"err_already_logged_out",sid:null, profile:null});
             return;
         }
@@ -251,20 +251,20 @@ router.get('/set_player_state',function (req,res,next) {
     var pstate = req.queryInt("ps");
     //CHECK INPUT PARAMETERs
     if(!hwid || !sid || !pstate){
-        res.status(500);
+        //res.status(500);
         res.json({err:true, status:"err_query_paramter_hwid_or_sid_or_ps_not_set"});
         return;
     }
     //CHECK PS STATE
     if(!lobby_handling.check_int_for_valid_player_state(pstate)){
-        res.status(500);
+        //res.status(500);
         res.json({err:true, status:"err_invalid_player_state_ps_value"});
         return;
     }
     //CHECK_SESSION
     session_handling.check_valid_session(hwid,sid,function (cvs_err,cvs_res) {
         if(cvs_err){
-            res.status(500);
+            //res.status(500);
             res.json({err:cvs_err, status:"err_session_check_failed"});
             return;
         }
@@ -276,7 +276,7 @@ router.get('/set_player_state',function (req,res,next) {
                 return;
             });
         }else{
-            res.status(500);
+            //res.status(500);
             res.json({err:cvs_err, status:"err_session_key_sid_check_failed"});
             return;
         }
@@ -308,7 +308,7 @@ router.get('/get_players_avariable',function (req,res,next) {
 
     //CHECK INPUT PARAMETERs
     if(!hwid || !sid ){
-        res.status(500);
+        //res.status(500);
         res.json({err:true, status:"err_query_paramter_hwid_or_sid_or_not_set", players:null});
         return;
     }
@@ -316,7 +316,7 @@ router.get('/get_players_avariable',function (req,res,next) {
     //CHECK_SESSION
     session_handling.check_valid_session(hwid,sid,function (cvs_err,cvs_res) {
         if(cvs_err){
-            res.status(500);
+            //res.status(500);
             res.json({err:cvs_err, status:"err_session_check_failed", players:null});
             return;
         }
@@ -328,7 +328,7 @@ router.get('/get_players_avariable',function (req,res,next) {
                 return;
             });
         }else{
-            res.status(500);
+            //res.status(500);
             res.json({err:cvs_err, status:"err_session_key_sid_check_failed",players:null});
             return;
         }
@@ -388,7 +388,7 @@ router.get('/get_player_state',function (req,res,next) {
 
     //CHECK INPUT PARAMETER
     if(!hwid || !sid ){
-        res.status(500);
+        //res.status(500);
         res.json({err:true, status:"err_query_paramter_hwid_or_sid_or_not_set", matchmaking_state:null,game_state:null});
         return;
     }
@@ -396,7 +396,7 @@ router.get('/get_player_state',function (req,res,next) {
     //CHECK_SESSION
     session_handling.check_valid_session(hwid,sid,function (cvs_err,cvs_res) {
         if(cvs_err){
-            res.status(500);
+            //res.status(500);
             res.json({err:cvs_err, status:"err_session_check_failed",  matchmaking_state:null,game_state:null});
             return;
         }
@@ -437,7 +437,7 @@ router.get('/get_player_state',function (req,res,next) {
                 });
             });
         }else{
-            res.status(500);
+            //res.status(500);
             res.json({err:cvs_err, status:"err_session_key_sid_check_failed", matchmaking_state:null,game_state:null});
         }
     });
@@ -462,7 +462,7 @@ router.get('/player_setup_confirmation',function (req,res,next) {
 
     //CHECK INPUT PARAMETER
     if(!hwid || !sid ){
-        res.status(500);
+        //res.status(500);
         res.json({err:true, status:"err_query_paramter_hwid_or_sid_or_not_set", matchmaking_state:null,game_state:null});
         return;
     }
@@ -470,7 +470,7 @@ router.get('/player_setup_confirmation',function (req,res,next) {
     //CHECK_SESSION
     session_handling.check_valid_session(hwid,sid,function (cvs_err,cvs_res) {
         if(cvs_err){
-            res.status(500);
+          //  res.status(500);
             res.json({err:cvs_err, status:"err_session_check_failed"});
             return;
         }
@@ -480,7 +480,7 @@ router.get('/player_setup_confirmation',function (req,res,next) {
                 res.json({err:psc_err, status:psc_res});
             });
         }else{
-            res.status(500);
+            //res.status(500);
             res.json({err:cvs_err, status:"err_session_key_sid_check_failed"});
         }
     });
@@ -512,7 +512,7 @@ router.get('/make_move',function (req,res,next) {
 
     //CHECK INPUT PARAMETER
     if(!hwid || !sid  || !move){
-        res.status(500);
+        //res.status(500);
         res.json({err:true, status:"err_query_paramter_hwid_or_sid_or_move_not_set"});
         return;
     }
@@ -520,7 +520,7 @@ router.get('/make_move',function (req,res,next) {
     //CHECK_SESSION
     session_handling.check_valid_session(hwid,sid,function (cvs_err,cvs_res) {
         if(cvs_err){
-            res.status(500);
+          //  res.status(500);
             res.json({err:cvs_err, status:"err_session_check_failed"});
             return;
         }
@@ -530,7 +530,7 @@ router.get('/make_move',function (req,res,next) {
                 res.json({err:psc_err, status:psc_res});
             });
         }else{
-            res.status(500);
+           // res.status(500);
             res.json({err:cvs_err, status:"err_session_key_sid_check_failed"});
         }
     });

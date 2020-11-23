@@ -73,7 +73,7 @@ services:
     #links:
     #  - "AtomicChessBackend:AtomicChessBackend"
     restart: "always"
-    scale: 1
+    #scale: 1
     environment:
       - PRODUCTION
       - BACKEND_IP=127.0.0.1:3000 #HOST IP OF BACKEND
