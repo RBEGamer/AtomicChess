@@ -29,7 +29,7 @@ services:
     build:
       context: ../ATC_MoveValidator/
     image: atcmovevalidator:latest
-    #network_mode: "host"
+    network_mode: "host"
     restart: always
     ports:
       - 5001:5001

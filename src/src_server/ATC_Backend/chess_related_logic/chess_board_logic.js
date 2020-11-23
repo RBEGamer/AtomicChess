@@ -77,7 +77,7 @@ function execute_move(_board,_move, _callback){
             }
             //IF ERROR IN RESPONSE THROW IT
             if(jsonbody.err){
-                throw string(jsonbody.err)
+                throw jsonbody.err
             }
         }catch (e) {
             console.error(e);

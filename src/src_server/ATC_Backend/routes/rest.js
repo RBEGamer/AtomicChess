@@ -309,7 +309,7 @@ router.get('/get_players_avariable',function (req,res,next) {
     //CHECK INPUT PARAMETERs
     if(!hwid || !sid ){
         //res.status(500);
-        res.json({err:true, status:"err_query_paramter_hwid_or_sid_or_not_set", players:null});
+        res.json({err:true, status:"err_query_paramter_hwid_or_sid_or_not_set", players:null,count:0});
         return;
     }
 
@@ -317,19 +317,19 @@ router.get('/get_players_avariable',function (req,res,next) {
     session_handling.check_valid_session(hwid,sid,function (cvs_err,cvs_res) {
         if(cvs_err){
             //res.status(500);
-            res.json({err:cvs_err, status:"err_session_check_failed", players:null});
+            res.json({err:cvs_err, status:"err_session_check_failed", players:null,count:0});
             return;
         }
         //IF SESSION VALID -> LIST PLAYERS
         if(cvs_res){
             //   lobby_handling.set
             lobby_handling.get_avariable_players(hwid,function (spl_err,spl_res) {
-                res.json({err:spl_err, status:"ok", players:spl_res});
+                res.json({err:spl_err, status:"ok", players:spl_res, count:spl_res.length});
                 return;
             });
         }else{
             //res.status(500);
-            res.json({err:cvs_err, status:"err_session_key_sid_check_failed",players:null});
+            res.json({err:cvs_err, status:"err_session_key_sid_check_failed",players:null,count:0});
             return;
         }
     })

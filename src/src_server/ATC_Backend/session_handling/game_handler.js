@@ -171,7 +171,7 @@ function make_move(_hwid,_move,_callback){
                 //UPDATE PLAYER STATES
 
                 //UPDATE GAME STATE
-                if(em_next_player_turn == CBL.PLAYER_TURN.WHITE){
+                if(em_next_player_turn === CBL.PLAYER_TURN.WHITE){
                     gag_res.game_state = GAME_STATE.PLAYER_WHITE_TURN;
                 }else{
                     gag_res.game_state = GAME_STATE.PLAYER_BLACK_TURN;
@@ -187,11 +187,11 @@ function make_move(_hwid,_move,_callback){
                     }
                     check_player_state_to_determ_new_game_state(gag_res.id,function (dns_err,dns_res) {
                         _callback(dns_err,dns_res);
-                        return;
-                    })
+
+                    });
                 });
             });
-        })
+        });
     });
 }
 //TODO ALSO USE IN CHECK ACTIVE PLAER
