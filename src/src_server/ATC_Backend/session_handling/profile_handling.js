@@ -60,7 +60,7 @@ module.exports = {
 
         _callback(null,null);
     },
-   simplify_profile_data: function (_profile_json) {
+    simplify_profile_data: function (_profile_json) {
         //TODO COPY JSON SHOW ONLY IMPORTANT PROFILE INFORAMTION MASK THE OTHER
        //HIDE HWID
        //USE VIRTUAL ID

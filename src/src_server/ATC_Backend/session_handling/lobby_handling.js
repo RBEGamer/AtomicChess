@@ -34,7 +34,9 @@ function get_avariable_players(_own_hwid,_callback, _ps = player_state.searching
             }
     },{
         $match:{
-            player_state:_ps, DOCTYPE: "LOBBY"
+            player_state:_ps,
+            DOCTYPE: "LOBBY",
+            has_valid_sesstion: true //FILTER ONLY ACTIVE USERS => FALG SET BY LOGIN AND UNSET BY INATIVITY
         }
 
     }]).toArray(function(err,res){
@@ -111,10 +113,8 @@ function get_avariable_ai_player(_callback){
             _callback(err_sm,[]);
             return;
         }
-
         _callback(null,res_sm.player_searching_ai);
         return;
-
     });
 }
 
@@ -134,6 +134,8 @@ module.exports = {
     get_player_for_matchmaking,
     get_avariable_players,
     get_avariable_ai_player,
+
+
     set_player_lobby_state: function(_hwid,_state, _callback){
         //ADD OR UPDATE THE LOBBY ENTRY FOR EACH PLAYER
         //THE UPSERT OPTION MAKES POSSIBLE TO ADD THE ENTRY IF NOT EXISTS
@@ -142,8 +144,27 @@ module.exports = {
         });
    },
 
-
-
+    set_valid_session_flag: function (_hwid, _session_flag_state, _callback){
+        var query = { hwid: _hwid,has_valid_sesstion: _session_flag_state };
+        //UPDATE LAST_SEEN ONLY IF PLAYER ACTIVELY SET HIS SESSION TO ACTIVE/TRUE
+        //FALG CAN BE SET TO FALSE BY THE BACKEND AUTOMATICALLY
+        if(_session_flag_state){
+            query.last_seen = Date.now();
+        }
+        mdb.getLobbyCollection().update({DOCTYPE: "LOBBY",hwid: _hwid}, { $set: query}, { upsert: true },function (err,res) {
+            _callback(err,res);
+        });
+    },
+    get_valid_session_flag: function (_hwid,_callback){
+        MDB.getLobbyCollection().findOne({hwid:_hwid, DOCTYPE: "LOBBY"},function (err,res) {
+            if(!err && res){
+                 _callback(null,res.has_valid_sesstion);
+                 return;
+            }
+            _callback(err,false);
+            return
+        });
+    },
     check_int_for_valid_player_state: function(_ps){
         if(_ps === player_state.ingame ||_ps === player_state.idle || _ps === player_state.hosting_game_manual || _ps === player_state.hosting_game_matchmake || _ps === player_state.searching_matchmake || _ps === player_state.searching_manual){
             return true;
@@ -152,11 +173,7 @@ module.exports = {
     },
 
     remove_player_from_lobby: function(_hwid, _callback, _set_only_offline){
-        if(_set_only_offline){
-            this.set_player_lobby_state(_hwid,player_state.offline,_callback);
-        }else{
-            mdb.getLobbyCollection().deleteOne({DOCTYPE: "LOBBY",hwid:_hwid},_callback);
-        }
+            this.set_player_lobby_state(_hwid,player_state.idle,_callback);
     },
     //EXPOSED VARAIBLES
     player_state,

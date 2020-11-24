@@ -67,7 +67,7 @@ function check_player_state_to_determ_new_game_state(_game_id ,_callback){
             //APPLY_POINTS TO USER PROFILE
             CBL.get_player_score(res.current_board.ExtendetFen,function (gpp_err,gpp_res) {
                 //LESS TURNS MORE POINTS
-                if(turn_history.length > 0){
+                if(res.turn_history.length > 0){
                     gpp_res *= (1.0/res.turn_history.length)*100.0;
                 }
                 //LESS TIME NEEDED MORE POINTS
@@ -109,6 +109,8 @@ function check_player_state_to_determ_new_game_state(_game_id ,_callback){
 
 }
 
+
+
 //TODO CHECK IF A GAME WITH THESE PLAYERS IS ACTIVE CURRENTLY -> ABORT THIS GAME
 //TODO ABBORT GAME FUNCTION
 //TODO SET PLAYER LOBBY STATE TO IDLE FOR BOTH PLAYER
@@ -120,7 +122,7 @@ function cancel_match_for_player(_hwid,_callback){
     }
     //GET CURRENT ACTIVE GAME FOR PLAYEWR WITH _HWID
     get_player_active_game_state(_hwid,function (gpagA_err,gpagA_res,gpagA_res_simple){
-        if(err || !gpagA_res){
+        if(gpagA_err || !gpagA_res){
             _callback(gpagA_err,null);
             return;
         }
@@ -130,16 +132,22 @@ function cancel_match_for_player(_hwid,_callback){
             other_player = gpagA_res.player_black_hwid;
         }else {
             other_player = gpagA_res.player_white_hwid;
-
         }
+
+        LH.set_player_lobby_state(_hwid,LH.player_state.idle,function (splsA_err,splsA_res){
+            LH.set_player_lobby_state(other_player,LH.player_state.idle,function (splsB_err,splsB_res){
+                MDB.getGameCollection().updateOne({id:gpagA_res.id, DOCTYPE:"GAME"},{$set:{game_state:GAME_STATE.aborted_game}},function (uo_err,uo_res) {
+                    _callback(null,{"state":"ok"});
+                });
+            });
+        });
 
     });
     //SET NEW GAME STATE
     //SET OWN PLAYER STATE TO IDLE
     //SET OTHER PLAYER STATE TO IDLE
 
-    //SET NOFIY THE OTHER PLAYER
-    _callback(null,{"state":"ok"});
+
 }
 
 

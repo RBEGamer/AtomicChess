@@ -17,7 +17,7 @@ var cleanup_job = new CronJob('*/'+CONFIG.getConfig().session_cleanup_loop_inter
         }
         cursor = reply[0];
         //CHECK IF SEACH SUCCESSFUL
-        if(cursor === '0'){
+        if(cursor ){//=== '0'){
             try {
                 //GET THE FOUND KEYS
                 var found_keys = reply[1];
@@ -44,22 +44,24 @@ var cleanup_job = new CronJob('*/'+CONFIG.getConfig().session_cleanup_loop_inter
                                     //IF TIME DIFFERENCE IS TOO HIGH -> REMOVE THE SESSION
                                     var diff=(Date.now()-dt) / 1000; //A TIMESTAMP IS IN MS SO WE HAVE DIVIDE
                                     //console.log(diff);
-                                    if(diff > CONFIG.session_lifetime_in_seconds){
+                                    if(diff > CONFIG.getConfig().session_lifetime_in_seconds){
                                         console.log("entry to remove ts: " + diff);
-                                        //REMOVE PLAYER FROM LOBBY
-                                        LH.remove_player_from_lobby(val2json.hwid,function (lhrm_err,lhrm_res) {
-
-                                        },false); //FALSE -> SET PLAYER ONLY OFFLINE
+                                        //CANCEL MATCH FOR PLAYERS IF A MATCH RUNNING
                                         GH.cancel_match_for_player(val2json.hwid,function (cmp_err,cmp_res){
-
-                                        });
-                                        //REMOVE KEY FROM DB
-                                        redisDbConnection.getRedisConnection().del(k,function (err, reply) {
-                                            if(err || !reply){
-                                                console.error("db_del_failed");
-                                                return;
-                                            }
-                                            //console.log("Redis Del", reply);
+                                            //SET PLAYER IDLE STATE TO IDLE (not listed)
+                                            LH.set_player_lobby_state(val2json.hwid, LH.player_state.idle,function (spls_err,spls_res){
+                                                //SET PLAYERS ACTIVE SESSION TO FALSE (-> no matchmaking possible)
+                                                LH.set_valid_session_flag(val2json.hwid,false,function (svsf_err,svsf_res){
+                                                    //REMOVE KEY FROM DB
+                                                    redisDbConnection.getRedisConnection().del(k,function (err, reply) {
+                                                        if(err || !reply){
+                                                            console.error("db_del_failed");
+                                                            return;
+                                                        }
+                                                        console.log("DELETE SESSION " + String(k), reply);
+                                                    });
+                                                });
+                                            });
                                         });
                                     }
                                 }else{

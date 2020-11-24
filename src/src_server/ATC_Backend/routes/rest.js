@@ -175,6 +175,7 @@ router.get('/login',function(req,res,next){
                         }
                         //CREATE SESSION ENTRY
                         redisClient.getRedisConnection().set("session:"+hwid, JSON.stringify({session_id:session_id,timestamp:ts, hwid:hwid}));
+                        lobby_handling.set_valid_session_flag(hwid,true,function (svfs_err,svfs_res){});
                         res.json({err:null, status:"ok",sid:session_id, timestamp:ts, profile:profile_handling.simplify_profile_data(cp_profile)});
                         return;
                     })
@@ -182,7 +183,8 @@ router.get('/login',function(req,res,next){
                  //PROFILE ALREADY EXISTS -> BEGIN SESSION AND SEND PROFILE DATA
                     redisClient.getRedisConnection().set("session:"+hwid, JSON.stringify({session_id:session_id,timestamp:ts, hwid:hwid}));
                     //RESET LOBBY STATE -> no error chating if failed its ok because the db entry already exists
-                    lobby_handling.set_player_lobby_state(hwid,lobby_handling.player_state.idle,function () {});
+                    lobby_handling.set_player_lobby_state(hwid,lobby_handling.player_state.idle,function (spls_err,spls_res) {});
+                    lobby_handling.set_valid_session_flag(hwid,true,function (svfs_err,svfs_res){});
                     res.json({err:null, status:"ok",sid:session_id, timestamp:ts, profile:profile_handling.simplify_profile_data(pe_result)});
                     return;
                 }
