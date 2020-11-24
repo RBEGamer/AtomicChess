@@ -425,6 +425,31 @@ router.get('/get_game_list',function (req,res,next) {
     });
 });
 
+router.get('/get_game',function (req,res,next) {
+    var gid = req.queryString("gid");
+    if(!gid || gid === ""){
+        res.json({err:"gid not set",game_data:null});
+        return;
+    }
+
+    game_handling.get_game(gid,function (lag_err,lag_res){
+            if(lag_err || !lag_res){
+                res.json({err:lag_err, game_data:null});
+            }
+
+
+           var game_information =  {
+                game_id:lag_res.id,
+                created_timestamp: lag_res.last_game_interaction,
+                game_state:lag_res.game_state,
+                start_board_string:lag_res.start_board_string,
+               current_board:lag_res.current_board,
+                move_count:lag_res.turn_history.length,
+               turn_history:lag_res.turn_history
+            };
+            res.json({err:null, game_data:game_information});
+    });
+});
 
 /**
  # @INPUT_QUERY

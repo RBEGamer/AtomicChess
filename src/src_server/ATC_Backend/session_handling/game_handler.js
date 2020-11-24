@@ -417,6 +417,41 @@ function list_all_games(_callback) {
     }
 });
 }
+
+
+function get_game(_game_id,_callback) {
+    MDB.getGameCollection().aggregate([{ $lookup:
+            {
+                from: CONFIG.getConfig().mongodb_collection_profiles,
+                localField: 'player_white_hwid',
+                foreignField: 'hwid',
+                as: 'profile_white'
+            }
+    },{ $lookup:
+            {
+                from: CONFIG.getConfig().mongodb_collection_profiles,
+                localField: 'player_black_hwid',
+                foreignField: 'hwid',
+                as: 'profile_black'
+            }
+    },{
+        $match:{
+            DOCTYPE: "GAME",
+            id:_game_id
+        }
+
+    }]).toArray(function (err,res) {
+        if(err){
+            _callback(err,null);
+            return;
+        }
+        if(res && res.length >= 1){
+            _callback(null,res[0]);
+        }else{
+            _callback(null,null);
+        }
+    });
+}
 module.exports = {
     start_match,
     get_player_active_game_state,
@@ -424,6 +459,7 @@ module.exports = {
     make_move,
     cancel_match_for_player,
     list_all_games,
+    get_game,
     //EXPOSED VARIABLED
     GAME_STATE,
     PLAYER_TURN_STATE

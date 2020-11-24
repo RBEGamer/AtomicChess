@@ -10,6 +10,9 @@
   <link href="/css/main.css" rel="stylesheet">
   <link href="/css/dashboard_main.css" rel="stylesheet">
   <link href="/css/dashboard_cards.css" rel="stylesheet">
+  <link rel="stylesheet" href="/js/PGNViewer/css/pgnvjs.css">
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
+
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="AtomicChess">
@@ -62,7 +65,11 @@
       <div class="card-body">
         <div class="text-center">
           <p class="card-content">PLEASE SELECT A GAME BELOW TO GET MORE INFORMATION ABOUT IT</p>
-          <p class="card-content" id="listed_games"></p>
+          <p class="card-content" id="game_info"></p>
+
+          <div id="board" style="width: 100px"></div>
+
+
         </div>
       </div>
     </div>
@@ -76,11 +83,9 @@
 <!-- Footer -->
 <footer class="footer bg-light">
   <div class="container text-center">
-
     <div class="row top-buffer"><div class="col-md-12"><h4 class="card-title">SERVICE AVAILABILITY</h4></div></div>
     <div class="row justify-content-center">
       <div class="col-auto">
-
         <table class="table table-responsive">
           <tbody>
           <tr>
@@ -113,8 +118,10 @@
 
 <script src="/js/jquery/jquery.min.js"></script>
 <script src="/bootstrap/js/bootstrap.min.js"></script>
-
+<script src="/js/PGNViewer/js/pgnvjs.js"></script>
 <script>
+  var cfg = { position: 'r1b2k2/pp2q1b1/2pp3r/4pp2/2B1P3/2N3Q1/PPP2PPP/3R1RK1 w - - 0 17', locale: 'en', pieceStyle: 'merida' };
+  var board = pgnView('board', cfg);
   //https://stackoverflow.com/questions/5416920/timestamp-to-human-readable-format
   function getFormattedDate(_dt) {
     var date = new Date(_dt);
@@ -170,10 +177,19 @@
   }
 
   function load_game_information(_id){
+    //debugger;
+    $.getJSON('/rest/get_game?gid=' +_id,function (data) {
+      //PROCESS GOT GAME LIST RESULT
+      //debugger;
 
+      if(!data || data.err || !data.game_data){
+        return;
+      }
+      console.log(data);
+      $("#game_headline_title").html(String(data.game_data.game_id));
     //LOAD GAME INFO
     //VISULIZES MOVES
-
+    });
   }
   function create_listed_games_table(){
     $.getJSON('/rest/get_game_list',function (data) {
