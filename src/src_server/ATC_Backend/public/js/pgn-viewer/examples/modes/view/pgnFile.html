@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Read PGN from file</title>
+    <script src="/lib/pgnv.js" type="text/javascript"></script>
+</head>
+<body class='merida blue'>
+<div id="board"></div>
+<script>
+    var pgnFile = "/examples/pgn/cori-vishnu.pgn";
+    var cfg = { showCoords: false, position: 'start', width: "400px", pgnFile: pgnFile };
+    var board = PGNV.pgnView('board', cfg);
+</script>
+</body>
+</html>

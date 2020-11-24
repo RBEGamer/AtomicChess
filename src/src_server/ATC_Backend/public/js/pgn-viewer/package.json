@@ -1,0 +1,40 @@
+{
+  "name": "@mliebelt/pgn-viewer",
+  "description": "A pgn viewer to view or edit chess games on HTML web sites.",
+  "keywords": [
+    "chess",
+    "pgn",
+    "viewer"
+  ],
+  "version": "1.4.1",
+  "main": "lib/pgnv.js",
+  "files": [
+    "lib/pgnv-assets/**",
+    "lib/locales/**",
+    "README.md"
+  ],
+  "module": "modules/pgn-viewer/src/index.js",
+  "author": "mliebelt",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mliebelt/PgnViewerJS.git"
+  },
+  "publishConfig": { "registry": "https://npm.pkg.github.com/" },
+  "scripts": {
+    "build": "../../node_modules/.bin/webpack --config webpack.prod.js",
+    "start": "../../node_modules/.bin/webpack-dev-server --open --config webpack.dev.js",
+    "gen_i18n": "node ./bin/gen-i18n.js"
+  },
+  "dependencies": {
+    "@mliebelt/pgn-reader": "^1.1.1",
+    "chessground": "^7.6.12",
+    "mousetrap": "^1.6.5",
+    "roddeh-i18n": "^1.2.0",
+    "smoothscroll-polyfill": "^0.4.4",
+    "sweetalert": "^2.1.2"
+  },
+  "devDependencies": {
+    "webpack-bundle-analyzer": "^3.8.0"
+  }
+}
