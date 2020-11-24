@@ -177,7 +177,7 @@
 <script src="/bootstrap/js/bootstrap.min.js"></script>
 <script src="/js/PGNViewer/js/pgnvjs.js"></script>
 <script>
-
+  //PARSE Date Object into human readable
   //https://stackoverflow.com/questions/5416920/timestamp-to-human-readable-format
   function getFormattedDate(_dt) {
     var date = new Date(_dt);
@@ -196,7 +196,7 @@
     var str = date.getFullYear() + "-" + month + "-" + day + "_" +  hour + ":" + min + ":" + sec;
     return str;
   }
-
+  //GET AND DISPLAY INFORMATION ABOUT THE SERVICE UPTIME
   function check_service_state(){
     $.getJSON('/rest/service_state',function (data) {
       //GET MOVEMENT VALIDATOR MICROSERVICE STATE
@@ -227,9 +227,7 @@
     });
 
   }
-
-
-  var game_move_history_fen = [];
+  //LOADS A FENT TO THE FEN VIEWER
   function load_fen_to_viewer(_fen){
     if(_fen == null || _fen === ""){
       $("#fen_viewer_board").html("");
@@ -240,8 +238,7 @@
     $("#fen_viewer_fen").html(""+_fen+"");
     var fen_viewer_board = pgnBoard('fen_viewer_board', { position: _fen, locale: 'en', pieceStyle: 'wikipedia', theme:'falken' });
   }
-
-
+  //CREATES TURN HISTORY TABLE
   function create_turn_history_table(_data){
   //  debugger;
     if(!_data || _data.length <= 0){
@@ -283,6 +280,7 @@
 
     $("#turn_histroy_table").html(tmp_html);
   }
+  //LOADS MORE INFORMATION ABOUT A SPECIFIC GAME ID
   function load_game_information(_id){
     //debugger;
     game_move_history_fen = [];
@@ -337,6 +335,7 @@
     });
 
   }
+  //LOAD ALL ALVARIABLE GAMES AND DISPLAY THEM IN THE GAME HISTROY CONTAINER
   function create_listed_games_table(){
     $.getJSON('/rest/get_game_list',function (data) {
       //PROCESS GOT GAME LIST RESULT
@@ -389,7 +388,7 @@
 
     });
   }
-
+  //SHOWS / HIDES THE GAME_INFORMATION CONTAINER
   function toggle_visible_information_container(_s) {
     var x = document.getElementById("game_information_container");
     if (_s) {
@@ -398,12 +397,13 @@
       x.style.display = "none";
     }
   }
+  //EXECUTES SCRIPT IF PAGE LOADED
   $(document).ready(function () {
 
 
     console.log("ready!");
     //HIDE GAME INFORMATION
-   // toggle_visible_information_container(false);
+   //toggle_visible_information_container(false);
     check_service_state();
     create_listed_games_table();
   });
