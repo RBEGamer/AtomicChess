@@ -384,12 +384,46 @@ function start_match(_player_a_hwid, _player_b_hwid, _callback) {
 }
 
 
+
+function list_all_games(_callback) {
+    MDB.getGameCollection().aggregate([{ $lookup:
+            {
+                from: CONFIG.getConfig().mongodb_collection_profiles,
+                localField: 'player_white_hwid',
+                foreignField: 'hwid',
+                as: 'profile_white'
+            }
+    },{ $lookup:
+            {
+                from: CONFIG.getConfig().mongodb_collection_profiles,
+                localField: 'player_black_hwid',
+                foreignField: 'hwid',
+                as: 'profile_black'
+            }
+    },{
+        $match:{
+            DOCTYPE: "GAME"
+        }
+
+    }]).toArray(function (err,res) {
+    if(err){
+        _callback(err,null);
+        return;
+    }
+    if(res){
+        _callback(null,res);
+    }else{
+        _callback(null,null);
+    }
+});
+}
 module.exports = {
     start_match,
     get_player_active_game_state,
     set_player_setup_confirmation,
     make_move,
     cancel_match_for_player,
+    list_all_games,
     //EXPOSED VARIABLED
     GAME_STATE,
     PLAYER_TURN_STATE

@@ -41,28 +41,33 @@
   <div class="card">
     <div class="card-header">
       <h4 class="card-title text-justify">GAME HISTORY</h4>
-
     </div>
     <div class="card-body">
-
       <div class="text-center">
-        <p class="card-content">PLEASE SELECT A GAME BELOW TO GET MORE INFORMATION ABOUT IT</p>
-
-
-
-        <p class="card-content" id="mtl_field"></p>
+        <p class="card-content" id="listed_games"></p>
       </div>
-
-
-
-
     </div>
   </div>
 </div>
-
 </div>
 
 
+
+<div class="row justify-content-center">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title text-justify">GAME INFORMATION <span id="game_headline_title"> -- ID --</span></h4>
+      </div>
+      <div class="card-body">
+        <div class="text-center">
+          <p class="card-content">PLEASE SELECT A GAME BELOW TO GET MORE INFORMATION ABOUT IT</p>
+          <p class="card-content" id="listed_games"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
@@ -110,6 +115,28 @@
 <script src="/bootstrap/js/bootstrap.min.js"></script>
 
 <script>
+  //https://stackoverflow.com/questions/5416920/timestamp-to-human-readable-format
+  function getFormattedDate(_dt) {
+    var date = new Date(_dt);
+
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    var hour = date.getHours();
+    var min = date.getMinutes();
+    var sec = date.getSeconds();
+
+    month = (month < 10 ? "0" : "") + month;
+    day = (day < 10 ? "0" : "") + day;
+    hour = (hour < 10 ? "0" : "") + hour;
+    min = (min < 10 ? "0" : "") + min;
+    sec = (sec < 10 ? "0" : "") + sec;
+
+    var str = date.getFullYear() + "-" + month + "-" + day + "_" +  hour + ":" + min + ":" + sec;
+
+    /*alert(str);*/
+
+    return str;
+  }
 
   function check_service_state(){
     $.getJSON('/rest/service_state',function (data) {
@@ -142,13 +169,70 @@
 
   }
 
+  function load_game_information(_id){
+
+    //LOAD GAME INFO
+    //VISULIZES MOVES
+
+  }
+  function create_listed_games_table(){
+    $.getJSON('/rest/get_game_list',function (data) {
+      //PROCESS GOT GAME LIST RESULT
+      if(!data || data.err || !data.game_data || !Array.isArray(data.game_data)){
+      return;
+      }
+
+
+
+    //CREATE TABLE STRUCTURE AND HEADLINES
+    var tmp_html = "<div class=\"table-responsive-sm\"><table class=\"table\">";
+    tmp_html+="<thead><tr><th scope=\"col\">#</th><th scope=\"col\">CREATED</th><th scope=\"col\">PLAYER WHITE</th><th scope=\"col\">PLAYER BLACK</th><th scope=\"col\">MOVE COUNT</th><th scope=\"col\">GAME_STATE</th><th scope=\"col\">VIEW</th></tr></thead>";
+    tmp_html+="<tbody>";
+    //POPULATE TABLE BODY WITH ENTRIES
+    for (let i= 0; i < data.game_data.length;i++){
+      const entry = data.game_data[i];
+      tmp_html+="<tr>";
+      tmp_html+="<th scope=\"row\">"+String(i+1)+"</th>";
+
+      tmp_html+="<th scope=\"row\">"+getFormattedDate(entry.created_timestamp)+"</th>";
+
+      tmp_html+="<th scope=\"row\">"+entry.player_white_profile_name+"</th>";
+      tmp_html+="<th scope=\"row\">"+entry.player_black_profile_name+"</th>";
+      tmp_html+="<th scope=\"row\">"+entry.move_count+"</th>";
+      var gsstring  = "UNKNOWN";
+      switch (entry.game_state){
+        case 0:gsstring = "STARTING";break;
+        case 1:gsstring = "STARTING";break;
+        case 8:gsstring = "RUNNING";break;
+        case 9:gsstring = "RUNNING";break;
+
+        case 10:gsstring = "FINISHED";break;
+        case 11:gsstring = "FINISHED";break;
+
+        case 12:gsstring = "CANCELED";break;
+        default:gsstring = "UNKNOWN";break;
+      }
+      tmp_html+="<th scope=\"row\">"+gsstring+"</th>";
+
+
+      tmp_html+="<th scope=\"row\"><button type=\"button\" onclick=\"load_game_information('"+entry.game_id+"')\" class=\"btn btn-info\">SHOW DETAILS</button></th>";
+      tmp_html+="</tr>";
+
+    }
+
+    tmp_html += "</tbody></table></div>";
+
+
+    $("#listed_games").html(tmp_html);
+    });
+  }
   $(document).ready(function () {
 
 
     console.log("ready!");
 
     check_service_state();
-
+    create_listed_games_table();
   });
 </script>
 

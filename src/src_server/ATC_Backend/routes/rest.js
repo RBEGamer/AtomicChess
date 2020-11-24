@@ -395,6 +395,36 @@ router.get('/get_avariable_ai_players',function (req,res,next) {
 
 
 
+router.get('/get_game_list',function (req,res,next) {
+    game_handling.list_all_games(function (lag_err,lag_res){
+        if(lag_err || !lag_res){
+            res.json({err:lag_err,count:game_data.length, game_data:game_data});
+        }
+        var game_data= [];
+        for (let i = 0; i < lag_res.length; i++) {
+            var name_pw = "---";
+            var name_pb = "---";
+            //CHECK IF PROFILE WAS FOUND FOR FIRENDLY NAME
+            if(lag_res[i].profile_white && lag_res[i].profile_white[0] && lag_res[i].profile_white[0].friendly_name){
+                name_pw = lag_res[i].profile_white[0].friendly_name;
+            }
+            if(lag_res[i].profile_black && lag_res[i].profile_black[0] && lag_res[i].profile_black[0].friendly_name){
+                name_pb = lag_res[i].profile_black[0].friendly_name;
+            }
+            //POPULATE RESULT ARRAY
+            game_data.push({
+                game_id:lag_res[i].id,
+                created_timestamp: lag_res[i].last_game_interaction,
+                game_state:lag_res[i].game_state,
+                player_white_profile_name:name_pw,
+                player_black_profile_name:name_pb,
+                move_count:lag_res[i].turn_history.length
+            });
+        }
+        res.json({err:null,count:game_data.length, game_data:game_data});
+    });
+});
+
 
 /**
  # @INPUT_QUERY
