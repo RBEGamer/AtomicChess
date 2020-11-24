@@ -106,8 +106,10 @@
     <div class="row">
       <div class="col-lg-12 h-100 text-center text-lg-center my-auto">
         <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-          <input type="hidden" name="destination" value="github"/>
-          <input type="submit" class="btn btn-small btn-info" value="IMPRESSUM" />
+          <form action="/redirect" method="GET">
+          <input type="hidden" name="destination" value="impressum"/>
+          <input type="submit" class="btn btn-small btn-link" value="IMPRESSUM" />
+          </form>
         </div>
 
 
