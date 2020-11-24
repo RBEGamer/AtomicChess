@@ -1,11 +1,26 @@
 <html lang="en">
 
 <head>
+  <link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/favicon/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/favicon/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/favicon/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/favicon/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/favicon/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/favicon/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/favicon/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
 
   <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-
-
   <link href="/css/landing-page.css" rel="stylesheet">
   <link href="/css/main.css" rel="stylesheet">
   <link href="/css/dashboard_main.css" rel="stylesheet">
@@ -64,35 +79,55 @@
       </div>
       <div class="card-body" id="game_information_container">
         <div class="text-center">
-
           <p class="card-content" id="game_info"></p>
-
           <div class="row justify-content-center">
             <div class="col-md-4">
-              <div id="current_board" style="width: 200px"></div>
+              <div id="current_board" style="width: 200px"><img width="200px" src="/img/board_placeholder_400x400.png"></div>
             </div>
-
             <div class="col-md-6">
               <table class="table">
                 <tbody>
                 <tr>
                   <th scope="row">PLAYER_TURN</th>
                   <td id="git_player_turn">---</td>
-
                 </tr>
                 <tr>
                   <th scope="row">IS_GAME_OVER</th>
                   <td id="git_game_over">---</td>
-
                 </tr>
                 <tr>
                   <th scope="row">START BOARD FEN</th>
                   <td id="git_start_board_fen">---</td>
                 </tr>
+                <tr>
+                  <th scope="row">CURRENT BOARD FEN</th>
+                  <td id="git_current_board_fen">---</td>
+                </tr>
                 </tbody>
               </table>
             </div>
           </div>
+          <div class="row top-buffer"></div>
+          <div class="row justify-content-center">
+            <div class="col-auto">
+              <h4 class="card-title text-justify">TURN HISTORY</h4>
+            </div>
+          </div>
+          <div class="row top-buffer"></div>
+          <div class="row justify-content-center">
+            <div class="col-md-4">
+              <p class="card-content" id="turn_histroy_table"></p>
+            </div>
+            <div class="col-md-8">
+              <div id="fen_viewer_board" style="width: 400px"><img width="400px" src="/img/board_placeholder_400x400.png"></div>
+              <div class="card-title text-justify" id="fen_viewer_fen"></div>
+            </div>
+          </div>
+
+
+
+
+
 
         </div>
       </div>
@@ -193,8 +228,65 @@
 
   }
 
+
+  var game_move_history_fen = [];
+  function load_fen_to_viewer(_fen){
+    if(_fen == null || _fen === ""){
+      $("#fen_viewer_board").html("");
+      $("#fen_viewer_fen").html("---");
+      return;
+    }
+    $("#fen_viewer_board").html("");
+    $("#fen_viewer_fen").html(""+_fen+"");
+    var fen_viewer_board = pgnBoard('fen_viewer_board', { position: _fen, locale: 'en', pieceStyle: 'wikipedia', theme:'falken' });
+  }
+
+
+  function create_turn_history_table(_data){
+  //  debugger;
+    if(!_data || _data.length <= 0){
+      $("#turn_histroy_table").html("--NO TURN HISTORY --");
+    return;
+    }
+    var tmp_html = "<div class=\"table-responsive-sm\"><table class=\"table\">";
+    tmp_html+="<thead><tr><th scope=\"col\">#</th><th scope=\"col\">MOVE</th><th scope=\"col\">PLAYER</th><th scope=\"col\">ACTION</th></tr></thead>";
+    tmp_html+="<tbody>";
+    //POPULATE TABLE BODY WITH ENTRIES
+    for (let i= 0; i < _data.length;i++){
+      const entry = _data[i];
+      tmp_html+="<tr>";
+      tmp_html+="<th scope=\"row\">"+String(i+1)+"</th>";
+
+      if(entry.move){
+      tmp_html+="<th scope=\"row\">"+entry.move+"</th>";
+      }else{
+        tmp_html+="<th scope=\"row\">---</th>";
+      }
+
+      if(entry.player_turn != null){
+        if(entry.player_turn == 1){
+          tmp_html+="<th scope=\"row\">BLACK</th>";
+        }else if(entry.player_turn == 0){
+          tmp_html+="<th scope=\"row\">WHITE</th>";
+        }else{
+          tmp_html+="<th scope=\"row\">"+String(entry.player_turn)+"</th>";
+        }
+      }
+
+
+      tmp_html+="<th scope=\"row\"><button type=\"button\" onclick=\"load_fen_to_viewer('"+entry.fen+"')\" class=\"btn btn-info\">SHOW BOARD</button></th>";
+      tmp_html+="</tr>";
+    }
+
+    tmp_html += "</tbody></table></div>";
+
+
+    $("#turn_histroy_table").html(tmp_html);
+  }
   function load_game_information(_id){
     //debugger;
+    game_move_history_fen = [];
+    load_fen_to_viewer(null);
     $.getJSON('/rest/get_game?gid=' +_id,function (data) {
       //PROCESS GOT GAME LIST RESULT
       //debugger;
@@ -204,21 +296,46 @@
       }
       console.log(data);
       //SHOW ID
+    //  debugger;
       $("#game_headline_title").html(String(data.game_data.game_id));
       //DISPLAY CURRENT BOARD
       if(data.game_data.current_board.fen){
+        $("#current_board").html("");
         var current_board = pgnBoard('current_board', { position: data.game_data.current_board.fen, locale: 'en', pieceStyle: 'wikipedia', theme:'falken' });
+      }
+      //LOAD AND DISPLAY GENERAL GAME INFO
+      if(data.game_data.current_board.player_turn != null){
+        if(data.game_data.current_board.player_turn == 1){
+          $("#git_player_turn").html("BLACK");
+        }else if(data.game_data.current_board.player_turn == 0){
+          $("#git_player_turn").html("WHITE");
+        }else{
+          $("#git_player_turn").html(String(data.game_data.current_board.player_turn));
+        }
+      }
+
+      if(data.game_data.current_board.is_game_over != null){
+        $("#git_game_over").html(String(data.game_data.current_board.is_game_over));
+      }
+      if(data.game_data.start_board_string != null){
+        $("#git_start_board_fen").html(String(data.game_data.start_board_string));
+      }
+      if(data.game_data.current_board.fen != null){
+        $("#git_current_board_fen").html(String(data.game_data.current_board.fen));
+      }
+
+      //VISULIZES MOVES
+      if(data.game_data.turn_history != null){
+        create_turn_history_table(data.game_data.turn_history);
       }
 
 
-      //id="git_player_turn"
-      //git_game_over
-      //id="git_start_board_fen"
-    //LOAD GAME INFO
-    //VISULIZES MOVES
+
+
+      //SHOW CONTAINER
+      toggle_visible_information_container(true);
     });
-    //SHOW CONTAINER
-    toggle_visible_information_container(true);
+
   }
   function create_listed_games_table(){
     $.getJSON('/rest/get_game_list',function (data) {
@@ -286,7 +403,7 @@
 
     console.log("ready!");
     //HIDE GAME INFORMATION
-    toggle_visible_information_container(false);
+   // toggle_visible_information_container(false);
     check_service_state();
     create_listed_games_table();
   });
