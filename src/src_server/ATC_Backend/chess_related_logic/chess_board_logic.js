@@ -53,6 +53,30 @@ function check_board_and_get_legal_moves(_extendet_fen,_callback){
         _callback(err, jsonbody.is_board_valid, jsonbody.legal_moves,jsonbody.is_game_over);
     });
 }
+
+function check_move_validator_state(_callback){
+    request.get({url:CONFIG.getConfig().chess_move_validator_api_url+"/rest/state"}, function optionalCallback(err, httpResponse, body) {
+        if (err) {
+            _callback(err);
+            return;
+        }
+        //console.log('Upload successful!  Server responded with:', body);
+        var jsonbody = null;
+        try {
+            jsonbody = JSON.parse(body);
+            if(!jsonbody || jsonbody.status == null || jsonbody.status == null || jsonbody.status == null){
+                console.error(jsonbody);
+                throw null;
+            }
+        }catch (e) {
+            console.error(e);
+            _callback(e);
+            return;
+        }
+        _callback(null);
+    });
+}
+
 //REST API IF PLAYER HAS STATE THAT THE HAS TO MAKE A MOVE ->check the suggetsted move then use a api to make a move
 //return the new board save it in the database
 //the other player polls the current board via the status
@@ -132,5 +156,6 @@ module.exports = {
     get_player_score,
     CHESS_FIGURES,
     PLAYER_TURN,
-    check_board_and_get_legal_moves
+    check_board_and_get_legal_moves,
+    check_move_validator_state
 };

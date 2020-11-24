@@ -3,8 +3,11 @@
  */
 var express = require('express');
 var router = express.Router();
-var redisClient = require("../session_handling/redis_db_connection");
+var listEndpoints = require('express-list-endpoints'); //for rest api explorer
 var UUID = require('uuid');
+
+//---- LOGIC PACKAGES -------------- //
+var redisClient = require("../session_handling/redis_db_connection");
 var profile_handling = require("../session_handling/profile_handling");
 var lobby_handling = require("../session_handling/lobby_handling");
 var session_handling = require("../session_handling/session_handler");
@@ -28,18 +31,35 @@ client version
  - err - true if an error occurs
  - status - the error if err set
  # @EXAMPLE
- - /rest/status -> {"err":false, "status":"ok"}
+ - /rest/status -> {"err":null, "status":"ok"}
+ - /rest/status -> {"err":true, "status":"error"}
+
  */
 router.get('/client_status',function (req,res,next) {
     var sysok = true;
     //TODO CHECK DB CONNECTIONS ...
     if(sysok){
-        res.json({"err": !sysok, "status":"ok"});
+        res.json({"err": null, "status":"ok"});
         return;
     }else{
-       // res.status(2);
-        res.json({"err": !sysok, "status":"sysok error"})
+        res.json({"err": sysok, "status":"sysok error"})
     }
+});
+
+/**
+ # @INPUT_QUERY
+ # @PROCESSING
+ - simply returns a 200 with a move_validator_state is null that the move_validator microservice is running
+ # @RETURN
+ - move_validator_state - is not null if an error occured/movement validator is offline
+ # @EXAMPLE
+ - /rest/service_state -> {"move_validator_state":null}
+ - /rest/service_state -> {"move_validator_state":"service not reachable"}
+ */
+router.get('/service_state',function (req,res,next) {
+    CBL.check_move_validator_state(function (cmvs_err){
+        res.json({"move_validator_state":cmvs_err})
+    });
 });
 
 /**
@@ -183,20 +203,31 @@ router.get('/login',function(req,res,next){
 
 
 
-
+/**
+ # @INPUT_QUERY
+ - table_id (=hwid)
+ # @PROCESSING
+ - logouts the user, which is used to create a new session_id with login
+ - cancel active games / sessions
+ # @RETURN
+ - err - if an error occurs
+ - status - ok if logout succeed
+ # @EXAMPLE
+ - /rest/logout?hwid=1334
+ */
 router.get('/logout',function(req,res,next){
     var hwid = req.queryString("hwid");
-    var playertype = req.queryInt("playertype");
+
     if(!hwid){
         //res.status(500);
-        res.json({err:true, status:"err_hwid_or_playertype_not_set",sid:null,profile:null});
+        res.json({err:true, status:"err_hwid_or_playertype_not_set"});
         return;
     }
     //CHECK REDIS FOR EXISTING SESSION
     redisClient.getRedisConnection().get("session:"+hwid, function(err, reply) {
         if(err){
             //res.status(500);
-            res.json({err:err,status:"err_db_read_error",sid:null,profile:null});
+            res.json({err:err,status:"err_db_read_error"});
             return;
         }
 
@@ -213,14 +244,14 @@ router.get('/logout',function(req,res,next){
                     //CANCEL MATCH IF A MATCH IS RUNNING
                     game_handling.cancel_match_for_player(hwid,function (cmp_err,cmp_res){
               //          res.status(200);
-                        res.json({err:err,cmp_err:cmp_err,spl_err:spl_err,status:"ok",sid:null, profile:null});
+                        res.json({err:err,cmp_err:cmp_err,spl_err:spl_err,status:"ok"});
                         return;
                     });
                 },false);
             });
         }else{ //IF A ENTRY ALREADY EXISTS -> USER LOGGED IN
             //res.status(500);
-            res.json({err:err,status:"err_already_logged_out",sid:null, profile:null});
+            res.json({err:err,status:"err_already_logged_out"});
             return;
         }
     });
@@ -535,5 +566,74 @@ router.get('/make_move',function (req,res,next) {
         }
     });
 });
+
+
+
+
+
+
+
+
+
+
+//------- THIS SNITTPET WAS FROM MY NODE_JS TEMPLATE --------------------------------- //
+// https://github.com/RBEGamer/HackathonStarterTemplateWebService/blob/master/src_nodejs/server.js
+//---------------------- FOR REST ENDPOINT LISTING ---------------------------------- //
+router.get('/', function (req, res) {
+    res.redirect('/restexplorer.html');
+});
+
+//RETURNS A JSON WITH ONLY /rest ENPOINTS TO GENERATE A NICE HTML SITE
+var REST_ENDPOINT_PATH_BEGIN_REGEX = "^\/rest\/(.)*$"; //REGEX FOR ALL /rest/* beginning
+var REST_API_TITLE = "ATC BACKEND";
+var rest_endpoint_regex = new RegExp(REST_ENDPOINT_PATH_BEGIN_REGEX);
+var REST_PARAM_REGEX = "\/:(.*)\/"; // FINDS /:id/ /:hallo/test
+//HERE YOU CAN ADD ADDITIONAL CALL DESCTIPRION
+var REST_ENDPOINTS_DESCRIPTIONS = [
+    { endpoints: "/rest/update/:id", text: "UPDATE A VALUES WITH ID" }
+
+];
+
+router.get('/listendpoints', function (req, res) {
+    var ep = listEndpoints(router);
+    var tmp = [];
+    for (let index = 0; index < ep.length; index++) {
+        var element = ep[index];
+        if (rest_endpoint_regex.test(element.path)) {
+            //LOAD OPTIONAL DESCRIPTION
+            for (let descindex = 0; descindex < REST_ENDPOINTS_DESCRIPTIONS.length; descindex++) {
+                if (REST_ENDPOINTS_DESCRIPTIONS[descindex].endpoints == element.path) {
+                    element.desc = REST_ENDPOINTS_DESCRIPTIONS[descindex].text;
+                }
+            }
+            //SEARCH FOR PARAMETERS
+            //ONLY REST URL PARAMETERS /:id/ CAN BE PARSED
+            //DO A REGEX TO THE FIRST:PARAMETER
+            element.url_parameters = [];
+            var arr = (String(element.path) + "/").match(REST_PARAM_REGEX);
+            if (arr != null) {
+                //SPLIT REST BY /
+                var splittedParams = String(arr[0]).split("/");
+                var cleanedParams = [];
+                //CLEAN PARAEMETER BY LOOKING FOR A : -> THAT IS A PARAMETER
+                for (let cpIndex = 0; cpIndex < splittedParams.length; cpIndex++) {
+                    if (splittedParams[cpIndex].startsWith(':')) {
+                        cleanedParams.push(splittedParams[cpIndex].replace(":", "")); //REMOVE :
+                    }
+                }
+                //ADD CLEANED PARAMES TO THE FINAL JOSN OUTPUT
+                for (let finalCPIndex = 0; finalCPIndex < cleanedParams.length; finalCPIndex++) {
+                    element.url_parameters.push({ name: cleanedParams[finalCPIndex] });
+
+                }
+            }
+            //ADD ENPOINT SET TO FINAL OUTPUT
+            tmp.push(element);
+        }
+    }
+    res.json({ api_name: REST_API_TITLE, endpoints: tmp });
+});
+
+
 
 module.exports = router;
