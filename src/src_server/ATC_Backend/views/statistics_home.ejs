@@ -44,12 +44,11 @@
 
 <nav class="navbar navbar-light bg-light static-top">
   <div class="container">
-    <a class="navbar-brand" href="/"><img width="64px"  src="/img/icons/chess_icon.png"><b>AtomicChess</b></a>
+    <a class="navbar-brand" href="/"><img width="64px"  src="/img/icons/chess_icon.png"><b>AtomicChess - DASHBOARD</b></a>
   </div>
 </nav>
 
 
-<!-- Masthead -->
 
 
 
@@ -80,6 +79,9 @@
       <div class="card-body" id="game_information_container">
         <div class="text-center">
           <p class="card-content" id="game_info"></p>
+
+
+
           <div class="row justify-content-center">
             <div class="col-md-4">
               <div id="current_board" style="width: 200px"><img width="200px" src="/img/board_placeholder_400x400.png"></div>
@@ -107,7 +109,11 @@
               </table>
             </div>
           </div>
+
+
           <div class="row top-buffer"></div>
+
+
           <div class="row justify-content-center">
             <div class="col-auto">
               <h4 class="card-title text-justify">TURN HISTORY</h4>
@@ -123,10 +129,6 @@
               <div class="card-title text-justify" id="fen_viewer_fen"></div>
             </div>
           </div>
-
-
-
-
 
 
         </div>
@@ -176,6 +178,8 @@
 <script src="/js/jquery/jquery.min.js"></script>
 <script src="/bootstrap/js/bootstrap.min.js"></script>
 <script src="/js/PGNViewer/js/pgnvjs.js"></script>
+
+
 <script>
   //PARSE Date Object into human readable
   //https://stackoverflow.com/questions/5416920/timestamp-to-human-readable-format
@@ -357,8 +361,8 @@
 
       tmp_html+="<th scope=\"row\">"+getFormattedDate(entry.created_timestamp)+"</th>";
 
-      tmp_html+="<th scope=\"row\">"+entry.player_white_profile_name+"</th>";
-      tmp_html+="<th scope=\"row\">"+entry.player_black_profile_name+"</th>";
+      tmp_html+="<th scope=\"row\"><a href='/profile?pid="+entry.player_white_profile_id+"'>"+entry.player_white_profile_name+"</a></th>";
+      tmp_html+="<th scope=\"row\"><a href='/profile?pid="+entry.player_black_profile_id+"'>"+entry.player_black_profile_name+"</a></th>";
       tmp_html+="<th scope=\"row\">"+entry.move_count+"</th>";
       var gsstring  = "UNKNOWN";
       switch (entry.game_state){

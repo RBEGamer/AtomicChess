@@ -15,13 +15,12 @@ var game_handling = require("../session_handling/game_handler");
 var CBL = require("../chess_related_logic/chess_board_logic");
 
 
-/*
-list all player profiles
-list all games
-list game with id
-logout
-client version
- */
+
+
+// TODO ->START GAME WITH Player PSEUDO ID!!
+
+
+
 
 /**
  # @INPUT_QUERY
@@ -33,7 +32,6 @@ client version
  # @EXAMPLE
  - /rest/status -> {"err":null, "status":"ok"}
  - /rest/status -> {"err":true, "status":"error"}
-
  */
 router.get('/client_status',function (req,res,next) {
     var sysok = true;
@@ -201,8 +199,6 @@ router.get('/login',function(req,res,next){
     //CHECK MONGO PROFILE DB
 });
 
-
-
 /**
  # @INPUT_QUERY
  - table_id (=hwid)
@@ -258,10 +254,6 @@ router.get('/logout',function(req,res,next){
     //CHECK MONGO PROFILE DB
 });
 
-
-
-
-
 /**
  # @INPUT_QUERY
  - table_id (=hwid)
@@ -314,11 +306,6 @@ router.get('/set_player_state',function (req,res,next) {
     })
 });
 
-
-
-// TODO ->START GAME WITH Player PSEUDO ID!!
-
-
 /**
  # @INPUT_QUERY
  - table_id (=hwid)
@@ -366,13 +353,6 @@ router.get('/get_players_avariable',function (req,res,next) {
     })
 });
 
-// TODO REMOVE
-router.get('/gmm',function (req,res,next) {
-   CBL.get_board(CBL.get_start_opening_fen(),CBL.get_start_opening_fen(),CBL.PLAYER_TURN.BLACK,false,function (_err,_res) {
-        res.json({err:_err,res:_res});
-   })
-});
-
 /**
  # @INPUT_QUERY
  # @PROCESSING
@@ -391,10 +371,17 @@ router.get('/get_avariable_ai_players',function (req,res,next) {
     });
 });
 
-
-
-
-
+/**
+ # @INPUT_QUERY
+ # @PROCESSING
+ - returns all game records starting/running/finished state
+ # @RETURN
+ - err - if an error occurs
+ - count - count of records
+ - game_data - an array, which contains simplied information (id,gamestate, creation_date) of each game
+ # @EXAMPLE
+ - /rest/get_game_list -> {"err":null,"count":0,"game_data":[{game_id:"xyz","game_state":"xyz,.."}]}
+ */
 router.get('/get_game_list',function (req,res,next) {
     game_handling.list_all_games(function (lag_err,lag_res){
         if(lag_err || !lag_res){
@@ -404,6 +391,8 @@ router.get('/get_game_list',function (req,res,next) {
         for (let i = 0; i < lag_res.length; i++) {
             var name_pw = "---";
             var name_pb = "---";
+            var pid_pw = "";
+            var pid_pb = "";
             //CHECK IF PROFILE WAS FOUND FOR FIRENDLY NAME
             if(lag_res[i].profile_white && lag_res[i].profile_white[0] && lag_res[i].profile_white[0].friendly_name){
                 name_pw = lag_res[i].profile_white[0].friendly_name;
@@ -411,6 +400,16 @@ router.get('/get_game_list',function (req,res,next) {
             if(lag_res[i].profile_black && lag_res[i].profile_black[0] && lag_res[i].profile_black[0].friendly_name){
                 name_pb = lag_res[i].profile_black[0].friendly_name;
             }
+
+
+            //GET PROFILE VIRTUAL ID
+            if(lag_res[i].profile_white && lag_res[i].profile_white[0] && lag_res[i].profile_white[0].virtual_player_id){
+                pid_pw = lag_res[i].profile_white[0].virtual_player_id;
+            }
+            if(lag_res[i].profile_black && lag_res[i].profile_black[0] && lag_res[i].profile_black[0].virtual_player_id){
+                pid_pb = lag_res[i].profile_black[0].virtual_player_id;
+            }
+
             //POPULATE RESULT ARRAY
             game_data.push({
                 game_id:lag_res[i].id,
@@ -418,6 +417,8 @@ router.get('/get_game_list',function (req,res,next) {
                 game_state:lag_res[i].game_state,
                 player_white_profile_name:name_pw,
                 player_black_profile_name:name_pb,
+                player_white_profile_id:pid_pw,
+                player_black_profile_id:pid_pb,
                 move_count:lag_res[i].turn_history.length
             });
         }
@@ -425,6 +426,17 @@ router.get('/get_game_list',function (req,res,next) {
     });
 });
 
+/**
+ # @INPUT_QUERY
+ - gid (=game record id)
+ # @PROCESSING
+ - return a game records withmore information
+ # @RETURN
+ - err - if an error occurs
+ - game_data - an array, which contains simplied information (id,gamestate, creation_date, turns history) of the selected game
+ # @EXAMPLE
+ - /rest/get_game -> {"err":null,"game_data":[{id:"xyz","game_state":"xyz,..", turn_history:[]}]}
+ */
 router.get('/get_game',function (req,res,next) {
     var gid = req.queryString("gid");
     if(!gid || gid === ""){
@@ -436,8 +448,7 @@ router.get('/get_game',function (req,res,next) {
             if(lag_err || !lag_res){
                 res.json({err:lag_err, game_data:null});
             }
-
-
+            //SERVE ONLY NEEDED INFORMATION ABOUT THE GAME
            var game_information =  {
                 game_id:lag_res.id,
                 created_timestamp: lag_res.last_game_interaction,
@@ -450,6 +461,42 @@ router.get('/get_game',function (req,res,next) {
             res.json({err:null, game_data:game_information});
     });
 });
+
+/**
+ # @INPUT_QUERY
+ - pid (=virtual_profile_id)
+ # @PROCESSING
+ - returns a profile record
+ # @RETURN
+ - err - if an error occurs
+ - profile_data - an object, which contains simplied information (firendly_name, creation_date, rank, elo rank) of the selected profile
+ # @EXAMPLE
+ - /rest/get_profile_information -> {"err":null,"profile_data":[{rank:"xyz","elo_rank":"xyz,.."}]}
+ */
+router.get('/get_profile_information',function (req,res,next) {
+    var pid = req.queryString("pid");
+    if(!pid || pid === ""){
+        res.json({err:"pid not set",profile_data:null});
+        return;
+    }
+    //FETCH PROFILE DATA
+    profile_handling.get_profile_virtual_id(pid,function (lag_err,lag_res){
+        if(lag_err || !lag_res){
+            res.json({err:lag_err, profile_data:null});
+        }
+        //SERVE ONLY NEEDED INFORMATION ABOUT THE GAME
+        var profile_information =  {
+            player_type:lag_res.player_type,
+            virtual_player_id: lag_res.virtual_player_id,
+            friendly_name:lag_res.friendly_name,
+            elo_rank_readable:lag_res.elo_rank_readable,
+            rank:lag_res.rank,
+            account_created:lag_res.account_created,
+        };
+        res.json({err:null, profile_data:profile_information});
+    });
+});
+
 
 /**
  # @INPUT_QUERY
@@ -626,6 +673,11 @@ router.get('/make_move',function (req,res,next) {
 
 
 
+router.get('/gmm',function (req,res,next) {
+    CBL.get_board(CBL.get_start_opening_fen(),CBL.get_start_opening_fen(),CBL.PLAYER_TURN.BLACK,false,function (_err,_res) {
+        res.json({err:_err,res:_res});
+    })
+});
 
 
 

@@ -14,6 +14,12 @@ module.exports = {
        });
    },
 
+    get_profile_virtual_id: function(_vid, _callback){
+        MDB.getProfileCollection().findOne({virtual_player_id:_vid, DOCTYPE:"PROFILE"},function(err,res){
+            _callback(err,res);
+        });
+    },
+
     create_profile: function(_hwid, _playertype ,_callback){
 
         //GENERATE VIRTUAL ID

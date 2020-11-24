@@ -27,4 +27,9 @@ router.get('/redirect', function(req, res, next) {
 router.get('/statistics', function(req, res, next) {
   res.render('statistics_home', { title: 'Game' });
 });
+
+
+router.get('/profile', function(req, res, next) {
+  res.render('statistics_profile', { title: 'Game' });
+});
 module.exports = router;
