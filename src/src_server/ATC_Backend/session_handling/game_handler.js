@@ -114,6 +114,30 @@ function check_player_state_to_determ_new_game_state(_game_id ,_callback){
 //TODO SET PLAYER LOBBY STATE TO IDLE FOR BOTH PLAYER
 // RUN AT LOGIN
 function cancel_match_for_player(_hwid,_callback){
+    if(_hwid == undefined || !_hwid || _hwid === ""){
+        _callback("_hwid not set", null);
+        return;
+    }
+    //GET CURRENT ACTIVE GAME FOR PLAYEWR WITH _HWID
+    get_player_active_game_state(_hwid,function (gpagA_err,gpagA_res,gpagA_res_simple){
+        if(err || !gpagA_res){
+            _callback(gpagA_err,null);
+            return;
+        }
+        //GET THE OTHER PLAYER ID
+        var other_player = null;
+        if(_hwid !== gpagA_res.player_black_hwid){
+            other_player = gpagA_res.player_black_hwid;
+        }else {
+            other_player = gpagA_res.player_white_hwid;
+
+        }
+
+    });
+    //SET NEW GAME STATE
+    //SET OWN PLAYER STATE TO IDLE
+    //SET OTHER PLAYER STATE TO IDLE
+
     //SET NOFIY THE OTHER PLAYER
     _callback(null,{"state":"ok"});
 }

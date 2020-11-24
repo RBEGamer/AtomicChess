@@ -366,16 +366,16 @@
       tmp_html+="<th scope=\"row\">"+entry.move_count+"</th>";
       var gsstring  = "UNKNOWN";
       switch (entry.game_state){
-        case 0:gsstring = "STARTING";break;
-        case 1:gsstring = "STARTING";break;
-        case 8:gsstring = "RUNNING";break;
-        case 9:gsstring = "RUNNING";break;
+        case 0:gsstring = "<p class=\"text-success\">STARTING</p>";break;
+        case 1:gsstring = "<p class=\"text-warning\">STARTING</p>";break;
+        case 8:gsstring = "<p class=\"text-success\">RUNNING</p>";break;
+        case 9:gsstring = "<p class=\"text-success\">RUNNING</p>";break;
 
-        case 10:gsstring = "FINISHED";break;
-        case 11:gsstring = "FINISHED";break;
+        case 10:gsstring = "<p class=\"text-primary\">FINISHED</p>";break;
+        case 11:gsstring = "<p class=\"text-primary\">FINISHED</p>";break;
 
-        case 12:gsstring = "CANCELED";break;
-        default:gsstring = "UNKNOWN";break;
+        case 12:gsstring = "<p class=\"text-danger\">CANCELED</p>";break;
+        default:gsstring = "<p class=\"text-secondary\">UNKNOWN</p>";break;
       }
       tmp_html+="<th scope=\"row\">"+gsstring+"</th>";
 

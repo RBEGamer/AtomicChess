@@ -346,7 +346,7 @@ func main() {
 		fmt.Println(err)
 		return
 	}
-	RestHeartbeat(HWID,SID,1000)
+	//RestHeartbeat(HWID,SID,1000)
 	//MAIN GAME LOOP
 	//TODO GAME START ABBORT
 	//GAME STATE FINISHED
