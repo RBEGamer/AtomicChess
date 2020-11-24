@@ -62,13 +62,37 @@
       <div class="card-header">
         <h4 class="card-title text-justify">GAME INFORMATION <span id="game_headline_title"> -- ID --</span></h4>
       </div>
-      <div class="card-body">
+      <div class="card-body" id="game_information_container">
         <div class="text-center">
-          <p class="card-content">PLEASE SELECT A GAME BELOW TO GET MORE INFORMATION ABOUT IT</p>
+
           <p class="card-content" id="game_info"></p>
 
-          <div id="board" style="width: 100px"></div>
+          <div class="row justify-content-center">
+            <div class="col-md-4">
+              <div id="current_board" style="width: 200px"></div>
+            </div>
 
+            <div class="col-md-6">
+              <table class="table">
+                <tbody>
+                <tr>
+                  <th scope="row">PLAYER_TURN</th>
+                  <td id="git_player_turn">---</td>
+
+                </tr>
+                <tr>
+                  <th scope="row">IS_GAME_OVER</th>
+                  <td id="git_game_over">---</td>
+
+                </tr>
+                <tr>
+                  <th scope="row">START BOARD FEN</th>
+                  <td id="git_start_board_fen">---</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
 
         </div>
       </div>
@@ -106,9 +130,7 @@
 
       </div>
       </div>
-
-
-
+  </div>
 </footer>
 
 
@@ -120,8 +142,7 @@
 <script src="/bootstrap/js/bootstrap.min.js"></script>
 <script src="/js/PGNViewer/js/pgnvjs.js"></script>
 <script>
-  var cfg = { position: 'r1b2k2/pp2q1b1/2pp3r/4pp2/2B1P3/2N3Q1/PPP2PPP/3R1RK1 w - - 0 17', locale: 'en', pieceStyle: 'merida' };
-  var board = pgnView('board', cfg);
+
   //https://stackoverflow.com/questions/5416920/timestamp-to-human-readable-format
   function getFormattedDate(_dt) {
     var date = new Date(_dt);
@@ -131,17 +152,13 @@
     var hour = date.getHours();
     var min = date.getMinutes();
     var sec = date.getSeconds();
-
+    //APPEND 0
     month = (month < 10 ? "0" : "") + month;
     day = (day < 10 ? "0" : "") + day;
     hour = (hour < 10 ? "0" : "") + hour;
     min = (min < 10 ? "0" : "") + min;
     sec = (sec < 10 ? "0" : "") + sec;
-
     var str = date.getFullYear() + "-" + month + "-" + day + "_" +  hour + ":" + min + ":" + sec;
-
-    /*alert(str);*/
-
     return str;
   }
 
@@ -186,10 +203,22 @@
         return;
       }
       console.log(data);
+      //SHOW ID
       $("#game_headline_title").html(String(data.game_data.game_id));
+      //DISPLAY CURRENT BOARD
+      if(data.game_data.current_board.fen){
+        var current_board = pgnBoard('current_board', { position: data.game_data.current_board.fen, locale: 'en', pieceStyle: 'wikipedia', theme:'falken' });
+      }
+
+
+      //id="git_player_turn"
+      //git_game_over
+      //id="git_start_board_fen"
     //LOAD GAME INFO
     //VISULIZES MOVES
     });
+    //SHOW CONTAINER
+    toggle_visible_information_container(true);
   }
   function create_listed_games_table(){
     $.getJSON('/rest/get_game_list',function (data) {
@@ -240,13 +269,24 @@
 
 
     $("#listed_games").html(tmp_html);
+
     });
+  }
+
+  function toggle_visible_information_container(_s) {
+    var x = document.getElementById("game_information_container");
+    if (_s) {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
   }
   $(document).ready(function () {
 
 
     console.log("ready!");
-
+    //HIDE GAME INFORMATION
+    toggle_visible_information_container(false);
     check_service_state();
     create_listed_games_table();
   });
