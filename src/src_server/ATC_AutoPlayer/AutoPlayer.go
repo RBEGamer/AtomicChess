@@ -129,6 +129,20 @@ func RandomString(length int) string {
 	return StringWithCharset(length, charset)
 }
 
+
+func RestLogout(_hwid string) (error){
+	fmt.Println("AutPlayer ["+_hwid+"]  LOGOUT")
+	//LOGIN AS e PLAYER
+	resp, err := http.Get("http://"+BACKEND_IP+"/rest/logout?hwid="+_hwid)
+	check(err)
+	body, err := ioutil.ReadAll(resp.Body)
+	check(err)
+	//fmt.Println(body)
+	fmt.Print(string(body))
+	return err
+}
+
+
 func RestLogin(_hwid string) (error,LoginResult){
 	fmt.Println("AutPlayer ["+_hwid+"]  LOGIN")
 	var lr LoginResult
@@ -292,8 +306,9 @@ func main() {
 	time.Sleep(time.Millisecond*5000)
 
 	HWID := RandomString(10)
+	_, he_is_present := os.LookupEnv("USE_HOSTNAME_HWID")
 	name, err := os.Hostname()
-	if err == nil {
+	if err != nil && he_is_present{
 		fmt.Println("hostname:", name)
 		HWID = name
 	}
@@ -301,6 +316,11 @@ func main() {
 	fmt.Println(HWID)
 	var SID string
 	
+	//LOGOUT (TO RESTART A NEW SESSION)
+	lo_err := RestLogout(HWID)
+	if lo_err != nil{
+		fmt.Println("LOGOUT FAILED BUT ITS OK => NO PREV SESSION RUNNING")
+	}
 
 	//FIRST LOGIN AT THE SERVER AS CPU PLAYER
 	err,LoginResultDetails := RestLogin(HWID)

@@ -76,7 +76,8 @@ services:
     #scale: 1
     environment:
       - PRODUCTION
-      - BACKEND_IP=127.0.0.1:3000 #HOST IP OF BACKEND
+      - BACKEND_IP=127.0.0.1:3000 #HOST IP:PORT OF BACKEND EXAMPLE 127.0.0.1:3000 USING ONLY HTTP
+      #- USE_HOSTNAME_HWID=TRUE # USE THE LOCAL MACHINE HOSTNAME AS HWID
 
   redis-commander:
     container_name: redis-commander
