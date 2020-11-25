@@ -53,7 +53,6 @@ function check_player_state_to_determ_new_game_state(_game_id ,_callback){
         //CHECK IF BLACK PLAYER HAS WON
         //THE PLAYER COLOR IS INVERTED BEACUSE THE CONTAINS THE NEXT PLAYER ALREADY
         if(res.current_board.is_game_over && res.game_state !== GAME_STATE.aborted_game){
-            //TODO SET GAME RUNNING TO FALSE
             console.info("------ GAME OVER -----");
             update_query["game_state"] = GAME_STATE.aborted_game;
             update_query["player_won"] = res.current_board.player_turn;
@@ -61,8 +60,10 @@ function check_player_state_to_determ_new_game_state(_game_id ,_callback){
             var player_won_hwid = null;
             if(res.current_board.player_turn === CBL.PLAYER_TURN.WHITE){
                 player_won_hwid = res.player_black_hwid;
+                update_query["player_won"] = res.current_board.PLAYER_WHITE_WON;
             }else if(res.current_board.player_turn === CBL.PLAYER_TURN.BLACK){
                 player_won_hwid = res.player_white_hwid;
+                update_query["player_won"] = res.current_board.PLAYER_BLACK_WON;
             }
             //APPLY_POINTS TO USER PROFILE
             CBL.get_player_score(res.current_board.ExtendetFen,function (gpp_err,gpp_res) {
@@ -71,8 +72,9 @@ function check_player_state_to_determ_new_game_state(_game_id ,_callback){
                     gpp_res *= (1.0/res.turn_history.length)*100.0;
                 }
                 //LESS TIME NEEDED MORE POINTS
-                gpp_res *= (1.0 / (Date.now()-res.game_init_timestamp))*1000.0;
+                //gpp_res *= (1.0 / ((Date.now()-res.game_init_timestamp)*0.1))*10000.0;
                 //SAVE POINTS IN PROFILE
+
                 PH.apply_points_to_profile(gpp_res,_game_id,player_won_hwid,function (ap_err,ap_res) {
                     //SET PLAYER STATE FOR EACH PLAYER
                     LH.set_player_lobby_state(res.player_black_hwid,LH.player_state.idle,function (spb_err,spb_res){

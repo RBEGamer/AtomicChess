@@ -110,7 +110,7 @@ type SetPlayerStateResult struct{
 }
 
 var BACKEND_IP = "127.0.0.1:3000"
-
+var PLAYER_TYPE = "0" // 1 AI PLAYER 0= HUMAN PLAYER => SEE BACKEND
 const charset = "abcdefghijklmnopqrstuvwxyz" +
 	"ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
@@ -148,7 +148,7 @@ func RestLogin(_hwid string) (error,LoginResult){
 	var lr LoginResult
 
 	//LOGIN AS e PLAYER
-	resp, err := http.Get("http://"+BACKEND_IP+"/rest/login?hwid="+_hwid+"&playertype=1")
+	resp, err := http.Get("http://"+BACKEND_IP+"/rest/login?hwid="+_hwid+"&playertype="+PLAYER_TYPE)
 	check(err)
 	body, err := ioutil.ReadAll(resp.Body)
 	check(err)
@@ -302,8 +302,8 @@ func main() {
 		log.Fatal(err)
 	}
 
-
-	time.Sleep(time.Millisecond*5000)
+	//WAIT A RANDOM DURATION TO PREVENT DDOS THE BACKEND BY STARTING 100 INSTANCE OF THE AUTO PLAYER
+	time.Sleep(time.Millisecond*1000*time.Duration(rand.Intn(10)))
 
 	HWID := RandomString(10)
 	_, he_is_present := os.LookupEnv("USE_HOSTNAME_HWID")
@@ -351,6 +351,7 @@ func main() {
 	//TODO GAME START ABBORT
 	//GAME STATE FINISHED
 	//-> EXIT
+	//var game_runned = false;
 	for true{
 
 		_, PlayerStateDetails := RestGetPlayerState(HWID,SID)
@@ -359,12 +360,22 @@ func main() {
 			//fmt.Println(PlayerStateDetails.Err)
 			break
 		}
+
+
+		//if game_runned && PlayerStateDetails.GameState.GameRunning{
+		//	err, SetPlayerStateResultDetails := RestSetPlayerState(HWID,SID,"4")
+		//	if err != nil{
+		//		fmt.Println(SetPlayerStateResultDetails)
+		//		fmt.Println(err)
+		//		return
+		//	}
+		//}
 		//NOW CHECK PLAYER STATE UNTIL WE GOT A MATCH
 		if PlayerStateDetails.MatchmakingState.WaitingForGame{
 			fmt.Println("-- MATCHMAKING RUNNING RUNNING --")
 		}else if PlayerStateDetails.GameState.GameRunning{
 			fmt.Println("-- GAME RUNNING --")
-
+			//game_runned = true;
 			//PLAYER_STATE = 0 -> SETUP BOARD / SETUP UCI ENGINE
 			if PlayerStateDetails.GameState.Simplified.PlayerState == 0{
 				//LOAD BOARD FEN
@@ -386,8 +397,6 @@ func main() {
 				uci_res, _ := eng.GoDepth(10, resultOpts)
 				//fmt.Println(uci_res)
 				//SEND TURN AND CHECK RESULT IF TURN WAS SUCCESS ELSE TRY NEXT IN QUEUE oder der state sich ändert
-				//TODO CHECK IF MOVE != ""
-				//TODO SYNC TABLES THEN MAKE MOVE
 				err_em := RestExecuteMove(HWID,SID,uci_res.BestMove)
 				if err_em != nil{
 					fmt.Println(err_em)
@@ -405,7 +414,10 @@ func main() {
 
 
 
-	//TODO LOGOUT -> WITH REMOVE
+	lo_erre := RestLogout(HWID)
+	if lo_erre != nil{
+		fmt.Println("LOGOUT FAILED BUT ITS OK => NO PREV SESSION RUNNING")
+	}
 	time.Sleep(time.Second * 50)
 }
 func check(err error) {

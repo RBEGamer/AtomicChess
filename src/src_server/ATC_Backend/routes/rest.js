@@ -84,42 +84,9 @@ router.get('/heartbeat', function(req, res, next) {
         res.json({err:true, status:"err_query_paramter_hwid_or_sid_not_set",reply:null});
         return;
     }
-    redisClient.getRedisConnection().get("session:"+hwid, function(err, reply) {
-        //CHECK FOR KEY EXISTS
-        if(err || !reply){
-         //   res.status(500);
-            res.json({err:err,status:"err_db_read_error",reply:null});
-            return;
-        }
-        //PARSE KEY JSON-DATA
-        var data = null;
-        try {
-            data = JSON.parse(reply);
-            if(!data){
-                throw "err_json_parse_data_failed_or_data_are_null";
-            }
-        } catch (e) {
-           // res.status(500);
-            res.json({err:e,status:e,reply:null});
-            return;
-        }
-        //CHECK SESSION_ID
-        if(!data.session_id || data.session_id !== sid){
-            //res.status(500);
-            res.json({err:true,status:"err_session_id_wrong",reply:null});
-            return;
-        }
-        //UPDATE TIMESTAMP
-        data.timestamp = Date.now();
-        redisClient.getRedisConnection().set("session:"+hwid, JSON.stringify(data),function (err_set,replay_set) {
-            if(err || !reply){
-              //  res.status(500);
-                res.json({err:err,status:"err_db_update_failed",reply:null});
-                return;
-            }
-            //RETURN INFO
-            res.json({err:null,status:"ok_timestamp_update_success",reply:data.timestamp});
-        });
+    session_handling.update_session_timestamp(hwid,sid,function (ust_err,ust_res){
+        res.json({err:ust_err,status:ust_res});
+        return;
     });
 });
 
@@ -141,14 +108,12 @@ router.get('/login',function(req,res,next){
     var hwid = req.queryString("hwid");
     var playertype = req.queryInt("playertype");
     if(!hwid){
-        //res.status(500);
         res.json({err:true, status:"err_hwid_or_playertype_not_set",sid:null,profile:null});
         return;
     }
     //CHECK REDIS FOR EXISTING SESSION
     redisClient.getRedisConnection().get("session:"+hwid, function(err, reply) {
         if(err){
-            //res.status(500);
             res.json({err:err,status:"err_db_read_error",sid:null,profile:null});
             return;
         }
@@ -157,48 +122,52 @@ router.get('/login',function(req,res,next){
             //CHECK IF THE PROFILE EXISTS
             profile_handling.get_profile(hwid,function (pe_err,pe_result) {
                 if(pe_err){
-                    //res.status(500);
                     res.json({err:pe_err,status:"err_db_get_profile_failed",sid:null});
                     return;
                 }
-                //GENERATE SESSION STUFF
-                var session_id = UUID.v1();
-                var ts = Date.now();
-
                 //IF PROFILE RESULT IS NULL -> NO PROFILE EXITSTS ->CREATE PROFILE ADN START SESSION
                 if(!pe_result){
                     profile_handling.create_profile(hwid,playertype,function (cp_err,cp_result,cp_profile) {
                         if(cp_err){
-                            //res.status(500);
                             res.json({err:pe_err,status:"err_profile_creation_failed",sid:null});
                             return;
                         }
                         //CREATE SESSION ENTRY
-                        redisClient.getRedisConnection().set("session:"+hwid, JSON.stringify({session_id:session_id,timestamp:ts, hwid:hwid}));
-                        lobby_handling.set_valid_session_flag(hwid,true,function (svfs_err,svfs_res){});
-                        res.json({err:null, status:"ok",sid:session_id, timestamp:ts, profile:profile_handling.simplify_profile_data(cp_profile)});
-                        return;
-                    })
+                        session_handling.insert_session(hwid, function (is_err,is_res){
+                            if(is_err){
+                                res.json({err:pe_err,status:"err_insert_session_failed",sid:null});
+                                return;
+                            }
+                            //SET VALID SESSION FLAG
+                            lobby_handling.set_valid_session_flag(hwid,true,function (svfs_err,svfs_res){
+                                res.json({err:null, status:"ok",sid:is_res, profile:profile_handling.simplify_profile_data(cp_profile)});
+                                return;
+                            });
+                        });
+                    });
                 }else{
-                 //PROFILE ALREADY EXISTS -> BEGIN SESSION AND SEND PROFILE DATA
-                    redisClient.getRedisConnection().set("session:"+hwid, JSON.stringify({session_id:session_id,timestamp:ts, hwid:hwid}));
-                    //RESET LOBBY STATE -> no error chating if failed its ok because the db entry already exists
-                    lobby_handling.set_player_lobby_state(hwid,lobby_handling.player_state.idle,function (spls_err,spls_res) {});
-                    lobby_handling.set_valid_session_flag(hwid,true,function (svfs_err,svfs_res){});
-                    res.json({err:null, status:"ok",sid:session_id, timestamp:ts, profile:profile_handling.simplify_profile_data(pe_result)});
-                    return;
+                    //PROFILE ALREADY EXISTS -> BEGIN SESSION AND SEND PROFILE DATA
+                    session_handling.update_session_timestamp(hwid,function (is_err,is_res){
+                        if(is_err){
+                            res.json({err:pe_err,status:"err_update_session_failed",sid:null});
+                            return;
+                        }
+                        //RESET LOBBY STATE -> no error chating if failed its ok because the db entry already exists
+                        lobby_handling.set_player_lobby_state(hwid,lobby_handling.player_state.idle,function (spls_err,spls_res) {
+                            lobby_handling.set_valid_session_flag(hwid,true,function (svfs_err,svfs_res){
+                                res.json({err:null, status:"ok",sid:is_res, profile:profile_handling.simplify_profile_data(pe_result)});
+                                return;
+                            });
+                        });
+                    });
                 }
             });
-
-
-
-        }else{ //IF A ENTRY ALREADY EXISTS -> USER LOGGED IN
+            //IF A ENTRY ALREADY EXISTS -> USER LOGGED IN
+        }else{
             //res.status(500);
             res.json({err:err,status:"err_already_logged_in",sid:null, profile:null});
-            return;
         }
     });
-    //CHECK MONGO PROFILE DB
 });
 
 /**
@@ -217,7 +186,6 @@ router.get('/logout',function(req,res,next){
     var hwid = req.queryString("hwid");
 
     if(!hwid){
-        //res.status(500);
         res.json({err:true, status:"err_hwid_or_playertype_not_set"});
         return;
     }

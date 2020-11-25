@@ -79,6 +79,29 @@ function get_avariable_players(_own_hwid,_callback, _ps = player_state.searching
     });
 }
 
+function get_player_in_lobby(_callback){
+    //GET ALL PLAYERS IN THE LOBBY JOIN THE PROFILE TABLE INTO TO GET THEIR PROFILE NAMES AND RANK TOO
+    mdb.getLobbyCollection().aggregate([{ $lookup:
+            {
+                from: CONFIG.getConfig().mongodb_collection_profiles,
+                localField: 'hwid',
+                foreignField: 'hwid',
+                as: 'profile'
+            }
+    },{
+        $match:{
+            DOCTYPE: "LOBBY",
+        }
+
+    }]).toArray(function(err,res){
+        if(err || !res){
+            _callback(err,null);
+            return;
+        }
+        _callback(null,res);
+        return;
+    });
+}
 
 function get_player_for_matchmaking(_callback, _include_hwid =false){
     //GET ALL PLAYERS AVARIABLE IN THE LOBBY
@@ -105,8 +128,6 @@ function get_player_for_matchmaking(_callback, _include_hwid =false){
     },player_state.searching_matchmake,_include_hwid)
 }
 
-
-
 function get_avariable_ai_player(_callback){
     get_player_for_matchmaking(function (err_sm,res_sm) {
         if(err_sm || !res_sm || !res_sm.player_searching_ai){
@@ -117,7 +138,6 @@ function get_avariable_ai_player(_callback){
         return;
     });
 }
-
 
 function get_player_matchmaking_state(_hwid,_callback){
     mdb.getLobbyCollection().findOne({hwid:_hwid,     player_state:player_state.searching_matchmake, DOCTYPE: "LOBBY"},function (err,res) {
@@ -130,12 +150,22 @@ function get_player_matchmaking_state(_hwid,_callback){
     });
 }
 
+function remove_lobby_entry(_hwid,_callback){
+    if(_hwid === undefined || _hwid == null){
+        _callack("_hwid is undefined", null);
+        return;
+    }
+    mdb.getLobbyCollection().deleteOne({DOCTYPE: "LOBBY",hwid: _hwid},function (err,res) {
+        _callback(err,res);
+    });
+}
+
 module.exports = {
     get_player_for_matchmaking,
     get_avariable_players,
     get_avariable_ai_player,
-
-
+    get_player_in_lobby,
+    remove_lobby_entry,
     set_player_lobby_state: function(_hwid,_state, _callback){
         //ADD OR UPDATE THE LOBBY ENTRY FOR EACH PLAYER
         //THE UPSERT OPTION MAKES POSSIBLE TO ADD THE ENTRY IF NOT EXISTS
@@ -175,6 +205,7 @@ module.exports = {
     remove_player_from_lobby: function(_hwid, _callback, _set_only_offline){
             this.set_player_lobby_state(_hwid,player_state.idle,_callback);
     },
+
     //EXPOSED VARAIBLES
     player_state,
     get_player_matchmaking_state,

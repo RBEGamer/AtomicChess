@@ -1,86 +1,63 @@
 var CronJob = require('cron').CronJob;
-var redisDbConnection = require('../session_handling/redis_db_connection');
+//var RDB = require('../session_handling/redis_db_connection');
 var CONFIG = require('../config'); //LOAD GLOABAL CONFIG FILE
 var LH = require("./lobby_handling");
 var GH = require("./game_handler");
-
+var SH = require("./session_handler");
 
 
 
 var cleanup_job = new CronJob('*/'+CONFIG.getConfig().session_cleanup_loop_interval+' * * * * *', function() {
     if(CONFIG.session_lifetime_in_seconds <=0 ){return;}
-    var cursor = '0';
-    //GET ALL KEYS WITH MATCHED KEY PATTERN
-    redisDbConnection.getRedisConnection().scan(cursor, 'MATCH', 'session:*', function(err, reply){
-        if(err){
-            throw err;
+    try {
+
+    //FIRST GET ALL PLAYER IN THE LOBBY
+    LH.get_player_in_lobby(function (gpil_err,gpil_res){
+        if(gpil_err){
+            return;
         }
-        cursor = reply[0];
-        //CHECK IF SEACH SUCCESSFUL
-        if(cursor ){//=== '0'){
-            try {
-                //GET THE FOUND KEYS
-                var found_keys = reply[1];
-                //console.log('Scan Complete ' + typeof found_keys);
-                //CHECK IF KEYS FOUND
-                if(found_keys.length > 0){
-                    //console.log('has_data');
-                    //console.log(found_keys);
-                    //ITERATE THOUGH EACH KEY TO GET THE DATA
-                    for(var i = 0; i < found_keys.length;i++){
-                        var k = found_keys[i];
-                        //NOW CHECK THE CONTENT OF EACH KEY TO CHECK THE TIMESTAMP
-                        redisDbConnection.getRedisConnection().get(k, function(err, reply) {
-                            if(err || !reply){
-                                console.error("db_fetch_failed");
-                                return;
-                            }
-                           // console.log(JSON.parse(reply).timestamp);
-                            try {
-                                var val2json = JSON.parse(reply);
-                                //CEHCK FOR TIMESTAMP ENTRY
-                                if(val2json && val2json.timestamp){
-                                    var dt = new Date(val2json.timestamp); //PARSE TIMESTAMP TO A DATE OBJECT
-                                    //IF TIME DIFFERENCE IS TOO HIGH -> REMOVE THE SESSION
-                                    var diff=(Date.now()-dt) / 1000; //A TIMESTAMP IS IN MS SO WE HAVE DIVIDE
-                                    //console.log(diff);
-                                    if(diff > CONFIG.getConfig().session_lifetime_in_seconds){
-                                        console.log("entry to remove ts: " + diff);
-                                        //CANCEL MATCH FOR PLAYERS IF A MATCH RUNNING
-                                        GH.cancel_match_for_player(val2json.hwid,function (cmp_err,cmp_res){
-                                            //SET PLAYER IDLE STATE TO IDLE (not listed)
-                                            LH.set_player_lobby_state(val2json.hwid, LH.player_state.idle,function (spls_err,spls_res){
-                                                //SET PLAYERS ACTIVE SESSION TO FALSE (-> no matchmaking possible)
-                                                LH.set_valid_session_flag(val2json.hwid,false,function (svsf_err,svsf_res){
-                                                    //REMOVE KEY FROM DB
-                                                    redisDbConnection.getRedisConnection().del(k,function (err, reply) {
-                                                        if(err || !reply){
-                                                            console.error("db_del_failed");
-                                                            return;
-                                                        }
-                                                        console.log("DELETE SESSION " + String(k), reply);
-                                                    });
-                                                });
-                                            });
-                                        });
-                                    }
-                                }else{
-                                    throw "value doesn not contain a timestamp attribute";
-                                }
-                            }catch (e) {
-                                console.log("json_parse_failed_of_redis_content");
-                                console.log(e);
-                            }
+        console.log("--- SCAN LOBBY ENTRIES ",gpil_res.length, "-----------");
+        for (let i = 0; i < gpil_res.length; i++) {
+            const entry = gpil_res[i];
+            SH.check_expired_session(entry.hwid,function (ces_err,ces_res){
+                //IF ERROR
+               // if(ces_err || !ces_res ){
+                //    return;
+                //}
+                //IF RESULT IS TRUE THE SESSION IS EXIPRED
+                if(ces_res != null && ces_res ===true){
+                    console.log("---- REMOVING SESSION FOR ", entry.hwid,"------");
+                    //FIRST DELETE SESSION
+                    SH.delete_session(entry.hwid,function (ds_err,ds_res){
+                        //CANCEL GAME
+                        GH.cancel_match_for_player(entry.hwid,function (cmfp_err,cmfp_res){
+                            //SET SESSION FLAG TO FALSE
+                            LH.set_valid_session_flag(entry.hwid,false,function (svsf_err,svsf_res){
+                                //SET PLAYER TO IDLE
+                                LH.set_player_lobby_state(entry.hwid,LH.player_state.idle,function (spls_err,spls_res){
+
+                                });
+                            });
                         });
-                    }
+                    });
+
+                    //IF RESULT IS NULL => SEESION ENTRY NOT EXISTS
+                }else if( ces_res == null){
+                    //CANCEL GAME
+                    GH.cancel_match_for_player(entry.hwid,function (cmfp_err,cmfp_res){
+                        //REMOVE PLAYER LOBBY ENTRY COMPLETELY
+                        LH.remove_lobby_entry(entry.hwid,function (spls_err,spls_res){
+
+                        });
+                    });
                 }
-            }catch (e) {
-            console.error(e);
-            }
-        }else{
+            });
         }
     });
 
+    } catch (e) {
+        console.log(e);
+    }
 
 }, null, true, 'America/Los_Angeles');
 
