@@ -21,7 +21,6 @@ var CBL = require("../chess_related_logic/chess_board_logic");
 
 
 
-
 /**
  # @INPUT_QUERY
  # @PROCESSING
@@ -34,13 +33,17 @@ var CBL = require("../chess_related_logic/chess_board_logic");
  - /rest/status -> {"err":true, "status":"error"}
  */
 router.get('/client_status',function (req,res,next) {
+    try {
     var sysok = true;
     //TODO CHECK DB CONNECTIONS ...
     if(sysok){
         res.json({"err": null, "status":"ok"});
         return;
     }else{
-        res.json({"err": sysok, "status":"sysok error"})
+        res.json({"err": sysok, "status":null})
+    }
+    }catch (e) {
+        res.json({"err": e, "status":null})
     }
 });
 
@@ -55,9 +58,13 @@ router.get('/client_status',function (req,res,next) {
  - /rest/service_state -> {"move_validator_state":"service not reachable"}
  */
 router.get('/service_state',function (req,res,next) {
+    try{
     CBL.check_move_validator_state(function (cmvs_err){
-        res.json({"move_validator_state":cmvs_err})
+        res.json({err:null,"move_validator_state":cmvs_err});
     });
+    }catch (e) {
+        res.json({"err": e, "move_validator_state":null});
+    }
 });
 
 /**
@@ -75,6 +82,7 @@ router.get('/service_state',function (req,res,next) {
  - /rest/heartbeat?hwid=1334&sid=1234 -> {"err":null,"status":"ok","reply":null}
  */
 router.get('/heartbeat', function(req, res, next) {
+    try{
     //GET QUERY PARAMETERS SANITIZED
     var hwid = req.queryString("hwid");
     var sid = req.queryString("sid");
@@ -88,6 +96,11 @@ router.get('/heartbeat', function(req, res, next) {
         res.json({err:ust_err,status:ust_res});
         return;
     });
+
+    }catch (e) {
+        res.json({err:e,status:null});
+        return;
+    }
 });
 
 /**
@@ -105,6 +118,7 @@ router.get('/heartbeat', function(req, res, next) {
  - /rest/login?hwid=1334
  */
 router.get('/login',function(req,res,next){
+    try{
     var hwid = req.queryString("hwid");
     var playertype = req.queryInt("playertype");
     if(!hwid){
@@ -168,6 +182,10 @@ router.get('/login',function(req,res,next){
             res.json({err:err,status:"err_already_logged_in",sid:null, profile:null});
         }
     });
+    }catch (e) {
+        res.json({err:e,status:null,sid:null, profile:null});
+        return;
+    }
 });
 
 /**
@@ -183,6 +201,7 @@ router.get('/login',function(req,res,next){
  - /rest/logout?hwid=1334
  */
 router.get('/logout',function(req,res,next){
+    try{
     var hwid = req.queryString("hwid");
 
     if(!hwid){
@@ -221,7 +240,10 @@ router.get('/logout',function(req,res,next){
             return;
         }
     });
-    //CHECK MONGO PROFILE DB
+    }catch (e) {
+        res.json({err:e,status:null});
+        return;
+    }
 });
 
 /**
@@ -239,6 +261,7 @@ router.get('/logout',function(req,res,next){
  - /rest/set_player_state?hwid=123&sid=8935c2d0-cad8-11ea-b7a0-ebf94b1bb0f7&ps=1
  */
 router.get('/set_player_state',function (req,res,next) {
+    try{
     var hwid = req.queryString("hwid");
     var sid = req.queryString("sid");
     var pstate = req.queryInt("ps");
@@ -273,7 +296,11 @@ router.get('/set_player_state',function (req,res,next) {
             res.json({err:cvs_err, status:"err_session_key_sid_check_failed"});
             return;
         }
-    })
+    });
+    }catch (e) {
+        res.json({err:e, status:null});
+        return;
+    }
 });
 
 /**
@@ -291,6 +318,7 @@ router.get('/set_player_state',function (req,res,next) {
  - /rest/get_players_avariable -> {"err":null,"status":"ok","players":[{profile},{profile}]}
  */
 router.get('/get_players_avariable',function (req,res,next) {
+    try{
     var hwid = req.queryString("hwid");
     var sid = req.queryString("sid");
 
@@ -320,7 +348,11 @@ router.get('/get_players_avariable',function (req,res,next) {
             res.json({err:cvs_err, status:"err_session_key_sid_check_failed",players:null,count:0});
             return;
         }
-    })
+    });
+    }catch (e) {
+        res.json({err:e, status:null,players:null,count:0});
+        return;
+    }
 });
 
 /**
@@ -336,9 +368,14 @@ router.get('/get_players_avariable',function (req,res,next) {
  - /rest/get_avariable_ai_players -> {"err":null,"count":3,"detailed":[{profile},{profile}]}
  */
 router.get('/get_avariable_ai_players',function (req,res,next) {
+    try{
     lobby_handling.get_avariable_ai_player(function (e,r) {
         res.json({err:e,count:r.length, detailed:r});
     });
+    }catch (e) {
+        res.json({err:e,count:0, detailed:null});
+        return;
+    }
 });
 
 /**
@@ -353,6 +390,7 @@ router.get('/get_avariable_ai_players',function (req,res,next) {
  - /rest/get_game_list -> {"err":null,"count":0,"game_data":[{game_id:"xyz","game_state":"xyz,.."}]}
  */
 router.get('/get_game_list',function (req,res,next) {
+    try{
     game_handling.list_all_games(function (lag_err,lag_res){
         if(lag_err || !lag_res){
             res.json({err:lag_err,count:game_data.length, game_data:game_data});
@@ -394,6 +432,10 @@ router.get('/get_game_list',function (req,res,next) {
         }
         res.json({err:null,count:game_data.length, game_data:game_data});
     });
+    }catch (e) {
+        res.json({err:e,count:0, game_data:null});
+        return;
+    }
 });
 
 /**
@@ -408,6 +450,7 @@ router.get('/get_game_list',function (req,res,next) {
  - /rest/get_game -> {"err":null,"game_data":[{id:"xyz","game_state":"xyz,..", turn_history:[]}]}
  */
 router.get('/get_game',function (req,res,next) {
+    try{
     var gid = req.queryString("gid");
     if(!gid || gid === ""){
         res.json({err:"gid not set",game_data:null});
@@ -430,6 +473,10 @@ router.get('/get_game',function (req,res,next) {
             };
             res.json({err:null, game_data:game_information});
     });
+    }catch (e) {
+        res.json({err:e, game_data:null});
+        return;
+    }
 });
 
 /**
@@ -444,6 +491,7 @@ router.get('/get_game',function (req,res,next) {
  - /rest/get_profile_information -> {"err":null,"profile_data":[{rank:"xyz","elo_rank":"xyz,.."}]}
  */
 router.get('/get_profile_information',function (req,res,next) {
+    try{
     var pid = req.queryString("pid");
     if(!pid || pid === ""){
         res.json({err:"pid not set",profile_data:null});
@@ -465,6 +513,10 @@ router.get('/get_profile_information',function (req,res,next) {
         };
         res.json({err:null, profile_data:profile_information});
     });
+    }catch (e) {
+        res.json({err:e, profile_data:null});
+        return;
+    }
 });
 
 
@@ -484,6 +536,7 @@ router.get('/get_profile_information',function (req,res,next) {
  -TODO /rest/get_player_state?hwid=1334&sid=1234 -> {"err":null,"status":"ok","matchmaking_state":null,"game_state":null}
  */
 router.get('/get_player_state',function (req,res,next) {
+    try{
     var hwid = req.queryString("hwid");
     var sid = req.queryString("sid");
     var simplified = req.queryInt("simplified");
@@ -544,6 +597,10 @@ router.get('/get_player_state',function (req,res,next) {
             res.json({err:cvs_err, status:"err_session_key_sid_check_failed", matchmaking_state:null,game_state:null});
         }
     });
+    }catch (e) {
+        res.json({err:e, status:null, matchmaking_state:null,game_state:null});
+        return;
+    }
 });
 
 /**
@@ -560,6 +617,7 @@ router.get('/get_player_state',function (req,res,next) {
  - /rest/player_setup_confirmation?hwid=1334&sid=1234 -> {"err":null,"status":"ok"}
  */
 router.get('/player_setup_confirmation',function (req,res,next) {
+    try{
     var hwid = req.queryString("hwid");
     var sid = req.queryString("sid");
 
@@ -580,13 +638,16 @@ router.get('/player_setup_confirmation',function (req,res,next) {
         //IF SESSION VALID -> UPDATE PLAYER STATE
         if(cvs_res){
           game_handling.set_player_setup_confirmation(hwid,function (psc_err,psc_res) {
-                res.json({err:psc_err, status:psc_res});
+                res.json({err:psc_err, status:"ok"});
             });
         }else{
             //res.status(500);
             res.json({err:cvs_err, status:"err_session_key_sid_check_failed"});
         }
     });
+    }catch (e) {
+        res.json({err:e, status:null});
+    }
 });
 
 /**
@@ -607,6 +668,7 @@ router.get('/player_setup_confirmation',function (req,res,next) {
  - /rest/make_move?hwid=1334&sid=1234&move=e3e4 -> {"err":null,"status":"ok"}
  */
 router.get('/make_move',function (req,res,next) {
+    try{
     var hwid = req.queryString("hwid");
     var sid = req.queryString("sid");
     var move = req.queryString("move");
@@ -637,6 +699,10 @@ router.get('/make_move',function (req,res,next) {
             res.json({err:cvs_err, status:"err_session_key_sid_check_failed"});
         }
     });
+    }catch (e) {
+        res.json({err:e, status:null});
+        return;
+    }
 });
 
 
@@ -644,9 +710,14 @@ router.get('/make_move',function (req,res,next) {
 
 
 router.get('/gmm',function (req,res,next) {
+    try{
     CBL.get_board(CBL.get_start_opening_fen(),CBL.get_start_opening_fen(),CBL.PLAYER_TURN.BLACK,false,function (_err,_res) {
         res.json({err:_err,res:_res});
-    })
+    });
+    }catch (e) {
+        res.json({err:e,res:null});
+        return;
+    }
 });
 
 

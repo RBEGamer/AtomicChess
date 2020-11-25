@@ -7,6 +7,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var restRouter = require('./routes/rest');
+var eas = require('express-async-errors');
 var app = express();
 
 //SETUP ALL SUB SYSTEMS BEFORE STARTING THE MAIN APPLICATION
@@ -64,7 +65,12 @@ app.use('/assets', [
   express.static(__dirname + '/node_modules/materialize-css/dist/')
 ]);
 
-
+app.use(function (err, req, res, next) {
+  if (err) {
+    res.status(500);
+    return res.json({err:err.message})
+  }
+})
 
 app.use('/rest', restRouter);
 app.use('/', indexRouter);
@@ -91,6 +97,10 @@ app.use(function(err, req, res, next) {
 
 
 
+
+app.use((err, req, res, next) => {
+  // response to user with 403 error and details
+});
 
 
 
