@@ -367,9 +367,9 @@ func main() {
 	//TODO GAME START ABBORT
 	//GAME STATE FINISHED
 	//-> EXIT
-	//var game_runned = false;
+	var game_runned = false;
 	for true{
-
+		//GET PLAYER STATE
 		_, PlayerStateDetails := RestGetPlayerState(HWID,SID)
 	//	fmt.Println(PlayerStateDetails)
 		if PlayerStateDetails.Err != nil{
@@ -377,21 +377,23 @@ func main() {
 			break
 		}
 
-
-		//if game_runned && PlayerStateDetails.GameState.GameRunning{
-		//	err, SetPlayerStateResultDetails := RestSetPlayerState(HWID,SID,"4")
-		//	if err != nil{
-		//		fmt.Println(SetPlayerStateResultDetails)
-		//		fmt.Println(err)
-		//		return
-		//	}
-		//}
+		//RESET CLIENT THIS AFTER A FINISHED GAMES
+		if game_runned && !PlayerStateDetails.GameState.GameRunning{
+			game_runned = false
+			time.Sleep(time.Millisecond*10000)
+			err, SetPlayerStateResultDetails := RestSetPlayerState(HWID,SID,"4")
+			if err != nil{
+				fmt.Println(SetPlayerStateResultDetails)
+				fmt.Println(err)
+				return
+			}
+		}
 		//NOW CHECK PLAYER STATE UNTIL WE GOT A MATCH
 		if PlayerStateDetails.MatchmakingState.WaitingForGame{
 			fmt.Println("-- MATCHMAKING RUNNING RUNNING --")
 		}else if PlayerStateDetails.GameState.GameRunning{
 			fmt.Println("-- GAME RUNNING --")
-			//game_runned = true;
+			game_runned = true;
 			//PLAYER_STATE = 0 -> SETUP BOARD / SETUP UCI ENGINE
 			if PlayerStateDetails.GameState.Simplified.PlayerState == 0{
 				//LOAD BOARD FEN
@@ -405,7 +407,7 @@ func main() {
 						})
 				//REPORT READY STATE TO BACKEND
 				_ = RestPlayerSetupConfirmation(HWID,SID)
-
+			//IF THIS PLAYERS TURN => DO THE TURN
 			}else if PlayerStateDetails.GameState.Simplified.IsMyTurn{
 				//MAKE A TURN
 				eng.SetFEN(PlayerStateDetails.GameState.Simplified.CurrentBoard.ExtendetFen)

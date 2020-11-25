@@ -9,6 +9,7 @@ COPY package*.json ./
 USER node
 # INSTALL NPM PACKAGE
 RUN npm install
+RUN npm audit -fix
 # COPY ALL OTHER FILES TO FOLDER
 COPY --chown=node:node . .
 RUN ls
