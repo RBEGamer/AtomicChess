@@ -6,7 +6,7 @@
   "session_lifetime_in_seconds": 15,
   "session_cleanup_loop_interval": 2,
   "matchmaking_runner_interval": 5,
-
+  "matchmaking_enable_minimum_wait": true,
   "mongodb_database_name": "ATC",
   "mongodb_collection_profiles": "profiles",
   "mongodb_collection_games": "games",
@@ -16,7 +16,9 @@
 
 
   "github_repository": "https://github.com/RBEGamer/AtomicChessOS",
-  "impressum_ulr": "https://marcelochsendorf.com/impressum"
+  "impressum_ulr": "https://marcelochsendorf.com/impressum",
+
+
 
 
 

@@ -12,9 +12,7 @@ function player_sort_function_swt(a, b) {
     return 0;
 }
 
-var ENABLE_AI_VS_AI = false;
-//TODO MATCHMAKING HUMAN VS PLAYER
-//SET VIA CONFIG
+
 
 var matchmaking_job = new CronJob('*/'+CONFIG.matchmaking_runner_interval+' * * * * *', function() {
 
@@ -51,6 +49,10 @@ var matchmaking_job = new CronJob('*/'+CONFIG.matchmaking_runner_interval+' * * 
          gpfm_res.player_searching_human.sort(player_sort_function_swt);
          //SELECT THE MOST WAITING PLAYER
          var p1 = gpfm_res.combined_player_searching[0];
+
+         if(CONFIG.matchmaking_enable_minimum_wait &&  Math.floor((Date.now()-p1.state_switched_time)/1000) < 20){
+             return;
+         }
          var p2  = gpfm_res.combined_player_searching[HELPER_FUNCTIONS.randomInteger(1,gpfm_res.combined_player_searching.length-1)];
          if(p1.hwid === p2.hwid){
              return;
