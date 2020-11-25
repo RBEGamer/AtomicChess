@@ -5,11 +5,10 @@ RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
 WORKDIR /home/node/app
 # COPY PACAKGE FILES TO INSTALL PACKAGES FIRST
 COPY package*.json ./
-
+# DEFUALT USER
 USER node
 # INSTALL NPM PACKAGE
 RUN npm install
-RUN npm audit -fix
 # COPY ALL OTHER FILES TO FOLDER
 COPY --chown=node:node . .
 RUN ls
