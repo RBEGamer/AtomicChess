@@ -7,6 +7,9 @@ import json  # FOR THE REST API
 import os
 app = Flask(__name__)
 
+@app.route('/', methods=['get'])
+def index():
+    return redirect('/rest/state',code=302)
 
 
 @app.route('/rest/state', methods=['get'])
@@ -135,6 +138,6 @@ def get_player_score():
 
 if __name__ == '__main__':
     logging.basicConfig(filename='./ATC_Move_Validator.log', level=logging.DEBUG)
-    logging.info('ATC_Move_Validator - started')
-    app.run(host='0.0.0.0', port=5000)
+    logging.info('ATC_Move_Validator - started internal 5001')
+    app.run(host='0.0.0.0', port=5001)
 
