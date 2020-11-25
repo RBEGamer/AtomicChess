@@ -57,7 +57,7 @@
 <div class="col-md-12">
   <div class="card">
     <div class="card-header">
-      <h4 class="card-title text-justify">GAME HISTORY</h4>
+      <h4 class="card-title text-justify">LAST GAMES - HISTORY</h4>
     </div>
     <div class="card-body">
       <div class="text-center">
@@ -181,6 +181,30 @@
 
 
 <script>
+
+  //SORTING TIMESTAMP
+  function compare_created_timestamp( b, a ) {
+    if ( a.created_timestamp < b.created_timestamp ){
+      return -1;
+    }
+    if ( a.created_timestamp > b.created_timestamp ){
+      return 1;
+    }
+    return 0;
+  }
+
+  //PARSES THE QUERY STRING IN THE URL
+  //https://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
+  function getParameterByName(name, url = window.location.href) {
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+  }
+
+
   //PARSE Date Object into human readable
   //https://stackoverflow.com/questions/5416920/timestamp-to-human-readable-format
   function getFormattedDate(_dt) {
@@ -346,15 +370,32 @@
       if(!data || data.err || !data.game_data || !Array.isArray(data.game_data)){
       return;
       }
+      //SORT GAMES BY TIMESTAMP
+      data.game_data.sort(compare_created_timestamp);
 
 
+      var max_items = 10;
+
+      var t = getParameterByName("list_count");
+      if(t != undefined && t != null){
+        console.log(t);
+        max_items = parseInt(t);
+        console.log(max_items);
+      }
+      if(data.game_data.length < max_items){
+        max_items = data.game_data.length;
+      } else if(max_items > data.game_data.length){
+        max_items = data.game_data.length;
+      }
+      console.log("---");
+      console.log(max_items);
 
     //CREATE TABLE STRUCTURE AND HEADLINES
     var tmp_html = "<div class=\"table-responsive-sm\"><table class=\"table\">";
     tmp_html+="<thead><tr><th scope=\"col\">#</th><th scope=\"col\">CREATED</th><th scope=\"col\">PLAYER WHITE</th><th scope=\"col\">PLAYER BLACK</th><th scope=\"col\">MOVE COUNT</th><th scope=\"col\">GAME_STATE</th><th scope=\"col\">VIEW</th></tr></thead>";
     tmp_html+="<tbody>";
     //POPULATE TABLE BODY WITH ENTRIES
-    for (let i= 0; i < data.game_data.length;i++){
+    for (let i= 0; i < max_items;i++){
       const entry = data.game_data[i];
       tmp_html+="<tr>";
       tmp_html+="<th scope=\"row\">"+String(i+1)+"</th>";
