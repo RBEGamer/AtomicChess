@@ -110,7 +110,7 @@ type SetPlayerStateResult struct{
 }
 
 var BACKEND_IP = "127.0.0.1:3000"
-var PLAYER_TYPE = "0" // 1 AI PLAYER 0= HUMAN PLAYER => SEE BACKEND
+var PLAYER_TYPE = "1" // 1 AI PLAYER 0= HUMAN PLAYER => SEE BACKEND
 const charset = "abcdefghijklmnopqrstuvwxyz" +
 	"ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
@@ -314,6 +314,19 @@ func main() {
 	}
 	fmt.Println("--- OUR USED HARDWARE ID ---")
 	fmt.Println(HWID)
+
+
+
+	_, pt_present := os.LookupEnv("PLAYER_TYPE_HUMAN")
+
+	if err != nil && pt_present{
+		PLAYER_TYPE = "0"
+	}else{
+		PLAYER_TYPE = "1"
+	}
+
+
+
 	var SID string
 	
 	//LOGOUT (TO RESTART A NEW SESSION)
