@@ -7,15 +7,18 @@
 
 * [Ungrouped](#ungrouped)
 
-  * [GET_AI_PLAYER_COUNT](#1-get_ai_player_count)
-  * [GET_PLAYERS_AVARIABLE](#2-get_players_avariable)
-  * [GET_PLAYER_STATE](#3-get_player_state)
-  * [GET_PLAYER_STATE Copy](#4-get_player_state-copy)
+  * [CLIENT_STATUS](#1-client_status)
+  * [GET_AI_PLAYER_COUNT](#2-get_ai_player_count)
+  * [GET_PLAYERS_AVARIABLE](#3-get_players_avariable)
+  * [GET_PLAYER_STATE](#4-get_player_state)
   * [HEARTBEAT](#5-heartbeat)
   * [LOGIN](#6-login)
-  * [PLAYER_SETUP_CONFIRMATION](#7-player_setup_confirmation)
-  * [PLAYER_STATE](#8-player_state)
-  * [TEST](#9-test)
+  * [LOGOUT](#7-logout)
+  * [MAKE_MOVE](#8-make_move)
+  * [PLAYER_SETUP_CONFIRMATION](#9-player_setup_confirmation)
+  * [SERVICE_STATE](#10-service_state)
+  * [SET_PLAYER_STATE](#11-set_player_state)
+  * [TEST](#12-test)
 
 
 --------
@@ -25,7 +28,23 @@
 
 
 
-### 1. GET_AI_PLAYER_COUNT
+### 1. CLIENT_STATUS
+
+
+IF REPSONSE IS SUCCESSFUL SERVER IS ONLINE
+
+
+***Endpoint:***
+
+```bash
+Method: GET
+Type: 
+URL: http://{{ATC_BACKEND_URL}}/rest/client_status
+```
+
+
+
+### 2. GET_AI_PLAYER_COUNT
 
 
 
@@ -48,7 +67,7 @@ URL: http://{{ATC_BACKEND_URL}}/rest/get_avariable_ai_players
 
 
 
-### 2. GET_PLAYERS_AVARIABLE
+### 3. GET_PLAYERS_AVARIABLE
 
 
 
@@ -71,7 +90,7 @@ URL: http://{{ATC_BACKEND_URL}}/rest/get_players_avariable
 
 
 
-### 3. GET_PLAYER_STATE
+### 4. GET_PLAYER_STATE
 
 
 
@@ -92,30 +111,6 @@ URL: http://{{ATC_BACKEND_URL}}/rest/get_player_state
 | hwid | {{PLAYER_HWID}} |  |
 | sid | {{PLAYER_SID}} |  |
 | simplified | 1 | RETURN ONLY NEEDED INFORAMTION  |
-
-
-
-### 4. GET_PLAYER_STATE Copy
-
-
-
-***Endpoint:***
-
-```bash
-Method: GET
-Type: 
-URL: http://{{ATC_BACKEND_URL}}/rest/make_move
-```
-
-
-
-***Query params:***
-
-| Key | Value | Description |
-| --- | ------|-------------|
-| hwid | {{PLAYER_HWID}} |  |
-| sid | {{PLAYER_SID}} |  |
-| move | e2e4 |  |
 
 
 
@@ -161,11 +156,58 @@ URL: http://{{ATC_BACKEND_URL}}/rest/login
 | Key | Value | Description |
 | --- | ------|-------------|
 | hwid | {{PLAYER_HWID}} |  |
+| playertype | 0 | 0=HUMAN_PLAYER 1=AI_PLAYER used for automatchmaking |
+
+
+
+### 7. LOGOUT
+
+
+
+***Endpoint:***
+
+```bash
+Method: GET
+Type: 
+URL: http://{{ATC_BACKEND_URL}}/rest/logout
+```
+
+
+
+***Query params:***
+
+| Key | Value | Description |
+| --- | ------|-------------|
+| hwid | {{PLAYER_HWID}} |  |
 | playertype | 1 | 0=HUMAN_PLAYER 1=AI_PLAYER used for automatchmaking |
 
 
 
-### 7. PLAYER_SETUP_CONFIRMATION
+### 8. MAKE_MOVE
+
+
+
+***Endpoint:***
+
+```bash
+Method: GET
+Type: 
+URL: http://{{ATC_BACKEND_URL}}/rest/make_move
+```
+
+
+
+***Query params:***
+
+| Key | Value | Description |
+| --- | ------|-------------|
+| hwid | {{PLAYER_HWID}} |  |
+| sid | {{PLAYER_SID}} |  |
+| move | e2e4 |  |
+
+
+
+### 9. PLAYER_SETUP_CONFIRMATION
 
 
 
@@ -188,7 +230,23 @@ URL: http://{{ATC_BACKEND_URL}}/rest/player_setup_confirmation
 
 
 
-### 8. PLAYER_STATE
+### 10. SERVICE_STATE
+
+
+IF REPSONSE IS SUCCESSFUL SERVER IS ONLINE
+
+
+***Endpoint:***
+
+```bash
+Method: GET
+Type: 
+URL: http://{{ATC_BACKEND_URL}}/rest/service_state
+```
+
+
+
+### 11. SET_PLAYER_STATE
 
 
 
@@ -212,7 +270,7 @@ URL: http://{{ATC_BACKEND_URL}}/rest/set_player_state
 
 
 
-### 9. TEST
+### 12. TEST
 
 
 
@@ -245,4 +303,4 @@ URL: http://{{ATC_BACKEND_URL}}/rest/gmm
 
 ---
 [Back to top](#atomicchessbackend)
-> Made with &#9829; by [thedevsaddam](https://github.com/thedevsaddam) | Generated at: 2020-07-29 23:42:15 by [docgen](https://github.com/thedevsaddam/docgen)
+> Made with &#9829; by [thedevsaddam](https://github.com/thedevsaddam) | Generated at: 2020-11-25 22:23:12 by [docgen](https://github.com/thedevsaddam/docgen)

@@ -40,7 +40,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{ATC_BACKEND_URL}}/rest/login?hwid={{PLAYER_HWID}}&playertype=1",
+					"raw": "http://{{ATC_BACKEND_URL}}/rest/login?hwid={{PLAYER_HWID}}&playertype=0",
 					"protocol": "http",
 					"host": [
 						"{{ATC_BACKEND_URL}}"
@@ -48,6 +48,36 @@
 					"path": [
 						"rest",
 						"login"
+					],
+					"query": [
+						{
+							"key": "hwid",
+							"value": "{{PLAYER_HWID}}"
+						},
+						{
+							"key": "playertype",
+							"value": "0",
+							"description": "0=HUMAN_PLAYER 1=AI_PLAYER used for automatchmaking"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LOGOUT",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ATC_BACKEND_URL}}/rest/logout?hwid={{PLAYER_HWID}}&playertype=1",
+					"protocol": "http",
+					"host": [
+						"{{ATC_BACKEND_URL}}"
+					],
+					"path": [
+						"rest",
+						"logout"
 					],
 					"query": [
 						{
@@ -65,7 +95,7 @@
 			"response": []
 		},
 		{
-			"name": "PLAYER_STATE",
+			"name": "SET_PLAYER_STATE",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -253,7 +283,7 @@
 			"response": []
 		},
 		{
-			"name": "GET_PLAYER_STATE Copy",
+			"name": "MAKE_MOVE",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -284,11 +314,63 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "CLIENT_STATUS",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ATC_BACKEND_URL}}/rest/client_status",
+					"protocol": "http",
+					"host": [
+						"{{ATC_BACKEND_URL}}"
+					],
+					"path": [
+						"rest",
+						"client_status"
+					]
+				},
+				"description": "IF REPSONSE IS SUCCESSFUL SERVER IS ONLINE"
+			},
+			"response": []
+		},
+		{
+			"name": "SERVICE_STATE",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "80c26a07-79bd-49ba-9a8a-afc19a5c66c3",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ATC_BACKEND_URL}}/rest/service_state",
+					"protocol": "http",
+					"host": [
+						"{{ATC_BACKEND_URL}}"
+					],
+					"path": [
+						"rest",
+						"service_state"
+					]
+				},
+				"description": "IF REPSONSE IS SUCCESSFUL SERVER IS ONLINE"
+			},
+			"response": []
 		}
 	],
 	"variable": [
 		{
-			"id": "365a5bf7-b3c9-41f7-b07b-e27e515e973a",
+			"id": "c58cccd9-323e-441e-a1f6-82d7646b0f21",
 			"key": "BASE_URL",
 			"value": "127.0.0.1:3000"
 		}

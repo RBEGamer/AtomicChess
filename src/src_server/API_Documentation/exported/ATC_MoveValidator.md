@@ -113,4 +113,4 @@ URL: {{ATC_MOVE_VALIDATOR_URL}}/rest/validate_board
 
 ---
 [Back to top](#atomicchesschessmovevalidator)
-> Made with &#9829; by [thedevsaddam](https://github.com/thedevsaddam) | Generated at: 2020-07-29 23:42:15 by [docgen](https://github.com/thedevsaddam/docgen)
+> Made with &#9829; by [thedevsaddam](https://github.com/thedevsaddam) | Generated at: 2020-11-25 22:23:12 by [docgen](https://github.com/thedevsaddam/docgen)
