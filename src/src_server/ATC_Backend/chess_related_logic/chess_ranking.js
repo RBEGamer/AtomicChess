@@ -14,6 +14,6 @@ module.exports = {
         else if(_rank >= 1600){return "CLASS B";}
         else if(_rank >= 1400){return "CLASS C";}
         else if(_rank >= 1200){return "CLASS D";}
-        else{return "NOOP";}
+        else{return "NOOB";}
     }
 }

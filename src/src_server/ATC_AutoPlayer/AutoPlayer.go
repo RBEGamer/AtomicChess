@@ -319,10 +319,13 @@ func main() {
 
 	_, pt_present := os.LookupEnv("PLAYER_TYPE_HUMAN")
 
-	if err != nil && pt_present{
+	if pt_present{
 		PLAYER_TYPE = "0"
+		fmt.Println("------ PLAYER TYPE 0 HUMAN --------------------")
 	}else{
 		PLAYER_TYPE = "1"
+		fmt.Println("------ PLAYER TYPE 1 AI --------------------")
+
 	}
 
 
