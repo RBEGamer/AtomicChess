@@ -161,7 +161,7 @@ router.get('/login',function(req,res,next){
                     });
                 }else{
                     //PROFILE ALREADY EXISTS -> BEGIN SESSION AND SEND PROFILE DATA
-                    session_handling.update_session_timestamp(hwid,function (is_err,is_res){
+                    session_handling.insert_session(hwid,function (is_err,is_res){
                         if(is_err){
                             res.json({err:pe_err,status:"err_update_session_failed",sid:null});
                             return;
@@ -211,13 +211,11 @@ router.get('/logout',function(req,res,next){
     //CHECK REDIS FOR EXISTING SESSION
     redisClient.getRedisConnection().get("session:"+hwid, function(err, reply) {
         if(err){
-            //res.status(500);
             res.json({err:err,status:"err_db_read_error"});
             return;
         }
-
-        if(reply){//ACTIVE SESSION FOUND
-            //TODO DELETE REDIS KEY
+        //ACTIVE SESSION FOUND
+        if(reply){
             //SET PLAYER STATE TO OFFLINE / NOT LISTED = 0
             //CANCEL MATCHES
             redisClient.getRedisConnection().del("session:"+hwid,function (err, reply) {
@@ -228,14 +226,12 @@ router.get('/logout',function(req,res,next){
                 lobby_handling.remove_player_from_lobby(hwid,function (spl_err,spl_res) {
                     //CANCEL MATCH IF A MATCH IS RUNNING
                     game_handling.cancel_match_for_player(hwid,function (cmp_err,cmp_res){
-              //          res.status(200);
                         res.json({err:err,cmp_err:cmp_err,spl_err:spl_err,status:"ok"});
                         return;
                     });
                 },false);
             });
         }else{ //IF A ENTRY ALREADY EXISTS -> USER LOGGED IN
-            //res.status(500);
             res.json({err:err,status:"err_already_logged_out"});
             return;
         }

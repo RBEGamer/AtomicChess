@@ -130,7 +130,7 @@ function update_session_timestamp(_hwid,_sid,_callback){
         }
         //UPDATE SESSION TIMESTAMP
         var ts = Date.now();
-        redisDbConnection.getRedisConnection().set("session:"+_hwid, JSON.stringify({session_id:_sid,timestamp:ts, hwid:_hwid}),function (s_err,s_res){
+        redisDbConnection.getRedisConnection().set("session:"+_hwid, JSON.stringify({session_id:gs_res.session_id,timestamp:ts, hwid:_hwid}),function (s_err,s_res){
             _callback(s_err,_sid);
         });
     });
