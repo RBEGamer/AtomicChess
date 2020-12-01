@@ -100,5 +100,5 @@ make
 
 echo "--CREATING UPDATE FILE FOR SWUPDATE using script in ./SWUPDATE--"
 cd ./SWUPDATE
-./swupdate_packer.sh
+bash ./swupdate_packer.sh
 
