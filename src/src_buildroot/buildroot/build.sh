@@ -20,7 +20,7 @@ fi
 
 
 # INCREMENT VERSION
-cd ./VERSIONING && ./increment_version.sh && cd ..
+cd ./VERSIONING && bash ./increment_version.sh && cd ..
 
 
 
