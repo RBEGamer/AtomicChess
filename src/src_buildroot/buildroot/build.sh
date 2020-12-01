@@ -44,7 +44,7 @@ fi
 
 # make distclean
 echo "-- COPY CONFIG FILE --"
-cp ./config_backup ./.config
+bash ./restore_config.sh
 
 
 
