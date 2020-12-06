@@ -3,10 +3,8 @@ var MDB = require('./mongo_db_connection'); //include mongo db connection
 var LH = require('./lobby_handling'); //GET LOBBY HANDLING FUNCTIONS
 var CR = require('../chess_related_logic/chess_ranking'); // GET CHESS RANKING FUNCTIONS
 var UUID = require('uuid');
-
+var ANG = require('./AbstractNameGenerator'); //
 function apply_points_to_profile(_points,_game_id,_other_player,_callback){
-    //TODO;
-    //TODO GET PROFILE
     //UPDATE POINTS * time multiplier
     var point_elo_name = CR.rank_to_elo_rating_name(_points);
     console.log("#### USER POINTS ####")
@@ -31,7 +29,7 @@ function apply_points_to_profile(_points,_game_id,_other_player,_callback){
             _callback("gp_res.rank missing",null);
             return;
         }
-
+        //FIANLLY UPDATE THE PROFILE EXTRY
         MDB.getProfileCollection().updateOne({hwid:_other_player},{$set:gp_res},function (uo_err,uo_res) {
             _callback(uo_err,"ok");
             return;
@@ -53,7 +51,7 @@ function create_profile(_hwid, _playertype ,_callback){
         fn = "AI_" + vid.substr(0,5); //USE FIRST 5 CHARS OF VIRTUAL ID AS AN IDENTIFIER
     }else  if(!_playertype || _playertype === 0){
         _playertype = LH.PLAYER_TYPE.HUMAN; // HUMAN PLAYER / TABLE
-        fn = "AWESOME_CHESS_PLAYER_" + vid.substr(0,5); //USE FIRST 5 CHARS OF VIRTUAL ID AS AN IDENTIFIER
+        fn = ANG.generate_fullname_underscore()+ "_" + vid.substr(0,3); //USE FIRST 5 CHARS OF VIRTUAL ID AS AN IDENTIFIER
     }
 
     var profile={hwid:_hwid, DOCTYPE:"PROFILE",account_created:Date.now(), rank:0,elo_rank_readable:CR.rank_to_elo_rating_name(0), friendly_name:fn,virtual_player_id:vid,player_type:_playertype};

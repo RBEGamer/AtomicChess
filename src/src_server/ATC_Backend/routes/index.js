@@ -32,4 +32,10 @@ router.get('/statistics', function(req, res, next) {
 router.get('/profile', function(req, res, next) {
   res.render('statistics_profile', { title: 'Game' });
 });
+
+
+
+router.get('/webclient', function(req, res, next) {
+  res.render('webclient', { title: 'Game' });
+});
 module.exports = router;
