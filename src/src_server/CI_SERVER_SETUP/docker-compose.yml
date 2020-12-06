@@ -1,0 +1,33 @@
+version: "3"
+services:
+  ATC_GitLab:
+    image: gitlab/gitlab-ce:latest
+    container_name: gitlab-web
+    hostname: gitlab
+    volumes:
+        - './gitlab-config:/etc/gitlab'
+        - './gitlab-logs:/var/log/gitlab'
+        - './gitlab-data:/var/opt/gitlab'
+    ports:
+        - '2222:22'
+        - '8080:80'
+        - '443:443'
+        - '4567:4567'
+    environment:
+        GITLAB_OMNIBUS_CONFIG: |
+        gitlab_rails['gitlab_shell_ssh_port'] = 2222
+        registry_external_url 'http://localhost:4567'
+        registry['enable'] = true
+        unicorn['socket'] = '/opt/gitlab/var/unicorn/gitlab.socket'
+    networks:
+        - gitlab-network
+  jenkins:
+        image: 'jenkinsci/blueocean:latest'
+        ports:
+            - '8080:8080'
+            - '8443:8443
+        volumes:
+            - './jenkins_data:/var/jenkins_home'
+        environment:
+        - 'JENKINS_OPTS=--httpPort=8080 --httpsPort=8443'
+
