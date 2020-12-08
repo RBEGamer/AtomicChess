@@ -137,7 +137,7 @@
         <h4 class="modal-title w-100 font-weight-bold">WAITING FOR GAME</h4>
       </div>
       <div class="modal-body mx-3">
-
+        <h3>PLEASE WAIT - LOOKING FOR A MATCH</h3>
         <div class="snippet" data-title=".dot-collision">
           <div class="stage">
             <div class="dot-collision"></div>
@@ -242,6 +242,18 @@
     });
   }
 
+  function get_logout(_hwid, _cb){
+    if(_hwid == null || _hwid === ""){
+      console.log("get_login _hwid not set");
+      return;
+    }
+    $.get( "/rest/logout?hwid=" +_hwid, function( data ) {
+      _cb(true);
+      return false;
+    });
+  }
+
+
   function get_heartbeat(_hwid, _sid){
     if(_hwid == null || _hwid === ""){
       console.log("get_login _hwid not set");
@@ -331,11 +343,15 @@
 
 
 
-
-    get_login(HWID, function (_login_succ){
-      set_playerstate(HWID,SID,PLAYER_STATE_SEARCHING); //SET PLAYER STATE TO MATCHMAKING
+    get_logout(HWID, function (_login_succ){
+      get_login(HWID, function (_login_succ){
+        set_playerstate(HWID,SID,PLAYER_STATE_SEARCHING); //SET PLAYER STATE TO MATCHMAKING
+        $('#modalLoginForm').modal('hide');
+        $('#modalLoadingForm').modal('hide');
+      });
     });
 
+    
     setInterval(function(){
         if(SID != null && SID !== ""){
           get_heartbeat(HWID,SID);
@@ -350,7 +366,7 @@
             if(_state.matchmaking_state.waiting_for_game != null && _state.matchmaking_state.waiting_for_game === true){
               $('#modalWaitingForGameForm').modal('show');
             }else if(_state.matchmaking_state.waiting_for_game != null && _state.matchmaking_state.waiting_for_game === false){
-              $('#modalWaitingForGameForm').modal('show');
+              $('#modalWaitingForGameForm').modal('hide');
             }
 
 
