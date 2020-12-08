@@ -1,3 +1,6 @@
+var app = require('express')();
+var http = require('http').createServer(app);
+var io = require('socket.io')(http);
 var express = require('express');
 var router = express.Router();
 var CFG = require('../config'); //include the cofnig file
@@ -38,4 +41,24 @@ router.get('/profile', function(req, res, next) {
 router.get('/webclient', function(req, res, next) {
   res.render('webclient', { title: 'Game' });
 });
+
+
+
+
+
+
+
+//------------------------- SOCKET IO ROUTER ------------------- //
+
+io.on('connection', (socket) => {
+  console.log('a user connected');
+});
+
+
+
+
+
+
+
+
 module.exports = router;

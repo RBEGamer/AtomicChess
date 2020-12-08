@@ -16,7 +16,9 @@ var cleanup_job = new CronJob('*/'+CONFIG.getConfig().session_cleanup_loop_inter
         if(gpil_err){
             return;
         }
-        console.log("--- SCAN LOBBY ENTRIES ",gpil_res.length, "-----------");
+        if(gpil_res.length > 0){
+            console.log("--- SCAN LOBBY ENTRIES ",gpil_res.length, "-----------");
+        }
         for (let i = 0; i < gpil_res.length; i++) {
             const entry = gpil_res[i];
             SH.check_expired_session(entry.hwid,function (ces_err,ces_res){
