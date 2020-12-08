@@ -129,7 +129,7 @@
   </div>
 </div>
 
-
+<!-- MATCHMAKING Modal -->
 <div class="modal" id="modalWaitingForGameForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document" >
     <div class="modal-content">
@@ -151,11 +151,31 @@
   </div>
 </div>
 
-<div class="row justify-content-center">
 
+
+<div class="row">
+  <div class="col-lg-12 h-100 text-center text-lg-center my-auto">
+      <h4 class="text-justify text-center" id="player_color">--- GAME ---</h4>
+  </div>
 </div>
 
 
+<!-- MAIN CONTENT  -->
+<div class="row">
+
+
+  <div class="col-md-7">
+    <div class="card-title text-justify" id="fen_viewer_board"></div>
+  </div>
+
+  <div class="col-md-5" id="move_options">
+    <h4 class="text-justify text-center">--- TURN STATE ---</h4>
+
+</div>
+</div>
+
+
+</div>
 
 
 
@@ -215,6 +235,71 @@
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
   }
 
+  var DISP_FEN = "";
+  function load_fen_to_viewer(_fen){
+    if(_fen == null || _fen === ""){
+      return;
+    }
+    if(DISP_FEN == _fen){return;}
+    var fen_viewer_board = pgnBoard('fen_viewer_board', { position: _fen, locale: 'en', pieceStyle: 'wikipedia', theme:'falken' });
+    DISP_FEN = _fen;
+  }
+
+  var GMOA_TRIGGERED = 0;
+  function generate_moveoption_table(_move_array){
+    console.log(_move_array);
+    if(GMOA_TRIGGERED == 1){return;}
+    if(_move_array == null){return;}
+
+    var tmp = "";
+
+
+    tmp +="<div class=\"row justify-content-center\">";
+
+    var btn_per_row = 3;
+    var col_type = btn_per_row / 12;
+    for (var i=0;i<_move_array.length;i++){
+      const n = _move_array[i];
+      if(n.length != 4){continue;}
+
+      var from = (String(n)[0] + String(n)[1]).toLocaleUpperCase();
+      var to = String(n).substr(2,3).toLocaleUpperCase();
+      //TODO BOOSTRAP GRID
+      //3 dann neue row
+
+      tmp += "<div class=\"col-"+String(btn_per_row)+"  text-center my-auto\">";
+
+
+
+      tmp +="<button type=\"button\" class=\"btn btn-primary btn-sm\" onclick=\"exec_move_btn('"+String(n)+"')\">"+from + "->" +to+"</button>";
+
+      tmp += "</div>";
+
+      //ADD NEW ROW
+      if(((i+1)%btn_per_row) == 0 && i>0){
+        tmp +="</div>";
+        tmp +="<div class=\"row justify-content-center\" style=\"min-height: 75px\">";
+      }
+
+    }
+
+
+    tmp +="</div>";
+
+    $("#move_options").html(tmp);
+    GMOA_TRIGGERED = 1;
+  }
+  function exec_move_btn(_mv_string){
+    set_make_move(HWID,SID,_mv_string);
+  }
+
+  function generate_waiting_animation(){
+    if(GMOA_TRIGGERED == 2){return;}
+
+    var tmp = "<span class=\"text-justify text-center\">WAITING FOR OTHER PLAYERS TURN</span>";
+    $("#move_options").html(tmp);
+    GMOA_TRIGGERED = 2;
+  }
 
   function get_login(_hwid, _cb){
     if(_hwid == null || _hwid === ""){
@@ -302,6 +387,43 @@
     });
   }
 
+  function set_playerconfigrmation(_hwid, _sid){
+    if(_hwid == null || _hwid === ""){
+      console.log("get_login _hwid not set");
+      return false;
+    }
+    if(_sid == null || _sid === ""){
+      console.log("get_login _sid not set");
+      return false;
+    }
+
+    $.get( "/rest/player_setup_confirmation?hwid=" +_hwid + "&sid=" + _sid, function( data ) {
+
+
+      return true;
+    });
+  }
+
+  function set_make_move(_hwid, _sid, _mv){
+    if(_hwid == null || _hwid === ""){
+      console.log("get_login _hwid not set");
+      return false;
+    }
+    if(_sid == null || _sid === ""){
+      console.log("get_login _sid not set");
+      return false;
+    }
+    if(_mv == null || _mv === ""){
+      console.log("get_login _sid not set");
+      return false;
+    }
+
+    $.get( "/rest/make_move?hwid=" +_hwid + "&sid=" + _sid + "&move=" + _mv, function( data ) {
+
+
+      return true;
+    });
+  }
   function get_player_state(_hwid, _sid, _cb){
     if(_hwid == null || _hwid === ""){
       console.log("get_login _hwid not set");
@@ -351,7 +473,7 @@
       });
     });
 
-    
+
     setInterval(function(){
         if(SID != null && SID !== ""){
           get_heartbeat(HWID,SID);
@@ -368,6 +490,40 @@
             }else if(_state.matchmaking_state.waiting_for_game != null && _state.matchmaking_state.waiting_for_game === false){
               $('#modalWaitingForGameForm').modal('hide');
             }
+
+            if(_state.game_state != null && _state.game_state.simplified != null && _state.game_state.simplified.is_syncing_phase === true){
+              //LOAD GAME
+              console.log("SET PLAYER CONFIRMATION");
+              set_playerconfigrmation(HWID,SID);
+              load_fen_to_viewer(_state.game_state.simplified.current_board.ExtendetFen);
+
+              if(_state.game_state.simplified.im_white_player){
+                $("#player_color").html("--- PLAYING ON WHITE ---");
+              }else{
+                $("#player_color").html("--- PLAYING ON BLACK ---");
+              }
+
+            }
+
+            if(_state.game_state != null && _state.game_state.simplified != null && _state.game_state.game_running === true){
+              //       console.log("SET PLAYER CONFIRMATION");
+              //TODO DISPLAY GAME LOAD GAME
+              //SHOW PLAYER NAMES
+              //SHOW CURRENT BOARD
+              //SHOW SITE
+              load_fen_to_viewer(_state.game_state.simplified.current_board.ExtendetFen);
+         //     debugger;
+              if(_state.game_state.simplified.is_my_turn === true){
+                //SHOW MOVE BUTTONS UNDER THE FIELD
+                generate_moveoption_table(_state.game_state.simplified.current_board.legal_moves);
+              }else{
+
+                  generate_waiting_animation();
+              }
+
+            }
+
+
 
 
           });
