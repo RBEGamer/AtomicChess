@@ -496,7 +496,8 @@
               console.log("SET PLAYER CONFIRMATION");
               set_playerconfigrmation(HWID,SID);
               load_fen_to_viewer(_state.game_state.simplified.current_board.ExtendetFen);
-
+              $('#modalLoginForm').modal('hide');
+              $('#modalLoadingForm').modal('hide');
               if(_state.game_state.simplified.im_white_player){
                 $("#player_color").html("--- PLAYING ON WHITE ---");
               }else{
