@@ -824,7 +824,7 @@ router.post('/set_user_config',function (req,res,next) {
         var sid = req.queryString("sid");
         var config_json = req.bodyJson();
 
-
+    console.log(req);
         //CHECK INPUT PARAMETER
         if(!hwid || !sid ){
             //res.status(500);
