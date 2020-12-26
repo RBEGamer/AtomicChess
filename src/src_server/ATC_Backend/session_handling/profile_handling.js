@@ -54,7 +54,7 @@ function create_profile(_hwid, _playertype ,_callback){
         fn = ANG.generate_fullname_underscore()+ "_" + vid.substr(0,3); //USE FIRST 5 CHARS OF VIRTUAL ID AS AN IDENTIFIER
     }
 
-    var profile={hwid:_hwid, DOCTYPE:"PROFILE",account_created:Date.now(), rank:0,elo_rank_readable:CR.rank_to_elo_rating_name(0), friendly_name:fn,virtual_player_id:vid,player_type:_playertype};
+    var profile={profile_config:{"SETTINGS":null,"USER_DATA":null},hwid:_hwid, DOCTYPE:"PROFILE",account_created:Date.now(), rank:0,elo_rank_readable:CR.rank_to_elo_rating_name(0), friendly_name:fn,virtual_player_id:vid,player_type:_playertype};
     MDB.getProfileCollection().insertOne(profile,function(err,res){
         if(err){
             _callback(err,res,profile);
@@ -79,6 +79,25 @@ function get_profile_virtual_id(_vid, _callback){
     });
 }
 
+
+
+
+
+function get_player_config(_cfg, _hwid, _callback){
+        //UPDATE PROFILE
+        var profile_config = {cfg:_cfg};
+        MDB.getProfileCollection().findOne({hwid:_hwid, DOCTYPE:"PROFILE"},function(gp_err,gp_res){
+            _callback(gp_err,gp_res.profile_config);
+        });
+}
+
+function set_player_config(_cfg,_hwid, _callback){
+    //UPDATE PROFILE
+    var profile_config = {cfg:_cfg};
+    MDB.getProfileCollection().updateOne({hwid:_hwid},{$set:profile_config},function (uo_err,uo_res) {
+        _callback(uo_err,"ok");
+    });
+}
 module.exports = {
 
 
@@ -91,5 +110,7 @@ module.exports = {
     get_profile,
     get_profile_virtual_id,
     create_profile,
-    apply_points_to_profile
+    apply_points_to_profile,
+    set_player_config,
+    get_player_config
 }

@@ -780,4 +780,78 @@ router.get('/listendpoints', function (req, res) {
 
 
 
+
+
+
+
+router.get('/get_user_config',function (req,res,next) {
+    try{
+        var hwid = req.queryString("hwid");
+        var sid = req.queryString("sid");
+
+
+        //CHECK INPUT PARAMETER
+        if(!hwid || !sid ){
+            //res.status(500);
+            res.json({err:true, status:"err_query_paramter_hwid_or_sid_or_not_set", matchmaking_state:null,game_state:null});
+            return;
+        }
+
+        //CHECK_SESSION
+        session_handling.check_valid_session(hwid,sid,function (cvs_err,cvs_res) {
+            if(cvs_err){
+                //res.status(500);
+                res.json({err:cvs_err, status:"err_session_check_failed"});
+                return;
+            }
+            //IF SESSION VALID -> LIST PLAYERS
+            if(cvs_res){
+                profile_handling.get_player_config(hwid,function (spc_err,spc_res) {
+                    res.json({err:spc_err, status:spc_res});
+                });
+            }else{
+                res.json({err:cvs_err, status:"err_cfg_load_failed"});
+            }
+        });
+    }catch (e) {
+        res.json({err:e, status:null});
+    }
+});
+
+router.post('/set_user_config',function (req,res,next) {
+    try{
+        var hwid = req.queryString("hwid");
+        var sid = req.queryString("sid");
+        var config_json = req.bodyJson();
+
+
+        //CHECK INPUT PARAMETER
+        if(!hwid || !sid ){
+            //res.status(500);
+            res.json({err:true, status:"err_query_paramter_hwid_or_sid_or_not_set", matchmaking_state:null,game_state:null});
+            return;
+        }
+
+        //CHECK_SESSION
+        session_handling.check_valid_session(hwid,sid,function (cvs_err,cvs_res) {
+            if(cvs_err){
+                //res.status(500);
+                res.json({err:cvs_err, status:"err_session_check_failed"});
+                return;
+            }
+            //IF SESSION VALID -> LIST PLAYERS
+            if(cvs_res){
+                profile_handling.set_player_config(config_json,hwid,function (spc_err,spc_res) {
+                    res.json({err:spc_err, status:spc_res});
+                });
+            }else{
+                res.json({err:cvs_err, status:"err_cfg_update_failed"});
+            }
+        });
+    }catch (e) {
+        res.json({err:e, status:null});
+    }
+});
+
+
 module.exports = router;
