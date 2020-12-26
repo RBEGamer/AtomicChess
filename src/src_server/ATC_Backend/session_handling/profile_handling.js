@@ -83,9 +83,9 @@ function get_profile_virtual_id(_vid, _callback){
 
 
 
-function get_player_config(_cfg, _hwid, _callback){
+function get_player_config(_hwid, _callback){
         //UPDATE PROFILE
-        var profile_config = {cfg:_cfg};
+
         MDB.getProfileCollection().findOne({hwid:_hwid, DOCTYPE:"PROFILE"},function(gp_err,gp_res){
             _callback(gp_err,gp_res.profile_config);
         });
@@ -94,7 +94,7 @@ function get_player_config(_cfg, _hwid, _callback){
 function set_player_config(_cfg,_hwid, _callback){
     //UPDATE PROFILE
     var profile_config = {cfg:_cfg};
-    MDB.getProfileCollection().updateOne({hwid:_hwid},{$set:profile_config},function (uo_err,uo_res) {
+    MDB.getProfileCollection().updateOne({hwid:_hwid,DOCTYPE:"PROFILE"},{$set:profile_config},function (uo_err,uo_res) {
         _callback(uo_err,"ok");
     });
 }
