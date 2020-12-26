@@ -801,16 +801,16 @@ router.get('/get_user_config',function (req,res,next) {
         session_handling.check_valid_session(hwid,sid,function (cvs_err,cvs_res) {
             if(cvs_err){
                 //res.status(500);
-                res.json({err:cvs_err, status:"err_session_check_failed"});
+                res.json({err:cvs_err, status:"err_session_check_failed",cfg:null});
                 return;
             }
             //IF SESSION VALID -> LIST PLAYERS
             if(cvs_res){
                 profile_handling.get_player_config(hwid,function (spc_err,spc_res) {
-                    res.json({err:spc_err, status:spc_res});
+                    res.json({err:spc_err, status:"ok",cfg:spc_res});
                 });
             }else{
-                res.json({err:cvs_err, status:"err_cfg_load_failed"});
+                res.json({err:cvs_err, status:"err_cfg_load_failed",cfg:null});
             }
         });
     }catch (e) {
