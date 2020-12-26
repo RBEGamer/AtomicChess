@@ -793,7 +793,7 @@ router.get('/get_user_config',function (req,res,next) {
         //CHECK INPUT PARAMETER
         if(!hwid || !sid ){
             //res.status(500);
-            res.json({err:true, status:"err_query_paramter_hwid_or_sid_or_not_set", matchmaking_state:null,game_state:null});
+            res.json({err:true, status:"err_query_paramter_hwid_or_sid_or_not_set", cfg:null});
             return;
         }
 
@@ -828,7 +828,7 @@ router.post('/set_user_config',function (req,res,next) {
         //CHECK INPUT PARAMETER
         if(!hwid || !sid ){
             //res.status(500);
-            res.json({err:true, status:"err_query_paramter_hwid_or_sid_or_not_set", matchmaking_state:null,game_state:null});
+            res.json({err:true, status:"err_query_paramter_hwid_or_sid_or_not_set"});
             return;
         }
 
