@@ -854,4 +854,23 @@ router.post('/set_user_config',function (req,res,next) {
 });
 
 
+router.post('/store_user_log',function (req,res,next) {
+    try{
+        var hwid = req.queryString("hwid");
+        var sid = req.queryString("sid");
+        var config_json = req.bodyJson();
+
+        console.log(req);
+       
+         //TODO STORE LOG UNDER HWID IF SET ELSE  ?
+              //  profile_handling.set_player_config(config_json,hwid,function (spc_err,spc_res) {
+               //     res.json({err:spc_err, status:spc_res});
+               // });
+           
+       
+    }catch (e) {
+        res.json({err:e, status:null});
+    }
+});
+
 module.exports = router;
