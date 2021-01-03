@@ -10,7 +10,7 @@ ATCGUI_SITE_METHOD = git
 ATCGUI_LICENSE = GPL-2.0+
 
 # NOW ADD QT DEPENDENCIES
-ATCGUI_DEPENDENCIES = qt5quickcontrols2 qt5base qt5quickcontrols qt5declarative zeromq czmq protobuf 
+ATCGUI_DEPENDENCIES = qt5quickcontrols2 qt5base qt5quickcontrols qt5declarative 
 
 define ATCGUI_BUILD_CMDS
 	@echo ATCGUI_BUILD!
