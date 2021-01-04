@@ -217,6 +217,12 @@ These packages are not required, but used for development.
 
 There are some more applications and libraries for development and testing installed, but the system is working with these mentioned above.
 
+#### STAT PACKAGE
+In the default configuration the `stat` command is missing on the target filesystem. The command is needed in order to use the Visual GDB Plugin later for remote debugging.
+It uses the command to verify a successful depoyment of the compiled binary.
+The `stat` command is located in the `coreutils` package, which is part of the busybox package. Busybox offers a different configuration menu which is accessable with the `$ make busybox-menuconfig`. In the following window the package can be activated in the `Coreutils -> stat` submenu.
+
+
 ### FILE SYSTEM SIZE
 
 ![make menuconfig](./documentation_images/buildroot_file_system.png)
