@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Buildroot CI_BUILD-4-gd0f30a52 Configuration
+# Buildroot CI_BUILD-5-g9e500f05 Configuration
 #
 BR2_HAVE_DOT_CONFIG=y
 BR2_HOST_GCC_AT_LEAST_4_9=y
@@ -581,7 +581,7 @@ BR2_PACKAGE_LINUX_TOOLS_GPIO=y
 #
 BR2_PACKAGE_ATCGUI=y
 # BR2_PACKAGE_ATCTP is not set
-BR2_PACKAGE_ATCCTL=y
+# BR2_PACKAGE_ATCCTL is not set
 # BR2_PACKAGE_ATCMISC is not set
 # BR2_PACKAGE_ATCMRPC is not set
 # BR2_PACKAGE_ATCCURL is not set
