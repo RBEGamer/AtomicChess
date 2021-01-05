@@ -824,11 +824,15 @@ router.post('/set_user_config',function (req,res,next) {
         var sid = req.queryString("sid");
         var config_json = req.bodyJson();
 
-    console.log(req);
+    //    console.log(req);
         //CHECK INPUT PARAMETER
         if(!hwid || !sid ){
             //res.status(500);
             res.json({err:true, status:"err_query_paramter_hwid_or_sid_or_not_set"});
+            return;
+        }
+        if(config_json == undefined || config_json.SETTINGS === null || config_json.USER_DATA === null){
+            res.json({err:true, status:"err_bodyJson() is null"});
             return;
         }
 
@@ -858,16 +862,36 @@ router.post('/store_user_log',function (req,res,next) {
     try{
         var hwid = req.queryString("hwid");
         var sid = req.queryString("sid");
-        var config_json = req.bodyJson();
+        var log = req.bodyJson();
 
-        console.log(req);
-       
-         //TODO STORE LOG UNDER HWID IF SET ELSE  ?
-              //  profile_handling.set_player_config(config_json,hwid,function (spc_err,spc_res) {
-               //     res.json({err:spc_err, status:spc_res});
-               // });
-           
-       
+       // console.log(req);
+        //CHECK INPUT PARAMETER
+        if(!hwid || !sid ){
+            //res.status(500);
+            res.json({err:true, status:"err_query_paramter_hwid_or_sid_or_not_set"});
+            return;
+        }
+        if(log == undefined || log.log === null){
+            res.json({err:true, status:"err_bodyJson() is null"});
+            return;
+        }
+
+        //CHECK_SESSION
+        session_handling.check_valid_session(hwid,sid,function (cvs_err,cvs_res) {
+            if(cvs_err){
+                //res.status(500);
+                res.json({err:cvs_err, status:"err_session_check_failed"});
+                return;
+            }
+            //IF SESSION VALID -> LIST PLAYERS
+            if(true || cvs_res){
+                profile_handling.append_player_log(log,hwid,function (spc_err,spc_res) {
+                    res.json({err:spc_err, status:spc_res});
+                });
+            }else{
+                res.json({err:cvs_err, status:"err_cfg_update_failed"});
+            }
+        });
     }catch (e) {
         res.json({err:e, status:null});
     }

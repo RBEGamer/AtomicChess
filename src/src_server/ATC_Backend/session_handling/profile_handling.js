@@ -54,7 +54,7 @@ function create_profile(_hwid, _playertype ,_callback){
         fn = ANG.generate_fullname_underscore()+ "_" + vid.substr(0,3); //USE FIRST 5 CHARS OF VIRTUAL ID AS AN IDENTIFIER
     }
 
-    var profile={profile_config:{"SETTINGS":null,"USER_DATA":null},hwid:_hwid, DOCTYPE:"PROFILE",account_created:Date.now(), rank:0,elo_rank_readable:CR.rank_to_elo_rating_name(0), friendly_name:fn,virtual_player_id:vid,player_type:_playertype};
+    var profile={profile_config:{"SETTINGS":null,"USER_DATA":null},logs:[],hwid:_hwid, DOCTYPE:"PROFILE",account_created:Date.now(), rank:0,elo_rank_readable:CR.rank_to_elo_rating_name(0), friendly_name:fn,virtual_player_id:vid,player_type:_playertype};
     MDB.getProfileCollection().insertOne(profile,function(err,res){
         if(err){
             _callback(err,res,profile);
@@ -93,11 +93,22 @@ function get_player_config(_hwid, _callback){
 
 function set_player_config(_cfg,_hwid, _callback){
     //UPDATE PROFILE
-    var profile_config = {cfg:_cfg};
+    var profile_config = {profile_config:{SETTINGS:_cfg.SETTINGS,USER_DATA:_cfg.USER_DATA, last_update: Date.now()}};
     MDB.getProfileCollection().updateOne({hwid:_hwid,DOCTYPE:"PROFILE"},{$set:profile_config},function (uo_err,uo_res) {
         _callback(uo_err,"ok");
     });
 }
+
+function append_player_log(_log,_hwid, _callback){
+    //UPDATE PROFILE
+    var logs = {};
+    logs[Date.now()] = _log;
+    //APPEND LOG ENTRY
+    MDB.getProfileCollection().updateOne({hwid:_hwid,DOCTYPE:"PROFILE"},{$push:{logs:logs}},function (uo_err,uo_res) {
+        _callback(uo_err,"ok");
+    });
+}
+
 module.exports = {
 
 
@@ -112,5 +123,6 @@ module.exports = {
     create_profile,
     apply_points_to_profile,
     set_player_config,
-    get_player_config
+    get_player_config,
+    append_player_log
 }
