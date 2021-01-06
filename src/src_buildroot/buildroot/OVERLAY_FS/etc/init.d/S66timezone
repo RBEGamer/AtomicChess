@@ -1,0 +1,41 @@
+#!/bin/sh
+# /etc/init.d/S66timezone ATCProject Marcel Ochsendorf marcel.ochsendorf.com
+#
+# atc        Starts all ATC pacakges.
+#
+
+
+
+umask 077
+
+start() {
+
+	rm -f /etc/localtime
+  ln -sf /usr/share/zoneinfo/Europe/Rome /etc/localtime
+	echo "NTP OK"
+}
+stop() {
+	printf "Stopping S66timezone"
+
+}
+restart() {
+	stop
+	start
+}
+
+case "$1" in
+  start)
+	start
+	;;
+  stop)
+	stop
+	;;
+  restart|reload)
+	restart
+	;;
+  *)
+	echo "Usage: $0 {start|stop|restart}"
+	exit 1
+esac
+
+exit $?
