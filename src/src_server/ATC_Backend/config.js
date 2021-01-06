@@ -52,12 +52,18 @@ function init_config(){
 
 }
 
-
-
+function set_key(_key, _value){
+    config[String(_key)] = _value;
+}
+function get_key(_key){
+    return config[String(_key)];
+}
 module.exports = {
     getConfig: function () {
         return config;
     },
-    init_config
+    init_config,
+    get_key,
+    set_key
 
 }

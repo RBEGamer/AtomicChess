@@ -43,7 +43,9 @@ router.get('/webclient', function(req, res, next) {
 });
 
 
-
+router.get('/server_config', function(req, res, next) {
+  res.render('server_config', { title: 'SERVER CONFIG' });
+});
 
 
 

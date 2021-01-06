@@ -7,11 +7,13 @@
   "session_cleanup_loop_interval": 2,
   "matchmaking_runner_interval": 5,
   "matchmaking_enable_minimum_wait": true,
+  "matchmaking_ai_enable": true,
   "mongodb_database_name": "ATC",
   "mongodb_collection_profiles": "profiles",
   "mongodb_collection_games": "games",
   "mongodb_collection_lobby": "lobby",
   "chess_move_validator_api_url": "http://127.0.0.1:5001",
   "github_repository": "https://github.com/RBEGamer/AtomicChessOS",
-  "impressum_ulr": "https://marcelochsendorf.com/impressum"
+  "impressum_ulr": "https://marcelochsendorf.com/impressum",
+  "settings_change_auth_key": "1337atomicchess"
 }

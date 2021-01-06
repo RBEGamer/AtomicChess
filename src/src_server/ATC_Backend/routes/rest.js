@@ -13,7 +13,7 @@ var lobby_handling = require("../session_handling/lobby_handling");
 var session_handling = require("../session_handling/session_handler");
 var game_handling = require("../session_handling/game_handler");
 var CBL = require("../chess_related_logic/chess_board_logic");
-
+var CFG = require('../config'); //include the cofnig file
 
 
 
@@ -707,6 +707,7 @@ router.get('/make_move',function (req,res,next) {
 
 router.get('/gmm',function (req,res,next) {
     try{
+
     CBL.get_board(CBL.get_start_opening_fen(),CBL.get_start_opening_fen(),CBL.PLAYER_TURN.BLACK,false,function (_err,_res) {
         res.json({err:_err,res:_res});
     });
@@ -716,8 +717,49 @@ router.get('/gmm',function (req,res,next) {
     }
 });
 
+router.get('/server_config',function (req,res,next) {
+    try{
+        var authkey = req.queryString("authkey");
+        var key = req.queryString("key");
+        var value = req.queryString("value");
 
+        if(!key || !value || !authkey){
+            //res.status(500);
+            res.json({err:true, status:"err_query_paramter_value"});
+            return;
+        }
 
+        if(authkey !== CFG.getConfig().settings_change_auth_key){
+            res.json({err:true, status:"err_authkey_false"});
+            return;
+        }
+
+        if(key === "settings_change_auth_key"){
+            res.json({err:true, status:"err_cant_set_auth_key_over_webconsole"});
+            return;
+        }
+        CFG.set_key(key,value);
+        var cfg = CFG.getConfig();
+        res.json({err:null,res:cfg});
+        return;
+    }catch (e) {
+        res.json({err:e,res:null});
+        return;
+    }
+});
+
+router.get('/get_server_config',function (req,res,next) {
+    try{
+        var cfg = CFG.getConfig();
+        var cfg_readonly = Object.assign({}, cfg); //CREATE A READ ONLY COPY OF THE CONFIG
+        cfg_readonly.settings_change_auth_key = "";
+        res.json({err:null,res:cfg_readonly});
+        return;
+    }catch (e) {
+        res.json({err:e,res:null});
+        return;
+    }
+});
 
 
 //------- THIS SNITTPET WAS FROM MY NODE_JS TEMPLATE --------------------------------- //
@@ -856,6 +898,8 @@ router.post('/set_user_config',function (req,res,next) {
         res.json({err:e, status:null});
     }
 });
+
+
 
 
 router.post('/store_user_log',function (req,res,next) {
