@@ -242,6 +242,56 @@ router.get('/logout',function(req,res,next){
     }
 });
 
+
+
+
+
+
+router.get('/abort_game',function (req,res,next) {
+    try{
+        var hwid = req.queryString("hwid");
+        var sid = req.queryString("sid");
+
+        //CHECK INPUT PARAMETERs
+        if(!hwid || !sid){
+            //res.status(500);
+            res.json({err:true, status:"err_query_paramter_hwid_or_sid_or_ps_not_set"});
+            return;
+        }
+
+        //CHECK_SESSION
+        session_handling.check_valid_session(hwid,sid,function (cvs_err,cvs_res) {
+            if(cvs_err){
+                //res.status(500);
+                res.json({err:cvs_err, status:"err_session_check_failed"});
+                return;
+            }
+            //IF SESSION VALID -> CHANGE PLAYERSTATE
+            if(cvs_res){
+                //   lobby_handling.set
+                lobby_handling.remove_player_from_lobby(hwid,function (spl_err,spl_res) {
+                    //CANCEL MATCH IF A MATCH IS RUNNING
+                    game_handling.cancel_match_for_player(hwid,function (cmp_err,cmp_res){
+                        res.json({err:err,cmp_err:cmp_err,spl_err:spl_err,status:"ok"});
+                        return;
+                    });
+                },false);
+            }else{
+                //res.status(500);
+                res.json({err:cvs_err, status:"err_session_key_sid_check_failed"});
+                return;
+            }
+        });
+    }catch (e) {
+        res.json({err:e, status:null});
+        return;
+    }
+});
+
+
+
+
+
 /**
  # @INPUT_QUERY
  - table_id (=hwid)
