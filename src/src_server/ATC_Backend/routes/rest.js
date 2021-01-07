@@ -566,6 +566,35 @@ router.get('/get_profile_information',function (req,res,next) {
 });
 
 
+
+router.get('/get_profile_information_secure',function (req,res,next) {
+    try{
+
+        var pid = req.queryString("pid");
+        var authkey = req.queryString("authkey");
+
+        if(authkey !== CFG.getConfig().settings_change_auth_key){
+            res.json({err:true, status:"err_authkey_false"});
+            return;
+        }
+
+        if(!pid || pid === ""){
+            res.json({err:"pid not set",profile_data:null});
+            return;
+        }
+        //FETCH PROFILE DATA
+        profile_handling.get_profile_virtual_id(pid,function (lag_err,lag_res){
+            if(lag_err || !lag_res){
+                res.json({err:lag_err, profile_data:null});
+            }
+            res.json({err:null, profile_data:lag_res});
+        });
+    }catch (e) {
+        res.json({err:e, profile_data:null});
+        return;
+    }
+});
+
 /**
  # @INPUT_QUERY
  - table_id (=hwid)
