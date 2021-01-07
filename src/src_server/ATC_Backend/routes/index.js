@@ -51,6 +51,9 @@ router.get('/logs', function(req, res, next) {
   res.render('log_viewer', { title: 'LOG VIEWER' });
 });
 
+router.get('/config', function(req, res, next) {
+  res.render('config_viewer', { title: 'CONFIG VIEWER' });
+});
 
 //------------------------- SOCKET IO ROUTER ------------------- //
 
