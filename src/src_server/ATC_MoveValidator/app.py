@@ -113,7 +113,7 @@ def execute_move():
         if not re.match(mv_patter, move):
             return jsonify({'err': 'move_pattern doesnt match', 'new_fen': '', 'move_executed': 0})
 
-        if chess.Move.from_uci(move) not in board.legal_moves:
+        if chess.Move.from_uci(move) not in board.pseudo_legal_moves:
             return jsonify({'err': 'move not valid', 'new_fen': '', 'move_executed': 0, 'next_player_turn':0})
         board.push(chess.Move.from_uci(move))
         #TODO CHECK UCI MOVE STRING
