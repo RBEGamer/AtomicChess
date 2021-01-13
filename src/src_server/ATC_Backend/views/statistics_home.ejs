@@ -445,7 +445,12 @@
   //EXECUTES SCRIPT IF PAGE LOADED
   $(document).ready(function () {
 
+    var gid = getParameterByName("gid");
+    if(gid != undefined && gid != null){
+      console.log(gid);
 
+      load_game_information(gid);
+    }
     console.log("ready!");
     //HIDE GAME INFORMATION
    //toggle_visible_information_container(false);

@@ -158,7 +158,7 @@ function make_move(_hwid,_move,_callback){
     console.log("make_move :" + String(_hwid) + " -> "+String(_move));
     //TODO get game
     get_player_active_game(_hwid,function (gag_err,gag_res) {
-        if(gag_err){
+        if(gag_err || !gag_res.current_board){
             _callback(gag_err,"no_active_game_found");
             return;
         }

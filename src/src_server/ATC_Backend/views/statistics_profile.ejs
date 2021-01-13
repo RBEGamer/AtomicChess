@@ -84,6 +84,18 @@
             <th scope="row">ACCOUNT CREATION DATE</th>
             <td id="account_created">---</td>
           </tr>
+          <tr>
+            <th scope="row"></th>
+            <td id="account_created">
+
+              <table>
+                <tr><td><button type="button" onclick="open_logs()" class="btn btn-info">PLAYER LOGS</button></td>
+                  <td><button type="button" onclick="open_settings()" class="btn btn-info">PLAYER SETTINGS</button></td>
+                </tr>
+              </table>
+
+            </td>
+          </tr>
           </tbody>
         </table>
 
@@ -200,6 +212,14 @@
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
   }
 
+
+  function open_logs(){
+    window.location.href = "/logs?pid=" + getParameterByName('pid');
+  }
+
+  function open_settings(){
+    window.location.href = "/config?pid=" + getParameterByName('pid');
+  }
 
 
   //LOADS MORE INFORMATION ABOUT A SPECIFIC GAME ID

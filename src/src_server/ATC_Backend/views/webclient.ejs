@@ -446,6 +446,8 @@
     });
   }
 
+
+  var got_game_id= "";
   $(document).ready(function ($) {
     console.log("ready!");
     //HIDE GAME INFORMATION
@@ -483,7 +485,17 @@
         if(SID != null && SID !== ""){
           get_player_state(HWID,SID,function (_state){
             console.log(_state);
+            //CHECK FOR INVALID GAMESTATE / MATCHMKAING COMBINATION => REDIRECT TO HOMESCREEN
+            if(_state.matchmaking_state.waiting_for_game == null || _state.matchmaking_state.waiting_for_game === false){
+              if(_state.game_state != null && _state.game_state.game_running === false){
+                  //TODO ADD MODAL
+                if(got_game_id != ""){
+                  window.location.href = "/statistics?gid=" + String(got_game_id);
+                }
 
+                //AUTO REDIRECT TO STATICSTICS
+              }
+            }
 
             if(_state.matchmaking_state.waiting_for_game != null && _state.matchmaking_state.waiting_for_game === true){
               $('#modalWaitingForGameForm').modal('show');
@@ -491,8 +503,10 @@
               $('#modalWaitingForGameForm').modal('hide');
             }
 
+
             if(_state.game_state != null && _state.game_state.simplified != null && _state.game_state.simplified.is_syncing_phase === true){
               //LOAD GAME
+              got_game_id = _state.game_state.detailed.id;
               console.log("SET PLAYER CONFIRMATION");
               set_playerconfigrmation(HWID,SID);
               load_fen_to_viewer(_state.game_state.simplified.current_board.ExtendetFen);

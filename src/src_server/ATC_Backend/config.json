@@ -3,7 +3,7 @@
   "app_name":"AtomicChessBackend",
   "mongodb_connection_url": "mongodb://127.0.0.1:27017",
   "redis_connection_url": "redis://127.0.0.1:6379",
-  "session_lifetime_in_seconds": 30,
+  "session_lifetime_in_seconds": 20,
   "session_cleanup_loop_interval": 2,
   "matchmaking_runner_interval": 5,
   "matchmaking_enable_minimum_wait": true,
