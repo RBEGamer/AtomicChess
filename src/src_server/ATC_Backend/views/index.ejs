@@ -25,6 +25,8 @@
 
   <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="/css/landing-page.css" rel="stylesheet">
+  <link href="/css/lightbox.min.css" rel="stylesheet">
+  <link href="/css/photo_gallery.css" rel="stylesheet">
   <link href="/css/main.css" rel="stylesheet">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -53,15 +55,65 @@
   <div class="col-md-6 px-0 ">
     <h1 class="display-4">Willkommen beim AtomicChessTable!</h1>
     <p class="lead my-3"><h5>Der autonome Schachtisch</h5></p>
-    <p class="lead-3 mb-0"><h4>Eine Abschlussarbeit von Marcel Ochsendorf, Informatikstudent der <span class="font-weight-bold">FH-Aachen</span></h4></p>
+    <p class="lead-3 mb-0"><h4 class="font-weight-normal">Eine Abschlussarbeit von <span class="font-weight-bold">Marcel Ochsendorf</span><br> Informatikstudent der <span class="font-weight-bold">FH-Aachen</span></h4></p>
+  </div>
+</div>
+
+
+
+<div class="row">
+  <div class="col-md-12">
+    <h1 class="featurette-heading text-justify text-center">
+      <a class="fhcolor_text" href="https://www.fh-aachen.de/studium/informatik-bsc">Über das Projekt</a>
+    </h1>
+  </div>
+  <div class="col-md-12 d-flex justify-content-center">
+
+
+      <p class="lead">
+      Das Ziel dieser Arbeit ist es, einen Schach-Tisch zu konstruieren und programmieren, welcher in der Lage ist Schachfiguren autonom zu bewegen.
+      <br>
+      <br>
+      Der Schwerpunkt liegt dabei insbesondere auf der Programmierung des eingebettenen Systems.
+      Dieses besteht zum einem aus der Positionserkennung und Steuerung der Hardwarekomponenten (Schachfiguren) und zum anderen aus der Kommuniktation zwischen dem Tisch selbst und einem in einer Cloud befindlichen Server.
+      Zum einen ist es möglich, einen Spieler gegen einen Tisch als virtuellen Gegner spielen zu lassen. Es wird somit ein Spiel für eine Einzelperson ermöglicht.
+      <br><br>
+      Zum anderen ist es möglich, zwei Tische miteinander zu verbinden und zwei Spieler geneinander spielen zu lassen.
+      <br>
+      Die Tische dienen dann nur als Spiegel der Schachzüge. Die Züge des ersten Spielers werden dann auf den anderen Tisch (beim zweiten Spieler) gespiegelt und umgekehrt.
+      So ist auch ein Spiel möglich, auch wenn sich die Spieler nicht am selben Ort befinden.
+    </p>
+  </div>
+</div>
+
+
+
+<div class="row">
+  <div class="col-md-12">
+    <h1 class="featurette-heading text-justify text-center">
+      <a class="fhcolor_text" href="https://www.fh-aachen.de/studium/informatik-bsc">Demonstrationsvideo</a>
+    </h1>
+  </div>
+  <div class="col-md-12 d-flex justify-content-center">
+    <iframe width="966" height="543" src="https://www.youtube.com/embed/iZrASSpE8TM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   </div>
 </div>
 
 
 
 
-<hr class="featurette-divider">
 
+
+
+
+
+<hr class="featurette-divider">
+<div class="row">
+  <div class="col-md-12">
+    <h1 class="featurette-heading text-justify text-center">
+      <a class="fhcolor_text" href="https://www.fh-aachen.de/studium/informatik-bsc">Schwerpunkte</a>
+    </h1>
+  </div>
 <div class="row featurette">
   <div class="col-md-7">
     <h2 class="featurette-heading"><a class="fhcolor_text" href="https://www.fh-aachen.de/studium/informatik-bsc">Informatik</a></h2>
@@ -96,6 +148,9 @@
 
 <hr class="featurette-divider">
 
+
+
+
 <div class="row featurette">
   <div class="col-md-7 order-md-2">
     <h2 class="featurette-heading"><a class="fhcolor_text" href="https://www.fh-aachen.de/fachbereiche/elektrotechnik-und-informationstechnik">Elektrotechnik und Informationstechnik</a></h2>
@@ -123,13 +178,93 @@
   </div>
 </div>
 
-<!-- /END THE FEATURETTES -->
 
+
+
+
+
+
+    <div class="row featurette">
+      <div class="col-md-7">
+        <h2 class="featurette-heading"><a class="fhcolor_text" href="https://www.fh-aachen.de/studium/informatik-bsc">Mechanik</a></h2>
+        <p class="lead">
+
+          Mechanik ist die Lehre von der Bewegung von Körpern sowie den dabei wirkenden Kräften.
+          Um die Schachfiguren von einem Feld auf das nächste zu versetzten, braucht es Mechanik.
+          <br></br>
+          Mechanik ist nicht direkt Teil des Informatikstudiums, doch die Verwendung und das Programmieren von Motoren definitiv.
+          <br>
+          Die Bewegung im Schachtisch geht von zwei Schrittmotoren und zwei Elektromagneten aus.
+          Alle Schachfiguren müssen daher magnetisch sein.
+          <br><br>
+          Die Elektromagnete werden unter dem Tisch in X- und Y-Richtung verschoben.
+          Für jede Richtung ist einer der Schrittmotoren zuständig. An der gewünschten Position angekommen, wird einer der Elektromagenten anktiviert, sodass die die Figur oberhalb der Platte magnetisch an diesen gebunden ist.
+          Zwei Elektromagneten sind dehalb nötig, um die Ecken der Platte erreichen zu können.
+          Wäre nur ein Elektromagnet mittig angebracht, würde die Konstruktion des Kreuztisches verhindern, dass die Ecken des Tisches erreicht werden können.
+      </div>
+      <div class="col-md-5">
+        <img class="featurette-image img-fluid mx-auto" data-src="/img/rsz_img_7413.png" src="/img/rsz_img_7413.png" alt="code snipped illustration">
+      </div>
+    </div>
+
+
+  <div class="row featurette">
+    <div class="col-md-7 order-md-2">
+      <h2 class="featurette-heading"><a class="fhcolor_text" href="https://www.fh-aachen.de/studium/informatik-bsc">Verteile Systeme</a></h2>
+      <p class="lead">
+        Cloud-Computing ist die bedarfsabhängige Bereitstellung von IT-Ressourcen über das Internet.
+        Der Tisch benötigt eine Cloud-Verbindung, um andere Spieler zu finden und zu verbinden. Zudem wird auch die Berechnung von möglichen Zügen in der Cloud ausgeführt.
+        Doch was ist die Cloud? Die Cloud ist ein Computer oder mehrere Computer, welche mit dem Internet verbunden sind und für andere erreichbar sind.
+        <br><br>
+        Dieser kann auf bestimmte Anfragen genau definierte Antworten zurücksenden.
+        Im Fall der Schachcloud steht dieser in einem Rechenzentrum in Frankfurt; alle Schachtische, die sich im Internet befinden, versuchen eine Verbindung mit der Schach-Cloud herzustellen und ihren Gegenspieler nach neuen Schachzügen.
+        <br>
+        Dazu sendet der Tisch seine eindeutige Nummer und die Position aller Figuren auf dem Schachbrett.
+        Die Cloud führt noch andere Aktionen aus, wie das Zusammenbringen von Spielern, welche auf der Suche nach einem Spiel sind (Matchmaking).
+        Auch werden alle bereits geführen Spiele gespeichert und können mit anderen geteilt werden.
+
+
+      </p>
+      <a class="btn btn-block btn-dark" href="/webclient">Jetzt ausprobieren!</a>
+
+    </div>
+    <div class="col-md-5 order-md-1">
+      <img class="featurette-image img-fluid mx-auto" data-src="/img/rsz_img_7412.png" src="/img/rsz_img_7414.jpg" alt="Generic placeholder image">
+    </div>
+  </div>
+
+
+
+<!-- /END THE FEATURETTES -->
 </div><!-- /.container -->
 
 
 
 
+
+
+
+
+  <div class="photo-gallery">
+    <div class="container">
+      <div class="intro">
+        <h1 class="text-center fhcolor_text">Photo Gallery</h1>
+      </div>
+      <div class="row photos">
+        <div class="col-sm-6 col-md-4 col-lg-3 item"><a href="/img/gallery/a_high.jpg" data-lightbox="photos"><img class="img-fluid" src="/img/gallery/a.jpg"></a></div>
+        <div class="col-sm-6 col-md-4 col-lg-3 item"><a href="/img/gallery/b_high.jpg" data-lightbox="photos"><img class="img-fluid" src="/img/gallery/b.jpg"></a></div>
+        <div class="col-sm-6 col-md-4 col-lg-3 item"><a href="img/gallery/c_high.jpg" data-lightbox="photos"><img class="img-fluid" src="/img/gallery/c.jpg"></a></div>
+        <div class="col-sm-6 col-md-4 col-lg-3 item"><a href="img/gallery/d_high.jpg" data-lightbox="photos"><img class="img-fluid" src="/img/gallery/d.jpg"></a></div>
+        <div class="col-sm-6 col-md-4 col-lg-3 item"><a href="img/gallery/e_high.jpg" data-lightbox="photos"><img class="img-fluid" src="/img/gallery/e.jpg"></a></div>
+        <div class="col-sm-6 col-md-4 col-lg-3 item"><a href="img/gallery/f_high.jpg" data-lightbox="photos"><img class="img-fluid" src="/img/gallery/f.jpg"></a></div>
+        <div class="col-sm-6 col-md-4 col-lg-3 item"><a href="img/gallery/g_high.jpg" data-lightbox="photos"><img class="img-fluid" src="/img/gallery/g.jpg"></a></div>
+        <div class="col-sm-6 col-md-4 col-lg-3 item"><a href="img/gallery/h_high.jpg" data-lightbox="photos"><img class="img-fluid" src="/img/gallery/h.jpg"></a></div>
+      </div>
+    </div>
+  </div>
+
+
+<!-- /.container -->
 
 
 
@@ -166,7 +301,7 @@
 
 <script src="/js/jquery/jquery.min.js"></script>
 <script src="/bootstrap/js/bootstrap.min.js"></script>
-
+<script src="/js/lightbox.min.js"></script>
 <script>
   $(document).ready(function () {
     console.log("ready!");
