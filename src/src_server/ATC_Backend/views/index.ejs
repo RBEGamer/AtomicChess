@@ -42,12 +42,44 @@
 
 <body class="container">
 
-<nav class="navbar navbar-light bg-light static-top fhcolor_bg">
-  <div class="container">
-    <a class="navbar-brand" href="/"><img width="64px"  src="/img/icons/chess_icon.png"><b>AtomicChess</b></a>
-    <a class="btn btn-dark" href="/webclient">Spiele gegen den Tisch</a>
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+  <a class="navbar-brand" href="/"><img width="64px"  src="/img/icons/chess_icon.png"><b>AtomicChess</b></a>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="#anch_about">Über das Projekt</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#anch_video">Video</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#anch_schwerpunkte">Schwerpunkte</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#anch_picutres">Gallerie</a>
+      </li>
+
+
+
+    </ul>
+
+    <a class="btn btn-large btn-dark" href="/webclient">Spiele gegen den Tisch</a>
   </div>
 </nav>
+
 
 
 
@@ -61,7 +93,7 @@
 
 
 
-<div class="row">
+<div id="anch_about" class="row">
   <div class="col-md-12">
     <h1 class="featurette-heading text-justify text-center">
       <a class="fhcolor_text" href="https://www.fh-aachen.de/studium/informatik-bsc">Über das Projekt</a>
@@ -88,7 +120,7 @@
 
 
 
-<div class="row">
+<div id="anch_video" class="row">
   <div class="col-md-12">
     <h1 class="featurette-heading text-justify text-center">
       <a class="fhcolor_text" href="https://www.fh-aachen.de/studium/informatik-bsc">Demonstrationsvideo</a>
@@ -108,7 +140,7 @@
 
 
 <hr class="featurette-divider">
-<div class="row">
+<div id="anch_schwerpunkte" class="row">
   <div class="col-md-12">
     <h1 class="featurette-heading text-justify text-center">
       <a class="fhcolor_text" href="https://www.fh-aachen.de/studium/informatik-bsc">Schwerpunkte</a>
@@ -223,7 +255,8 @@
         Die Cloud führt noch andere Aktionen aus, wie das Zusammenbringen von Spielern, welche auf der Suche nach einem Spiel sind (Matchmaking).
         Auch werden alle bereits geführen Spiele gespeichert und können mit anderen geteilt werden.
 
-
+        <br><br>
+        <span class="font-weight-bold">So ist es auch möglich, sich mit einem Webbrowser in das System einzuloggen und gegen einen Schatisch zu Spielen!</span>
       </p>
       <a class="btn btn-block btn-dark" href="/webclient">Jetzt ausprobieren!</a>
 
@@ -243,9 +276,7 @@
 
 
 
-
-
-  <div class="photo-gallery">
+  <div id="anch_picutres" class="photo-gallery">
     <div class="container">
       <div class="intro">
         <h1 class="text-center fhcolor_text">Photo Gallery</h1>
@@ -273,7 +304,7 @@
 
 
 <!-- Footer -->
-<footer class="footer bg-light">
+<footer class="footer fhcolor_bg">
   <div class="container text-center">
 
 
@@ -284,7 +315,7 @@
         <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
           <form action="/redirect" method="GET">
           <input type="hidden" name="destination" value="impressum"/>
-          <input type="submit" class="btn btn-small btn-link" value="IMPRESSUM" />
+          <input type="submit" class="btn btn-dark" value="IMPRESSUM" />
           </form>
         </div>
       </div>
