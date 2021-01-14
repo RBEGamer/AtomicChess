@@ -1,6 +1,9 @@
 <html lang="en">
 
 <head>
+  <meta content="text/html; charset=utf-8" http-equiv="content-type">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
   <link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png">
   <link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-icon-72x72.png">
@@ -23,15 +26,14 @@
   <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="/css/landing-page.css" rel="stylesheet">
   <link href="/css/main.css" rel="stylesheet">
-  <link href="/css/dashboard_main.css" rel="stylesheet">
-  <link href="/css/dashboard_cards.css" rel="stylesheet">
-  <link rel="stylesheet" href="/js/PGNViewer/css/pgnvjs.css">
-  <link href="/css/font-awesome.min.css" rel="stylesheet">
 
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
   <link href="/css/three_dots_loading_animations.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/chessboard.css">
+
 
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
   <meta name="description" content="AtomicChess">
   <meta name="author" content="Marcel Ochsendorf">
   <meta http-equiv="cache-control" content="max-age=0" />
@@ -41,32 +43,7 @@
   <meta http-equiv="pragma" content="no-cache" />
   <title>AtomicChess - WebClient</title>
 
-  <style>
 
-    .snippet {
-      position: relative;
-      background: #fff;
-      padding: 2rem 5%;
-      margin: 1.5rem 0;
-      box-shadow: 0 .4rem .8rem -.1rem rgba(0, 32, 128, .1), 0 0 0 1px #f0f2f7;
-      border-radius: .25rem;
-      width: 50%;
-      margin: 0 auto;
-    }
-    .examples .snippet:before {
-      display: inline-block;
-      position: absolute;
-      top: 0;
-      left: 0;
-      padding: 0 5px;
-      content: attr(data-title);
-      font-size: .75rem;
-      font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      color: white;
-      background-color: rgb(255, 25, 100);
-      border-radius: .25rem 0 .25rem 0;
-    }
-  </style>
 
 </head>
 
@@ -74,7 +51,7 @@
 
 <nav class="navbar navbar-light bg-light static-top">
   <div class="container">
-    <a class="navbar-brand" href="/statistics"><img width="64px"  src="/img/icons/chess_icon.png"><b>AtomicChess - WebClient</b></a>
+    <a class="navbar-brand" href="/"><img width="64px"  src="/img/icons/chess_icon.png"><b>AtomicChess - WebClient</b></a>
   </div>
 </nav>
 
@@ -154,28 +131,21 @@
 
 
 <div class="row">
-  <div class="col-lg-12 h-100 text-center text-lg-center my-auto">
+  <div class="col-lg-12 text-center text-lg-center my-auto">
       <h4 class="text-justify text-center" id="player_color">--- GAME ---</h4>
   </div>
-</div>
 
+  <div class="col-12">
 
-<!-- MAIN CONTENT  -->
-<div class="row">
-
-
-  <div class="col-md-7">
-    <div class="card-title text-justify" id="fen_viewer_board"></div>
+    <div class="d-flex justify-content-center">
+      <div id="board" style="width: 60%"></div>
+    </div>
   </div>
 
-  <div class="col-md-5" id="move_options">
-    <h4 class="text-justify text-center">--- TURN STATE ---</h4>
-
-</div>
 </div>
 
 
-</div>
+
 
 
 
@@ -185,7 +155,9 @@
 
 <!--<script src="/js/jquery/jquery.min.js"></script> -->
 
-<script src="/js/PGNViewer/js/pgnvjs.js"></script>
+<script src="js/json3.min.js"></script>
+<script src="js/jquery/jquery.min.js"></script>
+<script src="js/chessboard.js"></script>
 <script src="/bootstrap/js/bootstrap.min.js"></script>
 
 <script>
@@ -196,6 +168,12 @@
 
   const PLAYER_STATE_SEARCHING = "4";
   const PLAYER_STATE_IDLE ="1";
+
+  //------ CONFIG CHESSBOARD ------
+
+
+
+
   //https://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid
   function uuidv4() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
@@ -235,17 +213,10 @@
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
   }
 
-  var DISP_FEN = "";
-  function load_fen_to_viewer(_fen){
-    if(_fen == null || _fen === ""){
-      return;
-    }
-    if(DISP_FEN == _fen){return;}
-    var fen_viewer_board = pgnBoard('fen_viewer_board', { position: _fen, locale: 'en', pieceStyle: 'wikipedia', theme:'falken' });
-    DISP_FEN = _fen;
-  }
+
 
   var GMOA_TRIGGERED = 0;
+  var LAST_VALID_FEN = "";
   function generate_moveoption_table(_move_array){
     console.log(_move_array);
     if(GMOA_TRIGGERED == 1){return;}
@@ -289,8 +260,78 @@
     $("#move_options").html(tmp);
     GMOA_TRIGGERED = 1;
   }
-  function exec_move_btn(_mv_string){
-    set_make_move(HWID,SID,_mv_string);
+
+
+
+
+
+  var onChange = function(oldPos, newPos) {
+
+    // board.position();
+
+    console.log("Position changed:");
+    console.log("Old position: " + ChessBoard.objToFen(oldPos));
+    console.log("New position: " + ChessBoard.objToFen(newPos));
+    console.log("--------------------");
+
+    FEN = ChessBoard.objToFen(newPos);
+
+    //  document.getElementById('content').innerHTML = FEN;
+
+
+  };
+
+  var onDrop = function(source, target, piece, newPos, oldPos, orientation) {
+    console.log("Source: " + source);
+    console.log("Target: " + target);
+    console.log("Piece: " + piece);
+    console.log("New position: " + ChessBoard.objToFen(newPos));
+    console.log("Old position: " + ChessBoard.objToFen(oldPos));
+    console.log("Orientation: " + orientation);
+    console.log("--------------------");
+    LAST_VALID_FEN =ChessBoard.objToFen(oldPos);
+    var FEN = ChessBoard.objToFen(newPos);
+    //document.getElementById("myFen").value = FEN;
+
+    exec_move_btn(source + target,ChessBoard.objToFen(oldPos));
+
+
+    //   document.getElementById('content').innerHTML =  wer;
+
+
+  };
+
+  //------ CONFIG BOARD HERE ------- //
+  var BOARD_CFG = {
+    draggable: false,
+    position: '8/8/8/8/8/8/8/8',
+    onDrop: onDrop,
+    onChange: onChange,
+    sparePieces: false,
+    orientation:'black' //white
+  };
+  var board = ChessBoard('board', BOARD_CFG);
+  var update_board = false;
+
+
+  var DISP_FEN = "";
+  function load_fen_to_viewer(_fen){
+    if(_fen == null || _fen === ""){
+      return;
+    }
+    //CHECK SAME => SKIP
+    if(String(_fen).includes(board.fen())){return;}
+    board.position(_fen);
+    DISP_FEN = _fen;
+  }
+
+
+
+
+
+
+  function exec_move_btn(_mv_string, _old){
+    set_make_move(HWID,SID,_mv_string,_old);
   }
 
   function generate_waiting_animation(){
@@ -404,7 +445,8 @@
     });
   }
 
-  function set_make_move(_hwid, _sid, _mv){
+  function set_make_move(_hwid, _sid, _mv, _old_fen){
+  //  debugger;
     if(_hwid == null || _hwid === ""){
       console.log("get_login _hwid not set");
       return false;
@@ -419,7 +461,13 @@
     }
 
     $.get( "/rest/make_move?hwid=" +_hwid + "&sid=" + _sid + "&move=" + _mv, function( data ) {
+    if(data && data.status && data.status === "ok"){
 
+    }else if(data && data.status && data.status === "move not valid"){
+      board.position(_old_fen);
+
+      console.log("-- INVALID MOVE ---");
+    }
 
       return true;
     });
@@ -448,6 +496,12 @@
 
 
   var got_game_id= "";
+
+
+
+
+
+
   $(document).ready(function ($) {
     console.log("ready!");
     //HIDE GAME INFORMATION
@@ -458,8 +512,10 @@
     //IF PLAYERID IS NOT SET SHOW LOGIN FORM
     if(tmp == null || tmp == ""){
       console.log("playerid is null show login screen");
-      $('#m_gng_hwid').val(uuidv4())
-      $('#modalLoginForm').modal('show');
+      var uid= uuidv4();
+      $('#m_gng_hwid').val(uid)
+      window.location.href = "/webclient?playerid="+String(uid);
+     // $('#modalLoginForm').modal('show');
     }else{
       $('#modalLoginForm').modal('hide');
       HWID = tmp;
@@ -484,13 +540,13 @@
 
         if(SID != null && SID !== ""){
           get_player_state(HWID,SID,function (_state){
-            console.log(_state);
+           // console.log(_state);
             //CHECK FOR INVALID GAMESTATE / MATCHMKAING COMBINATION => REDIRECT TO HOMESCREEN
             if(_state.matchmaking_state.waiting_for_game == null || _state.matchmaking_state.waiting_for_game === false){
               if(_state.game_state != null && _state.game_state.game_running === false){
                   //TODO ADD MODAL
                 if(got_game_id != ""){
-                  window.location.href = "/statistics?gid=" + String(got_game_id);
+                  window.location.href = "/statistics?list_count=10&gid=" + String(got_game_id);
                 }
 
                 //AUTO REDIRECT TO STATICSTICS
@@ -509,16 +565,21 @@
               got_game_id = _state.game_state.detailed.id;
               console.log("SET PLAYER CONFIRMATION");
               set_playerconfigrmation(HWID,SID);
-              load_fen_to_viewer(_state.game_state.simplified.current_board.ExtendetFen);
+
               $('#modalLoginForm').modal('hide');
               $('#modalLoadingForm').modal('hide');
               if(_state.game_state.simplified.im_white_player){
-                $("#player_color").html("--- PLAYING ON WHITE ---");
+                BOARD_CFG.orientation = 'white';
+                board.expandConfig(BOARD_CFG);
+                board.orientation('white');
               }else{
-                $("#player_color").html("--- PLAYING ON BLACK ---");
+                BOARD_CFG.orientation = 'black';
+                board.expandConfig(BOARD_CFG);
+                board.orientation('black');
               }
-
+              load_fen_to_viewer(_state.game_state.simplified.current_board.ExtendetFen);
             }
+
 
             if(_state.game_state != null && _state.game_state.simplified != null && _state.game_state.game_running === true){
               //       console.log("SET PLAYER CONFIRMATION");
@@ -526,19 +587,39 @@
               //SHOW PLAYER NAMES
               //SHOW CURRENT BOARD
               //SHOW SITE
-              load_fen_to_viewer(_state.game_state.simplified.current_board.ExtendetFen);
+
+
          //     debugger;
               if(_state.game_state.simplified.is_my_turn === true){
                 //SHOW MOVE BUTTONS UNDER THE FIELD
-                generate_moveoption_table(_state.game_state.simplified.current_board.legal_moves);
+                $("#player_color").html("--- MY TURN ---");
+                //TODO SHOW PLAYERS TURN
+             //   generate_moveoption_table(_state.game_state.simplified.current_board.legal_moves);
+                BOARD_CFG.draggable = true;
+                if(_state.game_state.simplified.im_white_player){
+                  board.orientation('white');
+                }else{
+                  board.orientation('black');
+                }
+                board.expandConfig(BOARD_CFG);
               }else{
-
+                $("#player_color").html("--- OPPONENTS TURN ---");
+                BOARD_CFG.draggable = false;
+                board.expandConfig(BOARD_CFG);
                   generate_waiting_animation();
+
+
               }
-
+              load_fen_to_viewer(_state.game_state.simplified.current_board.ExtendetFen);
+              LAST_VALID_FEN =_state.game_state.simplified.current_board.ExtendetFen;
             }
-
-
+            if(_state.game_state != null && _state.game_state.simplified != null && _state.game_state.simplified.current_board.is_game_over === true) {
+              if(got_game_id != ""){
+                window.location.href = "/statistics?list_count=10&gid=" + String(got_game_id);
+              }else{
+                window.location.href = "/statistics?list_count=10";
+              }
+            }
 
 
           });

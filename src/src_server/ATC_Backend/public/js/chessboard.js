@@ -1235,6 +1235,7 @@
       // redraw the position
       drawPositionInstant()
 
+
       // hide the dragged piece
       $draggedPiece.fadeOut(config.trashSpeed)
 
@@ -1420,7 +1421,9 @@
     // -------------------------------------------------------------------------
     // Public Methods
     // -------------------------------------------------------------------------
-
+    widget.expandConfig = function(cfg){
+      expandConfig(cfg);
+    }
     // clear the board
     widget.clear = function (useAnimation) {
       widget.position({}, useAnimation)
@@ -1814,4 +1817,6 @@
   // expose util functions
   window['Chessboard']['fenToObj'] = fenToObj
   window['Chessboard']['objToFen'] = objToFen
+
+  window['Chessboard']['expandConfig'] = expandConfig
 })() // end anonymous wrapper
