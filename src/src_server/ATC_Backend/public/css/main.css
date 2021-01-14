@@ -1,5 +1,6 @@
 body {
-    padding-top: 50px;
+    padding-top: 10px;
+
 }
 
 .myimage{
@@ -23,6 +24,18 @@ body {
     height: 400px;
 }
 
+
+.fhcolor_text{
+    color: rgba(0,120,116,0.7);
+}
+
+.fhcolor_bg{
+    background-color: rgba(0,120,116,0.9);
+}
+
+.fhcolor_bg_dark{
+    background-color: rgba(0, 110, 106,0.9);
+}
 html {
     /*background: url(/img/emma_pg.png) no-repeat center center fixed; */
     -webkit-background-size: cover;
@@ -57,3 +70,25 @@ html {
 
 
 .top-buffer { margin-top:20px; }
+
+
+.grad_header {
+
+    object-fit: cover;
+    background: black;
+    overflow: hidden;
+    background: #C33764;  /* fallback colour. Make sure this is just one solid colour. */
+    background: -webkit-linear-gradient(rgba(0,120,116,0.2), rgba(0,120,116,0.7)),url("/img/atc_a.jpg");
+    background: linear-gradient(rgba(0,120,116,0.2), rgba(0,120,116,0.7)), url("/img/atc_a.jpg"); /* The least supported option. */
+    background-size: 100%;
+}
+
+.grad_header_two {
+    overflow: hidden;
+    background: #C33764;  /* fallback colour. Make sure this is just one solid colour. */
+    background:url("/img/atc_a.jpg") no-repeat center;
+    background-size: 100%;
+}
+.grad_img {
+    object-fit: cover;
+}

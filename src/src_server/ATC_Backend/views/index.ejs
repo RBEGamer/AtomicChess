@@ -40,38 +40,95 @@
 
 <body class="container">
 
-<nav class="navbar navbar-light bg-light static-top">
+<nav class="navbar navbar-light bg-light static-top fhcolor_bg">
   <div class="container">
     <a class="navbar-brand" href="/"><img width="64px"  src="/img/icons/chess_icon.png"><b>AtomicChess</b></a>
-    <a class="btn btn-info" href="/webclient">PLAY CHESS AGAINST THE TABLE</a>
+    <a class="btn btn-dark" href="/webclient">Spiele gegen den Tisch</a>
   </div>
 </nav>
 
 
-<!-- Masthead -->
-<form action="/webclient" method="GET">
-  <header class="masthead text-white text-center">
-    <div class="overlay"></div>
-    <div class="container">
-      <div class="row">
-        <div class="col-xl-9 mx-auto">
-          <h1 class="mb-5">The self-playing chess of the future</h1>
-        </div>
 
-
-        <noscript>
-          <div class="alert alert-danger">
-            <strong>Fehler :</strong> Bitte aktivieren Sie Javascript um alle Features sehen zu koennen.
-          </div>
-        </noscript>
+<div class="jumbotron p-3 p-md-5 text-white rounded fhcolor_bg grad_header">
+  <div class="col-md-6 px-0 ">
+    <h1 class="display-4">Willkommen beim AtomicChessTable!</h1>
+    <p class="lead my-3"><h5>Der autonome Schachtisch</h5></p>
+    <p class="lead-3 mb-0"><h4>Eine Abschlussarbeit von Marcel Ochsendorf, Informatikstudent der <span class="font-weight-bold">FH-Aachen</span></h4></p>
+  </div>
+</div>
 
 
 
-      </div>
-    </div>
-    </div>
-  </header>
-</form>
+
+<hr class="featurette-divider">
+
+<div class="row featurette">
+  <div class="col-md-7">
+    <h2 class="featurette-heading"><a class="fhcolor_text" href="https://www.fh-aachen.de/studium/informatik-bsc">Informatik</a></h2>
+    <p class="lead">
+
+      Das Ziel dieser Arbeit ist es, einen Schach-Tisch zu konstruieren und programmieren, welcher in der Lage ist Schachfiguren autonom zu bewegen.
+      Der Schwerpunkt liegt dabei insbesondere auf der Programmierung des eingebettenen Systems.
+      Dieses besteht zum einem aus der Positionserkennung und Steuerung der Hardwarekomponenten (Schachfiguren) und zum anderen aus der Kommuniktation zwischen dem Tisch selbst und einem in einer Cloud befindlichen Server.
+      <br>
+      <br>
+      Mittels der Informatik werden diverse Technologien von verschiedenen Einzelsystemen zu einem Gesamtprodukt zusammengesetzt.
+      <br>
+      <br>Zu diesen Einzelsystemen gehören:
+
+    <ul>
+      <li>Programmierung der Spiel-Logik, User-Interface, Hardware-Ansteuerung</li>
+      <li>Kommuniktion mit einer Cloud-Intratruktur</li>
+      <li>Implementierung der Spielflusssteuerung</li>
+      <li>Backend mit Datenbankanbindung zur speicherung der Spiele </li>
+    </ul>
+
+    <br>
+
+    <p class="lead">Hier bietet die <span class="fhcolor_text font-weight-bold">FH-Aachen</span> einen breit gefächerten Wahlmodulkatalog an,
+    welchen einen dabei Untersützt sich in verschiedenen Bereichen zu spezialisieren.
+    </p>
+  </div>
+  <div class="col-md-5">
+    <img class="featurette-image img-fluid mx-auto" data-src="/img/rsz_img_7411.png" src="/img/rsz_img_7411.png" alt="code snipped illustration">
+  </div>
+</div>
+
+<hr class="featurette-divider">
+
+<div class="row featurette">
+  <div class="col-md-7 order-md-2">
+    <h2 class="featurette-heading"><a class="fhcolor_text" href="https://www.fh-aachen.de/fachbereiche/elektrotechnik-und-informationstechnik">Elektrotechnik und Informationstechnik</a></h2>
+    <p class="lead">
+      Damit ein System überhaupt erst programmiert werden kann, muss man sich Gedanken über die Elektronik und Verkabelung des Systems machen.
+      <br>Welchen Hardware will ich eigentlich nutzen und warum?
+      <br>Wie soll mein System später mit seiner Umwelt kommunizieren?
+      <br><br>Im Laufe des Informatikstudium an der <span class="fhcolor_text font-weight-bold">FH-Aachen</span> wird man auch in grundlegender Elektronik unterrichtet.
+      Auslegen von Platinen und Bauteilen, welche Treiber benötigen die Motoren oder welche Spezifikationen müssen berücksichtigt werden.
+      <br><br>
+      Insgesamt zwei Schrittmotoren für die X- und die Y-Beweung sind im Schachtisch verbaut.
+      <br>
+      Zudem sind noch zwei Elektromageneten im Tisch verbaut, die die Schachfiguren wie von Geisterhand über den Tisch ziehen.
+      <br>
+      Zusätzlich befinden sich unter jeder Kachel des Schachfelds, noch Magnetsensoren, um zu erkennen, ob der Spieler eine Figur bewegt.
+      <br>
+      Neben der Verkabelung dieser Steuerungs-Komponenten, enthält das System noch ein Display zur Eingabe von Befehlen durch den Benutzer.
+
+
+
+    </p>
+  </div>
+  <div class="col-md-5 order-md-1">
+    <img class="featurette-image img-fluid mx-auto" data-src="/img/rsz_img_7412.png" src="/img/rsz_img_7412.png" alt="Generic placeholder image">
+  </div>
+</div>
+
+<!-- /END THE FEATURETTES -->
+
+</div><!-- /.container -->
+
+
+
 
 
 
@@ -88,7 +145,7 @@
 
 
     <div class="row">
-      <div class="col-lg-12 h-100 text-center text-lg-center my-auto">
+      <div class="col-lg-12 text-center text-lg-center my-auto">
         <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
           <form action="/redirect" method="GET">
           <input type="hidden" name="destination" value="impressum"/>
@@ -114,6 +171,10 @@
   $(document).ready(function () {
     console.log("ready!");
   });
+
+  setInterval(function(){
+          window.location.reload();
+          },5000);
 </script>
 
 </body>
