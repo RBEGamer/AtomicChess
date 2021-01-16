@@ -1,6 +1,7 @@
 <html lang="en">
 
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densityDpi=device-dpi" />
   <meta content="text/html; charset=utf-8" http-equiv="content-type">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
@@ -32,11 +33,23 @@
   <link rel="stylesheet" href="/css/chessboard.css">
 
   <style>
-    html, body{
+    html, body {
+      margin: 0;
+      height: 100%;
       overflow: hidden;
+      overflow-y: hidden;
     }
-    body{
-      padding-top: 50px;
+
+    .bd{
+      margin: 0;
+      width: 60%;
+      overflow: hidden;
+
+    }
+
+    .bd_pc{
+      min-width: 50%;
+      max-width: 90%;
     }
   </style>
 
@@ -145,8 +158,8 @@
 
   <div class="col-12">
 
-    <div class="d-flex justify-content-center">
-      <div id="board" style="max-width: 60%"></div>
+    <div class="justify-content-center">
+      <div id="board" class="bd" style=""></div>
     </div>
   </div>
 
@@ -512,6 +525,12 @@
 
   $(document).ready(function ($) {
     console.log("ready!");
+
+
+
+    window.addEventListener('resize', function (){
+      board.resize();
+    });
     //HIDE GAME INFORMATION
    //toggle_visible_information_container(false);
 //$("#modalLoginForm").modal.show();
