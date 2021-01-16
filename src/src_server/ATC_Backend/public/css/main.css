@@ -78,8 +78,8 @@ html {
     background: black;
     overflow: hidden;
     background: #C33764;  /* fallback colour. Make sure this is just one solid colour. */
-    background: -webkit-linear-gradient(rgba(0,120,116,0.2), rgba(0,120,116,0.7)),url("/img/atc_a.jpg");
-    background: linear-gradient(rgba(0,120,116,0.2), rgba(0,120,116,0.7)), url("/img/atc_a.jpg"); /* The least supported option. */
+    background: -webkit-linear-gradient(rgba(0,120,116,0.2), rgba(0,120,116,0.8)),url("/img/atc_a.jpg");
+    background: linear-gradient(rgba(0,120,116,0.2), rgba(0,120,116,0.8)), url("/img/atc_a.jpg"); /* The least supported option. */
     background-size: 100%;
 }
 
