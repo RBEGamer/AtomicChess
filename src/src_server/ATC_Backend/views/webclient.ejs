@@ -40,16 +40,21 @@
       overflow-y: hidden;
     }
 
-    .bd{
-      margin: 0;
-      width: 60%;
-      overflow: hidden;
+  .board_base{
+    overflow: hidden;
+    margin: 0;
+  }
 
-    }
-
-    .bd_pc{
+    .bord_mobile_portrait{
       min-width: 50%;
       max-width: 90%;
+    }
+    .bord_mobile_landscape{
+      width: 20%;
+    }
+
+    .board_desktop{
+      width: 60%;
     }
   </style>
 
@@ -159,7 +164,7 @@
   <div class="col-12">
 
     <div class="justify-content-center">
-      <div id="board" class="bd" style=""></div>
+      <div id="board" class="board_base" style=""></div>
     </div>
   </div>
 
@@ -526,7 +531,19 @@
   $(document).ready(function ($) {
     console.log("ready!");
 
+    var bMobile = navigator.userAgent.indexOf( "Mobile" ) !== -1 || navigator.userAgent.indexOf( "iPhone" ) !== -1 || navigator.userAgent.indexOf( "Android" ) !== -1 || navigator.userAgent.indexOf( "Windows Phone" ) !== -1 ;
 
+    if(bMobile){
+      if (window.matchMedia("(orientation: portrait)").matches) {
+        $("#board").addClass("bord_mobile_portrait");
+      }else{
+        $("#board").addClass("bord_mobile_landscape");
+      }
+
+    }else{
+      $("#board").addClass("board_desktop");
+    }
+    board.resize();
 
     window.addEventListener('resize', function (){
       board.resize();
