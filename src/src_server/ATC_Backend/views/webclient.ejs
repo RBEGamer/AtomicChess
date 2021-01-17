@@ -683,9 +683,9 @@
                 $("#nav_ypp").prop("href","/profile?pid="+_state.game_state.simplified.playerprofiles.white_player.virtual_player_id);
                 $("#nav_opp").prop("href","/profile?pid="+_state.game_state.simplified.playerprofiles.black_player.virtual_player_id);
                 $("#player_name").html("<b>" + _state.game_state.simplified.playerprofiles.white_player.firendly_name + "</b> VS " + _state.game_state.simplified.playerprofiles.black_player.firendly_name);
-
+                //IF TYPE IS TABLE _PLAYER => SHOW LIVESTREAM POPUP
                 if(_state.game_state.simplified.playerprofiles.black_player.player_type === 0){
-                $("#alert_message").html("<div class='alert alert-fh' role='alert'>!! YOU ARE PLAYING AGAINS A TABLE !! <a target='_blank' href='/redirect?destination=livestream'> => OPEN LIVESTREAM <= </a></div>");
+                  $("#alert_message").html("<div class='alert alert-fh' role='alert'>!! YOU ARE PLAYING AGAINS A TABLE !! <a target='_blank' href='/redirect?destination=livestream'> => OPEN LIVESTREAM <= </a></div>");
                 }
 
               }else if(_state.game_state.simplified.playerprofiles && _state.game_state.simplified.im_white_player == false){
@@ -693,6 +693,7 @@
                 $("#nav_ypp").prop("href","/profile?pid="+_state.game_state.simplified.playerprofiles.black_player.virtual_player_id);
                 $("#nav_opp").prop("href","/profile?pid="+_state.game_state.simplified.playerprofiles.white_player.virtual_player_id);
                 $("#player_name").html("<b>" + _state.game_state.simplified.playerprofiles.black_player.firendly_name + "</b> VS " + _state.game_state.simplified.playerprofiles.white_player.firendly_name);
+                //IF TYPE IS TABLE _PLAYER => SHOW LIVESTREAM POPUP
                 if(_state.game_state.simplified.playerprofiles.white_player.player_type === 0){
                   $("#alert_message").html("<div class='alert alert-fh' role='alert'>!! YOU ARE PLAYING AGAINS A TABLE !! <a target='_blank' href='/redirect?destination=livestream'> => OPEN LIVESTREAM <= </a></div>");
                 }

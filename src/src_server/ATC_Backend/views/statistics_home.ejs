@@ -131,7 +131,7 @@
                   <td id="git_start_board_fen">---</td>
                 </tr>
                 <tr>
-                  <th scope="row">CURRENT BOARD FEN</th>
+                  <th scope="row">LATEST BOARD FEN</th>
                   <td id="git_current_board_fen">---</td>
                 </tr>
                 </tbody>
@@ -150,8 +150,18 @@
           </div>
           <div class="row top-buffer"></div>
           <div class="row justify-content-center">
-            <div class="col-md-4">
-              <p class="card-content" id="turn_histroy_table"></p>
+            <div class="col-md-4 col-centered">
+              <p class="card-content" id="">
+                <table>
+                <tr><td>
+                    <button onclick="show_prev_move()"><img src="/img/icons/prev.png" width="50px" /></button>
+                  </td><td>
+                      <span id="current_move_text" class="fhcolor_text font-weight-bold"> x / N</span>
+                  </td><td>
+                    <button onclick="show_next_move()"><img src="/img/icons/next.png" width="50px" /></button>
+                  </td></tr>
+              </table>
+              </p>
             </div>
             <div class="col-md-8">
               <div id="fen_viewer_board" style="width: 400px"><img width="400px" src="/img/board_placeholder_400x400.png"></div>
@@ -295,6 +305,39 @@
     $("#fen_viewer_fen").html(""+_fen+"");
     var fen_viewer_board = pgnBoard('fen_viewer_board', { position: _fen, locale: 'en', pieceStyle: 'wikipedia', theme:'falken' });
   }
+
+
+  var move_data = null;
+  var move_index = -1;
+  function show_next_move(){
+    if(!move_data && move_index < 0){
+      return;
+    }
+    move_index++;
+    if(move_index >= move_data.length){
+      move_index = 0;
+    }else{
+
+    }
+   // debugger;
+    load_fen_to_viewer(move_data[move_index].fen);
+    $("#current_move_text").html(move_data[move_index].move +"("+String(move_index+1) + " / " + String(move_data.length)+")");
+  }
+
+  function show_prev_move(){
+    if(!move_data && move_index < 0){
+      return;
+    }
+    move_index--;
+    if(move_index < 0){
+      move_index = move_data.length-1;
+    }else{
+
+    }
+    // debugger;
+    load_fen_to_viewer(move_data[move_index].fen);
+    $("#current_move_text").html(move_data[move_index].move +"("+String(move_index+1) + " / " + String(move_data.length)+")");
+  }
   //CREATES TURN HISTORY TABLE
   function create_turn_history_table(_data){
   //  debugger;
@@ -302,6 +345,14 @@
       $("#turn_histroy_table").html("--NO TURN HISTORY --");
     return;
     }
+
+    move_data= _data;
+    move_index = 0;
+    load_fen_to_viewer(move_data[move_index].fen);
+
+    $("#current_move_text").html(move_data[move_index].move +"("+String(move_index+1) + " / " + String(move_data.length)+")");
+
+    /*
     var tmp_html = "<div class=\"table-responsive-sm\"><table class=\"table\">";
     tmp_html+="<thead><tr><th scope=\"col\">#</th><th scope=\"col\">MOVE</th><th scope=\"col\">PLAYER</th><th scope=\"col\">ACTION</th></tr></thead>";
     tmp_html+="<tbody>";
@@ -336,6 +387,8 @@
 
 
     $("#turn_histroy_table").html(tmp_html);
+    */
+
   }
   //LOADS MORE INFORMATION ABOUT A SPECIFIC GAME ID
   function load_game_information(_id){
