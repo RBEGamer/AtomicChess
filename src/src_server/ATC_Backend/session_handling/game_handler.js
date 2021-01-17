@@ -342,6 +342,7 @@ function get_player_active_game_state(_hwid,_callback){
             is_syncing_phase:is_syncing_phase,
             player_state: local_player_state,
             playerprofiles:res.playerprofiles
+
         }
             _callback(null,res,game_simplified);
         return;
@@ -395,13 +396,15 @@ function start_match(_player_a_hwid, _player_b_hwid, _callback) {
                             white_player_profile = {
                                 "firendly_name":_phgp_a_res.friendly_name,
                                 "rank":_phgp_a_res.rank,
-                                "virtual_player_id":_phgp_a_res.virtual_player_id
+                                "virtual_player_id":_phgp_a_res.virtual_player_id,
+                                "player_type":_phgp_b_res.player_type
                             }
                         }else if(_phgp_b_res && white_player === _phgp_b_res.hwid){
                             white_player_profile = {
                                 "firendly_name":_phgp_b_res.friendly_name,
                                 "rank":_phgp_b_res.rank,
-                                "virtual_player_id":_phgp_b_res.virtual_player_id
+                                "virtual_player_id":_phgp_b_res.virtual_player_id,
+                                "player_type":_phgp_b_res.player_type
                             }
                         }
 
