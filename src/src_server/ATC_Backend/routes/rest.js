@@ -121,10 +121,12 @@ router.get('/login',function(req,res,next){
     try{
     var hwid = req.queryString("hwid");
     var playertype = req.queryInt("playertype");
+
     if(!hwid){
         res.json({err:true, status:"err_hwid_or_playertype_not_set",sid:null,profile:null});
         return;
     }
+
     //CHECK REDIS FOR EXISTING SESSION
     redisClient.getRedisConnection().get("session:"+hwid, function(err, reply) {
         if(err){

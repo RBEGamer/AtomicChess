@@ -46,12 +46,16 @@ function create_profile(_hwid, _playertype ,_callback){
     var vid = String(UUID.v1());
     var fn = "INVALID_NAME";
 
-    if(_playertype || _playertype === 1){
+    if(_playertype && _playertype === 1){
         _playertype = LH.PLAYER_TYPE.AI; //CPU PLAYER
         fn = "AI_" + vid.substr(0,5); //USE FIRST 5 CHARS OF VIRTUAL ID AS AN IDENTIFIER
+    }else  if(_playertype && _playertype === 2) {
+        _playertype = LH.PLAYER_TYPE.HUMAN_VIRTUAL; // HUMAN PLAYER / TABLE
+        fn = "VIRT_" +ANG.generate_fullname_underscore()+ "_" + vid.substr(0,3); //USE FIRST 5 CHARS OF VIRTUAL ID AS AN IDENTIFIER
+
     }else  if(!_playertype || _playertype === 0){
         _playertype = LH.PLAYER_TYPE.HUMAN; // HUMAN PLAYER / TABLE
-        fn = ANG.generate_fullname_underscore()+ "_" + vid.substr(0,3); //USE FIRST 5 CHARS OF VIRTUAL ID AS AN IDENTIFIER
+        fn = "TABLE_"+ANG.generate_fullname_underscore()+ "_" + vid.substr(0,3); //USE FIRST 5 CHARS OF VIRTUAL ID AS AN IDENTIFIER
     }
 
     var profile={profile_config:{"SETTINGS":null,"USER_DATA":null},logs:[],hwid:_hwid, DOCTYPE:"PROFILE",account_created:Date.now(), rank:0,elo_rank_readable:CR.rank_to_elo_rating_name(0), friendly_name:fn,virtual_player_id:vid,player_type:_playertype};
@@ -118,6 +122,7 @@ module.exports = {
     simplify_profile_data: function (_profile_json) {
         return _profile_json;
    },
+
     get_profile,
     get_profile_virtual_id,
     create_profile,

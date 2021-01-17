@@ -340,7 +340,8 @@ function get_player_active_game_state(_hwid,_callback){
             im_white_player:im_white,
             is_my_turn:is_my_turn,
             is_syncing_phase:is_syncing_phase,
-            player_state: local_player_state
+            player_state: local_player_state,
+            playerprofiles:res.playerprofiles
         }
             _callback(null,res,game_simplified);
         return;
@@ -356,64 +357,109 @@ function start_match(_player_a_hwid, _player_b_hwid, _callback) {
         _callback("CANT START A PATCH WITH THE SAME PLAYER");
         return;
     }
-    //TODO CHECK EXISTSING GAME
+
+
+
     //DO NOTHING IF A GAME IS RUNNING
     check_active_player_game(_player_a_hwid,_player_b_hwid,function (cap_err,cap_is_game_running) {
     if(cap_err || cap_is_game_running){
         _callback("A game is alredy running for one of the players");
         return;
     }
+    //GET THE PLAYER PROFILE INFORMATION FOR THE NAMES AND VIRTUAL IDS
+        PH.get_profile(_player_a_hwid,function (_phgp_a_err,_phgp_a_res){
+            PH.get_profile(_player_b_hwid,function (_phgp_b_err,_phgp_b_res){
 
-    // MARKING THE PLAYER AS INGAME
-    LH.set_player_lobby_state(_player_a_hwid,LH.player_state.preparing_ingame,function (lsa_err,lsa_res) {
-        if(lsa_err){
-            console.error("player_a state switching failed");
-            return;
-        }
-        LH.set_player_lobby_state(_player_b_hwid,LH.player_state.preparing_ingame,function (lsb_err,lsb_res) {
-            //ON ERROR RESET THE STATE OF THE OTHER PLAYER
-            if(lsb_err){
-                console.error("player_a state switching failed");
-                LH.set_player_lobby_state(_player_a_hwid,LH.player_state.idle,function () {});
-                _callback(lsb_err,null);
-                return;
-            }
-            //WHICH PLAYER IS BLACK/WHITE
-            var rnd =HELPER_FUNCTIONS.randomInteger(0,1); //GET A RANDOM MUMBER
-            var white_player = [_player_a_hwid,_player_b_hwid][rnd]; //ASSIGN A PLAYER ID TO THE RANDOM NUMBER TO DETERM BLACK OR WHITE
-            var black_player =[_player_b_hwid,_player_a_hwid][rnd];
-            //GET OUR STARTING POSITION
-            var start_fen = CBL.get_start_opening_fen(); //GET STARTING FEN FROM STORAGE => STARTING POSITION
-            //generate our first board, its an intialboard with player white starts
-            //this board will be used to sync the tables of the players
-            CBL.get_board(start_fen,CBL.PLAYER_TURN.WHITE,null,true,1,function (gb_err,gb_board) {
-                //GET VARIABLE FOR GAME INIT
-                var game_init_structure = {
-                    id: UUID.v1(),
-                    DOCTYPE:"GAME",
-                    player_white_hwid:white_player,
-                    player_black_hwid:black_player,
-                    player_white_state:PLAYER_TURN_STATE.NONE,
-                    player_black_state:PLAYER_TURN_STATE.NONE,
-                    player_won:null,
-                    game_init_timestamp:Date.now(),
-                    last_game_interaction:Date.now(),
-                    game_state: GAME_STATE.waiting_player_setup_confirmation,
-                   // observer_player:[], //MAYBE FOR OBSERVER PLAYER -> FEATURES
-                   // start_player:white_player, // START PLAYER
-                    start_board_string: start_fen, //GET A NORMAL OPENING STRING
-                    current_board:gb_board,                   //REPRESENT THE CURRENT BOARD
-                    current_active_player:white_player, //WHICH PLAYER IS ACTIVE AND CAN MAKE A TURN
-                    turn_history:[gb_board] //CONTAIN ALL MADE MOVES EG FOR REPLY
-                }
-                //WRITE TO DB THE NEW GAME CREATED
-                MDB.getGameCollection().insertOne(game_init_structure,function (io_err,io_res) {
-                    _callback(io_err,io_res);
+
+                // MARKING THE PLAYER AS INGAME
+                LH.set_player_lobby_state(_player_a_hwid,LH.player_state.preparing_ingame,function (lsa_err,lsa_res) {
+                    if(lsa_err){
+                    console.error("player_a state switching failed");
                     return;
+                    }
+                    LH.set_player_lobby_state(_player_b_hwid,LH.player_state.preparing_ingame,function (lsb_err,lsb_res) {
+                        //ON ERROR RESET THE STATE OF THE OTHER PLAYER
+                        if(lsb_err){
+                            console.error("player_a state switching failed");
+                            LH.set_player_lobby_state(_player_a_hwid,LH.player_state.idle,function () {});
+                            _callback(lsb_err,null);
+                            return;
+                        }
+                        //WHICH PLAYER IS BLACK/WHITE
+                        var rnd =HELPER_FUNCTIONS.randomInteger(0,1); //GET A RANDOM MUMBER
+                        var white_player = [_player_a_hwid,_player_b_hwid][rnd]; //ASSIGN A PLAYER ID TO THE RANDOM NUMBER TO DETERM BLACK OR WHITE
+                        var black_player =[_player_b_hwid,_player_a_hwid][rnd];
+                        //POPULATE THE PLAYER PROFILE INFORMATION TO SHOW ON THE WEBCLIENT THE NAME OF THE OTHER PLAYER
+                        var white_player_profile = null;
+                        if(_phgp_a_res && white_player === _phgp_a_res.hwid){
+                            white_player_profile = {
+                                "firendly_name":_phgp_a_res.friendly_name,
+                                "rank":_phgp_a_res.rank,
+                                "virtual_player_id":_phgp_a_res.virtual_player_id
+                            }
+                        }else if(_phgp_b_res && white_player === _phgp_b_res.hwid){
+                            white_player_profile = {
+                                "firendly_name":_phgp_b_res.friendly_name,
+                                "rank":_phgp_b_res.rank,
+                                "virtual_player_id":_phgp_b_res.virtual_player_id
+                            }
+                        }
+
+                        var black_player_profile = null;
+                        if(_phgp_a_res && black_player === _phgp_a_res.hwid){
+                            black_player_profile = {
+                                "firendly_name":_phgp_a_res.friendly_name,
+                                "rank":_phgp_a_res.rank,
+                                "virtual_player_id":_phgp_a_res.virtual_player_id
+                            }
+                        }else if(_phgp_b_res && black_player === _phgp_b_res.hwid){
+                            black_player_profile = {
+                                "firendly_name":_phgp_b_res.friendly_name,
+                                "rank":_phgp_b_res.rank,
+                                "virtual_player_id":_phgp_b_res.virtual_player_id
+                            }
+                        }
+                        //POPULATE_PLAYER_PROFILE
+                        var playerprofile_data= {
+                            "white_player":white_player_profile,
+                            "black_player":black_player_profile
+                        };
+
+                        //GET OUR STARTING POSITION
+                        var start_fen = CBL.get_start_opening_fen(); //GET STARTING FEN FROM STORAGE => STARTING POSITION
+                        //generate our first board, its an intialboard with player white starts
+                        //this board will be used to sync the tables of the players
+                        CBL.get_board(start_fen,CBL.PLAYER_TURN.WHITE,null,true,1,function (gb_err,gb_board) {
+                            //GET VARIABLE FOR GAME INIT
+                            var game_init_structure = {
+                                id: UUID.v1(),
+                                DOCTYPE:"GAME",
+                                player_white_hwid:white_player,
+                                player_black_hwid:black_player,
+                                player_white_state:PLAYER_TURN_STATE.NONE,
+                                player_black_state:PLAYER_TURN_STATE.NONE,
+                                player_won:null,
+                                game_init_timestamp:Date.now(),
+                                last_game_interaction:Date.now(),
+                                game_state: GAME_STATE.waiting_player_setup_confirmation,
+                                // observer_player:[], //MAYBE FOR OBSERVER PLAYER -> FEATURES
+                                // start_player:white_player, // START PLAYER
+                                start_board_string: start_fen, //GET A NORMAL OPENING STRING
+                                current_board:gb_board,                   //REPRESENT THE CURRENT BOARD
+                                current_active_player:white_player, //WHICH PLAYER IS ACTIVE AND CAN MAKE A TURN
+                                turn_history:[gb_board], //CONTAIN ALL MADE MOVES EG FOR REPLY
+                                playerprofiles:playerprofile_data //CONTAINS THE PLAYER PROFILE DATA => PLAYERNAME AND VIRTUAL ID
+                            }
+                            //WRITE TO DB THE NEW GAME CREATED
+                            MDB.getGameCollection().insertOne(game_init_structure,function (io_err,io_res) {
+                                _callback(io_err,io_res);
+                                return;
+                            });
+                        });
+                    });
                 });
             });
-        })
-    })
+        });
     });
 }
 

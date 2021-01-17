@@ -20,7 +20,8 @@ const player_state = Object.freeze({
 });
 const PLAYER_TYPE = Object.freeze({
     HUMAN:0,
-    AI:1
+    AI:1,
+    HUMAN_VIRTUAL:2
 
 });
 function get_avariable_players(_own_hwid,_callback, _ps = player_state.searching_matchmake, _include_hwid = false){
@@ -119,7 +120,7 @@ function get_player_for_matchmaking(_callback, _include_hwid =false){
             for(var i=0;i < res_sm.length;i++){
                 if(res_sm[i].player_type === PLAYER_TYPE.AI){ // TYPE 1 => AI
                     tmp_player_ai.push(res_sm[i]);
-                }else  if(res_sm[i].player_type === PLAYER_TYPE.HUMAN) { // TYPE 0 => HUMAN
+                }else  if(res_sm[i].player_type === PLAYER_TYPE.HUMAN || res_sm[i].player_type === PLAYER_TYPE.HUMAN_VIRTUAL) { // TYPE 0 => HUMAN
                     tmp_player_human.push(res_sm[i]);
                 }
             }

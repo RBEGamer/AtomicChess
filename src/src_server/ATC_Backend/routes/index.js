@@ -20,6 +20,7 @@ router.get('/redirect', function(req, res, next) {
   switch (dest){
     case "github": real_dest=CFG.getConfig().github_repository;break;
     case "impressum":real_dest=CFG.getConfig().impressum_ulr;break;
+    case "livestream":real_dest=CFG.getConfig().livestream_url;break;
     default:real_dest="/";break;
   }
   }
