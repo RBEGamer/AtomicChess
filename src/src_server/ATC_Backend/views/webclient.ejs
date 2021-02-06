@@ -185,7 +185,8 @@
         <h4 class="modal-title w-100 font-weight-bold">WAITING FOR GAME</h4>
       </div>
       <div class="modal-body mx-3">
-        <h3>PLEASE WAIT - LOOKING FOR A MATCH</h3>
+       Bitte warten, bis ein freier Spieler gefunden wurde, dies dauert ca. 20 Sekunden.
+       Wenn der Schachtisch nicht frei ist, spielst du gegen den Computer.
         <div class="snippet" data-title=".dot-collision">
           <div class="stage">
             <div class="dot-collision"></div>
@@ -685,7 +686,7 @@
                 $("#player_name").html("<b>" + _state.game_state.simplified.playerprofiles.white_player.firendly_name + "</b> VS " + _state.game_state.simplified.playerprofiles.black_player.firendly_name);
                 //IF TYPE IS TABLE _PLAYER => SHOW LIVESTREAM POPUP
                 if(_state.game_state.simplified.playerprofiles.black_player.player_type === 0){
-                  $("#alert_message").html("<div class='alert alert-fh' role='alert'>!! YOU ARE PLAYING AGAINS A TABLE !! <a target='_blank' href='/redirect?destination=livestream'> => OPEN LIVESTREAM <= </a></div>");
+                  $("#alert_message").html("<div class='alert alert-fh' role='alert'>!! YOU ARE PLAYING AGAINS A TABLE !! <a class="btn btn-warning" role="button" target='_blank' href='/redirect?destination=livestream'> => OPEN LIVESTREAM <= </a></div>");
                 }
 
               }else if(_state.game_state.simplified.playerprofiles && _state.game_state.simplified.im_white_player == false){
