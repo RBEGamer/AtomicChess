@@ -1,0 +1,20 @@
+version: "3"
+services:
+  ATCBuildroot:
+    container_name: atcbuildroot
+    
+    image: atcbuildroot:latest
+    build: 
+      context: ./
+    #network_mode: "host"
+    #restart: always
+    ports:
+      - 2223:22
+    environment:
+      - PRODUCTION=1
+    volumes:
+      - "./build_result/:/var/build_result"
+      - "atcbuildrootcache:/var/dlcache"
+
+  volumes:
+    atcbuildrootcache:

@@ -1,0 +1,34 @@
+software =
+{
+        version = "4.2.10";
+
+
+        stable:
+        {
+                A:
+                {
+                        images: (
+                        {
+                                filename = "rootfs.ext2.gz";
+                        	device = "/dev/mmcblk0p2";
+                        	type = "raw";
+                        	sha256 = "1d972d113cf1d7c865bdbfb28077376512f8b5a5280c13f8dafcd6875ac6def7";
+                        	compressed = true;
+                        }
+                        );
+
+                };
+                B:
+                {
+                        images: (
+                        {
+                                filename = "rootfs.ext2.gz";
+                        	device = "/dev/mmcblk0p3";
+                        	type = "raw";
+                        	sha256 = "1d972d113cf1d7c865bdbfb28077376512f8b5a5280c13f8dafcd6875ac6def7";
+                        	compressed = true;
+                        }
+                        );
+                };
+        };
+}

@@ -1,0 +1,34 @@
+software =
+{
+        version = "VERSION";
+
+
+        stable:
+        {
+                A:
+                {
+                        images: (
+                        {
+                                filename = "rootfs.ext2.gz";
+                        	device = "/dev/mmcblk0p2";
+                        	type = "raw";
+                        	sha256 = "RFSHASH";
+                        	compressed = true;
+                        }
+                        );
+
+                };
+                B:
+                {
+                        images: (
+                        {
+                                filename = "rootfs.ext2.gz";
+                        	device = "/dev/mmcblk0p3";
+                        	type = "raw";
+                        	sha256 = "RFSHASH";
+                        	compressed = true;
+                        }
+                        );
+                };
+        };
+}

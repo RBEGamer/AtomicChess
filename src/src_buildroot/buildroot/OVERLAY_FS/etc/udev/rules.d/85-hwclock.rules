@@ -1,0 +1,1 @@
+KERNEL=="rtc0", RUN+="/sbin/hwclock --rtc=$root/$name --hctosys"
