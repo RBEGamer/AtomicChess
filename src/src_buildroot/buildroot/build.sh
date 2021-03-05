@@ -1,14 +1,30 @@
 #!/bin/bash
-echo "--- STARTING BUILD ---"
+
 pwd
-ls
+ls -la
 env
+cd /var/buildroot
+ls -la
+
+
+# CHECK IF ALREADY BUILD
+# NEEDED IN DOCKER CONTAINER
+FILE=./BUILD_DOCKER_SUCC
+if test -f "$FILE"; then
+    echo "$FILE exists."
+    exit -1
+else
+    echo "$FILE does not exists."
+    echo "--- STARTING BUILD ---"
+fi
+
+
 
 # INCREMENT VERSION
 cd ./VERSIONING && bash ./increment_version.sh && cd ..
 
 
-
+ 
 
 echo "-- COPY CONFIG FILE --"
 bash ./restore_config.sh
@@ -69,5 +85,17 @@ echo "--CREATING UPDATE FILE FOR SWUPDATE using script in ./SWUPDATE--"
 cd ./SWUPDATE
 bash ./swupdate_packer.sh
 
-bash ./postbuild_docker.sh
 
+
+echo "-- BUILD FINISHED --"
+# TODO ADD SECONDS .config only for base sytem
+bash /var/buildroot/build.sh
+# CREATE FOLDERS
+mkdir -p /var/build_result/images
+mkdir -p /var/build_result/host
+# COPY BUILD RESULT TO HOST
+cp -R /var/buildroot/output/images /var/build_result/images
+cp -R /var/buildroot/output/host /var/build_result/host
+
+touch ./BUILD_DOCKER_SUCC
+exit 0

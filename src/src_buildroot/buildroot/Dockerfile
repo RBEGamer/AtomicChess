@@ -37,7 +37,10 @@ RUN apt-get update && apt upgrade -y && \
     bison \
     flex \
     libssl-dev \
-    libfdt-dev
+    libfdt-dev \
+    nano
+
+    
 RUN locale-gen en_US.utf8
 
 RUN apt  install -y openssh-server
@@ -74,5 +77,5 @@ RUN make -j15
 EXPOSE 22
 
 # AFTER DOCKER RUN => BUILD THE IMAGE WITH ATC PACKAGES AND ALSO BUILD SW UPDATE PACKAGES
-ENTRYPOINT ["/var/buildroot/build.sh"]
+CMD ["/var/buildroot/build.sh"]
 
