@@ -4,5 +4,5 @@
 rm -Rf ./build_result
 mkdir -p ./build_result
 
-docker-compose up atcbuildroot
+docker-compose up --rm
  
