@@ -18,7 +18,7 @@ else
     echo "--- STARTING BUILD ---"
 fi
 
-
+touch ./BUILD_DOCKER_SUCC
 
 # INCREMENT VERSION
 cd ./VERSIONING && bash ./increment_version.sh && cd ..
@@ -94,8 +94,8 @@ bash /var/buildroot/build.sh
 mkdir -p /var/build_result/images
 mkdir -p /var/build_result/host
 # COPY BUILD RESULT TO HOST
-cp -R /var/buildroot/output/images /var/build_result/images
-cp -R /var/buildroot/output/host /var/build_result/host
+cp -R /var/buildroot/output/images /var/build_result
+cp -R /var/buildroot/output/host /var/build_result
 
-touch ./BUILD_DOCKER_SUCC
+
 exit 0
