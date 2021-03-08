@@ -96,6 +96,7 @@ mkdir -p /var/build_result/host
 # COPY BUILD RESULT TO HOST
 cp -R /var/buildroot/output/images /var/build_result
 cp -R /var/buildroot/output/host /var/build_result
+cp -R /var/buildroot/output/target /var/build_result
 
 
 exit 0

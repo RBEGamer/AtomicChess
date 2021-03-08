@@ -25,10 +25,8 @@ define ATCCTL_INSTALL_TARGET_CMDS
 	@echo -- make targetdir/usr/ATC with -p --
 	mkdir -p $(TARGET_DIR)/usr/ATC/
 	@echo -- copy atc_controller_executable --
-	#cp $(@D)/atc_controller $(TARGET_DIR)/usr/ATC/atc_controller
-	@echo -- copy needed files (WEBSERVER STATIC ..) --
-	cp -R $(@D)/WEBSERVER_STATIC $(TARGET_DIR)/usr/ATC/
-	$(INSTALL) -D -m 0755 $(@D)/atc_controller $(TARGET_DIR)/usr/ATC/atc_controller
+	cp $(@D)/Debug/atc_controller $(TARGET_DIR)/usr/ATC/atc_controller
+	$(INSTALL) -D -m 0755 $(@D)/Debug/atc_controller $(TARGET_DIR)/usr/ATC/atc_controller
 endef
 
 $(eval $(generic-package))
