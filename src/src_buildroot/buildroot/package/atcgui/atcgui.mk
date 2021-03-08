@@ -19,21 +19,22 @@ define ATCGUI_BUILD_CMDS
 	@echo -----------------
 	@echo ATCGUI_BUILD_QMAKE!
 	@echo -----------------
-	cat $(@D)/src/src_qtui/atcgui/atcgui.pro
+	cat $(@D)/atcgui.pro
 	@echo -----------------
 	
 	$(QT5_QMAKE) -d -o $(@D)/Makefile $(@D)/atcgui.pro  
 	@echo -----------------
 	@echo ATCGUI_BUILD_MAKE!
 	@echo -----------------
-	$(MAKE) $(TARGET_CONFIGURE_OPTS) CXXFLAGS="-std=c++17 -DUSES_QT" -C $(@D)/atcgui/
+	ls $(@D)
+	#$(MAKE) $(TARGET_CONFIGURE_OPTS) CXXFLAGS="-std=c++17 -DUSES_QT" -C $(@D)/atcgui/
 	@echo -----------------
 endef
 
 
 define ATCGUI_INSTALL_TARGET_CMDS
 	@echo ATCGUI_INSTALL!
-	$(INSTALL) -D -m 0755 $(@D)/atcgui $(TARGET_DIR)/usr/ATC/atc_ui
+	#$(INSTALL) -D -m 0755 $(@D)/atcgui $(TARGET_DIR)/usr/ATC/atc_ui
 endef
 
 $(eval $(generic-package))
