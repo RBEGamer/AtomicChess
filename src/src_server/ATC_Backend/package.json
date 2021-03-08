@@ -1,0 +1,31 @@
+{
+  "name": "AtomicChessBackend",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "bootstrap": "^4.5.0",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "dotenv": "^8.2.0",
+    "ejs": "~2.6.1",
+    "express": "~4.16.1",
+    "express-async-errors": "^3.1.1",
+    "http-errors": "~1.6.3",
+    "jquery": "^3.5.1",
+    "materialize-css": "^1.0.0-rc.2",
+    "morgan": "~1.9.1",
+    "redis": "^3.0.2",
+    "request": "^2.88.2",
+    "sanitize": "^2.1.0",
+    "socket.io": "^3.0.3"
+  },
+  "devDependencies": {
+    "cron": "^1.8.2",
+    "express-list-endpoints": "^5.0.0",
+    "mongodb": "^3.5.9",
+    "uuid": "^8.2.0"
+  }
+}

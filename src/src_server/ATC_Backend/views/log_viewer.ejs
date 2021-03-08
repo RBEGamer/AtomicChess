@@ -1,0 +1,330 @@
+<html lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densityDpi=device-dpi" />
+  <meta content="text/html; charset=utf-8" http-equiv="content-type">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/favicon/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/favicon/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/favicon/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/favicon/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/favicon/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/favicon/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/favicon/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/css/landing-page.css" rel="stylesheet">
+  <link href="/css/lightbox.min.css" rel="stylesheet">
+  <link href="/css/photo_gallery.css" rel="stylesheet">
+  <link href="/ionicons/css/ionicons.min.css" rel="stylesheet">
+  <link href="/css/faq.css" rel="stylesheet">
+  <link href="/css/main.css" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="AtomicChess">
+  <meta name="author" content="Marcel Ochsendorf">
+  <meta http-equiv="cache-control" content="max-age=0" />
+  <meta http-equiv="cache-control" content="no-cache" />
+  <meta http-equiv="expires" content="0" />
+  <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+  <meta http-equiv="pragma" content="no-cache" />
+
+  <link href="/css/dashboard_main.css" rel="stylesheet">
+  <link href="/css/dashboard_cards.css" rel="stylesheet">
+  <link rel="stylesheet" href="/js/PGNViewer/css/pgnvjs.css">
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="AtomicChess">
+  <meta name="author" content="Marcel Ochsendorf">
+  <meta http-equiv="cache-control" content="max-age=0" />
+  <meta http-equiv="cache-control" content="no-cache" />
+  <meta http-equiv="expires" content="0" />
+  <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+  <meta http-equiv="pragma" content="no-cache" />
+  <title>ATC BACKEND - LOG VIEWER</title>
+</head>
+
+<body class="container">
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+  <a class="navbar-brand" href="/"><img width="64px"  src="/img/icons/chess_icon.png"><b>AtomicChess -  PLAYER LOG VIEWER</b></a>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" id="" href="/">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="" href="/statistics">Statistics</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="" href="/server_config">SERVER CONFIGURATION</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+<div id="alert_message"></div>
+
+<div class="row justify-content-center">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title text-justify">PROFILE ID</h4>
+      </div>
+      <div class="card-body">
+        <div class="text-center">
+
+          <form>
+
+            <div class="form-group row">
+              <label for="inputPassword" class="col-sm-2 col-form-label">API KEY</label>
+              <div class="col-sm-10">
+                <input type="password" class="form-control" id="apikey" placeholder="1337_APIKEY">
+              </div>
+              <label for="inputPassword" class="col-sm-2 col-form-label">VIRTUAL PROFILE ID</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="pid" placeholder="PID">
+              </div>
+              <button type="button" class="btn btn-fh" onclick="get_profile_information()">SHOW LOGS</button>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row justify-content-center">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title text-justify">SELECT LOG</h4>
+    </div>
+    <div class="card-body">
+      <div class="text-center">
+        <table class="table">
+          <tbody id="log_sel_table">
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<div class="row justify-content-center">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title text-justify">SELECTED LOG</h4>
+      </div>
+      <div class="card-body">
+        <div class="text-center">
+          <textarea class="form-control" id="log_area" rows="3"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Footer -->
+<footer class="footer bg-light">
+  <div class="container text-center">
+    <div class="row top-buffer"><div class="col-md-12"><h4 class="card-title">SERVICE AVAILABILITY</h4></div></div>
+    <div class="row justify-content-center">
+      <div class="col-auto">
+        <table class="table table-responsive">
+          <tbody>
+          <tr>
+            <th>BACKEND</th>
+            <td><img id="sa_backend" width="64px" src="/img/icons/alert_off.png" /></td>
+          </tr>
+          <tr>
+            <th>CHESS LOGIC VALIDATOR</th>
+            <td><img id="sa_mv_validator" width="64px" src="/img/icons/alert_off.png" /></td>
+          </tr>
+
+          <tr>
+            <th>AVAILABLE PLAYER AI INSTANCES</th>
+            <td><span id="sa_aaipc"></span></td>
+          </tr>
+          </tbody>
+        </table>
+
+      </div>
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script src="/js/jquery/jquery.min.js"></script>
+<script src="/bootstrap/js/bootstrap.min.js"></script>
+<script src="/js/PGNViewer/js/pgnvjs.js"></script>
+
+
+<script>
+  //PARSE Date Object into human readable
+  //https://stackoverflow.com/questions/5416920/timestamp-to-human-readable-format
+  function getFormattedDate(_dt) {
+    var date = new Date(_dt);
+
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    var hour = date.getHours();
+    var min = date.getMinutes();
+    var sec = date.getSeconds();
+    //APPEND 0
+    month = (month < 10 ? "0" : "") + month;
+    day = (day < 10 ? "0" : "") + day;
+    hour = (hour < 10 ? "0" : "") + hour;
+    min = (min < 10 ? "0" : "") + min;
+    sec = (sec < 10 ? "0" : "") + sec;
+    var str = date.getFullYear() + "-" + month + "-" + day + "_" +  hour + ":" + min + ":" + sec;
+    return str;
+  }
+  //GET AND DISPLAY INFORMATION ABOUT THE SERVICE UPTIME
+  function check_service_state(){
+    $.getJSON('/rest/service_state',function (data) {
+      //GET MOVEMENT VALIDATOR MICROSERVICE STATE
+      if(data && data.move_validator_state){
+        $("#sa_mv_validator").attr("src", "/img/icons/cloud_offline.png");
+      }else{
+        $("#sa_mv_validator").attr("src", "/img/icons/cloud_online.png");
+      }
+
+    });
+    //CHECK STATUS OF THE TABLE COMMUNICATION BACKEND
+    $.getJSON('/rest/client_status',function (data) {
+      if(data && data.status && !data.err){
+        $("#sa_backend").attr("src", "/img/icons/cloud_online.png");
+      }else{
+        $("#sa_backend").attr("src", "/img/icons/cloud_online.png");
+      }
+    });
+
+    //GET AVARIABLE AI PLAYER COUNT
+    $.getJSON('/rest/get_avariable_ai_players',function (data) {
+
+      if(data && data.count !== undefined&&data.count != null && data.count >=0) {
+        $("#sa_aaipc").html("<b>"+String(data.count)+"</b>");
+      }else{
+        $("#sa_aaipc").html("---");
+      }
+    });
+
+  }
+
+  //PARSES THE QUERY STRING IN THE URL
+  //https://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
+  function getParameterByName(name, url = window.location.href) {
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+  }
+
+  var log_data = {}
+  function show_log(_logid){
+  $("#log_area").val(log_data[_logid]);
+  }
+
+  //LOADS MORE INFORMATION ABOUT A SPECIFIC GAME ID
+  function get_profile_information(){
+
+    var pid = $("#pid").val();
+    var api = $("#apikey").val();
+
+    $.getJSON('/rest/get_profile_information_secure?authkey='+api+'&pid='+pid,function (data) {
+
+      if(!data || data.err || !data.profile_data){
+        $("#alert_message").html("<div class='alert alert-fh' role='alert'>ERROR INVALID API KEY OR ENTRY VALUE</div>");
+        setTimeout(function (){
+          $("#alert_message").html("");
+        },2000);
+        return;
+      }
+
+
+      if(data.profile_data.logs && data.profile_data.logs.length <= 0){
+        $("#alert_message").html("<div class='alert alert-fh' role='alert'>NO LOG ENTRIES</div>");
+        setTimeout(function (){
+          $("#alert_message").html("");
+        },2000);
+        return;
+      }
+      //SHOW LOGS
+      if(data.profile_data.logs){
+        var tmp_html = "<table>";
+        log_data = data.profile_data.logs;
+        Object.keys(data.profile_data.logs).forEach(function(key) {
+
+          console.log(key, data.profile_data.logs[key]);
+          //TODO INSERT FROM WITH SUMBIT BUTTON
+          const entry = data.profile_data.logs[key];
+          //+SECRET KEY BUTTON
+          tmp_html += "<tr><td><input type='button' class='btn btn-fh' value='"+key+"' onclick='show_log(\""+String(key)+"\")'></td></form><tr>";
+        });
+        tmp_html += "</table>";
+        $('#log_sel_table').html(tmp_html);
+
+      }
+
+    });
+
+  }
+
+
+
+
+  //EXECUTES SCRIPT IF PAGE LOADED
+  $(document).ready(function () {
+    console.log("ready!");
+    //HIDE GAME INFORMATION
+
+    var tmp = getParameterByName('pid');
+    // console.log(tmp);
+    if(tmp != null && tmp != ""){
+      console.log(tmp);
+      $("#pid").val(tmp);
+    }
+
+
+    check_service_state();
+
+
+  });
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,362 @@
+INFO:root:ATC_Move_Validator - started
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2020 19:11:54] "[37mPOST /rest/check_move HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2020 19:12:00] "[37mPOST /rest/check_move HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2020 19:12:01] "[37mPOST /rest/check_move HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2020 19:12:01] "[37mPOST /rest/check_move HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2020 19:12:03] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2020 19:17:22] "[37mPOST /rest/check_move HTTP/1.1[0m" 200 -
+INFO:root:ATC_Move_Validator - started
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2020 19:17:26] "[37mPOST /rest/check_move HTTP/1.1[0m" 200 -
+INFO:root:ATC_Move_Validator - started
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:root:ATC_Move_Validator - started
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:root:ATC_Move_Validator - started
+INFO:werkzeug: * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2020 21:01:30] "[37mPOST /rest/check_move HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2020 21:01:38] "[37mPOST /rest/check_move HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2020 21:01:44] "[37mPOST /rest/check_move HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2020 21:01:48] "[37mPOST /rest/check_move HTTP/1.1[0m" 200 -
+INFO:root:ATC_Move_Validator - started
+INFO:werkzeug: * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2020 21:02:45] "[37mPOST /rest/check_move HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2020 21:02:49] "[37mPOST /rest/check_move HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2020 21:02:53] "[37mPOST /rest/check_move HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2020 21:02:57] "[37mPOST /rest/check_move HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2020 21:03:01] "[37mPOST /rest/check_move HTTP/1.1[0m" 200 -
+INFO:root:ATC_Move_Validator - started
+INFO:werkzeug: * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2020 21:03:45] "[37mPOST /rest/check_move HTTP/1.1[0m" 200 -
+INFO:root:ATC_Move_Validator - started
+INFO:werkzeug: * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+INFO:root:ATC_Move_Validator - started
+INFO:werkzeug: * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+INFO:root:ATC_Move_Validator - started
+INFO:werkzeug: * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2020 21:08:28] "[37mPOST /rest/check_move HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2020 21:08:48] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2020 21:08:50] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2020 21:11:52] "[33mPOST /rest/execute_move HTTP/1.1[0m" 404 -
+INFO:root:ATC_Move_Validator - started
+INFO:werkzeug: * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [24/Jul/2020 21:11:59] "[37mPOST /rest/execute_move HTTP/1.1[0m" 200 -
+INFO:root:ATC_Move_Validator - started
+INFO:werkzeug: * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+INFO:root:ATC_Move_Validator - started
+INFO:werkzeug: * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+INFO:root:ATC_Move_Validator - started
+INFO:werkzeug: * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+INFO:root:ATC_Move_Validator - started
+INFO:werkzeug: * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+INFO:root:ATC_Move_Validator - started
+INFO:werkzeug: * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2020 21:59:00] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2020 22:00:55] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2020 22:14:15] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2020 22:21:25] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2020 22:22:23] "[37mGET /rest/state HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2020 22:23:10] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2020 22:55:15] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2020 22:56:25] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2020 23:00:25] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2020 23:24:30] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2020 23:49:30] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 00:01:30] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 00:01:50] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 00:02:35] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 00:04:05] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 00:06:00] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 00:07:50] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 00:09:00] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 00:42:45] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 09:57:40] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 10:42:25] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 11:47:35] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 11:48:05] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 11:50:00] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 11:51:00] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 12:01:40] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 12:02:15] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 12:03:20] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 12:05:10] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 12:05:55] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 12:27:10] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 12:33:25] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:root:ATC_Move_Validator - started
+INFO:werkzeug: * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+INFO:root:ATC_Move_Validator - started
+INFO:werkzeug: * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 12:36:15] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:root:ATC_Move_Validator - started
+INFO:werkzeug: * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+WARNING:root:/rest/validate_board
+WARNING:root:rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR
+WARNING:root:r n b q k b n r
+p p p p p p p p
+. . . . . . . .
+. . . . . . . .
+. . . . . . . .
+. . . . . . . .
+P P P P P P P P
+R N B Q K B N R
+WARNING:root:'bool' object is not callable
+ERROR:app:Exception on /rest/validate_board [POST]
+Traceback (most recent call last):
+  File "/home/marcel/Desktop/AtomicChess/src/ATC_MoveValidator/lib/python3.8/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/marcel/Desktop/AtomicChess/src/ATC_MoveValidator/lib/python3.8/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/marcel/Desktop/AtomicChess/src/ATC_MoveValidator/lib/python3.8/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/marcel/Desktop/AtomicChess/src/ATC_MoveValidator/lib/python3.8/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/marcel/Desktop/AtomicChess/src/ATC_MoveValidator/lib/python3.8/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/marcel/Desktop/AtomicChess/src/ATC_MoveValidator/lib/python3.8/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/marcel/Desktop/AtomicChess/src/ATC_MoveValidator/app.py", line 54, in validate_board
+    return jsonify({'err': err, 'is_board_valid': is_board_valid,'legal_moves': legal_mv_coonverted, 'is_game_over': is_go})
+  File "/home/marcel/Desktop/AtomicChess/src/ATC_MoveValidator/lib/python3.8/site-packages/flask/json/__init__.py", line 370, in jsonify
+    dumps(data, indent=indent, separators=separators) + "\n",
+  File "/home/marcel/Desktop/AtomicChess/src/ATC_MoveValidator/lib/python3.8/site-packages/flask/json/__init__.py", line 211, in dumps
+    rv = _json.dumps(obj, **kwargs)
+  File "/usr/lib/python3.8/json/__init__.py", line 234, in dumps
+    return cls(
+  File "/usr/lib/python3.8/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/usr/lib/python3.8/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/home/marcel/Desktop/AtomicChess/src/ATC_MoveValidator/lib/python3.8/site-packages/flask/json/__init__.py", line 100, in default
+    return _json.JSONEncoder.default(self, o)
+  File "/usr/lib/python3.8/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type TypeError is not JSON serializable
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 12:39:20] "[35m[1mPOST /rest/validate_board HTTP/1.1[0m" 500 -
+WARNING:root:/rest/check_move
+WARNING:root:rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR
+WARNING:root:h2h2
+WARNING:root:400 Bad Request: The browser (or proxy) sent a request that this server could not understand.
+ERROR:app:Exception on /rest/check_move [POST]
+Traceback (most recent call last):
+  File "/home/marcel/Desktop/AtomicChess/src/ATC_MoveValidator/lib/python3.8/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/marcel/Desktop/AtomicChess/src/ATC_MoveValidator/lib/python3.8/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/marcel/Desktop/AtomicChess/src/ATC_MoveValidator/lib/python3.8/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/marcel/Desktop/AtomicChess/src/ATC_MoveValidator/lib/python3.8/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/marcel/Desktop/AtomicChess/src/ATC_MoveValidator/lib/python3.8/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/marcel/Desktop/AtomicChess/src/ATC_MoveValidator/lib/python3.8/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/marcel/Desktop/AtomicChess/src/ATC_MoveValidator/app.py", line 99, in check_move
+    return jsonify({'err': err, 'is_valid': is_valid, 'move': move, 'fen': fen})
+  File "/home/marcel/Desktop/AtomicChess/src/ATC_MoveValidator/lib/python3.8/site-packages/flask/json/__init__.py", line 370, in jsonify
+    dumps(data, indent=indent, separators=separators) + "\n",
+  File "/home/marcel/Desktop/AtomicChess/src/ATC_MoveValidator/lib/python3.8/site-packages/flask/json/__init__.py", line 211, in dumps
+    rv = _json.dumps(obj, **kwargs)
+  File "/usr/lib/python3.8/json/__init__.py", line 234, in dumps
+    return cls(
+  File "/usr/lib/python3.8/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/usr/lib/python3.8/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/home/marcel/Desktop/AtomicChess/src/ATC_MoveValidator/lib/python3.8/site-packages/flask/json/__init__.py", line 100, in default
+    return _json.JSONEncoder.default(self, o)
+  File "/usr/lib/python3.8/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type BadRequestKeyError is not JSON serializable
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 12:49:03] "[35m[1mPOST /rest/check_move HTTP/1.1[0m" 500 -
+WARNING:root:/rest/check_move
+WARNING:root:rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR
+WARNING:root:h2h2
+WARNING:root:'bool' object is not callable
+ERROR:app:Exception on /rest/check_move [POST]
+Traceback (most recent call last):
+  File "/home/marcel/Desktop/AtomicChess/src/ATC_MoveValidator/lib/python3.8/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/marcel/Desktop/AtomicChess/src/ATC_MoveValidator/lib/python3.8/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/marcel/Desktop/AtomicChess/src/ATC_MoveValidator/lib/python3.8/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/marcel/Desktop/AtomicChess/src/ATC_MoveValidator/lib/python3.8/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/marcel/Desktop/AtomicChess/src/ATC_MoveValidator/lib/python3.8/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/marcel/Desktop/AtomicChess/src/ATC_MoveValidator/lib/python3.8/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/marcel/Desktop/AtomicChess/src/ATC_MoveValidator/app.py", line 99, in check_move
+    return jsonify({'err': err, 'is_valid': is_valid, 'move': move, 'fen': fen})
+  File "/home/marcel/Desktop/AtomicChess/src/ATC_MoveValidator/lib/python3.8/site-packages/flask/json/__init__.py", line 370, in jsonify
+    dumps(data, indent=indent, separators=separators) + "\n",
+  File "/home/marcel/Desktop/AtomicChess/src/ATC_MoveValidator/lib/python3.8/site-packages/flask/json/__init__.py", line 211, in dumps
+    rv = _json.dumps(obj, **kwargs)
+  File "/usr/lib/python3.8/json/__init__.py", line 234, in dumps
+    return cls(
+  File "/usr/lib/python3.8/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/usr/lib/python3.8/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/home/marcel/Desktop/AtomicChess/src/ATC_MoveValidator/lib/python3.8/site-packages/flask/json/__init__.py", line 100, in default
+    return _json.JSONEncoder.default(self, o)
+  File "/usr/lib/python3.8/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type TypeError is not JSON serializable
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 12:49:11] "[35m[1mPOST /rest/check_move HTTP/1.1[0m" 500 -
+INFO:root:ATC_Move_Validator - started
+INFO:werkzeug: * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+INFO:root:ATC_Move_Validator - started
+INFO:werkzeug: * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 12:51:46] "[37mPOST /rest/check_move HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 12:51:56] "[37mPOST /rest/check_move HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 12:52:03] "[37mPOST /rest/check_move HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 12:52:09] "[37mPOST /rest/check_move HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 12:52:10] "[37mPOST /rest/check_move HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 12:52:14] "[37mPOST /rest/check_move HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 12:52:33] "[37mPOST /rest/check_move HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 12:52:38] "[37mPOST /rest/check_move HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 12:52:54] "[37mPOST /rest/check_move HTTP/1.1[0m" 200 -
+WARNING:root:/rest/validate_board
+WARNING:root:rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w - - 0 1
+WARNING:root:r n b q k b n r
+p p p p p p p p
+. . . . . . . .
+. . . . . . . .
+. . . . . . . .
+. . . . . . . .
+P P P P P P P P
+R N B Q K B N R
+WARNING:root:400 Bad Request: The browser (or proxy) sent a request that this server could not understand.
+ERROR:app:Exception on /rest/validate_board [POST]
+Traceback (most recent call last):
+  File "/home/marcel/Desktop/AtomicChess/src/ATC_MoveValidator/lib/python3.8/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/marcel/Desktop/AtomicChess/src/ATC_MoveValidator/lib/python3.8/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/marcel/Desktop/AtomicChess/src/ATC_MoveValidator/lib/python3.8/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/marcel/Desktop/AtomicChess/src/ATC_MoveValidator/lib/python3.8/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/marcel/Desktop/AtomicChess/src/ATC_MoveValidator/lib/python3.8/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/marcel/Desktop/AtomicChess/src/ATC_MoveValidator/lib/python3.8/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/marcel/Desktop/AtomicChess/src/ATC_MoveValidator/app.py", line 54, in validate_board
+    def check_move():
+  File "/home/marcel/Desktop/AtomicChess/src/ATC_MoveValidator/lib/python3.8/site-packages/flask/json/__init__.py", line 370, in jsonify
+    dumps(data, indent=indent, separators=separators) + "\n",
+  File "/home/marcel/Desktop/AtomicChess/src/ATC_MoveValidator/lib/python3.8/site-packages/flask/json/__init__.py", line 211, in dumps
+    rv = _json.dumps(obj, **kwargs)
+  File "/usr/lib/python3.8/json/__init__.py", line 234, in dumps
+    return cls(
+  File "/usr/lib/python3.8/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/usr/lib/python3.8/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/home/marcel/Desktop/AtomicChess/src/ATC_MoveValidator/lib/python3.8/site-packages/flask/json/__init__.py", line 100, in default
+    return _json.JSONEncoder.default(self, o)
+  File "/usr/lib/python3.8/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type BadRequestKeyError is not JSON serializable
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 13:03:00] "[35m[1mPOST /rest/validate_board HTTP/1.1[0m" 500 -
+WARNING:root:/rest/validate_board
+WARNING:root:rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w - - 0 1
+WARNING:root:r n b q k b n r
+p p p p p p p p
+. . . . . . . .
+. . . . . . . .
+. . . . . . . .
+. . . . . . . .
+P P P P P P P P
+R N B Q K B N R
+WARNING:root:400 Bad Request: The browser (or proxy) sent a request that this server could not understand.
+ERROR:app:Exception on /rest/validate_board [POST]
+Traceback (most recent call last):
+  File "/home/marcel/Desktop/AtomicChess/src/ATC_MoveValidator/lib/python3.8/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/marcel/Desktop/AtomicChess/src/ATC_MoveValidator/lib/python3.8/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/marcel/Desktop/AtomicChess/src/ATC_MoveValidator/lib/python3.8/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/marcel/Desktop/AtomicChess/src/ATC_MoveValidator/lib/python3.8/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/marcel/Desktop/AtomicChess/src/ATC_MoveValidator/lib/python3.8/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/marcel/Desktop/AtomicChess/src/ATC_MoveValidator/lib/python3.8/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/marcel/Desktop/AtomicChess/src/ATC_MoveValidator/app.py", line 54, in validate_board
+    def check_move():
+  File "/home/marcel/Desktop/AtomicChess/src/ATC_MoveValidator/lib/python3.8/site-packages/flask/json/__init__.py", line 370, in jsonify
+    dumps(data, indent=indent, separators=separators) + "\n",
+  File "/home/marcel/Desktop/AtomicChess/src/ATC_MoveValidator/lib/python3.8/site-packages/flask/json/__init__.py", line 211, in dumps
+    rv = _json.dumps(obj, **kwargs)
+  File "/usr/lib/python3.8/json/__init__.py", line 234, in dumps
+    return cls(
+  File "/usr/lib/python3.8/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/usr/lib/python3.8/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/home/marcel/Desktop/AtomicChess/src/ATC_MoveValidator/lib/python3.8/site-packages/flask/json/__init__.py", line 100, in default
+    return _json.JSONEncoder.default(self, o)
+  File "/usr/lib/python3.8/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type BadRequestKeyError is not JSON serializable
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 13:03:55] "[35m[1mPOST /rest/validate_board HTTP/1.1[0m" 500 -
+INFO:root:ATC_Move_Validator - started
+INFO:werkzeug: * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 13:05:40] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:root:ATC_Move_Validator - started
+INFO:werkzeug: * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 13:06:20] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 13:31:55] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 13:32:20] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 13:42:45] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 13:54:50] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 13:57:00] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 13:57:40] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 13:58:50] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 13:59:35] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 14:01:05] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 17:29:25] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 17:31:35] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 17:33:35] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 17:35:05] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 17:36:40] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 17:37:40] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 19:11:00] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 19:12:05] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 19:13:45] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:root:ATC_Move_Validator - started
+INFO:werkzeug: * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+INFO:root:ATC_Move_Validator - started
+INFO:werkzeug: * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 23:29:03] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:root:ATC_Move_Validator - started
+INFO:werkzeug: * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+INFO:root:ATC_Move_Validator - started
+INFO:werkzeug: * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 23:33:19] "[37mPOST /rest/execute_move HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 23:34:25] "[37mPOST /rest/execute_move HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 23:34:31] "[37mPOST /rest/execute_move HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 23:34:36] "[37mPOST /rest/execute_move HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 23:35:00] "[37mPOST /rest/execute_move HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 23:35:03] "[37mPOST /rest/execute_move HTTP/1.1[0m" 200 -
+INFO:root:ATC_Move_Validator - started
+INFO:werkzeug: * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 23:40:17] "[37mPOST /rest/execute_move HTTP/1.1[0m" 200 -
+INFO:root:ATC_Move_Validator - started
+INFO:werkzeug: * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+INFO:root:ATC_Move_Validator - started
+INFO:werkzeug: * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [29/Jul/2020 23:47:04] "[37mPOST /rest/execute_move HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [30/Jul/2020 00:32:20] "[37mPOST /rest/execute_move HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [30/Jul/2020 00:54:27] "[37mPOST /rest/execute_move HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [30/Jul/2020 00:54:52] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [30/Jul/2020 00:57:02] "[37mPOST /rest/execute_move HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [30/Jul/2020 00:57:02] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [30/Jul/2020 01:19:10] "[37mPOST /rest/validate_board HTTP/1.1[0m" 200 -
+INFO:root:ATC_Move_Validator - started
+INFO:werkzeug: * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)

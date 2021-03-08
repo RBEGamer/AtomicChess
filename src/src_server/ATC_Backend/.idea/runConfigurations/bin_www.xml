@@ -1,0 +1,15 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="bin/www" type="NodeJSConfigurationType" path-to-js-file="bin/www" working-dir="$PROJECT_DIR$">
+    <envs>
+      <env name="DEBUG" value="untitled:*" />
+      <env name="PRODUCTION" value="1" />
+      <env name="REDIS_IP" value="127.0.0.1:6379" />
+      <env name="MONGO_IP" value="127.0.0.1:27017" />
+      <env name="MVVALIDATOR_IP" value="127.0.0.1:5001" />
+    </envs>
+    <EXTENSION ID="com.jetbrains.nodejs.run.NodeJSStartBrowserRunConfigurationExtension">
+      <browser url="http://localhost:3000/" />
+    </EXTENSION>
+    <method v="2" />
+  </configuration>
+</component>

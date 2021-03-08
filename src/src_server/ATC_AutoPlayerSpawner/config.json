@@ -1,0 +1,5 @@
+{
+  "number_of_targeted_idle_ai_players" : 2,
+
+  "docker_compose_autoplayer_entry_name": "AtomicChessAutoPlayer"
+}

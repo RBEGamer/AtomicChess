@@ -1,0 +1,493 @@
+<html lang="en">
+
+<head>
+  <link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/favicon/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/favicon/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/favicon/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/favicon/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/favicon/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/favicon/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/favicon/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+
+
+
+
+  <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/css/landing-page.css" rel="stylesheet">
+  <link href="/css/lightbox.min.css" rel="stylesheet">
+  <link href="/css/photo_gallery.css" rel="stylesheet">
+  <link href="/ionicons/css/ionicons.min.css" rel="stylesheet">
+  <link href="/css/faq.css" rel="stylesheet">
+  <link href="/css/main.css" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="AtomicChess">
+  <meta name="author" content="Marcel Ochsendorf">
+  <meta http-equiv="cache-control" content="max-age=0" />
+  <meta http-equiv="cache-control" content="no-cache" />
+  <meta http-equiv="expires" content="0" />
+  <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+  <meta http-equiv="pragma" content="no-cache" />
+  <title>ATC BACKEND</title>
+</head>
+
+<body class="container">
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+  <a class="navbar-brand" href="/"><img width="64px"  src="/img/icons/chess_icon.png"><b>AtomicChess</b></a>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="#anch_about">Über das Projekt</a>
+      </li>
+
+      
+      <li class="nav-item">
+        <a class="nav-link" href="#anch_schwerpunkte">Schwerpunkte</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#anch_picutres">Gallerie</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#faq">FAQ</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="/statistics">Statistiken</a>
+      </li>
+
+
+
+    </ul>
+
+    <a class="btn btn-large btn-fh" href="/webclient">Spiele gegen den Tisch</a>
+  </div>
+</nav>
+
+
+
+
+<div class="jumbotron p-3 p-md-5 text-white rounded fhcolor_bg grad_header">
+  <div class="col-md-6 px-0 ">
+    <h1 class="display-4">Willkommen beim AtomicChessTable!</h1>
+    <p class="lead my-3"><h5>Der autonome Schachtisch</h5></p>
+    <p class="lead-3 mb-0"><h4 class="font-weight-normal">Eine Projektarbeit von <span class="font-weight-bold">Marcel Ochsendorf</span><br> Informatikstudent der <span class="font-weight-bold">FH-Aachen</span></h4></p>
+  </div>
+</div>
+
+
+
+<div id="anch_about" class="row">
+  <div class="col-md-12">
+    <h1 class="featurette-heading text-justify text-center">
+      <a class="fhcolor_text" href="https://www.fh-aachen.de/studium/informatik-bsc">Über das Projekt</a>
+    </h1>
+  </div>
+  <div class="col-md-12 d-flex justify-content-center">
+
+
+      <p class="lead">
+      Das Ziel dieser Arbeit ist es, einen Schach-Tisch zu konstruieren und programmieren, welcher in der Lage ist, Schachfiguren autonom zu bewegen.
+      <br>
+      <br>
+      Der Schwerpunkt liegt dabei insbesondere auf der Programmierung des eingebettenen Systems.
+      Dieses besteht einerseite aus der Positionserkennung und Steuerung der Hardwarekomponenten (Schachfiguren) und andererseits aus der Kommuniktation zwischen dem Tisch selbst und einem in einer Cloud befindlichen Server.
+      <br><br>
+      Zum einen ist es möglich, einen Spieler gegen einen Tisch als virtuellen Gegner spielen zu lassen. Es wird somit ein Spiel für eine Einzelperson ermöglicht.
+      <br>
+      Zum anderen ist es möglich, zwei Tische miteinander zu verbinden und zwei Spieler geneinander spielen zu lassen.
+      <br>
+      Die Tische dienen dann nur als Spiegel der Schachzüge. Die Züge des ersten Spielers werden dann auf den anderen Tisch (beim zweiten Spieler) gespiegelt und umgekehrt.
+      So ist auch ein Spiel möglich, auch wenn sich die Spieler nicht am selben Ort befinden.
+    </p>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<hr class="featurette-divider">
+<div id="anch_schwerpunkte" class="row">
+  <div class="col-md-12">
+    <h1 class="featurette-heading text-justify text-center">
+      <a class="fhcolor_text" href="https://www.fh-aachen.de/studium/informatik-bsc">Schwerpunkte</a>
+    </h1>
+  </div>
+<div class="row featurette">
+  <div class="col-md-7">
+    <h2 class="featurette-heading"><a class="fhcolor_text" href="https://www.fh-aachen.de/studium/informatik-bsc">Informatik</a></h2>
+    <p class="lead">
+
+     
+      Mittels der Informatik werden diverse Technologien von verschiedenen Einzelsystemen zu einem Gesamtprodukt zusammengesetzt.
+      <br>
+      <br>Zu diesen Einzelsystemen gehören:
+
+    <ul>
+      <li>Programmierung der Spiel-Logik, Benutzeroberfläche (UI), Hardware-Ansteuerung</li>
+      <li>Kommuniktion mit einer Cloud-Infrastruktur</li>
+      <li>Implementierung der Spielflusssteuerung (Schach-Spiel-Logik)</li>
+      <li>Backend mit Datenbankanbindung zur Speicherung der Spiele (Verwalten von Daten) </li>
+    </ul>
+
+    <br>
+
+    <p class="lead">Hier bietet die <a class="fhcolor_text" href="https://www.fh-aachen.de">FH-Aachen</a> einen breit gefächerten Wahlmodulkatalog an,
+    welchen einen dabei Untersützt sich in verschiedenen Bereichen zu spezialisieren.
+    </p>
+  </div>
+  <div class="col-md-5">
+    <img class="featurette-image img-fluid mx-auto" data-src="/img/rsz_img_7411.png" src="/img/rsz_img_7411.png" alt="code snipped illustration">
+  </div>
+</div>
+
+<hr class="featurette-divider">
+
+
+
+
+<div class="row featurette">
+  <div class="col-md-7 order-md-2">
+    <h2 class="featurette-heading"><a class="fhcolor_text" href="https://www.fh-aachen.de/fachbereiche/elektrotechnik-und-informationstechnik">Elektrotechnik und Informationstechnik</a></h2>
+    <p class="lead">
+      Damit ein System überhaupt erst programmiert werden kann, muss man sich Gedanken über die Elektronik und Verkabelung des Systems machen.
+      <br>Welchen Hardware will ich eigentlich nutzen und warum?
+      <br>Wie soll mein System später mit seiner Umwelt kommunizieren?
+      <br>Auch die Frage nach der Geschwindigkeit spielt hierbei eine Rolle.
+      <br><br>Im Laufe des Informatikstudium an der <a class="fhcolor_text" href="https://www.fh-aachen.de">FH-Aachen</a> wird man auch in grundlegender Elektronik unterrichtet.
+      Auslegen von Platinen und Bauteilen, welche Treiber benötigen die Motoren oder welche Spezifikationen müssen berücksichtigt werden.
+      <br><br>
+      Insgesamt zwei Schrittmotoren für die X- und die Y-Beweung sind im Schachtisch verbaut.
+      <br>
+      Zudem sind noch zwei Elektromageneten im Tisch verbaut, die die Schachfiguren wie von Geisterhand über den Tisch ziehen.
+      <br>
+      Zusätzlich befinden sich unter jeder Kachel des Schachfelds, noch Magnetsensoren, um zu erkennen, ob der Spieler eine Figur bewegt.
+      <br>
+      Neben der Verkabelung dieser Steuerungs-Komponenten, enthält das System noch ein Display zur Eingabe von Befehlen durch den Benutzer.
+
+
+
+    </p>
+  </div>
+  <div class="col-md-5 order-md-1">
+    <img class="featurette-image img-fluid mx-auto" data-src="/img/rsz_img_7412.png" src="/img/rsz_img_7412.png" alt="Generic placeholder image">
+  </div>
+</div>
+
+
+
+
+
+
+
+    <div class="row featurette">
+      <div class="col-md-7">
+        <h2 class="featurette-heading"><a class="fhcolor_text" href="https://www.fh-aachen.de/studium/informatik-bsc">Mechanik</a></h2>
+        <p class="lead">
+
+          Mechanik ist die Lehre von der Bewegung von Körpern sowie den dabei wirkenden Kräften.
+          Um die Schachfiguren von einem Feld auf das nächste zu versetzten, braucht es Mechanik.
+          <br></br>
+          Mechanik ist nicht direkt Teil des Informatikstudiums, doch die Verwendung und das Programmieren von Motoren definitiv.
+          <br>
+          Die Bewegung im Schachtisch geht von zwei Schrittmotoren und zwei Elektromagneten aus.
+          Alle Schachfiguren müssen daher magnetisch sein.
+          <br><br>
+          Die Elektromagnete werden unter dem Tisch in X- und Y-Richtung verschoben.
+          Für jede Richtung ist einer der Schrittmotoren zuständig. An der gewünschten Position angekommen, wird einer der Elektromagenten anktiviert, sodass die die Figur oberhalb der Platte magnetisch an diesen gebunden ist.
+          Zwei Elektromagneten sind dehalb nötig, um die Ecken der Platte erreichen zu können.
+          Wäre nur ein Elektromagnet mittig angebracht, würde die Konstruktion des Kreuztisches verhindern, dass die Ecken des Tisches erreicht werden können.
+      </div>
+      <div class="col-md-5">
+        <img class="featurette-image img-fluid mx-auto" data-src="/img/rsz_img_7413.png" src="/img/rsz_img_7413.png" alt="code snipped illustration">
+      </div>
+    </div>
+
+
+  <div class="row featurette">
+    <div class="col-md-7 order-md-2">
+      <h2 class="featurette-heading"><a class="fhcolor_text" href="https://www.fh-aachen.de/studium/informatik-bsc">Verteile Systeme</a></h2>
+      <p class="lead">
+        Cloud-Computing ist die bedarfsabhängige Bereitstellung von IT-Ressourcen über das Internet.
+        Der Tisch benötigt eine Cloud-Verbindung, um andere Spieler zu finden und zu verbinden. Zudem wird auch die Berechnung von möglichen Zügen in der Cloud ausgeführt.
+        Doch was ist die Cloud? Die Cloud ist ein Computer oder mehrere Computer, welche mit dem Internet verbunden sind und für andere erreichbar sind.
+        <br><br>
+        Dieser kann auf bestimmte Anfragen genau definierte Antworten zurücksenden.
+        Im Fall der Schachcloud steht dieser in einem Rechenzentrum in Frankfurt; alle Schachtische, die sich im Internet befinden, versuchen eine Verbindung mit der Schach-Cloud herzustellen und ihren Gegenspieler nach neuen Schachzügen.
+        <br>
+        Dazu sendet der Tisch seine eindeutige Nummer und die Position aller Figuren auf dem Schachbrett.
+        Die Cloud führt noch andere Aktionen aus, wie das Zusammenbringen von Spielern, welche auf der Suche nach einem Spiel sind (Matchmaking).
+        Auch werden alle bereits geführen Spiele gespeichert und können mit anderen geteilt werden.
+
+        <br><br>
+        <span class="font-weight-bold">So ist es auch möglich, sich mit einem Webbrowser in das System einzuloggen und gegen einen Schatisch zu Spielen!</span>
+      </p>
+      <br>
+      <a class="btn btn-block btn-fh" href="/webclient">Jetzt ausprobieren!</a>
+
+    </div>
+    <div class="col-md-5 order-md-1">
+      <img class="featurette-image img-fluid mx-auto" data-src="/img/rsz_img_7414c.jpg" src="/img/rsz_img_7414c.jpg" alt="Generic placeholder image">
+    </div>
+  </div>
+
+
+
+<!-- /END THE FEATURETTES -->
+</div><!-- /.container -->
+
+
+
+
+
+  <div id="anch_picutres" class="photo-gallery">
+    <div class="container">
+      <div class="intro">
+        <h1 class="text-center fhcolor_text">Photo Gallery</h1>
+      </div>
+      <div class="row photos">
+        <div class="col-sm-6 col-md-4 col-lg-3 item"><a href="/img/gallery/a_high.jpg" data-lightbox="photos"><img class="img-fluid" src="/img/gallery/a.jpg"></a></div>
+        <div class="col-sm-6 col-md-4 col-lg-3 item"><a href="/img/gallery/b_high.jpg" data-lightbox="photos"><img class="img-fluid" src="/img/gallery/b.jpg"></a></div>
+        <div class="col-sm-6 col-md-4 col-lg-3 item"><a href="img/gallery/c_high.jpg" data-lightbox="photos"><img class="img-fluid" src="/img/gallery/c.jpg"></a></div>
+        <div class="col-sm-6 col-md-4 col-lg-3 item"><a href="img/gallery/d_high.jpg" data-lightbox="photos"><img class="img-fluid" src="/img/gallery/d.jpg"></a></div>
+        <div class="col-sm-6 col-md-4 col-lg-3 item"><a href="img/gallery/e_high.jpg" data-lightbox="photos"><img class="img-fluid" src="/img/gallery/e.jpg"></a></div>
+        <div class="col-sm-6 col-md-4 col-lg-3 item"><a href="img/gallery/f_high.jpg" data-lightbox="photos"><img class="img-fluid" src="/img/gallery/f.jpg"></a></div>
+        <div class="col-sm-6 col-md-4 col-lg-3 item"><a href="img/gallery/g_high.jpg" data-lightbox="photos"><img class="img-fluid" src="/img/gallery/g.jpg"></a></div>
+        <div class="col-sm-6 col-md-4 col-lg-3 item"><a href="img/gallery/h_high.jpg" data-lightbox="photos"><img class="img-fluid" src="/img/gallery/h.jpg"></a></div>
+      </div>
+    </div>
+  </div>
+
+
+<!-- /.container -->
+
+
+
+
+
+
+
+<div class="container-fluid" id="faq">
+  <!-- Row -->
+  <div class="row">
+    <div class="col-xl-12 pa-0">
+
+      <div class="container mt-sm-60 mt-30">
+        <div class="hk-row">
+
+          <div class="col-xl-12">
+            <div class="card card-lg">
+
+              <h1 class="featurette-heading text-justify text-center">
+                <spawn class="fhcolor_text">FAQ</spawn>
+              </h1>
+
+
+              <div class="accordion accordion-type-2 accordion-flush" id="accordion_2">
+                <div class="card">
+                  <div class="card-header d-flex justify-content-between activestate">
+                    <a role="button" data-toggle="collapse" href="#collapse_1i" aria-expanded="true"><span class="fhcolor_text">Mehr über das Projekt</span></a>
+                  </div>
+                  <div id="collapse_1i" class="collapse show" data-parent="#accordion_2" role="tabpanel">
+                    <div class="card-body pa-15">
+                      <p class="lead">
+                        Wenn du mehr über das Projekt erfahren möchtest, gibt es mehrere Möglichkeiten. Da diese Projekt als <a class="fhcolor_text" href="https://de.wikipedia.org/wiki/Open_Source">OpenSource</a>-Projekt veröffentlicht wurde, stehen alle notwendigen Dateien frei zur Verfügung.
+                        Darunter zählen der Quellcode der Software, die Schaltpläne für die Elektronik und alle mechanischen Zeichnungen.
+                        All diese Dateien können <a class="fhcolor_text" href="https://github.com/RBEGamer/AtomicChessOS">HIER</a> heruntergeladen werden.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-header d-flex justify-content-between">
+                    <a class="collapsed" role="button" data-toggle="collapse" href="#collapse_2i" aria-expanded="false"><span class="fhcolor_text">Spielernamen</span></a>
+                  </div>
+                  <div id="collapse_2i" class="collapse" data-parent="#accordion_2">
+                    <div class="card-body pa-15">
+
+                      <p class="lead">
+                        In der <a class="fhcolor_text" href="/statistics">Spielübersicht</a> sind alle letzten Spiele aufgelistet. Die Spielernamen werden zufällig generiert und sind mit einem Prefix versehen.
+                        Dieser Prefix zeigt, von welchem Typ der Spieler ist. Hierbei gibt es diese Varianten:
+                      <ul>
+                        <li>
+                          AI => Dies ist ein Computerspieler, welcher automatisch einspringt wenn kein menschlicher Spieler bereitsteht.
+                        </li>
+                        <li>
+                          VIRT => Wenn über den <a href="/webclient" class="fhcolor_text">Webclienten</a> gespielt wird, bekommt dieser den Prefix VIRTUELL.
+                        </li>
+                        <li>
+                          TABLE => Dieser Prefix erhält eine Spieler, welcher an einem AtomicChess Schachtisch spielt.
+                        </li>
+
+                      </ul>
+
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card">
+                  <div class="card-header d-flex justify-content-between">
+                    <a class="collapsed" role="button" data-toggle="collapse" href="#collapse_3i" aria-expanded="false"><span class="fhcolor_text">Kann man den AtomicChess Schachtisch kaufen ?</span></a>
+                  </div>
+                  <div id="collapse_3i" class="collapse" data-parent="#accordion_2">
+                    <div class="card-body pa-15">
+                      <p class="lead">
+                        Nein das geht leider nicht, aber wenn du handwerklich begabt bist kannst du den AtomicChess Schachtisch selber bauen.
+                        Alle notwendigen Dateien können <a class="fhcolor_text" href="https://github.com/RBEGamer/AtomicChessOS">HIER</a> heruntergeladen werden.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="card">
+                  <div class="card-header d-flex justify-content-between">
+                    <a class="collapsed" role="button" data-toggle="collapse" href="#collapse_4i" aria-expanded="false"><span class="fhcolor_text">Kontakt</span></a>
+                  </div>
+                  <div id="collapse_4i" class="collapse" data-parent="#accordion_2">
+                    <div class="card-body pa-15">
+                      <p class="lead">
+                        Wenn du weitere Fragen hast rund um dieses Projekt, kannst du gerne eine E-Mail and die folgende Adresse schicken:
+
+                        <b><a href="mailto:info@atomicchess.de" class="fhcolor_text">info@atomicchess.de</a></b>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="card">
+                  <div class="card-header d-flex justify-content-between">
+                    <a class="collapsed" role="button" data-toggle="collapse" href="#collapse_5i" aria-expanded="false"><span class="fhcolor_text">Verwendete Programmiersprachen</span></a>
+                  </div>
+                  <div id="collapse_5i" class="collapse" data-parent="#accordion_2">
+                    <div class="card-body pa-15">
+                      <p class="lead">
+                        Bei diesem Projekt wurden mehrere verschiedene Sprachen verwendet, da diese Projekt aus vielen einzelnen unterschiedlichsten Services besteht.
+
+                      <p class="lead">
+                      <ul>
+                        <li>
+                          C/C++ => Wurde für das Eingebettete-System verwendet, dies steuert die Mechanik und berechnet die Laufwege der Figuren.
+                        </li>
+                        <li>
+                          NodeJS => Wird im Backend-Service verwendet, welcher für das Matchmaking und die Verwaltung der einzelnen Spiele verantwortlich ist.
+                        </li>
+                        <li>
+                          Python3 => Hiermit wurde ein weiterer Micro-Service erstellt, welcher die vom Schachtisch gesendeten Schachzuege validiert.
+                        </li>
+                        <li>
+                          SQL/NoSQL => In der Datenbank wird der Fortschritt jedes einzelnen Spiels und deren Spieler gespeichert.
+                        </li>
+                        <li>
+                          Golang => In Go wurde der Computer-Spieler implementiert, welcher zum Einsatz kommt wenn kein menschlicher Spieler online ist.
+                        </li>
+                      </ul>
+
+                      </p>
+                      
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /Row -->
+</div>
+
+
+
+
+
+
+<div id="anch_video" class="row">
+  <div class="col-md-12">
+    <h1 class="featurette-heading text-justify text-center">
+      <br>
+      <br>
+    </h1>
+  </div>
+</div>
+
+
+
+<!-- Footer -->
+<footer class="footer fhcolor_bg">
+  <div class="container text-center">
+
+
+
+
+    <div class="row">
+      <div class="col-lg-12 text-center text-lg-center my-auto">
+        <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+          <form action="/redirect" method="GET">
+          <input type="hidden" name="destination" value="impressum"/>
+          <input type="submit" class="btn btn-dark" value="IMPRESSUM" />
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+</footer>
+
+
+
+
+
+<script src="/js/jquery/jquery.min.js"></script>
+<script src="/bootstrap/js/bootstrap.min.js"></script>
+<script src="/js/lightbox.min.js"></script>
+<script>
+  $(document).ready(function () {
+    console.log("ready!");
+  });
+
+
+</script>
+
+</body>
+
+</html>

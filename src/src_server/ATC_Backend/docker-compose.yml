@@ -1,0 +1,39 @@
+version: "3"
+services:
+  AtomicChessBackend:
+    container_name: atc_backend
+    depends_on:
+      - atc_redis
+      - atc_mongo
+    build:
+      context: .
+    image: AtomicChessBackend
+    network_mode: "host"
+    restart: always
+    ports:
+      - 3000:3000
+
+
+
+  AtomicChessRedisDatabase:
+    image: redis:latest
+    restart: always
+    container_name: atc_redis
+    ports:
+      - 6379:6379
+    network_mode: "host"
+
+  AtomicChessMongoDatabase:
+    image: mongo:latest
+    container_name: atc_mongo
+    restart: always
+      #environment:
+      #  - MONGO_DATA_DIR=/data/db
+      #  - MONGO_LOG_DIR=/dev/null
+      #volumes:
+     #   - ./data/db:/data/db
+    ports:
+      - 27017:27017
+    command: mongod --smallfiles --logpath=/dev/null # --quiet
+
+
