@@ -1,0 +1,37 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven
+Built-By: olamy
+Build-Jdk: 1.8.0_201
+Extension-Name: blueocean-pipeline-api-impl
+Specification-Title: The Jenkins Plugins Parent POM Project
+Implementation-Title: blueocean-pipeline-api-impl
+Implementation-Version: 1.23.3
+Group-Id: io.jenkins.blueocean
+Short-Name: blueocean-pipeline-api-impl
+Long-Name: Pipeline implementation for Blue Ocean
+Url: https://github.com/jenkinsci/blueocean-plugin/blob/master/blueoce
+ an/doc/BlueOcean.adoc
+Minimum-Java-Version: 1.8
+Plugin-Version: 1.23.3
+Hudson-Version: 2.150.3
+Jenkins-Version: 2.150.3
+Plugin-Dependencies: blueocean-pipeline-scm-api:1.23.3,blueocean-rest-
+ impl:1.23.3,workflow-api:2.36,workflow-cps:2.76,workflow-durable-task
+ -step:2.31,workflow-job:2.33,workflow-multibranch:2.20,workflow-step-
+ api:2.22,workflow-support:3.3,branch-api:2.0.20,credentials:2.2.1,git
+ :3.9.3,github-branch-source:2.6.0,htmlpublisher:1.14,pipeline-build-s
+ tep:2.7,pipeline-graph-analysis:1.10,pipeline-input-step:2.8,pipeline
+ -stage-step:2.3,plain-credentials:1.4,scm-api:2.6.3,pipeline-model-de
+ finition:1.6.0,pipeline-stage-tags-metadata:1.6.0
+Plugin-Developers: Thorsten Iberian Sumurai:scherler:,Cliff Meyers:cli
+ ffmeyers:,Tom Fennelly:tfennelly:,Vivek Pandey:vivek:,Kohsuke:kohsuke
+ :,Josh McDonald:sophistifunk:,Ivan Meredith:imeredith:,Michael Neale:
+ michaelneale:,Keith Zantow:kzantow:,James Dumay:i386:,Marc:marcesher:
+ ,Paul Dragoonis:dragoonis:,Ivan Santos:pragmaticivan:,Peter Dave Hell
+ o:PeterDaveHello:,Alexandru Somai:alexsomai:
+Plugin-License-Name: MIT License
+Plugin-License-Url: https://opensource.org/licenses/MIT
+Plugin-ScmUrl: https://github.com/jenkinsci/blueocean-plugin/blueocean
+ -pipeline-api-impl
+

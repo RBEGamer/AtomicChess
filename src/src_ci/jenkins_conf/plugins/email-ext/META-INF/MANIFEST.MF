@@ -1,0 +1,32 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven
+Built-By: danielbeck
+Build-Jdk: 1.8.0_222
+Extension-Name: email-ext
+Specification-Title: Allows to configure every aspect of email notific
+ ations: when an email is sent, who should receive it and what the ema
+ il says
+Implementation-Title: email-ext
+Implementation-Version: 2.76
+Plugin-Class: hudson.plugins.emailext.EmailExtensionPlugin
+Group-Id: org.jenkins-ci.plugins
+Short-Name: email-ext
+Long-Name: Email Extension Plugin
+Url: https://github.com/jenkinsci/email-ext-plugin
+Compatible-Since-Version: 2.57.2
+Minimum-Java-Version: 1.8
+Plugin-Version: 2.76
+Hudson-Version: 2.164.3
+Jenkins-Version: 2.164.3
+Plugin-Dependencies: workflow-job:2.36;resolution:=optional,workflow-s
+ tep-api:2.20;resolution:=optional,config-file-provider:2.15.6;resolut
+ ion:=optional,junit:1.28,mailer:1.29,matrix-project:1.14,script-secur
+ ity:1.66,structs:1.20,token-macro:2.10,analysis-core:1.54;resolution:
+ =optional
+Plugin-Developers: Alex Earl:slide:slide.o.mix@gmail.com,David van Laa
+ tum:davidvanlaatum:david@vanlaatum.id.au
+Plugin-License-Name: The MIT License (MIT)
+Plugin-License-Url: https://opensource.org/licenses/MIT
+Plugin-ScmUrl: https://github.com/jenkinsci/plugin-pom/email-ext
+

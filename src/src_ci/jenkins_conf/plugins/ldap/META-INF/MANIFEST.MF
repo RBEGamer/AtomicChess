@@ -1,0 +1,24 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven
+Built-By: rsandell
+Build-Jdk: 1.8.0_211
+Extension-Name: ldap
+Specification-Title: Adds LDAP authentication to Jenkins
+Implementation-Title: ldap
+Implementation-Version: 1.26
+Group-Id: org.jenkins-ci.plugins
+Short-Name: ldap
+Long-Name: LDAP Plugin
+Url: https://github.com/jenkinsci/ldap-plugin
+Compatible-Since-Version: 1.16
+Minimum-Java-Version: 1.8
+Plugin-Version: 1.26
+Hudson-Version: 2.235.3
+Jenkins-Version: 2.235.3
+Plugin-Dependencies: mailer:1.20
+Plugin-Developers: 
+Plugin-License-Name: The MIT license
+Plugin-License-Url: https://www.opensource.org/licenses/mit-license.php
+Plugin-ScmUrl: https://github.com/jenkinsci/ldap-plugin
+

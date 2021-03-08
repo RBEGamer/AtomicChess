@@ -1,0 +1,32 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven
+Built-By: olamy
+Build-Jdk: 1.8.0_201
+Extension-Name: blueocean-github-pipeline
+Specification-Title: The Jenkins Plugins Parent POM Project
+Implementation-Title: blueocean-github-pipeline
+Implementation-Version: 1.23.3
+Group-Id: io.jenkins.blueocean
+Short-Name: blueocean-github-pipeline
+Long-Name: GitHub Pipeline for Blue Ocean
+Url: https://github.com/jenkinsci/blueocean-plugin/blob/master/blueoce
+ an/doc/BlueOcean.adoc
+Minimum-Java-Version: 1.8
+Plugin-Version: 1.23.3
+Hudson-Version: 2.150.3
+Jenkins-Version: 2.150.3
+Plugin-Dependencies: blueocean-pipeline-api-impl:1.23.3,apache-httpcom
+ ponents-client-4-api:4.5.10-1.0,github-api:1.111,github-branch-source
+ :2.6.0,jackson2-api:2.10.2,pubsub-light:1.13
+Plugin-Developers: Thorsten Iberian Sumurai:scherler:,Cliff Meyers:cli
+ ffmeyers:,Tom Fennelly:tfennelly:,Vivek Pandey:vivek:,Kohsuke:kohsuke
+ :,Josh McDonald:sophistifunk:,Ivan Meredith:imeredith:,Michael Neale:
+ michaelneale:,Keith Zantow:kzantow:,James Dumay:i386:,Marc:marcesher:
+ ,Paul Dragoonis:dragoonis:,Ivan Santos:pragmaticivan:,Peter Dave Hell
+ o:PeterDaveHello:,Alexandru Somai:alexsomai:
+Plugin-License-Name: MIT License
+Plugin-License-Url: https://opensource.org/licenses/MIT
+Plugin-ScmUrl: https://github.com/jenkinsci/blueocean-plugin/blueocean
+ -github-pipeline
+

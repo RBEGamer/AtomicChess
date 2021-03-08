@@ -1,0 +1,23 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven
+Built-By: rleon
+Build-Jdk: 1.8.0_242
+Extension-Name: matrix-project
+Specification-Title: Multi-configuration (matrix) project type.
+Implementation-Title: matrix-project
+Implementation-Version: 1.17
+Group-Id: org.jenkins-ci.plugins
+Short-Name: matrix-project
+Long-Name: Matrix Project Plugin
+Url: https://github.com/jenkinsci/matrix-project-plugin
+Minimum-Java-Version: 1.8
+Plugin-Version: 1.17
+Hudson-Version: 2.164.3
+Jenkins-Version: 2.164.3
+Plugin-Dependencies: junit:1.29,script-security:1.71
+Plugin-Developers: 
+Plugin-License-Name: MIT License
+Plugin-License-Url: https://opensource.org/licenses/MIT
+Plugin-ScmUrl: https://github.com/jenkinsci/matrix-project-plugin
+

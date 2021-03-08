@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<l:dependencies xmlns:l='licenses' groupId='io.jenkins.blueocean' artifactId='blueocean-jira' version='1.23.3'><l:dependency name='JIRA Integration for Blue Ocean' groupId='io.jenkins.blueocean' artifactId='blueocean-jira' version='1.23.3' url='https://github.com/jenkinsci/blueocean-plugin/blob/master/blueocean/doc/BlueOcean.adoc'><l:description>The Jenkins Plugins Parent POM Project</l:description><l:license name='MIT License' url='https://opensource.org/licenses/MIT'/></l:dependency><l:dependency name='FindBugs-jsr305' groupId='com.google.code.findbugs' artifactId='jsr305' version='3.0.2' url='http://findbugs.sourceforge.net/'><l:description>JSR305 Annotations for Findbugs</l:description><l:license name='The Apache Software License, Version 2.0' url='http://www.apache.org/licenses/LICENSE-2.0.txt'/></l:dependency><l:dependency name='Guava: Google Core Libraries for Java' groupId='com.google.guava' artifactId='guava' version='18.0' url='http://code.google.com/p/guava-libraries/guava'><l:description>Guava is a suite of core and expanded libraries that include
+    utility classes, google's collections, io classes, and much
+    much more.
+
+    Guava has only one code dependency - javax.annotation,
+    per the JSR-305 spec.</l:description><l:license name='The Apache Software License, Version 2.0' url='http://www.apache.org/licenses/LICENSE-2.0.txt'/></l:dependency></l:dependencies>

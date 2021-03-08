@@ -1,0 +1,31 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven
+Built-By: olamy
+Build-Jdk: 1.8.0_201
+Extension-Name: blueocean-git-pipeline
+Specification-Title: The Jenkins Plugins Parent POM Project
+Implementation-Title: blueocean-git-pipeline
+Implementation-Version: 1.23.3
+Group-Id: io.jenkins.blueocean
+Short-Name: blueocean-git-pipeline
+Long-Name: Git Pipeline for Blue Ocean
+Url: https://github.com/jenkinsci/blueocean-plugin/blob/master/blueoce
+ an/doc/BlueOcean.adoc
+Minimum-Java-Version: 1.8
+Plugin-Version: 1.23.3
+Hudson-Version: 2.150.3
+Jenkins-Version: 2.150.3
+Plugin-Dependencies: blueocean-pipeline-api-impl:1.23.3,blueocean-pipe
+ line-scm-api:1.23.3,git:3.9.3
+Plugin-Developers: Thorsten Iberian Sumurai:scherler:,Cliff Meyers:cli
+ ffmeyers:,Tom Fennelly:tfennelly:,Vivek Pandey:vivek:,Kohsuke:kohsuke
+ :,Josh McDonald:sophistifunk:,Ivan Meredith:imeredith:,Michael Neale:
+ michaelneale:,Keith Zantow:kzantow:,James Dumay:i386:,Marc:marcesher:
+ ,Paul Dragoonis:dragoonis:,Ivan Santos:pragmaticivan:,Peter Dave Hell
+ o:PeterDaveHello:,Alexandru Somai:alexsomai:
+Plugin-License-Name: MIT License
+Plugin-License-Url: https://opensource.org/licenses/MIT
+Plugin-ScmUrl: https://github.com/jenkinsci/blueocean-plugin/blueocean
+ -git-pipeline
+
