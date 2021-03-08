@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source files">
+      <UniqueIdentifier>{4cc0a2a9-3825-4cc6-9d3e-1e61018a39cd}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header files">
+      <UniqueIdentifier>{1658b562-e936-4e5e-ab25-b5bd2c30c96d}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource files">
+      <UniqueIdentifier>{b513d1f9-00d1-49fb-a984-ed26fc0e532d}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="Make files">
+      <UniqueIdentifier>{acc87951-585b-4264-9037-db79a2a8a662}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VisualGDB settings">
+      <UniqueIdentifier>{fa9047a1-3179-4491-bf0c-e9a1f20209d0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="controller.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <None Include="debug.mak">
+      <Filter>Make files</Filter>
+    </None>
+    <None Include="release.mak">
+      <Filter>Make files</Filter>
+    </None>
+    <None Include="controller-Debug.vgdbsettings">
+      <Filter>VisualGDB settings</Filter>
+    </None>
+    <None Include="controller-Release.vgdbsettings">
+      <Filter>VisualGDB settings</Filter>
+    </None>
+    <ClCompile Include="SHARED\loguru-master\loguru.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="BackendConnector.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="SHARED\guicommunicator\guicommunicator.cpp">
+      <Filter>Header files</Filter>
+    </ClCompile>
+    <ClCompile Include="TMC5160.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="SHARED\json11-master\json11.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="SHARED\WiringPi-master\wiringPi\wiringPi.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="SHARED\WiringPi-master\wiringPi\wiringPiI2C.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="SHARED\WiringPi-master\wiringPi\wiringPiSPI.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="IOController.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="ChessPiece.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="SPICommunication.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="ChessBoard.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="ChessField.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="ConfigParser.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="SHARED\WiringPi-master\wiringPi\softPwm.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="SHARED\WiringPi-master\wiringPi\softServo.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="SHARED\WiringPi-master\wiringPi\softTone.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="SHARED\WiringPi-master\wiringPi\wiringSerial.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="SHARED\WiringPi-master\wiringPi\wiringShift.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="SHARED\WiringPi-master\wiringPi\piHiPri.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="SHARED\WiringPi-master\wiringPi\piThread.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="SHARED\WiringPi-master\wiringPi\pseudoPins.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="StateMachine.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="BoardUserMoveWatcher.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="HardwareInterface.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="GCodeSender.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="SHARED\serialib-master\lib\serialib.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Makefile" />
+    <None Include="SHARED\PROTOCOL_MSG.proto" />
+    <None Include="SHARED\json11-master\json11.pc.in" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BackendConnector.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="SHARED\guicommunicator\guicommunicator.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="TMC5160.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="SHARED\cpp-httplib-master\httplib.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="SHARED\WiringPi-master\wiringPi\wiringPi.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="SHARED\WiringPi-master\wiringPi\wiringPiI2C.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="SHARED\WiringPi-master\wiringPi\wiringPiSPI.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="IOController.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="ChessPiece.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="SPICommunication.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="ChessBoard.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="ChessField.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigParser.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="SHARED\WiringPi-master\wiringPi\softPwm.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="SHARED\WiringPi-master\wiringPi\softServo.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="SHARED\WiringPi-master\wiringPi\softTone.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="SHARED\WiringPi-master\wiringPi\wiringSerial.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="SHARED\WiringPi-master\wiringPi\wiringShift.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="SHARED\WiringPi-master\wiringPi\pseudoPins.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="BoardUserMoveWatcher.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="HardwareInterface.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="GCodeSender.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="SHARED\CppLinuxSerial-master\include\CppLinuxSerial\Exception.hpp">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="SHARED\serialib-master\lib\serialib.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="USER_DATA\atccontrollerconfig.ini" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="controller.rc">
+      <Filter>Resource files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

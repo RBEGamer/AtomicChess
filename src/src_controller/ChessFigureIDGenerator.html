@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <h1>ATC - FIGURE UNIQUE ID GENERATOR</h2>
+
+        <h2>DESCRIPTION</h2>
+        This page generates the figure id data for the NFC tag of each figure.<br> Each NFC tag, is formatted into the NDEF format, which hols one text record. The text data indentify the figure piece. The data is capsuled between two = charakters. The
+        charakter is parsed to an unsigned char datatype and the eight bits are used to hold the following information:
+        <br><br> MSB [7,6,5,4,3,2,1,0] LSB
+        <br><br> MSB [TYPE,TYPE,TYPE,COLOR,ID,ID,ID,ID] LSB
+        <br><br>
+        <table>
+            <tr>
+                <th>USED BITS</th>
+                <th>INFORMATION</th>
+                <th>EXAMPLE</th>
+            </tr>
+
+            <tr>
+                <td>7 to 5</td>
+                <td>Piece Type</td>
+                <td>[1,1,1]=7 is the PAWN<br>[0,1,1]=3 is the ROOK</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Piece Color</td>
+                <td>[1]=BLACK<br>[0]=WHITE</td>
+            </tr>
+            <tr>
+                <td>3-0</td>
+                <td>Piece Number, for each type the number starts at zero.</td>
+                <td>[0,0,1]=1 first PAWN <br>[0,1,0]=2 second PAWN<br>[0,0,1]=1 first ROOK</td>
+            </tr>
+        </table>
+        <h2>SETTINGS</h2>
+        <form>
+            <p>FIGURE TYPE</p>
+            <fieldset>
+                <input type="radio" id="k" name="type" value="k" onClick="calc()">
+                <label for="k"> KING</label>
+                <input type="radio" id="q" name="type" value="q" onClick="calc()">
+                <label for="q"> QUEEN</label>
+                <input type="radio" id="r" name="type" value="r" onClick="calc()">
+                <label for="r"> ROOK</label>
+                <input type="radio" id="b" name="type" value="b" onClick="calc()">
+                <label for="b"> BISHOP</label>
+                <input type="radio" id="n" name="type" value="n" onClick="calc()">
+                <label for="n"> KNIGHT</label>
+                <input type="radio" id="p" name="type" value="p" onClick="calc()" checked>
+                <label for="p"> PAWN</label>
+            </fieldset>
+
+
+            <p>FIGURE COLOR</p>
+            <fieldset>
+                <input type="radio" id="b" name="color" value="b" onClick="calc()" checked>
+                <label for="b"> BLACK</label>
+                <input type="radio" id="w" name="color" value="w" onClick="calc()">
+                <label for="w"> WHITE</label>
+
+            </fieldset>
+        </form>
+
+
+        <h2>RESULT</h2>
+
+        <table id="restable" style="width:50%">
+        </table>
+        <script>
+            var figures = {
+                "k": {
+                    "count": 1,
+                    "typeno": [0, 0, 1]
+                },
+                "q": {
+                    "count": 1,
+                    "typeno": [0, 1, 0]
+                },
+                "r": {
+                    "count": 2,
+                    "typeno": [0, 1, 1]
+                },
+                "b": {
+                    "count": 2,
+                    "typeno": [1, 0, 0]
+                },
+                "n": {
+                    "count": 2,
+                    "typeno": [1, 0, 1]
+                },
+                "p": {
+                    "count": 8,
+                    "typeno": [1, 1, 0]
+                }
+            };
+
+
+
+            function calc() {
+                var resarr = [0, 0, 0, 0, 0, 0, 0, 0];
+                var table_res_arr = [];
+                var fid = "";
+                var fids = document.getElementsByName("type");
+                for (var i = 0; i < fids.length; i++) {
+                    if (fids[i].checked)
+                        fid = fids[i].value;
+                }
+                //   console.log(fid);
+
+                var figcount = 0;
+                if (fid != "") {
+                    var fd = figures[fid];
+                    if (fd) {
+                        figcount = fd.count;
+
+                        for (var i = 0; i < 3; + i++) {
+                            resarr[i] = fd.typeno[i];
+                        }
+                        //    console.log(resarr);
+                    }
+                    //  console.log(fd);
+                } else {
+                    return;
+                }
+
+
+                var col = "";
+                var cols = document.getElementsByName("color");
+                for (var i = 0; i < cols.length; i++) {
+                    if (cols[i].checked)
+                        col = cols[i].value;
+                }
+                //    console.log(col);
+                if (col == "b") {
+                    resarr[3] = 1;
+                }
+                //    console.log(resarr);
+
+                var html = "<tr><th>No</th><th>DATA</th><th>NDEF_RECORD_CONTENT</th></tr>";
+                for (let index = 0; index < figcount; index++) {
+                    console.log(index);
+                    var st = (index).toString(2).split('').map(function(s) {
+                        return parseInt(s);
+                    });
+                    st.reverse();
+
+                    if (st[3] == undefined) {
+                        st[3] = 0;
+                    }
+                    if (st[2] == undefined) {
+                        st[2] = 0;
+                    }
+                    if (st[1] == undefined) {
+                        st[1] = 0;
+                    }
+                    if (st[0] == undefined) {
+                        st[0] = 0;
+                    }
+
+
+                    console.log(st);
+                    resarr[4] = st[3];
+                    resarr[5] = st[2];
+                    resarr[6] = st[1];
+                    resarr[7] = st[0];
+                    table_res_arr.push();
+                    console.log(resarr);
+                    var ndefcontent = 0;
+                    for (let c = 0; c < resarr.length; c++) {
+                        if (resarr[resarr.length - c - 1] == 1) {
+                            ndefcontent += Math.pow(2, c);
+                        }
+
+                    }
+                    html += "<tr><td>" + (index + 0).toString() + "</td><td>" + resarr + " =[" + ndefcontent + "]</td><td>=" + String.fromCharCode(ndefcontent) + "=</td></tr>";
+                }
+
+
+
+
+                console.log(html);
+                document.getElementById("restable").innerHTML = html;
+            }
+
+            calc();
+        </script>
+
+</body>
+
+
+
+</html>
