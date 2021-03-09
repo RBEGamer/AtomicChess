@@ -7,5 +7,5 @@ rm -Rf ./output
 docker build -t atcbuildroot .
 
 # COPY FILES OVER TO HOST USING SCIRPT INSIDE OF THE CONTAINER
-docker run -it --rm -v "$(pwd)":/var/buildroot atcbuildroot
+docker run -i --rm -v "$(pwd)":/var/buildroot atcbuildroot
 
