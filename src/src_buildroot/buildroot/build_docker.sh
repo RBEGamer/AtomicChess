@@ -1,7 +1,7 @@
 #!/bin/bash
 bash ./restore_config.sh
 # CREATE FOLDERS
-rm -Rf ./output
+#rm -Rf ./output
 
 # BUILD CONTAINER
 docker build -t atcbuildroot .

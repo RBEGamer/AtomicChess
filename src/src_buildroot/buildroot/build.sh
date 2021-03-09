@@ -23,6 +23,8 @@ fi
 
 echo "-- COPY CONFIG FILE --"
 bash ./restore_config.sh
+
+echo "-- INITIAL BUILD TO CREATE HOST AND TARGET FS --"
 make -j10
 
 
@@ -30,9 +32,6 @@ make -j10
 
 # INCREMENT VERSION
 cd ./VERSIONING && bash ./increment_version.sh && cd ..
-
-
-
 # FORCE TO BUILD THE ATC PACKAGES
 echo "--BUILD FIRT ITERATION --"
 
