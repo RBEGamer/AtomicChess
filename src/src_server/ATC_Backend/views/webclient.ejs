@@ -186,7 +186,13 @@
       </div>
       <div class="modal-body mx-3">
        Bitte warten, bis ein freier Spieler gefunden wurde, dies dauert ca. 20 Sekunden.
-       Wenn der Schachtisch nicht frei ist, spielst du gegen den Computer.
+       Wenn der Schachtisch nicht frei ist, spielst du automatisch gegen den Computer.
+
+        <label id="mm_minutes">00</label>
+        <label id="mm_colon">:</label>
+        <label id="mm_seconds">00</label>
+
+
         <div class="snippet" data-title=".dot-collision">
           <div class="stage">
             <div class="dot-collision"></div>
@@ -248,8 +254,43 @@
   const PLAYER_STATE_IDLE ="1";
 
   //------ CONFIG CHESSBOARD ------
+  var mm_totalSeconds = -1;
+
+  function pad(val)
+  {
+    var valString = val + "";
+    if(valString.length < 2)
+    {
+      return "0" + valString;
+    }
+    else
+    {
+      return valString;
+    }
+  }
 
 
+  function update_matchmaking_timer()
+  {
+    if(mm_totalSeconds === -1){return;}
+    ++mm_totalSeconds;
+    $("#mm_seconds").html(pad(mm_totalSeconds%60));
+    $("#mm_minutes").html(pad(mm_totalSeconds/60));
+
+  }
+
+  function pad(val)
+  {
+    var valString = val + "";
+    if(valString.length < 2)
+    {
+      return "0" + valString;
+    }
+    else
+    {
+      return valString;
+    }
+  }
 
 
   //https://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid
@@ -584,6 +625,7 @@
 
 
   $(document).ready(function ($) {
+    setInterval(update_matchmaking_timer, 1000);
     console.log("ready!");
     console.log(navigator.userAgent);
     var bMobile = navigator.userAgent.indexOf( "Mobile" ) !== -1 || navigator.userAgent.indexOf( "iPhone" ) !== -1 || navigator.userAgent.indexOf( "Android" ) !== -1 || navigator.userAgent.indexOf( "Windows Phone" ) !== -1 ;
@@ -654,8 +696,13 @@
 
             if(_state.matchmaking_state.waiting_for_game != null && _state.matchmaking_state.waiting_for_game === true){
               $('#modalWaitingForGameForm').modal('show');
+              //START TIMER
+              if(mm_totalSeconds === -1){
+                mm_totalSeconds = 0;
+              }
             }else if(_state.matchmaking_state.waiting_for_game != null && _state.matchmaking_state.waiting_for_game === false){
               $('#modalWaitingForGameForm').modal('hide');
+              mm_totalSeconds = -1;
             }
 
 
