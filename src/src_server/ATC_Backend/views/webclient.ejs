@@ -188,8 +188,7 @@
        Bitte warten, bis ein freier Spieler gefunden wurde, dies dauert ca. 20 Sekunden.
        Wenn der Schachtisch nicht frei ist, spielst du automatisch gegen den Computer.
 
-        <label id="mm_minutes">00</label>
-        <label id="mm_colon">:</label>
+       
         <label id="mm_seconds">00</label>
 
 
@@ -275,7 +274,7 @@
     if(mm_totalSeconds === -1){return;}
     ++mm_totalSeconds;
     $("#mm_seconds").html(pad(mm_totalSeconds%60));
-    $("#mm_minutes").html(pad(mm_totalSeconds/60));
+  //  $("#mm_minutes").html(pad(mm_totalSeconds/60));
 
   }
 
