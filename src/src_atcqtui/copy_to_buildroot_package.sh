@@ -1,4 +1,8 @@
 #!/bin/bash
+
+echo "COPY SHARED FOLDER FROM ../src_shared"
+cp -Rf ../src_shared/SHARED ./src/
+
 echo "COPY TO BUILDROOT PACKAGE"
 pwd
 ls
