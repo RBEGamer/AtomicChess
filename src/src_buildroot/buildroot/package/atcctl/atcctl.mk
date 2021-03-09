@@ -5,7 +5,7 @@
 ################################################################################
 
 ATCCTL_VERSION = 1.0.0
-ATCCTL_SITE = ./package/atctp/atcctl/src
+ATCCTL_SITE = ./package/atcctl/src
 ATCCTL_SITE_METHOD = local
 ATCCTL_LICENSE = GPL-2.0+
 

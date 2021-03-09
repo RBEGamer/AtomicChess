@@ -1,5 +1,5 @@
 #!/bin/bash
-
+bash ./restore_config.sh
 # CREATE FOLDERS
 rm -Rf ./build_result
 mkdir -p ./build_result

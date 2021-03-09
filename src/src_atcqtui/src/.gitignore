@@ -70,4 +70,5 @@ Thumbs.db
 # --------
 *.dll
 *.exe
-
+atcgui
+moc_predefs.h
