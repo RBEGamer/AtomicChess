@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Buildroot -g94cf0d38-dirty Configuration
+# Buildroot -g7983429b-dirty Configuration
 #
 BR2_HAVE_DOT_CONFIG=y
 BR2_HOST_GCC_AT_LEAST_4_9=y
@@ -588,7 +588,7 @@ BR2_LINUX_KERNEL_NEEDS_HOST_OPENSSL=y
 #
 BR2_PACKAGE_ATCGUI=y
 BR2_PACKAGE_ATCTP=y
-BR2_PACKAGE_ATCCTL=y
+# BR2_PACKAGE_ATCCTL is not set
 # BR2_PACKAGE_ATCMISC is not set
 # BR2_PACKAGE_ATCMRPC is not set
 
