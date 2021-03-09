@@ -3,13 +3,14 @@
 pwd
 ls -la
 env
-cd /var/buildroot
+#cd /var/buildroot
 ls -la
+
 
 
 # CHECK IF ALREADY BUILD
 # NEEDED IN DOCKER CONTAINER
-FILE=./BUILD_DOCKER_SUCC
+FILE=./output/BUILD_DOCKER_SUCC
 if test -f "$FILE"; then
     echo "$FILE exists."
     exit -1
@@ -18,24 +19,21 @@ else
     echo "--- STARTING BUILD ---"
 fi
 
-touch ./BUILD_DOCKER_SUCC
+
+
+echo "-- COPY CONFIG FILE --"
+bash ./restore_config.sh
+make -j10
+
+
+
 
 # INCREMENT VERSION
 cd ./VERSIONING && bash ./increment_version.sh && cd ..
 
 
- 
-
-echo "-- COPY CONFIG FILE --"
-bash ./restore_config.sh
-
-
 
 # FORCE TO BUILD THE ATC PACKAGES
-make atcgui-dirclean && rm -Rf ./dl/atcgui/
-make atcctl-dirclean && rm -Rf ./dl/atcctl/
-make atctp-dirclean && rm -Rf ./dl/atctp/
-
 echo "--BUILD FIRT ITERATION --"
 
 make -j10
@@ -89,14 +87,16 @@ bash ./swupdate_packer.sh
 
 echo "-- BUILD FINISHED --"
 # TODO ADD SECONDS .config only for base sytem
-bash /var/buildroot/build.sh
+
 # CREATE FOLDERS
-mkdir -p /var/build_result/images
-mkdir -p /var/build_result/host
+#mkdir -p /var/build_result/images
+#mkdir -p /var/build_result/host
 # COPY BUILD RESULT TO HOST
-cp -R /var/buildroot/output/images /var/build_result
-cp -R /var/buildroot/output/host /var/build_result
-cp -R /var/buildroot/output/target /var/build_result
+#cp -R /var/buildroot/output/images /var/build_result
+#cp -R /var/buildroot/output/host /var/build_result
+#cp -R /var/buildroot/output/target /var/build_result
 
+chmod -R 777 ./output
 
+touch ./output/BUILD_DOCKER_SUCC
 exit 0

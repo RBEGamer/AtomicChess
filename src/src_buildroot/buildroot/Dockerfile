@@ -68,7 +68,7 @@ RUN bash /var/buildroot/restore_config.sh
 # CHECK GENERATED PUB/PRIV KEYS FOR SW UPDATE EXISTS
 RUN bash /var/buildroot/check_keys.sh
 # RUN A INITIAL MAKE TO DOWNLOAD THE INITIAL PACKAGES
-RUN make -j15
+#RUN make -j15
 
 
 

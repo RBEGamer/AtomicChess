@@ -1,12 +1,11 @@
 #!/bin/bash
 bash ./restore_config.sh
 # CREATE FOLDERS
-rm -Rf ./build_result
-mkdir -p ./build_result
+rm -Rf ./output
 
 # BUILD CONTAINER
 docker build -t atcbuildroot .
 
 # COPY FILES OVER TO HOST USING SCIRPT INSIDE OF THE CONTAINER
-docker run -it --rm -v "$(pwd)/build_result":/var/build_result atcbuildroot
+docker run -it --rm -v "$(pwd)":/var/buildroot atcbuildroot
 
