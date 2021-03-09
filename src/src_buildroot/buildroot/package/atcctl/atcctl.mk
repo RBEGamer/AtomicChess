@@ -14,7 +14,7 @@ define ATCCTL_BUILD_CMDS
 	@echo ATCCTL_BUILD!
 	@echo $(@D)
 	@echo -----------------
-	#$(MAKE) $(TARGET_CONFIGURE_OPTS) -C $(@D) CONFIG=DEBUGLOCAL TARGETNAME=atc_controller CXXFLAGS='-std=c++17'
+	$(MAKE) $(TARGET_CONFIGURE_OPTS) -C $(@D) CONFIG=DEBUGLOCAL TARGETNAME=atc_controller CXXFLAGS='-std=c++17'
 
 endef
 
