@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.3.9)  10 MAR 2021 00:25
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.3.9)  10 MAR 2021 00:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -502,18 +502,97 @@ File: listings.cfg 2019/09/10 1.8c listings configuration
 ))
 Package: listings 2019/09/10 1.8c (Carsten Heinz)
 
+(/usr/share/texlive/texmf-dist/tex/latex/tools/longtable.sty
+Package: longtable 2020/01/07 v4.13 Multi-page Table package (DPC)
+\LTleft=\skip71
+\LTright=\skip72
+\LTpre=\skip73
+\LTpost=\skip74
+\LTchunksize=\count280
+\LTcapwidth=\dimen163
+\LT@head=\box53
+\LT@firsthead=\box54
+\LT@foot=\box55
+\LT@lastfoot=\box56
+\LT@cols=\count281
+\LT@rows=\count282
+\c@LT@tables=\count283
+\c@LT@chunks=\count284
+\LT@p@ftn=\toks27
+)
+Class scrartcl Info: longtable captions redefined on input line 106.
+
+(/usr/share/texlive/texmf-dist/tex/latex/booktabs/booktabs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen164
+\lightrulewidth=\dimen165
+\cmidrulewidth=\dimen166
+\belowrulesep=\dimen167
+\belowbottomsep=\dimen168
+\aboverulesep=\dimen169
+\abovetopsep=\dimen170
+\cmidrulesep=\dimen171
+\cmidrulekern=\dimen172
+\defaultaddspace=\dimen173
+\@cmidla=\count285
+\@cmidlb=\count286
+\@aboverulesep=\dimen174
+\@belowrulesep=\dimen175
+\@thisruleclass=\count287
+\@lastruleclass=\count288
+\@thisrulewidth=\dimen176
+)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count289
+\calc@Bcount=\count290
+\calc@Adimen=\dimen177
+\calc@Bdimen=\dimen178
+\calc@Askip=\skip75
+\calc@Bskip=\skip76
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count291
+\calc@Cskip=\skip77
+)
+(/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2019/09/21 v2.5h e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count292
+)
+(/usr/share/texlive/texmf-dist/tex/latex/footnotehyper/footnotehyper.sty
+Package: footnotehyper 2019/11/07 v1.1a hyperref aware footnote.sty (JFB)
+\FNH@notes=\box57
+\FNH@width=\dimen179
+)
 (/usr/share/texlive/texmf-dist/tex/latex/footnotebackref/footnotebackref.sty
 Package: footnotebackref 2012/07/01 v1.0 Backreferences for footnotes (Holger L
 ange)
-\c@BackrefHyperFootnoteCounter=\count280
+\c@BackrefHyperFootnoteCounter=\count293
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2019/11/30 v1.2a Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2019/11/30 v1.4a Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 105.
+)
+\Gin@req@height=\dimen180
+\Gin@req@width=\dimen181
 )
 (/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count281
-\float@exts=\toks27
-\float@box=\box53
-\@float@everytoks=\toks28
-\@floatcapt=\box54
+\c@float@type=\count294
+\float@exts=\toks28
+\float@box=\box58
+\@float@everytoks=\toks29
+\@floatcapt=\box59
 )
 (/usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty
 Package: babel 2020/02/14 3.40 The Babel package
@@ -526,12 +605,12 @@ Language: english 2017/06/06 v3.3r English support from the babel system
 
 (/usr/share/texlive/texmf-dist/tex/generic/babel/babel.def
 File: babel.def 2020/02/14 3.40 Babel common definitions
-\babel@savecnt=\count282
-\U@D=\dimen163
+\babel@savecnt=\count295
+\U@D=\dimen182
 
 (/usr/share/texlive/texmf-dist/tex/generic/babel/txtbabel.def)
 \bbl@readstream=\read2
-\bbl@dirlevel=\count283
+\bbl@dirlevel=\count296
 )
 Package babel Info: \l@canadian = using hyphenrules for english
 (babel)             (\language0) on input line 102.
@@ -545,18 +624,13 @@ Language: english 2017/06/06 v3.3r English support from the babel system
 ))
 (/usr/share/texlive/texmf-dist/tex/latex/csquotes/csquotes.sty
 Package: csquotes 2019-12-06 v5.2j context-sensitive quotations (JAW)
-
-(/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty
-Package: etoolbox 2019/09/21 v2.5h e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count284
-)
-\csq@reset=\count285
-\csq@gtype=\count286
-\csq@glevel=\count287
-\csq@qlevel=\count288
-\csq@maxlvl=\count289
-\csq@tshold=\count290
-\csq@ltx@everypar=\toks29
+\csq@reset=\count297
+\csq@gtype=\count298
+\csq@glevel=\count299
+\csq@qlevel=\count300
+\csq@maxlvl=\count301
+\csq@tshold=\count302
+\csq@ltx@everypar=\toks30
 
 (/usr/share/texlive/texmf-dist/tex/latex/csquotes/csquotes.def
 File: csquotes.def 2019-12-06 v5.2j csquotes generic definitions (JAW)
@@ -573,22 +647,26 @@ Package: caption 2020/01/03 v3.4h Customizing captions (AR)
 (/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
 Package: caption3 2020/01/03 v1.8h caption3 kernel (AR)
 Package caption3 Info: TeX engine: e-TeX on input line 61.
-\captionmargin=\dimen164
-\captionmargin@=\dimen165
-\captionwidth=\dimen166
-\caption@tempdima=\dimen167
-\caption@indent=\dimen168
-\caption@parindent=\dimen169
-\caption@hangindent=\dimen170
+\captionmargin=\dimen183
+\captionmargin@=\dimen184
+\captionwidth=\dimen185
+\caption@tempdima=\dimen186
+\caption@indent=\dimen187
+\caption@parindent=\dimen188
+\caption@hangindent=\dimen189
 Package caption Info: KOMA-Script document class detected.
 )
 Package caption Info: KOMA-Script document class.
-\c@caption@flags=\count291
-\c@continuedfloat=\count292
+\c@caption@flags=\count303
+\c@continuedfloat=\count304
 Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
 Package caption Info: listings package is loaded.
-)
+Package caption Info: longtable package is loaded.
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/ltcaption.sty
+Package: ltcaption 2018/08/26 v1.4a longtable captions (AR)
+))
 (/usr/share/texlive/texmf-dist/tex/latex/mdframed/mdframed.sty
 Package: mdframed 2013/07/01 1.9b: mdframed
 
@@ -598,14 +676,14 @@ Package: expl3 2020-02-14 L3 programming layer (loader)
 
 (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
 File: l3backend-pdfmode.def 2020-02-03 L3 backend support: PDF mode
-\l__kernel_color_stack_int=\count293
-\l__pdf_internal_box=\box55
+\l__kernel_color_stack_int=\count305
+\l__pdf_internal_box=\box60
 ))
 Package: xparse 2020-02-14 L3 Experimental document command parser
-\l__xparse_current_arg_int=\count294
-\g__xparse_grabber_int=\count295
-\l__xparse_m_args_int=\count296
-\l__xparse_v_nesting_int=\count297
+\l__xparse_current_arg_int=\count306
+\g__xparse_grabber_int=\count307
+\l__xparse_m_args_int=\count308
+\l__xparse_v_nesting_int=\count309
 )
 (/usr/share/texlive/texmf-dist/tex/latex/zref/zref-abspage.sty
 Package: zref-abspage 2019/11/29 v2.28 Module abspage for zref (HO)
@@ -616,99 +694,99 @@ Package zref Info: New property list: main on input line 763.
 Package zref Info: New property: default on input line 764.
 Package zref Info: New property: page on input line 765.
 )
-\c@abspage=\count298
+\c@abspage=\count310
 Package zref Info: New property: abspage on input line 66.
 )
 (/usr/share/texlive/texmf-dist/tex/latex/needspace/needspace.sty
 Package: needspace 2010/09/12 v1.3d reserve vertical space
 )
-\mdf@templength=\skip71
-\c@mdf@globalstyle@cnt=\count299
-\mdf@skipabove@length=\skip72
-\mdf@skipbelow@length=\skip73
-\mdf@leftmargin@length=\skip74
-\mdf@rightmargin@length=\skip75
-\mdf@innerleftmargin@length=\skip76
-\mdf@innerrightmargin@length=\skip77
-\mdf@innertopmargin@length=\skip78
-\mdf@innerbottommargin@length=\skip79
-\mdf@splittopskip@length=\skip80
-\mdf@splitbottomskip@length=\skip81
-\mdf@outermargin@length=\skip82
-\mdf@innermargin@length=\skip83
-\mdf@linewidth@length=\skip84
-\mdf@innerlinewidth@length=\skip85
-\mdf@middlelinewidth@length=\skip86
-\mdf@outerlinewidth@length=\skip87
-\mdf@roundcorner@length=\skip88
-\mdf@footenotedistance@length=\skip89
-\mdf@userdefinedwidth@length=\skip90
-\mdf@needspace@length=\skip91
-\mdf@frametitleaboveskip@length=\skip92
-\mdf@frametitlebelowskip@length=\skip93
-\mdf@frametitlerulewidth@length=\skip94
-\mdf@frametitleleftmargin@length=\skip95
-\mdf@frametitlerightmargin@length=\skip96
-\mdf@shadowsize@length=\skip97
-\mdf@extratopheight@length=\skip98
-\mdf@subtitleabovelinewidth@length=\skip99
-\mdf@subtitlebelowlinewidth@length=\skip100
-\mdf@subtitleaboveskip@length=\skip101
-\mdf@subtitlebelowskip@length=\skip102
-\mdf@subtitleinneraboveskip@length=\skip103
-\mdf@subtitleinnerbelowskip@length=\skip104
-\mdf@subsubtitleabovelinewidth@length=\skip105
-\mdf@subsubtitlebelowlinewidth@length=\skip106
-\mdf@subsubtitleaboveskip@length=\skip107
-\mdf@subsubtitlebelowskip@length=\skip108
-\mdf@subsubtitleinneraboveskip@length=\skip109
-\mdf@subsubtitleinnerbelowskip@length=\skip110
+\mdf@templength=\skip78
+\c@mdf@globalstyle@cnt=\count311
+\mdf@skipabove@length=\skip79
+\mdf@skipbelow@length=\skip80
+\mdf@leftmargin@length=\skip81
+\mdf@rightmargin@length=\skip82
+\mdf@innerleftmargin@length=\skip83
+\mdf@innerrightmargin@length=\skip84
+\mdf@innertopmargin@length=\skip85
+\mdf@innerbottommargin@length=\skip86
+\mdf@splittopskip@length=\skip87
+\mdf@splitbottomskip@length=\skip88
+\mdf@outermargin@length=\skip89
+\mdf@innermargin@length=\skip90
+\mdf@linewidth@length=\skip91
+\mdf@innerlinewidth@length=\skip92
+\mdf@middlelinewidth@length=\skip93
+\mdf@outerlinewidth@length=\skip94
+\mdf@roundcorner@length=\skip95
+\mdf@footenotedistance@length=\skip96
+\mdf@userdefinedwidth@length=\skip97
+\mdf@needspace@length=\skip98
+\mdf@frametitleaboveskip@length=\skip99
+\mdf@frametitlebelowskip@length=\skip100
+\mdf@frametitlerulewidth@length=\skip101
+\mdf@frametitleleftmargin@length=\skip102
+\mdf@frametitlerightmargin@length=\skip103
+\mdf@shadowsize@length=\skip104
+\mdf@extratopheight@length=\skip105
+\mdf@subtitleabovelinewidth@length=\skip106
+\mdf@subtitlebelowlinewidth@length=\skip107
+\mdf@subtitleaboveskip@length=\skip108
+\mdf@subtitlebelowskip@length=\skip109
+\mdf@subtitleinneraboveskip@length=\skip110
+\mdf@subtitleinnerbelowskip@length=\skip111
+\mdf@subsubtitleabovelinewidth@length=\skip112
+\mdf@subsubtitlebelowlinewidth@length=\skip113
+\mdf@subsubtitleaboveskip@length=\skip114
+\mdf@subsubtitlebelowskip@length=\skip115
+\mdf@subsubtitleinneraboveskip@length=\skip116
+\mdf@subsubtitleinnerbelowskip@length=\skip117
 
 (/usr/share/texlive/texmf-dist/tex/latex/mdframed/md-frame-0.mdf
 File: md-frame-0.mdf 2013/07/01\ 1.9b: md-frame-0
 )
-\mdf@frametitlebox=\box56
-\mdf@footnotebox=\box57
-\mdf@splitbox@one=\box58
-\mdf@splitbox@two=\box59
-\mdf@splitbox@save=\box60
-\mdfsplitboxwidth=\skip111
-\mdfsplitboxtotalwidth=\skip112
-\mdfsplitboxheight=\skip113
-\mdfsplitboxdepth=\skip114
-\mdfsplitboxtotalheight=\skip115
-\mdfframetitleboxwidth=\skip116
-\mdfframetitleboxtotalwidth=\skip117
-\mdfframetitleboxheight=\skip118
-\mdfframetitleboxdepth=\skip119
-\mdfframetitleboxtotalheight=\skip120
-\mdffootnoteboxwidth=\skip121
-\mdffootnoteboxtotalwidth=\skip122
-\mdffootnoteboxheight=\skip123
-\mdffootnoteboxdepth=\skip124
-\mdffootnoteboxtotalheight=\skip125
-\mdftotallinewidth=\skip126
-\mdfboundingboxwidth=\skip127
-\mdfboundingboxtotalwidth=\skip128
-\mdfboundingboxheight=\skip129
-\mdfboundingboxdepth=\skip130
-\mdfboundingboxtotalheight=\skip131
-\mdf@freevspace@length=\skip132
-\mdf@horizontalwidthofbox@length=\skip133
-\mdf@verticalmarginwhole@length=\skip134
-\mdf@horizontalspaceofbox=\skip135
-\mdfsubtitleheight=\skip136
-\mdfsubsubtitleheight=\skip137
-\c@mdfcountframes=\count300
+\mdf@frametitlebox=\box61
+\mdf@footnotebox=\box62
+\mdf@splitbox@one=\box63
+\mdf@splitbox@two=\box64
+\mdf@splitbox@save=\box65
+\mdfsplitboxwidth=\skip118
+\mdfsplitboxtotalwidth=\skip119
+\mdfsplitboxheight=\skip120
+\mdfsplitboxdepth=\skip121
+\mdfsplitboxtotalheight=\skip122
+\mdfframetitleboxwidth=\skip123
+\mdfframetitleboxtotalwidth=\skip124
+\mdfframetitleboxheight=\skip125
+\mdfframetitleboxdepth=\skip126
+\mdfframetitleboxtotalheight=\skip127
+\mdffootnoteboxwidth=\skip128
+\mdffootnoteboxtotalwidth=\skip129
+\mdffootnoteboxheight=\skip130
+\mdffootnoteboxdepth=\skip131
+\mdffootnoteboxtotalheight=\skip132
+\mdftotallinewidth=\skip133
+\mdfboundingboxwidth=\skip134
+\mdfboundingboxtotalwidth=\skip135
+\mdfboundingboxheight=\skip136
+\mdfboundingboxdepth=\skip137
+\mdfboundingboxtotalheight=\skip138
+\mdf@freevspace@length=\skip139
+\mdf@horizontalwidthofbox@length=\skip140
+\mdf@verticalmarginwhole@length=\skip141
+\mdf@horizontalspaceofbox=\skip142
+\mdfsubtitleheight=\skip143
+\mdfsubsubtitleheight=\skip144
+\c@mdfcountframes=\count312
 
 ****** mdframed patching \endmdf@trivlist
 
 ****** -- success******
 
-\mdf@envdepth=\count301
-\c@mdf@env@i=\count302
-\c@mdf@env@ii=\count303
-\c@mdf@zref@counter=\count304
+\mdf@envdepth=\count313
+\c@mdf@env@i=\count314
+\c@mdf@env@ii=\count315
+\c@mdf@zref@counter=\count316
 Package zref Info: New property: mdf@pagevalue on input line 895.
 )
 (/usr/share/texlive/texmf-dist/tex/latex/sourcesanspro/sourcesanspro.sty
@@ -719,10 +797,10 @@ Package: xkeyval 2014/12/03 v2.7a package option processing (HA)
 
 (/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkeyval.tex
 (/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkvutils.tex
-\XKV@toks=\toks30
-\XKV@tempa@toks=\toks31
+\XKV@toks=\toks31
+\XKV@tempa@toks=\toks32
 )
-\XKV@depth=\count305
+\XKV@depth=\count317
 File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
 ))
 (/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
@@ -877,9 +955,9 @@ LaTeX Font Info:    Font shape `T1/SourceSansPro-LF/m/n' will be
 (Font)              scaled to size 10.95pt on input line 112.
 )) (/usr/share/texlive/texmf-dist/tex/latex/titling/titling.sty
 Package: titling 2009/09/04 v2.1d maketitle typesetting
-\thanksmarkwidth=\skip138
-\thanksmargin=\skip139
-\droptitle=\skip140
+\thanksmarkwidth=\skip145
+\thanksmargin=\skip146
+\droptitle=\skip147
 )
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2019/09/10 1.8c listings language file
@@ -908,45 +986,45 @@ Package csquotes Info: ... found 'babel' package.
 Package csquotes Info: Adjusting default style.
 Package csquotes Info: Redefining alias 'default' -> 'english'.
 
-No file thesis_document.aux.
+(./thesis_document.aux)
 \openout1 = `thesis_document.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 383.
-LaTeX Font Info:    ... okay on input line 383.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 383.
-LaTeX Font Info:    ... okay on input line 383.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 383.
-LaTeX Font Info:    ... okay on input line 383.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 383.
-LaTeX Font Info:    ... okay on input line 383.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 383.
-LaTeX Font Info:    ... okay on input line 383.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 383.
-LaTeX Font Info:    ... okay on input line 383.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 383.
-LaTeX Font Info:    ... okay on input line 383.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 383.
-LaTeX Font Info:    ... okay on input line 383.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 383.
-LaTeX Font Info:    ... okay on input line 383.
-LaTeX Font Info:    Checking defaults for LY1/ptm/m/n on input line 383.
-LaTeX Font Info:    Trying to load font information for LY1+ptm on input line 3
-83.
-(/usr/share/texlive/texmf-dist/tex/latex/ly1/ly1ptm.fd
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 415.
+LaTeX Font Info:    ... okay on input line 415.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 415.
+LaTeX Font Info:    ... okay on input line 415.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 415.
+LaTeX Font Info:    ... okay on input line 415.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 415.
+LaTeX Font Info:    ... okay on input line 415.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 415.
+LaTeX Font Info:    ... okay on input line 415.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 415.
+LaTeX Font Info:    ... okay on input line 415.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 415.
+LaTeX Font Info:    ... okay on input line 415.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 415.
+LaTeX Font Info:    ... okay on input line 415.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 415.
+LaTeX Font Info:    ... okay on input line 415.
+LaTeX Font Info:    Checking defaults for LY1/ptm/m/n on input line 415.
+LaTeX Font Info:    Trying to load font information for LY1+ptm on input line 4
+15.
+ (/usr/share/texlive/texmf-dist/tex/latex/ly1/ly1ptm.fd
 File: ly1ptm.fd 2001/02/01 font definitions for LY1/ptm using Berry names.
 )
-LaTeX Font Info:    ... okay on input line 383.
-Package scrbase Info: activating english \contentsname on input line 383.
-Package scrbase Info: activating english \listfigurename on input line 383.
-Package scrbase Info: activating english \listtablename on input line 383.
-LaTeX Info: Redefining \microtypecontext on input line 383.
+LaTeX Font Info:    ... okay on input line 415.
+Package scrbase Info: activating english \contentsname on input line 415.
+Package scrbase Info: activating english \listfigurename on input line 415.
+Package scrbase Info: activating english \listtablename on input line 415.
+LaTeX Info: Redefining \microtypecontext on input line 415.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using protrusion set `basicmath'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `basictext'.
-LaTeX Info: Redefining \showhyphens on input line 383.
+LaTeX Info: Redefining \showhyphens on input line 415.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
@@ -954,24 +1032,40 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `SourceSansPro-LF' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count306
-\scratchdimen=\dimen171
-\scratchbox=\box61
-\nofMPsegments=\count307
-\nofMParguments=\count308
-\everyMPshowfont=\toks32
-\MPscratchCnt=\count309
-\MPscratchDim=\dimen172
-\MPnumerator=\count310
-\makeMPintoPDFobject=\count311
-\everyMPtoPDFconversion=\toks33
+\scratchcounter=\count318
+\scratchdimen=\dimen190
+\scratchbox=\box66
+\nofMPsegments=\count319
+\nofMParguments=\count320
+\everyMPshowfont=\toks33
+\MPscratchCnt=\count321
+\MPscratchDim=\dimen191
+\MPnumerator=\count322
+\makeMPintoPDFobject=\count323
+\everyMPtoPDFconversion=\toks34
+) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+
+(/usr/share/texlive/texmf-dist/tex/latex/grfext/grfext.sty
+Package: grfext 2019/12/03 v1.3 Manage graphics extensions (HO)
 )
-\AtBeginShipoutBox=\box62
-Package hyperref Info: Link coloring OFF on input line 383.
- (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+Package grfext Info: Graphics extension search list:
+(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 504.
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+\AtBeginShipoutBox=\box67
+Package hyperref Info: Link coloring OFF on input line 415.
+
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
 
 (/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty
@@ -980,11 +1074,11 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 (/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count312
+\c@section@level=\count324
 )
-LaTeX Info: Redefining \ref on input line 383.
-LaTeX Info: Redefining \pageref on input line 383.
-LaTeX Info: Redefining \nameref on input line 383.
+LaTeX Info: Redefining \ref on input line 415.
+LaTeX Info: Redefining \pageref on input line 415.
+LaTeX Info: Redefining \nameref on input line 415.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1022,30 +1116,57 @@ LaTeX Info: Redefining \nameref on input line 383.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-\c@lstlisting=\count313
+\c@lstlisting=\count325
+
+Package footnotehyper Warning: 
+ The footnote environment will not be fully functional, sorry.
+ You may try to email the author this meaning of \@makefntext:
+ \long macro:#1->\renewcommand \@makefnmark {\mbox {\textsuperscript {\normalfo
+nt \hyperref [\BackrefFootnoteTag ]{\@thefnmark }}}\,}\BHFN@OldMakefntext {#1}
+ together with the used preamble.
+
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
 LaTeX Font Info:    Font shape `T1/SourceSansPro-LF/b/n' will be
-(Font)              scaled to size 10.95pt on input line 397.
+(Font)              scaled to size 10.95pt on input line 428.
 LaTeX Font Info:    Font shape `T1/SourceSansPro-LF/b/n' will be
-(Font)              scaled to size 14.4pt on input line 397.
+(Font)              scaled to size 14.4pt on input line 428.
+LaTeX Font Info:    Trying to load font information for TS1+SourceSansPro-LF on
+ input line 439.
+(/usr/share/texlive/texmf-dist/tex/latex/sourcesanspro/TS1SourceSansPro-LF.fd
+File: TS1SourceSansPro-LF.fd 2016/12/03 (autoinst) Font definitions for TS1/Sou
+rceSansPro-LF.
+)
+LaTeX Font Info:    Font shape `TS1/SourceSansPro-LF/m/n' will be
+(Font)              scaled to size 10.95pt on input line 439.
 LaTeX Font Info:    Font shape `T1/SourceSansPro-LF/b/n' will be
-(Font)              scaled to size 12.0pt on input line 401.
+(Font)              scaled to size 12.0pt on input line 457.
 LaTeX Font Info:    Font shape `T1/SourceSansPro-LF/m/n' will be
-(Font)              scaled to size 10.0pt on input line 409.
+(Font)              scaled to size 10.0pt on input line 485.
 LaTeX Font Info:    Trying to load font information for T1+SourceCodePro-TLF on
- input line 409.
+ input line 485.
+
 (/usr/share/texlive/texmf-dist/tex/latex/sourcecodepro/T1SourceCodePro-TLF.fd
 File: T1SourceCodePro-TLF.fd 2018/02/18 (autoinst) Font definitions for T1/Sour
 ceCodePro-TLF.
 )
 LaTeX Font Info:    Font shape `T1/SourceCodePro-TLF/m/n' will be
-(Font)              scaled to size 10.0pt on input line 409.
-LaTeX Font Info:    Font shape `T1/SourceCodePro-TLF/b/n' will be
-(Font)              scaled to size 10.0pt on input line 410.
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 4
-43.
+(Font)              scaled to size 10.0pt on input line 485.
 
+Underfull \hbox (badness 10000) in paragraph at lines 490--495
+[]\T1/SourceSansPro-LF/m/n/10.95 (+20) After cloning the repos-i-tory [][][][][
+][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
+[][][][][][]
+ []
+
+LaTeX Font Info:    Font shape `T1/SourceSansPro-LF/m/sl' in size <10.95> not a
+vailable
+(Font)              Font shape `T1/SourceSansPro-LF/m/it' tried instead on inpu
+t line 495.
+LaTeX Font Info:    Font shape `T1/SourceSansPro-LF/m/it' will be
+(Font)              scaled to size 10.95pt on input line 495.
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 4
+95.
 (/usr/share/texmf/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
@@ -1054,30 +1175,30 @@ File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman
 (RS)
 )
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 4
-43.
+95.
 
 (/usr/share/texmf/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-443.
+495.
 
 (/usr/share/texmf/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-443.
+495.
 
 (/usr/share/texmf/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 443.
+(Font)              <10.95> on input line 495.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 443.
+(Font)              <8> on input line 495.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 443.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 443
+(Font)              <6> on input line 495.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 495
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
@@ -1086,7 +1207,7 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 443
+LaTeX Font Info:    Trying to load font information for U+msb on input line 495
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
@@ -1094,64 +1215,95 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
+) [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
+
+] [2]
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2019/09/10 1.8c listings language file
 )
-LaTeX Font Info:    Trying to load font information for TS1+SourceSansPro-LF on
- input line 461.
-
-(/usr/share/texlive/texmf-dist/tex/latex/sourcesanspro/TS1SourceSansPro-LF.fd
-File: TS1SourceSansPro-LF.fd 2016/12/03 (autoinst) Font definitions for TS1/Sou
-rceSansPro-LF.
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2019/09/10 1.8c (Carsten Heinz)
 )
-LaTeX Font Info:    Font shape `TS1/SourceSansPro-LF/m/n' will be
-(Font)              scaled to size 10.95pt on input line 461.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 468.
-LaTeX Font Info:    Font shape `T1/SourceSansPro-LF/m/sl' in size <10.95> not a
-vailable
-(Font)              Font shape `T1/SourceSansPro-LF/m/it' tried instead on inpu
-t line 468.
-LaTeX Font Info:    Font shape `T1/SourceSansPro-LF/m/it' will be
-(Font)              scaled to size 10.95pt on input line 468.
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2019/09/10 1.8c listings language file
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2019/09/10 1.8c (Carsten Heinz)
+)
+<./images/ATC_Calibration_Guide.png, id=36, 683.55376pt x 652.4375pt>
+File: ./images/ATC_Calibration_Guide.png Graphic file (type png)
+<use ./images/ATC_Calibration_Guide.png>
+Package pdftex.def Info: ./images/ATC_Calibration_Guide.png  used on input line
+ 637.
+(pdftex.def)             Requested size: 455.25636pt x 434.5325pt.
+ [3]
+<./images/ATC_ChessMoveAlgorithm.png, id=65, 652.4375pt x 652.4375pt>
+File: ./images/ATC_ChessMoveAlgorithm.png Graphic file (type png)
+<use ./images/ATC_ChessMoveAlgorithm.png>
+Package pdftex.def Info: ./images/ATC_ChessMoveAlgorithm.png  used on input lin
+e 647.
+(pdftex.def)             Requested size: 455.2596pt x 455.2596pt.
+ [4 <./images/ATC_Calibration_Guide.png>] [5 <./images/ATC_ChessMoveAlgorithm.p
+ng>]
+Overfull \hbox (3.1878pt too wide) in paragraph at lines 680--681
+[]\T1/SourceSansPro-LF/m/n/10.95 (-20) ALGORITHM_V1_TRAVEL_TIME 
+ []
 
-[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
-]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 468.
+Overfull \hbox (4.6043pt too wide) in paragraph at lines 682--683
+[]\T1/SourceSansPro-LF/m/n/10.95 (-20) ALGORITHM_V2_TRAVEL_TIME 
+ []
+
+<./images/FigureMovementTims_GRAPH_COMP.PNG, id=86, 892.08281pt x 243.15843pt>
+File: ./images/FigureMovementTims_GRAPH_COMP.PNG Graphic file (type png)
+<use ./images/FigureMovementTims_GRAPH_COMP.PNG>
+Package pdftex.def Info: ./images/FigureMovementTims_GRAPH_COMP.PNG  used on in
+put line 721.
+(pdftex.def)             Requested size: 455.24207pt x 124.08707pt.
+[6 <./images/FigureMovementTims_GRAPH_COMP.PNG>]
+Overfull \hbox (35.84547pt too wide) in alignment at lines 786--800
+ [] [] [] [] [] [] 
+ []
+
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table 2 on input line 800.
+
+[7]
+
+Package longtable Warning: Table widths have changed. Rerun LaTeX.
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 834.
+[8]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 834.
  (./thesis_document.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 468.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 468.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 834.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 834.
 
 
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 468.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 834.
  ) 
 Here is how much of TeX's memory you used:
- 23651 strings out of 481239
- 443172 string characters out of 5920378
- 1011936 words of memory out of 5000000
- 38509 multiletter control sequences out of 15000+600000
- 608759 words of font info for 79 fonts, out of 8000000 for 9000
+ 24804 strings out of 481239
+ 461518 string characters out of 5920378
+ 1139379 words of memory out of 5000000
+ 39494 multiletter control sequences out of 15000+600000
+ 612344 words of font info for 103 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,19n,95p,10158b,1410s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/sourcesanspro/a_sd7igg.enc}{/u
-sr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dvips/l
-m/lm-mathit.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/share/
-texmf/fonts/enc/dvips/lm/lm-mathex.enc}{/usr/share/texlive/texmf-dist/fonts/enc
-/dvips/sourcecodepro/a_lutrty.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvip
-s/sourcesanspro/a_ggs4wk.enc}</usr/share/texlive/texmf-dist/fonts/type1/adobe/s
-ourcecodepro/SourceCodePro-Bold.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-adobe/sourcecodepro/SourceCodePro-Regular.pfb></usr/share/texlive/texmf-dist/fo
-nts/type1/adobe/sourcesanspro/SourceSansPro-Bold.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/adobe/sourcesanspro/SourceSansPro-Regular.pfb></usr/share/texm
-f/fonts/type1/public/lm/lmex10.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi
-10.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi6.pfb></usr/share/texmf/font
-s/type1/public/lm/lmmi8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb><
-/usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/p
-ublic/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy8.pfb>
-Output written on thesis_document.pdf (1 page, 230343 bytes).
+ 62i,20n,105p,10158b,2023s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/sourcecodepro/a_lutrty.enc}{/u
+sr/share/texlive/texmf-dist/fonts/enc/dvips/sourcesanspro/a_sd7igg.enc}{/usr/sh
+are/texlive/texmf-dist/fonts/enc/dvips/sourcesanspro/a_ggs4wk.enc}</usr/share/t
+exlive/texmf-dist/fonts/type1/adobe/sourcecodepro/SourceCodePro-Regular.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/adobe/sourcesanspro/SourceSansPro-Bold.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/adobe/sourcesanspro/SourceSansPr
+o-Regular.pfb>
+Output written on thesis_document.pdf (8 pages, 321006 bytes).
 PDF statistics:
- 105 PDF objects out of 1000 (max. 8388607)
- 89 compressed objects within 1 object stream
- 20 named destinations out of 1000 (max. 500000)
- 12313 words of extra memory for PDF output out of 14400 (max. 10000000)
+ 229 PDF objects out of 1000 (max. 8388607)
+ 207 compressed objects within 3 object streams
+ 97 named destinations out of 1000 (max. 500000)
+ 12440 words of extra memory for PDF output out of 14400 (max. 10000000)
 

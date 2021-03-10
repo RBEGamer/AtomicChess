@@ -1,4 +1,44 @@
+%%
+% Copyright (c) 2017 - 2021, Pascal Wagler;
+% Copyright (c) 2014 - 2021, John MacFarlane
+%
+% All rights reserved.
+%
+% Redistribution and use in source and binary forms, with or without
+% modification, are permitted provided that the following conditions
+% are met:
+%
+% - Redistributions of source code must retain the above copyright
+% notice, this list of conditions and the following disclaimer.
+%
+% - Redistributions in binary form must reproduce the above copyright
+% notice, this list of conditions and the following disclaimer in the
+% documentation and/or other materials provided with the distribution.
+%
+% - Neither the name of John MacFarlane nor the names of other
+% contributors may be used to endorse or promote products derived
+% from this software without specific prior written permission.
+%
+% THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+% "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+% LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+% FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+% COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+% INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+% BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+% LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+% CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+% LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+% ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+% POSSIBILITY OF SUCH DAMAGE.
+%%
 
+%%
+% This is the Eisvogel pandoc LaTeX template.
+%
+% For usage information and examples visit the official GitHub page:
+% https://github.com/Wandmalfarbe/pandoc-latex-template
+%%
 
 % Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode}{hyperref}
@@ -62,8 +102,31 @@
 \newcommand{\passthrough}[1]{#1}
 \lstset{defaultdialect=[5.3]Lua}
 \lstset{defaultdialect=[x86masm]Assembler}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
 % add backlinks to footnote references, cf. https://tex.stackexchange.com/questions/302266/make-footnote-clickable-both-ways
 \usepackage{footnotebackref}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
@@ -194,6 +257,15 @@
 %
 % tables
 %
+
+\definecolor{table-row-color}{HTML}{F5F5F5}
+\definecolor{table-rule-color}{HTML}{999999}
+
+%\arrayrulecolor{black!40}
+\arrayrulecolor{table-rule-color}     % color of \toprule, \midrule, \bottomrule
+\setlength\heavyrulewidth{0.3ex}      % thickness of \toprule, \bottomrule
+\renewcommand{\arraystretch}{1.3}     % spacing (padding)
+
 
 %
 % remove paragraph indention
@@ -352,77 +424,411 @@
 
 
 
-\hypertarget{vinaque-sanguine-metuenti-cuiquam-alcyone-fixus}{%
-\section{Vinaque sanguine metuenti cuiquam Alcyone
-fixus}\label{vinaque-sanguine-metuenti-cuiquam-alcyone-fixus}}
+\hypertarget{atomicchessos}{%
+\section{AtomicChessOS}\label{atomicchessos}}
 
-\hypertarget{aesculeae-domus-vincemur-et-veneris-adsuetus-lapsum}{%
-\subsection{Aesculeae domus vincemur et Veneris adsuetus
-lapsum}\label{aesculeae-domus-vincemur-et-veneris-adsuetus-lapsum}}
+\hypertarget{atc-controller}{%
+\section{ATC CONTROLLER}\label{atc-controller}}
 
-Lorem markdownum Letoia, et alios: figurae flectentem annis aliquid
-Peneosque ab esse, obstat gravitate. Obscura atque coniuge, per de
-coniunx, sibi \textbf{medias commentaque virgine} anima tamen comitemque
-petis, sed. In Amphion vestros hamos ire arceor mandere spicula, in
-licet aliquando.
-
-\begin{lstlisting}[language=Java]
-public class Example implements LoremIpsum {
-    public static void main(String[] args) {
-        if(args.length < 2) {
-            System.out.println("Lorem ipsum dolor sit amet");
-        }
-    } // Obscura atque coniuge, per de coniunx
-}
-\end{lstlisting}
-
-Porrigitur et Pallas nuper longusque cratere habuisse sepulcro pectore
-fertur. Laudat ille auditi; vertitur iura tum nepotis causa; motus. Diva
-virtus! Acrota destruitis vos iubet quo et classis excessere Scyrumve
-spiro subitusque mente Pirithoi abstulit, lapides.
-
-\hypertarget{lydia-caelo-recenti-haerebat-lacerum-ratae-at}{%
-\subsection{Lydia caelo recenti haerebat lacerum ratae
-at}\label{lydia-caelo-recenti-haerebat-lacerum-ratae-at}}
-
-Te concepit pollice fugit vias alumno \textbf{oras} quam potest
-\href{http://example.com\#rursus}{rursus} optat. Non evadere orbem
-equorum, spatiis, vel pede inter si.
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  De neque iura aquis
-\item
-  Frangitur gaudia mihi eo umor terrae quos
-\item
-  Recens diffudit ille tantum
-\end{enumerate}
-
-\begin{equation}\label{eq:neighbor-propability}
-    p_{ij}(t) = \frac{\ell_j(t) - \ell_i(t)}{\sum_{k \in N_i(t)}^{} \ell_k(t) - \ell_i(t)}
-\end{equation}
-
-Tamen condeturque saxa Pallorque num et ferarum promittis inveni lilia
-iuvencae adessent arbor. Florente perque at condeturque saxa et ferarum
-promittis tendebat. Armos nisi obortas refugit me.
-
-\begin{quote}
-Et nepotes poterat, se qui. Euntem ego pater desuetaque aethera
-Maeandri, et \href{http://example.com\#Dardanio_geminaque}{Dardanio
-geminaque} cernit. Lassaque poenas nec, manifesta \(\pi r^2\) mirantia
-captivarum prohibebant scelerato gradus unusque dura.
-\end{quote}
+The controller is the main system on the embedded device that controls
+the hardware of a ATC Table
 
 \begin{itemize}
 \tightlist
 \item
-  Permulcens flebile simul
+  Motor Control
 \item
-  Iura tum nepotis causa motus diva virtus Acrota. Tamen condeturque
-  saxa Pallorque num et ferarum promittis inveni lilia iuvencae adessent
-  arbor. Florente perque at ire arcum.
+  Communcication with the Server
+\item
+  Communication with the UI running on the device
+\item
+  Chess Figure Movement Algorithm
 \end{itemize}
+
+For this software component, we are using a Windows and Visual Studi
+environment for developing the software. Our embedded system is a linux
+device, so we have to build the application for the linux environment
+running on the emmbedded device. For this task, the prevously build
+buildroot toolchain is used. A software plugin called VisualGDB for
+Visual Studio, enable Visual Studio to use the linux toolchain over a
+remote linux system, in order to build and deploy the application.
+
+\hypertarget{requirements}{%
+\subsection{REQUIREMENTS}\label{requirements}}
+
+\begin{itemize}
+\tightlist
+\item
+  windows pc for development
+\item
+  linux pc with buildroot toolchain
+\item
+  embedded system for deployment
+\end{itemize}
+
+\hypertarget{setup-a-project-using-visual-studio-and-visualgdb}{%
+\subsection{SETUP A PROJECT USING VISUAL STUDIO AND
+VisualGDB}\label{setup-a-project-using-visual-studio-and-visualgdb}}
+
+\hypertarget{requirements-1}{%
+\subsubsection{REQUIREMENTS}\label{requirements-1}}
+
+On the development windows pc is the following software installed: *
+Windows 10 Pro x64 * Visual Studio 2019 (Community or Enterprise) *
+VisualGDB Plugin (Version 5.5, Linux Edition) * A SSH Client (MobaXterm
+Personal Edition) * git (Gitkraken)
+
+\hypertarget{linux-build-system}{%
+\subsubsection{LINUX BUILD SYSTEM}\label{linux-build-system}}
+
+On the linux build system, the VisualGSB plugin builds the project. The
+system is a \passthrough{\lstinline!Intel Nuc 10!}, mini pc, with a
+stock \passthrough{\lstinline!Ubuntu 20.04!} installed. One the machine
+are all package requirements for building the buildroot toolchain
+installed (see buildroot chapter).
+
+After cloning the repository
+\passthrough{\lstinline!$ git clone -b buildroot git@github.com:RBEGamer/AtomicChessOS.git ./atc\_buildroot!}
+and switched to the \passthrough{\lstinline!buildroot!} branch, the
+build process of the toolchain was invoked using the build script
+\passthrough{\lstinline!$ ./atc\_buildroot/src/src\_buildroot/buildroot/build.sh!}.
+
+After building the toolchain is completed, the further configuration
+work can be done on the windows development pc. Its nessessary for the
+linux build system to allow SSH connections. Its may required to install
+the OpenSSHServer uisng
+\passthrough{\lstinline!$ sudo apt install openssh-server!}.
+
+The VisualGDB plugin requires some extra packages on the build pc:
+
+\begin{itemize}
+\tightlist
+\item
+  \passthrough{\lstinline!$ sudo apt-get install socat!}
+\end{itemize}
+
+Now the configuration of the linux build pc for the VisualGDB plugin is
+complete. The next step, is the setup of the embedded system for
+deployment.
+
+\hypertarget{embedded-system-deployment}{%
+\subsubsection{EMBEDDED SYSTEM
+DEPLOYMENT}\label{embedded-system-deployment}}
+
+Afer building the sources into an executable, the final binaries will be
+copied to the embedded system. The embedded system is flashed with tha
+latest image build by buildroot.
+
+In order to setup the VisualGDB Project, its nessessary that the
+embedded device can be accessed over SSH.
+
+\hypertarget{makefile-modifications}{%
+\paragraph{MAKEFILE MODIFICATIONS}\label{makefile-modifications}}
+
+\begin{itemize}
+\tightlist
+\item
+  buildroot build oveerrides TARGETNAME AND CONFIG to load a different
+  makefile config in order to use the toolchain generated by buildroot
+  The different configurationa are stored in different .mk files that
+  will be includes by the Makefile. THe
+  \passthrough{\lstinline!debug.mk!} configuration contains theVisualGDB
+  Configuration that allows the Visual Studio Plugin to use the remote
+  toolchain on the linux server and can only build by over the visual
+  gdb plugin. The \passthrough{\lstinline!release.mk!} configuration is
+  used to build the controller apllication with the buildroot framework.
+  It used the compiler executable paths defines by \$CC. \$LD enviroment
+  variables and build the program with release flags and without any
+  debug symbols. All used libraries are linked staticly.
+\end{itemize}
+
+\hypertarget{third-party-libraries}{%
+\subsection{THIRD PARTY LIBRARIES}\label{third-party-libraries}}
+
+The ATC\_Controller software uses serveral different third party
+libraries, escacially for http requests and json parsing. *
+\passthrough{\lstinline!https://github.com/nlohmann/json#serialization--deserialization!},
+json parsing. *
+\passthrough{\lstinline!https://github.com/yhirose/cpp-httplib!},
+http/https requests. *
+\passthrough{\lstinline!https://github.com/Neargye/magic\_enum!}, enum
+handling. * \passthrough{\lstinline!https://github.com/emilk/loguru!} A
+copy of the used versions, are located in the controller software
+directory.
+
+\hypertarget{controller-overview}{%
+\section{CONTROLLER OVERVIEW}\label{controller-overview}}
+
+\hypertarget{motor-driver}{%
+\subsection{MOTOR DRIVER}\label{motor-driver}}
+
+\hypertarget{board-class}{%
+\subsection{BOARD CLASS}\label{board-class}}
+
+\hypertarget{chess-piece}{%
+\subsection{CHESS PIECE}\label{chess-piece}}
+
+\hypertarget{nfc-tag-content-generator}{%
+\subsubsection{NFC TAG CONTENT
+GENERATOR}\label{nfc-tag-content-generator}}
+
+Each figures NFC tag is ued to identify the figure. For easy usage of
+the NFC tag, it is formatted into the NDEF format, so its simply
+possible to program the NFC tags with an mobile phone. The tag contains
+a ndef \passthrough{\lstinline!text record!} with a string to identifiy
+the type of figure (three bits), color (one bit) and a counting number
+(four bits). A combination of all three attributes make the figures id
+unique to the system. For the automatic unique ID generation, a html
+page \passthrough{\lstinline!ChessFigureIDGenerator.html!} was created
+to automaticliy generate all ID for a complete chess board. Only one
+byte is stored in the record of the text record and so only 10bytes are
+used on the NFC tag.
+
+\begin{itemize}
+\tightlist
+\item
+  MSB {[}7,6,5,4,3,2,1,0{]} LSB
+\item
+  MSB {[}TYPE,TYPE,TYPE,COLOR,ID,ID,ID,ID{]} LSB
+\end{itemize}
+
+For reading the NFC tag with the PN532, the program only reads the first
+NDEF record and parses the text record data to get the figure type. With
+this system it is possible to expand the system further and store more
+data on the NFC tag, by adding more NDEF records.
+
+On the controller side two functions were created to generate the unique
+ids and read them back.
+
+\begin{lstlisting}[language={C++}]
+  ChessPiece::FIGURE fig;
+    fig.figure_number = 1;
+    fig.color = ChessPiece::COLOR_BLACK;
+    fig.type = ChessPiece::TYPE_KNIGHT;
+  
+  //GENERATE ID FROM STRUCT
+  uint8_t UNIQUE_ID = ChessPiece::figure2NDEF(fig);
+  
+  //PARSE UNIQUE_ID BACK TO A STRUCT
+  ChessPiece::FIGURE back = ChessPiece::NDEF2Figure(UNIQUE_ID);
+  
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  IMAGE
+\end{itemize}
+
+\hypertarget{config-and-calibration}{%
+\subsection{CONFIG AND CALIBRATION}\label{config-and-calibration}}
+
+The system uses a config file located in the filesystem
+\passthrough{\lstinline!/usr/ATC/atccontroller.ini!}.
+
+\hypertarget{calibration}{%
+\subsubsection{CALIBRATION}\label{calibration}}
+
+In order to calibrate the mechanic, several entries in the config file
+has to be changed.
+
+\begin{figure}
+\centering
+\includegraphics{./images/ATC_Calibration_Guide.png}
+\caption{MOCKUP\_MAIN\_MENU}
+\end{figure}
+
+\hypertarget{chess-piece-movement-algorithm}{%
+\subsubsection{Chess Piece Movement
+Algorithm}\label{chess-piece-movement-algorithm}}
+
+\begin{figure}
+\centering
+\includegraphics{./images/ATC_ChessMoveAlgorithm.png}
+\caption{MOCKUP\_MAIN\_MENU}
+\end{figure}
+
+\hypertarget{basic-movement-procedure}{%
+\paragraph{BASIC MOVEMENT PROCEDURE}\label{basic-movement-procedure}}
+
+*move \#\#\#\#\# BOARD \textless{}-\textgreater{} BOARD
+
+\hypertarget{park_position---board-board---park_positon}{%
+\subparagraph{PARK\_POSITION \textless{}-\textgreater{} BOARD
+\textbar{}\textbar{} BOARD \textless{}-\textgreater{}
+PARK\_POSITON}\label{park_position---board-board---park_positon}}
+
+\hypertarget{algorithm-improvements}{%
+\subparagraph{ALGORITHM IMPROVEMENTS}\label{algorithm-improvements}}
+
+\begin{itemize}
+\item
+  queue movement all movementinstructions needed for a move, send them
+  combinded to the motor driver
+\item
+  send coil change event only if changed, SPI Implementation needs time
+  (about 0.5 Secs with the wait ACK)
+\item
+\end{itemize}
+
+\hypertarget{piece-move-time}{%
+\paragraph{PIECE MOVE TIME}\label{piece-move-time}}
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule
+\begin{minipage}[b]{0.29\columnwidth}\raggedright
+ALGORITHM\_V1\_TRAVEL\_TIME {[}s{]}\strut
+\end{minipage} & \begin{minipage}[b]{0.29\columnwidth}\raggedright
+ALGORITHM\_V2\_TRAVEL\_TIME {[}s{]}\strut
+\end{minipage} & \begin{minipage}[b]{0.34\columnwidth}\raggedright
+TRAVEL\_DISTANCE {[}FIELDS\_DIAGONAL{]}\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.29\columnwidth}\raggedright
+7.20\strut
+\end{minipage} & \begin{minipage}[t]{0.29\columnwidth}\raggedright
+2.56\strut
+\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright
+1\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.29\columnwidth}\raggedright
+11.56\strut
+\end{minipage} & \begin{minipage}[t]{0.29\columnwidth}\raggedright
+6,20\strut
+\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright
+3\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.29\columnwidth}\raggedright
+12,27\strut
+\end{minipage} & \begin{minipage}[t]{0.29\columnwidth}\raggedright
+7,06\strut
+\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright
+5\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.29\columnwidth}\raggedright
+14,39\strut
+\end{minipage} & \begin{minipage}[t]{0.29\columnwidth}\raggedright
+6,56\strut
+\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright
+8\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{figure}
+\centering
+\includegraphics{./images/FigureMovementTims_GRAPH_COMP.PNG}
+\caption{MOCKUP\_MAIN\_MENU}
+\end{figure}
+
+\hypertarget{movement-speed-comarpision-hardware-v1-v2}{%
+\subsubsection{MOVEMENT SPEED COMARPISION HARDWARE V1 /
+V2}\label{movement-speed-comarpision-hardware-v1-v2}}
+
+\begin{itemize}
+\tightlist
+\item
+  gocde slower nicht
+\end{itemize}
+
+\hypertarget{linux-handling-different}{%
+\paragraph{{[}LINUX{]} HANDLING
+DIFFERENT}\label{linux-handling-different}}
+
+The simplified hardware design of the projects uses two USB2Serial
+adapters to connect the SKR1.3 Stepper Driver Board and the User-Move
+Dector with the Embedded System. All serial deives will be mount under
+the \passthrough{\lstinline!/dev/ttyXXX!} path and the the squence can
+be differ after each reboot. In order to prevent this, it is possible to
+mount a usb device with a Vendor and Product-ID to a specified path
+using a custom udev roule. For each rule, the Vendor and Product-ID is
+needed, for this commands like \passthrough{\lstinline!lsub!} or
+\passthrough{\lstinline!usb-devices!} and output the relevant
+information for each usb device attached.
+
+\begin{lstlisting}
+$ usb-devices
+
+T:  Bus=03 Lev=02 Prnt=02 Port=02 Cnt=03 Dev#= 11 Spd=12  MxCh= 0
+D:  Ver= 2.00 Cls=ef(misc ) Sub=02 Prot=01 MxPS=64 #Cfgs=  1
+P:  Vendor=1d50 ProdID=6029 Rev=01.00
+S:  Manufacturer=marlinfw.org 
+S:  Product=Marlin USB Device
+S:  SerialNumber=06FF800AAF3D08075C664F58F50020C3
+C:  #Ifs= 3 Cfg#= 1 Atr=80 MxPwr=500mA
+I:  If#=0x0 Alt= 0 #EPs= 1 Cls=02(commc) Sub=02 Prot=00 Driver=cdc_acm
+I:  If#=0x1 Alt= 0 #EPs= 2 Cls=0a(data ) Sub=00 Prot=00 Driver=cdc_acm
+I:  If#=0x2 Alt= 0 #EPs= 2 Cls=08(stor.) Sub=06 Prot=50 Driver=usb-storage
+\end{lstlisting}
+
+During development, several different board are used to control the
+different hardware sections. These can be divided into two main groups :
+
+\begin{itemize}
+\tightlist
+\item
+  \passthrough{\lstinline!Stepper-Controller!} - For controlling the
+  Stpper-Drivers, Endstop, Coils/Servo
+\item
+  \passthrough{\lstinline!User-Move-Detector!} - To interface the
+  hall-sensor array, to detect a manual move of the figures.
+\end{itemize}
+
+In the following table, the Vendor/Product-IDs from some tested boards
+are listed below:
+
+\begin{longtable}[]{@{}llllll@{}}
+\toprule
+Product & SUBSYSTEM & Vendor-ID & Product-ID & SYMLINK &
+Board-Type\tabularnewline
+\midrule
+\endhead
+Bigtreetech SKR 1.4 Turbo & tty & 1d50 & 6029 & ttySKR &
+Stepper-Controller\tabularnewline
+Bigtreetech SKR 1.3 & tty & 1d50 & 6029 & ttySKR &
+Stepper-Controller\tabularnewline
+Arduino Due {[}Programming Port{]} & tty & 2341 & 003d & ttyUBC &
+User-Move-Detector\tabularnewline
+Arduino Due {[}Native SAMX3 Port{]} & tty & 2341 & 003e & ttyUBC &
+User-Move-Detector\tabularnewline
+CH340 & tty & 1a86 & 7523 & ttyUBC & User-Move-Detector\tabularnewline
+HL-340 & tty & 1a86 & 7523 & ttyUBC & User-Move-Detector\tabularnewline
+STM32F411 & tty & 0483 & 5740 & ttyUBC &
+User-Move-Detector\tabularnewline
+\bottomrule
+\end{longtable}
+
+With these information, is is possible to generate the needed udev
+rules.
+
+\begin{lstlisting}
+$ cat /etc/udev/rules.d/50-usb.rules
+
+...
+SUBSYSTEM=="tty", ATTRS{idVendor}=="1d50", ATTRS{idProduct}=="6029", SYMLINK+="ttySKR"
+...
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="5740", SYMLINK+="ttyUBC"
+...
+\end{lstlisting}
+
+This configuration archieves, that any type (of supported)
+Stepper-Controller-Boards are accessable over the
+\passthrough{\lstinline!/dev/ttySKR!} symblink.
+
+After the installation of the rules and connection of a SKR1.3 and a
+STM32F411 (known as STM32-BlackPill), the device directory contains the
+following entires:
+
+\begin{lstlisting}
+ls /dev/tty*
+
+/dev/ttyS27  /dev/ttyS6
+/dev/ttyUSB0  /dev/ttyACMA0  /dev/tty25  /dev/tty32  /dev/tty4  /dev/ttyprintk  /dev/ttySKR  /dev/ttyUBC
+\end{lstlisting}
+
+The in the configutation file of the controller file, these tty paths
+are set and no reconfiguration for different hardware configuration is
+needed.
 
 \end{document}
