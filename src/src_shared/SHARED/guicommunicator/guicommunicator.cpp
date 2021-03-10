@@ -441,7 +441,7 @@ void guicommunicator::createEvent(GUI_ELEMENT _event, GUI_VALUE_TYPE _type, QStr
 #else	
 void guicommunicator::show_error_message_on_gui(std::string _err)
 {
-	createEvent(guicommunicator::GUI_ELEMENT::ERROR, guicommunicator::GUI_VALUE_TYPE::ERROR_MESSAGE, _err);
+	createEvent(guicommunicator::GUI_ELEMENT::QT_UI_ERROR, guicommunicator::GUI_VALUE_TYPE::ERROR_MESSAGE, _err);
 }
 
 

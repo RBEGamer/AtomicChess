@@ -45,6 +45,19 @@ typedef std::chrono::system_clock::time_point TimePoint;
 #define LOG_FILE_PATH_ERROR "/tmp/atc_controller_error_log.log"
 using namespace std;
 
+
+
+int mainloop_running = 0;
+int make_move_mode = 0;    //TO DETERM FOR WHICH PURPOSE THE PLAYER_MAKE_MANUAL_MOVE_SCREEN WAS OPENED 0=NOT OPEN 1=TEST 2=RUNNING GAME MOVE
+BackendConnector* gamebackend_logupload = nullptr;     //USED ONLY FOR UPLOADING THE LOGS
+
+//----- VARS FOR CALIBRATION SCREEN ----- //
+int h1pos_x = 0;
+int h1pos_y = 0;
+int a8pos_x = 0;
+int a8pos_y = 0;
+int cal_move = -1; //-1 disbaled 0=h1 1=a8
+
 //!Reads the system HWID File from the location
 std::string readHWID(std::string _file)
 {
@@ -59,10 +72,6 @@ std::string readHWID(std::string _file)
 		std::istreambuf_iterator<char>());
 }
 
-
-int mainloop_running = 0;
-int make_move_mode = 0;   //TO DETERM FOR WHICH PURPOSE THE PLAYER_MAKE_MANUAL_MOVE_SCREEN WAS OPENED 0=NOT OPEN 1=TEST 2=RUNNING GAME MOVE
-BackendConnector* gamebackend_logupload = nullptr;    //USED ONLY FOR UPLOADING THE LOGS
 
 std::string get_interface_mac_address(const string& _ifname) {
 	ifstream iface("/sys/class/net/" + _ifname + "/address");
@@ -180,12 +189,23 @@ int main(int argc, char *argv[])
 	//READ CONFIG FILE
 	LOG_SCOPE_F(INFO, "LOADING CONFIG FILE ./atccontrollerconfig.ini");
 	
+	std::string hwid = get_interface_mac_address(ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::GENERAL_HWID_INTERFACE));
+	LOG_F(INFO, (const char*)hwid.c_str());
+	
+	
 	//GENERATE A DEFAULT CONFIG FILE IN DEBUG MODE TO TEST THE CONFIG GENERATION
 	if(cmdOptionExists(argv, argv + argc, "-writeconfig"))
 	{
 		LOG_F(WARNING, "ARGUMENT -writeconfig SET => CREATE NEW CONFIG FILE");
-		//TODO
-		ConfigParser::getInstance()->loadDefaults();
+		//LOAD (PUPULATE) ALL CONFIG ENTRIES WITH THE DEFAULT CONFIG
+		if(hwid == "b827ebad862f")
+		{
+			ConfigParser::getInstance()->loadDefaults(HardwareInterface::HI_HWREV_DK);  
+		}
+		else
+		{
+			ConfigParser::getInstance()->loadDefaults(HardwareInterface::HI_HWREV_PROD);  
+		}
 		ConfigParser::getInstance()->createConfigFile(CONFIG_FILE_PATH, false);
 	}
 	
@@ -194,7 +214,17 @@ int main(int argc, char *argv[])
 	if(!ConfigParser::getInstance()->loadConfigFile(CONFIG_FILE_PATH))
 	{
 		LOG_F(ERROR, "Failed to load atccontrollerconfig.ini");
-		ConfigParser::getInstance()->loadDefaults();            //LOAD (PUPULATE) ALL CONFIG ENTRIES WITH THE DEFAULT CONFIG
+		//LOAD (PUPULATE) ALL CONFIG ENTRIES WITH THE DEFAULT CONFIG
+		if (hwid == "b827ebad862f")
+		{
+			ConfigParser::getInstance()->loadDefaults(HardwareInterface::HI_HWREV_DK);  
+		}
+		else
+		{
+			ConfigParser::getInstance()->loadDefaults(HardwareInterface::HI_HWREV_PROD);  
+		}
+		
+		
 		ConfigParser::getInstance()->createConfigFile(CONFIG_FILE_PATH, false);
 		LOG_F(ERROR, "Failed to load atccontrollerconfig.ini");
 		return 1;
@@ -204,23 +234,19 @@ int main(int argc, char *argv[])
 	
 	//------------- DETERM THE HW REV ------------ //
 	//DETERM BY THE HWID => THERE IS ONLY ONE DK VERSION WITH DIFFERENT HARDWARE
-	std::string hwid = get_interface_mac_address(ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::GENERAL_HWID_INTERFACE));
-	LOG_F(INFO, (const char*)hwid.c_str());
+	
 
 	//IF WE ARE ON THE DK HARDWARE THEN OVERRIDE THE DEFAULT CONFIG
 	if(hwid == "b827ebad862f")
 	{
 		LOG_F(WARNING, "DETECTED HWID WITH DK HARDWARE PATCHING CONFIG TO DK");	
 		//STORE ONLY IN DEBUG MODE PERSISTENT
+		//ConfigParser::getInstance()->loadDefaults(HardwareInterface::HI_HWREV_DK);
 		ConfigParser::getInstance()->set(ConfigParser::CFG_ENTRY::HWARDWARE_REVISION, "DK", CONFIG_FILE_PATH);
 		ConfigParser::getInstance()->set(ConfigParser::CFG_ENTRY::MECHANIC_DISBABLE_COILSIWTCH_USE_COIL_A_ONLY, "0", CONFIG_FILE_PATH);
 		
-		
-		
 	}else
 	{
-		ConfigParser::getInstance()->set(ConfigParser::CFG_ENTRY::HWARDWARE_REVISION, "PROD", CONFIG_FILE_PATH);
-		ConfigParser::getInstance()->set(ConfigParser::CFG_ENTRY::MECHANIC_DISBABLE_COILSIWTCH_USE_COIL_A_ONLY, "1", CONFIG_FILE_PATH);
 		LOG_F(INFO, "DETECTED HWID WITH PROD");	
 	}
 
@@ -868,7 +894,7 @@ int main(int argc, char *argv[])
 		gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::PROCESSING_SCREEN);
 		//LOGOUT AND GOTO LOGIN SCREEN
 		//if(gamebackend.stop_heartbeat_thread()) {
-			gamebackend.logout();
+		gamebackend.logout();
 		gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::LOGIN_SCREEN);
 		//}
 	}
@@ -911,6 +937,97 @@ int main(int argc, char *argv[])
 	}	
 		
 		
+	//--------------------------------------------------------
+	//----------------CALIBRATION SCREEN ---------------------
+	//--------------------------------------------------------
+	if(ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_H1POS && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
+		cal_move = 0;
+		LOG_F(WARNING, "CALIBRATION SCREEN - H1 POSITION");
+		//MOVE HOME POS
+		HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, false);
+		HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, false);
+		HardwareInterface::getInstance()->home_sync();
+		
+		//READ CONFIG VALUES
+		cal_pos_x = ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X);
+		cal_pos_y = ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y);
+		//MOVE TO NEW H1 POSITION
+		HardwareInterface::getInstance()->move_to_postion_mm_absolute(cal_pos_x, cal_pos_y);
+		
+	}else if(ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_A8POS && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
+			cal_move = 1;
+			LOG_F(WARNING, "CALIBRATION SCREEN - H1 POSITION");
+			//MOVE HOME POS
+			HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, false);
+			HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, false);
+			HardwareInterface::getInstance()->home_sync();
+		
+			//READ CONFIG VALUES
+			cal_pos_x = ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X) + (ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_CHESS_FIELD_WIDTH)*8);
+			cal_pos_y = ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y) + (ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_CHESS_FIELD_WIDTH) * 8);
+			//MOVE TO NEW H1 POSITION
+			HardwareInterface::getInstance()->move_to_postion_mm_absolute(cal_pos_x, cal_pos_y);
+		
+	}else if (ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_MVUP && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
+		LOG_F(WARNING, "CALIBRATION SCREEN - UP");
+		//MOVE TO NEW POSITION
+		cal_pos_y += 5;
+		HardwareInterface::getInstance()->move_to_postion_mm_absolute(cal_pos_x, cal_pos_y);
+	}
+	else if (ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_MVDOWN && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
+		LOG_F(WARNING, "CALIBRATION SCREEN - DOWN");
+		//MOVE TO NEW POSITION
+		cal_pos_y -= 5;
+		HardwareInterface::getInstance()->move_to_postion_mm_absolute(cal_pos_x, cal_pos_y);
+	}else if(ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_MVLEFT && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
+			LOG_F(WARNING, "CALIBRATION SCREEN - LEFT");
+			//MOVE TO NEW POSITION
+			cal_pos_x += 5;
+			HardwareInterface::getInstance()->move_to_postion_mm_absolute(cal_pos_x, cal_pos_y);
+	}else if(ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_MVRIGHT && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
+			LOG_F(WARNING, "CALIBRATION SCREEN - RIGHT");
+			//MOVE TO NEW POSITION
+			cal_pos_x -= 5;
+			HardwareInterface::getInstance()->move_to_postion_mm_absolute(cal_pos_x, cal_pos_y);
+	}
+	
+		
+	//SAVE
+	if (ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_SAVE && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
+		LOG_F(WARNING, "CALIBRATION SCREEN - SAVE");
+		if (cal_move == -1)
+		{
+			gui.show_error_message_on_gui("CALIBRATION SAVE FAILED -> PLEASE SELECT CONRNER");
+			return;
+		}
+		else if (cal_move == 0) //CAL MOVE H1
+			{
+				ConfigParser::getInstance()->setInt(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X, cal_pos_x, CONFIG_FILE_PATH);
+				ConfigParser::getInstance()->setInt(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y, cal_pos_y, CONFIG_FILE_PATH);
+				LOG_F(WARNING, cal_pos_x);
+				LOG_F(WARNING, cal_pos_y);
+				gui.show_error_message_on_gui("CALIBRATION SAVED FOR H1");
+			}
+		else if (cal_move == 1)
+		{
+			const int tmp_cal_pos_x = ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X);
+			const int tmp_cal_pos_y = ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y);
+			cal_pos_x = (cal_pos_x - tmp_cal_pos_x) / 8;
+			cal_pos_y = (cal_pos_y - tmp_cal_pos_y) / 8;
+			LOG_F(WARNING, cal_pos_x);
+			LOG_F(WARNING, cal_pos_y);
+			const int cal_res = (cal_pos_y + cal_pos_x) / 2;
+			LOG_F(WARNING, cal_res);
+			ConfigParser::getInstance()->setInt(ConfigParser::CFG_ENTRY::MECHANIC_CHESS_FIELD_WIDTH, cal_res, CONFIG_FILE_PATH); //WRITE FIELD WIDTH
+			ConfigParser::getInstance()->setInt(ConfigParser::CFG_ENTRY::MECHANIC_CHESS_BOARD_WIDTH, cal_res*8, CONFIG_FILE_PATH); //= FW*8 WRITE BOARD WITH = NEEDED FOR ChessBoardClass
+			gui.show_error_message_on_gui("CALIBRATION SAVED FOR A1");
+		}
+		
+		
+		//RESET CAL MENU	
+		cal_move = -1;
+			
+	}
 		
 }
 	

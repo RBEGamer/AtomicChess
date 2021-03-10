@@ -49,6 +49,7 @@ public slots:
     void sm_init_btn();
     void sm_logout_btn();
     void sm_scan_board_btn();
+    void ss_calboard_btn();
 
 
     //----- GENERAL ----//
@@ -75,6 +76,17 @@ public slots:
     void memm_enter_move_user_input(QString _charakter);
     //---- GENERAL FUNCTIONS --- //
     void general_ui_reset(); //RESET THE UI TO INITIAL STATE
+
+
+    //--- CALIBRATION SCREEN --- //
+    void cal_a8_pos_btn();
+    void cal_h1pos_btn();
+    void cal_save_btn();
+    void cal_mvleft_btn();
+    void cal_mvup_btn();
+    void cal_mvdown_btn();
+    void cal_mvright_btn();
+
 private:
     void show_error(QString _err);
     guicommunicator guiconnection;

@@ -13,14 +13,16 @@
 #include "SHARED/magic_enum-master/include/magic_enum.hpp"
 #include "SHARED/json11-master/json11.hpp"
 
+//INCLUDE ATC PACKAGES
+#include "HardwareInterface.h"
+
+
+
 #define USE_STD_LOG
-
-
 #define INI_SETTINGS_CATEGORY_TOKEN "SETTINGS"
-
-
 #define INI_USER_DATA_CATEGORY_TOKEN "USER_DATA"
 #define USER_DATA_CONFIG_ENTRY_PREFIX "USER_"
+
 class ConfigParser
 {
 public:
@@ -121,12 +123,15 @@ public:
 	
 	std::string get(ConfigParser::CFG_ENTRY _entry);
 	void set(ConfigParser::CFG_ENTRY _entry, std::string _value, std::string _conf_file_path); //SETS A CONFIG VALUE FOR ENTRY IF _conf_file_path IS NOT EMPTY THE NEW CONFIG WILL BE WRITTEN TO FILE
+	void setInt(ConfigParser::CFG_ENTRY _entry, int _value, std::string _conf_file_path);  //SETS A CONFIG VALUE FOR ENTRY IF _conf_file_path IS NOT EMPTY THE NEW CONFIG WILL BE WRITTEN TO FILE
 	bool writeConfigFile(std::string _file);
 	
 	bool getInt(ConfigParser::CFG_ENTRY _entry, int& _ret);
 	int getInt_nocheck(ConfigParser::CFG_ENTRY _entry); //SAME AS getInt BUT WITH NO SUCCESS CHECK IF ENTRY FOUND; RETURN 0 IF ENTRY WAS NOT FOUND 
 	bool getBool(ConfigParser::CFG_ENTRY _entry, bool& _ret);
 	void loadDefaults();
+	
+	void loadDefaults(HardwareInterface::HI_HARDWARE_REVISION _type);
 	bool getBool_nocheck(ConfigParser::CFG_ENTRY _entry);//SAME AS getBool BUT WITH NO SUCCESS CHECK IF ENTRY FOUND; RETURN FALSE IF ENTRY WAS NOT FOUND 
 	std::string toJson();
 	bool loadFromJson(std::string _jsonstr, bool load_only_user_data); //loads config from json  load_only_user_data is TRUE = updates only the user data section with the new data from json
