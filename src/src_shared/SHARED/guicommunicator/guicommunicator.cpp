@@ -478,6 +478,6 @@ guicommunicator::GUI_MESSAGE_BOX_RESULT guicommunicator::show_message_box(GUI_ME
 			break;
 		}
 	}
-
+	return guicommunicator::GUI_MESSAGE_BOX_RESULT::MSGBOX_RES_NONE;
 }
 #endif

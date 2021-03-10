@@ -20,7 +20,7 @@ set(SOURCE_FILES SHARED/guicommunicator/guicommunicator.cpp SHARED/json11-master
 
 
 file(GLOB SOURCES *.h *.cpp)
-add_executable(${PROJECT_NAME} ${SOURCE_FILES} ${SOURCES})
+add_executable(${PROJECT_NAME} ${SOURCE_FILES} ${SOURCES} HardwareInterface.cpp)
 
 TARGET_LINK_LIBRARIES(${PROJECT_NAME} ${Boost_LIBRARIES} rt)
 target_link_libraries(${PROJECT_NAME} ${CMAKE_DL_LIBS})

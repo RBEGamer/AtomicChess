@@ -119,7 +119,7 @@ public:
     GAMESCREEN_PLAYER_TURN_COLOR = 33,
 
 
-
+   
 
     PLAYER_EMM_LABEL = 34,
     PLAYER_EMM_OK = 35,
@@ -139,44 +139,44 @@ public:
 
 };
 
-    enum class GUI_MESSAGE_BOX_TYPE
-    {
-        MSGBOX_B_OK = 0,
-        MSGBOX_A_OK_CANCEL = 1
-    };
-    enum class GUI_MESSAGE_BOX_RESULT
-    {
-        MSGBOX_RES_NONE = 0,
-        MSGBOX_RES_OK = 1,
-        MSGBOX_RES_CANCEL =2
+	enum class GUI_MESSAGE_BOX_TYPE
+	{
+		MSGBOX_B_OK = 0,
+		MSGBOX_A_OK_CANCEL = 1
+	};
+	enum class GUI_MESSAGE_BOX_RESULT
+	{
+		MSGBOX_RES_NONE = 0,
+		MSGBOX_RES_OK = 1,
+		MSGBOX_RES_CANCEL =2
+		
+	};
+	enum class GUI_VALUE_TYPE{
+	CLICKED = 0,
+	SELECTED = 1,
+	USER_INPUT_STRING = 2,
+	USER_INPUT_NUMBER = 3,
+	ENABLED = 4,
+	DISBALED = 5,
 
-    };
-    enum class GUI_VALUE_TYPE{
-    CLICKED = 0,
-    SELECTED = 1,
-    USER_INPUT_STRING = 2,
-    USER_INPUT_NUMBER = 3,
-    ENABLED = 4,
-    DISBALED = 5,
 
+	//SPECIAL TYPES
+	AVARIABLED_PLAYERS_ARRAY = 6,   //DATA FOR AVARIABLE PLAYER ARRAY VIEW
+	CHESS_MOVE = 7,   //IS A C
+	SWITCH_SCREEN = 8,
+	PLAYER_ID = 9,   // THE PLAYER ID USED ON BEGIN_MATCH_WITH_PLAYER ELEMENT
 
-    //SPECIAL TYPES
-    AVARIABLED_PLAYERS_ARRAY = 6,   //DATA FOR AVARIABLE PLAYER ARRAY VIEW
-    CHESS_MOVE = 7,   //IS A C
-    SWITCH_SCREEN = 8,
-    PLAYER_ID = 9,   // THE PLAYER ID USED ON BEGIN_MATCH_WITH_PLAYER ELEMENT
-
-    RES1 = 10,
-    RE2 = 11,
-    RES3 = 12,
-    //MENUS
-    LOGIN_SCREEN = 13,
-    MAIN_MENU_SCREEN = 14,
-    SETTINGS_SCREEN = 15,
-    PLAYER_SEARCH_SCREEN = 16,
-    GAME_SCREEN = 17,
-    CREDIT_SCREEN = 18,
-    INFO_SCREEN = 19,
+	RES1 = 10,
+	RE2 = 11,
+	RES3 = 12,
+	//MENUS
+	LOGIN_SCREEN = 13,
+	MAIN_MENU_SCREEN = 14,
+	SETTINGS_SCREEN = 15,
+	PLAYER_SEARCH_SCREEN = 16,
+	GAME_SCREEN = 17,
+	CREDIT_SCREEN = 18,
+	INFO_SCREEN = 19,
     ERROR_MESSAGE = 20,
     ONLINE = 21,
     OFFLINE = 22,
@@ -206,20 +206,20 @@ public:
     ~guicommunicator();
 
 
-
-
-
-    void enable_qt_communication(bool _en);
+	
+	
+	
+	void enable_qt_communication(bool _en);
 
     void createEvent(GUI_ELEMENT _event, GUI_VALUE_TYPE _type, std::string _value); //sends a event though ZeroMQ using protocol buffer
     //DERIVATIONS FRom createEvent
     void createEvent(GUI_ELEMENT _event, GUI_VALUE_TYPE _type);
-    void clearPreviousEvents();
+	void clearPreviousEvents();
     #ifdef USES_QT
     void createEvent(GUI_ELEMENT _event, GUI_VALUE_TYPE _type, QString _value);
     #endif
 
-
+  
     void debug_event(GUI_EVENT _event, bool _rec);
 
     void start_recieve_thread();
@@ -227,46 +227,46 @@ public:
 
 
      GUI_EVENT get_gui_update_event();
-     GUI_EVENT get_event();
+	 GUI_EVENT get_event();
      bool check_guicommunicator_version();
-     bool check_guicommunicator_reachable();
+	 bool check_guicommunicator_reachable();
 #ifdef USES_QT
      static bool IS_PLATTFORM_WEB;
 #endif
-    //SOME FUNTIONS ARE ONLY FOR THE GUI SIDE
+	//SOME FUNTIONS ARE ONLY FOR THE GUI SIDE
     #ifndef USES_QT
         void show_error_message_on_gui(std::string _err);	//DISPLAYS A ERROR MESSAGE WITH OK BUTTONS
         GUI_MESSAGE_BOX_RESULT show_message_box(GUI_MESSAGE_BOX_TYPE _type, std::string _message, int _wait_time_ms); //DISPLAY A MESSAGEBOX WITH OK/CANCEL BUTTON AND WAITS FOR THE USER INPUT
     #endif
 private:
 
-
+	
 #ifdef USES_QT
       QThread* update_thread = nullptr;
       QMutex update_thread_mutex;
 #else
     std::thread* update_thread = nullptr;
     std::mutex update_thread_mutex;
-    std::mutex webview_thread_mutex;
-
+	std::mutex webview_thread_mutex;
+	
 #endif
 
     std::queue<GUI_EVENT> gui_update_event_queue;
-    std::queue<GUI_EVENT> webview_update_event_queue;
-    GUI_EVENT webview_last_screen_switch_event;
-
-    bool thread_running = false;
-    bool en_qt_communication = true;
+	std::queue<GUI_EVENT> webview_update_event_queue;
+	GUI_EVENT webview_last_screen_switch_event;
+	
+	bool thread_running = false;
+	bool en_qt_communication = true;
     httplib::Server svr;
 
     GUI_EVENT last_event_from_webserver;
 
 
     void enqueue_event(GUI_EVENT _ev);
-    void debug_output(std::string _msg);
-    std::string guievent2Json(GUI_EVENT _ev);
-    GUI_EVENT json2Guievent(std::string _jsonstring);
-    GUI_EVENT json2Guievent(json11::Json::object _jsobj);
+	void debug_output(std::string _msg);
+	std::string guievent2Json(GUI_EVENT _ev);
+	GUI_EVENT json2Guievent(std::string _jsonstring);
+	GUI_EVENT json2Guievent(json11::Json::object _jsobj);
     static void recieve_thread_function(guicommunicator* _this);
 
 

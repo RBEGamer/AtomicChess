@@ -23,16 +23,20 @@ HardwareInterface::HardwareInterface()
 	{ 
 		hwrev = HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_DK;
 	}
-	else if (hwrevstr == "PROD")
+	else if (hwrevstr == "PROD_V1")
 	{ 
 		hwrev = HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD;
-	}
+	}else if (hwrevstr == "PROD_V2")
+    {
+        hwrev = HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD_V2;
+    }
 	else
 	{
 		init_complete = false;
 		return;
 	}
-	LOG_F(INFO, "HardwareInterface::HardwareInterface got hwrev ", hwrevstr.c_str());
+	LOG_F(INFO, "HardwareInterface::HardwareInterface got hwrev ");
+    LOG_F(INFO, hwrevstr.c_str());
 	//AFTER DETERM OF THE HW REV THE SPECIFIC HARDWARE CAN BE SETUP
 	init_complete = init_hardware(hwrev);
 }
@@ -94,7 +98,7 @@ bool HardwareInterface::init_hardware(HardwareInterface::HI_HARDWARE_REVISION _h
 		
 		
 	}
-	else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD)
+	else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD || hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD_V2)
 	{
 		if (gcode_interface == nullptr) {
 			int baud = 115200;
@@ -145,7 +149,7 @@ bool HardwareInterface::check_hw_init_complete()
 
 bool HardwareInterface::is_production_hardware()
 {
-	if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD)
+	if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD || hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD_V2)
 	{
 		return true;
 	}
@@ -166,7 +170,7 @@ bool HardwareInterface::setTurnStateLight(HardwareInterface::HI_TURN_STATE_LIGHT
 		}
 			
 	}
-	else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD)
+	else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD || hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD_V2)
 	{
 		//TODO
 	}
@@ -183,7 +187,7 @@ bool HardwareInterface::setCoilState(HI_COIL _coil, bool _state)
 		}
 			
 	}
-	else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD)
+	else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD || hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD_V2)
 	{
 		//MORE LOGIC NEEDED HERE
 		//IT DEPENDS ON THE ONFIGURATION OF MARLIN WHICH INDEX THE SERVOS HAVE TO WE NEED TO LOAD IT FROM THE CONFIG FIRST
@@ -221,10 +225,19 @@ ChessPiece::FIGURE HardwareInterface::ScanNFC(int _retry_count)
 		}
 			
 	}
-	else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD)
+	else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD || hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD_V2)
 	{
 		//TODO
 	}
+
+	//ELSE RETURN A INVALID FIGURE
+    ChessPiece::FIGURE fig;
+	fig.color = ChessPiece::COLOR::COLOR_UNKNOWN;
+	fig.type = ChessPiece::TYPE::TYPE_INVALID;
+	fig.figure_number = -1;
+	fig.unique_id = -1;
+	fig.is_empty = true;
+	return fig;
 }
 	
 	
@@ -243,7 +256,7 @@ void HardwareInterface::enable_motors()
 		}
 			
 	}
-	else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD)
+	else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD || hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD_V2)
 	{
 		//NOT NEEDED FOR REV 2 (GCODE) => MOTORS WILL AUTOMATICLY ACTIVATED AFTER A MOVEMENT COMMAND (G0, G1)
 	}
@@ -260,7 +273,7 @@ void HardwareInterface::disable_motors()
 		}
 			
 	}
-	else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD)
+	else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD || hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD_V2)
 	{
 		if (gcode_interface != nullptr)
 		{
@@ -283,13 +296,15 @@ bool HardwareInterface::is_target_position_reached()
 		}
 			
 	}
-	else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD)
+	else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD || hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD_V2)
 	{
 		if (gcode_interface != nullptr)
 		{
 			return gcode_interface->is_target_position_reached();
 		}
 	}
+	LOG_F(ERROR,"HardwareInterface::is_target_position_reached() return false due invalid HW CONFIG");
+	return false;
 }
 	
 void HardwareInterface::move_to_postion_mm_absolute(int _x, int _y, bool _blocking)
@@ -303,7 +318,7 @@ void HardwareInterface::move_to_postion_mm_absolute(int _x, int _y, bool _blocki
 		}
 			
 	}
-	else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD)
+	else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD || hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD_V2)
 	{
 		if (gcode_interface != nullptr)
 		{
@@ -323,7 +338,7 @@ void HardwareInterface::home_sync()
 		}
 			
 	}
-	else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD)
+	else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD || hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD_V2)
 	{
 		if (gcode_interface != nullptr)
 		{
@@ -343,7 +358,7 @@ void HardwareInterface::set_speed_preset(HardwareInterface::HI_TRAVEL_SPEED_PRES
 		}
 			
 	}
-	else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD)
+	else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD || hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD_V2)
 	{
 		if (gcode_interface != nullptr)
 		{

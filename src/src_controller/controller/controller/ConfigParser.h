@@ -14,7 +14,7 @@
 #include "SHARED/json11-master/json11.hpp"
 
 //INCLUDE ATC PACKAGES
-#include "HardwareInterface.h"
+
 
 
 
@@ -26,7 +26,7 @@
 class ConfigParser
 {
 public:
-	///PLEAE NOT BY EDIT/ADDING ENTRIES PLEASE EDIT ConfigParser::createConfigFile FUNCTION
+	///PLEASE NOTE BY EDIT/ADDING ENTRIES PLEASE EDIT ConfigParser::createConfigFile, loadDefaults FUNCTIONS TOO
 	enum class CFG_ENTRY
 	{
 		NETWORK_BACKEND_URL = 0,
@@ -129,9 +129,10 @@ public:
 	bool getInt(ConfigParser::CFG_ENTRY _entry, int& _ret);
 	int getInt_nocheck(ConfigParser::CFG_ENTRY _entry); //SAME AS getInt BUT WITH NO SUCCESS CHECK IF ENTRY FOUND; RETURN 0 IF ENTRY WAS NOT FOUND 
 	bool getBool(ConfigParser::CFG_ENTRY _entry, bool& _ret);
-	void loadDefaults();
+
 	
-	void loadDefaults(HardwareInterface::HI_HARDWARE_REVISION _type);
+	void loadDefaults(std::string _type_str);
+
 	bool getBool_nocheck(ConfigParser::CFG_ENTRY _entry);//SAME AS getBool BUT WITH NO SUCCESS CHECK IF ENTRY FOUND; RETURN FALSE IF ENTRY WAS NOT FOUND 
 	std::string toJson();
 	bool loadFromJson(std::string _jsonstr, bool load_only_user_data); //loads config from json  load_only_user_data is TRUE = updates only the user data section with the new data from json

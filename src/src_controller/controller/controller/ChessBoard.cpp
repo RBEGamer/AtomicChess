@@ -137,6 +137,8 @@ bool ChessBoard::MoveWaypointsAlong(std::queue<MV_POSITION>& _mv)
 	//DISABLE COILS
 	HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, false);
 	HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, false);
+
+	return true;
 }
 
 //GET NEXT FIELD TO PARK POS
@@ -743,7 +745,7 @@ bool ChessBoard::copyBoard(ChessPiece::FIGURE* _from, ChessPiece::FIGURE* _to) /
 	}
 	
 	
-	
+	return true;
 }
 
 bool ChessBoard::syncRealWithTargetBoard() {
@@ -1708,7 +1710,10 @@ bool ChessBoard::isFieldParkPosition(ChessField::CHESS_FILEDS _field)
 	
 std::list<ChessPiece::FIGURE> checkBoardForFullFigureSet(ChessPiece::FIGURE(&board)[BOARD_WIDTH][BOARD_HEIGHT])
 {
+    //TODO
+    std::list<ChessPiece::FIGURE> tmp;
 	//list missing or to much figures
+	return tmp;
 }
 
 IOController::COIL ChessBoard::getValidCoilTypeParkPosition(ChessField::CHESS_FILEDS _field, IOController::COIL _target)
@@ -1843,6 +1848,7 @@ ChessBoard::BOARD_ERROR ChessBoard::get_coil_offset(IOController::COIL _coil, in
 
 	_y = 0;            //THE COILS ARE ONLY MOVING IN X DIRECTION
 	_x = mv_distance;
+	return ChessBoard::BOARD_ERROR::NO_ERROR;
 }
 	
 
