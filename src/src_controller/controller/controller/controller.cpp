@@ -40,6 +40,7 @@ typedef std::chrono::system_clock::time_point TimePoint;
 
 
 //---------------------- CONFIG DEFINED --------------------------- //
+
 #define CONFIG_FILE_PATH "./atccontrollerconfig.ini"
 #define LOG_FILE_PATH "/tmp/atc_controller_log.log"
 #define LOG_FILE_PATH_ERROR "/tmp/atc_controller_error_log.log"
@@ -79,6 +80,8 @@ std::string readHWID(std::string _file)
 
 std::string get_interface_mac_address(const string& _ifname) {
 	ifstream iface("/sys/class/net/" + _ifname + "/address");
+
+
 	//READ FILE
 	std::string str((istreambuf_iterator<char>(iface)), istreambuf_iterator<char>());
 	//CHECK LENGTH
@@ -90,7 +93,7 @@ std::string get_interface_mac_address(const string& _ifname) {
 	else {
 		return "1nv4l1dm4c";
 	}
-} 
+}
 
 std::string read_file_to_string(const std::string& _path) {
 	ifstream iface(_path);
@@ -224,8 +227,8 @@ int main(int argc, char *argv[])
 		
 		
 		ConfigParser::getInstance()->createConfigFile(CONFIG_FILE_PATH, false);
-		LOG_F(ERROR, "Failed to load atccontrollerconfig.ini");
-		return 1;
+		LOG_F(ERROR, "WRITE NEW CONFIGFILE DUE MISSING ONE atccontrollerconfig.ini");
+
 	}
 	LOG_F(INFO, "CONFIG FILE LOADED");	
 	
