@@ -936,6 +936,7 @@ int main(int argc, char *argv[])
 		cal_pos_x = ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X);
 		cal_pos_y = ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y);
 		//MOVE TO NEW H1 POSITION
+        HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A,true);
 		HardwareInterface::getInstance()->move_to_postion_mm_absolute(cal_pos_x, cal_pos_y,true);
 		
 	}else if(ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_A8POS && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
@@ -949,7 +950,8 @@ int main(int argc, char *argv[])
 			//READ CONFIG VALUES
 			cal_pos_x = ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X) + (ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_CHESS_FIELD_WIDTH)*8);
 			cal_pos_y = ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y) + (ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_CHESS_FIELD_WIDTH) * 8);
-			//MOVE TO NEW H1 POSITION
+			//MOVE TO NEW A8 POSITION
+        HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B,true);
 			HardwareInterface::getInstance()->move_to_postion_mm_absolute(cal_pos_x, cal_pos_y,true);
 		
 	}else if (ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_MVUP && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
@@ -972,6 +974,7 @@ int main(int argc, char *argv[])
 			LOG_F(WARNING, "CALIBRATION SCREEN - RIGHT");
 			//MOVE TO NEW POSITION
 			cal_pos_x -= 5;
+
 			HardwareInterface::getInstance()->move_to_postion_mm_absolute(cal_pos_x, cal_pos_y,true);
 	}
 	
@@ -1005,6 +1008,8 @@ int main(int argc, char *argv[])
 		
 		//RESET CAL MENU	
 		cal_move = -1;
+        HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, false);
+        HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, false);
 			
 	}
 		
