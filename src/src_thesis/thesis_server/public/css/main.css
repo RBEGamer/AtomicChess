@@ -1,0 +1,98 @@
+body {
+    padding-top: 50px;
+    font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+
+
+  h1,
+  h2,
+  html,
+  body {
+    padding: 10px;
+  }
+  
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 700;
+  }
+
+
+
+.half_transparency{
+opacity: 0.5;
+
+filter: alpha(opacity=50); /* For IE8 and earlier */
+}
+
+
+.half_transparency_back{
+background:rgba(255, 255, 255, 0.7);
+}
+/* Always set the map height explicitly to define the size of the div
+* element that contains the map. */
+
+#map {
+    height: 400px;
+}
+
+html { 
+/*background: url(/img/emma_pg.png) no-repeat center center fixed; */
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+}
+
+
+.update_text {
+    color: rgba(88, 88, 88, 0.7);
+    font-size: 8px;
+}
+
+
+
+.impressum_text {
+    color: rgba(192, 192, 192, 0.7);
+    font-size: 8px;
+}
+
+.table td {
+    text-align: center;   
+ }
+
+ .center_image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+   
+}
+
+
+
+.grad_header {
+
+    object-fit: cover;
+    background: black;
+    overflow: hidden;
+    background: #C33764;  /* fallback colour. Make sure this is just one solid colour. */
+    background: -webkit-linear-gradient(rgba(0,120,116,0.2), rgba(0,120,116,0.8)),url("/img/gallery/nixie_l.jpg");
+    background: linear-gradient(rgba(0,120,116,0.2), rgba(0,120,116,0.8)), url("/img/gallery/nixie_l.jpg"); /* The least supported option. */
+    background-size: 100%;
+}
+
+.grad_header_two {
+    overflow: hidden;
+    background: #C33764;  /* fallback colour. Make sure this is just one solid colour. */
+    background:url("/img/gallery/nixie_l.jpg") no-repeat center;
+    background-size: 100%;
+}
+.grad_img {
+    object-fit: cover;
+}
+
+
+/* Optional: Makes the sample page fill the window. */

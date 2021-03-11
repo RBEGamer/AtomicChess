@@ -1,0 +1,75 @@
+
+
+.fhcolor_text{
+    color: rgba(0,120,116,0.7);
+}
+
+.alert-fh{
+    background-color:rgba(0,120,116,0.7);
+    color:floralwhite;
+}
+
+.btn-fh, .btn-fh:hover, .btn-fh:active, .btn-fh:visited {
+    background-color: rgba(0,120,116,0.9) !important;
+    color:floralwhite;
+}
+
+.list-group-fh .list-group-fh {
+    background-color: rgba(0,120,116,0.9) !important;
+    border-top: 1px solid #0091b5;
+    border-left-color: #fff;
+    border-right-color: #fff;
+}
+
+.list-group-fh .list-group-fh:hover {
+    background-color: red;
+}
+
+.btn-outline-fh {
+    color: rgba(0,120,116,0.9);
+    background-color: transparent;
+    background-image: none;
+    border-color: rgba(0,120,116,0.9)
+}
+
+.btn-outline-fh:hover {
+    color: #222;
+    background-color: #8ad3d3;
+    border-color: rgba(0,120,116,0.9)
+}
+
+.btn-outline-fh:focus,
+.btn-outline-fh.focus {
+    box-shadow: 0 0 0 .2rem rgba(0,120,116,0.9)
+}
+
+.btn-outline-fh.disabled,
+.btn-outline-fh:disabled {
+    color: rgba(0,120,116,0.9);
+    background-color: transparent
+}
+
+.btn-outline-fh:not(:disabled):not(.disabled):active,
+.btn-outline-fh:not(:disabled):not(.disabled).active,
+.show>.btn-outline-fh.dropdown-toggle {
+    color: #212529;
+    background-color: #8ad3d3;
+    border-color: rgba(0,120,116,0.9)
+}
+
+
+.btn-outline-fh:not(:disabled):not(.disabled):active:focus,
+.btn-outline-fh:not(:disabled):not(.disabled).active:focus,
+.show>.btn-outline-fh.dropdown-toggle:focus {
+    box-shadow: 0 0 0 .2rem rgba(0,120,116,0.9);
+    color:floralwhite;
+}
+
+
+.fhcolor_bg{
+    background-color: rgba(0,120,116,0.9);
+}
+
+.fhcolor_bg_dark{
+    background-color: rgba(0, 110, 106,0.9);
+}

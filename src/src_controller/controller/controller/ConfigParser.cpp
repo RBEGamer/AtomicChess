@@ -265,7 +265,7 @@ void ConfigParser::loadDefaults(std::string _type_str)
 	
 		config_store[ConfigParser::CFG_ENTRY::MECHANIC_STEPS_PER_MM] = "1292";
 		config_store[ConfigParser::CFG_ENTRY::MECHANIC_INVERT_COILS] = "1";
-		config_store[ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X] = "-15";  //50 ON DK
+		config_store[ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X] = "15";  //50 ON DK
 		config_store[ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y] = "40";  //0 ON DK
 		config_store[ConfigParser::CFG_ENTRY::MECHANIC_DISTANCE_COILS_MM] = "0";  //110 ON DK
 		config_store[ConfigParser::CFG_ENTRY::MECHANIC_COIL_SWITCH_POSTION_TRIGGER] = "200";
@@ -314,7 +314,7 @@ void ConfigParser::loadDefaults(std::string _type_str)
 
         config_store[ConfigParser::CFG_ENTRY::MECHANIC_STEPS_PER_MM] = "1292";
         config_store[ConfigParser::CFG_ENTRY::MECHANIC_INVERT_COILS] = "1";
-        config_store[ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X] = "-15";  //50 ON DK
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X] = "15";  //50 ON DK
         config_store[ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y] = "40";  //0 ON DK
         config_store[ConfigParser::CFG_ENTRY::MECHANIC_DISTANCE_COILS_MM] = "0";  //110 ON DK
         config_store[ConfigParser::CFG_ENTRY::MECHANIC_COIL_SWITCH_POSTION_TRIGGER] = "200";
@@ -326,10 +326,10 @@ void ConfigParser::loadDefaults(std::string _type_str)
         config_store[ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_WHITE_FIRST_Y_OFFSET] = "5";
         config_store[ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_CELL_BEFORE_OFFSET] = "30";
         config_store[ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_CELL_SIZE] = "30";
-        config_store[ConfigParser::CFG_ENTRY::MECHANIC_BOARD_SIZE_550MM_WORKAROUND] = "1"; //1 ON DK
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_BOARD_SIZE_550MM_WORKAROUND] = "1";
         config_store[ConfigParser::CFG_ENTRY::MECHANIC_WRITE_COIL_STATE_ALWAYS_MAKE_MOVE] = "0";
         config_store[ConfigParser::CFG_ENTRY::MECHANIC_WRITE_COIL_STATE_ALWAYS_WRITE_OFF] = "0";
-        config_store[ConfigParser::CFG_ENTRY::MECHANIC_BOARD_HOME_AFTER_MAKE_MOVE] = "0";  //1 ON DK
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_BOARD_HOME_AFTER_MAKE_MOVE] = "0";
         config_store[ConfigParser::CFG_ENTRY::MECHANIC_DISBABLE_COILSIWTCH_USE_COIL_A_ONLY] = "1";  // 0 ON DK
 
         config_store[ConfigParser::CFG_ENTRY::BOARD_PRESET_START_POSITION_FEN] = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";

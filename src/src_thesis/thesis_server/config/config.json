@@ -1,0 +1,19 @@
+{
+    "webserver_default_port": 3020,
+    "hostname":"thesis.marcelochsendorf.com",
+    "session_secret":"dfgnreiovhfgjhiosvegnewoingo",
+    "app_name_title": "Document Store - Marcel Ochsendorf",
+    "app_name_site":"Document Store - Marcel Ochsendorf",
+    "app_directory":"./",
+
+    "redirect_urls":{
+      "datenschutz":"https://marcelochsendorf.com/datenschutz",
+      "impressum":"https://marcelochsendorf.com/impressum",
+
+
+      "ba":"/document?doc=ba&tok=423467",
+      "rep":"/document?doc=rep&tok=423467",
+      "cv":"https://marcelochsendorf.com/"
+    }
+
+}

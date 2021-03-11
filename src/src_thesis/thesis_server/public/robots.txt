@@ -1,0 +1,6 @@
+User-Agent: Googlebot 
+Disallow: /rest 
+
+
+User-Agent: Googlebot-Image 
+Disallow: /rest 
