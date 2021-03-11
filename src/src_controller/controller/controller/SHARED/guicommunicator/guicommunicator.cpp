@@ -5,15 +5,17 @@ bool guicommunicator::IS_PLATTFORM_WEB = false;
 #endif
 guicommunicator::guicommunicator()
 {
-    #ifdef USES_QT
+  
 
-    #endif
-	//    rpc::server srv(RPC_PORT);
-	//    srv.bind(RPC_FKT_NAME, &guicommunicator::rpc_callback);
-	//    ptrsrv = &srv;
-	//    srv.async_run();
 	
 		debug_output("guicommunicator started");
+
+		#ifdef USES_QT
+			debug_output("-- QT VERSION --");
+		#else
+			debug_output("-- CONTROLLER VERSION --");
+    	
+		#endif
 }
 
 guicommunicator::~guicommunicator() {
@@ -101,7 +103,13 @@ void guicommunicator::createEvent(GUI_ELEMENT _event, GUI_VALUE_TYPE _type, std:
 	{
 		//MAKE REQUEST
 		httplib::Client cli(EVENT_URL_COMPLETE);
-		cli.Post(EVENT_URL_SETEVENT, tmp, "application/json");		
+		if(auto res = cli.Post(EVENT_URL_SETEVENT,tmp,"application/json")) {
+        const int status_code = res->status;
+        //CHECK STATUS CODE 200 IS VALID
+        const std::string body = res->body;
+		int i = 0;
+    	}
+    
 	}
     #ifndef USES_QT
     //MAKE REQUEST TO THE WEBAPPLICATION

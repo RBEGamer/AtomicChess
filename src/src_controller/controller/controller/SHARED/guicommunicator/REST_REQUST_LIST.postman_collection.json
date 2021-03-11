@@ -1,0 +1,110 @@
+{
+	"info": {
+		"_postman_id": "c8c7b35a-726c-43df-ba2d-ccbc7f22dfc6",
+		"name": "GUICOMMUNICATOR",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "SET_EVENT_QT",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\"{\\\"ack\\\": 1, \\\"event\\\": 39, \\\"is_event_valid\\\": false, \\\"ispageswitchevent\\\": 0, \\\"type\\\": 4, \\\"value\\\": \\\"\\\"}\"",
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/status",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET_VERSION_QT",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/version",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"version"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET_VERSION_CONTROLLER",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8001/version",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8001",
+					"path": [
+						"version"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SET_EVENT_CONTROLLER",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\"{\\\"ack\\\": 1, \\\"event\\\": 30, \\\"is_event_valid\\\": false, \\\"ispageswitchevent\\\": 0, \\\"type\\\": 4, \\\"value\\\": \\\"\\\"}\""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8001/status",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8001",
+					"path": [
+						"status"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
