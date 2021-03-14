@@ -1,146 +1,406 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-% Beispiel für eine Bachelorarbeit mit FH FB 8 Titelblattstyles
-%
-%	Prof. Enning, 18.07.2013
-%   Überarbeitet, 17.06.2014
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hypertarget{atomicchessos}{%
+\section{AtomicChessOS}\label{atomicchessos}}
 
-%%%%%%%%%%%%%% Präambel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\documentclass [
-% 	draft		% falls ohne Bilder gedruckt werden soll (Entwurf)
-	]{scrbook}	% KOMA Klasse für Bücher
-%
-\usepackage{fhacmb}	% Style-File für Titelblatt. Ggf. bei Enning holen
-%
-% Einstellen der Optionen für die KOMA Klasse
-\KOMAoptions{
-	parskip=true,		% Absätze mit Abstand
-	fontsize=12pt,		% Standardschriftgröße 
-	toc=flat,		% Inhaltsverzeichnis ohne Einzüge
-	twoside=false,		% Einseitig setzen
-	numbers=nodotatend,	% Nummerierungen nicht mit Punkt abschließen
-% die folgenden Optionen nehmen die entsprechende Dinge ins Inhaltsverzeichnis auf
-% mit der bei texlive vorhandenen aktuellen Version von pdflatex funkioniert es nicht mehr
-% (bekannter Bug)
-%	toc=bibliography,	% Literaturverzeichnis ins Inhaltsverzeichnis
-%	toc=listof,		% Abbildung- und Tabellenverzeichnis ins Inhaltsverzeichnis
-%	toc=index,		% Stichwortverzeichnis ins Inhaltsverzeichnis
-	}
-%
-%%%%%% Immer benötigte Packages
-%
-\usepackage[T1]{fontenc}		% sonst funktioniert die Silbentrennung bei Umlauten nicht
-\usepackage[utf8]{inputenc}	% Eingabedekodierung. Ermöglicht Umlaute. Achtung: Unbedingt mit Betreuer
-				% Verwendung der Umlaute-Eingabemethode absprechen. Im Zweifel \"O für Ö
-\usepackage[ngerman]{babel}	% Silbentrennung und Sprachanpassung
-\usepackage{blindtext}		% Blindtext
-\usepackage[hidelinks]{hyperref}		% Sprungmarken, z.B. im Inhaltsverzeichnis auf Textpassagen
-\usepackage{graphicx}		% Definiert o.a. \includegraphics
-\usepackage{textcomp}		% Sonst funktioniert z.B. \texteuro nicht
-\usepackage{scrlayer-scrpage}	% Package zum Definieren der Kopf- und Fußzeilen
-\usepackage{amsmath}		% Muss sein
-\usepackage{mathrsfs} 	% Weitere Mathematik-Symbole, z.B. Laplace-L
-%
-%%%%% Anpassung an Formatvorlagen des Fachbereichs
-%
-\usepackage{helvet}		% Serifenlose Schrift ähnlich Arial
-\renewcommand{\familydefault}{\sfdefault}	% als Standardschrift serifenlose Schrift verwenden
-%
-\usepackage{geometry} 		% Ränder direkt einstellen
-\geometry{a4paper, top=20mm, left=30mm, right=20mm, bottom=25mm} % nach Vorgabe
-\linespread{1.25} 		% Zeilenabstand nach Vorgabe
-%
-\usepackage{chngcntr}		% Ändert Verhalten von Countern
-\counterwithout{figure}{section}	% Figure-Nummerierung nicht bei section-Wechsel zurücksetzen
-\renewcommand{\thefigure}{\textbf\thechapter-\arabic{figure}}	% im Stil 3-2
-%
-%%%% für das Erzeugen von Grafiken mit Zeichenbefehlen
-%
-\usepackage{tikz}		% Grundpaket
-\usetikzlibrary{shapes,arrows}	% einige Symbolpackages
-\usepackage{tikz-cd}		% einige Symbolpackages
-%
-%%%%%% Gegebenenfalls nützliche Zusatzpackages
-%
-%\usepackage{blindtext}		% Blindtexte zum Ausprobieren von Formatierungen
-%\usepackage{color}		% Schriftfarben
-\usepackage{colortbl}		% für die Hintergrundfarbe von Tabellen
-%\usepackage{gensymb}		% Definiert Formelzeichen, die im math und im text-Modus gleich aussehen
-%\usepackage{wrapfig}		% Definiert die wrapfigure-Umgebung (Bild am Rand von Text umflossen)
-%\usepackage{pdfpages}		% Einbinden von pdf-Seiten
-%
-%\usepackage{booktabs} 		% Schöne Tabellen
-%\usepackage{tabu}	 	% Sehr einfach Tabellen gestalten
-%\usepackage{array} 		% Erweiterung der Tabellenumgebung, neue Spaltentypen
-\usepackage{paralist}		% Weitere Nummeriungsoptionen, z.b. alphabetisch für enumerate/itemize
-%\usepackage{verbatim}		% Verbesserte verbatim-Umgebung (z.b. Programm-Listings)
-%\usepackage{subfig}		% Unterfigures mit eigenen Bildunterschriften
-%
-%%%%%% Sammelsurium
-%
+\hypertarget{atc-controller}{%
+\section{ATC CONTROLLER}\label{atc-controller}}
 
-%
-%%%%%%%%%%  Angaben für Titelseite %%%%%%%%%%%%%%%%%%%%%%
-%
-\input{titelangaben}
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-\begin{document}
-% Einige Anpassungen müssen nach \begin{document} stehen !!
-\renewcaptionname{ngerman}{\figurename}{\textbf Bild} 	% Bild ... statt Abbildung ... 
-\renewcaptionname{ngerman}{\contentsname}{Inhalt}% Inhalt statt Inhaltsverzeichnis
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Titel im FH Style
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\fhacmbtitle{\includegraphics[height=4cm]{fh_logo}}{5pt}{5pt}
+The controller is the main system on the embedded device that controls
+the hardware of a ATC Table
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Erklärung / Geheimhaltung
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{itemize}
+\tightlist
+\item
+  Motor Control
+\item
+  Communcication with the Server
+\item
+  Communication with the UI running on the device
+\item
+  Chess Figure Movement Algorithm
+\end{itemize}
 
-%\frontmatter 	% Wenn der Hauptteil mit Seite 1 beginnen soll
-\pagestyle{plain}
-% \input{erklaerung}
+For this software component, we are using a Windows and Visual Studi
+environment for developing the software. Our embedded system is a linux
+device, so we have to build the application for the linux environment
+running on the emmbedded device. For this task, the prevously build
+buildroot toolchain is used. A software plugin called VisualGDB for
+Visual Studio, enable Visual Studio to use the linux toolchain over a
+remote linux system, in order to build and deploy the application.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Inhaltsverzeichnis
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hypertarget{requirements}{%
+\subsection{REQUIREMENTS}\label{requirements}}
 
-\tableofcontents
+\begin{itemize}
+\tightlist
+\item
+  windows pc for development
+\item
+  linux pc with buildroot toolchain
+\item
+  embedded system for deployment
+\end{itemize}
 
+\hypertarget{setup-a-project-using-visual-studio-and-visualgdb}{%
+\subsection{SETUP A PROJECT USING VISUAL STUDIO AND
+VisualGDB}\label{setup-a-project-using-visual-studio-and-visualgdb}}
 
-%\mainmatter	% Wenn der Hauptteil mit Seite 1 beginnen soll
-\pagestyle{scrheadings}
-%%%%%%%%%%%%%%% Anpassung des Seitenstils an FH-Layoutvorschrift %%%%%%%%%%%%
-\renewcommand{\chaptermark}[1]{\markboth{\thechapter\hspace{1cm}#1}{}}	% Kapitel für Headerzeile neu definieren (ohne Nummer)
-\chead{}		% Header Mitte löschen
-\ihead{\leftmark}	% Kapitelbezeichnung links setzen 
-\renewcommand{\headfont}{\bfseries}	% Bold-Font für Headerzeile verwenden
-\setheadsepline{0.5pt}
+\hypertarget{requirements-1}{%
+\subsubsection{REQUIREMENTS}\label{requirements-1}}
 
-% \input{aufgabenstellung}
-%\input{thesis_document.tex}
-% \input{kapitel2}
+On the development windows pc is the following software installed: *
+Windows 10 Pro x64 * Visual Studio 2019 (Community or Enterprise) *
+VisualGDB Plugin (Version 5.5, Linux Edition) * A SSH Client (MobaXterm
+Personal Edition) * git (Gitkraken)
 
-%% Verschiedene Versionen, nach DIN 1505 zu zitieren
-\bibliographystyle{plaindin}
-%\bibliographystyle{natdin}
-%\bibliographystyle{alphadin}
-%\bibliographystyle{unsrtdin}
+\hypertarget{linux-build-system}{%
+\subsubsection{LINUX BUILD SYSTEM}\label{linux-build-system}}
 
-% Die DIN 1505 Styles müssen ggf. nachinstalliert werden. Bei Texlive
-% heisst das Paket texlive-bibtex-extra
+On the linux build system, the VisualGSB plugin builds the project. The
+system is a \passthrough{\lstinline!Intel Nuc 10!}, mini pc, with a
+stock \passthrough{\lstinline!Ubuntu 20.04!} installed. One the machine
+are all package requirements for building the buildroot toolchain
+installed (see buildroot chapter).
 
-% Hier muss noch aufgeräumt werden. Nennung von URLs verbesserungsbedürftig. Ggf auf biblatex (statt bibtex) umsteigen
-\bibliography{book_reference}
+After cloning the repository
+\passthrough{\lstinline!$ git clone -b buildroot git@github.com:RBEGamer/AtomicChessOS.git ./atc\_buildroot!}
+and switched to the \passthrough{\lstinline!buildroot!} branch, the
+build process of the toolchain was invoked using the build script
+\passthrough{\lstinline!$ ./atc\_buildroot/src/src\_buildroot/buildroot/build.sh!}.
 
-\listoffigures
-\listoftables
+After building the toolchain is completed, the further configuration
+work can be done on the windows development pc. Its nessessary for the
+linux build system to allow SSH connections. Its may required to install
+the OpenSSHServer uisng
+\passthrough{\lstinline!$ sudo apt install openssh-server!}.
 
-\appendix
-% \input{anhang}
+The VisualGDB plugin requires some extra packages on the build pc:
 
-\end{document}
+\begin{itemize}
+\tightlist
+\item
+  \passthrough{\lstinline!$ sudo apt-get install socat!}
+\end{itemize}
+
+Now the configuration of the linux build pc for the VisualGDB plugin is
+complete. The next step, is the setup of the embedded system for
+deployment.
+
+\hypertarget{embedded-system-deployment}{%
+\subsubsection{EMBEDDED SYSTEM
+DEPLOYMENT}\label{embedded-system-deployment}}
+
+Afer building the sources into an executable, the final binaries will be
+copied to the embedded system. The embedded system is flashed with tha
+latest image build by buildroot.
+
+In order to setup the VisualGDB Project, its nessessary that the
+embedded device can be accessed over SSH.
+
+\hypertarget{makefile-modifications}{%
+\paragraph{MAKEFILE MODIFICATIONS}\label{makefile-modifications}}
+
+\begin{itemize}
+\tightlist
+\item
+  buildroot build oveerrides TARGETNAME AND CONFIG to load a different
+  makefile config in order to use the toolchain generated by buildroot
+  The different configurationa are stored in different .mk files that
+  will be includes by the Makefile. THe
+  \passthrough{\lstinline!debug.mk!} configuration contains theVisualGDB
+  Configuration that allows the Visual Studio Plugin to use the remote
+  toolchain on the linux server and can only build by over the visual
+  gdb plugin. The \passthrough{\lstinline!release.mk!} configuration is
+  used to build the controller apllication with the buildroot framework.
+  It used the compiler executable paths defines by \$CC. \$LD enviroment
+  variables and build the program with release flags and without any
+  debug symbols. All used libraries are linked staticly.
+\end{itemize}
+
+\hypertarget{third-party-libraries}{%
+\subsection{THIRD PARTY LIBRARIES}\label{third-party-libraries}}
+
+The ATC\_Controller software uses serveral different third party
+libraries, escacially for http requests and json parsing. *
+\passthrough{\lstinline!https://github.com/nlohmann/json#serialization--deserialization!},
+json parsing. *
+\passthrough{\lstinline!https://github.com/yhirose/cpp-httplib!},
+http/https requests. *
+\passthrough{\lstinline!https://github.com/Neargye/magic\_enum!}, enum
+handling. * \passthrough{\lstinline!https://github.com/emilk/loguru!} A
+copy of the used versions, are located in the controller software
+directory.
+
+\hypertarget{controller-overview}{%
+\section{CONTROLLER OVERVIEW}\label{controller-overview}}
+
+\hypertarget{motor-driver}{%
+\subsection{MOTOR DRIVER}\label{motor-driver}}
+
+\hypertarget{board-class}{%
+\subsection{BOARD CLASS}\label{board-class}}
+
+\hypertarget{chess-piece}{%
+\subsection{CHESS PIECE}\label{chess-piece}}
+
+\hypertarget{nfc-tag-content-generator}{%
+\subsubsection{NFC TAG CONTENT
+GENERATOR}\label{nfc-tag-content-generator}}
+
+Each figures NFC tag is ued to identify the figure. For easy usage of
+the NFC tag, it is formatted into the NDEF format, so its simply
+possible to program the NFC tags with an mobile phone. The tag contains
+a ndef \passthrough{\lstinline!text record!} with a string to identifiy
+the type of figure (three bits), color (one bit) and a counting number
+(four bits). A combination of all three attributes make the figures id
+unique to the system. For the automatic unique ID generation, a html
+page \passthrough{\lstinline!ChessFigureIDGenerator.html!} was created
+to automaticliy generate all ID for a complete chess board. Only one
+byte is stored in the record of the text record and so only 10bytes are
+used on the NFC tag.
+
+\begin{itemize}
+\tightlist
+\item
+  MSB {[}7,6,5,4,3,2,1,0{]} LSB
+\item
+  MSB {[}TYPE,TYPE,TYPE,COLOR,ID,ID,ID,ID{]} LSB
+\end{itemize}
+
+For reading the NFC tag with the PN532, the program only reads the first
+NDEF record and parses the text record data to get the figure type. With
+this system it is possible to expand the system further and store more
+data on the NFC tag, by adding more NDEF records.
+
+On the controller side two functions were created to generate the unique
+ids and read them back.
+
+\begin{lstlisting}[language={C++}]
+  ChessPiece::FIGURE fig;
+    fig.figure_number = 1;
+    fig.color = ChessPiece::COLOR_BLACK;
+    fig.type = ChessPiece::TYPE_KNIGHT;
+  
+  //GENERATE ID FROM STRUCT
+  uint8_t UNIQUE_ID = ChessPiece::figure2NDEF(fig);
+  
+  //PARSE UNIQUE_ID BACK TO A STRUCT
+  ChessPiece::FIGURE back = ChessPiece::NDEF2Figure(UNIQUE_ID);
+  
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  IMAGE
+\end{itemize}
+
+\hypertarget{config-and-calibration}{%
+\subsection{CONFIG AND CALIBRATION}\label{config-and-calibration}}
+
+The system uses a config file located in the filesystem
+\passthrough{\lstinline!/usr/ATC/atccontroller.ini!}.
+
+\hypertarget{calibration}{%
+\subsubsection{CALIBRATION}\label{calibration}}
+
+In order to calibrate the mechanic, several entries in the config file
+has to be changed.
+
+\begin{figure}
+\centering
+\includegraphics{./images/ATC_Calibration_Guide.png}
+\caption{MOCKUP\_MAIN\_MENU}
+\end{figure}
+
+\hypertarget{chess-piece-movement-algorithm}{%
+\subsubsection{Chess Piece Movement
+Algorithm}\label{chess-piece-movement-algorithm}}
+
+\begin{figure}
+\centering
+\includegraphics{./images/ATC_ChessMoveAlgorithm.png}
+\caption{MOCKUP\_MAIN\_MENU}
+\end{figure}
+
+\hypertarget{basic-movement-procedure}{%
+\paragraph{BASIC MOVEMENT PROCEDURE}\label{basic-movement-procedure}}
+
+*move \#\#\#\#\# BOARD \textless{}-\textgreater{} BOARD
+
+\hypertarget{park_position---board-board---park_positon}{%
+\subparagraph{PARK\_POSITION \textless{}-\textgreater{} BOARD
+\textbar{}\textbar{} BOARD \textless{}-\textgreater{}
+PARK\_POSITON}\label{park_position---board-board---park_positon}}
+
+\hypertarget{algorithm-improvements}{%
+\subparagraph{ALGORITHM IMPROVEMENTS}\label{algorithm-improvements}}
+
+\begin{itemize}
+\item
+  queue movement all movementinstructions needed for a move, send them
+  combinded to the motor driver
+\item
+  send coil change event only if changed, SPI Implementation needs time
+  (about 0.5 Secs with the wait ACK)
+\item
+\end{itemize}
+
+\hypertarget{piece-move-time}{%
+\paragraph{PIECE MOVE TIME}\label{piece-move-time}}
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule
+\begin{minipage}[b]{0.29\columnwidth}\raggedright
+ALGORITHM\_V1\_TRAVEL\_TIME {[}s{]}\strut
+\end{minipage} & \begin{minipage}[b]{0.29\columnwidth}\raggedright
+ALGORITHM\_V2\_TRAVEL\_TIME {[}s{]}\strut
+\end{minipage} & \begin{minipage}[b]{0.34\columnwidth}\raggedright
+TRAVEL\_DISTANCE {[}FIELDS\_DIAGONAL{]}\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.29\columnwidth}\raggedright
+7.20\strut
+\end{minipage} & \begin{minipage}[t]{0.29\columnwidth}\raggedright
+2.56\strut
+\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright
+1\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.29\columnwidth}\raggedright
+11.56\strut
+\end{minipage} & \begin{minipage}[t]{0.29\columnwidth}\raggedright
+6,20\strut
+\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright
+3\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.29\columnwidth}\raggedright
+12,27\strut
+\end{minipage} & \begin{minipage}[t]{0.29\columnwidth}\raggedright
+7,06\strut
+\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright
+5\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.29\columnwidth}\raggedright
+14,39\strut
+\end{minipage} & \begin{minipage}[t]{0.29\columnwidth}\raggedright
+6,56\strut
+\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright
+8\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{figure}
+\centering
+\includegraphics{./images/FigureMovementTims_GRAPH_COMP.PNG}
+\caption{MOCKUP\_MAIN\_MENU}
+\end{figure}
+
+\hypertarget{movement-speed-comarpision-hardware-v1-v2}{%
+\subsubsection{MOVEMENT SPEED COMARPISION HARDWARE V1 /
+V2}\label{movement-speed-comarpision-hardware-v1-v2}}
+
+\begin{itemize}
+\tightlist
+\item
+  gocde slower nicht
+\end{itemize}
+
+\hypertarget{linux-handling-different}{%
+\paragraph{{[}LINUX{]} HANDLING
+DIFFERENT}\label{linux-handling-different}}
+
+The simplified hardware design of the projects uses two USB2Serial
+adapters to connect the SKR1.3 Stepper Driver Board and the User-Move
+Dector with the Embedded System. All serial deives will be mount under
+the \passthrough{\lstinline!/dev/ttyXXX!} path and the the squence can
+be differ after each reboot. In order to prevent this, it is possible to
+mount a usb device with a Vendor and Product-ID to a specified path
+using a custom udev roule. For each rule, the Vendor and Product-ID is
+needed, for this commands like \passthrough{\lstinline!lsub!} or
+\passthrough{\lstinline!usb-devices!} and output the relevant
+information for each usb device attached.
+
+\begin{lstlisting}
+$ usb-devices
+
+T:  Bus=03 Lev=02 Prnt=02 Port=02 Cnt=03 Dev#= 11 Spd=12  MxCh= 0
+D:  Ver= 2.00 Cls=ef(misc ) Sub=02 Prot=01 MxPS=64 #Cfgs=  1
+P:  Vendor=1d50 ProdID=6029 Rev=01.00
+S:  Manufacturer=marlinfw.org 
+S:  Product=Marlin USB Device
+S:  SerialNumber=06FF800AAF3D08075C664F58F50020C3
+C:  #Ifs= 3 Cfg#= 1 Atr=80 MxPwr=500mA
+I:  If#=0x0 Alt= 0 #EPs= 1 Cls=02(commc) Sub=02 Prot=00 Driver=cdc_acm
+I:  If#=0x1 Alt= 0 #EPs= 2 Cls=0a(data ) Sub=00 Prot=00 Driver=cdc_acm
+I:  If#=0x2 Alt= 0 #EPs= 2 Cls=08(stor.) Sub=06 Prot=50 Driver=usb-storage
+\end{lstlisting}
+
+During development, several different board are used to control the
+different hardware sections. These can be divided into two main groups :
+
+\begin{itemize}
+\tightlist
+\item
+  \passthrough{\lstinline!Stepper-Controller!} - For controlling the
+  Stpper-Drivers, Endstop, Coils/Servo
+\item
+  \passthrough{\lstinline!User-Move-Detector!} - To interface the
+  hall-sensor array, to detect a manual move of the figures.
+\end{itemize}
+
+In the following table, the Vendor/Product-IDs from some tested boards
+are listed below:
+
+\begin{longtable}[]{@{}llllll@{}}
+\toprule
+Product & SUBSYSTEM & Vendor-ID & Product-ID & SYMLINK &
+Board-Type\tabularnewline
+\midrule
+\endhead
+Bigtreetech SKR 1.4 Turbo & tty & 1d50 & 6029 & ttySKR &
+Stepper-Controller\tabularnewline
+Bigtreetech SKR 1.3 & tty & 1d50 & 6029 & ttySKR &
+Stepper-Controller\tabularnewline
+Arduino Due {[}Programming Port{]} & tty & 2341 & 003d & ttyUBC &
+User-Move-Detector\tabularnewline
+Arduino Due {[}Native SAMX3 Port{]} & tty & 2341 & 003e & ttyUBC &
+User-Move-Detector\tabularnewline
+CH340 & tty & 1a86 & 7523 & ttyUBC & User-Move-Detector\tabularnewline
+HL-340 & tty & 1a86 & 7523 & ttyUBC & User-Move-Detector\tabularnewline
+STM32F411 & tty & 0483 & 5740 & ttyUBC &
+User-Move-Detector\tabularnewline
+\bottomrule
+\end{longtable}
+
+With these information, is is possible to generate the needed udev
+rules.
+
+\begin{lstlisting}
+$ cat /etc/udev/rules.d/50-usb.rules
+
+...
+SUBSYSTEM=="tty", ATTRS{idVendor}=="1d50", ATTRS{idProduct}=="6029", SYMLINK+="ttySKR"
+...
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="5740", SYMLINK+="ttyUBC"
+...
+\end{lstlisting}
+
+This configuration archieves, that any type (of supported)
+Stepper-Controller-Boards are accessable over the
+\passthrough{\lstinline!/dev/ttySKR!} symblink.
+
+After the installation of the rules and connection of a SKR1.3 and a
+STM32F411 (known as STM32-BlackPill), the device directory contains the
+following entires:
+
+\begin{lstlisting}
+ls /dev/tty*
+
+/dev/ttyS27  /dev/ttyS6
+/dev/ttyUSB0  /dev/ttyACMA0  /dev/tty25  /dev/tty32  /dev/tty4  /dev/ttyprintk  /dev/ttySKR  /dev/ttyUBC
+\end{lstlisting}
+
+The in the configutation file of the controller file, these tty paths
+are set and no reconfiguration for different hardware configuration is
+needed.
