@@ -13,5 +13,5 @@
 * src_server => Contains the complete game server, player ai server and the CI setup
 * src_shared => Contains all used 3rd party libraries and the custom made IPC library (guicommunicator)
 * src_thesis => Contains the thesis document and a thesis publishing server
-
+* src_unitychesssimulation => Contains a chess figure movement algorithm playground, made in Unity
 
