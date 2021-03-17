@@ -1,8 +1,7 @@
 
-\documentclass[
-  paper=a4,
-  ,captions=tableheading
-]{scrbook}
+\documentclass [
+% 	draft		% falls ohne Bilder gedruckt werden soll (Entwurf)
+	]{scrbook}	% KOMA Klasse für Bücher
 
 %%MOD%%
 \usepackage{fhacmb}	% Style-File für Titelblatt. Ggf. bei Enning holen
@@ -23,90 +22,26 @@
 %
 
 \usepackage{amsmath,amssymb}
-\usepackage{lmodern}
-\usepackage{setspace}
-\setstretch{1.2}
-\usepackage{ifxetex,ifluatex}
-\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
-  \usepackage[T1]{fontenc}
-  \usepackage[utf8]{inputenc}
-  \usepackage{textcomp} % provide euro and other symbols
-\else % if luatex or xetex
-  \usepackage{unicode-math}
-  \defaultfontfeatures{Scale=MatchLowercase}
-  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
-\fi
-% Use upquote if available, for straight quotes in verbatim environments
-\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
-\IfFileExists{microtype.sty}{% use microtype if available
-  \usepackage[]{microtype}
-  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
-}{}
-\makeatletter
-\@ifundefined{KOMAClassName}{% if non-KOMA class
-  \IfFileExists{parskip.sty}{%
-    \usepackage{parskip}
-  }{% else
-    \setlength{\parindent}{0pt}
-    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
-}{% if KOMA class
-  \KOMAoptions{parskip=half}}
-\makeatother
-\usepackage{xcolor}
-\definecolor{default-linkcolor}{HTML}{A50000}
-\definecolor{default-filecolor}{HTML}{A50000}
-\definecolor{default-citecolor}{HTML}{4077C0}
-\definecolor{default-urlcolor}{HTML}{4077C0}
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-%%MOD%%
-%\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
-%\hypersetup{
-%  hidelinks,
-%  breaklinks=true,
-%  pdfcreator={}} %%MOD%%
-\urlstyle{same} % disable monospaced font for URLs
-
-
-%%MOD%%
-%\usepackage[margin=2.5cm,includehead=true,includefoot=true,centering,]{geometry}
 
 
 
-\usepackage{listings}
-\newcommand{\passthrough}[1]{#1}
-\lstset{defaultdialect=[5.3]Lua}
-\lstset{defaultdialect=[x86masm]Assembler}
-% add backlinks to footnote references, cf. https://tex.stackexchange.com/questions/302266/make-footnote-clickable-both-ways
-\usepackage{footnotebackref}
-\usepackage{graphicx}
-\makeatletter
-\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
-\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
-\makeatother
-% Scale images if necessary, so that they will not overflow the page
-% margins by default, and it is still possible to overwrite the defaults
-% using explicit options in \includegraphics[width, height, ...]{}
-\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-% Set default figure placement to htbp
-\makeatletter
-\def\fps@figure{htbp}
-\makeatother
-\setlength{\emergencystretch}{3em} % prevent overfull lines
+\IfFileExists{xcolor.sty}{
+    \RequirePackage{xcolor}
+}{
+    \RequirePackage{color}
+}
+
+
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+  
+  
 
-% Make use of float-package and set default placement for figures to H.
-% The option H means 'PUT IT HERE' (as  opposed to the standard h option which means 'You may put it here if you like').
-\usepackage{float}
-\floatplacement{figure}{H}
+\usepackage{footnotebackref}
+\usepackage{graphicx}
 
-\ifluatex
-  \usepackage{selnolig}  % disable illegal ligatures
-\fi
 
-\author{}
-\date{}
+
 
 
 
@@ -138,333 +73,23 @@
 %
 \usepackage{csquotes}
 
-%
-% captions
-%
-\definecolor{caption-color}{HTML}{777777}
-\usepackage[font={stretch=1.2}, textfont={color=caption-color}, position=top, skip=4mm, labelfont=bf, singlelinecheck=false, justification=raggedright]{caption}
-\setcapindent{0em}
-
-%
-% blockquote
-%
-\definecolor{blockquote-border}{RGB}{221,221,221}
-\definecolor{blockquote-text}{RGB}{119,119,119}
-\usepackage{mdframed}
-\newmdenv[rightline=false,bottomline=false,topline=false,linewidth=3pt,linecolor=blockquote-border,skipabove=\parskip]{customblockquote}
-\renewenvironment{quote}{\begin{customblockquote}\list{}{\rightmargin=0em\leftmargin=0em}%
-\item\relax\color{blockquote-text}\ignorespaces}{\unskip\unskip\endlist\end{customblockquote}}
-
-%
-% Source Sans Pro as the de­fault font fam­ily
-% Source Code Pro for monospace text
-%
-% 'default' option sets the default
-% font family to Source Sans Pro, not \sfdefault.
-%
-\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
-    \usepackage[default]{sourcesanspro}
-  \usepackage{sourcecodepro}
-  \else % if not pdftex
-    \usepackage[default]{sourcesanspro}
-  \usepackage{sourcecodepro}
-
-  % XeLaTeX specific adjustments for straight quotes: https://tex.stackexchange.com/a/354887
-  % This issue is already fixed (see https://github.com/silkeh/latex-sourcecodepro/pull/5) but the
-  % fix is still unreleased.
-  % TODO: Remove this workaround when the new version of sourcecodepro is released on CTAN.
-  \ifxetex
-    \makeatletter
-    \defaultfontfeatures[\ttfamily]
-      { Numbers   = \sourcecodepro@figurestyle,
-        Scale     = \SourceCodePro@scale,
-        Extension = .otf }
-    \setmonofont
-      [ UprightFont    = *-\sourcecodepro@regstyle,
-        ItalicFont     = *-\sourcecodepro@regstyle It,
-        BoldFont       = *-\sourcecodepro@boldstyle,
-        BoldItalicFont = *-\sourcecodepro@boldstyle It ]
-      {SourceCodePro}
-    \makeatother
-  \fi
-  \fi
-
-%
-% heading color
-%
-\definecolor{heading-color}{RGB}{40,40,40}
-\addtokomafont{section}{\color{heading-color}}
-% When using the classes report, scrreprt, book,
-% scrbook or memoir, uncomment the following line.
-%\addtokomafont{chapter}{\color{heading-color}}
 
 %
 % variables for title, author and date
 %
 \usepackage{titling}
-\title{}
-\author{}
-\date{}
 
-%
-% tables
-%
 
-%
-% remove paragraph indention
-%
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{6pt plus 2pt minus 1pt}
-\setlength{\emergencystretch}{3em}  % prevent overfull lines
 
-%
-%
-% Listings
-%
-%
 
 
 %
-% general listing colors
+% ADD SYNTAX HIGHLIGHTING
 %
-\definecolor{listing-background}{HTML}{F7F7F7}
-\definecolor{listing-rule}{HTML}{B3B2B3}
-\definecolor{listing-numbers}{HTML}{B3B2B3}
-\definecolor{listing-text-color}{HTML}{000000}
-\definecolor{listing-keyword}{HTML}{435489}
-\definecolor{listing-keyword-2}{HTML}{1284CA} % additional keywords
-\definecolor{listing-keyword-3}{HTML}{9137CB} % additional keywords
-\definecolor{listing-identifier}{HTML}{435489}
-\definecolor{listing-string}{HTML}{00999A}
-\definecolor{listing-comment}{HTML}{8E8E8E}
-
-\lstdefinestyle{eisvogel_listing_style}{
-  language         = java,
-  numbers          = left,
-  xleftmargin      = 2.7em,
-  framexleftmargin = 2.5em,
-  backgroundcolor  = \color{listing-background},
-  basicstyle       = \color{listing-text-color}\linespread{1.0}\small\ttfamily{},
-  breaklines       = true,
-  frame            = single,
-  framesep         = 0.19em,
-  rulecolor        = \color{listing-rule},
-  frameround       = ffff,
-  tabsize          = 4,
-  numberstyle      = \color{listing-numbers},
-  aboveskip        = 1.0em,
-  belowskip        = 0.1em,
-  abovecaptionskip = 0em,
-  belowcaptionskip = 1.0em,
-  keywordstyle     = {\color{listing-keyword}\bfseries},
-  keywordstyle     = {[2]\color{listing-keyword-2}\bfseries},
-  keywordstyle     = {[3]\color{listing-keyword-3}\bfseries\itshape},
-  sensitive        = true,
-  identifierstyle  = \color{listing-identifier},
-  commentstyle     = \color{listing-comment},
-  stringstyle      = \color{listing-string},
-  showstringspaces = false,
-  escapeinside     = {/*@}{@*/}, % Allow LaTeX inside these special comments
-  literate         =
-  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
-  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
-  {à}{{\`a}}1 {è}{{\'e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
-  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
-  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
-  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
-  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
-  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
-  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
-  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
-  {€}{{\EUR}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
-  {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
-  {…}{{\ldots}}1 {≥}{{>=}}1 {≤}{{<=}}1 {„}{{\glqq}}1 {“}{{\grqq}}1
-  {”}{{''}}1
-}
-\lstset{style=eisvogel_listing_style}
-
-%
-% Java (Java SE 12, 2019-06-22)
-%
-\lstdefinelanguage{Java}{
-  morekeywords={
-    % normal keywords (without data types)
-    abstract,assert,break,case,catch,class,continue,default,
-    do,else,enum,exports,extends,final,finally,for,if,implements,
-    import,instanceof,interface,module,native,new,package,private,
-    protected,public,requires,return,static,strictfp,super,switch,
-    synchronized,this,throw,throws,transient,try,volatile,while,
-    % var is an identifier
-    var
-  },
-  morekeywords={[2] % data types
-    % primitive data types
-    boolean,byte,char,double,float,int,long,short,
-    % String
-    String,
-    % primitive wrapper types
-    Boolean,Byte,Character,Double,Float,Integer,Long,Short
-    % number types
-    Number,AtomicInteger,AtomicLong,BigDecimal,BigInteger,DoubleAccumulator,DoubleAdder,LongAccumulator,LongAdder,Short,
-    % other
-    Object,Void,void
-  },
-  morekeywords={[3] % literals
-    % reserved words for literal values
-    null,true,false,
-  },
-  sensitive,
-  morecomment  = [l]//,
-  morecomment  = [s]{/*}{*/},
-  morecomment  = [s]{/**}{*/},
-  morestring   = [b]",
-  morestring   = [b]',
-}
-
-\lstdefinelanguage{C++}{
-  morekeywords={
-    % normal keywords (without data types)
-    abstract,assert,break,case,catch,class,continue,default,
-    do,else,enum,exports,extends,final,finally,for,if,implements,
-    import,instanceof,interface,module,native,new,package,private,
-    protected,public,requires,return,static,strictfp,super,switch,
-    synchronized,this,throw,throws,transient,try,volatile,while,
-    const,this,template,struct,union,volatile,auto,inline,noexcept,not_eq,
-    const_cast,extern,namespace,mutable,reflexpr,reinterpret_cast,
-    static_cast,throw,typedef,typeid,wchar_t,xor_eq,or_eq,asm,std
-    % var is an identifier
-    var
-  },
-  morekeywords={[2] % data types
-    % primitive data types
-    bool,char,int,float,double,void,wchar_t,string,short,signed,long,unsigned
-  },
-  morekeywords={[3] % literals
-    % reserved words for literal values
-    null,true,false,
-  },
-  sensitive,
-  morecomment  = [l]//,
-  morecomment  = [s]{/*}{*/},
-  morecomment  = [s]{/**}{*/},
-  morestring   = [b]",
-  morestring   = [b]',
-}
-
-\lstdefinelanguage{QML}{
-  morekeywords={
-    % normal keywords (without data types)
-    default,required,readonly,property,function,
-    import,qsTr,delegate
-  },
-  morekeywords={[2] % data types
-    % primitive data types
-    QtQuick,TextInput,Text,Connections,Rectangle,Item,Button,MenuManager,
-    Image,BusyIndicator,GraphChart,ListView,AnimatedImage,Flickable,TextEdit,
-    BorderImage,FocusScope,MouseArea,CheckBox,CheckDelegate,ComboBox,DelayButton,Dial,
-    Frame,GroupBox,ItemDelegate,Label,Page,PageIndicator,Pane,ProgressBar,
-    RadioButton,RadioDelegate,RangeSlider,RoundButton,ScrollView,Slider,SpinBox,StackView,
-    SwipeDelegate,SwipeView,Switch,SwitchDelegate,TabBar,TabButton,TextArea,TextField,ToolBar,
-    ToolButton,ToolSeperator,Tumbler,ColumnLayout,GridLayout,RowLayout,StackLayout,
-    Column,Flow,Grid,Row,GridView,ListView,PathView,
-    ColorAnimation,NumberAnimation,ParallelAnimation,PauseAnimation,PropertyAction,PropertyAnimation,
-    ScriptAction,SequentialAnimation
-  },
-  morekeywords={[3] % literals
-    % reserved words for literal values
-    null,true,false,id,x,y,width,height,color,visible,objectName,target,
-    horizontalAlignment,wrapMode,change,value´
-  },
-  sensitive,
-  morecomment  = [l]//,
-  morecomment  = [s]{/*}{*/},
-  morecomment  = [s]{/**}{*/},
-  morestring   = [b]",
-  morestring   = [b]',
-}
-
-
-\lstdefinelanguage{JavaScript}{
-  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
-  %keywordstyle=\color{blue}\bfseries,
-  ndkeywords={class, export, boolean, throw, implements, import, this},
-  %ndkeywordstyle=\color{darkgray}\bfseries,
-  %identifierstyle=\color{black},
-  sensitive=false,
-  comment=[l]{//},
-  morecomment=[s]{/*}{*/},
-  %commentstyle=\color{purple}\ttfamily,
-  %stringstyle=\color{red}\ttfamily,
-  morestring=[b]',
-  morestring=[b]"
-}
-
-\usepackage{xcolor}
-\colorlet{punct}{red!60!black}
-\definecolor{background}{HTML}{EEEEEE}
-\definecolor{delim}{RGB}{20,105,176}
-\colorlet{numb}{magenta!60!black}
-\lstdefinelanguage{JSON}{
-    basicstyle=\normalfont\ttfamily,
-    numbers=left,
-    %numberstyle=\scriptsize,
-    %stepnumber=1,  
-    %showstringspaces=false,
-    breaklines=true,
-    literate=
-     *{0}{{{\color{numb}0}}}{1}
-      {1}{{{\color{numb}1}}}{1}
-      {2}{{{\color{numb}2}}}{1}
-      {3}{{{\color{numb}3}}}{1}
-      {4}{{{\color{numb}4}}}{1}
-      {5}{{{\color{numb}5}}}{1}
-      {6}{{{\color{numb}6}}}{1}
-      {7}{{{\color{numb}7}}}{1}
-      {8}{{{\color{numb}8}}}{1}
-      {9}{{{\color{numb}9}}}{1}
-      {:}{{{\color{punct}{:}}}}{1}
-      {,}{{{\color{punct}{,}}}}{1}
-      {\{}{{{\color{delim}{\{}}}}{1}
-      {\}}{{{\color{delim}{\}}}}}{1}
-      {[}{{{\color{delim}{[}}}}{1}
-      {]}{{{\color{delim}{]}}}}{1},
-}
+\input{syntax_highlight}
 
 
 
-\lstdefinelanguage{XML}{
-  morestring      = [b]",
-  moredelim       = [s][\bfseries\color{listing-keyword}]{<}{\ },
-  moredelim       = [s][\bfseries\color{listing-keyword}]{</}{>},
-  moredelim       = [l][\bfseries\color{listing-keyword}]{/>},
-  moredelim       = [l][\bfseries\color{listing-keyword}]{>},
-  morecomment     = [s]{<?}{?>},
-  morecomment     = [s]{<!--}{-->},
-  commentstyle    = \color{listing-comment},
-  stringstyle     = \color{listing-string},
-  identifierstyle = \color{listing-identifier}
-}
-
-%
-% header and footer
-%
-\usepackage[headsepline,footsepline]{scrlayer-scrpage}
-
-\newpairofpagestyles{eisvogel-header-footer}{
-  \clearpairofpagestyles
-  \ihead[]{}
-  \chead[]{}
-  \ohead[]{}
-  \ifoot[\thepage]{}
-  \cfoot[]{}
-  \ofoot[]{\thepage}
-  \addtokomafont{pageheadfoot}{\upshape}
-}
-\pagestyle{eisvogel-header-footer}
-
-%%
-%% end added
-%%
 
 %%%%%% Immer benötigte Packages
 %
@@ -488,7 +113,7 @@
 
 \usepackage{textcomp}		% Sonst funktioniert z.B. \texteuro nicht
 \usepackage{scrlayer-scrpage}	% Package zum Definieren der Kopf- und Fußzeilen
-\usepackage{amsmath}		% Muss sein
+\usepackage{amsmath,amssymb}		% Muss sein
 \usepackage{mathrsfs} 	% Weitere Mathematik-Symbole, z.B. Laplace-L
 %
 %%%%% Anpassung an Formatvorlagen des Fachbereichs
@@ -510,28 +135,41 @@
 \usetikzlibrary{shapes,arrows}	% einige Symbolpackages
 \usepackage{tikz-cd}		% einige Symbolpackages
 
+%
+%%%% TABELLEN
+%
+\usepackage{colortbl}		% für die Hintergrundfarbe von Tabellen
+\usepackage{paralist}		% Weitere Nummeriungsoptionen, z.b. alphabetisch für enumerate/itemize
+
 \usepackage{longtable}% FOR PANDOC TABLE GENERATOR
 \usepackage{booktabs} % FOR TOPRULE MIDRULE
 
 
+%
+%%%% UNORDERED LISTS
+%
+\renewcommand{\labelitemii}{$\circ$} % Bullets für itemize-Listen
 
 
-%\setkeys{Gin}%{width=\ScaleWidthIfNeeded,height=\ScaleHeightIfNeeded,keepaspectratio}%
 
-%%MOD%%
-
-\usepackage{helvet}		% Serifenlose Schrift ähnlich Arial
-\renewcommand{\familydefault}{\sfdefault}	% als Standardschrift serifenlose Schrift verwenden
-
-
+%
+%%%% PAGE AND FIGURE NUMBERING
+%
 \usepackage{chngcntr}		% Ändert Verhalten von Countern
 \counterwithout{figure}{section}	% Figure-Nummerierung nicht bei section-Wechsel zurücksetzen
 \renewcommand{\thefigure}{\textbf\thechapter-\arabic{figure}}	% im Stil 3-2
 
-\usepackage{colortbl}		% für die Hintergrundfarbe von Tabellen
-\usepackage{paralist}		% Weitere Nummeriungsoptionen, z.b. alphabetisch für enumerate/itemize
-\usepackage{verbatim}		% Verbesserte verbatim-Umgebung (z.b. Programm-Listings)
 %\usepackage{subfig}		% Unterfigures mit eigenen Bildunterschriften
+
+
+
+%
+%%%% acronyms
+%
+\input{acronyms}
+%%%%%%%%%%%%%%%%%%%%%% ADD ACRONYM ENTRIES HERE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 
 
 
@@ -541,7 +179,13 @@
 %
 \input{thesis_titleinformation}
 
+
+
+
+
 \begin{document}
+
+
 
 %%MOD%%
 % Einige Anpassungen müssen nach \begin{document} stehen !!
@@ -554,30 +198,34 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Erklärung / Geheimhaltung
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\frontmatter 	% Wenn der Hauptteil mit Seite 1 beginnen soll
+%\frontmatter 	% Wenn der Hauptteil mit Seite 1 beginnen soll
 \pagestyle{plain}
+
+\frontmatter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Erklaerung
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+
+\input{declaration}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % ABSTRACT
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
-\input{abstract}
-\newpage
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Erklaerung
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newpage
-\input{declaration}
-\newpage
+\input{abstract}
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Inhaltsverzeichnis
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newpage
 \tableofcontents
-\newpage
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CONTENT
@@ -596,36 +244,40 @@
 \input{thesis_document}
 
 
-Wenn Sie auf Quellen, wie z.B. diese Webreferenz \cite{Bohner2001} oder auch dieses Buch \cite{Murrenhoff} verweisen, erscheinen die entsprechenden Titel perfekt formatiert im Literaturverzeichnis.
-
-Damit alle Referenzen stimmen, muss man ggf. pdflatex und bibtex mehrfach aufrufen. Sicher ist die folgende Reihenfolge
-\begin{enumerate}
-\item pdflatex. Erzeugt die *.aux-Datei, die bibtex benötigt
-\item bibtex. Erzeugt Dateien, die pdflatex einbindet
-\item pdflatex
-\item pdflatex (Ggf. auf Fehlermeldungen schauen. Nach dem zweiten Lauf sollte alles okay sein)
-\end{enumerate}
 
 
 
 
 
 
-
-
-\medskip
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% REFERENZEN
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Verschiedene Versionen, nach DIN 1505 zu zitieren
 \bibliographystyle{plaindin}
 \bibliography{thesis_references}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ACRONYM VERZEICHNIS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\printglossaries
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ABBILDUNGSVERZEICHNIS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \listoffigures
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ABBILDUNGSVERZEICHNIS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \listoftables
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ANHANG
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
-\appendix
+\appendix % ANHANG EINLEITEN
 \input{attachments}
 
 
