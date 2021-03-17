@@ -1,0 +1,151 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage{listings}
+\newcommand{\passthrough}[1]{#1}
+\lstset{defaultdialect=[5.3]Lua}
+\lstset{defaultdialect=[x86masm]Assembler}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\author{}
+\date{}
+
+
+
+
+
+
+
+\begin{document}
+
+
+
+
+% Einige Anpassungen müssen nach \begin{document} stehen !!
+\renewcaptionname{ngerman}{\figurename}{\textbf Bild} 	% Bild ... statt Abbildung ... 
+\renewcaptionname{ngerman}{\contentsname}{Inhalt}% Inhalt statt Inhaltsverzeichnis
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Titel im FH Style
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\fhacmbtitle{\includegraphics[height=4cm]{fh_logo}}{5pt}{5pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Erklärung / Geheimhaltung
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\frontmatter 	% Wenn der Hauptteil mit Seite 1 beginnen soll
+\pagestyle{plain}
+% \input{erklaerung}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Inhaltsverzeichnis
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\tableofcontents
+
+
+%\mainmatter	% Wenn der Hauptteil mit Seite 1 beginnen soll
+\pagestyle{scrheadings}
+%%%%%%%%%%%%%%% Anpassung des Seitenstils an FH-Layoutvorschrift %%%%%%%%%%%%
+\renewcommand{\chaptermark}[1]{\markboth{\thechapter\hspace{1cm}#1}{}}	% Kapitel für Headerzeile neu definieren (ohne Nummer)
+\chead{}		% Header Mitte löschen
+\ihead{\leftmark}	% Kapitelbezeichnung links setzen 
+\renewcommand{\headfont}{\bfseries}	% Bold-Font für Headerzeile verwenden
+\setheadsepline{0.5pt}
+
+
+
+
+
+
+\hypertarget{kapitel}{%
+\section{KAPITEL}\label{kapitel}}
+
+sd fsfcsaf
+
+\hypertarget{sun-kaptile}{%
+\subsection{SUN KAPTILE}\label{sun-kaptile}}
+
+asdasdad asfsdfsdfdscsafc
+
+\begin{itemize}
+\tightlist
+\item
+  A
+\item
+  B
+\item
+  C
+\end{itemize}
+
+
+
+
+%% Verschiedene Versionen, nach DIN 1505 zu zitieren
+\bibliographystyle{plaindin}
+%\bibliographystyle{natdin}
+%\bibliographystyle{alphadin}
+%\bibliographystyle{unsrtdin}
+
+% Die DIN 1505 Styles müssen ggf. nachinstalliert werden. Bei Texlive
+% heisst das Paket texlive-bibtex-extra
+
+% Hier muss noch aufgeräumt werden. Nennung von URLs verbesserungsbedürftig. Ggf auf biblatex (statt bibtex) umsteigen
+\bibliography{book_reference}
+
+\listoffigures
+\listoftables
+
+\appendix
+% \input{anhang}
+
+
+
+
+
+
+\end{document}
