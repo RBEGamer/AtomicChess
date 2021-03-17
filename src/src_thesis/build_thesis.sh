@@ -11,4 +11,14 @@ pandoc "attachments.md" -o "attachments.tex" --from markdown
 pdflatex thesis.tex thesis.pdf
 pdflatex thesis.tex thesis.pdf
 pdflatex thesis.tex thesis.pdf
+
+
+rm -f *.aux
+rm -f *.lof
+rm -f *.lot
+rm -f *.aux
+rm -f *.out
+rm -f *.toc
+rm -f *.log
+rm -f *.synctex.gz
 exit 0
