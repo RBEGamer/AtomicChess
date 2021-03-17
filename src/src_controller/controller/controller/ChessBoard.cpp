@@ -848,6 +848,8 @@ bool ChessBoard::syncRealWithTargetBoard_not_empty() {
 	return false;
 }
 
+
+//-------------- TODO EACH STEP IN ITS OWN LOOP ------------------- //
 bool ChessBoard::syncRealWithTargetBoard_add_remove_empty() {
 
 	//USE MAKE MOVE TO GENERATE A MOVE LIST THEN EXECUTE THE MOVES
@@ -880,14 +882,7 @@ bool ChessBoard::syncRealWithTargetBoard_add_remove_empty() {
 			it++;
 			continue;
 		}
-		
-		
-		
-		
-		
-		
-		
-		//
+
 		//1. FIELDS ARE NOT EMPTY
 		if(!diff.at(it).field_curr.figure.is_empty && !diff.at(it).field_target.figure.is_empty)
 		{
@@ -926,10 +921,11 @@ bool ChessBoard::syncRealWithTargetBoard_add_remove_empty() {
 				//}
 			}
 		}
-		
+    }
 		
 		//ONE TARGET FIELD IS NOT EMPTY AND ONE OTHER FIELD THE CURRENT FIELD IS NOT EMPTY
 		//AND THE FIGURE ARE THE SAME
+    for (size_t it = 0; it < diff.size(); it++) {
 		if(diff.at(it).field_curr.figure.is_empty && !diff.at(it).field_target.figure.is_empty && !ChessPiece::compareFigures(diff.at(it).field_curr.figure, diff.at(it).field_target.figure))
 		{
 			
@@ -947,7 +943,8 @@ bool ChessBoard::syncRealWithTargetBoard_add_remove_empty() {
 				break;
 			}
 		}
-		
+    }
+    for (size_t it = 0; it < diff.size(); it++) {
 		//MOVE FIGURE OUT OF THE FIELD
 		if(!diff.at(it).field_curr.figure.is_empty && diff.at(it).field_target.figure.is_empty)
 		{
@@ -959,6 +956,8 @@ bool ChessBoard::syncRealWithTargetBoard_add_remove_empty() {
 				break;
 			}
 		}
+    }
+    for (size_t it = 0; it < diff.size(); it++) {
 		//MOVE FIGURE INTO THE FIELD
 		if(diff.at(it).field_curr.figure.is_empty && !diff.at(it).field_target.figure.is_empty)
 		{
@@ -970,7 +969,7 @@ bool ChessBoard::syncRealWithTargetBoard_add_remove_empty() {
 				break;
 			}
 		}
-	}
+    }
 	
 	volatile bool move_made = false;
 	if (move_list.size() > 0)
