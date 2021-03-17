@@ -1,0 +1,183 @@
+\chapter{Einführung} 
+\section{Was ganz Allgemeines}
+\subsection{Welche Dateien braucht man wirklich?}
+Ein Compilerlauf erzeugt eine Unmenge Dateien. Die meisten integrierten Tex-Umgebungen bieten einen Befehl zum Aufräumen, der alles löscht, was nicht zu Ihrem Projekt gehört.
+
+Folgende Dateien dürfen nie gelöscht werden
+
+\begin{tabu}{|X[0.5] | X[3] |}
+\hline
+\rowfont{\bfseries} Endung & Inhalt \\
+\hline
+tex & Ihre Tex-Quelldateien\\
+bib & Ihre Literaturdatenbank(en)\\
+\hline
+\end{tabu}
+und natürlich alles an Material (Bilder etc.), was Sie einbinden. Fast alle anderen Dateien dürfen (und sollten gelegentlich) entsorgt werden, insbesondere
+
+\begin{tabu}{|X[0.5] | X[3] |}
+\hline
+\rowfont{\bfseries} Endung & Inhalt \\
+\hline
+aux & Hilfsdateien\\
+toc & Erzeugte Verzeichnisse\\
+lot & \\
+lof & \\
+out & \\
+blg & Log-Datei des Bibtex-Laufs \\
+log & Log-Datei des pdflatex-Laufs\\
+\hline
+\end{tabu}
+
+
+\subsection{Was ist eigentlich Blindtext?}
+
+\blindtext
+\subsection{Wie macht man Aufzählungen?}
+Zum Beispiel als
+\begin{itemize}
+\item einfache
+\item unnummerierte
+\item Liste
+\end{itemize}
+
+oder auch als numerierte Liste mit
+\begin{enumerate}
+\item Erstens
+\item Zweitens 
+\item Drittens
+\end{enumerate}
+
+Sie können auch
+\begin{enumerate}[a)]
+\item ganz
+\item anders 
+\item nummerieren
+\end{enumerate}
+
+\section{Tabelle}
+\subsection{Ein Buch mit sieben Siegeln}
+
+Es gibt eine unüberschaubare Menge an Styles für Tabellen. Den einfachsten Einstieg erhalten Sie, wenn Sie nicht die tabular-Umgebung, sondern die tabu-Umgebung verwenden. Hier ein Beispiel, Tabelle \ref{tabelle1}.
+
+\begin{table}
+\caption{Tabellen beschriftet man \underline{oberhalb}}
+\label{tabelle1}
+\tabulinesep=3pt  % ein bisschen Platz schaffen
+\begin{tabu} to 0.8\textwidth {| X[0.5c] | X[2r] | X[3l]|}
+\hline
+\rowfont{\bfseries} Nr & Aktion & Formel\\ 
+\hline
+1 & Bachelorarbeit schreiben &
+$G(s) = \frac{1}{(s-s_p)^n}$
+\\\hline
+2 & Heiraten &
+$G(s) = \frac{s\omega_0^2}{s^2+2D\omega_0 s + \omega_0^2}$ 
+\\\hline
+3 & Baum pflanzen &
+$F(s) = \mathscr L \{f (t)\} = \int\limits_0^{\infty} f (t) \, e^{-s t} \text{d}t$
+\\
+\hline
+\end{tabu}
+\end{table}
+
+\subsection{Verdammt nochmal, ich will selbst entscheiden}
+
+... wohin meine Tabelle oder mein Bild kommt.
+
+table und figure sind so genannte Float-Umgebungen, d.~h. Latex entscheidet, wo sie hinkommen und geht davon aus, dass es Ihnen egal ist, weil Sie die Objekte mit \textbackslash caption beschriften und über \textbackslash label und \textbackslash ref dorthin verweisen.
+
+Wenn Sie das mögen (und damit sind Sie nicht alleine), verwenden Sie stattdessen andere Umgebungen, wie z.B. par oder center. Um dennoch eine Bild- bzw. Tabellennummer zu erhalten, benutzen Sie statt \textbackslash caption den Befehl \textbackslash captionof. Sie Beispiel Tabelle \ref{tabelle2} \underline{direkt nach diesem Absatz}.
+
+\begin{center}
+\captionof{table}{Tabellen beschriftet man \underline{oberhalb}}
+\label{tabelle2}
+\begin{tabu} to 0.8\textwidth {| X[0.5c] | X[2r] | X[3l]|}
+\hline
+\rowfont{\bfseries} Nr & Aktion & Formel\\ 
+\hline
+1 & Bachelorarbeit schreiben &
+$G(s) = \frac{1}{(s-s_p)^n}$
+\\\hline
+2 & Heiraten &
+$G(s) = \frac{s\omega_0^2}{s^2+2D\omega_0 s + \omega_0^2}$ 
+\\\hline
+3 & Baum pflanzen &
+$F(s) = \L \{f (t)\} = \int\limits_0^{\infty} f (t) \, e^{-s t} \text{d}t$
+\\
+\hline
+\end{tabu}
+\end{center}
+
+\section{Verwendung von Literatur}
+
+Um das korrekte Zitieren kümmert sich bibtex. Legen Sie eine Datei (Datenbank) mit Ihrer Literatur als Datei \verb+[name].bib+ an. Darin nehmen Sie für jede Referenz eine Quellenangabe auf.
+
+Tipp: Die meisten Literaturdatenbanken bieten die Möglichkeit, bibtex-Datensätze zu exportieren.
+
+Wenn Sie auf Quellen, wie z.B. diese Webreferenz \cite{webreferenz} oder auch dieses Buch \cite{Murrenhoff} verweisen, erscheinen die entsprechenden Titel perfekt formatiert im Literaturverzeichnis.
+
+Damit alle Referenzen stimmen, muss man ggf. pdflatex und bibtex mehrfach aufrufen. Sicher ist die folgende Reihenfolge
+\begin{enumerate}
+\item pdflatex. Erzeugt die *.aux-Datei, die bibtex benötigt
+\item bibtex. Erzeugt Dateien, die pdflatex einbindet
+\item pdflatex
+\item pdflatex (Ggf. auf Fehlermeldungen schauen. Nach dem zweiten Lauf sollte alles okay sein)
+\end{enumerate}
+
+
+
+\subsection{Einfügen von Bildern}
+
+Der richtige Tex-perte tex't auch seine Bilder, z. B. so wie in Bild \ref{bild2}
+
+% Define block styles
+	\tikzstyle{Baustein} = [rectangle, draw, 
+    text width=3.5cm, text centered, rounded corners, minimum height=1cm]
+	\tikzstyle{Baustein2} = [rectangle, draw, 
+    text width=7cm, text centered, rounded corners, minimum height=1cm]
+	\tikzstyle{Baustein3} = [rectangle, draw, 
+    text width=9cm, text centered, rounded corners, minimum height=1cm]
+	\tikzstyle{Baustein4} = [rectangle, draw, 
+    text width=3.5cm, text centered, rounded corners, minimum height=4cm]
+	 
+	\tikzstyle{line} = [draw, -latex']
+	\tikzstyle{line2} = [draw]
+
+\begin{figure}
+\begin{center}
+\begin{tikzpicture}[node distance = 1.5cm, auto]
+    % Place nodes
+ 	   \node [Baustein] (M) {Name};
+ 	   \node [Baustein, below of=M] (W) {Name};
+ 	   \node [Baustein, below of=W] (F) {Name};
+  	  \node [Baustein, below of=F] (P) {Name};
+  	  \node [Baustein2, below of=P] (S) {Name};
+  	\coordinate (D) at (-4,-6);
+
+    % Draw edges
+
+   	 \path [line](S)--(P);
+	\path [line](P) -- (F);
+	\path [line](F) -- (W);
+	\path [line](W)-- (M);
+	\path[line2] (M)-|(D);
+  	 \path[line] (D)--(S); 
+\end{tikzpicture}
+\caption{figure}{Ein mit tikz gezeichnetes Flussdiagramm}
+\label{bild2}
+\end{center}
+\end{figure}
+Bilder bindet man wie folgt ein. Siehe Beispiel Bild \ref{bild1}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.1\textwidth]{fh_logo.png}
+\caption{Logo der FH Aachen}
+\label{bild1}
+\end{figure}
+
+
+\blindtext
+
+

@@ -39,7 +39,6 @@
 % Textstyles für das Deckblatt
 \def\hlmint{\fontfamily{phv}\fontsize{19pt}{19pt}\fontseries{b}\color{fh-mint}\selectfont}
 \def\hlAbold{\fontfamily{phv}\fontsize{14pt}{30pt}\fontseries{b}\selectfont}
-\def\hlAboldLongName{\fontfamily{phv}\fontsize{12pt}{28pt}\fontseries{b}\selectfont}
 \def\hlAnormal{\fontfamily{phv}\fontsize{14pt}{14pt}\selectfont}
 
 % Variable und Kommando für den Typ der Arbeit
@@ -160,11 +159,9 @@
 	\vspace{15mm}
 	\tabulinesep=3mm
 	\begin{tabu}{X[1]X[2]}
-
-	\textls{vorgelegt von} & {\hlAboldLongName \@autor}\\[2mm]
+	\textls{vorgelegt von} & {\hlAbold \@autor}\\[2mm]
 	 & \textls{Matrikel-Nr.} \textbf{\@matrnr}\\[10mm]
 	% Zeile Referent nur, wenn Angabe vorhanden
-	
 	\ifthenelse{\equal{\@betreuer}{}}{}{
 	\textls{Referent:} & \@betreuer\\
 	}
