@@ -49,6 +49,8 @@ typedef std::chrono::system_clock::time_point TimePoint;
 //PROD_V1 => 60x60cm ITEM VERSION WITH  SKR1.4 BOARD AND CORE_YX MECHANIC
 #define HWID_DK_HARDWARE "b827ebad862f"
 #define HWID_PROD_V1_HARDWARE "----"
+
+#define INVALID_HWID "1nv4l1dm4c"
 using namespace std;
 
 
@@ -79,19 +81,32 @@ std::string readHWID(std::string _file)
 
 
 std::string get_interface_mac_address(const string& _ifname) {
-	ifstream iface("/sys/class/net/" + _ifname + "/address");
+    LOG_F(INFO, "get_interface_mac_address=>");
+    LOG_F(INFO, "/sys/class/net/IF_NAME/address");
+    LOG_F(INFO, _ifname.c_str());
+	std::ifstream iface;
 
+
+    iface.open("/sys/class/net/" + _ifname + "/address");
+    if (!iface) {
+        LOG_F(ERROR, "CANT OPEN FILE");
+        LOG_F(ERROR, "/sys/class/net/IF_NAME/address");
+        LOG_F(ERROR, _ifname.c_str());
+        return INVALID_HWID;
+    }
 
 	//READ FILE
 	std::string str((istreambuf_iterator<char>(iface)), istreambuf_iterator<char>());
 	//CHECK LENGTH
-	if(str.length() > 0) {
+	if(!str.empty() && str != "00:00:00:00:00:00") {
+        LOG_F(INFO, str.c_str());
 		//REPLACE ILLEGAL CHARAKTERS
 		std::string hex = regex_replace(str, std::regex("[,:.;/\\\n\t\r ]"), "");
+        LOG_F(INFO, hex.c_str());
 		return hex;
 	}
 	else {
-		return "1nv4l1dm4c";
+		return INVALID_HWID;
 	}
 }
 
@@ -197,7 +212,26 @@ int main(int argc, char *argv[])
 	LOG_SCOPE_F(INFO, "LOADING CONFIG FILE ./atccontrollerconfig.ini");
 
 	//GET HARDWARE REVISION
-	std::string hwid = get_interface_mac_address(ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::GENERAL_HWID_INTERFACE));
+	std::string used_if_path = ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::GENERAL_HWID_INTERFACE);
+	std::string hwid = get_interface_mac_address(used_if_path);
+    //IF INVALID TRY OTHER PATH IF
+
+	if(hwid == INVALID_HWID){
+	    const size_t HWID_IF_ALTERNATIVES_COUNT = 5;
+        const std::string HWID_IF_ALTERNATIVES[HWID_IF_ALTERNATIVES_COUNT] = { "eth0", "wlan0", "enp5s0","wlo1","docker0"};
+        //CYCLE THOUGHT SOME ALTERNATIVES INTERFACE NAMES
+        for(size_t i = 0; i < HWID_IF_ALTERNATIVES_COUNT;i++){
+            LOG_SCOPE_F(INFO, "TRY ALTERNATIVE HWINTERFACE");
+            LOG_SCOPE_F(INFO, HWID_IF_ALTERNATIVES[i].c_str());
+
+            hwid = get_interface_mac_address(HWID_IF_ALTERNATIVES[i]);
+            if(hwid != INVALID_HWID){
+                used_if_path = HWID_IF_ALTERNATIVES[i]; //STORE USED INTERFACE NAME / PATH
+                break;
+            }
+        }
+        //used_if_path
+    }
 	LOG_F(INFO, (const char*)hwid.c_str());
 
 
@@ -211,22 +245,33 @@ int main(int argc, char *argv[])
 	{
         LOG_F(WARNING, "--- CREATE LOCAL CONFIG FILE -----");
 		LOG_F(WARNING, "1. Failed to load atccontrollerconfig.ini");
-        LOG_F(WARNING, "2. ARGUMENT -writeconfig SET => CREATE NEW CONFIG FILE");
+        LOG_F(WARNING, "2. ARGUMENT -writeconfig SET => CREATE NEW CONFIG FILE FOR HWID");
+        LOG_F(WARNING, hwid.c_str());
 		//LOAD (PUPULATE) ALL CONFIG ENTRIES WITH THE DEFAULT CONFIG
 
 		if (hwid == HWID_DK_HARDWARE)
 		{
+            LOG_F(WARNING, "DK HARDWARE");
 			ConfigParser::getInstance()->loadDefaults("DK");
 		}
-		else if (hwid == HWID_PROD_V1_HARDWARE)
-		{
-			ConfigParser::getInstance()->loadDefaults("PROD_V1");
-		}else {
+		else if (hwid == HWID_PROD_V1_HARDWARE) {
+            LOG_F(WARNING, "PROD_V1 HARDWARE");
+            ConfigParser::getInstance()->loadDefaults("PROD_V1");
+        }else if (hwid == INVALID_HWID){ //IF HWIF IS INVALID => RETURN ERROR
+
+            LOG_F(ERROR, "--- GOT INVALID HWID TO AVOID DAMAGES ON HARDWARE => TERMINATE PROGRAM -----");
+            std::raise(SIGINT);
+		}else { //EVERY OTHER HWID IS PROD_V2 HWID
+            LOG_F(WARNING, "PROD_V2 HARDWARE");
             ConfigParser::getInstance()->loadDefaults("PROD_V2");
         }
 		
-		
+		//STORE INTERFACE PATH USED FOR HWID GENERATION
+        ConfigParser::getInstance()->set(ConfigParser::CFG_ENTRY::GENERAL_HWID_INTERFACE,used_if_path,"");
+
+		//WRITE CONFIG FILE TO FILESYSTEM
 		ConfigParser::getInstance()->createConfigFile(CONFIG_FILE_PATH, false);
+        ConfigParser::getInstance()->set(ConfigParser::CFG_ENTRY::GENERAL_HWID_INTERFACE,used_if_path,CONFIG_FILE_PATH);
 		LOG_F(ERROR, "WRITE NEW CONFIGFILE DUE MISSING ONE atccontrollerconfig.ini");
 
 	}
@@ -992,6 +1037,8 @@ int main(int argc, char *argv[])
 				ConfigParser::getInstance()->setInt(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X, cal_pos_x, CONFIG_FILE_PATH);
 				ConfigParser::getInstance()->setInt(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y, cal_pos_y, CONFIG_FILE_PATH);
 				gui.show_error_message_on_gui("CALIBRATION SAVED FOR H1");
+                LOG_F(INFO, "CALIBRATION SAVED FOR H1");
+
 			}
 		else if (cal_move == 1)
 		{
@@ -1002,7 +1049,8 @@ int main(int argc, char *argv[])
 			const int cal_res = (cal_pos_y + cal_pos_x) / 2;
 			ConfigParser::getInstance()->setInt(ConfigParser::CFG_ENTRY::MECHANIC_CHESS_FIELD_WIDTH, cal_res, CONFIG_FILE_PATH); //WRITE FIELD WIDTH
 			ConfigParser::getInstance()->setInt(ConfigParser::CFG_ENTRY::MECHANIC_CHESS_BOARD_WIDTH, cal_res*8, CONFIG_FILE_PATH); //= FW*8 WRITE BOARD WITH = NEEDED FOR ChessBoardClass
-			gui.show_error_message_on_gui("CALIBRATION SAVED FOR A1");
+			gui.show_error_message_on_gui("CALIBRATION SAVED FOR A8");
+            LOG_F(INFO, "CALIBRATION SAVED FOR A8");
 		}
 		
 		
