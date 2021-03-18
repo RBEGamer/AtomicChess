@@ -1,0 +1,60 @@
+version: '3.7'
+
+services:
+
+  # ---------------------
+  # hawkBit service
+  # ---------------------
+  hawkbit:
+    image: "hawkbit/hawkbit-update-server:latest-mysql"
+
+    ports:
+    - "8083:8080"
+    links:
+    - "hawkbit_rabbitmq:hawkbit_rabbitmq"
+    - "hawkbit_mysql:hawkbit_mysql"
+    deploy:
+      restart_policy:
+        condition: on-failure
+    environment:
+    - 'SPRING_DATASOURCE_URL=jdbc:mysql://hawkbit_mysql:3306/hawkbit'
+    - 'SPRING_DATASOURCE_USERNAME=hawkbit'
+    - 'SPRING_DATASOURCE_PASSWORD=hawkbit'
+    - 'SPRING_RABBITMQ_HOST=hawkbit_rabbitmq'
+    - 'SPRING_RABBITMQ_USERNAME=guest'
+    - 'SPRING_RABBITMQ_PASSWORD=guest'
+
+  # ---------------------
+  # RabbitMQ service
+  # ---------------------
+  hawkbit_rabbitmq:
+    image: "rabbitmq:3-management"
+
+    ports:
+    - "15672:15672"
+    - "5672:5672"
+    deploy:
+      restart_policy:
+        condition: on-failure
+    environment:
+      RABBITMQ_DEFAULT_VHOST: "/"
+
+  # ---------------------
+  # MySQL service
+  # ---------------------
+  hawkbit_mysql:
+    image: "mysql:5.7"
+
+    ports:
+    - "3306:3306"
+    deploy:
+      restart_policy:
+        condition: on-failure
+    environment:
+      environment:
+      MYSQL_ROOT_PASSWORD: hawkbit
+      MYSQL_DATABASE: hawkbit
+      MYSQL_USER: hawkbit
+      MYSQL_PASSWORD: hawkbit
+    volumes:
+      - ./hawkbit_mysql:/var/lib/mysql

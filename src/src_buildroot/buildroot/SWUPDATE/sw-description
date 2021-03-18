@@ -12,7 +12,7 @@ software =
                                 filename = "rootfs.ext2.gz";
                         	device = "/dev/mmcblk0p2";
                         	type = "raw";
-                        	sha256 = "";
+                        	sha256 = "09e006f3fc0a6141029f4df759981b5088491837b92303524706e004822382ec";
                         	compressed = true;
                         }
                         );
@@ -25,7 +25,7 @@ software =
                                 filename = "rootfs.ext2.gz";
                         	device = "/dev/mmcblk0p3";
                         	type = "raw";
-                        	sha256 = "";
+                        	sha256 = "09e006f3fc0a6141029f4df759981b5088491837b92303524706e004822382ec";
                         	compressed = true;
                         }
                         );
