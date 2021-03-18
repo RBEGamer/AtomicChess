@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.jenkins-ci.plugins</groupId>
   <artifactId>docker-workflow</artifactId>
-  <version>1.24</version>
+  <version>1.26</version>
   <packaging>hpi</packaging>
   <name>Docker Pipeline</name>
   <description>Build and use Docker containers from pipelines</description>
@@ -19,7 +19,7 @@
   <scm>
     <connection>scm:git:git://github.com/jenkinsci/docker-workflow-plugin.git</connection>
     <developerConnection>scm:git:git@github.com:jenkinsci/docker-workflow-plugin.git</developerConnection>
-    <tag>docker-workflow-1.24</tag>
+    <tag>docker-workflow-1.26</tag>
     <url>https://github.com/jenkinsci/docker-workflow-plugin</url>
   </scm>
   <distributionManagement>
@@ -42,7 +42,7 @@
     <dependency>
       <groupId>org.jenkins-ci.plugins.workflow</groupId>
       <artifactId>workflow-cps</artifactId>
-      <version>2.80</version>
+      <version>2.83</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
@@ -60,13 +60,7 @@
     <dependency>
       <groupId>org.jenkins-ci.plugins.workflow</groupId>
       <artifactId>workflow-step-api</artifactId>
-      <version>2.22</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.jenkinsci.plugins</groupId>
-      <artifactId>pipeline-model-extensions</artifactId>
-      <version>1.5.1</version>
+      <version>2.23</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
@@ -76,9 +70,15 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
+      <groupId>org.jenkinsci.plugins</groupId>
+      <artifactId>pipeline-model-definition</artifactId>
+      <version>1.8.1</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
       <groupId>org.jenkins-ci.main</groupId>
       <artifactId>jenkins-core</artifactId>
-      <version>2.176.4</version>
+      <version>2.190.3</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -90,7 +90,7 @@
     <dependency>
       <groupId>com.github.spotbugs</groupId>
       <artifactId>spotbugs-annotations</artifactId>
-      <version>3.1.11</version>
+      <version>3.1.12</version>
       <scope>provided</scope>
       <optional>true</optional>
     </dependency>
@@ -138,7 +138,7 @@
       <plugin>
         <groupId>org.jenkins-ci.tools</groupId>
         <artifactId>maven-hpi-plugin</artifactId>
-        <version>3.15</version>
+        <version>3.17</version>
         <extensions>true</extensions>
       </plugin>
       <plugin>

@@ -1,0 +1,27 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven
+Built-By: citaire
+Build-Jdk: 1.8.0_111
+Extension-Name: docker-java-api
+Specification-Title: Plugin providing Docker API for other plugins. Wr
+ ap docker-java and required dependency for Netty transport only. JAX-
+ RS default transport is not usable
+Implementation-Title: docker-java-api
+Implementation-Version: 3.1.5.2
+Group-Id: org.jenkins-ci.plugins
+Short-Name: docker-java-api
+Long-Name: Docker API Plugin
+Url: https://github.com/jenkinsci/docker-java-api-plugin
+Compatible-Since-Version: 3.1
+Minimum-Java-Version: 1.8
+Plugin-Version: 3.1.5.2
+Hudson-Version: 1.609.1
+Jenkins-Version: 1.609.1
+Plugin-Dependencies: jackson2-api:2.6.4
+Plugin-Developers: 
+Support-Dynamic-Loading: true
+Plugin-License-Name: MIT
+Plugin-License-Url: http://opensource.org/licenses/MIT
+Plugin-ScmUrl: https://github.com/jenkinsci/docker-java-api-plugin
+

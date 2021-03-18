@@ -6,19 +6,19 @@ Build-Jdk: 1.8.0_181
 Extension-Name: github
 Specification-Title: The Jenkins Plugins Parent POM Project
 Implementation-Title: github
-Implementation-Version: 1.31.0
+Implementation-Version: 1.33.1
 Plugin-Class: org.jenkinsci.plugins.github.GitHubPlugin
 Group-Id: com.coravy.hudson.plugins.github
 Short-Name: github
 Long-Name: GitHub plugin
 Url: https://github.com/jenkinsci/github-plugin
 Minimum-Java-Version: 1.8
-Plugin-Version: 1.31.0
-Hudson-Version: 2.164.3
-Jenkins-Version: 2.164.3
-Plugin-Dependencies: credentials:2.1.13,display-url-api:2.0,git:3.4.0,
- github-api:1.114.2,plain-credentials:1.1,scm-api:2.2.0,structs:1.17,t
- oken-macro:1.12.1
+Plugin-Version: 1.33.1
+Hudson-Version: 2.222.4
+Jenkins-Version: 2.222.4
+Plugin-Dependencies: credentials:2.3.14,display-url-api:2.3.4,git:4.5.
+ 0,github-api:1.114.2,plain-credentials:1.7,scm-api:2.6.4,token-macro:
+ 2.13
 Plugin-Developers: Merkushev Kirill:lanwen:,Kanstantsin Shautsou:Kosty
  aSha:
 Plugin-License-Name: MIT License

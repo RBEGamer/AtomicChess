@@ -1,0 +1,7 @@
+:root {
+  --solarized-emphasized: var(--solarized-base1);
+  --solarized-primary: var(--solarized-base0);
+  --solarized-secondary: var(--solarized-base01);
+  --solarized-bg-highlights: var(--solarized-base02);
+  --solarized-bg: var(--solarized-base03);
+}

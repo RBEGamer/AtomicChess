@@ -1,0 +1,17 @@
+commit e4c28e8f0ef9ba2ec119c4e666ad1ee1e4b2c778
+tree 8f9b7ec63d19015615b062fae628fc70fb0d7471
+parent c7954789b8780d25be61c862a1e76a5a180ec2e2
+author Marcel <info@prodevmo.com> 2020-12-08 01:32:34 +0100
+committer Marcel <info@prodevmo.com> 2020-12-08 01:32:34 +0100
+
+    webclient - login, set_playerstate, get_state
+    
+
+
+:100644 100644 8fcd473edd90f6d802b364e440bb9c3db3883dfb e0c5d160f38b7322eb78420b7d2b6d13ec6c66d5 M	src/src_server/ATC_Backend/package-lock.json
+:100644 100644 8a491bc345c9b0fa90b3de0c96fd1e673e2dbe0a b62605879f720ae6be2486d4a0946e698318416d M	src/src_server/ATC_Backend/package.json
+:000000 100644 0000000000000000000000000000000000000000 c183f108801d0832395e9222b212a0a8116ff29e A	src/src_server/ATC_Backend/public/css/three_dots_loading_animations.css
+:100644 100644 a7368e9666a115f0d50bcc1fe0f5d0da56f276ef 586cfdbc38b462f88d36bfd51d20d4fcce9d249d M	src/src_server/ATC_Backend/routes/index.js
+:100644 100644 a714d9d0f39e26c428de9b0733c5fdcb2a8566d3 eca58b05d95c02553ce9301428ca83e680691981 M	src/src_server/ATC_Backend/session_handling/session_cleanup.js
+:100644 100644 25dfae3924db2656d4aa1e3a46182b687189fab9 9ad900f8a2b3b4a5b8da5bbb4c2bd4b479b89665 M	src/src_server/ATC_Backend/views/index.ejs
+:100644 100644 a503a4eb6d548a7fcacb5acfff59f880ff4ceb5d 1999e3de2819a7d8ec5833d5df06ca7a4955d416 M	src/src_server/ATC_Backend/views/webclient.ejs

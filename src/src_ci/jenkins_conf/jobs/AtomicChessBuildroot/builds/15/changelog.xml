@@ -1,0 +1,10 @@
+commit c722a366530cdfb26c173561bc0a23b3eecbdc3d
+tree 04b6f4ea7a49ce267364f4a4d11e5018343f4665
+parent c7e491eb672e3609c56ae8153ab1624312b4ab3a
+author John Doe <johndoe@example.com> 2021-01-04 00:57:59 +0100
+committer John Doe <johndoe@example.com> 2021-01-04 00:57:59 +0100
+
+    remove package dependencies czmq protobuf from atcgui package
+
+
+:100644 100644 723b4978279c08e04dcb0fae5e980429f129dbe2 6591bc9b9df295bb3c8f7b9fd39a9e0f281f8925 M	src/src_buildroot/buildroot/package/atcgui/atcgui.mk

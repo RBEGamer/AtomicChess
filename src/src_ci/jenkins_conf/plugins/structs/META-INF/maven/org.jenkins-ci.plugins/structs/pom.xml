@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.jenkins-ci.plugins</groupId>
   <artifactId>structs</artifactId>
-  <version>1.20</version>
+  <version>1.22</version>
   <packaging>hpi</packaging>
   <name>Structs Plugin</name>
   <description>Library plugin for DSL plugins that need names for Jenkins objects.</description>
-  <url>https://wiki.jenkins-ci.org/display/JENKINS/Structs+plugin</url>
+  <url>https://github.com/jenkinsci/structs-plugin</url>
   <inceptionYear>2016</inceptionYear>
   <licenses>
     <license>
@@ -19,7 +19,7 @@
   <scm>
     <connection>scm:git:git://github.com/jenkinsci/structs-plugin.git/structs</connection>
     <developerConnection>scm:git:git@github.com:jenkinsci/structs-plugin.git/structs</developerConnection>
-    <tag>structs-parent-1.20</tag>
+    <tag>structs-parent-1.22</tag>
     <url>http://github.com/jenkinsci/structs-plugin/structs</url>
   </scm>
   <distributionManagement>
@@ -36,13 +36,25 @@
     <dependency>
       <groupId>org.jenkins-ci</groupId>
       <artifactId>symbol-annotation</artifactId>
-      <version>1.20</version>
+      <version>1.22</version>
       <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jenkins-ci.main</groupId>
+      <artifactId>jenkins-core</artifactId>
+      <version>2.222.4</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>3.1.0</version>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.github.spotbugs</groupId>
       <artifactId>spotbugs-annotations</artifactId>
-      <version>3.1.12</version>
+      <version>3.1.11</version>
       <scope>provided</scope>
       <optional>true</optional>
     </dependency>
@@ -56,28 +68,15 @@
     <dependency>
       <groupId>org.codehaus.mojo</groupId>
       <artifactId>animal-sniffer-annotations</artifactId>
-      <version>1.17</version>
+      <version>1.19</version>
       <scope>provided</scope>
       <optional>true</optional>
     </dependency>
     <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
-      <version>3.1.0</version>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <version>1.2</version>
       <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.jenkins-ci.main</groupId>
-      <artifactId>jenkins-core</artifactId>
-      <version>2.107.3</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-      <version>1.7.25</version>
-      <scope>compile</scope>
-      <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>org.kohsuke</groupId>
@@ -91,12 +90,6 @@
         </exclusion>
       </exclusions>
     </dependency>
-    <dependency>
-      <groupId>commons-logging</groupId>
-      <artifactId>commons-logging</artifactId>
-      <version>1.2</version>
-      <scope>provided</scope>
-    </dependency>
   </dependencies>
   <repositories>
     <repository>
@@ -109,7 +102,7 @@
       <plugin>
         <groupId>org.jenkins-ci.tools</groupId>
         <artifactId>maven-hpi-plugin</artifactId>
-        <version>3.5</version>
+        <version>3.17</version>
         <extensions>true</extensions>
       </plugin>
       <plugin>

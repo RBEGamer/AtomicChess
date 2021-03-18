@@ -1,0 +1,14 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<fingerprint>
+  <timestamp>2021-03-18 15:33:45.406 UTC</timestamp>
+  <md5sum>59aa2a7a85e47b75090d9c2c6c81eedb</md5sum>
+  <fileName>Credential id=7ecf882e-4ad1-47a4-829e-fee052b5d2a1 name=root (SSH_ACCES_LOCALHOST)</fileName>
+  <usages/>
+  <facets>
+    <com.cloudbees.plugins.credentials.fingerprints.NodeCredentialsFingerprintFacet plugin="credentials@2.3.15">
+      <timestamp>1616081625393</timestamp>
+      <nodeName>local_server</nodeName>
+      <timestamp0>1616081625393</timestamp0>
+    </com.cloudbees.plugins.credentials.fingerprints.NodeCredentialsFingerprintFacet>
+  </facets>
+</fingerprint>

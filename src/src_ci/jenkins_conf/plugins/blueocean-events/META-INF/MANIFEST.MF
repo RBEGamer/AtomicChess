@@ -1,23 +1,23 @@
 Manifest-Version: 1.0
 Archiver-Version: Plexus Archiver
 Created-By: Apache Maven
-Built-By: olamy
-Build-Jdk: 1.8.0_201
+Built-By: dnusbaum
+Build-Jdk: 1.8.0_161
 Extension-Name: blueocean-events
 Specification-Title: The Jenkins Plugins Parent POM Project
 Implementation-Title: blueocean-events
-Implementation-Version: 1.23.3
+Implementation-Version: 1.24.4
 Group-Id: io.jenkins.blueocean
 Short-Name: blueocean-events
 Long-Name: Events API for Blue Ocean
 Url: https://github.com/jenkinsci/blueocean-plugin/blob/master/blueoce
  an/doc/BlueOcean.adoc
 Minimum-Java-Version: 1.8
-Plugin-Version: 1.23.3
-Hudson-Version: 2.150.3
-Jenkins-Version: 2.150.3
-Plugin-Dependencies: blueocean-pipeline-api-impl:1.23.3,pubsub-light:1
- .13,sse-gateway:1.21
+Plugin-Version: 1.24.4
+Hudson-Version: 2.176.4
+Jenkins-Version: 2.176.4
+Plugin-Dependencies: blueocean-pipeline-api-impl:1.24.4,pubsub-light:1
+ .13,sse-gateway:1.24
 Plugin-Developers: Thorsten Iberian Sumurai:scherler:,Cliff Meyers:cli
  ffmeyers:,Tom Fennelly:tfennelly:,Vivek Pandey:vivek:,Kohsuke:kohsuke
  :,Josh McDonald:sophistifunk:,Ivan Meredith:imeredith:,Michael Neale:

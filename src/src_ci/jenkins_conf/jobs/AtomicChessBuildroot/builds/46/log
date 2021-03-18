@@ -1,0 +1,111 @@
+Started by user [8mha:////4HeQu7QxSfPJmiGpZcYSZuhcclhWOV448WYE8rDJrQ+DAAAAnR+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAzuEgZB/dLi1CL9xJL83Mzk5IzU4mIA55peXsYAAAA=[0mAtomicChess
+Running as SYSTEM
+Building remotely on [8mha:////4NhQxXi60jAlX5rncxKDkW4xGC/PmymblX2gatAeBdgUAAAAoh+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAyeEgYx/eT83ILSktQi/Zz85MSc+OLUorLUIgBFdgO6ywAAAA==[0mlocal_server (ATC_SERVER_AGENT) in workspace /var/jenkins_build/workspace/AtomicChessBuildroot
+The recommended git tool is: NONE
+using credential 867013a9-1ccb-4bd0-b0c8-f41e88a499f9
+ > git rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url git@github.com:RBEGamer/AtomicChessOS.git # timeout=10
+Fetching upstream changes from git@github.com:RBEGamer/AtomicChessOS.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.17.1'
+using GIT_SSH to set credentials local ssh key
+ > git fetch --tags --progress -- git@github.com:RBEGamer/AtomicChessOS.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+Checking out Revision d7dbf9549389cad7518807b506448c0902c35003 (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f d7dbf9549389cad7518807b506448c0902c35003 # timeout=10
+Commit message: "."
+ > git rev-list --no-walk bf20de7a0bdd3a5373471c9d5a12c9745fc030ad # timeout=10
+[AtomicChessBuildroot] $ /bin/sh -xe /tmp/jenkins3855905386863383047.sh
++ ls
+documentation_statistics
+README.md
+src
++ cd ./src/src_buildroot
++ bash ./build_toolchain_image.sh
+COPY SHARED FOLDER FROM ../src_shared
+COPY TO BUILDROOT PACKAGE
+/var/jenkins_build/workspace/AtomicChessBuildroot/src/src_atctest
+copy_to_buildroot_package.sh
+README.md
+src
+COPY ./src TO ../src_buildroot/buildroot/package/atctp
+COPY SHARED FOLDER FROM ../src_shared
+COPY TO BUILDROOT PACKAGE
+/var/jenkins_build/workspace/AtomicChessBuildroot/src/src_atcqtui
+ATC_GUI_MOCKUP.bmpr
+copy_to_buildroot_package.sh
+documentation_images
+README.md
+src
+COPY ./src TO ../src_buildroot/buildroot/package/atcgui
+COPY SHARED FOLDER FROM ../src_shared
+COPY TO BUILDROOT PACKAGE
+/var/jenkins_build/workspace/AtomicChessBuildroot/src/src_controller
+ChessFigureIDGenerator.html
+controller
+copy_to_buildroot_package.sh
+documentation_images
+README.md
+COPY ./controller/controller TO ../src_buildroot/buildroot/package/atcctl
+Sending build context to Docker daemon  2.695GB
+Step 1/17 : FROM ubuntu:20.04
+ ---> 4dd97cefde62
+Step 2/17 : WORKDIR /var/buildroot
+ ---> Using cache
+ ---> 6856a276107e
+Step 3/17 : ENV DEBIAN_FRONTEND=noninteractive
+ ---> Using cache
+ ---> 143d549ecb89
+Step 4/17 : RUN apt-get update && apt upgrade -y &&     apt-get install -y     build-essential     bash     bc     binutils     build-essential     bzip2     cpio     g++     gcc     git     gzip     locales     libncurses5-dev     libdevmapper-dev     libsystemd-dev     make     mercurial     whois     patch     perl     python     rsync     sed     tar     vim     unzip     wget     bison     flex     libssl-dev     libfdt-dev     nano
+ ---> Using cache
+ ---> e05fa5fb79b3
+Step 5/17 : RUN locale-gen en_US.utf8
+ ---> Using cache
+ ---> 0ffa5c65cea5
+Step 6/17 : RUN echo 'root:root' |chpasswd
+ ---> Using cache
+ ---> 6dfbb9dd156a
+Step 7/17 : ENV O=/buildroot_output
+ ---> Using cache
+ ---> 18b0f5210f3d
+Step 8/17 : RUN touch .config
+ ---> Using cache
+ ---> 9db49886511d
+Step 9/17 : RUN touch kernel.config
+ ---> Using cache
+ ---> ce9cc758c0ec
+Step 10/17 : RUN mkdir -p /var/buildroot/output/images
+ ---> Using cache
+ ---> a375ed5f9696
+Step 11/17 : RUN mkdir /root/.ssh
+ ---> Using cache
+ ---> b083d4bca6ed
+Step 12/17 : RUN apt-get clean &&     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+ ---> Using cache
+ ---> fac87ab47dd8
+Step 13/17 : RUN rm -Rf /var/buildroot
+ ---> Using cache
+ ---> fc1f6af56b2c
+Step 14/17 : COPY ./ /var/buildroot
+ ---> f73d4a370a46
+Step 15/17 : RUN bash /var/buildroot/restore_config.sh
+ ---> Running in 3adf2e8b83fa
+Removing intermediate container 3adf2e8b83fa
+ ---> 4c5f89aeaa5c
+Step 16/17 : RUN bash /var/buildroot/check_keys.sh
+ ---> Running in 9947249410d6
+--- GENERATE KEYS FOR SWUPDATE---
+--KEYS EYISTS --
+Removing intermediate container 9947249410d6
+ ---> 779dd5d8e8e1
+Step 17/17 : CMD ["/var/buildroot/build.sh"]
+ ---> Running in bf030733ee01
+Removing intermediate container bf030733ee01
+ ---> fee960cdde23
+Successfully built fee960cdde23
+Successfully tagged atcbuildroot:latest
+the input device is not a TTY
+Build step 'Execute shell' marked build as failure
+Finished: FAILURE

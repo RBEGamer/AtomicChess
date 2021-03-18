@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.jenkins-ci.plugins</groupId>
   <artifactId>trilead-api</artifactId>
-  <version>1.0.10</version>
+  <version>1.0.13</version>
   <packaging>hpi</packaging>
   <name>Trilead API Plugin</name>
   <description>This plugin provides access to Trilead without having to bundle Trilead in Jenkins core</description>
@@ -32,7 +32,7 @@
   <scm>
     <connection>scm:git:git://github.com/jenkinsci/trilead-api-plugin.git</connection>
     <developerConnection>scm:git:git@github.com:jenkinsci/trilead-api-plugin.git</developerConnection>
-    <tag>trilead-api-1.0.10</tag>
+    <tag>trilead-api-1.0.13</tag>
     <url>https://github.com/jenkinsci/trilead-api-plugin</url>
   </scm>
   <distributionManagement>
@@ -49,7 +49,7 @@
     <dependency>
       <groupId>org.jenkins-ci</groupId>
       <artifactId>trilead-ssh2</artifactId>
-      <version>build-217-jenkins-21</version>
+      <version>build-217-jenkins-27</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
@@ -65,9 +65,21 @@
       </exclusions>
     </dependency>
     <dependency>
+      <groupId>org.jenkins-ci.main</groupId>
+      <artifactId>jenkins-core</artifactId>
+      <version>2.204</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>3.1.0</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
       <groupId>com.github.spotbugs</groupId>
       <artifactId>spotbugs-annotations</artifactId>
-      <version>3.1.12</version>
+      <version>3.1.11</version>
       <scope>provided</scope>
       <optional>true</optional>
     </dependency>
@@ -81,33 +93,20 @@
     <dependency>
       <groupId>org.codehaus.mojo</groupId>
       <artifactId>animal-sniffer-annotations</artifactId>
-      <version>1.17</version>
+      <version>1.18</version>
       <scope>provided</scope>
       <optional>true</optional>
     </dependency>
     <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
-      <version>3.1.0</version>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <version>1.2</version>
       <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.jenkins-ci.main</groupId>
-      <artifactId>jenkins-core</artifactId>
-      <version>2.184</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-      <version>1.7.25</version>
-      <scope>compile</scope>
-      <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>org.kohsuke</groupId>
       <artifactId>access-modifier-annotation</artifactId>
-      <version>1.16</version>
+      <version>1.14</version>
       <scope>provided</scope>
       <exclusions>
         <exclusion>
@@ -115,12 +114,6 @@
           <groupId>org.jenkins-ci</groupId>
         </exclusion>
       </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>commons-logging</groupId>
-      <artifactId>commons-logging</artifactId>
-      <version>1.2</version>
-      <scope>provided</scope>
     </dependency>
   </dependencies>
   <repositories>
@@ -134,7 +127,7 @@
       <plugin>
         <groupId>org.jenkins-ci.tools</groupId>
         <artifactId>maven-hpi-plugin</artifactId>
-        <version>3.5</version>
+        <version>3.15</version>
         <extensions>true</extensions>
       </plugin>
       <plugin>

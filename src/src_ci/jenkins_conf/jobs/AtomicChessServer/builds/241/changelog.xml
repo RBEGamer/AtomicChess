@@ -1,0 +1,63 @@
+commit ee5a86f9baabe7c5630256fe805ea1802a8fc976
+tree f1b993ea2350f4e200d158369ce6333a1106ae0a
+parent fce93f3e64ee63943e5d76d767e0b75dd8a3fbed
+author Marcel Ochsendorf <marcel.ochsendorf@gmail.com> 2021-03-13 08:12:12 +0100
+committer GitHub <noreply@github.com> 2021-03-13 08:12:12 +0100
+
+    Update titelangaben.tex
+
+:100644 100644 30a9acfb98d3f7ddce3c51408f80f1ca89a6d145 8517a16e4e4030554687fed83804e509880f09c5 M	src/src_thesis/titelangaben.tex
+commit fce93f3e64ee63943e5d76d767e0b75dd8a3fbed
+tree 4ba4b4f2d3b5e28ee743b5334345515ac33189c1
+parent f661ed6119c68aeeb458440938fa6a509e97bbeb
+author Marcel Ochsendorf <marcel.ochsendorf@gmail.com> 2021-03-13 08:11:37 +0100
+committer GitHub <noreply@github.com> 2021-03-13 08:11:37 +0100
+
+    Delete template.pdf
+
+:100644 000000 94dd4e133140295e893dd18544c3395f997d7364 0000000000000000000000000000000000000000 D	src/src_thesis/template.pdf
+commit f661ed6119c68aeeb458440938fa6a509e97bbeb
+tree e0f0a6752cc77a021ff16f7d49f543afcf76c3ee
+parent dfe9206998bfd414d3d86f9e2355bfc158a3f6d6
+author Marcel Ochsendorf <marcel.ochsendorf@gmail.com> 2021-03-13 08:10:11 +0100
+committer GitHub <noreply@github.com> 2021-03-13 08:10:11 +0100
+
+    Update titelangaben.tex
+
+:100644 100644 317e0afca113b042a27b8d1e964dff4d64580b7c 30a9acfb98d3f7ddce3c51408f80f1ca89a6d145 M	src/src_thesis/titelangaben.tex
+commit dfe9206998bfd414d3d86f9e2355bfc158a3f6d6
+tree d0d117dcc48f85b7c9108bd6395f8b7811bf8460
+parent f1763288a026e1fc1639034cb501e576d7014823
+author Marcel Ochsendorf <marcel.ochsendorf@gmail.com> 2021-03-13 08:08:45 +0100
+committer GitHub <noreply@github.com> 2021-03-13 08:08:45 +0100
+
+    Delete report_document.pdf
+
+:100644 000000 ce51721bf5be17ef6e96669732bb539a5cf73636 0000000000000000000000000000000000000000 D	src/src_thesis/report_document.pdf
+commit f1763288a026e1fc1639034cb501e576d7014823
+tree 0413a1670704933f8f0fd4c6d051deeded01bf1b
+parent 40b9984799430ec4c4725746cd4ce02eb6413d1f
+author Marcel Ochsendorf <marcel.ochsendorf@gmail.com> 2021-03-13 08:08:20 +0100
+committer GitHub <noreply@github.com> 2021-03-13 08:08:20 +0100
+
+    Delete report_document.tex
+
+:100644 000000 525ca6c274bc959bde6556ec9d95cc22a1cb15f1 0000000000000000000000000000000000000000 D	src/src_thesis/report_document.tex
+commit 40b9984799430ec4c4725746cd4ce02eb6413d1f
+tree 4eb86f3cb560fca3a8b959132ccec8603aa32b03
+parent b5fdd569c4efbd48b14458454e6b7a4dfff5505d
+author Marcel Ochsendorf <marcel.ochsendorf@gmail.com> 2021-03-13 08:08:08 +0100
+committer GitHub <noreply@github.com> 2021-03-13 08:08:08 +0100
+
+    Delete build_report.sh
+
+:100755 000000 373e251187d9cea47dfd4ca10417ca20934b0e17 0000000000000000000000000000000000000000 D	src/src_thesis/build_report.sh
+commit b5fdd569c4efbd48b14458454e6b7a4dfff5505d
+tree a5b7d1a03a2c2c46eb44fccda958a9af00a4e4e7
+parent 00af8609517a8b2818f89c27629cf886d078821b
+author Marcel Ochsendorf <marcel.ochsendorf@gmail.com> 2021-03-13 08:07:56 +0100
+committer GitHub <noreply@github.com> 2021-03-13 08:07:56 +0100
+
+    Update build_start_thesis_server.sh
+
+:100755 100755 86497bc7142ef571d595682aa65bec5d51b876c7 8387fabe2ea30bdf46cb8e70884e2d31a20f976c M	src/src_thesis/build_start_thesis_server.sh

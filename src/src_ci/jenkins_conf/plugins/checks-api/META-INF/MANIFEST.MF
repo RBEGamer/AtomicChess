@@ -1,0 +1,25 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven
+Built-By: timja
+Build-Jdk: 11.0.9.1
+Extension-Name: checks-api
+Specification-Title: Defines an API for Jenkins to publish checks to S
+ CM platforms.
+Implementation-Title: checks-api
+Implementation-Version: 1.5.0
+Group-Id: io.jenkins.plugins
+Short-Name: checks-api
+Long-Name: Checks API plugin
+Url: https://github.com/jenkinsci/checks-api-plugin
+Minimum-Java-Version: 1.8
+Plugin-Version: 1.5.0
+Hudson-Version: 2.204.6
+Jenkins-Version: 2.204.6
+Plugin-Dependencies: plugin-util-api:1.6.1,workflow-job:2.40,workflow-
+ step-api:2.23,display-url-api:2.3.3
+Plugin-Developers: Kezhi Xiong:xiongkezhi:august.xkz@gmail.com
+Plugin-License-Name: MIT License
+Plugin-License-Url: https://opensource.org/licenses/MIT
+Plugin-ScmUrl: https://github.com/jenkinsci/checks-api-plugin
+

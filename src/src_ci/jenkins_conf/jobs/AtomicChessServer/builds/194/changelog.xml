@@ -1,0 +1,10 @@
+commit 5af7c3f0507096c3dd87ce19cdeabde01033984e
+tree 6b4fd59c5046a40fc98dc39f530f54b7b7cbdaa7
+parent e6537deb007008dbd079bcbf0ea747dcf1560c7a
+author dev1 <dev1@itsdomain.local> 2021-01-14 07:11:24 +0100
+committer dev1 <dev1@itsdomain.local> 2021-01-14 07:11:24 +0100
+
+    docker-compose scale to 10 instances
+
+
+:100644 100644 b49f78edc9fd3586e048b577c989bb845a051087 7a89c9f0b46dc4d28f95721f628769feeec63149 M	src/src_server/CI/docker-compose.yml

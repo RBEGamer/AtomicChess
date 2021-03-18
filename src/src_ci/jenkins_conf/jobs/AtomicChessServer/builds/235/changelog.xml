@@ -1,0 +1,36 @@
+commit 0780e58a5572d18f1dc322df9d633e42371dad43
+tree b5f788ce2063bdf7befe131db674e24e907054e5
+parent 3d667f93f3847f6ec49d5dbe09b7df9e6500c8e6
+author Marcel <info@prodevmo.com> 2021-03-11 02:28:27 +0100
+committer Marcel <info@prodevmo.com> 2021-03-11 02:28:27 +0100
+
+    added led color faq
+    
+
+
+:100644 100644 1b9e202ef33da1696fae7626be7fae2c84fe7a89 e3dccb97346d0b53cde1e9c48f4b4353efd3b837 M	src/src_server/ATC_Backend/views/index.ejs
+commit 3d667f93f3847f6ec49d5dbe09b7df9e6500c8e6
+tree 1ce1b303ffd0e115dd2d216e0c5b577a23081c50
+parent 40dd5ba8d7db281b22d654c359160e4e4bed8ba9
+author Marcel <info@prodevmo.com> 2021-03-11 01:45:29 +0100
+committer Marcel <info@prodevmo.com> 2021-03-11 01:45:29 +0100
+
+    added calibration coils siwtching
+    
+
+
+:100755 100755 95e7f94612b7d0d964dae0fd5aca1211f8068b08 2996fb72ba3d3213a36d04b608b8eac8777da587 M	src/src_controller/controller/controller/atc_controller
+:100644 100644 792e851d682815035afa46c4189dec3831d8e56f daf87f03aad8dbe59d94c47de8a733d63e26d0ac M	src/src_controller/controller/controller/controller.cpp
+commit 40dd5ba8d7db281b22d654c359160e4e4bed8ba9
+tree 629aae1d91316064c8649add290ad6e5d353c579
+parent 6cd5eee796627a13914039a98c2946c9c3fae3a0
+author Marcel <info@prodevmo.com> 2021-03-11 01:38:43 +0100
+committer Marcel <info@prodevmo.com> 2021-03-11 01:38:43 +0100
+
+    make the world working again
+    
+
+
+:100644 100644 14e6c8cfef6434e5bf7d18b127e7b3b5d4a390c6 258813dcd7f977b8b6418bb8874703a12522c25b M	src/src_atcqtui/src/qml/WINDOW.qml
+:100644 100644 ecb368fbd8e6b2406c59e187677393f23ad816af 07924b376242a7a4ff53f1da9efb0081df33fd17 M	src/src_controller/controller/controller/ConfigParser.cpp
+:100755 100755 43e4fbd75c00098bbccc6e424411603b2a0f446e 95e7f94612b7d0d964dae0fd5aca1211f8068b08 M	src/src_controller/controller/controller/atc_controller

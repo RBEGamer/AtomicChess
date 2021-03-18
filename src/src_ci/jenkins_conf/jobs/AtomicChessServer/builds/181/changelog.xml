@@ -1,0 +1,14 @@
+commit e3be28f26e818f77adef9d1c4d3708b7bfd67b6b
+tree 43d6ce32abcba171c7aae19bfe4b4195aa7190c8
+parent abfd7a8b54972476438ddbcbe506d7ce1760c091
+author dev1 <dev1@itsdomain.local> 2021-01-05 02:23:16 +0100
+committer dev1 <dev1@itsdomain.local> 2021-01-05 02:23:16 +0100
+
+    logupload working
+
+
+:100644 100644 549df4033ee70c2497311e4fcf123a955c6e0681 667fbbb7c880502fb24ac3f699e1ea2cf34aabee M	src/src_server/ATC_Backend/app.js
+:100644 100644 df34e9a5c2375d7e2325de49b6d5ee66373dc5d3 d97a0009daa9adee7ef04f533c394ab336311a44 M	src/src_server/ATC_Backend/routes/rest.js
+:100644 100644 6f422bef86f076f2f394f9ba671c45aaf3d80366 b256dcc6acd0140ce764e50320d8367abf27568f M	src/src_server/ATC_Backend/session_handling/profile_handling.js
+:000000 100644 0000000000000000000000000000000000000000 3148ea455fdee6e94e9587d54dc31169862b0571 A	src/src_server/CI/docker-compose_dev.yml
+:000000 100755 0000000000000000000000000000000000000000 e7dc7d77f02e53e7df2989c383568eafe1c9cd74 A	src/src_server/CI/start_stack_dev.sh

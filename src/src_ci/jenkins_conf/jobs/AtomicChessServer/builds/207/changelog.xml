@@ -1,0 +1,15 @@
+commit efdc85cdaf4241016f9b6eeec4665d309b974d43
+tree ef22eb10c18c20c12c9ad89ecc69bfa121efdc26
+parent f6feaa0af12be2839313dfc0397ad232051c0549
+author dev1 <dev1@itsdomain.local> 2021-01-17 20:24:56 +0100
+committer dev1 <dev1@itsdomain.local> 2021-01-17 20:24:56 +0100
+
+    added prev/next buttons
+
+
+:100644 100644 48bbcc7d9ade74740c48aee550b3227b0e5f72f6 0f371baa934d8f3f7d96dbd6ffc6d9005ab79271 M	src/src_server/ATC_Backend/public/img/icons/cloud_online.png
+:000000 100644 0000000000000000000000000000000000000000 d42aceebd0d135e7ff30a43fc4716ca601ccc6e9 A	src/src_server/ATC_Backend/public/img/icons/next.png
+:000000 100644 0000000000000000000000000000000000000000 a3b994cf67453d6ff22dba5042ff442c715a3c68 A	src/src_server/ATC_Backend/public/img/icons/prev.png
+:000000 100644 0000000000000000000000000000000000000000 7251c648d450aa4127d482745476fb28fb1f52f1 A	src/src_server/ATC_Backend/public/img/icons/stop.png
+:100644 100644 e21fabdf862466ee0fb618efbe50a379941a4777 1ada81d93fa98bda31635fad0468a34e4bcad668 M	src/src_server/ATC_Backend/views/statistics_home.ejs
+:100644 100644 35e7f5c96d68f5d2cdafb8542ccbbec78cb621bb 7939a46268d8f3bbaf782be7fb90960242eb96cd M	src/src_server/ATC_Backend/views/webclient.ejs

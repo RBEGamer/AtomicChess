@@ -1,0 +1,9 @@
+commit 7614e8d42314c267874376e4eef35c6ea3d4a30f
+tree 1384c687ca58c6aae25ee784b0bf8bd811d2eb9e
+parent 0af21fc88604898fdd92ecb5b3322850c0bf2fa4
+author Marcel Ochsendorf <marcel.ochsendorf@gmail.com> 2021-01-06 13:16:30 +0100
+committer GitHub <noreply@github.com> 2021-01-06 13:16:30 +0100
+
+    Create ntp.conf
+
+:000000 100644 0000000000000000000000000000000000000000 9514b01414566e8b9fb15ea3d959b90b44fe9945 A	src/src_buildroot/buildroot/OVERLAY_FS/etc/ntp.conf

@@ -1,0 +1,10 @@
+commit acdbc82de9e71b67f4777eeba71606845beeafa0
+tree e7282b7aabf601ef51370fac8a1551b240dde141
+parent 017f63c280b7aa5c92a9c532f76c2b98e658ca72
+author John Doe <johndoe@example.com> 2021-01-04 16:20:49 +0100
+committer John Doe <johndoe@example.com> 2021-01-04 16:20:49 +0100
+
+    .
+
+
+:100644 100644 12638e89d6dcb37a724b45ddda231004fd9d2240 281a7415d0c542d671f4e867fb6804d8d884ccb3 M	src/src_buildroot/buildroot/config_backup

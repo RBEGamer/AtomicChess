@@ -1,0 +1,14 @@
+commit 94cf0d384db0fb79381334a9b2f98c607cd56d0c
+tree d23c849dd838124c084335873cf1d84954c2f28f
+parent f47290534c9c984fb5c1aee58dc4f30d8c5e91dc
+author Marcel <info@prodevmo.com> 2021-03-08 23:55:07 +0100
+committer Marcel <info@prodevmo.com> 2021-03-08 23:55:07 +0100
+
+    fix makefile atc_controller
+    
+
+
+:100755 100755 bb751e1f79e9935e1cedb125f6df7e70476b2b6e ac3a0c2da793170c9cc9f17f9b0b87d657bb52a1 M	src/src_buildroot/buildroot/build.sh
+:100644 100644 87a79626242c87f3f3d669290ecda3d4400b951b b3603742364ae6e70ec09b7b0baa902970d15eb1 M	src/src_buildroot/buildroot/config_backup
+:100644 100644 c89d0880e5bdce1aeaab802c95baa1118c9043de 084a0a26b9ff76c6fdb7266e93ef319fb6017796 M	src/src_buildroot/buildroot/package/atcctl/atcctl.mk
+:100755 100755 c8e3360699ac7c105570cb6608b6ba3991bbf7d3 49f64c6e7a078e9f73528ceed2d9111af04646a7 M	src/src_controller/copy_to_buildroot_package.sh

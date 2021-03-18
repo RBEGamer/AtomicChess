@@ -1,0 +1,15 @@
+commit e5e096284db8213617d11d3f729298a3e86fb630
+tree b20e8c9c2786da6d3a40915672d27ff0c4fd7bd3
+parent e3be28f26e818f77adef9d1c4d3708b7bfd67b6b
+author dev1 <dev1@itsdomain.local> 2021-01-06 01:43:13 +0100
+committer dev1 <dev1@itsdomain.local> 2021-01-06 01:43:13 +0100
+
+    added /server_config route to change general server config
+
+
+:100644 100644 c8057c082815e9f24688f60863ef3fc2a480e442 d7f080bf69d3a441291f02338df5fc5ef3a2c1d8 M	src/src_server/ATC_Backend/chess_related_logic/matchmaking_logic.js
+:100644 100644 e608eb72364c0acda1ae25226f41f0557f0b18fd f1de9b6f52ce8731a0906b9ffb2df6ff5a75d74e M	src/src_server/ATC_Backend/config.js
+:100644 100644 f8d85142d76311bead522d531d556b502c8f3c13 720400e10c6d722769b169679a2e9a80280504f6 M	src/src_server/ATC_Backend/config.json
+:100644 100644 586cfdbc38b462f88d36bfd51d20d4fcce9d249d 37696efcb91ec0ecebed605fe2d4935d5340cdfe M	src/src_server/ATC_Backend/routes/index.js
+:100644 100644 d97a0009daa9adee7ef04f533c394ab336311a44 d3e3e43b78bddb1285e4ced1270c3c1511f513d3 M	src/src_server/ATC_Backend/routes/rest.js
+:000000 100644 0000000000000000000000000000000000000000 a07109116b5170617e24950ee4c169631f3e7021 A	src/src_server/ATC_Backend/views/server_config.ejs

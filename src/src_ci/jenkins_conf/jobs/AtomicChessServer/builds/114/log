@@ -1,0 +1,541 @@
+Started by timer
+Running as SYSTEM
+Building remotely on [8mha:////4NhQxXi60jAlX5rncxKDkW4xGC/PmymblX2gatAeBdgUAAAAoh+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAyeEgYx/eT83ILSktQi/Zz85MSc+OLUorLUIgBFdgO6ywAAAA==[0mlocal_server (ATC_SERVER_AGENT) in workspace /var/jenkins_build/workspace/AtomicChessServer
+The recommended git tool is: NONE
+using credential 867013a9-1ccb-4bd0-b0c8-f41e88a499f9
+ > git rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url git@github.com:RBEGamer/AtomicChessOS.git # timeout=10
+Fetching upstream changes from git@github.com:RBEGamer/AtomicChessOS.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.17.1'
+using GIT_SSH to set credentials local ssh key
+ > git fetch --tags --progress -- git@github.com:RBEGamer/AtomicChessOS.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/server^{commit} # timeout=10
+Checking out Revision 12b28f605bb22b929c27eee8e7aa61518a488166 (refs/remotes/origin/server)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 12b28f605bb22b929c27eee8e7aa61518a488166 # timeout=10
+Commit message: "Update README.md"
+ > git rev-list --no-walk 12b28f605bb22b929c27eee8e7aa61518a488166 # timeout=10
+[AtomicChessServer] $ /bin/sh -xe /tmp/jenkins2182207414820676125.sh
++ ls
+src
++ cd ./src/src_server/CI/
++ bash ./start_stack.sh
+TERM environment variable not set.
+AtomicChessRedisDatabase uses an image, skipping
+AtomicChessMongoDatabase uses an image, skipping
+redis-commander uses an image, skipping
+Building AtomicChessMoveValidator
+Step 1/11 : FROM python:3.7-alpine
+ ---> f4bd0adb4b78
+Step 2/11 : LABEL maintainer="Marcel Ochsendorf info@marcelochsendorf.com"
+ ---> Running in ef0cd53047b3
+Removing intermediate container ef0cd53047b3
+ ---> 9fd0a7764995
+Step 3/11 : WORKDIR /app
+ ---> Running in 9c45bb3020b8
+Removing intermediate container 9c45bb3020b8
+ ---> 4957af16331d
+Step 4/11 : COPY . /app
+ ---> b6226e99fb29
+Step 5/11 : RUN pwd
+ ---> Running in 956fcbf76ec4
+/app
+Removing intermediate container 956fcbf76ec4
+ ---> 9592e0c76a24
+Step 6/11 : RUN ls -la
+ ---> Running in ab470abde63a
+total 88
+drwxr-xr-x    1 root     root          4096 Dec  1 07:25 .
+drwxr-xr-x    1 root     root          4096 Dec  1 07:25 ..
+drwxr-xr-x    3 root     root          4096 Nov 30 21:49 .idea
+-rw-r--r--    1 root     root         27073 Nov 30 21:49 ATC_Move_Validator.log
+-rw-r--r--    1 root     root           273 Nov 30 21:49 Dockerfile
+-rw-r--r--    1 root     root           753 Nov 30 21:49 README.md
+-rw-r--r--    1 root     root            29 Nov 30 21:49 RUN_IN_CONTAINER
+-rw-r--r--    1 root     root          4454 Nov 30 21:49 app.py
+drwxr-xr-x    2 root     root          4096 Nov 30 21:49 bin
+-rwxr-xr-x    1 root     root            47 Nov 30 21:49 buid_dockerimage.sh
+drwxr-xr-x    3 root     root          4096 Nov 30 21:49 lib
+lrwxrwxrwx    1 root     root             3 Nov 30 21:49 lib64 -> lib
+drwxr-xr-x    2 root     root          4096 Nov 30 21:49 python-chess
+-rw-r--r--    1 root     root            69 Nov 30 21:49 pyvenv.cfg
+-rw-r--r--    1 root     root           129 Nov 30 21:49 requirements.txt
+drwxr-xr-x    4 root     root          4096 Nov 30 21:49 venv_37
+Removing intermediate container ab470abde63a
+ ---> 007e83339074
+Step 7/11 : RUN pip3 install -r /app/requirements.txt
+ ---> Running in ccd08ceb88f2
+Collecting click==7.1.2
+  Downloading click-7.1.2-py2.py3-none-any.whl (82 kB)
+Collecting Flask==1.1.2
+  Downloading Flask-1.1.2-py2.py3-none-any.whl (94 kB)
+Collecting itsdangerous==1.1.0
+  Downloading itsdangerous-1.1.0-py2.py3-none-any.whl (16 kB)
+Collecting Jinja2==2.11.2
+  Downloading Jinja2-2.11.2-py2.py3-none-any.whl (125 kB)
+Collecting MarkupSafe==1.1.1
+  Downloading MarkupSafe-1.1.1.tar.gz (19 kB)
+Collecting python-chess>=0.31.3
+  Downloading python_chess-1.999-py3-none-any.whl (1.4 kB)
+Collecting Werkzeug==1.0.1
+  Downloading Werkzeug-1.0.1-py2.py3-none-any.whl (298 kB)
+Collecting gunicorn>=20
+  Downloading gunicorn-20.0.4-py2.py3-none-any.whl (77 kB)
+Collecting chess<2,>=1
+  Downloading chess-1.3.0-py3-none-any.whl (140 kB)
+Requirement already satisfied: setuptools>=3.0 in /usr/local/lib/python3.7/site-packages (from gunicorn>=20->-r /app/requirements.txt (line 8)) (50.3.2)
+Building wheels for collected packages: MarkupSafe
+  Building wheel for MarkupSafe (setup.py): started
+  Building wheel for MarkupSafe (setup.py): finished with status 'done'
+  Created wheel for MarkupSafe: filename=MarkupSafe-1.1.1-py3-none-any.whl size=12627 sha256=0cc3e2dc3d4396ab72bed350be7723215bea74f3b5084f6570b8156fcd8e4569
+  Stored in directory: /root/.cache/pip/wheels/b9/d9/ae/63bf9056b0a22b13ade9f6b9e08187c1bb71c47ef21a8c9924
+Successfully built MarkupSafe
+Installing collected packages: click, itsdangerous, MarkupSafe, Jinja2, Werkzeug, Flask, chess, python-chess, gunicorn
+Successfully installed Flask-1.1.2 Jinja2-2.11.2 MarkupSafe-1.1.1 Werkzeug-1.0.1 chess-1.3.0 click-7.1.2 gunicorn-20.0.4 itsdangerous-1.1.0 python-chess-1.999
+[91mWARNING: You are using pip version 20.2.4; however, version 20.3 is available.
+You should consider upgrading via the '/usr/local/bin/python -m pip install --upgrade pip' command.
+[0mRemoving intermediate container ccd08ceb88f2
+ ---> b13ac6116ce9
+Step 8/11 : RUN pip3 install python-chess
+ ---> Running in 638c515d2855
+Requirement already satisfied: python-chess in /usr/local/lib/python3.7/site-packages (1.999)
+Requirement already satisfied: chess<2,>=1 in /usr/local/lib/python3.7/site-packages (from python-chess) (1.3.0)
+[91mWARNING: You are using pip version 20.2.4; however, version 20.3 is available.
+You should consider upgrading via the '/usr/local/bin/python -m pip install --upgrade pip' command.
+[0mRemoving intermediate container 638c515d2855
+ ---> ea5d3b9fdcd5
+Step 9/11 : RUN rm -f ./RUN_IN_CONTAINER
+ ---> Running in b7d7d0d7a359
+Removing intermediate container b7d7d0d7a359
+ ---> 5d4aa988536b
+Step 10/11 : EXPOSE 5001
+ ---> Running in 09f2e7a2a6ea
+Removing intermediate container 09f2e7a2a6ea
+ ---> 914e4930757b
+Step 11/11 : CMD ["python3", "./app.py"]
+ ---> Running in f81de6c6d13a
+Removing intermediate container f81de6c6d13a
+ ---> 8555ac9cb566
+
+Successfully built 8555ac9cb566
+Successfully tagged atcmovevalidator:latest
+Building AtomicChessBackend
+Step 1/13 : FROM node:14-alpine
+ ---> 7f1893c3ede0
+Step 2/13 : LABEL maintainer="Marcel Ochsendorf info@marcelochsendorf.com"
+ ---> Running in 7793643646c9
+Removing intermediate container 7793643646c9
+ ---> 39f7295aea48
+Step 3/13 : RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
+ ---> Running in 909829ad8f25
+Removing intermediate container 909829ad8f25
+ ---> 848a3515c9d6
+Step 4/13 : WORKDIR /home/node/app
+ ---> Running in fafe0c9acde5
+Removing intermediate container fafe0c9acde5
+ ---> 193813d38457
+Step 5/13 : COPY package*.json ./
+ ---> e5c4d8b44b2c
+Step 6/13 : USER node
+ ---> Running in 7ed3717f2e02
+Removing intermediate container 7ed3717f2e02
+ ---> 51a07e630d6d
+Step 7/13 : RUN npm install
+ ---> Running in dcca0332466c
+added 128 packages from 131 contributors and audited 129 packages in 4.698s
+
+3 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+Removing intermediate container dcca0332466c
+ ---> d526f2eb338f
+Step 8/13 : COPY --chown=node:node . .
+ ---> e17cfdf36611
+Step 9/13 : RUN ls
+ ---> Running in 6975e086f226
+Dockerfile
+RUN_IN_CONTAINER
+app.js
+bin
+buid_dockerfile.sh
+chess_related_logic
+config.js
+config.json
+config_backup.json
+docker-compose.yml
+install.sh
+node_modules
+package-lock.json
+package.json
+public
+routes
+session_handling
+views
+Removing intermediate container 6975e086f226
+ ---> d233ec7fcdbe
+Step 10/13 : RUN rm -f ./RUN_IN_CONTAINER
+ ---> Running in 49aeeb2a0330
+Removing intermediate container 49aeeb2a0330
+ ---> 3cb20f4cd42a
+Step 11/13 : RUN ls
+ ---> Running in 8b3d4416d1cb
+Dockerfile
+app.js
+bin
+buid_dockerfile.sh
+chess_related_logic
+config.js
+config.json
+config_backup.json
+docker-compose.yml
+install.sh
+node_modules
+package-lock.json
+package.json
+public
+routes
+session_handling
+views
+Removing intermediate container 8b3d4416d1cb
+ ---> 2d9f70702568
+Step 12/13 : EXPOSE 3000
+ ---> Running in 572f87757a68
+Removing intermediate container 572f87757a68
+ ---> ff19130f245f
+Step 13/13 : CMD [ "npm", "start" ]
+ ---> Running in fa08af4ddd84
+Removing intermediate container fa08af4ddd84
+ ---> c3603baaa2cd
+
+Successfully built c3603baaa2cd
+Successfully tagged atcbackend:latest
+Building AtomicChessAutoPlayer
+Step 1/8 : FROM golang:latest
+ ---> 6d8772fbd285
+Step 2/8 : RUN mkdir /app
+ ---> Running in bb9c9b9753b1
+Removing intermediate container bb9c9b9753b1
+ ---> bfaea2213545
+Step 3/8 : ADD . /app/
+ ---> 99dae5bb9308
+Step 4/8 : WORKDIR /app
+ ---> Running in 7ad8896bfe81
+Removing intermediate container 7ad8896bfe81
+ ---> 303685f3da76
+Step 5/8 : RUN ls
+ ---> Running in a9f33eac140d
+ATC_AutoPlayer_Build
+AutoPlayer.go
+Dockerfile
+buid_dockerfile.sh
+stockfish-11-linux
+uci.go
+uci_go_licence.md
+Removing intermediate container a9f33eac140d
+ ---> ba1722988b50
+Step 6/8 : RUN cd ./stockfish-11-linux/src/ && make clean && make build ARCH=autodetect
+ ---> Running in c261459b95ee
+
+Config:
+debug: 'no'
+sanitize: 'no'
+optimize: 'yes'
+arch: 'x86_64'
+bits: '64'
+kernel: 'Linux'
+os: 'GNU/Linux'
+prefetch: 'no'
+popcnt: 'no'
+sse: 'no'
+pext: 'no'
+
+Flags:
+CXX: g++
+CXXFLAGS: -Wall -Wcast-qual -fno-exceptions -std=c++11  -pedantic -Wextra -Wshadow -m64 -DNDEBUG -O3 -DIS_64BIT -DNO_PREFETCH -flto
+LDFLAGS:  -m64 -Wl,--no-as-needed -lpthread -Wall -Wcast-qual -fno-exceptions -std=c++11  -pedantic -Wextra -Wshadow -m64 -DNDEBUG -O3 -DIS_64BIT -DNO_PREFETCH -flto
+
+Testing config sanity. If this fails, try 'make help' ...
+
+make ARCH=autodetect COMP=gcc all
+make[1]: Entering directory '/app/stockfish-11-linux/src'
+g++ -Wall -Wcast-qual -fno-exceptions -std=c++11  -pedantic -Wextra -Wshadow -m64 -DNDEBUG -O3 -DIS_64BIT -DNO_PREFETCH -flto   -c -o benchmark.o benchmark.cpp
+g++ -Wall -Wcast-qual -fno-exceptions -std=c++11  -pedantic -Wextra -Wshadow -m64 -DNDEBUG -O3 -DIS_64BIT -DNO_PREFETCH -flto   -c -o bitbase.o bitbase.cpp
+g++ -Wall -Wcast-qual -fno-exceptions -std=c++11  -pedantic -Wextra -Wshadow -m64 -DNDEBUG -O3 -DIS_64BIT -DNO_PREFETCH -flto   -c -o bitboard.o bitboard.cpp
+g++ -Wall -Wcast-qual -fno-exceptions -std=c++11  -pedantic -Wextra -Wshadow -m64 -DNDEBUG -O3 -DIS_64BIT -DNO_PREFETCH -flto   -c -o endgame.o endgame.cpp
+g++ -Wall -Wcast-qual -fno-exceptions -std=c++11  -pedantic -Wextra -Wshadow -m64 -DNDEBUG -O3 -DIS_64BIT -DNO_PREFETCH -flto   -c -o evaluate.o evaluate.cpp
+g++ -Wall -Wcast-qual -fno-exceptions -std=c++11  -pedantic -Wextra -Wshadow -m64 -DNDEBUG -O3 -DIS_64BIT -DNO_PREFETCH -flto   -c -o main.o main.cpp
+g++ -Wall -Wcast-qual -fno-exceptions -std=c++11  -pedantic -Wextra -Wshadow -m64 -DNDEBUG -O3 -DIS_64BIT -DNO_PREFETCH -flto   -c -o material.o material.cpp
+g++ -Wall -Wcast-qual -fno-exceptions -std=c++11  -pedantic -Wextra -Wshadow -m64 -DNDEBUG -O3 -DIS_64BIT -DNO_PREFETCH -flto   -c -o misc.o misc.cpp
+g++ -Wall -Wcast-qual -fno-exceptions -std=c++11  -pedantic -Wextra -Wshadow -m64 -DNDEBUG -O3 -DIS_64BIT -DNO_PREFETCH -flto   -c -o movegen.o movegen.cpp
+g++ -Wall -Wcast-qual -fno-exceptions -std=c++11  -pedantic -Wextra -Wshadow -m64 -DNDEBUG -O3 -DIS_64BIT -DNO_PREFETCH -flto   -c -o movepick.o movepick.cpp
+g++ -Wall -Wcast-qual -fno-exceptions -std=c++11  -pedantic -Wextra -Wshadow -m64 -DNDEBUG -O3 -DIS_64BIT -DNO_PREFETCH -flto   -c -o pawns.o pawns.cpp
+g++ -Wall -Wcast-qual -fno-exceptions -std=c++11  -pedantic -Wextra -Wshadow -m64 -DNDEBUG -O3 -DIS_64BIT -DNO_PREFETCH -flto   -c -o position.o position.cpp
+g++ -Wall -Wcast-qual -fno-exceptions -std=c++11  -pedantic -Wextra -Wshadow -m64 -DNDEBUG -O3 -DIS_64BIT -DNO_PREFETCH -flto   -c -o psqt.o psqt.cpp
+g++ -Wall -Wcast-qual -fno-exceptions -std=c++11  -pedantic -Wextra -Wshadow -m64 -DNDEBUG -O3 -DIS_64BIT -DNO_PREFETCH -flto   -c -o search.o search.cpp
+g++ -Wall -Wcast-qual -fno-exceptions -std=c++11  -pedantic -Wextra -Wshadow -m64 -DNDEBUG -O3 -DIS_64BIT -DNO_PREFETCH -flto   -c -o thread.o thread.cpp
+g++ -Wall -Wcast-qual -fno-exceptions -std=c++11  -pedantic -Wextra -Wshadow -m64 -DNDEBUG -O3 -DIS_64BIT -DNO_PREFETCH -flto   -c -o timeman.o timeman.cpp
+g++ -Wall -Wcast-qual -fno-exceptions -std=c++11  -pedantic -Wextra -Wshadow -m64 -DNDEBUG -O3 -DIS_64BIT -DNO_PREFETCH -flto   -c -o tt.o tt.cpp
+g++ -Wall -Wcast-qual -fno-exceptions -std=c++11  -pedantic -Wextra -Wshadow -m64 -DNDEBUG -O3 -DIS_64BIT -DNO_PREFETCH -flto   -c -o uci.o uci.cpp
+g++ -Wall -Wcast-qual -fno-exceptions -std=c++11  -pedantic -Wextra -Wshadow -m64 -DNDEBUG -O3 -DIS_64BIT -DNO_PREFETCH -flto   -c -o ucioption.o ucioption.cpp
+g++ -Wall -Wcast-qual -fno-exceptions -std=c++11  -pedantic -Wextra -Wshadow -m64 -DNDEBUG -O3 -DIS_64BIT -DNO_PREFETCH -flto   -c -o syzygy/tbprobe.o syzygy/tbprobe.cpp
+g++ -o stockfish benchmark.o bitbase.o bitboard.o endgame.o evaluate.o main.o material.o misc.o movegen.o movepick.o pawns.o position.o psqt.o search.o thread.o timeman.o tt.o uci.o ucioption.o syzygy/tbprobe.o  -m64 -Wl,--no-as-needed -lpthread -Wall -Wcast-qual -fno-exceptions -std=c++11  -pedantic -Wextra -Wshadow -m64 -DNDEBUG -O3 -DIS_64BIT -DNO_PREFETCH -flto
+make[1]: Leaving directory '/app/stockfish-11-linux/src'
+Removing intermediate container c261459b95ee
+ ---> 4a0382fb2c19
+Step 7/8 : RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main .
+ ---> Running in aeb815837676
+[91m# internal/unsafeheader
+runtime: failed to create new OS thread (have 8 already; errno=11)
+runtime: may need to increase max user processes (ulimit -u)
+fatal error: newosproc
+
+runtime stack:
+runtime.throw(0xc47ce7, 0x9)
+	/usr/local/go/src/runtime/panic.go:1116 +0x72
+runtime.newosproc(0xc000542000)
+	/usr/local/go/src/runtime/os_linux.go:161 +0x1c5
+runtime.newm1(0xc000542000)
+	/usr/local/go/src/runtime/proc.go:1837 +0xdd
+runtime.newm(0x0, 0xc000023800, 0x7)
+	/usr/local/go/src/runtime/proc.go:1816 +0x9b
+runtime.startm(0xc000023800, 0x111af00)
+	/usr/local/go/src/runtime/proc.go:1973 +0xc9
+runtime.handoffp(0xc000023800)
+	/usr/local/go/src/runtime/proc.go:2001 +0x52
+runtime.entersyscallblock_handoff()
+	/usr/local/go/src/runtime/proc.go:3213 +0x30
+runtime.systemstack(0x46b114)
+	/usr/local/go/src/runtime/asm_amd64.s:370 +0x66
+runtime.mstart()
+	/usr/local/go/src/runtime/proc.go:1116
+
+goroutine 1 [syscall]:
+runtime.notetsleepg(0x115c518, 0xffffffffffffffff, 0xc000028800)
+	/usr/local/go/src/runtime/lock_futex.go:235 +0x34 fp=0xc0000b7440 sp=0xc0000b7410 pc=0x40c1d4
+runtime.gcBgMarkStartWorkers()
+	/usr/local/go/src/runtime/mgc.go:1840 +0x90 fp=0xc0000b7480 sp=0xc0000b7440 pc=0x41ccb0
+runtime.gcStart(0x0, 0x0, 0x0)
+	/usr/local/go/src/runtime/mgc.go:1296 +0x1ca fp=0xc0000b74f8 sp=0xc0000b7480 pc=0x41b78a
+runtime.mallocgc(0x138000, 0xc28ea0, 0xc00009e601, 0xc000397860)
+	/usr/local/go/src/runtime/malloc.go:1153 +0x470 fp=0xc0000b7598 sp=0xc0000b74f8 pc=0x40d7b0
+runtime.makeslice(0xc28ea0, 0x4, 0x4, 0xc0000a8720)
+	/usr/local/go/src/runtime/slice.go:98 +0x6c fp=0xc0000b75c8 sp=0xc0000b7598 pc=0x44e0ec
+cmd/compile/internal/gc.initssaconfig()
+	/usr/local/go/src/cmd/compile/internal/gc/ssa.go:68 +0x332 fp=0xc0000b7838 sp=0xc0000b75c8 pc=0xabb472
+cmd/compile/internal/gc.Main(0xc6e390)
+	/usr/local/go/src/cmd/compile/internal/gc/main.go:732 +0x3375 fp=0xc0000b7f10 sp=0xc0000b7838 pc=0xa5f075
+main.main()
+	/usr/local/go/src/cmd/compile/main.go:52 +0xb1 fp=0xc0000b7f88 sp=0xc0000b7f10 pc=0xba5ff1
+runtime.main()
+	/usr/local/go/src/runtime/proc.go:204 +0x209 fp=0xc0000b7fe0 sp=0xc0000b7f88 pc=0x4393c9
+runtime.goexit()
+	/usr/local/go/src/runtime/asm_amd64.s:1374 +0x1 fp=0xc0000b7fe8 sp=0xc0000b7fe0 pc=0x46ce81
+# internal/race
+runtime: failed to create new OS thread (have 7 already; errno=11)
+runtime: may need to increase max user processes (ulimit -u)
+fatal error: newosproc
+
+runtime stack:
+runtime.throw(0xc47ce7, 0x9)
+	/usr/local/go/src/runtime/panic.go:1116 +0x72
+runtime.newosproc(0xc000542400)
+	/usr/local/go/src/runtime/os_linux.go:161 +0x1c5
+runtime.newm1(0xc000542400)
+	/usr/local/go/src/runtime/proc.go:1837 +0xdd
+runtime.newm(0xc6f5d0, 0xc000024000, 0x6)
+	/usr/local/go/src/runtime/proc.go:1816 +0x9b
+runtime.startm(0x0, 0xc000041f01)
+	/usr/local/go/src/runtime/proc.go:1973 +0xc9
+runtime.wakep()
+	/usr/local/go/src/runtime/proc.go:2061 +0x66
+runtime.resetspinning()
+	/usr/local/go/src/runtime/proc.go:2533 +0x59
+runtime.schedule()
+	/usr/local/go/src/runtime/proc.go:2684 +0x2b9
+runtime.park_m(0xc000580600)
+	/usr/local/go/src/runtime/proc.go:2845 +0x9d
+runtime.mcall(0x0)
+	/usr/local/go/src/runtime/asm_amd64.s:318 +0x5b
+
+goroutine 1 [running]:
+	goroutine running on other thread; stack unavailable
+# runtime/internal/sys
+runtime: failed to create new OS thread (have 7 already; errno=11)
+runtime: may need to increase max user processes (ulimit -u)
+fatal error: newosproc
+
+runtime stack:
+runtime.throw(0xc47ce7, 0x9)
+	/usr/local/go/src/runtime/panic.go:1116 +0x72
+runtime.newosproc(0xc000480400)
+	/usr/local/go/src/runtime/os_linux.go:161 +0x1c5
+runtime.newm1(0xc000480400)
+	/usr/local/go/src/runtime/proc.go:1837 +0xdd
+runtime.newm(0xc6f5d0, 0xc000026000, 0x6)
+	/usr/local/go/src/runtime/proc.go:1816 +0x9b
+runtime.startm(0x0, 0xc0003bc001)
+	/usr/local/go/src/runtime/proc.go:1973 +0xc9
+runtime.wakep()
+	/usr/local/go/src/runtime/proc.go:2061 +0x66
+runtime.resetspinning()
+	/usr/local/go/src/runtime/proc.go:2533 +0x59
+runtime.schedule()
+	/usr/local/go/src/runtime/proc.go:2684 +0x2b9
+runtime.park_m(0xc000000300)
+	/usr/local/go/src/runtime/proc.go:2845 +0x9d
+runtime.mca[0m[91mll(0x0)
+	/usr/local/go/src/runtime/asm_amd64.s:318 +0x5b
+
+goroutine 1 [runnable]:
+cmd/compile/internal/gc.initssaconfig()
+	/usr/local/go/src/cmd/compile/internal/gc/ssa.go:68 +0x332
+cmd/compile/internal/gc.Main(0xc6e390)
+	/usr/local/go/src/cmd/compile/internal/gc/main.go:732 +0x3375
+main.main()
+	/usr/local/go/src/cmd/compile/main.go:52 +0xb1
+[0m[91m# container/list
+runtime: failed to create new OS thread (have 6 already; errno=11)
+runtime: may need to increase max user processes (ulimit -u)
+fatal error: newosproc
+
+runtime stack:
+runtime.throw(0xc47ce7, 0x9)
+	/usr/local/go/src/runtime/panic.go:1116 +0x72
+runtime.newosproc(0xc0005b8000)
+	/usr/local/go/src/runtime/os_linux.go:161 +0x1c5
+runtime.newm1(0xc0005b8000)
+	/usr/local/go/src/runtime/proc.go:1837 +0xdd
+runtime.newm(0xc6f5d0, 0xc000023800, 0x5)
+	/usr/local/go/src/runtime/proc.go:1816 +0x9b
+runtime.startm(0x0, 0xc000043f01)
+	/usr/local/go/src/runtime/proc.go:1973 +0xc9
+runtime.wakep()
+	/usr/local/go/src/runtime/proc.go:2061 +0x66
+runtime.resetspinning()
+	/usr/local/go/src/runtime/proc.go:2533 +0x59
+runtime.schedule()
+	/usr/local/go/src/runtime/proc.go:2684 +0x2b9
+runtime.park_m(0xc000000d80)
+	/usr/local/go/src/runtime/proc.go:2845 +0x9d
+runtime.mcall(0x0)
+	/usr/local/go/src/runtime/asm_amd64.s:318 +0x5b
+
+goroutine 1 [syscall]:
+cmd/compile/internal/gc.initssaconfig()
+	/usr/local/go/src/cmd/compile/internal/gc/ssa.go:68 +0x332
+cmd/compile/internal/gc.Main(0xc6e390)
+	/usr/local/go/src/cmd/compile/internal/gc/main.go:732 +0x3375
+main.main()
+	/usr/local/go/src/cmd/compile/main.go:52 +0xb1
+[0m[91m# internal/cpu
+runtime: failed to create new OS thread (have 6 already; errno=11)
+runtime: may need to increase max user processes (ulimit -u)
+fatal error: newosproc
+runtime: failed to create new OS thread (have 7 already; errno=11)
+runtime: may need to increase max user processes (ulimit -u)
+fatal error: newosproc
+
+runtime stack:
+runtime.throw(0xc47ce7, 0x9)
+	/usr/local/go/src/runtime/panic.go:1116 +0x72
+runtime.newosproc(0xc0000e4c00)
+	/usr/local/go/src/runtime/os_linux.go:161 +0x1c5
+runtime.newm1(0xc0000e4c00)
+	/usr/local/go/src/runtime/proc.go:1837 +0xdd
+runtime.newm(0x0, 0xc00001e800, 0x5)
+	/usr/local/go/src/runtime/proc.go:1816 +0x9b
+runtime.startm(0xc00001e800, 0x111af00)
+	/usr/local/go/src/runtime/proc.go:1973 +0xc9
+runtime.handoffp(0xc00001e800)
+	/usr/local/go/src/runtime/proc.go:2001 +0x52
+runtime.entersyscallblock_handoff()
+	/usr/local/go/src/runtime/proc.go:3213 +0x30
+runtime.systemstack(0x46b114)
+	/usr/local/go/src/runtime/asm_amd64.s:370 +0x66
+runtime.mstart()
+	/usr/local/go/src/runtime/proc.go:1116
+
+goroutine 1 [syscall]:
+runtime.notetsleepg(0x115c518, 0xffffffffffffffff, 0xc00001c000)
+	/usr/local/go/src/runtime/lock_futex.go:235 +0x34 fp=0xc0000b7440 sp=0xc0000b7410 pc=0x40c1d4
+runtime.gcBgMarkStartWorkers()
+	/usr/local/go/src/runtime/mgc.go:1840 +0x90 fp=0xc0000b7480 sp=0xc0000b7440 pc=0x41ccb0
+runtime.gcStart(0x0, 0x0, 0x0)
+	/usr/local/go/src/runtime/mgc.go:1296 +0x1ca fp=0xc0000b74f8 sp=0xc0000b7480 pc=0x41b78a
+runtime.mallocgc(0x138000, 0xc28ea0, 0xc00009e901, 0xc0003f9140)
+	/usr/local/go/src/runtime/malloc.go:1153 +0x470 fp=0xc0000b7598 sp=0xc0000b74f8 pc=0x40d7b0
+runtime.makeslice(0xc28ea0, 0x4, 0x4, 0xc0000a8780)
+	/usr/local/go/src/runtime/slice.go:98 +0x6c fp=0xc0000b75c8 sp=0xc0000b7598 pc=0x44e0ec
+cmd/compile/internal/gc.initssaconfig()
+	/usr/local/go/src/cmd/compile/internal/gc/ssa.go:68 +0x332 fp=0xc0000b7838 sp=0xc0000b75c8 pc=0xabb472
+cmd/compile/internal/gc.Main(0xc6e390)
+	/usr/local/go/src/cmd/compile/internal/gc/main.go:732 +0x3375 fp=0xc0000b7f10 sp=0xc0000b7838 pc=0xa5f075
+main.main()
+	/usr/local/go/src/cmd/compile/main.go:52 +0xb1 fp=0xc0000b7f88 sp=0xc0000b7f10 pc=0xba5ff1
+runtime.main()
+	/usr/local/go/src/runtime/proc.go:204 +0x209 fp=0xc0000b7fe0 sp=0xc0000b7f88 pc=0x4393c9
+runtime.goexit()
+	/usr/local/go/src/runtime/asm_amd64.s:1374 +0x1 fp=0xc0000b7fe8 sp=0xc0000b7fe0 pc=0x46ce81
+
+runtime stack:
+runtime.throw(0xc47ce7, 0x9)
+	/usr/local/go/src/runtime/panic.go:1116 +0x72
+runtime.newosproc(0xc000540000)
+	/usr/local/go/src/runtime/os_linux.go:161 +0x1c5
+runtime.newm1(0xc000540000)
+	/usr/local/go/src/runtime/proc.go:1837 +0xdd
+runtime.newm(0xc6f5d0, 0xc000023800, 0x6)
+	/usr/local/go/src/runtime/proc.go:1816 +0x9b
+runtime.startm(0x0, 0xc000043f01)
+	/usr/local/go/src/runtime/proc.go:1973 +0xc9
+runtime.wakep()
+	/usr/local/go/src/runtime/proc.go:2061 +0x66
+runtime.resetspinning()
+	/usr/local/go/src/runtime/proc.go:2533 +0x59
+runtime.schedule()
+	/usr/local/go/src/runtime/proc.go:2684 +0x2b9
+runtime.park_m(0xc000000d80)
+	/usr/local/go/src/runtime/proc.go:2845 +0x9d
+runtime.mcall(0x0)
+	/usr/local/go/src/runtime/asm_amd64.s:318 +0x5b
+[0mService 'AtomicChessAutoPlayer' failed to build : The command '/bin/sh -c CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main .' returned a non-zero code: 2
+Stopping ci_AtomicChessAutoPlayer_5 ... 
+Stopping ci_AtomicChessAutoPlayer_3 ... 
+Stopping ci_AtomicChessAutoPlayer_1 ... 
+Stopping ci_AtomicChessAutoPlayer_4 ... 
+Stopping ci_AtomicChessAutoPlayer_2 ... 
+Stopping atcbackend                 ... 
+Stopping redis-commander            ... 
+Stopping atcmovevalidator           ... 
+Stopping atcredis                   ... 
+Stopping atcmongo                   ... 
+[10A[2KStopping ci_AtomicChessAutoPlayer_5 ... [32mdone[0m[10B[9A[2KStopping ci_AtomicChessAutoPlayer_3 ... [32mdone[0m[9B[6A[2KStopping ci_AtomicChessAutoPlayer_2 ... [32mdone[0m[6B[7A[2KStopping ci_AtomicChessAutoPlayer_4 ... [32mdone[0m[7B[5A[2KStopping atcbackend                 ... [32mdone[0m[5B[8A[2KStopping ci_AtomicChessAutoPlayer_1 ... [32mdone[0m[8B[4A[2KStopping redis-commander            ... [32mdone[0m[4B[1A[2KStopping atcmongo                   ... [32mdone[0m[1B[2A[2KStopping atcredis                   ... [32mdone[0m[2B[3A[2KStopping atcmovevalidator           ... [32mdone[0m[3BRemoving ci_AtomicChessAutoPlayer_5 ... 
+Removing ci_AtomicChessAutoPlayer_3 ... 
+Removing ci_AtomicChessAutoPlayer_1 ... 
+Removing ci_AtomicChessAutoPlayer_4 ... 
+Removing ci_AtomicChessAutoPlayer_2 ... 
+Removing atcbackend                 ... 
+Removing redis-commander            ... 
+Removing atcmovevalidator           ... 
+Removing atcredis                   ... 
+Removing atcmongo                   ... 
+[4A[2KRemoving redis-commander            ... [32mdone[0m[4B[10A[2KRemoving ci_AtomicChessAutoPlayer_5 ... [32mdone[0m[10B[7A[2KRemoving ci_AtomicChessAutoPlayer_4 ... [32mdone[0m[7B[6A[2KRemoving ci_AtomicChessAutoPlayer_2 ... [32mdone[0m[6B[8A[2KRemoving ci_AtomicChessAutoPlayer_1 ... [32mdone[0m[8B[2A[2KRemoving atcredis                   ... [32mdone[0m[2B[3A[2KRemoving atcmovevalidator           ... [32mdone[0m[3B[5A[2KRemoving atcbackend                 ... [32mdone[0m[5B[9A[2KRemoving ci_AtomicChessAutoPlayer_3 ... [32mdone[0m[9B[1A[2KRemoving atcmongo                   ... [32mdone[0m[1BRemoving network ci_default
+Creating network "ci_default" with the default driver
+Creating atcredis ... 
+Creating atcmongo ... 
+Creating atcmovevalidator ... 
+Creating redis-commander  ... 
+[4A[2KCreating atcredis         ... [32mdone[0m[4B[3A[2KCreating atcmongo         ... [32mdone[0m[3B[1A[2KCreating redis-commander  ... [32mdone[0m[1B[2A[2KCreating atcmovevalidator ... [32mdone[0m[2Batcmovevalidator is up-to-date
+atcmongo is up-to-date
+atcredis is up-to-date
+Creating atcbackend ... 
+[1A[2KCreating atcbackend ... [32mdone[0m[1BCreating ci_AtomicChessAutoPlayer_1 ... 
+Creating ci_AtomicChessAutoPlayer_2 ... 
+Creating ci_AtomicChessAutoPlayer_3 ... 
+Creating ci_AtomicChessAutoPlayer_4 ... 
+Creating ci_AtomicChessAutoPlayer_5 ... 
+[5A[2KCreating ci_AtomicChessAutoPlayer_1 ... [32mdone[0m[5B[1A[2KCreating ci_AtomicChessAutoPlayer_5 ... [32mdone[0m[1B[4A[2KCreating ci_AtomicChessAutoPlayer_2 ... [32mdone[0m[4B[2A[2KCreating ci_AtomicChessAutoPlayer_4 ... [32mdone[0m[2B[3A[2KCreating ci_AtomicChessAutoPlayer_3 ... [32mdone[0m[3BFinished: SUCCESS

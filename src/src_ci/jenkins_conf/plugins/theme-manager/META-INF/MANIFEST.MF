@@ -1,0 +1,23 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven
+Built-By: timja
+Build-Jdk: 1.8.0_222
+Extension-Name: theme-manager
+Specification-Title: The Jenkins Plugins Parent POM Project
+Implementation-Title: theme-manager
+Implementation-Version: 0.5
+Group-Id: io.jenkins.plugins
+Short-Name: theme-manager
+Long-Name: Theme Manager (Incubating)
+Url: https://github.com/jenkinsci/theme-manager-plugin
+Minimum-Java-Version: 1.8
+Plugin-Version: 0.5
+Hudson-Version: 2.222.1
+Jenkins-Version: 2.222.1
+Plugin-Dependencies: blueocean-web:1.23.2;resolution:=optional
+Plugin-Developers: Tim Jacomb:timja:
+Plugin-License-Name: MIT License
+Plugin-License-Url: https://opensource.org/licenses/MIT
+Plugin-ScmUrl: https://github.com/jenkinsci/theme-manager-plugin
+

@@ -1,0 +1,160 @@
+Started by user [8mha:////4HeQu7QxSfPJmiGpZcYSZuhcclhWOV448WYE8rDJrQ+DAAAAnR+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAzuEgZB/dLi1CL9xJL83Mzk5IzU4mIA55peXsYAAAA=[0mAtomicChess
+Running as SYSTEM
+Building remotely on [8mha:////4NhQxXi60jAlX5rncxKDkW4xGC/PmymblX2gatAeBdgUAAAAoh+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAyeEgYx/eT83ILSktQi/Zz85MSc+OLUorLUIgBFdgO6ywAAAA==[0mlocal_server (ATC_SERVER_AGENT) in workspace /var/jenkins_build/workspace/AtomicChessThesis
+The recommended git tool is: NONE
+using credential 867013a9-1ccb-4bd0-b0c8-f41e88a499f9
+ > git rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url git@github.com:RBEGamer/AtomicChessOS.git # timeout=10
+Fetching upstream changes from git@github.com:RBEGamer/AtomicChessOS.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.17.1'
+using GIT_SSH to set credentials local ssh key
+ > git fetch --tags --progress -- git@github.com:RBEGamer/AtomicChessOS.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+Checking out Revision f2f399b24bf4dde9ecec712d6bb0e75abc8aca46 (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f f2f399b24bf4dde9ecec712d6bb0e75abc8aca46 # timeout=10
+Commit message: "Merge remote-tracking branch 'origin/master'"
+ > git rev-list --no-walk 1f99b4cf5bba724abd0e2363896ad7c8adf7cd68 # timeout=10
+[AtomicChessThesis] $ /bin/sh -xe /tmp/jenkins7476314085975760224.sh
++ ls
+documentation_statistics
+README.md
+src
++ cd ./src/src_thesis/
++ ls
+book_reference.bib
+build_report.sh
+build_start_thesis_server.sh
+build_thesis.sh
+images
+orig_template
+README.md
+report_document.aux
+report_document.log
+report_document.pdf
+report_document.tex
+template.tex
+thesis_document.aux
+thesis_document.log
+thesis_document.md
+thesis_document.pdf
+thesis_document.tex
+thesis_server
++ bash ./build_start_thesis_server.sh
+-- STARTING BUILDING THESIS DOCUMENT --
+./build_thesis.sh: Zeile 5: pandoc: Befehl nicht gefunden
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+
+kpathsea: Running mktexfmt pdflatex.fmt
+mktexfmt: mktexfmt is using the following fmtutil.cnf files (in precedence order):
+mktexfmt: mktexfmt is using the following fmtutil.cnf file for writing changes:
+mktexfmt:   /root/.texlive2017/texmf-config/web2c/fmtutil.cnf
+mktexfmt [INFO]: writing formats under /root/.texlive2017/texmf-var/web2c
+mktexfmt [INFO]: did not find entry for byfmt=pdflatex, skipped
+mktexfmt [INFO]: Total formats: 0
+mktexfmt [INFO]: exiting with status 0
+I can't find the format file `pdflatex.fmt'!
+-- STARTING BUILDING REPORT DOCUMENT --
+./build_report.sh: Zeile 5: pandoc: Befehl nicht gefunden
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+
+kpathsea: Running mktexfmt pdflatex.fmt
+mktexfmt: mktexfmt is using the following fmtutil.cnf files (in precedence order):
+mktexfmt: mktexfmt is using the following fmtutil.cnf file for writing changes:
+mktexfmt:   /root/.texlive2017/texmf-config/web2c/fmtutil.cnf
+mktexfmt [INFO]: writing formats under /root/.texlive2017/texmf-var/web2c
+mktexfmt [INFO]: did not find entry for byfmt=pdflatex, skipped
+mktexfmt [INFO]: Total formats: 0
+mktexfmt [INFO]: exiting with status 0
+I can't find the format file `pdflatex.fmt'!
+Building ThesisServer
+Step 1/8 : FROM node:14
+ ---> 060aed823995
+Step 2/8 : WORKDIR /usr/src/app
+ ---> Using cache
+ ---> 48d92a88af23
+Step 3/8 : COPY ./package*.json ./
+ ---> 87535dbeea05
+Step 4/8 : RUN npm install
+ ---> Running in 28aacc265faa
+
+> bcrypt@5.0.1 install /usr/src/app/node_modules/bcrypt
+> node-pre-gyp install --fallback-to-build
+
+[bcrypt] Success: "/usr/src/app/node_modules/bcrypt/lib/binding/napi-v3/bcrypt_lib.node" is installed via remote
+
+> ejs@3.1.3 postinstall /usr/src/app/node_modules/ejs
+> node --harmony ./postinstall.js
+
+Thank you for installing [35mEJS[0m: built with the [32mJake[0m JavaScript build tool ([32mhttps://jakejs.com/[0m)
+
+
+> node-cron@2.0.3 postinstall /usr/src/app/node_modules/node-cron
+> opencollective-postinstall
+
+[96m[1mThank you for using node-cron![96m[1m
+[0m[96mIf you rely on this package, please consider supporting our open collective:[22m[39m
+> [94mhttps://opencollective.com/node-cron/donate[0m
+
+
+> nodemailer@6.4.6 postinstall /usr/src/app/node_modules/nodemailer
+> node -e "try{require('./postinstall')}catch(e){}"
+
+[96m=== Nodemailer 6.4.6 ===[0m
+[96m[0m
+[96mThank you for using Nodemailer for your email sending needs! While Nodemailer[0m
+[96mitself is mostly meant to be a SMTP client there are other related projects in[0m
+[96mthe Nodemailer project as well.[0m
+[96m[0m
+[96mFor example:[0m
+[96m> IMAP API ( [94m https://imapapi.com [96m ) is a server application to easily access[0m
+[96mIMAP accounts via REST API[0m
+[96m> NodemailerApp ( [94m https://nodemailer.com/app/ [96m ) is a cross platform GUI app to[0m
+[96mdebug emails[0m
+[96m[0m
+[91mnpm WARN MarcelOchsendorfPortfolioPage@1.0.0 No repository field.
+[0m[91m
+[0madded 773 packages from 1110 contributors and audited 775 packages in 27.954s
+
+4 packages are looking for funding
+  run `npm fund` for details
+
+found 2 low severity vulnerabilities
+  run `npm audit fix` to fix them, or `npm audit` for details
+Removing intermediate container 28aacc265faa
+ ---> 40eb82d54806
+Step 5/8 : COPY ./ .
+ ---> 08cb554f5bbb
+Step 6/8 : RUN npm audit fix
+ ---> Running in 35fabc266536
+up to date in 5.175s
+[91mnpm WARN MarcelOchsendorfPortfolioPage@1.0.0 No repository field.
+
+[0m
+4 packages are looking for funding
+  run `npm fund` for details
+
+fixed 1 of 2 vulnerabilities in 775 scanned packages
+  1 vulnerability required manual review and could not be updated
+Removing intermediate container 35fabc266536
+ ---> 5464ca072b91
+Step 7/8 : EXPOSE 3020
+ ---> Running in 95f4e25d4843
+Removing intermediate container 95f4e25d4843
+ ---> b040631f2daa
+Step 8/8 : CMD [ "node", "server.js" ]
+ ---> Running in fd5e6c61dd4f
+Removing intermediate container fd5e6c61dd4f
+ ---> 6b0cabc67a2b
+
+Successfully built 6b0cabc67a2b
+Successfully tagged thesisserver:latest
+Removing network thesis_server_default
+Network thesis_server_default not found.
+Creating network "thesis_server_default" with the default driver
+Creating thesisserver ... 
+[1A[2KCreating thesisserver ... [32mdone[0m[1BFinished: SUCCESS

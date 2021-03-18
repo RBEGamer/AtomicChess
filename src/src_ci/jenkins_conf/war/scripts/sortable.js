@@ -55,7 +55,22 @@ var Sortable = (function() {
 
         // We have a first row: assume it's the header, and make its contents clickable links
         firstRow.each(function (cell){
-            cell.innerHTML = '<a href="#" class="sortheader">'+this.getInnerText(cell)+'<span class="sortarrow"></span></a>';
+            var noSort = cell.getAttribute('data-sort-disable');
+            if (noSort) {
+                //TODO the data storage should be changed
+                this.arrows.push(null);
+
+                // do not add clickable behavior on a column that is not expected to be sorted
+                // like icon columns
+                return;
+            }
+            /*
+             * Normally the innerHTML is dangerous, but in this case, we receive the column caption from an escaped jelly
+             * and thus, the content there is already escaped.
+             * If we use innerText, we will get the unescaped version and potentially trigger a XSS.
+             * Using the innerHTML will return the escaped content that could be reused directly within the wrapper.
+             */
+            cell.innerHTML = '<a href="#" class="sortheader">'+cell.innerHTML+'<span class="sortarrow"></span></a>';
             this.arrows.push(cell.firstChild.lastChild);
 
             var self = this;
@@ -206,7 +221,10 @@ var Sortable = (function() {
 
             // update arrow rendering
             this.arrows.each(function(e,i){
-                e.innerHTML = ((i==column) ? dir : arrowTable.none).text;
+                // to check the columns with sort disabled
+                if (e) {
+                    e.innerHTML = ((i==column) ? dir : arrowTable.none).text;
+                }
             });
         },
 
@@ -265,28 +283,43 @@ var Sortable = (function() {
     arrowTable.up.next = arrowTable.down;
     arrowTable.down.next = arrowTable.up;
 
-
+    /**
+     * Matches dates like:
+     *   "1/4/2017 ignored content"
+     *   "03-23-99 1:30 PM also ignored content"
+     *   "12-25/1979 13:45:22 always with the ignored content!"
+     */
+    var date_pattern = /^(\d{1,2})[\/-](\d{1,2})[\/-](\d\d|\d\d\d\d)(?:(?:\s*(\d{1,2})?:(\d\d)?(?::(\d\d)?)?)?(?:\s*([aA][mM]|[pP][mM])?))\b/
 
     // available sort functions
     var sorter = {
         date : function(a,b) {
-            function toDt(x) {
-              // y2k notes: two digit years less than 50 are treated as 20XX, greater than 50 are treated as 19XX
-              if (x.length == 10) {
-                  return x.substr(6,4)+x.substr(3,2)+x.substr(0,2);
-              } else {
-                  var yr = x.substr(6,2);
-                  if (parseInt(yr) < 50) { yr = '20'+yr; } else { yr = '19'+yr; }
-                  return yr+x.substr(3,2)+x.substr(0,2);
-              }
+            /**
+             * Note - 2-digit years under 50 are considered post-2000,
+             * otherwise they're pre-2000. This is terrible, but
+             * preserves existing behavior. If you use sortable.js,
+             * please make sure you use 4-digit year values.
+             */
+            function toDate(x) {
+                dmatches = x.match(date_pattern);
+                month = dmatches[1];
+                day = dmatches[2];
+                year = parseInt(dmatches[3]);
+                if (year < 50) {
+                    year += 2000;
+                } else if (year < 100) {
+                    year += 1900;
+                }
+                hours = dmatches[4] || 0;
+                minutes = dmatches[5] || 0;
+                seconds = dmatches[6] || 0;
+                hours = parseInt(hours);
+                if (dmatches[7] && dmatches[7].match(/pm/i) && hours < 12) {
+                    hours += 12;
+                }
+                return new Date(year, month, day, hours, minutes, seconds, 0);
             }
-
-            var dt1 = toDt(a);
-            var dt2 = toDt(b);
-
-            if (dt1==dt2) return 0;
-            if (dt1<dt2) return -1;
-            return 1;
+            return toDate(a) - toDate(b);
         },
 
         currency : function(a,b) {
@@ -332,8 +365,7 @@ var Sortable = (function() {
          */
         determine : function(itm) {
             var sortfn = this.caseInsensitive;
-            if (itm.match(/^\d\d[\/-]\d\d[\/-]\d\d\d\d$/)) sortfn = this.date;
-            if (itm.match(/^\d\d[\/-]\d\d[\/-]\d\d$/)) sortfn = this.date;
+            if (itm.match(date_pattern)) sortfn = this.date;
             if (itm.match(/^[�$]/)) sortfn = this.currency;
             if (itm.match(/\%$/)) sortfn = this.percent;
             if (itm.match(/^-?[\d\.]+$/)) sortfn = this.numeric;

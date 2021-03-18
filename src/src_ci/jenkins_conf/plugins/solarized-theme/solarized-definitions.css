@@ -1,0 +1,202 @@
+:root {
+  --add-item-btn-decorator-bg-color: var(--solarized-bg-highlights);                                                    /* background color of the area around the "OK" button on "New Item" dialog */
+  --add-item-btn-decorator-border-color: var(--solarized-bg-highlights);                                                /* border color of the area around the "OK" button on "New Item" dialog */
+  --alert-danger-bg-color: var(--solarized-red);
+  --alert-danger-border-color: var(--alert-danger-bg-color);
+  --alert-danger-text-color: #fff;                                                                                      /* TODO solarize */
+  /* --alert-default-bg-color */                                                                                        /* TODO this is a color */
+  /* --alert-default-border-color */                                                                                    /* TODO this is a color */
+  /* --alert-default-color */                                                                                           /* TODO this is a color */
+  /* --alert-default-icon-color */                                                                                      /* TODO this is a color */
+  --alert-info-bg-color: var(--solarized-bg-highlights);
+  --alert-info-border-color: var(--alert-info-bg-color);
+  --alert-info-text-color: var(--solarized-secondary);
+  --alert-success-bg-color: #007e33;                                                                                    /* TODO solarize */
+  --alert-success-border-color: var(--alert-success-bg-color);
+  --alert-success-text-color: #fff;                                                                                     /* TODO solarize */
+  --alert-warning-bg-color: var(--solarized-yellow);
+  --alert-warning-border-color: var(--alert-warning-bg-color);
+  --alert-warning-text-color: #fff;                                                                                     /* TODO solarize */
+  --auto-complete-bg-color--prehighlight: var(--solarized-primary);
+  /* --background-medium */
+  --background: var(--solarized-bg);
+  /* --bigtable-border-width */                                                                                         /* not a color */
+  /* --bigtable-cell-padding-x */                                                                                       /* not a color */
+  /* --bigtable-cell-padding-y */                                                                                       /* not a color */
+  --bigtable-header-bg: var(--solarized-bg-highlights);
+  --bigtable-header-border-color: var(--solarized-bg-highlights);
+  /* --bigtable-header-font-weight */                                                                                   /* not a color */
+  --bigtable-header-text-color: var(--text-color);
+  --bigtable-row-border-color: var(--solarized-bg-highlights);
+  /* --black */                                                                                                         /* color palette color */
+  /* --box-shadow */
+  /* --brand-link-color-active-v2 */                                                                                    /* TODO this is a color */
+  /* --brand-link-color-hover-v2 */                                                                                     /* TODO this is a color */
+  --brand-link-color: var(--solarized-primary);
+  --breadcrumbs-bg-color--hover: var(--solarized-bg);
+  --breadcrumbs-bg: var(--solarized-bg-highlights);
+  --breadcrumbs-border: var(--solarized-bg-highlights);
+  --breadcrumbs-item-bg-color--hover: var(--solarized-bg-highlights);
+  --breadcrumbs-text-color: var(--solarized-blue);
+  --bright-bg-color: var(--solarized-bg);                                                                               /* Used for both active tab background color, and general form background color on Jenkins 2.0 style forms */
+  --brightest-bg-color: var(--solarized-bg-highlights);
+  --btn-link-bg--active: var(--solarized-bg-highlights);
+  --btn-link-bg--hover: var(--solarized-bg-highlights);
+  /* --btn-primary-bg-active */                                                                                         /* TODO this is a color */
+  --btn-primary-bg-hover: var(--solarized-blue);
+  --btn-primary-bg: var(--solarized-violet);                                                                            /* Used for both background and border of primary buttons (at least as of 2.252) */
+  --btn-primary-color: var(--solarized-blue);
+  --btn-secondary-bg: var(--solarized-bg-highlights);
+  --btn-secondary-border: var(--solarized-primary);                                                                     /* border color of secondary button */
+  --btn-secondary-color: var(--btn-primary-color);
+  /* --btn-text-color */                                                                                                /* TODO this is a color */
+  --call-to-action-link-color: var(--solarized-blue);
+  --call-to-action-text-color: var(--solarized-emphasized);
+  /* --checkbox-border */                                                                                               /* TODO this is a color */
+  --configure-job-bottom-sticker-bg-color: var(--solarized-bg-highlights);
+  --configure-job-bottom-sticker-border-color: var(--solarized-bg-highlights);
+  --configure-job-help-area-bg-color: var(--solarized-bg-highlights);
+  /* --danger-active */                                                                                                 /* TODO this is a color */
+  /* --danger-color */                                                                                                  /* TODO this is a color */
+  /* --danger-dark */                                                                                                   /* TODO this is a color */
+  /* --danger-dark-line */                                                                                              /* active border color of red (delete) button */
+  /* --danger-hover */                                                                                                  /* TODO this is a color */
+  /* --danger-line */                                                                                                   /* border color of red (delete) button */
+  --danger: var(--solarized-red);                                                                                       /* branding color */
+  /* --dark-grey */                                                                                                     /* color palette color */
+  --even-row-color: var(--solarized-bg);
+  /* --focus */                                                                                                         /* branding color */
+  /* --font-family-sans */                                                                                              /* not a color */
+  /* --font-size-base */                                                                                                /* not a color */
+  /* --font-size-monospace */                                                                                           /* not a color */
+  /* --font-size-sm */                                                                                                  /* not a color */
+  /* --font-size-xs */                                                                                                  /* not a color */
+  /* --header-bg-classic */
+  --header-bg-v2: var(--solarized-secondary);
+  /* --header-item-border-radius */
+  /* --header-link-bg-active-v2 */
+  /* --header-link-bg-classic-active */
+  /* --header-link-bg-classic-hover */
+  /* --header-link-bg-hover-v2 */
+  --header-link-color-active: var(--solarized-blue);                                                                    /* link color in active header items (like login/logout/alerts/user name) */
+  --header-link-color: var(--solarized-primary);                                                                        /* link color in header items (like login/logout/alerts/user name) */
+  /* --header-link-outline */
+  --header-search-border: var(--solarized-bg-highlights);
+  --help-area-bg-color: var(--solarized-bg);
+  --input-border: var(--solarized-bg-highlights);
+  --input-color: var(--solarized-bg-highlights);
+  /* --input-form-border */
+  --input-hidden-password-bg-color: var(--input-color);
+  /* --input-line-height */
+  --light-bg-color--hover: var(--solarized-bg);
+  --light-bg-color: var(--solarized-bg);
+  --light-grey: var(--solarized-bg-highlights);                                                                         /* color palette color */
+  /* --line-blue */                                                                                                     /* used for modern config form tab bar */
+  /* --line-green */                                                                                                    /* color palette color */
+  /* --line-height-base */                                                                                              /* not a color */
+  /* --line-height-heading */                                                                                           /* not a color */
+  /* --link-color--active */
+  /* --link-color--hover */
+  --link-color: var(--solarized-blue);
+  --link-dark-color: var(--solarized-primary);                                                                          /* sidepanel links */
+  --link-dark-color--active: var(--solarized-violet);                                                                   /* sidepanel links */
+  --link-dark-color--hover: var(--solarized-violet);                                                                    /* sidepanel links */
+  /* --link-dark-font-weight */                                                                                         /* not a color */
+  /* --link-dark-text-decoration */                                                                                     /* not a color */
+  /* --link-dark-text-decoration--active */                                                                             /* not a color */
+  /* --link-dark-text-decoration--hover */                                                                              /* not a color */
+  /* --link-dark-visited-color */                                                                                       /* sidepanel links */
+  /* --link-font-weight */                                                                                              /* not a color */
+  /* --link-text-decoration */                                                                                          /* not a color */
+  /* --link-text-decoration--active */                                                                                  /* not a color */
+  /* --link-text-decoration--hover */                                                                                   /* not a color */
+  /* --link-visited-color */
+  --link-visited-color: var(--solarized-blue);
+  --logo-bg: var(--solarized-bg-highlights);
+  --manage-option-bg-color--active: var(--solarized-bg-highlights);
+  --manage-option-bg-color--hover: var(--solarized-bg-highlights);
+  --manage-option-border-color: var(--solarized-bg-highlights);
+  --medium-grey: var(--solarized-bg-highlights);                                                                        /* color palette color */
+  /* --medium-translucent */
+  --menu-bg-color: var(--solarized-bg-highlights);
+  --menu-box-shadow: 0 0 2px var(--solarized-primary);                                                                  /* not a color */
+  --menu-selected-color: var(--solarized-bg-highlights);
+  --menu-text-color: var(--solarized-primary);
+  /* --monitor-bg-v2 */
+  /* --monitor-color-v2 */
+  --notification-error-bg-color: var(--solarized-bg-highlights);
+  --notification-error-border-color: var(--solarized-secondary);
+  /* --notification-error-color */
+  /* --notification-error-icon-color */
+  --notification-success-bg-color: var(--solarized-bg-highlights);
+  --notification-success-border-color: var(--solarized-secondary);
+  --notification-success-color: var(--solarized-green);
+  /* --notification-success-icon-color */
+  --notification-warning-bg-color: var(--solarized-bg-highlights);
+  --notification-warning-border-color: var(--solarized-secondary);
+  /* --notification-warning-color */
+  /* --notification-warning-icon-color */
+  --pane-border-color: var(--solarized-bg-highlights);
+  /* --pane-border-width */
+  /* --pane-header-bg */
+  --pane-header-border-color: var(--solarized-bg-highlights);
+  --pane-header-color: var(--solarized-bg-highlights);
+  /* --pane-header-font-weight */
+  /* --pane-header-text-color */
+  /* --pane-link-color */
+  /* --pane-link-color--visited */
+  /* --pane-text-color */
+  --panel-border-color--hover: var(--solarized-bg-highlights);
+  --panel-border-color: var(--solarized-bg-highlights);
+  --panel-header-bg-color: var(--solarized-bg);
+  --plugin-manager-bg-color-already-upgraded: var(--solarized-secondary);
+  --plugin-manager-category-link-bg-color--hover: var(--solarized-bg-highlights);
+  --plugin-manager-category-link-bg-color var(--solarized-bg);
+  --plugin-manager-category-link-border-color: var(--solarized-secondary);
+  --plugin-manager-category-link-border-color--hover: var(--solarized-primary);
+  --plugin-manager-category-link-color--hover var(--solarized-bg-highlights);
+  --plugin-manager-category-text-color: var(--solarized-primary);
+  --plugin-manager-unavailable-bg-color: var(--solarized-secondary);
+  /* --primary-active */
+  /* --primary-hover */
+  --primary: var(--solarized-emphasized);                                                                               /* branding color */
+  --search-bg: var(--solarized-bg-highlights);
+  /* --search-box-completion-bg */
+  /* --search-box-shadow */
+  --search-input-color: var(--text-color);
+  /* --secondary */                                                                                                     /* branding color */
+  /* --shade */                                                                                                         /* used for the shaded background of some form fields */
+  /* --shade-hint */                                                                                                    /* used for the colored left border of some form fields */
+  /* --success */                                                                                                       /* branding color */
+  /* --tab-baseline-color */
+  /* --tab-baseline-default-display */
+  /* --tab-baseline-width */
+  /* --tab-link-bg */
+  --tab-link-bg--active: var(--solarized-bg-highlights);
+  --tab-link-bg--hover: var(--solarized-bg-highlights);
+  /* --tab-link-border-color--active */
+  /* --tab-link-border-color--hover */
+  --tab-link-border-color: var(--solarized-bg-highlights);
+  /* --tab-link-border-radius */
+  /* --tab-link-border-width */
+  --tab-link-checked-bg: var(--solarized-bg-highlights);
+  --tab-link-checked-border-color: var(--solarized-bg-highlights);
+  --tab-link-checked-text-color: var(--primary);
+  /* --tab-link-font-weight */
+  /* --tab-link-padding-x */
+  /* --tab-link-padding-y */
+  /* --tab-link-text-color--active */
+  /* --tab-link-text-color--hover */
+  --tab-link-text-color: #999;                                                                                          /* TODO solarize */
+  /* --table-parameters-bg--hover */
+  --table-striped-bg--hover: var(--solarized-bg-highlights);
+  /* --task-link-bg-color--active */
+  --task-link-bg-color--hover: var(--solarized-bg-highlights);
+  --text-area-handle-bg-color: var(--text-area-handle-border);
+  --text-area-handle-border: var(--solarized-bg-highlights);
+  --text-color-secondary: var(--solarized-secondary);
+  --text-color: var(--solarized-primary);
+  --very-light-grey: var(--solarized-bg-highlights);                                                                    /* color palette color */
+  /* --warning */                                                                                                       /* branding color */
+  /* --white */                                                                                                         /* color palette color */
+}

@@ -1,0 +1,27 @@
+commit 77feafe9d0124378928da6b36c7d3ef37144972c
+tree 6fa34a32c56ca90e3c95ff9fbbe3183a4141bca8
+parent 524a1555817339edb49405a063d273cf4fe9c0a1
+author dev1 <dev1@itsdomain.local> 2021-01-17 01:17:38 +0100
+committer dev1 <dev1@itsdomain.local> 2021-01-17 01:17:38 +0100
+
+    massivce website content reqork
+    
+    * bootstrap controls in fh design
+    * faq section
+    * playerinfo in game screen
+
+
+:100644 100644 f4bb2bded36a1bbcb42cd3ad942903be7d3b37ee caa5d0ebfae841bb8d0564a0d33ae90941cb8644 M	src/src_server/ATC_Backend/config.json
+:100644 100644 c973dbc7180354fa344261a7834c7f22406e6739 e17a68e93828a3d548d8a3e00c59e93ba699e17a M	src/src_server/ATC_Backend/public/css/main.css
+:100644 100644 bbdc841525b2186249fe214d5f46abb820c38d54 2fa785f82f8cca1b196c36b70913e63ee3e98d8d M	src/src_server/ATC_Backend/routes/index.js
+:100644 100644 5b1318299c0b9b39689e9460955410bcd078f0d1 2b71693202cb235fbae6d55849aeea825bc16752 M	src/src_server/ATC_Backend/routes/rest.js
+:100644 100644 a5e8218ededf7ab3985e6f7ec535773e0568709c 094d1163821033df7182fdc5e261e24c0fbdb215 M	src/src_server/ATC_Backend/session_handling/game_handler.js
+:100644 100644 29d255b826662356c0191bdc3ab7d600628ce4f7 10c0772d4a0174fc5454d52cc88fbe714815d158 M	src/src_server/ATC_Backend/session_handling/lobby_handling.js
+:100644 100644 b256dcc6acd0140ce764e50320d8367abf27568f 60e64c5f32886e2736401edb85e7c61f9bee4129 M	src/src_server/ATC_Backend/session_handling/profile_handling.js
+:100644 100644 d946782918706297beed51058c4ec37206de11dd fdd2b277390978db84d73db8d3732d7f6ae8c5c5 M	src/src_server/ATC_Backend/views/config_viewer.ejs
+:100644 100644 67b21239b13467807c367633a57e29dbad746748 21ee9dbd19edb6efa8627f3ecdb84476f3455abc M	src/src_server/ATC_Backend/views/index.ejs
+:100644 100644 88a6d079b49b1492c7b54cd57d872264bfd7224b 982b00ad46cf6ae8dc1d400a957713875a22ab9f M	src/src_server/ATC_Backend/views/log_viewer.ejs
+:100644 100644 7943454d6a7549264f1b57000297d757b72d946d 2fdfffaecff37308d779a057ed7a0d721df0147e M	src/src_server/ATC_Backend/views/server_config.ejs
+:100644 100644 be024c07bf1b0efa77d5bc113784c42f26d055e7 e21fabdf862466ee0fb618efbe50a379941a4777 M	src/src_server/ATC_Backend/views/statistics_home.ejs
+:100644 100644 e2ba0e1b8ec3ea79253ccb24ce8787fb4bcdce74 046ca8715366b71f9dc6e10e01a4714db1679f70 M	src/src_server/ATC_Backend/views/statistics_profile.ejs
+:100644 100644 b4760552db5f2942c61afced58c0783acce2eaee e6c599768d518446276c3a5a98d3cfb2c07ec796 M	src/src_server/ATC_Backend/views/webclient.ejs

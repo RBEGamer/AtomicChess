@@ -1,0 +1,10 @@
+commit 482c34967d269037dcae1fba2692f183ac5ba42e
+tree 66d77031f2ed635ab3f57e364134c826c0356e05
+parent 01012f8141b7022df4960f1d31f04bc3ae219f4b
+author dev1 <dev1@itsdomain.local> 2021-01-07 07:17:56 +0100
+committer dev1 <dev1@itsdomain.local> 2021-01-07 07:17:56 +0100
+
+    30second session lifetime
+
+
+:100644 100644 a5df04749fcab0dc4ae8134cf340ab4e739c21b2 99fe81f937a3eb32059e1e2cc997f1251087ebf3 M	src/src_server/ATC_Backend/config.json

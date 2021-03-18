@@ -1,0 +1,14 @@
+commit ac318443103a6b630ede5ca63baabebb316b47b1
+tree 9cb225b3553c6130cc8bd058790037488b9716c2
+parent cb48cc0a209a537c54f69f3a34a8a305fabf6b20
+author dev1 <dev1@itsdomain.local> 2021-01-14 05:22:53 +0100
+committer dev1 <dev1@itsdomain.local> 2021-01-14 05:22:53 +0100
+
+    first of new site
+
+
+:000000 100644 0000000000000000000000000000000000000000 be68d528da2b6b0ab8f8f84d1b32d3ea4077564b A	src/src_server/ATC_Backend/public/css/album.css
+:100644 100644 04b79b4a1af4cf6174b1d52e68e7fcf61be5c7d7 85ea53eeeae48b8ee6a92af26a0295cadc1befea M	src/src_server/ATC_Backend/public/css/main.css
+:000000 100644 0000000000000000000000000000000000000000 c90c55833b7cc65466ad76298a4680efffbb65b3 A	src/src_server/ATC_Backend/public/img/rsz_img_7411.png
+:000000 100644 0000000000000000000000000000000000000000 13a4b653bfc5e977e741bcc0cd90a030bdb3a296 A	src/src_server/ATC_Backend/public/img/rsz_img_7412.png
+:100644 100644 6e9f3fcdbe193dc7700cfc87d0b7a740d9fa2e1e 11942354540eb538e56437e75b741e3b13a27867 M	src/src_server/ATC_Backend/views/index.ejs

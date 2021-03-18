@@ -1,0 +1,11 @@
+commit 380870f144a8785520666df1024354dbfd2b4d36
+tree c03e9a6fef32eaee69a61ecf8e9db867bae46df0
+parent 56f1ff9bad017a6375fcc36861267ca731f6a054
+author dev1 <dev1@itsdomain.local> 2020-12-26 21:30:39 +0100
+committer dev1 <dev1@itsdomain.local> 2020-12-26 21:30:39 +0100
+
+    added profile config
+
+
+:100644 100644 5e469111677450eaaa47d3763b3a0fb71a3f2a82 f6dbfa04ed0356e182d19335dc36cd03efd9f669 M	src/src_server/ATC_Backend/routes/rest.js
+:100644 100644 09b60af2274697ba8b6cdae92bf80f1097d94d40 91bc558b07f92b3b36b64d601022168a17718ca7 M	src/src_server/ATC_Backend/session_handling/profile_handling.js

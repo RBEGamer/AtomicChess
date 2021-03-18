@@ -1,0 +1,10 @@
+commit 66684b89bfa5d35c10e02a3e192d6ca6fd78783a
+tree 755746f321db357abfb26b2e3b4cb3a211e94518
+parent cd7c6a45d3807bc9db603310de6f28e5a92d716f
+author John Doe <johndoe@example.com> 2021-01-07 00:12:38 +0100
+committer John Doe <johndoe@example.com> 2021-01-07 00:12:38 +0100
+
+    added qt webkit
+
+
+:100644 100644 4fb1d0d70916d16d8e40336cb5e1e753eb7a421a d34df8ea75698fdb1130ec30bbe94571ac5dcdc1 M	src/src_buildroot/buildroot/config_backup

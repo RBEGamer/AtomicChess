@@ -1,0 +1,10 @@
+commit 108a85fa201adf2d029407c51e1c9a145fc3f306
+tree e8ebf4484c092d1cc5bbfdd461a662908a15668b
+parent 66684b89bfa5d35c10e02a3e192d6ca6fd78783a
+author John Doe <johndoe@example.com> 2021-01-10 16:57:40 +0100
+committer John Doe <johndoe@example.com> 2021-01-10 16:57:40 +0100
+
+    added usb serial device udev rules
+
+
+:000000 100644 0000000000000000000000000000000000000000 9ecfa121a7fa5545d53df4fb39e336c1b7cdcbdf A	src/src_buildroot/buildroot/OVERLAY_FS/etc/udev/rules.d/50-usb.rules

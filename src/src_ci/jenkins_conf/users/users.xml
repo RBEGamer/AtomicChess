@@ -3,8 +3,32 @@
   <version>1</version>
   <idToDirectoryNameMap class="concurrent-hash-map">
     <entry>
-      <string>admin</string>
-      <string>admin_3687916692171582047</string>
+      <string>dev1</string>
+      <string>dev1_5305860983368255996</string>
+    </entry>
+    <entry>
+      <string>marcel.ochsendorf</string>
+      <string>marcelochsendo_7746299705270141866</string>
+    </entry>
+    <entry>
+      <string>noreply</string>
+      <string>noreply_2805933397852048804</string>
+    </entry>
+    <entry>
+      <string>johndoe</string>
+      <string>johndoe_1135549165910551947</string>
+    </entry>
+    <entry>
+      <string>dev</string>
+      <string>dev_6756548885938727652</string>
+    </entry>
+    <entry>
+      <string>atomicchess</string>
+      <string>atomicchess_7006146970735133755</string>
+    </entry>
+    <entry>
+      <string>info</string>
+      <string>info_4214017630263839219</string>
     </entry>
   </idToDirectoryNameMap>
 </hudson.model.UserIdMapper>

@@ -1,0 +1,16 @@
+commit 7983429b3736914fd266b990eeb8e48fb2c13ec0
+tree bbddd18c00d37f4499cf1d4257dfb3f412c10642
+parent 94cf0d384db0fb79381334a9b2f98c607cd56d0c
+author Marcel <info@prodevmo.com> 2021-03-09 01:15:35 +0100
+committer Marcel <info@prodevmo.com> 2021-03-09 01:15:35 +0100
+
+    fixing makefiles for atc packages ui and tp
+    
+
+
+:100644 100644 fab7372d796ea95c80d02df6caa7eb2b411a7ac1 8c88dd9bdbbd36df786021cef490ca3a3fe53d16 M	src/src_atcqtui/src/.gitignore
+:100644 100644 bb02d9f57270011ea0094bb39aed0ecaa908389d 6fd6338e3e74ff1f5b18a36869c9f5a70c87c474 M	src/src_buildroot/.gitignore
+:100755 100755 70e4a64222249f9be6c5839d64cf0deb4a396709 ff760f07877f30960389f5728ff53b9050a6e318 M	src/src_buildroot/buildroot/build_docker.sh
+:100644 100644 b3603742364ae6e70ec09b7b0baa902970d15eb1 124616bf14367060de19cb6cddc9128a1cd59161 M	src/src_buildroot/buildroot/config_backup
+:100644 100644 084a0a26b9ff76c6fdb7266e93ef319fb6017796 553a2fa4d13c1a8da4f7d8b591bde8ea127c8608 M	src/src_buildroot/buildroot/package/atcctl/atcctl.mk
+:100644 100644 ab273663a468257793918df4e2258a7f7d9258e5 0104af9491956ad67a7ffdee2b617ac68676e04f M	src/src_buildroot/buildroot/package/atcgui/atcgui.mk

@@ -1,0 +1,461 @@
+Started by an SCM change
+Running as SYSTEM
+Building remotely on [8mha:////4NhQxXi60jAlX5rncxKDkW4xGC/PmymblX2gatAeBdgUAAAAoh+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAyeEgYx/eT83ILSktQi/Zz85MSc+OLUorLUIgBFdgO6ywAAAA==[0mlocal_server (ATC_SERVER_AGENT) in workspace /var/jenkins_build/workspace/AtomicChessBuildroot
+The recommended git tool is: NONE
+using credential 867013a9-1ccb-4bd0-b0c8-f41e88a499f9
+ > git rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url git@github.com:RBEGamer/AtomicChessOS.git # timeout=10
+Fetching upstream changes from git@github.com:RBEGamer/AtomicChessOS.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.17.1'
+using GIT_SSH to set credentials local ssh key
+ > git fetch --tags --progress -- git@github.com:RBEGamer/AtomicChessOS.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+Checking out Revision 94cf0d384db0fb79381334a9b2f98c607cd56d0c (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 94cf0d384db0fb79381334a9b2f98c607cd56d0c # timeout=10
+Commit message: "fix makefile atc_controller"
+ > git rev-list --no-walk f47290534c9c984fb5c1aee58dc4f30d8c5e91dc # timeout=10
+[AtomicChessBuildroot] $ /bin/sh -xe /tmp/jenkins2457736479702900519.sh
++ ls
+documentation_statistics
+README.md
+src
++ cd ./src/src_buildroot
++ bash ./build_toolchain_image.sh
+COPY TO BUILDROOT PACKAGE
+/var/jenkins_build/workspace/AtomicChessBuildroot/src/src_atctest
+copy_to_buildroot_package.sh
+README.md
+src
+COPY ./src TO ../src_buildroot/buildroot/package/atctp
+COPY TO BUILDROOT PACKAGE
+/var/jenkins_build/workspace/AtomicChessBuildroot/src/src_atcqtui
+ATC_GUI_MOCKUP.bmpr
+copy_to_buildroot_package.sh
+documentation_images
+README.md
+src
+COPY ./src TO ../src_buildroot/buildroot/package/atcgui
+COPY TO BUILDROOT PACKAGE
+/var/jenkins_build/workspace/AtomicChessBuildroot/src/src_controller
+ChessFigureIDGenerator.html
+controller
+copy_to_buildroot_package.sh
+documentation_images
+README.md
+COPY ./controller/controller TO ../src_buildroot/buildroot/package/atcctl
+Sending build context to Docker daemon  19.03GB
+Step 1/22 : FROM ubuntu:20.04
+ ---> 4dd97cefde62
+Step 2/22 : WORKDIR /var/buildroot
+ ---> Using cache
+ ---> 6856a276107e
+Step 3/22 : ENV DEBIAN_FRONTEND=noninteractive
+ ---> Using cache
+ ---> 143d549ecb89
+Step 4/22 : RUN apt-get update && apt upgrade -y &&     apt-get install -y     build-essential     bash     bc     binutils     build-essential     bzip2     cpio     g++     gcc     git     gzip     locales     libncurses5-dev     libdevmapper-dev     libsystemd-dev     make     mercurial     whois     patch     perl     python     rsync     sed     tar     vim     unzip     wget     bison     flex     libssl-dev     libfdt-dev     nano
+ ---> Using cache
+ ---> e05fa5fb79b3
+Step 5/22 : RUN locale-gen en_US.utf8
+ ---> Using cache
+ ---> 0ffa5c65cea5
+Step 6/22 : RUN apt  install -y openssh-server
+ ---> Using cache
+ ---> 90eeb2a9ff26
+Step 7/22 : RUN mkdir /var/run/sshd
+ ---> Using cache
+ ---> 48b145d84313
+Step 8/22 : RUN echo 'root:root' |chpasswd
+ ---> Using cache
+ ---> 86a3f4bb053b
+Step 9/22 : ENV O=/buildroot_output
+ ---> Using cache
+ ---> 309ed840d36d
+Step 10/22 : RUN touch .config
+ ---> Using cache
+ ---> 6fb16bae1c4f
+Step 11/22 : RUN touch kernel.config
+ ---> Using cache
+ ---> 623902054a32
+Step 12/22 : RUN mkdir -p /var/buildroot/output/images
+ ---> Using cache
+ ---> 3a5aea84d05b
+Step 13/22 : RUN sed -ri 's/^#?PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config
+ ---> Using cache
+ ---> b1b1574aa608
+Step 14/22 : RUN sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
+ ---> Using cache
+ ---> 46b445aca153
+Step 15/22 : RUN mkdir /root/.ssh
+ ---> Using cache
+ ---> 39370c5c6806
+Step 16/22 : RUN apt-get clean &&     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+ ---> Using cache
+ ---> df5a99dcb3a1
+Step 17/22 : COPY ./ /var/buildroot
+ ---> ec3299922eaa
+Step 18/22 : RUN bash /var/buildroot/restore_config.sh
+ ---> Running in a02c49c98204
+Removing intermediate container a02c49c98204
+ ---> 65f1e4380192
+Step 19/22 : RUN bash /var/buildroot/check_keys.sh
+ ---> Running in 73dbf60ed3ff
+--- GENERATE KEYS FOR SWUPDATE---
+--KEYS EYISTS --
+Removing intermediate container 73dbf60ed3ff
+ ---> a6f6ce18ad16
+Step 20/22 : RUN make -j15
+ ---> Running in 17640a20fc17
+/usr/bin/make -j1 O=/var/buildroot/output HOSTCC="/usr/bin/gcc" HOSTCXX="/usr/bin/g++" syncconfig
+[91mmake[1]: warning: -j1 forced in submake: resetting jobserver mode.
+[0mmake[1]: Entering directory '/var/buildroot'
+make[1]: Leaving directory '/var/buildroot'
+>>> host-pkgconf 1.6.3 Downloading
+[91m--2021-03-09 05:08:57--  https://distfiles.dereferenced.org/pkgconf/pkgconf-1.6.3.tar.xz
+[0m[91mResolving distfiles.dereferenced.org (distfiles.dereferenced.org)... [0m[91m170.39.20.83, 2602:fd37:1::83
+Connecting to distfiles.dereferenced.org (distfiles.dereferenced.org)|170.39.20.83|:443... [0m[91mconnected.
+[0m[91mHTTP request sent, awaiting response... [0m[91m200 OK
+Length: 291216 (284K) [application/octet-stream]
+Saving to: '/var/buildroot/output/build/.pkgconf-1.6.3.tar.xz.iK25m4/output'
+
+     0K .......... .......... .......... .[0m[91m......... .......[0m[91m.[0m[91m.[0m[91m.[0m[91m 17%  324K 1s
+    50K .......... ...[0m[91m....... .........[0m[91m. .......... .....[0m[91m..... 35%[0m[91m  326K 1s
+   100K .........[0m[91m. .......... .......[0m[91m... ..[0m[91m...[0m[91m..... ...[0m[91m....... 52% 25.0M 0s
+   150K .[0m[91m........[0m[91m. .......... ....[0m[91m.[0m[91m..... ...[0m[91m....... .[0m[91m......... 70% 1.29M 0s
+   200K .......[0m[91m... .......... ...[0m[91m....... .[0m[91m......[0m[91m... [0m[91m....[0m[91m...... 87%  435K 0s
+   250K .......... .......... .......... ....                 100%  164M=0.5s
+
+[0m[91m2021-03-09 05:08:58 (615 KB/s) - '/var/buildroot/output/build/.pkgconf-1.6.3.tar.xz.iK25m4/output' saved [291216/291216]
+
+[0mpkgconf-1.6.3.tar.xz: OK (sha256: 61f0b31b0d5ea0e862b454a80c170f57bad47879c0c42bd8de89200ff62ea210)
+>>> host-pkgconf 1.6.3 Extracting
+xzcat /var/buildroot/dl/pkgconf/pkgconf-1.6.3.tar.xz | tar --strip-components=1 -C /var/buildroot/output/build/host-pkgconf-1.6.3   -xf -
+>>> host-pkgconf 1.6.3 Patching
+
+Applying 0001-Only-prefix-with-the-sysroot-a-subset-of-variables.patch using patch: 
+patching file libpkgconf/tuple.c
+
+Applying 0002-Revert-main-assume-modversion-insted-of-version-if-o.patch using patch: 
+patching file cli/main.c
+>>> host-pkgconf 1.6.3 Updating config.sub and config.guess
+for file in config.guess config.sub; do for i in $(find /var/buildroot/output/build/host-pkgconf-1.6.3 -name $file); do cp support/gnuconfig/$file $i; done; done
+>>> host-pkgconf 1.6.3 Patching libtool
+patching file /var/buildroot/output/build/host-pkgconf-1.6.3/ltmain.sh
+Hunk #1 succeeded at 2694 (offset 7 lines).
+Hunk #2 succeeded at 4284 (offset 7 lines).
+Hunk #3 succeeded at 6579 (offset 25 lines).
+Hunk #4 succeeded at 6589 (offset 25 lines).
+Hunk #5 succeeded at 6882 (offset 25 lines).
+Hunk #6 succeeded at 7174 (offset 25 lines).
+Hunk #7 succeeded at 8146 (offset 34 lines).
+Hunk #8 succeeded at 10778 (offset 68 lines).
+>>> host-pkgconf 1.6.3 Configuring
+(cd /var/buildroot/output/build/host-pkgconf-1.6.3/ && rm -rf config.cache; PATH="/var/buildroot/output/host/bin:/var/buildroot/output/host/sbin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" PKG_CONFIG="/var/buildroot/output/host/bin/pkg-config" PKG_CONFIG_SYSROOT_DIR="/" PKG_CONFIG_ALLOW_SYSTEM_CFLAGS=1 PKG_CONFIG_ALLOW_SYSTEM_LIBS=1 PKG_CONFIG_LIBDIR="/var/buildroot/output/host/lib/pkgconfig:/var/buildroot/output/host/share/pkgconfig" AR="/usr/bin/ar" AS="/usr/bin/as" LD="/usr/bin/ld" NM="/usr/bin/nm" CC="/usr/bin/gcc" GCC="/usr/bin/gcc" CXX="/usr/bin/g++" CPP="/usr/bin/cpp" OBJCOPY="/usr/bin/objcopy" RANLIB="/usr/bin/ranlib" CPPFLAGS="-I/var/buildroot/output/host/include" CFLAGS="-O2 -I/var/buildroot/output/host/include" CXXFLAGS="-O2 -I/var/buildroot/output/host/include" LDFLAGS="-L/var/buildroot/output/host/lib -Wl,-rpath,/var/buildroot/output/host/lib" INTLTOOL_PERL=/usr/bin/perl CFLAGS="-O2 -I/var/buildroot/output/host/include" LDFLAGS="-L/var/buildroot/output/host/lib -Wl,-rpath,/var/buildroot/output/host/lib"  CONFIG_SITE=/dev/null ./configure --prefix="/var/buildroot/output/host" --sysconfdir="/var/buildroot/output/host/etc" --localstatedir="/var/buildroot/output/host/var" --enable-shared --disable-static --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --disable-debug --with-xmlto=no --with-fop=no --disable-nls --disable-dependency-tracking   )
+[91mconfigure: WARNING: unrecognized options: --disable-gtk-doc, --disable-gtk-doc-html, --disable-doc, --disable-docs, --disable-documentation, --disable-debug, --with-xmlto, --with-fop, --disable-nls
+[0mchecking for gcc... /usr/bin/gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether /usr/bin/gcc accepts -g... yes
+checking for /usr/bin/gcc option to accept ISO C89... none needed
+checking whether /usr/bin/gcc understands -c and -o together... yes
+checking whether C compiler accepts -Wall... yes
+checking whether C compiler accepts -Wextra... yes
+checking whether C compiler accepts -Wformat=2... yes
+checking whether C compiler accepts -std=gnu99... yes
+checking for strlcpy... no
+checking for strlcat... no
+checking for strndup... yes
+checking for cygwin_conv_path... no
+checking how to run the C preprocessor... /usr/bin/cpp
+checking for grep that handles long lines and -e... /usr/bin/grep
+checking for egrep... /usr/bin/grep -E
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking for sys/stat.h... (cached) yes
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a thread-safe mkdir -p... /usr/bin/mkdir -p
+checking for gawk... gawk
+checking whether make sets $(MAKE)... yes
+checking for style of include used by make... GNU
+checking whether make supports nested variables... yes
+checking dependency style of /usr/bin/gcc... none
+checking whether make supports nested variables... (cached) yes
+checking build system type... x86_64-pc-linux-gnu
+checking host system type... x86_64-pc-linux-gnu
+checking how to print strings... printf
+checking for a sed that does not truncate output... /usr/bin/sed
+checking for fgrep... /usr/bin/grep -F
+checking for ld used by /usr/bin/gcc... /usr/bin/ld
+checking if the linker (/usr/bin/ld) is GNU ld... yes
+checking for BSD- or MS-compatible name lister (nm)... /usr/bin/nm
+checking the name lister (/usr/bin/nm) interface... BSD nm
+checking whether ln -s works... yes
+checking the maximum length of command line arguments... 1572864
+checking how to convert x86_64-pc-linux-gnu file names to x86_64-pc-linux-gnu format... func_convert_file_noop
+checking how to convert x86_64-pc-linux-gnu file names to toolchain format... func_convert_file_noop
+checking for /usr/bin/ld option to reload object files... -r
+checking for objdump... objdump
+checking how to recognize dependent libraries... pass_all
+checking for dlltool... no
+checking how to associate runtime and link libraries... printf %s\n
+checking for archiver @FILE support... @
+checking for strip... strip
+checking for ranlib... /usr/bin/ranlib
+checking command to parse /usr/bin/nm output from /usr/bin/gcc object... ok
+checking for sysroot... no
+checking for a working dd... /usr/bin/dd
+checking how to truncate binary pipes... /usr/bin/dd bs=4096 count=1
+checking for mt... mt
+checking if mt is a manifest tool... no
+checking for dlfcn.h... yes
+checking for objdir... .libs
+checking if /usr/bin/gcc supports -fno-rtti -fno-exceptions... no
+checking for /usr/bin/gcc option to produce PIC... -fPIC -DPIC
+checking if /usr/bin/gcc PIC flag -fPIC -DPIC works... yes
+checking if /usr/bin/gcc static flag -static works... yes
+checking if /usr/bin/gcc supports -c -o file.o... yes
+checking if /usr/bin/gcc supports -c -o file.o... (cached) yes
+checking whether the /usr/bin/gcc linker (/usr/bin/ld -m elf_x86_64) supports shared libraries... yes
+checking whether -lc should be explicitly linked in... no
+checking dynamic linker characteristics... GNU/Linux ld.so
+checking how to hardcode library paths into programs... immediate
+checking whether stripping libraries is possible... yes
+checking if libtool supports shared libraries... yes
+checking whether to build shared libraries... yes
+checking whether to build static libraries... no
+checking for special C compiler options needed for large files... no
+checking for _FILE_OFFSET_BITS value needed for large files... no
+checking how to run the C preprocessor... /usr/bin/cpp
+checking for gcc... (cached) /usr/bin/gcc
+checking whether we are using the GNU C compiler... (cached) yes
+checking whether /usr/bin/gcc accepts -g... (cached) yes
+checking for /usr/bin/gcc option to accept ISO C89... (cached) none needed
+checking whether /usr/bin/gcc understands -c and -o together... (cached) yes
+checking whether ln -s works... yes
+checking that generated files are newer than configure... done
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating Kyuafile
+config.status: creating libpkgconf.pc
+config.status: creating tests/Kyuafile
+config.status: creating tests/test_env.sh
+config.status: creating libpkgconf/config.h
+config.status: executing depfiles commands
+config.status: executing libtool commands
+[91mconfigure: WARNING: unrecognized options: --disable-gtk-doc, --disable-gtk-doc-html, --disable-doc, --disable-docs, --disable-documentation, --disable-debug, --with-xmlto, --with-fop, --disable-nls
+[0m>>> host-pkgconf 1.6.3 Building
+PATH="/var/buildroot/output/host/bin:/var/buildroot/output/host/sbin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" PKG_CONFIG="/var/buildroot/output/host/bin/pkg-config" PKG_CONFIG_SYSROOT_DIR="/" PKG_CONFIG_ALLOW_SYSTEM_CFLAGS=1 PKG_CONFIG_ALLOW_SYSTEM_LIBS=1 PKG_CONFIG_LIBDIR="/var/buildroot/output/host/lib/pkgconfig:/var/buildroot/output/host/share/pkgconfig"  /usr/bin/make   -C /var/buildroot/output/build/host-pkgconf-1.6.3/
+make[1]: Entering directory '/var/buildroot/output/build/host-pkgconf-1.6.3'
+  CC       libpkgconf/audit.lo
+  CC       libpkgconf/cache.lo
+  CC       libpkgconf/client.lo
+  CC       libpkgconf/pkg.lo
+  CC       libpkgconf/bsdstubs.lo
+  CC       libpkgconf/fragment.lo
+  CC       libpkgconf/argvsplit.lo
+  CC       libpkgconf/fileio.lo
+  CC       libpkgconf/tuple.lo
+  CC       libpkgconf/queue.lo
+  CC       libpkgconf/path.lo
+  CC       libpkgconf/personality.lo
+  CC       libpkgconf/dependency.lo
+  CC       libpkgconf/parser.lo
+  CC       cli/pkgconf-main.o
+  CC       cli/pkgconf-getopt_long.o
+  CC       cli/pkgconf-renderer-msvc.o
+  CCLD     libpkgconf.la
+  CCLD     pkgconf
+make[1]: Leaving directory '/var/buildroot/output/build/host-pkgconf-1.6.3'
+>>> host-pkgconf 1.6.3 Installing to host directory
+PATH="/var/buildroot/output/host/bin:/var/buildroot/output/host/sbin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" PKG_CONFIG="/var/buildroot/output/host/bin/pkg-config" PKG_CONFIG_SYSROOT_DIR="/" PKG_CONFIG_ALLOW_SYSTEM_CFLAGS=1 PKG_CONFIG_ALLOW_SYSTEM_LIBS=1 PKG_CONFIG_LIBDIR="/var/buildroot/output/host/lib/pkgconfig:/var/buildroot/output/host/share/pkgconfig"  /usr/bin/make  install -C /var/buildroot/output/build/host-pkgconf-1.6.3/
+make[1]: Entering directory '/var/buildroot/output/build/host-pkgconf-1.6.3'
+make[2]: Entering directory '/var/buildroot/output/build/host-pkgconf-1.6.3'
+ /usr/bin/mkdir -p '/var/buildroot/output/host/lib'
+ /usr/bin/mkdir -p '/var/buildroot/output/host/share/doc/pkgconf'
+ /usr/bin/mkdir -p '/var/buildroot/output/host/share/aclocal'
+ /bin/bash ./libtool   --mode=install /usr/bin/install -c   libpkgconf.la '/var/buildroot/output/host/lib'
+ /usr/bin/mkdir -p '/var/buildroot/output/host/share/man/man5'
+ /usr/bin/mkdir -p '/var/buildroot/output/host/include/pkgconf'
+ /usr/bin/mkdir -p '/var/buildroot/output/host/share/man/man1'
+ /usr/bin/mkdir -p '/var/buildroot/output/host/lib/pkgconfig'
+ /usr/bin/mkdir -p '/var/buildroot/output/host/share/man/man7'
+ /usr/bin/install -c -m 644 pkg.m4 '/var/buildroot/output/host/share/aclocal'
+ /usr/bin/install -c -m 644 libpkgconf.pc '/var/buildroot/output/host/lib/pkgconfig'
+ /usr/bin/install -c -m 644 README.md AUTHORS '/var/buildroot/output/host/share/doc/pkgconf'
+ /usr/bin/mkdir -p '/var/buildroot/output/host/include/pkgconf/libpkgconf'
+ /usr/bin/install -c -m 644  libpkgconf/bsdstubs.h libpkgconf/iter.h libpkgconf/libpkgconf.h libpkgconf/stdinc.h libpkgconf/libpkgconf-api.h '/var/buildroot/output/host/include/pkgconf/libpkgconf'
+ /usr/bin/install -c -m 644 man/pc.5 man/pkgconf-personality.5 '/var/buildroot/output/host/share/man/man5'
+ /usr/bin/install -c -m 644 man/pkg.m4.7 '/var/buildroot/output/host/share/man/man7'
+ /usr/bin/install -c -m 644 man/pkgconf.1 '/var/buildroot/output/host/share/man/man1'
+libtool: install: /usr/bin/install -c .libs/libpkgconf.so.3.0.0 /var/buildroot/output/host/lib/libpkgconf.so.3.0.0
+libtool: install: (cd /var/buildroot/output/host/lib && { ln -s -f libpkgconf.so.3.0.0 libpkgconf.so.3 || { rm -f libpkgconf.so.3 && ln -s libpkgconf.so.3.0.0 libpkgconf.so.3; }; })
+libtool: install: (cd /var/buildroot/output/host/lib && { ln -s -f libpkgconf.so.3.0.0 libpkgconf.so || { rm -f libpkgconf.so && ln -s libpkgconf.so.3.0.0 libpkgconf.so; }; })
+libtool: install: /usr/bin/install -c .libs/libpkgconf.lai /var/buildroot/output/host/lib/libpkgconf.la
+libtool: finish: PATH="/var/buildroot/output/host/bin:/var/buildroot/output/host/sbin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/sbin" ldconfig -n /var/buildroot/output/host/lib
+----------------------------------------------------------------------
+Libraries have been installed in:
+   /var/buildroot/output/host/lib
+
+If you ever happen to want to link against installed libraries
+in a given directory, LIBDIR, you must either use libtool, and
+specify the full pathname of the library, or use the '-LLIBDIR'
+flag during linking and do at least one of the following:
+   - add LIBDIR to the 'LD_LIBRARY_PATH' environment variable
+     during execution
+   - add LIBDIR to the 'LD_RUN_PATH' environment variable
+     during linking
+   - use the '-Wl,-rpath -Wl,LIBDIR' linker flag
+   - have your system administrator add LIBDIR to '/etc/ld.so.conf'
+
+See any operating system documentation about shared libraries for
+more information, such as the ld(1) and ld.so(8) manual pages.
+----------------------------------------------------------------------
+ /usr/bin/mkdir -p '/var/buildroot/output/host/bin'
+  /bin/bash ./libtool   --mode=install /usr/bin/install -c pkgconf '/var/buildroot/output/host/bin'
+libtool: install: /usr/bin/install -c pkgconf /var/buildroot/output/host/bin/pkgconf
+make[2]: Leaving directory '/var/buildroot/output/build/host-pkgconf-1.6.3'
+make[1]: Leaving directory '/var/buildroot/output/build/host-pkgconf-1.6.3'
+/usr/bin/install -m 0755 -D package/pkgconf/pkg-config.in /var/buildroot/output/host/bin/pkg-config
+/usr/bin/sed -i -e 's,@STAGING_SUBDIR@,arm-buildroot-linux-gnueabihf/sysroot,g' /var/buildroot/output/host/bin/pkg-config
+/usr/bin/sed -i -e 's,@STATIC@,,' /var/buildroot/output/host/bin/pkg-config
+***
+*** ERROR: package host-pkgconf installs executables without proper RPATH:
+***   /var/buildroot/output/host/bin/gio
+***   /var/buildroot/output/host/bin/dbus-test-tool
+***   /var/buildroot/output/host/bin/pkgdata
+***   /var/buildroot/output/host/bin/genimage
+***   /var/buildroot/output/host/bin/gendict
+***   /var/buildroot/output/host/bin/gsettings
+***   /var/buildroot/output/host/bin/dbus-binding-tool
+***   /var/buildroot/output/host/bin/lsipc
+***   /var/buildroot/output/host/bin/eject
+***   /var/buildroot/output/host/bin/attr
+***   /var/buildroot/output/host/bin/lsattr
+***   /var/buildroot/output/host/bin/chacl
+***   /var/buildroot/output/host/bin/arm-buildroot-linux-gnueabihf-nm
+***   /var/buildroot/output/host/bin/umount
+***   /var/buildroot/output/host/bin/gencnval
+***   /var/buildroot/output/host/bin/glib-compile-schemas
+***   /var/buildroot/output/host/bin/arm-buildroot-linux-gnueabihf-gcov
+***   /var/buildroot/output/host/bin/dbus-update-activation-environment
+***   /var/buildroot/output/host/bin/glib-compile-resources
+***   /var/buildroot/output/host/bin/dbus-run-session
+***   /var/buildroot/output/host/bin/prlimit
+***   /var/buildroot/output/host/bin/arm-buildroot-linux-gnueabihf-size
+***   /var/buildroot/output/host/bin/arm-buildroot-linux-gnueabihf-ld
+***   /var/buildroot/output/host/bin/python2.7
+***   /var/buildroot/output/host/bin/dbus-send
+***   /var/buildroot/output/host/bin/gdbus
+***   /var/buildroot/output/host/bin/uuidparse
+***   /var/buildroot/output/host/bin/tset
+***   /var/buildroot/output/host/bin/arm-buildroot-linux-gnueabihf-ld.bfd
+***   /var/buildroot/output/host/bin/toe
+***   /var/buildroot/output/host/bin/gobject-query
+***   /var/buildroot/output/host/bin/gresource
+***   /var/buildroot/output/host/bin/arm-buildroot-linux-gnueabihf-objdump
+***   /var/buildroot/output/host/bin/openssl
+***   /var/buildroot/output/host/bin/clear
+***   /var/buildroot/output/host/bin/dbus-uuidgen
+***   /var/buildroot/output/host/bin/genrb
+***   /var/buildroot/output/host/bin/tic
+***   /var/buildroot/output/host/bin/lsmem
+***   /var/buildroot/output/host/bin/arm-buildroot-linux-gnueabihf-c++filt
+***   /var/buildroot/output/host/bin/icuinfo
+***   /var/buildroot/output/host/bin/infocmp
+***   /var/buildroot/output/host/bin/arm-buildroot-linux-gnueabihf-gprof
+***   /var/buildroot/output/host/bin/gtester
+***   /var/buildroot/output/host/bin/arm-buildroot-linux-gnueabihf-objcopy
+***   /var/buildroot/output/host/bin/dbus-daemon
+***   /var/buildroot/output/host/bin/arm-buildroot-linux-gnueabihf-as
+***   /var/buildroot/output/host/bin/arm-buildroot-linux-gnueabihf-strip
+***   /var/buildroot/output/host/bin/lua
+***   /var/buildroot/output/host/bin/pcregrep
+***   /var/buildroot/output/host/bin/fdtput
+***   /var/buildroot/output/host/bin/uuidgen
+***   /var/buildroot/output/host/bin/findmnt
+***   /var/buildroot/output/host/bin/fdtoverlay
+***   /var/buildroot/output/host/bin/gapplication
+***   /var/buildroot/output/host/bin/protoc
+***   /var/buildroot/output/host/bin/arm-buildroot-linux-gnueabihf-ar
+***   /var/buildroot/output/host/bin/mount
+***   /var/buildroot/output/host/bin/column
+***   /var/buildroot/output/host/bin/lslocks
+***   /var/buildroot/output/host/bin/arm-buildroot-linux-gnueabihf-gdb
+***   /var/buildroot/output/host/bin/lscpu
+***   /var/buildroot/output/host/bin/python3.8
+***   /var/buildroot/output/host/bin/fincore
+***   /var/buildroot/output/host/bin/genbrk
+***   /var/buildroot/output/host/bin/dbusxx-xml2cpp
+***   /var/buildroot/output/host/bin/chattr
+***   /var/buildroot/output/host/bin/gio-querymodules
+***   /var/buildroot/output/host/bin/dbus-launch
+***   /var/buildroot/output/host/bin/xmlwf
+***   /var/buildroot/output/host/bin/tabs
+***   /var/buildroot/output/host/bin/setfacl
+***   /var/buildroot/output/host/bin/getfacl
+***   /var/buildroot/output/host/bin/lsblk
+***   /var/buildroot/output/host/bin/lsns
+***   /var/buildroot/output/host/bin/pcretest
+***   /var/buildroot/output/host/bin/arm-buildroot-linux-gnueabihf-addr2line
+***   /var/buildroot/output/host/bin/arm-buildroot-linux-gnueabihf-lto-dump
+***   /var/buildroot/output/host/bin/arm-buildroot-linux-gnueabihf-strings
+***   /var/buildroot/output/host/bin/mountpoint
+***   /var/buildroot/output/host/bin/fdtget
+***   /var/buildroot/output/host/bin/tput
+***   /var/buildroot/output/host/bin/arm-buildroot-linux-gnueabihf-ranlib
+***   /var/buildroot/output/host/bin/dbus-monitor
+***   /var/buildroot/output/host/bin/dbusxx-introspect
+***   /var/buildroot/output/host/bin/gencfu
+***   /var/buildroot/output/host/bin/makeconv
+***   /var/buildroot/output/host/bin/arm-buildroot-linux-gnueabihf-readelf
+***   /var/buildroot/output/host/sbin/swapon
+***   /var/buildroot/output/host/sbin/debugfs
+***   /var/buildroot/output/host/sbin/fdisk
+***   /var/buildroot/output/host/sbin/mkfs.cramfs
+***   /var/buildroot/output/host/sbin/icupkg
+***   /var/buildroot/output/host/sbin/dumpe2fs
+***   /var/buildroot/output/host/sbin/swaplabel
+***   /var/buildroot/output/host/sbin/fsck.cramfs
+***   /var/buildroot/output/host/sbin/e2fsck
+***   /var/buildroot/output/host/sbin/wipefs
+***   /var/buildroot/output/host/sbin/fstrim
+***   /var/buildroot/output/host/sbin/sfdisk
+***   /var/buildroot/output/host/sbin/e2undo
+***   /var/buildroot/output/host/sbin/findfs
+***   /var/buildroot/output/host/sbin/gencmn
+***   /var/buildroot/output/host/sbin/e2image
+***   /var/buildroot/output/host/sbin/resize2fs
+***   /var/buildroot/output/host/sbin/swapoff
+***   /var/buildroot/output/host/sbin/mkswap
+***   /var/buildroot/output/host/sbin/mke2fs
+***   /var/buildroot/output/host/sbin/gennorm2
+***   /var/buildroot/output/host/sbin/e2freefrag
+***   /var/buildroot/output/host/sbin/e4crypt
+***   /var/buildroot/output/host/sbin/tune2fs
+***   /var/buildroot/output/host/sbin/badblocks
+***   /var/buildroot/output/host/sbin/losetup
+***   /var/buildroot/output/host/sbin/blkid
+***   /var/buildroot/output/host/sbin/gensprep
+***   /var/buildroot/output/host/sbin/fsck
+***   /var/buildroot/output/host/sbin/genccode
+***   /var/buildroot/output/host/sbin/partx
+[91mmake: *** [package/pkg-generic.mk:262: /var/buildroot/output/build/host-pkgconf-1.6.3/.stamp_host_installed] Error 1
+[0mThe command '/bin/sh -c make -j15' returned a non-zero code: 2
+the input device is not a TTY
+Build step 'Execute shell' marked build as failure
+Finished: FAILURE

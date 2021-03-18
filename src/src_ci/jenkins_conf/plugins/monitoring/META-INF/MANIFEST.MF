@@ -1,0 +1,25 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven
+Built-By: Emeric
+Build-Jdk: 1.8.0_112
+Extension-Name: monitoring
+Specification-Title: Monitoring of Jenkins
+Implementation-Title: monitoring
+Implementation-Version: 1.86.0
+Plugin-Class: org.jvnet.hudson.plugins.monitoring.PluginImpl
+Group-Id: org.jvnet.hudson.plugins
+Short-Name: monitoring
+Long-Name: Monitoring
+Url: https://github.com/jenkinsci/monitoring-plugin
+Minimum-Java-Version: 1.8
+Plugin-Version: 1.86.0
+Hudson-Version: 2.60.3
+Jenkins-Version: 2.60.3
+Plugin-Dependencies: aws-cloudwatch-library:1.11.136;resolution:=optio
+ nal
+Plugin-Developers: Emeric Vernat:evernat:evernat@free.fr
+Plugin-License-Name: ASL
+Plugin-License-Url: http://www.apache.org/licenses/LICENSE-2.0.txt
+Plugin-ScmUrl: https://github.com/jenkinsci/monitoring-plugin
+

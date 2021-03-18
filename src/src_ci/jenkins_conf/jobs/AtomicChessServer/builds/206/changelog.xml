@@ -1,0 +1,12 @@
+commit f6feaa0af12be2839313dfc0397ad232051c0549
+tree ee90a7c5b5ca00e05233ef1cf3eb195e18e0a8e9
+parent 77feafe9d0124378928da6b36c7d3ef37144972c
+author dev1 <dev1@itsdomain.local> 2021-01-17 01:26:42 +0100
+committer dev1 <dev1@itsdomain.local> 2021-01-17 01:26:42 +0100
+
+    added message if player is playing agains a table to open livestream
+
+
+:100644 100644 094d1163821033df7182fdc5e261e24c0fbdb215 4a2f7a145440e25a6e34c7e89a2621b9f47552d2 M	src/src_server/ATC_Backend/session_handling/game_handler.js
+:100644 100644 21ee9dbd19edb6efa8627f3ecdb84476f3455abc cd1d8d839da4133c238e040b81026a438053ac12 M	src/src_server/ATC_Backend/views/index.ejs
+:100644 100644 e6c599768d518446276c3a5a98d3cfb2c07ec796 35e7f5c96d68f5d2cdafb8542ccbbec78cb621bb M	src/src_server/ATC_Backend/views/webclient.ejs

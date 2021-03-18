@@ -1,0 +1,29 @@
+Started by user [8mha:////4HeQu7QxSfPJmiGpZcYSZuhcclhWOV448WYE8rDJrQ+DAAAAnR+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAzuEgZB/dLi1CL9xJL83Mzk5IzU4mIA55peXsYAAAA=[0mAtomicChess
+Running as SYSTEM
+Building remotely on [8mha:////4NhQxXi60jAlX5rncxKDkW4xGC/PmymblX2gatAeBdgUAAAAoh+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAyeEgYx/eT83ILSktQi/Zz85MSc+OLUorLUIgBFdgO6ywAAAA==[0mlocal_server (ATC_SERVER_AGENT) in workspace /var/jenkins_build/workspace/AtomicChessThesis
+The recommended git tool is: NONE
+using credential 867013a9-1ccb-4bd0-b0c8-f41e88a499f9
+ > git rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url git@github.com:RBEGamer/AtomicChessOS.git # timeout=10
+Fetching upstream changes from git@github.com:RBEGamer/AtomicChessOS.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.17.1'
+using GIT_SSH to set credentials local ssh key
+ > git fetch --tags --progress -- git@github.com:RBEGamer/AtomicChessOS.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+Checking out Revision 1f99b4cf5bba724abd0e2363896ad7c8adf7cd68 (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 1f99b4cf5bba724abd0e2363896ad7c8adf7cd68 # timeout=10
+Commit message: "Create README.md"
+ > git rev-list --no-walk 1f99b4cf5bba724abd0e2363896ad7c8adf7cd68 # timeout=10
+[AtomicChessThesis] $ /bin/sh -xe /tmp/jenkins8215318945068726542.sh
++ ls
+documentation_statistics
+README.md
+src
++ cd ./src/src_thesis/
++ bash ./build_start_thesis_server.sh
+bash: ./build_start_thesis_server.sh: Datei oder Verzeichnis nicht gefunden
+Build step 'Execute shell' marked build as failure
+Finished: FAILURE

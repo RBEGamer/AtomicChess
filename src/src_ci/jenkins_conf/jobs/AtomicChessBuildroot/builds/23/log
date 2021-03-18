@@ -1,0 +1,186 @@
+Started by an SCM change
+Running as SYSTEM
+Building remotely on [8mha:////4NhQxXi60jAlX5rncxKDkW4xGC/PmymblX2gatAeBdgUAAAAoh+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAyeEgYx/eT83ILSktQi/Zz85MSc+OLUorLUIgBFdgO6ywAAAA==[0mlocal_server (ATC_SERVER_AGENT) in workspace /var/jenkins_build/workspace/AtomicChessBuildroot
+The recommended git tool is: NONE
+using credential 867013a9-1ccb-4bd0-b0c8-f41e88a499f9
+ > git rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url git@github.com:RBEGamer/AtomicChessOS.git # timeout=10
+Fetching upstream changes from git@github.com:RBEGamer/AtomicChessOS.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.17.1'
+using GIT_SSH to set credentials local ssh key
+ > git fetch --tags --progress -- git@github.com:RBEGamer/AtomicChessOS.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/buildroot^{commit} # timeout=10
+Checking out Revision 5bcac88a12c5901f3d5c37039346bcdf97ea20f3 (refs/remotes/origin/buildroot)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 5bcac88a12c5901f3d5c37039346bcdf97ea20f3 # timeout=10
+Commit message: "Update config_backup"
+ > git rev-list --no-walk 6931333a88628d7858b2be26162acc15a0134944 # timeout=10
+[AtomicChessBuildroot] $ /bin/sh -xe /tmp/jenkins703755821293122259.sh
++ ls
+src
++ cd ./src/src_buildroot/buildroot
++ bash ./build.sh
+--- STARTING BUILD ---
+/var/jenkins_build/workspace/AtomicChessBuildroot/src/src_buildroot/buildroot
+arch
+backup_config.sh
+board
+boot
+build.sh
+CHANGES
+config_backup
+Config.in
+Config.in.legacy
+configs
+COPYING
+DELETE_FOR_REBUILD
+DEVELOPERS
+dl
+docs
+fs
+linux
+Makefile
+Makefile.legacy
+output
+OVERLAY_FS
+package
+PATCHES
+README
+restore_config.sh
+support
+SWUPDATE
+system
+toolchain
+utils
+VERSIONING
+GIT_COMMIT=5bcac88a12c5901f3d5c37039346bcdf97ea20f3
+RUN_DISPLAY_URL=http://85.214.224.153:8082/job/AtomicChessBuildroot/23/display/redirect
+JENKINS_URL=http://85.214.224.153:8082/
+EXECUTOR_NUMBER=3
+SSH_CONNECTION=127.0.0.1 41674 127.0.0.1 22
+LANG=de_DE.UTF-8
+BUILD_ID=23
+OLDPWD=/var/jenkins_build/workspace/AtomicChessBuildroot
+RUN_CHANGES_DISPLAY_URL=http://85.214.224.153:8082/job/AtomicChessBuildroot/23/display/redirect?page=changes
+JOB_BASE_NAME=AtomicChessBuildroot
+WORKSPACE_TMP=/var/jenkins_build/workspace/AtomicChessBuildroot@tmp
+GIT_URL=git@github.com:RBEGamer/AtomicChessOS.git
+HUDSON_COOKIE=f9fa7d8d-2a9f-4ab8-af83-73582de5dae4
+USER=root
+BUILD_NUMBER=23
+WORKSPACE=/var/jenkins_build/workspace/AtomicChessBuildroot
+PWD=/var/jenkins_build/workspace/AtomicChessBuildroot/src/src_buildroot/buildroot
+HUDSON_URL=http://85.214.224.153:8082/
+HOME=/root
+NODE_NAME=local_server
+HUDSON_SERVER_COOKIE=18b5d3f8e67d489e
+SSH_CLIENT=127.0.0.1 41674 22
+JENKINS_HOME=/var/jenkins_home
+JOB_NAME=AtomicChessBuildroot
+RUN_TESTS_DISPLAY_URL=http://85.214.224.153:8082/job/AtomicChessBuildroot/23/display/redirect?page=tests
+GIT_PREVIOUS_COMMIT=6931333a88628d7858b2be26162acc15a0134944
+HUDSON_HOME=/var/jenkins_home
+JOB_DISPLAY_URL=http://85.214.224.153:8082/job/AtomicChessBuildroot/display/redirect
+RUN_ARTIFACTS_DISPLAY_URL=http://85.214.224.153:8082/job/AtomicChessBuildroot/23/display/redirect?page=artifacts
+MAIL=/var/mail/root
+BUILD_URL=http://85.214.224.153:8082/job/AtomicChessBuildroot/23/
+SHELL=/bin/bash
+JOB_URL=http://85.214.224.153:8082/job/AtomicChessBuildroot/
+BUILD_DISPLAY_NAME=#23
+SHLVL=2
+GIT_BRANCH=origin/buildroot
+BUILD_TAG=jenkins-AtomicChessBuildroot-23
+NODE_LABELS=ATC_SERVER_AGENT local_server
+LOGNAME=root
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+GIT_PREVIOUS_SUCCESSFUL_COMMIT=6931333a88628d7858b2be26162acc15a0134944
+JENKINS_SERVER_COOKIE=18b5d3f8e67d489e
+_=/usr/bin/env
+--- GENERATE KEYS FOR SWUPDATE---
+--KEYS EYISTS --
+OLD_VERSION: 4.3.5
+['4', '3', '6']
+NEW_VERSION: 4.3.6
+./DELETE_FOR_REBUILD exists.
+-- COPY CONFIG FILE --
+rm -Rf /var/jenkins_build/workspace/AtomicChessBuildroot/src/src_buildroot/buildroot/output/build/atcgui-origin_qtui
+rm -Rf /var/jenkins_build/workspace/AtomicChessBuildroot/src/src_buildroot/buildroot/output/build/atcctl-origin_controller
+rm -Rf /var/jenkins_build/workspace/AtomicChessBuildroot/src/src_buildroot/buildroot/output/build/atctp-origin_testprogram
+--BUILD FIRT ITERATION --
+Makefile:584: *** libusb-compat is in the dependency chain of libnfc that has added it to its _DEPENDENCIES variable without selecting it or depending on it from Config.in.  Schluss.
+./build.sh: Zeile 64: ./output/images/rpi-firmware/config.txt: Datei oder Verzeichnis nicht gefunden
+./build.sh: Zeile 65: ./output/images/rpi-firmware/config.txt: Datei oder Verzeichnis nicht gefunden
+./build.sh: Zeile 66: ./output/images/rpi-firmware/config.txt: Datei oder Verzeichnis nicht gefunden
+./build.sh: Zeile 67: ./output/images/rpi-firmware/config.txt: Datei oder Verzeichnis nicht gefunden
+./build.sh: Zeile 68: ./output/images/rpi-firmware/config.txt: Datei oder Verzeichnis nicht gefunden
+./build.sh: Zeile 69: ./output/images/rpi-firmware/config.txt: Datei oder Verzeichnis nicht gefunden
+./build.sh: Zeile 70: ./output/images/rpi-firmware/config.txt: Datei oder Verzeichnis nicht gefunden
+./build.sh: Zeile 71: ./output/images/rpi-firmware/config.txt: Datei oder Verzeichnis nicht gefunden
+./build.sh: Zeile 74: ./output/images/rpi-firmware/config.txt: Datei oder Verzeichnis nicht gefunden
+./build.sh: Zeile 75: ./output/images/rpi-firmware/config.txt: Datei oder Verzeichnis nicht gefunden
+cat: ./output/images/rpi-firmware/config.txt: Datei oder Verzeichnis nicht gefunden
+./build.sh: Zeile 80: ./output/images/rpi-firmware/cmdline.txt: Datei oder Verzeichnis nicht gefunden
+./build.sh: Zeile 81: ./output/images/rpi-firmware/cmdline.txt: Datei oder Verzeichnis nicht gefunden
+cat: ./output/images/rpi-firmware/cmdline.txt: Datei oder Verzeichnis nicht gefunden
+touch: './output/images/rpi-firmware/PATCHED' kann nicht berührt werden: Datei oder Verzeichnis nicht gefunden
+-- PATCH config.txt --
+--BUILD FINAL WITH PATCHED config.txt--
+Makefile:584: *** libusb-compat is in the dependency chain of libnfc that has added it to its _DEPENDENCIES variable without selecting it or depending on it from Config.in.  Schluss.
+--CREATING UPDATE FILE FOR SWUPDATE using script in ./SWUPDATE--
+--- READ VERSION ---
+build updatepacke for version 4.3.6
+--- GENERATE SHA256 from rootfs.ext2.gz ---
+sha256sum: ../output/images/rootfs.ext2.gz: Datei oder Verzeichnis nicht gefunden
+rootfs hash 
+sha256sum: ../output/images/rootfs.ext2.gz: Datei oder Verzeichnis nicht gefunden
+--- PATCH sw-description from sw-description_template
+software =
+{
+        version = "4.3.6";
+
+
+        stable:
+        {
+                A:
+                {
+                        images: (
+                        {
+                                filename = "rootfs.ext2.gz";
+                        	device = "/dev/mmcblk0p2";
+                        	type = "raw";
+                        	sha256 = "";
+                        	compressed = true;
+                        }
+                        );
+
+                };
+                B:
+                {
+                        images: (
+                        {
+                                filename = "rootfs.ext2.gz";
+                        	device = "/dev/mmcblk0p3";
+                        	type = "raw";
+                        	sha256 = "";
+                        	compressed = true;
+                        }
+                        );
+                };
+        };
+}
+--- SIGN sw-description ---
+--- COPY sw-description to ../output/images/ ---
+--- RUN PACKAGE to .swu in ../output/images/ ---
+
+sw-description
+sw-description.sig
+cpio: rootfs.ext2.gz: Funktion »stat« fehlgeschlagen: Datei oder Verzeichnis nicht gefunden
+3 Blöcke
+atctable_signed.swu
+BUILD_DATE
+sw-description
+sw-description.sig
+VERSION
+Finished: SUCCESS

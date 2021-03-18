@@ -1,0 +1,34 @@
+commit fb4aa13ef667f85394744e58e5358ed70bde2718
+tree 13b038658f2060aaab6527448c4a33e8ee849544
+parent 576e8f68a5ccd2f162c7a452c0c6bc2f873d5dae
+author dev1 <dev1@itsdomain.local> 2021-01-14 00:41:11 +0100
+committer dev1 <dev1@itsdomain.local> 2021-01-14 00:41:11 +0100
+
+    added profile log/config button and auto redirect player after game over
+
+
+:100644 100644 99fe81f937a3eb32059e1e2cc997f1251087ebf3 f4bb2bded36a1bbcb42cd3ad942903be7d3b37ee M	src/src_server/ATC_Backend/config.json
+:100644 100644 b2b1dcb78ad2d9ce9f42bc4134adf7d799dfe76b cc87384902a0d1207d490863f6737ecaedd278fa M	src/src_server/ATC_Backend/public/chessboard.html
+:100644 100644 b7bcb08abde92f044c67d71647fcf3b27c550e9b 8de95f47023a571f6a6a21fbac0d14464f599986 M	src/src_server/ATC_Backend/public/css/chessboard.css
+:000000 100644 0000000000000000000000000000000000000000 73f844a827d021da31a01d76487eddd7159e21ec A	src/src_server/ATC_Backend/public/css/chessboard.min.css
+:000000 100644 0000000000000000000000000000000000000000 be3007dd0cdc7662268e103458b30a035da1cebf A	src/src_server/ATC_Backend/public/img/chesspieces/wikipedia/bB.png
+:000000 100644 0000000000000000000000000000000000000000 de9880ce6390d6a53464f1b028bff7be0fd0f131 A	src/src_server/ATC_Backend/public/img/chesspieces/wikipedia/bK.png
+:000000 100644 0000000000000000000000000000000000000000 e31a6d0224819791210e91218fc99b7cd3b848ed A	src/src_server/ATC_Backend/public/img/chesspieces/wikipedia/bN.png
+:000000 100644 0000000000000000000000000000000000000000 afa0c9d4459e4d04648ca413ba90690bfdd49a02 A	src/src_server/ATC_Backend/public/img/chesspieces/wikipedia/bP.png
+:000000 100644 0000000000000000000000000000000000000000 4649bb8bd09db6e4c9ef6dd6254f55c295bf5b7c A	src/src_server/ATC_Backend/public/img/chesspieces/wikipedia/bQ.png
+:000000 100644 0000000000000000000000000000000000000000 c7eb127ac700e6528930e525a5d105ae1890f484 A	src/src_server/ATC_Backend/public/img/chesspieces/wikipedia/bR.png
+:000000 100644 0000000000000000000000000000000000000000 70e0e14088f6ea09b84b728df6aaae6d4776ab4e A	src/src_server/ATC_Backend/public/img/chesspieces/wikipedia/wB.png
+:000000 100644 0000000000000000000000000000000000000000 bbf5664951a0486c20478407a84bda23cbdcce34 A	src/src_server/ATC_Backend/public/img/chesspieces/wikipedia/wK.png
+:000000 100644 0000000000000000000000000000000000000000 237250c164f652f0ea61f5e8f65c9b4cb83489b7 A	src/src_server/ATC_Backend/public/img/chesspieces/wikipedia/wN.png
+:000000 100644 0000000000000000000000000000000000000000 5f9315c75fd634092496514a3e24df71ea9a566e A	src/src_server/ATC_Backend/public/img/chesspieces/wikipedia/wP.png
+:000000 100644 0000000000000000000000000000000000000000 c3dfc15e556cbbeb546374aa9ee5e6bf121e929d A	src/src_server/ATC_Backend/public/img/chesspieces/wikipedia/wQ.png
+:000000 100644 0000000000000000000000000000000000000000 cc697603033640c5bc846fb42dbe1ae46c449d2e A	src/src_server/ATC_Backend/public/img/chesspieces/wikipedia/wR.png
+:000000 100644 0000000000000000000000000000000000000000 20b7d615ca6c5773d77e8bda0e46aa2c8fbf0770 A	src/src_server/ATC_Backend/public/js/CHESSBOARD_JS_LICENSE.md
+:100644 100644 bb5eac0eb60db9932e9521af9ac2b158138b69f9 0939efce3f0948c3a5b27bed410f53e5fa07b8fd M	src/src_server/ATC_Backend/public/js/chessboard.js
+:000000 100644 0000000000000000000000000000000000000000 73ea2870fdf1cc04cf24b6886341e1eaef0834ff A	src/src_server/ATC_Backend/public/js/chessboard.min.js
+:100644 100644 0491a478b068d07a540b3e925f7d36e1d855175e 0491a478b068d07a540b3e925f7d36e1d855175e R100	src/src_server/ATC_Backend/public/js/jquery/stockfish.js	src/src_server/ATC_Backend/public/js/stockfish.js
+:100644 100644 2c3e672b39264653bad0261e35a8bf08ec2e73d1 a5e8218ededf7ab3985e6f7ec535773e0568709c M	src/src_server/ATC_Backend/session_handling/game_handler.js
+:100644 100644 e06c64168dc1dae710e344892e23089fa94cece6 88a6d079b49b1492c7b54cd57d872264bfd7224b M	src/src_server/ATC_Backend/views/log_viewer.ejs
+:100644 100644 86a1443e1e12a5a489d64b740d6b8831dac1368a 8d62514535c3cf81d51ae24b26994e3b62a9b807 M	src/src_server/ATC_Backend/views/statistics_home.ejs
+:100644 100644 28149d592400190a5117691140cbba68488459d3 e2ba0e1b8ec3ea79253ccb24ce8787fb4bcdce74 M	src/src_server/ATC_Backend/views/statistics_profile.ejs
+:100644 100644 5e511edb314053a856f66e6f6bd7da0c8562ce35 bae05189f1d68b4472b4f3f0572b407443be2fcd M	src/src_server/ATC_Backend/views/webclient.ejs

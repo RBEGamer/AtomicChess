@@ -20,7 +20,7 @@ var classguicommunicator =
       [ "MAINMENU_START_AI_MATCH_BTN", "classguicommunicator.html#a78400032ab2edde9e9ab4cb58e6974d0a85bded1d85e302e47ad57287d9f2b5b9", null ],
       [ "MAINMENU_MATCHMAKING_BTN", "classguicommunicator.html#a78400032ab2edde9e9ab4cb58e6974d0a89b0f2d7edc275a4bb00fc434facdfb2", null ],
       [ "MAINMENU_PLAYER_LIST_BTN", "classguicommunicator.html#a78400032ab2edde9e9ab4cb58e6974d0a2027e21e23454e6e5883632e6448c585", null ],
-      [ "ERROR", "classguicommunicator.html#a78400032ab2edde9e9ab4cb58e6974d0abb1ca97ec761fc37101737ba0aa2e7c5", null ],
+      [ "QT_UI_ERROR", "classguicommunicator.html#a78400032ab2edde9e9ab4cb58e6974d0afad851f6494ef57edd4377ea00f907d4", null ],
       [ "NETWORK_STATUS", "classguicommunicator.html#a78400032ab2edde9e9ab4cb58e6974d0a13d6e2341105e4eda847e9e1afb4b761", null ],
       [ "MESSAGEBOX_MESSAGE_TEXT", "classguicommunicator.html#a78400032ab2edde9e9ab4cb58e6974d0a1b9773dc8fbe8865cd3f278468a58dc7", null ],
       [ "MESSAGEBOX_OK_BTN", "classguicommunicator.html#a78400032ab2edde9e9ab4cb58e6974d0a5a59314188113969959dbffec372007e", null ],
@@ -42,7 +42,14 @@ var classguicommunicator =
       [ "PLAYER_EMM_RESET", "classguicommunicator.html#a78400032ab2edde9e9ab4cb58e6974d0a4e1b537248b7da69348df340a18b2f6f", null ],
       [ "PLAYER_EMM_INPUT", "classguicommunicator.html#a78400032ab2edde9e9ab4cb58e6974d0ab7b27e1ca9d58d3d858047dd517e975e", null ],
       [ "PLAYER_EMM_INPUT_RAW", "classguicommunicator.html#a78400032ab2edde9e9ab4cb58e6974d0aadab76290907f49a4422b672d4de148a", null ],
-      [ "QT_UI_RESET", "classguicommunicator.html#a78400032ab2edde9e9ab4cb58e6974d0a0feb8bf54cd0fcd63368914fad769dd8", null ]
+      [ "QT_UI_RESET", "classguicommunicator.html#a78400032ab2edde9e9ab4cb58e6974d0a0feb8bf54cd0fcd63368914fad769dd8", null ],
+      [ "CALIBRATIONSCREEN_H1POS", "classguicommunicator.html#a78400032ab2edde9e9ab4cb58e6974d0ad7a9bb9b81bd804f91f4e02cd49f5f3f", null ],
+      [ "CALIBRATIONSCREEN_A8POS", "classguicommunicator.html#a78400032ab2edde9e9ab4cb58e6974d0a4e61fdf00b21651402ca00b9d0e14db4", null ],
+      [ "CALIBRATIONSCREEN_SAVE", "classguicommunicator.html#a78400032ab2edde9e9ab4cb58e6974d0ac2faf9394afe51c99aa84951769eeda2", null ],
+      [ "CALIBRATIONSCREEN_MVUP", "classguicommunicator.html#a78400032ab2edde9e9ab4cb58e6974d0aedcd224a1da5acde066c237a281e68b4", null ],
+      [ "CALIBRATIONSCREEN_MVDOWN", "classguicommunicator.html#a78400032ab2edde9e9ab4cb58e6974d0aada48dee05d68b9b430324e086bbc400", null ],
+      [ "CALIBRATIONSCREEN_MVLEFT", "classguicommunicator.html#a78400032ab2edde9e9ab4cb58e6974d0a3494b47b00d6dd05b259cee8e3249c92", null ],
+      [ "CALIBRATIONSCREEN_MVRIGHT", "classguicommunicator.html#a78400032ab2edde9e9ab4cb58e6974d0a57def8fec22246240e0fd01596b0c254", null ]
     ] ],
     [ "GUI_MESSAGE_BOX_RESULT", "classguicommunicator.html#a4b5f41a487ed9c1349701d595c173285", [
       [ "MSGBOX_RES_NONE", "classguicommunicator.html#a4b5f41a487ed9c1349701d595c173285ad5c24c3b94f624a613d95a68309b292b", null ],
@@ -83,7 +90,8 @@ var classguicommunicator =
       [ "DEBUG_SCREEN", "classguicommunicator.html#a64dfe76a012adf2d58b79a58f417ce24a8bb742d355b7b420435c12aca64c84e3", null ],
       [ "CHESS_COLOR_WHITE", "classguicommunicator.html#a64dfe76a012adf2d58b79a58f417ce24a6f08f0e4d42fbb154fd2f05fd0568b77", null ],
       [ "CHESS_COLOR_BLACK", "classguicommunicator.html#a64dfe76a012adf2d58b79a58f417ce24a87bfdbb24fcce5fc43afdaae29d11816", null ],
-      [ "PLAYER_ENTER_MANUAL_MOVE_SCREEN", "classguicommunicator.html#a64dfe76a012adf2d58b79a58f417ce24aebfae6e9b1dc9d861a0c444d98126aba", null ]
+      [ "PLAYER_ENTER_MANUAL_MOVE_SCREEN", "classguicommunicator.html#a64dfe76a012adf2d58b79a58f417ce24aebfae6e9b1dc9d861a0c444d98126aba", null ],
+      [ "CALIBRATION_SCREEN", "classguicommunicator.html#a64dfe76a012adf2d58b79a58f417ce24ab8603f12c2ab71bfc37e5f7f957d0a37", null ]
     ] ],
     [ "guicommunicator", "classguicommunicator.html#a7247e5dd0f337d68d55ed7ddcbe1c46d", null ],
     [ "~guicommunicator", "classguicommunicator.html#a4d4f0eaf8aba71945d216c6ff3a751db", null ],

@@ -7,13 +7,13 @@ Extension-Name: pipeline-rest-api
 Specification-Title: Provides a REST API to access pipeline and pipeli
  ne run data
 Implementation-Title: pipeline-rest-api
-Implementation-Version: 2.15
+Implementation-Version: 2.19
 Group-Id: org.jenkins-ci.plugins.pipeline-stage-view
 Short-Name: pipeline-rest-api
 Long-Name: Pipeline: REST API Plugin
 Url: https://github.com/jenkinsci/pipeline-stage-view-plugin
 Minimum-Java-Version: 1.8
-Plugin-Version: 2.15
+Plugin-Version: 2.19
 Hudson-Version: 2.60.3
 Jenkins-Version: 2.60.3
 Plugin-Dependencies: workflow-api:2.24,workflow-job:2.12,workflow-step
@@ -23,5 +23,4 @@ Plugin-Developers:
 Plugin-License-Name: MIT License
 Plugin-License-Url: https://opensource.org/licenses/MIT
 Plugin-ScmUrl: https://github.com/jenkinsci/pipeline-stage-view-plugin
- /pipeline-rest-api
 

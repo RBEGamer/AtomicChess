@@ -1,0 +1,2 @@
+@import url('solarized-dark.css') (prefers-color-scheme: dark);
+@import url('solarized-light.css') not (prefers-color-scheme: dark);

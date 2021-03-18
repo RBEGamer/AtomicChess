@@ -1,0 +1,15 @@
+commit a6f515bf6982a5a75ce4ab4fc1aba6a0360ab15f
+tree 2b2c2a2a555339404272b0c4599373c2eb4fc642
+parent 9462a00717d1c3a317cf6af01fb882ad24079278
+author Marcel <info@prodevmo.com> 2020-12-06 21:43:42 +0100
+committer Marcel <info@prodevmo.com> 2020-12-06 21:43:42 +0100
+
+    added better profile name generator
+    
+
+
+:100644 100644 c8a0b7bd29cae63a74a88d9998243f3faaa08d69 a7368e9666a115f0d50bcc1fe0f5d0da56f276ef M	src/src_server/ATC_Backend/routes/index.js
+:000000 100644 0000000000000000000000000000000000000000 b8747a0fd866f6e340f1968fb8a4c5a61d278aff A	src/src_server/ATC_Backend/session_handling/AbstractNameGenerator.js
+:100644 100644 7ac8a5b1394194e40b79cc3dfcff30d20351fd75 09b60af2274697ba8b6cdae92bf80f1097d94d40 M	src/src_server/ATC_Backend/session_handling/profile_handling.js
+:000000 100644 0000000000000000000000000000000000000000 a503a4eb6d548a7fcacb5acfff59f880ff4ceb5d A	src/src_server/ATC_Backend/views/webclient.ejs
+:000000 100644 0000000000000000000000000000000000000000 468eb4793bff67f4b2945ab157d6db1a381b89bf A	src/src_server/CI/hawkbit_config/application.properties

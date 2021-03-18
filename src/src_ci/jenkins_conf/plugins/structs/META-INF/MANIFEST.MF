@@ -2,19 +2,22 @@ Manifest-Version: 1.0
 Archiver-Version: Plexus Archiver
 Created-By: Apache Maven
 Built-By: carroll
-Build-Jdk: 1.8.0_202
+Build-Jdk: 1.8.0_282
 Extension-Name: structs
 Specification-Title: Library plugin for DSL plugins that need names fo
  r Jenkins objects.
 Implementation-Title: structs
-Implementation-Version: 1.20
+Implementation-Version: 1.22
 Group-Id: org.jenkins-ci.plugins
 Short-Name: structs
 Long-Name: Structs Plugin
-Url: https://wiki.jenkins-ci.org/display/JENKINS/Structs+plugin
+Url: https://github.com/jenkinsci/structs-plugin
 Minimum-Java-Version: 1.8
-Plugin-Version: 1.20
-Hudson-Version: 2.107.3
-Jenkins-Version: 2.107.3
+Plugin-Version: 1.22
+Hudson-Version: 2.222.4
+Jenkins-Version: 2.222.4
 Plugin-Developers: 
+Plugin-License-Name: MIT License
+Plugin-License-Url: https://opensource.org/licenses/MIT
+Plugin-ScmUrl: http://github.com/jenkinsci/structs-plugin/structs
 

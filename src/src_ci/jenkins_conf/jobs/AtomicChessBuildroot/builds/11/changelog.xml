@@ -1,0 +1,9 @@
+commit ca9346fad575c0b8b210c7d0b733ab9193a293ab
+tree 65903866cf864c8e72528d35a6043defd7d04667
+parent 40fed195f8a06d5ff9afe79b7cd5f80804985ed6
+author Marcel Ochsendorf <marcel.ochsendorf@gmail.com> 2021-01-03 17:57:16 +0100
+committer GitHub <noreply@github.com> 2021-01-03 17:57:16 +0100
+
+    Update atcctl.mk
+
+:100644 100644 18715c1cb2f1d87a076b1a49d06da3e30844717f 394f0690e97924258fdaa7dc8e6d18902302aa7a M	src/src_buildroot/buildroot/package/atcctl/atcctl.mk

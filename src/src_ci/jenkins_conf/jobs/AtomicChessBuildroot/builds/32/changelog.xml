@@ -1,0 +1,9 @@
+commit 0ae7f0602cedd9f42f0dcbce1492eb49b467270b
+tree 1ac4a69dce50fec753112059d2e2cf043fb8376c
+parent 7614e8d42314c267874376e4eef35c6ea3d4a30f
+author Marcel Ochsendorf <marcel.ochsendorf@gmail.com> 2021-01-06 13:24:20 +0100
+committer GitHub <noreply@github.com> 2021-01-06 13:24:20 +0100
+
+    Create S66timezone
+
+:000000 100644 0000000000000000000000000000000000000000 06a0631a658013254f11380fc084764dcc25101e A	src/src_buildroot/buildroot/OVERLAY_FS/etc/init.d/S66timezone

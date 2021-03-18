@@ -1,0 +1,10 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<log>
+  <name>org.jenkinsci.plugins.periodicbackup</name>
+  <targets>
+    <target>
+      <name>org.jenkinsci.plugins.periodicbackup</name>
+      <level>-2147483648</level>
+    </target>
+  </targets>
+</log>

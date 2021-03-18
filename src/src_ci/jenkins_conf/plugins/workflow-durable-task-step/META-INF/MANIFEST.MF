@@ -8,13 +8,13 @@ Specification-Title: Pipeline steps locking agents and workspaces, and
   running external processes that may survive a Jenkins restart or age
  nt reconnection.
 Implementation-Title: workflow-durable-task-step
-Implementation-Version: 2.36
+Implementation-Version: 2.37
 Group-Id: org.jenkins-ci.plugins.workflow
 Short-Name: workflow-durable-task-step
 Long-Name: Pipeline: Nodes and Processes
 Url: https://github.com/jenkinsci/workflow-durable-task-step-plugin
 Minimum-Java-Version: 1.8
-Plugin-Version: 2.36
+Plugin-Version: 2.37
 Hudson-Version: 2.248
 Jenkins-Version: 2.248
 Plugin-Dependencies: workflow-api:2.40,workflow-step-api:2.22,workflow

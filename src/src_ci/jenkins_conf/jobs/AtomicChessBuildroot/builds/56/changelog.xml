@@ -1,0 +1,18 @@
+commit ee5a86f9baabe7c5630256fe805ea1802a8fc976
+tree f1b993ea2350f4e200d158369ce6333a1106ae0a
+parent fce93f3e64ee63943e5d76d767e0b75dd8a3fbed
+author Marcel Ochsendorf <marcel.ochsendorf@gmail.com> 2021-03-13 08:12:12 +0100
+committer GitHub <noreply@github.com> 2021-03-13 08:12:12 +0100
+
+    Update titelangaben.tex
+
+:100644 100644 30a9acfb98d3f7ddce3c51408f80f1ca89a6d145 8517a16e4e4030554687fed83804e509880f09c5 M	src/src_thesis/titelangaben.tex
+commit fce93f3e64ee63943e5d76d767e0b75dd8a3fbed
+tree 4ba4b4f2d3b5e28ee743b5334345515ac33189c1
+parent f661ed6119c68aeeb458440938fa6a509e97bbeb
+author Marcel Ochsendorf <marcel.ochsendorf@gmail.com> 2021-03-13 08:11:37 +0100
+committer GitHub <noreply@github.com> 2021-03-13 08:11:37 +0100
+
+    Delete template.pdf
+
+:100644 000000 94dd4e133140295e893dd18544c3395f997d7364 0000000000000000000000000000000000000000 D	src/src_thesis/template.pdf

@@ -1,0 +1,14 @@
+commit cb48cc0a209a537c54f69f3a34a8a305fabf6b20
+tree b584da9af62042482fe22884ebb39aef02c2689a
+parent fb4aa13ef667f85394744e58e5358ed70bde2718
+author dev1 <dev1@itsdomain.local> 2021-01-14 03:22:29 +0100
+committer dev1 <dev1@itsdomain.local> 2021-01-14 03:22:29 +0100
+
+    webclient now working with drag&drop
+
+
+:100644 000000 cc87384902a0d1207d490863f6737ecaedd278fa 0000000000000000000000000000000000000000 D	src/src_server/ATC_Backend/public/chessboard.html
+:100644 100644 0939efce3f0948c3a5b27bed410f53e5fa07b8fd d834fced455c28e46d552e50a98c2e906487517d M	src/src_server/ATC_Backend/public/js/chessboard.js
+:100644 100644 edb6724d7cabe7d1178e2bac0c97f6583bd9db30 6e9f3fcdbe193dc7700cfc87d0b7a740d9fa2e1e M	src/src_server/ATC_Backend/views/index.ejs
+:100644 100644 8d62514535c3cf81d51ae24b26994e3b62a9b807 be024c07bf1b0efa77d5bc113784c42f26d055e7 M	src/src_server/ATC_Backend/views/statistics_home.ejs
+:100644 100644 bae05189f1d68b4472b4f3f0572b407443be2fcd 904e6b8927359a85a41069a497c6183925a166cf M	src/src_server/ATC_Backend/views/webclient.ejs

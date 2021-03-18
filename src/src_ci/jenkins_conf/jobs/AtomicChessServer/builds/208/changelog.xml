@@ -1,0 +1,27 @@
+commit 6020890c4c446e7ee0aeb096cac45c34a33c7f0f
+tree 591198f1cfdc203b07fa04694f964b1d329972a6
+parent 8b805de1e13591437acdd48c547368c6647aaa3e
+author Marcel Ochsendorf <marcel.ochsendorf@gmail.com> 2021-02-03 14:11:50 +0100
+committer GitHub <noreply@github.com> 2021-02-03 14:11:50 +0100
+
+    Update index.ejs
+
+:100644 100644 58a1424af1c292ab02fee328a535f4bc121f3839 c100cd801e632ceeaf92e2bf8c755e66a187f29f M	src/src_server/ATC_Backend/views/index.ejs
+commit 8b805de1e13591437acdd48c547368c6647aaa3e
+tree 0d861d136723a6fb8dc4e02d89884b76499bd5e4
+parent 9422102972945f726e00cf2f6735e555308b2830
+author Marcel Ochsendorf <marcel.ochsendorf@gmail.com> 2021-01-28 06:25:15 +0100
+committer GitHub <noreply@github.com> 2021-01-28 06:25:15 +0100
+
+    Update index.ejs
+
+:100644 100644 cd1d8d839da4133c238e040b81026a438053ac12 58a1424af1c292ab02fee328a535f4bc121f3839 M	src/src_server/ATC_Backend/views/index.ejs
+commit 9422102972945f726e00cf2f6735e555308b2830
+tree 3fe2d9e724bfdd1122ae8cb03c301b97842c3c92
+parent efdc85cdaf4241016f9b6eeec4665d309b974d43
+author Marcel Ochsendorf <marcel.ochsendorf@gmail.com> 2021-01-28 06:24:34 +0100
+committer GitHub <noreply@github.com> 2021-01-28 06:24:34 +0100
+
+    Update config.json
+
+:100644 100644 caa5d0ebfae841bb8d0564a0d33ae90941cb8644 cc90d40f8f59015eed72b81188e28405c6dbf4cd M	src/src_server/ATC_Backend/config.json

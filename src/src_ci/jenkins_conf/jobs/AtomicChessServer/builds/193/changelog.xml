@@ -1,0 +1,10 @@
+commit e6537deb007008dbd079bcbf0ea747dcf1560c7a
+tree 37f5ddfb6a66856cb3f31dd2933f263b56c21a81
+parent c46b3ce0fdd5341be5b6f6c6122b267a1f1b805d
+author dev1 <dev1@itsdomain.local> 2021-01-14 07:05:47 +0100
+committer dev1 <dev1@itsdomain.local> 2021-01-14 07:05:47 +0100
+
+    added index menu
+
+
+:100644 100644 d72903278752ae6a1563d7b932e8bca5c078c71c 5b719402876644c89b01764e44a016954391b0c4 M	src/src_server/ATC_Backend/views/index.ejs

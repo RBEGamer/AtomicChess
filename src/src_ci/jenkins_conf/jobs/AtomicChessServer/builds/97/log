@@ -1,0 +1,139 @@
+Started by timer
+Running as SYSTEM
+Building remotely on [8mha:////4NhQxXi60jAlX5rncxKDkW4xGC/PmymblX2gatAeBdgUAAAAoh+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAyeEgYx/eT83ILSktQi/Zz85MSc+OLUorLUIgBFdgO6ywAAAA==[0mlocal_server (ATC_SERVER_AGENT) in workspace /var/jenkins_build/workspace/AtomicChessServer
+The recommended git tool is: NONE
+using credential 867013a9-1ccb-4bd0-b0c8-f41e88a499f9
+ > git rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url git@github.com:RBEGamer/AtomicChessOS.git # timeout=10
+Fetching upstream changes from git@github.com:RBEGamer/AtomicChessOS.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.17.1'
+using GIT_SSH to set credentials local ssh key
+ > git fetch --tags --progress -- git@github.com:RBEGamer/AtomicChessOS.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/server^{commit} # timeout=10
+Checking out Revision 12b28f605bb22b929c27eee8e7aa61518a488166 (refs/remotes/origin/server)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 12b28f605bb22b929c27eee8e7aa61518a488166 # timeout=10
+Commit message: "Update README.md"
+ > git rev-list --no-walk 12b28f605bb22b929c27eee8e7aa61518a488166 # timeout=10
+[AtomicChessServer] $ /bin/sh -xe /tmp/jenkins1439532715932934536.sh
++ ls
+src
++ cd ./src/src_server/CI/
++ bash ./start_stack.sh
+TERM environment variable not set.
+AtomicChessRedisDatabase uses an image, skipping
+AtomicChessMongoDatabase uses an image, skipping
+redis-commander uses an image, skipping
+Building AtomicChessMoveValidator
+Step 1/11 : FROM python:3.7-alpine
+ ---> f4bd0adb4b78
+Step 2/11 : LABEL maintainer="Marcel Ochsendorf info@marcelochsendorf.com"
+ ---> Running in b2ea8a5b44d8
+Removing intermediate container b2ea8a5b44d8
+ ---> 8b95ea7450b2
+Step 3/11 : WORKDIR /app
+ ---> Running in 9812c7b69f4f
+Removing intermediate container 9812c7b69f4f
+ ---> 46a903e7fd0e
+Step 4/11 : COPY . /app
+ ---> 895003cc52c9
+Step 5/11 : RUN pwd
+ ---> Running in 6f688a087fab
+/app
+Removing intermediate container 6f688a087fab
+ ---> c677d1abc704
+Step 6/11 : RUN ls -la
+ ---> Running in 5ec2462355b5
+total 88
+drwxr-xr-x    1 root     root          4096 Dec  1 06:00 .
+drwxr-xr-x    1 root     root          4096 Dec  1 06:00 ..
+drwxr-xr-x    3 root     root          4096 Nov 30 21:49 .idea
+-rw-r--r--    1 root     root         27073 Nov 30 21:49 ATC_Move_Validator.log
+-rw-r--r--    1 root     root           273 Nov 30 21:49 Dockerfile
+-rw-r--r--    1 root     root           753 Nov 30 21:49 README.md
+-rw-r--r--    1 root     root            29 Nov 30 21:49 RUN_IN_CONTAINER
+-rw-r--r--    1 root     root          4454 Nov 30 21:49 app.py
+drwxr-xr-x    2 root     root          4096 Nov 30 21:49 bin
+-rwxr-xr-x    1 root     root            47 Nov 30 21:49 buid_dockerimage.sh
+drwxr-xr-x    3 root     root          4096 Nov 30 21:49 lib
+lrwxrwxrwx    1 root     root             3 Nov 30 21:49 lib64 -> lib
+drwxr-xr-x    2 root     root          4096 Nov 30 21:49 python-chess
+-rw-r--r--    1 root     root            69 Nov 30 21:49 pyvenv.cfg
+-rw-r--r--    1 root     root           129 Nov 30 21:49 requirements.txt
+drwxr-xr-x    4 root     root          4096 Nov 30 21:49 venv_37
+Removing intermediate container 5ec2462355b5
+ ---> 60759b38505a
+Step 7/11 : RUN pip3 install -r /app/requirements.txt
+ ---> Running in b69f769541f4
+Collecting click==7.1.2
+  Downloading click-7.1.2-py2.py3-none-any.whl (82 kB)
+Collecting Flask==1.1.2
+  Downloading Flask-1.1.2-py2.py3-none-any.whl (94 kB)
+Collecting itsdangerous==1.1.0
+  Downloading itsdangerous-1.1.0-py2.py3-none-any.whl (16 kB)
+Collecting Jinja2==2.11.2
+  Downloading Jinja2-2.11.2-py2.py3-none-any.whl (125 kB)
+Collecting MarkupSafe==1.1.1
+  Downloading MarkupSafe-1.1.1.tar.gz (19 kB)
+Collecting python-chess>=0.31.3
+  Downloading python_chess-1.999-py3-none-any.whl (1.4 kB)
+Collecting Werkzeug==1.0.1
+  Downloading Werkzeug-1.0.1-py2.py3-none-any.whl (298 kB)
+Collecting gunicorn>=20
+  Downloading gunicorn-20.0.4-py2.py3-none-any.whl (77 kB)
+Collecting chess<2,>=1
+  Downloading chess-1.3.0-py3-none-any.whl (140 kB)
+Requirement already satisfied: setuptools>=3.0 in /usr/local/lib/python3.7/site-packages (from gunicorn>=20->-r /app/requirements.txt (line 8)) (50.3.2)
+Building wheels for collected packages: MarkupSafe
+  Building wheel for MarkupSafe (setup.py): started
+  Building wheel for MarkupSafe (setup.py): finished with status 'done'
+  Created wheel for MarkupSafe: filename=MarkupSafe-1.1.1-py3-none-any.whl size=12627 sha256=348fb9a4ecb76dc12a3edd8cc7176d5dea172904785ae9b4826e1378d7d62831
+  Stored in directory: /root/.cache/pip/wheels/b9/d9/ae/63bf9056b0a22b13ade9f6b9e08187c1bb71c47ef21a8c9924
+Successfully built MarkupSafe
+Installing collected packages: click, itsdangerous, Werkzeug, MarkupSafe, Jinja2, Flask, chess, python-chess, gunicorn
+Successfully installed Flask-1.1.2 Jinja2-2.11.2 MarkupSafe-1.1.1 Werkzeug-1.0.1 chess-1.3.0 click-7.1.2 gunicorn-20.0.4 itsdangerous-1.1.0 python-chess-1.999
+[91mWARNING: You are using pip version 20.2.4; however, version 20.3 is available.
+You should consider upgrading via the '/usr/local/bin/python -m pip install --upgrade pip' command.
+[0mRemoving intermediate container b69f769541f4
+ ---> ea5e6631b911
+Step 8/11 : RUN pip3 install python-chess
+ ---> Running in 22ebdf5ed710
+Service 'AtomicChessMoveValidator' failed to build : OCI runtime create failed: container_linux.go:349: starting container process caused "process_linux.go:449: container init caused \"process_linux.go:432: running prestart hook 0 caused \\\"error running hook: exit status 2, stdout: , stderr: runtime/cgo: pthread_create failed: Resource temporarily unavailable\\\\nSIGABRT: abort\\\\nPC=0x7fbc23b36fb7 m=0 sigcode=18446744073709551610\\\\n\\\\ngoroutine 0 [idle]:\\\\nruntime: unknown pc 0x7fbc23b36fb7\\\\nstack: frame={sp:0x7ffc2cf94b50, fp:0x0} stack=[0x7ffc2c7961d0,0x7ffc2cf95210)\\\\n00007ffc2cf94a50:  0000000000f429ad  0000000000f429ad \\\\n00007ffc2cf94a60:  0000000000000000  0000000000000000 \\\\n00007ffc2cf94a70:  ffffffffffffffff  ffffffffffffffff \\\\n00007ffc2cf94a80:  ffffffffffffffff  ffffffffffffffff \\\\n00007ffc2cf94a90:  ffffffffffffffff  ffffffffffffffff \\\\n00007ffc2cf94aa0:  c4637ab809e4e7b0  d0ac80c063906560 \\\\n00007ffc2cf94ab0:  f504ec31d8821eaf  b2e3992f64a74455 \\\\n00007ffc2cf94ac0:  15ffe7c856d1756f  02a2b2787d7aeedc \\\\n00007ffc2cf94ad0:  978a5afbf4724091  dd130d2084df9750 \\\\n00007ffc2cf94ae0:  aa9eb3724ffd9a92  ca4d5f2c8145ea20 \\\\n00007ffc2cf94af0:  f8f7c0f18fef0a45  eeae59ab57c84c1a \\\\n00007ffc2cf94b00:  80c3a4e579ecf146  a03aac9c2d97ea38 \\\\n00007ffc2cf94b10:  024affaf193fe164  1d282ba13e8e3ee7 \\\\n00007ffc2cf94b20:  363ce15e33f01105  9185834e03117d63 \\\\n00007ffc2cf94b30:  a60a5427ccea5078  f3389296088e2cd1 \\\\n00007ffc2cf94b40:  52b51e78ed0fef4b  bb4af25357a1dd0c \\\\n00007ffc2cf94b50: <0000000000000000  0b04785f7c1410f4 \\\\n00007ffc2cf94b60:  00007ffc2cf94c50  0000000000001000 \\\\n00007ffc2cf94b70:  00007ffc2cf94ce0  00007fbc245abec5 \\\\n00007ffc2cf94b80:  00007fbc1d16e9d0  00007fbc245ac228 \\\\n00007ffc2cf94b90:  000055cea6290003  00007fbc1d16e9c0 \\\\n00007ffc2cf94ba0:  000055cea27cfd56 <runtime.(*fixalloc).alloc+118>  00007fbc00000000 \\\\n00007ffc2cf94bb0:  00007fbc1c96e000  0000000000801000 \\\\n00007ffc2cf94bc0:  0000000000000002  0000000000000000 \\\\n00007ffc2cf94bd0:  fffffffe7fffffff  ffffffffffffffff \\\\n00007ffc2cf94be0:  ffffffffffffffff  ffffffffffffffff \\\\n00007ffc2cf94bf0:  ffffffffffffffff  ffffffffffffffff \\\\n00007ffc2cf94c00:  ffffffffffffffff  ffffffffffffffff \\\\n00007ffc2cf94c10:  ffffffffffffffff  ffffffffffffffff \\\\n00007ffc2cf94c20:  ffffffffffffffff  ffffffffffffffff \\\\n00007ffc2cf94c30:  ffffffffffffffff  ffffffffffffffff \\\\n00007ffc2cf94c40:  ffffffffffffffff  ffffffffffffffff \\\\nruntime: unknown pc 0x7fbc23b36fb7\\\\nstack: frame={sp:0x7ffc2cf94b50, fp:0x0} stack=[0x7ffc2c7961d0,0x7ffc2cf95210)\\\\n00007ffc2cf94a50:  0000000000f429ad  0000000000f429ad \\\\n00007ffc2cf94a60:  0000000000000000  0000000000000000 \\\\n00007ffc2cf94a70:  ffffffffffffffff  ffffffffffffffff \\\\n00007ffc2cf94a80:  ffffffffffffffff  ffffffffffffffff \\\\n00007ffc2cf94a90:  ffffffffffffffff  ffffffffffffffff \\\\n00007ffc2cf94aa0:  c4637ab809e4e7b0  d0ac80c063906560 \\\\n00007ffc2cf94ab0:  f504ec31d8821eaf  b2e3992f64a74455 \\\\n00007ffc2cf94ac0:  15ffe7c856d1756f  02a2b2787d7aeedc \\\\n00007ffc2cf94ad0:  978a5afbf4724091  dd130d2084df9750 \\\\n00007ffc2cf94ae0:  aa9eb3724ffd9a92  ca4d5f2c8145ea20 \\\\n00007ffc2cf94af0:  f8f7c0f18fef0a45  eeae59ab57c84c1a \\\\n00007ffc2cf94b00:  80c3a4e579ecf146  a03aac9c2d97ea38 \\\\n00007ffc2cf94b10:  024affaf193fe164  1d282ba13e8e3ee7 \\\\n00007ffc2cf94b20:  363ce15e33f01105  9185834e03117d63 \\\\n00007ffc2cf94b30:  a60a5427ccea5078  f3389296088e2cd1 \\\\n00007ffc2cf94b40:  52b51e78ed0fef4b  bb4af25357a1dd0c \\\\n00007ffc2cf94b50: <0000000000000000  0b04785f7c1410f4 \\\\n00007ffc2cf94b60:  00007ffc2cf94c50  0000000000001000 \\\\n00007ffc2cf94b70:  00007ffc2cf94ce0  00007fbc245abec5 \\\\n00007ffc2cf94b80:  00007fbc1d16e9d0  00007fbc245ac228 \\\\n00007ffc2cf94b90:  000055cea6290003  00007fbc1d16e9c0 \\\\n00007ffc2cf94ba0:  000055cea27cfd56 <runtime.(*fixalloc).alloc+118>  00007fbc00000000 \\\\n00007ffc2cf94bb0:  00007fbc1c96e000  0000000000801000 \\\\n00007ffc2cf94bc0:  0000000000000002  0000000000000000 \\\\n00007ffc2cf94bd0:  fffffffe7fffffff  ffffffffffffffff \\\\n00007ffc2cf94be0:  ffffffffffffffff  ffffffffffffffff \\\\n00007ffc2cf94bf0:  ffffffffffffffff  ffffffffffffffff \\\\n00007ffc2cf94c00:  ffffffffffffffff  ffffffffffffffff \\\\n00007ffc2cf94c10:  ffffffffffffffff  ffffffffffffffff \\\\n00007ffc2cf94c20:  ffffffffffffffff  ffffffffffffffff \\\\n00007ffc2cf94c30:  ffffffffffffffff  ffffffffffffffff \\\\n00007ffc2cf94c40:  ffffffffffffffff  ffffffffffffffff \\\\n\\\\ngoroutine 1 [runnable, locked to thread]:\\\\ngithub.com/docker/docker/vendor/github.com/prometheus/client_golang/prometheus.(*Registry).Register(0xc0000d28c0, 0x55cea51528c0, 0xc000258550, 0x0, 0x0)\\\\n\\\\t/go/src/github.com/docker/docker/vendor/github.com/prometheus/client_golang/prometheus/registry.go:298 +0x1f9\\\\ngithub.com/docker/docker/vendor/github.com/prometheus/client_golang/prometheus.(*Registry).MustRegister(0xc0000d28c0, 0xc000226ce0, 0x1, 0x1)\\\\n\\\\t/go/src/github.com/docker/docker/vendor/github.com/prometheus/client_golang/prometheus/registry.go:403 +0x78\\\\ngithub.com/docker/docker/vendor/github.com/prometheus/client_golang/prometheus.MustRegister(...)\\\\n\\\\t/go/src/github.com/docker/docker/vendor/github.com/prometheus/client_golang/prometheus/registry.go:152\\\\ngithub.com/docker/docker/vendor/github.com/docker/go-metrics.Register(...)\\\\n\\\\t/go/src/github.com/docker/docker/vendor/github.com/docker/go-metrics/register.go:8\\\\ngithub.com/docker/docker/daemon.init.0()\\\\n\\\\t/go/src/github.com/docker/docker/daemon/metrics.go:60 +0x6e8\\\\n\\\\ngoroutine 19 [syscall]:\\\\nos/signal.signal_recv(0x0)\\\\n\\\\t/usr/local/go/src/runtime/sigqueue.go:147 +0x9e\\\\nos/signal.loop()\\\\n\\\\t/usr/local/go/src/os/signal/signal_unix.go:23 +0x24\\\\ncreated by os/signal.init.0\\\\n\\\\t/usr/local/go/src/os/signal/signal_unix.go:29 +0x43\\\\n\\\\ngoroutine 30 [select]:\\\\ngithub.com/docker/docker/vendor/go.opencensus.io/stats/view.(*worker).start(0xc00004e640)\\\\n\\\\t/go/src/github.com/docker/docker/vendor/go.opencensus.io/stats/view/worker.go:144 +0xdf\\\\ncreated by github.com/docker/docker/vendor/go.opencensus.io/stats/view.init.0\\\\n\\\\t/go/src/github.com/docker/docker/vendor/go.opencensus.io/stats/view/worker.go:29 +0x59\\\\n\\\\nrax    0x0\\\\nrbx    0x7fbc23ee4840\\\\nrcx    0xffffffffffffffff\\\\nrdx    0x0\\\\nrdi    0x2\\\\nrsi    0x7ffc2cf94b50\\\\nrbp    0x55cea4475415\\\\nrsp    0x7ffc2cf94b50\\\\nr8     0x0\\\\nr9     0x7ffc2cf94b50\\\\nr10    0x8\\\\nr11    0x246\\\\nr12    0x55cea73b9370\\\\nr13    0x0\\\\nr14    0x55cea441d1b4\\\\nr15    0x0\\\\nrip    0x7fbc23b36fb7\\\\nrflags 0x246\\\\ncs     0x33\\\\nfs     0x0\\\\ngs     0x0\\\\n\\\"\"": unknown
+Stopping ci_AtomicChessAutoPlayer_2 ... 
+Stopping ci_AtomicChessAutoPlayer_5 ... 
+Stopping ci_AtomicChessAutoPlayer_4 ... 
+Stopping ci_AtomicChessAutoPlayer_1 ... 
+Stopping ci_AtomicChessAutoPlayer_3 ... 
+Stopping atcbackend                 ... 
+Stopping atcmongo                   ... 
+Stopping redis-commander            ... 
+Stopping atcmovevalidator           ... 
+Stopping atcredis                   ... 
+[6A[2KStopping ci_AtomicChessAutoPlayer_3 ... [32mdone[0m[6B[10A[2KStopping ci_AtomicChessAutoPlayer_2 ... [32mdone[0m[10B[9A[2KStopping ci_AtomicChessAutoPlayer_5 ... [32mdone[0m[9B[5A[2KStopping atcbackend                 ... [32mdone[0m[5B[7A[2KStopping ci_AtomicChessAutoPlayer_1 ... [32mdone[0m[7B[3A[2KStopping redis-commander            ... [32mdone[0m[3B[8A[2KStopping ci_AtomicChessAutoPlayer_4 ... [32mdone[0m[8B[1A[2KStopping atcredis                   ... [32mdone[0m[1B[4A[2KStopping atcmongo                   ... [32mdone[0m[4B[2A[2KStopping atcmovevalidator           ... [32mdone[0m[2BRemoving ci_AtomicChessAutoPlayer_2 ... 
+Removing ci_AtomicChessAutoPlayer_5 ... 
+Removing ci_AtomicChessAutoPlayer_4 ... 
+Removing ci_AtomicChessAutoPlayer_1 ... 
+Removing ci_AtomicChessAutoPlayer_3 ... 
+Removing atcbackend                 ... 
+Removing atcmongo                   ... 
+Removing redis-commander            ... 
+Removing atcmovevalidator           ... 
+Removing atcredis                   ... 
+[2A[2KRemoving atcmovevalidator           ... [32mdone[0m[2B[8A[2KRemoving ci_AtomicChessAutoPlayer_4 ... [32mdone[0m[8B[10A[2KRemoving ci_AtomicChessAutoPlayer_2 ... [32mdone[0m[10B[9A[2KRemoving ci_AtomicChessAutoPlayer_5 ... [32mdone[0m[9B[3A[2KRemoving redis-commander            ... [32mdone[0m[3B[4A[2KRemoving atcmongo                   ... [32mdone[0m[4B[7A[2KRemoving ci_AtomicChessAutoPlayer_1 ... [32mdone[0m[7B[5A[2KRemoving atcbackend                 ... [32mdone[0m[5B[6A[2KRemoving ci_AtomicChessAutoPlayer_3 ... [32mdone[0m[6B[1A[2KRemoving atcredis                   ... [32mdone[0m[1BRemoving network ci_default
+Creating network "ci_default" with the default driver
+Creating atcmovevalidator ... 
+Creating atcredis         ... 
+Creating atcmongo         ... 
+Creating redis-commander  ... 
+[2A[2KCreating atcmongo         ... [32mdone[0m[2B[1A[2KCreating redis-commander  ... [32mdone[0m[1B[3A[2KCreating atcredis         ... [32mdone[0m[3B[4A[2KCreating atcmovevalidator ... [32mdone[0m[4Batcmovevalidator is up-to-date
+atcmongo is up-to-date
+atcredis is up-to-date
+Creating atcbackend ... 
+[1A[2KCreating atcbackend ... [32mdone[0m[1BCreating ci_AtomicChessAutoPlayer_1 ... 
+Creating ci_AtomicChessAutoPlayer_2 ... 
+Creating ci_AtomicChessAutoPlayer_3 ... 
+Creating ci_AtomicChessAutoPlayer_4 ... 
+Creating ci_AtomicChessAutoPlayer_5 ... 
+[3A[2KCreating ci_AtomicChessAutoPlayer_3 ... [32mdone[0m[3B[2A[2KCreating ci_AtomicChessAutoPlayer_4 ... [32mdone[0m[2B[4A[2KCreating ci_AtomicChessAutoPlayer_2 ... [32mdone[0m[4B[1A[2KCreating ci_AtomicChessAutoPlayer_5 ... [32mdone[0m[1B[5A[2KCreating ci_AtomicChessAutoPlayer_1 ... [32mdone[0m[5BFinished: SUCCESS

@@ -1,0 +1,9 @@
+commit 72301f12b6e51a5ae81b43b46fcb8434d75cc7f3
+tree ae38aa13cb94650be293629124e10fd43dad9f64
+parent 9b459b8c5e1b1e33ad10d35d846159295d54be9e
+author Marcel Ochsendorf <marcel.ochsendorf@gmail.com> 2020-12-01 13:54:34 +0100
+committer GitHub <noreply@github.com> 2020-12-01 13:54:34 +0100
+
+    Update build.sh
+
+:100755 100755 6a247f3fbd1dd5edbad2102a6074391fb6881fee 4cbe323a923a76fd47cf3d3b8c3675b8f0c4ee7b M	src/src_buildroot/buildroot/build.sh

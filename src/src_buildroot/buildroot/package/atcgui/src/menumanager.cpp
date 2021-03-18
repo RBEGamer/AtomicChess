@@ -29,6 +29,8 @@ menu_levels["processing_container"] = 0;
 menu_levels["showavariableplayer_container"] = 1;
 menu_levels["ss_container"] = 2;
 menu_levels["debug_container"] = 3;
+menu_levels["calibration_container"] = 3;
+
 menu_levels["is_container"] = 4;
 
 menu_levels["mmem_container"] = 4;
@@ -121,6 +123,8 @@ void MenuManager::switch_menu(QString _screen){
     set_visible_element("game_container",false);
     set_visible_element("showavariableplayer_container",false);
     set_visible_element("mmem_container",false);
+    set_visible_element("calibration_container",false);
+
 
     //ENABLE THE SELECTED MENU
     set_visible_element(_screen,true);
@@ -158,6 +162,10 @@ void MenuManager::switch_menu(guicommunicator::GUI_VALUE_TYPE _screen){
         case guicommunicator::GUI_VALUE_TYPE::GAME_SCREEN:{switch_menu("game_container");break;}
         case guicommunicator::GUI_VALUE_TYPE::PLAYER_SEARCH_SCREEN:{switch_menu("showavariableplayer_container");break;}
         case guicommunicator::GUI_VALUE_TYPE::PLAYER_ENTER_MANUAL_MOVE_SCREEN:{switch_menu("mmem_container");break;}
+        case guicommunicator::GUI_VALUE_TYPE::CALIBRATION_SCREEN:{switch_menu("calibration_container");break;}
+
+
+
 
         default:break;
     }
@@ -181,7 +189,7 @@ void MenuManager::updateProgress()
         set_label_text("is_container","is_version_label",QString::fromStdString(ev.value));
     }else if(ev.event == guicommunicator::GUI_ELEMENT::INFOSCREEN_PLAYERINFO_LABEL){
         set_label_text("is_container","is_playerinfo_label",QString::fromStdString(ev.value));
-    }else if(ev.event == guicommunicator::GUI_ELEMENT::ERROR){
+    }else if(ev.event == guicommunicator::GUI_ELEMENT::QT_UI_ERROR){
         switch_menu(ev.type);
         set_label_text("es_container","es_lasterr_label",QString::fromStdString(ev.value));
     }else if(ev.event == guicommunicator::GUI_ELEMENT::NETWORK_STATUS){
@@ -312,7 +320,9 @@ void MenuManager::sm_open_settings_btn(){
     qInfo() <<"sm_open_settings_btn";
 }
 
-
+void MenuManager::ss_calboard_btn(){
+     MenuManager::switch_menu(guicommunicator::GUI_VALUE_TYPE::CALIBRATION_SCREEN);
+}
 
 void MenuManager::sm_logout_btn(){
     qInfo() << "sm_logout_btn";
@@ -431,4 +441,30 @@ void MenuManager::memm_enter_move_user_input(QString _charakter){
      }
 
 
+}
+
+
+
+
+
+void MenuManager::cal_a8_pos_btn(){
+     guiconnection.createEvent(guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_A8POS, guicommunicator::GUI_VALUE_TYPE::CLICKED);
+}
+void MenuManager::cal_h1pos_btn(){
+      guiconnection.createEvent(guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_H1POS, guicommunicator::GUI_VALUE_TYPE::CLICKED);
+}
+void MenuManager::cal_save_btn(){
+      guiconnection.createEvent(guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_SAVE, guicommunicator::GUI_VALUE_TYPE::CLICKED);
+}
+void MenuManager::cal_mvleft_btn(){
+      guiconnection.createEvent(guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_MVLEFT, guicommunicator::GUI_VALUE_TYPE::CLICKED);
+}
+void MenuManager::cal_mvup_btn(){
+      guiconnection.createEvent(guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_MVUP, guicommunicator::GUI_VALUE_TYPE::CLICKED);
+}
+void MenuManager::cal_mvdown_btn(){
+      guiconnection.createEvent(guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_MVDOWN, guicommunicator::GUI_VALUE_TYPE::CLICKED);
+}
+void MenuManager::cal_mvright_btn(){
+      guiconnection.createEvent(guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_MVRIGHT, guicommunicator::GUI_VALUE_TYPE::CLICKED);
 }

@@ -1,0 +1,13 @@
+commit bb751a47964b445a415cbe8f84e12faa30869d3a
+tree eb58910e723dcbe421158010665ca3c2390fab3f
+parent 2affa6ccee7eb10b03642862d7c43c94a902354c
+author dev1 <dev1@itsdomain.local> 2021-01-07 05:50:34 +0100
+committer dev1 <dev1@itsdomain.local> 2021-01-07 05:50:34 +0100
+
+    pseudo legal moves fix
+
+
+:100644 100644 d7f080bf69d3a441291f02338df5fc5ef3a2c1d8 6e28ca3ca5f75ddad26edae1459fb66c67d5ced2 M	src/src_server/ATC_Backend/chess_related_logic/matchmaking_logic.js
+:100644 100644 720400e10c6d722769b169679a2e9a80280504f6 01e461c3b6de8de8f5a524b728b5ce7054ec0fb1 M	src/src_server/ATC_Backend/config.json
+:100644 100644 63319136d8d38957c11e87972d01ea29e2b5d4f7 5c1ea755a0336e1b7d2ac35ebfeb1261dd08c978 M	src/src_server/ATC_MoveValidator/app.py
+:100755 100755 e7dc7d77f02e53e7df2989c383568eafe1c9cd74 e4a92c5e0f642fd3c2c7c837007f74ca068720a3 M	src/src_server/CI/start_stack_dev.sh

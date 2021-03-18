@@ -1,0 +1,12 @@
+commit 01012f8141b7022df4960f1d31f04bc3ae219f4b
+tree cffbc04d53d9d88272bfa4974aec0ae3ffa37bfb
+parent d716c9728ca2cbcf39e05cfe6e899a4490749236
+author dev1 <dev1@itsdomain.local> 2021-01-07 06:43:00 +0100
+committer dev1 <dev1@itsdomain.local> 2021-01-07 06:43:00 +0100
+
+    added simple config viewer
+
+
+:100644 100644 fadcee89bf9b8de751e77c0aa0d127e34c0ac374 bd05064e79dfcdda0c29b009f2a91ee4efc978d4 M	src/src_server/ATC_Backend/public/restexplorer.html
+:100644 100644 a5b923656590779365c1525cb49941d41d2dbb7d bbdc841525b2186249fe214d5f46abb820c38d54 M	src/src_server/ATC_Backend/routes/index.js
+:000000 100644 0000000000000000000000000000000000000000 d946782918706297beed51058c4ec37206de11dd A	src/src_server/ATC_Backend/views/config_viewer.ejs

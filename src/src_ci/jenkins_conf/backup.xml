@@ -1,0 +1,17 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<org.jvnet.hudson.plugins.backup.BackupConfig plugin="backup@1.6.1">
+  <targetDirectory>/var/jenkins_backup</targetDirectory>
+  <verbose>true</verbose>
+  <xmlOnly>false</xmlOnly>
+  <noShutdown>false</noShutdown>
+  <fileNameTemplate></fileNameTemplate>
+  <archiveType>ZIP</archiveType>
+  <keepWorkspaces>true</keepWorkspaces>
+  <keepFingerprints>true</keepFingerprints>
+  <keepBuilds>true</keepBuilds>
+  <keepArchives>false</keepArchives>
+  <jobIncludes></jobIncludes>
+  <jobExcludes></jobExcludes>
+  <caseSensitive>false</caseSensitive>
+  <customExclusions/>
+</org.jvnet.hudson.plugins.backup.BackupConfig>

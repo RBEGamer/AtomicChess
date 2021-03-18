@@ -1,0 +1,35 @@
+commit 56f1ff9bad017a6375fcc36861267ca731f6a054
+tree 35bada8ba6312efe608bd398ed39da30b2c603f2
+parent 9402b290fc0027a3bc83cc1e5c0d9bdc78d30661
+author Marcel <info@prodevmo.com> 2020-12-11 23:20:20 +0100
+committer Marcel <info@prodevmo.com> 2020-12-11 23:20:20 +0100
+
+    .
+    
+
+
+:100644 100644 dbc40801dafdf68e771ffa53e560f84310aa8e7c 5e511edb314053a856f66e6f6bd7da0c8562ce35 M	src/src_server/ATC_Backend/views/webclient.ejs
+commit 9402b290fc0027a3bc83cc1e5c0d9bdc78d30661
+tree bfd1ba631990558ef1ad50693c95c0ac69a9b9d5
+parent 7bb8a854b1a35d17f92b71dbefbac57929e39f1f
+author Marcel <info@prodevmo.com> 2020-12-08 17:31:46 +0100
+committer Marcel <info@prodevmo.com> 2020-12-08 17:31:46 +0100
+
+    working webclient
+    
+
+
+:100644 100644 8d000c01953c11ee58b6ef2cd62b9f31be1eca1d 549df4033ee70c2497311e4fcf123a955c6e0681 M	src/src_server/ATC_Backend/app.js
+:100644 100644 9ad900f8a2b3b4a5b8da5bbb4c2bd4b479b89665 edb6724d7cabe7d1178e2bac0c97f6583bd9db30 M	src/src_server/ATC_Backend/views/index.ejs
+:100644 100644 60baca0175e92324a16cafeb8602f5d91ff61d99 dbc40801dafdf68e771ffa53e560f84310aa8e7c M	src/src_server/ATC_Backend/views/webclient.ejs
+commit 7bb8a854b1a35d17f92b71dbefbac57929e39f1f
+tree b0f8578173834f4722097373ce6fbfc16b32831d
+parent e4c28e8f0ef9ba2ec119c4e666ad1ee1e4b2c778
+author Marcel <info@prodevmo.com> 2020-12-08 01:50:16 +0100
+committer Marcel <info@prodevmo.com> 2020-12-08 01:50:16 +0100
+
+    adding auto logout
+    
+
+
+:100644 100644 1999e3de2819a7d8ec5833d5df06ca7a4955d416 60baca0175e92324a16cafeb8602f5d91ff61d99 M	src/src_server/ATC_Backend/views/webclient.ejs

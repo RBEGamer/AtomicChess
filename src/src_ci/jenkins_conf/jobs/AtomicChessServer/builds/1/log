@@ -1,0 +1,34 @@
+Started by user [8mha:////4HeQu7QxSfPJmiGpZcYSZuhcclhWOV448WYE8rDJrQ+DAAAAnR+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAzuEgZB/dLi1CL9xJL83Mzk5IzU4mIA55peXsYAAAA=[0mAtomicChess
+Running as SYSTEM
+Building in workspace /var/jenkins_home/workspace/AtomicChessServer
+The recommended git tool is: NONE
+using credential 867013a9-1ccb-4bd0-b0c8-f41e88a499f9
+Cloning the remote Git repository
+Cloning repository git@github.com:RBEGamer/AtomicChessOS.git
+ > git init /var/jenkins_home/workspace/AtomicChessServer # timeout=10
+Fetching upstream changes from git@github.com:RBEGamer/AtomicChessOS.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.26.2'
+using GIT_SSH to set credentials local ssh key
+ > git fetch --tags --force --progress -- git@github.com:RBEGamer/AtomicChessOS.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config remote.origin.url git@github.com:RBEGamer/AtomicChessOS.git # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+Avoid second fetch
+ > git rev-parse refs/remotes/origin/server^{commit} # timeout=10
+Checking out Revision 6513130fc91a5ade92bd39562ebe59c4db4ba680 (refs/remotes/origin/server)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 6513130fc91a5ade92bd39562ebe59c4db4ba680 # timeout=10
+Commit message: "Update index.ejs"
+First time build. Skipping changelog.
+[AtomicChessServer] $ /bin/sh -xe /tmp/jenkins4450382804425559741.sh
++ ls
+src
++ cd ./src/src_server/CI/
++ bash ./start_stack.sh
+[H[J./start_stack.sh: line 3: docker-compose: command not found
+./start_stack.sh: line 4: docker-compose: command not found
+./start_stack.sh: line 6: docker-compose: command not found
+./start_stack.sh: line 9: docker-compose: command not found
+./start_stack.sh: line 11: docker-compose: command not found
+Build step 'Execute shell' marked build as failure
+Finished: FAILURE

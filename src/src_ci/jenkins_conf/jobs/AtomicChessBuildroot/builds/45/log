@@ -1,0 +1,179 @@
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Started by an SCM change
+Running as SYSTEM
+Building remotely on [8mha:////4NhQxXi60jAlX5rncxKDkW4xGC/PmymblX2gatAeBdgUAAAAoh+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAyeEgYx/eT83ILSktQi/Zz85MSc+OLUorLUIgBFdgO6ywAAAA==[0mlocal_server (ATC_SERVER_AGENT) in workspace /var/jenkins_build/workspace/AtomicChessBuildroot
+The recommended git tool is: NONE
+using credential 867013a9-1ccb-4bd0-b0c8-f41e88a499f9
+ > git rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url git@github.com:RBEGamer/AtomicChessOS.git # timeout=10
+Fetching upstream changes from git@github.com:RBEGamer/AtomicChessOS.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.17.1'
+using GIT_SSH to set credentials local ssh key
+ > git fetch --tags --progress -- git@github.com:RBEGamer/AtomicChessOS.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+Checking out Revision bf20de7a0bdd3a5373471c9d5a12c9745fc030ad (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f bf20de7a0bdd3a5373471c9d5a12c9745fc030ad # timeout=10
+Commit message: "."
+ > git rev-list --no-walk 0ff748f2a6d8ec4049948e740714f6f92f3cdb57 # timeout=10
+[AtomicChessBuildroot] $ /bin/sh -xe /tmp/jenkins4348198286580989147.sh
++ ls
+documentation_statistics
+README.md
+src
++ cd ./src/src_buildroot
++ bash ./build_toolchain_image.sh
+COPY SHARED FOLDER FROM ../src_shared
+COPY TO BUILDROOT PACKAGE
+/var/jenkins_build/workspace/AtomicChessBuildroot/src/src_atctest
+copy_to_buildroot_package.sh
+README.md
+src
+COPY ./src TO ../src_buildroot/buildroot/package/atctp
+COPY SHARED FOLDER FROM ../src_shared
+COPY TO BUILDROOT PACKAGE
+/var/jenkins_build/workspace/AtomicChessBuildroot/src/src_atcqtui
+ATC_GUI_MOCKUP.bmpr
+copy_to_buildroot_package.sh
+documentation_images
+README.md
+src
+COPY ./src TO ../src_buildroot/buildroot/package/atcgui
+COPY SHARED FOLDER FROM ../src_shared
+COPY TO BUILDROOT PACKAGE
+/var/jenkins_build/workspace/AtomicChessBuildroot/src/src_controller
+ChessFigureIDGenerator.html
+controller
+copy_to_buildroot_package.sh
+documentation_images
+README.md
+COPY ./controller/controller TO ../src_buildroot/buildroot/package/atcctl
+Sending build context to Docker daemon  19.06GB
+Step 1/18 : FROM ubuntu:20.04
+ ---> 4dd97cefde62
+Step 2/18 : WORKDIR /var/buildroot
+ ---> Using cache
+ ---> 6856a276107e
+Step 3/18 : ENV DEBIAN_FRONTEND=noninteractive
+ ---> Using cache
+ ---> 143d549ecb89
+Step 4/18 : RUN apt-get update && apt upgrade -y &&     apt-get install -y     build-essential     bash     bc     binutils     build-essential     bzip2     cpio     g++     gcc     git     gzip     locales     libncurses5-dev     libdevmapper-dev     libsystemd-dev     make     mercurial     whois     patch     perl     python     rsync     sed     tar     vim     unzip     wget     bison     flex     libssl-dev     libfdt-dev     nano
+ ---> Using cache
+ ---> e05fa5fb79b3
+Step 5/18 : RUN locale-gen en_US.utf8
+ ---> Using cache
+ ---> 0ffa5c65cea5
+Step 6/18 : RUN echo 'root:root' |chpasswd
+ ---> Using cache
+ ---> 6dfbb9dd156a
+Step 7/18 : ENV O=/buildroot_output
+ ---> Using cache
+ ---> 18b0f5210f3d
+Step 8/18 : RUN touch .config
+ ---> Using cache
+ ---> 9db49886511d
+Step 9/18 : RUN touch kernel.config
+ ---> Using cache
+ ---> ce9cc758c0ec
+Step 10/18 : RUN mkdir -p /var/buildroot/output/images
+ ---> Using cache
+ ---> a375ed5f9696
+Step 11/18 : RUN mkdir /root/.ssh
+ ---> Using cache
+ ---> b083d4bca6ed
+Step 12/18 : RUN apt-get clean &&     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+ ---> Using cache
+ ---> fac87ab47dd8
+Step 13/18 : RUN rm -Rf /var/buildroot
+ ---> Using cache
+ ---> fc1f6af56b2c
+Step 14/18 : COPY ./ /var/buildroot
+Build was aborted
+Aborted by [8mha:////4HeQu7QxSfPJmiGpZcYSZuhcclhWOV448WYE8rDJrQ+DAAAAnR+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAzuEgZB/dLi1CL9xJL83Mzk5IzU4mIA55peXsYAAAA=[0mAtomicChess
+Finished: ABORTED

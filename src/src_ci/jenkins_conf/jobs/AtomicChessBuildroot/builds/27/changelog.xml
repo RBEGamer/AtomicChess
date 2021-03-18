@@ -1,0 +1,11 @@
+commit 28c42b5b4cc2224409fb207781fb721320ea6582
+tree 44c11a26177e63ba18f11d3990daa32fec062832
+parent acdbc82de9e71b67f4777eeba71606845beeafa0
+author John Doe <johndoe@example.com> 2021-01-04 16:27:16 +0100
+committer John Doe <johndoe@example.com> 2021-01-04 16:27:16 +0100
+
+    -- busybox fragment config fragment file added
+
+
+:000000 100644 0000000000000000000000000000000000000000 23a2c38a5254d7d3f9acdee9f53803ee32a30c64 A	src/src_buildroot/buildroot/busybox_config
+:100644 100644 281a7415d0c542d671f4e867fb6804d8d884ccb3 720e3d45188cc3a42dcaa3918353367e5176f9b9 M	src/src_buildroot/buildroot/config_backup

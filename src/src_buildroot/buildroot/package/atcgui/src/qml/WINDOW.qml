@@ -344,7 +344,7 @@ Rectangle {
         Button {
             id: ss_init_board_btn
             x: 17
-            y: 165
+            y: 150
             width: 200
             height: 80
             text: qsTr("INIT BOARD")
@@ -359,14 +359,30 @@ Rectangle {
         Button {
             id: ss_scan_board_btn
             x: 17
-            y: 17
+            y: 8
             width: 200
             height: 80
-            text: qsTr("CALIBRATION WIZARD")
+            text: qsTr("RESET BOARD")
             Connections {
                 target: ss_scan_board_btn
                 function onClicked(_mouse){
                     main_menu.sm_scan_board_btn()
+                }
+            }
+        }
+
+
+        Button {
+            id: ss_calboard_btn
+            x: 291
+            y: 8
+            width: 200
+            height: 80
+            text: qsTr("CALIBRATION WIZARD")
+            Connections {
+                target: ss_calboard_btn
+                function onClicked(_mouse){
+                    main_menu.ss_calboard_btn()
                 }
             }
         }
@@ -1273,6 +1289,148 @@ Rectangle {
 
     }
 
+    Rectangle {
+        id: calibration_container
+        objectName: "calibration_container"
+        property var headline_bar_name:"CALIBRATION"
+        x: 0
+        y: 68
+        width: 800
+        height: 411
+        color: "#07a8a5"
+        visible: false
+
+        Button {
+            id: cal_back_btn
+            x: 649
+            y: 323
+            width: 128
+            height: 51
+            text: qsTr("BACK")
+            Connections {
+                target: cal_back_btn
+                function onClicked(_mouse){
+                    main_menu.go_menu_back()
+                }
+            }
+        }
+
+        Button {
+            id: cal_h1pos_btn
+            x: 8
+            y: 8
+            width: 127
+            height: 51
+            text: qsTr("H1 POSITION")
+            font.bold: false
+            Connections {
+                target: cal_h1pos_btn
+                function onClicked(_mouse){
+                    main_menu.cal_h1pos_btn()
+                }
+            }
+        }
+
+        Button {
+            id: cal_a8pos_btn
+            x: 8
+            y: 166
+            width: 128
+            height: 51
+            text: qsTr("A8 POSITION")
+            Connections {
+                target: cal_a8pos_btn
+                function onClicked(_mouse){
+                    main_menu.cal_a8_pos_btn()
+                }
+            }
+        }
+
+
+
+
+
+        Button {
+            id: cal_save_btn
+            x: 8
+            y: 323
+            width: 127
+            height: 51
+            text: qsTr("SAVE")
+            Connections {
+                target: cal_save_btn
+                function onClicked(_mouse){
+                    main_menu.cal_save_btn()
+                }
+            }
+        }
+
+        Button {
+            id: cal_mvup_btn
+            x: 383
+            y: 19
+            width: 120
+            height: 120
+            text: qsTr("UP")
+            font.pointSize: 18
+            font.bold: false
+            Connections {
+                target: cal_mvup_btn
+                function onClicked(_mouse){
+                    main_menu.cal_mvup_btn()
+                }
+            }
+        }
+
+        Button {
+            id: cal_mvdown_btn
+            x: 382
+            y: 257
+            width: 120
+            height: 120
+            text: qsTr("DOWN")
+            font.pointSize: 18
+            Connections {
+                target: cal_mvdown_btn
+                function onClicked(_mouse){
+                    main_menu.cal_mvdown_btn()
+                }
+            }
+        }
+
+        Button {
+            id: cal_mvleft_btn
+            x: 263
+            y: 138
+            width: 120
+            height: 120
+            text: qsTr("LEFT")
+            font.pointSize: 18
+            Connections {
+                target: cal_mvleft_btn
+                function onClicked(_mouse){
+                    main_menu.cal_mvleft_btn()
+                }
+            }
+        }
+
+        Button {
+            id: cal_mvright_btn
+            x: 503
+            y: 138
+            width: 120
+            height: 120
+            text: qsTr("RIGHT")
+            font.pointSize: 18
+            Connections {
+                target: cal_mvright_btn
+                function onClicked(_mouse){
+                    main_menu.cal_mvright_btn()
+                }
+            }
+        }
+
+    }
 
 }
 

@@ -1,0 +1,11 @@
+commit bf20de7a0bdd3a5373471c9d5a12c9745fc030ad
+tree 492a8f466c8e4a74641946e249c0e406270e4bfa
+parent 0ff748f2a6d8ec4049948e740714f6f92f3cdb57
+author Marcel <info@prodevmo.com> 2021-03-09 14:38:57 +0100
+committer Marcel <info@prodevmo.com> 2021-03-09 14:38:57 +0100
+
+    .
+    
+
+
+:100644 100644 896f303e2d8bb44e594f4451dfa96b30d2aa1030 6df3e1fc2faf884a553c259a0d80026b5cdff9ad M	src/src_buildroot/buildroot/package/atcctl/atcctl.mk

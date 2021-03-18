@@ -1,0 +1,11 @@
+commit a02a7f95bcbad68498c21a63253498a158a670b0
+tree 551aaf87f2e61362b7048849e0912d2e51e51921
+parent c4a48d225f8f199be171bd13af0d10a8aae03b03
+author dev1 <dev1@itsdomain.local> 2021-01-16 13:00:26 +0100
+committer dev1 <dev1@itsdomain.local> 2021-01-16 13:00:26 +0100
+
+    max-width:max-width attribute
+
+
+:100644 100644 85ea53eeeae48b8ee6a92af26a0295cadc1befea c973dbc7180354fa344261a7834c7f22406e6739 M	src/src_server/ATC_Backend/public/css/main.css
+:100644 100644 904e6b8927359a85a41069a497c6183925a166cf e6a43fa57b157ed7108c0b55f7e85b7af21dafe0 M	src/src_server/ATC_Backend/views/webclient.ejs

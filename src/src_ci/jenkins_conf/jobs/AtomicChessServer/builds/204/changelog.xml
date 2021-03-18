@@ -1,0 +1,10 @@
+commit 524a1555817339edb49405a063d273cf4fe9c0a1
+tree e5279a205bca8c0bd6d4ad71a89b587e5e4ecdd3
+parent d829fc01ebf78cbee0c4f7ce5a84be72f6f93d58
+author dev1 <dev1@itsdomain.local> 2021-01-16 16:08:33 +0100
+committer dev1 <dev1@itsdomain.local> 2021-01-16 16:08:33 +0100
+
+    added css switch for mobile landscape/portrait/desktop
+
+
+:100644 100644 5c8e162871bfc0f88a5962125e4e4418fe237269 b4760552db5f2942c61afced58c0783acce2eaee M	src/src_server/ATC_Backend/views/webclient.ejs

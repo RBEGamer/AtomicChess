@@ -7,13 +7,13 @@ Extension-Name: script-security
 Specification-Title: Allows Jenkins administrators to control what in-
  process scripts can be run by less-privileged users.
 Implementation-Title: script-security
-Implementation-Version: 1.74
+Implementation-Version: 1.76
 Group-Id: org.jenkins-ci.plugins
 Short-Name: script-security
 Long-Name: Script Security Plugin
 Url: https://github.com/jenkinsci/script-security-plugin
 Minimum-Java-Version: 1.8
-Plugin-Version: 1.74
+Plugin-Version: 1.76
 Hudson-Version: 2.176.4
 Jenkins-Version: 2.176.4
 Plugin-Developers: 

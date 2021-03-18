@@ -1,0 +1,14 @@
+commit d716c9728ca2cbcf39e05cfe6e899a4490749236
+tree 6008effa3f7db514d4476bd09ef22a6c1d8ab36c
+parent bb751a47964b445a415cbe8f84e12faa30869d3a
+author dev1 <dev1@itsdomain.local> 2021-01-07 06:37:23 +0100
+committer dev1 <dev1@itsdomain.local> 2021-01-07 06:37:23 +0100
+
+    added log viewer
+
+
+:100644 100644 01e461c3b6de8de8f5a524b728b5ce7054ec0fb1 a5df04749fcab0dc4ae8134cf340ab4e739c21b2 M	src/src_server/ATC_Backend/config.json
+:100644 100644 37696efcb91ec0ecebed605fe2d4935d5340cdfe a5b923656590779365c1525cb49941d41d2dbb7d M	src/src_server/ATC_Backend/routes/index.js
+:100644 100644 9e630437055d6c7a269b472055003baeb36882d9 5b1318299c0b9b39689e9460955410bcd078f0d1 M	src/src_server/ATC_Backend/routes/rest.js
+:000000 100644 0000000000000000000000000000000000000000 e06c64168dc1dae710e344892e23089fa94cece6 A	src/src_server/ATC_Backend/views/log_viewer.ejs
+:100644 100644 a07109116b5170617e24950ee4c169631f3e7021 7943454d6a7549264f1b57000297d757b72d946d M	src/src_server/ATC_Backend/views/server_config.ejs

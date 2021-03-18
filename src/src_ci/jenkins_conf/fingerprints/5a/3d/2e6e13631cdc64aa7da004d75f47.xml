@@ -1,0 +1,43 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<fingerprint>
+  <timestamp>2020-11-30 21:40:36.47 UTC</timestamp>
+  <md5sum>5a3d2e6e13631cdc64aa7da004d75f47</md5sum>
+  <fileName>Credential id=867013a9-1ccb-4bd0-b0c8-f41e88a499f9 name=jenkins (local ssh key)</fileName>
+  <usages>
+    <entry>
+      <string>ManusDXSite</string>
+      <ranges>1-32</ranges>
+    </entry>
+    <entry>
+      <string>MarcelOchsendorfPortfolioSite</string>
+      <ranges>1-74</ranges>
+    </entry>
+    <entry>
+      <string>AtomicChessThesis</string>
+      <ranges>1-22</ranges>
+    </entry>
+    <entry>
+      <string>AtomicChessBuildroot</string>
+      <ranges>1-58</ranges>
+    </entry>
+    <entry>
+      <string>AtomicChessServer</string>
+      <ranges>1-242</ranges>
+    </entry>
+    <entry>
+      <string>GynOchsendorfSite</string>
+      <ranges>1-4</ranges>
+    </entry>
+    <entry>
+      <string>ProDevMoSite</string>
+      <ranges>1-10</ranges>
+    </entry>
+  </usages>
+  <facets>
+    <com.cloudbees.plugins.credentials.fingerprints.NodeCredentialsFingerprintFacet plugin="credentials@2.3.15">
+      <timestamp>1606772682603</timestamp>
+      <nodeName>local_server</nodeName>
+      <timestamp0>1606772628765</timestamp0>
+    </com.cloudbees.plugins.credentials.fingerprints.NodeCredentialsFingerprintFacet>
+  </facets>
+</fingerprint>

@@ -1,0 +1,10 @@
+commit 93ab884f2637b995900357c40b4f8e84045fbed2
+tree c93bc9439f09e3d549e6657dda1a1d81d6a45023
+parent b65db9f740cdeeee68ff1a9868dd759af9afbb33
+author John Doe <johndoe@example.com> 2021-01-04 03:46:37 +0100
+committer John Doe <johndoe@example.com> 2021-01-04 03:46:37 +0100
+
+    .
+
+
+:100644 100644 394f0690e97924258fdaa7dc8e6d18902302aa7a 51bde89ecdb7c9e01ec3a429680effe30d22f87b M	src/src_buildroot/buildroot/package/atcctl/atcctl.mk

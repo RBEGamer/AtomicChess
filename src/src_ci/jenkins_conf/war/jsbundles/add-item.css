@@ -1,3 +1,15 @@
+:root {
+  --medium-translucent: rgba(255, 255, 255, 0.75);
+  --shade-hint: rgba(0, 0, 0, 0.025);
+  --shade: rgba(0, 0, 0, 0.1);
+  --line-blue: #69c;
+  --line-green: #acb;
+  --danger: #d24939;
+  --danger-line: #be3a2b;
+  --danger-dark: #a23225;
+  --danger-dark-line: #942e22;
+  --input-line-height: 2.25em;
+}
 /*
  * Mixins
  * http://lesscss.org/features/#mixins-feature
@@ -10,7 +22,6 @@
   /* iOS Safari */
   -webkit-user-select: none;
   /* Chrome/Safari/Opera */
-  -khtml-user-select: none;
   /* Konqueror */
   -moz-user-select: none;
   /* Firefox */
@@ -23,7 +34,6 @@
   /* iOS Safari */
   -webkit-user-select: text;
   /* Chrome/Safari/Opera */
-  -khtml-user-select: text;
   /* Konqueror */
   -moz-user-select: text;
   /* Firefox */
@@ -43,16 +53,199 @@
 /*
  * Tab bar specific rules.
  */
+:root {
+  --font-family-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --font-size-base: 1rem;
+  --font-size-sm: 0.875rem;
+  --font-size-xs: 0.75rem;
+  --font-size-monospace: 0.95em;
+  --line-height-base: 1.5;
+  --line-height-heading: 1.2;
+  --white: #fff;
+  --very-light-grey: #f8f8f8;
+  --light-grey: #eaeff2;
+  --medium-grey: #9ba7af;
+  --dark-grey: #4d545d;
+  --black: #333;
+  --primary: #0b6aa2;
+  --secondary: #4d545d;
+  --success: #138347;
+  --danger: #cc0003;
+  --warning: #ea6b19;
+  --focus: #3fb3f7;
+  --primary-hover: #0587d4;
+  --primary-active: #095683;
+  --danger-hover: #eb383b;
+  --danger-active: #b50003;
+  --background: var(--white);
+  --line-green: #acb;
+  --medium-translucent: rgba(255, 255, 255, 0.75);
+  --logo-bg: var(--white);
+  --brand-link-color: var(--secondary);
+  --header-link-color: var(--white);
+  --header-link-color-active: #f5f5f5;
+  --header-link-outline: var(--focus);
+  --header-search-border: var(--white);
+  --search-input-color: var(--brand-link-color);
+  --search-bg: var(--white);
+  --search-box-completion-bg: var(--primary-hover);
+  --search-box-shadow: 0 1px 7px 0 rgba(0, 0, 0, 0.3);
+  --header-bg-classic: #000;
+  --header-link-bg-classic-hover: #404040;
+  --header-link-bg-classic-active: #404040;
+  --header-bg-v2: var(--primary-hover);
+  --brand-link-color-hover-v2: var(--primary-hover);
+  --brand-link-color-active-v2: var(--primary-active);
+  --header-link-bg-hover-v2: var(--primary-hover);
+  --header-link-bg-active-v2: var(--primary-active);
+  --header-item-border-radius: 4px;
+  --breadcrumbs-bg: #f8f8f8;
+  --breadcrumbs-border: var(--light-grey);
+  --breadcrumbs-text-color: #4d545d;
+  --breadcrumbs-item-bg-color--hover: var(--light-grey);
+  --monitor-bg-v2: #f8d7da;
+  --monitor-color-v2: #721c24;
+  --alert-default-icon-color: #2196f3;
+  --alert-default-bg-color: #d1ecf1;
+  --alert-default-border-color: #bee5eb;
+  --alert-default-color: #0c5464;
+  --notification-success-icon-color: #4caf50;
+  --notification-success-bg-color: #d4edda;
+  --notification-success-border-color: #c3e6cb;
+  --notification-success-color: var(--success);
+  --notification-warning-icon-color: #ff9800;
+  --notification-warning-bg-color: #fff3cd;
+  --notification-warning-border-color: #ffeeba;
+  --notification-warning-color: #856404;
+  --notification-error-icon-color: #f44336;
+  --notification-error-bg-color: #f8d7da;
+  --notification-error-border-color: #f5c6cb;
+  --notification-error-color: #721c24;
+  --alert-success-text-color: #155724;
+  --alert-success-bg-color: #d4edda;
+  --alert-success-border-color: #c3e6cb;
+  --alert-info-text-color: #31708f;
+  --alert-info-bg-color: #d9edf7;
+  --alert-info-border-color: #bce8f1;
+  --alert-warning-text-color: #8a6d3b;
+  --alert-warning-bg-color: #fcf8e3;
+  --alert-warning-border-color: #faebcc;
+  --alert-danger-text-color: #a94442;
+  --alert-danger-bg-color: #f2dede;
+  --alert-danger-border-color: #ebccd1;
+  --text-color: var(--black);
+  --text-color-secondary: var(--secondary);
+  --btn-primary-bg: var(--primary);
+  --btn-primary-bg-hover: var(--primary-hover);
+  --btn-primary-bg-active: var(--primary-active);
+  --btn-secondary-color: var(--secondary);
+  --btn-secondary-bg: var(--btn-text-color);
+  --btn-secondary-border: var(--medium-grey);
+  --btn-text-color: var(--white);
+  --btn-link-bg--hover: var(--very-light-grey);
+  --btn-link-bg--active: var(--light-grey);
+  --help-area-bg-color: var(--very-light-grey);
+  --configure-job-help-area-bg-color: var(--medium-translucent);
+  --even-row-color: var(--very-light-grey);
+  --bigtable-border-width: var(--pane-border-width);
+  --bigtable-header-bg: var(--dark-grey);
+  --bigtable-header-font-weight: bold;
+  --bigtable-header-text-color: var(--white);
+  --bigtable-row-border-color: var(--medium-grey);
+  --bigtable-cell-padding-x: 0.75rem;
+  --bigtable-cell-padding-y: 0.5rem;
+  --table-parameters-bg--hover: var(--light-grey);
+  --table-striped-bg--hover: var(--light-grey);
+  --link-color: var(--primary);
+  --link-visited-color: var(--link-color);
+  --link-color--hover: var(--link-color);
+  --link-color--active: var(--text-color);
+  --link-text-decoration: none;
+  --link-text-decoration--hover: underline;
+  --link-text-decoration--active: underline;
+  --link-font-weight: 600;
+  --link-dark-color: var(--text-color);
+  --link-dark-visited-color: var(--link-dark-color);
+  --link-dark-color--hover: var(--primary-hover);
+  --link-dark-color--active: var(--primary-active);
+  --link-dark-text-decoration: none;
+  --link-dark-text-decoration--hover: underline;
+  --link-dark-text-decoration--active: underline;
+  --link-dark-font-weight: 600;
+  --pane-border-width: 1px;
+  --pane-header-text-color: var(--text-color);
+  --pane-header-bg: var(--light-grey);
+  --pane-header-border-color: var(--light-grey);
+  --pane-header-font-weight: bold;
+  --pane-border-color: var(--light-grey);
+  --pane-text-color: var(--text-color);
+  --pane-link-color: black;
+  --pane-link-color--visited: black;
+  --tab-link-border-radius: 4px;
+  --tab-link-border-width: 2px;
+  --tab-link-padding-x: 0.75rem;
+  --tab-link-padding-y: 0.375rem;
+  --tab-link-font-weight: bold;
+  --tab-link-text-color: var(--text-color-secondary);
+  --tab-link-bg: transparent;
+  --tab-link-border-color: var(--light-grey);
+  --tab-link-text-color--hover: var(--tab-link-text-color);
+  --tab-link-bg--hover: var(--light-grey);
+  --tab-link-border-color--hover: var(--tab-link-bg--hover);
+  --tab-link-text-color--active: var(--tab-link-text-color);
+  --tab-link-bg--active: var(--light-grey);
+  --tab-link-border-color--active: var(--tab-link-checked-bg);
+  --tab-link-checked-text-color: var(--white);
+  --tab-link-checked-bg: var(--dark-grey);
+  --tab-link-checked-border-color: var(--tab-link-checked-bg);
+  --tab-baseline-width: 2px;
+  --tab-baseline-color: var(--light-grey);
+  --tab-baseline-default-display: none;
+  --panel-header-bg-color: var(--light-grey);
+  --panel-border-color: var(--light-grey);
+  --side-panel-hover-color: var(--panel-border-color);
+  --task-link-bg-color--active: var(--panel-border-color);
+  --task-link-bg-color--hover: var(--very-light-grey);
+  --input-color: var(--white);
+  --input-border: #ccc;
+  --input-hidden-password-bg-color: #f9f9f9;
+  --menu-text-color: black;
+  --menu-bg-color: var(--white);
+  --menu-selected-color: #b3d4ff;
+  --menu-box-shadow: 0 3px 10px #bbb;
+  --manage-option-bg-color--hover: var(--very-light-grey);
+  --manage-option-bg-color--active: var(--light-grey);
+  --manage-option-border-color: var(--medium-grey);
+  --light-bg-color: #eee;
+  --bright-bg-color: #f9f9f9;
+  --brightest-bg-color: var(--white);
+  --light-bg-color--hover: rgba(255, 255, 255, 0.65);
+  --add-item-btn-decorator-border-color: #acb;
+  --add-item-btn-decorator-bg-color: rgba(245, 249, 239, 0.75);
+  --configure-job-bottom-sticker-bg-color: rgba(245, 249, 239, 0.75);
+  --configure-job-bottom-sticker-border-color: var(--line-green);
+  --plugin-manager-bg-color-already-upgraded: var(--light-grey);
+  --plugin-manager-category-link-bg-color: var(--very-light-grey);
+  --plugin-manager-category-link-bg-color--hover: #f2f2f2;
+  --plugin-manager-category-link-border-color: var(--medium-grey);
+  --plugin-manager-category-link-border-color--hover: var(--black);
+  --plugin-manager-category-text-color: var(--text-color);
+  --plugin-manager-category-link-color--hover: var(--text-color);
+  --plugin-manager-unavailable-bg-color: #f4f4f4;
+  --auto-complete-bg-color--prehighlight: #b3d4ff;
+  --call-to-action-link-color: #000;
+  --call-to-action-text-color: var(--alert-info-text-color);
+}
 .jenkins-config-widgets {
   position: relative;
-  border: 1px solid #cccccc;
+  border: 1px solid #ccc;
+  border: 1px solid var(--input-border);
   border-bottom: none;
-  background: #eeeeee;
+  background: #eee;
+  background: var(--light-bg-color);
   min-height: 2.5em;
-  -webkit-border-top-left-radius: 3px;
   -moz-border-top-left-radius: 3px;
   border-top-left-radius: 3px;
-  -webkit-border-top-right-radius: 3px;
   -moz-border-top-right-radius: 3px;
   border-top-right-radius: 3px;
   z-index: 5;
@@ -68,7 +261,8 @@
 .jenkins-config-widgets .showTabs:hover {
   opacity: 0.8;
   background: #bbb;
-  color: #eeeeee;
+  color: #eee;
+  color: var(--light-bg-color);
   text-shadow: none;
 }
 .jenkins-config-widgets .find-container {
@@ -78,19 +272,23 @@
 .jenkins-config-widgets .showTabs,
 .jenkins-config-widgets .noTabs {
   position: absolute;
-  border-radius: 3px;
+  border-radius: var(3px);
   right: 5px;
   top: 5px;
   cursor: pointer;
-  color: #cccccc;
-  text-shadow: #ffffff 0 1px 2px;
-  font-size: 0.85em;
+  color: #ccc;
+  color: var(--input-border);
+  text-shadow: #fff;
+  text-shadow: var(--brightest-bg-color 0 1px 2px);
+  font-size: 0.875rem;
+  font-size: var(--font-size-sm);
   padding: 3px 7px;
   display: none;
 }
 .jenkins-config-widgets .form-config.tabBarFrame {
   position: relative;
-  border-bottom: solid 1px #cccccc;
+  border-bottom: solid 1px #ccc;
+  border-bottom: solid 1px var(--input-border);
 }
 .jenkins-config-widgets .form-config.tabBarFrame .config-section-activators {
   margin: 0;
@@ -102,10 +300,8 @@
   border: solid 1px transparent;
   color: #999;
   padding: 7px 10px;
-  -webkit-border-top-left-radius: 5px;
   -moz-border-top-left-radius: 5px;
   border-top-left-radius: 5px;
-  -webkit-border-top-right-radius: 5px;
   -moz-border-top-right-radius: 5px;
   border-top-right-radius: 5px;
   cursor: pointer;
@@ -114,15 +310,20 @@
 }
 .jenkins-config-widgets .form-config.tabBarFrame .tabBar .tab:hover {
   background: #bbb;
-  color: #ffffff;
+  color: #fff;
+  color: var(--brightest-bg-color);
 }
 .jenkins-config-widgets .form-config.tabBarFrame .tabBar .tab.active {
   background: #f9f9f9;
-  color: #000;
+  background: var(--bright-bg-color);
+  color: #333;
+  color: var(--text-color);
   font-weight: bold;
   z-index: 2;
-  border: 1px solid #cccccc;
+  border: 1px solid #ccc;
+  border: 1px solid var(--input-border);
   border-bottom: 1px solid #f9f9f9;
+  border-bottom: 1px solid var(--bright-bg-color);
 }
 .jenkins-config-widgets .form-config.tabBarFrame.mouse-over .noTabs {
   display: inline;
@@ -131,10 +332,12 @@
   opacity: 0.8;
 }
 #jenkins .jenkins-config {
-  border: 1px solid #cccccc;
+  border: 1px solid #ccc;
+  border: 1px solid var(--input-border);
   padding: 10px;
   border-top: none;
   background: #f9f9f9;
+  background: var(--bright-bg-color);
   -webkit-border-bottom-left-radius: 3px;
   -moz-border-bottom-left-radius: 3px;
   -webkit-border-bottom-right-radius: 3px;
@@ -145,27 +348,67 @@
   display: block;
   text-align: right;
 }
-#jenkins .jenkins-config table.config-table .section-header-row {
-  background: none;
-  border-color: transparent;
-}
-#jenkins .jenkins-config table.config-table .section-header {
-  margin-top: 10px;
-}
 #jenkins .jenkins-config table {
   border-collapse: collapse;
 }
-#jenkins .jenkins-config table .bottom-sticker-edge {
+#jenkins .jenkins-config table td {
+  padding: 5px;
+}
+#jenkins .jenkins-config table .repeated-chunk,
+#jenkins .jenkins-config table tr[nameref^="rowSetStart"],
+#jenkins .jenkins-config table tr[nameref^="cb"],
+#jenkins .jenkins-config table tr[nameref^="radio-block"] {
+  background: rgba(0, 0, 0, 0.025);
+  background: var(--shade-hint);
+  border-left: 5px solid rgba(0, 0, 0, 0.1);
+  border-left: 5px solid var(--shade);
+}
+#jenkins .jenkins-config table .hetero-list-container,
+#jenkins .jenkins-config table .repeated-container,
+#jenkins .jenkins-config table tr.optional-block-start,
+#jenkins .jenkins-config table tr.radio-block-start {
+  border-left: 5px solid rgba(0, 0, 0, 0.1);
+  border-left: 5px solid var(--shade);
+  background: none;
+}
+#jenkins .jenkins-config .config-table table,
+#jenkins .jenkins-config .config-table .table {
+  border-collapse: collapse;
+}
+#jenkins .jenkins-config .config-table input[type='email'].setting-input,
+#jenkins .jenkins-config .config-table input[type='password'].setting-input,
+#jenkins .jenkins-config .config-table input[type='text'].setting-input {
+  height: 2.25em;
+  height: var(--input-line-height);
+  line-height: 2.25em;
+  line-height: var(--input-line-height);
+  padding: 0 5px;
+  border-radius: 3px;
+}
+#jenkins .jenkins-config .config-table select:not([multiple]) {
+  height: 2.25em;
+  height: var(--input-line-height);
+  line-height: 2.25em;
+  line-height: var(--input-line-height);
+}
+#jenkins .jenkins-config .config-table select:not(.select-ajax-pending) {
+  border-radius: 0;
+  background: #fff;
+  background: var(--brightest-bg-color);
+}
+#jenkins .jenkins-config .config-table .bottom-sticker-edge {
   display: none;
 }
-#jenkins .jenkins-config table .bottom-sticker-inner {
+#jenkins .jenkins-config .config-table .bottom-sticker-inner {
   padding: 20px 10px 25px 20px;
   border-top-right-radius: 10px;
-  border: 1px solid #aaccbb;
+  border: 1px solid #acb;
+  border: 1px solid var(--configure-job-bottom-sticker-border-color);
   background: rgba(245, 249, 239, 0.75);
+  background: var(--configure-job-bottom-sticker-bg-color);
 }
-#jenkins .jenkins-config table .bottom-sticker,
-#jenkins .jenkins-config table #bottom-sticker {
+#jenkins .jenkins-config .config-table .bottom-sticker,
+#jenkins .jenkins-config .config-table #bottom-sticker {
   width: auto;
   margin-left: -10px;
   overflow: hidden;
@@ -173,8 +416,8 @@
   margin: 30px 30px -25px -15px;
   z-index: 9;
 }
-#jenkins .jenkins-config table .bottom-sticker .cover,
-#jenkins .jenkins-config table #bottom-sticker .cover {
+#jenkins .jenkins-config .config-table .bottom-sticker .cover,
+#jenkins .jenkins-config .config-table #bottom-sticker .cover {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -182,182 +425,86 @@
   right: 0;
   z-index: 2;
 }
-#jenkins .jenkins-config table .bottom-sticker .yui-button.primary button,
-#jenkins .jenkins-config table #bottom-sticker .yui-button.primary button {
-  background: #447788;
-  border-color: #335566;
-}
-#jenkins .jenkins-config table .bottom-sticker .yui-button.yui-button-disabled button,
-#jenkins .jenkins-config table #bottom-sticker .yui-button.yui-button-disabled button {
-  background: #eeeeee;
-  border-color: #cccccc;
-  color: #cccccc;
-}
-#jenkins .jenkins-config table .bottom-sticker .yui-button,
-#jenkins .jenkins-config table #bottom-sticker .yui-button {
-  margin-right: 10px;
-}
-#jenkins .jenkins-config table .bottom-sticker .yui-button button,
-#jenkins .jenkins-config table #bottom-sticker .yui-button button {
-  padding: 5px 20px;
-  background: #ccddee;
-  border-color: #6699cc;
-}
-#jenkins .jenkins-config table .section-header {
-  margin: 30px 0px 5px -10px;
-  font-size: 1.5em;
-  padding: 10px 15px;
-  border: none;
-  border-top: 1px solid #ddd;
-}
-#jenkins .jenkins-config table .attach-previous {
-  margin-left: 3px;
-}
-#jenkins .jenkins-config table .validation-error-area td {
-  padding: 0 5px;
-}
-#jenkins .jenkins-config table .stapler-class-bag td {
-  padding: 0px;
-}
-#jenkins .jenkins-config table td.setting-name {
-  line-height: 29px;
-}
-#jenkins .jenkins-config table td.setting-main input[type='radio'],
-#jenkins .jenkins-config table td.setting-main input[type='checkbox'] {
-  position: relative;
-  top: .33em;
-}
-#jenkins .jenkins-config table td {
-  padding: 5px;
-}
-#jenkins .jenkins-config table td textarea.setting-input {
-  display: block;
-}
-#jenkins .jenkins-config table td .yui-button button,
-#jenkins .jenkins-config table td input[type='email'].setting-input,
-#jenkins .jenkins-config table td input[type='password'].setting-input,
-#jenkins .jenkins-config table td input[type='text'].setting-input {
-  height: 2.25em;
-  line-height: 2.25em;
-  padding: 0 5px;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-}
-#jenkins .jenkins-config table td .yui-button button {
-  padding: 0 10px;
-  box-sizing: content-box;
-}
-#jenkins .jenkins-config table td .yui-button button.hetero-list-add {
-  padding-right: 25px;
-}
-#jenkins .jenkins-config table td select:not([multiple]) {
-  height: 2.25em;
-  line-height: 2.25em;
-}
-#jenkins .jenkins-config table td select {
-  border-radius: 0;
-  background: #ffffff;
-}
-#jenkins .jenkins-config table td .help {
+#jenkins .jenkins-config .config-table .help {
   background: rgba(255, 255, 255, 0.75);
+  background: var(--configure-job-help-area-bg-color);
 }
-#jenkins .jenkins-config table td p,
-#jenkins .jenkins-config table td .help,
-#jenkins .jenkins-config table td .setting-description {
-  font-size: 1em;
-  line-height: 1.4;
+#jenkins .jenkins-config .config-table p,
+#jenkins .jenkins-config .config-table .help,
+#jenkins .jenkins-config .config-table .setting-description {
+  font-size: 1rem;
+  font-size: var(--font-size-base);
 }
-#jenkins .jenkins-config table td[colspan="4"]:empty {
-  display: none;
-}
-#jenkins .jenkins-config table td.setting-help {
-  vertical-align: top;
-  padding: 5px 10px 5px 5px;
-}
-#jenkins .jenkins-config table td.setting-leftspace:after {
-  content: ' ';
-  display: block;
-  width: 13px;
-  height: 1px;
-}
-#jenkins .jenkins-config table .repeated-chunk,
-#jenkins .jenkins-config table tr[nameref^="rowSetStart"],
-#jenkins .jenkins-config table tr[nameref^="cb"],
-#jenkins .jenkins-config table tr[nameref^="radio-block"] {
-  background: rgba(0, 0, 0, 0.025);
-  border-left: 5px solid rgba(0, 0, 0, 0.1);
-}
-#jenkins .jenkins-config table .hetero-list-container,
-#jenkins .jenkins-config table .repeated-container,
-#jenkins .jenkins-config table tr.optional-block-start,
-#jenkins .jenkins-config table tr.radio-block-start {
-  border-left: 5px solid rgba(0, 0, 0, 0.1);
-  background: none;
-}
-#jenkins .jenkins-config table tr.help-area {
+#jenkins .jenkins-config .config-table tr.help-area,
+#jenkins .jenkins-config .config-table .tr.help-area {
   background: none !important;
 }
-#jenkins .jenkins-config table tr.help-area td {
+#jenkins .jenkins-config .config-table tr.help-area td,
+#jenkins .jenkins-config .config-table .tr.help-area td,
+#jenkins .jenkins-config .config-table tr.help-area .td,
+#jenkins .jenkins-config .config-table .tr.help-area .td {
   padding: 0 5px;
 }
-#jenkins .jenkins-config table .CodeMirror {
-  background: #ffffff;
+#jenkins .jenkins-config .config-table .repeated-container > .repeated-chunk {
+  padding: 0.75rem;
 }
-#jenkins .jenkins-config table .CodeMirror-scroll {
-  border: 1px solid #cccccc !important;
-}
-#jenkins .jenkins-config table .repeated-container > .repeated-chunk {
-  padding-top: 15px;
-}
-#jenkins .jenkins-config table .repeated-chunk.hover {
-  border-color: #6699cc;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1), inset 0 200px 200px -200px #ffffff;
+#jenkins .jenkins-config .config-table .repeated-chunk.hover {
+  border-color: #69c;
+  border-color: var(--line-blue);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1), inset 0 200px 200px -200px #fff;
+  box-shadow: 0 2px 10px var(--shade), inset 0 200px 200px -200px var(--brightest-bg-color);
   position: relative;
   z-index: 2;
 }
-#jenkins .jenkins-config table .repeated-chunk.dragging {
+#jenkins .jenkins-config .config-table .repeated-chunk.dragging {
   position: static;
 }
-#jenkins .jenkins-config table .repeated-chunk {
+#jenkins .jenkins-config .config-table .repeated-chunk {
   border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--shade);
   margin: 2px;
   position: relative;
 }
-#jenkins .jenkins-config table .repeatable-delete {
+#jenkins .jenkins-config .config-table .repeatable-delete {
   position: absolute;
   top: -4px;
   right: 40px;
   height: 20px;
   width: 30px;
 }
-#jenkins .jenkins-config table .repeatable-delete button {
+#jenkins .jenkins-config .config-table .repeatable-delete button {
   text-align: center;
   text-indent: -9999px;
   width: 30px !important;
   height: 18px !important;
   padding: 0 !important;
   margin: 0 !important;
-  -webkit-border-top-left-radius: 0 !important;
   -moz-border-top-left-radius: 0 !important;
   border-top-left-radius: 0 !important;
-  -webkit-border-top-right-radius: 0 !important;
   -moz-border-top-right-radius: 0 !important;
   border-top-right-radius: 0 !important;
-  background-color: #d24939;
-  color: #eeeeee;
+  background-color: #cc0003;
+  background-color: var(--danger);
+  color: #eee;
+  color: var(--light-bg-color);
   border: 1px solid #be3a2b;
+  border: 1px solid var(--danger-line);
   line-height: 12px !important;
   display: inline-block;
   font-size: 8px;
+  min-width: 0;
+  min-height: 0;
 }
-#jenkins .jenkins-config table .repeatable-delete button:focus,
-#jenkins .jenkins-config table .repeatable-delete button:hover {
+#jenkins .jenkins-config .config-table .repeatable-delete button:focus,
+#jenkins .jenkins-config .config-table .repeatable-delete button:hover {
   background-color: #a23225;
+  background-color: var(--danger-dark);
   border-color: #942e22;
-  color: #ffffff;
+  border-color: var(--danger-dark-line);
+  color: #fff;
+  color: var(--brightest-bg-color);
 }
-#jenkins .jenkins-config table .repeatable-delete button:before {
+#jenkins .jenkins-config .config-table .repeatable-delete button:before {
   content: 'X';
   font-weight: bold;
   position: absolute;
@@ -370,13 +517,23 @@
   font-size: 12px;
   text-indent: 0;
 }
-#jenkins .jenkins-config span.highlight {
+#jenkins .jenkins-config .config-table span.highlight {
   background-color: #ffff00;
 }
+#jenkins .jenkins-config .config-table .CodeMirror {
+  background: #fff;
+  background: var(--brightest-bg-color);
+}
+#jenkins .jenkins-config .config-table .CodeMirror-scroll {
+  border: 1px solid #ccc !important;
+  border: 1px solid var(--input-border) !important;
+}
 #ygddfdiv {
-  background: #eeeeee;
-  border: 1px solid #6699cc !important;
-  opacity: .5;
+  background: #eee;
+  background: var(--light-bg-color);
+  border: 1px solid #69c !important;
+  border: 1px solid var(--line-blue) !important;
+  opacity: 0.5;
 }
 .yui-skin-sam .yuimenu {
   z-index: 9999 !important;
@@ -386,22 +543,24 @@
 }
 #add-item-panel form > .header {
   position: relative;
-  border: 1px solid #cccccc;
+  border: 1px solid #ccc;
+  border: 1px solid var(--input-border);
   border-bottom: none;
-  background: #eeeeee;
-  -webkit-border-top-left-radius: 3px;
+  background: #eee;
+  background: var(--light-bg-color);
   -moz-border-top-left-radius: 3px;
   border-top-left-radius: 3px;
-  -webkit-border-top-right-radius: 3px;
   -moz-border-top-right-radius: 3px;
   border-top-right-radius: 3px;
   z-index: 5;
 }
 #add-item-panel form > .footer {
   position: relative;
-  border: 1px solid #cccccc;
+  border: 1px solid #ccc;
+  border: 1px solid var(--input-border);
   border-top: none;
-  background: #eeeeee;
+  background: #eee;
+  background: var(--light-bg-color);
   height: 110px;
 }
 #add-item-panel form > .footer .btn-decorator {
@@ -410,8 +569,10 @@
   padding: 20px 30px;
   width: auto;
   border-top-right-radius: 10px;
-  border: 1px solid #aaccbb;
+  border: 1px solid #acb;
+  border: 1px solid var(--add-item-btn-decorator-border-color);
   background: rgba(245, 249, 239, 0.75);
+  background: var(--add-item-btn-decorator-bg-color);
   text-align: center;
   z-index: 10;
 }
@@ -420,58 +581,63 @@
   min-width: auto;
   margin-right: 0px;
 }
-#add-item-panel form > .footer .btn-decorator button[type=submit] {
-  padding: 5px 20px;
-  background-color: #ccddee;
-  border-color: #6699cc;
-  border-radius: 3px;
-  border-width: 1px;
-  border-style: solid;
-  color: #505050;
-  font-weight: bold;
-  font-size: 12px;
-  line-height: 27px;
-}
-#add-item-panel form > .footer .btn-decorator button[type=submit]:hover:not(.disabled),
-#add-item-panel form > .footer .btn-decorator button[type=submit]:focus:not(.disabled) {
-  background-color: #447788;
-  border-color: #335566;
-  color: #eeeeee;
-  cursor: pointer;
-}
-#add-item-panel form > .footer .btn-decorator button[type=submit].disabled {
-  background-color: #ccc;
-  border-color: #aaa;
-  color: #8c8c8c;
-  cursor: auto;
-  opacity: 0.75;
-}
 #add-item-panel .add-item-name {
   padding: 20px;
 }
 #add-item-panel .add-item-name label {
   position: relative;
-  display: block;
-  font-size: 22px;
-  font-weight: bold;
   padding-bottom: 10px;
 }
 #add-item-panel .item-copy {
   position: relative;
-  border: 1px solid #cccccc;
+  border: 1px solid #ccc;
+  border: 1px solid var(--input-border);
   border-top: none;
   padding: 20px;
-  background-color: #f9f9f9;
+  background-color: #eee;
+  background-color: var(--light-bg-color);
 }
 #add-item-panel .item-copy p.description {
-  font-size: 16px;
+  font-size: 1rem;
+  font-size: var(--font-size-base);
   margin-top: 0;
 }
 #add-item-panel .item-copy .add-item-copy {
   position: relative;
   padding-left: 58px;
   /* This is needed because <s:textbox /> included YUI styles and we need to override this one */
-  font-family: Helvetica, Arial, sans-serif !important;
+  font-family: -apple-system
+,
+BlinkMacSystemFont
+,
+"Segoe UI"
+,
+Roboto
+,
+"Noto Sans"
+,
+Oxygen
+,
+Ubuntu
+,
+Cantarell
+,
+"Fira Sans"
+,
+"Droid Sans"
+,
+"Helvetica Neue"
+,
+Arial
+,
+sans-serif
+,
+"Apple Color Emoji"
+,
+"Segoe UI Emoji"
+,
+"Segoe UI Symbol" !important;
+  font-family: var(--font-family-sans) !important;
 }
 #add-item-panel .item-copy .add-item-copy input[type=radio] {
   display: none;
@@ -491,7 +657,8 @@
 #add-item-panel .add-item-copy .input-help {
   color: #666;
   font-style: italic;
-  font-size: 13px;
+  font-size: 0.875rem;
+  font-size: var(--font-size-sm);
   padding-top: 2px;
 }
 #add-item-panel .add-item-name .input-validation-message,
@@ -510,10 +677,11 @@
   top: 10px;
   height: 48px;
   width: 48px;
-  background: #ffffff;
+  background: #fff;
+  background: var(--input-color);
   border: 1px solid #6699cc;
   border-radius: 50%;
-  opacity: .9;
+  opacity: 0.9;
 }
 #add-item-panel .icon img {
   position: relative;
@@ -543,45 +711,45 @@
   font-size: 175%;
   color: #ffffff;
   text-shadow: rgba(0, 0, 0, 0.25) 0 -1px 1px;
-  opacity: .75;
+  opacity: 0.75;
 }
 #add-item-panel .default-icon .b {
   text-transform: lowercase;
 }
 #add-item-panel .c-D33833 {
   border: 1px solid #900;
-  box-shadow: inset #990000 0 0 1px, inset #ffffff 0 0 0 1px, 0 5px 3px -2px rgba(0, 0, 0, 0.25), inset -5px -5px 10px 2px #990033, inset -5px -10px 15px 14px #d33833;
+  box-shadow: inset #900 0 0 1px, inset #fff 0 0 0 1px, 0 5px 3px -2px rgba(0, 0, 0, 0.25), inset -5px -5px 10px 2px #903, inset -5px -10px 15px 14px #D33833;
 }
 #add-item-panel .c-6D6B6D {
   border: 1px solid #000;
-  box-shadow: inset #333333 0 0 1px, inset #ffffff 0 0 0 1px, 0 5px 3px -2px rgba(0, 0, 0, 0.25), inset -5px -5px 10px 2px #222222, inset -5px -10px 15px 14px #555555;
+  box-shadow: inset #333 0 0 1px, inset #fff 0 0 0 1px, 0 5px 3px -2px rgba(0, 0, 0, 0.25), inset -5px -5px 10px 2px #222, inset -5px -10px 15px 14px #555;
 }
 #add-item-panel .c-335061 {
   border: 1px solid #356;
-  box-shadow: inset #002244 0 0 1px, inset #ffffff 0 0 0 1px, 0 5px 3px -2px rgba(0, 0, 0, 0.25), inset -5px -5px 10px 2px #001122, inset -5px -10px 15px 14px #335061;
+  box-shadow: inset #024 0 0 1px, inset #fff 0 0 0 1px, 0 5px 3px -2px rgba(0, 0, 0, 0.25), inset -5px -5px 10px 2px #012, inset -5px -10px 15px 14px #335061;
 }
 #add-item-panel .c-49728B {
   border: 1px solid #036;
-  box-shadow: inset #003366 0 0 1px, inset #ffffff 0 0 0 1px, 0 5px 3px -2px rgba(0, 0, 0, 0.25), inset -5px -5px 10px 2px #003366, inset -5px -10px 15px 14px #49728b;
+  box-shadow: inset #036 0 0 1px, inset #fff 0 0 0 1px, 0 5px 3px -2px rgba(0, 0, 0, 0.25), inset -5px -5px 10px 2px #036, inset -5px -10px 15px 14px #49728B;
 }
 #add-item-panel .c-6699CC {
   border: 1px solid #6699cc;
   box-shadow: inset #003399 0 0 1px, inset #ffffff 0 0 0 1px, 0 5px 3px -2px rgba(0, 0, 0, 0.25), inset -5px -5px 10px 2px #336699, inset -5px -10px 15px 14px #6699cc;
 }
 #add-item-panel input {
-  font-size: 1.5em;
-  background-color: #fff;
   padding: 5px 10px;
-  border: 1px solid #999;
   width: 50%;
   min-width: 300px;
 }
 #add-item-panel .categories {
-  border: 1px solid #cccccc;
+  border: 1px solid #ccc;
+  border: 1px solid var(--input-border);
   background-color: #f9f9f9;
+  background-color: var(--bright-bg-color);
 }
 #add-item-panel .categories .category {
-  border-bottom: 1px solid #cccccc;
+  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid var(--input-border);
   padding: 10px;
 }
 #add-item-panel .categories .category .header {
@@ -620,25 +788,26 @@
 }
 .j-item-options li:hover,
 .j-item-options li:focus {
-  border-color: #cccccc;
+  border-color: #ccc;
+  border-color: var(--input-border);
   background: rgba(255, 255, 255, 0.65);
+  background: var(--light-bg-color--hover);
   outline: 0;
 }
 .j-item-options li.active {
   cursor: text;
-  background-color: #ffffff;
-  border-color: #6699cc;
-  box-shadow: inset 999rem 0 #ffffff;
+  background-color: #fff;
+  background-color: var(--background);
+  border-color: #ccc;
+  border-color: var(--input-border);
+  box-shadow: inset 999rem 0 #fff;
+  box-shadow: inset 999rem 0 var(--background);
   -webkit-touch-callout: text;
   -webkit-user-select: text;
-  -khtml-user-select: text;
   -moz-user-select: text;
   -ms-user-select: text;
   user-select: text;
-  -moz-transition: .5s;
-  -webkit-transition: .5s;
-  -o-transition: .5s;
-  transition: .5s;
+  transition: 0.5s;
 }
 .j-item-options li.active .icon {
   opacity: 1;
@@ -646,7 +815,6 @@
 .j-item-options li {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
-  -khtml-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
@@ -659,9 +827,11 @@
 }
 .j-item-options li label {
   display: block;
-  font-size: 1.1em;
+  font-size: 1rem;
+  font-size: var(--font-size-base);
   font-weight: bold;
-  color: #000;
+  color: #333;
+  color: var(--text-color);
   padding-bottom: 5px;
   cursor: pointer;
 }
@@ -671,3 +841,6 @@
   left: 25px;
   display: none;
 }
+
+
+/*# sourceMappingURL=add-item.css.map*/

@@ -1,0 +1,9 @@
+commit 00af8609517a8b2818f89c27629cf886d078821b
+tree 9eb2dbe6eed4a468121c7f3d005cdd58c41c9ebe
+parent fec870645ceda125887a6b4e34b8bacc0eb1de30
+author Marcel Ochsendorf <marcel.ochsendorf@gmail.com> 2021-03-12 21:17:56 +0100
+committer GitHub <noreply@github.com> 2021-03-12 21:17:56 +0100
+
+    Update index.ejs
+
+:100755 100755 ab20f63ec9bed22be494a2b38262586c757a4cc4 89750e8d61b8b0b0de695d0d06663dbb305d5407 M	src/src_thesis/thesis_server/views/index.ejs

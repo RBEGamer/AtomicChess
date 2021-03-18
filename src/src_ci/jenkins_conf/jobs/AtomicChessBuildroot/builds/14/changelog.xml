@@ -1,0 +1,10 @@
+commit c7e491eb672e3609c56ae8153ab1624312b4ab3a
+tree 6d270f081b3bd8bb66f9ac5b2a5e542573ab284d
+parent 7570c186074add573d83a7b8af5f5e987abe02a7
+author John Doe <johndoe@example.com> 2021-01-04 00:51:23 +0100
+committer John Doe <johndoe@example.com> 2021-01-04 00:51:23 +0100
+
+    remove some stuff
+
+
+:100644 100644 e5ec523b5ed43688ac3aa86c228dfe8f9e1dd4d7 0dd0c51f89ee011e225356eec3f5d8d0bd85cce0 M	src/src_buildroot/buildroot/config_backup
