@@ -8,6 +8,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt upgrade -y && \
     apt-get install -y \
     build-essential \
+    python \
+    python3 \
     bash \
     bc \
     binutils \
