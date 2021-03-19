@@ -29,6 +29,10 @@ make -j10
 
 
 
+# FORCE TO BUILD THE ATC PACKAGES
+make atcgui-dirclean && rm -Rf ./dl/atcgui/
+make atcctl-dirclean && rm -Rf ./dl/atcctl/
+make atctp-dirclean && rm -Rf ./dl/atctp/
 
 # INCREMENT VERSION
 cd ./VERSIONING && bash ./increment_version.sh && cd ..
