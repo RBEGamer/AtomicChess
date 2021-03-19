@@ -45,6 +45,20 @@ Abschließend wird eine Zusammenfassung ¨uber den Verlauf der Arbeit und der er
 
 # Analyse bestehender Systeme
 
+## Existierende Systeme im Vergleich
+
+|                                         	| Square Off - Kingdom              	| Square Off - Grand Kingdom        	| DGT Smart Board      	| DGT Bluetooth Wenge  	|
+|-----------------------------------------	|-----------------------------------	|-----------------------------------	|----------------------	|----------------------	|
+| Erkennung Schachfigurstellung           	| ja (Manuell per Ausgangsposition) 	| ja (Manuell per Ausgangsposition) 	| ja (Resonanzspulen)  	| ja (RFID)            	|
+| Tischabmessungen (LxBxH)                	| 486mm x 486mm x 75mm              	| 671mm x 486mm x 75mm              	| 540mm x 540mm x 20mm 	| 540mm x 540mm x 20mm 	|
+| Konektivität                            	| BLE                               	| BLE                               	| USB / Seriell        	| Bluetooth 2.0        	|
+| Automatisches Bewegen der Figuren       	| ja                                	| ja                                	| nein                 	| nein                 	|
+| Spiel Livestream                        	| ja                                	| ja                                	| ja                   	| ja                   	|
+| Cloud anbindung (online Spiele)         	| ja (über Mobiltelefon + App)      	| ja (über Mobiltelefon + App)      	| ja (über PC + App)   	| ja (über PC + App)   	|
+| Parkposition für ausgeschiedene Figuren 	| nein                              	| ja                                	| nein                 	| nein                 	|
+|                                         	|                                   	|                                   	|                      	|                      	|
+|           
+
 ## Zielgruppe
 
 ## User Experience
