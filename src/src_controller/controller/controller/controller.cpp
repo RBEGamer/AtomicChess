@@ -1060,8 +1060,8 @@ int main(int argc, char *argv[])
 			gui.show_error_message_on_gui("CALIBRATION SAVED FOR A8");
             LOG_F(INFO, "CALIBRATION SAVED FOR A8");
 		}
-		
-		
+		//WRITE CONFIG TO FILE
+		ConfigParser::getInstance()->writeConfigFile(CONFIG_FILE_PATH);
 		//RESET CAL MENU	
 		cal_move = -1;
 
