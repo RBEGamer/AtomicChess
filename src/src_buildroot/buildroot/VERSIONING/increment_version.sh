@@ -3,7 +3,7 @@
 # This script increments a versionnumber before each build
 # its normally called by the ../build.sh script
 
-python3 ./increment_version.py
+python ./increment_version.py
 
 
 cp ./VERSION ../OVERLAY_FS/VERSION

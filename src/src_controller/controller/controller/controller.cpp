@@ -983,7 +983,9 @@ int main(int argc, char *argv[])
 		//MOVE TO NEW H1 POSITION
         HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A,true);
 		HardwareInterface::getInstance()->move_to_postion_mm_absolute(cal_pos_x, cal_pos_y,true);
-		
+        //DK WORKAROUND
+        HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, false);
+        HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, false);
 	}else if(ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_A8POS && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
 			cal_move = 1;
 			LOG_F(WARNING, "CALIBRATION SCREEN - H1 POSITION");
@@ -996,8 +998,11 @@ int main(int argc, char *argv[])
 			cal_pos_x = ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X) + (ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_CHESS_FIELD_WIDTH)*8);
 			cal_pos_y = ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y) + (ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_CHESS_FIELD_WIDTH) * 8);
 			//MOVE TO NEW A8 POSITION
-        HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B,true);
+            HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B,true);
 			HardwareInterface::getInstance()->move_to_postion_mm_absolute(cal_pos_x, cal_pos_y,true);
+			//DK WORKAROUND
+            HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, false);
+            HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, false);
 		
 	}else if (ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_MVUP && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
 		LOG_F(WARNING, "CALIBRATION SCREEN - UP");
@@ -1027,8 +1032,11 @@ int main(int argc, char *argv[])
 	//SAVE
 	if (ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_SAVE && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
 		LOG_F(WARNING, "CALIBRATION SCREEN - SAVE");
+        HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, false);
+        HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, false);
 		if (cal_move == -1)
 		{
+
 			gui.show_error_message_on_gui("CALIBRATION SAVE FAILED -> PLEASE SELECT CONRNER");
 
 		}
@@ -1056,8 +1064,7 @@ int main(int argc, char *argv[])
 		
 		//RESET CAL MENU	
 		cal_move = -1;
-        HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, false);
-        HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, false);
+
 			
 	}
 		
