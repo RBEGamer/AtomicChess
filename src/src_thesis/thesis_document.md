@@ -43,6 +43,40 @@ Abschließend wird eine Zusammenfassung ¨uber den Verlauf der Arbeit und der er
 
 
 
+# Analyse bestehender Systeme
+
+## Zielgruppe
+
+## User Experience
+
+### Software-Aufbau
+
+### Hardware-Aufbau
+
+
+
+# Grundlagen
+
+## Anforderungsanalyse
+
+
+
+
+## Machbarkeitsanalyse
+
+## Technologien im Makerspace
+
+##
+
+
+
+
+
+
+
+
+
+
 
 
 
