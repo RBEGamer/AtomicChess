@@ -443,7 +443,9 @@ void MenuManager::memm_enter_move_user_input(QString _charakter){
 
 }
 
-
+void MenuManager::memm_mi_scan_btn(){
+    guiconnection.createEvent(guicommunicator::GUI_ELEMENT::PLAYER_EMM_SCAN_BOARD, guicommunicator::GUI_VALUE_TYPE::CLICKED);
+}
 
 
 
@@ -467,4 +469,11 @@ void MenuManager::cal_mvdown_btn(){
 }
 void MenuManager::cal_mvright_btn(){
       guiconnection.createEvent(guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_MVRIGHT, guicommunicator::GUI_VALUE_TYPE::CLICKED);
+}
+
+void MenuManager::cal_ppwhite1_btn(){
+     guiconnection.createEvent(guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_PPWHITE1, guicommunicator::GUI_VALUE_TYPE::CLICKED);
+}
+void MenuManager::cal_ppblack1_btn(){
+     guiconnection.createEvent(guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_PPBLACK1, guicommunicator::GUI_VALUE_TYPE::CLICKED);
 }
