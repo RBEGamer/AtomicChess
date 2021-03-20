@@ -74,6 +74,7 @@ public slots:
     void memm_enter_move_reset();
     void memm_enter_move_ok();
     void memm_enter_move_user_input(QString _charakter);
+    void memm_mi_scan_btn();
     //---- GENERAL FUNCTIONS --- //
     void general_ui_reset(); //RESET THE UI TO INITIAL STATE
 
@@ -86,6 +87,9 @@ public slots:
     void cal_mvup_btn();
     void cal_mvdown_btn();
     void cal_mvright_btn();
+
+    void cal_ppwhite1_btn();
+    void cal_ppblack1_btn();
 
 private:
     void show_error(QString _err);

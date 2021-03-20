@@ -962,7 +962,7 @@ Rectangle {
             id: mmem_chosen_move_label
             objectName: "mmem_chosen_move_label"
             x: 304
-            y: 109
+            y: 53
             width: 192
             height: 57
             text: qsTr("----")
@@ -973,7 +973,7 @@ Rectangle {
         Text {
             id: mmem_move_headline
             x: 315
-            y: 68
+            y: 12
             width: 173
             height: 35
             text: qsTr("Entered Move")
@@ -1256,7 +1256,7 @@ Rectangle {
         Button {
             id: memm_mi_ok_btn
             x: 304
-            y: 244
+            y: 119
             width: 184
             height: 69
             text: qsTr("OK")
@@ -1273,7 +1273,7 @@ Rectangle {
         Button {
             id: memm_mi_rest_btn
             x: 304
-            y: 341
+            y: 216
             width: 184
             height: 45
             text: qsTr("RESET")
@@ -1282,6 +1282,22 @@ Rectangle {
                 target: memm_mi_rest_btn
                 function onClicked(_mouse){
                     main_menu.memm_enter_move_reset()
+                }
+            }
+        }
+
+        Button {
+            id: memm_mi_scan_btn
+            x: 307
+            y: 296
+            width: 184
+            height: 90
+            text: qsTr("SCAN BOARD")
+            font.pointSize: 15
+            Connections {
+                target: memm_mi_scan_btn
+                function onClicked(_mouse){
+                    main_menu.memm_mi_scan_btn()
                 }
             }
         }
@@ -1302,8 +1318,8 @@ Rectangle {
 
         Button {
             id: cal_back_btn
-            x: 649
-            y: 323
+            x: 659
+            y: 343
             width: 128
             height: 51
             text: qsTr("BACK")
@@ -1319,8 +1335,8 @@ Rectangle {
             id: cal_h1pos_btn
             x: 8
             y: 8
-            width: 127
-            height: 51
+            width: 209
+            height: 69
             text: qsTr("H1 POSITION")
             font.bold: false
             Connections {
@@ -1334,9 +1350,9 @@ Rectangle {
         Button {
             id: cal_a8pos_btn
             x: 8
-            y: 166
-            width: 128
-            height: 51
+            y: 111
+            width: 210
+            height: 70
             text: qsTr("A8 POSITION")
             Connections {
                 target: cal_a8pos_btn
@@ -1346,16 +1362,42 @@ Rectangle {
             }
         }
 
+        Button {
+            id: cal_ppwhite1_btn
+            x: 8
+            y: 333
+            width: 210
+            height: 70
+            text: qsTr("PARK POSITION WHITE 1")
+            Connections {
+                target: cal_ppwhite1_btn
+                function onClicked(_mouse){
+                    main_menu.cal_ppwhite1_btn()
+                }
+            }
+        }
 
-
-
+        Button {
+            id: cal_ppblack1_btn
+            x: 8
+            y: 224
+            width: 210
+            height: 70
+            text: qsTr("PARK POSITION BLACK 1")
+            Connections {
+                target: cal_ppblack1_btn
+                function onClicked(_mouse){
+                    main_menu.cal_ppblack1_btn()
+                }
+            }
+        }
 
         Button {
             id: cal_save_btn
-            x: 8
-            y: 323
-            width: 127
-            height: 51
+            x: 577
+            y: 8
+            width: 210
+            height: 70
             text: qsTr("SAVE")
             Connections {
                 target: cal_save_btn
@@ -1439,6 +1481,6 @@ Rectangle {
 
 /*##^##
 Designer {
-    D{i:0;active3dScene:"-1"}
+    D{i:0;active3dScene:"-1"}D{i:140}
 }
 ##^##*/
