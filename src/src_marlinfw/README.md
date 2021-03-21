@@ -30,8 +30,9 @@ For the ATC Project the following settings are changed in comparision with the d
 
 ## Configuration.h
 
-* `664 | #define X_MIN_ENDSTOP_INVERTING true // Set to true to invert the logic of the endstop.`
-* `665 | #define Y_MIN_ENDSTOP_INVERTING true // Set to true to invert the logic of the endstop.`
+* `0615 | #define COREYZ //ON HWREV_PROD2`  
+* `0664 | #define X_MIN_ENDSTOP_INVERTING true // Set to true to invert the logic of the endstop.`
+* `0665 | #define Y_MIN_ENDSTOP_INVERTING true // Set to true to invert the logic of the endstop.`
 
 * `0750 | #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 93 } // FOR HWREV_PROD2 USE { 100, 100, 400, 93 }`
 
@@ -41,7 +42,9 @@ For the ATC Project the following settings are changed in comparision with the d
 * `1132 | #define X_BED_SIZE 700`
 * `1133 | #define Y_BED_SIZE 700`
 
-* `0615 | #define COREYZ //ON HWREV_PROD2`  
+* `1404 | #define HOMING_FEEDRATE_XY 1000 //LIMIT THE HOMING FEEDRATE`
+
+
 
 * `2359 | #define NEOPIXEL_LED //ENABLE NEXOPIXEL LED SUPPORT`
 * `2365 | #define NEOPIXEL_PIXELS 60       // Number of LEDs in the strip.`
