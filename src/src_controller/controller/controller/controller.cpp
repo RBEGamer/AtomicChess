@@ -978,6 +978,7 @@ int main(int argc, char *argv[])
 	//----------------CALIBRATION SCREEN ---------------------
 	//--------------------------------------------------------
 	if(ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_H1POS && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
+        HardwareInterface::getInstance()->set_speed_preset(HardwareInterface::HI_TRAVEL_SPEED_PRESET::HI_TSP_MOVE);
 		cal_move = 0;
         cal_move_step = 5; //SET USER ARROW KEY TO 5mm PER PRESS
 		LOG_F(WARNING, "CALIBRATION SCREEN - H1 POSITION");
@@ -997,6 +998,7 @@ int main(int argc, char *argv[])
         HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, false);
 
 	}else if(ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_A8POS && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
+            HardwareInterface::getInstance()->set_speed_preset(HardwareInterface::HI_TRAVEL_SPEED_PRESET::HI_TSP_MOVE);
 			cal_move = 1;
             cal_move_step = 5; //SET USER ARROW KEY TO 5mm PER PRESS
 			LOG_F(WARNING, "CALIBRATION SCREEN - H1 POSITION");
@@ -1016,6 +1018,7 @@ int main(int argc, char *argv[])
 
 
     }else if(ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_PPBLACK1 && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
+            HardwareInterface::getInstance()->set_speed_preset(HardwareInterface::HI_TRAVEL_SPEED_PRESET::HI_TSP_MOVE);
             cal_move = 2;
             cal_move_step = 2; //SET USER ARROW KEY TO 2mm PER PRESS
             LOG_F(WARNING, "CALIBRATION SCREEN -PARK POSITION BLACK 1");
@@ -1033,6 +1036,7 @@ int main(int argc, char *argv[])
             HardwareInterface::getInstance()->move_to_postion_mm_absolute(cal_pos_x, cal_pos_y,true);
 
     }else if(ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_PPWHITE1 && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
+        HardwareInterface::getInstance()->set_speed_preset(HardwareInterface::HI_TRAVEL_SPEED_PRESET::HI_TSP_MOVE);
         cal_move = 3;
         cal_move_step = 2; //SET USER ARROW KEY TO 2mm PER PRESS
         LOG_F(WARNING, "CALIBRATION SCREEN -PARK POSITION WHITE 1");
@@ -1050,6 +1054,7 @@ int main(int argc, char *argv[])
         HardwareInterface::getInstance()->move_to_postion_mm_absolute(cal_pos_x, cal_pos_y,true);
 
     }else if(ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_PPBLACK16 && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
+        HardwareInterface::getInstance()->set_speed_preset(HardwareInterface::HI_TRAVEL_SPEED_PRESET::HI_TSP_MOVE);
         cal_move = 4;
         cal_move_step = 2; //SET USER ARROW KEY TO 2mm PER PRESS
         LOG_F(WARNING, "CALIBRATION SCREEN -PARK POSITION BLACK 16");

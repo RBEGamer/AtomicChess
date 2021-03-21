@@ -233,9 +233,14 @@ void ConfigParser::loadDefaults(std::string _type_str)
 		config_store[ConfigParser::CFG_ENTRY::MECHANIC_WRITE_COIL_STATE_ALWAYS_WRITE_OFF] = "0";
 		config_store[ConfigParser::CFG_ENTRY::MECHANIC_BOARD_HOME_AFTER_MAKE_MOVE] = "1";      //1 ON DK
 		config_store[ConfigParser::CFG_ENTRY::MECHANIC_DISBABLE_COILSIWTCH_USE_COIL_A_ONLY] = "0";      // 0 ON DK
-	
+
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_FEEDRATE_TRAVEL] = "-1"; //ON DK THIS OPTIONS ARE NOT SUPPORTED
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_FEEDRATE_MOVE] = "-1";
+
+
 		config_store[ConfigParser::CFG_ENTRY::BOARD_PRESET_START_POSITION_FEN] = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
-	
+
+
 		config_store[ConfigParser::CFG_ENTRY::HWARDWARE_REVISION] = "DK";
 		config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_BOARD_SERIAL_PORT] = "/dev/ttyACM0";
 		config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_BOARD_SERIAL_BAUD] = "115200";
@@ -284,6 +289,9 @@ void ConfigParser::loadDefaults(std::string _type_str)
 		config_store[ConfigParser::CFG_ENTRY::MECHANIC_WRITE_COIL_STATE_ALWAYS_WRITE_OFF] = "0";
 		config_store[ConfigParser::CFG_ENTRY::MECHANIC_BOARD_HOME_AFTER_MAKE_MOVE] = "0";  //1 ON DK
 		config_store[ConfigParser::CFG_ENTRY::MECHANIC_DISBABLE_COILSIWTCH_USE_COIL_A_ONLY] = "1";  // 0 ON DK
+
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_FEEDRATE_TRAVEL] = "8000";
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_FEEDRATE_MOVE] = "5000";
 	
 		config_store[ConfigParser::CFG_ENTRY::BOARD_PRESET_START_POSITION_FEN] = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 	
@@ -335,6 +343,10 @@ void ConfigParser::loadDefaults(std::string _type_str)
         config_store[ConfigParser::CFG_ENTRY::MECHANIC_WRITE_COIL_STATE_ALWAYS_WRITE_OFF] = "0";
         config_store[ConfigParser::CFG_ENTRY::MECHANIC_BOARD_HOME_AFTER_MAKE_MOVE] = "0";
         config_store[ConfigParser::CFG_ENTRY::MECHANIC_DISBABLE_COILSIWTCH_USE_COIL_A_ONLY] = "1";
+
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_FEEDRATE_TRAVEL] = "5000";
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_FEEDRATE_MOVE] = "3000";
+
 
         config_store[ConfigParser::CFG_ENTRY::BOARD_PRESET_START_POSITION_FEN] = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 

@@ -364,8 +364,13 @@ void HardwareInterface::set_speed_preset(HardwareInterface::HI_TRAVEL_SPEED_PRES
 	{
 		if (tmc5160_x != nullptr && tmc5160_y != nullptr)
 		{
-			tmc5160_x->atc_set_speed_preset(static_cast<TMC5160::TRAVEL_SPEED_PRESET>(_preset));
-			tmc5160_y->atc_set_speed_preset(static_cast<TMC5160::TRAVEL_SPEED_PRESET>(_preset));
+
+
+                tmc5160_x->atc_set_speed_preset(static_cast<TMC5160::TRAVEL_SPEED_PRESET>(_preset));
+                tmc5160_y->atc_set_speed_preset(static_cast<TMC5160::TRAVEL_SPEED_PRESET>(_preset));
+
+
+
 		}
 			
 	}
@@ -373,10 +378,19 @@ void HardwareInterface::set_speed_preset(HardwareInterface::HI_TRAVEL_SPEED_PRES
 	{
 		if (gcode_interface != nullptr)
 		{
+
+		    int fr_move = ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_FEEDRATE_MOVE);
+		    int fr_travel = ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_FEEDRATE_TRAVEL);
+            //CHECK
+		    if(fr_move <= 0 || fr_travel <= 0){
+                fr_move = 100;
+                fr_travel = 100;
+                LOG_F(ERROR,"cant set speed_preset to fr_move %i or fr_travel %i USING DEFAULT OF 100 FOR BOTH",fr_move,fr_travel);
+		    }
 			switch (_preset)
 			{
-			case HardwareInterface::HI_TRAVEL_SPEED_PRESET::HI_TSP_MOVE : gcode_interface->set_speed_preset(8000); break; //MM per MINUTE
-			case HardwareInterface::HI_TRAVEL_SPEED_PRESET::HI_TSP_TRAVEL : gcode_interface->set_speed_preset(15000); break;
+			case HardwareInterface::HI_TRAVEL_SPEED_PRESET::HI_TSP_MOVE : gcode_interface->set_speed_preset(fr_move); break; //MM per MINUTE
+			case HardwareInterface::HI_TRAVEL_SPEED_PRESET::HI_TSP_TRAVEL : gcode_interface->set_speed_preset(fr_travel); break;
 			default:
 				break;
 			}
