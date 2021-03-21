@@ -42,7 +42,7 @@ For the ATC Project the following settings are changed in comparision with the d
 * `1132 | #define X_BED_SIZE 700`
 * `1133 | #define Y_BED_SIZE 700`
 
-* `1404 | #define HOMING_FEEDRATE_XY 1000 //LIMIT THE HOMING FEEDRATE`
+* `1404 | #define HOMING_FEEDRATE_XY 600 //LIMIT THE HOMING FEEDRATE`
 
 
 
