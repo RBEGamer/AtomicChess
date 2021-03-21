@@ -89,6 +89,7 @@ public slots:
     void cal_mvright_btn();
 
     void cal_ppwhite1_btn();
+    void cal_ppblack16_btn();
     void cal_ppblack1_btn();
 
 private:

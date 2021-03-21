@@ -1333,10 +1333,10 @@ Rectangle {
 
         Button {
             id: cal_h1pos_btn
-            x: 8
+            x: 16
             y: 8
             width: 209
-            height: 69
+            height: 50
             text: qsTr("H1 POSITION")
             font.bold: false
             Connections {
@@ -1349,10 +1349,10 @@ Rectangle {
 
         Button {
             id: cal_a8pos_btn
-            x: 8
-            y: 111
+            x: 15
+            y: 260
             width: 210
-            height: 70
+            height: 50
             text: qsTr("A8 POSITION")
             Connections {
                 target: cal_a8pos_btn
@@ -1364,10 +1364,10 @@ Rectangle {
 
         Button {
             id: cal_ppwhite1_btn
-            x: 8
-            y: 333
+            x: 16
+            y: 344
             width: 210
-            height: 70
+            height: 50
             text: qsTr("PARK POSITION WHITE 1")
             Connections {
                 target: cal_ppwhite1_btn
@@ -1379,15 +1379,30 @@ Rectangle {
 
         Button {
             id: cal_ppblack1_btn
-            x: 8
-            y: 224
+            x: 15
+            y: 91
             width: 210
-            height: 70
+            height: 50
             text: qsTr("PARK POSITION BLACK 1")
             Connections {
                 target: cal_ppblack1_btn
                 function onClicked(_mouse){
                     main_menu.cal_ppblack1_btn()
+                }
+            }
+        }
+
+        Button {
+            id: cal_ppblack16_btn
+            x: 15
+            y: 176
+            width: 210
+            height: 50
+            text: qsTr("PARK POSITION BLACK 16")
+            Connections {
+                target: cal_ppblack16_btn
+                function onClicked(_mouse){
+                    main_menu.cal_ppblack16_btn()
                 }
             }
         }
@@ -1481,6 +1496,6 @@ Rectangle {
 
 /*##^##
 Designer {
-    D{i:0;active3dScene:"-1"}D{i:140}
+    D{i:0;active3dScene:"-1"}
 }
 ##^##*/
