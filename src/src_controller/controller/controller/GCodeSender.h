@@ -38,7 +38,7 @@ public:
 	bool setTurnStateLight(int _state);
 	bool setServo(int _index, int _pos);
 	
-	
+	bool set_steps_per_mm(int _x, int _y);
 	
 private:
 	serialib*  port = nullptr;

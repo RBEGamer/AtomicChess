@@ -107,6 +107,15 @@ bool HardwareInterface::init_hardware(HardwareInterface::HI_HARDWARE_REVISION _h
 			gcode_interface->configure_marlin();  //CONFIGURE MARLIN FOR STARTUP
 			setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, false);
 			setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, false);
+            //SET STEPS PER MM AFTER! INIT
+            int spm = 0;
+            ConfigParser::getInstance()->getInt(ConfigParser::CFG_ENTRY::MECHANIC_STEPS_PER_MM, spm);
+            if (spm > 0)
+            {
+                gcode_interface->set_steps_per_mm(spm,spm);
+                LOG_F(INFO, "HardwareInterface::init_hardware set steps per mm setting to: %i" ,spm);
+            }
+
 		}
 
 	}
@@ -323,6 +332,7 @@ void HardwareInterface::move_to_postion_mm_absolute(int _x, int _y, bool _blocki
 		if (gcode_interface != nullptr)
 		{
 			gcode_interface->move_to_postion_mm_absolute(_x, _y, _blocking);
+			gcode_interface->disable_motors();
 		}
 	}
 }
@@ -343,6 +353,7 @@ void HardwareInterface::home_sync()
 		if (gcode_interface != nullptr)
 		{
 			gcode_interface->home_sync();
+            gcode_interface->disable_motors();
 		}
 	}
 }

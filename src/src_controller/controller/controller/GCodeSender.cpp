@@ -305,6 +305,19 @@ void GCodeSender::disable_motors() {
 	write_gcode("M84");     //DISBBLE MOTOR
 }
 
+bool GCodeSender::set_steps_per_mm(int _x, int _y){
+    //M92 X100 Y100
+    if(_x < 0){
+        _x = 0;
+    }
+    if(_y < 0){
+        _y = 0;
+    }
+    //MARLIN M92 COMMAND TO SET STEPS PER MM DYNAMICLY
+    return write_gcode("M92 X" + std::to_string(_x) + " Y" + std::to_string(_y));     //MOVE SERVO
+}
+
+
 bool GCodeSender::write_gcode(std::string _gcode_line)
 {
 	return write_gcode(_gcode_line, true);

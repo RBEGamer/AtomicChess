@@ -214,17 +214,17 @@ void ConfigParser::loadDefaults(std::string _type_str)
 		config_store[ConfigParser::CFG_ENTRY::GENERAL_EN_ATCGUI_COMMUNICATION] = "1";
 	
 	
-		config_store[ConfigParser::CFG_ENTRY::MECHANIC_STEPS_PER_MM] = "1292";
+		config_store[ConfigParser::CFG_ENTRY::MECHANIC_STEPS_PER_MM] = "1292"; //1292 ON TMC5160 DRIVER WITH MICROSTEPPING ENABLED
 		config_store[ConfigParser::CFG_ENTRY::MECHANIC_INVERT_COILS] = "1";
-		config_store[ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X] = "50";      //50 ON DK
-		config_store[ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y] = "0";      //0 ON DK
+		config_store[ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X] = "60";      //50 ON DK
+		config_store[ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y] = "10";      //0 ON DK
 		config_store[ConfigParser::CFG_ENTRY::MECHANIC_DISTANCE_COILS_MM] = "110";      //110 ON DK
 		config_store[ConfigParser::CFG_ENTRY::MECHANIC_COIL_SWITCH_POSTION_TRIGGER] = "200";
-		config_store[ConfigParser::CFG_ENTRY::MECHANIC_CHESS_FIELD_WIDTH] = "50";      //50 ON DK
-		config_store[ConfigParser::CFG_ENTRY::MECHANIC_CHESS_BOARD_WIDTH] = "400";      //400 ON DK
+		config_store[ConfigParser::CFG_ENTRY::MECHANIC_CHESS_FIELD_WIDTH] = "45";      //50 ON DK
+		config_store[ConfigParser::CFG_ENTRY::MECHANIC_CHESS_BOARD_WIDTH] = "360";      //400 ON DK
 		config_store[ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_BLACK_X_LINE] = "5";
 		config_store[ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_BLACK_FIRST_Y_OFFSET] = "10";
-		config_store[ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_WHITE_X_LINE] = "350";     //350 ON DK
+		config_store[ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_WHITE_X_LINE] = "370";     //350 ON DK
 		config_store[ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_WHITE_FIRST_Y_OFFSET] = "5";
 		config_store[ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_CELL_BEFORE_OFFSET] = "30";	
 		config_store[ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_CELL_SIZE] = "30";
@@ -248,6 +248,8 @@ void ConfigParser::loadDefaults(std::string _type_str)
 		config_store[ConfigParser::CFG_ENTRY::USER_GENERAL_ENABLE_AUTO_MATCHMAKING_ENABLE] = "0";
 		config_store[ConfigParser::CFG_ENTRY::USER_GENERAL_ENABLE_AUTOLOGIN] = "1";
 		config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_SKIP_CHESS_PLACEMENT_DIALOG] = "1";
+
+		config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_MAKE_MOVE_MANUAL_TEST_DO_SYNC] = "0";
 	}
 	else if (_type_str == "PROD_V1")
 	{
@@ -263,7 +265,7 @@ void ConfigParser::loadDefaults(std::string _type_str)
 		config_store[ConfigParser::CFG_ENTRY::GENERAL_EN_ATCGUI_COMMUNICATION] = "1";
 	
 	
-		config_store[ConfigParser::CFG_ENTRY::MECHANIC_STEPS_PER_MM] = "1292";
+		config_store[ConfigParser::CFG_ENTRY::MECHANIC_STEPS_PER_MM] = "80"; //80 steps / mm for normal xy configuration
 		config_store[ConfigParser::CFG_ENTRY::MECHANIC_INVERT_COILS] = "1";
 		config_store[ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X] = "15";  //50 ON DK
 		config_store[ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y] = "40";  //0 ON DK
@@ -297,7 +299,9 @@ void ConfigParser::loadDefaults(std::string _type_str)
 		config_store[ConfigParser::CFG_ENTRY::USER_GENERAL_ENABLE_AUTO_MATCHMAKING_ENABLE] = "0";
 		config_store[ConfigParser::CFG_ENTRY::USER_GENERAL_ENABLE_AUTOLOGIN] = "1";
 		config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_SKIP_CHESS_PLACEMENT_DIALOG] = "1";
-	}
+        config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_MAKE_MOVE_MANUAL_TEST_DO_SYNC] = "0";
+
+    }
 	else
 	{
         config_store[ConfigParser::CFG_ENTRY::NETWORK_BACKEND_URL] = "http://atomicchess.de:3000";
@@ -312,17 +316,17 @@ void ConfigParser::loadDefaults(std::string _type_str)
         config_store[ConfigParser::CFG_ENTRY::GENERAL_EN_ATCGUI_COMMUNICATION] = "1";
 
 
-        config_store[ConfigParser::CFG_ENTRY::MECHANIC_STEPS_PER_MM] = "1292";
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_STEPS_PER_MM] = "100";//80 steps / mm for CORE XY configuration
         config_store[ConfigParser::CFG_ENTRY::MECHANIC_INVERT_COILS] = "1";
-        config_store[ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X] = "15";  //50 ON DK
-        config_store[ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y] = "40";  //0 ON DK
-        config_store[ConfigParser::CFG_ENTRY::MECHANIC_DISTANCE_COILS_MM] = "0";  //110 ON DK
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X] = "60";
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y] = "30";
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_DISTANCE_COILS_MM] = "0";
         config_store[ConfigParser::CFG_ENTRY::MECHANIC_COIL_SWITCH_POSTION_TRIGGER] = "200";
-        config_store[ConfigParser::CFG_ENTRY::MECHANIC_CHESS_FIELD_WIDTH] = "55";  //50 ON DK
-        config_store[ConfigParser::CFG_ENTRY::MECHANIC_CHESS_BOARD_WIDTH] = "440";  //400 ON DK
-        config_store[ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_BLACK_X_LINE] = "5";
-        config_store[ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_BLACK_FIRST_Y_OFFSET] = "10";
-        config_store[ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_WHITE_X_LINE] = "520"; //350 ON DK
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_CHESS_FIELD_WIDTH] = "55";
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_CHESS_BOARD_WIDTH] = "440";
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_BLACK_X_LINE] = "0";
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_BLACK_FIRST_Y_OFFSET] = "7";
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_WHITE_X_LINE] = "510";
         config_store[ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_WHITE_FIRST_Y_OFFSET] = "5";
         config_store[ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_CELL_BEFORE_OFFSET] = "30";
         config_store[ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_CELL_SIZE] = "30";
@@ -330,7 +334,7 @@ void ConfigParser::loadDefaults(std::string _type_str)
         config_store[ConfigParser::CFG_ENTRY::MECHANIC_WRITE_COIL_STATE_ALWAYS_MAKE_MOVE] = "0";
         config_store[ConfigParser::CFG_ENTRY::MECHANIC_WRITE_COIL_STATE_ALWAYS_WRITE_OFF] = "0";
         config_store[ConfigParser::CFG_ENTRY::MECHANIC_BOARD_HOME_AFTER_MAKE_MOVE] = "0";
-        config_store[ConfigParser::CFG_ENTRY::MECHANIC_DISBABLE_COILSIWTCH_USE_COIL_A_ONLY] = "1";  // 0 ON DK
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_DISBABLE_COILSIWTCH_USE_COIL_A_ONLY] = "1";
 
         config_store[ConfigParser::CFG_ENTRY::BOARD_PRESET_START_POSITION_FEN] = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
@@ -346,7 +350,9 @@ void ConfigParser::loadDefaults(std::string _type_str)
         config_store[ConfigParser::CFG_ENTRY::USER_GENERAL_ENABLE_AUTO_MATCHMAKING_ENABLE] = "0";
         config_store[ConfigParser::CFG_ENTRY::USER_GENERAL_ENABLE_AUTOLOGIN] = "1";
         config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_SKIP_CHESS_PLACEMENT_DIALOG] = "1";
-	}
+        config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_MAKE_MOVE_MANUAL_TEST_DO_SYNC] = "0";
+
+    }
 }
 
 

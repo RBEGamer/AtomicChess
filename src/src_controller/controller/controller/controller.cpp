@@ -63,7 +63,7 @@ BackendConnector* gamebackend_logupload = nullptr;     //USED ONLY FOR UPLOADING
 int cal_pos_x = 0;
 int cal_pos_y = 0;
 int cal_move = -1; //-1 disbaled 0=h1 1=a8
-
+int cal_move_step = 5;
 //!Reads the system HWID File from the location
 std::string readHWID(std::string _file)
 {
@@ -396,7 +396,7 @@ int main(int argc, char *argv[])
 			break;
 		}
 	}
-	
+
 
 	
 	//CREATE GAME BACKEND INSTANCE
@@ -876,7 +876,7 @@ int main(int argc, char *argv[])
 	}
 
 
-
+    //TODO ---- SCAN BOARD AS MOVE AND ENTER IT TO GUI
 	//----------------- PLAYER MOVE RESPOMSE ---------------------- //
 	if(ev.event == guicommunicator::GUI_ELEMENT::PLAYER_EMM_INPUT && ev.type == guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING && make_move_mode) {
 			
@@ -884,13 +884,21 @@ int main(int argc, char *argv[])
 		if (mvpair.is_valid) {
 			//FOR TEST
 			if(make_move_mode == 1) {
+			    LOG_F(INFO, "MAKE MOVE TEST");
 				board.makeMoveSync(mvpair, false, false, false);
-				board.syncRealWithTargetBoard();
+				if(ConfigParser::getInstance()->getBool_nocheck(ConfigParser::CFG_ENTRY::USER_RESERVED_MAKE_MOVE_MANUAL_TEST_DO_SYNC)){
+                    LOG_F(INFO,"USER_RESERVED_MAKE_MOVE_MANUAL_TEST_DO_SYNC IS SET => PERFORMING  board.syncRealWithTargetBoard();");
+				    board.syncRealWithTargetBoard();
+				}
+
+
 				gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::DEBUG_SCREEN);
 				make_move_mode = 0;
 			}
 			else if(make_move_mode == 2) {
-				//FOR RUNNING GAME
+                LOG_F(INFO, "MAKE MOVE INGAME");
+
+                //FOR RUNNING GAME
 				gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::GAME_SCREEN);
 			   if(gamebackend.set_make_move(ev.value))
 				{
@@ -971,6 +979,7 @@ int main(int argc, char *argv[])
 	//--------------------------------------------------------
 	if(ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_H1POS && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
 		cal_move = 0;
+        cal_move_step = 5; //SET USER ARROW KEY TO 5mm PER PRESS
 		LOG_F(WARNING, "CALIBRATION SCREEN - H1 POSITION");
 		//MOVE HOME POS
 		HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, false);
@@ -986,8 +995,10 @@ int main(int argc, char *argv[])
         //DK WORKAROUND
         HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, false);
         HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, false);
+
 	}else if(ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_A8POS && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
 			cal_move = 1;
+            cal_move_step = 5; //SET USER ARROW KEY TO 5mm PER PRESS
 			LOG_F(WARNING, "CALIBRATION SCREEN - H1 POSITION");
 			//MOVE HOME POS
 			HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, false);
@@ -995,37 +1006,96 @@ int main(int argc, char *argv[])
 			HardwareInterface::getInstance()->home_sync();
 		
 			//READ CONFIG VALUES
-			cal_pos_x = ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X) + (ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_CHESS_FIELD_WIDTH)*8);
-			cal_pos_y = ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y) + (ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_CHESS_FIELD_WIDTH) * 8);
+			//THE CHESS BOARD IS SQUARED SO X AND Y ARE DIAGONALLY THE SAME
+			cal_pos_x = ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_CHESS_FIELD_WIDTH)*7;
+			cal_pos_y = cal_pos_x;
 			//MOVE TO NEW A8 POSITION
+            HardwareInterface::getInstance()->move_to_postion_mm_absolute(ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X), ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y),true);
             HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B,true);
-			HardwareInterface::getInstance()->move_to_postion_mm_absolute(cal_pos_x, cal_pos_y,true);
-			//DK WORKAROUND
+			HardwareInterface::getInstance()->move_to_postion_mm_absolute(cal_pos_x+ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X), cal_pos_y+ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y),true);
+
+
+    }else if(ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_PPBLACK1 && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
+            cal_move = 2;
+            cal_move_step = 2; //SET USER ARROW KEY TO 2mm PER PRESS
+            LOG_F(WARNING, "CALIBRATION SCREEN -PARK POSITION BLACK 1");
+            //MOVE HOME POS
             HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, false);
             HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, false);
-		
+            HardwareInterface::getInstance()->home_sync();
+            //MOVE H1
+            HardwareInterface::getInstance()->move_to_postion_mm_absolute(ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X), ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y),true);
+            //ENABLE COIL FOR RIGHT SITE
+            HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, true);
+            //MOVE TO PARK POS BLACK 1
+            cal_pos_x = ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_BLACK_X_LINE);
+            cal_pos_y = ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_BLACK_FIRST_Y_OFFSET);
+            HardwareInterface::getInstance()->move_to_postion_mm_absolute(cal_pos_x, cal_pos_y,true);
+
+    }else if(ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_PPWHITE1 && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
+        cal_move = 3;
+        cal_move_step = 2; //SET USER ARROW KEY TO 2mm PER PRESS
+        LOG_F(WARNING, "CALIBRATION SCREEN -PARK POSITION WHITE 1");
+        //MOVE HOME POS
+        HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, false);
+        HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, false);
+        HardwareInterface::getInstance()->home_sync();
+        //MOVE H1
+        HardwareInterface::getInstance()->move_to_postion_mm_absolute(ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X), ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y),true);
+        //ENABLE COIL FOR RIGHT SITE
+        HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, true);
+        //MOVE TO PARK POS BLACK 1
+        cal_pos_x = ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_WHITE_X_LINE);
+        cal_pos_y = ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_WHITE_FIRST_Y_OFFSET);
+        HardwareInterface::getInstance()->move_to_postion_mm_absolute(cal_pos_x, cal_pos_y,true);
+
+
+
+
 	}else if (ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_MVUP && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
 		LOG_F(WARNING, "CALIBRATION SCREEN - UP");
 		//MOVE TO NEW POSITION
-		cal_pos_y += 5;
-		HardwareInterface::getInstance()->move_to_postion_mm_absolute(cal_pos_x, cal_pos_y,true);
+		cal_pos_y += cal_move_step;
+
+        //WORKAROUND FOR A8
+		if(cal_move == 1){
+            HardwareInterface::getInstance()->move_to_postion_mm_absolute(cal_pos_x+ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X), cal_pos_y+ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y),true);
+        }else{
+            HardwareInterface::getInstance()->move_to_postion_mm_absolute(cal_pos_x, cal_pos_y,true);
+		}
+
 	}
 	else if (ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_MVDOWN && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
 		LOG_F(WARNING, "CALIBRATION SCREEN - DOWN");
 		//MOVE TO NEW POSITION
-		cal_pos_y -= 5;
-		HardwareInterface::getInstance()->move_to_postion_mm_absolute(cal_pos_x, cal_pos_y,true);
+		cal_pos_y -= cal_move_step;
+        //WORKAROUND FOR A8
+        if(cal_move == 1){
+            HardwareInterface::getInstance()->move_to_postion_mm_absolute(cal_pos_x+ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X), cal_pos_y+ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y),true);
+        }else{
+            HardwareInterface::getInstance()->move_to_postion_mm_absolute(cal_pos_x, cal_pos_y,true);
+        }
 	}else if(ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_MVLEFT && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
 			LOG_F(WARNING, "CALIBRATION SCREEN - LEFT");
 			//MOVE TO NEW POSITION
-			cal_pos_x += 5;
-			HardwareInterface::getInstance()->move_to_postion_mm_absolute(cal_pos_x, cal_pos_y,true);
+			cal_pos_x += cal_move_step;
+        //WORKAROUND FOR A8
+        if(cal_move == 1){
+            HardwareInterface::getInstance()->move_to_postion_mm_absolute(cal_pos_x+ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X), cal_pos_y+ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y),true);
+        }else{
+            HardwareInterface::getInstance()->move_to_postion_mm_absolute(cal_pos_x, cal_pos_y,true);
+        }
 	}else if(ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_MVRIGHT && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
 			LOG_F(WARNING, "CALIBRATION SCREEN - RIGHT");
 			//MOVE TO NEW POSITION
-			cal_pos_x -= 5;
+			cal_pos_x -= cal_move_step;
 
-			HardwareInterface::getInstance()->move_to_postion_mm_absolute(cal_pos_x, cal_pos_y,true);
+        //WORKAROUND FOR A8
+        if(cal_move == 1){
+            HardwareInterface::getInstance()->move_to_postion_mm_absolute(cal_pos_x+ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X), cal_pos_y+ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y),true);
+        }else{
+            HardwareInterface::getInstance()->move_to_postion_mm_absolute(cal_pos_x, cal_pos_y,true);
+        }
 	}
 	
 		
@@ -1034,32 +1104,48 @@ int main(int argc, char *argv[])
 		LOG_F(WARNING, "CALIBRATION SCREEN - SAVE");
         HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, false);
         HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, false);
+
+        //INVALID SAVE COMMAND
 		if (cal_move == -1)
 		{
 
 			gui.show_error_message_on_gui("CALIBRATION SAVE FAILED -> PLEASE SELECT CONRNER");
 
-		}
-		else if (cal_move == 0) //CAL MOVE H1
-			{
+		//SAVE H1
+		}else if (cal_move == 0){
 				ConfigParser::getInstance()->setInt(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X, cal_pos_x, CONFIG_FILE_PATH);
 				ConfigParser::getInstance()->setInt(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y, cal_pos_y, CONFIG_FILE_PATH);
 				gui.show_error_message_on_gui("CALIBRATION SAVED FOR H1");
-                LOG_F(INFO, "CALIBRATION SAVED FOR H1");
+                LOG_F(INFO, "CALIBRATION SAVED FOR H1 H1_OFFSET_MM_X %i H1_OFFSET_MM_Y %i", cal_pos_x,cal_pos_y);
+        //SAVE A8
+		}else if (cal_move == 1){
 
-			}
-		else if (cal_move == 1)
-		{
-			const int tmp_cal_pos_x = ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X);
-			const int tmp_cal_pos_y = ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y);
-			cal_pos_x = (cal_pos_x - tmp_cal_pos_x) / 8;
-			cal_pos_y = (cal_pos_y - tmp_cal_pos_y) / 8;
+		    //ONLY DIV 7 DUE 8 but only 7 moves from a1->a8 or a1->h1
+		    cal_pos_x = cal_pos_x / (8-1);
+			cal_pos_y = cal_pos_y / (8-1);
 			const int cal_res = (cal_pos_y + cal_pos_x) / 2;
+			const int board_size = cal_res * 8;
 			ConfigParser::getInstance()->setInt(ConfigParser::CFG_ENTRY::MECHANIC_CHESS_FIELD_WIDTH, cal_res, CONFIG_FILE_PATH); //WRITE FIELD WIDTH
-			ConfigParser::getInstance()->setInt(ConfigParser::CFG_ENTRY::MECHANIC_CHESS_BOARD_WIDTH, cal_res*8, CONFIG_FILE_PATH); //= FW*8 WRITE BOARD WITH = NEEDED FOR ChessBoardClass
+			ConfigParser::getInstance()->setInt(ConfigParser::CFG_ENTRY::MECHANIC_CHESS_BOARD_WIDTH, board_size, CONFIG_FILE_PATH); //= FW*8 WRITE BOARD WITH = NEEDED FOR ChessBoardClass
 			gui.show_error_message_on_gui("CALIBRATION SAVED FOR A8");
-            LOG_F(INFO, "CALIBRATION SAVED FOR A8");
-		}
+            LOG_F(INFO, "CALIBRATION SAVED FOR A8 FILED_WIDTH %i, BOARD_WIDTH %i", cal_res,board_size);
+
+            //SAVE PARKPOS BLACK 1 => LINE OFFSET X AND START
+		}else if(cal_move == 2){
+
+            ConfigParser::getInstance()->setInt(ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_BLACK_X_LINE, cal_pos_x, CONFIG_FILE_PATH);
+            ConfigParser::getInstance()->setInt(ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_BLACK_FIRST_Y_OFFSET, cal_pos_y, CONFIG_FILE_PATH);
+            gui.show_error_message_on_gui("CALIBRATION SAVED FOR PARK POSITION BLACK 1");
+            LOG_F(INFO, "CALIBRATION SAVED FOR PARK POS BLACK 1 MECHANIC_PARK_POS_BLACK_X_LINE %i MECHANIC_PARK_POS_BLACK_FIRST_Y_OFFSET %i", cal_pos_x,cal_pos_y);
+
+        //SAVE PARKPOS WHITE 1 => LINE OFFSET X AND START
+        }else if(cal_move == 3){
+            ConfigParser::getInstance()->setInt(ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_WHITE_X_LINE, cal_pos_x, CONFIG_FILE_PATH);
+            ConfigParser::getInstance()->setInt(ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_WHITE_FIRST_Y_OFFSET, cal_pos_y, CONFIG_FILE_PATH);
+            gui.show_error_message_on_gui("CALIBRATION SAVED FOR PARK POSITION WHITE 1");
+            LOG_F(INFO, "CALIBRATION SAVED FOR PARK POS WHITE 1 MECHANIC_PARK_POS_WHITE_X_LINE %i MECHANIC_PARK_POS_WHITE_FIRST_Y_OFFSET %i", cal_pos_x,cal_pos_y);
+        }
+
 		//WRITE CONFIG TO FILE
 		ConfigParser::getInstance()->writeConfigFile(CONFIG_FILE_PATH);
 		//RESET CAL MENU	
