@@ -255,7 +255,7 @@
 
   var log_data = {}
   function show_log(_logid){
-  $("#log_area").val(log_data[_logid]);
+  $("#log_area").val(JSON.stringify(log_data[_logid]));
   }
 
   //LOADS MORE INFORMATION ABOUT A SPECIFIC GAME ID
