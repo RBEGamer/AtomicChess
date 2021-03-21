@@ -477,3 +477,7 @@ void MenuManager::cal_ppwhite1_btn(){
 void MenuManager::cal_ppblack1_btn(){
      guiconnection.createEvent(guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_PPBLACK1, guicommunicator::GUI_VALUE_TYPE::CLICKED);
 }
+
+void MenuManager::cal_ppblack16_btn(){
+    guiconnection.createEvent(guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_PPBLACK16, guicommunicator::GUI_VALUE_TYPE::CLICKED);
+}

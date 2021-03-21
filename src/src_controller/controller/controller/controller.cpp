@@ -1049,8 +1049,30 @@ int main(int argc, char *argv[])
         cal_pos_y = ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_WHITE_FIRST_Y_OFFSET);
         HardwareInterface::getInstance()->move_to_postion_mm_absolute(cal_pos_x, cal_pos_y,true);
 
+    }else if(ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_PPBLACK16 && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
+        cal_move = 4;
+        cal_move_step = 2; //SET USER ARROW KEY TO 2mm PER PRESS
+        LOG_F(WARNING, "CALIBRATION SCREEN -PARK POSITION BLACK 16");
+        //MOVE HOME POS
+        HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, false);
+        HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, false);
+        HardwareInterface::getInstance()->home_sync();
+        //MOVE H1
+        HardwareInterface::getInstance()->move_to_postion_mm_absolute(ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X), ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y),true);
+        //ENABLE COIL FOR RIGHT SITE
+        HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, true);
+        //MOVE TO PARK POS BLACK 16
+        cal_pos_y = ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_BLACK_FIRST_Y_OFFSET);
+        //GET THE Y POSITION OF THE 16th PARK POS
+        cal_pos_y += (16-1)*ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_CELL_SIZE);
 
-
+        //FIRST MOVE TO PP BLACK 16 BEFORE ENTRY
+        cal_pos_x = ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_BLACK_X_LINE);
+        cal_pos_x = ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_CELL_BEFORE_OFFSET);
+        HardwareInterface::getInstance()->move_to_postion_mm_absolute(cal_pos_x, cal_pos_y,true);
+        //THEN INTO THE PARK POSITION
+        cal_pos_x = ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_BLACK_X_LINE);
+        HardwareInterface::getInstance()->move_to_postion_mm_absolute(cal_pos_x, cal_pos_y,true);
 
 	}else if (ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_MVUP && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
 		LOG_F(WARNING, "CALIBRATION SCREEN - UP");
@@ -1143,6 +1165,18 @@ int main(int argc, char *argv[])
             ConfigParser::getInstance()->setInt(ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_WHITE_X_LINE, cal_pos_x, CONFIG_FILE_PATH);
             ConfigParser::getInstance()->setInt(ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_WHITE_FIRST_Y_OFFSET, cal_pos_y, CONFIG_FILE_PATH);
             gui.show_error_message_on_gui("CALIBRATION SAVED FOR PARK POSITION WHITE 1");
+            LOG_F(INFO, "CALIBRATION SAVED FOR PARK POS WHITE 1 MECHANIC_PARK_POS_WHITE_X_LINE %i MECHANIC_PARK_POS_WHITE_FIRST_Y_OFFSET %i", cal_pos_x,cal_pos_y);
+
+
+        }else if(cal_move == 4){
+		    //INTS ONLY NEEDED FOR ONE SITE BECAUSE THE WHITE PARK POS ARE THE SAME DIMENSIONS
+            //GET OFFSET FROM FIRST CELL
+            const int first_park_cell_offset = ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_BLACK_FIRST_Y_OFFSET);
+            //CALC PARK POS CELL POS
+            const int park_positions_length = (cal_pos_y - first_park_cell_offset) / (16-1);
+            //SAVE PARK POS CELL OFFSET
+            ConfigParser::getInstance()->setInt(ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_CELL_SIZE, park_positions_length, CONFIG_FILE_PATH);
+            gui.show_error_message_on_gui("CALIBRATION SAVED FOR PARK POSITION CELL SIZE");
             LOG_F(INFO, "CALIBRATION SAVED FOR PARK POS WHITE 1 MECHANIC_PARK_POS_WHITE_X_LINE %i MECHANIC_PARK_POS_WHITE_FIRST_Y_OFFSET %i", cal_pos_x,cal_pos_y);
         }
 
