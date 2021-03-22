@@ -248,7 +248,10 @@ void ConfigParser::loadDefaults(std::string _type_str)
 		config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_B_INDEX] = "1";
 		config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_BOTTOM_POS] = "0";
 		config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_UPPER_POS] = "115";
-	
+
+        config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_RESET_EEPROM_TO_DEFAULT_DURING_STARTUP] = "0";
+
+
 		config_store[ConfigParser::CFG_ENTRY::USER_GENERAL_ENABLE_RANDOM_MOVE_MATCH] = "0";
 		config_store[ConfigParser::CFG_ENTRY::USER_GENERAL_ENABLE_AUTO_MATCHMAKING_ENABLE] = "0";
 		config_store[ConfigParser::CFG_ENTRY::USER_GENERAL_ENABLE_AUTOLOGIN] = "1";
@@ -296,13 +299,15 @@ void ConfigParser::loadDefaults(std::string _type_str)
 		config_store[ConfigParser::CFG_ENTRY::BOARD_PRESET_START_POSITION_FEN] = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 	
 		config_store[ConfigParser::CFG_ENTRY::HWARDWARE_REVISION] = "PROD_V1";
-		config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_BOARD_SERIAL_PORT] = "/dev/ttyACM0";
+		config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_BOARD_SERIAL_PORT] = "/dev/ttySKR";
 		config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_BOARD_SERIAL_BAUD] = "115200";
 		config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_A_INDEX] = "0";
 		config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_B_INDEX] = "1";
 		config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_BOTTOM_POS] = "0";
 		config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_UPPER_POS] = "115";
-	
+        config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_RESET_EEPROM_TO_DEFAULT_DURING_STARTUP] = "1";
+
+
 		config_store[ConfigParser::CFG_ENTRY::USER_GENERAL_ENABLE_RANDOM_MOVE_MATCH] = "0";
 		config_store[ConfigParser::CFG_ENTRY::USER_GENERAL_ENABLE_AUTO_MATCHMAKING_ENABLE] = "0";
 		config_store[ConfigParser::CFG_ENTRY::USER_GENERAL_ENABLE_AUTOLOGIN] = "1";
@@ -351,12 +356,14 @@ void ConfigParser::loadDefaults(std::string _type_str)
         config_store[ConfigParser::CFG_ENTRY::BOARD_PRESET_START_POSITION_FEN] = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
         config_store[ConfigParser::CFG_ENTRY::HWARDWARE_REVISION] = "PROD_V2";
-        config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_BOARD_SERIAL_PORT] = "/dev/ttyACM0";
+        config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_BOARD_SERIAL_PORT] = "/dev/ttySKR";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_BOARD_SERIAL_BAUD] = "115200";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_A_INDEX] = "0";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_B_INDEX] = "1";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_BOTTOM_POS] = "0";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_UPPER_POS] = "115";
+        config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_RESET_EEPROM_TO_DEFAULT_DURING_STARTUP] = "1";
+
 
         config_store[ConfigParser::CFG_ENTRY::USER_GENERAL_ENABLE_RANDOM_MOVE_MATCH] = "0";
         config_store[ConfigParser::CFG_ENTRY::USER_GENERAL_ENABLE_AUTO_MATCHMAKING_ENABLE] = "0";

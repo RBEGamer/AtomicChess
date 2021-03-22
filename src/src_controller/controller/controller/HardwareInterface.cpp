@@ -104,6 +104,15 @@ bool HardwareInterface::init_hardware(HardwareInterface::HI_HARDWARE_REVISION _h
 			int baud = 115200;
 			ConfigParser::getInstance()->getInt(ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_BOARD_SERIAL_BAUD, baud);
 			gcode_interface = new GCodeSender(ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_BOARD_SERIAL_PORT), baud);
+
+
+			//REST EEPROM IF SET
+			if(ConfigParser::getInstance()->getBool_nocheck(ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_RESET_EEPROM_TO_DEFAULT_DURING_STARTUP)){
+                gcode_interface->reset_eeprom();
+                LOG_F(INFO, "HardwareInterface::init_hardware RESET EEPROM TO DEFAULT");
+			}
+
+
 			gcode_interface->configure_marlin();  //CONFIGURE MARLIN FOR STARTUP
 			setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, false);
 			setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, false);

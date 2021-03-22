@@ -305,6 +305,10 @@ void GCodeSender::disable_motors() {
 	write_gcode("M84");     //DISBBLE MOTOR
 }
 
+void GCodeSender::reset_eeprom(){
+    write_gcode("M502"); // RESET DEFAULTS
+    write_gcode("M500"); // STORE NEW VALUES
+}
 bool GCodeSender::set_steps_per_mm(int _x, int _y){
     //M92 X100 Y100
     if(_x < 0){

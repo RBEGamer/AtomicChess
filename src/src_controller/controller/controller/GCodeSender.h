@@ -32,6 +32,7 @@ public:
 	bool is_target_position_reached();
 	void move_to_postion_mm_absolute(int _x, int _y, bool _blocking);
 	void move_to_postion_mm_absolute(int _x, int _y); //JUST FOR CONVENIENCE 	CALLS => void move_to_postion_mm_absolute(int _x, int _y, bool _blocking);
+	void reset_eeprom();//RESETS THE INTERNAL EEPROM TO FIRMWARE DEFAULTS //IS A BUGFIX OF UNCONTROLLED BEHAVIOR OG THE MARLIN CONTROLLER
 	void home_sync();
 	void set_speed_preset(int _feedrate);
 
