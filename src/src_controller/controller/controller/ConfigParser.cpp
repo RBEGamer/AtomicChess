@@ -383,7 +383,7 @@ void ConfigParser::loadDefaults(std::string _type_str)
 void ConfigParser::set(ConfigParser::CFG_ENTRY _entry, std::string _value, std::string _conf_file_path)
 {
 
-    LOG_F(INFO,"ConfigParser::set UPDATE CONFIG ENTRY %s", _value.c_str(), std::string(magic_enum::enum_name(_entry)).c_str());
+    LOG_F(INFO,"ConfigParser::set UPDATE CONFIG ENTRY %s, %s", _value.c_str(), std::string(magic_enum::enum_name(_entry)).c_str());
 	config_store[_entry] = _value;
 	
 	if (!_conf_file_path.empty())
@@ -464,6 +464,7 @@ bool ConfigParser::getBool_nocheck(ConfigParser::CFG_ENTRY _entry)
 	bool tmp = false;
 	if (!getBool(_entry, tmp))
 	{
+        LOG_F(INFO,"ConfigParser::getBool_nocheck ERROR READ KEY FAILED%s", std::string(magic_enum::enum_name(_entry)).c_str());
 		return false;
 	}
 		
@@ -474,6 +475,7 @@ int ConfigParser::getInt_nocheck(ConfigParser::CFG_ENTRY _entry)
 {
 	int ret = 0;
 	if (getInt(_entry,ret)) {
+        LOG_F(INFO,"ConfigParser::getInt_nocheck ERROR READ KEY FAILED%s", std::string(magic_enum::enum_name(_entry)).c_str());
 		return ret;
 	}
 	return 0;
