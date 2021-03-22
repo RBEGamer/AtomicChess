@@ -6,18 +6,14 @@ GCodeSender::GCodeSender(std::string _serialport_file, int _baud)
 	LOG_SCOPE_F(INFO, "GCodeSender::GCodeSender");
 	if (_serialport_file.empty())
 	{
-		
-		LOG_F(ERROR, "serial port _serialport_file is empty");
+		LOG_F(ERROR, "serial port _serialport_file is empty %s", _serialport_file.c_str());
 		return;
 	}
-		
+	//OPEN SERIAL PORT
 	if (port == nullptr)
 	{
-		
 		port = new serialib();
 		init_serial_port(_serialport_file, _baud);
-		
-		
 	}
 }
 
@@ -108,13 +104,13 @@ bool GCodeSender::init_serial_port(std::string _serial_port_file, int _baud_rate
 	}
 	if (_baud_rate <= 0 || !check_baud_rate(_baud_rate))
 	{
-		LOG_F(ERROR, "serial port baudrate is invalid");
+		LOG_F(ERROR, "serial port baudrate is invalid %i", _baud_rate);
 		return false;
 	}
 	//configure serialport though 3rd party lib
 	close_serial_port();     //CLOSE PORT IF OPEN
 	if(port->openDevice(_serial_port_file.c_str(), _baud_rate) != 1) {
-		LOG_F(ERROR, "serial port open failed");
+		LOG_F(ERROR, "serial port open failed %s WITH BAUD %i",_serial_port_file.c_str(),_baud_rate);
 	}
 	//ENABLE RESET
 	port->DTR(false);
@@ -126,7 +122,7 @@ bool GCodeSender::init_serial_port(std::string _serial_port_file, int _baud_rate
 	port->DTR(true);
 	port->RTS(false);
 	
-	
+	//READ MAY EXISITNG BUFFER => IGNORING MARLIN CONNECTION INFO LIKE Printer Online,...
 	dummy_read();
 
 	
@@ -337,7 +333,7 @@ void GCodeSender::move_to_postion_mm_absolute(int _x, int _y, bool _blocking) {
 	current_pos_y = _y;
 
 	if (_blocking) {
-		write_gcode("M400");      //HOME AXIS
+		write_gcode("M400");      //WAIT FOR PREV MOVE COMMAND FINISHED
 		//is_target_position_reached();
 	}
 	

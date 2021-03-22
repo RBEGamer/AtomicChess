@@ -122,6 +122,7 @@ ConfigParser* ConfigParser::getInstance()
 	
 bool ConfigParser::loadConfigFile(std::string _file)
 {
+    LOG_F(INFO,"onfigParser::loadConfigFile WITH FILE %s", _file.c_str());
 	//PARSE GIVEN INI FILE
 	reader = INIReader(_file);
 	if (reader.ParseError() != 0)
@@ -154,6 +155,7 @@ bool ConfigParser::loadConfigFile(std::string _file)
 
 bool ConfigParser::writeConfigFile(std::string _file)
 {
+    LOG_F(INFO,"onfigParser::writeConfigfile save into %s", _file.c_str());
 	//OPEN TEXT FILE
 	std::ofstream myfile;
 	myfile.open(_file.c_str());
@@ -200,6 +202,9 @@ bool ConfigParser::writeConfigFile(std::string _file)
 
 void ConfigParser::loadDefaults(std::string _type_str)
 {
+
+    LOG_F(INFO,"ConfigParser::loadDefaults FOR CONFIG %s", _type_str.c_str());
+
 	if (_type_str == "DK")
 	{
 		config_store[ConfigParser::CFG_ENTRY::NETWORK_BACKEND_URL] = "http://atomicchess.de:3000";
@@ -377,6 +382,8 @@ void ConfigParser::loadDefaults(std::string _type_str)
 
 void ConfigParser::set(ConfigParser::CFG_ENTRY _entry, std::string _value, std::string _conf_file_path)
 {
+
+    LOG_F(INFO,"ConfigParser::set UPDATE CONFIG ENTRY %s", _value.c_str(), std::string(magic_enum::enum_name(_entry)).c_str());
 	config_store[_entry] = _value;
 	
 	if (!_conf_file_path.empty())

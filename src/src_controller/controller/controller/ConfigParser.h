@@ -9,6 +9,7 @@
 #include <map>
 
 ///INCLUDE 3rd PARTY
+#include "SHARED/loguru-master/loguru.hpp"
 #include "SHARED/inih-master/INIReader.h"
 #include "SHARED/magic_enum-master/include/magic_enum.hpp"
 #include "SHARED/json11-master/json11.hpp"

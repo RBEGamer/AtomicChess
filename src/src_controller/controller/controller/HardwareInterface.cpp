@@ -44,6 +44,7 @@ HardwareInterface::HardwareInterface()
 
 bool HardwareInterface::init_hardware(HardwareInterface::HI_HARDWARE_REVISION _hwrev)
 {
+    LOG_F(INFO, "HardwareInterface::init_hardware");
 	if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_DK)
 	{
 		//MOTOR SETUP
