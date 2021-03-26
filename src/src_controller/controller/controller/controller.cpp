@@ -291,7 +291,6 @@ int main(int argc, char *argv[])
 	if (cmdOptionExists(argv, argv + argc, "-autoplayer"))
 	{
 		LOG_F(WARNING, "ARGUMENT -autoplayer SET");
-		//TODO
 		ConfigParser::getInstance()->set(ConfigParser::CFG_ENTRY::GENERAL_ENABLE_RANDOM_MOVE_MATCH, "1", CONFIG_FILE_PATH);
 	}
 	

@@ -103,7 +103,8 @@ void guicommunicator::createEvent(GUI_ELEMENT _event, GUI_VALUE_TYPE _type, std:
 	{
 		//MAKE REQUEST
 		httplib::Client cli(EVENT_URL_COMPLETE);
-		if(auto res = cli.Post(EVENT_URL_SETEVENT,tmp,"application/json")) {
+		httplib::Result res = cli.Post(EVENT_URL_SETEVENT,tmp,"application/json");
+		if(res && res->status >= 200 && res->status < 300) {
         const int status_code = res->status;
         //CHECK STATUS CODE 200 IS VALID
         const std::string body = res->body;
@@ -115,10 +116,7 @@ void guicommunicator::createEvent(GUI_ELEMENT _event, GUI_VALUE_TYPE _type, std:
     //MAKE REQUEST TO THE WEBAPPLICATION
     //httplib::Client cli(EVENT_URL_COMPLETE_WEBGL);
     //cli.Post(EVENT_URL_SETEVENT, tmp, "application/json");
-
-
-
-#endif
+	#endif
 }
 
 
@@ -242,7 +240,7 @@ bool guicommunicator::check_guicommunicator_version() {
 	httplib::Client cli(EVENT_URL_COMPLETE);
 
 	httplib::Result res =  cli.Get(EVENT_URL_VERSION);
-	if (GUICOMMUNICATOR_VERSION == res->body) {
+	if (res && res->status >= 200 && res->status < 300 && GUICOMMUNICATOR_VERSION == res->body) {
 		debug_output("CHECK VERSION OK");
 		debug_output("GOT:" + res->body + " REQUIRED:" + GUICOMMUNICATOR_VERSION);
 		return true;
@@ -262,7 +260,7 @@ bool guicommunicator::check_guicommunicator_reachable() {
 		
 	httplib::Client cli(EVENT_URL_COMPLETE);
 	httplib::Result res =  cli.Get(EVENT_URL_VERSION);
-	if (res->status >= 200 && res->status < 300) {
+	if (res && res->status >= 200 && res->status < 300) {
 		debug_output("CHECK check_guicommunicator_reachable OK");
 		return true;
 	}

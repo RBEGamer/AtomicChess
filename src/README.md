@@ -15,4 +15,4 @@
 * src_thesis => Contains the thesis document and a thesis publishing server
 * src_unitychesssimulation => Contains a chess figure movement algorithm playground, made in Unity
 * src_misc => Contains several other files / config files
-
+* src_chessboardcomaprealgorithm => Contains a c++ projekt for testing the chess board compare algorithm. Its just a playground

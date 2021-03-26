@@ -1,0 +1,3 @@
+/home/prodevmo/Desktop/AtomiChessOS_/src/src_chessboardcomaprealgorithm/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/prodevmo/Desktop/AtomiChessOS_/src/src_chessboardcomaprealgorithm/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/prodevmo/Desktop/AtomiChessOS_/src/src_chessboardcomaprealgorithm/cmake-build-debug/CMakeFiles/src_chessboardcomaprealgorithm.dir
