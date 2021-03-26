@@ -301,7 +301,7 @@ bool BackendConnector::set_player_setup_confirmation(PLAYER_SETUP_STATE _state)
 {
 	int state_index = magic_enum::enum_integer(_state);
 	request_result tmp = make_request(URL_SET_PLAYER_SETUP_CONFIRMATION + "?hwid=" + hwid + "&sid=" + session_id + "&state=" + std::to_string(state_index));
-	if (!tmp.body.empty())
+	if (!tmp.request_failed && !tmp.body.empty())
 	{
 		//PARSE JSON
 		std::string jp_err = "";
@@ -322,7 +322,7 @@ bool BackendConnector::set_player_setup_confirmation(PLAYER_SETUP_STATE _state)
 bool BackendConnector::set_make_move(std::string _move)
 {
 	request_result tmp = make_request(URL_SET_MAKE_MOVE + "?hwid=" + hwid + "&sid=" + session_id + "&move=" + _move);
-	if (!tmp.body.empty())
+	if (!tmp.request_failed && !tmp.body.empty())
 	{
 		//PARSE JSON
 		std::string jp_err = "";
@@ -342,7 +342,7 @@ bool BackendConnector::set_make_move(std::string _move)
 bool BackendConnector::set_abort_game()
 {
 	request_result tmp = make_request(URL_ABORT_GAME + "?hwid=" + hwid + "&sid=" + session_id);
-	if (!tmp.body.empty())
+	if (!tmp.request_failed && !tmp.body.empty())
 	{
 		//PARSE JSON
 		std::string jp_err = "";
@@ -365,7 +365,7 @@ bool BackendConnector::set_player_state(PLAYER_STATE _ps)
 	
 	
 	request_result tmp = make_request(URL_SET_PLAYER_VISIBLE_STATE + "?hwid=" + hwid + "&sid=" + session_id + "&ps=" + std::to_string(ps_index));
-	if (!tmp.body.empty())
+	if (!tmp.body.empty() && !tmp.request_failed)
 	{
 		//PARSE JSON
 		std::string jp_err = "";
@@ -381,6 +381,7 @@ bool BackendConnector::set_player_state(PLAYER_STATE _ps)
 	return false;
 }
 
+///GET REQUEST
 BackendConnector::request_result BackendConnector::make_request(std::string _url_path)
 {
 	//PORT AND PROTOCOL IS ALREADY INCLUDED IN BASE URL LIKE http://127.0.0.1:3000
@@ -402,20 +403,23 @@ BackendConnector::request_result BackendConnector::make_request(std::string _url
 	req_res.uri =  backend_base_url + _url_path;
 	req_res.request_failed = false;
 	//PERFORM REQUEST
-	if(auto res = cli.Get(_url_path.c_str())) {
+    httplib::Result res = cli.Get(_url_path.c_str());
+    if(res && res->status >= 200 && res->status < 300) {
 		req_res.status_code = res->status;
 		//CHECK STATUS CODE 200 IS VALID
-			req_res.body = res->body;
+		req_res.body = res->body;
+		req_res.request_failed = false;
 	}
 	else {
 		req_res.error = res.error();
 		req_res.request_failed = true;
+        req_res.body = "";
 	}
 	
 	return req_res;
 }
 
-
+///POST REQUEST
 BackendConnector::request_result BackendConnector::make_request_post(std::string _url_path, std::string _post_body_json_data)
 {
     //PORT AND PROTOCOL IS ALREADY INCLUDED IN BASE URL LIKE http://127.0.0.1:3000
@@ -437,14 +441,16 @@ BackendConnector::request_result BackendConnector::make_request_post(std::string
     req_res.uri =  backend_base_url + _url_path;
     req_res.request_failed = false;
     //PERFORM REQUEST
-    if(auto res = cli.Post(_url_path.c_str(),_post_body_json_data,"application/json")) {
+    httplib::Result res = cli.Post(_url_path.c_str(),_post_body_json_data,"application/json");
+    if(res && res->status >= 200 && res->status < 300) {
         req_res.status_code = res->status;
-        //CHECK STATUS CODE 200 IS VALID
         req_res.body = res->body;
+        req_res.request_failed = false;
     }
     else {
         req_res.error = res.error();
         req_res.request_failed = true;
+        req_res.body = "";
     }
 
     return req_res;
@@ -471,10 +477,12 @@ BackendConnector::request_result BackendConnector::make_request_post_raw(std::st
 	req_res.uri =  backend_base_url + _url_path;
 	req_res.request_failed = false;
 	//PERFORM REQUEST
-	if(auto res = cli.Post(_url_path.c_str(), _post_body_json_data, "text/plain")) {
+    httplib::Result res = cli.Post(_url_path.c_str(), _post_body_json_data, "text/plain");
+    if(res && res->status >= 200 && res->status < 300) {
 		req_res.status_code = res->status;
 		//CHECK STATUS CODE 200 IS VALID
 		req_res.body = res->body;
+		req_res.request_failed = false;
 	}
 	else {
 		req_res.error = res.error();
@@ -483,6 +491,7 @@ BackendConnector::request_result BackendConnector::make_request_post_raw(std::st
 
 	return req_res;
 }
+
 void BackendConnector::set_backend_base_url(std::string _url)
 {
 	backend_base_url = _url;
@@ -502,7 +511,7 @@ BackendConnector::PLAYER_PROFILE BackendConnector::getPlayerProfile()
 bool BackendConnector::check_connection()
 {
 	request_result tmp = make_request(URL_CONNECTION_CHECK);
-	if (!tmp.body.empty())
+	if (!tmp.body.empty() && !tmp.request_failed)
 	{
 		//PARSE JSON
 		std::string jp_err = "";
@@ -701,7 +710,7 @@ bool BackendConnector::get_heartbeat(BackendConnector::HB_THREAD_DATA _data)
 	}
 		
 	request_result tmp = make_request(URL_HEARTBEAT + "?hwid=" + _data.hwid + "&sid=" + _data.sid);
-	if (!tmp.body.empty())
+	if (!tmp.body.empty() && !tmp.request_failed)
 	{
 		//PARSE JSON
 		std::string jp_err = "";
