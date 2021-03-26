@@ -21,6 +21,26 @@ Simply copy the .bin file to the SD Card of the board, or via the USB mount.
 * SKR1.3 => ./SKR_V1.3_BOARD_FIRMWARE/BTT SKR V1.3/firmware/Marlin-bugfix-2.0.x
 * SKR1.4_TURBO=> ./SKR_V1.4_BOARD_FIRMWARE/BTT SKR V1.4/firmware/Marlin-2.0.x-SKR-V1.4-Turbo/
 
+# USED GCODE COMMAND
+
+The controller software uses the following GCode commands. Some are optional for example the M150 command that setup the RGB Strip.
+
+## REQUIRED COMMANDS
+* `G21`
+* `G90`
+* `G28`
+* `M280`
+* `G0`
+* `M400`
+
+## OPTIONAL COMMANDS
+
+* `M84`
+* `M502`
+* `M500`
+* `M92`
+* `M150`
+
 
 # IMPORTANT CONFIGRATION SETTINGS
 
