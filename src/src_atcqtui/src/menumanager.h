@@ -50,7 +50,7 @@ public slots:
     void sm_logout_btn();
     void sm_scan_board_btn();
     void ss_calboard_btn();
-
+    void ss_solcal_btn();
 
     //----- GENERAL ----//
     void go_menu_back();
@@ -91,6 +91,13 @@ public slots:
     void cal_ppwhite1_btn();
     void cal_ppblack16_btn();
     void cal_ppblack1_btn();
+
+
+    void solcal_bottom_pos();
+    void solcal_up_pos();
+    void solcal_save();
+    void solcal_mvup();
+    void solcal_mvdonw();
 
 private:
     void show_error(QString _err);

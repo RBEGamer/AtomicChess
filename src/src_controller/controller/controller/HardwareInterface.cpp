@@ -210,7 +210,7 @@ bool HardwareInterface::setCoilState(HI_COIL _coil, bool _state)
 	{
 		//MORE LOGIC NEEDED HERE
 		//IT DEPENDS ON THE ONFIGURATION OF MARLIN WHICH INDEX THE SERVOS HAVE TO WE NEED TO LOAD IT FROM THE CONFIG FIRST
-		if(_coil == HardwareInterface::HI_COIL::HI_COIL_A)
+		if(_coil == HardwareInterface::HI_COIL::HI_COIL_A || _coil == HardwareInterface::HI_COIL::HI_COIL_B)
 		{
 			if (_state)
 			{
@@ -220,15 +220,7 @@ bool HardwareInterface::setCoilState(HI_COIL _coil, bool _state)
 			{
 				gcode_interface->setServo(ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_A_INDEX), ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_BOTTOM_POS));	
 			}
-		}else if(_coil == HardwareInterface::HI_COIL::HI_COIL_B) {
-			if (_state)
-			{
-				gcode_interface->setServo(ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_B_INDEX), ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_UPPER_POS));	
-			}
-			else
-			{
-				gcode_interface->setServo(ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_B_INDEX), ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_BOTTOM_POS));	
-			}
+
 		}
 	}
 	return true;
@@ -328,6 +320,13 @@ bool HardwareInterface::is_target_position_reached()
 	
 void HardwareInterface::move_to_postion_mm_absolute(int _x, int _y, bool _blocking)
 {
+    //CHECK FOR SWITCH X Y AXIS
+    if(ConfigParser::getInstance()->getBool_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_FEEDRATE_SIWTHC_XY_AXIS)){
+        const int tmp = _x;
+        _y = _x;
+        _x = tmp;
+    }
+
 	if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_DK)
 	{
 		if (tmc5160_x != nullptr && tmc5160_y != nullptr)
@@ -374,13 +373,8 @@ void HardwareInterface::set_speed_preset(HardwareInterface::HI_TRAVEL_SPEED_PRES
 	{
 		if (tmc5160_x != nullptr && tmc5160_y != nullptr)
 		{
-
-
                 tmc5160_x->atc_set_speed_preset(static_cast<TMC5160::TRAVEL_SPEED_PRESET>(_preset));
                 tmc5160_y->atc_set_speed_preset(static_cast<TMC5160::TRAVEL_SPEED_PRESET>(_preset));
-
-
-
 		}
 			
 	}
@@ -388,15 +382,16 @@ void HardwareInterface::set_speed_preset(HardwareInterface::HI_TRAVEL_SPEED_PRES
 	{
 		if (gcode_interface != nullptr)
 		{
-
+            //LOAD FEEDRATE FROM CONFIG
 		    int fr_move = ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_FEEDRATE_MOVE);
 		    int fr_travel = ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_FEEDRATE_TRAVEL);
-            //CHECK
+            //CHECK FOR FEEDRATE
 		    if(fr_move <= 0 || fr_travel <= 0){
                 fr_move = 100;
                 fr_travel = 100;
                 LOG_F(ERROR,"cant set speed_preset to fr_move %i or fr_travel %i USING DEFAULT OF 100 FOR BOTH",fr_move,fr_travel);
 		    }
+		    //WRITE FEEDRATE TO CONTROLLER MARLIN
 			switch (_preset)
 			{
 			case HardwareInterface::HI_TRAVEL_SPEED_PRESET::HI_TSP_MOVE : gcode_interface->set_speed_preset(fr_move); break; //MM per MINUTE

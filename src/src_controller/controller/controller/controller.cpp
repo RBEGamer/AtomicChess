@@ -64,6 +64,13 @@ int cal_pos_x = 0;
 int cal_pos_y = 0;
 int cal_move = -1; //-1 disbaled 0=h1 1=a8
 int cal_move_step = 5;
+
+
+//----- VARS FOR SOLANOID CALIBRATION SCREEN ---- //
+int solcal_move = -1; //-1 disbaled 0=upper pos 1=lower pos
+int solcal_pos = 0;
+
+
 //!Reads the system HWID File from the location
 std::string readHWID(std::string _file)
 {
@@ -833,7 +840,7 @@ int main(int argc, char *argv[])
 	//----------------DEBUG - LOAD CONFIG BUTTON--------------
 	//--------------------------------------------------------
 	if(ev.event == guicommunicator::GUI_ELEMENT::DEBUG_FUNCTION_D && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
-		gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK, "G5 -> A2", 10000);
+
 		std::string test_text = "";
 		board.test_make_move_static();
 		gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::DEBUG_SCREEN);
@@ -993,9 +1000,7 @@ int main(int argc, char *argv[])
 		//MOVE TO NEW H1 POSITION
         HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A,true);
 		HardwareInterface::getInstance()->move_to_postion_mm_absolute(cal_pos_x, cal_pos_y,true);
-        //DK WORKAROUND
-        HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, false);
-        HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, false);
+
 
 	}else if(ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_A8POS && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
             HardwareInterface::getInstance()->set_speed_preset(HardwareInterface::HI_TRAVEL_SPEED_PRESET::HI_TSP_MOVE);
@@ -1189,13 +1194,91 @@ int main(int argc, char *argv[])
 		ConfigParser::getInstance()->writeConfigFile(CONFIG_FILE_PATH);
 		//RESET CAL MENU	
 		cal_move = -1;
-
-			
 	}
-		
-}
-	
-	
+
+
+
+        //--------------------------------------------------------
+        //----------------SOLANOID CALIBRATION SCREEN ---------------------
+        //--------------------------------------------------------
+        if(ev.event == guicommunicator::GUI_ELEMENT::SOLANOIDSCREEN_UPPER_POS && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
+            HardwareInterface::getInstance()->set_speed_preset(HardwareInterface::HI_TRAVEL_SPEED_PRESET::HI_TSP_MOVE);
+            solcal_move = 0;
+
+            LOG_F(WARNING, "SOLANOID CALIBRATION SCREEN - MAGNET UPPER POSITION");
+            //MOVE HOME POS
+            HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, false);
+            HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, false);
+            HardwareInterface::getInstance()->home_sync();
+
+            HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, true);
+            HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, true);
+            //READ CONFIG VALUES
+            solcal_pos = ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_UPPER_POS);
+
+        }else if(ev.event == guicommunicator::GUI_ELEMENT::SOLANOIDSCREEN_BOTTOM_POS && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
+            HardwareInterface::getInstance()->set_speed_preset(HardwareInterface::HI_TRAVEL_SPEED_PRESET::HI_TSP_MOVE);
+            solcal_move = 1;
+
+            LOG_F(WARNING, "SOLANOID CALIBRATION SCREEN - MAGNET BOTTOM POSITION");
+            //MOVE HOME POS
+            //READ CONFIG VALUES
+            solcal_pos = ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_BOTTOM_POS);
+
+            HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, false);
+            HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, false);
+            HardwareInterface::getInstance()->home_sync();
+        }else if(ev.event == guicommunicator::GUI_ELEMENT::SOLANOIDSCREEN_MVUP && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
+            //INCREASE POSITION
+            solcal_pos += 5;
+            if(solcal_pos >= 255){
+                solcal_pos = 255;
+            }
+            LOG_F(WARNING, "SOLANOID CALIBRATION SCREEN - NEW POS %i FOR SOLANOID_MODE %i", solcal_pos,solcal_move);
+            //SAVE NEW VALUE AND WRITE NEW VALUE TO SERVO
+            /// WORKS ONLY ON PRODUCATION HARDWARE EQUIPPED WITH THE SERVO
+            if(solcal_move == 0 && HardwareInterface::getInstance()->is_production_hardware()){
+                ConfigParser::getInstance()->setInt(ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_UPPER_POS, solcal_pos, CONFIG_FILE_PATH);
+                HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, true);
+                HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, true);
+            }else if(solcal_move == 1 && HardwareInterface::getInstance()->is_production_hardware()){
+                ConfigParser::getInstance()->setInt(ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_BOTTOM_POS, solcal_pos, CONFIG_FILE_PATH);
+                HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, false);
+                HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, false);
+            }
+
+
+
+
+        }else if(ev.event == guicommunicator::GUI_ELEMENT::SOLANOIDSCREEN_MVDONW && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
+            //INCREASE POSITION
+            solcal_pos -= 5;
+            if(solcal_pos < 0){
+                solcal_pos = 0;
+            }
+            LOG_F(WARNING, "SOLANOID CALIBRATION SCREEN - NEW POS %i FOR SOLANOID_MODE %i", solcal_pos,solcal_move);
+            //SAVE NEW VALUE AND WRITE NEW VALUE TO SERVO
+            /// WORKS ONLY ON PRODUCATION HARDWARE EQUIPPED WITH THE SERVO
+            if(solcal_move == 0 && HardwareInterface::getInstance()->is_production_hardware()){
+                ConfigParser::getInstance()->setInt(ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_UPPER_POS, solcal_pos, CONFIG_FILE_PATH);
+                HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, true);
+                HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, true);
+            }else if(solcal_move == 1 && HardwareInterface::getInstance()->is_production_hardware()){
+                ConfigParser::getInstance()->setInt(ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_BOTTOM_POS, solcal_pos, CONFIG_FILE_PATH);
+                HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, false);
+                HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, false);
+            }
+
+
+
+        }
+
+    }
+
+        /*
+         * int solcal_move = -1; //-1 disbaled 0=upper pos 1=lower pos
+    int solcal_pos = 0;
+         */
 	
 	
 //UPLOAD LOGILES

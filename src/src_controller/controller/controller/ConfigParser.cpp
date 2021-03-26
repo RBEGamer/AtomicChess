@@ -242,6 +242,9 @@ void ConfigParser::loadDefaults(std::string _type_str)
         config_store[ConfigParser::CFG_ENTRY::MECHANIC_FEEDRATE_TRAVEL] = "-1"; //ON DK THIS OPTIONS ARE NOT SUPPORTED
         config_store[ConfigParser::CFG_ENTRY::MECHANIC_FEEDRATE_MOVE] = "-1";
 
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_FEEDRATE_SIWTHC_XY_AXIS] = "0";
+
+
 
 		config_store[ConfigParser::CFG_ENTRY::BOARD_PRESET_START_POSITION_FEN] = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
@@ -300,8 +303,9 @@ void ConfigParser::loadDefaults(std::string _type_str)
 
         config_store[ConfigParser::CFG_ENTRY::MECHANIC_FEEDRATE_TRAVEL] = "8000";
         config_store[ConfigParser::CFG_ENTRY::MECHANIC_FEEDRATE_MOVE] = "5000";
-	
-		config_store[ConfigParser::CFG_ENTRY::BOARD_PRESET_START_POSITION_FEN] = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_FEEDRATE_SIWTHC_XY_AXIS] = "0";
+
+        config_store[ConfigParser::CFG_ENTRY::BOARD_PRESET_START_POSITION_FEN] = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 	
 		config_store[ConfigParser::CFG_ENTRY::HWARDWARE_REVISION] = "PROD_V1";
 		config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_BOARD_SERIAL_PORT] = "/dev/ttySKR";
@@ -336,12 +340,12 @@ void ConfigParser::loadDefaults(std::string _type_str)
 
         config_store[ConfigParser::CFG_ENTRY::MECHANIC_STEPS_PER_MM] = "100";//80 steps / mm for CORE XY configuration
         config_store[ConfigParser::CFG_ENTRY::MECHANIC_INVERT_COILS] = "1";
-        config_store[ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X] = "60";
-        config_store[ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y] = "30";
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X] = "50";
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y] = "55";
         config_store[ConfigParser::CFG_ENTRY::MECHANIC_DISTANCE_COILS_MM] = "0";
         config_store[ConfigParser::CFG_ENTRY::MECHANIC_COIL_SWITCH_POSTION_TRIGGER] = "200";
-        config_store[ConfigParser::CFG_ENTRY::MECHANIC_CHESS_FIELD_WIDTH] = "55";
-        config_store[ConfigParser::CFG_ENTRY::MECHANIC_CHESS_BOARD_WIDTH] = "440";
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_CHESS_FIELD_WIDTH] = "57";//55
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_CHESS_BOARD_WIDTH] = "480";//440
         config_store[ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_BLACK_X_LINE] = "0";
         config_store[ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_BLACK_FIRST_Y_OFFSET] = "7";
         config_store[ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_WHITE_X_LINE] = "510";
@@ -356,6 +360,7 @@ void ConfigParser::loadDefaults(std::string _type_str)
 
         config_store[ConfigParser::CFG_ENTRY::MECHANIC_FEEDRATE_TRAVEL] = "5000";
         config_store[ConfigParser::CFG_ENTRY::MECHANIC_FEEDRATE_MOVE] = "3000";
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_FEEDRATE_SIWTHC_XY_AXIS] = "0";
 
 
         config_store[ConfigParser::CFG_ENTRY::BOARD_PRESET_START_POSITION_FEN] = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
@@ -365,8 +370,8 @@ void ConfigParser::loadDefaults(std::string _type_str)
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_BOARD_SERIAL_BAUD] = "115200";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_A_INDEX] = "0";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_B_INDEX] = "1";
-        config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_BOTTOM_POS] = "0";
-        config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_UPPER_POS] = "115";
+        config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_BOTTOM_POS] = "180";
+        config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_UPPER_POS] = "45";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_RESET_EEPROM_TO_DEFAULT_DURING_STARTUP] = "1";
 
 
@@ -474,11 +479,11 @@ bool ConfigParser::getBool_nocheck(ConfigParser::CFG_ENTRY _entry)
 int ConfigParser::getInt_nocheck(ConfigParser::CFG_ENTRY _entry)
 {
 	int ret = 0;
-	if (getInt(_entry,ret)) {
+	if (!getInt(_entry,ret)) {
         LOG_F(INFO,"ConfigParser::getInt_nocheck ERROR READ KEY FAILED%s", std::string(magic_enum::enum_name(_entry)).c_str());
-		return ret;
+		return 0;
 	}
-	return 0;
+	return ret;
 }
 
 std::string ConfigParser::get(ConfigParser::CFG_ENTRY _entry)

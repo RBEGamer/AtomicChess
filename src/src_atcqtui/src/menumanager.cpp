@@ -30,7 +30,7 @@ menu_levels["showavariableplayer_container"] = 1;
 menu_levels["ss_container"] = 2;
 menu_levels["debug_container"] = 3;
 menu_levels["calibration_container"] = 3;
-
+menu_levels["solanoidcal_container"] = 3;
 menu_levels["is_container"] = 4;
 
 menu_levels["mmem_container"] = 4;
@@ -124,7 +124,7 @@ void MenuManager::switch_menu(QString _screen){
     set_visible_element("showavariableplayer_container",false);
     set_visible_element("mmem_container",false);
     set_visible_element("calibration_container",false);
-
+    set_visible_element("solanoidcal_container",false);
 
     //ENABLE THE SELECTED MENU
     set_visible_element(_screen,true);
@@ -163,8 +163,7 @@ void MenuManager::switch_menu(guicommunicator::GUI_VALUE_TYPE _screen){
         case guicommunicator::GUI_VALUE_TYPE::PLAYER_SEARCH_SCREEN:{switch_menu("showavariableplayer_container");break;}
         case guicommunicator::GUI_VALUE_TYPE::PLAYER_ENTER_MANUAL_MOVE_SCREEN:{switch_menu("mmem_container");break;}
         case guicommunicator::GUI_VALUE_TYPE::CALIBRATION_SCREEN:{switch_menu("calibration_container");break;}
-
-
+        case guicommunicator::GUI_VALUE_TYPE::SOLANOID_CALIBRATION_SCREEN:{switch_menu("solanoidcal_container");break;}
 
 
         default:break;
@@ -324,6 +323,12 @@ void MenuManager::ss_calboard_btn(){
      MenuManager::switch_menu(guicommunicator::GUI_VALUE_TYPE::CALIBRATION_SCREEN);
 }
 
+
+void MenuManager::ss_solcal_btn(){
+     MenuManager::switch_menu(guicommunicator::GUI_VALUE_TYPE::SOLANOID_CALIBRATION_SCREEN);
+}
+
+
 void MenuManager::sm_logout_btn(){
     qInfo() << "sm_logout_btn";
     guiconnection.createEvent(guicommunicator::GUI_ELEMENT::LOGOUT_BTN, guicommunicator::GUI_VALUE_TYPE::CLICKED);
@@ -480,4 +485,25 @@ void MenuManager::cal_ppblack1_btn(){
 
 void MenuManager::cal_ppblack16_btn(){
     guiconnection.createEvent(guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_PPBLACK16, guicommunicator::GUI_VALUE_TYPE::CLICKED);
+}
+
+
+
+void MenuManager::solcal_bottom_pos(){
+    guiconnection.createEvent(guicommunicator::GUI_ELEMENT::SOLANOIDSCREEN_BOTTOM_POS, guicommunicator::GUI_VALUE_TYPE::CLICKED);
+}
+void MenuManager::solcal_up_pos(){
+    guiconnection.createEvent(guicommunicator::GUI_ELEMENT::SOLANOIDSCREEN_UPPER_POS, guicommunicator::GUI_VALUE_TYPE::CLICKED);
+}
+
+void MenuManager::solcal_save(){
+    guiconnection.createEvent(guicommunicator::GUI_ELEMENT::SOLANOIDSCREEN_SAVE, guicommunicator::GUI_VALUE_TYPE::CLICKED);
+}
+
+void MenuManager::solcal_mvup(){
+    guiconnection.createEvent(guicommunicator::GUI_ELEMENT::SOLANOIDSCREEN_MVUP, guicommunicator::GUI_VALUE_TYPE::CLICKED);
+}
+
+void MenuManager::solcal_mvdonw(){
+    guiconnection.createEvent(guicommunicator::GUI_ELEMENT::SOLANOIDSCREEN_MVDONW, guicommunicator::GUI_VALUE_TYPE::CLICKED);
 }
