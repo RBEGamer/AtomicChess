@@ -191,7 +191,45 @@ bool HardwareInterface::setTurnStateLight(HardwareInterface::HI_TURN_STATE_LIGHT
 	}
 	else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD || hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD_V2)
 	{
-		//TODO
+
+	    //USE THE SAME COLOR MODEL AS THE HWREV_DK VERSION
+	    int hsv_col = 0; //0 is also a color on a 360 degree circle
+	    int intensity = 255;
+        switch (_state) {
+            case HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_OFF: hsv_col = 240;intensity = 128;break; //SPECIAL CASE DIM THE OFF STATE
+            case HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_IDLE: hsv_col = 180;break;
+            case HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_PLAYER_WHITE_TURN: hsv_col = 140;break;
+            case HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_PLAYER_BLACK_TURN: hsv_col = 90;break;
+            case HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_PRECCESSING: hsv_col = 35;break;
+            default:hsv_col=0;break;
+        }
+
+        int r,g,b = 0;
+
+
+        //CONVERT HSV TO RGB
+            if (hsv_col < 85) {
+                r = hsv_col * 3;
+                g = 255 - hsv_col * 3;
+                b = 0;
+            } else if (hsv_col < 170) {
+                hsv_col -= 85;
+                r = hsv_col * 3;
+                g = 255 - hsv_col * 3;
+                b = 0;
+            } else {
+                hsv_col -= 170;
+                b = hsv_col * 3;
+                g = 255 - hsv_col * 3;
+                r= 0;
+            }
+
+
+        if (gcode_interface != nullptr) {
+            gcode_interface->set_led(r,g,b,intensity);
+        }
+
+
 	}
 	return true;
 }
@@ -210,17 +248,21 @@ bool HardwareInterface::setCoilState(HI_COIL _coil, bool _state)
 	{
 		//MORE LOGIC NEEDED HERE
 		//IT DEPENDS ON THE ONFIGURATION OF MARLIN WHICH INDEX THE SERVOS HAVE TO WE NEED TO LOAD IT FROM THE CONFIG FIRST
-		if(_coil == HardwareInterface::HI_COIL::HI_COIL_A || _coil == HardwareInterface::HI_COIL::HI_COIL_B)
-		{
-			if (_state)
-			{
-				gcode_interface->setServo(ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_A_INDEX), ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_UPPER_POS));	
-			}
-			else
-			{
-				gcode_interface->setServo(ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_A_INDEX), ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_BOTTOM_POS));	
-			}
-
+        if (gcode_interface != nullptr)
+        {
+		if(_coil == HardwareInterface::HI_COIL::HI_COIL_A || _coil == HardwareInterface::HI_COIL::HI_COIL_B) {
+            if (_state) {
+                gcode_interface->setServo(ConfigParser::getInstance()->getInt_nocheck(
+                        ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_A_INDEX),
+                                          ConfigParser::getInstance()->getInt_nocheck(
+                                                  ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_UPPER_POS));
+            } else {
+                gcode_interface->setServo(ConfigParser::getInstance()->getInt_nocheck(
+                        ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_A_INDEX),
+                                          ConfigParser::getInstance()->getInt_nocheck(
+                                                  ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_BOTTOM_POS));
+            }
+        }
 		}
 	}
 	return true;

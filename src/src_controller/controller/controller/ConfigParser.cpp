@@ -371,7 +371,7 @@ void ConfigParser::loadDefaults(std::string _type_str)
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_A_INDEX] = "0";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_B_INDEX] = "1";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_BOTTOM_POS] = "180";
-        config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_UPPER_POS] = "45";
+        config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_UPPER_POS] = "60";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_RESET_EEPROM_TO_DEFAULT_DURING_STARTUP] = "1";
 
 

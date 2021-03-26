@@ -39,6 +39,18 @@ GCodeSender::GCodeSender(std::string _serialport_file)
 		
 }
 
+bool GCodeSender::set_led(int _r, int _g, int _b, int _intensity){
+//M150 P255 U255 R255 B255
+    //p<intensity> u<green_intensity> r<red_intensity> b<blue_intensity>
+    if(_r > 255){_r = 255;}else if(_r < 0){_r = 0;}
+    if(_g > 255){_g = 255;}else if(_g < 0){_g = 0;}
+    if(_b > 255){_b = 255;}else if(_b < 0){_b = 0;}
+    if(_intensity > 255){_intensity = 255;}else if(_intensity < 0){_intensity = 0;}
+
+    return write_gcode("M150 P" + std::to_string(_intensity) + " U" + std::to_string(_g)+ " R" + std::to_string(_r)+ " B" + std::to_string(_b));     //MOVE SERVO
+
+}
+
 bool GCodeSender::check_baud_rate(int _baudrate_to_check) {
 	switch (_baudrate_to_check) {
 	case 9600:

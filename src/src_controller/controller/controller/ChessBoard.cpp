@@ -853,7 +853,7 @@ bool ChessBoard::syncRealWithTargetBoard_not_empty() {
 bool ChessBoard::syncRealWithTargetBoard_add_remove_empty() {
 
 	//USE MAKE MOVE TO GENERATE A MOVE LIST THEN EXECUTE THE MOVES
-	 std::vector<ChessBoard::MovePiar> move_list;
+	std::vector<ChessBoard::MovePiar> move_list;
 	ChessPiece::FIGURE*board_current = get_board_pointer(ChessBoard::BOARD_TPYE::REAL_BOARD);
 	ChessPiece::FIGURE*board_target = get_board_pointer(ChessBoard::BOARD_TPYE::TARGET_BOARD);
 	
@@ -944,19 +944,21 @@ bool ChessBoard::syncRealWithTargetBoard_add_remove_empty() {
 			}
 		}
     }
-    for (size_t it = 0; it < diff.size(); it++) {
+ //   for (size_t it = 0; it < diff.size(); it++) {
 		//MOVE FIGURE OUT OF THE FIELD
-		if(!diff.at(it).field_curr.figure.is_empty && diff.at(it).field_target.figure.is_empty)
-		{
-			int fdIndex = get_next_free_park_position(ChessBoard::BOARD_TPYE::REAL_BOARD, diff.at(it).field_curr.figure);
-			if (fdIndex >= 0)
-			{
-				move_list.push_back(MovePiar(diff.at(it).field_curr.field, ChessField::Index2Field(fdIndex)));
-				diff.at(it).processed = true;
-				break;
-			}
-		}
-    }
+//		if(!diff.at(it).field_curr.figure.is_empty && diff.at(it).field_target.figure.is_empty)
+//		{
+//			int fdIndex = get_next_free_park_position(ChessBoard::BOARD_TPYE::REAL_BOARD, diff.at(it).field_curr.figure);
+//			if (fdIndex >= 0)
+//			{
+//				move_list.push_back(MovePiar(diff.at(it).field_curr.field, ChessField::Index2Field(fdIndex)));
+//				diff.at(it).processed = true;
+//				break;
+//			}
+//		}
+  //  }
+
+  /*
     for (size_t it = 0; it < diff.size(); it++) {
 		//MOVE FIGURE INTO THE FIELD
 		if(diff.at(it).field_curr.figure.is_empty && !diff.at(it).field_target.figure.is_empty)
@@ -970,7 +972,7 @@ bool ChessBoard::syncRealWithTargetBoard_add_remove_empty() {
 			}
 		}
     }
-	
+	*/
 	volatile bool move_made = false;
 	if (move_list.size() > 0)
 	{
@@ -1926,9 +1928,13 @@ ChessBoard::BOARD_ERROR ChessBoard::initBoard(bool _with_scan)
 
 
 	//TODO OVERRIDE PARKPOS
-	boardFromFen("rnbqkbnr/pppppppp/8/8/3P4/8/PPP1PPPP/RNBQKBNR b KQkq - 0 1",ChessBoard::BOARD_TPYE::TARGET_BOARD); //D2D4
-    syncRealWithTargetBoard();
+	//boardFromFen("rnbqkbnr/pppppppp/8/8/3P4/8/PPP1PPPP/RNBQKBNR b KQkq - 0 1",ChessBoard::BOARD_TPYE::TARGET_BOARD); //D2D4
 
+ //   boardFromFen("rnbqkbnr/pppppp1p/8/6p1/3P4/8/PPP1PPPP/RNBQKBNR w Qkq g6 0 1",ChessBoard::BOARD_TPYE::TARGET_BOARD); //D2D4 && G7G5
+  //  syncRealWithTargetBoard();
+    //boardFromFen("rnbqkbnr/pppppp1p/8/6P1/8/8/PPP1PPPP/RNBQKBNR b Qkq - 0 1",ChessBoard::BOARD_TPYE::TARGET_BOARD); //D4 -> G5
+  //  boardFromFen("rnbqkbnr/pppPpp1p/8/8/8/8/PPP1pPPP/RNBQKBNR w Qkq - 0 1",ChessBoard::BOARD_TPYE::TARGET_BOARD); //D4 -> D7  && G5 -> E2
+  //  syncRealWithTargetBoard();
 	//syncRealWithTargetBoard();
 	//boardFromFen("r1bqkbnr/pp1ppppp/n7/8/2p5/1QP5/PP1PPPPP/RNB1KBNR", ChessBoard::BOARD_TPYE::REAL_BOARD);    //DAME BAUER
 	//boardFromFen("r1bqkbnr/pp1ppppp/n7/8/8/1pP5/PP1PPPPP/RNB1KBNR", ChessBoard::BOARD_TPYE::TARGET_BOARD); 	//BAUER SCHLAEGT DAME
