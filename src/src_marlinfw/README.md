@@ -65,3 +65,7 @@ For the ATC Project the following settings are changed in comparision with the d
 * `2365 | #define NEOPIXEL_PIXELS 60       // Number of LEDs in the strip.`
 * `2412 | #define NUM_SERVOS 1 // Servo index starts with 0 for M280 command ON SKR BOARD THE SERVO PIN IS P2_00`
 * `2417 | #define SERVO_DELAY { 500 } //(ms) Delay  before the next move will start`
+
+### Configuration_adv.h
+
+`2797 | #define EXPERIMENTAL_I2CBUS //ENABLE I2C Master`
