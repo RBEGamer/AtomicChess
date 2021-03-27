@@ -33,6 +33,8 @@ The controller software uses the following GCode commands. Some are optional for
 * `G0` - move linear
 * `M400` - wait for action finished
 
+* `M260 M261` - i2c read write (for nfc read)
+
 ### OPTIONAL COMMANDS
 
 * `M84` - disable steppers
