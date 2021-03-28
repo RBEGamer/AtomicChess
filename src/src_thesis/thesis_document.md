@@ -57,6 +57,7 @@ Abschließend wird eine Zusammenfassung uber den Verlauf der Arbeit und der erzi
 
 ### Kommerzielle Produkte
 
+* zwei hersteller wirklich autonomer schachtische; für tunieren werden dgt schachbretter für livestreams und recordinge verwendet.
 
 |                                         	| Square Off - Kingdom              	| Square Off - Grand Kingdom        	| DGT Smart Board      		| DGT Bluetooth Wenge  	|
 |-------------------------------------------|---------------------------------------|---------------------------------------|---------------------------|-----------------------|
@@ -77,6 +78,7 @@ Besonders bei work-in-progress Projekten können sich die Features noch verände
 
 Desweiteren gibt es unzählige deratige Projekte, in der Tabelle wurde nur diese Aufgelistet welche sich von anderen Projekten in mindestens einem Feature unterscheiden.
 
+Auch existieren weitere abwandlungen von autonomen Schachbrettern, bei welchem die Figuren von oberhalb des Spielbretts gegriffen bzw bewegt werden. In einigen Projekten wird dies mittels eines Roboterarms oder eines modifizierten 3D-Druckers realisiert. Diese wurden hier nicht berücksichtigt.
 
 
 
