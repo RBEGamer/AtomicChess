@@ -36,17 +36,8 @@ Mittels der Programmierung werden diverse Technologien von verschiedenen Einzels
 * Kaptiel x+3 ansätze zur verbesserung und modifikation der Hardware auf reproduzierbarkeit und kosteneffektivität
 * Kaptiel x+4 test und fazit
 
-konzeptioneller Ebene zu erarbeiten. Aufbauend auf der Analyse wird das umzusetzende Spielkonzept erarbeitet und fur den Prototypen deﬁniert.
 
-Der Systementwurf in Kapitel 4 wird die Ergebnisse der vorangegangenen Untersuchungen in einem Software-System zusammenfuhren. Zudem wird die Datenhaltung modelliert, die Architektur in Komponenten zerlegt und deren Funktionsumfang festgelegt.
-
-Die Implementierung der Anwendung behandelt die Schritte, Probleme und Losungen der Umsetzung. Außerdem wird auf die eingesetzten Implementierungs-Technologien eingegangen.
-
-Eine Demonstration zeigt die zuvor in der Anforderungsdeﬁnition erstellte Funktionalitat der Anwendung. Außerdem testet eine Evaluation unter verschiedenen Gesichtspunkten die Flexibilitat und Korrektheit der Anwendung.
-
-Abschließend wird eine Zusammenfassung uber den Verlauf der Arbeit und der erzielten Ergebnisse sowie ein Ausblick auf mögliche Erweiterungen des Systems aufgezeigt.
-
-
+* demonstration und validierung der funktionsfähigkeit
 
 
 
