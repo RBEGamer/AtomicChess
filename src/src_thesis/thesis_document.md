@@ -78,18 +78,18 @@ Auch existieren weitere abwandlungen von autonomen Schachbrettern, bei welchem d
 
 : Auflistung von Open-Source Schachtisch Projekten
 
-|                                         	| Automated Chess Board (Michael Guerero) 	| Automated Chess Board (Akash Ravichandran) 	| DIY Super Smart Chessboard 	|
-|-----------------------------------------	|-----------------------------------------	|--------------------------------------------	|----------------------------	|
-| Erkennung Schfigurstellung              	| nein (Manuell per Ausgangsposition)     	| ja (Kamera / OpenCV)                       	| nein                       	|
-| Tischabmessungen (LxBxH)                	| keine Angabe                            	| keine Angabe                               	| 450mm x 300mm x 50mm       	|
-| Konnektivität                           	| (+usb)                                   	| Ethernet | (+wlan)                           	| Ethernet | (+wlan)          	|
-| Automatisches Bewegen der Figuren       	| ja                                      	| ja                                         	| nein                       	|
-| Spiel Livestream                        	| nein                                    	| nein                                       	| nein                       	|
-| Cloud anbindung (online Spiele)         	| nein                                    	| nein                                       	| ja                         	|
-| Parkposition für ausgeschiedene Figuren 	| nein                                    	| nein                                       	| nein                       	|
-| Stand-Alone Funktionalität              	| nein (PC erfoderlich)                   	| ja                                         	| ja                         	|
-| Besonderheiten                          	| -                                       	| Sprachsteuerung (Amazon Alexa)             	| Zuganzeige über LED Matrix 	|
-| Licence                                 	| (+gpl) 3+                                	| (+gpl)                                       	| -                          	|
+|                                         	| Automated Chess Board (Michael Guerero) [@actproject1]	| Automated Chess Board (Akash Ravichandran) [@actproject2]	| DIY Super Smart Chessboard [@actproject3]	|
+|-----------------------------------------	|-------------------------------------------------------	|----------------------------------------------------------	|------------------------------------------	|
+| Erkennung Schfigurstellung              	| nein (Manuell per Ausgangsposition)     					| ja (Kamera / OpenCV)                       				| nein                       				|
+| Tischabmessungen (LxBxH)                	| keine Angabe                            					| keine Angabe                               				| 450mm x 300mm x 50mm       				|
+| Konnektivität                           	| (+usb)                                   					| Ethernet, (+wlan)                           				| Ethernet, (+wlan)          				|
+| Automatisches Bewegen der Figuren       	| ja                                      					| ja                                         				| nein                       				|
+| Spiel Livestream                        	| nein                                    					| nein                                       				| nein                       				|
+| Cloud anbindung (online Spiele)         	| nein                                    					| nein                                       				| ja                         				|
+| Parkposition für ausgeschiedene Figuren 	| nein                                    					| nein                                       				| nein                       				|
+| Stand-Alone Funktionalität              	| nein (PC erfoderlich)                   					| ja                                         				| ja                         				|
+| Besonderheiten                          	| -                                       					| Sprachsteuerung (Amazon Alexa)             				| Zuganzeige über LED Matrix 				|
+| Licence                                 	| (+gpl) 3+                                					| (+gpl)                                       				| -                          				|
 
 ## Zielgruppe
 
