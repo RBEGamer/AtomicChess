@@ -1,4 +1,5 @@
 
+
 \documentclass [
 % 	draft		% falls ohne Bilder gedruckt werden soll (Entwurf)
 	]{scrbook}	% KOMA Klasse für Bücher
@@ -15,9 +16,9 @@
 % die folgenden Optionen nehmen die entsprechende Dinge ins Inhaltsverzeichnis auf
 % mit der bei texlive vorhandenen aktuellen Version von pdflatex funkioniert es nicht mehr
 % (bekannter Bug)
-%	toc=bibliography,	% Literaturverzeichnis ins Inhaltsverzeichnis
-%	toc=listof,		% Abbildung- und Tabellenverzeichnis ins Inhaltsverzeichnis
-%	toc=index,		% Stichwortverzeichnis ins Inhaltsverzeichnis
+	toc=bibliography,	% Literaturverzeichnis ins Inhaltsverzeichnis
+	toc=listof,		% Abbildung- und Tabellenverzeichnis ins Inhaltsverzeichnis
+	toc=index,		% Stichwortverzeichnis ins Inhaltsverzeichnis
 	}
 %
 
@@ -166,14 +167,12 @@
 %
 %%%% acronyms
 %
+
+
+\usepackage[acronym]{glossaries}
+\makeglossaries
+
 \input{acronyms}
-%%%%%%%%%%%%%%%%%%%%%% ADD ACRONYM ENTRIES HERE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-
-
-
 %
 %%%%%%%%%%  Angaben für Titelseite %%%%%%%%%%%%%%%%%%%%%%
 %
@@ -184,7 +183,8 @@
 
 
 \begin{document}
-
+\bibliographystyle{plaindin}
+\bibliography{thesis_references}
 
 
 %%MOD%%

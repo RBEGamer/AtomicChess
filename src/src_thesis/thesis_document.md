@@ -46,43 +46,50 @@ Mittels der Programmierung werden diverse Technologien von verschiedenen Einzels
 
 ## Existierende Systeme im Vergleich
 
+
+
+
 ### Kommerzielle Produkte
 
 * zwei hersteller wirklich autonomer schachtische; für tunieren werden dgt schachbretter für livestreams und recordinge verwendet.
 
-|                                         	| Square Off - Kingdom              	| Square Off - Grand Kingdom        	| DGT Smart Board      		| DGT Bluetooth Wenge  	|
-|-------------------------------------------|---------------------------------------|---------------------------------------|---------------------------|-----------------------|
-| Erkennung Schfigurstellung           		| nein (Manuell per Ausgangsposition) 	| nein (Manuell per Ausgangsposition) 	| ja (Resonanzspulen)  		| ja (RFID)            	|
-| Tischabmessungen (LxBxH)                	| 486mm x 486mm x 75mm              	| 671mm x 486mm x 75mm              	| 540mm x 540mm x 20mm 		| 540mm x 540mm x 20mm 	|
-| Konnektivität                            	| BLE                               	| BLE                               	| USB / Seriell        		| Bluetooth 2.0        	|
-| Automatisches Bewegen der Figuren       	| ja                                	| ja                                	| nein                 		| nein                 	|
-| Spiel Livestream                        	| ja                                	| ja                                	| ja                   		| ja                   	|
-| Cloud anbindung (online Spiele)         	| ja (über Mobiltelefon + App)      	| ja (über Mobiltelefon + App)      	| ja (über PC + App)   		| ja (über PC + App)   	|
-| Parkposition für ausgeschiedene Figuren 	| nein                              	| ja                                	| nein                 		| nein                 	|
-| Stand-Alone Funktionalität               	| nein (Mobiltelefon erforderlich)    	| nein (Mobiltelefon erforderlich)     	| nein (PC erforderlich)	| nein (PC erforderlich)|      
+: Auflistung kommerzieller autonomer Schachtische
 
+|                                         	| Square Off - Kingdom [@squareoffkingdom]	| Square Off - Grand Kingdom [@squareoffgrand]		| DGT Smart Board [@dtgsmartboard]	| DGT Bluetooth Wenge [@dtgble] |
+|-------------------------------------------|-------------------------------------------|---------------------------------------------------|-----------------------------------|-------------------------------|
+| Erkennung Schfigurstellung           		| nein (Manuell per Ausgangsposition) 		| nein (Manuell per Ausgangsposition) 				| ja (Resonanzspulen)  				| ja ((+rfid))          		|
+| Tischabmessungen (LxBxH)                	| 486mm x 486mm x 75mm              		| 671mm x 486mm x 75mm              				| 540mm x 540mm x 20mm 				| 540mm x 540mm x 20mm 			|
+| Konnektivität                            	| (+ble)                               		| (+ble)                               				| (+usb) / Seriell        			| Bluetooth 2.0        			|
+| Automatisches Bewegen der Figuren       	| ja                                		| ja                                				| nein                 				| nein                 			|
+| Spiel Livestream                        	| ja                                		| ja                                				| ja                   				| ja                   			|
+| Cloud anbindung (online Spiele)         	| ja (über Mobiltelefon + App)      		| ja (über Mobiltelefon + App)      				| ja (über PC + App)   				| ja (über PC + App)   			|
+| Parkposition für ausgeschiedene Figuren 	| nein                              		| ja                                				| nein                 				| nein                 			|
+| Stand-Alone Funktionalität               	| nein (Mobiltelefon erforderlich)    		| nein (Mobiltelefon erforderlich)     				| nein (PC erforderlich)			| nein (PC erforderlich)		|   	   
+| Besonderheiten                          	| Akku für 30 Spiele                    	| Akku für 15 Spiele					           	| - 								| -
 
 ### Open-Source Projekte
 
 Bei allen Open-Source Projekten wurden die Features anhand der Beschreibung und der aktuellen Software extrahiert.
 Besonders bei work-in-progress Projekten können sich die Features noch verändern und so weitere Funktionalitäten hinzugefügt werden.
 
-Desweiteren gibt es unzählige deratige Projekte, in der Tabelle wurde nur diese Aufgelistet welche sich von anderen Projekten in mindestens einem Feature unterscheiden.
+Desweiteren gibt es weitere deratige Projekte, in der Tabelle wurde nur diese Aufgelistet welche sich von anderen Projekten in mindestens einem Feature unterscheiden.
 
-Auch existieren weitere abwandlungen von autonomen Schachbrettern, bei welchem die Figuren von oberhalb des Spielbretts gegriffen bzw bewegt werden. In einigen Projekten wird dies mittels eines Roboterarms [@act_project_robot] oder eines modifizierten 3D-Druckers realisiert. Diese wurden hier nicht berücksichtigt.
+Auch existieren weitere abwandlungen von autonomen Schachbrettern, bei welchem die Figuren von oberhalb des Spielbretts gegriffen bzw bewegt werden. In einigen Projekten wird dies mittels eines Roboterarms [@actprojectrobot] oder eines modifizierten 3D-Druckers realisiert, diese wurden hier nicht aufgrund der Konstruktion über dem Spielbrett nicht berücksichtigt.
 
- |**Automated Chess Board (Michael Guerero [@act_project_1])**|**Automated Chess Board (Akash Ravichandran [@act_project_2])**|**DIY Super Smart Chessboard [@act_project_3]**
-:-----:|:-----:|:-----:|:-----:
-Erkennung Schfigurstellung|nein (Manuell per Ausgangsposition)|ja (Kamera / OpenCV)|nein
-Tischabmessungen (LxBxH) |keine Angabe|keine|450mm x 300mm x 50mm
-Konnektivität|USB / Seriell|Ethernet / Wifi|Ethernet / Wifi
-Automatisches Bewegen der Figuren|ja|ja|nein
-Spiel Livestream|nein|nein|nein
-Cloud anbindung (online Spiele)|nein|nein|ja
-Parkposition für ausgeschiedene Figuren|nein|nein|nein
-Stand-Alone Funktionalität|nein (PC erfoderlich)|ja|ja
-Licence|GPL3+|GPL|-
-Besonderheiten|-|Sprachsteuerung per Amazon Alexa|Zuganzeige über LED Matrix
+: Auflistung von Open-Source Schachtisch Projekten
+
+|                                         	| Automated Chess Board (Michael Guerero) 	| Automated Chess Board (Akash Ravichandran) 	| DIY Super Smart Chessboard 	|
+|-----------------------------------------	|-----------------------------------------	|--------------------------------------------	|----------------------------	|
+| Erkennung Schfigurstellung              	| nein (Manuell per Ausgangsposition)     	| ja (Kamera / OpenCV)                       	| nein                       	|
+| Tischabmessungen (LxBxH)                	| keine Angabe                            	| keine Angabe                               	| 450mm x 300mm x 50mm       	|
+| Konnektivität                           	| (+usb)                                   	| Ethernet | (+wlan)                           	| Ethernet | (+wlan)          	|
+| Automatisches Bewegen der Figuren       	| ja                                      	| ja                                         	| nein                       	|
+| Spiel Livestream                        	| nein                                    	| nein                                       	| nein                       	|
+| Cloud anbindung (online Spiele)         	| nein                                    	| nein                                       	| ja                         	|
+| Parkposition für ausgeschiedene Figuren 	| nein                                    	| nein                                       	| nein                       	|
+| Stand-Alone Funktionalität              	| nein (PC erfoderlich)                   	| ja                                         	| ja                         	|
+| Besonderheiten                          	| -                                       	| Sprachsteuerung (Amazon Alexa)             	| Zuganzeige über LED Matrix 	|
+| Licence                                 	| (+gpl) 3+                                	| (+gpl)                                       	| -                          	|
 
 ## Zielgruppe
 
@@ -183,22 +190,6 @@ dura.
 - Permulcens flebile simul
 - Iura tum nepotis causa motus diva virtus Acrota. Tamen condeturque saxa Pallorque num et ferarum promittis inveni lilia iuvencae adessent arbor. Florente perque at ire arcum.
 
-
-
-## LaTeX Table with Caption
-
-At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr.
-
-
-| ALGORITHM_V1_TRAVEL_TIME [s] 	| ALGORITHM_V2_TRAVEL_TIME [s] 	| TRAVEL_DISTANCE [FIELDS_DIAGONAL] 	|
-|------------------------------	|------------------------------	|-----------------------------------	|
-| 7.20                         	| 2.56                         	| 1                                 	|
-| 11.56                        	| 6,20                         	| 3                                 	|
-| 12,27                        	| 7,06                         	| 5                                 	|
-| 14,39                        	| 6,56                         	| 8                                 	|
-
-
-Table: Verschiedene Bewegungsalgorithmen im Vergleich
 
 
 ## Image with Caption
