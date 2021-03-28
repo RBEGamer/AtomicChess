@@ -1,0 +1,11 @@
+,Automated Chess Board (Michael Guerero),Automated Chess Board (Akash Ravichandran),DIY Super Smart Chessboard
+Erkennung Schfigurstellung,nein (Manuell per Ausgangsposition),ja (Kamera / OpenCV),nein
+Tischabmessungen (LxBxH) ,keine Angabe,keine,450mm x 300mm x 50mm
+Konnektivität,USB / Seriell,Ethernet / Wifi,Ethernet / Wifi
+Automatisches Bewegen der Figuren,ja,ja,nein
+Spiel Livestream,nein,nein,nein
+Cloud anbindung (online Spiele),nein,nein,ja
+Parkposition für ausgeschiedene Figuren,nein,nein,nein
+Stand-Alone Funktionalität,nein (PC erfoderlich),ja,ja
+Licence,GPL3+,GPL,-
+Besonderheiten,-,Sprachsteuerung per Amazon Alexa,Zuganzeige über LED Matrix

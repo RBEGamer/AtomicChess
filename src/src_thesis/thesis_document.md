@@ -69,9 +69,20 @@ Besonders bei work-in-progress Projekten können sich die Features noch verände
 
 Desweiteren gibt es unzählige deratige Projekte, in der Tabelle wurde nur diese Aufgelistet welche sich von anderen Projekten in mindestens einem Feature unterscheiden.
 
-Auch existieren weitere abwandlungen von autonomen Schachbrettern, bei welchem die Figuren von oberhalb des Spielbretts gegriffen bzw bewegt werden. In einigen Projekten wird dies mittels eines Roboterarms oder eines modifizierten 3D-Druckers realisiert. Diese wurden hier nicht berücksichtigt.
+Auch existieren weitere abwandlungen von autonomen Schachbrettern, bei welchem die Figuren von oberhalb des Spielbretts gegriffen bzw bewegt werden. In einigen Projekten wird dies mittels eines Roboterarms [@act_project_robot] oder eines modifizierten 3D-Druckers realisiert. Diese wurden hier nicht berücksichtigt.
 
-
+ |**Automated Chess Board (Michael Guerero [@act_project_1])**|**Automated Chess Board (Akash Ravichandran [@act_project_2])**|**DIY Super Smart Chessboard [@act_project_3]**
+:-----:|:-----:|:-----:|:-----:
+Erkennung Schfigurstellung|nein (Manuell per Ausgangsposition)|ja (Kamera / OpenCV)|nein
+Tischabmessungen (LxBxH) |keine Angabe|keine|450mm x 300mm x 50mm
+Konnektivität|USB / Seriell|Ethernet / Wifi|Ethernet / Wifi
+Automatisches Bewegen der Figuren|ja|ja|nein
+Spiel Livestream|nein|nein|nein
+Cloud anbindung (online Spiele)|nein|nein|ja
+Parkposition für ausgeschiedene Figuren|nein|nein|nein
+Stand-Alone Funktionalität|nein (PC erfoderlich)|ja|ja
+Licence|GPL3+|GPL|-
+Besonderheiten|-|Sprachsteuerung per Amazon Alexa|Zuganzeige über LED Matrix
 
 ## Zielgruppe
 
