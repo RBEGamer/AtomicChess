@@ -36,13 +36,14 @@ public:
 	void home_sync();
 	void set_speed_preset(int _feedrate);
 
-	bool setTurnStateLight(int _state);
+
 	bool setServo(int _index, int _pos);
 	
 	bool set_steps_per_mm(int _x, int _y);
 
 	bool set_led(int _r, int _g, int _b, int _intensity); //SET THE RGW STRIP COLOR M150 OPTION NEEDED
-	
+
+	bool read_i2c_slave(int _slave_addr,int _bytes, char* _read_data);
 private:
 	serialib*  port = nullptr;
 	const int MARLIN_SERIAL_BAUD_RATE = 115200;

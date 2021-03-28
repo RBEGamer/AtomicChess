@@ -46,7 +46,8 @@ public:
 		int figure_number;
 		///THIS IS THE UNIQUE ID OF THE FIGURE HWICH IS ALSO WRITTEN ON THE NFC TAG
 		unsigned char  unique_id;
-		bool is_empty;
+		bool is_empty; //IF THIS IS SET THE FIELD WHERE THE FIGURE IS STANDING ON IS EMPTY
+		bool figure_read_failed; //IS SET IF THE FIGURE WAS READ OVER NFC OCCURED A ERROR
 	};
 	
 	

@@ -2,31 +2,39 @@
 
 ## Motivation
 
-Der Boom in der Spieleindustrie ist ungebrochen. Allein das Online-Rollenspiel World of Warcraft erreichte Ende Oktober 2008 eine Spielerzahl von 11 Millionen [15]. Der Spieler bewegt seinen Charakter meist durch eine dreidimensionale Fantasiewelt – durch verschiedene Stadte und Dorfer, durch W¨alder und Wusten bis hin zu Dschungeln und speziellen Dungeons. Er sammelt dort Erfahrungspunkte und Belohnungen in Form von virtuellem Geld, Ausrustungsgegenstanden oder anderen Items. Hierbei ist das Medium Computer, als auch der Stil der Interaktion durch die Steuerung der Figur vom Programm vorgegeben. Alles in Allem ist die Trennung der Welten innerhalb des Spiels und der realen Welt zu jeder Zeit gegeben.
 
-Pervasive Spiele dahingegen zielen auf eine neue Art des Spielens ab. Sie integrieren Informations- und Kommunikationstechnik, um die Grenzen herkommlicher Spiele aufzubrechen und erweiterte Spielwelten zu schaen. Mit Hilfe von mobilen Endgeraten und deren speziﬁschen Eigenschaften soll somit eine neue Art von Spielerlebnis geschaen werden. Die Nutzung von ortsabhangigen Diensten und Umgebungsinformationen der Benutzer wird zu einem entscheidenden Merkmal des Spiels. Die Schlusseltechnologien dafur ﬁnden sich in den Bereichen der drahtlosen Kommunikation und der Positionsbestimmung von Benutzern bzw. mobilen Geraten. Im Gegensatz zu klassischen Computerspielen, die in der virtuellen Welt stattﬁnden, sind bei pervasiven Spielen beispielsweise physikalische Bewegungen und soziale Interaktionen mit anderen Benutzern erforderlich. Der Spieler nutzt die physische Welt als Spielfeld und kann dennoch die Vorteile und Moglichkeiten der technischen Gerate und der virtuellen Welt nutzen.
 
-Auf diese Weise konnen ganzlich neue Spielkonzepte realisiert werden. Aber auch eine Er- 1 Einleitung
 
-2
+* Beginn: Er zieht die Aufmerksamkeit des Lesers durch die Schilderung des Ereignisses auf sich, das zu dem Problem geführt hat.
+* Hintergrundinformationen (Herstellung des Kontexts): Gehe tiefer auf das Ereignis ein, indem du mehr Informationen über es vermittelst und dabei auch den Rahmen deiner Forschung skizzierst.
+* Brücke zur Problemstellung: Erläutere, inwiefern es sich hierbei um ein Problem handelt, und schlage somit die Brücke zur Problemstellung, die deiner Untersuchung zu Grunde liegt.
 
-weiterung tradtionioneller Spiele um Komponenten des Pervasive Computing ist denkbar.
-
-Solche Spiele eronen ein breites Feld von Anwendungen. Es konnen neue Lernmethoden im Schulunterricht oder die unterhaltsame Vermittlung kultureller Aspekte angestrebt werden. Die Konzeption dessen gestaltet sich jedoch problematisch und wirft Fragen auf, wie die Schlusseltechnologien in das Spiel zu integrieren sind.
 
 ## Zielsetzung
 
-Im Rahmen dieser Arbeit soll eine verteilte Anwendung entworfen und prototypisch implementiert werden, die es ermoglicht anhand unterschiedlicher Sensordaten eines mobilen Endgerates die Situation und Position des Benutzers zu bestimmen. In Abhangigkeit dieser Daten sollen von einer zentralen Instanz die Daten zur Anreicherung des Spiels abgerufen werden. Auf diese Weise sollen dem Spieler Elemente der Story, neue Aufgaben oder Informationen uber andere Spieler n¨aher gebracht werden.
+Das Ziel dieser Arbeit ist es, einen Schach-Tisch zu konstruieren und programmieren, welcher in der Lage ist Schachfiguren autonom zu bewegen. Der Schwerpunkt liegt dabei insbesondere auf der Programmierung des eingebettenen Systems. Dieses besteht zum einem aus der Positionserkennung und Steuerung der Hardwarekomponenten (Schachfiguren) und zum anderen aus der Kommuniktation zwischen dem Tisch selbst und einem in einer Cloud befindlichen Server.
 
-Ziel dieser Arbeit wird es sein, die Vorgehensweise bei der Positions- und Situationsbestimmung im Detail auszuarbeiten und die unterschiedlichen Technologien und Algorithmen zu untersuchen und den Anforderungen entsprechend auszuwahlen. Diese werden schließlich in einem Software-Entwurf zu einem Gesamtsystem kombiniert, das alle Anforderungen an ein unterhaltsames Spiel fur Pervasive Gaming erf¨ullt.
+Mittels der Programmierung werden diverse Technologien von verschiedenen Einzelsystemen zu einem Gesamtprodukt zusammengesetzt. Zu diesen Einzelsystemen gehören:
+
+* Programmierung der Motorsteuerung, HMI (zB. Qt oder simple Buttons), NFC Tag erkennung
+* Programmierung eines Wrappers für die Kommuniktion mit der Cloud (AWS)
+* Statemaschiene und Implementierung der Spielflusssteuerung
+* Backend mit Datenbankanbindung zwischen Server und Embedded-System
+* Verwendung eines CI/CD Systems zum automatisierten bauen der Linux-Images für das Embedded-System
+
 
 ## Aufbau der Arbeit
 
-In dieser Arbeit werden theoretische Grundlagen und gegebene Randbedingungen beleuchtet. Zunachst werden in Abschnitt 2.1 die Konzepte der Positionsbestimmung und einsetzbare Technologien beschrieben. Anschließend werden in Abschnitt 2.2 die Grundlagen des Ubiquitous und Pervasive Computing und die damit verbundenen Konﬂikte in den Bereichen Sicherheit und Datenschutz beleuchtet. In Abschnitt 2.3 wird auf die Notwendigkeit der Kontextsensitivitat eingegangen. Und schließlich wird in Abschnitt 2.4 auf die aktuellen Trends und m¨ogliche Endger¨ate f¨ur die Umsetzung des Systems eingegangen.
 
-Gegenstand der Diskussion in Kapitel 3 ist die Beleuchtung bereits vorhandener pervasiver Spiele und die Identiﬁzierung vorhandener und fehlender Funktionalit¨aten. Die Analyse wird außerdem mogliche Anwendungsf¨alle aufzeigen, um die Komponenten auf 1 Einleitung
+* theoretische Grundlagen
+* gegebene Randbedingungen
+* beleuchtung existierender ansätze && festlegung zu erwartener Features
 
-3
+* Kaptiel x erstellung einzelner software unf hardwarekomponenten
+* Kapitel x+1 zusammenführung in die DK HW
+* Kaptiel x+2 fehleranaöyse der DK Hardware
+* Kaptiel x+3 ansätze zur verbesserung und modifikation der Hardware auf reproduzierbarkeit und kosteneffektivität
+* Kaptiel x+4 test und fazit
 
 konzeptioneller Ebene zu erarbeiten. Aufbauend auf der Analyse wird das umzusetzende Spielkonzept erarbeitet und fur den Prototypen deﬁniert.
 
@@ -36,7 +44,7 @@ Die Implementierung der Anwendung behandelt die Schritte, Probleme und Losungen 
 
 Eine Demonstration zeigt die zuvor in der Anforderungsdeﬁnition erstellte Funktionalitat der Anwendung. Außerdem testet eine Evaluation unter verschiedenen Gesichtspunkten die Flexibilitat und Korrektheit der Anwendung.
 
-Abschließend wird eine Zusammenfassung uber den Verlauf der Arbeit und der erzielten Ergebnisse sowie ein Ausblick auf m¨ogliche Erweiterungen des Systems aufgezeigt.
+Abschließend wird eine Zusammenfassung uber den Verlauf der Arbeit und der erzielten Ergebnisse sowie ein Ausblick auf mögliche Erweiterungen des Systems aufgezeigt.
 
 
 
@@ -47,17 +55,30 @@ Abschließend wird eine Zusammenfassung uber den Verlauf der Arbeit und der erzi
 
 ## Existierende Systeme im Vergleich
 
-|                                         	| Square Off - Kingdom              	| Square Off - Grand Kingdom        	| DGT Smart Board      	| DGT Bluetooth Wenge  	|
-|-----------------------------------------	|-----------------------------------	|-----------------------------------	|----------------------	|----------------------	|
-| Erkennung chfigurstellung           	| ja (Manuell per Ausgangsposition) 	| ja (Manuell per Ausgangsposition) 	| ja (Resonanzspulen)  	| ja (RFID)            	|
-| Tischabmessungen (LxBxH)                	| 486mm x 486mm x 75mm              	| 671mm x 486mm x 75mm              	| 540mm x 540mm x 20mm 	| 540mm x 540mm x 20mm 	|
-| Konnektivität                            	| BLE                               	| BLE                               	| USB / Seriell        	| Bluetooth 2.0        	|
-| Automatisches Bewegen der Figuren       	| ja                                	| ja                                	| nein                 	| nein                 	|
-| Spiel Livestream                        	| ja                                	| ja                                	| ja                   	| ja                   	|
-| Cloud anbindung (online Spiele)         	| ja (über Mobiltelefon + App)      	| ja (über Mobiltelefon + App)      	| ja (über PC + App)   	| ja (über PC + App)   	|
-| Parkposition für ausgeschiedene Figuren 	| nein                              	| ja                                	| nein                 	| nein                 	|
-|                                         	|                                   	|                                   	|                      	|                      	|
-|           
+### Kommerzielle Produkte
+
+
+|                                         	| Square Off - Kingdom              	| Square Off - Grand Kingdom        	| DGT Smart Board      		| DGT Bluetooth Wenge  	|
+|-------------------------------------------|---------------------------------------|---------------------------------------|---------------------------|-----------------------|
+| Erkennung Schfigurstellung           		| nein (Manuell per Ausgangsposition) 	| nein (Manuell per Ausgangsposition) 	| ja (Resonanzspulen)  		| ja (RFID)            	|
+| Tischabmessungen (LxBxH)                	| 486mm x 486mm x 75mm              	| 671mm x 486mm x 75mm              	| 540mm x 540mm x 20mm 		| 540mm x 540mm x 20mm 	|
+| Konnektivität                            	| BLE                               	| BLE                               	| USB / Seriell        		| Bluetooth 2.0        	|
+| Automatisches Bewegen der Figuren       	| ja                                	| ja                                	| nein                 		| nein                 	|
+| Spiel Livestream                        	| ja                                	| ja                                	| ja                   		| ja                   	|
+| Cloud anbindung (online Spiele)         	| ja (über Mobiltelefon + App)      	| ja (über Mobiltelefon + App)      	| ja (über PC + App)   		| ja (über PC + App)   	|
+| Parkposition für ausgeschiedene Figuren 	| nein                              	| ja                                	| nein                 		| nein                 	|
+| Stand-Alone Funktionalität               	| nein (Mobiltelefon erforderlich)    	| nein (Mobiltelefon erforderlich)     	| nein (PC erforderlich)	| nein (PC erforderlich)|      
+
+
+### Open-Source Projekte
+
+Bei allen Open-Source Projekten wurden die Features anhand der Beschreibung und der aktuellen Software extrahiert.
+Besonders bei work-in-progress Projekten können sich die Features noch verändern und so weitere Funktionalitäten hinzugefügt werden.
+
+Desweiteren gibt es unzählige deratige Projekte, in der Tabelle wurde nur diese Aufgelistet welche sich von anderen Projekten in mindestens einem Feature unterscheiden.
+
+
+
 
 ## Zielgruppe
 

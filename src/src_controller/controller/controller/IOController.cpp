@@ -120,16 +120,16 @@ ChessPiece::FIGURE IOController::ScanNFC(int _retry_count)
 		tmp_figure = ChessPiece::NDEF2Figure(buffer_r[0]);
 		if (tmp_figure.type != ChessPiece::TYPE::TYPE_INVALID) {
 			figure_valid = true;
-			
+
 		}
 		retry++;
 	}
 	//SEND NFC READ/FINISH COMMAND
 	buffer_w[0] = IOController::COMMANDS::NFC_READ_CANCEL;
 	res = SPICommunication::getInstance()->spi_write(SPI_CS_DEVICE, buffer_w, 1);
-	
-	//PARSE RESULT TO A FIGURE
-	
+    //SET NFC READ SUCC
+    tmp_figure.figure_read_failed = false; //READ SUCCESS
+
 	return tmp_figure;
 }
 

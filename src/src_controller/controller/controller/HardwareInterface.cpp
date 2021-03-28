@@ -280,7 +280,7 @@ ChessPiece::FIGURE HardwareInterface::ScanNFC(int _retry_count)
 	}
 	else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD || hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD_V2)
 	{
-		//TODO
+		//TODO WITH MARLIN? OVER I2C ?
 	}
 
 	//ELSE RETURN A INVALID FIGURE
@@ -290,6 +290,7 @@ ChessPiece::FIGURE HardwareInterface::ScanNFC(int _retry_count)
 	fig.figure_number = -1;
 	fig.unique_id = -1;
 	fig.is_empty = true;
+	fig.figure_read_failed = true;
 	return fig;
 }
 	
