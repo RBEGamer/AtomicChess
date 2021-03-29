@@ -303,9 +303,13 @@ int main(int argc, char *argv[])
 		LOG_F(ERROR, "check_hw_init_complete failed");
 		std::raise(SIGINT);
 	}
-	
-	HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL_A, true);
-	HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL_A, false);	
+
+
+//	HardwareInterface::getInstance()->ScanNFC();
+
+
+
+
 		
 	//SARTING GUI COMMUNICATOR PROCESS
 	LOG_F(INFO, "guicommunicator startig ipc thread");

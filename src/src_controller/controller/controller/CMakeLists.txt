@@ -15,7 +15,7 @@ set(CMAKE_CXX_STANDARD 17)
 find_package (Threads)
 
 
-set(SOURCE_FILES SHARED/guicommunicator/guicommunicator.cpp SHARED/json11-master/json11.cpp SHARED/loguru-master/loguru.cpp SHARED/serialib-master/lib/serialib.cpp SHARED/WiringPi-master/wiringPi/piHiPri.c SHARED/WiringPi-master/wiringPi/piThread.c SHARED/WiringPi-master/wiringPi/pseudoPins.c SHARED/WiringPi-master/wiringPi/softPwm.c SHARED/WiringPi-master/wiringPi/softServo.c SHARED/WiringPi-master/wiringPi/softTone.c SHARED/WiringPi-master/wiringPi/wiringPi.c SHARED/WiringPi-master/wiringPi/wiringPiI2C.c SHARED/WiringPi-master/wiringPi/wiringPiSPI.c SHARED/WiringPi-master/wiringPi/wiringSerial.c SHARED/WiringPi-master/wiringPi/wiringShift.c)
+set(SOURCE_FILES SHARED/guicommunicator/guicommunicator.cpp SHARED/json11-master/json11.cpp SHARED/loguru-master/loguru.cpp SHARED/serialib-master/lib/serialib.cpp SHARED/WiringPi-master/wiringPi/piHiPri.c SHARED/WiringPi-master/wiringPi/piThread.c SHARED/WiringPi-master/wiringPi/pseudoPins.c SHARED/WiringPi-master/wiringPi/softPwm.c SHARED/WiringPi-master/wiringPi/softServo.c SHARED/WiringPi-master/wiringPi/softTone.c SHARED/WiringPi-master/wiringPi/wiringPi.c SHARED/WiringPi-master/wiringPi/wiringPiI2C.c SHARED/WiringPi-master/wiringPi/wiringPiSPI.c SHARED/WiringPi-master/wiringPi/wiringSerial.c SHARED/WiringPi-master/wiringPi/wiringShift.c UserBoardController.cpp UserBoardController.h)
 
 
 

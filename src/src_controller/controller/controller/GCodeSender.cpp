@@ -123,6 +123,7 @@ bool GCodeSender::init_serial_port(std::string _serial_port_file, int _baud_rate
 	close_serial_port();     //CLOSE PORT IF OPEN
 	if(port->openDevice(_serial_port_file.c_str(), _baud_rate) != 1) {
 		LOG_F(ERROR, "serial port open failed %s WITH BAUD %i",_serial_port_file.c_str(),_baud_rate);
+		return false;
 	}
 	//ENABLE RESET
 	port->DTR(false);
@@ -133,7 +134,7 @@ bool GCodeSender::init_serial_port(std::string _serial_port_file, int _baud_rate
 	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 	port->DTR(true);
 	port->RTS(false);
-	
+	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 	//READ MAY EXISITNG BUFFER => IGNORING MARLIN CONNECTION INFO LIKE Printer Online,...
 	dummy_read();
 

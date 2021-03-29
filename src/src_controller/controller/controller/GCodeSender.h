@@ -43,7 +43,7 @@ public:
 
 	bool set_led(int _r, int _g, int _b, int _intensity); //SET THE RGW STRIP COLOR M150 OPTION NEEDED
 
-	bool read_i2c_slave(int _slave_addr,int _bytes, char* _read_data);
+
 private:
 	serialib*  port = nullptr;
 	const int MARLIN_SERIAL_BAUD_RATE = 115200;

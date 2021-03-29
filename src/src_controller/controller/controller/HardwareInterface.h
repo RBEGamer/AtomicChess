@@ -21,7 +21,7 @@
 
 //--- V2 HARDWARE MODULES -------- //
 #include "GCodeSender.h"
-
+#include "UserBoardController.h" //READ ARDUINO BASED NFC TAG USING PN532
 
 
 
@@ -100,6 +100,7 @@ private:
 	IOController* iocontroller = nullptr;
 	//----- V2 HARDWARE ------- //
 	GCodeSender* gcode_interface = nullptr;
+	UserBoardController* userboardcontroller_interface = nullptr;
 	HardwareInterface();
 	~HardwareInterface();
 };

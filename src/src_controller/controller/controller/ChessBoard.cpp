@@ -1846,8 +1846,8 @@ ChessBoard::BOARD_ERROR ChessBoard::initBoard(bool _with_scan) {
     //boardFromFen("rnbqkbnr/pppPpp1p/8/8/8/8/PPP1pPPP/RNBQKBNR w Qkq - 0 1",ChessBoard::BOARD_TPYE::TARGET_BOARD); //D4 -> D7  && G5 -> E2 //OK
 
     //TODO ADD PARK TO FIELD
-    boardFromFen("rnbqkbnr/pp1ppppp/8/8/8/8/P1pPPPPP/RNBQKBNR w KQkq - 0 1",
-                 ChessBoard::BOARD_TPYE::TARGET_BOARD); //REMOVE B2 PAWN AND MOVE C7C2
+  //  boardFromFen("rnbqkbnr/pp1ppppp/8/8/8/8/P1pPPPPP/RNBQKBNR w KQkq - 0 1",
+    //             ChessBoard::BOARD_TPYE::TARGET_BOARD); //REMOVE B2 PAWN AND MOVE C7C2
     syncRealWithTargetBoard();
     //syncRealWithTargetBoard();
     //boardFromFen("r1bqkbnr/pp1ppppp/n7/8/2p5/1QP5/PP1PPPPP/RNB1KBNR", ChessBoard::BOARD_TPYE::REAL_BOARD);    //DAME BAUER

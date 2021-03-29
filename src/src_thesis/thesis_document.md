@@ -12,7 +12,10 @@
 
 ## Zielsetzung
 
-Das Ziel dieser Arbeit ist es, einen Schach-Tisch zu konstruieren und programmieren, welcher in der Lage ist Schachfiguren autonom zu bewegen. Der Schwerpunkt liegt dabei insbesondere auf der Programmierung des eingebettenen Systems. Dieses besteht zum einem aus der Positionserkennung und Steuerung der Hardwarekomponenten (Schachfiguren) und zum anderen aus der Kommuniktation zwischen dem Tisch selbst und einem in einer Cloud befindlichen Server.
+Das Ziel dieser Arbeit ist es, einen Schach-Tisch zu konstruieren und programmieren, welcher in der Lage ist Schachfiguren autonom zu bewegen.
+
+Der Schwerpunkt liegt dabei insbesondere auf der Programmierung des eingebettenen Systems.
+Dieses besteht zum einem, aus der Positionserkennung und Steuerung der Hardwarekomponenten (Schachfiguren) und zum anderen aus der Kommuniktation zwischen dem Tisch selbst und einem in einer Cloud befindlichen Server.
 
 Mittels der Programmierung werden diverse Technologien von verschiedenen Einzelsystemen zu einem Gesamtprodukt zusammengesetzt. Zu diesen Einzelsystemen gehören:
 
@@ -89,8 +92,11 @@ Auch existieren weitere abwandlungen von autonomen Schachbrettern, bei welchem d
 | Parkposition für ausgeschiedene Figuren 	| nein                                    					| nein                                       				| nein                       				|
 | Stand-Alone Funktionalität              	| nein (PC erfoderlich)                   					| ja                                         				| ja                         				|
 | Besonderheiten                          	| -                                       					| Sprachsteuerung (Amazon Alexa)             				| Zuganzeige über LED Matrix 				|
-| Licence                                 	| (+gpl) 3+                                					| (+gpl)                                       				| -                          				|
+| Lizenz#
+zz                                 	| (+gpl) 3+                                					| (+gpl)                                       				| -                          				|
 
+
+In den bestehenden Projekten ist zu erkennen, dass so ein Schachtisch sehr einfach und mit einfachsten Mittel konstruiert werden können.
 ## Zielgruppe
 
 ## User Experience

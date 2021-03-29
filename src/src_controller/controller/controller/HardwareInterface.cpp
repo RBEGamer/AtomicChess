@@ -101,6 +101,7 @@ bool HardwareInterface::init_hardware(HardwareInterface::HI_HARDWARE_REVISION _h
 	}
 	else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD || hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD_V2)
 	{
+	    //INIT THE MARLIN GCODE SENDER INTERFACE
 		if (gcode_interface == nullptr) {
 			int baud = 115200;
 			ConfigParser::getInstance()->getInt(ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_BOARD_SERIAL_BAUD, baud);
@@ -126,6 +127,14 @@ bool HardwareInterface::init_hardware(HardwareInterface::HI_HARDWARE_REVISION _h
                 LOG_F(INFO, "HardwareInterface::init_hardware set steps per mm setting to: %i" ,spm);
             }
 
+		}
+
+
+        //INIT USERBOARD CONTROLLER TO READ NFC TAGS USING THE ARDUINO SERIAL BASED APPROACH
+		if(userboardcontroller_interface == nullptr){
+            int baud = 115200;
+            ConfigParser::getInstance()->getInt(ConfigParser::CFG_ENTRY::HARDWARE_UBC_SERIAL_BAUD, baud);
+            userboardcontroller_interface = new UserBoardController(ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::HARDWARE_UBC_SERIAL_PORT), baud);
 		}
 
 	}
@@ -157,6 +166,11 @@ HardwareInterface::~HardwareInterface()
 	{
 		delete gcode_interface;
 	}
+
+    if (userboardcontroller_interface != nullptr)
+    {
+        delete userboardcontroller_interface;
+    }
 	
 }
 
@@ -274,16 +288,21 @@ ChessPiece::FIGURE HardwareInterface::ScanNFC(int _retry_count)
 	{
 		if (iocontroller != nullptr)
 		{
-			return iocontroller->ScanNFC(_retry_count);
+            ChessPiece::FIGURE fig= iocontroller->ScanNFC(_retry_count);
+            ChessPiece::FigureDebugPrint(fig);
+			return fig;
 		}
 			
 	}
 	else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD || hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD_V2)
 	{
-		//TODO WITH MARLIN? OVER I2C ?
+        ChessPiece::FIGURE fig = userboardcontroller_interface->read_chess_piece_nfc();
+        ChessPiece::FigureDebugPrint(fig);
+        return fig;
 	}
 
 	//ELSE RETURN A INVALID FIGURE
+    LOG_F(ERROR,"HardwareInterface::ScanNFC() return an invalid figure due invalid HW CONFIG");
     ChessPiece::FIGURE fig;
 	fig.color = ChessPiece::COLOR::COLOR_UNKNOWN;
 	fig.type = ChessPiece::TYPE::TYPE_INVALID;
@@ -312,7 +331,7 @@ void HardwareInterface::enable_motors()
 	}
 	else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD || hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD_V2)
 	{
-		//NOT NEEDED FOR REV 2 (GCODE) => MOTORS WILL AUTOMATICLY ACTIVATED AFTER A MOVEMENT COMMAND (G0, G1)
+		//NOT NEEDED FOR REV 2 (GCODE) => MOTORS WILL AUTOMATICLY ACTIVATED AFTER A MOVEMENT COMMAND (G0, G1,...)
 	}
 }
 
