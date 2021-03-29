@@ -11,6 +11,7 @@
 #include <iostream>
 #include <thread>
 #include <vector>
+#include <sstream>      // std::stringstream, std::stringbuf
 //3rd PARTY INCLUDES
 #include "SHARED/loguru-master/loguru.hpp"
 #include "SHARED/serialib-master/lib/serialib.h"
@@ -51,6 +52,7 @@ private:
     bool check_baud_rate(int _baudrate_to_check); //CHECKS A GIVEN BAUDRATE TO A STANDART VALID ONE
     void dummy_read();
     std::string get_value(std::string data, char separator, int index);
+    std::vector<std::string> split(std::string _input, char _char);
 };
 
 

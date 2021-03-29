@@ -305,7 +305,7 @@ int main(int argc, char *argv[])
 	}
 
 
-//	HardwareInterface::getInstance()->ScanNFC();
+	HardwareInterface::getInstance()->ScanNFC();
 
 
 

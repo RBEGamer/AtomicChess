@@ -198,6 +198,23 @@ std::string UserBoardController::get_value(std::string data, char separator, int
         return found > index ? data.substr(strIndex[0], strIndex[1]) : "";
 
 }
+
+//https://stackoverflow.com/questions/10058606/splitting-a-string-by-a-character/10058756
+std::vector<std::string> UserBoardController::split(std::string _input, char _char){
+    std::stringstream test;
+    test.str(_input); //LOAD STRING
+
+    std::string segment;
+    std::vector<std::string> seglist;
+
+    while(std::getline(test, segment, _char))
+    {
+        seglist.push_back(segment);
+    }
+
+    return seglist;
+}
+
 std::string UserBoardController::send_command_blocking(std::string _cmd) {
 
     if (port == nullptr) {
@@ -235,9 +252,11 @@ std::string UserBoardController::send_command_blocking(std::string _cmd) {
         //CHECK FOR RESPONSE
         if (resp.rfind(_cmd + "res_") != std::string::npos) {
         std::string value = get_value(resp,UBC_CMD_SEPERATOR,3);
-        int i = 0;
+        std::vector<std::string> re = split(value,UBC_CMD_SEPERATOR);
         return value;
-
+            //0 => TAG
+            //1 => ERROR
+            //IF COMMAND
         //TODO MODIFY PARSE RESULT
         } else {
             wait_counter++;
