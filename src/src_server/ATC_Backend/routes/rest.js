@@ -3,9 +3,8 @@
  */
 var express = require('express');
 var router = express.Router();
-var listEndpoints = require('express-list-endpoints'); //for rest api explorer
-var UUID = require('uuid');
-
+var sanitizer = require('sanitizer');
+var bcrypt = require('bcrypt'); //for pw hash
 //---- LOGIC PACKAGES -------------- //
 var redisClient = require("../session_handling/redis_db_connection");
 var profile_handling = require("../session_handling/profile_handling");
@@ -575,10 +574,11 @@ router.get('/get_profile_information_secure',function (req,res,next) {
         var pid = req.queryString("pid");
         var authkey = req.queryString("authkey");
 
-        if(authkey !== CFG.getConfig().settings_change_auth_key){
-            res.json({err:true, status:"err_authkey_false"});
+        if(!req.session.user_data && authkey !== CFG.getConfig().settings_change_auth_key){
+            res.json({err:true, status:"err_authkey_false_or_invalid_session"});
             return;
         }
+
 
         if(!pid || pid === ""){
             res.json({err:"pid not set",profile_data:null});
@@ -804,21 +804,24 @@ router.get('/server_config',function (req,res,next) {
         var key = req.queryString("key");
         var value = req.queryString("value");
 
-        if(!key || !value || !authkey){
+        if(!key || !value){
             //res.status(500);
             res.json({err:true, status:"err_query_paramter_value"});
             return;
         }
-
-        if(authkey !== CFG.getConfig().settings_change_auth_key){
-            res.json({err:true, status:"err_authkey_false"});
+        //CHECK SESSION OR API KEY
+        if(!req.session.user_data && authkey !== CFG.getConfig().settings_change_auth_key){
+            res.json({err:true, status:"err_authkey_false_or_invalid_session"});
             return;
         }
 
-        if(key === "settings_change_auth_key"){
-            res.json({err:true, status:"err_cant_set_auth_key_over_webconsole"});
+        if(key === "settings_change_auth_key" || key === "settings_change_pw"|| key === "secret_addition"){
+            res.json({err:true, status:"err_cant_set_this_key_over_webconsole"});
             return;
         }
+
+
+
         CFG.set_key(key,value);
         var cfg = CFG.getConfig();
         res.json({err:null,res:cfg});
@@ -831,81 +834,72 @@ router.get('/server_config',function (req,res,next) {
 
 router.get('/get_server_config',function (req,res,next) {
     try{
+        //CHECK SESSION OR API KEY
+        if(!req.session.user_data && req.queryString("authkey") !== CFG.getConfig().settings_change_auth_key){
+            res.json({err:true, status:"err_authkey_false_or_invalid_session"});
+            return;
+        }
+        //LOAD CONFIG AND SEND JSON
         var cfg = CFG.getConfig();
         var cfg_readonly = Object.assign({}, cfg); //CREATE A READ ONLY COPY OF THE CONFIG
-        cfg_readonly.settings_change_auth_key = "";
+        //DELETE SOME KEYS
+        //TODO USE PREFIX IN KEYS TO REMOVE OR SPLIT CONFIG
+        delete cfg_readonly.settings_change_auth_key;
+        delete cfg_readonly.settings_change_pw;
+        delete cfg_readonly.secret_addition;
+        delete cfg_readonly.mongodb_connection_url;
+        delete cfg_readonly.redis_connection_url;
+        delete cfg_readonly.chess_move_validator_api_url;
+        delete cfg_readonly.mongodb_database_name;
+        delete cfg_readonly.mongodb_collection_profiles;
+        delete cfg_readonly.mongodb_collection_games;
+        delete cfg_readonly.mongodb_collection_lobby;
+        delete cfg_readonly.webserver_default_port;
+        delete cfg_readonly.app_name;
+
         res.json({err:null,res:cfg_readonly});
-        return;
     }catch (e) {
         res.json({err:e,res:null});
-        return;
     }
 });
 
 
-//------- THIS SNITTPET WAS FROM MY NODE_JS TEMPLATE --------------------------------- //
-// https://github.com/RBEGamer/HackathonStarterTemplateWebService/blob/master/src_nodejs/server.js
-//---------------------- FOR REST ENDPOINT LISTING ---------------------------------- //
-router.get('/', function (req, res) {
-    res.redirect('/restexplorer.html');
+//------ SESSION MANAGEMENT --------- //
+router.get('/check_login_state', function (req, res) {
+    sess = req.session;
+    if(sess.user_data){
+        res.json({login_state:true});
+    }else{
+        res.json({login_state:false});
+    }
+
 });
 
-//RETURNS A JSON WITH ONLY /rest ENPOINTS TO GENERATE A NICE HTML SITE
-var REST_ENDPOINT_PATH_BEGIN_REGEX = "^\/rest\/(.)*$"; //REGEX FOR ALL /rest/* beginning
-var REST_API_TITLE = "ATC BACKEND";
-var rest_endpoint_regex = new RegExp(REST_ENDPOINT_PATH_BEGIN_REGEX);
-var REST_PARAM_REGEX = "\/:(.*)\/"; // FINDS /:id/ /:hallo/test
-//HERE YOU CAN ADD ADDITIONAL CALL DESCTIPRION
-var REST_ENDPOINTS_DESCRIPTIONS = [
-    { endpoints: "/rest/update/:id", text: "UPDATE A VALUES WITH ID" }
+router.post('/perform_user_login', function (req, res) {
 
-];
+    sess = req.session;
+    var user_pw = req.body.user_pw;
+    var origin_url = req.body.origin_url;
 
-router.get('/listendpoints', function (req, res) {
-    var ep = listEndpoints(router);
-    var tmp = [];
-    for (let index = 0; index < ep.length; index++) {
-        var element = ep[index];
-        if (rest_endpoint_regex.test(element.path)) {
-            //LOAD OPTIONAL DESCRIPTION
-            for (let descindex = 0; descindex < REST_ENDPOINTS_DESCRIPTIONS.length; descindex++) {
-                if (REST_ENDPOINTS_DESCRIPTIONS[descindex].endpoints == element.path) {
-                    element.desc = REST_ENDPOINTS_DESCRIPTIONS[descindex].text;
-                }
+
+
+    //NOW CHECK PASSWORD
+    //var p2 =  bcrypt.hashSync(user_pw,12);
+    bcrypt.compare(sanitizer.sanitize(user_pw),CFG.getConfig().settings_change_pw, function (err, crypr_res) {
+        if (crypr_res) {
+            //APPLY USER DATA
+            sess.user_data = {login_ts: Date.now()};
+            //REDIRECT USER IF ORIGIN SET
+            if(origin_url != null && origin_url !== ""){
+                res.redirect(sanitizer.sanitize(origin_url));
+            }else{
+                res.redirect("/");
             }
-            //SEARCH FOR PARAMETERS
-            //ONLY REST URL PARAMETERS /:id/ CAN BE PARSED
-            //DO A REGEX TO THE FIRST:PARAMETER
-            element.url_parameters = [];
-            var arr = (String(element.path) + "/").match(REST_PARAM_REGEX);
-            if (arr != null) {
-                //SPLIT REST BY /
-                var splittedParams = String(arr[0]).split("/");
-                var cleanedParams = [];
-                //CLEAN PARAEMETER BY LOOKING FOR A : -> THAT IS A PARAMETER
-                for (let cpIndex = 0; cpIndex < splittedParams.length; cpIndex++) {
-                    if (splittedParams[cpIndex].startsWith(':')) {
-                        cleanedParams.push(splittedParams[cpIndex].replace(":", "")); //REMOVE :
-                    }
-                }
-                //ADD CLEANED PARAMES TO THE FINAL JOSN OUTPUT
-                for (let finalCPIndex = 0; finalCPIndex < cleanedParams.length; finalCPIndex++) {
-                    element.url_parameters.push({ name: cleanedParams[finalCPIndex] });
-
-                }
-            }
-            //ADD ENPOINT SET TO FINAL OUTPUT
-            tmp.push(element);
+        }else{
+            res.redirect("/?login_invalid=1");
         }
-    }
-    res.json({ api_name: REST_API_TITLE, endpoints: tmp });
+    });
 });
-
-
-
-
-
-
 
 router.get('/get_user_config',function (req,res,next) {
     try{
@@ -979,9 +973,6 @@ router.post('/set_user_config',function (req,res,next) {
         res.json({err:e, status:null});
     }
 });
-
-
-
 
 router.post('/store_user_log',function (req,res,next) {
     try{

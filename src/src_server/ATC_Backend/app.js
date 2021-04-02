@@ -5,6 +5,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+var session = require('express-session');//sessions
+var sessionstore = require('sessionstore'); //sessions
+var md5 = require('md5'); //sessions
+
 
 var indexRouter = require('./routes/index');
 var restRouter = require('./routes/rest');
@@ -61,6 +65,15 @@ app.use(function (req, res, next) {
 });
 //HANDLE UNTRUSTED INPUT
 app.use(require('sanitize').middleware);
+
+
+//ENABLE SESSIONS
+app.use(session({
+  secret: md5(String(Date.now())+CNF.getConfig().secret_addition), // MAKE A UNIQUE HASH EVERY TIME THE SERVER STARTS // SITEEFFECT: SESSION FROM OLD CLIENT WILL BE DESTROYED
+  store: sessionstore.createSessionStore(),
+  resave: true,
+  saveUninitialized: true
+}));
 
 //USE THE ASSETS "FOLDER" TO PROVIDE LIBRARIES FROM NODE MODULES
 app.use('/assets', [

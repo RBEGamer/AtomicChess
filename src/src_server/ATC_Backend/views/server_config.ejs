@@ -1,7 +1,7 @@
 <html lang="en">
 
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densityDpi=device-dpi" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
   <meta content="text/html; charset=utf-8" http-equiv="content-type">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
@@ -80,6 +80,24 @@
 </nav>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div id="alert_message"></div>
 
 <div class="row justify-content-center">
@@ -90,9 +108,7 @@
       </div>
       <div class="card-body">
         <div class="text-center">
-
           <form>
-
             <div class="form-group row">
               <label for="inputPassword" class="col-sm-2 col-form-label">API KEY</label>
               <div class="col-sm-10">
@@ -100,7 +116,6 @@
               </div>
             </div>
           </form>
-
         </div>
       </div>
     </div>
@@ -126,7 +141,28 @@
 </div>
 
 
+<!-- LOGIN/GETHWID Modal -->
+<div class="modal" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document" >
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">LOGIN</h4>
+      </div>
+      <div class="modal-body mx-3">
+        <form method="get">
+          <div class="form-group">
+            <label for="m_gng_hwid">PROFILE ID</label>
+            <input type="text" class="form-control" id="m_gng_hwid" name="playerid" aria-describedby="m_gng_hwid" placeholder="" required minlength="36" maxlength="36">
+            <small id="m_gng_hwid" class="form-text text-muted">Remember this ID to login to this Profile later again.</small>
+          </div>
 
+          <button type="submit" class="btn btn-info btn-lg btn-block" >START NEW GAME</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
 
 <!-- Footer -->
 <footer class="footer bg-light">
@@ -144,14 +180,12 @@
             <th>CHESS LOGIC VALIDATOR</th>
             <td><img id="sa_mv_validator" width="64px" src="/img/icons/alert_off.png" /></td>
           </tr>
-
           <tr>
             <th>AVAILABLE PLAYER AI INSTANCES</th>
             <td><span id="sa_aaipc"></span></td>
           </tr>
           </tbody>
         </table>
-
       </div>
       </div>
   </div>
@@ -162,7 +196,9 @@
 
 
 
-<script src="/js/jquery/jquery.min.js"></script>
+<script src="js/json3.min.js"></script>
+<script src="js/jquery/jquery.min.js"></script>
+<script src="js/chessboard.js"></script>
 <script src="/bootstrap/js/bootstrap.min.js"></script>
 <script src="/js/PGNViewer/js/pgnvjs.js"></script>
 
@@ -172,7 +208,6 @@
   //https://stackoverflow.com/questions/5416920/timestamp-to-human-readable-format
   function getFormattedDate(_dt) {
     var date = new Date(_dt);
-
     var month = date.getMonth() + 1;
     var day = date.getDate();
     var hour = date.getHours();
@@ -254,48 +289,40 @@
   }
 
   function load_server_config(){
-
     $.getJSON('/rest/get_server_config',function (data) {
-
       if(!data || data.err || !data.res){
         console.log(data.err)
         return;
       }
-      console.log(data.res);
+      //CREATE HTML TABLE WITH ALL KEYS
       var tmp_html = "";
       Object.keys(data.res).forEach(function(key) {
-
-
         console.log(key, data.res[key]);
         //TODO INSERT FROM WITH SUMBIT BUTTON
         //+SECRET KEY BUTTON
         tmp_html += "<tr><td>"+String(key)+"</td><td><input id='SC_"+String(key)+"' type='text' name='value' value='"+data.res[key]+"' />        <input type='button' class='btn btn-sm btn-fh' value='SAVE' onclick='set_server_config(\"SC_"+String(key)+"\")'></td></form><tr>";
       });
-
-
+      //SHOW CONFIG TABLE
       $('#config_table').html(tmp_html);
-      /*
-
-      <tr>
-            <th scope="row">Name</th>
-            <td id="friendly_name">---</td>
-
-          </tr>
-       */
-      //DISPLAY CURRENT BOARD
     });
+  }
 
+
+  function check_login_state(){
+    $.getJSON('/rest/check_login_state',function (data) {
+      console.log(data);
+      if(data && data.login_state== null || data.login_state === false){
+        window.location.href = "/create_session?origin=" + window.location.pathname;
+      }
+    });
   }
 
 
   //EXECUTES SCRIPT IF PAGE LOADED
-  $(document).ready(function () {
-    console.log("ready!");
-    //HIDE GAME INFORMATION
-   //toggle_visible_information_container(false);
+  $(document).ready(function ($) {
+    check_login_state();
     check_service_state();
     load_server_config();
-
   });
 </script>
 

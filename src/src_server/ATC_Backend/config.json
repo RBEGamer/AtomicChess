@@ -16,5 +16,8 @@
   "github_repository": "https://github.com/RBEGamer/AtomicChessOS",
   "impressum_ulr": "https://marcelochsendorf.com/impressum",
   "livestream_url": "https://youtu.be/Lt0HTwnXU78",
-  "settings_change_auth_key": "1337"
+  "settings_change_auth_key": "1337",
+  "settings_change_pw": "$2b$12$5U/EjaTgIT1bgFmsjpgE6OftfQSBmlKEkSAeEZSFROhIMzU7S30/a",
+  "secret_addition":"dfvsgijoamporwemjhioangmvkrnjg"
+
 }

@@ -56,6 +56,19 @@ router.get('/config', function(req, res, next) {
   res.render('config_viewer', { title: 'CONFIG VIEWER' });
 });
 
+
+router.get('/create_session', function(req, res, next) {
+  res.render('create_session', { title: 'SESSION MANAGEMENT' });
+});
+
+
+
+
+
+
+
+
+
 //------------------------- SOCKET IO ROUTER ------------------- //
 
 io.on('connection', (socket) => {
