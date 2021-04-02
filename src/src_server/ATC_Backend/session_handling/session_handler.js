@@ -1,6 +1,6 @@
 var CronJob = require('cron').CronJob;
 var redisDbConnection = require('../session_handling/redis_db_connection');
-var CONFIG = require('../config'); //LOAD GLOABAL CONFIG FILE
+var CFG = require('../config/config'); //LOAD GLOABAL CONFIG FILE
 var UUID = require('uuid');
 
 
@@ -47,7 +47,7 @@ function check_expired_session(_hwid,_callack){
             //IF TIME DIFFERENCE IS TOO HIGH -> REMOVE THE SESSION
             var diff = (Date.now() - dt) / 1000; //A TIMESTAMP IS IN MS SO WE HAVE DIVIDE
             //console.log(diff);
-            if (diff > CONFIG.getConfig().session_lifetime_in_seconds) {
+            if (diff > CFG.getConfig().session_lifetime_in_seconds) {
                 _callack(null, true);
                 return;
             }else{
@@ -72,7 +72,6 @@ function get_session_keys(_callback){
         if (reply[0]) {
             //RETURN KEYS
             _callback(null,reply[1]);
-            return;
         }
     });
 }
@@ -83,7 +82,6 @@ function insert_session(_hwid, _callback){
     var ts = Date.now();
     redisDbConnection.getRedisConnection().set("session:"+_hwid, JSON.stringify({session_id:session_id,timestamp:ts, hwid:_hwid}),function (s_err,s_res){
         _callback(s_err,session_id);
-        return;
     });
 }
 
@@ -111,7 +109,6 @@ function get_session(_hwid, _callback){
             console.log("json_parse_failed_of_redis_content");
             console.log(e);
             _callback(e,null);
-            return;
         }
 
     });

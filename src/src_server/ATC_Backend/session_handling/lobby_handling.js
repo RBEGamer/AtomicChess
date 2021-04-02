@@ -1,6 +1,6 @@
 var mongo = require('mongodb');
 var MongoClient = require('mongodb').MongoClient;
-var CONFIG = require('../config'); //include the cofnig file
+var CFG = require('../config/config'); //include the cofnig file
 var mdb = require('./mongo_db_connection'); //include mongo db connection
 var cr = require("../chess_related_logic/chess_ranking");
 //THE PLAYER GAME STATES
@@ -28,7 +28,7 @@ function get_avariable_players(_own_hwid,_callback, _ps = player_state.searching
     //GET ALL PLAYERS IN THE LOBBY JOIN THE PROFILE TABLE INTO TO GET THEIR PROFILE NAMES AND RANK TOO
     mdb.getLobbyCollection().aggregate([{ $lookup:
             {
-                from: CONFIG.getConfig().mongodb_collection_profiles,
+                from: CFG.getConfig().mongodb_collection_profiles,
                 localField: 'hwid',
                 foreignField: 'hwid',
                 as: 'profile'
@@ -84,7 +84,7 @@ function get_player_in_lobby(_callback){
     //GET ALL PLAYERS IN THE LOBBY JOIN THE PROFILE TABLE INTO TO GET THEIR PROFILE NAMES AND RANK TOO
     mdb.getLobbyCollection().aggregate([{ $lookup:
             {
-                from: CONFIG.getConfig().mongodb_collection_profiles,
+                from: CFG.getConfig().mongodb_collection_profiles,
                 localField: 'hwid',
                 foreignField: 'hwid',
                 as: 'profile'

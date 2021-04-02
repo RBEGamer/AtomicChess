@@ -1,10 +1,10 @@
-var CONFIG = require('../config'); //include the cofnig file
+var CFG = require('../config/config'); //include the cofnig file
 var REDIS = require("redis");
 
 var redisClient = null;
 var redisReady = false;
 function connect_db(){
-redisClient = REDIS.createClient(CONFIG.getConfig().redis_connection_url);
+redisClient = REDIS.createClient(CFG.getConfig().redis_connection_url);
     //REGISTER EVENTS FOR ERROR AND REDIS FINISHED
     redisClient.on("error", function(error) {
         console.error(error);

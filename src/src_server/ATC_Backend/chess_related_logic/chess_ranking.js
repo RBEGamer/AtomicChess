@@ -1,7 +1,3 @@
-
-
-
-
 module.exports = {
     rank_to_elo_rating_name: function (_rank) {
         if (_rank >= 2700) {return "SUPER GRANDMASTER";}

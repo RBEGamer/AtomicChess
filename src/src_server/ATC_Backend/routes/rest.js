@@ -12,7 +12,7 @@ var lobby_handling = require("../session_handling/lobby_handling");
 var session_handling = require("../session_handling/session_handler");
 var game_handling = require("../session_handling/game_handler");
 var CBL = require("../chess_related_logic/chess_board_logic");
-var CFG = require('../config'); //include the cofnig file
+var CFG = require('../config/config'); //include the cofnig file
 
 
 
@@ -976,6 +976,7 @@ router.post('/set_user_config',function (req,res,next) {
 
 router.post('/store_user_log',function (req,res,next) {
     try{
+
         var hwid = req.queryString("hwid");
         var sid = req.queryString("sid");
         var log = req.bodyJson();

@@ -3,7 +3,7 @@ var http = require('http').createServer(app);
 var io = require('socket.io')(http);
 var express = require('express');
 var router = express.Router();
-var CFG = require('../config'); //include the cofnig file
+var CFG = require('../config/config'); //include the cofnig file
 
 
 /* GET home page. */

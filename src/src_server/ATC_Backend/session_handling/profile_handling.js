@@ -1,9 +1,11 @@
-var CONFIG = require('../config'); //include the cofnig file
 var MDB = require('./mongo_db_connection'); //include mongo db connection
 var LH = require('./lobby_handling'); //GET LOBBY HANDLING FUNCTIONS
 var CR = require('../chess_related_logic/chess_ranking'); // GET CHESS RANKING FUNCTIONS
 var UUID = require('uuid');
 var ANG = require('./AbstractNameGenerator'); //
+
+
+
 function apply_points_to_profile(_points,_game_id,_other_player,_callback){
     //UPDATE POINTS * time multiplier
     var point_elo_name = CR.rank_to_elo_rating_name(_points);

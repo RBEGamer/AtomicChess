@@ -1,8 +1,7 @@
 var LH = require("../session_handling/lobby_handling");
 var GH = require("../session_handling/game_handler");
 var CR = require("./chess_ranking");
-var CONFIG = require("../config.json");
-var CFG = require('../config'); //include the cofnig file
+var CFG = require('../config/config'); //include the cofnig file
 var CronJob = require('cron').CronJob;
 var HELPER_FUNCTIONS = require("../session_handling/helper_functions");
 
@@ -15,7 +14,7 @@ function player_sort_function_swt(a, b) {
 
 
 
-var matchmaking_job = new CronJob('*/'+CONFIG.matchmaking_runner_interval+' * * * * *', function() {
+var matchmaking_job = new CronJob('*/'+CFG.getConfig().matchmaking_runner_interval+' * * * * *', function() {
 
    // console.log("matchmaking_job");
     //GET ALL SEARCHING PLAYERS
@@ -74,11 +73,9 @@ var matchmaking_job = new CronJob('*/'+CONFIG.matchmaking_runner_interval+' * * 
 
 
 
-
-
 function startMatchmakingCycle() {
     //if interval time is less then 0 we disbale the cleanup
-    if(CONFIG.matchmaking_runner_interval <=0 ){
+    if(CFG.getConfig().matchmaking_runner_interval <=0 ){
         console.info("--- startMatchmakingCycleDisbale ---");
         return;
     }

@@ -1,5 +1,5 @@
 var request = require('request');
-var CONFIG = require('../config'); //include the cofnig file
+var CFG = require('../config/config'); //include the cofnig file
 
 const CHESS_FIGURES = Object.freeze({
     BLACK:{
@@ -32,7 +32,7 @@ function get_player_score(_extendet_fen,_callback){
 
 
 function check_board_and_get_legal_moves(_extendet_fen,_callback){
-    request.post({url:CONFIG.getConfig().chess_move_validator_api_url+"/rest/validate_board", formData: {fen:_extendet_fen}}, function optionalCallback(err, httpResponse, body) {
+    request.post({url:CFG.getConfig().chess_move_validator_api_url+"/rest/validate_board", formData: {fen:_extendet_fen}}, function optionalCallback(err, httpResponse, body) {
         if (err) {
             _callback(err,null);
             return;
@@ -55,7 +55,7 @@ function check_board_and_get_legal_moves(_extendet_fen,_callback){
 }
 
 function check_move_validator_state(_callback){
-    request.get({url:CONFIG.getConfig().chess_move_validator_api_url+"/rest/state"}, function optionalCallback(err, httpResponse, body) {
+    request.get({url:CFG.getConfig().chess_move_validator_api_url+"/rest/state"}, function optionalCallback(err, httpResponse, body) {
         if (err) {
             _callback(err);
             return;
@@ -64,7 +64,7 @@ function check_move_validator_state(_callback){
         var jsonbody = null;
         try {
             jsonbody = JSON.parse(body);
-            if(!jsonbody || jsonbody.status == null || jsonbody.status == null || jsonbody.status == null){
+            if(!jsonbody || jsonbody.status == null){
                 console.error(jsonbody);
                 throw null;
             }
@@ -85,7 +85,7 @@ function execute_move(_board,_move, _callback){
         _callback("!_board.ExtendetFen",false,null,false);
         return;
     }
-    request.post({url:CONFIG.getConfig().chess_move_validator_api_url+"/rest/execute_move", formData: {fen:_board.ExtendetFen,move:_move}}, function optionalCallback(err, httpResponse, body) {
+    request.post({url:CFG.getConfig().chess_move_validator_api_url+"/rest/execute_move", formData: {fen:_board.ExtendetFen,move:_move}}, function optionalCallback(err, httpResponse, body) {
         if (err) {
             _callback(err,null);
             return;

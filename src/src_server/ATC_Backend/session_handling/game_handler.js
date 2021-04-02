@@ -1,10 +1,11 @@
-var CONFIG = require("../config");
+var CFG = require('../config/config');
 var MDB = require('./mongo_db_connection'); //include mongo db connection
 var LH = require("../session_handling/lobby_handling");
 var UUID = require('uuid');
 var HELPER_FUNCTIONS = require("./helper_functions");
 var CBL = require("../chess_related_logic/chess_board_logic");
 var PH = require("./profile_handling");
+
 //game cleanup job wenn spiel last interaction <60m
 const GAME_STATE = Object.freeze({ //TODO UPPER CASE
     init:0, //TODO ----------------------- REMOVE -----------------------------
@@ -471,14 +472,14 @@ function start_match(_player_a_hwid, _player_b_hwid, _callback) {
 function list_all_games(_callback) {
     MDB.getGameCollection().aggregate([{ $lookup:
             {
-                from: CONFIG.getConfig().mongodb_collection_profiles,
+                from: CFG.getConfig().mongodb_collection_profiles,
                 localField: 'player_white_hwid',
                 foreignField: 'hwid',
                 as: 'profile_white'
             }
     },{ $lookup:
             {
-                from: CONFIG.getConfig().mongodb_collection_profiles,
+                from: CFG.getConfig().mongodb_collection_profiles,
                 localField: 'player_black_hwid',
                 foreignField: 'hwid',
                 as: 'profile_black'
@@ -505,14 +506,14 @@ function list_all_games(_callback) {
 function get_game(_game_id,_callback) {
     MDB.getGameCollection().aggregate([{ $lookup:
             {
-                from: CONFIG.getConfig().mongodb_collection_profiles,
+                from: CFG.getConfig().mongodb_collection_profiles,
                 localField: 'player_white_hwid',
                 foreignField: 'hwid',
                 as: 'profile_white'
             }
     },{ $lookup:
             {
-                from: CONFIG.getConfig().mongodb_collection_profiles,
+                from: CFG.getConfig().mongodb_collection_profiles,
                 localField: 'player_black_hwid',
                 foreignField: 'hwid',
                 as: 'profile_black'

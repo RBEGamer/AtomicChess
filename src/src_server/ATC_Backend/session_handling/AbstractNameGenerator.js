@@ -31,20 +31,11 @@ function namegen(count) {
         }
         ret.push(name);
     }
-
     return ret;
 };
 
 
-
-
-
 module.exports = {
-
-
-
-
-
     generate_fullname: function () {
         var tmp =namegen(2);
         return tmp[0] + " " + tmp[1]
@@ -54,9 +45,6 @@ module.exports = {
         return tmp[0] + "_" + tmp[1]
     },
     generate_name: function () {
-
-
         return namegen[0];
     },
-
 }

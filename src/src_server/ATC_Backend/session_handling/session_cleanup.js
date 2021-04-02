@@ -1,14 +1,14 @@
 var CronJob = require('cron').CronJob;
 //var RDB = require('../session_handling/redis_db_connection');
-var CONFIG = require('../config'); //LOAD GLOABAL CONFIG FILE
+var CFG = require('../config/config'); //LOAD GLOABAL CONFIG FILE
 var LH = require("./lobby_handling");
 var GH = require("./game_handler");
 var SH = require("./session_handler");
 
 
 
-var cleanup_job = new CronJob('*/'+CONFIG.getConfig().session_cleanup_loop_interval+' * * * * *', function() {
-    if(CONFIG.session_lifetime_in_seconds <=0 ){return;}
+var cleanup_job = new CronJob('*/'+CFG.getConfig().session_cleanup_loop_interval+' * * * * *', function() {
+    if(CFG.session_lifetime_in_seconds <=0 ){return;}
     try {
 
     //FIRST GET ALL PLAYER IN THE LOBBY
@@ -68,7 +68,7 @@ var cleanup_job = new CronJob('*/'+CONFIG.getConfig().session_cleanup_loop_inter
 module.exports = {
     startSessionCleanupCycle: function () {
         //if interval time is less then 0 we disbale the cleanup
-        if(CONFIG.getConfig().session_lifetime_in_seconds <=0 ){
+        if(CFG.getConfig().session_lifetime_in_seconds <=0 ){
             console.info("--- SessionCleanupCycleDisabled ---");
             return;
         }
