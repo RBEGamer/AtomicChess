@@ -254,10 +254,7 @@ std::string UserBoardController::send_command_blocking(std::string _cmd) {
         std::string value = get_value(resp,UBC_CMD_SEPERATOR,3);
         std::vector<std::string> re = split(value,UBC_CMD_SEPERATOR);
         return value;
-            //0 => TAG
-            //1 => ERROR
-            //IF COMMAND
-        //TODO MODIFY PARSE RESULT
+           //TODO TEST
         } else {
             wait_counter++;
             if (wait_counter > 3) {
@@ -291,7 +288,10 @@ ChessPiece::FIGURE UserBoardController::read_chess_piece_nfc(){
             continue;
         }
         //TODO PARSE RESULT + ERROR CODE
-
+        //0 => TAG
+        //1 => ERROR
+        //IF COMMAND
+        //TODO MODIFY PARSE RESULT
         //MAKE A FIGURE
     }
 

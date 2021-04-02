@@ -9,7 +9,7 @@
 
 \KOMAoptions{
 	parskip=true,		% Absätze mit Abstand
-	fontsize=12pt,		% Standardschriftgröße 
+	fontsize=12pt,		% Standardschriftgröße
 	toc=flat,		% Inhaltsverzeichnis ohne Einzüge
 	twoside=false,		% Einseitig setzen
 	numbers=nodotatend,	% Nummerierungen nicht mit Punkt abschließen
@@ -35,8 +35,8 @@
 
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-  
-  
+
+
 
 \usepackage{footnotebackref}
 \usepackage{graphicx}
@@ -189,7 +189,7 @@
 
 %%MOD%%
 % Einige Anpassungen müssen nach \begin{document} stehen !!
-\renewcaptionname{ngerman}{\figurename}{\textbf Bild} 	% Bild ... statt Abbildung ... 
+\renewcaptionname{ngerman}{\figurename}{\textbf Bild} 	% Bild ... statt Abbildung ...
 \renewcaptionname{ngerman}{\contentsname}{Inhalt}% Inhalt statt Inhaltsverzeichnis
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Titel im FH Style
@@ -208,7 +208,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 
-\input{declaration}
+\input{thesis_declaration}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -216,7 +216,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 
-\input{abstract}
+\input{thesis_abstract}
 
 
 
@@ -235,7 +235,7 @@
 %%%%%%%%%%%%%%% Anpassung des Seitenstils an FH-Layoutvorschrift %%%%%%%%%%%%
 \renewcommand{\chaptermark}[1]{\markboth{\thechapter\hspace{1cm}#1}{}}	% Kapitel für Headerzeile neu definieren (ohne Nummer)
 \chead{}		% Header Mitte löschen
-\ihead{\leftmark}	% Kapitelbezeichnung links setzen 
+\ihead{\leftmark}	% Kapitelbezeichnung links setzen
 \renewcommand{\headfont}{\bfseries}	% Bold-Font für Headerzeile verwenden
 \setheadsepline{0.5pt}
 
@@ -278,7 +278,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 \appendix % ANHANG EINLEITEN
-\input{attachments}
+\input{thesis_attachments}
 
 
 \end{document}
