@@ -1,1 +1,0 @@
-/usr/bin/c++  -g   CMakeFiles/src_chessboardcomaprealgorithm.dir/main.cpp.o  -o src_chessboardcomaprealgorithm 
