@@ -23,7 +23,12 @@
  */
 
 #include <stdio.h>
+// PATCH FOR MACOSX //
+#include <stdlib.h>
+#else
 #include <malloc.h>
+#endif
+
 #include <pthread.h>
 
 #include "wiringPi.h"
