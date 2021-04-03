@@ -55,5 +55,8 @@ module.exports = {
     },
     getGameCollection: function () {
         return MongoDBDatabase.collection(CFG.getConfig().mongodb_collection_games);
+    },
+    state: function (){
+        return IsMongoConnected;
     }
 }

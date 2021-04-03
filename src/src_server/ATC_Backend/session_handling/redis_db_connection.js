@@ -8,6 +8,7 @@ redisClient = REDIS.createClient(CFG.getConfig().redis_connection_url);
     //REGISTER EVENTS FOR ERROR AND REDIS FINISHED
     redisClient.on("error", function(error) {
         console.error(error);
+        redisReady = false;
     });
 
     redisClient.on('ready', function () {
@@ -25,6 +26,7 @@ redisClient = REDIS.createClient(CFG.getConfig().redis_connection_url);
  */
 process.on("exit", function(){
     if(redisClient == null){return;}
+    redisReady = false;
     redisClient.quit();
 });
 
@@ -32,7 +34,7 @@ process.on("exit", function(){
 module.exports = {
     getRedisConnection: function () {
         if(redisClient == null){
-            console.error("getRedisConnection - redis is not connected - please use conntec function first");
+            console.error("getRedisConnection - redis is not connected - please use connect function first");
             connect_db();
             return null;
         }
@@ -40,4 +42,7 @@ module.exports = {
     },connect: function(){
         return connect_db();
     },
+    state: function (){
+        return redisReady;
+    }
 }

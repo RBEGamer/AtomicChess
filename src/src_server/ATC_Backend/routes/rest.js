@@ -12,9 +12,9 @@ var lobby_handling = require("../session_handling/lobby_handling");
 var session_handling = require("../session_handling/session_handler");
 var game_handling = require("../session_handling/game_handler");
 var CBL = require("../chess_related_logic/chess_board_logic");
-var CFG = require('../config/config'); //include the cofnig file
-
-
+var CFG = require("../config/config"); //include the cofnig file
+var MDB = require("../session_handling/mongo_db_connection"); //ONLY USED IN client_status
+var RDS = require("../session_handling/redis_db_connection"); //ONLY USED IN client_status
 
 // TODO ->START GAME WITH Player PSEUDO ID!!
 
@@ -33,9 +33,7 @@ var CFG = require('../config/config'); //include the cofnig file
  */
 router.get('/client_status',function (req,res,next) {
     try {
-    var sysok = true;
-    //TODO CHECK DB CONNECTIONS ...
-    if(sysok){
+    if(MDB.state() && RDS.state()){
         res.json({"err": null, "status":"ok"});
         return;
     }else{
@@ -59,7 +57,7 @@ router.get('/client_status',function (req,res,next) {
 router.get('/service_state',function (req,res,next) {
     try{
     CBL.check_move_validator_state(function (cmvs_err){
-        res.json({err:null,"move_validator_state":cmvs_err});
+        res.json({err:null,"move_validator_state":!cmvs_err,"move_validator_state_err":cmvs_err});
     });
     }catch (e) {
         res.json({"err": e, "move_validator_state":null});
