@@ -29,8 +29,10 @@ HardwareInterface::HardwareInterface()
 	}else if (hwrevstr == "PROD_V2")
     {
         hwrev = HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD_V2;
-    }
-	else
+    }else if (hwrevstr == "VIRT")
+    {
+        hwrev = HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_VIRT;
+    }else
 	{
 		init_complete = false;
 		return;
@@ -137,9 +139,9 @@ bool HardwareInterface::init_hardware(HardwareInterface::HI_HARDWARE_REVISION _h
             userboardcontroller_interface = new UserBoardController(ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::HARDWARE_UBC_SERIAL_PORT), baud);
 		}
 
-	}
-	else
-	{
+	}else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_VIRT){
+        LOG_F(INFO, "HardwareInterface::init_hardware INIT VIRTUAL HARDWARE");
+    }else{
 		return false;
 	}
 	
@@ -299,10 +301,15 @@ ChessPiece::FIGURE HardwareInterface::ScanNFC(int _retry_count)
         ChessPiece::FIGURE fig = userboardcontroller_interface->read_chess_piece_nfc();
         ChessPiece::FigureDebugPrint(fig);
         return fig;
+
+    }else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_VIRT){
+       // LOG_F(INFO,"HardwareInterface::ScanNFC() return an invalid figure due HWREV_VIRT");
+	}else{
+        LOG_F(ERROR,"HardwareInterface::ScanNFC() return an invalid figure due invalid HW CONFIG");
 	}
 
 	//ELSE RETURN A INVALID FIGURE
-    LOG_F(ERROR,"HardwareInterface::ScanNFC() return an invalid figure due invalid HW CONFIG");
+
     ChessPiece::FIGURE fig;
 	fig.color = ChessPiece::COLOR::COLOR_UNKNOWN;
 	fig.type = ChessPiece::TYPE::TYPE_INVALID;
@@ -375,7 +382,11 @@ bool HardwareInterface::is_target_position_reached()
 		{
 			return gcode_interface->is_target_position_reached();
 		}
+    }else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_VIRT){
+	    return true;
 	}
+
+
 	LOG_F(ERROR,"HardwareInterface::is_target_position_reached() return false due invalid HW CONFIG");
 	return false;
 }
