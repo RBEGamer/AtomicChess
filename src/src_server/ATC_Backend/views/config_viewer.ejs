@@ -140,10 +140,7 @@
       <h4 class="card-title text-justify">SELECTED CONFIG</h4>
     </div>
     <div class="card-body">
-      <div class="text-center">
-
-        <pre style="overflow:scroll; height:400px;" id="test_response" class="prettyprint"></pre>
-
+      <div class="text-center" id="test_response">
       </div>
     </div>
   </div>
@@ -163,11 +160,11 @@
           <tbody>
           <tr>
             <th>BACKEND</th>
-            <td><img id="sa_backend" width="64px" src="/img/icons/alert_off.png" /></td>
+            <td><img id="sa_backend" width="64px" src="/img/icons/cloud_offline.png" /></td>
           </tr>
           <tr>
             <th>CHESS LOGIC VALIDATOR</th>
-            <td><img id="sa_mv_validator" width="64px" src="/img/icons/alert_off.png" /></td>
+            <td><img id="sa_mv_validator" width="64px" src="/img/icons/cloud_offline.png" /></td>
           </tr>
 
           <tr>
@@ -296,10 +293,17 @@
         return;
       }
       //SHOW LOGS
-      if(data.profile_data.profile_config){
-        var str = JSON.stringify(data.profile_data.profile_config, undefined, 4);
-        var strj = syntaxHighlight(str);
-        $("#test_response").html(strj);
+      if(){
+        var tmp_html = "";
+        const keys = Object.keys(data.profile_data.profile_config.USER_DATA);
+        for(var i =0;i< keys.length;i++){
+          const key = keys[i];
+          const val = data.profile_data.profile_config.USER_DATA[key];
+          console.log(key, val);
+          tmp_html += "<tr><td>"+String(key)+"</td><td><input id='SC_"+String(key)+"' type='text' name='value' value='"+val+"' /><input type='button' class='btn btn-sm btn-fh' value='SAVE' onclick='set_userdataconfig(\"SC_"+String(key)+"\")'></td></form><tr>";
+        }
+        //SHOW CONFIG TABLE
+        $('#test_response').html(tmp_html);
       }
     });
 
@@ -314,6 +318,25 @@
     });
   }
 
+  function set_userdataconfig(_key){
+    var key = String(_key).substr(3);
+    var val = $("#"+ String(_key)).val();
+    var api = $("#apikey").val();
+    var vid = $("#pid").val();
+    $.getJSON('/rest/set_user_config_single_key?authkey='+api+'&key='+key+'&value='+val+'&vid='+vid,function (data) {
+      if(!data || data.err || !data.res){
+        $("#alert_message").html("<div class='alert alert-danger' role='alert'>ERROR INVALID API KEY OR ENTRY VALUE</div>");
+      }else{
+        $("#alert_message").html("<div class='alert alert-success' role='alert'>CONFIG ENTRY CHANGE SUCCESS</div>");
+      }
+
+      setTimeout(function (){
+        $("#alert_message").html("");
+      },2000);
+    });
+
+    load_server_config();
+  }
 
   //EXECUTES SCRIPT IF PAGE LOADED
   $(document).ready(function () {

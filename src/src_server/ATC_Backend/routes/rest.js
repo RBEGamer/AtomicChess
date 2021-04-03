@@ -1012,4 +1012,39 @@ router.post('/store_user_log',function (req,res,next) {
     }
 });
 
+
+router.get('/set_user_config_single_key',function (req,res,next) {
+    try{
+        var authkey = req.queryString("authkey");
+        var key = req.queryString("key");
+        var value = req.queryString("value");
+        var vid = req.queryString("vid");
+        if(!key || !value || !vid){
+            //res.status(500);
+            res.json({err:true, status:"err_query_paramter_value"});
+            return;
+        }
+        //CHECK SESSION OR API KEY
+        if(!req.session.user_data && authkey !== CFG.getConfig().settings_change_auth_key){
+            res.json({err:true, status:"err_authkey_false_or_invalid_session"});
+            return;
+        }
+
+        if(key === "settings_change_auth_key" || key === "settings_change_pw"|| key === "secret_addition"){
+            res.json({err:true, status:"err_cant_set_this_key_over_webconsole"});
+            return;
+        }
+
+
+        profile_handling.set_player_user_config_key(key,value,vid,function (sp_err,sp_res) {
+            res.json({err:sp_err, status:sp_res});
+        });
+
+
+    }catch (e) {
+        res.json({err:e,res:null});
+    }
+});
+
+
 module.exports = router;

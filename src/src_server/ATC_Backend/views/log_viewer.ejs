@@ -211,9 +211,9 @@
     $.getJSON('/rest/service_state',function (data) {
       //GET MOVEMENT VALIDATOR MICROSERVICE STATE
       if(data && data.move_validator_state){
-        $("#sa_mv_validator").attr("src", "/img/icons/cloud_offline.png");
-      }else{
         $("#sa_mv_validator").attr("src", "/img/icons/cloud_online.png");
+      }else{
+        $("#sa_mv_validator").attr("src", "/img/icons/cloud_offline.png");
       }
 
     });

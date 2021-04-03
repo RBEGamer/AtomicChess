@@ -87,11 +87,13 @@ function get_profile_virtual_id(_vid, _callback){
 
 
 
-
+function get_player_config_vid(_vid, _callback){
+    MDB.getProfileCollection().findOne({virtual_player_id:_vid, DOCTYPE:"PROFILE"},function(gp_err,gp_res){
+        _callback(gp_err,gp_res.profile_config);
+    });
+}
 
 function get_player_config(_hwid, _callback){
-        //UPDATE PROFILE
-
         MDB.getProfileCollection().findOne({hwid:_hwid, DOCTYPE:"PROFILE"},function(gp_err,gp_res){
             _callback(gp_err,gp_res.profile_config);
         });
@@ -100,9 +102,22 @@ function get_player_config(_hwid, _callback){
 function set_player_config(_cfg,_hwid, _callback){
     //UPDATE PROFILE
     var profile_config = {profile_config:{SETTINGS:_cfg.SETTINGS,USER_DATA:_cfg.USER_DATA, last_update: Date.now()}};
-    MDB.getProfileCollection().updateOne({hwid:_hwid,DOCTYPE:"PROFILE"},{$set:profile_config},function (uo_err,uo_res) {
+    MDB.getProfileCollection().updateOne({hwid:_vid,DOCTYPE:"PROFILE"},{$set:profile_config},function (uo_err,uo_res) {
         _callback(uo_err,"ok");
     });
+}
+
+
+function set_player_user_config_key(_key,_val,_vid, _callback){
+    //UPDATE PROFILE
+    get_player_config_vid(_vid,function(_gpc_err,_gpc_res){
+        _gpc_res.USER_DATA[_key] = _val;
+        var profile_config = {profile_config:{USER_DATA:_gpc_res.USER_DATA, last_update: Date.now()}};
+        MDB.getProfileCollection().updateOne({virtual_player_id:_vid,DOCTYPE:"PROFILE"},{$set:profile_config},function (uo_err,uo_res) {
+            _callback(uo_err,"ok");
+        });
+    });
+
 }
 
 function append_player_log(_log,_hwid, _callback){
@@ -131,5 +146,7 @@ module.exports = {
     apply_points_to_profile,
     set_player_config,
     get_player_config,
-    append_player_log
+    append_player_log,
+    set_player_user_config_key,
+    get_player_config_vid
 }
