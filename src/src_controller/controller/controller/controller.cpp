@@ -10,6 +10,14 @@
 #include <regex>
 #include <algorithm>
 #include <thread>
+
+#ifdef __MACH__
+#include <mach/clock.h>
+#include <mach/mach.h>
+#endif
+
+
+
 //#include <format> // FOR FORMAT STRING
 
 // INCLUDE AND TYPEDEF FOR SYSTEM CLOCK
@@ -248,6 +256,7 @@ int main(int argc, char *argv[])
 	
 
 	//OVERWRITE WITH EXISTSING CONFIG FILE SETTINGS
+	bool new_config_file_written = false;
 	if(!ConfigParser::getInstance()->loadConfigFile(CONFIG_FILE_PATH) || cmdOptionExists(argv, argv + argc, "-writeconfig"))
 	{
         LOG_F(WARNING, "--- CREATE LOCAL CONFIG FILE -----");
@@ -279,8 +288,10 @@ int main(int argc, char *argv[])
 		//WRITE CONFIG FILE TO FILESYSTEM
 		ConfigParser::getInstance()->createConfigFile(CONFIG_FILE_PATH, false);
         ConfigParser::getInstance()->set(ConfigParser::CFG_ENTRY::GENERAL_HWID_INTERFACE,used_if_path,CONFIG_FILE_PATH);
-		LOG_F(ERROR, "WRITE NEW CONFIGFILE DUE MISSING ONE atccontrollerconfig.ini");
 
+
+		LOG_F(ERROR, "WRITE NEW CONFIGFILE DUE MISSING ONE atccontrollerconfig.ini");
+        new_config_file_written = true;
 	}
 	LOG_F(INFO, "CONFIG FILE LOADED");	
 	
@@ -456,7 +467,10 @@ int main(int argc, char *argv[])
 		std::raise(SIGINT);
 	}
 	
-	
+	//IF NEW CONFIG FILE WAS CREATED => UPLOAD IT TO SERVER
+	if(new_config_file_written){
+	    gamebackend.upload_config(ConfigParser::getInstance());
+	}
 
 	
 	
@@ -517,8 +531,14 @@ int main(int argc, char *argv[])
 	
 	
 	//INIT SYSTEM TIMER
+#ifdef __MACH__
+    struct timespec t1;
+    struct timespec t2;
+#else
 	TimePoint t1 = Clock::now();
 	TimePoint t2 = Clock::now();
+#endif
+
 	int SYSTEM_TICK_DELAY = 0;
 	if (!ConfigParser::getInstance()->getInt(ConfigParser::CFG_ENTRY::GENERAL_SYSTEM_TICK_INTERVAL_MS, SYSTEM_TICK_DELAY)) {
 		LOG_F(ERROR, "GENERAL_SYSTEM_TICK_INTERVAL_MS - config get entry  failed");
@@ -534,14 +554,31 @@ int main(int argc, char *argv[])
 	HardwareInterface::getInstance()->setTurnStateLight(HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_IDLE);
 	while (mainloop_running == 0)
 	{
-		
-	
+
+#ifdef __MACH__
+        clock_serv_t cclock;
+        mach_timespec_t mts;
+        host_get_clock_service(mach_host_self(), CALENDAR_CLOCK, &cclock);
+        clock_get_time(cclock, &mts);
+        mach_port_deallocate(mach_task_self(), cclock);
+        t2.tv_sec = mts.tv_sec;
+        t2.tv_nsec = mts.tv_nsec;
+        //IF TIME DIFFERENCE IS BIG ENOUGHT => CALL THE TIMER EVENT
+        if((t2.tv_sec -t1.tv_sec) > SYSTEM_TICK_DELAY)
+        {
+            host_get_clock_service(mach_host_self(), CALENDAR_CLOCK, &cclock);
+            clock_get_time(cclock, &mts);
+            mach_port_deallocate(mach_task_self(), cclock);
+            t1.tv_sec = mts.tv_sec;
+            t1.tv_nsec = mts.tv_nsec;
+#else
+
 		t2 = Clock::now();
 		//IF TIME DIFFERENCE IS BIG ENOUGHT => CALL THE TIMER EVENT
 		if(CHRONO_DURATION_MS(t2, t1) > SYSTEM_TICK_DELAY)
 		{
 			t1 = Clock::now();
-		
+#endif
 
 		
 			//IF A VALID SESSION

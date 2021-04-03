@@ -22,7 +22,15 @@ set(SOURCE_FILES SHARED/guicommunicator/guicommunicator.cpp SHARED/json11-master
 file(GLOB SOURCES *.h *.cpp)
 add_executable(${PROJECT_NAME} ${SOURCE_FILES} ${SOURCES} HardwareInterface.cpp)
 
-TARGET_LINK_LIBRARIES(${PROJECT_NAME} ${Boost_LIBRARIES} rt)
+# MAC COMPILE ON MAC OSX
+if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+else()
+    TARGET_LINK_LIBRARIES(${PROJECT_NAME} ${Boost_LIBRARIES} rt)
+endif()
+
+
+
+
 target_link_libraries(${PROJECT_NAME} ${CMAKE_DL_LIBS})
 target_link_libraries (${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT})
 target_link_libraries(${PROJECT_NAME} ${CMAKE_DL_LIBS})

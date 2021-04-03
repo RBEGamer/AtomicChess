@@ -52,6 +52,9 @@ bool GCodeSender::set_led(int _r, int _g, int _b, int _intensity){
 }
 
 bool GCodeSender::check_baud_rate(int _baudrate_to_check) {
+#ifdef __MACH__
+    return true;
+#else
 	switch (_baudrate_to_check) {
 	case 9600:
 		return B9600;
@@ -92,6 +95,7 @@ bool GCodeSender::check_baud_rate(int _baudrate_to_check) {
 	default:
 		return 0;
 	}
+#endif
 }
 
 bool GCodeSender::close_serial_port()

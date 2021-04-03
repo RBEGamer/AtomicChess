@@ -33,6 +33,9 @@ UserBoardController::UserBoardController(std::string _serialport_file) {
 }
 
 bool UserBoardController::check_baud_rate(int _baudrate_to_check) {
+#ifdef __MACH__
+    return true;
+#else
     switch (_baudrate_to_check) {
         case 9600:
             return B9600;
@@ -73,6 +76,8 @@ bool UserBoardController::check_baud_rate(int _baudrate_to_check) {
         default:
             return 0;
     }
+#endif
+
 }
 
 bool UserBoardController::close_serial_port() {
