@@ -36,7 +36,7 @@ beleuchtung existierender ansätze && festlegung zu erwartener Features, Kapitel
 
 
 
-# Analyse bestehender Systeme
+# Analyse bestehender Systeme und Machbarkeitsanalyse
 
 ## Existierende Systeme im Vergleich
 
@@ -102,17 +102,15 @@ Ein wichtiger Aspekt bei diesem Projekt spiel die User-Experience. Diese beschre
 Hierbei geht es primär um das Erlebnis, welches der Benutzer bei dem Verwenden eines Produktes erlebt und welche Erwartungen der Benutzer an die Verwendung des Produktes hat.
 
 Bei dem autonomen Schachtisch, soll der Benutzer eine ähnlich einfache Erfahrung erleben, wie bei einer Schachpartie mit einem menschlichen Gegenspieler.
-Der Benutzer soll direkt nach dem einschalten des Tisches und dem Aufstellen der Figuren in der Lage sein, mit dem Spiel beginnen zu können.
+Der Benutzer soll direkt nach dem einschalten des Tisches und dem Aufstellen der Figuren in der Lage sein, mit dem Spiel beginnen zu können. Dies soll wie ein reguläres Schachspiel ablaufen, der Spieler vor dem Tisch soll die Figuren mit der Hand bewegen können und der Tisch soll den Gegenspieler darstellen. Dieser bewegt die Figuren der Gegenseite.
+
+Nach Beendigung einer Partie, soll das Spielbrett wieder in die Ausgangssituation gebracht werden, die kann zum einem vom Tisch selber oder vom Benutzer per Hand geschehen. Danach ist der Tisch für die nächste Partie bereit, welche einfach per Knopfdruck gestartet werden können sollte.
+
+Ein weiter Punkt welcher bei der User-Experience beachtet werden soll, ist die zeitliche Konstante. Ein Spiel auf einem normalen Schachspiel hat je nach Spielart kein Zeitlimit, dies kann für das gesamte Spiel gelten oder auch für die Zeit zwischen einzelnen Zügen.
+Der autonome Schachtisch soll es dem Spieler z.B. ermöglichen ein Spiel am Morgen zu beginnen und erst am nächsten Tag dieses fortzusetzen.
 
 
 
-### Software-Aufbau
-
-### Hardware-Aufbau
-
-
-
-# Grundlagen
 
 ## Anforderungsanalyse
 
@@ -121,7 +119,7 @@ Der Benutzer soll direkt nach dem einschalten des Tisches und dem Aufstellen der
 
 ## Machbarkeitsanalyse
 
-## Technologien im Makerspace
+### Technologien im Makerspace
 
 
 
