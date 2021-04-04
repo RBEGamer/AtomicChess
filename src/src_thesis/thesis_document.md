@@ -15,12 +15,12 @@
 Das Ziel dieser Arbeit ist es, einen autonomen Schach-Tisch, welcher in der Lage ist Schachfiguren autonom zu bewegen und auf Benutzerinteraktion zu reagieren.
 
 Der Schwerpunkt liegt dabei insbesondere auf der Programmierung des eingebettenen Systems.
-Dieses besteht zum einem, aus der Positionserkennung und Steuerung der Hardwarekomponenten (Schachfiguren) und zum anderen aus der Kommuniktation zwischen dem Tisch selbst und einem in einer Cloud befindlichen Server.
+Dieses besteht zum einem, aus der Positionserkennung und Steuerung der Hardwarekomponenten (Schachfiguren) und zum anderen aus der Kommunikation zwischen dem Tisch selbst und einem in einer Cloud befindlichen Server.
 
 Mittels der Programmierung werden diverse Technologien von verschiedenen Einzelsystemen zu einem Gesamtprodukt zusammengesetzt. Zu diesen Einzelsystemen gehören:
 
 * Programmierung der Motorsteuerung, HMI (zB. Qt oder simple Buttons), NFC Tag erkennung
-* Programmierung eines Wrappers für die Kommuniktion mit der Cloud (AWS)
+* Programmierung eines Wrappers für die Kommunikation mit der Cloud (AWS)
 * Statemaschiene und Implementierung der Spielflusssteuerung
 * Backend mit Datenbankanbindung zwischen Server und Embedded-System
 * Verwendung eines CI/CD Systems zum automatisierten bauen der Linux-Images für das Embedded-System
@@ -60,7 +60,7 @@ Mittels der Programmierung werden diverse Technologien von verschiedenen Einzels
 
 |                                         	| Square Off - Kingdom [@squareoffkingdom]	| Square Off - Grand Kingdom [@squareoffgrand]		| DGT Smart Board [@dtgsmartboard]	| DGT Bluetooth Wenge [@dtgble] |
 |-------------------------------------------|-------------------------------------------|---------------------------------------------------|-----------------------------------|-------------------------------|
-| Erkennung Schfigurstellung           		| nein (Manuell per Ausgangsposition) 		| nein (Manuell per Ausgangsposition) 				| ja (Resonanzspulen)  				| ja ((+rfid))          		|
+| Erkennung Schachfigurstellung           		| nein (Manuell per Ausgangsposition) 		| nein (Manuell per Ausgangsposition) 				| ja (Resonanzspulen)  				| ja ((+rfid))          		|
 | Tischabmessungen (LxBxH)                	| 486mm x 486mm x 75mm              		| 671mm x 486mm x 75mm              				| 540mm x 540mm x 20mm 				| 540mm x 540mm x 20mm 			|
 | Konnektivität                            	| (+ble)                               		| (+ble)                               				| (+usb) / Seriell        			| Bluetooth 2.0        			|
 | Automatisches Bewegen der Figuren       	| ja                                		| ja                                				| nein                 				| nein                 			|
@@ -83,14 +83,14 @@ Auch existieren weitere Abwandlungen von autonomen Schachbrettern, bei welchem d
 
 |                                         	| Automated Chess Board (Michael Guerero) [@actproject1]	| Automated Chess Board (Akash Ravichandran) [@actproject2]	| DIY Super Smart Chessboard [@actproject3]	|
 |-----------------------------------------	|-------------------------------------------------------	|----------------------------------------------------------	|------------------------------------------	|
-| Erkennung Schfigurstellung              	| nein (Manuell per Ausgangsposition)     					| ja (Kamera / OpenCV)                       				| nein                       				|
+| Erkennung Schachfigurstellung              	| nein (Manuell per Ausgangsposition)     					| ja (Kamera / OpenCV)                       				| nein                       				|
 | Tischabmessungen (LxBxH)                	| keine Angabe                            					| keine Angabe                               				| 450mm x 300mm x 50mm       				|
 | Konnektivität                           	| (+usb)                                   					| Ethernet, (+wlan)                           				| Ethernet, (+wlan)          				|
 | Automatisches Bewegen der Figuren       	| ja                                      					| ja                                         				| nein                       				|
 | Spiel Livestream                        	| nein                                    					| nein                                       				| nein                       				|
 | Cloud anbindung (online Spiele)         	| nein                                    					| nein                                       				| ja                         				|
 | Parkposition für ausgeschiedene Figuren 	| nein                                    					| nein                                       				| nein                       				|
-| Stand-Alone Funktionalität              	| nein (PC erfoderlich)                   					| ja                                         				| ja                         				|
+| Stand-Alone Funktionalität              	| nein (PC erforderlich)                   					| ja                                         				| ja                         				|
 | Besonderheiten                          	| -                                       					| Sprachsteuerung (Amazon Alexa)             				| Zuganzeige über LED Matrix 				|
 | Lizenz#
 zz                                 	| (+gpl) 3+                                					| (+gpl)                                       				| -                          				|
