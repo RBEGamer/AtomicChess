@@ -334,9 +334,9 @@ void ConfigParser::loadDefaults(std::string _type_str)
 
 
         config_store[ConfigParser::CFG_ENTRY::GENERAL_HWID_INTERFACE] = "eth0";
-        config_store[ConfigParser::CFG_ENTRY::GENERAL_VERSION_FILE_PATH] = "/VERSION";
-        config_store[ConfigParser::CFG_ENTRY::GENERAL_HWREV_FILE_PATH] = "/etc/hwrevision";
-        config_store[ConfigParser::CFG_ENTRY::GENERAL_BOOT_PARTION_INFO_FILE_PATH] = "/etc/swupdate/BOOTPART";
+        config_store[ConfigParser::CFG_ENTRY::GENERAL_VERSION_FILE_PATH] = "/tmp/VERSION";
+        config_store[ConfigParser::CFG_ENTRY::GENERAL_HWREV_FILE_PATH] = "/tmp/hwrevision";
+        config_store[ConfigParser::CFG_ENTRY::GENERAL_BOOT_PARTION_INFO_FILE_PATH] = "/tmp/BOOTPART";
         config_store[ConfigParser::CFG_ENTRY::GENERAL_SYSTEM_TICK_INTERVAL_MS] = "1000";
         config_store[ConfigParser::CFG_ENTRY::GENERAL_EN_ATCGUI_COMMUNICATION] = "1";
 

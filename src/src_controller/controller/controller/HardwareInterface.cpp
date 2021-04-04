@@ -194,6 +194,18 @@ bool HardwareInterface::is_production_hardware()
 	}
 }
 
+bool HardwareInterface::is_simulates_hardware()
+{
+    if (hwrev == HardwareInterface::HI_HWREV_VIRT)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
 
 bool HardwareInterface::setTurnStateLight(HardwareInterface::HI_TURN_STATE_LIGHT _state)
 {

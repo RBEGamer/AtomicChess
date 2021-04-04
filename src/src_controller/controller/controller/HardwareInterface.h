@@ -87,6 +87,7 @@ public:
 	
 	
 	bool is_production_hardware();
+	bool is_simulates_hardware();
 private:
 	
 	
