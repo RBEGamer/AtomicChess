@@ -117,7 +117,6 @@ function set_player_user_config_key(_key,_val,_vid, _callback){
             _callback(uo_err,"ok");
         });
     });
-
 }
 
 function append_player_log(_log,_hwid, _callback){

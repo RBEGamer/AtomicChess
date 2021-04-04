@@ -12,7 +12,7 @@
 
 ## Zielsetzung
 
-Das Ziel dieser Arbeit ist es, einen Schach-Tisch zu konstruieren und programmieren, welcher in der Lage ist Schachfiguren autonom zu bewegen.
+Das Ziel dieser Arbeit ist es, einen autonomen Schach-Tisch, welcher in der Lage ist Schachfiguren autonom zu bewegen und auf Benutzerinteraktion zu reagieren.
 
 Der Schwerpunkt liegt dabei insbesondere auf der Programmierung des eingebettenen Systems.
 Dieses besteht zum einem, aus der Positionserkennung und Steuerung der Hardwarekomponenten (Schachfiguren) und zum anderen aus der Kommuniktation zwischen dem Tisch selbst und einem in einer Cloud befindlichen Server.
@@ -75,9 +75,9 @@ Mittels der Programmierung werden diverse Technologien von verschiedenen Einzels
 Bei allen Open-Source Projekten wurden die Features anhand der Beschreibung und der aktuellen Software extrahiert.
 Besonders bei work-in-progress Projekten können sich die Features noch verändern und so weitere Funktionalitäten hinzugefügt werden.
 
-Desweiteren gibt es weitere deratige Projekte, in der Tabelle wurde nur diese Aufgelistet welche sich von anderen Projekten in mindestens einem Feature unterscheiden.
+Des Weiteren gibt es weitere derartige Projekte, in der Tabelle wurde nur diese Aufgelistet welche sich von anderen Projekten in mindestens einem Feature unterscheiden.
 
-Auch existieren weitere abwandlungen von autonomen Schachbrettern, bei welchem die Figuren von oberhalb des Spielbretts gegriffen bzw bewegt werden. In einigen Projekten wird dies mittels eines Roboterarms [@actprojectrobot] oder eines modifizierten 3D-Druckers realisiert, diese wurden hier nicht aufgrund der Konstruktion über dem Spielbrett nicht berücksichtigt.
+Auch existieren weitere Abwandlungen von autonomen Schachbrettern, bei welchem die Figuren von oberhalb des Spielbretts gegriffen bzw. bewegt werden. In einigen Projekten wird dies mittels eines Roboterarm [@actprojectrobot] oder eines modifizierten 3D-Druckers[@atcproject3dprinter] realisiert, diese wurden hier nicht aufgrund der Mechanik welche über dem Spielbrett  montiert werden muss nicht berücksichtigt.
 
 : Auflistung von Open-Source Schachtisch Projekten
 

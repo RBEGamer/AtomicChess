@@ -318,19 +318,21 @@ int main(int argc, char *argv[])
         std::raise(SIGINT);
     }
 
-
+    //TODO REMOVE
+    //TODO TEST
     HardwareInterface::getInstance()->ScanNFC();
 
 
 
-
+    //PRINT SOME VERSION TO CONSOLE
     std::string fwver = ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::GENERAL_VERSION_FILE_PATH);
     std::string hwrev = ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::GENERAL_HWREV_FILE_PATH);
     std::string bootpart = ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::GENERAL_BOOT_PARTION_INFO_FILE_PATH);
+    LOG_F(INFO, "FWVER: %s HWREV: %s BOOTPARTITION: %s",fwver.c_str(),hwrev.c_str(),bootpart.c_str());
 
     //SARTING GUI COMMUNICATOR PROCESS
     guicommunicator gui;
-
+    //USE GUICOMMUNICATOR ONLY IF WE HAVE REAL HARDWARE
     if(!HardwareInterface::getInstance()->is_simulates_hardware()){
         LOG_F(INFO, "guicommunicator startig ipc thread");
         gui.start_recieve_thread();    //START RECEIEVE WEBSERVER
@@ -352,13 +354,12 @@ int main(int argc, char *argv[])
                 break;
             }
         }
-        //RAISE EXCEPTION IF ITS NOT A SIMULATED HARDWARE TABLE WHICH HAS NO GUI
         if(gui_wait_counter > GUI_WAIT_COUNTER_MAX)
         {
             LOG_F(WARNING, "guicommunicator check_guicommunicator_reachable check failed");
             std::raise(SIGINT);
         }
-
+        //RESET THE UI TO A CLEAN STATE
         gui.createEvent(guicommunicator::GUI_ELEMENT::QT_UI_RESET, guicommunicator::GUI_VALUE_TYPE::ENABLED);
         gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::PROCESSING_SCREEN);
         //CHECK VERSION ON GUI SIDE
@@ -367,12 +368,11 @@ int main(int argc, char *argv[])
             LOG_F(WARNING, "guicommunicator version check failed");
         }
         //DETERM THE HWID BY USING THE MAC ADDRESS OF THE OUTGOING INTERNFACE NAME
-        gui.createEvent(guicommunicator::GUI_ELEMENT::INFOSCREEN_HWID_LABEL, guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING, hwid);
-
         //DISPLAY FIRMARE VERSION NUMBER
+        gui.createEvent(guicommunicator::GUI_ELEMENT::INFOSCREEN_HWID_LABEL, guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING, hwid);
         gui.createEvent(guicommunicator::GUI_ELEMENT::INFOSCREEN_RANK_LABEL, guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING, fwver + "|" + hwrev + "|" + bootpart);
     }
-    LOG_F(INFO, (const char*)fwver.c_str());
+
 
 
 
@@ -387,11 +387,10 @@ int main(int argc, char *argv[])
 
     //INIT CHESSBOARD
     ChessBoard board;
-    //INIT THE CHESS BOARD MECHANIC
-    //=> HOME, SETUP COILS
+
     HardwareInterface::getInstance()->setTurnStateLight(HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_PLAYER_WHITE_TURN);
     bool board_scan = true;
-    //ASKS THE USER TO PLACE THE FIGURE CORRECTLY
+    //ASKS THE USER TO PLACE THE FIGURE CORRECTLY OR A SCAN SHOULD BE DONE
     if(cmdOptionExists(argv, argv + argc, "-skipplacementdialog") || ConfigParser::getInstance()->getBool_nocheck(ConfigParser::CFG_ENTRY::USER_RESERVED_SKIP_CHESS_PLACEMENT_DIALOG))
     {
         board_scan = false;
@@ -409,11 +408,8 @@ int main(int argc, char *argv[])
         }
     }
 
-
-
-
-
-
+    //INIT THE CHESS BOARD MECHANIC
+    //=> HOME, SETUP COILS
     HardwareInterface::getInstance()->setTurnStateLight(HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_PRECCESSING);
     gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::PROCESSING_SCREEN);
     while (board.initBoard(board_scan) != ChessBoard::BOARD_ERROR::INIT_COMPLETE)
@@ -425,16 +421,15 @@ int main(int argc, char *argv[])
 
 
 
-    //CREATE GAME BACKEND INSTANCE
+    //CREATE GAME BACKEND INSTANCE => THIS IS THE CONNECTION TO THE GAME SERVER
     BackendConnector gamebackend(ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::NETWORK_BACKEND_URL), ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::GENERAL_HWID_INTERFACE), hwid);
-    //SET NEEDED SETTINGS
+    //SET HEARTBEAT INTERVAL
     int gamebackend_heartbeat_interval = 5;
     ConfigParser::getInstance()->getInt(ConfigParser::CFG_ENTRY::NETWORK_HEARTBEAT_INTERVAL_SECS, gamebackend_heartbeat_interval);
     gamebackend.setHearbeatCallInterval(gamebackend_heartbeat_interval);
-
-    //NOW TRY TO CONNECT TO THE SERVER
-    std::string ALTERNATIVE_BACKEND_URL[] = { "http://192.168.178.24:3000", "http://atomicchess.de:3000", "http://marcelochsendorf.com:3000", "http://marcelochsendorf.com:3001", "http://marcelochsendorf.com:3002", "http://prodevmo.com:3001", "http://prodevmo.com:3002", "http://127.0.0.1:3000" };
-    //CHECK IF GAMESERVER IS REACHABLE ELSE USE A OTHER PREDEFINED URL
+    //NOW TRY TO CONNECT TO THE SERVER, WE USE SOME HARDCODED FALL BACK URLs
+    std::string ALTERNATIVE_BACKEND_URL[] = { "http://atomicchess.de:3000", "http://marcelochsendorf.com:3000", "http://marcelochsendorf.com:3001", "http://marcelochsendorf.com:3002", "http://prodevmo.com:3001", "http://prodevmo.com:3002", "http://127.0.0.1:3000","http://127.0.0.1:3001" };
+    //CHECK IF GAMESERVER IS REACHABLE ELSE TRY AND ITERATE THOUGH THE OTHER HARDCODED URLS
     volatile int abu_counter = 0;
     volatile bool abu_result = true;
     while (!gamebackend.check_connection()) {
