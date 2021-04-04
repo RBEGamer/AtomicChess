@@ -281,7 +281,7 @@
   function get_profile_config(){
 
     var pid = $("#pid").val();
-    var api = "";//$("#apikey").val();
+    var api = $("#apikey").val();
 
     $.getJSON('/rest/get_profile_information_secure?authkey='+api+'&pid='+pid,function (data) {
 
@@ -293,7 +293,7 @@
         return;
       }
       //SHOW LOGS
-      if(){
+      if(data.profile_data.profile_config.USER_DATA){
         var tmp_html = "";
         const keys = Object.keys(data.profile_data.profile_config.USER_DATA);
         for(var i =0;i< keys.length;i++){
