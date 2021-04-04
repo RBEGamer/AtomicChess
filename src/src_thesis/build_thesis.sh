@@ -18,10 +18,10 @@ echo "-- STARTING BUILDING THESIS DOCUMENT --"
 pandoc --version
 
 
-rm thesis_declaration.tex
-rm thesis_document.tex
-rm thesis_abstract.tex
-rm thesis_attachments.tex
+rm -f thesis_declaration.tex
+rm -f thesis_document.tex
+rm -f thesis_abstract.tex
+rm -f thesis_attachments.tex
 
 pandoc "thesis_document.md" -o "thesis_document.tex" --from markdown --biblatex --template "pandoc_template.tex" --listings --lua-filter pandoc_filters/pandoc-gls.lua
 # NOW THE HACKY PART WE WANT TO USE THE STANDART cite command instead the from pandoc used cite to we use sed to hard replace the stuff
