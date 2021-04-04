@@ -77,7 +77,7 @@ Besonders bei work-in-progress Projekten können sich die Features noch verände
 
 Des Weiteren gibt es weitere derartige Projekte, in der Tabelle wurde nur diese Aufgelistet welche sich von anderen Projekten in mindestens einem Feature unterscheiden.
 
-Auch existieren weitere Abwandlungen von autonomen Schachbrettern, bei welchem die Figuren von oberhalb des Spielbretts gegriffen bzw. bewegt werden. In einigen Projekten wird dies mittels eines Roboterarm [@actprojectrobot] oder eines modifizierten 3D-Druckers[@atcproject3dprinter] realisiert, diese wurden hier nicht aufgrund der Mechanik welche über dem Spielbrett  montiert werden muss nicht berücksichtigt.
+Auch existieren weitere Abwandlungen von autonomen Schachbrettern, bei welchem die Figuren von oberhalb des Spielbretts gegriffen bzw. bewegt werden. In einigen Projekten wird dies mittels eines Industrie-Roboters [@actprojectrobot] oder eines modifizierten 3D-Druckers[@atcproject3dprinter] realisiert, diese wurden hier nicht aufgrund der Mechanik welche über dem Spielbrett  montiert werden muss nicht berücksichtigt.
 
 : Auflistung von Open-Source Schachtisch Projekten
 
@@ -96,8 +96,13 @@ Auch existieren weitere Abwandlungen von autonomen Schachbrettern, bei welchem d
 zz                                 	| (+gpl) 3+                                					| (+gpl)                                       				| -                          				|
 
 
-In den bestehenden Projekten ist zu erkennen, dass so ein Schachtisch sehr einfach und mit einfachsten Mittel konstruiert werden können.
-## Zielgruppe
+In den bestehenden Projekten ist zu erkennen, dass ein autonomer Schachtisch sehr einfach und mit einfachsten Mittel konstruiert werden kann. Hierbei fehlen in der Regel einige Features wie das automatische Erkennen von Figuren oder das Spielen über das Internet.
+
+Einige Projekte setzten dabei auf eingebettete Systeme, welche direkt im Schachtisch montiert sind, andere hingegen nutzen einen externen PC, welcher die Steuerbefehle an die Elektronik sendet.
+
+Bei der Konstruktion der Mechanik und der Methode mit welcher die Figuren über das Feld bewegt werden ähneln sich jedoch die meisten dieser Projekte. Hier wird meist eine einfache X und Y-Achse verwendet, welche von zwei Schrittmotoren bewegt werden. Die Schachfiguren werden dabei mittels eines Elektromagneten über die Oberseite gezogen. Hierbei ist ein Magnet oder eine kleine Metallplatte in den Fuß der Figuren eingelassen worden.
+
+Die Erkennung der Schachfiguren ist augenscheinlich die schwierigste Aufgabe. Hier wurde in der Mehrzahl der Projekte eine Kamera im Zusammenspiel mit einer auf OpenCV basierenden Figur-Erkennung. Diese Variante ist je nach Implementierung des Vision-Algorithmus fehleranfälliger bei sich ändernden Lichtverhältnissen, auch muss die Kamera oberhalb der Schachfiguren platziert werden, wenn kein transparentes Schachfeld verwendet werden soll.
 
 ## User Experience
 
