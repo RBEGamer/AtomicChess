@@ -29,18 +29,9 @@ Mittels der Programmierung werden diverse Technologien von verschiedenen Einzels
 ## Aufbau der Arbeit
 
 
-* theoretische Grundlagen
-* gegebene Randbedingungen
-* beleuchtung existierender ansätze && festlegung zu erwartener Features
 
-* Kaptiel x erstellung einzelner software unf hardwarekomponenten
-* Kapitel x+1 zusammenführung in die DK HW
-* Kaptiel x+2 fehleranaöyse der DK Hardware
-* Kaptiel x+3 ansätze zur verbesserung und modifikation der Hardware auf reproduzierbarkeit und kosteneffektivität
-* Kaptiel x+4 test und fazit
+beleuchtung existierender ansätze && festlegung zu erwartener Features, Kapitel x+1 zusammenführung in die DK HW,Kaptiel x+4 test und fazit,demonstration und validierung der funktionsfähigkeit
 
-
-* demonstration und validierung der funktionsfähigkeit
 
 
 
