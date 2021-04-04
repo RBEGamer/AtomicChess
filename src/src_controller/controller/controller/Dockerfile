@@ -40,7 +40,8 @@ RUN apt-get update && apt upgrade -y && \
     flex \
     libssl-dev \
     libfdt-dev \
-    nano
+    nano \
+    cmake
 
 
 COPY . /var/

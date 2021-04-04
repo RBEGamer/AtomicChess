@@ -1,3 +1,3 @@
 #!/bin/bash
-bash ./buid.sh
+bash ./build.sh
 bash ./run.sh

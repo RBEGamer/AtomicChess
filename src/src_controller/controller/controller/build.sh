@@ -4,3 +4,4 @@ ls
 pwd
 cmake .
 make
+ls

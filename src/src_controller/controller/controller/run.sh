@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-FILEA=/tmp/ATC/ATC_LOCK
+FILEA=/tmp/ATC_LOCK
 touch "$FILEA"
 
 
