@@ -104,7 +104,17 @@ Bei der Konstruktion der Mechanik und der Methode mit welcher die Figuren über 
 
 Die Erkennung der Schachfiguren ist augenscheinlich die schwierigste Aufgabe. Hier wurde in der Mehrzahl der Projekte eine Kamera im Zusammenspiel mit einer auf OpenCV basierenden Figur-Erkennung. Diese Variante ist je nach Implementierung des Vision-Algorithmus fehleranfälliger bei sich ändernden Lichtverhältnissen, auch muss die Kamera oberhalb der Schachfiguren platziert werden, wenn kein transparentes Schachfeld verwendet werden soll.
 
+
+
 ## User Experience
+
+Ein wichtiger Aspekt bei diesem Projekt spiel die User-Experience. Diese beschreibt die Ergonomie der Mensch-Maschine Interaktion und wird durch die DIN 9241[@din9241] beschrieben.
+Hierbei geht es primär um das Erlebnis, welches der Benutzer bei dem Verwenden eines Produktes erlebt und welche Erwartungen der Benutzer an die Verwendung des Produktes hat.
+
+Bei dem autonomen Schachtisch, soll der Benutzer eine ähnlich einfache Erfahrung erleben, wie bei einer Schachpartie mit einem menschlichen Gegenspieler.
+Der Benutzer soll direkt nach dem einschalten des Tisches und dem Aufstellen der Figuren in der Lage sein, mit dem Spiel beginnen zu können.
+
+
 
 ### Software-Aufbau
 
@@ -123,7 +133,7 @@ Die Erkennung der Schachfiguren ist augenscheinlich die schwierigste Aufgabe. Hi
 
 ## Technologien im Makerspace
 
-##
+
 
 
 
