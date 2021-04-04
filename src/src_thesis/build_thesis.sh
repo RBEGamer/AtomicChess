@@ -15,6 +15,8 @@ rm -f *.fdb_latexmk
 rm -f *.run.xml
 
 echo "-- STARTING BUILDING THESIS DOCUMENT --"
+pandoc --version
+
 
 pandoc "thesis_document.md" -o "thesis_document.tex" --from markdown --biblatex --template "pandoc_template.tex" --listings --lua-filter pandoc_filters/pandoc-gls.lua
 
