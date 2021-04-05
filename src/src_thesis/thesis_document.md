@@ -114,26 +114,32 @@ Der autonome Schachtisch soll es dem Spieler z.B. ermöglichen ein Spiel am Morg
 
 ## Anforderungsanalyse
 
-
+alle key requirements welcher der tisch haben soll
 
 
 ## Machbarkeitsanalyse
 
+welche technologien werden benötigt
+
 ### Technologien im Makerspace
 
+stehen diese im makerspace zur verfüfung
+
+
+
+###
 
 
 
 
+# Erstellung erster Prototyp
+
+## Technologieauswahl für ersten Protoypen
 
 
 
 
-
-
-
-
-
+#
 
 # Vinaque sanguine metuenti cuiquam Alcyone fixus
 
