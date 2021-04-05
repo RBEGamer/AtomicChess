@@ -9,7 +9,7 @@
 
 ### SELECT HARDWARE REVISION HWREV
 
-Normally the controller software sets its hardware revision automatically. In order to select a hardware revision manually the following commandline arguments can be choosen:
+Normally the controller software detects its hardware revision automatically. In order to select a hardware revision manually the following commandline arguments can be choosen:
 
 
 * `./atc_controller -writeconfig -hwvirtual` - selects the virtual hardware which enables testing without hardware
