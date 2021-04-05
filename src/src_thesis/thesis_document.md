@@ -103,6 +103,10 @@ Bei der Konstruktion der Mechanik und der Methode mit welcher die Figuren über 
 
 Die Erkennung der Schachfiguren ist augenscheinlich die schwierigste Aufgabe. Hier wurde in der Mehrzahl der Projekte eine Kamera im Zusammenspiel mit einer auf OpenCV basierenden Figur-Erkennung. Diese Variante ist je nach Implementierung des Vision-Algorithmus fehleranfälliger bei sich ändernden Lichtverhältnissen, auch muss die Kamera oberhalb der Schachfiguren platziert werden, wenn kein transparentes Schachfeld verwendet werden soll.
 
+Eine andere alternative ist die Verwendung einer Matrix aus Reed-Schaltern oder Hallsensoren. Diese werden in einer 8x8 Matrix konfiguration unterhalb der Platte montiert und reagieren auf die Magnete in den Figuren. So ist es möglich zu erkennen welches der Schachfelder belegt ist, jedoch nicht konkret von welchem Typ von Figur.
+Diese Problem wird durch eine definierte Ausgangsstellung beim Spielstart gelößt. Nach jedem Zug durch den Spieler und der dadurch resultierenden änderungen in der Figurpositionen in der Matrix, können die neuen Figurstellungen berechnet werden.
+
+
 
 
 ## User Experience
@@ -116,7 +120,7 @@ Der Benutzer soll direkt nach dem einschalten des Tisches und dem Aufstellen der
 Nach Beendigung einer Partie, soll das Spielbrett wieder in die Ausgangssituation gebracht werden, die kann zum einem vom Tisch selber oder vom Benutzer per Hand geschehen. Danach ist der Tisch für die nächste Partie bereit, welche einfach per Knopfdruck gestartet werden können sollte.
 
 Ein weiter Punkt welcher bei der User-Experience beachtet werden soll, ist die zeitliche Konstante. Ein Spiel auf einem normalen Schachspiel hat je nach Spielart kein Zeitlimit, dies kann für das gesamte Spiel gelten oder auch für die Zeit zwischen einzelnen Zügen.
-Der autonome Schachtisch soll es dem Spieler z.B. ermöglichen ein Spiel am Morgen zu beginnen und erst am nächsten Tag dieses fortzusetzen.
+Der autonome Schachtisch soll es dem Spieler z.B. ermöglichen ein Spiel am Morgen zu beginnen und dieses erst am nächsten Tag fortzusetzen.
 
 
 
