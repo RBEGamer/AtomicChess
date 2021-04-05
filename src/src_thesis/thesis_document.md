@@ -48,17 +48,17 @@ beleuchtung existierender ansätze && festlegung zu erwartener Features, Kapitel
 
 : Auflistung kommerzieller autonomer Schachtische
 
-|                                         	| Square Off - Kingdom [@squareoffkingdom]	| Square Off - Grand Kingdom [@squareoffgrand]			| DGT Smart Board [@dtgsmartboard]	| DGT Bluetooth Wenge [@dtgble] |
+|                                         	| Square Off - Kingdom [@squareoffkingdom]	| Square Off - Grand Kingdom [@squareoffgrand]		| DGT Smart Board [@dtgsmartboard]	| DGT Bluetooth Wenge [@dtgble] |
 |-------------------------------------------|-------------------------------------------|---------------------------------------------------|-----------------------------------|-------------------------------|
-| Erkennung Schachfigurstellung           	| nein (Manuell per Ausgangsposition) 			| nein (Manuell per Ausgangsposition) 							| ja (Resonanzspulen)  							| ja ((+rfid))          				|
-| Tischabmessungen (LxBxH)                	| 486mm x 486mm x 75mm              				| 671mm x 486mm x 75mm              								| 540mm x 540mm x 20mm 							| 540mm x 540mm x 20mm 					|
-| Konnektivität                            	| (+ble)                               			| (+ble)                               							| (+usb) / Seriell        					| Bluetooth 2.0        					|
-| Automatisches Bewegen der Figuren       	| ja                                				| ja                                								| nein                 							| nein                 					|
-| Spiel Livestream                        	| ja                                				| ja                                								| ja                   							| ja                   					|
-| Cloud anbindung (online Spiele)         	| ja (über Mobiltelefon + App)      				| ja (über Mobiltelefon + App)      								| ja (über PC + App)   							| ja (über PC + App)   					|
-| Parkposition für ausgeschiedene Figuren 	| nein                              				| ja                                								| nein                 							| nein                 					|
-| Stand-Alone Funktionalität               	| nein (Mobiltelefon erforderlich)    			| nein (Mobiltelefon erforderlich)     							| nein (PC erforderlich)						| nein (PC erforderlich)				|   	   
-| Besonderheiten                          	| Akku für 30 Spiele                    		| Akku für 15 Spiele					           						| - 																| -															|
+| Erkennung Schachfigurstellung           	| nein (Manuell per Ausgangsposition) 		| nein (Manuell per Ausgangsposition) 				| ja (Resonanzspulen)  				| ja ((+rfid))          		|
+| Abmessungen (LxBxH)                		| 486mm x 486mm x 75mm              		| 671mm x 486mm x 75mm              				| 540mm x 540mm x 20mm 				| 540mm x 540mm x 20mm 			|
+| Konnektivität                            	| (+ble)                               		| (+ble)                               				| (+usb) / Seriell        			| Bluetooth 2.0        			|
+| Automatisches Bewegen der Figuren       	| ja                                		| ja                                				| nein                 				| nein                 			|
+| Spiel Livestream                        	| ja                                		| ja                                				| ja                   				| ja                   			|
+| Cloud anbindung (online Spiele)         	| ja (über Mobiltelefon + App)      		| ja (über Mobiltelefon + App)      				| ja (über PC + App)   				| ja (über PC + App)   			|
+| Parkposition für ausgeschiedene Figuren 	| nein                              		| ja                                				| nein                 				| nein                 			|
+| Stand-Alone Funktionalität               	| nein (Mobiltelefon erforderlich)    		| nein (Mobiltelefon erforderlich)     				| nein (PC erforderlich)			| nein (PC erforderlich)		|   	   
+| Besonderheiten                          	| Akku für 30 Spiele                    	| Akku für 15 Spiele					           	| - 								| -								|
 
 
 Bei den DGT Schachbrettern ist zu beachten, dass diese die Schachfiguren nicht autonom bewegen können. Sie wurden jedoch in die Liste aufgenommen, da diese einen Teil der Funktionalitäten der Square Off Schachbrettern abdecken und lediglich das bewegen der Schachfiguren fehlt.
@@ -81,18 +81,18 @@ Auch existieren weitere Abwandlungen von autonomen Schachbrettern, bei welchem d
 
 : Auflistung von Open-Source Schachtisch Projekten
 
-|                                         		| Automated Chess Board (Michael Guerero) [@actproject1]	| Automated Chess Board (Akash Ravichandran) [@actproject2]	| DIY Super Smart Chessboard [@actproject3]	|
-|---------------------------------------------|-------------------------------------------------------	|----------------------------------------------------------	|------------------------------------------	|
-| Erkennung Schachfigurstellung              	| nein (Manuell per Ausgangsposition)     								| ja (Kamera / OpenCV)                       								| nein                       								|
-| Tischabmessungen (LxBxH)                		| keine Angabe                            								| keine Angabe                               								| 450mm x 300mm x 50mm       								|
-| Konnektivität                           		| (+usb)                                   								| Ethernet, (+wlan)                           							| Ethernet, (+wlan)          								|
-| Automatisches Bewegen der Figuren       		| ja                                      								| ja                                         								| nein                       								|
-| Spiel Livestream                        		| nein                                    								| nein                                       								| nein                       								|
-| Cloud anbindung (online Spiele)         		| nein                                    								| nein                                       								| ja                         								|
-| Parkposition für ausgeschiedene Figuren 		| nein                                    								| nein                                       								| nein                       								|
-| Stand-Alone Funktionalität              		| nein (PC erforderlich)                   								| ja                                         								| ja                         								|
-| Besonderheiten                          		| -                                       								| Sprachsteuerung (Amazon Alexa)             								| Zuganzeige über LED Matrix 								|
-| Lizenz                                 			| (+gpl) 3+                                								| (+gpl)                                       							| -                          								|
+|                                         		| Automated Chess Board (Michael Guerero) [@actproject1]| Automated Chess Board (Akash Ravichandran) [@actproject2]	| DIY Super Smart Chessboard [@actproject3]	|
+|---------------------------------------------	|-------------------------------------------------------|----------------------------------------------------------	|------------------------------------------	|
+| Erkennung Schachfigurstellung              	| nein (Manuell per Ausgangsposition)     				| ja (Kamera / OpenCV)                       				| nein                       				|
+| Abmessungen (LxBxH)                			| keine Angabe                            				| keine Angabe                               				| 450mm x 300mm x 50mm       				|
+| Konnektivität                           		| (+usb)                                   				| Ethernet, (+wlan)                           				| Ethernet, (+wlan)          				|
+| Automatisches Bewegen der Figuren       		| ja                                      				| ja                                         				| nein                       				|
+| Spiel Livestream                        		| nein                                    				| nein                                       				| nein                       				|
+| Cloud anbindung (online Spiele)         		| nein                                    				| nein                                       				| ja                         				|
+| Parkposition für ausgeschiedene Figuren 		| nein                                    				| nein                                       				| nein                       				|
+| Stand-Alone Funktionalität              		| nein (PC erforderlich)                   				| ja                                         				| ja                         				|
+| Besonderheiten                          		| -                                       				| Sprachsteuerung (Amazon Alexa)             				| Zuganzeige über LED Matrix 				|
+| Lizenz                                 		| (+gpl) 3+                                				| (+gpl)                                       				| -                          				|
 
 
 In den bestehenden Projekten ist zu erkennen, dass ein autonomer Schachtisch sehr einfach und mit einfachsten Mittel konstruiert werden kann. Hierbei fehlen in der Regel einige Features wie das automatische Erkennen von Figuren oder das Spielen über das Internet.
