@@ -1,5 +1,3 @@
-
-
 \hypertarget{einleitung}{%
 \section{Einleitung}\label{einleitung}}
 
@@ -24,12 +22,14 @@
 \hypertarget{zielsetzung}{%
 \subsection{Zielsetzung}\label{zielsetzung}}
 
-Das Ziel dieser Arbeit ist es, einen Schach-Tisch zu konstruieren und
-programmieren, welcher in der Lage ist Schachfiguren autonom zu bewegen.
+Das Ziel dieser Arbeit ist es, einen autonomen Schach-Tisch, welcher in
+der Lage ist Schachfiguren autonom zu bewegen und auf
+Benutzerinteraktion zu reagieren.
+
 Der Schwerpunkt liegt dabei insbesondere auf der Programmierung des
-eingebettenen Systems. Dieses besteht zum einem aus der
+eingebettenen Systems. Dieses besteht zum einem, aus der
 Positionserkennung und Steuerung der Hardwarekomponenten (Schachfiguren)
-und zum anderen aus der Kommuniktation zwischen dem Tisch selbst und
+und zum anderen aus der Kommunikation zwischen dem Tisch selbst und
 einem in einer Cloud befindlichen Server.
 
 Mittels der Programmierung werden diverse Technologien von verschiedenen
@@ -42,7 +42,8 @@ Einzelsystemen gehören:
   Programmierung der Motorsteuerung, HMI (zB. Qt oder simple Buttons),
   NFC Tag erkennung
 \item
-  Programmierung eines Wrappers für die Kommuniktion mit der Cloud (AWS)
+  Programmierung eines Wrappers für die Kommunikation mit der Cloud
+  (AWS)
 \item
   Statemaschiene und Implementierung der Spielflusssteuerung
 \item
@@ -55,32 +56,13 @@ Einzelsystemen gehören:
 \hypertarget{aufbau-der-arbeit}{%
 \subsection{Aufbau der Arbeit}\label{aufbau-der-arbeit}}
 
-\begin{itemize}
-\item
-  theoretische Grundlagen
-\item
-  gegebene Randbedingungen
-\item
-  beleuchtung existierender ansätze \&\& festlegung zu erwartener
-  Features
-\item
-  Kaptiel x erstellung einzelner software unf hardwarekomponenten
-\item
-  Kapitel x+1 zusammenführung in die DK HW
-\item
-  Kaptiel x+2 fehleranaöyse der DK Hardware
-\item
-  Kaptiel x+3 ansätze zur verbesserung und modifikation der Hardware auf
-  reproduzierbarkeit und kosteneffektivität
-\item
-  Kaptiel x+4 test und fazit
-\item
-  demonstration und validierung der funktionsfähigkeit
-\end{itemize}
+beleuchtung existierender ansätze \&\& festlegung zu erwartener
+Features, Kapitel x+1 zusammenführung in die DK HW,Kaptiel x+4 test und
+fazit,demonstration und validierung der funktionsfähigkeit
 
-\hypertarget{analyse-bestehender-systeme}{%
-\section{Analyse bestehender
-Systeme}\label{analyse-bestehender-systeme}}
+\hypertarget{analyse-bestehender-systeme-und-machbarkeitsanalyse}{%
+\section{Analyse bestehender Systeme und
+Machbarkeitsanalyse}\label{analyse-bestehender-systeme-und-machbarkeitsanalyse}}
 
 \hypertarget{existierende-systeme-im-vergleich}{%
 \subsection{Existierende Systeme im
@@ -102,13 +84,13 @@ Vergleich}\label{existierende-systeme-im-vergleich}}
 \begin{minipage}[b]{0.18\columnwidth}\raggedright
 \strut
 \end{minipage} & \begin{minipage}[b]{0.18\columnwidth}\raggedright
-Square Off - Kingdom \cite{squareoffkingdom}\strut
+Square Off - Kingdom \autocite{squareoffkingdom}\strut
 \end{minipage} & \begin{minipage}[b]{0.22\columnwidth}\raggedright
-Square Off - Grand Kingdom \cite{squareoffgrand}\strut
+Square Off - Grand Kingdom \autocite{squareoffgrand}\strut
 \end{minipage} & \begin{minipage}[b]{0.15\columnwidth}\raggedright
-DGT Smart Board \cite{dtgsmartboard}\strut
+DGT Smart Board \autocite{dtgsmartboard}\strut
 \end{minipage} & \begin{minipage}[b]{0.13\columnwidth}\raggedright
-DGT Bluetooth Wenge \cite{dtgble}\strut
+DGT Bluetooth Wenge \autocite{dtgble}\strut
 \end{minipage}\tabularnewline
 \midrule
 \endfirsthead
@@ -116,18 +98,18 @@ DGT Bluetooth Wenge \cite{dtgble}\strut
 \begin{minipage}[b]{0.18\columnwidth}\raggedright
 \strut
 \end{minipage} & \begin{minipage}[b]{0.18\columnwidth}\raggedright
-Square Off - Kingdom \cite{squareoffkingdom}\strut
+Square Off - Kingdom \autocite{squareoffkingdom}\strut
 \end{minipage} & \begin{minipage}[b]{0.22\columnwidth}\raggedright
-Square Off - Grand Kingdom \cite{squareoffgrand}\strut
+Square Off - Grand Kingdom \autocite{squareoffgrand}\strut
 \end{minipage} & \begin{minipage}[b]{0.15\columnwidth}\raggedright
-DGT Smart Board \cite{dtgsmartboard}\strut
+DGT Smart Board \autocite{dtgsmartboard}\strut
 \end{minipage} & \begin{minipage}[b]{0.13\columnwidth}\raggedright
-DGT Bluetooth Wenge \cite{dtgble}\strut
+DGT Bluetooth Wenge \autocite{dtgble}\strut
 \end{minipage}\tabularnewline
 \midrule
 \endhead
 \begin{minipage}[t]{0.18\columnwidth}\raggedright
-Erkennung Schfigurstellung\strut
+Erkennung Schachfigurstellung\strut
 \end{minipage} & \begin{minipage}[t]{0.18\columnwidth}\raggedright
 nein (Manuell per Ausgangsposition)\strut
 \end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
@@ -236,163 +218,223 @@ Beschreibung und der aktuellen Software extrahiert. Besonders bei
 work-in-progress Projekten können sich die Features noch verändern und
 so weitere Funktionalitäten hinzugefügt werden.
 
-Desweiteren gibt es unzählige deratige Projekte, in der Tabelle wurde
+Des Weiteren gibt es weitere derartige Projekte, in der Tabelle wurde
 nur diese Aufgelistet welche sich von anderen Projekten in mindestens
 einem Feature unterscheiden.
 
-Auch existieren weitere abwandlungen von autonomen Schachbrettern, bei
-welchem die Figuren von oberhalb des Spielbretts gegriffen bzw bewegt
-werden. In einigen Projekten wird dies mittels eines Roboterarms
-\cite{actprojectrobot} oder eines modifizierten 3D-Druckers
-realisiert, diese wurden hier nicht berücksichtigt.
+Auch existieren weitere Abwandlungen von autonomen Schachbrettern, bei
+welchem die Figuren von oberhalb des Spielbretts gegriffen bzw. bewegt
+werden. In einigen Projekten wird dies mittels eines Industrie-Roboters
+\autocite{actprojectrobot} oder eines modifizierten
+3D-Druckers\autocite{atcproject3dprinter} realisiert, diese wurden hier
+nicht aufgrund der Mechanik welche über dem Spielbrett montiert werden
+muss nicht berücksichtigt.
 
 \begin{longtable}[]{@{}llll@{}}
 \caption{Auflistung von Open-Source Schachtisch
 Projekten}\tabularnewline
 \toprule
-\begin{minipage}[b]{0.24\columnwidth}\raggedright
+\begin{minipage}[b]{0.20\columnwidth}\raggedright
 \strut
 \end{minipage} & \begin{minipage}[b]{0.24\columnwidth}\raggedright
-Automated Chess Board (Michael Guerero)\strut
-\end{minipage} & \begin{minipage}[b]{0.25\columnwidth}\raggedright
-Automated Chess Board (Akash Ravichandran)\strut
-\end{minipage} & \begin{minipage}[b]{0.16\columnwidth}\raggedright
-DIY Super Smart Chessboard\strut
+Automated Chess Board (Michael Guerero) \autocite{actproject1}\strut
+\end{minipage} & \begin{minipage}[b]{0.26\columnwidth}\raggedright
+Automated Chess Board (Akash Ravichandran) \autocite{actproject2}\strut
+\end{minipage} & \begin{minipage}[b]{0.19\columnwidth}\raggedright
+DIY Super Smart Chessboard \autocite{actproject3}\strut
 \end{minipage}\tabularnewline
 \midrule
 \endfirsthead
 \toprule
-\begin{minipage}[b]{0.24\columnwidth}\raggedright
+\begin{minipage}[b]{0.20\columnwidth}\raggedright
 \strut
 \end{minipage} & \begin{minipage}[b]{0.24\columnwidth}\raggedright
-Automated Chess Board (Michael Guerero)\strut
-\end{minipage} & \begin{minipage}[b]{0.25\columnwidth}\raggedright
-Automated Chess Board (Akash Ravichandran)\strut
-\end{minipage} & \begin{minipage}[b]{0.16\columnwidth}\raggedright
-DIY Super Smart Chessboard\strut
+Automated Chess Board (Michael Guerero) \autocite{actproject1}\strut
+\end{minipage} & \begin{minipage}[b]{0.26\columnwidth}\raggedright
+Automated Chess Board (Akash Ravichandran) \autocite{actproject2}\strut
+\end{minipage} & \begin{minipage}[b]{0.19\columnwidth}\raggedright
+DIY Super Smart Chessboard \autocite{actproject3}\strut
 \end{minipage}\tabularnewline
 \midrule
 \endhead
-\begin{minipage}[t]{0.24\columnwidth}\raggedright
-Erkennung Schfigurstellung\strut
+\begin{minipage}[t]{0.20\columnwidth}\raggedright
+Erkennung Schachfigurstellung\strut
 \end{minipage} & \begin{minipage}[t]{0.24\columnwidth}\raggedright
 nein (Manuell per Ausgangsposition)\strut
-\end{minipage} & \begin{minipage}[t]{0.25\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[t]{0.26\columnwidth}\raggedright
 ja (Kamera / OpenCV)\strut
-\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[t]{0.19\columnwidth}\raggedright
 nein\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.24\columnwidth}\raggedright
+\begin{minipage}[t]{0.20\columnwidth}\raggedright
 Tischabmessungen (LxBxH)\strut
 \end{minipage} & \begin{minipage}[t]{0.24\columnwidth}\raggedright
 keine Angabe\strut
-\end{minipage} & \begin{minipage}[t]{0.25\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[t]{0.26\columnwidth}\raggedright
 keine Angabe\strut
-\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[t]{0.19\columnwidth}\raggedright
 450mm x 300mm x 50mm\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.24\columnwidth}\raggedright
+\begin{minipage}[t]{0.20\columnwidth}\raggedright
 Konnektivität\strut
 \end{minipage} & \begin{minipage}[t]{0.24\columnwidth}\raggedright
 \gls{usb}\strut
-\end{minipage} & \begin{minipage}[t]{0.25\columnwidth}\raggedright
-Ethernet\strut
-\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
-\gls{wlan}\strut
+\end{minipage} & \begin{minipage}[t]{0.26\columnwidth}\raggedright
+Ethernet, \gls{wlan}\strut
+\end{minipage} & \begin{minipage}[t]{0.19\columnwidth}\raggedright
+Ethernet, \gls{wlan}\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.24\columnwidth}\raggedright
+\begin{minipage}[t]{0.20\columnwidth}\raggedright
 Automatisches Bewegen der Figuren\strut
 \end{minipage} & \begin{minipage}[t]{0.24\columnwidth}\raggedright
 ja\strut
-\end{minipage} & \begin{minipage}[t]{0.25\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[t]{0.26\columnwidth}\raggedright
 ja\strut
-\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[t]{0.19\columnwidth}\raggedright
 nein\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.24\columnwidth}\raggedright
+\begin{minipage}[t]{0.20\columnwidth}\raggedright
 Spiel Livestream\strut
 \end{minipage} & \begin{minipage}[t]{0.24\columnwidth}\raggedright
 nein\strut
-\end{minipage} & \begin{minipage}[t]{0.25\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[t]{0.26\columnwidth}\raggedright
 nein\strut
-\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[t]{0.19\columnwidth}\raggedright
 nein\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.24\columnwidth}\raggedright
+\begin{minipage}[t]{0.20\columnwidth}\raggedright
 Cloud anbindung (online Spiele)\strut
 \end{minipage} & \begin{minipage}[t]{0.24\columnwidth}\raggedright
 nein\strut
-\end{minipage} & \begin{minipage}[t]{0.25\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[t]{0.26\columnwidth}\raggedright
 nein\strut
-\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[t]{0.19\columnwidth}\raggedright
 ja\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.24\columnwidth}\raggedright
+\begin{minipage}[t]{0.20\columnwidth}\raggedright
 Parkposition für ausgeschiedene Figuren\strut
 \end{minipage} & \begin{minipage}[t]{0.24\columnwidth}\raggedright
 nein\strut
-\end{minipage} & \begin{minipage}[t]{0.25\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[t]{0.26\columnwidth}\raggedright
 nein\strut
-\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[t]{0.19\columnwidth}\raggedright
 nein\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.24\columnwidth}\raggedright
+\begin{minipage}[t]{0.20\columnwidth}\raggedright
 Stand-Alone Funktionalität\strut
 \end{minipage} & \begin{minipage}[t]{0.24\columnwidth}\raggedright
-nein (PC erfoderlich)\strut
-\end{minipage} & \begin{minipage}[t]{0.25\columnwidth}\raggedright
+nein (PC erforderlich)\strut
+\end{minipage} & \begin{minipage}[t]{0.26\columnwidth}\raggedright
 ja\strut
-\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[t]{0.19\columnwidth}\raggedright
 ja\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.24\columnwidth}\raggedright
+\begin{minipage}[t]{0.20\columnwidth}\raggedright
 Besonderheiten\strut
 \end{minipage} & \begin{minipage}[t]{0.24\columnwidth}\raggedright
 -\strut
-\end{minipage} & \begin{minipage}[t]{0.25\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[t]{0.26\columnwidth}\raggedright
 Sprachsteuerung (Amazon Alexa)\strut
-\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[t]{0.19\columnwidth}\raggedright
 Zuganzeige über LED Matrix\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.24\columnwidth}\raggedright
-Licence\strut
+\begin{minipage}[t]{0.20\columnwidth}\raggedright
+Lizenz\strut
 \end{minipage} & \begin{minipage}[t]{0.24\columnwidth}\raggedright
 \gls{gpl} 3+\strut
-\end{minipage} & \begin{minipage}[t]{0.25\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[t]{0.26\columnwidth}\raggedright
 \gls{gpl}\strut
-\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[t]{0.19\columnwidth}\raggedright
 -\strut
 \end{minipage}\tabularnewline
 \bottomrule
 \end{longtable}
 
-\hypertarget{zielgruppe}{%
-\subsection{Zielgruppe}\label{zielgruppe}}
+In den bestehenden Projekten ist zu erkennen, dass ein autonomer
+Schachtisch sehr einfach und mit einfachsten Mittel konstruiert werden
+kann. Hierbei fehlen in der Regel einige Features wie das automatische
+Erkennen von Figuren oder das Spielen über das Internet.
+
+Einige Projekte setzten dabei auf eingebettete Systeme, welche direkt im
+Schachtisch montiert sind, andere hingegen nutzen einen externen PC,
+welcher die Steuerbefehle an die Elektronik sendet.
+
+Bei der Konstruktion der Mechanik und der Methode mit welcher die
+Figuren über das Feld bewegt werden ähneln sich jedoch die meisten
+dieser Projekte. Hier wird meist eine einfache X und Y-Achse verwendet,
+welche von zwei Schrittmotoren bewegt werden. Die Schachfiguren werden
+dabei mittels eines Elektromagneten über die Oberseite gezogen. Hierbei
+ist ein Magnet oder eine kleine Metallplatte in den Fuß der Figuren
+eingelassen worden.
+
+Die Erkennung der Schachfiguren ist augenscheinlich die schwierigste
+Aufgabe. Hier wurde in der Mehrzahl der Projekte eine Kamera im
+Zusammenspiel mit einer auf OpenCV basierenden Figur-Erkennung. Diese
+Variante ist je nach Implementierung des Vision-Algorithmus
+fehleranfälliger bei sich ändernden Lichtverhältnissen, auch muss die
+Kamera oberhalb der Schachfiguren platziert werden, wenn kein
+transparentes Schachfeld verwendet werden soll.
 
 \hypertarget{user-experience}{%
 \subsection{User Experience}\label{user-experience}}
 
-\hypertarget{software-aufbau}{%
-\subsubsection{Software-Aufbau}\label{software-aufbau}}
+Ein wichtiger Aspekt bei diesem Projekt spiel die User-Experience. Diese
+beschreibt die Ergonomie der Mensch-Maschine Interaktion und wird durch
+die DIN 9241\autocite{din9241} beschrieben. Hierbei geht es primär um
+das Erlebnis, welches der Benutzer bei dem Verwenden eines Produktes
+erlebt und welche Erwartungen der Benutzer an die Verwendung des
+Produktes hat.
 
-\hypertarget{hardware-aufbau}{%
-\subsubsection{Hardware-Aufbau}\label{hardware-aufbau}}
+Bei dem autonomen Schachtisch, soll der Benutzer eine ähnlich einfache
+Erfahrung erleben, wie bei einer Schachpartie mit einem menschlichen
+Gegenspieler. Der Benutzer soll direkt nach dem einschalten des Tisches
+und dem Aufstellen der Figuren in der Lage sein, mit dem Spiel beginnen
+zu können. Dies soll wie ein reguläres Schachspiel ablaufen, der Spieler
+vor dem Tisch soll die Figuren mit der Hand bewegen können und der Tisch
+soll den Gegenspieler darstellen. Dieser bewegt die Figuren der
+Gegenseite.
 
-\hypertarget{grundlagen}{%
-\section{Grundlagen}\label{grundlagen}}
+Nach Beendigung einer Partie, soll das Spielbrett wieder in die
+Ausgangssituation gebracht werden, die kann zum einem vom Tisch selber
+oder vom Benutzer per Hand geschehen. Danach ist der Tisch für die
+nächste Partie bereit, welche einfach per Knopfdruck gestartet werden
+können sollte.
+
+Ein weiter Punkt welcher bei der User-Experience beachtet werden soll,
+ist die zeitliche Konstante. Ein Spiel auf einem normalen Schachspiel
+hat je nach Spielart kein Zeitlimit, dies kann für das gesamte Spiel
+gelten oder auch für die Zeit zwischen einzelnen Zügen. Der autonome
+Schachtisch soll es dem Spieler z.B. ermöglichen ein Spiel am Morgen zu
+beginnen und erst am nächsten Tag dieses fortzusetzen.
 
 \hypertarget{anforderungsanalyse}{%
 \subsection{Anforderungsanalyse}\label{anforderungsanalyse}}
 
+alle key requirements welcher der tisch haben soll
+
 \hypertarget{machbarkeitsanalyse}{%
 \subsection{Machbarkeitsanalyse}\label{machbarkeitsanalyse}}
 
+welche technologien werden benötigt
+
 \hypertarget{technologien-im-makerspace}{%
-\subsection{Technologien im
+\subsubsection{Technologien im
 Makerspace}\label{technologien-im-makerspace}}
 
+stehen diese im makerspace zur verfüfung
+
 \hypertarget{section}{%
-\subsection{}\label{section}}
+\subsubsection{}\label{section}}
+
+\hypertarget{erstellung-erster-prototyp}{%
+\section{Erstellung erster Prototyp}\label{erstellung-erster-prototyp}}
+
+\hypertarget{technologieauswahl-fuxfcr-ersten-protoypen}{%
+\subsection{Technologieauswahl für ersten
+Protoypen}\label{technologieauswahl-fuxfcr-ersten-protoypen}}
+
+\hypertarget{section-1}{%
+\section{}\label{section-1}}
 
 \hypertarget{vinaque-sanguine-metuenti-cuiquam-alcyone-fixus}{%
 \section{Vinaque sanguine metuenti cuiquam Alcyone

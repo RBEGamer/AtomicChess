@@ -270,14 +270,14 @@ int main(int argc, char *argv[])
             LOG_F(WARNING, "VIRTUAL/SIMULATED HARDWARE");
             ConfigParser::getInstance()->loadDefaults("VIRT");
 
-        }else if (hwid == HWID_DK_HARDWARE){
+        }else if (hwid == HWID_DK_HARDWARE || cmdOptionExists(argv, argv + argc, "-hwdk")){
             LOG_F(WARNING, "DK HARDWARE");
             ConfigParser::getInstance()->loadDefaults("DK");
 
-        }else if (hwid == HWID_PROD_V1_HARDWARE) {
+        }else if (hwid == HWID_PROD_V1_HARDWARE || cmdOptionExists(argv, argv + argc, "-hwprod1")) {
             LOG_F(WARNING, "PROD_V1 HARDWARE");
             ConfigParser::getInstance()->loadDefaults("PROD_V1");
-        }else if (hwid == INVALID_HWID){ //IF HWIF IS INVALID => RETURN ERROR
+        }else if (hwid == INVALID_HWID || cmdOptionExists(argv, argv + argc, "-hwinvalid")){ //IF HWIF IS INVALID => RETURN ERROR
             LOG_F(ERROR, "--- GOT INVALID HWID TO AVOID DAMAGES ON HARDWARE => TERMINATE PROGRAM -----");
             std::raise(SIGINT);
         }else { //EVERY OTHER HWID IS PROD_V2 HWID
