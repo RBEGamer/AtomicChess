@@ -32,3 +32,11 @@ This option always overrides the existing config file!
 ### SKIP NFC read
 
 * `./atc_controller -skipplacementdialog` - skips the initial chess board NFC scan and load the default fen from the config file
+
+### HELP
+
+* `./atc_controller -help` - print this page
+
+### VERSION
+
+* `./atc_controller -version` - print version message if #define ATC_CONTROLLER_VERSION "{{VERSION}}" was overwritten by build system
