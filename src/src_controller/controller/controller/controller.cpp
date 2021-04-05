@@ -1,5 +1,4 @@
 #include <iostream>
-
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -48,7 +47,7 @@ typedef std::chrono::system_clock::time_point TimePoint;
 
 
 //---------------------- CONFIG DEFINED --------------------------- //
-
+#define ATC_CONTROLLER_VERSION "{{VERSION}}"
 #define CONFIG_FILE_PATH "./atccontrollerconfig.ini"
 #define LOG_FILE_PATH "/tmp/atc_controller_log.log"
 #define LOG_FILE_PATH_ERROR "/tmp/atc_controller_error_log.log"
@@ -210,6 +209,38 @@ int main(int argc, char *argv[])
 {
     //REGISTER SIGNAL HANDLER
     signal(SIGINT, signal_callback_handler);
+
+
+
+    //---- PRINT HELP MESSAGE ------------------------------------------------------ //
+    if (cmdOptionExists(argv, argv + argc, "-help"))
+    {
+        std::cout << "---- ATC_CONTROLLER HELP ----" <<std::endl;
+        std::cout << "-help                   | prints this message" <<std::endl;
+        std::cout << "-writeconfig            | overrides existing or creates new config file with defaults" <<std::endl;
+        std::cout << "-writeconfig -hwvirtual | selects the virtual hardware which enables testing without hardware" <<std::endl;
+        std::cout << "-writeconfig -hwdk      | selects the development kit DK hardware (RPI SPI interface)" <<std::endl;
+        std::cout << "-writeconfig -hwprod1   | selects the production hardware version 1 (Marlin XY)" <<std::endl;
+        std::cout << "-writeconfig -hwprod2   | selects the production hardware version 2 (Marlin CoreXY)" <<std::endl;
+        std::cout << "-autoplayer             | enables the automatic player mode - table will make random moves" <<std::endl;
+        std::cout << "-skipplacementdialog    | skips the initial chess board NFC scan and load the default fen from the config file" <<std::endl;
+        std::cout << "---- END ATC_CONTROLLER HELP ----" <<std::endl;
+        return 0;
+    }
+
+    //---- PRINT VERSION MESSAGE ------------------------------------------------------ //
+    if (cmdOptionExists(argv, argv + argc, "-help"))
+    {
+        std::cout << "---- ATC_CONTROLLER VERSION ----" <<std::endl;
+        std::cout << "atc_controller version:"<< ATC_CONTROLLER_VERSION <<std::endl;
+
+        return 0;
+    }
+
+
+
+
+
 
 
     //SETUP LOGGER
