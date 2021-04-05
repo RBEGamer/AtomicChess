@@ -229,11 +229,12 @@ int main(int argc, char *argv[])
     }
 
     //---- PRINT VERSION MESSAGE ------------------------------------------------------ //
-    if (cmdOptionExists(argv, argv + argc, "-help"))
+    if (cmdOptionExists(argv, argv + argc, "-version"))
     {
         std::cout << "---- ATC_CONTROLLER VERSION ----" <<std::endl;
         std::cout << "atc_controller version:"<< ATC_CONTROLLER_VERSION <<std::endl;
-
+        std::cout << "atc_controller build date:"<< __DATE__ <<std::endl;
+        std::cout << "atc_controller build date:"<< __TIME__ <<std::endl;
         return 0;
     }
 
