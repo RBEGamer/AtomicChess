@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "5ae2fe1c-2edc-4a74-a4e0-ff677ae333ac",
+		"_postman_id": "de06a72f-e3a8-4920-8fed-5b17a2bdc6d0",
 		"name": "AtomicChessBackend",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -341,7 +341,6 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "80c26a07-79bd-49ba-9a8a-afc19a5c66c3",
 						"exec": [
 							""
 						],
@@ -366,14 +365,235 @@
 				"description": "IF REPSONSE IS SUCCESSFUL SERVER IS ONLINE"
 			},
 			"response": []
+		},
+		{
+			"name": "get_profile_information_secure",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ATC_BACKEND_URL}}/rest/get_profile_information_secure?pid={{PLAYER_VIRTUAL_ID}}&authkey={{API_KEY}}",
+					"protocol": "http",
+					"host": [
+						"{{ATC_BACKEND_URL}}"
+					],
+					"path": [
+						"rest",
+						"get_profile_information_secure"
+					],
+					"query": [
+						{
+							"key": "pid",
+							"value": "{{PLAYER_VIRTUAL_ID}}",
+							"description": "Player virtual ID"
+						},
+						{
+							"key": "authkey",
+							"value": "{{API_KEY}}",
+							"description": "api key set in config"
+						}
+					]
+				},
+				"description": "This request returns the profile data from a user including config"
+			},
+			"response": []
+		},
+		{
+			"name": "server_config",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ATC_BACKEND_URL}}/rest/server_config?key=matchmaking_ai_enable&authkey={{API_KEY}}&value=false",
+					"protocol": "http",
+					"host": [
+						"{{ATC_BACKEND_URL}}"
+					],
+					"path": [
+						"rest",
+						"server_config"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "matchmaking_ai_enable",
+							"description": "the key from the config want to change"
+						},
+						{
+							"key": "authkey",
+							"value": "{{API_KEY}}"
+						},
+						{
+							"key": "value",
+							"value": "false",
+							"description": "value of the key"
+						}
+					]
+				},
+				"description": "This request sets a specific key in the global server config (config.json)"
+			},
+			"response": []
+		},
+		{
+			"name": "get_server_config",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ATC_BACKEND_URL}}/rest/get_server_config",
+					"protocol": "http",
+					"host": [
+						"{{ATC_BACKEND_URL}}"
+					],
+					"path": [
+						"rest",
+						"get_server_config"
+					]
+				},
+				"description": "Returns the server config file (config.json)"
+			},
+			"response": []
+		},
+		{
+			"name": "set_user_config_single_key",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ATC_BACKEND_URL}}/rest/set_user_config_single_key?key=USER_GENERAL_ENABLE_AUTO_MATCHMAKING_ENABLE&authkey={{API_KEY}}&value=false&vid={{PLAYER_VIRTUAL_ID}}",
+					"protocol": "http",
+					"host": [
+						"{{ATC_BACKEND_URL}}"
+					],
+					"path": [
+						"rest",
+						"set_user_config_single_key"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "USER_GENERAL_ENABLE_AUTO_MATCHMAKING_ENABLE"
+						},
+						{
+							"key": "authkey",
+							"value": "{{API_KEY}}",
+							"description": "api key set in config.json"
+						},
+						{
+							"key": "value",
+							"value": "false",
+							"description": "new config value"
+						},
+						{
+							"key": "vid",
+							"value": "{{PLAYER_VIRTUAL_ID}}",
+							"description": "virtual id of the player profile"
+						}
+					]
+				},
+				"description": "Sets a USER_ key into the users profile config."
+			},
+			"response": []
+		},
+		{
+			"name": "store_user_log",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ATC_BACKEND_URL}}/rest/store_user_log?hwid={{PLAYER_HWID}}&sid={{PLAYER_SID}}&log=--LOG_FROM_PLAYER--",
+					"protocol": "http",
+					"host": [
+						"{{ATC_BACKEND_URL}}"
+					],
+					"path": [
+						"rest",
+						"store_user_log"
+					],
+					"query": [
+						{
+							"key": "hwid",
+							"value": "{{PLAYER_HWID}}",
+							"description": "player hwid"
+						},
+						{
+							"key": "sid",
+							"value": "{{PLAYER_SID}}",
+							"description": "players session key"
+						},
+						{
+							"key": "log",
+							"value": "--LOG_FROM_PLAYER--",
+							"description": "the log content"
+						}
+					]
+				},
+				"description": "This request stores the logfile from a active table into the users profile"
+			},
+			"response": []
+		},
+		{
+			"name": "perform_user_login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "user_pw",
+							"value": "1337",
+							"description": "password set in config.json",
+							"type": "text"
+						},
+						{
+							"key": "origin_url",
+							"value": "/",
+							"description": "after successful login rediret to this destination",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{ATC_BACKEND_URL}}/rest/perform_user_login",
+					"protocol": "http",
+					"host": [
+						"{{ATC_BACKEND_URL}}"
+					],
+					"path": [
+						"rest",
+						"perform_user_login"
+					]
+				},
+				"description": "This request is used to claim a administrator session key to save edit server settings"
+			},
+			"response": []
+		},
+		{
+			"name": "check_login_state",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ATC_BACKEND_URL}}/rest/check_login_state",
+					"protocol": "http",
+					"host": [
+						"{{ATC_BACKEND_URL}}"
+					],
+					"path": [
+						"rest",
+						"check_login_state"
+					]
+				},
+				"description": "returns true if the a admin session was claimed trougth perform_user_login"
+			},
+			"response": []
 		}
 	],
 	"variable": [
 		{
-			"id": "c58cccd9-323e-441e-a1f6-82d7646b0f21",
 			"key": "BASE_URL",
 			"value": "127.0.0.1:3000"
 		}
-	],
-	"protocolProfileBehavior": {}
+	]
 }
