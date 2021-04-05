@@ -45,7 +45,6 @@ beleuchtung existierender ansätze && festlegung zu erwartener Features, Kapitel
 
 ### Kommerzielle Produkte
 
-* zwei hersteller wirklich autonomer schachtische; für tunieren werden dgt schachbretter für livestreams und recordinge verwendet.
 
 : Auflistung kommerzieller autonomer Schachtische
 
@@ -60,6 +59,16 @@ beleuchtung existierender ansätze && festlegung zu erwartener Features, Kapitel
 | Parkposition für ausgeschiedene Figuren 	| nein                              				| ja                                								| nein                 							| nein                 					|
 | Stand-Alone Funktionalität               	| nein (Mobiltelefon erforderlich)    			| nein (Mobiltelefon erforderlich)     							| nein (PC erforderlich)						| nein (PC erforderlich)				|   	   
 | Besonderheiten                          	| Akku für 30 Spiele                    		| Akku für 15 Spiele					           						| - 																| -															|
+
+
+Bei den DGT Schachbrettern ist zu beachten, dass diese die Schachfiguren nicht autonom bewegen können. Sie wurden jedoch in die Liste aufgenommen, da diese einen Teil der Funktionalitäten der Square Off Schachbrettern abdecken und lediglich das bewegen der Schachfiguren fehlt.
+Die DGT Bretter können die Position der Figuren erkennen und ermöglichen so auch Spiele über das Internet bzw. können diese auch  Spiele als Livestream anbieten.
+Diese werden bei Schachtunieren für die Übertragung der Partien sowie die Aufzeichnung der Spielzüge verwendet und bieten support für den anschluss von weiterer Peripherie wie z.B. Schachuhren.
+
+
+Somit gibt es zum Zeitpunkt der Recherche nur einen Hersteller von autonomen Schachbrettern.
+
+
 
 ### Open-Source Projekte
 
