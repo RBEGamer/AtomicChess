@@ -849,7 +849,7 @@ int main(int argc, char *argv[])
         //--------------------------------------------------------
         if(ev.event == guicommunicator::GUI_ELEMENT::INIT_BTN && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
             gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::PROCESSING_SCREEN);
-            if (board.initBoard(board_scan) != ChessBoard::BOARD_ERROR::INIT_COMPLETE)
+            if (board.initBoard(true) != ChessBoard::BOARD_ERROR::INIT_COMPLETE)
             {
                 gui.show_error_message_on_gui("board.initBoard() FAILED");
 
