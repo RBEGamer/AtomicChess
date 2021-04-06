@@ -21,6 +21,7 @@ ChessBoard::~ChessBoard() {
 
 void ChessBoard::test_make_move_static() {
     MovePiar tmp_pair;
+    HardwareInterface::getInstance()->home_sync();
     tmp_pair.from_field = ChessField::CHESS_FILEDS::CHESS_FIELD_G2;
     tmp_pair.to_field = ChessField::CHESS_FILEDS::CHESS_FIELD_A2;
     makeMoveSync(tmp_pair, false, false, false);

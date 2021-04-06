@@ -352,7 +352,7 @@ int main(int argc, char *argv[])
 
     //TODO REMOVE
     //TODO TEST
-    HardwareInterface::getInstance()->ScanNFC();
+  //  HardwareInterface::getInstance()->ScanNFC();
 
 
 
@@ -902,7 +902,7 @@ int main(int argc, char *argv[])
             int test_id = 0;
             while (test_id >= 0) {
                 board.test_make_move_func(test_text, test_id);
-                gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK, test_text, 10000);
+               // gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK, test_text, 10000);
             }
             gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::DEBUG_SCREEN);
         }
