@@ -106,6 +106,7 @@ bool UserBoardController::init_serial_port(std::string _serial_port_file, int _b
         LOG_F(ERROR, "serial port open failed %s WITH BAUD %i", _serial_port_file.c_str(), _baud_rate);
         return false;
     }
+
     //ENABLE RESET
     port->DTR(false);
     port->RTS(false);

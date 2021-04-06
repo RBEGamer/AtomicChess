@@ -232,7 +232,8 @@ bool HardwareInterface::setTurnStateLight(HardwareInterface::HI_TURN_STATE_LIGHT
             default:hsv_col=0;break;
         }
 
-        int r,g,b = 0;
+        int r,g,b,tmp = 0;
+
 
 
         //CONVERT HSV TO RGB
@@ -251,7 +252,12 @@ bool HardwareInterface::setTurnStateLight(HardwareInterface::HI_TURN_STATE_LIGHT
                 g = 255 - hsv_col * 3;
                 r= 0;
             }
-
+        //SWITCH G AND B COMPONENT DEPENDING ON THE USED WS2812 STRIP
+        if(ConfigParser::getInstance()->getBool_nocheck(ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_RGBW_STRIP_SWITCH_GB)){
+            tmp = g;
+            g = b;
+            b = tmp;
+        }
 
         if (gcode_interface != nullptr) {
             gcode_interface->set_led(r,g,b,intensity);
@@ -310,9 +316,9 @@ ChessPiece::FIGURE HardwareInterface::ScanNFC(int _retry_count)
 	}
 	else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD || hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD_V2)
 	{
-        ChessPiece::FIGURE fig = userboardcontroller_interface->read_chess_piece_nfc();
-        ChessPiece::FigureDebugPrint(fig);
-        return fig;
+       // ChessPiece::FIGURE fig = userboardcontroller_interface->read_chess_piece_nfc();
+       // ChessPiece::FigureDebugPrint(fig);
+       // return fig;
 
     }else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_VIRT){
        // LOG_F(INFO,"HardwareInterface::ScanNFC() return an invalid figure due HWREV_VIRT");
