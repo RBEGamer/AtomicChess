@@ -1585,49 +1585,41 @@ ChessBoard::BOARD_ERROR ChessBoard::scanBoard(bool _include_park_postion) {
     HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, false);
     HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, false);
 
+
+    HardwareInterface::getInstance()->set_speed_preset(HardwareInterface::HI_TRAVEL_SPEED_PRESET::HI_TSP_TRAVEL);
     int x = 0;
     int y = 0;
     for (int i = 0; i < magic_enum::enum_integer(ChessField::CHESS_FILEDS::CHESS_FIELD_PARK_POSTION_WHITE_1); i++) {
         //getFieldCoordinates((ChessField::CHESS_FILEDS)i, x, y, IOController::COIL::COIL_NFC, true, true);        //GET INDEX FOR ARRAY
         travelToField(static_cast<ChessField::CHESS_FILEDS>(i), IOController::COIL::COIL_NFC,
                       true);             //TRAVEL TO NEXT FIELD
+
+          //ON PRODUCTION HARDWARE WE NEED TO LIFT THE NFC HEAD
+         if(HardwareInterface::getInstance()->is_production_hardware()){
+             HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, true);
+         }
+
+
         ChessPiece::FIGURE tmop = HardwareInterface::getInstance()->ScanNFC(10);             //SCAN NFC TAG IF PRESENT
-        ChessPiece::FigureDebugPrint(tmop);            //DEBUG PRINT FIGURE IF FOUND
+        //ChessPiece::FigureDebugPrint(tmop);            //DEBUG PRINT FIGURE IF FOUND
         if (tmop.type == ChessPiece::TYPE::TYPE_INVALID) {
             tmop.is_empty = true;
         } else {
             tmop.is_empty = false;
         }
 
-        board_current[ChessField::get_board_index_from_field(
-                static_cast<ChessField::CHESS_FILEDS>(i))] = tmop;                   //STORE FIGURE ON BOARD
-    }
-
-    //TODO SCAN PARK POSITION FOR WHITE
-    for (int i = magic_enum::enum_integer(ChessField::CHESS_FILEDS::CHESS_FIELD_PARK_POSTION_BLACK_1);
-         i < magic_enum::enum_integer(ChessField::CHESS_FILEDS::CHESS_FIELD_PARK_POSTION_BLACK_16); i++) {
-
-        //GOOT
-        //getFieldCoordinates((ChessField::CHESS_FILEDS)i, x, y, IOController::COIL::COIL_NFC, true, true);   //GET INDEX FOR ARRAY
-        travelToField(static_cast<ChessField::CHESS_FILEDS>(i), IOController::COIL::COIL_NFC,
-                      true);              //TRAVEL TO NEXT FIELD
-        //ACTIVATE COIL FOR THE BLACK SITE COIL A IS NESSESSARY
-        HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, false);
-        //MOVE OUT SLOW
-        //MOVE NFC
-
-        //SCAN POSSBILE NFC TAG
-        ChessPiece::FIGURE tmop = HardwareInterface::getInstance()->ScanNFC(10);              //SCAN NFC TAG IF PRESENT
-        ChessPiece::FigureDebugPrint(tmop);             //DEBUG PRINT FIGURE IF FOUND
-        if (tmop.type == ChessPiece::TYPE::TYPE_INVALID) {
-            tmop.is_empty = true;
+        //ON PRODUCTION HARDWARE WE NEED TO LIFT THE NFC HEAD
+        if(HardwareInterface::getInstance()->is_production_hardware()){
+            HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, false);
         }
-        //ACTIVTE COIL A AGAIN
-        HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, true);
-        //MOVE IN
-        //DEACTIVATE COIL
-        HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, false);
+
+        board_current[ChessField::field2Index(static_cast<ChessField::CHESS_FILEDS>(i))] = tmop;                   //STORE FIGURE ON BOARD
+
+        printBoard(ChessBoard::BOARD_TPYE::REAL_BOARD);
+
     }
+
+
 
 
     //TRAVEL BACK TO ORIGINAL STARTING POSITION
@@ -1786,12 +1778,6 @@ ChessBoard::BOARD_ERROR ChessBoard::initBoard(bool _with_scan) {
     HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, false);
 
 
-#ifdef DEBUG
-    //MOVE TO FIELD H1 WITH COIL A => THAT THE VISIBLE REF POSITION FOR VISUAL INSPRECTION
-    travelToField(ChessField::CHESS_FILEDS::CHESS_FIELD_H1, IOController::COIL_A, true);
-#endif // DEBUG	
-
-
     //INIT BOARD ARRAYS => TO EMPY FIELDS
     initBoardArray(get_board_pointer(ChessBoard::BOARD_TPYE::TARGET_BOARD));
     initBoardArray(get_board_pointer(ChessBoard::BOARD_TPYE::REAL_BOARD));
@@ -1810,9 +1796,10 @@ ChessBoard::BOARD_ERROR ChessBoard::initBoard(bool _with_scan) {
 
     //NEXT SCAN THE FIELD WITH PARK POSTIONS
     if (_with_scan) {
+        loadBoardPreset(ChessBoard::BOARD_TPYE::REAL_BOARD,ChessBoard::BOARD_PRESET::BOARD_PRESET_ALL_FIGURES_IN_START_POSTITION);
+        printBoard(ChessBoard::BOARD_TPYE::REAL_BOARD);
         scanBoard(false);
         printBoard(ChessBoard::BOARD_TPYE::REAL_BOARD);
-    } else {
     }
 
     //syncRealWithTargetBoard(StringToMovePair("f2h4"));
@@ -1821,18 +1808,7 @@ ChessBoard::BOARD_ERROR ChessBoard::initBoard(bool _with_scan) {
 
     HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, false);
     HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, false);
-    //TODO ONLY OCCUPED FIELDS
-    /*
-    for (int i = 0; i < magic_enum::enum_integer(ChessField::CHESS_FILEDS::CHESS_FIELD_PARK_POSTION_WHITE_1); i++)
-    {
-        //getFieldCoordinates((ChessField::CHESS_FILEDS)i, x, y, IOController::COIL::COIL_NFC, true, true);        //GET INDEX FOR ARRAY
-        HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, false);
-        HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, false);
-        travelToField(static_cast<ChessField::CHESS_FILEDS>(i), IOController::COIL::COIL_NFC, true);             //TRAVEL TO NEXT FIELD
-        HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, true);
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
-    }
-    */
+
     HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, false);
     HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, false);
 

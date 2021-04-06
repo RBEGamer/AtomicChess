@@ -253,13 +253,9 @@ std::string UserBoardController::send_command_blocking(std::string _cmd) {
 
     while (true) {
         std::string resp = read_string_from_serial();
-
-
         //CHECK FOR RESPONSE
         if (resp.rfind(_cmd + "res_") != std::string::npos) {
-        std::string value = get_value(resp,UBC_CMD_SEPERATOR,3);
-        std::vector<std::string> re = split(value,UBC_CMD_SEPERATOR);
-        return value;
+        return resp;
            //TODO TEST
         } else {
             wait_counter++;
@@ -293,12 +289,26 @@ ChessPiece::FIGURE UserBoardController::read_chess_piece_nfc(){
         if(readres.empty()){
             continue;
         }
-        //TODO PARSE RESULT + ERROR CODE
-        //0 => TAG
-        //1 => ERROR
-        //IF COMMAND
-        //TODO MODIFY PARSE RESULT
-        //MAKE A FIGURE
+        //SPLIT REPSONSE
+        std::vector<std::string> re = split(readres,UBC_CMD_SEPERATOR);
+        //CHECK SPLIT LENGTH
+        if(re.size() != 6){
+            continue;
+        }
+        //READ RESULT
+
+        const std::string figure = re.at(3);
+        const std::string errorcode = re.at(4);
+        int j = 0;
+
+        if(errorcode != "ok"){
+            LOG_F(WARNING, "NFC READ RESPONSE ERRORCODE %s", errorcode.c_str());
+            continue;
+        }
+        const char figure_charakter = figure.at(0);
+        //const char figure_id = figure_at(1);
+        fig = ChessPiece::getFigureByCharakter(figure_charakter);
+
     }
 
 

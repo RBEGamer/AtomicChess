@@ -312,14 +312,10 @@ ChessPiece::FIGURE HardwareInterface::ScanNFC(int _retry_count)
             ChessPiece::FigureDebugPrint(fig);
 			return fig;
 		}
-			
 	}
 	else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD || hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD_V2)
 	{
-       // ChessPiece::FIGURE fig = userboardcontroller_interface->read_chess_piece_nfc();
-       // ChessPiece::FigureDebugPrint(fig);
-       // return fig;
-
+        return userboardcontroller_interface->read_chess_piece_nfc();;
     }else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_VIRT){
        // LOG_F(INFO,"HardwareInterface::ScanNFC() return an invalid figure due HWREV_VIRT");
 	}else{
@@ -327,7 +323,6 @@ ChessPiece::FIGURE HardwareInterface::ScanNFC(int _retry_count)
 	}
 
 	//ELSE RETURN A INVALID FIGURE
-
     ChessPiece::FIGURE fig;
 	fig.color = ChessPiece::COLOR::COLOR_UNKNOWN;
 	fig.type = ChessPiece::TYPE::TYPE_INVALID;

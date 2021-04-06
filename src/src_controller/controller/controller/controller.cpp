@@ -350,10 +350,6 @@ int main(int argc, char *argv[])
         std::raise(SIGINT);
     }
 
-    //TODO REMOVE
-    //TODO TEST
-  //  HardwareInterface::getInstance()->ScanNFC();
-
 
 
     //PRINT SOME VERSION TO CONSOLE
@@ -430,11 +426,11 @@ int main(int argc, char *argv[])
     }
     else
     {
-        if (gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_A_OK_CANCEL, "CHESS FIGURES PLACED IN PARKING POSITIONS?", 10000) != guicommunicator::GUI_MESSAGE_BOX_RESULT::MSGBOX_RES_OK)
+        if (gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_A_OK_CANCEL, "PLEASE PLACE ALL FIGURES INSIDE THE FIELD", 10000) == guicommunicator::GUI_MESSAGE_BOX_RESULT::MSGBOX_RES_OK)
         {
             board_scan = false;
         }
-        else if (gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_A_OK_CANCEL, "CHESS FIGURES PLACED IN PARKING POSITIONS?", 10000) != guicommunicator::GUI_MESSAGE_BOX_RESULT::MSGBOX_RES_CANCEL)
+        else
         {
             board_scan = true;
         }
