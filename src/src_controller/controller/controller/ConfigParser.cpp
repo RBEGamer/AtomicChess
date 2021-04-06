@@ -402,10 +402,10 @@ void ConfigParser::loadDefaults(std::string _type_str)
         config_store[ConfigParser::CFG_ENTRY::GENERAL_EN_ATCGUI_COMMUNICATION] = "1";
 
 
-        config_store[ConfigParser::CFG_ENTRY::MECHANIC_STEPS_PER_MM] = "100";//80 steps / mm for CORE XY configuration
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_STEPS_PER_MM] = "80";//80 steps / mm for CORE XY configuration
         config_store[ConfigParser::CFG_ENTRY::MECHANIC_INVERT_COILS] = "1";
         config_store[ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X] = "50";
-        config_store[ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y] = "55";
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y] = "60";
         config_store[ConfigParser::CFG_ENTRY::MECHANIC_DISTANCE_COILS_MM] = "0";
         config_store[ConfigParser::CFG_ENTRY::MECHANIC_COIL_SWITCH_POSTION_TRIGGER] = "200";
         config_store[ConfigParser::CFG_ENTRY::MECHANIC_CHESS_FIELD_WIDTH] = "57";//55
@@ -435,7 +435,7 @@ void ConfigParser::loadDefaults(std::string _type_str)
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_A_INDEX] = "0";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_B_INDEX] = "1";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_BOTTOM_POS] = "180";
-        config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_UPPER_POS] = "60";
+        config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_UPPER_POS] = "100";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_RESET_EEPROM_TO_DEFAULT_DURING_STARTUP] = "1";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_RGBW_STRIP_SWITCH_GB] = "1";
 
