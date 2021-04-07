@@ -299,15 +299,21 @@ ChessPiece::FIGURE UserBoardController::read_chess_piece_nfc(){
 
         const std::string figure = re.at(3);
         const std::string errorcode = re.at(4);
-        int j = 0;
 
-        if(errorcode != "ok"){
+        //READ STATUS CODE IF READOUT IS VALID / NO TAG PRESENT OR READ FAILED
+        if(errorcode == "ok"){
+            const char figure_charakter = figure.at(0);
+            //const char figure_id = figure_at(1);
+            fig = ChessPiece::getFigureByCharakter(figure_charakter);
+            break;
+        }else if(errorcode == "notagpresent"){
+            break;
+        }else{
             LOG_F(WARNING, "NFC READ RESPONSE ERRORCODE %s", errorcode.c_str());
-            continue;
         }
-        const char figure_charakter = figure.at(0);
-        //const char figure_id = figure_at(1);
-        fig = ChessPiece::getFigureByCharakter(figure_charakter);
+
+
+
 
     }
 

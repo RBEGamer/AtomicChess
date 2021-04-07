@@ -907,10 +907,10 @@ int main(int argc, char *argv[])
         //----------------DEBUG - LOAD CONFIG BUTTON--------------
         //--------------------------------------------------------
         if(ev.event == guicommunicator::GUI_ELEMENT::DEBUG_FUNCTION_D && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
-
-            std::string test_text = "";
-            board.test_make_move_static();
-            gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::DEBUG_SCREEN);
+            board.corner_move_test();
+            //std::string test_text = "";
+            //board.test_make_move_static();
+            //gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::DEBUG_SCREEN);
         }
 
         //--------------------------------------------------------
@@ -1082,7 +1082,7 @@ int main(int argc, char *argv[])
             //READ CONFIG VALUES
             //THE CHESS BOARD IS SQUARED SO X AND Y ARE DIAGONALLY THE SAME
             cal_pos_x = ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_CHESS_FIELD_WIDTH)*7;
-            cal_pos_y = cal_pos_x;
+            cal_pos_y = cal_pos_x; //BECAUSE ITS DIAGONAL
             //MOVE TO NEW A8 POSITION
             HardwareInterface::getInstance()->move_to_postion_mm_absolute(ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X), ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y),true);
             HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B,true);

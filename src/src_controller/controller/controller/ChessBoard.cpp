@@ -163,7 +163,7 @@ ChessField::CHESS_FILEDS ChessBoard::getNextHalfFieldFromParkPos(ChessField::CHE
     //FOR EACH BOARD FIELD
     for (int i = start_index; i < stop_index; i++) {
         //GET FIELD COODIANTES
-        getFieldCoordinates(ChessField::Index2Field(i), tmp_x, tmp_y, parkpos_needed_coil, false, true);
+        getFieldCoordinates(ChessField::Index2Field(i), tmp_x, tmp_y, parkpos_needed_coil, false);
         //USE PYTHAGORAS TO GET THE DISTANCE BEWEEN THE POINTS
         distance = std::hypotl(tmp_x - pp_x, tmp_y - pp_y);
         if (distance < smallest_distance) {
@@ -183,7 +183,7 @@ bool ChessBoard::makeMoveFromBoardToParkPosition(ChessField::CHESS_FILEDS _park_
     //IF NOT PARK POS RETURN ADD THE FINAL TARGET FIELD POSITION TO THE QUEUE
     if (!isFieldParkPosition(_park_pos)) {
         IOController::COIL parkpos_needed_coil = getValidCoilTypeParkPosition(_park_pos, IOController::COIL::COIL_A);
-        getFieldCoordinates(_park_pos, _current_x, _current_y, parkpos_needed_coil, false, true);
+        getFieldCoordinates(_park_pos, _current_x, _current_y, parkpos_needed_coil, false);
         _generated_waypoint_list.push(
                 MV_POSITION(_current_x, _current_y, parkpos_needed_coil == IOController::COIL::COIL_A,
                             parkpos_needed_coil == IOController::COIL::COIL_B));
@@ -271,7 +271,7 @@ bool ChessBoard::makeMoveFromParkPositionToBoard(ChessField::CHESS_FILEDS _park_
     //MOVE THE FIGURE TO THE _target_field y position
     int target_pos_x = 0;
     int target_pos_y = 0;
-    getFieldCoordinates(_dest_pos, target_pos_x, target_pos_y, target_coil, false, true);
+    getFieldCoordinates(_dest_pos, target_pos_x, target_pos_y, target_coil, false);
 
     //TARGET POS IS EXACLTY BETWEEN TWO FIELDS
     if (_EN_BOARD_SIZE_WORKAROUND) {
@@ -387,7 +387,7 @@ ChessBoard::makeMoveSync(ChessBoard::MovePiar _move, bool _with_scan, bool _dire
         }
 
     } else {
-        getFieldCoordinates(_move.from_field, x_start, y_start, start_coil, false, true);
+        getFieldCoordinates(_move.from_field, x_start, y_start, start_coil, false);
         start_coil = getValidCoilTypeParkPosition(_move.from_field, IOController::COIL::COIL_B);
 
     }
@@ -395,12 +395,11 @@ ChessBoard::makeMoveSync(ChessBoard::MovePiar _move, bool _with_scan, bool _dire
     if (isFieldParkPosition(_move.to_field)) {
         ChessField::CHESS_FILEDS end_field_tmp = getNextHalfFieldFromParkPos(
                 _move.to_field);     // GET NEAREST FIELD NEXT TO PARK POS
-        getFieldCoordinates(end_field_tmp, x_end, y_end, end_coil, false,
-                            true);     //CALCULATE NEW COORDINATES FOR THE CHANGED FIELD
+        getFieldCoordinates(end_field_tmp, x_end, y_end, end_coil, false);     //CALCULATE NEW COORDINATES FOR THE CHANGED FIELD
         end_coil = getValidCoilTypeParkPosition(end_field_tmp, IOController::COIL::COIL_B);
         is_end_park_pos = true;
     } else {
-        getFieldCoordinates(_move.to_field, x_end, y_end, end_coil, false, true);
+        getFieldCoordinates(_move.to_field, x_end, y_end, end_coil, false);
     }
 
     //FIRST TRAVEL TO START POSITON
@@ -1524,7 +1523,7 @@ void ChessBoard::getParkPositionCoordinates(ChessField::CHESS_FILEDS _index, int
 
 //CONVERTS FIELD ID TO THE X Y  COORDINATES 0-7 0-7
 void ChessBoard::getFieldCoordinates(ChessField::CHESS_FILEDS _index, int &_x, int &_y, IOController::COIL _coil,
-                                     bool _get_only_array_index, bool _get_field_center) {
+                                     bool _get_only_array_index) {
 
     //TODO CHECK PARK POSTION
     if (isFieldParkPosition(_index)) {
@@ -1534,17 +1533,15 @@ void ChessBoard::getFieldCoordinates(ChessField::CHESS_FILEDS _index, int &_x, i
     }
 
 
-    int offset_x = 0;
-    int offset_y = 0;
+    int h1_offset_x = 0;
+    int h1_offset_y = 0;
     //LOAD OFFSET FROM CONFIG FILE IF HOME POS IS NOT IN FIELD H1
-    ConfigParser::getInstance()->getInt(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X, offset_x);
-    ConfigParser::getInstance()->getInt(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y, offset_y);
-    int board_width = 0;
-    //LOAD OFFSET FROM CONFIG FILE IF HOME POS IS NOT IN FIELD H1
-    ConfigParser::getInstance()->getInt(ConfigParser::CFG_ENTRY::MECHANIC_CHESS_BOARD_WIDTH, board_width);
+    ConfigParser::getInstance()->getInt(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X, h1_offset_x);
+    ConfigParser::getInstance()->getInt(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y, h1_offset_y);
+    //TODO FOR X Y
     int field_width = 50;
     ConfigParser::getInstance()->getInt(ConfigParser::CFG_ENTRY::MECHANIC_CHESS_FIELD_WIDTH, field_width);
-
+    const int board_width = field_width * (BOARD_WIDTH -4);
 
 
     //GET COIL OFFSET
@@ -1556,21 +1553,30 @@ void ChessBoard::getFieldCoordinates(ChessField::CHESS_FILEDS _index, int &_x, i
 
     ///CONVERT TO XY WITH A NORMAL CHESS FIELD WITH 8 by 8 FIELDS
     int field_index = static_cast<int>(_index);
-    if (_get_field_center) {
+    const int field_with_x = field_width;
+    const int field_with_y = field_width;
 
 
-    } else {
-        offset_x += field_width / 2;
-        offset_y += field_width / 2;
-    }
+    const int field_index_x = field_index / 8;
+    const int field_index_y = field_index % 8;
 
+    const int board_width_x = field_with_x * (BOARD_WIDTH -4-1); //-4 for 2x 2 rows parking pos //-1 for 0-7 fields
+    const int board_width_y = field_with_y * (BOARD_HEIGHT -4-1);
 
+    //TODO REWORK
     if (_get_only_array_index) {
         _x = (field_index / 8);
         _y = (field_index % 8);
     } else {
-        _x = (board_width - ((field_index / 8) * field_width) - offset_x) - coil_offset_x;
-        _y = (((field_index % 8) * field_width) + offset_y) + coil_offset_y;
+        //CALC COORDIANTES FOR FIELDSS
+        _x =  board_width_x-((field_index_x * field_with_x));
+        _y = ((field_index_y * field_with_y));
+        //ADD COIL OFFSET
+        _x +=coil_offset_x;
+        _y += coil_offset_y;
+        //ADD HOME FIELD H1 OFFSET
+        _x += h1_offset_x;
+        _y += h1_offset_y;
     }
 
 
@@ -1590,9 +1596,8 @@ ChessBoard::BOARD_ERROR ChessBoard::scanBoard(bool _include_park_postion) {
     int x = 0;
     int y = 0;
     for (int i = 0; i < magic_enum::enum_integer(ChessField::CHESS_FILEDS::CHESS_FIELD_PARK_POSTION_WHITE_1); i++) {
-        //getFieldCoordinates((ChessField::CHESS_FILEDS)i, x, y, IOController::COIL::COIL_NFC, true, true);        //GET INDEX FOR ARRAY
-        travelToField(static_cast<ChessField::CHESS_FILEDS>(i), IOController::COIL::COIL_NFC,
-                      true);             //TRAVEL TO NEXT FIELD
+
+        travelToField(static_cast<ChessField::CHESS_FILEDS>(i), IOController::COIL::COIL_NFC);             //TRAVEL TO NEXT FIELD
 
           //ON PRODUCTION HARDWARE WE NEED TO LIFT THE NFC HEAD
          if(HardwareInterface::getInstance()->is_production_hardware()){
@@ -1623,7 +1628,7 @@ ChessBoard::BOARD_ERROR ChessBoard::scanBoard(bool _include_park_postion) {
 
 
     //TRAVEL BACK TO ORIGINAL STARTING POSITION
-    travelToField(original_position, original_coil, true);
+    travelToField(original_position, original_coil);
 
     return ChessBoard::BOARD_ERROR::NO_ERROR;
 }
@@ -1690,12 +1695,9 @@ ChessBoard::getValidCoilTypeParkPosition(ChessField::CHESS_FILEDS _field, IOCont
 }
 
 ChessBoard::BOARD_ERROR
-ChessBoard::travelToField(ChessField::CHESS_FILEDS _field, IOController::COIL _coil, bool _to_field_center) {
+ChessBoard::travelToField(ChessField::CHESS_FILEDS _field, IOController::COIL _coil) {
 
-    //SHUT COILS OFF
-//	iocontroller->setCoilState(IOController::COIL_A, false);
-//	iocontroller->setCoilState(IOController::COIL_B, false);
-    //SETUP_MOTORS
+
     HardwareInterface::getInstance()->set_speed_preset(HardwareInterface::HI_TRAVEL_SPEED_PRESET::HI_TSP_MOVE);
 
 
@@ -1704,12 +1706,12 @@ ChessBoard::travelToField(ChessField::CHESS_FILEDS _field, IOController::COIL _c
     int field_coordinates_y = -1;
     //GET FIELD TYPE NORMAL BOARD FIELD OR PARK POSITION
     if (!isFieldParkPosition(_field)) {
-        getFieldCoordinates(_field, field_coordinates_x, field_coordinates_y, _coil, false, _to_field_center);
+        getFieldCoordinates(_field, field_coordinates_x, field_coordinates_y, _coil, false);
     } else {
-        getParkPositionCoordinates(_field, field_coordinates_x, field_coordinates_y, _coil, _to_field_center);
+        getParkPositionCoordinates(_field, field_coordinates_x, field_coordinates_y, _coil,true);
     }
     //CONVERSION ERROR HANDLING
-    if (field_coordinates_x == -1 && field_coordinates_y == -1) {
+    if (field_coordinates_x < 0 || field_coordinates_y < 0) {
         return ChessBoard::BOARD_ERROR::AXIS_TRAGET_ARRIVAL_FAILED;
     }
     //FINALLY MOVE TO POSITION
@@ -1760,6 +1762,22 @@ ChessBoard::BOARD_ERROR ChessBoard::get_coil_offset(IOController::COIL _coil, in
     return ChessBoard::BOARD_ERROR::NO_ERROR;
 }
 
+ChessBoard::BOARD_ERROR ChessBoard::corner_move_test(){
+    HardwareInterface::getInstance()->home_sync();
+
+    HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, true);
+    HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, true);
+
+    travelToField(ChessField::CHESS_FILEDS::CHESS_FIELD_H1,IOController::COIL::COIL_A);
+    travelToField(ChessField::CHESS_FILEDS::CHESS_FIELD_A1,IOController::COIL::COIL_B);
+    travelToField(ChessField::CHESS_FILEDS::CHESS_FIELD_A8,IOController::COIL::COIL_B);
+    travelToField(ChessField::CHESS_FILEDS::CHESS_FIELD_H8,IOController::COIL::COIL_A);
+
+    HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, false);
+    HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, false);
+
+    return ChessBoard::BOARD_ERROR::NO_ERROR;
+}
 
 ChessBoard::BOARD_ERROR ChessBoard::initBoard(bool _with_scan) {
     //CHECK HARDWARE INIT
@@ -1804,13 +1822,13 @@ ChessBoard::BOARD_ERROR ChessBoard::initBoard(bool _with_scan) {
 
     //syncRealWithTargetBoard(StringToMovePair("f2h4"));
     //syncRealWithTargetBoard(StringToMovePair("g2h4"));
-
-
     HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, false);
     HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, false);
 
-    HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, false);
-    HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, false);
+
+
+
+//TODO SEPERATE FUNCTION AND TRIGGER BY A2G5 BUTTON RENAME THE BTN
 
 
     //TODO OVERRIDE PARKPOS
@@ -1863,7 +1881,7 @@ ChessBoard::BOARD_ERROR ChessBoard::calibrate_home_pos() {
     //FIRST DO HOMEING OF THE AXIS
     HardwareInterface::getInstance()->home_sync();
     //MOVE TO H1 WITH COILA_ACTIVE
-    travelToField(ChessField::CHESS_FILEDS::CHESS_FIELD_H1, IOController::COIL_A, true);
+    travelToField(ChessField::CHESS_FILEDS::CHESS_FIELD_H1, IOController::COIL_A);
 
 
     //ENABLE COIL A

@@ -152,12 +152,12 @@ public:
 	ChessBoard::BOARD_ERROR initBoard(bool _with_scan);   ///INIT THE MECHANICS AND SCANS THE BOARD
 	void loadBoardPreset(ChessBoard::BOARD_TPYE _target_board, ChessBoard::BOARD_PRESET _preset);
 	ChessBoard::BOARD_ERROR makeMoveSync(MovePiar _move, bool _with_scan, bool _directly, bool _occupy_check); ///MOVES A FIGURE FROM TO AN FIELD TO AN OTHER _with_scan_scans the figure on start field first; _directly moves figure on direct way, occupy_check ches if target field is alreadey occupied
-	ChessBoard::BOARD_ERROR travelToField(ChessField::CHESS_FILEDS _field, IOController::COIL _coil,bool _to_field_center); ///TRAVEL HEAD TO A FIELD DIRECTLY DIAGONAL
+	ChessBoard::BOARD_ERROR travelToField(ChessField::CHESS_FILEDS _field, IOController::COIL _coil); ///TRAVEL HEAD TO A FIELD DIRECTLY DIAGONAL
 	ChessBoard::BOARD_ERROR calibrate_home_pos(); ///MOVE THE HEAD TO FIELD H1
 	int get_next_free_park_position(ChessBoard::BOARD_TPYE _target_board, ChessPiece::FIGURE _fig); ///RETURNS THE INDEX OF THE NEXT FREE PARK POSITION FO RTHE GIVEN COLOR
 	std::vector<ChessField::CHESS_FILEDS> get_free_fields_on_the_board(ChessPiece::FIGURE* _board_pointer);
 	std::vector<ChessField::CHESS_FILEDS> get_parking_fileld_occupied_by_figure_type(ChessPiece::FIGURE* _board_pointer, ChessPiece::FIGURE _fig);
-	
+    BOARD_ERROR corner_move_test(); //MOVES THE HEAD IN ALL 4 CORNER FIELDS A1 A8 H8 H1 FOR TESTING THE CALIBRATION
 	int get_figure_type_count(ChessBoard::BOARD_TPYE _target_board, char _type_char , bool _board_only); ///RETURNS THE COUNT OF FIGURES PLACED ON THE BOARD
 	int get_figure_type_count(ChessPiece::FIGURE* _board_pointer, char _type_char , bool _board_only); ///RETURNS THE COUNT OF FIGURES PLACED ON THE BOARD
 	
@@ -173,7 +173,7 @@ private:
 	ChessPiece::FIGURE board_temp[BOARD_WIDTH*BOARD_HEIGHT];   ///USED FOR FEN PARSING
 	void log_error(std::string _err);
 	
-	void getFieldCoordinates(ChessField::CHESS_FILEDS _index, int& _x, int& _y, IOController::COIL _coil, bool _get_only_array_index, bool _get_field_center);
+	void getFieldCoordinates(ChessField::CHESS_FILEDS _index, int& _x, int& _y, IOController::COIL _coil, bool _get_only_array_index);
 	void getParkPositionCoordinates(ChessField::CHESS_FILEDS _index, int& _x, int& _y, IOController::COIL _coil, bool before_parkpostion_entry);
 	bool isFieldParkPosition(ChessField::CHESS_FILEDS _field);
 	ChessBoard::BOARD_ERROR switch_coil(IOController::COIL _coil, bool _activate_swtiched_coil);
