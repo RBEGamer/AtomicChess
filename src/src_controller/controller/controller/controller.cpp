@@ -1081,8 +1081,9 @@ int main(int argc, char *argv[])
 
             //READ CONFIG VALUES
             //THE CHESS BOARD IS SQUARED SO X AND Y ARE DIAGONALLY THE SAME
-            cal_pos_x = ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_CHESS_FIELD_WIDTH)*7;
-            cal_pos_y = cal_pos_x; //BECAUSE ITS DIAGONAL
+            cal_pos_x = ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_CHESS_FIELD_WIDTH_X)*7;
+            cal_pos_y = ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_CHESS_FIELD_WIDTH_Y)*7;
+
             //MOVE TO NEW A8 POSITION
             HardwareInterface::getInstance()->move_to_postion_mm_absolute(ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X), ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y),true);
             HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B,true);
@@ -1222,12 +1223,11 @@ int main(int argc, char *argv[])
                 //ONLY DIV 7 DUE 8 but only 7 moves from a1->a8 or a1->h1
                 cal_pos_x = cal_pos_x / (8-1);
                 cal_pos_y = cal_pos_y / (8-1);
-                const int cal_res = (cal_pos_y + cal_pos_x) / 2;
-                const int board_size = cal_res * 8;
-                ConfigParser::getInstance()->setInt(ConfigParser::CFG_ENTRY::MECHANIC_CHESS_FIELD_WIDTH, cal_res, CONFIG_FILE_PATH); //WRITE FIELD WIDTH
-                ConfigParser::getInstance()->setInt(ConfigParser::CFG_ENTRY::MECHANIC_CHESS_BOARD_WIDTH, board_size, CONFIG_FILE_PATH); //= FW*8 WRITE BOARD WITH = NEEDED FOR ChessBoardClass
+
+                ConfigParser::getInstance()->setInt(ConfigParser::CFG_ENTRY::MECHANIC_CHESS_FIELD_WIDTH_X, cal_pos_x, CONFIG_FILE_PATH); //WRITE FIELD WIDTH
+                ConfigParser::getInstance()->setInt(ConfigParser::CFG_ENTRY::MECHANIC_CHESS_FIELD_WIDTH_Y, cal_pos_y, CONFIG_FILE_PATH); //= FW*8 WRITE BOARD WITH = NEEDED FOR ChessBoardClass
                 gui.show_error_message_on_gui("CALIBRATION SAVED FOR A8");
-                LOG_F(INFO, "CALIBRATION SAVED FOR A8 FILED_WIDTH %i, BOARD_WIDTH %i", cal_res,board_size);
+                LOG_F(INFO, "CALIBRATION SAVED FOR A8 FILED_WIDTH %i, BOARD_WIDTH X:%i Y:%i", cal_pos_x,cal_pos_y);
 
                 //SAVE PARKPOS BLACK 1 => LINE OFFSET X AND START
             }else if(cal_move == 2){

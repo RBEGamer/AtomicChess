@@ -235,11 +235,8 @@ bool ChessBoard::makeMoveFromParkPositionToBoard(ChessField::CHESS_FILEDS _park_
         return false;
     }
     //GET FIELD WITDTH /2
-    int field_width = 50;
-    if (!ConfigParser::getInstance()->getInt(ConfigParser::CFG_ENTRY::MECHANIC_CHESS_FIELD_WIDTH, field_width)) {
-        field_width = 50;        //SET TO DEFAULT WIDTH
-    }
-    field_width /= 2;        //WANT TO TRAVEL BETWEEN TWO FIELDS
+    int field_width_y = ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_CHESS_FIELD_WIDTH_Y) / 2;//WANT TO TRAVEL BETWEEN TWO FIELDS
+
     //MOVE TO PARK START POSTION
     int pp_pos_inside_x = 0;
     int pp_pos_inside_y = 0;
@@ -275,11 +272,11 @@ bool ChessBoard::makeMoveFromParkPositionToBoard(ChessField::CHESS_FILEDS _park_
 
     //TARGET POS IS EXACLTY BETWEEN TWO FIELDS
     if (_EN_BOARD_SIZE_WORKAROUND) {
-        _generated_waypoint_list.push(MV_POSITION(pp_pos_before_x, target_pos_y - field_width,
+        _generated_waypoint_list.push(MV_POSITION(pp_pos_before_x, target_pos_y - field_width_y,
                                                   parkpos_needed_coil == IOController::COIL::COIL_A,
                                                   parkpos_needed_coil == IOController::COIL::COIL_B));
     } else {
-        _generated_waypoint_list.push(MV_POSITION(pp_pos_before_x, target_pos_y + field_width,
+        _generated_waypoint_list.push(MV_POSITION(pp_pos_before_x, target_pos_y + field_width_y,
                                                   parkpos_needed_coil == IOController::COIL::COIL_A,
                                                   parkpos_needed_coil == IOController::COIL::COIL_B));
 
@@ -315,11 +312,8 @@ ChessBoard::makeMoveSync(ChessBoard::MovePiar _move, bool _with_scan, bool _dire
         EN_BSIZE_WORKAROUND = true;
     }
     //GET FIELD WITDTH /2
-    int field_width = 50;
-    if (!ConfigParser::getInstance()->getInt(ConfigParser::CFG_ENTRY::MECHANIC_CHESS_FIELD_WIDTH, field_width)) {
-        field_width = 50;       //SET TO DEFAULT WIDTH
-    }
-    field_width /= 2;       //WANT TO TRAVEL BETWEEN TWO FIELDS
+    int field_width_x = ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_CHESS_FIELD_WIDTH_X) / 2;
+    int field_width_y = ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_CHESS_FIELD_WIDTH_Y) / 2;
     //GET COIL OFFSET FOR THE LATER COIL SWITCH
     int coil_distance = 0;
     ConfigParser::getInstance()->getInt(ConfigParser::CFG_ENTRY::MECHANIC_DISTANCE_COILS_MM, coil_distance);
@@ -412,7 +406,7 @@ ChessBoard::makeMoveSync(ChessBoard::MovePiar _move, bool _with_scan, bool _dire
     //MoveWaypointsAlong(position_queue);
     //SECOND TRAVEL 1/2 FIELD UP OR DOWN IF START WORKAROUND
     position_queue.push(
-            MV_POSITION(x_start, y_start + field_width * INVERT_FIELD_OFFSET, start_coil == IOController::COIL::COIL_A,
+            MV_POSITION(x_start, y_start + field_width_y * INVERT_FIELD_OFFSET, start_coil == IOController::COIL::COIL_A,
                         start_coil == IOController::COIL::COIL_B));
 
 
@@ -433,7 +427,7 @@ ChessBoard::makeMoveSync(ChessBoard::MovePiar _move, bool _with_scan, bool _dire
         }
 
 
-        position_queue.push(MV_POSITION(coil_offset, y_start + field_width * INVERT_FIELD_OFFSET,
+        position_queue.push(MV_POSITION(coil_offset, y_start + field_width_y * INVERT_FIELD_OFFSET,
                                         start_coil == IOController::COIL::COIL_A,
                                         start_coil == IOController::COIL::COIL_B));
 
@@ -441,25 +435,25 @@ ChessBoard::makeMoveSync(ChessBoard::MovePiar _move, bool _with_scan, bool _dire
 
         //MoveWaypointsAlong(position_queue);
         //TURN COILS OFF
-        position_queue.push(MV_POSITION(coil_offset, y_start + field_width * INVERT_FIELD_OFFSET, false, false));
+        position_queue.push(MV_POSITION(coil_offset, y_start + field_width_y * INVERT_FIELD_OFFSET, false, false));
         //MoveWaypointsAlong(position_queue);
         //GET COORDINATES FOR THE COIL SWITCH
         //=> SWITCH TO B COIL => -coil_offset
         if (start_coil == IOController::COIL::COIL_A && end_coil == IOController::COIL::COIL_B) {
             position_queue.push(
-                    MV_POSITION(coil_offset - coil_switch_pos / 2, y_start + field_width * INVERT_FIELD_OFFSET, false,
+                    MV_POSITION(coil_offset - coil_switch_pos / 2, y_start + field_width_y * INVERT_FIELD_OFFSET, false,
                                 false));
             //MoveWaypointsAlong(position_queue);
             position_queue.push(
-                    MV_POSITION(coil_offset - coil_switch_pos / 2, y_start + field_width * INVERT_FIELD_OFFSET,
+                    MV_POSITION(coil_offset - coil_switch_pos / 2, y_start + field_width_y * INVERT_FIELD_OFFSET,
                                 end_coil == IOController::COIL::COIL_A, end_coil == IOController::COIL::COIL_B));
         } else if (start_coil == IOController::COIL::COIL_B && end_coil == IOController::COIL::COIL_A) {
             position_queue.push(
-                    MV_POSITION(coil_offset + coil_switch_pos / 2, y_start + field_width * INVERT_FIELD_OFFSET, false,
+                    MV_POSITION(coil_offset + coil_switch_pos / 2, y_start + field_width_y * INVERT_FIELD_OFFSET, false,
                                 false));
             //MoveWaypointsAlong(position_queue);
             position_queue.push(
-                    MV_POSITION(coil_offset + coil_switch_pos / 2, y_start + field_width * INVERT_FIELD_OFFSET,
+                    MV_POSITION(coil_offset + coil_switch_pos / 2, y_start + field_width_y * INVERT_FIELD_OFFSET,
                                 end_coil == IOController::COIL::COIL_A, end_coil == IOController::COIL::COIL_B));
 
         }
@@ -468,12 +462,12 @@ ChessBoard::makeMoveSync(ChessBoard::MovePiar _move, bool _with_scan, bool _dire
     }
 
     //MOVE TO TARGET X COORDINATES WITH 1/2 FIELD OFFSET
-    position_queue.push(MV_POSITION(x_end + field_width, y_start + field_width * INVERT_FIELD_OFFSET,
+    position_queue.push(MV_POSITION(x_end + field_width_x, y_start + field_width_y * INVERT_FIELD_OFFSET,
                                     end_coil == IOController::COIL::COIL_A, end_coil == IOController::COIL::COIL_B));
 
     //MoveWaypointsAlong(position_queue);
     //MOVE TO TARGET Y COORDINATES WITH 1/2 FIELD OFFSET
-    position_queue.push(MV_POSITION(x_end + field_width, y_end + field_width * INVERT_FIELD_OFFSET_END,
+    position_queue.push(MV_POSITION(x_end + field_width_x, y_end + field_width_y * INVERT_FIELD_OFFSET_END,
                                     end_coil == IOController::COIL::COIL_A, end_coil == IOController::COIL::COIL_B));
 
     //MoveWaypointsAlong(position_queue);
@@ -483,7 +477,7 @@ ChessBoard::makeMoveSync(ChessBoard::MovePiar _move, bool _with_scan, bool _dire
                                         end_coil == IOController::COIL::COIL_B));
     } else {
         //TODO MOVE FROM THERE TO FINAL PARK POS
-        makeMoveFromBoardToParkPosition(_move.to_field, position_queue, x_end + field_width, y_end + field_width);
+        makeMoveFromBoardToParkPosition(_move.to_field, position_queue, x_end + field_width_x, y_end + field_width_y);
     }
 
 
@@ -1539,9 +1533,12 @@ void ChessBoard::getFieldCoordinates(ChessField::CHESS_FILEDS _index, int &_x, i
     ConfigParser::getInstance()->getInt(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X, h1_offset_x);
     ConfigParser::getInstance()->getInt(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y, h1_offset_y);
     //TODO FOR X Y
-    int field_width = 50;
-    ConfigParser::getInstance()->getInt(ConfigParser::CFG_ENTRY::MECHANIC_CHESS_FIELD_WIDTH, field_width);
-    const int board_width = field_width * (BOARD_WIDTH -4);
+    int field_with_x = ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_CHESS_FIELD_WIDTH_X);
+    int field_with_y = ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_CHESS_FIELD_WIDTH_Y);
+
+    ///CONVERT TO XY WITH A NORMAL CHESS FIELD WITH 8 by 8 FIELDS
+    int field_index = static_cast<int>(_index);
+
 
 
     //GET COIL OFFSET
@@ -1551,10 +1548,6 @@ void ChessBoard::getFieldCoordinates(ChessField::CHESS_FILEDS _index, int &_x, i
 
 
 
-    ///CONVERT TO XY WITH A NORMAL CHESS FIELD WITH 8 by 8 FIELDS
-    int field_index = static_cast<int>(_index);
-    const int field_with_x = field_width;
-    const int field_with_y = field_width;
 
 
     const int field_index_x = field_index / 8;
@@ -1563,7 +1556,7 @@ void ChessBoard::getFieldCoordinates(ChessField::CHESS_FILEDS _index, int &_x, i
     const int board_width_x = field_with_x * (BOARD_WIDTH -4-1); //-4 for 2x 2 rows parking pos //-1 for 0-7 fields
     const int board_width_y = field_with_y * (BOARD_HEIGHT -4-1);
 
-    //TODO REWORK
+
     if (_get_only_array_index) {
         _x = (field_index / 8);
         _y = (field_index % 8);
@@ -1763,6 +1756,7 @@ ChessBoard::BOARD_ERROR ChessBoard::get_coil_offset(IOController::COIL _coil, in
 }
 
 ChessBoard::BOARD_ERROR ChessBoard::corner_move_test(){
+    HardwareInterface::getInstance()->setTurnStateLight(HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_PRECCESSING);
     HardwareInterface::getInstance()->home_sync();
 
     HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, true);
@@ -1772,9 +1766,10 @@ ChessBoard::BOARD_ERROR ChessBoard::corner_move_test(){
     travelToField(ChessField::CHESS_FILEDS::CHESS_FIELD_A1,IOController::COIL::COIL_B);
     travelToField(ChessField::CHESS_FILEDS::CHESS_FIELD_A8,IOController::COIL::COIL_B);
     travelToField(ChessField::CHESS_FILEDS::CHESS_FIELD_H8,IOController::COIL::COIL_A);
-
+    travelToField(ChessField::CHESS_FILEDS::CHESS_FIELD_H1,IOController::COIL::COIL_A);
     HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, false);
     HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, false);
+    HardwareInterface::getInstance()->setTurnStateLight(HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_IDLE);
 
     return ChessBoard::BOARD_ERROR::NO_ERROR;
 }
