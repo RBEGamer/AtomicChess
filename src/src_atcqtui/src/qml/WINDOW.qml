@@ -761,7 +761,7 @@ Rectangle {
                 y: 121
                 width: 209
                 height: 60
-                text: qsTr("G5 -> A2")
+                text: qsTr("CORNER FIELD TEST")
                 Connections {
                     target: debug_fkt_d_btn
                     function onClicked(_mouse){
@@ -1625,6 +1625,6 @@ Rectangle {
 
 /*##^##
 Designer {
-    D{i:0;active3dScene:"-1"}D{i:42}
+    D{i:0;active3dScene:"-1"}
 }
 ##^##*/
