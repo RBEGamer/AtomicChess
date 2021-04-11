@@ -11,10 +11,37 @@ ChessField::CHESS_FILEDS ChessField::Index2Field(int _field){
 }
 
 
+//https://stackoverflow.com/questions/10058606/splitting-a-string-by-a-character/10058756
+std::vector<std::string> ChessField::split(std::string _input, char _char){
+    std::stringstream test;
+    test.str(_input); //LOAD STRING
+
+    std::string segment;
+    std::vector<std::string> seglist;
+
+    while(std::getline(test, segment, _char))
+    {
+        seglist.push_back(segment);
+    }
+
+    return seglist;
+}
+
+
+
 std::string ChessField::field_to_string(ChessField::CHESS_FILEDS _f){
 
-    const std::string tmp = std::string(magic_enum::enum_name(_f));
-    //TODO SPLIT _ AND GET IF PARKPOS
+    std::string tmp = std::string(magic_enum::enum_name(_f));
+    std::transform(tmp.begin(), tmp.end(), tmp.begin(), ::tolower); //CONVER TO LOWER
+    const std::vector<std::string> split_res = split(tmp,'_'); //SPLIT BY _ CHARAKTER
+
+    //CHECK SPLIT RESULT TO GET TYPE OF FIELD PP OR NORMAL
+    if(split_res.size() == 3){//NON PARKPOS
+        return  split_res[2]; //STANDART FORMAT e2 => e2h4
+    }else if(split_res.size() == 6){//PARKPOS
+        return "[park" + split_res[4] + split_res[5] + "]"; //non standart so in brackets
+    }
+
     return tmp;
 }
 

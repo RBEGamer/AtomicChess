@@ -893,7 +893,7 @@ bool ChessBoard::syncRealWithTargetBoard_add_remove_empty() {
     for (size_t i = 0; i < move_list.size(); i++) {
 
         const MovePiar mv = move_list.at(i); //DEBUG
-        LOG_F(INFO,"MOVE_PAIR %s => %s", ChessField::field_to_string(mv.from_field).c_str(),ChessField::field_to_string(mv.to_field).c_str());
+        LOG_F(INFO,"MOVE_PAIR %s", (ChessField::field_to_string(mv.from_field)+ChessField::field_to_string(mv.to_field).c_str()).c_str());
 
         makeMoveSync(mv, false, false, false);
         printBoard(ChessBoard::BOARD_TPYE::REAL_BOARD);
