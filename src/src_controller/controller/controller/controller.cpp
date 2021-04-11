@@ -733,7 +733,7 @@ int main(int argc, char *argv[])
                         if(cmdOptionExists(argv, argv + argc, "-autoplayer") || ConfigParser::getInstance()->getBool_nocheck(ConfigParser::CFG_ENTRY::USER_GENERAL_ENABLE_RANDOM_MOVE_MATCH)) {
                             if (current_player_state.game_state.legal_moves.size() > 0)
                             {
-                                const int rnd_idnex = (rand() % (current_player_state.game_state.legal_moves.size() - 1));
+                                const int rnd_idnex = (int)(std::rand() % (current_player_state.game_state.legal_moves.size() - 1));
                                 if(!gamebackend.set_make_move(current_player_state.game_state.legal_moves.at(rnd_idnex))){
 
                                 }
@@ -745,9 +745,9 @@ int main(int argc, char *argv[])
                                 LOG_F(ERROR, "LEGAL_MOVES_EMPTY - CANCEL GAME");
                             }
 
-                            //READ HUMAN PLAYER INPUT
+
                         }else{
-                            //TODO SHOW MOVE UI
+                            //ELSE SHOW MANUAL MOVE ENTER SCREEN
                             if (make_move_mode != 2)
                             {
                                 gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::PLAYER_ENTER_MANUAL_MOVE_SCREEN);
@@ -767,13 +767,6 @@ int main(int argc, char *argv[])
                     //SYNC THE TWO BORDS
                     board.boardFromFen(current_player_state.game_state.current_board_fen, ChessBoard::BOARD_TPYE::TARGET_BOARD);
                     board.syncRealWithTargetBoard();
-
-
-
-
-
-
-
 
                 }else
                 {
@@ -800,7 +793,7 @@ int main(int argc, char *argv[])
             if(gamebackend.login(BackendConnector::PLAYER_TYPE::PT_HUMAN) && !gamebackend.get_session_id().empty())
             {
                 //LOAD USER CONFIG FROM SERVER (MAYBE)
-//IF NOT EXISTS UPLOAD THEM
+                //IF NOT EXISTS UPLOAD THEM
                 if(!gamebackend.download_config(ConfigParser::getInstance(), true)) {
                     LOG_F(WARNING, "download_config failed - upload current config");
                     gamebackend.upload_config(ConfigParser::getInstance());
@@ -826,9 +819,6 @@ int main(int argc, char *argv[])
                 {
                     gamebackend.set_player_state(BackendConnector::PLAYER_STATE::PS_SEARCHING);
                 }
-
-
-
 
 
             }else {
@@ -893,13 +883,8 @@ int main(int argc, char *argv[])
         //----------------DEBUG - LOAD CONFIG BUTTON--------------
         //--------------------------------------------------------
         if(ev.event == guicommunicator::GUI_ELEMENT::DEBUG_FUNCTION_C && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
-            gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK, "RUN MAKE_MOVE FKT\nh1h5\ng2a2\npb1-pw10\ng8-pw10", 10000);
-            std::string test_text = "";
-            int test_id = 0;
-            while (test_id >= 0) {
-                board.test_make_move_func(test_text, test_id);
-               // gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK, test_text, 10000);
-            }
+            gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK, "MOVE TEST POPULATE CHESSBOARD IN START POSITION", 10000);
+            board.test_make_move_func();
             gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::DEBUG_SCREEN);
         }
 
@@ -908,9 +893,6 @@ int main(int argc, char *argv[])
         //--------------------------------------------------------
         if(ev.event == guicommunicator::GUI_ELEMENT::DEBUG_FUNCTION_D && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
             board.corner_move_test();
-            //std::string test_text = "";
-            //board.test_make_move_static();
-            //gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::DEBUG_SCREEN);
         }
 
         //--------------------------------------------------------

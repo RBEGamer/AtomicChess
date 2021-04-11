@@ -1,4 +1,13 @@
 #pragma once
+#ifndef __CHESSFIELD_H__
+#define __CHESSFIELD_H__
+#include <string>
+#include <locale>         // std::locale, std::tolower
+
+
+//3RD PARTY INCLUDE
+#include "SHARED/magic_enum-master/include/magic_enum.hpp"
+
 class ChessField
 {
 	
@@ -133,5 +142,9 @@ public:
 	static int get_board_index_from_field(ChessField::CHESS_FILEDS _field);
 	
 	static bool is_row_over_row(ChessField::CHESS_FILEDS _a, ChessField::CHESS_FILEDS _b); //THIS FUNCTIONS RETURNS TRUE IF FIELD A IS (SEEN BY Y AXIS) OVER THE FIELD B; ITS USED TO DECIED WHET TO TRAVEL UP/DOWN TO GET AWAY TO THE CENTER FIELD
+
+	static std::string field_to_string(ChessField::CHESS_FILEDS _f);
+
 };
 
+#endif

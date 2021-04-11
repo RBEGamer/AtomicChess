@@ -116,10 +116,14 @@ public:
 		FigureField field_curr;
 		FigureField field_target;
 		bool processed; //IS TRUE IF THIS FIELS IS ALREADY PROCESSED BY THE SYNC BOARD ALGORITHM
+
+
 	};
 	
 	struct MovePiar
 	{
+
+
 		ChessField::CHESS_FILEDS from_field;
 		ChessField::CHESS_FILEDS to_field;
 		bool is_valid;
@@ -134,9 +138,11 @@ public:
 		{
 			is_valid = false;
 		}
+
+
 	};
 		
-	bool test_make_move_func(std::string& _descr, int& _test_no);
+	bool test_make_move_func();
 	void test_make_move_static();
 	void home_board();
 	ChessBoard() ;

@@ -27,49 +27,26 @@ void ChessBoard::test_make_move_static() {
     makeMoveSync(tmp_pair, false, false, false);
 }
 
-bool ChessBoard::test_make_move_func(std::string &_descr, int &_test_no) {
+bool ChessBoard::test_make_move_func() {
 
     home_board();
     MovePiar tmp_pair;
+    tmp_pair.from_field = ChessField::CHESS_FILEDS::CHESS_FIELD_H1;
+    tmp_pair.to_field = ChessField::CHESS_FILEDS::CHESS_FIELD_PARK_POSTION_WHITE_1;
+    makeMoveSync(tmp_pair, false, false, false);
 
-    switch (_test_no) {
-        case 2: {
-            _descr = "H1 -> PARK_WHITE_1";
-            tmp_pair.from_field = ChessField::CHESS_FILEDS::CHESS_FIELD_H1;
-            tmp_pair.to_field = ChessField::CHESS_FILEDS::CHESS_FIELD_PARK_POSTION_WHITE_1;
-            makeMoveSync(tmp_pair, false, false, false);
-            break;
-        }
-        case 3: {
-            _descr = "H2 -> PARK_WHITE_16";
-            tmp_pair.from_field = ChessField::CHESS_FILEDS::CHESS_FIELD_H2;
-            tmp_pair.to_field = ChessField::CHESS_FILEDS::CHESS_FIELD_PARK_POSTION_WHITE_16;
-            makeMoveSync(tmp_pair, false, false, false);
-            break;
-        }
-        case 0: {
-            _descr = "H3 -> PARK_BLACK_1";
-            tmp_pair.from_field = ChessField::CHESS_FILEDS::CHESS_FIELD_H3;
-            tmp_pair.to_field = ChessField::CHESS_FILEDS::CHESS_FIELD_PARK_POSTION_BLACK_1;
-            makeMoveSync(tmp_pair, false, false, false);
-            break;
-        }
-        case 1: {
-            _descr = "H4 -> PARK_BLACK_16";
-            tmp_pair.from_field = ChessField::CHESS_FILEDS::CHESS_FIELD_H4;
-            tmp_pair.to_field = ChessField::CHESS_FILEDS::CHESS_FIELD_PARK_POSTION_BLACK_16;
-            makeMoveSync(tmp_pair, false, false, false);
-            break;
-        }
-        default:
-            _test_no = -1;
-            break;
-    }
+    tmp_pair.from_field = ChessField::CHESS_FILEDS::CHESS_FIELD_E1;
+    tmp_pair.to_field = ChessField::CHESS_FILEDS::CHESS_FIELD_A6;
+    makeMoveSync(tmp_pair, false, false, false);
 
+    tmp_pair.from_field = ChessField::CHESS_FILEDS::CHESS_FIELD_PARK_POSTION_WHITE_1;
+    tmp_pair.to_field = ChessField::CHESS_FILEDS::CHESS_FIELD_E1;
+    makeMoveSync(tmp_pair, false, false, false);
 
-    if (_test_no >= 0) {
-        _test_no++;
-    }
+    tmp_pair.from_field = ChessField::CHESS_FILEDS::CHESS_FIELD_A6;
+    tmp_pair.to_field = ChessField::CHESS_FILEDS::CHESS_FIELD_H1;
+    makeMoveSync(tmp_pair, false, false, false);
+
     return true;
 }
 
@@ -772,79 +749,11 @@ bool ChessBoard::syncRealWithTargetBoard() {
 }
 
 
-bool ChessBoard::syncRealWithTargetBoard_not_empty() {
-
-    //USE MAKE MOVE TO GENERATE A MOVE LIST THEN EXECUTE THE MOVES
-    std::vector<ChessBoard::MovePiar> move_list;
-    ChessPiece::FIGURE *board_current = get_board_pointer(ChessBoard::BOARD_TPYE::REAL_BOARD);
-    ChessPiece::FIGURE *board_target = get_board_pointer(ChessBoard::BOARD_TPYE::TARGET_BOARD);
-
-    if (!board_current || !board_target) {
-        return false;
-    }
-
-    //LAMBDA FUNCTION FOR GETTING THE NEXT FIGURE THATS WITH THE SAME TYPE WHICH WAS ALSO MODIFIED
-    std::vector<FigureFieldPair>::iterator gfidlp_it;
-    //GET THE DIFFERNCE BETWEEN THE TWO BOARDS AS LIST
-    std::vector<FigureFieldPair> diff = compareBoards(board_current, board_target, true);
-
-    if (diff.size() == 0) {
-        return false;
-    }
-
-    //NOW THE HAVE THE DIFFERENCES
-
-    //ENTRY X )target: empty | current: black pawn
-    //ENTRY X+n )target: black pawn | current: white pawn
-    //ENTRY X+m )target: white pawn | current: empty
-    //THESE THREE FIELDS CAN BE MERGED INTO ZWO MOVES
-
-    //WITH FIRST MOVE X+m => PARKPOS
-    // X+n => X+m
-    // X => X+n
-
-    //ITERATE THOUGHT LIST
-
-    for (size_t it = 0; it < diff.size(); it++) {
-        if (diff.at(it).processed) {
-            it++;
-            continue;
-        }
-
-
-        //FIRGURE REMVOED/ADDED FROM/TO FIELD
-        //WHERE THE DESTIANTATION FIELS IS NOT EMPTY
-        if (!diff.at(it).field_curr.figure.is_empty && !diff.at(it).field_target.figure.is_empty) {
-            //FIND A PLACE WHRE THE SAME FIGURE TYPE IS PLACES
-            std::vector<FigureFieldPair>::iterator res_it = getFigureInDiffListPlacedOnEmptpy(diff,
-                                                                                              diff.at(it).field_curr.figure);
-            //CHECK IF GOT AN RESULT
-            //if(res_it != diff.end())
-            //{
-            //	move_list.push_back(MovePiar(diff.at(it).field_curr.field, res_it->field_target.field));
-            //	diff.at(it).processed = true;
-            //	res_it->processed = true;
-            //	continue;
-            //}
-        }
-
-    }
-
-    //FINALLY EXECUTE MOVES
-    for (size_t i = 0; i < move_list.size(); i++) {
-        makeMoveSync(move_list.at(i), false, false, false);
-    }
-
-    if (move_list.size() > 0) {
-        return true;
-    }
-    return false;
-}
 
 
 //-------------- TODO EACH STEP IN ITS OWN LOOP ------------------- //
 bool ChessBoard::syncRealWithTargetBoard_add_remove_empty() {
-
+    //TODO
     //USE MAKE MOVE TO GENERATE A MOVE LIST THEN EXECUTE THE MOVES
     std::vector<ChessBoard::MovePiar> move_list;
     ChessPiece::FIGURE *board_current = get_board_pointer(ChessBoard::BOARD_TPYE::REAL_BOARD);
@@ -858,60 +767,16 @@ bool ChessBoard::syncRealWithTargetBoard_add_remove_empty() {
     std::vector<FigureFieldPair>::iterator gfidlp_it;
     //GET THE DIFFERNCE BETWEEN THE TWO BOARDS AS LIST
     std::vector<FigureFieldPair> diff = compareBoards(board_current, board_target, true);
-
+    //BOARD IS EQUAL = NO CHANGES
     if (diff.size() == 0) {
         return false;
     }
-    //FIND THREORETICAL MATCHES
+
 
     //FIND ICH EIN FELD BEI DER DAS CURRENT FELD = DEM TARGET FELD IST ?
     std::vector<MovePiar> diff_matched;
 
 
-    //A IST BESETZT UND B IST LEER => ENTFERNEN DER FIGUR VOM FELD
-    for (size_t it = 0; it < diff.size(); it++) {
-        if (diff.at(it).processed) {
-            it++;
-            continue;
-        }
-
-        if (!diff.at(it).field_curr.figure.is_empty && !diff.at(it).field_target.figure.is_empty) {
-            //2. FIELDS ARE THE SAME => SO FIGURE HAS CHANGES ON FIELD
-            //	if(diff.at(it).field_curr.field == diff.at(it).field_target.field) {
-            //TARGET FIGURE IS THE CURRENT FIGURE OF THE FIELD
-            if (!ChessPiece::compareFigures(diff.at(it).field_curr.figure, diff.at(it).field_target.figure)) {
-
-                //THEN WE HAVE TO FIND A FIELD WHERE THE FIGURE ON it->field_curr
-                //HAS A OTHER FIELD PAIR IF itd->field_TARGET->FIGURE && itd->field_current->empty
-                //THEN THE TARGET FIELD FIGURE HAVE TO BE REMOVED FROM THE FIELD
-                int found = -1;
-                for (size_t itd = 0; itd < diff.size(); itd++) {
-                    if (diff.at(itd).field_curr.figure.is_empty &&
-                        !ChessPiece::compareFigures(diff.at(it).field_curr.figure, diff.at(itd).field_target.figure)) {
-                        found = itd;
-                        break; //FOUND A FIGURE
-                    }
-                }
-                //IF A OTHER FIELD IS FOUND WITH THE FIGURE TO REMOVE => CREATE A MOVE
-                if (found >= 0 && found < diff.size()) {
-
-                    move_list.push_back(MovePiar(diff.at(it).field_curr.field, diff.at(found).field_target.field));
-                    diff.at(it).processed = true;
-                    //break;
-                } else //ELSE MOVE FIGURE TO PARKING SLOT
-                {
-                    int fdIndex = get_next_free_park_position(ChessBoard::BOARD_TPYE::REAL_BOARD,
-                                                              diff.at(it).field_curr.figure);
-                    if (fdIndex >= 0) {
-                        move_list.push_back(MovePiar(diff.at(it).field_curr.field, ChessField::Index2Field(fdIndex)));
-                        diff.at(it).processed = true;
-                        //break;
-                    }
-                }
-                //}
-            }
-        }
-    }
 
     //NORMALER ZUG VON A NACH B WENN B LEER UND FIGURTYP IST GLEICH
     if (move_list.empty()) {
@@ -930,7 +795,63 @@ bool ChessBoard::syncRealWithTargetBoard_add_remove_empty() {
                 if (found >= 0 && found < diff.size()) {
                     move_list.push_back(MovePiar(diff.at(found).field_curr.field, diff.at(it).field_target.field));
                     diff.at(it).processed = true;
-                    //break;
+                    break;
+                }
+            }
+        }
+    }
+
+
+    //A IST BESETZT UND B IST LEER => ENTFERNEN DER FIGUR VOM FELD
+    if (move_list.empty()) {
+        for (size_t it = 0; it < diff.size(); it++) {
+            if (diff.at(it).processed) {
+                it++;
+                continue;
+            }
+            //ZIELFELD NICHT LEER => ALOS VON EINER ANDEREN FIGUR SPÄTER BESETZT
+            if (!diff.at(it).field_curr.figure.is_empty)  {//&& !diff.at(it).field_target.figure.is_empty
+                //2. FIELDS ARE THE SAME => SO FIGURE HAS CHANGES ON FIELD
+                //	if(diff.at(it).field_curr.field == diff.at(it).field_target.field) {
+                //TARGET FIGURE IS THE CURRENT FIGURE OF THE FIELD
+                if (!ChessPiece::compareFigures(diff.at(it).field_curr.figure, diff.at(it).field_target.figure)) {
+
+                    //THEN WE HAVE TO FIND A FIELD WHERE THE FIGURE ON it->field_curr
+                    //HAS A OTHER FIELD PAIR IF itd->field_TARGET->FIGURE && itd->field_current->empty
+                    //THEN THE TARGET FIELD FIGURE HAVE TO BE REMOVED FROM THE FIELD
+
+                    //TODO ERROR REWORK
+                    int found = -1;
+                    for (size_t itd = 0; itd < diff.size(); itd++) {
+                        //FINDE EIN WEITERES FELD BEI DER DIE TAGET FIGUR :
+                        // CURRENT FIELD LERR
+                        // TARGET FIELD MIT DER PASSENDEND FIGUR BELEGT UND NICHT LEER
+                        if (diff.at(itd).field_curr.figure.is_empty &&
+                            diff.at(it).field_curr.figure.type == diff.at(itd).field_target.figure.type &&
+                            diff.at(it).field_curr.figure.color == diff.at(itd).field_target.figure.color &&
+                            !diff.at(itd).field_target.figure.is_empty) {
+                            found = itd;
+                            break; //FOUND A FIGURE
+                        }
+                    }
+                    //IF A OTHER FIELD IS FOUND WITH THE FIGURE TO REMOVE => CREATE A MOVE
+                    if (found >= 0 && found < diff.size()) {
+
+                        move_list.push_back(MovePiar(diff.at(it).field_curr.field, diff.at(found).field_target.field));
+                        diff.at(it).processed = true;
+                        break;
+                    } else //ELSE MOVE FIGURE TO PARKING SLOT
+                    {
+                        int fdIndex = get_next_free_park_position(ChessBoard::BOARD_TPYE::REAL_BOARD,
+                                                                  diff.at(it).field_curr.figure);
+                        if (fdIndex >= 0) {
+                            move_list.push_back(
+                                    MovePiar(diff.at(it).field_curr.field, ChessField::Index2Field(fdIndex)));
+                            diff.at(it).processed = true;
+                            break;
+                        }
+                    }
+                    //}
                 }
             }
         }
@@ -940,38 +861,30 @@ bool ChessBoard::syncRealWithTargetBoard_add_remove_empty() {
     //LETZTE OPTION IST WENN FIGUREN AUF DEM BRETT FEHLEN => A LEER B GEFÜLLT
     if (move_list.empty()) {
         //TODO
+        for (size_t it = 0; it < diff.size(); it++) {
+            if (diff.at(it).processed) {
+                it++;
+                continue;
+            }
+            //A EMPTY AND B NOT EMPTY
+            if(diff.at(it).field_curr.figure.is_empty && !diff.at(it).field_target.figure.is_empty)
+            {
+                //GET A MACHTING FIGURE FROM PARK POSITIONS
+                std::vector<ChessField::CHESS_FILEDS> fields = get_parking_fileld_occupied_by_figure_type(board_current, diff.at(it).field_target.figure);
+                if (fields.size() > 0)
+                {
+                    //CREATE MOVE FROM PARKPOS INTO FIELD
+                    move_list.push_back(MovePiar(fields.at(0), diff.at(it).field_target.field));
+                    diff.at(it).processed = true;
+                    break; //BREAK OUTHER LOOP
+                }
+            }
+        }
     }
-    //   for (size_t it = 0; it < diff.size(); it++) {
-    //MOVE FIGURE OUT OF THE FIELD
-//		if(!diff.at(it).field_curr.figure.is_empty && diff.at(it).field_target.figure.is_empty)
-//		{
-//			int fdIndex = get_next_free_park_position(ChessBoard::BOARD_TPYE::REAL_BOARD, diff.at(it).field_curr.figure);
-//			if (fdIndex >= 0)
-//			{
-//				move_list.push_back(MovePiar(diff.at(it).field_curr.field, ChessField::Index2Field(fdIndex)));
-//				diff.at(it).processed = true;
-//				break;
-//			}
-//		}
-    //  }
 
-    /*
-      for (size_t it = 0; it < diff.size(); it++) {
-          //MOVE FIGURE INTO THE FIELD
-          if(diff.at(it).field_curr.figure.is_empty && !diff.at(it).field_target.figure.is_empty)
-          {
-              std::vector<ChessField::CHESS_FILEDS> fields = get_parking_fileld_occupied_by_figure_type(board_current, diff.at(it).field_target.figure);
-              if (fields.size() > 0)
-              {
-                  move_list.push_back(MovePiar(fields.at(0), diff.at(it).field_target.field));
-                  diff.at(it).processed = true;
-                  break;
-              }n,  m, k k.nkmlmömlömlömölmlömlö
 
-              
-          }
-      }
-      */
+
+
     volatile bool move_made = false;
     if (move_list.size() > 0) {
         move_made = true;
@@ -979,8 +892,10 @@ bool ChessBoard::syncRealWithTargetBoard_add_remove_empty() {
     //FINALLY EXECUTE MOVES
     for (size_t i = 0; i < move_list.size(); i++) {
 
+        const MovePiar mv = move_list.at(i); //DEBUG
+        LOG_F(INFO,"MOVE_PAIR %s => %s", ChessField::field_to_string(mv.from_field).c_str(),ChessField::field_to_string(mv.to_field).c_str());
 
-        makeMoveSync(move_list.at(i), false, false, false);
+        makeMoveSync(mv, false, false, false);
         printBoard(ChessBoard::BOARD_TPYE::REAL_BOARD);
         int ij = 0;
     }
@@ -1052,8 +967,7 @@ ChessBoard::get_parking_fileld_occupied_by_figure_type(ChessPiece::FIGURE *_boar
     return res;
 }
 
-std::vector<ChessField::CHESS_FILEDS>
-ChessBoard::get_chess_fields_occupied_from_figure(ChessPiece::FIGURE *_board_pointer, ChessPiece::FIGURE _fig,
+std::vector<ChessField::CHESS_FILEDS> ChessBoard::get_chess_fields_occupied_from_figure(ChessPiece::FIGURE *_board_pointer, ChessPiece::FIGURE _fig,
                                                   bool _board_only) {
 
     std::vector<ChessField::CHESS_FILEDS> tmp;
@@ -1322,14 +1236,8 @@ bool ChessBoard::boardFromFen(std::string _fen, ChessBoard::BOARD_TPYE _target_b
             cb[bindex] = tmp;
             //STEP TO NEXT FIELD
             board_position_x++;
-#ifdef DEBUG
-            //printBoard(_target_board);
-
-#endif // DEBUG
-
 
         }
-
     }
 
 
@@ -1532,7 +1440,7 @@ void ChessBoard::getFieldCoordinates(ChessField::CHESS_FILEDS _index, int &_x, i
     //LOAD OFFSET FROM CONFIG FILE IF HOME POS IS NOT IN FIELD H1
     ConfigParser::getInstance()->getInt(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X, h1_offset_x);
     ConfigParser::getInstance()->getInt(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y, h1_offset_y);
-    //TODO FOR X Y
+
     int field_with_x = ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_CHESS_FIELD_WIDTH_X);
     int field_with_y = ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_CHESS_FIELD_WIDTH_Y);
 
@@ -1558,8 +1466,8 @@ void ChessBoard::getFieldCoordinates(ChessField::CHESS_FILEDS _index, int &_x, i
 
 
     if (_get_only_array_index) {
-        _x = (field_index / 8);
-        _y = (field_index % 8);
+        _x = field_index_x;
+        _y = field_index_y;
     } else {
         //CALC COORDIANTES FOR FIELDSS
         _x =  board_width_x-((field_index_x * field_with_x));
@@ -1597,22 +1505,22 @@ ChessBoard::BOARD_ERROR ChessBoard::scanBoard(bool _include_park_postion) {
              HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, true);
          }
 
+        //SCAN NFC TAG OF FIGURE
 
-        ChessPiece::FIGURE tmop = HardwareInterface::getInstance()->ScanNFC(10);             //SCAN NFC TAG IF PRESENT
-        //ChessPiece::FigureDebugPrint(tmop);            //DEBUG PRINT FIGURE IF FOUND
+        ChessPiece::FIGURE tmop = HardwareInterface::getInstance()->ScanNFC();
         if (tmop.type == ChessPiece::TYPE::TYPE_INVALID) {
             tmop.is_empty = true;
         } else {
             tmop.is_empty = false;
         }
 
-        //ON PRODUCTION HARDWARE WE NEED TO LIFT THE NFC HEAD
+        //ON PRODUCTION HARDWARE WE NEED TO LIFT DOWN THE NFC HEAD
         if(HardwareInterface::getInstance()->is_production_hardware()){
             HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, false);
         }
-
-        board_current[ChessField::field2Index(static_cast<ChessField::CHESS_FILEDS>(i))] = tmop;                   //STORE FIGURE ON BOARD
-
+        //STORE FIGURE ON CURRENT BOARD
+        board_current[ChessField::field2Index(static_cast<ChessField::CHESS_FILEDS>(i))] = tmop;
+        //PRINT THE NEW BOARD
         printBoard(ChessBoard::BOARD_TPYE::REAL_BOARD);
 
     }
@@ -1644,8 +1552,7 @@ std::list<ChessPiece::FIGURE> checkBoardForFullFigureSet(ChessPiece::FIGURE(&boa
     return tmp;
 }
 
-IOController::COIL
-ChessBoard::getValidCoilTypeParkPosition(ChessField::CHESS_FILEDS _field, IOController::COIL _target) {
+IOController::COIL ChessBoard::getValidCoilTypeParkPosition(ChessField::CHESS_FILEDS _field, IOController::COIL _target) {
 
     //if (!isFieldParkPosition(_field))
 //	{
@@ -1687,8 +1594,7 @@ ChessBoard::getValidCoilTypeParkPosition(ChessField::CHESS_FILEDS _field, IOCont
 
 }
 
-ChessBoard::BOARD_ERROR
-ChessBoard::travelToField(ChessField::CHESS_FILEDS _field, IOController::COIL _coil) {
+ChessBoard::BOARD_ERROR ChessBoard::travelToField(ChessField::CHESS_FILEDS _field, IOController::COIL _coil) {
 
 
     HardwareInterface::getInstance()->set_speed_preset(HardwareInterface::HI_TRAVEL_SPEED_PRESET::HI_TSP_MOVE);
@@ -1827,7 +1733,34 @@ ChessBoard::BOARD_ERROR ChessBoard::initBoard(bool _with_scan) {
 
 
     //TODO OVERRIDE PARKPOS
-    //boardFromFen("rnbqkbnr/pppppppp/8/8/3P4/8/PPP1PPPP/RNBQKBNR b KQkq - 0 1",ChessBoard::BOARD_TPYE::TARGET_BOARD); //D2D4
+    //boardFromFen("rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b - - 0 1",ChessBoard::BOARD_TPYE::TARGET_BOARD); syncRealWithTargetBoard();//E2E4 OK
+    //boardFromFen("r1bqkbnr/pppppppp/2n5/8/4P3/8/PPPP1PPP/RNBQKBNR w - - 1 2",ChessBoard::BOARD_TPYE::TARGET_BOARD); syncRealWithTargetBoard();//B8B6 OK
+   // boardFromFen("r1bqkbnr/pppppppp/2n5/8/3PP3/8/PPP2PPP/RNBQKBNR b - - 0 2",ChessBoard::BOARD_TPYE::TARGET_BOARD); syncRealWithTargetBoard();//D2D4 OK
+   // boardFromFen("r1bqkbnr/pppppppp/8/4n3/3PP3/8/PPP2PPP/RNBQKBNR w - - 1 3",ChessBoard::BOARD_TPYE::TARGET_BOARD); syncRealWithTargetBoard();//C6E5 OK
+
+    //loadBoardPreset(ChessBoard::BOARD_TPYE::TARGET_BOARD,ChessBoard::BOARD_PRESET::BOARD_PRESET_ALL_FIGURES_IN_START_POSTITION);syncRealWithTargetBoard(); //RESET BOARD OK + 1 nutzloser zug
+
+   // boardFromFen("r1bqkbnr/pppppppp/8/4P3/4P3/8/PPP2PPP/RNBQKBNR b - - 0 3",ChessBoard::BOARD_TPYE::TARGET_BOARD); syncRealWithTargetBoard();//D4E5 OK SCHLAG DES SPRINGERS
+   // boardFromFen("r1bqkbnr/p1pppppp/1p6/4P3/4P3/8/PPP2PPP/RNBQKBNR w - - 0 4",ChessBoard::BOARD_TPYE::TARGET_BOARD); syncRealWithTargetBoard();//B7B6 OK
+   // boardFromFen("r1bqkbnr/p1pppppp/1p6/4P3/4P3/3B4/PPP2PPP/RNBQK1NR b - - 1 4",ChessBoard::BOARD_TPYE::TARGET_BOARD); syncRealWithTargetBoard();//F1D3 OK
+   // boardFromFen("r1bqkbnr/p1ppp1pp/1p3p2/4P3/4P3/3B4/PPP2PPP/RNBQK1NR w - - 0 5",ChessBoard::BOARD_TPYE::TARGET_BOARD); syncRealWithTargetBoard();//F7F6 OK
+
+  //  loadBoardPreset(ChessBoard::BOARD_TPYE::TARGET_BOARD,ChessBoard::BOARD_PRESET::BOARD_PRESET_ALL_FIGURES_IN_START_POSTITION);syncRealWithTargetBoard(); //RESET BOARD
+
+  //  boardFromFen("r1bqkbnr/p1ppp1pp/1p3p2/4P3/4P3/3B1N2/PPP2PPP/RNBQK2R b - - 1 5",ChessBoard::BOARD_TPYE::TARGET_BOARD); syncRealWithTargetBoard();//G1F3 OK
+  //  boardFromFen("r1bqkbnr/p1ppp1pp/1p6/4p3/4P3/3B1N2/PPP2PPP/RNBQK2R w - - 0 6",ChessBoard::BOARD_TPYE::TARGET_BOARD); syncRealWithTargetBoard();//F6E5 OK SCHLAG BAUERN
+  //  boardFromFen("r1bqkbnr/p1ppp1pp/1p6/4p3/4P2P/3B1N2/PPP2PP1/RNBQK2R b - - 0 6",ChessBoard::BOARD_TPYE::TARGET_BOARD); syncRealWithTargetBoard();//H2H4 OK
+ //   boardFromFen("r2qkbnr/pbppp1pp/1p6/4p3/4P2P/3B1N2/PPP2PP1/RNBQK2R w - - 1 7",ChessBoard::BOARD_TPYE::TARGET_BOARD); syncRealWithTargetBoard();//C8B7 OK
+
+
+    //SET + RESET OK
+    //boardFromFen("r2qkbnr/pbppp1pp/1p6/4N3/4P2P/3B4/PPP2PP1/RNBQK2R b - - 0 7",ChessBoard::BOARD_TPYE::TARGET_BOARD); syncRealWithTargetBoard();//F3E5 OK //ONE SHOT TEST OK
+    //loadBoardPreset(ChessBoard::BOARD_TPYE::TARGET_BOARD,ChessBoard::BOARD_PRESET::BOARD_PRESET_ALL_FIGURES_IN_START_POSTITION);syncRealWithTargetBoard(); //RESET BOARD OK
+
+
+
+   // boardFromFen("r3kb1r/pbppq1pp/1p2pn2/1B2N1B1/4P2P/8/PPP2PP1/RN1QK2R w - - 4 10",ChessBoard::BOARD_TPYE::TARGET_BOARD); syncRealWithTargetBoard();//TODO G8F6 FEHLER => B8F6
+    //boardFromFen("r3kb1r/p1pBq1pp/1p2pB2/4N3/4b2P/8/PPP2PP1/RN1QK2R b - - 0 11",ChessBoard::BOARD_TPYE::TARGET_BOARD); syncRealWithTargetBoard();//B5D7
 
     // boardFromFen("rnbqkbnr/pppppp1p/8/6p1/3P4/8/PPP1PPPP/RNBQKBNR w Qkq g6 0 1",
     //            ChessBoard::BOARD_TPYE::REAL_BOARD); //D2D4 && G7G5
@@ -1838,14 +1771,14 @@ ChessBoard::BOARD_ERROR ChessBoard::initBoard(bool _with_scan) {
     //TODO ADD PARK TO FIELD
   //  boardFromFen("rnbqkbnr/pp1ppppp/8/8/8/8/P1pPPPPP/RNBQKBNR w KQkq - 0 1",
     //             ChessBoard::BOARD_TPYE::TARGET_BOARD); //REMOVE B2 PAWN AND MOVE C7C2
-    syncRealWithTargetBoard();
+   // syncRealWithTargetBoard();
     //syncRealWithTargetBoard();
     //boardFromFen("r1bqkbnr/pp1ppppp/n7/8/2p5/1QP5/PP1PPPPP/RNB1KBNR", ChessBoard::BOARD_TPYE::REAL_BOARD);    //DAME BAUER
     //boardFromFen("r1bqkbnr/pp1ppppp/n7/8/8/1pP5/PP1PPPPP/RNB1KBNR", ChessBoard::BOARD_TPYE::TARGET_BOARD); 	//BAUER SCHLAEGT DAME
     //syncRealWithTargetBoard();
 
     //boardFromFen("rn1qkbnr/pp2pppp/2p5/5b2/3PN3/8/PPP2PPP/R1BQKBNR", ChessBoard::BOARD_TPYE::TARGET_BOARD);       //d1c4 c2c3
-    syncRealWithTargetBoard();
+    //syncRealWithTargetBoard();
 
     //boardFromFen("rnbqkbnr/ppppp1pp/8/8/5P2/8/PPPPPP1P/RNBQKBNR", ChessBoard::BOARD_TPYE::TARGET_BOARD);  //e2e5
     //syncRealWithTargetBoard();

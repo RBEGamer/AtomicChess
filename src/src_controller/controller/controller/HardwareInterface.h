@@ -64,7 +64,7 @@ public:
 	//USED FUNCTIONS FROM THE IO CONTROLLER  (CONTROL COILS,LED, NFC READER)
 	bool setTurnStateLight(HI_TURN_STATE_LIGHT _state);
 	bool setCoilState(HI_COIL _coil, bool _state);
-	ChessPiece::FIGURE ScanNFC(int _retry_count = 1);
+	ChessPiece::FIGURE ScanNFC();
 	
 	
 	

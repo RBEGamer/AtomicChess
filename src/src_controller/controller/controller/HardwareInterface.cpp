@@ -302,22 +302,24 @@ bool HardwareInterface::setCoilState(HI_COIL _coil, bool _state)
 	return true;
 }
 
-ChessPiece::FIGURE HardwareInterface::ScanNFC(int _retry_count)
+ChessPiece::FIGURE HardwareInterface::ScanNFC()
 {
+
 	if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_DK)
 	{
 		if (iocontroller != nullptr)
 		{
-            ChessPiece::FIGURE fig= iocontroller->ScanNFC(_retry_count);
+            const int retry_count = ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::HARDWARE_UBC_NFC_READ_RETRY_COUNT) + 1;
+            ChessPiece::FIGURE fig= iocontroller->ScanNFC(retry_count);
             ChessPiece::FigureDebugPrint(fig);
 			return fig;
 		}
 	}
 	else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD || hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD_V2)
 	{
-        return userboardcontroller_interface->read_chess_piece_nfc();;
+        return userboardcontroller_interface->read_chess_piece_nfc();
     }else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_VIRT){
-       // LOG_F(INFO,"HardwareInterface::ScanNFC() return an invalid figure due HWREV_VIRT");
+        LOG_F(INFO,"HardwareInterface::ScanNFC() return an invalid figure due HWREV_VIRT");
 	}else{
         LOG_F(ERROR,"HardwareInterface::ScanNFC() return an invalid figure due invalid HW CONFIG");
 	}

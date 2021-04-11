@@ -11,6 +11,14 @@ ChessField::CHESS_FILEDS ChessField::Index2Field(int _field){
 }
 
 
+std::string ChessField::field_to_string(ChessField::CHESS_FILEDS _f){
+
+    const std::string tmp = std::string(magic_enum::enum_name(_f));
+    //TODO SPLIT _ AND GET IF PARKPOS
+    return tmp;
+}
+
+
 bool ChessField::is_row_over_row(ChessField::CHESS_FILEDS _a, ChessField::CHESS_FILEDS _b)
 {
 	int heigth_a = field2Index(_a) / 8;
