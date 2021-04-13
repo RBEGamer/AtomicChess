@@ -300,9 +300,14 @@ void MenuManager::lb_settings_btn(){
     // MenuManager::switch_menu(guicommunicator::GUI_VALUE_TYPE::SETTINGS_SCREEN);
 };
 
-void MenuManager::ls_login_btn(){
+void MenuManager::ls_login_btn(bool _with_scan){
     qInfo() <<"ls_login_btn";
-    guiconnection.createEvent(guicommunicator::GUI_ELEMENT::BEGIN_BTN, guicommunicator::GUI_VALUE_TYPE::CLICKED);
+    if(_with_scan){
+        guiconnection.createEvent(guicommunicator::GUI_ELEMENT::BEGIN_BTN_SCAN, guicommunicator::GUI_VALUE_TYPE::CLICKED);
+    }else{
+        guiconnection.createEvent(guicommunicator::GUI_ELEMENT::BEGIN_BTN_DEFAULT, guicommunicator::GUI_VALUE_TYPE::CLICKED);
+    }
+
 
 }
 

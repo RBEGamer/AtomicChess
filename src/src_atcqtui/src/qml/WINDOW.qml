@@ -268,17 +268,32 @@ Rectangle {
         color: "#07a8a5"
         visible: false
         Button {
-            id: ls_login_btn
-            x: 272
-            y: 147
-            width: 257
+            id: ls_login_btn_scan
+            x: 34
+            y: 139
+            width: 359
             height: 118
-            text: qsTr("BEGIN")
-            font.pointSize: 20
+            text: qsTr("BEGIN WITH BOARD SCAN")
+            font.pointSize: 18
             Connections {
-                target: ls_login_btn
+                target: ls_login_btn_scan
                 function onClicked(_mouse){
-                    main_menu.ls_login_btn()
+                    main_menu.ls_login_btn(true)
+                }
+            }
+        }
+        Button {
+            id: ls_login_btn_default
+            x: 425
+            y: 139
+            width: 359
+            height: 118
+            text: qsTr("BEGIN WITH DEFAULT BOARD")
+            font.pointSize: 18
+            Connections {
+                target: ls_login_btn_default
+                function onClicked(_mouse){
+                    main_menu.ls_login_btn(false)
                 }
             }
         }
@@ -1623,8 +1638,4 @@ Rectangle {
 
 
 
-/*##^##
-Designer {
-    D{i:0;active3dScene:"-1"}
-}
-##^##*/
+

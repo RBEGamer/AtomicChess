@@ -52,7 +52,13 @@
 #include <string.h>
 #include <fcntl.h>
 #include <sys/ioctl.h>
+
+#ifdef __MACH__
+
+#else
 #include <asm/ioctl.h>
+#endif
+
 
 #include "wiringPi.h"
 #include "wiringPiI2C.h"

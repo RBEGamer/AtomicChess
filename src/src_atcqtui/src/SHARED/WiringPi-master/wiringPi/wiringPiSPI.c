@@ -30,8 +30,15 @@
 #include <errno.h>
 #include <string.h>
 #include <sys/ioctl.h>
+
+#ifdef __MACH__
+
+#else
 #include <asm/ioctl.h>
 #include <linux/spi/spidev.h>
+#endif
+
+
 
 #include "wiringPi.h"
 
@@ -73,6 +80,8 @@ int wiringPiSPIGetFd (int channel)
 
 int wiringPiSPIDataRW (int channel, unsigned char *data, int len)
 {
+#ifdef __MACH__
+#else
   struct spi_ioc_transfer spi ;
 
   channel &= 1 ;
@@ -90,6 +99,7 @@ int wiringPiSPIDataRW (int channel, unsigned char *data, int len)
   spi.bits_per_word = spiBPW ;
 
   return ioctl (spiFds [channel], SPI_IOC_MESSAGE(1), &spi) ;
+#endif
 }
 
 
@@ -101,6 +111,8 @@ int wiringPiSPIDataRW (int channel, unsigned char *data, int len)
 
 int wiringPiSPISetupMode (int channel, int speed, int mode)
 {
+#ifdef __MACH__
+#else
   int fd ;
   char spiDev [32] ;
 
@@ -129,6 +141,7 @@ int wiringPiSPISetupMode (int channel, int speed, int mode)
     return wiringPiFailure (WPI_ALMOST, "SPI Speed Change failure: %s\n", strerror (errno)) ;
 
   return fd ;
+#endif
 }
 
 

@@ -71,7 +71,7 @@ class guicommunicator
 public:
 
     enum class GUI_ELEMENT{
-    BEGIN_BTN = 0,
+    BEGIN_BTN_SCAN = 0,
     QI_START_EVENT = 1,
     INITFIELD_BTN = 2,
     ATC_LOGO_BTN = 3,
@@ -147,8 +147,10 @@ public:
     SOLANOIDSCREEN_UPPER_POS = 52,
     SOLANOIDSCREEN_SAVE = 53,
     SOLANOIDSCREEN_MVDONW = 54,
-    SOLANOIDSCREEN_MVUP = 55
+    SOLANOIDSCREEN_MVUP = 55,
     
+
+    BEGIN_BTN_DEFAULT = 56
 };
 
 	enum class GUI_MESSAGE_BOX_TYPE
