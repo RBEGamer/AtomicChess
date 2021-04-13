@@ -66,7 +66,9 @@ Die DGT Bretter können die Position der Figuren erkennen und ermöglichen so au
 Diese werden bei Schachtunieren für die Übertragung der Partien sowie die Aufzeichnung der Spielzüge verwendet und bieten support für den anschluss von weiterer Peripherie wie z.B. Schachuhren.
 
 
-Somit gibt es zum Zeitpunkt der Recherche nur einen Hersteller von autonomen Schachbrettern, welcher auch die Figuren bewegen kann.
+Somit gibt es zum Zeitpunkt der Recherche nur einen Hersteller von autonomen Schachbrettern, welcher auch die Figuren bewegen kann.sdfger
+
+wdad
 
 
 

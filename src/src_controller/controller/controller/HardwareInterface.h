@@ -57,6 +57,12 @@ public:
 		HI_COIL_B   = 1,
 		HI_COIL_NFC = 2
 	};
+
+	enum HI_FAN{
+	    HI_FAN_MOTOR_DRIVER = 0
+	};
+
+
 	static HardwareInterface* getInstance(); 
 	
 	
@@ -73,7 +79,7 @@ public:
 	//NOW THERE IS AN INTERFACE FOR BOTH X AND Y MOTORS COMBINED
 	void enable_motors();
 	void disable_motors();
-	
+	void set_fan_state(HI_FAN _fan, bool _state);
 	bool is_target_position_reached();
 	void move_to_postion_mm_absolute(int _x,int _y, bool _blocking);
 	void home_sync();

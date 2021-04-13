@@ -266,8 +266,7 @@ bool ChessBoard::makeMoveFromParkPositionToBoard(ChessField::CHESS_FILEDS _park_
 }
 
 
-ChessBoard::BOARD_ERROR
-ChessBoard::makeMoveSync(ChessBoard::MovePiar _move, bool _with_scan, bool _directly, bool _occupy_check) {
+ChessBoard::BOARD_ERROR ChessBoard::makeMoveSync(ChessBoard::MovePiar _move, bool _with_scan, bool _directly, bool _occupy_check) {
     HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, false);
     HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, false);
     //IF FIELDS EQUAL NOTHING TODO
@@ -623,6 +622,8 @@ bool ChessBoard::syncRealWithTargetBoard(MovePiar _ecevute_move) {
     }
 
     //EXECUTE MOVES
+
+
     for (size_t i = 0; i < move_list.size(); i++) {
         makeMoveSync(move_list.at(i), false, false, false);
     }
@@ -691,8 +692,7 @@ ChessBoard::compareBoards(ChessPiece::FIGURE *_board_a, ChessPiece::FIGURE *_boa
 }
 
 
-std::vector<ChessBoard::FigureFieldPair>::iterator
-ChessBoard::getFigureInDiffListPlacedOnEmptpy(std::vector<ChessBoard::FigureFieldPair> &_figlist,
+std::vector<ChessBoard::FigureFieldPair>::iterator ChessBoard::getFigureInDiffListPlacedOnEmptpy(std::vector<ChessBoard::FigureFieldPair> &_figlist,
                                               ChessPiece::FIGURE _fig) {
     std::vector<FigureFieldPair>::iterator nit;
     for (nit = _figlist.begin(); nit != _figlist.end(); nit++) {
@@ -707,8 +707,7 @@ ChessBoard::getFigureInDiffListPlacedOnEmptpy(std::vector<ChessBoard::FigureFiel
 
 }
 
-bool ChessBoard::copyBoard(ChessPiece::FIGURE *_from, ChessPiece::FIGURE *_to) //a=from b=to
-{
+bool ChessBoard::copyBoard(ChessPiece::FIGURE *_from, ChessPiece::FIGURE *_to){
     if (!_from || !_to) {
         return false;
     }
@@ -725,6 +724,7 @@ bool ChessBoard::copyBoard(ChessPiece::FIGURE *_from, ChessPiece::FIGURE *_to) /
 }
 
 bool ChessBoard::syncRealWithTargetBoard() {
+    HardwareInterface::getInstance()->set_fan_state(HardwareInterface::HI_FAN::HI_FAN_MOTOR_DRIVER,true);
     ChessPiece::FIGURE *board_current = get_board_pointer(ChessBoard::BOARD_TPYE::REAL_BOARD);
     ChessPiece::FIGURE *board_target = get_board_pointer(ChessBoard::BOARD_TPYE::TARGET_BOARD);
     volatile bool _changes_made = true;
@@ -744,7 +744,7 @@ bool ChessBoard::syncRealWithTargetBoard() {
     printBoard(ChessBoard::BOARD_TPYE::TARGET_BOARD);
 #endif // DEBUG
 
-
+    HardwareInterface::getInstance()->set_fan_state(HardwareInterface::HI_FAN::HI_FAN_MOTOR_DRIVER,true);
     return true;
 }
 
@@ -924,9 +924,7 @@ std::vector<ChessField::CHESS_FILEDS> ChessBoard::get_free_fields_on_the_board(C
     return tmp;
 }
 
-
-std::vector<ChessField::CHESS_FILEDS>
-ChessBoard::get_parking_fileld_occupied_by_figure_type(ChessPiece::FIGURE *_board_pointer, ChessPiece::FIGURE _fig) {
+std::vector<ChessField::CHESS_FILEDS> ChessBoard::get_parking_fileld_occupied_by_figure_type(ChessPiece::FIGURE *_board_pointer, ChessPiece::FIGURE _fig) {
     std::vector<ChessField::CHESS_FILEDS> res;
     if (_board_pointer == nullptr) {
         return res;
@@ -967,8 +965,7 @@ ChessBoard::get_parking_fileld_occupied_by_figure_type(ChessPiece::FIGURE *_boar
     return res;
 }
 
-std::vector<ChessField::CHESS_FILEDS> ChessBoard::get_chess_fields_occupied_from_figure(ChessPiece::FIGURE *_board_pointer, ChessPiece::FIGURE _fig,
-                                                  bool _board_only) {
+std::vector<ChessField::CHESS_FILEDS> ChessBoard::get_chess_fields_occupied_from_figure(ChessPiece::FIGURE *_board_pointer, ChessPiece::FIGURE _fig, bool _board_only) {
 
     std::vector<ChessField::CHESS_FILEDS> tmp;
 
@@ -1000,7 +997,6 @@ std::vector<ChessField::CHESS_FILEDS> ChessBoard::get_chess_fields_occupied_from
     return tmp;
 
 }
-
 
 ChessPiece::TYPE ChessBoard::getSpecificFigureTypeForParkpostion(ChessField::CHESS_FILEDS _field) {
 
@@ -1071,7 +1067,6 @@ int ChessBoard::get_next_free_park_position(ChessBoard::BOARD_TPYE _target_board
     return -1; //RETURN INVALID
 }
 
-
 ChessPiece::FIGURE *ChessBoard::get_board_pointer(ChessBoard::BOARD_TPYE _target_board) {
     if (_target_board == ChessBoard::BOARD_TPYE::TARGET_BOARD) {
         return board_target;
@@ -1083,7 +1078,6 @@ ChessPiece::FIGURE *ChessBoard::get_board_pointer(ChessBoard::BOARD_TPYE _target
         return nullptr;//INVALID SELECTD BOARD
     }
 }
-
 
 int ChessBoard::get_figure_type_count(ChessBoard::BOARD_TPYE _target_board, char _type_char, bool _board_only) {
     return get_figure_type_count(get_board_pointer(_target_board), _type_char, _board_only);
@@ -1286,7 +1280,6 @@ bool ChessBoard::boardFromFen(std::string _fen, ChessBoard::BOARD_TPYE _target_b
     return true;
 }
 
-
 void ChessBoard::printBoard(ChessBoard::BOARD_TPYE _target_board) {
     ChessPiece::FIGURE *cb;
 
@@ -1338,7 +1331,6 @@ void ChessBoard::printBoard(ChessBoard::BOARD_TPYE _target_board) {
     std::cout << "----- END BOARD -------------------" << std::endl;
 }
 
-
 void ChessBoard::log_error(std::string _err) {
 #ifdef USE_STD_LOG
     std::cout << _err << std::endl;
@@ -1346,8 +1338,7 @@ void ChessBoard::log_error(std::string _err) {
     //	LOG_F(ERROR, "%s", _err.c_str());
 }
 
-void ChessBoard::getParkPositionCoordinates(ChessField::CHESS_FILEDS _index, int &_x, int &_y, IOController::COIL _coil,
-                                            bool before_parkpostion_entry) {
+void ChessBoard::getParkPositionCoordinates(ChessField::CHESS_FILEDS _index, int &_x, int &_y, IOController::COIL _coil, bool before_parkpostion_entry) {
     //INDEX IS NOT A PARK POSITION
     if (!isFieldParkPosition(_index)) {
         _x = -1;
@@ -1424,8 +1415,7 @@ void ChessBoard::getParkPositionCoordinates(ChessField::CHESS_FILEDS _index, int
 }
 
 //CONVERTS FIELD ID TO THE X Y  COORDINATES 0-7 0-7
-void ChessBoard::getFieldCoordinates(ChessField::CHESS_FILEDS _index, int &_x, int &_y, IOController::COIL _coil,
-                                     bool _get_only_array_index) {
+void ChessBoard::getFieldCoordinates(ChessField::CHESS_FILEDS _index, int &_x, int &_y, IOController::COIL _coil, bool _get_only_array_index) {
 
     //TODO CHECK PARK POSTION
     if (isFieldParkPosition(_index)) {
@@ -1483,7 +1473,6 @@ void ChessBoard::getFieldCoordinates(ChessField::CHESS_FILEDS _index, int &_x, i
 
 }
 
-
 ChessBoard::BOARD_ERROR ChessBoard::scanBoard(bool _include_park_postion) {
     //SAVE CURRENT FIELD
     ChessField::CHESS_FILEDS original_position = current_field;
@@ -1533,7 +1522,6 @@ ChessBoard::BOARD_ERROR ChessBoard::scanBoard(bool _include_park_postion) {
 
     return ChessBoard::BOARD_ERROR::NO_ERROR;
 }
-
 
 bool ChessBoard::isFieldParkPosition(ChessField::CHESS_FILEDS _field) {
     int field_index = static_cast<int>(_field);            //CAST FIELD ENUM TO A INDEX/NUMBER
@@ -1638,7 +1626,6 @@ ChessBoard::BOARD_ERROR ChessBoard::travelToField(ChessField::CHESS_FILEDS _fiel
     current_field = _field;
     return ChessBoard::BOARD_ERROR::NO_ERROR;
 }
-
 
 ChessBoard::BOARD_ERROR ChessBoard::get_coil_offset(IOController::COIL _coil, int &_x, int &_y) {
     //LOAD COIL DISTANCE COIL_A <--- NFC ---> COIL_B THE DISTANCE IS COIL_A to COIL_B THE NFC COIL IS IN THE MIDDLE
@@ -1754,8 +1741,8 @@ ChessBoard::BOARD_ERROR ChessBoard::initBoard(bool _with_scan) {
 
 
     //SET + RESET OK
-    //boardFromFen("r2qkbnr/pbppp1pp/1p6/4N3/4P2P/3B4/PPP2PP1/RNBQK2R b - - 0 7",ChessBoard::BOARD_TPYE::TARGET_BOARD); syncRealWithTargetBoard();//F3E5 OK //ONE SHOT TEST OK
-    //loadBoardPreset(ChessBoard::BOARD_TPYE::TARGET_BOARD,ChessBoard::BOARD_PRESET::BOARD_PRESET_ALL_FIGURES_IN_START_POSTITION);syncRealWithTargetBoard(); //RESET BOARD OK
+    boardFromFen("r2qkbnr/pbppp1pp/1p6/4N3/4P2P/3B4/PPP2PP1/RNBQK2R b - - 0 7",ChessBoard::BOARD_TPYE::TARGET_BOARD); syncRealWithTargetBoard();//F3E5 OK //ONE SHOT TEST OK
+    loadBoardPreset(ChessBoard::BOARD_TPYE::TARGET_BOARD,ChessBoard::BOARD_PRESET::BOARD_PRESET_ALL_FIGURES_IN_START_POSTITION);syncRealWithTargetBoard(); //RESET BOARD OK
 
 
 
@@ -1818,7 +1805,6 @@ ChessBoard::BOARD_ERROR ChessBoard::calibrate_home_pos() {
     HardwareInterface::getInstance()->setTurnStateLight(HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_IDLE);
     return ChessBoard::BOARD_ERROR::NO_ERROR;
 }
-
 
 void ChessBoard::loadBoardPreset(ChessBoard::BOARD_TPYE _target_board, ChessBoard::BOARD_PRESET _preset) {
     //CLEAR BOARD

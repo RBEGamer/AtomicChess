@@ -209,7 +209,6 @@ void ConfigParser::loadDefaults(std::string _type_str)
 	{
 		config_store[ConfigParser::CFG_ENTRY::NETWORK_BACKEND_URL] = "http://atomicchess.de:3000";
 		config_store[ConfigParser::CFG_ENTRY::NETWORK_HEARTBEAT_INTERVAL_SECS] = "5";
-	
 
 		config_store[ConfigParser::CFG_ENTRY::GENERAL_HWID_INTERFACE] = "eth0";
 		config_store[ConfigParser::CFG_ENTRY::GENERAL_VERSION_FILE_PATH] = "/VERSION";
@@ -217,8 +216,7 @@ void ConfigParser::loadDefaults(std::string _type_str)
 		config_store[ConfigParser::CFG_ENTRY::GENERAL_BOOT_PARTION_INFO_FILE_PATH] = "/etc/swupdate/BOOTPART";
 		config_store[ConfigParser::CFG_ENTRY::GENERAL_SYSTEM_TICK_INTERVAL_MS] = "1000";
 		config_store[ConfigParser::CFG_ENTRY::GENERAL_EN_ATCGUI_COMMUNICATION] = "1";
-	
-	
+
 		config_store[ConfigParser::CFG_ENTRY::MECHANIC_STEPS_PER_MM] = "1292"; //1292 ON TMC5160 DRIVER WITH MICROSTEPPING ENABLED
 		config_store[ConfigParser::CFG_ENTRY::MECHANIC_INVERT_COILS] = "1";
 		config_store[ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X] = "60";      //50 ON DK
@@ -238,16 +236,11 @@ void ConfigParser::loadDefaults(std::string _type_str)
 		config_store[ConfigParser::CFG_ENTRY::MECHANIC_WRITE_COIL_STATE_ALWAYS_WRITE_OFF] = "0";
 		config_store[ConfigParser::CFG_ENTRY::MECHANIC_BOARD_HOME_AFTER_MAKE_MOVE] = "1";      //1 ON DK
 		config_store[ConfigParser::CFG_ENTRY::MECHANIC_DISBABLE_COILSIWTCH_USE_COIL_A_ONLY] = "0";      // 0 ON DK
-
         config_store[ConfigParser::CFG_ENTRY::MECHANIC_FEEDRATE_TRAVEL] = "-1"; //ON DK THIS OPTIONS ARE NOT SUPPORTED
         config_store[ConfigParser::CFG_ENTRY::MECHANIC_FEEDRATE_MOVE] = "-1";
-
         config_store[ConfigParser::CFG_ENTRY::MECHANIC_FEEDRATE_SIWTHC_XY_AXIS] = "0";
 
-
-
 		config_store[ConfigParser::CFG_ENTRY::BOARD_PRESET_START_POSITION_FEN] = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
-
 
 		config_store[ConfigParser::CFG_ENTRY::HWARDWARE_REVISION] = "DK";
 		config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_BOARD_SERIAL_PORT] = "/dev/ttyACM0";
@@ -258,17 +251,16 @@ void ConfigParser::loadDefaults(std::string _type_str)
 		config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_UPPER_POS] = "115";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_RESET_EEPROM_TO_DEFAULT_DURING_STARTUP] = "0";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_RGBW_STRIP_SWITCH_GB] = "1";
+        config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_COOLING_FAN_DRIVER_INDEX] = "0";
 
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_UBC_SERIAL_PORT] = "/dev/ttyUBC";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_UBC_SERIAL_BAUD] = "115200";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_UBC_NFC_READ_RETRY_COUNT] = "3";
 
-
         config_store[ConfigParser::CFG_ENTRY::USER_GENERAL_ENABLE_RANDOM_MOVE_MATCH] = "0";
 		config_store[ConfigParser::CFG_ENTRY::USER_GENERAL_ENABLE_AUTO_MATCHMAKING_ENABLE] = "0";
 		config_store[ConfigParser::CFG_ENTRY::USER_GENERAL_ENABLE_AUTOLOGIN] = "1";
 		config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_SKIP_CHESS_PLACEMENT_DIALOG] = "0";
-
 		config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_MAKE_MOVE_MANUAL_TEST_DO_SYNC] = "0";
 	}else if (_type_str == "PROD_V1"){
 		config_store[ConfigParser::CFG_ENTRY::NETWORK_BACKEND_URL] = "http://atomicchess.de:3000";
@@ -318,6 +310,7 @@ void ConfigParser::loadDefaults(std::string _type_str)
 		config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_UPPER_POS] = "115";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_RESET_EEPROM_TO_DEFAULT_DURING_STARTUP] = "1";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_RGBW_STRIP_SWITCH_GB] = "1";
+        config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_COOLING_FAN_DRIVER_INDEX] = "0";
 
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_UBC_SERIAL_PORT] = "/dev/ttyUBC";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_UBC_SERIAL_BAUD] = "115200";
@@ -377,10 +370,11 @@ void ConfigParser::loadDefaults(std::string _type_str)
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_UPPER_POS] = "115";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_RESET_EEPROM_TO_DEFAULT_DURING_STARTUP] = "1";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_RGBW_STRIP_SWITCH_GB] = "1";
+        config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_COOLING_FAN_DRIVER_INDEX] = "0";
+
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_UBC_SERIAL_PORT] = "/dev/ttyUBC";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_UBC_SERIAL_BAUD] = "115200";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_UBC_NFC_READ_RETRY_COUNT] = "3";
-
 
         config_store[ConfigParser::CFG_ENTRY::USER_GENERAL_ENABLE_RANDOM_MOVE_MATCH] = "1";
         config_store[ConfigParser::CFG_ENTRY::USER_GENERAL_ENABLE_AUTO_MATCHMAKING_ENABLE] = "1";
@@ -393,14 +387,12 @@ void ConfigParser::loadDefaults(std::string _type_str)
         config_store[ConfigParser::CFG_ENTRY::NETWORK_BACKEND_URL] = "http://atomicchess.de:3000";
         config_store[ConfigParser::CFG_ENTRY::NETWORK_HEARTBEAT_INTERVAL_SECS] = "5";
 
-
         config_store[ConfigParser::CFG_ENTRY::GENERAL_HWID_INTERFACE] = "eth0";
         config_store[ConfigParser::CFG_ENTRY::GENERAL_VERSION_FILE_PATH] = "/VERSION";
         config_store[ConfigParser::CFG_ENTRY::GENERAL_HWREV_FILE_PATH] = "/etc/hwrevision";
         config_store[ConfigParser::CFG_ENTRY::GENERAL_BOOT_PARTION_INFO_FILE_PATH] = "/etc/swupdate/BOOTPART";
         config_store[ConfigParser::CFG_ENTRY::GENERAL_SYSTEM_TICK_INTERVAL_MS] = "1000";
         config_store[ConfigParser::CFG_ENTRY::GENERAL_EN_ATCGUI_COMMUNICATION] = "1";
-
 
         config_store[ConfigParser::CFG_ENTRY::MECHANIC_STEPS_PER_MM] = "80";//80 steps / mm for CORE XY configuration
         config_store[ConfigParser::CFG_ENTRY::MECHANIC_INVERT_COILS] = "1";
@@ -438,13 +430,11 @@ void ConfigParser::loadDefaults(std::string _type_str)
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_UPPER_POS] = "85";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_RESET_EEPROM_TO_DEFAULT_DURING_STARTUP] = "1";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_RGBW_STRIP_SWITCH_GB] = "1";
-
-
+        config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_COOLING_FAN_DRIVER_INDEX] = "0";
 
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_UBC_SERIAL_PORT] = "/dev/ttyUBC";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_UBC_SERIAL_BAUD] = "115200";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_UBC_NFC_READ_RETRY_COUNT] = "3";
-
 
         config_store[ConfigParser::CFG_ENTRY::USER_GENERAL_ENABLE_RANDOM_MOVE_MATCH] = "0";
         config_store[ConfigParser::CFG_ENTRY::USER_GENERAL_ENABLE_AUTO_MATCHMAKING_ENABLE] = "0";

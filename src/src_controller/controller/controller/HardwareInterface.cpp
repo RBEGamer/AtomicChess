@@ -491,3 +491,27 @@ void HardwareInterface::set_speed_preset(HardwareInterface::HI_TRAVEL_SPEED_PRES
 		}
 	}
 }
+
+void HardwareInterface::set_fan_state(HardwareInterface::HI_FAN _fan, bool _state){
+    if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_DK)
+    {
+
+    }
+    else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD || hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD_V2)
+    {
+        int fan_index =-1 ;
+        //LOAD FAN INDEX
+        if(_fan == HI_FAN::HI_FAN_MOTOR_DRIVER){
+            fan_index = ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_COOLING_FAN_DRIVER_INDEX);
+        }
+        //SKIP IF DISBALED
+        if(fan_index < 0){
+            return;
+        }
+        //SET FAN STATE
+        if (gcode_interface != nullptr)
+        {
+            gcode_interface->setFan(fan_index,((int)_state)*255);
+        }
+    }
+};

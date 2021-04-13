@@ -314,6 +314,13 @@ bool GCodeSender::setServo(int _index, int _pos) {
 	return write_gcode("M280 P" + std::to_string(_index) + " S" + std::to_string(_pos));     //MOVE SERVO
 }
 
+
+bool GCodeSender::setFan(int _index, int _speed){
+    return write_gcode("M106 P" + std::to_string(_index) + " S" + std::to_string(_speed));     //SET FAN STATE
+}
+
+
+
 void GCodeSender::disable_motors() {
 	write_gcode("M84");     //DISBBLE MOTOR
 }
