@@ -440,10 +440,25 @@ int main(int argc, char *argv[])
     //=> HOME, SETUP COILS
     HardwareInterface::getInstance()->setTurnStateLight(HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_PRECCESSING);
     gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::PROCESSING_SCREEN);
+
+    ChessBoard::BOARD_ERROR board_init_err = ChessBoard::BOARD_ERROR::ERROR;
     while (board.initBoard(board_scan) != ChessBoard::BOARD_ERROR::INIT_COMPLETE)
     {
-        if (gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_A_OK_CANCEL, "BOARD_INIT_FAILED RETRY?", 10000) != guicommunicator::GUI_MESSAGE_BOX_RESULT::MSGBOX_RES_OK) {
+        //INIT BOARD
+        board_init_err = board.initBoard(board_scan);
+        //IF NO ERROR GO FURTHER
+        if(board_init_err == ChessBoard::BOARD_ERROR::INIT_COMPLETE){
             break;
+        }
+        //CHECK FOR FIGURE MISSING ERROR
+        if(board_init_err == ChessBoard::BOARD_ERROR::FIGURES_MISSING){
+            if (gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_A_OK_CANCEL, "FIGURE MISSING ! PLEASE PLACE ALL FIGURES INSIDE THE FIELDS (H1 to A8)", 5000) != guicommunicator::GUI_MESSAGE_BOX_RESULT::MSGBOX_RES_OK) {
+                break;
+            }
+        }else{
+            if (gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_A_OK_CANCEL, "BOARD_INIT_FAILED RETRY?", 5000) != guicommunicator::GUI_MESSAGE_BOX_RESULT::MSGBOX_RES_OK) {
+                break;
+            }
         }
     }
 
@@ -839,10 +854,13 @@ int main(int argc, char *argv[])
         //--------------------------------------------------------
         if(ev.event == guicommunicator::GUI_ELEMENT::INIT_BTN && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
             gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::PROCESSING_SCREEN);
-            if (board.initBoard(true) != ChessBoard::BOARD_ERROR::INIT_COMPLETE)
-            {
-                gui.show_error_message_on_gui("board.initBoard() FAILED");
 
+            board_init_err = board.initBoard(board_scan);
+            //CHECK FOR FIGURE MISSING ERROR
+            if(board_init_err == ChessBoard::BOARD_ERROR::FIGURES_MISSING){
+                gui.show_error_message_on_gui("FIGURES MISSING");
+            }else{
+                gui.show_error_message_on_gui("BOARD INIT FAILED UNKNOWN ERROR");
             }
             gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::SETTINGS_SCREEN);
         }

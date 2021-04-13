@@ -82,7 +82,9 @@ public:
 		AXIS_TRAGET_ARRIVAL_FAILED = 6,
 		BAD_FILED_INDEX = 7,
 		INIT_CHESS_FIGURES_NOT_COMPLETE = 8,
-		INIT_COMPLETE = 9
+		INIT_COMPLETE = 9,
+        FIGURES_MISSING = 10,
+        ERROR = 11
 	};
 	
 	enum class BOARD_STATUS {
@@ -94,7 +96,8 @@ public:
 	enum class BOARD_PRESET {
 		BOARD_PRESET_ALL_FIGURES_IN_START_POSTITION = 0,
 		BOARD_PRESET_ALL_FIGURES_IN_PARK_POSITION = 1,
-		BOARD_PRESET_NO_FIGURES_PLACED = 2
+		BOARD_PRESET_NO_FIGURES_PLACED = 2,
+        BOARD_TEST_PATTERN = 3
 	};
 	
 	struct FigureField
@@ -187,7 +190,7 @@ private:
 	
 	
 	
-	std::list<ChessPiece::FIGURE> checkBoardForFullFigureSet(ChessPiece::FIGURE(&board)[BOARD_WIDTH][BOARD_HEIGHT]);
+	std::list<ChessPiece::FIGURE> checkBoardForFullFigureSet(ChessBoard::BOARD_TPYE _target_board); //RETURNS A LIST OF MISSING FIGURES ON THE FIELD
 	IOController::COIL getValidCoilTypeParkPosition(ChessField::CHESS_FILEDS _field, IOController::COIL _target); //GET THE RIGHT COIL FOR THE PARK POS
 	std::vector<ChessField::CHESS_FILEDS> get_chess_fields_occupied_from_figure(ChessPiece::FIGURE* _board_pointer, ChessPiece::FIGURE _fig, bool _board_only); //RETURNS FIELD LIST WITH ALL SELECTED TYPES OF FIGURE _fig OCCUPIEDS FILES
 	
