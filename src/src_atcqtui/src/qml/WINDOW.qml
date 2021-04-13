@@ -532,9 +532,9 @@ Rectangle {
             text: qsTr("ERROR")
             horizontalAlignment: Text.AlignHCenter
             objectName: "es_lasterr_label"
-            font.pixelSize: 30
+            font.pixelSize: 18
         }
-        visible: false
+        visible: true
     }
 
     Rectangle {
@@ -565,6 +565,7 @@ Rectangle {
             y: 102
             width: 695
             height: 142
+            visible: true
             color: "#ffffff"
             text: qsTr("MESSAGE")
             horizontalAlignment: Text.AlignHCenter

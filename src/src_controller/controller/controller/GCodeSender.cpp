@@ -297,7 +297,8 @@ bool GCodeSender::write_gcode(std::string _gcode_line, bool _ack_check) {
 
 void GCodeSender::set_speed_preset(int _feedrate) {
 	if (_feedrate < 0){_feedrate = 0; }
-	write_gcode("G0 F" + std::to_string(_feedrate));
+	write_gcode("M203 X" + std::to_string(_feedrate)+" Y"+ std::to_string(_feedrate));
+    write_gcode("G0 F" + std::to_string(_feedrate));
 }
 
 void GCodeSender::configure_marlin() {

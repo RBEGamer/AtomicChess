@@ -104,6 +104,7 @@ public:
 	{
 		ChessField::CHESS_FILEDS field;
 		ChessPiece::FIGURE figure;
+		ChessPiece::FIGURE figure_scan; //ONLY USED BY NFC SCAN METHODS
 		FigureField()
 		{
 		}
@@ -151,7 +152,12 @@ public:
 	ChessBoard() ;
 	~ChessBoard();
 	MovePiar StringToMovePair(std::string _mv);
+    std::vector<MovePiar> StringToMovePair(std::vector<std::string> _mv, bool _only_valid_ones); //PARSES AN VECTOR OF STRING MOVES INTO MOVE PAIRS THE  bool _only_valid_ones OPTION APPENDS ONLY PARABLE MOVES TO THE RESULT
 	std::string board2FEN(ChessBoard::BOARD_TPYE _type); //RETURNS A FEN REPRESENTATION OF THE BOARD
+	std::vector<FigureField> scanBoardForChangesByGivenFields(std::vector<ChessField::CHESS_FILEDS> _fd,ChessBoard::BOARD_TPYE _target_board);
+    std::vector<ChessField::CHESS_FILEDS> getMinimalFieldsToCheckForChanges(std::vector<ChessBoard::MovePiar> _mv); //RETURNS A MINIML SET IF FIELDS NEED TO CHECK FOR A MOVE
+    ChessPiece::FIGURE scanField(ChessField::CHESS_FILEDS _field); //SCANS A SINGLE FIELD WITH THE NFC HEAD AND RETURNS A FIGURE
+    std::vector<ChessField::CHESS_FILEDS> getAllTargetFieldsFromGivenFieldAndMove(std::vector<ChessBoard::MovePiar> _moves, std::vector<ChessBoard::FigureField> _fields);
 	bool boardFromFen(std::string _fen, ChessBoard::BOARD_TPYE _target_board); //LOADS A BOARD BY FEN
 	bool syncRealWithTargetBoard(); ///SNYC THE RealBoard with the Target board and move the 
 	bool syncRealWithTargetBoard(MovePiar _ecevute_move);   ///SNYC THE RealBoard with the Target board and move the figures
