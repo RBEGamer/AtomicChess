@@ -189,6 +189,49 @@ void update_gamescreen_with_player_state(BackendConnector::PLAYER_STATUS _ps, gu
 }
 
 
+void player_enter_manual_move_start_board_scan(guicommunicator& _gui, ChessBoard& _board, BackendConnector& _gamebackend, std::vector<std::string> _possible_moves){
+    if(_possible_moves.size() > 0){
+        //PARSE THE STRING MOVES INTO MovePair
+        const std::vector<ChessBoard::MovePiar> moves = _board.StringToMovePair(_possible_moves,true);
+        //SCAN THE BOARD FOR A POSSIBLE MOVE USING THE LEGAL MOVES
+        const ChessBoard::PossibleUserMoveResult possible_move_result = _board.scanBoardForPossibleUserMove(moves);
+
+        if(possible_move_result.error == ChessBoard::BOARD_ERROR::POSSIBLE_USER_MOVE_RESULT_MULTIBLE_MOVE_CANDIDATES){
+            _gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK,"MULTIBLE MOVES - PLEASE REWIND FIGURES AND ENTER MOVE MANUALLY",10000);
+            _gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::PLAYER_ENTER_MANUAL_MOVE_SCREEN);
+
+        }else if(possible_move_result.error == ChessBoard::BOARD_ERROR::POSSIBLE_USER_MOVE_MOVE_INVALID) {
+            _gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK,"MOVE INVALID - PLEASE REWIND FIGURES AND ENTER MOVE MANUALLY",10000);
+            _gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::PLAYER_ENTER_MANUAL_MOVE_SCREEN);
+
+        }else if(possible_move_result.possible_move.is_valid){
+            //CONVERT MOVE BACK TO STRING
+            std::string move_made_str = ChessField::field_to_string(possible_move_result.possible_move.from_field ) +ChessField::field_to_string(possible_move_result.possible_move.to_field);
+            //SEND MOVE TO BACKEND
+            if(_gamebackend.set_make_move(move_made_str))
+            {
+                //UPDATE THE REAL_BOARD WITH THE MADE MOVE =>
+                _board.makeMoveSyncVirtual(_board.StringToMovePair(move_made_str));
+                //board.syncRealWithTargetBoard();
+                _gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::GAME_SCREEN);
+                make_move_mode = 0; //MOVE VALID
+            }else
+            {
+                _gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK,"MOVE INVALID - PLEASE REWIND FIGURES AND ENTER MOVE MANUALLY",10000);
+                _gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::PLAYER_ENTER_MANUAL_MOVE_SCREEN);
+                make_move_mode = 2; //MOVE INVALID => SHOW USER MOVE ENTRY UI AGAIN
+            }
+        }
+        //USER HAS NO MOVE OPTIONS
+    }else{
+        _gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK,"NO LEGAL MOVE LEFT - PLEASE ENTER MOVE MANUALLY",10000);
+        _gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::PLAYER_ENTER_MANUAL_MOVE_SCREEN);
+    }
+}
+
+
+
+
 void signal_callback_handler(int signum)
 {
     printf("Caught signal %d\n", signum);
@@ -704,6 +747,7 @@ int main(int argc, char *argv[])
                         //SYNC BOARDS
                         board.boardFromFen(current_player_state.game_state.current_board_fen, ChessBoard::BOARD_TPYE::TARGET_BOARD);
                         board.syncRealWithTargetBoard();
+                        make_move_mode = 0;
                     //ELSE IF IF MY TURN
                     }else if (current_player_state.game_state.is_my_turn) {//IS MY TURN TRIGGER DIALOG
                         //SET TURN LIGHT RIGHT
@@ -742,23 +786,22 @@ int main(int argc, char *argv[])
                                 make_move_mode = 2;
                                 //STORE ALL POSSIBLE MOVES
                                 possible_moves = current_player_state.game_state.legal_moves; //STORE MOVES
+                               //ENABLE BOARD AUTOSCAN AFTER X SECONDS
+                                if(!ConfigParser::getInstance()->getInt(ConfigParser::CFG_ENTRY::USER_RESERVED_AUTO_SCAN_BOARD_TIME_IF_USERS_TURN,make_move_scan_timer)){
+                                    make_move_scan_timer = -1;
+                                }
 
-
-                                //TODO CONFIG
-                                make_move_scan_timer = 10;
-
-
-
+                            //AUTO TIMER FUNCTION
                             }else if(make_move_mode == 2){
                                 //IF TIMER = 0 TRIGGER EVENT FOR SCAN
-                            //    if(make_move_scan_timer == 0){
+                                if(make_move_scan_timer == 0){
                                     //TRIGGER A SCAN EVENT
-                           //         gui.createEventLocal(guicommunicator::GUI_ELEMENT::PLAYER_EMM_SCAN_BOARD, guicommunicator::GUI_VALUE_TYPE::CLICKED);
-                            //        make_move_mode = 2;
-                            //        make_move_scan_timer = -1;
-                            //    }else if(make_move_scan_timer > 0){
-                            //        make_move_scan_timer--;
-                             //   }
+                                    player_enter_manual_move_start_board_scan(gui,board,gamebackend,possible_moves);
+                                    //DISBALE TIMER
+                                    make_move_scan_timer = -1;
+                                }else if(make_move_scan_timer > 0){
+                                    make_move_scan_timer--;
+                                }
 
                             }
 
@@ -893,9 +936,11 @@ int main(int argc, char *argv[])
             board_init_err = board.initBoard(board_scan | HardwareInterface::getInstance()->is_production_hardware());
             //CHECK FOR FIGURE MISSING ERROR
             if(board_init_err == ChessBoard::BOARD_ERROR::FIGURES_MISSING){
-                gui.show_error_message_on_gui("FIGURES MISSING");
+                //gui.show_error_message_on_gui("FIGURES MISSING");
+                gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK,"FIGURES MISSING - PLEASE CHECK ON BOARD",10000);
             }else{
-                gui.show_error_message_on_gui("BOARD INIT FAILED UNKNOWN ERROR");
+                //gui.show_error_message_on_gui("BOARD INIT FAILED UNKNOWN ERROR");
+                gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK,"BOARD INIT FAILED UNKNOWN ERROR",10000);
             }
             gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::SETTINGS_SCREEN);
         }
@@ -1038,12 +1083,13 @@ int main(int argc, char *argv[])
         //----------------PLAYER MAKE MANUAL MOVE--------------
         //--------------------------------------------------------
         if(ev.event == guicommunicator::GUI_ELEMENT::PLAYER_EMM_INPUT && ev.type == guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING && make_move_mode > 0) {
+            make_move_scan_timer = -1;
             //TODO ---- SCAN BOARD AS MOVE AND ENTER IT TO GUI
             ChessBoard::MovePiar mvpair = board.StringToMovePair(ev.value);
             if (mvpair.is_valid) {
                 //FOR TEST
                 if(make_move_mode == 1) {
-                    LOG_F(INFO, "MAKE MOVE TEST");
+                    //PERFORM THE MOVE ON THE BOARD => MOVE FIGURES
                     board.makeMoveSync(mvpair, false, false, false);
                     if(ConfigParser::getInstance()->getBool_nocheck(ConfigParser::CFG_ENTRY::USER_RESERVED_MAKE_MOVE_MANUAL_TEST_DO_SYNC)){
                         LOG_F(INFO,"USER_RESERVED_MAKE_MOVE_MANUAL_TEST_DO_SYNC IS SET => PERFORMING  board.syncRealWithTargetBoard();");
@@ -1053,7 +1099,7 @@ int main(int argc, char *argv[])
                     make_move_mode = 0;
                 }
                 else if(make_move_mode == 2) {
-                    //FOR RUNNING GAME
+                    //FOR RUNNING GAME FIRST CHECK VIA BACKEN IF THE MOVE IS VALID
                     gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::GAME_SCREEN);
                     if(gamebackend.set_make_move(ev.value))
                     {
@@ -1069,43 +1115,7 @@ int main(int argc, char *argv[])
             }
 
         }else if(ev.event == guicommunicator::GUI_ELEMENT::PLAYER_EMM_SCAN_BOARD && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED && make_move_mode > 0) { //THE SCNA BOARD FOR MOVE BTN
-            if(possible_moves.size() > 0){
-                //PARSE THE STRING MOVES INTO MovePair
-                const std::vector<ChessBoard::MovePiar> moves = board.StringToMovePair(possible_moves,true);
-                //SCAN THE BOARD FOR A POSSIBLE MOVE USING THE LEGAL MOVES
-                const ChessBoard::PossibleUserMoveResult possible_move_result = board.scanBoardForPossibleUserMove(moves);
-
-                if(possible_move_result.error == ChessBoard::BOARD_ERROR::POSSIBLE_USER_MOVE_RESULT_MULTIBLE_MOVE_CANDIDATES){
-                    gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK,"MULTIBLE MOVES - PLEASE REWIND FIGURES AND ENTER MOVE MANUALLY",10000);
-                    gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::PLAYER_ENTER_MANUAL_MOVE_SCREEN);
-
-                }else if(possible_move_result.error == ChessBoard::BOARD_ERROR::POSSIBLE_USER_MOVE_MOVE_INVALID) {
-                    gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK,"MOVE INVALID - PLEASE REWIND FIGURES AND ENTER MOVE MANUALLY",10000);
-                    gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::PLAYER_ENTER_MANUAL_MOVE_SCREEN);
-
-                }else if(possible_move_result.possible_move.is_valid){
-                    //CONVERT MOVE BACK TO STRING
-                    std::string move_made_str = ChessField::field_to_string(possible_move_result.possible_move.from_field ) +ChessField::field_to_string(possible_move_result.possible_move.to_field);
-                    //SEND MOVE TO BACKEND
-                    if(gamebackend.set_make_move(move_made_str))
-                    {
-                        //UPDATE THE REAL_BOARD WITH THE MADE MOVE =>
-                        board.makeMoveSyncVirtual(board.StringToMovePair(move_made_str));
-                        //board.syncRealWithTargetBoard();
-                        gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::GAME_SCREEN);
-                        make_move_mode = 0; //MOVE VALID
-                    }else
-                    {
-                        gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK,"MOVE INVALID - PLEASE REWIND FIGURES AND ENTER MOVE MANUALLY",10000);
-                        gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::PLAYER_ENTER_MANUAL_MOVE_SCREEN);
-                        make_move_mode = 2; //MOVE INVALID => SHOW USER MOVE ENTRY UI AGAIN
-                    }
-                }
-            //USER HAS NO MOVE OPTIONS
-            }else{
-                gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK,"NO LEGAL MOVE LEFT - PLEASE ENTER MOVE MANUALLY",10000);
-                gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::PLAYER_ENTER_MANUAL_MOVE_SCREEN);
-            }
+            player_enter_manual_move_start_board_scan(gui,board,gamebackend,possible_moves);
         }
 
 

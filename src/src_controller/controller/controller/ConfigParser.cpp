@@ -451,7 +451,7 @@ void ConfigParser::loadDefaults(std::string _type_str)
         config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_SKIP_CHESS_PLACEMENT_DIALOG] = "1";
         config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_MAKE_MOVE_MANUAL_TEST_DO_SYNC] = "0";
         config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_SKIP_USER_NFC_MOVE_SEARCH_AFTER_FIRST_CHANGE] = "1";
-        config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_AUTO_SCAN_BOARD_TIME_IF_USERS_TURN] = "10";
+        config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_AUTO_SCAN_BOARD_TIME_IF_USERS_TURN] = "-1";
 
     }
 }
