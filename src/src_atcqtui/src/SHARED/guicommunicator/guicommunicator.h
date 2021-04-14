@@ -228,6 +228,10 @@ public:
 	void enable_qt_communication(bool _en);
 
     void createEvent(GUI_ELEMENT _event, GUI_VALUE_TYPE _type, std::string _value); //sends a event though ZeroMQ using protocol buffer
+    
+    void createEventLocal(GUI_ELEMENT _event, GUI_VALUE_TYPE _type, std::string _value);
+    void createEventLocal(GUI_ELEMENT _event, GUI_VALUE_TYPE _type);
+
     //DERIVATIONS FRom createEvent
     void createEvent(GUI_ELEMENT _event, GUI_VALUE_TYPE _type);
 	void clearPreviousEvents();

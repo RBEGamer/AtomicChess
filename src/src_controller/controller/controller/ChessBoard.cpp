@@ -1847,70 +1847,67 @@ ChessBoard::BOARD_ERROR ChessBoard::initBoard(bool _with_scan) {
     HardwareInterface::getInstance()->setTurnStateLight(HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_IDLE);
 
 
-
-    //TODO SEPERATE FUNCTION AND TRIGGER BY A2G5 BUTTON RENAME THE BTN
-    //TODO OVERRIDE PARKPOS
-    //boardFromFen("rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b - - 0 1",ChessBoard::BOARD_TPYE::TARGET_BOARD); syncRealWithTargetBoard();//E2E4 OK
-    //boardFromFen("r1bqkbnr/pppppppp/2n5/8/4P3/8/PPPP1PPP/RNBQKBNR w - - 1 2",ChessBoard::BOARD_TPYE::TARGET_BOARD); syncRealWithTargetBoard();//B8B6 OK
-   // boardFromFen("r1bqkbnr/pppppppp/2n5/8/3PP3/8/PPP2PPP/RNBQKBNR b - - 0 2",ChessBoard::BOARD_TPYE::TARGET_BOARD); syncRealWithTargetBoard();//D2D4 OK
-   // boardFromFen("r1bqkbnr/pppppppp/8/4n3/3PP3/8/PPP2PPP/RNBQKBNR w - - 1 3",ChessBoard::BOARD_TPYE::TARGET_BOARD); syncRealWithTargetBoard();//C6E5 OK
-
-    //loadBoardPreset(ChessBoard::BOARD_TPYE::TARGET_BOARD,ChessBoard::BOARD_PRESET::BOARD_PRESET_ALL_FIGURES_IN_START_POSTITION);syncRealWithTargetBoard(); //RESET BOARD OK + 1 nutzloser zug
-
-   // boardFromFen("r1bqkbnr/pppppppp/8/4P3/4P3/8/PPP2PPP/RNBQKBNR b - - 0 3",ChessBoard::BOARD_TPYE::TARGET_BOARD); syncRealWithTargetBoard();//D4E5 OK SCHLAG DES SPRINGERS
-   // boardFromFen("r1bqkbnr/p1pppppp/1p6/4P3/4P3/8/PPP2PPP/RNBQKBNR w - - 0 4",ChessBoard::BOARD_TPYE::TARGET_BOARD); syncRealWithTargetBoard();//B7B6 OK
-   // boardFromFen("r1bqkbnr/p1pppppp/1p6/4P3/4P3/3B4/PPP2PPP/RNBQK1NR b - - 1 4",ChessBoard::BOARD_TPYE::TARGET_BOARD); syncRealWithTargetBoard();//F1D3 OK
-   // boardFromFen("r1bqkbnr/p1ppp1pp/1p3p2/4P3/4P3/3B4/PPP2PPP/RNBQK1NR w - - 0 5",ChessBoard::BOARD_TPYE::TARGET_BOARD); syncRealWithTargetBoard();//F7F6 OK
-
-  //  loadBoardPreset(ChessBoard::BOARD_TPYE::TARGET_BOARD,ChessBoard::BOARD_PRESET::BOARD_PRESET_ALL_FIGURES_IN_START_POSTITION);syncRealWithTargetBoard(); //RESET BOARD
-
-  //  boardFromFen("r1bqkbnr/p1ppp1pp/1p3p2/4P3/4P3/3B1N2/PPP2PPP/RNBQK2R b - - 1 5",ChessBoard::BOARD_TPYE::TARGET_BOARD); syncRealWithTargetBoard();//G1F3 OK
-  //  boardFromFen("r1bqkbnr/p1ppp1pp/1p6/4p3/4P3/3B1N2/PPP2PPP/RNBQK2R w - - 0 6",ChessBoard::BOARD_TPYE::TARGET_BOARD); syncRealWithTargetBoard();//F6E5 OK SCHLAG BAUERN
-  //  boardFromFen("r1bqkbnr/p1ppp1pp/1p6/4p3/4P2P/3B1N2/PPP2PP1/RNBQK2R b - - 0 6",ChessBoard::BOARD_TPYE::TARGET_BOARD); syncRealWithTargetBoard();//H2H4 OK
- //   boardFromFen("r2qkbnr/pbppp1pp/1p6/4p3/4P2P/3B1N2/PPP2PP1/RNBQK2R w - - 1 7",ChessBoard::BOARD_TPYE::TARGET_BOARD); syncRealWithTargetBoard();//C8B7 OK
-
-
-    //SET + RESET OK
-   // boardFromFen("8/1pppppp1/1p4p1/1rnbbnr1/1RNBBNR1/1P4P1/1PPPPPP1/8 w - - 0 1",ChessBoard::BOARD_TPYE::TARGET_BOARD); syncRealWithTargetBoard();//F3E5 OK //ONE SHOT TEST OK
-  //  loadBoardPreset(ChessBoard::BOARD_TPYE::TARGET_BOARD,ChessBoard::BOARD_PRESET::BOARD_PRESET_ALL_FIGURES_IN_START_POSTITION);syncRealWithTargetBoard(); //RESET BOARD OK
-
-    //loadBoardPreset(ChessBoard::BOARD_TPYE::TARGET_BOARD,ChessBoard::BOARD_PRESET::BOARD_PRESET_ALL_FIGURES_IN_PARK_POSITION);
-    loadBoardPreset(ChessBoard::BOARD_TPYE::REAL_BOARD,ChessBoard::BOARD_PRESET::BOARD_PRESET_ALL_FIGURES_IN_PARK_POSITION);
+    //loadBoardPreset(ChessBoard::BOARD_TPYE::REAL_BOARD,ChessBoard::BOARD_PRESET::BOARD_PRESET_ALL_FIGURES_IN_PARK_POSITION);
     //syncRealWithTargetBoard();
-    loadBoardPreset(ChessBoard::BOARD_TPYE::TARGET_BOARD,ChessBoard::BOARD_PRESET::BOARD_PRESET_ALL_FIGURES_IN_START_POSTITION);
+    //loadBoardPreset(ChessBoard::BOARD_TPYE::TARGET_BOARD,ChessBoard::BOARD_PRESET::BOARD_PRESET_ALL_FIGURES_IN_START_POSTITION);
     syncRealWithTargetBoard();
-   // boardFromFen("r3kb1r/pbppq1pp/1p2pn2/1B2N1B1/4P2P/8/PPP2PP1/RN1QK2R w - - 4 10",ChessBoard::BOARD_TPYE::TARGET_BOARD); syncRealWithTargetBoard();//TODO G8F6 FEHLER => B8F6
-    //boardFromFen("r3kb1r/p1pBq1pp/1p2pB2/4N3/4b2P/8/PPP2PP1/RN1QK2R b - - 0 11",ChessBoard::BOARD_TPYE::TARGET_BOARD); syncRealWithTargetBoard();//B5D7
-
-    // boardFromFen("rnbqkbnr/pppppp1p/8/6p1/3P4/8/PPP1PPPP/RNBQKBNR w Qkq g6 0 1",
-    //            ChessBoard::BOARD_TPYE::REAL_BOARD); //D2D4 && G7G5
-    //  syncRealWithTargetBoard();
-    //boardFromFen("rnbqkbnr/pppppp1p/8/6P1/8/8/PPP1PPPP/RNBQKBNR b Qkq - 0 1",ChessBoard::BOARD_TPYE::TARGET_BOARD); //D4 -> G5 //OK
-    //boardFromFen("rnbqkbnr/pppPpp1p/8/8/8/8/PPP1pPPP/RNBQKBNR w Qkq - 0 1",ChessBoard::BOARD_TPYE::TARGET_BOARD); //D4 -> D7  && G5 -> E2 //OK
-
-    //TODO ADD PARK TO FIELD
-  //  boardFromFen("rnbqkbnr/pp1ppppp/8/8/8/8/P1pPPPPP/RNBQKBNR w KQkq - 0 1",
-    //             ChessBoard::BOARD_TPYE::TARGET_BOARD); //REMOVE B2 PAWN AND MOVE C7C2
-   // syncRealWithTargetBoard();
-    //syncRealWithTargetBoard();
-    //boardFromFen("r1bqkbnr/pp1ppppp/n7/8/2p5/1QP5/PP1PPPPP/RNB1KBNR", ChessBoard::BOARD_TPYE::REAL_BOARD);    //DAME BAUER
-    //boardFromFen("r1bqkbnr/pp1ppppp/n7/8/8/1pP5/PP1PPPPP/RNB1KBNR", ChessBoard::BOARD_TPYE::TARGET_BOARD); 	//BAUER SCHLAEGT DAME
-    //syncRealWithTargetBoard();
-
-    //boardFromFen("rn1qkbnr/pp2pppp/2p5/5b2/3PN3/8/PPP2PPP/R1BQKBNR", ChessBoard::BOARD_TPYE::TARGET_BOARD);       //d1c4 c2c3
-    //syncRealWithTargetBoard();
-
-    //boardFromFen("rnbqkbnr/ppppp1pp/8/8/5P2/8/PPPPPP1P/RNBQKBNR", ChessBoard::BOARD_TPYE::TARGET_BOARD);  //e2e5
-    //syncRealWithTargetBoard();
-
-    //makeMoveSync(ChessField::CHESS_FILEDS::CHESS_FIELD_H1, ChessField::CHESS_FILEDS::CHESS_FIELD_A1, true, false, true);   //WITH SCAN //DIRECTLY //OCCUPY CHECK
-//	syncRealWithTargetBoard(StringToMovePair("f2h7"));
-    //TODO SCAN FIELD ROUTINE
-
-
-
     return ChessBoard::BOARD_ERROR::INIT_COMPLETE;
 }
+
+
+
+
+ChessBoard::PossibleUserMoveResult ChessBoard::scanBoardForPossibleUserMove(std::vector<ChessBoard::MovePiar> _pseudo_legal_moves){
+    //CREATE RESULT VAR
+    ChessBoard::PossibleUserMoveResult result;
+    result.error = ChessBoard::BOARD_ERROR::POSSIBLE_USER_MOVE_RESULT_OK;
+    //GET ONLY NEEDED MOVES TO CHECK WITH NFC => REDUCE TIME
+    const std::vector<ChessField::CHESS_FILEDS> minimal_start_fields = getMinimalFieldsToCheckForChanges(_pseudo_legal_moves);
+    //SCAN THE START FIELDS AND RETURN ALL CHANGES
+    const std::vector<ChessBoard::FigureField> changes_start_fields = scanBoardForChangesByGivenFields(minimal_start_fields, ChessBoard::BOARD_TPYE::REAL_BOARD);
+    //GET ALL END FIELDS BY A SELECTED START FIELD
+    const std::vector<ChessField::CHESS_FILEDS> minimal_end_fields = getAllTargetFieldsFromGivenFieldAndMove(_pseudo_legal_moves,changes_start_fields);
+    //FINALLY SCAN ALL END FIELDS RESULTING OF THE CHANGED START FIELDS
+    const std::vector<ChessBoard::FigureField> changes_end_fields = scanBoardForChangesByGivenFields(minimal_end_fields, ChessBoard::BOARD_TPYE::REAL_BOARD);
+    //NOW SEARCH FOR A MATCHING MOVE WITH FROM_FIELD AND TO_FIELD MATCHES THE PESUDO_LEGAL_MOVE_LIST
+    ChessBoard::MovePiar move_made;
+    move_made.is_valid = false;
+    //CHECK FOR MULTIBLE MOVES AND P
+    if(changes_start_fields.size() == 1 && changes_end_fields.size() == 1){
+        //GET EXECUTED MOVE
+        for(int i = 0; i< _pseudo_legal_moves.size(); i++){
+            if(_pseudo_legal_moves.at(i).is_valid && _pseudo_legal_moves.at(i).from_field == changes_start_fields.at(0).field && _pseudo_legal_moves.at(i).to_field == changes_end_fields.at(0).field){
+                move_made = _pseudo_legal_moves.at(i);
+                move_made.is_valid = true;
+                break;
+            }
+        }
+    }else{
+        result.error = ChessBoard::BOARD_ERROR::POSSIBLE_USER_MOVE_RESULT_MULTIBLE_MOVE_CANDIDATES;
+    }
+    //CHECK FOR VALID MOVE FOUND
+    if(!move_made.is_valid){
+        result.error = ChessBoard::BOARD_ERROR::POSSIBLE_USER_MOVE_MOVE_INVALID;
+    }
+    //ASSIGN MOVE
+    result.possible_move = move_made;
+
+    return result;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ChessBoard::BOARD_ERROR ChessBoard::calibrate_home_pos() {
     //CHECK HARDWARE INIT

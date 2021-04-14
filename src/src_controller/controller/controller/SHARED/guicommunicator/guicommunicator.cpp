@@ -61,7 +61,34 @@ void guicommunicator::debug_event(GUI_EVENT _event, bool _rec) {
 	}
 }
 
+void guicommunicator::createEventLocal(GUI_ELEMENT _event, GUI_VALUE_TYPE _type, std::string _value){
+	std::string tmp; //EVENT STRING
+	//CONVERT EVENT TO JSON
+	GUI_EVENT tmp_event;
+	
+	tmp_event.event = _event;
+	tmp_event.type = _type;
+	tmp_event.value = _value;
 
+	std::string_view cfg_name = magic_enum::enum_name(_type);
+	if (std::string(cfg_name).rfind("_SCREEN", 0) == 0) {tmp_event.ispageswitchevent = true; }
+	else if (std::string(cfg_name) == "ERROR_MESSAGE") {tmp_event.ispageswitchevent = true; }
+	else if (std::string(cfg_name).rfind("MESSAGEBOX_", 0) == 0) {tmp_event.ispageswitchevent = true; }
+	
+
+	#ifdef USES_QT
+		tmp_event.ack = 0;
+	#else
+		tmp_event.ack = 1;
+	#endif // USES_QT
+
+	//PUSH EVENT TO LOCAL EVENT QUEUE
+	enqueue_event(tmp_event);
+}
+
+void guicommunicator::createEventLocal(GUI_ELEMENT _event, GUI_VALUE_TYPE _type){
+	createEventLocal(_event,_type,"");
+}
 
 void guicommunicator::createEvent(GUI_ELEMENT _event, GUI_VALUE_TYPE _type, std::string _value) {
 
@@ -77,7 +104,7 @@ void guicommunicator::createEvent(GUI_ELEMENT _event, GUI_VALUE_TYPE _type, std:
 	tmp_event.ispageswitchevent = false;
 	//HARDCODES STUFF TODO REMOVE
 	//HAHA IS A WOKRAROUND FOR THE SHITTY ENUM/STRUCT CONSTRUCTION
-	 std::string_view cfg_name = magic_enum::enum_name(_type);
+	std::string_view cfg_name = magic_enum::enum_name(_type);
 	if (std::string(cfg_name).rfind("_SCREEN", 0) == 0) {tmp_event.ispageswitchevent = true; }
 	else if (std::string(cfg_name) == "ERROR_MESSAGE") {tmp_event.ispageswitchevent = true; }
 	else if (std::string(cfg_name).rfind("MESSAGEBOX_", 0) == 0) {tmp_event.ispageswitchevent = true; }
@@ -304,6 +331,7 @@ void guicommunicator::stop_recieve_thread() {
 guicommunicator::GUI_EVENT guicommunicator::get_event() {
 	return guicommunicator::get_gui_update_event();
 }
+
 guicommunicator::GUI_EVENT guicommunicator::get_gui_update_event() {
 	GUI_EVENT tmp;
 	tmp.is_event_valid = false;

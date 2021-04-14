@@ -64,6 +64,7 @@ using namespace std;
 int game_running_state = 0;
 int mainloop_running = 0;
 int make_move_mode = 0;    //TO DETERM FOR WHICH PURPOSE THE PLAYER_MAKE_MANUAL_MOVE_SCREEN WAS OPENED 0=NOT OPEN 1=TEST 2=RUNNING GAME MOVE
+int make_move_scan_timer = 10; //IF ENABLED AFTER X INTERVALS SCAN BOARD FOR A USER MOVE AUTOMATICLY
 std::vector<std::string> possible_moves; //STORES ALL POSSIBLE MOVES THE USER CAN MAKE
 BackendConnector* gamebackend_logupload = nullptr;     //USED ONLY FOR UPLOADING THE LOGS
 
@@ -616,7 +617,6 @@ int main(int argc, char *argv[])
 			t1 = Clock::now();
 #endif
 
-
             //IF A VALID SESSION
             if(gamebackend.check_login_state())
             {
@@ -742,13 +742,36 @@ int main(int argc, char *argv[])
                                 make_move_mode = 2;
                                 //STORE ALL POSSIBLE MOVES
                                 possible_moves = current_player_state.game_state.legal_moves; //STORE MOVES
+
+
+                                //TODO CONFIG
+                                make_move_scan_timer = 10;
+
+
+
+                            }else if(make_move_mode == 2){
+                                //IF TIMER = 0 TRIGGER EVENT FOR SCAN
+                            //    if(make_move_scan_timer == 0){
+                                    //TRIGGER A SCAN EVENT
+                           //         gui.createEventLocal(guicommunicator::GUI_ELEMENT::PLAYER_EMM_SCAN_BOARD, guicommunicator::GUI_VALUE_TYPE::CLICKED);
+                            //        make_move_mode = 2;
+                            //        make_move_scan_timer = -1;
+                            //    }else if(make_move_scan_timer > 0){
+                            //        make_move_scan_timer--;
+                             //   }
+
                             }
+
+
                             board.boardFromFen(current_player_state.game_state.current_board_fen, ChessBoard::BOARD_TPYE::TARGET_BOARD);
                             board.syncRealWithTargetBoard();
 
                         }
                     }else if(current_player_state.game_state.is_game_over) {
                         //IS GAME OVER => ABORT GAME TO SERVER AND  GOTO MAIN MENU
+                        board.boardFromFen(current_player_state.game_state.current_board_fen, ChessBoard::BOARD_TPYE::TARGET_BOARD);
+                        board.syncRealWithTargetBoard();
+                        //SET GAME OVER AND GOTO MAIN MENU
                         gamebackend.set_abort_game();
                         gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::MAIN_MENU_SCREEN);
                     }else{
@@ -760,6 +783,7 @@ int main(int argc, char *argv[])
                 }else{
                     //RETURN TO THE MAIN MENU IF GAME WAS STARTEN AND NOW EXITED
                     if(game_running_state == 1){
+
                         game_running_state = 2;
                         gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::MAIN_MENU_SCREEN);
                     }
@@ -816,8 +840,7 @@ int main(int argc, char *argv[])
                 gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::LOGIN_SCREEN);
             }
         }
-
-        if(ev.event == guicommunicator::GUI_ELEMENT::BEGIN_BTN_DEFAULT && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
+        else if(ev.event == guicommunicator::GUI_ELEMENT::BEGIN_BTN_DEFAULT && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
             //PERFORM A LOGIN AS HUMAN
             if(gamebackend.login(BackendConnector::PLAYER_TYPE::PT_HUMAN) && !gamebackend.get_session_id().empty())
             {
@@ -1026,21 +1049,16 @@ int main(int argc, char *argv[])
                         LOG_F(INFO,"USER_RESERVED_MAKE_MOVE_MANUAL_TEST_DO_SYNC IS SET => PERFORMING  board.syncRealWithTargetBoard();");
                         board.syncRealWithTargetBoard();
                     }
-
-
                     gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::DEBUG_SCREEN);
                     make_move_mode = 0;
                 }
                 else if(make_move_mode == 2) {
-                    LOG_F(INFO, "MAKE MOVE INGAME");
-
                     //FOR RUNNING GAME
                     gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::GAME_SCREEN);
                     if(gamebackend.set_make_move(ev.value))
                     {
                         //board.makeMoveSync(board.StringToMovePair(ev.value),false,true,false);
                         //board.syncRealWithTargetBoard();
-
                         make_move_mode = 0; //MOVE VALID
                     }else
                     {
@@ -1048,72 +1066,49 @@ int main(int argc, char *argv[])
                         gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::PLAYER_ENTER_MANUAL_MOVE_SCREEN);
                     }
                 }
-
-
             }
 
         }else if(ev.event == guicommunicator::GUI_ELEMENT::PLAYER_EMM_SCAN_BOARD && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED && make_move_mode > 0) { //THE SCNA BOARD FOR MOVE BTN
-            if(possible_moves.size()<0){
+            if(possible_moves.size() > 0){
+                //PARSE THE STRING MOVES INTO MovePair
+                const std::vector<ChessBoard::MovePiar> moves = board.StringToMovePair(possible_moves,true);
+                //SCAN THE BOARD FOR A POSSIBLE MOVE USING THE LEGAL MOVES
+                const ChessBoard::PossibleUserMoveResult possible_move_result = board.scanBoardForPossibleUserMove(moves);
 
-            }
-            //PARSE THE STRING MOVES INTO MovePair
-            const std::vector<ChessBoard::MovePiar> moves = board.StringToMovePair(possible_moves,true);
-            //GET ONLY NEEDED MOVES TO CHECK WITH NFC => REDUCE TIME
-            const std::vector<ChessField::CHESS_FILEDS> minimal_start_fields = board.getMinimalFieldsToCheckForChanges(moves);
-            //SCAN THE START FIELDS AND RETURN ALL CHANGES
-            const std::vector<ChessBoard::FigureField> changes_start_fields = board.scanBoardForChangesByGivenFields(minimal_start_fields, ChessBoard::BOARD_TPYE::REAL_BOARD);
-            //GET ALL END FIELDS BY A SELECTED START FIELD
-            const std::vector<ChessField::CHESS_FILEDS> minimal_end_fields = board.getAllTargetFieldsFromGivenFieldAndMove(moves,changes_start_fields);
-            //FINALLY SCAN ALL END FIELDS RESULTING OF THE CHANGED START FIELDS
-            const std::vector<ChessBoard::FigureField> changes_end_fields = board.scanBoardForChangesByGivenFields(minimal_end_fields, ChessBoard::BOARD_TPYE::REAL_BOARD);
+                if(possible_move_result.error == ChessBoard::BOARD_ERROR::POSSIBLE_USER_MOVE_RESULT_MULTIBLE_MOVE_CANDIDATES){
+                    gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK,"MULTIBLE MOVES - PLEASE REWIND FIGURES AND ENTER MOVE MANUALLY",10000);
+                    gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::PLAYER_ENTER_MANUAL_MOVE_SCREEN);
 
-            ChessBoard::MovePiar move_made;
-            move_made.is_valid = false;
-            //CHECK FOR MULTIBLE MOVES
-            if(changes_start_fields.size() == 1 && changes_end_fields.size() == 1){
-                //GET EXECUTED MOVE
-                for(int i = 0; i< moves.size(); i++){
-                    if(moves.at(i).is_valid && moves.at(i).from_field == changes_start_fields.at(0).field && moves.at(i).to_field == changes_end_fields.at(0).field){
-                        move_made = moves.at(i);
-                        move_made.is_valid = true;
-                        break;
+                }else if(possible_move_result.error == ChessBoard::BOARD_ERROR::POSSIBLE_USER_MOVE_MOVE_INVALID) {
+                    gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK,"MOVE INVALID - PLEASE REWIND FIGURES AND ENTER MOVE MANUALLY",10000);
+                    gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::PLAYER_ENTER_MANUAL_MOVE_SCREEN);
+
+                }else if(possible_move_result.possible_move.is_valid){
+                    //CONVERT MOVE BACK TO STRING
+                    std::string move_made_str = ChessField::field_to_string(possible_move_result.possible_move.from_field ) +ChessField::field_to_string(possible_move_result.possible_move.to_field);
+                    //SEND MOVE TO BACKEND
+                    if(gamebackend.set_make_move(move_made_str))
+                    {
+                        //UPDATE THE REAL_BOARD WITH THE MADE MOVE =>
+                        board.makeMoveSyncVirtual(board.StringToMovePair(move_made_str));
+                        //board.syncRealWithTargetBoard();
+                        gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::GAME_SCREEN);
+                        make_move_mode = 0; //MOVE VALID
+                    }else
+                    {
+                        gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK,"MOVE INVALID - PLEASE REWIND FIGURES AND ENTER MOVE MANUALLY",10000);
+                        gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::PLAYER_ENTER_MANUAL_MOVE_SCREEN);
+                        make_move_mode = 2; //MOVE INVALID => SHOW USER MOVE ENTRY UI AGAIN
                     }
                 }
+            //USER HAS NO MOVE OPTIONS
             }else{
-                gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK,"MULTIBLE MOVES - PLEASE REWIND FIGURES AND ENTER MOVE MANUALLY",10000);
+                gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK,"NO LEGAL MOVE LEFT - PLEASE ENTER MOVE MANUALLY",10000);
                 gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::PLAYER_ENTER_MANUAL_MOVE_SCREEN);
             }
-
-
-
-            //SEND MOVE TO BACKEND
-            if(move_made.is_valid){
-                //TODO MARK MOVE WITH CATCH ON FIELD
-                //TODO APPLY MOVE TO BOARD
-                //CONVERT MOVE BACK TO STRING
-                std::string move_made_str = ChessField::field_to_string(move_made.from_field ) +ChessField::field_to_string(move_made.to_field);
-
-                if(gamebackend.set_make_move(move_made_str))
-                {
-                    //UPDATE THE REAL_BOARD WITH THE MADE MOVE =>
-                    board.makeMoveSyncVirtual(board.StringToMovePair(move_made_str));
-                    //board.syncRealWithTargetBoard();
-
-                    gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::GAME_SCREEN);
-                    make_move_mode = 0; //MOVE VALID
-                }else
-                {
-                    gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK,"MOVE INVALID - PLEASE REWIND FIGURES AND ENTER MOVE MANUALLY",10000);
-                    gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::GAME_SCREEN);
-                    make_move_mode = 2;
-                }
-            }
-
-            //SEND MOVE TO BACKEND
-
-
-
         }
+
+
         //TODO USER_RESERVED_AUTO_SCAN_BOARD_TIME_IF_USERS_TURN
         //--------------------------------------------------------
         //----------------CALIBRATION SCREEN ---------------------

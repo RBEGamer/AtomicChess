@@ -84,7 +84,10 @@ public:
 		INIT_CHESS_FIGURES_NOT_COMPLETE = 8,
 		INIT_COMPLETE = 9,
         FIGURES_MISSING = 10,
-        ERROR = 11
+        ERROR = 11,
+        POSSIBLE_USER_MOVE_RESULT_MULTIBLE_MOVE_CANDIDATES = 12,
+        POSSIBLE_USER_MOVE_RESULT_OK = 13,
+        POSSIBLE_USER_MOVE_MOVE_INVALID = 14,
 	};
 	
 	enum class BOARD_STATUS {
@@ -123,11 +126,10 @@ public:
 
 
 	};
-	
+
+
 	struct MovePiar
 	{
-
-
 		ChessField::CHESS_FILEDS from_field;
 		ChessField::CHESS_FILEDS to_field;
 		bool is_valid;
@@ -142,10 +144,15 @@ public:
 		{
 			is_valid = false;
 		}
-
-
 	};
-		
+
+
+    struct  PossibleUserMoveResult{
+        ChessBoard::MovePiar possible_move;
+        ChessBoard::BOARD_ERROR error;
+    };
+
+
 	bool test_make_move_func();
 	void test_make_move_static();
 	void home_board();
@@ -175,7 +182,8 @@ public:
     BOARD_ERROR corner_move_test(); //MOVES THE HEAD IN ALL 4 CORNER FIELDS A1 A8 H8 H1 FOR TESTING THE CALIBRATION
 	int get_figure_type_count(ChessBoard::BOARD_TPYE _target_board, char _type_char , bool _board_only); ///RETURNS THE COUNT OF FIGURES PLACED ON THE BOARD
 	int get_figure_type_count(ChessPiece::FIGURE* _board_pointer, char _type_char , bool _board_only); ///RETURNS THE COUNT OF FIGURES PLACED ON THE BOARD
-    ChessBoard::BOARD_ERROR makeMoveSyncVirtual(ChessBoard::MovePiar _move);
+    ChessBoard::BOARD_ERROR makeMoveSyncVirtual(ChessBoard::MovePiar _move); //APPLY A MOVE TO THE BOARD BUT WITHOUT MOVING ANYTHING
+    ChessBoard::PossibleUserMoveResult scanBoardForPossibleUserMove(std::vector<ChessBoard::MovePiar> _pseudo_legal_moves);
 
 
         private:
