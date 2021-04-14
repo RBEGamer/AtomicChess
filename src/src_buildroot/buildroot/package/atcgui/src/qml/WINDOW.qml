@@ -268,17 +268,32 @@ Rectangle {
         color: "#07a8a5"
         visible: false
         Button {
-            id: ls_login_btn
-            x: 272
-            y: 147
-            width: 257
+            id: ls_login_btn_scan
+            x: 34
+            y: 139
+            width: 359
             height: 118
-            text: qsTr("BEGIN")
-            font.pointSize: 20
+            text: qsTr("BEGIN WITH BOARD SCAN")
+            font.pointSize: 18
             Connections {
-                target: ls_login_btn
+                target: ls_login_btn_scan
                 function onClicked(_mouse){
-                    main_menu.ls_login_btn()
+                    main_menu.ls_login_btn(true)
+                }
+            }
+        }
+        Button {
+            id: ls_login_btn_default
+            x: 425
+            y: 139
+            width: 359
+            height: 118
+            text: qsTr("BEGIN WITH DEFAULT BOARD")
+            font.pointSize: 18
+            Connections {
+                target: ls_login_btn_default
+                function onClicked(_mouse){
+                    main_menu.ls_login_btn(false)
                 }
             }
         }
@@ -383,6 +398,21 @@ Rectangle {
                 target: ss_calboard_btn
                 function onClicked(_mouse){
                     main_menu.ss_calboard_btn()
+                }
+            }
+        }
+
+        Button {
+            id: ss_solcal_btn
+            x: 291
+            y: 150
+            width: 200
+            height: 80
+            text: qsTr("SOLANOID WIZARD")
+            Connections {
+                target: ss_solcal_btn
+                function onClicked(_mouse){
+                    main_menu.ss_solcal_btn()
                 }
             }
         }
@@ -502,7 +532,7 @@ Rectangle {
             text: qsTr("ERROR")
             horizontalAlignment: Text.AlignHCenter
             objectName: "es_lasterr_label"
-            font.pixelSize: 30
+            font.pixelSize: 18
         }
         visible: false
     }
@@ -535,6 +565,7 @@ Rectangle {
             y: 102
             width: 695
             height: 142
+            visible: true
             color: "#ffffff"
             text: qsTr("MESSAGE")
             horizontalAlignment: Text.AlignHCenter
@@ -746,7 +777,7 @@ Rectangle {
                 y: 121
                 width: 209
                 height: 60
-                text: qsTr("G5 -> A2")
+                text: qsTr("CORNER FIELD TEST")
                 Connections {
                     target: debug_fkt_d_btn
                     function onClicked(_mouse){
@@ -1489,13 +1520,129 @@ Rectangle {
 
     }
 
+
+    Rectangle {
+        id: solanoidcal_container
+        objectName: "solanoidcal_container"
+        property var headline_bar_name:"SOLANOID CALIBRATION"
+        x: 0
+        y: 68
+        width: 800
+        height: 411
+        color: "#07a8a5"
+        visible: false
+
+        Button {
+            id: solcal_back_btn
+            x: 659
+            y: 343
+            width: 128
+            height: 51
+            text: qsTr("BACK")
+            Connections {
+                target: solcal_back_btn
+                function onClicked(_mouse){
+                    main_menu.go_menu_back()
+                }
+            }
+        }
+
+        Button {
+            id: solcal_bottom_pos
+            x: 16
+            y: 8
+            width: 209
+            height: 50
+            text: qsTr("SOLANOID BOTTOM POS")
+            font.bold: false
+            Connections {
+                target: solcal_bottom_pos
+                function onClicked(_mouse){
+                    main_menu.solcal_bottom_pos()
+                }
+            }
+        }
+
+        Button {
+            id: solcal_up_pos
+            x: 16
+            y: 344
+            width: 210
+            height: 50
+            text: qsTr("SOLANOID UPPER POS")
+            Connections {
+                target: solcal_up_pos
+                function onClicked(_mouse){
+                    main_menu.solcal_up_pos()
+                }
+            }
+        }
+
+
+
+
+        Button {
+            id: solcal_save
+            x: 577
+            y: 8
+            width: 210
+            height: 70
+            visible: false
+            text: qsTr("SAVE")
+            Connections {
+                target: solcal_save
+                function onClicked(_mouse){
+                    main_menu.solcal_save()
+                }
+            }
+        }
+
+        Button {
+            id: solcal_mvup
+            x: 383
+            y: 19
+            width: 120
+            height: 120
+            text: qsTr("UP")
+            font.pointSize: 18
+            font.bold: false
+            Connections {
+                target: solcal_mvup
+                function onClicked(_mouse){
+                    main_menu.solcal_mvup()
+                }
+            }
+        }
+
+        Button {
+            id: solcal_mvdonw
+            x: 382
+            y: 257
+            width: 120
+            height: 120
+            text: qsTr("DOWN")
+            font.pointSize: 18
+            Connections {
+                target: solcal_mvdonw
+                function onClicked(_mouse){
+                    main_menu.solcal_mvdonw()
+                }
+            }
+        }
+
+
+
+    }
+
 }
+
+
 
 
 
 
 /*##^##
 Designer {
-    D{i:0;active3dScene:"-1"}
+    D{i:0;autoSize:true;height:480;width:640}
 }
 ##^##*/

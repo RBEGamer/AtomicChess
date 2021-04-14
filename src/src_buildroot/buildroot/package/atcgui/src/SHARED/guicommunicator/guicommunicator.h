@@ -71,7 +71,7 @@ class guicommunicator
 public:
 
     enum class GUI_ELEMENT{
-    BEGIN_BTN = 0,
+    BEGIN_BTN_SCAN = 0,
     QI_START_EVENT = 1,
     INITFIELD_BTN = 2,
     ATC_LOGO_BTN = 3,
@@ -141,9 +141,16 @@ public:
     CALIBRATIONSCREEN_PPWHITE1 = 47,
     CALIBRATIONSCREEN_PPBLACK1 = 48,
     CALIBRATIONSCREEN_PPBLACK16 = 49,
-    PLAYER_EMM_SCAN_BOARD = 50
+    PLAYER_EMM_SCAN_BOARD = 50,
 
+    SOLANOIDSCREEN_BOTTOM_POS = 51,
+    SOLANOIDSCREEN_UPPER_POS = 52,
+    SOLANOIDSCREEN_SAVE = 53,
+    SOLANOIDSCREEN_MVDONW = 54,
+    SOLANOIDSCREEN_MVUP = 55,
+    
 
+    BEGIN_BTN_DEFAULT = 56
 };
 
 	enum class GUI_MESSAGE_BOX_TYPE
@@ -194,7 +201,9 @@ public:
     CHESS_COLOR_WHITE = 27,
     CHESS_COLOR_BLACK = 28,
     PLAYER_ENTER_MANUAL_MOVE_SCREEN = 29,
-    CALIBRATION_SCREEN = 30
+    CALIBRATION_SCREEN = 30,
+    SOLANOID_CALIBRATION_SCREEN = 31
+
 };
 
     //KEEP IN SYNC WITH THE PROTOCOL_MSG.proto
@@ -219,6 +228,10 @@ public:
 	void enable_qt_communication(bool _en);
 
     void createEvent(GUI_ELEMENT _event, GUI_VALUE_TYPE _type, std::string _value); //sends a event though ZeroMQ using protocol buffer
+    
+    void createEventLocal(GUI_ELEMENT _event, GUI_VALUE_TYPE _type, std::string _value);
+    void createEventLocal(GUI_ELEMENT _event, GUI_VALUE_TYPE _type);
+
     //DERIVATIONS FRom createEvent
     void createEvent(GUI_ELEMENT _event, GUI_VALUE_TYPE _type);
 	void clearPreviousEvents();

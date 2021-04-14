@@ -61,7 +61,34 @@ void guicommunicator::debug_event(GUI_EVENT _event, bool _rec) {
 	}
 }
 
+void guicommunicator::createEventLocal(GUI_ELEMENT _event, GUI_VALUE_TYPE _type, std::string _value){
+	std::string tmp; //EVENT STRING
+	//CONVERT EVENT TO JSON
+	GUI_EVENT tmp_event;
+	
+	tmp_event.event = _event;
+	tmp_event.type = _type;
+	tmp_event.value = _value;
 
+	std::string_view cfg_name = magic_enum::enum_name(_type);
+	if (std::string(cfg_name).rfind("_SCREEN", 0) == 0) {tmp_event.ispageswitchevent = true; }
+	else if (std::string(cfg_name) == "ERROR_MESSAGE") {tmp_event.ispageswitchevent = true; }
+	else if (std::string(cfg_name).rfind("MESSAGEBOX_", 0) == 0) {tmp_event.ispageswitchevent = true; }
+	
+
+	#ifdef USES_QT
+		tmp_event.ack = 0;
+	#else
+		tmp_event.ack = 1;
+	#endif // USES_QT
+
+	//PUSH EVENT TO LOCAL EVENT QUEUE
+	enqueue_event(tmp_event);
+}
+
+void guicommunicator::createEventLocal(GUI_ELEMENT _event, GUI_VALUE_TYPE _type){
+	createEventLocal(_event,_type,"");
+}
 
 void guicommunicator::createEvent(GUI_ELEMENT _event, GUI_VALUE_TYPE _type, std::string _value) {
 
@@ -77,7 +104,7 @@ void guicommunicator::createEvent(GUI_ELEMENT _event, GUI_VALUE_TYPE _type, std:
 	tmp_event.ispageswitchevent = false;
 	//HARDCODES STUFF TODO REMOVE
 	//HAHA IS A WOKRAROUND FOR THE SHITTY ENUM/STRUCT CONSTRUCTION
-	 std::string_view cfg_name = magic_enum::enum_name(_type);
+	std::string_view cfg_name = magic_enum::enum_name(_type);
 	if (std::string(cfg_name).rfind("_SCREEN", 0) == 0) {tmp_event.ispageswitchevent = true; }
 	else if (std::string(cfg_name) == "ERROR_MESSAGE") {tmp_event.ispageswitchevent = true; }
 	else if (std::string(cfg_name).rfind("MESSAGEBOX_", 0) == 0) {tmp_event.ispageswitchevent = true; }
@@ -103,7 +130,8 @@ void guicommunicator::createEvent(GUI_ELEMENT _event, GUI_VALUE_TYPE _type, std:
 	{
 		//MAKE REQUEST
 		httplib::Client cli(EVENT_URL_COMPLETE);
-		if(auto res = cli.Post(EVENT_URL_SETEVENT,tmp,"application/json")) {
+		httplib::Result res = cli.Post(EVENT_URL_SETEVENT,tmp,"application/json");
+		if(res && res->status >= 200 && res->status < 300) {
         const int status_code = res->status;
         //CHECK STATUS CODE 200 IS VALID
         const std::string body = res->body;
@@ -115,10 +143,7 @@ void guicommunicator::createEvent(GUI_ELEMENT _event, GUI_VALUE_TYPE _type, std:
     //MAKE REQUEST TO THE WEBAPPLICATION
     //httplib::Client cli(EVENT_URL_COMPLETE_WEBGL);
     //cli.Post(EVENT_URL_SETEVENT, tmp, "application/json");
-
-
-
-#endif
+	#endif
 }
 
 
@@ -242,7 +267,7 @@ bool guicommunicator::check_guicommunicator_version() {
 	httplib::Client cli(EVENT_URL_COMPLETE);
 
 	httplib::Result res =  cli.Get(EVENT_URL_VERSION);
-	if (GUICOMMUNICATOR_VERSION == res->body) {
+	if (res && res->status >= 200 && res->status < 300 && GUICOMMUNICATOR_VERSION == res->body) {
 		debug_output("CHECK VERSION OK");
 		debug_output("GOT:" + res->body + " REQUIRED:" + GUICOMMUNICATOR_VERSION);
 		return true;
@@ -262,7 +287,7 @@ bool guicommunicator::check_guicommunicator_reachable() {
 		
 	httplib::Client cli(EVENT_URL_COMPLETE);
 	httplib::Result res =  cli.Get(EVENT_URL_VERSION);
-	if (res->status >= 200 && res->status < 300) {
+	if (res && res->status >= 200 && res->status < 300) {
 		debug_output("CHECK check_guicommunicator_reachable OK");
 		return true;
 	}
@@ -306,6 +331,7 @@ void guicommunicator::stop_recieve_thread() {
 guicommunicator::GUI_EVENT guicommunicator::get_event() {
 	return guicommunicator::get_gui_update_event();
 }
+
 guicommunicator::GUI_EVENT guicommunicator::get_gui_update_event() {
 	GUI_EVENT tmp;
 	tmp.is_event_valid = false;
