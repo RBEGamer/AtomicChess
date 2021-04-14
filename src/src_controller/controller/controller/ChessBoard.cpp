@@ -488,16 +488,56 @@ ChessBoard::BOARD_ERROR ChessBoard::makeMoveSync(ChessBoard::MovePiar _move, boo
     return ChessBoard::BOARD_ERROR::NO_ERROR;
 }
 
+ChessBoard::BOARD_ERROR ChessBoard::makeMoveSyncVirtual(ChessBoard::MovePiar _move){
+    //FINALLY SAVE MADE MOVE INTO THE CURRENT BOARD
+    ChessPiece::FIGURE *board_current = get_board_pointer(ChessBoard::BOARD_TPYE::REAL_BOARD);
+    if(board_current == nullptr){
+        LOG_F(ERROR,"makeMoveSyncVirtual board_current pointer is empty");
+        return ChessBoard::BOARD_ERROR::INIT_NULLPTR_EXECPTION;
+    }
+
+    const ChessPiece::FIGURE from_fig = getFigureOnField(board_current, _move.from_field);
+    const ChessPiece::FIGURE to_fig = getFigureOnField(board_current, _move.to_field);
+
+    printBoard(ChessBoard::BOARD_TPYE::REAL_BOARD);
+
+    //CREATE EMPTY FIGURE
+    ChessPiece::FIGURE empty_fig;
+    empty_fig.color = ChessPiece::COLOR_UNKNOWN;
+    empty_fig.type = ChessPiece::TYPE_INVALID;
+    empty_fig.is_empty = true;     //!!
+    empty_fig.figure_number = -1;
+
+    //THE DESITNATION FIELD IS NOT EMPTY => THE FIGURE
+    if(!to_fig.is_empty && !from_fig.is_empty){
+
+    //THE DESITNATION FIELD IS NOT EMPTY => THE FIGURE
+        const int pp_field_index = get_next_free_park_position(ChessBoard::BOARD_TPYE::REAL_BOARD,to_fig);
+        board_current[pp_field_index] = to_fig;
+    }
+
+    //SET FIGURE FROM FIELD TO THE TO FIELD FIGURE
+    const int t_index = ChessField::field2Index(_move.to_field);
+    board_current[t_index] = from_fig;
+    //THE FROM FIELS IS NOW EMPTY
+    const int f_index = ChessField::field2Index(_move.from_field);
+    board_current[f_index] = empty_fig;
+
+    printBoard(ChessBoard::BOARD_TPYE::REAL_BOARD);
+    //const int t_index = ChessField::field2Index(_move.to_field);
+    //board_current[t_index] = from_fig;
+    //CREATE EMPTY FIGURE
+
+
+}
+
 ChessBoard::MovePiar ChessBoard::StringToMovePair(std::string _mv) {
     MovePiar tmp;
     tmp.is_valid = true;
-    //CHECK STRING POPULATES
-    if (_mv.empty()) {
+    //CHECK STRING FOR CONTENT AND LENGTH
+    if (_mv.empty() || _mv.size() != 4) {
         tmp.is_valid = false;
-    }
-    //CHECK STRING LENGHT OK
-    if (_mv.size() != 4) {
-        tmp.is_valid = false;
+        return tmp;
     }
     //STRING TO LOWER CASE
     transform(_mv.begin(), _mv.end(), _mv.begin(), ::tolower);
@@ -505,6 +545,7 @@ ChessBoard::MovePiar ChessBoard::StringToMovePair(std::string _mv) {
     //CHECK FORMAT BY REGEX
     if (!std::regex_match(_mv, std::regex(STRING_MOVE_REGEX))) {
         tmp.is_valid = false;
+        return tmp;
     }
 
     int fca = _mv.at(0);
@@ -638,7 +679,7 @@ void ChessBoard::initBoardArray(ChessPiece::FIGURE *_board) {
 
 }
 
-std::vector<ChessBoard::FigureFieldPair> ChessBoard::compareBoards(ChessPiece::FIGURE *_board_a, ChessPiece::FIGURE *_board_b, bool _include_park_pos) {
+std::vector<ChessBoard::FigureFieldPair> ChessBoard::compareBoards(ChessPiece::FIGURE *_board_a,ChessPiece::FIGURE *_board_b, bool _include_park_pos) {
     std::vector<ChessBoard::FigureFieldPair> diff_list;
     ChessPiece::FIGURE *board_current = get_board_pointer(ChessBoard::BOARD_TPYE::REAL_BOARD);
     ChessPiece::FIGURE *board_target = get_board_pointer(ChessBoard::BOARD_TPYE::TARGET_BOARD);
@@ -690,7 +731,7 @@ std::vector<ChessBoard::FigureFieldPair>::iterator ChessBoard::getFigureInDiffLi
 
 }
 
-bool ChessBoard::copyBoard(ChessPiece::FIGURE *_from, ChessPiece::FIGURE *_to){
+bool ChessBoard::copyBoard( ChessPiece::FIGURE *_from, ChessPiece::FIGURE *_to){
     if (!_from || !_to) {
         return false;
     }
@@ -1389,7 +1430,6 @@ void ChessBoard::getParkPositionCoordinates(ChessField::CHESS_FILEDS _index, int
 
 }
 
-//CONVERTS FIELD ID TO THE X Y  COORDINATES 0-7 0-7
 void ChessBoard::getFieldCoordinates(ChessField::CHESS_FILEDS _index, int &_x, int &_y, IOController::COIL _coil, bool _get_only_array_index) {
 
     //TODO CHECK PARK POSTION
@@ -1644,7 +1684,6 @@ ChessBoard::BOARD_ERROR ChessBoard::corner_move_test(){
     return ChessBoard::BOARD_ERROR::NO_ERROR;
 }
 
-
 std::vector<ChessBoard::MovePiar> ChessBoard::StringToMovePair(std::vector<std::string> _mv, bool _only_valid_ones){
     std::vector<ChessBoard::MovePiar> tmp;
     for(int i = 0; i <_mv.size();i++){
@@ -1703,7 +1742,6 @@ ChessPiece::FIGURE ChessBoard::scanField(ChessField::CHESS_FILEDS _field){
     return tmop;
 }
 
-
 std::vector<ChessBoard::FigureField> ChessBoard::scanBoardForChangesByGivenFields(std::vector<ChessField::CHESS_FILEDS> _fd,ChessBoard::BOARD_TPYE _target_board){
     std::vector<ChessBoard::FigureField> tmp;
 
@@ -1740,7 +1778,6 @@ std::vector<ChessBoard::FigureField> ChessBoard::scanBoardForChangesByGivenField
     return tmp;
 }
 
-
 std::vector<ChessField::CHESS_FILEDS> ChessBoard::getAllTargetFieldsFromGivenFieldAndMove(std::vector<ChessBoard::MovePiar> _moves, std::vector<ChessBoard::FigureField> _fields){
     //TODO CHANGE TO DICT
     std::vector<ChessField::CHESS_FILEDS> tmp;
@@ -1757,8 +1794,6 @@ std::vector<ChessField::CHESS_FILEDS> ChessBoard::getAllTargetFieldsFromGivenFie
     }
     return tmp;
 }
-
-
 
 ChessBoard::BOARD_ERROR ChessBoard::initBoard(bool _with_scan) {
     //CHECK HARDWARE INIT
@@ -1839,8 +1874,11 @@ ChessBoard::BOARD_ERROR ChessBoard::initBoard(bool _with_scan) {
    // boardFromFen("8/1pppppp1/1p4p1/1rnbbnr1/1RNBBNR1/1P4P1/1PPPPPP1/8 w - - 0 1",ChessBoard::BOARD_TPYE::TARGET_BOARD); syncRealWithTargetBoard();//F3E5 OK //ONE SHOT TEST OK
   //  loadBoardPreset(ChessBoard::BOARD_TPYE::TARGET_BOARD,ChessBoard::BOARD_PRESET::BOARD_PRESET_ALL_FIGURES_IN_START_POSTITION);syncRealWithTargetBoard(); //RESET BOARD OK
 
-
-
+    //loadBoardPreset(ChessBoard::BOARD_TPYE::TARGET_BOARD,ChessBoard::BOARD_PRESET::BOARD_PRESET_ALL_FIGURES_IN_PARK_POSITION);
+    loadBoardPreset(ChessBoard::BOARD_TPYE::REAL_BOARD,ChessBoard::BOARD_PRESET::BOARD_PRESET_ALL_FIGURES_IN_PARK_POSITION);
+    //syncRealWithTargetBoard();
+    loadBoardPreset(ChessBoard::BOARD_TPYE::TARGET_BOARD,ChessBoard::BOARD_PRESET::BOARD_PRESET_ALL_FIGURES_IN_START_POSTITION);
+    syncRealWithTargetBoard();
    // boardFromFen("r3kb1r/pbppq1pp/1p2pn2/1B2N1B1/4P2P/8/PPP2PP1/RN1QK2R w - - 4 10",ChessBoard::BOARD_TPYE::TARGET_BOARD); syncRealWithTargetBoard();//TODO G8F6 FEHLER => B8F6
     //boardFromFen("r3kb1r/p1pBq1pp/1p2pB2/4N3/4b2P/8/PPP2PP1/RN1QK2R b - - 0 11",ChessBoard::BOARD_TPYE::TARGET_BOARD); syncRealWithTargetBoard();//B5D7
 

@@ -175,9 +175,10 @@ public:
     BOARD_ERROR corner_move_test(); //MOVES THE HEAD IN ALL 4 CORNER FIELDS A1 A8 H8 H1 FOR TESTING THE CALIBRATION
 	int get_figure_type_count(ChessBoard::BOARD_TPYE _target_board, char _type_char , bool _board_only); ///RETURNS THE COUNT OF FIGURES PLACED ON THE BOARD
 	int get_figure_type_count(ChessPiece::FIGURE* _board_pointer, char _type_char , bool _board_only); ///RETURNS THE COUNT OF FIGURES PLACED ON THE BOARD
-	
-	
-private:
+    ChessBoard::BOARD_ERROR makeMoveSyncVirtual(ChessBoard::MovePiar _move);
+
+
+        private:
 	
 
 	IOController::COIL current_selected_coil = IOController::COIL::COIL_A;

@@ -302,6 +302,10 @@ ChessPiece::FIGURE UserBoardController::read_chess_piece_nfc(){
 
         //READ STATUS CODE IF READOUT IS VALID / NO TAG PRESENT OR READ FAILED
         if(errorcode == "ok"){
+            if(figure.empty()){
+                break;
+
+            }
             const char figure_charakter = figure.at(0);
             //const char figure_id = figure_at(1);
             fig = ChessPiece::getFigureByCharakter(figure_charakter);

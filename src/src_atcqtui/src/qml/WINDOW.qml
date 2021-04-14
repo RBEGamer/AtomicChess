@@ -534,7 +534,7 @@ Rectangle {
             objectName: "es_lasterr_label"
             font.pixelSize: 18
         }
-        visible: true
+        visible: false
     }
 
     Rectangle {
@@ -1640,3 +1640,9 @@ Rectangle {
 
 
 
+
+/*##^##
+Designer {
+    D{i:0;autoSize:true;height:480;width:640}
+}
+##^##*/

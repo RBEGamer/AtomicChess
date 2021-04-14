@@ -61,7 +61,7 @@ typedef std::chrono::system_clock::time_point TimePoint;
 using namespace std;
 
 
-
+int game_running_state = 0;
 int mainloop_running = 0;
 int make_move_mode = 0;    //TO DETERM FOR WHICH PURPOSE THE PLAYER_MAKE_MANUAL_MOVE_SCREEN WAS OPENED 0=NOT OPEN 1=TEST 2=RUNNING GAME MOVE
 std::vector<std::string> possible_moves; //STORES ALL POSSIBLE MOVES THE USER CAN MAKE
@@ -640,15 +640,9 @@ int main(int argc, char *argv[])
                     LOG_F(ERROR, "GOT err_query_paramter_hwid_or_sid_or_not_set");
                 }
 
-                //FOR ALL OTHER EVENTS USE THE STATE MACHINE HANDLING CLASS
-                //WHICH HANDLES THE GAME LOGIC STATES
-                //THE CALL DETERMS THE CURRENT STATE
-                //StateMachine::SM_STATE current_state = state_machiene.determ_state(current_player_state);
-                //StateMachine::SM_STATE previous_state = state_machiene.get_prev_state();
-                //IF STATE SWITCHED
+
                 if(current_player_state.game_state.game_running)
                 {
-
                     //IN THIS SECIONT THE IMMEDIATES STATE WILL BE HANDLED
                     //EG FROM NO_GAME_RUNNING TO GAME_RUNNING, THE SCREEN HAVE TO BE SWITCHED, ...
 
@@ -658,7 +652,7 @@ int main(int argc, char *argv[])
                     //IF BOARD IS IN SYNC PHASE => SETUP BOARD BIECES
                     if (current_player_state.game_state.is_syncing_phase)
                     {
-
+                        game_running_state =1;
                         make_move_mode = 0;
                         //SHOW THE PROCESSING SCREEN
                         //gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::PROCESSING_SCREEN);
@@ -694,9 +688,11 @@ int main(int argc, char *argv[])
                             }
                         }
 
+
+                    //ELSE IF THE OPPONEND TURN
                     }else if (!current_player_state.game_state.is_my_turn) {
                         make_move_mode = 0;
-
+                        //SET TURN LIGHT RIGHT
                         if (current_player_state.game_state.im_white_player)
                         {
                             HardwareInterface::getInstance()->setTurnStateLight(HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_PLAYER_BLACK_TURN);
@@ -705,29 +701,26 @@ int main(int argc, char *argv[])
                         {
                             HardwareInterface::getInstance()->setTurnStateLight(HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_PLAYER_WHITE_TURN);
                         }
+                        //SYNC BOARDS
+                        board.boardFromFen(current_player_state.game_state.current_board_fen, ChessBoard::BOARD_TPYE::TARGET_BOARD);
+                        board.syncRealWithTargetBoard();
+                    //ELSE IF IF MY TURN
+                    }else if (current_player_state.game_state.is_my_turn) {//IS MY TURN TRIGGER DIALOG
+                        //SET TURN LIGHT RIGHT
+                        if (current_player_state.game_state.im_white_player)
+                        {
+                            HardwareInterface::getInstance()->setTurnStateLight(HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_PLAYER_WHITE_TURN);
+                        }
+                        else
+                        {
+                            HardwareInterface::getInstance()->setTurnStateLight(HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_PLAYER_BLACK_TURN);
+                        }
 
                         //SYNC BOARDS
-                        if(board.boardFromFen(current_player_state.game_state.current_board_fen, ChessBoard::BOARD_TPYE::TARGET_BOARD) && !current_player_state.game_state.current_board_move.empty()) {
-                            if(board.syncRealWithTargetBoard(board.StringToMovePair(current_player_state.game_state.current_board_move))){
-
-                            }
-                        }
                         board.boardFromFen(current_player_state.game_state.current_board_fen, ChessBoard::BOARD_TPYE::TARGET_BOARD);
                         board.syncRealWithTargetBoard();
 
-                    }else if (current_player_state.game_state.is_my_turn) {//IS MY TURN TRIGGER DIALOG
-                        if (current_player_state.game_state.im_white_player)
-                        {
-                            HardwareInterface::getInstance()->setTurnStateLight(HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_PLAYER_WHITE_TURN);
-                        }
-                        else
-                        {
-                            HardwareInterface::getInstance()->setTurnStateLight(HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_PLAYER_BLACK_TURN);
-                        }
-                        //SYNC BOARDS
-                        if (board.boardFromFen(current_player_state.game_state.current_board_fen, ChessBoard::BOARD_TPYE::TARGET_BOARD) && board.syncRealWithTargetBoard()) {
 
-                        }
 
                         //ENABLE AUTO PLAY FEATURE
                         if(cmdOptionExists(argv, argv + argc, "-autoplayer") || ConfigParser::getInstance()->getBool_nocheck(ConfigParser::CFG_ENTRY::USER_GENERAL_ENABLE_RANDOM_MOVE_MATCH)) {
@@ -735,17 +728,11 @@ int main(int argc, char *argv[])
                             {
                                 const int rnd_idnex = (int)(std::rand() % (current_player_state.game_state.legal_moves.size() - 1));
                                 if(!gamebackend.set_make_move(current_player_state.game_state.legal_moves.at(rnd_idnex))){
-
                                 }
-
-                            }
-                            else
-                            {
+                            }else{
                                 gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK, "LEGAL_MOVES_EMPTY - CANCEL GAME", 4000);
                                 LOG_F(ERROR, "LEGAL_MOVES_EMPTY - CANCEL GAME");
                             }
-
-
                         }else{
                             //ELSE SHOW MANUAL MOVE ENTER SCREEN
                             if (make_move_mode != 2)
@@ -764,21 +751,20 @@ int main(int argc, char *argv[])
                         //IS GAME OVER => ABORT GAME TO SERVER AND  GOTO MAIN MENU
                         gamebackend.set_abort_game();
                         gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::MAIN_MENU_SCREEN);
-                    }//else{
+                    }else{
                         //SYNC THE TWO BORDS
-                    board.boardFromFen(current_player_state.game_state.current_board_fen, ChessBoard::BOARD_TPYE::TARGET_BOARD);
-                    board.syncRealWithTargetBoard();
-                    //}
-
-
-
-                }else
-                {
-
+                        board.boardFromFen(current_player_state.game_state.current_board_fen, ChessBoard::BOARD_TPYE::TARGET_BOARD);
+                        board.syncRealWithTargetBoard();
+                    }
+                    
+                }else{
+                    //RETURN TO THE MAIN MENU IF GAME WAS STARTEN AND NOW EXITED
+                    if(game_running_state == 1){
+                        game_running_state = 2;
+                        gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::MAIN_MENU_SCREEN);
+                    }
                 }
-
             }
-
         }
 
 
@@ -786,7 +772,7 @@ int main(int argc, char *argv[])
         guicommunicator::GUI_EVENT ev = gui.get_gui_update_event();
         if (!ev.is_event_valid){continue;}
 
-        gui.debug_event(ev, true);
+        //gui.debug_event(ev, true);
 
 
         //--------------------------------------------------------
@@ -1052,6 +1038,8 @@ int main(int argc, char *argv[])
                     gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::GAME_SCREEN);
                     if(gamebackend.set_make_move(ev.value))
                     {
+                        //board.makeMoveSync(board.StringToMovePair(ev.value),false,true,false);
+                        //board.syncRealWithTargetBoard();
 
                         make_move_mode = 0; //MOVE VALID
                     }else
@@ -1065,7 +1053,7 @@ int main(int argc, char *argv[])
             }
 
         }else if(ev.event == guicommunicator::GUI_ELEMENT::PLAYER_EMM_SCAN_BOARD && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED && make_move_mode > 0) { //THE SCNA BOARD FOR MOVE BTN
-            if(possible_moves.size()>0){
+            if(possible_moves.size()<0){
 
             }
             //PARSE THE STRING MOVES INTO MovePair
@@ -1092,7 +1080,8 @@ int main(int argc, char *argv[])
                     }
                 }
             }else{
-                gui.show_error_message_on_gui("MULTIBLE MOVES - PLEASE REWIND FIGURES AND ENTER MOVE MANUALLY");
+                gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK,"MULTIBLE MOVES - PLEASE REWIND FIGURES AND ENTER MOVE MANUALLY",10000);
+                gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::PLAYER_ENTER_MANUAL_MOVE_SCREEN);
             }
 
 
@@ -1106,11 +1095,16 @@ int main(int argc, char *argv[])
 
                 if(gamebackend.set_make_move(move_made_str))
                 {
+                    //UPDATE THE REAL_BOARD WITH THE MADE MOVE =>
+                    board.makeMoveSyncVirtual(board.StringToMovePair(move_made_str));
+                    //board.syncRealWithTargetBoard();
+
                     gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::GAME_SCREEN);
                     make_move_mode = 0; //MOVE VALID
                 }else
                 {
-                    gui.show_error_message_on_gui("MOVE INVALID - PLEASE REWIND FIGURES AND ENTER MOVE MANUALLY");
+                    gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK,"MOVE INVALID - PLEASE REWIND FIGURES AND ENTER MOVE MANUALLY",10000);
+                    gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::GAME_SCREEN);
                     make_move_mode = 2;
                 }
             }
