@@ -923,14 +923,29 @@ int main(int argc, char *argv[])
                     //NOW INIT BOARD AGAIN WITH SCAN
                     HardwareInterface::getInstance()->setTurnStateLight(HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_PRECCESSING);
                     gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::PROCESSING_SCREEN);
-                    board.initBoard(false);
-                    gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::MAIN_MENU_SCREEN);
-                    HardwareInterface::getInstance()->setTurnStateLight(HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_IDLE);
-                    //SET USER TO AUTO SEARCHING
-                    if(ConfigParser::getInstance()->getBool_nocheck(ConfigParser::CFG_ENTRY::USER_GENERAL_ENABLE_AUTO_MATCHMAKING_ENABLE))
-                    {
-                        gamebackend.set_player_state(BackendConnector::PLAYER_STATE::PS_SEARCHING);
+                    //INIT BOARD
+                    board_init_err = board.initBoard(false);
+                    if(board_init_err == ChessBoard::BOARD_ERROR::FIGURES_MISSING){
+                        //FIGURE IS MISSING ON BOARD
+                        gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK,"FIGURES MISSING - PLEASE CHECK ON BOARD",10000);
+                        gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::LOGIN_SCREEN);
+
+                    }else if(board_init_err == ChessBoard::BOARD_ERROR::INIT_COMPLETE){
+                        //IF NO ERROR GOTO MAIN MENU
+                        gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::MAIN_MENU_SCREEN);
+                        HardwareInterface::getInstance()->setTurnStateLight(HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_IDLE);
+                        //SET USER TO AUTO SEARCHING
+                        if(ConfigParser::getInstance()->getBool_nocheck(ConfigParser::CFG_ENTRY::USER_GENERAL_ENABLE_AUTO_MATCHMAKING_ENABLE))
+                        {
+                            gamebackend.set_player_state(BackendConnector::PLAYER_STATE::PS_SEARCHING);
+                        }
+
+                    }else{
+                        //UNKNOWN ERROR => GO BACK LOGIN SCREEN
+                        gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK,"BOARD INIT FAILED UNKNOWN ERROR",10000);
+                        gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::LOGIN_SCREEN);
                     }
+
 
                 }else {
                     gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK, "LOGIN_FAILED_HEARTBEAT", 4000);
@@ -957,7 +972,7 @@ int main(int argc, char *argv[])
             if(board_init_err == ChessBoard::BOARD_ERROR::FIGURES_MISSING){
                 //gui.show_error_message_on_gui("FIGURES MISSING");
                 gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK,"FIGURES MISSING - PLEASE CHECK ON BOARD",10000);
-            }else{
+            }else if(board_init_err != ChessBoard::BOARD_ERROR::INIT_COMPLETE){
                 //gui.show_error_message_on_gui("BOARD INIT FAILED UNKNOWN ERROR");
                 gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK,"BOARD INIT FAILED UNKNOWN ERROR",10000);
             }

@@ -112,8 +112,22 @@
 
 
           <div class="row justify-content-center">
-            <div class="col-md-4">
-              <div id="current_board" style="width: 200px"><img width="200px" src="/img/board_placeholder_400x400.png"></div>
+            <div class="col-md-4 text-center">
+              <div id="fen_viewer_board" style="width: 200px"><img width="200px" src="/img/board_placeholder_400x400.png"></div>
+
+
+
+              <table>
+                <tr><td>
+                    <button onclick="show_prev_move()"><img src="/img/icons/prev.png" width="30px" /></button>
+                  </td><td>
+                    <span id="current_move_text" class="fhcolor_text font-weight-bold"> x / N</span>
+                  </td><td>
+                    <button onclick="show_next_move()"><img src="/img/icons/next.png" width="30px" /></button>
+                  </td></tr>
+              </table>
+
+
             </div>
             <div class="col-md-6">
               <table class="table">
@@ -145,31 +159,15 @@
 
           <div class="row justify-content-center">
             <div class="col-auto">
-              <h4 class="card-title text-justify">TURN HISTORY</h4>
+              <h4 class="card-title text-justify">CURRENT BOARD</h4>
             </div>
           </div>
           <div class="row top-buffer"></div>
           <div class="row justify-content-center">
-            <div class="col-md-4 col-centered">
-              <p class="card-content" id="">
-                <table>
-                <tr><td>
-                    <button onclick="show_prev_move()"><img src="/img/icons/prev.png" width="50px" /></button>
-                  </td><td>
-                      <span id="current_move_text" class="fhcolor_text font-weight-bold"> x / N</span>
-                  </td><td>
-                    <button onclick="show_next_move()"><img src="/img/icons/next.png" width="50px" /></button>
-                  </td></tr>
-              </table>
-              </p>
-            </div>
-            <div class="col-md-8">
-              <div id="fen_viewer_board" style="width: 400px"><img width="400px" src="/img/board_placeholder_400x400.png"></div>
-              <div class="card-title text-justify" id="fen_viewer_fen"></div>
+            <div class="col-md-12 d-flex justify-content-center">
+              <div id="current_board" style="width: 400px"><img width="400px" src="/img/board_placeholder_400x400.png"></div>
             </div>
           </div>
-
-
         </div>
       </div>
     </div>
@@ -304,6 +302,7 @@
     $("#fen_viewer_board").html("");
     $("#fen_viewer_fen").html(""+_fen+"");
     var fen_viewer_board = pgnBoard('fen_viewer_board', { position: _fen, locale: 'en', pieceStyle: 'wikipedia', theme:'falken' });
+    //fen_viewer_board.position = _fen;
   }
 
 
@@ -339,7 +338,7 @@
     $("#current_move_text").html(move_data[move_index].move +"("+String(move_index+1) + " / " + String(move_data.length)+")");
   }
   //CREATES TURN HISTORY TABLE
-  function create_turn_history_table(_data){
+  function create_turn_history_table(_data, _update_only){
   //  debugger;
     if(!_data || _data.length <= 0){
       $("#turn_histroy_table").html("--NO TURN HISTORY --");
@@ -347,15 +346,19 @@
     }
 
     move_data= _data;
-    move_index = 0;
-    load_fen_to_viewer(move_data[move_index].fen);
+
+    if(!_update_only){
+      move_index = 0;
+      load_fen_to_viewer(move_data[move_index].fen);
+   }
+
 
     $("#current_move_text").html(move_data[move_index].move +"("+String(move_index+1) + " / " + String(move_data.length)+")");
 
 
 
   }
-
+  var current_board = null;
 
   //LOADS MORE INFORMATION ABOUT A SPECIFIC GAME ID
   var loaded_game_id = null;
@@ -383,8 +386,18 @@
       }
       //DISPLAY CURRENT BOARD
       if(data.game_data.current_board.fen){
-        $("#current_board").html("");
-        var current_board = pgnBoard('current_board', { position: data.game_data.current_board.fen, locale: 'en', pieceStyle: 'wikipedia', theme:'falken' });
+        //CREATE BOARD INSTANCE FIRST TIME
+        if(!_update_only) {
+          $("#current_board").html("");
+          current_board = pgnBoard('current_board', { position: data.game_data.current_board.fen, locale: 'en', pieceStyle: 'wikipedia', theme:'falken' });
+
+        }
+
+        if(current_board != null){
+          //debugger;
+          current_board = pgnBoard('current_board', { position: data.game_data.current_board.fen, locale: 'en', pieceStyle: 'wikipedia', theme:'falken' });
+        }
+
       }
       //LOAD AND DISPLAY GENERAL GAME INFO
       if(data.game_data.current_board.player_turn != null){
@@ -397,26 +410,29 @@
         }
       }
 
-      if(data.game_data.current_board.is_game_over != null){
+      if(data.game_data.current_board.is_game_over != null ){
         $("#git_game_over").html(String(data.game_data.current_board.is_game_over));
       }
       if(data.game_data.start_board_string != null){
         $("#git_start_board_fen").html(String(data.game_data.start_board_string));
       }
-      if(data.game_data.current_board.fen != null){
+      if(data.game_data.current_board.fen != null ){
         $("#git_current_board_fen").html(String(data.game_data.current_board.fen));
       }
 
       //VISULIZES MOVES
       if(data.game_data.turn_history != null){
-        create_turn_history_table(data.game_data.turn_history);
+        create_turn_history_table(data.game_data.turn_history,_update_only);
       }
 
 
 
 
       //SHOW CONTAINER
-      toggle_visible_information_container(true);
+        toggle_visible_information_container(true);
+
+
+
     });
 
   }
