@@ -60,7 +60,7 @@ typedef std::chrono::system_clock::time_point TimePoint;
 #define INVALID_HWID "1nv4l1dm4c"
 using namespace std;
 
-
+bool flip_screen_state = false;
 int game_running_state = 0;
 int mainloop_running = 0;
 int make_move_mode = 0;    //TO DETERM FOR WHICH PURPOSE THE PLAYER_MAKE_MANUAL_MOVE_SCREEN WAS OPENED 0=NOT OPEN 1=TEST 2=RUNNING GAME MOVE
@@ -438,8 +438,10 @@ int main(int argc, char *argv[])
         //ROTATE SCREEN IF NEEDED
         if(ConfigParser::getInstance()->getBool_nocheck(ConfigParser::CFG_ENTRY::HARDWARE_QTUI_FLIP_ORIENTATION)){
             gui.createEvent(guicommunicator::GUI_ELEMENT::QT_UI_SET_ORIENTATION_180, guicommunicator::GUI_VALUE_TYPE::ENABLED);
+            flip_screen_state = true;
         }else{
             gui.createEvent(guicommunicator::GUI_ELEMENT::QT_UI_SET_ORIENTATION_0, guicommunicator::GUI_VALUE_TYPE::ENABLED);
+            flip_screen_state = false;
         }
         //SET PROCESSING SCREEN
         gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::PROCESSING_SCREEN);
@@ -846,15 +848,20 @@ int main(int argc, char *argv[])
 
         //HANDLE UI EVENTS UI LOOP
         guicommunicator::GUI_EVENT ev = gui.get_gui_update_event();
-        if (!ev.is_event_valid){continue;}
+        if (!ev.is_event_valid){
+     //       gui.debug_event(ev, true);
+            continue;
+        }
 
-        //gui.debug_event(ev, true);
 
 
-        //--------------------------------------------------------
-        //----------------LOGIN BUTTON ---------------------------
-        //--------------------------------------------------------
+        //-----------------------------------------------------------
+        //---------------- PROCESS EVENTS ---------------------------
+        //-----------------------------------------------------------
         if(ev.event == guicommunicator::GUI_ELEMENT::BEGIN_BTN_SCAN && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
+            //-----------------------------------------------------------
+            //----------------LOGIN BUTTON WITH BOARD INIT AND NFC SCAN--
+            //-----------------------------------------------------------
             //PERFORM A LOGIN AS HUMAN
             if(gamebackend.login(BackendConnector::PLAYER_TYPE::PT_HUMAN) && !gamebackend.get_session_id().empty())
             {
@@ -891,8 +898,11 @@ int main(int argc, char *argv[])
                 LOG_F(ERROR, "GOT LOGIN FAILED");
                 gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::LOGIN_SCREEN);
             }
-        }
-        else if(ev.event == guicommunicator::GUI_ELEMENT::BEGIN_BTN_DEFAULT && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
+
+        }else if(ev.event == guicommunicator::GUI_ELEMENT::BEGIN_BTN_DEFAULT && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
+            //-------------------------------------------------------------
+            //LOGIN TO SERVER WITH INIT BOARD WITH DEFAULT FIGURE POSTION--
+            //-------------------------------------------------------------
             //PERFORM A LOGIN AS HUMAN
             if(gamebackend.login(BackendConnector::PLAYER_TYPE::PT_HUMAN) && !gamebackend.get_session_id().empty())
             {
@@ -927,21 +937,20 @@ int main(int argc, char *argv[])
                     gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::LOGIN_SCREEN);
                 }
 
-
-
             }else {
                 gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK, "LOGIN_FAILED", 4000);
                 LOG_F(ERROR, "GOT LOGIN FAILED");
                 gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::LOGIN_SCREEN);
             }
-        }
 
-        //--------------------------------------------------------
-        //----------------BOARD INIT BUTTON-----------------------
-        //--------------------------------------------------------
-        if(ev.event == guicommunicator::GUI_ELEMENT::INIT_BTN && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
+
+
+        }else if(ev.event == guicommunicator::GUI_ELEMENT::INIT_BTN && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
+            //--------------------------------------------------------
+            //----------------BOARD INIT BUTTON-----------------------
+            //--------------------------------------------------------
             gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::PROCESSING_SCREEN);
-
+            //INIT BOARD ON PRODUCTATION HARDWARE ALWAYS
             board_init_err = board.initBoard(board_scan | HardwareInterface::getInstance()->is_production_hardware());
             //CHECK FOR FIGURE MISSING ERROR
             if(board_init_err == ChessBoard::BOARD_ERROR::FIGURES_MISSING){
@@ -952,12 +961,13 @@ int main(int argc, char *argv[])
                 gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK,"BOARD INIT FAILED UNKNOWN ERROR",10000);
             }
             gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::SETTINGS_SCREEN);
-        }
 
-        //--------------------------------------------------------
-        //----------------CALIBRATE BOARD BTN--------------------------
-        //--------------------------------------------------------
-        if((ev.event == guicommunicator::GUI_ELEMENT::SCAN_BOARD_BTN) && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
+
+
+        }else if((ev.event == guicommunicator::GUI_ELEMENT::SCAN_BOARD_BTN) && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
+            //--------------------------------------------------------
+            //----------------CALIBRATE BOARD BTN---------------------
+            //--------------------------------------------------------
             gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::PROCESSING_SCREEN);
             if (board.calibrate_home_pos() == ChessBoard::BOARD_ERROR::NO_ERROR)
             {
@@ -969,45 +979,42 @@ int main(int argc, char *argv[])
             }
             HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, false);
             gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::SETTINGS_SCREEN);
-        }
 
-        //--------------------------------------------------------
-        //----------------DEBUG - LOAD CONFIG BUTTON--------------
-        //--------------------------------------------------------
-        if(ev.event == guicommunicator::GUI_ELEMENT::DEBUG_FUNCTION_B && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
+        }else if(ev.event == guicommunicator::GUI_ELEMENT::DEBUG_FUNCTION_B && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
+            //--------------------------------------------------------
+            //----------------DEBUG - LOAD CONFIG BUTTON--------------
+            //--------------------------------------------------------
             gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::PROCESSING_SCREEN);
             ConfigParser::getInstance()->createConfigFile(CONFIG_FILE_PATH, true);
             gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK, "LOADED DEFAULT CONFIG", 10000);
             gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::SETTINGS_SCREEN);
-        }
 
-        //--------------------------------------------------------
-        //----------------DEBUG - LOAD CONFIG BUTTON--------------
-        //--------------------------------------------------------
-        if(ev.event == guicommunicator::GUI_ELEMENT::DEBUG_FUNCTION_C && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
+        }else if(ev.event == guicommunicator::GUI_ELEMENT::DEBUG_FUNCTION_C && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
+            //--------------------------------------------------------
+            //----------------DEBUG - LOAD CONFIG BUTTON--------------
+            //--------------------------------------------------------
             gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK, "MOVE TEST POPULATE CHESSBOARD IN START POSITION", 10000);
             board.test_make_move_func();
             gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::DEBUG_SCREEN);
-        }
 
-        //--------------------------------------------------------
-        //----------------DEBUG - LOAD CONFIG BUTTON--------------
-        //--------------------------------------------------------
-        if(ev.event == guicommunicator::GUI_ELEMENT::DEBUG_FUNCTION_D && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
+
+
+        }else if(ev.event == guicommunicator::GUI_ELEMENT::DEBUG_FUNCTION_D && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
+            //--------------------------------------------------------
+            //----------------DEBUG - LOAD CONFIG BUTTON--------------
+            //--------------------------------------------------------
             board.corner_move_test();
-        }
 
-        //--------------------------------------------------------
-        //----------------DEBUG - UPLOAD CONFIG BUTTON--------------
-        //--------------------------------------------------------
-        if(ev.event == guicommunicator::GUI_ELEMENT::DEBUG_FUNCTION_E && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
+        }if(ev.event == guicommunicator::GUI_ELEMENT::DEBUG_FUNCTION_E && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
+            //--------------------------------------------------------
+            //----------------DEBUG - UPLOAD CONFIG BUTTON------------
+            //--------------------------------------------------------
             gamebackend.upload_config(ConfigParser::getInstance());
-        }
 
-        //--------------------------------------------------------
-        //----------------DEBUG - UPLOAD LOG BUTTON--------------
-        //--------------------------------------------------------
-        if(ev.event == guicommunicator::GUI_ELEMENT::DEBUG_FUNCTION_F && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
+        }else if(ev.event == guicommunicator::GUI_ELEMENT::DEBUG_FUNCTION_F && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
+            //--------------------------------------------------------
+            //----------------DEBUG - UPLOAD LOG BUTTON---------------
+            //--------------------------------------------------------
             LOG_F(WARNING, "MANUAL LOG UPLOAD");
             LOG_F(WARNING, LOG_FILE_PATH_ERROR);
             loguru::flush();
@@ -1019,64 +1026,69 @@ int main(int argc, char *argv[])
                 gamebackend.upload_logfile(log);
                 gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::DEBUG_SCREEN);
             }
-        }
 
-        //--------------------------------------------------------
-        //----------------DEBUG - DOWNLOAD CONFIG BUTTON--------------
-        //--------------------------------------------------------
-        if(ev.event == guicommunicator::GUI_ELEMENT::DEBUG_FUNCTION_H && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
+        }else if(ev.event == guicommunicator::GUI_ELEMENT::DEBUG_FUNCTION_H && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
+            //--------------------------------------------------------
+            //----------------DEBUG - DOWNLOAD CONFIG BUTTON----------
+            //--------------------------------------------------------
             LOG_F(WARNING, "DEBUG -SHOW MAKE MOVE SCREEN ");
             make_move_mode = 1;
-
             gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::PLAYER_ENTER_MANUAL_MOVE_SCREEN);
-        }
 
-        //--------------------------------------------------------
-        //----------------DEBUG - DOWNLOAD CONFIG BUTTON--------------
-        //--------------------------------------------------------
-        if(ev.event == guicommunicator::GUI_ELEMENT::DEBUG_FUNCTION_G && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
+        }else if(ev.event == guicommunicator::GUI_ELEMENT::DEBUG_FUNCTION_G && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
+            //--------------------------------------------------------
+            //----------------DEBUG - DOWNLOAD CONFIG BUTTON----------
+            //--------------------------------------------------------
             LOG_F(WARNING, "DEBUG - DOWNLOAD CONFIG BUTTON TRIGGERED ");
             gamebackend.download_config(ConfigParser::getInstance(), true);
-        }
 
-        //--------------------------------------------------------
-        //----------------LOGOUT BUTTON --------------------------
-        //--------------------------------------------------------
-        if(ev.event == guicommunicator::GUI_ELEMENT::LOGOUT_BTN && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
+        }else if(ev.event == guicommunicator::GUI_ELEMENT::DEBUG_FUNCTION_I && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
+            //--------------------------------------------------------
+            //----------------DEBUG - FLIP SCREEN---------------------
+            //--------------------------------------------------------
+            LOG_F(WARNING, "DEBUG - FLIP ROATION ");
+            flip_screen_state = !flip_screen_state;
+            if(flip_screen_state){
+                gui.createEvent(guicommunicator::GUI_ELEMENT::QT_UI_SET_ORIENTATION_180, guicommunicator::GUI_VALUE_TYPE::ENABLED);
+            }else{
+                gui.createEvent(guicommunicator::GUI_ELEMENT::QT_UI_SET_ORIENTATION_0, guicommunicator::GUI_VALUE_TYPE::ENABLED);
+            }
+
+        }else if(ev.event == guicommunicator::GUI_ELEMENT::LOGOUT_BTN && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
+            //--------------------------------------------------------
+            //----------------LOGOUT BUTTON --------------------------
+            //--------------------------------------------------------
             gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::PROCESSING_SCREEN);
             //LOGOUT AND GOTO LOGIN SCREEN
             //if(gamebackend.stop_heartbeat_thread()) {
             gamebackend.logout();
             gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::LOGIN_SCREEN);
             //}
-        }
 
-        //--------------------------------------------------------
-        //----------------ENABLE MATCHMAKING BUTTON --------------
-        //--------------------------------------------------------
-        if(ev.event == guicommunicator::GUI_ELEMENT::MAINMENU_START_AI_MATCH_BTN && ev.type == guicommunicator::GUI_VALUE_TYPE::ENABLED) {
+        }else if(ev.event == guicommunicator::GUI_ELEMENT::MAINMENU_START_AI_MATCH_BTN && ev.type == guicommunicator::GUI_VALUE_TYPE::ENABLED) {
+            //--------------------------------------------------------
+            //----------------ENABLE MATCHMAKING BUTTON --------------
+            //--------------------------------------------------------
             //SET PLAYERSTATE TO OPEN FO A MATCH
             if(!gamebackend.set_player_state(BackendConnector::PLAYER_STATE::PS_SEARCHING)) {
                 gui.show_error_message_on_gui("ENABLE MATCHMAKING FAILED");
                 LOG_F(WARNING, "ENABLE MATCHMAKING FAILED TRIGGERED BY USER BUTTON");
             }
-        }
 
-        //--------------------------------------------------------
-        //----------------DISBALE MATCHMAKING BUTTON --------------
-        //--------------------------------------------------------
-        if(ev.event == guicommunicator::GUI_ELEMENT::MAINMENU_START_AI_MATCH_BTN && ev.type == guicommunicator::GUI_VALUE_TYPE::DISBALED) {
+        }else if(ev.event == guicommunicator::GUI_ELEMENT::MAINMENU_START_AI_MATCH_BTN && ev.type == guicommunicator::GUI_VALUE_TYPE::DISBALED) {
+            //--------------------------------------------------------
+            //----------------DISBALE MATCHMAKING BUTTON -------------
+            //--------------------------------------------------------
             //SET PLAYERSTATE TO OPEN FO A MATCH
             if(!gamebackend.set_player_state(BackendConnector::PLAYER_STATE::PS_IDLE)) {
                 gui.show_error_message_on_gui("DISBALE MATCHMAKING FAILED");
                 LOG_F(WARNING, "DISBALE MATCHMAKING FAILED TRIGGERED BY USER BUTTON");
             }
-        }
 
-        //--------------------------------------------------------
-        //----------------ABORT GAME BUTTON --------------
-        //--------------------------------------------------------
-        if(ev.event == guicommunicator::GUI_ELEMENT::GAMESCREEN_ABORT_GAME && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
+        }else if(ev.event == guicommunicator::GUI_ELEMENT::GAMESCREEN_ABORT_GAME && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
+            //--------------------------------------------------------
+            //----------------ABORT GAME BUTTON ----------------------
+            //--------------------------------------------------------
             //SET PLAYERSTATE TO OPEN FO A MATCH
             //if(gamebackend.set_abort_game()) {
 
@@ -1088,18 +1100,18 @@ int main(int argc, char *argv[])
             //ROTATE SCREEN IF NEEDED
             if(ConfigParser::getInstance()->getBool_nocheck(ConfigParser::CFG_ENTRY::HARDWARE_QTUI_FLIP_ORIENTATION)){
                 gui.createEvent(guicommunicator::GUI_ELEMENT::QT_UI_SET_ORIENTATION_180, guicommunicator::GUI_VALUE_TYPE::ENABLED);
+                flip_screen_state = true;
             }else{
                 gui.createEvent(guicommunicator::GUI_ELEMENT::QT_UI_SET_ORIENTATION_0, guicommunicator::GUI_VALUE_TYPE::ENABLED);
+                flip_screen_state = false;
             }
             gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::LOGIN_SCREEN);
-        }
 
-        //--------------------------------------------------------
-        //----------------PLAYER MAKE MANUAL MOVE--------------
-        //--------------------------------------------------------
-        if(ev.event == guicommunicator::GUI_ELEMENT::PLAYER_EMM_INPUT && ev.type == guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING && make_move_mode > 0) {
+        }else if(ev.event == guicommunicator::GUI_ELEMENT::PLAYER_EMM_INPUT && ev.type == guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING && make_move_mode > 0) {
+            //--------------------------------------------------------
+            //----------------PLAYER MAKE MANUAL MOVE-----------------
+            //--------------------------------------------------------
             make_move_scan_timer = -1;
-            //TODO ---- SCAN BOARD AS MOVE AND ENTER IT TO GUI
             ChessBoard::MovePiar mvpair = board.StringToMovePair(ev.value);
             if (mvpair.is_valid) {
                 //FOR TEST
@@ -1130,15 +1142,15 @@ int main(int argc, char *argv[])
             }
 
         }else if(ev.event == guicommunicator::GUI_ELEMENT::PLAYER_EMM_SCAN_BOARD && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED && make_move_mode > 0) { //THE SCNA BOARD FOR MOVE BTN
+            //--------------------------------------------------------
+            //--LAYER ENTER MANUAL MOVE SCAN BOARD FOR MOVE BUTTON ---
+            //--------------------------------------------------------
             player_enter_manual_move_start_board_scan(gui,board,gamebackend,possible_moves);
-        }
 
-
-        //TODO USER_RESERVED_AUTO_SCAN_BOARD_TIME_IF_USERS_TURN
-        //--------------------------------------------------------
-        //----------------CALIBRATION SCREEN ---------------------
-        //--------------------------------------------------------
-        if(ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_H1POS && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
+        }else if(ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_H1POS && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
+            //--------------------------------------------------------
+            //----------------CALIBRATION SCREEN ---------------------
+            //--------------------------------------------------------
             HardwareInterface::getInstance()->set_speed_preset(HardwareInterface::HI_TRAVEL_SPEED_PRESET::HI_TSP_MOVE);
             cal_move = 0;
             cal_move_step = 5; //SET USER ARROW KEY TO 5mm PER PRESS
@@ -1157,6 +1169,9 @@ int main(int argc, char *argv[])
 
 
         }else if(ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_A8POS && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
+            //--------------------------------------------------------
+            //----------------CALIBRATION SCREEN CAL A8 POSITION------
+            //--------------------------------------------------------
             HardwareInterface::getInstance()->set_speed_preset(HardwareInterface::HI_TRAVEL_SPEED_PRESET::HI_TSP_MOVE);
             cal_move = 1;
             cal_move_step = 5; //SET USER ARROW KEY TO 5mm PER PRESS
@@ -1252,7 +1267,7 @@ int main(int argc, char *argv[])
             }
 
 
-    }else if (ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_MVDOWN && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
+        }else if (ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_MVDOWN && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
             LOG_F(WARNING, "CALIBRATION SCREEN - DOWN");
             //MOVE TO NEW POSITION
             cal_pos_y -= cal_move_step;
@@ -1283,11 +1298,9 @@ int main(int argc, char *argv[])
             }else{
                 HardwareInterface::getInstance()->move_to_postion_mm_absolute(cal_pos_x, cal_pos_y,true);
             }
-        }
-
 
         //SAVE CALIBRAION DATA
-        if (ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_SAVE && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
+        }else if (ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_SAVE && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
             LOG_F(WARNING, "CALIBRATION SCREEN - SAVE");
             HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, false);
             HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, false);
@@ -1348,14 +1361,14 @@ int main(int argc, char *argv[])
             ConfigParser::getInstance()->writeConfigFile(CONFIG_FILE_PATH);
             //RESET CAL MENU
             cal_move = -1;
-        }
+
 
 
 
         //--------------------------------------------------------
         //----------------SOLANOID CALIBRATION SCREEN ---------------------
         //--------------------------------------------------------
-        if(ev.event == guicommunicator::GUI_ELEMENT::SOLANOIDSCREEN_UPPER_POS && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
+        }else if(ev.event == guicommunicator::GUI_ELEMENT::SOLANOIDSCREEN_UPPER_POS && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
             HardwareInterface::getInstance()->set_speed_preset(HardwareInterface::HI_TRAVEL_SPEED_PRESET::HI_TSP_MOVE);
             solcal_move = 0;
 
