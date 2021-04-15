@@ -1847,9 +1847,9 @@ ChessBoard::BOARD_ERROR ChessBoard::initBoard(bool _with_scan) {
     HardwareInterface::getInstance()->setTurnStateLight(HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_IDLE);
 
 
-    //loadBoardPreset(ChessBoard::BOARD_TPYE::REAL_BOARD,ChessBoard::BOARD_PRESET::BOARD_PRESET_ALL_FIGURES_IN_PARK_POSITION);
-    //syncRealWithTargetBoard();
-    //loadBoardPreset(ChessBoard::BOARD_TPYE::TARGET_BOARD,ChessBoard::BOARD_PRESET::BOARD_PRESET_ALL_FIGURES_IN_START_POSTITION);
+    //loadBoardPreset(ChessBoard::BOARD_TPYE::REAL_BOARD,ChessBoard::BOARD_PRESET::BOARD_PRESET_ALL_FIGURES_IN_START_POSTITION);
+    //loadBoardPreset(ChessBoard::BOARD_TPYE::TARGET_BOARD,ChessBoard::BOARD_PRESET::BOARD_PRESET_ALL_FIGURES_IN_PARK_POSITION);
+
     syncRealWithTargetBoard();
     return ChessBoard::BOARD_ERROR::INIT_COMPLETE;
 }
