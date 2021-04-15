@@ -324,10 +324,11 @@
     var api = $("#apikey").val();
     var vid = $("#pid").val();
     $.getJSON('/rest/set_user_config_single_key?authkey='+api+'&key='+key+'&value='+val+'&vid='+vid,function (data) {
+
       if(!data || data.err || !data.res){
-        $("#alert_message").html("<div class='alert alert-danger' role='alert'>ERROR INVALID API KEY OR ENTRY VALUE</div>");
-      }else{
         $("#alert_message").html("<div class='alert alert-success' role='alert'>CONFIG ENTRY CHANGE SUCCESS</div>");
+      }else{
+        $("#alert_message").html("<div class='alert alert-danger' role='alert'>ERROR INVALID API KEY OR ENTRY VALUE</div>");
       }
 
       setTimeout(function (){
@@ -335,7 +336,7 @@
       },2000);
     });
 
-    load_server_config();
+    get_profile_config();
   }
 
   //EXECUTES SCRIPT IF PAGE LOADED

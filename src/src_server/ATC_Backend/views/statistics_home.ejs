@@ -210,14 +210,20 @@
 
 
 
-
-
 <script src="/js/jquery/jquery.min.js"></script>
 <script src="/bootstrap/js/bootstrap.min.js"></script>
 <script src="/js/PGNViewer/js/pgnvjs.js"></script>
 
 
 <script>
+
+  //GLOBAL VARIABLES
+  var move_data = null;
+  var move_index = -1;
+  var current_board = null;
+  var loaded_game_id = null;
+
+
 
   //SORTING TIMESTAMP
   function compare_created_timestamp( b, a ) {
@@ -229,7 +235,6 @@
     }
     return 0;
   }
-
   //PARSES THE QUERY STRING IN THE URL
   //https://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
   function getParameterByName(name, url = window.location.href) {
@@ -240,13 +245,10 @@
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
   }
-
-
   //PARSE Date Object into human readable
   //https://stackoverflow.com/questions/5416920/timestamp-to-human-readable-format
   function getFormattedDate(_dt) {
     var date = new Date(_dt);
-
     var month = date.getMonth() + 1;
     var day = date.getDate();
     var hour = date.getHours();
@@ -304,10 +306,7 @@
     var fen_viewer_board = pgnBoard('fen_viewer_board', { position: _fen, locale: 'en', pieceStyle: 'wikipedia', theme:'falken' });
     //fen_viewer_board.position = _fen;
   }
-
-
-  var move_data = null;
-  var move_index = -1;
+  //LOAD NEXT MOVE TO FEN VIWER
   function show_next_move(){
     if(!move_data && move_index < 0){
       return;
@@ -322,7 +321,7 @@
     load_fen_to_viewer(move_data[move_index].fen);
     $("#current_move_text").html(move_data[move_index].move +"("+String(move_index+1) + " / " + String(move_data.length)+")");
   }
-
+  //LOAD PREV MOVE TO FEN VIEWER
   function show_prev_move(){
     if(!move_data && move_index < 0){
       return;
@@ -344,24 +343,17 @@
       $("#turn_histroy_table").html("--NO TURN HISTORY --");
     return;
     }
-
+    //STORE CURRENT MOVE DATA
     move_data= _data;
-
+    //LOAD FEN TO BOARD ONLY AT THE FIRST TIME
     if(!_update_only){
       move_index = 0;
       load_fen_to_viewer(move_data[move_index].fen);
    }
-
-
+    //UPDATE MOVES LIST EVERY TIME
     $("#current_move_text").html(move_data[move_index].move +"("+String(move_index+1) + " / " + String(move_data.length)+")");
-
-
-
   }
-  var current_board = null;
-
   //LOADS MORE INFORMATION ABOUT A SPECIFIC GAME ID
-  var loaded_game_id = null;
   function load_game_information(_id, _update_only){
     //debugger;
     game_move_history_fen = [];
@@ -517,21 +509,16 @@
   }
   //EXECUTES SCRIPT IF PAGE LOADED
   $(document).ready(function () {
-
+    //CHECK QUERY PARAMETER TO LOAD A GAME DIRECTLY
     var gid = getParameterByName("gid");
     if(gid != undefined && gid != null){
-      console.log(gid);
-
       load_game_information(gid);
     }
-    console.log("ready!");
     //HIDE GAME INFORMATION
    //toggle_visible_information_container(false);
     check_service_state();
     create_listed_games_table();
-
-
-
+    //START POLLING REFRESH TIMER
     var update_timer = setInterval(function (){
       if(loaded_game_id != null && loaded_game_id !== ""){
         load_game_information(loaded_game_id,true); //UPDATE GAME STATISTICS ONLY

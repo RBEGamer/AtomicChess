@@ -100,9 +100,14 @@ function get_player_config(_hwid, _callback){
 }
 
 function set_player_config(_cfg,_hwid, _callback){
+
+    if(_cfg === undefined || !_cfg || !_cfg.SETTINGS|| !_cfg.USER_DATA){
+        _callback(true,"error");
+        return;
+    }
     //UPDATE PROFILE
     var profile_config = {profile_config:{SETTINGS:_cfg.SETTINGS,USER_DATA:_cfg.USER_DATA, last_update: Date.now()}};
-    MDB.getProfileCollection().updateOne({hwid:_vid,DOCTYPE:"PROFILE"},{$set:profile_config},function (uo_err,uo_res) {
+    MDB.getProfileCollection().updateOne({hwid:_hwid,DOCTYPE:"PROFILE"},{$set:profile_config},function (uo_err,uo_res) {
         _callback(uo_err,"ok");
     });
 }

@@ -1007,7 +1007,7 @@ int main(int argc, char *argv[])
 
         }else if(ev.event == guicommunicator::GUI_ELEMENT::DEBUG_FUNCTION_C && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
             //--------------------------------------------------------
-            //----------------DEBUG - LOAD CONFIG BUTTON--------------
+            //----------------DEBUG - MAKE MOVE --------------
             //--------------------------------------------------------
             gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK, "MOVE TEST POPULATE CHESSBOARD IN START POSITION", 10000);
             board.test_make_move_func();
@@ -1017,7 +1017,7 @@ int main(int argc, char *argv[])
 
         }else if(ev.event == guicommunicator::GUI_ELEMENT::DEBUG_FUNCTION_D && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
             //--------------------------------------------------------
-            //----------------DEBUG - LOAD CONFIG BUTTON--------------
+            //----------------DEBUG - CORNER TEST--------------
             //--------------------------------------------------------
             board.corner_move_test();
 
