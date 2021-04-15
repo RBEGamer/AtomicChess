@@ -402,6 +402,7 @@ void MenuManager::debug_screen_fkt(int _id){
     case 5: guiconnection.createEvent(guicommunicator::GUI_ELEMENT::DEBUG_FUNCTION_F, guicommunicator::GUI_VALUE_TYPE::CLICKED);break;
     case 6: guiconnection.createEvent(guicommunicator::GUI_ELEMENT::DEBUG_FUNCTION_G, guicommunicator::GUI_VALUE_TYPE::CLICKED);break;
     case 7: guiconnection.createEvent(guicommunicator::GUI_ELEMENT::DEBUG_FUNCTION_H, guicommunicator::GUI_VALUE_TYPE::CLICKED);break;
+    case 8: guiconnection.createEvent(guicommunicator::GUI_ELEMENT::DEBUG_FUNCTION_I, guicommunicator::GUI_VALUE_TYPE::CLICKED);break;
     default:
         break;
     }

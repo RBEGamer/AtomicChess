@@ -847,6 +847,21 @@ Rectangle {
                 }
 
             }
+
+            Button {
+                id: debug_fkt_i_btn
+                x: 510
+                y: 218
+                width: 209
+                height: 60
+                text: qsTr("FLIP SCREEN")
+                Connections {
+                    target: debug_fkt_i_btn
+                    function onClicked(_mouse){
+                        main_menu.debug_screen_fkt(8)
+                    }
+                }
+            }
         }
     }
 
