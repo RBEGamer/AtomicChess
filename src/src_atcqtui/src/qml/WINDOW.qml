@@ -13,6 +13,7 @@ Rectangle {
     width: 800
     height: 480
     color: "#07a8a5"
+    rotation: 0
 
     z: -1
 
@@ -1641,8 +1642,4 @@ Rectangle {
 
 
 
-/*##^##
-Designer {
-    D{i:0;autoSize:true;height:480;width:640}
-}
-##^##*/
+

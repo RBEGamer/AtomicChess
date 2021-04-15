@@ -434,6 +434,14 @@ int main(int argc, char *argv[])
         }
         //RESET THE UI TO A CLEAN STATE
         gui.createEvent(guicommunicator::GUI_ELEMENT::QT_UI_RESET, guicommunicator::GUI_VALUE_TYPE::ENABLED);
+
+        //ROTATE SCREEN IF NEEDED
+        if(ConfigParser::getInstance()->getBool_nocheck(ConfigParser::CFG_ENTRY::HARDWARE_QTUI_FLIP_ORIENTATION)){
+            gui.createEvent(guicommunicator::GUI_ELEMENT::QT_UI_SET_ORIENTATION_180, guicommunicator::GUI_VALUE_TYPE::ENABLED);
+        }else{
+            gui.createEvent(guicommunicator::GUI_ELEMENT::QT_UI_SET_ORIENTATION_0, guicommunicator::GUI_VALUE_TYPE::ENABLED);
+        }
+        //SET PROCESSING SCREEN
         gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::PROCESSING_SCREEN);
         //CHECK VERSION ON GUI SIDE
         if(gui.check_guicommunicator_version())
@@ -545,6 +553,7 @@ int main(int argc, char *argv[])
         //CONNECTION FAILED => EXIT
         gui.createEvent(guicommunicator::GUI_ELEMENT::NETWORK_STATUS, guicommunicator::GUI_VALUE_TYPE::OFFLINE);
         gui.show_error_message_on_gui("Cant connect to game server. (ERR01) [" + gamebackend.get_backend_base_url() + "]");
+
         std::raise(SIGINT);
     }
 
@@ -1076,6 +1085,12 @@ int main(int argc, char *argv[])
             LOG_F(WARNING, "GAME STOPPED TRIGGERED BY USER BUTTON");
             gamebackend.logout();
             gui.createEvent(guicommunicator::GUI_ELEMENT::QT_UI_RESET, guicommunicator::GUI_VALUE_TYPE::ENABLED);
+            //ROTATE SCREEN IF NEEDED
+            if(ConfigParser::getInstance()->getBool_nocheck(ConfigParser::CFG_ENTRY::HARDWARE_QTUI_FLIP_ORIENTATION)){
+                gui.createEvent(guicommunicator::GUI_ELEMENT::QT_UI_SET_ORIENTATION_180, guicommunicator::GUI_VALUE_TYPE::ENABLED);
+            }else{
+                gui.createEvent(guicommunicator::GUI_ELEMENT::QT_UI_SET_ORIENTATION_0, guicommunicator::GUI_VALUE_TYPE::ENABLED);
+            }
             gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::LOGIN_SCREEN);
         }
 

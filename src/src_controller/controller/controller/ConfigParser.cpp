@@ -257,6 +257,8 @@ void ConfigParser::loadDefaults(std::string _type_str)
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_UBC_SERIAL_BAUD] = "115200";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_UBC_NFC_READ_RETRY_COUNT] = "3";
 
+        config_store[ConfigParser::CFG_ENTRY::HARDWARE_QTUI_FLIP_ORIENTATION] = "0";
+
         config_store[ConfigParser::CFG_ENTRY::USER_GENERAL_ENABLE_RANDOM_MOVE_MATCH] = "0";
 		config_store[ConfigParser::CFG_ENTRY::USER_GENERAL_ENABLE_AUTO_MATCHMAKING_ENABLE] = "0";
 		config_store[ConfigParser::CFG_ENTRY::USER_GENERAL_ENABLE_AUTOLOGIN] = "1";
@@ -319,6 +321,7 @@ void ConfigParser::loadDefaults(std::string _type_str)
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_UBC_SERIAL_BAUD] = "115200";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_UBC_NFC_READ_RETRY_COUNT] = "3";
 
+        config_store[ConfigParser::CFG_ENTRY::HARDWARE_QTUI_FLIP_ORIENTATION] = "0";
 
         config_store[ConfigParser::CFG_ENTRY::USER_GENERAL_ENABLE_RANDOM_MOVE_MATCH] = "0";
 		config_store[ConfigParser::CFG_ENTRY::USER_GENERAL_ENABLE_AUTO_MATCHMAKING_ENABLE] = "0";
@@ -382,6 +385,8 @@ void ConfigParser::loadDefaults(std::string _type_str)
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_UBC_SERIAL_BAUD] = "115200";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_UBC_NFC_READ_RETRY_COUNT] = "3";
 
+        config_store[ConfigParser::CFG_ENTRY::HARDWARE_QTUI_FLIP_ORIENTATION] = "0";
+
         config_store[ConfigParser::CFG_ENTRY::USER_GENERAL_ENABLE_RANDOM_MOVE_MATCH] = "1";
         config_store[ConfigParser::CFG_ENTRY::USER_GENERAL_ENABLE_AUTO_MATCHMAKING_ENABLE] = "1";
         config_store[ConfigParser::CFG_ENTRY::USER_GENERAL_ENABLE_AUTOLOGIN] = "1";
@@ -444,6 +449,8 @@ void ConfigParser::loadDefaults(std::string _type_str)
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_UBC_SERIAL_PORT] = "/dev/ttyUBC";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_UBC_SERIAL_BAUD] = "115200";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_UBC_NFC_READ_RETRY_COUNT] = "3";
+
+        config_store[ConfigParser::CFG_ENTRY::HARDWARE_QTUI_FLIP_ORIENTATION] = "1";
 
         config_store[ConfigParser::CFG_ENTRY::USER_GENERAL_ENABLE_RANDOM_MOVE_MATCH] = "0";
         config_store[ConfigParser::CFG_ENTRY::USER_GENERAL_ENABLE_AUTO_MATCHMAKING_ENABLE] = "0";
