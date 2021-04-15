@@ -269,6 +269,7 @@ int main(int argc, char *argv[])
         std::cout << "-writeconfig -hwprod2   | selects the production hardware version 2 (Marlin CoreXY)" <<std::endl;
         std::cout << "-autoplayer             | enables the automatic player mode - table will make random moves" <<std::endl;
         std::cout << "-skipplacementdialog    | skips the initial chess board NFC scan and load the default fen from the config file" <<std::endl;
+        std::cout << "-preventflipscreen      | ignore gui flip screen config" <<std::endl;
         std::cout << "---- END ATC_CONTROLLER HELP ----" <<std::endl;
         return 0;
     }
@@ -436,7 +437,7 @@ int main(int argc, char *argv[])
         gui.createEvent(guicommunicator::GUI_ELEMENT::QT_UI_RESET, guicommunicator::GUI_VALUE_TYPE::ENABLED);
 
         //ROTATE SCREEN IF NEEDED
-        if(ConfigParser::getInstance()->getBool_nocheck(ConfigParser::CFG_ENTRY::HARDWARE_QTUI_FLIP_ORIENTATION)){
+        if(ConfigParser::getInstance()->getBool_nocheck(ConfigParser::CFG_ENTRY::HARDWARE_QTUI_FLIP_ORIENTATION) && !cmdOptionExists(argv, argv + argc, "-preventflipscreen")){
             gui.createEvent(guicommunicator::GUI_ELEMENT::QT_UI_SET_ORIENTATION_180, guicommunicator::GUI_VALUE_TYPE::ENABLED);
             flip_screen_state = true;
         }else{
