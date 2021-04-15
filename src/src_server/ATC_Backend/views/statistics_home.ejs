@@ -352,49 +352,20 @@
 
     $("#current_move_text").html(move_data[move_index].move +"("+String(move_index+1) + " / " + String(move_data.length)+")");
 
-    /*
-    var tmp_html = "<div class=\"table-responsive-sm\"><table class=\"table\">";
-    tmp_html+="<thead><tr><th scope=\"col\">#</th><th scope=\"col\">MOVE</th><th scope=\"col\">PLAYER</th><th scope=\"col\">ACTION</th></tr></thead>";
-    tmp_html+="<tbody>";
-    //POPULATE TABLE BODY WITH ENTRIES
-    for (let i= 0; i < _data.length;i++){
-      const entry = _data[i];
-      tmp_html+="<tr>";
-      tmp_html+="<th scope=\"row\">"+String(i+1)+"</th>";
 
-      if(entry.move){
-      tmp_html+="<th scope=\"row\">"+entry.move+"</th>";
-      }else{
-        tmp_html+="<th scope=\"row\">---</th>";
-      }
-
-      if(entry.player_turn != null){
-        if(entry.player_turn == 1){
-          tmp_html+="<th scope=\"row\">BLACK</th>";
-        }else if(entry.player_turn == 0){
-          tmp_html+="<th scope=\"row\">WHITE</th>";
-        }else{
-          tmp_html+="<th scope=\"row\">"+String(entry.player_turn)+"</th>";
-        }
-      }
-
-
-      tmp_html+="<th scope=\"row\"><button type=\"button\" onclick=\"load_fen_to_viewer('"+entry.fen+"')\" class=\"btn btn-fh\">SHOW BOARD</button></th>";
-      tmp_html+="</tr>";
-    }
-
-    tmp_html += "</tbody></table></div>";
-
-
-    $("#turn_histroy_table").html(tmp_html);
-    */
 
   }
+
+
   //LOADS MORE INFORMATION ABOUT A SPECIFIC GAME ID
-  function load_game_information(_id){
+  var loaded_game_id = null;
+  function load_game_information(_id, _update_only){
     //debugger;
     game_move_history_fen = [];
-    load_fen_to_viewer(null);
+    if(!_update_only){
+      load_fen_to_viewer(null);
+    }
+
     $.getJSON('/rest/get_game?gid=' +_id,function (data) {
       //PROCESS GOT GAME LIST RESULT
       //debugger;
@@ -402,10 +373,14 @@
       if(!data || data.err || !data.game_data){
         return;
       }
+      //ONLY SAVE ID FOR AUTO REFRESH IF WE GOT VALID DATA
+      loaded_game_id = _id;
       console.log(data);
       //SHOW ID
     //  debugger;
-      $("#game_headline_title").html(String(data.game_data.game_id));
+      if(!_update_only) {
+        $("#game_headline_title").html(String(data.game_data.game_id));
+      }
       //DISPLAY CURRENT BOARD
       if(data.game_data.current_board.fen){
         $("#current_board").html("");
@@ -538,6 +513,14 @@
    //toggle_visible_information_container(false);
     check_service_state();
     create_listed_games_table();
+
+
+
+    var update_timer = setInterval(function (){
+      if(loaded_game_id != null && loaded_game_id !== ""){
+        load_game_information(loaded_game_id,true); //UPDATE GAME STATISTICS ONLY
+      }
+    },1000);
   });
 </script>
 

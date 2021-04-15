@@ -1099,7 +1099,7 @@ int main(int argc, char *argv[])
             gamebackend.logout();
             gui.createEvent(guicommunicator::GUI_ELEMENT::QT_UI_RESET, guicommunicator::GUI_VALUE_TYPE::ENABLED);
             //ROTATE SCREEN IF NEEDED
-            if(ConfigParser::getInstance()->getBool_nocheck(ConfigParser::CFG_ENTRY::HARDWARE_QTUI_FLIP_ORIENTATION)){
+            if(ConfigParser::getInstance()->getBool_nocheck(ConfigParser::CFG_ENTRY::HARDWARE_QTUI_FLIP_ORIENTATION)&& !cmdOptionExists(argv, argv + argc, "-preventflipscreen")){
                 gui.createEvent(guicommunicator::GUI_ELEMENT::QT_UI_SET_ORIENTATION_180, guicommunicator::GUI_VALUE_TYPE::ENABLED);
                 flip_screen_state = true;
             }else{
