@@ -398,7 +398,7 @@ void ConfigParser::loadDefaults(std::string _type_str)
     }
 	else
 	{
-        config_store[ConfigParser::CFG_ENTRY::NETWORK_BACKEND_URL] = "http://127.0.0.1:3000";
+        config_store[ConfigParser::CFG_ENTRY::NETWORK_BACKEND_URL] = "http://atomicchess.de:3000";
         config_store[ConfigParser::CFG_ENTRY::NETWORK_HEARTBEAT_INTERVAL_SECS] = "5";
 
         config_store[ConfigParser::CFG_ENTRY::GENERAL_HWID_INTERFACE] = "eth0";
