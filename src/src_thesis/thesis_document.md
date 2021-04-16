@@ -50,12 +50,12 @@ beleuchtung existierender ansätze && festlegung zu erwartener Features, Kapitel
 
 |                                         	| Square Off - Kingdom [@squareoffkingdom]	| Square Off - Grand Kingdom [@squareoffgrand]		| DGT Smart Board [@dtgsmartboard]	| DGT Bluetooth Wenge [@dtgble] |
 |-------------------------------------------|-------------------------------------------|---------------------------------------------------|-----------------------------------|-------------------------------|
-| Erkennung Schachfigurstellung           	| nein (Manuell per Ausgangsposition) 		| nein (Manuell per Ausgangsposition) 				| ja (Resonanzspulen)  				| ja ((+rfid))          		|
+| Erkennung Figurstellung           	    | nein (Manuell per Ausgangsposition) 		| nein (Manuell per Ausgangsposition) 				| ja                  				| ja                     		|
 | Abmessungen (LxBxH)                		| 486mm x 486mm x 75mm              		| 671mm x 486mm x 75mm              				| 540mm x 540mm x 20mm 				| 540mm x 540mm x 20mm 			|
-| Konnektivität                            	| (+ble)                               		| (+ble)                               				| (+usb) / Seriell        			| Bluetooth 2.0        			|
+| Konnektivität                            	| Bluetooth                            		| Bluetooth                         				| Seriell           			    | Bluetooth         			|
 | Automatisches Bewegen der Figuren       	| ja                                		| ja                                				| nein                 				| nein                 			|
 | Spiel Livestream                        	| ja                                		| ja                                				| ja                   				| ja                   			|
-| Cloud anbindung (online Spiele)         	| ja (über Mobiltelefon + App)      		| ja (über Mobiltelefon + App)      				| ja (über PC + App)   				| ja (über PC + App)   			|
+| Cloud anbindung (online Spiele)         	| ja (Mobiltelefon + App)      		        | ja (Mobiltelefon + App)      				        | ja (PC + App)   				        | ja (PC + App)   			|
 | Parkposition für ausgeschiedene Figuren 	| nein                              		| ja                                				| nein                 				| nein                 			|
 | Stand-Alone Funktionalität               	| nein (Mobiltelefon erforderlich)    		| nein (Mobiltelefon erforderlich)     				| nein (PC erforderlich)			| nein (PC erforderlich)		|   	   
 | Besonderheiten                          	| Akku für 30 Spiele                    	| Akku für 15 Spiele					           	| - 								| -								|
@@ -85,9 +85,9 @@ Auch existieren weitere Abwandlungen von autonomen Schachbrettern, bei welchem d
 
 |                                         		| Automated Chess Board (Michael Guerero) [@actproject1]| Automated Chess Board (Akash Ravichandran) [@actproject2]	| DIY Super Smart Chessboard [@actproject3]	|
 |---------------------------------------------	|-------------------------------------------------------|----------------------------------------------------------	|------------------------------------------	|
-| Erkennung Schachfigurstellung              	| nein (Manuell per Ausgangsposition)     				| ja (Kamera / OpenCV)                       				| nein                       				|
+| Erkennung Figurstellung              	        | nein (Manuell per Ausgangsposition)     				| ja (Kamera / OpenCV)                       				| nein                       				|
 | Abmessungen (LxBxH)                			| keine Angabe                            				| keine Angabe                               				| 450mm x 300mm x 50mm       				|
-| Konnektivität                           		| (+usb)                                   				| Ethernet, (+wlan)                           				| Ethernet, (+wlan)          				|
+| Konnektivität                           		| (+usb)                                   				| (+wlan)                           				        | (+wlan)          			            	|
 | Automatisches Bewegen der Figuren       		| ja                                      				| ja                                         				| nein                       				|
 | Spiel Livestream                        		| nein                                    				| nein                                       				| nein                       				|
 | Cloud anbindung (online Spiele)         		| nein                                    				| nein                                       				| ja                         				|
