@@ -16,7 +16,6 @@ var CFG = require("../config/config"); //include the cofnig file
 var MDB = require("../session_handling/mongo_db_connection"); //ONLY USED IN client_status
 var RDS = require("../session_handling/redis_db_connection"); //ONLY USED IN client_status
 
-// TODO ->START GAME WITH Player PSEUDO ID!!
 
 
 
@@ -241,11 +240,6 @@ router.get('/logout',function(req,res,next){
     }
 });
 
-
-
-
-
-
 router.get('/abort_game',function (req,res,next) {
     try{
         var hwid = req.queryString("hwid");
@@ -286,10 +280,6 @@ router.get('/abort_game',function (req,res,next) {
         return;
     }
 });
-
-
-
-
 
 /**
  # @INPUT_QUERY
@@ -781,9 +771,6 @@ router.get('/make_move',function (req,res,next) {
 });
 
 
-
-
-
 router.get('/gmm',function (req,res,next) {
     try{
 
@@ -960,6 +947,7 @@ router.post('/set_user_config',function (req,res,next) {
             }
             //IF SESSION VALID -> LIST PLAYERS
             if(cvs_res){
+
                 profile_handling.set_player_config(config_json,hwid,function (spc_err,spc_res) {
                     res.json({err:spc_err, status:spc_res});
                 });
@@ -1030,10 +1018,6 @@ router.get('/set_user_config_single_key',function (req,res,next) {
             return;
         }
 
-        if(key === "settings_change_auth_key" || key === "settings_change_pw"|| key === "secret_addition"){
-            res.json({err:true, status:"err_cant_set_this_key_over_webconsole"});
-            return;
-        }
 
 
         profile_handling.set_player_user_config_key(key,value,vid,function (sp_err,sp_res) {

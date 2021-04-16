@@ -233,6 +233,10 @@ void MenuManager::updateProgress()
         set_label_text("mmem_container","mmem_chosen_move_label",user_entered_move);
     }else if(ev.event == guicommunicator::GUI_ELEMENT::QT_UI_RESET){
         general_ui_reset();
+    }else if(ev.event == guicommunicator::GUI_ELEMENT::QT_UI_SET_ORIENTATION_0){
+        qtui_flip_screen(false);
+    }else if(ev.event == guicommunicator::GUI_ELEMENT::QT_UI_SET_ORIENTATION_180){
+        qtui_flip_screen(true);
     }
 
 
@@ -266,6 +270,10 @@ void MenuManager::set_progress_indicator(QString _container_name, QString _ic_na
     }
 }
 
+void MenuManager::qtui_flip_screen(bool _flip){
+    qInfo()<< "QTUI_FLIP_SCREEN " << _flip;
+    this->parent()->setProperty("rotation",180 * (int)_flip);
+}
 
 void MenuManager::general_ui_reset(){
     //RESET ICONS
@@ -300,9 +308,14 @@ void MenuManager::lb_settings_btn(){
     // MenuManager::switch_menu(guicommunicator::GUI_VALUE_TYPE::SETTINGS_SCREEN);
 };
 
-void MenuManager::ls_login_btn(){
+void MenuManager::ls_login_btn(bool _with_scan){
     qInfo() <<"ls_login_btn";
-    guiconnection.createEvent(guicommunicator::GUI_ELEMENT::BEGIN_BTN, guicommunicator::GUI_VALUE_TYPE::CLICKED);
+    if(_with_scan){
+        guiconnection.createEvent(guicommunicator::GUI_ELEMENT::BEGIN_BTN_SCAN, guicommunicator::GUI_VALUE_TYPE::CLICKED);
+    }else{
+        guiconnection.createEvent(guicommunicator::GUI_ELEMENT::BEGIN_BTN_DEFAULT, guicommunicator::GUI_VALUE_TYPE::CLICKED);
+    }
+
 
 }
 
@@ -389,6 +402,7 @@ void MenuManager::debug_screen_fkt(int _id){
     case 5: guiconnection.createEvent(guicommunicator::GUI_ELEMENT::DEBUG_FUNCTION_F, guicommunicator::GUI_VALUE_TYPE::CLICKED);break;
     case 6: guiconnection.createEvent(guicommunicator::GUI_ELEMENT::DEBUG_FUNCTION_G, guicommunicator::GUI_VALUE_TYPE::CLICKED);break;
     case 7: guiconnection.createEvent(guicommunicator::GUI_ELEMENT::DEBUG_FUNCTION_H, guicommunicator::GUI_VALUE_TYPE::CLICKED);break;
+    case 8: guiconnection.createEvent(guicommunicator::GUI_ELEMENT::DEBUG_FUNCTION_I, guicommunicator::GUI_VALUE_TYPE::CLICKED);break;
     default:
         break;
     }

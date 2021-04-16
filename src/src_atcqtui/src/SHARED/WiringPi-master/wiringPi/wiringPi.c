@@ -69,7 +69,14 @@
 #include <sys/stat.h>
 #include <sys/wait.h>
 #include <sys/ioctl.h>
+
+#ifdef __MACH__
+
+#else
 #include <asm/ioctl.h>
+#endif
+
+
 
 #include "softPwm.h"
 #include "softTone.h"

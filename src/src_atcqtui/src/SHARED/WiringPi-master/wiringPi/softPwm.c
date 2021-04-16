@@ -23,7 +23,11 @@
  */
 
 #include <stdio.h>
+#ifdef __MACH__
+#include <stdlib.h>
+#else
 #include <malloc.h>
+#endif
 #include <pthread.h>
 
 #include "wiringPi.h"

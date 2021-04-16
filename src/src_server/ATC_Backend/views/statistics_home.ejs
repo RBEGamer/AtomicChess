@@ -112,8 +112,22 @@
 
 
           <div class="row justify-content-center">
-            <div class="col-md-4">
-              <div id="current_board" style="width: 200px"><img width="200px" src="/img/board_placeholder_400x400.png"></div>
+            <div class="col-md-4 text-center">
+              <div id="fen_viewer_board" style="width: 200px"><img width="200px" src="/img/board_placeholder_400x400.png"></div>
+
+
+
+              <table>
+                <tr><td>
+                    <button onclick="show_prev_move()"><img src="/img/icons/prev.png" width="30px" /></button>
+                  </td><td>
+                    <span id="current_move_text" class="fhcolor_text font-weight-bold"> x / N</span>
+                  </td><td>
+                    <button onclick="show_next_move()"><img src="/img/icons/next.png" width="30px" /></button>
+                  </td></tr>
+              </table>
+
+
             </div>
             <div class="col-md-6">
               <table class="table">
@@ -145,31 +159,15 @@
 
           <div class="row justify-content-center">
             <div class="col-auto">
-              <h4 class="card-title text-justify">TURN HISTORY</h4>
+              <h4 class="card-title text-justify">CURRENT BOARD</h4>
             </div>
           </div>
           <div class="row top-buffer"></div>
           <div class="row justify-content-center">
-            <div class="col-md-4 col-centered">
-              <p class="card-content" id="">
-                <table>
-                <tr><td>
-                    <button onclick="show_prev_move()"><img src="/img/icons/prev.png" width="50px" /></button>
-                  </td><td>
-                      <span id="current_move_text" class="fhcolor_text font-weight-bold"> x / N</span>
-                  </td><td>
-                    <button onclick="show_next_move()"><img src="/img/icons/next.png" width="50px" /></button>
-                  </td></tr>
-              </table>
-              </p>
-            </div>
-            <div class="col-md-8">
-              <div id="fen_viewer_board" style="width: 400px"><img width="400px" src="/img/board_placeholder_400x400.png"></div>
-              <div class="card-title text-justify" id="fen_viewer_fen"></div>
+            <div class="col-md-12 d-flex justify-content-center">
+              <div id="current_board" style="width: 400px"><img width="400px" src="/img/board_placeholder_400x400.png"></div>
             </div>
           </div>
-
-
         </div>
       </div>
     </div>
@@ -212,14 +210,20 @@
 
 
 
-
-
 <script src="/js/jquery/jquery.min.js"></script>
 <script src="/bootstrap/js/bootstrap.min.js"></script>
 <script src="/js/PGNViewer/js/pgnvjs.js"></script>
 
 
 <script>
+
+  //GLOBAL VARIABLES
+  var move_data = null;
+  var move_index = -1;
+  var current_board = null;
+  var loaded_game_id = null;
+
+
 
   //SORTING TIMESTAMP
   function compare_created_timestamp( b, a ) {
@@ -231,7 +235,6 @@
     }
     return 0;
   }
-
   //PARSES THE QUERY STRING IN THE URL
   //https://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
   function getParameterByName(name, url = window.location.href) {
@@ -242,13 +245,10 @@
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
   }
-
-
   //PARSE Date Object into human readable
   //https://stackoverflow.com/questions/5416920/timestamp-to-human-readable-format
   function getFormattedDate(_dt) {
     var date = new Date(_dt);
-
     var month = date.getMonth() + 1;
     var day = date.getDate();
     var hour = date.getHours();
@@ -304,11 +304,9 @@
     $("#fen_viewer_board").html("");
     $("#fen_viewer_fen").html(""+_fen+"");
     var fen_viewer_board = pgnBoard('fen_viewer_board', { position: _fen, locale: 'en', pieceStyle: 'wikipedia', theme:'falken' });
+    //fen_viewer_board.position = _fen;
   }
-
-
-  var move_data = null;
-  var move_index = -1;
+  //LOAD NEXT MOVE TO FEN VIWER
   function show_next_move(){
     if(!move_data && move_index < 0){
       return;
@@ -323,7 +321,7 @@
     load_fen_to_viewer(move_data[move_index].fen);
     $("#current_move_text").html(move_data[move_index].move +"("+String(move_index+1) + " / " + String(move_data.length)+")");
   }
-
+  //LOAD PREV MOVE TO FEN VIEWER
   function show_prev_move(){
     if(!move_data && move_index < 0){
       return;
@@ -339,62 +337,30 @@
     $("#current_move_text").html(move_data[move_index].move +"("+String(move_index+1) + " / " + String(move_data.length)+")");
   }
   //CREATES TURN HISTORY TABLE
-  function create_turn_history_table(_data){
+  function create_turn_history_table(_data, _update_only){
   //  debugger;
     if(!_data || _data.length <= 0){
       $("#turn_histroy_table").html("--NO TURN HISTORY --");
     return;
     }
-
+    //STORE CURRENT MOVE DATA
     move_data= _data;
-    move_index = 0;
-    load_fen_to_viewer(move_data[move_index].fen);
-
+    //LOAD FEN TO BOARD ONLY AT THE FIRST TIME
+    if(!_update_only){
+      move_index = 0;
+      load_fen_to_viewer(move_data[move_index].fen);
+   }
+    //UPDATE MOVES LIST EVERY TIME
     $("#current_move_text").html(move_data[move_index].move +"("+String(move_index+1) + " / " + String(move_data.length)+")");
-
-    /*
-    var tmp_html = "<div class=\"table-responsive-sm\"><table class=\"table\">";
-    tmp_html+="<thead><tr><th scope=\"col\">#</th><th scope=\"col\">MOVE</th><th scope=\"col\">PLAYER</th><th scope=\"col\">ACTION</th></tr></thead>";
-    tmp_html+="<tbody>";
-    //POPULATE TABLE BODY WITH ENTRIES
-    for (let i= 0; i < _data.length;i++){
-      const entry = _data[i];
-      tmp_html+="<tr>";
-      tmp_html+="<th scope=\"row\">"+String(i+1)+"</th>";
-
-      if(entry.move){
-      tmp_html+="<th scope=\"row\">"+entry.move+"</th>";
-      }else{
-        tmp_html+="<th scope=\"row\">---</th>";
-      }
-
-      if(entry.player_turn != null){
-        if(entry.player_turn == 1){
-          tmp_html+="<th scope=\"row\">BLACK</th>";
-        }else if(entry.player_turn == 0){
-          tmp_html+="<th scope=\"row\">WHITE</th>";
-        }else{
-          tmp_html+="<th scope=\"row\">"+String(entry.player_turn)+"</th>";
-        }
-      }
-
-
-      tmp_html+="<th scope=\"row\"><button type=\"button\" onclick=\"load_fen_to_viewer('"+entry.fen+"')\" class=\"btn btn-fh\">SHOW BOARD</button></th>";
-      tmp_html+="</tr>";
-    }
-
-    tmp_html += "</tbody></table></div>";
-
-
-    $("#turn_histroy_table").html(tmp_html);
-    */
-
   }
   //LOADS MORE INFORMATION ABOUT A SPECIFIC GAME ID
-  function load_game_information(_id){
+  function load_game_information(_id, _update_only){
     //debugger;
     game_move_history_fen = [];
-    load_fen_to_viewer(null);
+    if(!_update_only){
+      load_fen_to_viewer(null);
+    }
+
     $.getJSON('/rest/get_game?gid=' +_id,function (data) {
       //PROCESS GOT GAME LIST RESULT
       //debugger;
@@ -402,14 +368,28 @@
       if(!data || data.err || !data.game_data){
         return;
       }
+      //ONLY SAVE ID FOR AUTO REFRESH IF WE GOT VALID DATA
+      loaded_game_id = _id;
       console.log(data);
       //SHOW ID
     //  debugger;
-      $("#game_headline_title").html(String(data.game_data.game_id));
+      if(!_update_only) {
+        $("#game_headline_title").html(String(data.game_data.game_id));
+      }
       //DISPLAY CURRENT BOARD
       if(data.game_data.current_board.fen){
-        $("#current_board").html("");
-        var current_board = pgnBoard('current_board', { position: data.game_data.current_board.fen, locale: 'en', pieceStyle: 'wikipedia', theme:'falken' });
+        //CREATE BOARD INSTANCE FIRST TIME
+        if(!_update_only) {
+          $("#current_board").html("");
+          current_board = pgnBoard('current_board', { position: data.game_data.current_board.fen, locale: 'en', pieceStyle: 'wikipedia', theme:'falken' });
+
+        }
+
+        if(current_board != null){
+          //debugger;
+          current_board = pgnBoard('current_board', { position: data.game_data.current_board.fen, locale: 'en', pieceStyle: 'wikipedia', theme:'falken' });
+        }
+
       }
       //LOAD AND DISPLAY GENERAL GAME INFO
       if(data.game_data.current_board.player_turn != null){
@@ -422,26 +402,29 @@
         }
       }
 
-      if(data.game_data.current_board.is_game_over != null){
+      if(data.game_data.current_board.is_game_over != null ){
         $("#git_game_over").html(String(data.game_data.current_board.is_game_over));
       }
       if(data.game_data.start_board_string != null){
         $("#git_start_board_fen").html(String(data.game_data.start_board_string));
       }
-      if(data.game_data.current_board.fen != null){
+      if(data.game_data.current_board.fen != null ){
         $("#git_current_board_fen").html(String(data.game_data.current_board.fen));
       }
 
       //VISULIZES MOVES
       if(data.game_data.turn_history != null){
-        create_turn_history_table(data.game_data.turn_history);
+        create_turn_history_table(data.game_data.turn_history,_update_only);
       }
 
 
 
 
       //SHOW CONTAINER
-      toggle_visible_information_container(true);
+        toggle_visible_information_container(true);
+
+
+
     });
 
   }
@@ -526,18 +509,21 @@
   }
   //EXECUTES SCRIPT IF PAGE LOADED
   $(document).ready(function () {
-
+    //CHECK QUERY PARAMETER TO LOAD A GAME DIRECTLY
     var gid = getParameterByName("gid");
     if(gid != undefined && gid != null){
-      console.log(gid);
-
       load_game_information(gid);
     }
-    console.log("ready!");
     //HIDE GAME INFORMATION
    //toggle_visible_information_container(false);
     check_service_state();
     create_listed_games_table();
+    //START POLLING REFRESH TIMER
+    var update_timer = setInterval(function (){
+      if(loaded_game_id != null && loaded_game_id !== ""){
+        load_game_information(loaded_game_id,true); //UPDATE GAME STATISTICS ONLY
+      }
+    },1000);
   });
 </script>
 

@@ -82,7 +82,12 @@ public:
 		AXIS_TRAGET_ARRIVAL_FAILED = 6,
 		BAD_FILED_INDEX = 7,
 		INIT_CHESS_FIGURES_NOT_COMPLETE = 8,
-		INIT_COMPLETE = 9
+		INIT_COMPLETE = 9,
+        FIGURES_MISSING = 10,
+        ERROR = 11,
+        POSSIBLE_USER_MOVE_RESULT_MULTIBLE_MOVE_CANDIDATES = 12,
+        POSSIBLE_USER_MOVE_RESULT_OK = 13,
+        POSSIBLE_USER_MOVE_MOVE_INVALID = 14,
 	};
 	
 	enum class BOARD_STATUS {
@@ -94,13 +99,15 @@ public:
 	enum class BOARD_PRESET {
 		BOARD_PRESET_ALL_FIGURES_IN_START_POSTITION = 0,
 		BOARD_PRESET_ALL_FIGURES_IN_PARK_POSITION = 1,
-		BOARD_PRESET_NO_FIGURES_PLACED = 2
+		BOARD_PRESET_NO_FIGURES_PLACED = 2,
+        BOARD_TEST_PATTERN = 3
 	};
 	
 	struct FigureField
 	{
 		ChessField::CHESS_FILEDS field;
 		ChessPiece::FIGURE figure;
+		ChessPiece::FIGURE figure_scan; //ONLY USED BY NFC SCAN METHODS
 		FigureField()
 		{
 		}
@@ -119,11 +126,10 @@ public:
 
 
 	};
-	
+
+
 	struct MovePiar
 	{
-
-
 		ChessField::CHESS_FILEDS from_field;
 		ChessField::CHESS_FILEDS to_field;
 		bool is_valid;
@@ -138,17 +144,27 @@ public:
 		{
 			is_valid = false;
 		}
-
-
 	};
-		
+
+
+    struct  PossibleUserMoveResult{
+        ChessBoard::MovePiar possible_move;
+        ChessBoard::BOARD_ERROR error;
+    };
+
+
 	bool test_make_move_func();
 	void test_make_move_static();
 	void home_board();
 	ChessBoard() ;
 	~ChessBoard();
 	MovePiar StringToMovePair(std::string _mv);
+    std::vector<MovePiar> StringToMovePair(std::vector<std::string> _mv, bool _only_valid_ones); //PARSES AN VECTOR OF STRING MOVES INTO MOVE PAIRS THE  bool _only_valid_ones OPTION APPENDS ONLY PARABLE MOVES TO THE RESULT
 	std::string board2FEN(ChessBoard::BOARD_TPYE _type); //RETURNS A FEN REPRESENTATION OF THE BOARD
+	std::vector<FigureField> scanBoardForChangesByGivenFields(std::vector<ChessField::CHESS_FILEDS> _fd,ChessBoard::BOARD_TPYE _target_board);
+    std::vector<ChessField::CHESS_FILEDS> getMinimalFieldsToCheckForChanges(std::vector<ChessBoard::MovePiar> _mv); //RETURNS A MINIML SET IF FIELDS NEED TO CHECK FOR A MOVE
+    ChessPiece::FIGURE scanField(ChessField::CHESS_FILEDS _field); //SCANS A SINGLE FIELD WITH THE NFC HEAD AND RETURNS A FIGURE
+    std::vector<ChessField::CHESS_FILEDS> getAllTargetFieldsFromGivenFieldAndMove(std::vector<ChessBoard::MovePiar> _moves, std::vector<ChessBoard::FigureField> _fields);
 	bool boardFromFen(std::string _fen, ChessBoard::BOARD_TPYE _target_board); //LOADS A BOARD BY FEN
 	bool syncRealWithTargetBoard(); ///SNYC THE RealBoard with the Target board and move the 
 	bool syncRealWithTargetBoard(MovePiar _ecevute_move);   ///SNYC THE RealBoard with the Target board and move the figures
@@ -166,9 +182,11 @@ public:
     BOARD_ERROR corner_move_test(); //MOVES THE HEAD IN ALL 4 CORNER FIELDS A1 A8 H8 H1 FOR TESTING THE CALIBRATION
 	int get_figure_type_count(ChessBoard::BOARD_TPYE _target_board, char _type_char , bool _board_only); ///RETURNS THE COUNT OF FIGURES PLACED ON THE BOARD
 	int get_figure_type_count(ChessPiece::FIGURE* _board_pointer, char _type_char , bool _board_only); ///RETURNS THE COUNT OF FIGURES PLACED ON THE BOARD
-	
-	
-private:
+    ChessBoard::BOARD_ERROR makeMoveSyncVirtual(ChessBoard::MovePiar _move); //APPLY A MOVE TO THE BOARD BUT WITHOUT MOVING ANYTHING
+    ChessBoard::PossibleUserMoveResult scanBoardForPossibleUserMove(std::vector<ChessBoard::MovePiar> _pseudo_legal_moves);
+
+
+        private:
 	
 
 	IOController::COIL current_selected_coil = IOController::COIL::COIL_A;
@@ -187,7 +205,7 @@ private:
 	
 	
 	
-	std::list<ChessPiece::FIGURE> checkBoardForFullFigureSet(ChessPiece::FIGURE(&board)[BOARD_WIDTH][BOARD_HEIGHT]);
+	std::list<ChessPiece::FIGURE> checkBoardForFullFigureSet(ChessBoard::BOARD_TPYE _target_board); //RETURNS A LIST OF MISSING FIGURES ON THE FIELD
 	IOController::COIL getValidCoilTypeParkPosition(ChessField::CHESS_FILEDS _field, IOController::COIL _target); //GET THE RIGHT COIL FOR THE PARK POS
 	std::vector<ChessField::CHESS_FILEDS> get_chess_fields_occupied_from_figure(ChessPiece::FIGURE* _board_pointer, ChessPiece::FIGURE _fig, bool _board_only); //RETURNS FIELD LIST WITH ALL SELECTED TYPES OF FIGURE _fig OCCUPIEDS FILES
 	

@@ -37,7 +37,8 @@ var matchmaking_job = new CronJob('*/'+CFG.getConfig().matchmaking_runner_interv
 
      if(CFG.getConfig().matchmaking_ai_enable === true && gpfm_res.player_searching_human.length === 1 && gpfm_res.player_searching_ai.length  >= 1){
         //THEN START ;ATCH BETWEEN THEM
-         if(CFG.getConfig().matchmaking_enable_minimum_wait &&  Math.floor((Date.now()-gpfm_res.player_searching_human[0].state_switched_time)/1000) < 20){
+         const player_wait_time =  Math.floor((Date.now()-gpfm_res.player_searching_human[0].state_switched_time)/1000);
+         if(CFG.getConfig().matchmaking_enable_minimum_wait &&  player_wait_time < CFG.getConfig().matchmaking_enable_minimum_wait_time){
              return;
          }
          GH.start_match(gpfm_res.player_searching_human[0].hwid,gpfm_res.player_searching_ai[0].hwid,function (sm_err,sm_res) {
@@ -54,10 +55,10 @@ var matchmaking_job = new CronJob('*/'+CFG.getConfig().matchmaking_runner_interv
          //SORT PLAYER WITH THE LONGEST WAIT TIME IN THE LOBBY
          gpfm_res.player_searching_human.sort(player_sort_function_swt);
          //SELECT THE MOST WAITING PLAYER
-         var p1 = gpfm_res.combined_player_searching[0];
+         var p1 = gpfm_res.player_searching_human[0];
 
 
-         var p2  = gpfm_res.combined_player_searching[HELPER_FUNCTIONS.randomInteger(1,gpfm_res.combined_player_searching.length-1)];
+         var p2  = gpfm_res.player_searching_human[HELPER_FUNCTIONS.randomInteger(1,gpfm_res.player_searching_human.length-1)];
          if(p1.hwid === p2.hwid){
              return;
          }

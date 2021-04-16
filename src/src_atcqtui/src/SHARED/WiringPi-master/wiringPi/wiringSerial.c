@@ -43,10 +43,12 @@
 
 int serialOpen (const char *device, const int baud)
 {
+
   struct termios options ;
   speed_t myBaud ;
   int     status, fd ;
-
+#ifdef __MACH__
+#else
   switch (baud)
   {
     case      50:	myBaud =      B50 ; break ;
@@ -83,7 +85,7 @@ int serialOpen (const char *device, const int baud)
     default:
       return -2 ;
   }
-
+#endif
   if ((fd = open (device, O_RDWR | O_NOCTTY | O_NDELAY | O_NONBLOCK)) == -1)
     return -1 ;
 

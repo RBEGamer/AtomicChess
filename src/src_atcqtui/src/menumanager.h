@@ -37,7 +37,7 @@ public slots:
     void lb_settings_btn();
     void lb_info_btn();
     // ----- LOGIN/START ----//
-    void ls_login_btn();
+    void ls_login_btn(bool _with_scan);
     //------ MAIN MENU ---- //
     void mm_start_ai_btn();
     void mm_player_list_btn();
@@ -99,6 +99,8 @@ public slots:
     void solcal_mvup();
     void solcal_mvdonw();
 
+
+    void qtui_flip_screen(bool _flip);
 private:
     void show_error(QString _err);
     guicommunicator guiconnection;
