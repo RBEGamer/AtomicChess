@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # BUILD DOCUMENTS
-bash ./build_thesis.sh
+bash ./build_thesis_docker.sh
 # COPY TO SERVER DIR
 cp ./thesis.pdf ./thesis_server/protected/thesis_document.pdf
 # START SERVER

@@ -1,9 +1,11 @@
 # THESIS
 
 
+## BUILD DOCKER IMAGE WITH LATEX AND PANDOC INCLUDED
+
+`$ docker build -t atcthesis:latest .`
 
 
+## BUILD THESIS thesis_document
 
-`sudo apt-get install texlive-full`
-`sudo apt-get install texmaker `
-`sudo apt-get update && sudo apt-get install pandoc`
+`$ bash ./build_thesis_docker.sh`

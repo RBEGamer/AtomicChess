@@ -14,24 +14,24 @@
 
 Das Ziel dieser Arbeit ist es, einen autonomen Schachtisch, welcher in der Lage ist Schachfiguren autonom zu bewegen und auf Benutzerinteraktion zu reagieren.
 
-Der Schwerpunkt liegt dabei insbesondere auf der Programmierung des eingebettenen Systems und dem Zusammenspiel dieses mit einem aus dem Internet erreichbaren Servers, welcher als Vermittlungsstelle zwischen verschiedenen Schachtischen dient.
+Der Schwerpunkt liegt dabei insbesondere auf der Programmierung des eingebetteten Systems und dem Zusammenspiel dieses mit einem aus dem Internet erreichbaren Servers, welcher als Vermittlungsstelle zwischen verschiedenen Schachtischen dient.
 
-Dieses besteht zum einem, aus der Positionserkennung und Steuerung der Hardwarekomponenten (Schachfiguren) und zum anderen aus der Kommunikation zwischen dem Tisch selbst und einem in einer Cloud befindlichen Server.
+Dieses besteht zum einem aus der Positionserkennung und Steuerung der Hardwarekomponenten (Schachfiguren) und zum anderen aus der Kommunikation zwischen dem Tisch selbst und einem in einer Cloud befindlichen Server.
 
 Mittels der Programmierung werden diverse Technologien von verschiedenen Einzelsystemen zu einem Gesamtprodukt zusammengesetzt. Zu diesen Einzelsystemen gehören:
 
-* Programmierung der Motorsteuerung, HMI (zB. Qt oder simple Buttons), NFC Tag erkennung
-* Programmierung eines Wrappers für die Kommunikation mit der Cloud (AWS)
-* Statemaschiene und Implementierung der Spielflusssteuerung
+* Programmierung der Motorsteuerung, HMI (zB. Qt oder simple Buttons), NFC-Tag Erkennung
+* Programmierung eines Wrappers für die Kommunikation mit einer Cloud (AWS)
+* State-Maschine und Implementierung der Spielflusssteuerung
 * Backend mit Datenbankanbindung zwischen Server und Embedded-System
-* Verwendung eines CI/CD Systems zum automatisierten bauen der Linux-Images für das Embedded-System
+* Verwendung eines CI/CD Systems zum automatisierten Bauen der Linux-Images für das Embedded-System
 
 
 ## Methodik
 
 Im ersten Abschnitt werden die zum Zeitpunkt existierenden Ansätze und deren Umsetzung beleuchtet.
-Anschliessend werden die zur Umsetzung verwendeten Technologien beleuchtet, welche bei bei den beiden darauffolgenden Prototypen verwendet wurden.
-Im nächsten Abschnitt wird die Cloud-Infrastruktur thematisiert, welche für eine Kommunikation zwischen den Prototypen entscheidend ist.
+Anschliessend werden die zuvor verwendeten Technologien betrachtet, welche bei bei den beiden darauffolgenden Prototypen verwendet wurden.
+Im darauffolgenden Abschnitt wird die Cloud-Infrastruktur thematisiert, welche für eine Kommunikation zwischen den Prototypen entscheidend ist.
 
 Abschliessend wir ein Ausblick auf
 
@@ -66,9 +66,9 @@ Abschliessend wir ein Ausblick auf
 | Besonderheiten                          	| Akku für 30 Spiele                    	| Akku für 15 Spiele					           	| - 								| -								|
 
 
-Bei den DGT Schachbrettern ist zu beachten, dass diese die Schachfiguren nicht autonom bewegen können. Sie wurden jedoch in die Liste aufgenommen, da diese einen Teil der Funktionalitäten der Square Off Schachbrettern abdecken und lediglich die automatische Bewegung der Schachfiguren fehlt.
-Die DGT-Bretter können die Position der Figuren erkennen und ermöglichen so auch Spiele über das Internet; diese können sie auch  als Livestream anbieten.
-Bei Schachtunieren werden diese für die Übertragung der Partien sowie die Aufzeichnung der Spielzüge verwendet und bieten Support für den Anschluss von weiterer Peripherien wie z.B. Schachuhren.
+Bei den DGT-Schachbrettern ist zu beachten, dass diese die Schachfiguren nicht autonom bewegen können. Sie wurden jedoch in die Liste aufgenommen, da diese einen Teil der Funktionalitäten der Square Off Schachbrettern abdecken und lediglich die automatische Bewegung der Schachfiguren fehlt.
+Die DGT-Bretter können die Position der Figuren erkennen und ermöglichen so auch Spiele über das Internet; diese können sie auch als Livestream anbieten.
+Bei Schachturnieren werden diese für die Übertragung der Partien sowie die Aufzeichnung der Spielzüge verwendet und bieten Support für den Anschluss von weiterer Peripherien wie z.B. Schachuhren.
 
 
 Somit gibt es zum Zeitpunkt der Recherche nur einen Hersteller von autonomen Schachbrettern, welcher auch die Figuren bewegen kann.
@@ -80,7 +80,7 @@ Somit gibt es zum Zeitpunkt der Recherche nur einen Hersteller von autonomen Sch
 Bei allen Open-Source Projekten wurden die Features anhand der Beschreibung und der aktuellen Software extrahiert.
 Besonders bei work-in-progress Projekten können sich die Features noch verändern und so weitere Funktionalitäten hinzugefügt werden.
 
-Zusätzlich zu den genannten Projekten sind weitere derartige Projekte verfügbar; in der Tabelle wurde nur jende aufgelistet, welche sich von anderen Projekten in mindestens einem Feature unterscheiden.
+Zusätzlich zu den genannten Projekten sind weitere derartige Projekte verfügbar; in der Tabelle wurde nur jene aufgelistet, welche sich von anderen Projekten in mindestens einem Feature unterscheiden.
 
 Auch existieren weitere Abwandlungen von autonomen Schachbrettern, bei welchem die Figuren von oberhalb des Spielbretts gegriffen bzw. bewegt werden. In einigen Projekten wird dies mittels eines Industrie-Roboters [@actprojectrobot] oder eines modifizierten 3D-Druckers[@atcproject3dprinter] realisiert. Diese wurden hier aufgrund der Mechanik, welche über dem Spielbrett montiert werden muss, nicht berücksichtigt.
 
@@ -136,7 +136,7 @@ Auch muss sich hier die Frage gestellt werden, was mit den ausgeschiedenen Figur
 ## Anforderungsanalyse
 * komplettes vollweriges Produkt
 * alle key requirements welcher der tisch haben soll
-
+* als tabellen
 
 ## Machbarkeitsanalyse
 
@@ -187,7 +187,7 @@ Die RESTful API stellt verschiedene Ressourcen bereit, welche durch eine URI ein
 Eine URI besteht dabei aus mehreren Teilen. Das Schema  gibt an wie die nachfolgenden Teile interpretiert werden sollen. Dabei wird bei einer RESTful Schnittstelle typischerweise das (+http) Protokoll, sowie (+https) verwendet. Dabei steht (+https) für eine verschlüsselte Verbindung. Desweiteren gibt es viele andere Schema, wie z.B (+ftp) welches
 
 
-Somit stellt die RESTful API eine Interoperabilität zwischen verschiedenen Anwendungen und Systemen bereit, welche durch ein Netzwerk miteinander verbunden sind.
+Somit stellt die RESTful API eine Interoperabilität zwischen verschiedenen Anwendungen und Systemen bereit, welche durch ein Netzwerk miteinander verbunden sind.
 Dieser Ansatz ist somit geeignet um die verschiedenen Client Systeme (Schachtisch, Webclient) eine Kommunikation mit dem Server zu erlauben.
 
 
@@ -201,10 +201,12 @@ Dieser Ansatz ist somit geeignet um die verschiedenen Client Systeme (Schachtisc
 * statelss
 Diese stellen alle wichtigen Funktionen zum Betrieb des autonomen Schachtischs zur verfügung.
 
-![Aufbau einer URI](images/ATC_Service_Architecture.png)
+![Aufbau der Service Architecture](images/ATC_Service_Architecture.png)
 
 
 ### Vorüberlegungen
+
+
 
 * welche funktionalitäten müssen abgedeckt werden
 * client aktivitendiagram
@@ -226,9 +228,25 @@ Diese stellen alle wichtigen Funktionen zum Betrieb des autonomen Schachtischs z
 
 ### MoveValidator
 
-* eigenliche schachlogik
-* erstellt / überprüft züge
+
+
+Der MoveValidator-Service bildet im System die eigentliche Schachlogik ab.
+Die Aufgabe ist es, die vom Benutzer eingegebenen Züge auf Richtigkeit zu überprüfen und auf daraufhin neuen Spiel-Status zurückzugeben.
+Dazu zählen unter anderem das neue Schachbrett und ob ein Spieler gewonnen oder verloren hat.
+
+Bevor ein Spiel begonnen wird, generiert der MoveValidator das initiale Spielfeld und bestimmt den Spieler, welcher als erstes am Zug ist.
+
+Der Backend-Service fragt einen neues Spiel an, oder übergibt einen Schachzug inkl. des Spielbretts an den Service. Der Response wird dann vom Backend in der Datenbank gespeichert und weiter an die Client-Devices verteilt.
+
+
+Mit diesem Design ist es möglich auch andere Spielarten im System zu implementieren, nur hier die initialen Spielfelder generiert werden und Züge der Spieler validiert werden.
+
+Für ein anderes Spiel müssen drei
+
+
 * generiter neues brett
+* python chess packge welche pesudo legal moves generiert
+* beispiel Requests
 
 
 ### AutoPlayer
@@ -242,27 +260,73 @@ Diese stellen alle wichtigen Funktionen zum Betrieb des autonomen Schachtischs z
 
 ## Entwicklung Webclient
 
+Der Webclient wurde primär dazu entwickelt um das System während der Entwicklung zu testen.
+Dieser simuliert einen autonomen Schachtisch und verwendet dabei die gleichen (+http) Requests.
+Dieser wurde dabei komplett in (+js) umgesetzt im Zusammenspiel mit (+html) und (+css) und ist somit komplett im Browser lauffähig.
+
+Ausgeliefert werden die statischen Dateien zur Einfachheit durch den Backend-Service.
+* express router
+* public folder
+
+![Webclient: Spielansicht](images/ATC_webclient.png)
+
+Während der Implementierung wurde der Webclient weiter ausgebaut und es wurde weitere Features ergänzt.
+Dazu zählt zum einen eine Übersicht über vergangene und aktuell laufende Spiele. In dieser können Spiele Zug um Zug nachvollzogen werden und weitere Information über den Spielstatus angezeigt werden.
+Auch ist es möglich aktuell laufende Spiele in Echtzeit anzeigen zu lassen, somit wurde eine Livestream-Funktionaliät implementiert.
+
+![Webclient: Statistiken](images/ATC_statistics.png)
+
+
+
+* techstack js
+
+
 * backend zu testen
 * menschliche spieler zu simulieren
 * wärend der entwicklungsphase des tisches gezielt spiele simulieren zu können
-
+* liefert auch statistiken
+* wird zur einfachheit direkt aus dem abckend heraus ausgeliefert da nur statisches html/js/class
 
 
 ## Sicherheit
 
 * authetifizierung
 * https only
-* zertifikate auf clientseite
+* zertifikate auf clientseite geniert jedoch nicht abgefragt
+
 
 
 
 # Grundlegende Verifikation der ausgewälten Technologien
 
 ## Erprobung Buildroot-Framework
+* erstellen eines einfachen images für das embedded System
+* inkl ssh Server und SFTP
+* qt 5 libraries
+* eigenes package atctp
+* test der toolchain
+
 
 ## Verifikfation NFC Technologie
 
-## Schrittmotorsteuerung
+* warum gewählter nfc reader => ndef lesen
+* reicheweiten test mit 22mm
+* test mit benachbarten figuren
+* warum kein RFID => keine speicherung von id auf der controller seite
+* selbherstellung von eigenen figuren ohne modifikation der controllerseite
+
+![Grove PN532 NFC Reader mit Kabelgebundener Antenne](images/ATC_nfc_range_test.JPG)
+
+
+## Schrittmotor / Schrittmotorsteuerung
+* warum => einfache ansteuerung
+* keine STEP DIR somit muss embedded nicht echtzeitfähigsein und kann ggf auch andere task abbarbeiten
+* TMC schrittmotortreiber spi configuration
+* und goto move  => wait for move finished irw testen
+* dafür einfacher python testreiber geschribene
+* schrittverlust nicht zu erwarten
+
+
 
 ## 3D Druck für den mechanischen Aufbau
 
@@ -274,9 +338,37 @@ Diese stellen alle wichtigen Funktionen zum Betrieb des autonomen Schachtischs z
 
 # Erstellung erster Prototyp
 
+* vorgaben IKEA tisch al
+
 ## Technologieauswahl für ersten Protoypen
 
 * durch verifikation bestätigt
+
+
+## CAD Design
+
+* Einabrietung in Fusion360
+* Cad design aller bauteile
+* standartxy
+* erweituerng des spielraums durch zwei Magnete
+
+## Schaltungsentwurf Motorsteuerung
+
+
+* auswahl der Motortreiber (leise, bus ansteuerung)
+* ansteuerung pn532 und umsetzung auf uart
+
+* platinendesign
+*
+
+##  Anpassung Controller Software
+
+
+### Implementierung HAL
+* ansteuerung des TMC5160
+* ansterung des Microncontollers (PN532, LED)
+* integration in controller software
+
 
 
 

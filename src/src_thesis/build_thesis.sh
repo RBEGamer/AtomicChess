@@ -1,5 +1,5 @@
 #!/bin/bash
-
+cd .
 # REMOVE TEMP FILES
 rm -f *.aux
 rm -f *.lof

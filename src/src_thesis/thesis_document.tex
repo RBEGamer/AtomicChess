@@ -22,15 +22,19 @@
 \hypertarget{zielsetzung}{%
 \subsection{Zielsetzung}\label{zielsetzung}}
 
-Das Ziel dieser Arbeit ist es, einen autonomen Schach-Tisch, welcher in
+Das Ziel dieser Arbeit ist es, einen autonomen Schachtisch, welcher in
 der Lage ist Schachfiguren autonom zu bewegen und auf
 Benutzerinteraktion zu reagieren.
 
 Der Schwerpunkt liegt dabei insbesondere auf der Programmierung des
-eingebettenen Systems. Dieses besteht zum einem, aus der
-Positionserkennung und Steuerung der Hardwarekomponenten (Schachfiguren)
-und zum anderen aus der Kommunikation zwischen dem Tisch selbst und
-einem in einer Cloud befindlichen Server.
+eingebetteten Systems und dem Zusammenspiel dieses mit einem aus dem
+Internet erreichbaren Servers, welcher als Vermittlungsstelle zwischen
+verschiedenen Schachtischen dient.
+
+Dieses besteht zum einem aus der Positionserkennung und Steuerung der
+Hardwarekomponenten (Schachfiguren) und zum anderen aus der
+Kommunikation zwischen dem Tisch selbst und einem in einer Cloud
+befindlichen Server.
 
 Mittels der Programmierung werden diverse Technologien von verschiedenen
 Einzelsystemen zu einem Gesamtprodukt zusammengesetzt. Zu diesen
@@ -40,25 +44,36 @@ Einzelsystemen gehören:
 \tightlist
 \item
   Programmierung der Motorsteuerung, HMI (zB. Qt oder simple Buttons),
-  NFC Tag erkennung
+  NFC-Tag Erkennung
 \item
-  Programmierung eines Wrappers für die Kommunikation mit der Cloud
+  Programmierung eines Wrappers für die Kommunikation mit einer Cloud
   (AWS)
 \item
-  Statemaschiene und Implementierung der Spielflusssteuerung
+  State-Maschine und Implementierung der Spielflusssteuerung
 \item
   Backend mit Datenbankanbindung zwischen Server und Embedded-System
 \item
-  Verwendung eines CI/CD Systems zum automatisierten bauen der
+  Verwendung eines CI/CD Systems zum automatisierten Bauen der
   Linux-Images für das Embedded-System
 \end{itemize}
 
-\hypertarget{aufbau-der-arbeit}{%
-\subsection{Aufbau der Arbeit}\label{aufbau-der-arbeit}}
+\hypertarget{methodik}{%
+\subsection{Methodik}\label{methodik}}
 
-beleuchtung existierender ansätze \&\& festlegung zu erwartener
-Features, Kapitel x+1 zusammenführung in die DK HW,Kaptiel x+4 test und
-fazit,demonstration und validierung der funktionsfähigkeit
+Im ersten Abschnitt werden die zum Zeitpunkt existierenden Ansätze und
+deren Umsetzung beleuchtet. Anschliessend werden die zuvor verwendeten
+Technologien betrachtet, welche bei bei den beiden darauffolgenden
+Prototypen verwendet wurden. Im darauffolgenden Abschnitt wird die
+Cloud-Infrastruktur thematisiert, welche für eine Kommunikation zwischen
+den Prototypen entscheidend ist.
+
+Abschliessend wir ein Ausblick auf
+
+\begin{itemize}
+\tightlist
+\item
+  ausblick weitere features
+\end{itemize}
 
 \hypertarget{analyse-bestehender-systeme-und-machbarkeitsanalyse}{%
 \section{Analyse bestehender Systeme und
@@ -67,6 +82,14 @@ Machbarkeitsanalyse}\label{analyse-bestehender-systeme-und-machbarkeitsanalyse}}
 \hypertarget{existierende-systeme-im-vergleich}{%
 \subsection{Existierende Systeme im
 Vergleich}\label{existierende-systeme-im-vergleich}}
+
+\begin{itemize}
+\tightlist
+\item
+  nieschenprodukt jedoch einige Projekte im OpenSource bereich verfügbar
+\item
+  ein kommerzieller hersteller
+\end{itemize}
 
 \hypertarget{kommerzielle-produkte}{%
 \subsubsection{Kommerzielle Produkte}\label{kommerzielle-produkte}}
@@ -203,21 +226,19 @@ Akku für 15 Spiele\strut
 \bottomrule
 \end{longtable}
 
-Bei den DGT Schachbrettern ist zu beachten, dass diese die Schachfiguren
+Bei den DGT-Schachbrettern ist zu beachten, dass diese die Schachfiguren
 nicht autonom bewegen können. Sie wurden jedoch in die Liste
 aufgenommen, da diese einen Teil der Funktionalitäten der Square Off
 Schachbrettern abdecken und lediglich die automatische Bewegung der
 Schachfiguren fehlt. Die DGT-Bretter können die Position der Figuren
 erkennen und ermöglichen so auch Spiele über das Internet; diese können
-sie auch als Livestream anbieten. Bei Schachtunieren werden diese für
+sie auch als Livestream anbieten. Bei Schachturnieren werden diese für
 die Übertragung der Partien sowie die Aufzeichnung der Spielzüge
 verwendet und bieten Support für den Anschluss von weiterer Peripherien
 wie z.B. Schachuhren.
 
 Somit gibt es zum Zeitpunkt der Recherche nur einen Hersteller von
-autonomen Schachbrettern, welcher auch die Figuren bewegen kann.sdfger
-
-wdad
+autonomen Schachbrettern, welcher auch die Figuren bewegen kann.
 
 \hypertarget{open-source-projekte}{%
 \subsubsection{Open-Source Projekte}\label{open-source-projekte}}
@@ -228,7 +249,7 @@ work-in-progress Projekten können sich die Features noch verändern und
 so weitere Funktionalitäten hinzugefügt werden.
 
 Zusätzlich zu den genannten Projekten sind weitere derartige Projekte
-verfügbar; in der Tabelle wurde nur jende aufgelistet, welche sich von
+verfügbar; in der Tabelle wurde nur jene aufgelistet, welche sich von
 anderen Projekten in mindestens einem Feature unterscheiden.
 
 Auch existieren weitere Abwandlungen von autonomen Schachbrettern, bei
@@ -385,9 +406,9 @@ Lichtverhältnissen, auch muss die Kamera oberhalb der Schachfiguren
 platziert werden, wenn kein transparentes Schachfeld verwendet werden
 soll.
 
-Eine andere Alternative ist die Verwendung einer Matrix aus
-Reed-Schaltern oder Hallsensoren. Diese werden in einer 8x8 Matrix
-Konfiguration unterhalb der Platte montiert und reagieren auf die
+Eine weitere Alternative ist die Verwendung einer Matrix aus
+Reed-Schaltern oder Halleffekt-Sensoren. Diese werden in einer 8x8
+Matrix Konfiguration unterhalb der Platte montiert und reagieren auf die
 Magnete in den Figuren. So ist es möglich zu erkennen, welches der
 Schachfelder belegt ist, jedoch nicht konkret von welchem Figurtypen.
 Dieses Problem wird durch eine definierte Ausgangsstellung beim
@@ -420,6 +441,10 @@ oder vom Benutzer manuell geschehen. Danach ist der Tisch für die
 nächste Partie bereit, welche einfach per Knopfdruck gestartet werden
 können sollte.
 
+Dies soll auf für abgebrochene Spiele gelten, welche von Benutzer oder
+durch das System abgebrochen werden. Hierbei soll das Schachbrett sich
+ebenfalls selbständig zurücksetzten können.
+
 Ein weiter Punkt welcher bei der User-Experience beachtet werden soll,
 ist die zeitliche Konstante. Ein Spiel auf einem normalen Schachspiel
 hat je nach Spielart kein Zeitlimit, dies kann für das gesamte Spiel
@@ -427,15 +452,35 @@ gelten oder auch für die Zeit zwischen einzelnen Zügen. Der autonome
 Schachtisch soll es dem Spieler z.B. ermöglichen ein Spiel am Morgen zu
 beginnen und dieses erst am nächsten Tag fortzusetzen.
 
+Auch muss sich hier die Frage gestellt werden, was mit den
+ausgeschiedenen Figuren geschieht. Bei den autonomen Schachbrettern von
+Square Off\cite{squareoffgrand}, werden die Figuren an die Seite auf
+vordefinierte Felder bewegt und können so wieder bei der nächsten Partie
+vom System aufgestellt werden. Viele andere Projekte schieben die
+Figuren auf dem Feld heraus, können diese aber im Anschluss nicht mehr
+gezielt in das Feld zurückholen. So muss diese Aufgabe vom Benutzer
+geschehen. Auch wir diese Funktionalität von einigen Projekten nicht
+abgedeckt und der Benutzer muss die Figuren selbständig vom Feld
+entfernen.
+
 \hypertarget{anforderungsanalyse}{%
 \subsection{Anforderungsanalyse}\label{anforderungsanalyse}}
 
-alle key requirements welcher der tisch haben soll
+\begin{itemize}
+\tightlist
+\item
+  komplettes vollweriges Produkt
+\item
+  alle key requirements welcher der tisch haben soll
+\item
+  als tabellen
+\end{itemize}
 
 \hypertarget{machbarkeitsanalyse}{%
 \subsection{Machbarkeitsanalyse}\label{machbarkeitsanalyse}}
 
-welche technologien werden benötigt
+welche technologien werden benötigt * software architektur anfoderungen
+* hardware anforderungen * grosse * wiederholgenauigkeit * lautstärke *
 
 \hypertarget{technologien-im-makerspace}{%
 \subsubsection{Technologien im
@@ -446,11 +491,373 @@ stehen diese im makerspace zur verfüfung
 \hypertarget{section}{%
 \subsubsection{}\label{section}}
 
+\hypertarget{entwicklung-der-cloud-infrastruktur}{%
+\section{Entwicklung der Cloud
+Infrastruktur}\label{entwicklung-der-cloud-infrastruktur}}
+
+Die erste Phase der Entwicklung des Systems bestand in der Entwicklung
+der Cloud-Infrastruktur und der darauf laufenden Services. Hierbei
+stellt die ``Cloud'', einen Server dar, welcher aus dem Internet über
+eine feste IPv4 und eine IPv6 verfügt und frei konfiguriert werden kann.
+
+\begin{figure}
+\centering
+\includegraphics{images/ATC_Cloud_Architecture.png}
+\caption{Gesamtübersicht der verwendeten Cloud-Infrastruktur}
+\end{figure}
+
+\hypertarget{api-design}{%
+\subsection{API Design}\label{api-design}}
+
+Das System soll so ausgelegt werden, dass es im späteren Zeitpunkt mit
+verschiedenen Client-Devices mit diesem kommunizieren können. Dazu
+zählen zum einen der autonome Schachtisch, aber z.B. auch einen
+Web-Client, welcher die Funktionalität eines Schachtisch im Browser
+abbilden kann. Hierzu muss das System eine einheitliche REST
+bereitstellen.
+
+Eine RESTful API bezeichnet eine API welche HTTP-Requests verwendet um
+auf Daten zugreifen zu können.
+
+\begin{itemize}
+\tightlist
+\item
+  grafik
+\item
+  5 requirements
+\end{itemize}
+
+Die RESTful API stellt verschiedene Ressourcen bereit, welche durch eine
+URI eindeutig identifizierbar sind. Auf diese können mittels
+verschiedenster HTTP Anfragemethoden (GET, POST, PUT, DELETE)
+zugegriffen werden. Jeder dieser Methoden stellt einen anderen Zugriff
+auf die Ressource dar und beeinflusst somit das Verhalten und die
+Rückantwort dieser.
+
+\begin{figure}
+\centering
+\includegraphics{images/ATC_URI_SCHEMES.png}
+\caption{Aufbau einer URI}
+\end{figure}
+
+Eine URI besteht dabei aus mehreren Teilen. Das Schema gibt an wie die
+nachfolgenden Teile interpretiert werden sollen. Dabei wird bei einer
+RESTful Schnittstelle typischerweise das \gls{http} Protokoll, sowie
+\gls{https} verwendet. Dabei steht \gls{https} für eine verschlüsselte
+Verbindung. Desweiteren gibt es viele andere Schema, wie z.B \gls{ftp}
+welches
+
+Somit stellt die RESTful API eine Interoperabilität zwischen
+verschiedenen Anwendungen und Systemen bereit, welche durch ein Netzwerk
+miteinander verbunden sind. Dieser Ansatz ist somit geeignet um die
+verschiedenen Client Systeme (Schachtisch, Webclient) eine Kommunikation
+mit dem Server zu erlauben.
+
+\hypertarget{service-architektur}{%
+\subsection{Service Architektur}\label{service-architektur}}
+
+\begin{itemize}
+\tightlist
+\item
+  was ist ein Service
+\item
+  microservice ansatz
+\item
+  Kapselung der Schach spiel spzifischen funktionaliutäten
+\item
+  verwendung von NoSQL Datenbanken somit müssen tabellen nicht spzeill
+  auf Schach spezifische felder ausgelegt sein
+\item
+  statelss Diese stellen alle wichtigen Funktionen zum Betrieb des
+  autonomen Schachtischs zur verfügung.
+\end{itemize}
+
+\begin{figure}
+\centering
+\includegraphics{images/ATC_Service_Architecture.png}
+\caption{Aufbau der Service Architecture}
+\end{figure}
+
+\hypertarget{voruxfcberlegungen}{%
+\subsubsection{Vorüberlegungen}\label{voruxfcberlegungen}}
+
+\begin{itemize}
+\tightlist
+\item
+  welche funktionalitäten müssen abgedeckt werden
+\item
+  client aktivitendiagram
+\end{itemize}
+
+\hypertarget{backend}{%
+\subsubsection{Backend}\label{backend}}
+
+\begin{itemize}
+\tightlist
+\item
+  matchmaking schachlogik
+\item
+  zentraler zugriffspunkt auf das System und stellt diese abi bereit
+\item
+  stellt spielerprofile aus datenbanken bereit bereit
+\item
+  authentifizierung der clients und deren sessions
+\item
+  weiterleitung der von spielerinteraktionen an move validator
+\end{itemize}
+
+\hypertarget{movevalidator}{%
+\subsubsection{MoveValidator}\label{movevalidator}}
+
+Der MoveValidator-Service bildet im System die eigentliche Schachlogik
+ab. Die Aufgabe ist es, die vom Benutzer eingegebenen Züge auf
+Richtigkeit zu überprüfen und auf daraufhin neuen Spiel-Status
+zurückzugeben. Dazu zählen unter anderem das neue Schachbrett und ob ein
+Spieler gewonnen oder verloren hat.
+
+Bevor ein Spiel begonnen wird, generiert der MoveValidator das initiale
+Spielfeld und bestimmt den Spieler, welcher als erstes am Zug ist.
+
+Der Backend-Service fragt einen neues Spiel an, oder übergibt einen
+Schachzug inkl. des Spielbretts an den Service. Der Response wird dann
+vom Backend in der Datenbank gespeichert und weiter an die
+Client-Devices verteilt.
+
+Mit diesem Design ist es möglich auch andere Spielarten im System zu
+implementieren, nur hier die initialen Spielfelder generiert werden und
+Züge der Spieler validiert werden.
+
+Für ein anderes Spiel müssen drei
+
+\begin{itemize}
+\tightlist
+\item
+  generiter neues brett
+\item
+  python chess packge welche pesudo legal moves generiert
+\item
+  beispiel Requests
+\end{itemize}
+
+\hypertarget{autoplayer}{%
+\subsubsection{AutoPlayer}\label{autoplayer}}
+
+\begin{itemize}
+\tightlist
+\item
+  stellt schachai dar
+\item
+  agiert als selbstäniger spieler
+\item
+  wenn nicht genügend menschlich spieler vorhanden sind
+\end{itemize}
+
+\hypertarget{entwicklung-webclient}{%
+\subsection{Entwicklung Webclient}\label{entwicklung-webclient}}
+
+Der Webclient wurde primär dazu entwickelt um das System während der
+Entwicklung zu testen. Dieser simuliert einen autonomen Schachtisch und
+verwendet dabei die gleichen \gls{http} Requests. Dieser wurde dabei
+komplett in \gls{js} umgesetzt im Zusammenspiel mit \gls{html} und
+\gls{css} und ist somit komplett im Browser lauffähig.
+
+Ausgeliefert werden die statischen Dateien zur Einfachheit durch den
+Backend-Service. * express router * public folder
+
+\begin{figure}
+\centering
+\includegraphics{images/ATC_webclient.png}
+\caption{Webclient: Spielansicht}
+\end{figure}
+
+Während der Implementierung wurde der Webclient weiter ausgebaut und es
+wurde weitere Features ergänzt. Dazu zählt zum einen eine Übersicht über
+vergangene und aktuell laufende Spiele. In dieser können Spiele Zug um
+Zug nachvollzogen werden und weitere Information über den Spielstatus
+angezeigt werden. Auch ist es möglich aktuell laufende Spiele in
+Echtzeit anzeigen zu lassen, somit wurde eine Livestream-Funktionaliät
+implementiert.
+
+\begin{figure}
+\centering
+\includegraphics{images/ATC_statistics.png}
+\caption{Webclient: Statistiken}
+\end{figure}
+
+\begin{itemize}
+\item
+  techstack js
+\item
+  backend zu testen
+\item
+  menschliche spieler zu simulieren
+\item
+  wärend der entwicklungsphase des tisches gezielt spiele simulieren zu
+  können
+\item
+  liefert auch statistiken
+\item
+  wird zur einfachheit direkt aus dem abckend heraus ausgeliefert da nur
+  statisches html/js/class
+\end{itemize}
+
+\hypertarget{sicherheit}{%
+\subsection{Sicherheit}\label{sicherheit}}
+
+\begin{itemize}
+\tightlist
+\item
+  authetifizierung
+\item
+  https only
+\item
+  zertifikate auf clientseite geniert jedoch nicht abgefragt
+\end{itemize}
+
+\hypertarget{grundlegende-verifikation-der-ausgewuxe4lten-technologien}{%
+\section{Grundlegende Verifikation der ausgewälten
+Technologien}\label{grundlegende-verifikation-der-ausgewuxe4lten-technologien}}
+
+\hypertarget{erprobung-buildroot-framework}{%
+\subsection{Erprobung
+Buildroot-Framework}\label{erprobung-buildroot-framework}}
+
+\begin{itemize}
+\tightlist
+\item
+  erstellen eines einfachen images für das embedded System
+\item
+  inkl ssh Server und SFTP
+\item
+  qt 5 libraries
+\item
+  eigenes package atctp
+\item
+  test der toolchain
+\end{itemize}
+
+\hypertarget{verifikfation-nfc-technologie}{%
+\subsection{Verifikfation NFC
+Technologie}\label{verifikfation-nfc-technologie}}
+
+\begin{itemize}
+\tightlist
+\item
+  warum gewählter nfc reader =\textgreater{} ndef lesen
+\item
+  reicheweiten test mit 22mm
+\item
+  test mit benachbarten figuren
+\item
+  warum kein RFID =\textgreater{} keine speicherung von id auf der
+  controller seite
+\item
+  selbherstellung von eigenen figuren ohne modifikation der
+  controllerseite
+\end{itemize}
+
+\begin{figure}
+\centering
+\includegraphics{images/ATC_nfc_range_test.JPG}
+\caption{Grove PN532 NFC Reader mit Kabelgebundener Antenne}
+\end{figure}
+
+\hypertarget{schrittmotor-schrittmotorsteuerung}{%
+\subsection{Schrittmotor /
+Schrittmotorsteuerung}\label{schrittmotor-schrittmotorsteuerung}}
+
+\begin{itemize}
+\tightlist
+\item
+  warum =\textgreater{} einfache ansteuerung
+\item
+  keine STEP DIR somit muss embedded nicht echtzeitfähigsein und kann
+  ggf auch andere task abbarbeiten
+\item
+  TMC schrittmotortreiber spi configuration
+\item
+  und goto move =\textgreater{} wait for move finished irw testen
+\item
+  dafür einfacher python testreiber geschribene
+\item
+  schrittverlust nicht zu erwarten
+\end{itemize}
+
+\hypertarget{d-druck-fuxfcr-den-mechanischen-aufbau}{%
+\subsection{3D Druck für den mechanischen
+Aufbau}\label{d-druck-fuxfcr-den-mechanischen-aufbau}}
+
 \hypertarget{erstellung-erster-prototyp}{%
 \section{Erstellung erster Prototyp}\label{erstellung-erster-prototyp}}
+
+\begin{itemize}
+\tightlist
+\item
+  vorgaben IKEA tisch al
+\end{itemize}
 
 \hypertarget{technologieauswahl-fuxfcr-ersten-protoypen}{%
 \subsection{Technologieauswahl für ersten
 Protoypen}\label{technologieauswahl-fuxfcr-ersten-protoypen}}
 
-was stejt zur verfügung
+\begin{itemize}
+\tightlist
+\item
+  durch verifikation bestätigt
+\end{itemize}
+
+\hypertarget{cad-design}{%
+\subsection{CAD Design}\label{cad-design}}
+
+\begin{itemize}
+\tightlist
+\item
+  Einabrietung in Fusion360
+\item
+  Cad design aller bauteile
+\item
+  standartxy
+\item
+  erweituerng des spielraums durch zwei Magnete
+\end{itemize}
+
+\hypertarget{schaltungsentwurf-motorsteuerung}{%
+\subsection{Schaltungsentwurf
+Motorsteuerung}\label{schaltungsentwurf-motorsteuerung}}
+
+\begin{itemize}
+\item
+  auswahl der Motortreiber (leise, bus ansteuerung)
+\item
+  ansteuerung pn532 und umsetzung auf uart
+\item
+  platinendesign
+\item
+\end{itemize}
+
+\hypertarget{anpassung-controller-software}{%
+\subsection{Anpassung Controller
+Software}\label{anpassung-controller-software}}
+
+\hypertarget{implementierung-hal}{%
+\subsubsection{Implementierung HAL}\label{implementierung-hal}}
+
+\begin{itemize}
+\tightlist
+\item
+  ansteuerung des TMC5160
+\item
+  ansterung des Microncontollers (PN532, LED)
+\item
+  integration in controller software
+\end{itemize}
+
+\hypertarget{erstellung-zweiter-prototyp}{%
+\section{Erstellung zweiter
+Prototyp}\label{erstellung-zweiter-prototyp}}
+
+\hypertarget{fazit}{%
+\section{Fazit}\label{fazit}}
+
+\hypertarget{ausblick}{%
+\subsection{Ausblick}\label{ausblick}}
