@@ -1,5 +1,4 @@
-\hypertarget{einleitung}{%
-\section{Einleitung}\label{einleitung}}
+Authentifizierung\# Einleitung
 
 \hypertarget{motivation}{%
 \subsection{Motivation}\label{motivation}}
@@ -476,20 +475,149 @@ entfernen.
   als tabellen
 \end{itemize}
 
-\hypertarget{machbarkeitsanalyse}{%
-\subsection{Machbarkeitsanalyse}\label{machbarkeitsanalyse}}
-
-welche technologien werden benötigt * software architektur anfoderungen
-* hardware anforderungen * grosse * wiederholgenauigkeit * lautstärke *
-
 \hypertarget{technologien-im-makerspace}{%
 \subsubsection{Technologien im
 Makerspace}\label{technologien-im-makerspace}}
 
 stehen diese im makerspace zur verfüfung
 
-\hypertarget{section}{%
-\subsubsection{}\label{section}}
+\hypertarget{machbarkeitsanalyse}{%
+\subsection{Machbarkeitsanalyse}\label{machbarkeitsanalyse}}
+
+welche technologien werden benötigt * software architektur anfoderungen
+* hardware anforderungen * grosse * wiederholgenauigkeit * lautstärke *
+
+\hypertarget{grundlegende-verifikation-der-ausgewuxe4lten-technologien}{%
+\section{Grundlegende Verifikation der ausgewälten
+Technologien}\label{grundlegende-verifikation-der-ausgewuxe4lten-technologien}}
+
+\hypertarget{erprobung-buildroot-framework}{%
+\subsection{Erprobung
+Buildroot-Framework}\label{erprobung-buildroot-framework}}
+
+\begin{itemize}
+\tightlist
+\item
+  erstellen eines einfachen images für das embedded System
+\item
+  inkl ssh Server und SFTP
+\item
+  qt 5 libraries
+\item
+  eigenes package atctp
+\item
+  test der toolchain
+\end{itemize}
+
+\hypertarget{verifikfation-nfc-technologie}{%
+\subsection{Verifikfation NFC
+Technologie}\label{verifikfation-nfc-technologie}}
+
+\begin{itemize}
+\tightlist
+\item
+  warum gewählter nfc reader =\textgreater{} ndef lesen
+\item
+  reicheweiten test mit 22mm
+\item
+  test mit benachbarten figuren
+\item
+  warum kein RFID =\textgreater{} keine speicherung von id auf der
+  controller seite
+\item
+  selbherstellung von eigenen figuren ohne modifikation der
+  controllerseite
+\end{itemize}
+
+\begin{figure}
+\centering
+\includegraphics{images/ATC_nfc_range_test.JPG}
+\caption{Grove PN532 NFC Reader mit Kabelgebundener Antenne}
+\end{figure}
+
+\hypertarget{schrittmotor-schrittmotorsteuerung}{%
+\subsection{Schrittmotor /
+Schrittmotorsteuerung}\label{schrittmotor-schrittmotorsteuerung}}
+
+\begin{itemize}
+\tightlist
+\item
+  warum =\textgreater{} einfache ansteuerung
+\item
+  keine STEP DIR somit muss embedded nicht echtzeitfähigsein und kann
+  ggf auch andere task abbarbeiten
+\item
+  TMC schrittmotortreiber spi configuration
+\item
+  und goto move =\textgreater{} wait for move finished irw testen
+\item
+  dafür einfacher python testreiber geschribene
+\item
+  schrittverlust nicht zu erwarten
+\end{itemize}
+
+\hypertarget{d-druck-fuxfcr-den-mechanischen-aufbau}{%
+\subsection{3D Druck für den mechanischen
+Aufbau}\label{d-druck-fuxfcr-den-mechanischen-aufbau}}
+
+\hypertarget{erstellung-erster-prototyp}{%
+\section{Erstellung erster Prototyp}\label{erstellung-erster-prototyp}}
+
+\begin{itemize}
+\tightlist
+\item
+  vorgaben IKEA tisch al
+\end{itemize}
+
+\hypertarget{mechanik}{%
+\subsection{Mechanik}\label{mechanik}}
+
+\begin{itemize}
+\item
+  xy riemen führung
+\item
+  spiel in Mechanik
+\item
+\item
+  Einabrietung in Fusion360
+\item
+  Cad design aller bauteile
+\item
+  standartxy
+\item
+  erweituerng des spielraums durch zwei Magnete
+\end{itemize}
+
+\hypertarget{schaltungsentwurf-motorsteuerung}{%
+\subsection{Schaltungsentwurf
+Motorsteuerung}\label{schaltungsentwurf-motorsteuerung}}
+
+\begin{itemize}
+\item
+  auswahl der Motortreiber (leise, bus ansteuerung)
+\item
+  ansteuerung pn532 und umsetzung auf uart
+\item
+  platinendesign
+\item
+\end{itemize}
+
+\hypertarget{implementierung-hal}{%
+\subsubsection{Implementierung HAL}\label{implementierung-hal}}
+
+\begin{itemize}
+\tightlist
+\item
+  ansteuerung des TMC5160
+\item
+  ansterung des Microncontollers (PN532, LED)
+\item
+  integration in controller software
+\end{itemize}
+
+\hypertarget{erstellung-zweiter-prototyp}{%
+\section{Erstellung zweiter
+Prototyp}\label{erstellung-zweiter-prototyp}}
 
 \hypertarget{entwicklung-der-cloud-infrastruktur}{%
 \section{Entwicklung der Cloud
@@ -701,8 +829,8 @@ implementiert.
   statisches html/js/class
 \end{itemize}
 
-\hypertarget{sicherheit}{%
-\subsection{Sicherheit}\label{sicherheit}}
+\hypertarget{authetifizierung}{%
+\subsection{Authetifizierung}\label{authetifizierung}}
 
 \begin{itemize}
 \tightlist
@@ -714,147 +842,8 @@ implementiert.
   zertifikate auf clientseite geniert jedoch nicht abgefragt
 \end{itemize}
 
-\hypertarget{grundlegende-verifikation-der-ausgewuxe4lten-technologien}{%
-\section{Grundlegende Verifikation der ausgewälten
-Technologien}\label{grundlegende-verifikation-der-ausgewuxe4lten-technologien}}
-
-\hypertarget{erprobung-buildroot-framework}{%
-\subsection{Erprobung
-Buildroot-Framework}\label{erprobung-buildroot-framework}}
-
-\begin{itemize}
-\tightlist
-\item
-  erstellen eines einfachen images für das embedded System
-\item
-  inkl ssh Server und SFTP
-\item
-  qt 5 libraries
-\item
-  eigenes package atctp
-\item
-  test der toolchain
-\end{itemize}
-
-\hypertarget{verifikfation-nfc-technologie}{%
-\subsection{Verifikfation NFC
-Technologie}\label{verifikfation-nfc-technologie}}
-
-\begin{itemize}
-\tightlist
-\item
-  warum gewählter nfc reader =\textgreater{} ndef lesen
-\item
-  reicheweiten test mit 22mm
-\item
-  test mit benachbarten figuren
-\item
-  warum kein RFID =\textgreater{} keine speicherung von id auf der
-  controller seite
-\item
-  selbherstellung von eigenen figuren ohne modifikation der
-  controllerseite
-\end{itemize}
-
-\begin{figure}
-\centering
-\includegraphics{images/ATC_nfc_range_test.JPG}
-\caption{Grove PN532 NFC Reader mit Kabelgebundener Antenne}
-\end{figure}
-
-\hypertarget{schrittmotor-schrittmotorsteuerung}{%
-\subsection{Schrittmotor /
-Schrittmotorsteuerung}\label{schrittmotor-schrittmotorsteuerung}}
-
-\begin{itemize}
-\tightlist
-\item
-  warum =\textgreater{} einfache ansteuerung
-\item
-  keine STEP DIR somit muss embedded nicht echtzeitfähigsein und kann
-  ggf auch andere task abbarbeiten
-\item
-  TMC schrittmotortreiber spi configuration
-\item
-  und goto move =\textgreater{} wait for move finished irw testen
-\item
-  dafür einfacher python testreiber geschribene
-\item
-  schrittverlust nicht zu erwarten
-\end{itemize}
-
-\hypertarget{d-druck-fuxfcr-den-mechanischen-aufbau}{%
-\subsection{3D Druck für den mechanischen
-Aufbau}\label{d-druck-fuxfcr-den-mechanischen-aufbau}}
-
-\hypertarget{erstellung-erster-prototyp}{%
-\section{Erstellung erster Prototyp}\label{erstellung-erster-prototyp}}
-
-\begin{itemize}
-\tightlist
-\item
-  vorgaben IKEA tisch al
-\end{itemize}
-
-\hypertarget{technologieauswahl-fuxfcr-ersten-protoypen}{%
-\subsection{Technologieauswahl für ersten
-Protoypen}\label{technologieauswahl-fuxfcr-ersten-protoypen}}
-
-\begin{itemize}
-\tightlist
-\item
-  durch verifikation bestätigt
-\end{itemize}
-
-\hypertarget{cad-design}{%
-\subsection{CAD Design}\label{cad-design}}
-
-\begin{itemize}
-\tightlist
-\item
-  Einabrietung in Fusion360
-\item
-  Cad design aller bauteile
-\item
-  standartxy
-\item
-  erweituerng des spielraums durch zwei Magnete
-\end{itemize}
-
-\hypertarget{schaltungsentwurf-motorsteuerung}{%
-\subsection{Schaltungsentwurf
-Motorsteuerung}\label{schaltungsentwurf-motorsteuerung}}
-
-\begin{itemize}
-\item
-  auswahl der Motortreiber (leise, bus ansteuerung)
-\item
-  ansteuerung pn532 und umsetzung auf uart
-\item
-  platinendesign
-\item
-\end{itemize}
-
-\hypertarget{anpassung-controller-software}{%
-\subsection{Anpassung Controller
-Software}\label{anpassung-controller-software}}
-
-\hypertarget{implementierung-hal}{%
-\subsubsection{Implementierung HAL}\label{implementierung-hal}}
-
-\begin{itemize}
-\tightlist
-\item
-  ansteuerung des TMC5160
-\item
-  ansterung des Microncontollers (PN532, LED)
-\item
-  integration in controller software
-\end{itemize}
-
-\hypertarget{erstellung-zweiter-prototyp}{%
-\section{Erstellung zweiter
-Prototyp}\label{erstellung-zweiter-prototyp}}
+\hypertarget{controller-software}{%
+\section{Controller software}\label{controller-software}}
 
 \hypertarget{fazit}{%
 \section{Fazit}\label{fazit}}

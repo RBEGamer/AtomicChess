@@ -1,4 +1,4 @@
-# Einleitung
+Authentifizierung# Einleitung
 
 ## Motivation
 
@@ -138,6 +138,11 @@ Auch muss sich hier die Frage gestellt werden, was mit den ausgeschiedenen Figur
 * alle key requirements welcher der tisch haben soll
 * als tabellen
 
+### Technologien im Makerspace
+
+stehen diese im makerspace zur verfüfung
+
+
 ## Machbarkeitsanalyse
 
 welche technologien werden benötigt
@@ -148,13 +153,106 @@ welche technologien werden benötigt
 * lautstärke
 *
 
-### Technologien im Makerspace
-
-stehen diese im makerspace zur verfüfung
 
 
 
-###
+
+
+
+
+
+# Grundlegende Verifikation der ausgewälten Technologien
+
+## Erprobung Buildroot-Framework
+* erstellen eines einfachen images für das embedded System
+* inkl ssh Server und SFTP
+* qt 5 libraries
+* eigenes package atctp
+* test der toolchain
+
+
+## Verifikfation NFC Technologie
+
+* warum gewählter nfc reader => ndef lesen
+* reicheweiten test mit 22mm
+* test mit benachbarten figuren
+* warum kein RFID => keine speicherung von id auf der controller seite
+* selbherstellung von eigenen figuren ohne modifikation der controllerseite
+
+![Grove PN532 NFC Reader mit Kabelgebundener Antenne](images/ATC_nfc_range_test.JPG)
+
+
+## Schrittmotor / Schrittmotorsteuerung
+* warum => einfache ansteuerung
+* keine STEP DIR somit muss embedded nicht echtzeitfähigsein und kann ggf auch andere task abbarbeiten
+* TMC schrittmotortreiber spi configuration
+* und goto move  => wait for move finished irw testen
+* dafür einfacher python testreiber geschribene
+* schrittverlust nicht zu erwarten
+
+
+
+## 3D Druck für den mechanischen Aufbau
+
+
+
+
+
+
+
+# Erstellung erster Prototyp
+
+* vorgaben IKEA tisch al
+
+
+
+
+## Mechanik
+
+* xy riemen führung
+* spiel in Mechanik
+*
+
+* Einabrietung in Fusion360
+* Cad design aller bauteile
+* standartxy
+* erweituerng des spielraums durch zwei Magnete
+
+## Schaltungsentwurf Motorsteuerung
+
+
+* auswahl der Motortreiber (leise, bus ansteuerung)
+* ansteuerung pn532 und umsetzung auf uart
+
+* platinendesign
+*
+
+
+
+
+### Implementierung HAL
+* ansteuerung des TMC5160
+* ansterung des Microncontollers (PN532, LED)
+* integration in controller software
+
+
+
+
+
+# Erstellung zweiter Prototyp
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -276,10 +374,7 @@ Auch ist es möglich aktuell laufende Spiele in Echtzeit anzeigen zu lassen, som
 
 ![Webclient: Statistiken](images/ATC_statistics.png)
 
-
-
 * techstack js
-
 
 * backend zu testen
 * menschliche spieler zu simulieren
@@ -288,93 +383,14 @@ Auch ist es möglich aktuell laufende Spiele in Echtzeit anzeigen zu lassen, som
 * wird zur einfachheit direkt aus dem abckend heraus ausgeliefert da nur statisches html/js/class
 
 
-## Sicherheit
+## Authetifizierung
 
 * authetifizierung
 * https only
 * zertifikate auf clientseite geniert jedoch nicht abgefragt
 
 
-
-
-# Grundlegende Verifikation der ausgewälten Technologien
-
-## Erprobung Buildroot-Framework
-* erstellen eines einfachen images für das embedded System
-* inkl ssh Server und SFTP
-* qt 5 libraries
-* eigenes package atctp
-* test der toolchain
-
-
-## Verifikfation NFC Technologie
-
-* warum gewählter nfc reader => ndef lesen
-* reicheweiten test mit 22mm
-* test mit benachbarten figuren
-* warum kein RFID => keine speicherung von id auf der controller seite
-* selbherstellung von eigenen figuren ohne modifikation der controllerseite
-
-![Grove PN532 NFC Reader mit Kabelgebundener Antenne](images/ATC_nfc_range_test.JPG)
-
-
-## Schrittmotor / Schrittmotorsteuerung
-* warum => einfache ansteuerung
-* keine STEP DIR somit muss embedded nicht echtzeitfähigsein und kann ggf auch andere task abbarbeiten
-* TMC schrittmotortreiber spi configuration
-* und goto move  => wait for move finished irw testen
-* dafür einfacher python testreiber geschribene
-* schrittverlust nicht zu erwarten
-
-
-
-## 3D Druck für den mechanischen Aufbau
-
-
-
-
-
-
-
-# Erstellung erster Prototyp
-
-* vorgaben IKEA tisch al
-
-## Technologieauswahl für ersten Protoypen
-
-* durch verifikation bestätigt
-
-
-## CAD Design
-
-* Einabrietung in Fusion360
-* Cad design aller bauteile
-* standartxy
-* erweituerng des spielraums durch zwei Magnete
-
-## Schaltungsentwurf Motorsteuerung
-
-
-* auswahl der Motortreiber (leise, bus ansteuerung)
-* ansteuerung pn532 und umsetzung auf uart
-
-* platinendesign
-*
-
-##  Anpassung Controller Software
-
-
-### Implementierung HAL
-* ansteuerung des TMC5160
-* ansterung des Microncontollers (PN532, LED)
-* integration in controller software
-
-
-
-
-
-# Erstellung zweiter Prototyp
-
+# Controller software
 
 
 
