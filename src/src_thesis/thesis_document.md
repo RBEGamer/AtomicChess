@@ -12,9 +12,10 @@
 
 ## Zielsetzung
 
-Das Ziel dieser Arbeit ist es, einen autonomen Schach-Tisch, welcher in der Lage ist Schachfiguren autonom zu bewegen und auf Benutzerinteraktion zu reagieren.
+Das Ziel dieser Arbeit ist es, einen autonomen Schachtisch, welcher in der Lage ist Schachfiguren autonom zu bewegen und auf Benutzerinteraktion zu reagieren.
 
-Der Schwerpunkt liegt dabei insbesondere auf der Programmierung des eingebettenen Systems.
+Der Schwerpunkt liegt dabei insbesondere auf der Programmierung des eingebettenen Systems und dem Zusammenspiel dieses mit einem aus dem Internet erreichbaren Servers, welcher als Vermittlungsstelle zwischen verschiedenen Schachtischen dient.
+
 Dieses besteht zum einem, aus der Positionserkennung und Steuerung der Hardwarekomponenten (Schachfiguren) und zum anderen aus der Kommunikation zwischen dem Tisch selbst und einem in einer Cloud befindlichen Server.
 
 Mittels der Programmierung werden diverse Technologien von verschiedenen Einzelsystemen zu einem Gesamtprodukt zusammengesetzt. Zu diesen Einzelsystemen gehören:
@@ -26,12 +27,16 @@ Mittels der Programmierung werden diverse Technologien von verschiedenen Einzels
 * Verwendung eines CI/CD Systems zum automatisierten bauen der Linux-Images für das Embedded-System
 
 
-## Aufbau der Arbeit
+## Methodik
+
+Im ersten Abschnitt werden die zum Zeitpunkt existierenden Ansätze und deren Umsetzung beleuchtet.
+Anschliessend werden die zur Umsetzung verwendeten Technologien beleuchtet, welche bei bei den beiden darauffolgenden Prototypen verwendet wurden.
+Im nächsten Abschnitt wird die Cloud-Infrastruktur thematisiert, welche für eine Kommunikation zwischen den Prototypen entscheidend ist.
+
+Abschliessend wir ein Ausblick auf
 
 
-
-beleuchtung existierender ansätze && festlegung zu erwartener Features, Kapitel x+1 zusammenführung in die DK HW,Kaptiel x+4 test und fazit,demonstration und validierung der funktionsfähigkeit
-
+* ausblick weitere features
 
 
 
@@ -40,8 +45,8 @@ beleuchtung existierender ansätze && festlegung zu erwartener Features, Kapitel
 
 ## Existierende Systeme im Vergleich
 
-
-
+* nieschenprodukt jedoch einige Projekte im OpenSource bereich verfügbar
+* ein kommerzieller hersteller
 
 ### Kommerzielle Produkte
 
@@ -66,9 +71,7 @@ Die DGT-Bretter können die Position der Figuren erkennen und ermöglichen so au
 Bei Schachtunieren werden diese für die Übertragung der Partien sowie die Aufzeichnung der Spielzüge verwendet und bieten Support für den Anschluss von weiterer Peripherien wie z.B. Schachuhren.
 
 
-Somit gibt es zum Zeitpunkt der Recherche nur einen Hersteller von autonomen Schachbrettern, welcher auch die Figuren bewegen kann.sdfger
-
-wdad
+Somit gibt es zum Zeitpunkt der Recherche nur einen Hersteller von autonomen Schachbrettern, welcher auch die Figuren bewegen kann.
 
 
 
@@ -105,7 +108,7 @@ Bei der Konstruktion der Mechanik und der Methode mit welcher die Figuren über 
 
 Die Erkennung der Schachfiguren ist augenscheinlich die schwierigste Aufgabe. Hier wurde in der Mehrzahl der Projekte eine Kamera im Zusammenspiel mit einer auf OpenCV basierenden Figur-Erkennung verwendet. Diese Variante ist je nach Implementierung des Vision-Algorithmus fehleranfälliger bei sich ändernden Lichtverhältnissen, auch muss die Kamera oberhalb der Schachfiguren platziert werden, wenn kein transparentes Schachfeld verwendet werden soll.
 
-Eine andere Alternative ist die Verwendung einer Matrix aus Reed-Schaltern oder Hallsensoren. Diese werden in einer 8x8 Matrix Konfiguration unterhalb der Platte montiert und reagieren auf die Magnete in den Figuren. So ist es möglich zu erkennen, welches der Schachfelder belegt ist, jedoch nicht konkret von welchem Figurtypen.
+Eine weitere Alternative ist die Verwendung einer Matrix aus Reed-Schaltern oder Halleffekt-Sensoren. Diese werden in einer 8x8 Matrix Konfiguration unterhalb der Platte montiert und reagieren auf die Magnete in den Figuren. So ist es möglich zu erkennen, welches der Schachfelder belegt ist, jedoch nicht konkret von welchem Figurtypen.
 Dieses Problem wird durch eine definierte Ausgangsstellung beim Spielstart gelöst. Nach jedem Zug durch den Spieler und der dadurch resultierenden Änderungen in der Figurpositionen in der Matrix können die neuen Figurstellungen berechnet werden.
 
 
@@ -121,20 +124,29 @@ Der Benutzer soll direkt nach dem Einschalten des Tisches und dem Aufstellen der
 
 Nach Beendigung einer Partie, soll das Spielbrett wieder in die Ausgangssituation gebracht werden; dies kann zum einem vom Tisch selbst oder vom Benutzer manuell geschehen. Danach ist der Tisch für die nächste Partie bereit, welche einfach per Knopfdruck gestartet werden können sollte.
 
+Dies soll auf für abgebrochene Spiele gelten, welche von Benutzer oder durch das System abgebrochen werden. Hierbei soll das Schachbrett sich ebenfalls selbständig zurücksetzten können.
+
 Ein weiter Punkt welcher bei der User-Experience beachtet werden soll, ist die zeitliche Konstante. Ein Spiel auf einem normalen Schachspiel hat je nach Spielart kein Zeitlimit, dies kann für das gesamte Spiel gelten oder auch für die Zeit zwischen einzelnen Zügen.
 Der autonome Schachtisch soll es dem Spieler z.B. ermöglichen ein Spiel am Morgen zu beginnen und dieses erst am nächsten Tag fortzusetzen.
 
+Auch muss sich hier die Frage gestellt werden, was mit den ausgeschiedenen Figuren geschieht. Bei den autonomen Schachbrettern von Square Off[@squareoffgrand], werden die Figuren an die Seite auf vordefinierte Felder bewegt und können so wieder bei der nächsten Partie vom System aufgestellt werden. Viele andere Projekte schieben die Figuren auf dem Feld heraus, können diese aber im Anschluss nicht mehr gezielt in das Feld zurückholen. So muss diese Aufgabe vom Benutzer geschehen. Auch wir diese Funktionalität von einigen Projekten nicht abgedeckt und der Benutzer muss die Figuren selbständig vom Feld entfernen.
 
 
 
 ## Anforderungsanalyse
-
-alle key requirements welcher der tisch haben soll
+* komplettes vollweriges Produkt
+* alle key requirements welcher der tisch haben soll
 
 
 ## Machbarkeitsanalyse
 
 welche technologien werden benötigt
+* software architektur anfoderungen
+* hardware anforderungen
+* grosse
+* wiederholgenauigkeit
+* lautstärke
+*
 
 ### Technologien im Makerspace
 
@@ -146,8 +158,136 @@ stehen diese im makerspace zur verfüfung
 
 
 
+# Entwicklung der Cloud Infrastruktur
+
+Die erste Phase der Entwicklung des Systems bestand in der Entwicklung der Cloud-Infrastruktur und der darauf laufenden Services.
+Hierbei stellt die "Cloud", einen Server dar, welcher aus dem Internet über eine feste IPv4 und eine IPv6 verfügt und frei konfiguriert werden kann.
+
+![Gesamtübersicht der verwendeten Cloud-Infrastruktur](images/ATC_Cloud_Architecture.png)
+
+
+
+## API Design
+
+Das System soll so ausgelegt werden, dass es im späteren Zeitpunkt mit verschiedenen Client-Devices mit diesem kommunizieren können.
+Dazu zählen zum einen der autonome Schachtisch, aber z.B. auch einen Web-Client, welcher die Funktionalität eines Schachtisch im Browser abbilden kann.
+Hierzu muss das System eine einheitliche REST bereitstellen.
+
+Eine RESTful API bezeichnet eine API welche HTTP-Requests verwendet um auf Daten zugreifen zu können.
+
+* grafik
+* 5 requirements
+
+
+Die RESTful API stellt verschiedene Ressourcen bereit, welche durch eine URI eindeutig identifizierbar sind. Auf diese können mittels verschiedenster HTTP Anfragemethoden (GET, POST, PUT, DELETE) zugegriffen werden. Jeder dieser Methoden stellt einen anderen Zugriff auf die Ressource dar und beeinflusst somit das Verhalten und die Rückantwort dieser.
+
+
+![Aufbau einer URI](images/ATC_URI_SCHEMES.png)
+
+Eine URI besteht dabei aus mehreren Teilen. Das Schema  gibt an wie die nachfolgenden Teile interpretiert werden sollen. Dabei wird bei einer RESTful Schnittstelle typischerweise das (+http) Protokoll, sowie (+https) verwendet. Dabei steht (+https) für eine verschlüsselte Verbindung. Desweiteren gibt es viele andere Schema, wie z.B (+ftp) welches
+
+
+Somit stellt die RESTful API eine Interoperabilität zwischen verschiedenen Anwendungen und Systemen bereit, welche durch ein Netzwerk miteinander verbunden sind.
+Dieser Ansatz ist somit geeignet um die verschiedenen Client Systeme (Schachtisch, Webclient) eine Kommunikation mit dem Server zu erlauben.
+
+
+
+## Service Architektur
+
+* was ist ein Service
+* microservice ansatz
+* Kapselung der Schach spiel spzifischen funktionaliutäten
+* verwendung von NoSQL Datenbanken somit müssen tabellen nicht spzeill auf Schach spezifische felder ausgelegt sein
+* statelss
+Diese stellen alle wichtigen Funktionen zum Betrieb des autonomen Schachtischs zur verfügung.
+
+![Aufbau einer URI](images/ATC_Service_Architecture.png)
+
+
+### Vorüberlegungen
+
+* welche funktionalitäten müssen abgedeckt werden
+* client aktivitendiagram
+
+
+
+
+
+
+### Backend
+* matchmaking schachlogik
+* zentraler zugriffspunkt auf das System und stellt diese abi bereit
+* stellt spielerprofile aus datenbanken bereit bereit
+* authentifizierung der clients und deren sessions
+* weiterleitung der von spielerinteraktionen an move validator
+
+
+
+
+### MoveValidator
+
+* eigenliche schachlogik
+* erstellt / überprüft züge
+* generiter neues brett
+
+
+### AutoPlayer
+
+* stellt schachai dar
+* agiert als selbstäniger spieler
+* wenn nicht genügend menschlich spieler vorhanden sind
+
+
+
+
+## Entwicklung Webclient
+
+* backend zu testen
+* menschliche spieler zu simulieren
+* wärend der entwicklungsphase des tisches gezielt spiele simulieren zu können
+
+
+
+## Sicherheit
+
+* authetifizierung
+* https only
+* zertifikate auf clientseite
+
+
+
+# Grundlegende Verifikation der ausgewälten Technologien
+
+## Erprobung Buildroot-Framework
+
+## Verifikfation NFC Technologie
+
+## Schrittmotorsteuerung
+
+## 3D Druck für den mechanischen Aufbau
+
+
+
+
+
+
 
 # Erstellung erster Prototyp
 
 ## Technologieauswahl für ersten Protoypen
-was stejt zur verfügung
+
+* durch verifikation bestätigt
+
+
+
+
+# Erstellung zweiter Prototyp
+
+
+
+
+
+
+# Fazit
+
+## Ausblick
