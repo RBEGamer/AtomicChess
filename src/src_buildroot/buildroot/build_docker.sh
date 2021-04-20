@@ -6,11 +6,10 @@ bash ./restore_config.sh
 # BUILD CONTAINER
 
 if [[ "$(docker images -q atcbuildroot:latest 2> /dev/null)" == "" ]]; then
-  # do something
-  echo "atcbuildroot:latest IMAGE EXISTS; NO BUILD REQUIRED"
-else
  echo "atcbuildroot:latest IMAGE BUILD STARTED"
  docker build -t atcbuildroot:latest .
+else
+ echo "atcbuildroot:latest IMAGE EXISTS; NO BUILD REQUIRED"
 fi
 
 
