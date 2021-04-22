@@ -207,7 +207,7 @@ welche technologien werden benötigt
 # Erstellung erster Prototyp
 
 
-* BILD AUSSEN INNEN NEBENEINANDER
+![Erster Prototyp des autonomen Schachtisch](images/table_images/dk.png)
 
 
 * vorgaben IKEA tisch als grundbasis
@@ -273,7 +273,7 @@ welche technologien werden benötigt
 
 # Erstellung zweiter Prototyp
 
-* BILD AUSSEN INNEN NEBENEINANDER
+![Finaler autonomer Schachtisch](images/table_images/prod.png)
 
 # Änderungen der Mechanik
 
