@@ -486,6 +486,7 @@ stehen diese im makerspace zur verfüfung
 
 welche technologien werden benötigt * software architektur anfoderungen
 * hardware anforderungen * grosse * wiederholgenauigkeit * lautstärke *
+vorerfahrnung in cad ed druck und schaltungsdesign
 
 \hypertarget{grundlegende-verifikation-der-ausgewuxe4lten-technologien}{%
 \section{Grundlegende Verifikation der ausgewälten
@@ -531,9 +532,15 @@ Technologie}\label{verifikfation-nfc-technologie}}
 
 \begin{figure}
 \centering
-\includegraphics{images/ATC_nfc_range_test.JPG}
+\includegraphics{images/ATC_nfc_range_test.png}
 \caption{Grove PN532 NFC Reader mit Kabelgebundener Antenne}
 \end{figure}
+
+\begin{itemize}
+\tightlist
+\item
+  test mit figuren nebeneinander
+\end{itemize}
 
 \hypertarget{schrittmotor-schrittmotorsteuerung}{%
 \subsection{Schrittmotor /
@@ -564,20 +571,21 @@ Aufbau}\label{d-druck-fuxfcr-den-mechanischen-aufbau}}
 \section{Erstellung erster Prototyp}\label{erstellung-erster-prototyp}}
 
 \begin{itemize}
-\tightlist
 \item
-  vorgaben IKEA tisch al
+  BILD AUSSEN INNEN NEBENEINANDER
+\item
+  vorgaben IKEA tisch als grundbasis
 \end{itemize}
 
 \hypertarget{mechanik}{%
 \subsection{Mechanik}\label{mechanik}}
 
 \begin{itemize}
+\tightlist
 \item
   xy riemen führung
 \item
   spiel in Mechanik
-\item
 \item
   Einabrietung in Fusion360
 \item
@@ -588,11 +596,42 @@ Aufbau}\label{d-druck-fuxfcr-den-mechanischen-aufbau}}
   erweituerng des spielraums durch zwei Magnete
 \end{itemize}
 
-\hypertarget{schaltungsentwurf-motorsteuerung}{%
-\subsection{Schaltungsentwurf
-Motorsteuerung}\label{schaltungsentwurf-motorsteuerung}}
+\hypertarget{parametrisierung-schachfiguren}{%
+\subsection{Parametrisierung
+Schachfiguren}\label{parametrisierung-schachfiguren}}
 
 \begin{itemize}
+\tightlist
+\item
+  benutzung existierender figuren + nfc Tag
+\item
+  ndef record
+\item
+  was ist NDEF
+\item
+  payload einer figur
+\item
+  vorteile durch selbst gestaltbare figuren
+\end{itemize}
+
+\begin{figure}
+\centering
+\includegraphics{images/ATC_ChessFigureIDGenerator.png}
+\caption{Tool zur Erstellung des NDEF Payloads:
+ChessFigureIDGenerator.html}
+\end{figure}
+
+\hypertarget{schaltungsentwurf}{%
+\subsection{Schaltungsentwurf}\label{schaltungsentwurf}}
+
+\begin{figure}
+\centering
+\includegraphics{images/ATC_Hardware_Architecture_DK.png}
+\caption{Prototyp Hardware: Blockdiagramm}
+\end{figure}
+
+\begin{itemize}
+\tightlist
 \item
   auswahl der Motortreiber (leise, bus ansteuerung)
 \item
@@ -600,6 +639,7 @@ Motorsteuerung}\label{schaltungsentwurf-motorsteuerung}}
 \item
   platinendesign
 \item
+  ansterung elektromagnetet
 \end{itemize}
 
 \hypertarget{implementierung-hal}{%
@@ -615,9 +655,60 @@ Motorsteuerung}\label{schaltungsentwurf-motorsteuerung}}
   integration in controller software
 \end{itemize}
 
+\hypertarget{fazit-zum-ersten-prototypen}{%
+\subsection{Fazit zum ersten
+Prototypen}\label{fazit-zum-ersten-prototypen}}
+
+\begin{itemize}
+\tightlist
+\item
+  nicht für production geeignet
+\item
+  aufbau und calibrierung langwiehrig
+\item
+  trotzdem robustes design auf kleinem formfaktor
+\item
+  verwendeten elektromagnete nicht stark genug, somit über aqusserhalb
+  der specs betrieben was zu temeraturproblemen führte
+\item
+  gewicht der Figuren zu klein bzw magnete zu start
+\item
+  workarounds in der software nötig durch die beiden magnete
+\end{itemize}
+
 \hypertarget{erstellung-zweiter-prototyp}{%
 \section{Erstellung zweiter
 Prototyp}\label{erstellung-zweiter-prototyp}}
+
+\begin{itemize}
+\tightlist
+\item
+  BILD AUSSEN INNEN NEBENEINANDER
+\end{itemize}
+
+\hypertarget{uxe4nderungen-der-mechanik}{%
+\section{Änderungen der Mechanik}\label{uxe4nderungen-der-mechanik}}
+
+\hypertarget{uxe4nderungen-der-elektronik}{%
+\section{Änderungen der Elektronik}\label{uxe4nderungen-der-elektronik}}
+
+\begin{figure}
+\centering
+\includegraphics{images/ATC_Hardware_Architecture_PROD.png}
+\caption{Prototyp Hardware: Blockdiagramm}
+\end{figure}
+
+\hypertarget{implementierung-gcode-sender}{%
+\subsection{IMPLEMENTIERUNG
+GCODE-Sender}\label{implementierung-gcode-sender}}
+
+\begin{itemize}
+\tightlist
+\item
+  was ist GCODE
+\item
+  grundlegend verwendete kommandos
+\end{itemize}
 
 \hypertarget{entwicklung-der-cloud-infrastruktur}{%
 \section{Entwicklung der Cloud
@@ -746,6 +837,12 @@ Spieler gewonnen oder verloren hat.
 Bevor ein Spiel begonnen wird, generiert der MoveValidator das initiale
 Spielfeld und bestimmt den Spieler, welcher als erstes am Zug ist.
 
+\begin{itemize}
+\tightlist
+\item
+  Beispiel request/repsonse
+\end{itemize}
+
 Der Backend-Service fragt einen neues Spiel an, oder übergibt einen
 Schachzug inkl. des Spielbretts an den Service. Der Response wird dann
 vom Backend in der Datenbank gespeichert und weiter an die
@@ -753,12 +850,13 @@ Client-Devices verteilt.
 
 Mit diesem Design ist es möglich auch andere Spielarten im System zu
 implementieren, nur hier die initialen Spielfelder generiert werden und
-Züge der Spieler validiert werden.
+Züge der Spieler validiert werden müssen.
 
-Für ein anderes Spiel müssen drei
+Allgemein geschieht die Kommunikation über drei API Calls.
 
 \begin{itemize}
-\tightlist
+\item
+  Auflistung der routen
 \item
   generiter neues brett
 \item
@@ -842,8 +940,59 @@ implementiert.
   zertifikate auf clientseite geniert jedoch nicht abgefragt
 \end{itemize}
 
-\hypertarget{controller-software}{%
-\section{Controller software}\label{controller-software}}
+\hypertarget{embedded-system-software}{%
+\section{Embedded System Software}\label{embedded-system-software}}
+
+\begin{itemize}
+\tightlist
+\item
+  hauptsoftware zur steuerung der Elektrik/Mechanik
+\item
+  kommunikation mit dem Cloud-Server
+\end{itemize}
+
+\hypertarget{ablaufdiagramm}{%
+\subsection{Ablaufdiagramm}\label{ablaufdiagramm}}
+
+\begin{itemize}
+\tightlist
+\item
+  dummer client, synchronisierung von gegeben feld mit dem lokalen
+\end{itemize}
+
+\begin{figure}
+\centering
+\includegraphics{images/ATC_gameclient_statemachiene.png}
+\caption{Embedded System Software: Ablaufdiagramm}
+\end{figure}
+
+\hypertarget{figur-bewegungspfadberechnung}{%
+\subsection{Figur
+Bewegungspfadberechnung}\label{figur-bewegungspfadberechnung}}
+
+\begin{itemize}
+\tightlist
+\item
+  Algorithmus zur Umsetzung eines Schachzugs
+\item
+  auftrennung in current und target Board
+\end{itemize}
+
+\hypertarget{userinterface}{%
+\subsection{Userinterface}\label{userinterface}}
+
+\begin{itemize}
+\tightlist
+\item
+  qt quick ui
+\item
+  ipc bibliothek zur kommunikation mit der hauptsoftware
+\item
+  auf json basiert =\textgreater{} einfaches debugging
+\item
+  steuerung über andere endgeräte möglich z.B Handy-App welche im selben
+  Netzwerk befindet.
+\end{itemize}
 
 \hypertarget{fazit}{%
 \section{Fazit}\label{fazit}}

@@ -151,7 +151,7 @@ welche technologien werden benötigt
 * grosse
 * wiederholgenauigkeit
 * lautstärke
-*
+* vorerfahrnung in cad ed druck und schaltungsdesign
 
 
 
@@ -179,7 +179,11 @@ welche technologien werden benötigt
 * warum kein RFID => keine speicherung von id auf der controller seite
 * selbherstellung von eigenen figuren ohne modifikation der controllerseite
 
-![Grove PN532 NFC Reader mit Kabelgebundener Antenne](images/ATC_nfc_range_test.JPG)
+![Grove PN532 NFC Reader mit Kabelgebundener Antenne](images/ATC_nfc_range_test.png)
+
+* test mit figuren nebeneinander
+
+
 
 
 ## Schrittmotor / Schrittmotorsteuerung
@@ -202,7 +206,11 @@ welche technologien werden benötigt
 
 # Erstellung erster Prototyp
 
-* vorgaben IKEA tisch al
+
+* BILD AUSSEN INNEN NEBENEINANDER
+
+
+* vorgaben IKEA tisch als grundbasis
 
 
 
@@ -211,29 +219,53 @@ welche technologien werden benötigt
 
 * xy riemen führung
 * spiel in Mechanik
-*
-
 * Einabrietung in Fusion360
 * Cad design aller bauteile
 * standartxy
 * erweituerng des spielraums durch zwei Magnete
 
-## Schaltungsentwurf Motorsteuerung
 
+
+## Parametrisierung Schachfiguren
+
+* benutzung existierender figuren + nfc Tag
+* ndef record
+* was ist NDEF
+* payload einer figur
+* vorteile durch selbst gestaltbare figuren
+
+
+![Tool zur Erstellung des NDEF Payloads: ChessFigureIDGenerator.html](images/ATC_ChessFigureIDGenerator.png)
+
+## Schaltungsentwurf
+
+![Prototyp Hardware: Blockdiagramm](images/ATC_Hardware_Architecture_DK.png)
 
 * auswahl der Motortreiber (leise, bus ansteuerung)
 * ansteuerung pn532 und umsetzung auf uart
-
 * platinendesign
-*
-
-
+* ansterung elektromagnetet
 
 
 ### Implementierung HAL
+
 * ansteuerung des TMC5160
 * ansterung des Microncontollers (PN532, LED)
 * integration in controller software
+
+
+## Fazit zum ersten Prototypen
+
+* nicht für production geeignet
+* aufbau und calibrierung langwiehrig
+* trotzdem robustes design auf kleinem formfaktor
+* verwendeten elektromagnete nicht stark genug, somit über aqusserhalb der specs betrieben was zu temeraturproblemen führte
+* gewicht der Figuren zu klein bzw magnete zu start
+* workarounds in der software nötig durch die beiden magnete
+
+
+
+
 
 
 
@@ -241,14 +273,18 @@ welche technologien werden benötigt
 
 # Erstellung zweiter Prototyp
 
+* BILD AUSSEN INNEN NEBENEINANDER
 
+# Änderungen der Mechanik
 
+# Änderungen der Elektronik
 
+![Prototyp Hardware: Blockdiagramm](images/ATC_Hardware_Architecture_PROD.png)
 
+## IMPLEMENTIERUNG GCODE-Sender
 
-
-
-
+* was ist GCODE
+* grundlegend verwendete kommandos
 
 
 
@@ -334,12 +370,17 @@ Dazu zählen unter anderem das neue Schachbrett und ob ein Spieler gewonnen oder
 
 Bevor ein Spiel begonnen wird, generiert der MoveValidator das initiale Spielfeld und bestimmt den Spieler, welcher als erstes am Zug ist.
 
+* Beispiel request/repsonse
+
 Der Backend-Service fragt einen neues Spiel an, oder übergibt einen Schachzug inkl. des Spielbretts an den Service. Der Response wird dann vom Backend in der Datenbank gespeichert und weiter an die Client-Devices verteilt.
 
 
-Mit diesem Design ist es möglich auch andere Spielarten im System zu implementieren, nur hier die initialen Spielfelder generiert werden und Züge der Spieler validiert werden.
+Mit diesem Design ist es möglich auch andere Spielarten im System zu implementieren, nur hier die initialen Spielfelder generiert werden und Züge der Spieler validiert werden müssen.
 
-Für ein anderes Spiel müssen drei
+Allgemein geschieht die Kommunikation über drei API Calls.
+
+* Auflistung der routen
+
 
 
 * generiter neues brett
@@ -390,7 +431,36 @@ Auch ist es möglich aktuell laufende Spiele in Echtzeit anzeigen zu lassen, som
 * zertifikate auf clientseite geniert jedoch nicht abgefragt
 
 
-# Controller software
+
+
+# Embedded System Software
+
+* hauptsoftware zur steuerung der Elektrik/Mechanik
+* kommunikation mit dem Cloud-Server
+
+
+
+## Ablaufdiagramm
+
+* dummer client, synchronisierung von gegeben feld mit dem lokalen
+
+![Embedded System Software: Ablaufdiagramm](images/ATC_gameclient_statemachiene.png)
+
+
+## Figur Bewegungspfadberechnung
+
+* Algorithmus zur Umsetzung eines Schachzugs
+* auftrennung in current und target Board
+
+
+
+## Userinterface
+
+* qt quick ui
+* ipc bibliothek zur kommunikation mit der hauptsoftware
+* auf json basiert => einfaches debugging
+* steuerung über andere endgeräte möglich z.B Handy-App welche im selben Netzwerk befindet.
+
 
 
 

@@ -1,6 +1,13 @@
 #!/bin/bash
 cd .
 # REMOVE TEMP FILES
+rm -f *.acn
+rm -f *.acr
+rm -f *.alg
+rm -f *.ist
+rm -f *.glg
+rm -f *.glo
+rm -f *.gls
 rm -f *.aux
 rm -f *.lof
 rm -f *.lot
@@ -55,6 +62,13 @@ echo "------------- PDF EXPORT FINISHED -----------"
 #pandoc thesis.tex -f latex -t html -s -o thesis.html --bibliography thesis_references.bib
 
 # REMOVE TEMP FILES
+rm -f *.acn
+rm -f *.acr
+rm -f *.alg
+rm -f *.ist
+rm -f *.glg
+rm -f *.glo
+rm -f *.gls
 rm -f *.aux
 rm -f *.lof
 rm -f *.lot
