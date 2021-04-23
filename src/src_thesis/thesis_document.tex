@@ -816,6 +816,12 @@ mit dem Server zu erlauben.
 \hypertarget{backend}{%
 \subsubsection{Backend}\label{backend}}
 
+\begin{figure}
+\centering
+\includegraphics{images/ATC_request_example.png}
+\caption{Login-Requst und Response}
+\end{figure}
+
 \begin{itemize}
 \tightlist
 \item
@@ -873,6 +879,8 @@ Allgemein geschieht die Kommunikation über drei API Calls.
 \hypertarget{autoplayer}{%
 \subsubsection{AutoPlayer}\label{autoplayer}}
 
+Der AutoPlayer-Service stellt den Computerspieler bereit.
+
 \begin{itemize}
 \tightlist
 \item
@@ -881,6 +889,8 @@ Allgemein geschieht die Kommunikation über drei API Calls.
   agiert als selbstäniger spieler
 \item
   wenn nicht genügend menschlich spieler vorhanden sind
+\item
+  jeweils eine instanz ist ein spieler container wird beendet
 \end{itemize}
 
 \hypertarget{entwicklung-webclient}{%

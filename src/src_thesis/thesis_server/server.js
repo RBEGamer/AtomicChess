@@ -85,7 +85,7 @@ app.get('/index', function (req, res) {
     res.render('index.ejs', {
         app_name_title: CNF.get_key('app_name_title') || 'APP TILE HERE',
         app_name_site: CNF.get_key('app_name_site') || 'APP NAME HERE',
-       
+
     });
 });
 
@@ -97,8 +97,8 @@ app.get('/document', function(req, res, next) {
     console.log(req.body);
     var tok = req.queryString('tok');
     var doc = req.queryString('doc');
-    
-    if(tok !== "423467"){
+
+    if(tok !== CNF.get_key('acess_token')){
         res.redirect('/');
         return;
     }
@@ -109,6 +109,9 @@ app.get('/document', function(req, res, next) {
     }else  if(doc === "rep"){
         res.sendFile(path.join(appDirectory,"./protected/report_document.pdf"));
         return;
+    }else  if(doc === "cv"){
+        res.sendFile(path.join(appDirectory,"./protected/cv.pdf"));
+        return;
     }
 
     req.redirect('/');
@@ -118,8 +121,10 @@ app.get('/document', function(req, res, next) {
 
 
 app.get('/redirect', function(req, res, next) {
-  
+
   var dest = req.queryString('destination');
+  var toc = req.queryString('toc');
+
   console.log(dest);
   var real_dest = "/";
 
@@ -129,6 +134,8 @@ app.get('/redirect', function(req, res, next) {
     real_dest = "/";
   }
 }
+
+  real_dest = String(real_dest).replace("&tok=","&tok="+toc);
   res.redirect(real_dest);
 });
 

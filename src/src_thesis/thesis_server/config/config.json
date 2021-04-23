@@ -11,9 +11,10 @@
       "impressum":"https://marcelochsendorf.com/impressum",
 
 
-      "ba":"/document?doc=ba&tok=423467",
-      "rep":"/document?doc=rep&tok=423467",
-      "cv":"https://marcelochsendorf.com/"
-    }
+      "ba":"/document?doc=ba&tok=",
+      "rep":"/document?doc=rep&tok=",
+      "cv":"/document?doc=cv&tok="
+    },
+    "acess_token":"1337"
 
 }

@@ -13,7 +13,7 @@
   <meta http-equiv="pragma" content="no-cache" />
 
 
-  
+
   <link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png">
   <link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-icon-72x72.png">
@@ -45,7 +45,7 @@
   <link href="/css/color_design.css" rel="stylesheet">
   <link href="/css/photo_gallery.css" rel="stylesheet">
 
- 
+
   <title><%= app_name_title %></title>
 
   <style>
@@ -69,7 +69,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 
- 
+
 </nav>
 
 
@@ -88,13 +88,14 @@
 
 <div id="anch_about" class="row">
   <div class="col-md-12">
-    
+
   </div>
 
 
   <div class="col-md-6 d-flex justify-content-center">
     <form action="/redirect" method="GET">
       <input type="hidden" name="destination" value="ba"/>
+      <input type="hidden" name="toc" id="toc1" value=""/>
     <button type="submit" class=" btn-fh btn btn-primary btn-lg btn-block">BACHELOR THESIS</button>
     </form>
   </div>
@@ -104,6 +105,7 @@
   <div class="col-md-6 d-flex justify-content-center">
     <form action="/redirect" method="GET">
       <input type="hidden" name="destination" value="cv"/>
+      <input type="hidden" name="toc" id="toc2" value=""/>
     <button type="submit" class=" btn-fh btn btn-primary btn-lg btn-block">CURRICULUM VITAE</button>
   </form>
   </div>
@@ -180,7 +182,14 @@ function getParameterByName(name, url = window.location.href) {
 
   $(document).ready(function () {
 
-
+    var toc = getParameterByName("toc",window.location.href);
+    console.log(toc);
+    if(toc){
+      $("#toc1").val(toc);
+      $("#toc2").val(toc);
+    }else{
+      console.log("NO PARAM");
+    }
 
   });
 

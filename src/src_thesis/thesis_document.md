@@ -338,6 +338,9 @@ Diese stellen alle wichtigen Funktionen zum Betrieb des autonomen Schachtischs z
 ![Aufbau der Service Architecture](images/ATC_Service_Architecture.png)
 
 
+
+
+
 ### Vorüberlegungen
 
 
@@ -351,12 +354,15 @@ Diese stellen alle wichtigen Funktionen zum Betrieb des autonomen Schachtischs z
 
 
 ### Backend
+
+![Login-Requst und Response](images/ATC_request_example.png)
+
 * matchmaking schachlogik
 * zentraler zugriffspunkt auf das System und stellt diese abi bereit
 * stellt spielerprofile aus datenbanken bereit bereit
 * authentifizierung der clients und deren sessions
 * weiterleitung der von spielerinteraktionen an move validator
-
+* spielfelder werden als string übermittelt = hier fen representation; einfach zu parsen; standart
 
 
 
@@ -390,10 +396,12 @@ Allgemein geschieht die Kommunikation über drei API Calls.
 
 ### AutoPlayer
 
+Der AutoPlayer-Service stellt den Computerspieler bereit.
+
 * stellt schachai dar
 * agiert als selbstäniger spieler
 * wenn nicht genügend menschlich spieler vorhanden sind
-
+* jeweils eine instanz ist ein spieler container wird beendet
 
 
 
