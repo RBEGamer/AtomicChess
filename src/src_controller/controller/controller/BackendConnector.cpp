@@ -120,7 +120,7 @@ BackendConnector::PLAYER_STATUS BackendConnector::get_player_state()
 		return status;
 	}
 	std::string e = tmp.body;
-	LOG_F(INFO, "%s", e.c_str());
+//	LOG_F(INFO, "%s", e.c_str());
 	//PARSE THE JSON RESULT
 	if(tmp.body.empty())
 	{
