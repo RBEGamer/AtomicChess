@@ -43,7 +43,7 @@ app.engine('html', require('ejs').renderFile);
 // Routing
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
-    secret: CNF.get_key('session_secret') || 'sdfkmgomwepipwiomeoma',
+    secret: CNF.get_key('session_secret') || String(Date.now() + "asklsmadas"),
     store: sessionstore.createSessionStore(),
     resave: true,
     saveUninitialized: true
@@ -67,12 +67,6 @@ server.listen(port, function () {
     console.log('Server listening at port %d', port);
 });
 // ---------------- END EXPRESS SETUP -------------- //
-
-
-
-
-
-
 
 
 
@@ -115,11 +109,8 @@ app.get('/document', function(req, res, next) {
         res.redirect('/?error=The_requested_document_ID_is_invalid_due_to_server_errors?toc=' + tok);
         return;
     }
-
+    //FINALLY SEND FILE
     res.sendFile(path.join(appDirectory,doc_red));
-
-
-
   });
 
 
@@ -134,7 +125,7 @@ app.get('/redirect', function(req, res, next) {
   if(CNF.get_key('redirect_urls')){
    real_dest = CNF.get_key('redirect_urls')[dest];
   if(real_dest == undefined || real_dest == null || real_dest === ""){
-    real_dest = "/";
+    real_dest = "/?error=Redirect_Destination_is_invalid";
   }
 }
 
