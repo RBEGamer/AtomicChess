@@ -1,4 +1,5 @@
-Authentifizierung\# Einleitung
+\hypertarget{einleitung}{%
+\section{Einleitung}\label{einleitung}}
 
 \hypertarget{motivation}{%
 \subsection{Motivation}\label{motivation}}
@@ -469,10 +470,45 @@ entfernen.
 \tightlist
 \item
   komplettes vollweriges Produkt
+\end{itemize}
+
+\begin{longtable}[]{@{}ll@{}}
+\caption{Auflistung der Anforderungen an den autonomen
+Schachtisch}\tabularnewline
+\toprule
+& autonomer Schachtisch \gls{atc}\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+& autonomer Schachtisch \gls{atc}\tabularnewline
+\midrule
+\endhead
+Erkennung Schachfigurstellung & ja\tabularnewline
+Konnektivität & \gls{wlan}, \gls{usb}\tabularnewline
+Automatisches Bewegen der Figuren & ja\tabularnewline
+Spiel Livestream & ja\tabularnewline
+Cloud anbindung (online Spiele) & ja\tabularnewline
+Parkposition für ausgeschiedene Figuren & ja\tabularnewline
+Stand-Alone Funktionalität & ja (Bedienung direkt am
+Tisch)\tabularnewline
+Besonderheiten & visuelle Hinweise per Beleuchtung\tabularnewline
+\bottomrule
+\end{longtable}
+
+Die Abmessungen und das Gewicht des autonomen Schachtisches, ergeben
+sich aus mechanischen Umsetzung und werden hier aufgrund der zur
+Verfügung stehenden Materialen und fertigungstechniken nicht festgelegt.
+Dennoch wird Wert darauf gelgegt, dass das Verhältnis zwischen den
+Spielfeldabmessungen und den Abmessungen des Tisches so gering wie
+möglich ausfällt. Auch müssen die Figuren für den Benutzer eine gut
+handhabbare Grösse aufweisen um ein angenehmes haptisches Spielerlebnis
+zu gewährleisten.
+
+\begin{itemize}
+\tightlist
 \item
-  alle key requirements welcher der tisch haben soll
-\item
-  als tabellen
+  abmessungen und gewicht ergeben sich aus der Umsetzung der
+  Anforderungen
 \end{itemize}
 
 \hypertarget{technologien-im-makerspace}{%
@@ -573,13 +609,14 @@ Aufbau}\label{d-druck-fuxfcr-den-mechanischen-aufbau}}
 \begin{figure}
 \centering
 \includegraphics{images/table_images/dk.png}
-\caption{Erster Prototyp des autonomen Schachtisch}
+\caption{Prototyp Hardware: Erster Prototyp des autonomen Schachtisch}
 \end{figure}
 
 \begin{itemize}
 \tightlist
 \item
-  vorgaben IKEA tisch als grundbasis
+  vorgaben IKEA tisch als grundbasis =\textgreater{} bereits fertiger
+  grundrahmen in denen die einzelteile integriert werden können
 \end{itemize}
 
 \hypertarget{mechanik}{%
@@ -622,7 +659,7 @@ Schachfiguren}\label{parametrisierung-schachfiguren}}
 \begin{figure}
 \centering
 \includegraphics{images/ATC_ChessFigureIDGenerator.png}
-\caption{Tool zur Erstellung des NDEF Payloads:
+\caption{Prototyp Hardware: Tool zur Erstellung des NDEF Payloads:
 ChessFigureIDGenerator.html}
 \end{figure}
 
@@ -688,11 +725,42 @@ Prototyp}\label{erstellung-zweiter-prototyp}}
 \begin{figure}
 \centering
 \includegraphics{images/table_images/prod.png}
-\caption{Finaler autonomer Schachtisch}
+\caption{Producation Hardware: Finaler autonomer Schachtisch}
 \end{figure}
 
-\hypertarget{uxe4nderungen-der-mechanik}{%
-\section{Änderungen der Mechanik}\label{uxe4nderungen-der-mechanik}}
+\hypertarget{modifikation-der-mechanik}{%
+\section{Modifikation der Mechanik}\label{modifikation-der-mechanik}}
+
+\begin{itemize}
+\item
+  dauertest hat gezeigt dass mechnik zu viel spiel aufweisst
+\item
+  Motorenhalterung der y achse schränkt des bewegungsspielraum um mehr
+  als 10cm ein, welches zu einem unwesentlichen grösseren verhältnis von
+  Spielfeldgrösse und Abmessungen des Schachtischs
+\item
+  CoreXY bietet Vorteil:
+\item
+  Motoren fest am rahmen =\textgreater{} weniger kabel + gewicht an der
+  Y Achse
+\item
+  jedoch komplexerer Aufwand der riemenverlegung so komplexere 3d
+  bauteile
+\item
+  Tischabmessungen 620x620mm dabei Bewegungsspielraum vom 580x580 zuvor
+  nur 480x480 \# Optimierungen der Spielfiguren
+\item
+  komplett 3d gedruckte Figuren mit integrierten Magnet
+\item
+  nfc + filzgleiter
+\item
+  durch SLA druck höheres Gewicht somit kein Abstoßen von den anderen
+  Figuren mehr
+\item
+  verschiedene Magnetgrässe/Stärke für Bauern/andere Figuren
+\item
+  jedoch alte figuren weiter verwendbar und austausch / vermischbar
+\end{itemize}
 
 \hypertarget{uxe4nderungen-der-elektronik}{%
 \section{Änderungen der Elektronik}\label{uxe4nderungen-der-elektronik}}
@@ -700,8 +768,20 @@ Prototyp}\label{erstellung-zweiter-prototyp}}
 \begin{figure}
 \centering
 \includegraphics{images/ATC_Hardware_Architecture_PROD.png}
-\caption{Prototyp Hardware: Blockdiagramm}
+\caption{Producation Hardware: Blockdiagramm}
 \end{figure}
+
+\begin{itemize}
+\tightlist
+\item
+  verwenung von standarthardware, welche gut zu beschaffen ist
+\item
+  implementierung von standart gcode protokol, somit mit universell
+  verwendbaren steuerung verwendbar
+\item
+  bietet eine hohe flexibilität da nur ein minimales set von
+  Gcode-kommandos vorrausgesetzt wird
+\end{itemize}
 
 \hypertarget{implementierung-gcode-sender}{%
 \subsection{IMPLEMENTIERUNG
@@ -713,6 +793,23 @@ GCODE-Sender}\label{implementierung-gcode-sender}}
   was ist GCODE
 \item
   grundlegend verwendete kommandos
+\end{itemize}
+
+\hypertarget{fazit-zum-finalen-prototypen}{%
+\subsection{Fazit zum finalen
+Prototypen}\label{fazit-zum-finalen-prototypen}}
+
+\begin{itemize}
+\tightlist
+\item
+  modularer hardware aufbau
+\item
+  einfach/gut verfügbare materialien verwendet
+\item
+  geänderte Mechnik resultiert in nahezu Spielfreier Mechanik (+- 1mm),
+  welches für diesen Zweck mehr als ausreicht
+\item
+  6h dauertest bestanden
 \end{itemize}
 
 \hypertarget{entwicklung-der-cloud-infrastruktur}{%
@@ -727,7 +824,8 @@ eine feste IPv4 und eine IPv6 verfügt und frei konfiguriert werden kann.
 \begin{figure}
 \centering
 \includegraphics{images/ATC_Cloud_Architecture.png}
-\caption{Gesamtübersicht der verwendeten Cloud-Infrastruktur}
+\caption{Cloud-Infrastruktur: Gesamtübersicht der verwendeten
+Cloud-Infrastruktur}
 \end{figure}
 
 \hypertarget{api-design}{%
@@ -761,7 +859,7 @@ Rückantwort dieser.
 \begin{figure}
 \centering
 \includegraphics{images/ATC_URI_SCHEMES.png}
-\caption{Aufbau einer URI}
+\caption{Cloud-Infrastruktur: Aufbau einer URI}
 \end{figure}
 
 Eine URI besteht dabei aus mehreren Teilen. Das Schema gibt an wie die
@@ -799,7 +897,7 @@ mit dem Server zu erlauben.
 \begin{figure}
 \centering
 \includegraphics{images/ATC_Service_Architecture.png}
-\caption{Aufbau der Service Architecture}
+\caption{Cloud-Infrastruktur: Aufbau der Service Architecture}
 \end{figure}
 
 \hypertarget{voruxfcberlegungen}{%
@@ -819,7 +917,7 @@ mit dem Server zu erlauben.
 \begin{figure}
 \centering
 \includegraphics{images/ATC_request_example.png}
-\caption{Login-Requst und Response}
+\caption{Cloud-Infrastruktur: Backend Login-Requst und Response}
 \end{figure}
 
 \begin{itemize}
@@ -834,6 +932,9 @@ mit dem Server zu erlauben.
   authentifizierung der clients und deren sessions
 \item
   weiterleitung der von spielerinteraktionen an move validator
+\item
+  spielfelder werden als string übermittelt = hier fen representation;
+  einfach zu parsen; standart
 \end{itemize}
 
 \hypertarget{movevalidator}{%
@@ -993,8 +1094,24 @@ Bewegungspfadberechnung}\label{figur-bewegungspfadberechnung}}
   auftrennung in current und target Board
 \end{itemize}
 
+\hypertarget{schachfeld-scan-algorithmus-zur-erkennung-von-schachzuxfcgen}{%
+\subsection{Schachfeld Scan Algorithmus zur Erkennung von
+Schachzügen}\label{schachfeld-scan-algorithmus-zur-erkennung-von-schachzuxfcgen}}
+
+\begin{figure}
+\centering
+\includegraphics{images/ATC_ChessMoveAlgorithm.png}
+\caption{Embedded System Software: Schachfeld Scan Algorithmus Ablauf}
+\end{figure}
+
 \hypertarget{userinterface}{%
 \subsection{Userinterface}\label{userinterface}}
+
+\begin{figure}
+\centering
+\includegraphics{images/ATC_ChessMoveAlgorithm.png}
+\caption{Embedded System Software: User-Interface Mockup}
+\end{figure}
 
 \begin{itemize}
 \tightlist
@@ -1012,5 +1129,20 @@ Bewegungspfadberechnung}\label{figur-bewegungspfadberechnung}}
 \hypertarget{fazit}{%
 \section{Fazit}\label{fazit}}
 
+\begin{itemize}
+\tightlist
+\item
+  mit am weitesten forgeschrittener open-source autonomes Schachtisch
+  Projekt
+\end{itemize}
+
 \hypertarget{ausblick}{%
 \subsection{Ausblick}\label{ausblick}}
+
+\begin{itemize}
+\tightlist
+\item
+  einbdingung in existeirende Schach-Clouds
+\item
+  user-port für Erweiterungen (z.B. DGT Schachur)
+\end{itemize}

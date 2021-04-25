@@ -135,8 +135,26 @@ Auch muss sich hier die Frage gestellt werden, was mit den ausgeschiedenen Figur
 
 ## Anforderungsanalyse
 * komplettes vollweriges Produkt
-* alle key requirements welcher der tisch haben soll
-* als tabellen
+
+: Auflistung der Anforderungen an den autonomen Schachtisch
+
+|                                         	| autonomer Schachtisch (+atc)        	|
+|-----------------------------------------	|-----------------------------------	|
+| Erkennung Schachfigurstellung           	| ja                                 	|
+| Konnektivität                           	| (+wlan), (+usb)                   	|
+| Automatisches Bewegen der Figuren       	| ja                                	|
+| Spiel Livestream                        	| ja                                	|
+| Cloud anbindung (online Spiele)         	| ja                                	|
+| Parkposition für ausgeschiedene Figuren 	| ja                                	|
+| Stand-Alone Funktionalität              	| ja (Bedienung direkt am Tisch)    	|
+| Besonderheiten                          	| visuelle Hinweise per Beleuchtung 	|
+
+
+Die Abmessungen und das Gewicht des autonomen Schachtisches, ergeben sich aus mechanischen Umsetzung und werden hier aufgrund der zur Verfügung stehenden Materialen und fertigungstechniken nicht festgelegt.
+Dennoch wird Wert darauf gelgegt, dass das Verhältnis zwischen den Spielfeldabmessungen und den Abmessungen des Tisches so gering wie möglich ausfällt. Auch müssen die Figuren für den Benutzer eine gut handhabbare Grösse aufweisen um ein angenehmes haptisches Spielerlebnis zu gewährleisten.
+
+* abmessungen und gewicht ergeben sich aus der Umsetzung der Anforderungen
+
 
 ### Technologien im Makerspace
 
@@ -207,10 +225,10 @@ welche technologien werden benötigt
 # Erstellung erster Prototyp
 
 
-![Erster Prototyp des autonomen Schachtisch](images/table_images/dk.png)
+![Prototyp Hardware: Erster Prototyp des autonomen Schachtisch](images/table_images/dk.png)
 
 
-* vorgaben IKEA tisch als grundbasis
+* vorgaben IKEA tisch als grundbasis => bereits fertiger grundrahmen in denen die einzelteile integriert werden können
 
 
 
@@ -235,7 +253,7 @@ welche technologien werden benötigt
 * vorteile durch selbst gestaltbare figuren
 
 
-![Tool zur Erstellung des NDEF Payloads: ChessFigureIDGenerator.html](images/ATC_ChessFigureIDGenerator.png)
+![Prototyp Hardware: Tool zur Erstellung des NDEF Payloads: ChessFigureIDGenerator.html](images/ATC_ChessFigureIDGenerator.png)
 
 ## Schaltungsentwurf
 
@@ -273,13 +291,35 @@ welche technologien werden benötigt
 
 # Erstellung zweiter Prototyp
 
-![Finaler autonomer Schachtisch](images/table_images/prod.png)
+![Producation Hardware: Finaler autonomer Schachtisch](images/table_images/prod.png)
 
-# Änderungen der Mechanik
+# Modifikation der Mechanik
+
+* dauertest hat gezeigt dass mechnik zu viel spiel aufweisst
+* Motorenhalterung der y achse schränkt des bewegungsspielraum um mehr als 10cm ein, welches zu einem unwesentlichen grösseren verhältnis von Spielfeldgrösse und Abmessungen des Schachtischs
+* CoreXY bietet Vorteil:
+* Motoren fest am rahmen => weniger kabel + gewicht an der Y Achse
+* jedoch komplexerer Aufwand der riemenverlegung so komplexere 3d bauteile
+* Tischabmessungen 620x620mm dabei Bewegungsspielraum vom 580x580 zuvor nur 480x480
+# Optimierungen der Spielfiguren
+
+* komplett 3d gedruckte Figuren mit integrierten Magnet 
+* nfc + filzgleiter
+* durch SLA druck höheres Gewicht somit kein Abstoßen von den anderen Figuren mehr
+* verschiedene Magnetgrässe/Stärke für Bauern/andere Figuren
+
+* jedoch alte figuren weiter verwendbar und austausch / vermischbar
 
 # Änderungen der Elektronik
 
-![Prototyp Hardware: Blockdiagramm](images/ATC_Hardware_Architecture_PROD.png)
+![Producation Hardware: Blockdiagramm](images/ATC_Hardware_Architecture_PROD.png)
+
+* verwenung von standarthardware, welche gut zu beschaffen ist
+* implementierung von standart gcode protokol, somit mit universell verwendbaren steuerung verwendbar
+* bietet eine hohe flexibilität da nur ein minimales set von Gcode-kommandos vorrausgesetzt wird
+
+
+
 
 ## IMPLEMENTIERUNG GCODE-Sender
 
@@ -288,7 +328,12 @@ welche technologien werden benötigt
 
 
 
+## Fazit zum finalen Prototypen
 
+* modularer hardware aufbau
+* einfach/gut verfügbare materialien verwendet
+* geänderte Mechnik resultiert in nahezu Spielfreier Mechanik (+- 1mm), welches für diesen Zweck mehr als ausreicht
+* 6h dauertest bestanden
 
 
 
@@ -297,7 +342,7 @@ welche technologien werden benötigt
 Die erste Phase der Entwicklung des Systems bestand in der Entwicklung der Cloud-Infrastruktur und der darauf laufenden Services.
 Hierbei stellt die "Cloud", einen Server dar, welcher aus dem Internet über eine feste IPv4 und eine IPv6 verfügt und frei konfiguriert werden kann.
 
-![Gesamtübersicht der verwendeten Cloud-Infrastruktur](images/ATC_Cloud_Architecture.png)
+![Cloud-Infrastruktur: Gesamtübersicht der verwendeten Cloud-Infrastruktur](images/ATC_Cloud_Architecture.png)
 
 
 
@@ -316,7 +361,7 @@ Eine RESTful API bezeichnet eine API welche HTTP-Requests verwendet um auf Daten
 Die RESTful API stellt verschiedene Ressourcen bereit, welche durch eine URI eindeutig identifizierbar sind. Auf diese können mittels verschiedenster HTTP Anfragemethoden (GET, POST, PUT, DELETE) zugegriffen werden. Jeder dieser Methoden stellt einen anderen Zugriff auf die Ressource dar und beeinflusst somit das Verhalten und die Rückantwort dieser.
 
 
-![Aufbau einer URI](images/ATC_URI_SCHEMES.png)
+![Cloud-Infrastruktur: Aufbau einer URI](images/ATC_URI_SCHEMES.png)
 
 Eine URI besteht dabei aus mehreren Teilen. Das Schema  gibt an wie die nachfolgenden Teile interpretiert werden sollen. Dabei wird bei einer RESTful Schnittstelle typischerweise das (+http) Protokoll, sowie (+https) verwendet. Dabei steht (+https) für eine verschlüsselte Verbindung. Desweiteren gibt es viele andere Schema, wie z.B (+ftp) welches
 
@@ -335,7 +380,7 @@ Dieser Ansatz ist somit geeignet um die verschiedenen Client Systeme (Schachtisc
 * statelss
 Diese stellen alle wichtigen Funktionen zum Betrieb des autonomen Schachtischs zur verfügung.
 
-![Aufbau der Service Architecture](images/ATC_Service_Architecture.png)
+![Cloud-Infrastruktur: Aufbau der Service Architecture](images/ATC_Service_Architecture.png)
 
 
 
@@ -355,7 +400,7 @@ Diese stellen alle wichtigen Funktionen zum Betrieb des autonomen Schachtischs z
 
 ### Backend
 
-![Login-Requst und Response](images/ATC_request_example.png)
+![Cloud-Infrastruktur: Backend Login-Requst und Response](images/ATC_request_example.png)
 
 * matchmaking schachlogik
 * zentraler zugriffspunkt auf das System und stellt diese abi bereit
@@ -460,9 +505,14 @@ Auch ist es möglich aktuell laufende Spiele in Echtzeit anzeigen zu lassen, som
 * Algorithmus zur Umsetzung eines Schachzugs
 * auftrennung in current und target Board
 
+## Schachfeld Scan Algorithmus zur Erkennung von Schachzügen
+
+![Embedded System Software: Schachfeld Scan Algorithmus Ablauf](images/ATC_ChessMoveAlgorithm.png)
 
 
 ## Userinterface
+
+![Embedded System Software: User-Interface Mockup](images/ATC_ChessMoveAlgorithm.png)
 
 * qt quick ui
 * ipc bibliothek zur kommunikation mit der hauptsoftware
@@ -476,4 +526,10 @@ Auch ist es möglich aktuell laufende Spiele in Echtzeit anzeigen zu lassen, som
 
 # Fazit
 
+* mit am weitesten forgeschrittener open-source autonomes Schachtisch Projekt
+
+
 ## Ausblick
+
+* einbdingung in existeirende Schach-Clouds
+* user-port für Erweiterungen (z.B. DGT Schachur)

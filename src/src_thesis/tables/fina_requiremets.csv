@@ -1,0 +1,9 @@
+,AtomicChessTable
+Erkennung Schachfigurstellung,ja (per NFC Tags)
+Konnektivität,"(+wlan), (+usb)"
+Automatisches Bewegen der Figuren,ja
+Spiel Livestream,ja
+Cloud anbindung (online Spiele),ja
+Parkposition für ausgeschiedene Figuren,ja
+Stand-Alone Funktionalität,ja (Bedienung direkt am Tisch)
+Besonderheiten,visuelle Hinweise per Beleuchtung
