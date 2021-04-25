@@ -77,6 +77,7 @@
 
 </div>
 
+
 <div class="jumbotron p-3 p-md-5 text-white rounded fhcolor_bg grad_header">
   <div class="col-md-6 px-0 ">
     <h1 class="display-4">Document Store</h1>
@@ -91,6 +92,9 @@
 
   </div>
 
+  <div class="col-md-12" id="alert_holder_server">
+
+  </div>
 
   <div class="col-md-4 d-flex justify-content-center">
     <form action="/redirect" method="GET">
@@ -200,7 +204,13 @@ function getParameterByName(name, url = window.location.href) {
       $("#toc3").val(toc);
     }else{
       console.log("NO PARAM");
-      $("#alert_holder").html('<div class="alert alert-warning" role="alert">No download token available, you may not be able to download all documents.</div>');
+      $("#alert_holder").html('<div class="alert alert-info" role="alert">No download token available, you may not be able to download all documents.</div>');
+    }
+
+    var err = getParameterByName("error",window.location.href);
+    if(err){
+      err  = String(err).split("_").join(" ");
+      $("#alert_holder_server").html('<div class="alert alert-warning" role="alert">'+err+'</div>');
     }
   });
 

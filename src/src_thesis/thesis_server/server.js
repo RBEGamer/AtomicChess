@@ -101,18 +101,18 @@ app.get('/document', function(req, res, next) {
     //APPEND KEY PREFIX
     var key = CNF.get_key("protected_" + tok);
     if(key == undefined || key === null){
-        res.redirect('/?error=token_invalid');
+        res.redirect('/?error=The_given_access_token_is_invalid_for_the_requested_document');
         return;
     }
 
     if(doc == undefined || doc === null|| doc === ""){
-        res.redirect('/?error=doc_invalid?toc=' + tok);
+        res.redirect('/?error=The_requested_document_ID_is_invalid?toc=' + tok);
         return;
     }
 
     var doc_red = key[doc];
     if(doc_red == undefined || doc_red === null|| doc_red === ""){
-        res.redirect('/?error=doc_red_invalid?toc=' + tok);
+        res.redirect('/?error=The_requested_document_ID_is_invalid_due_to_server_errors?toc=' + tok);
         return;
     }
 
