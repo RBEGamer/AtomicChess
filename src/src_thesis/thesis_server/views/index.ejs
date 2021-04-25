@@ -87,7 +87,7 @@
 
 
 <div id="anch_about" class="row">
-  <div class="col-md-12">
+  <div class="col-md-12" id="alert_holder">
 
   </div>
 
@@ -189,8 +189,8 @@ function getParameterByName(name, url = window.location.href) {
       $("#toc2").val(toc);
     }else{
       console.log("NO PARAM");
+      $("#alert_holder").html('<div class="alert alert-warning" role="alert">No download token available, you may not be able to download all documents.</div>');
     }
-
   });
 
 </script>
