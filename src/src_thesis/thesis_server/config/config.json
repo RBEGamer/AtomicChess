@@ -15,6 +15,7 @@
       "rep":"/document?doc=rep&tok=",
       "cv":"/document?doc=cv&tok="
     },
-    "acess_token":"1337"
+    "acess_token":"1337",
+    "acess_token_ot":"1338"
 
 }

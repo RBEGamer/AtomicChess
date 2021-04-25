@@ -95,22 +95,21 @@ app.get('/index', function (req, res) {
 
 app.get('/document', function(req, res, next) {
     console.log(req.body);
-    var tok = req.queryString('tok');
+    var tok = req.queryString('toc');
     var doc = req.queryString('doc');
 
-    if(tok !== CNF.get_key('acess_token')){
-        res.redirect('/');
-        return;
-    }
 
-    if(doc === "ba"){
+    if(doc === "ba" && tok !== CNF.get_key('acess_token')){
         res.sendFile(path.join(appDirectory,"./protected/thesis_document.pdf"));
         return;
-    }else  if(doc === "rep"){
+    }else  if(doc === "rep" && tok !== CNF.get_key('acess_token')){
         res.sendFile(path.join(appDirectory,"./protected/report_document.pdf"));
         return;
-    }else  if(doc === "cv"){
+    }else  if(doc === "cv" && tok !== CNF.get_key('acess_token')){
         res.sendFile(path.join(appDirectory,"./protected/cv.pdf"));
+        return;
+    }else  if(doc === "opentmas" && tok !== CNF.get_key('acess_token_ot')){
+        res.sendFile(path.join(appDirectory,"./protected/opentmas.pdf"));
         return;
     }
 
@@ -135,7 +134,7 @@ app.get('/redirect', function(req, res, next) {
   }
 }
 
-  real_dest = String(real_dest).replace("&tok=","&tok="+toc);
+  real_dest = String(real_dest).replace("&toc=","&tok="+toc);
   res.redirect(real_dest);
 });
 
