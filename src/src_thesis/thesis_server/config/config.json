@@ -11,11 +11,22 @@
       "impressum":"https://marcelochsendorf.com/impressum",
 
 
-      "ba":"/document?doc=ba&tok=",
-      "rep":"/document?doc=rep&tok=",
-      "cv":"/document?doc=cv&tok="
+      "ba":"/document?doc=ba&toc=",
+      "rep":"/document?doc=rep&toc=",
+      "cv":"/document?doc=cv&toc=",
+      "opentmas": "/document?doc=opentmas&toc="
     },
-    "acess_token":"1337",
-    "acess_token_ot":"1338"
+
+
+  "protected_1337":{
+    "ba": "./protected/thesis_document.pdf",
+    "rep": "./protected/report_document.pdf",
+    "cv": "./protected/cv.pdf",
+    "opentmas": "./protected/opentmas.pdf"
+},
+  "protected_1338": {
+    "cv": "./protected/cv.pdf",
+    "opentmas": "./protected/opentmas.pdf"
+  }
 
 }

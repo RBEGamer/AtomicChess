@@ -98,23 +98,27 @@ app.get('/document', function(req, res, next) {
     var tok = req.queryString('toc');
     var doc = req.queryString('doc');
 
-
-    if(doc === "ba" && tok !== CNF.get_key('acess_token')){
-        res.sendFile(path.join(appDirectory,"./protected/thesis_document.pdf"));
-        return;
-    }else  if(doc === "rep" && tok !== CNF.get_key('acess_token')){
-        res.sendFile(path.join(appDirectory,"./protected/report_document.pdf"));
-        return;
-    }else  if(doc === "cv" && tok !== CNF.get_key('acess_token')){
-        res.sendFile(path.join(appDirectory,"./protected/cv.pdf"));
-        return;
-    }else  if(doc === "opentmas" && tok !== CNF.get_key('acess_token_ot')){
-        res.sendFile(path.join(appDirectory,"./protected/opentmas.pdf"));
+    //APPEND KEY PREFIX
+    var key = CNF.get_key("protected_" + tok);
+    if(key == undefined || key === null){
+        res.redirect('/?error=token_invalid');
         return;
     }
 
-    req.redirect('/');
-    return;
+    if(doc == undefined || doc === null|| doc === ""){
+        res.redirect('/?error=doc_invalid?toc=' + tok);
+        return;
+    }
+
+    var doc_red = key[doc];
+    if(doc_red == undefined || doc_red === null|| doc_red === ""){
+        res.redirect('/?error=doc_red_invalid?toc=' + tok);
+        return;
+    }
+
+    res.sendFile(path.join(appDirectory,doc_red));
+
+
 
   });
 
@@ -134,7 +138,7 @@ app.get('/redirect', function(req, res, next) {
   }
 }
 
-  real_dest = String(real_dest).replace("&toc=","&tok="+toc);
+  real_dest = String(real_dest).replace("&toc=","&toc="+toc);
   res.redirect(real_dest);
 });
 
