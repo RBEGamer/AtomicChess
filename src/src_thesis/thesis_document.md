@@ -587,9 +587,18 @@ Somit wird dieser wärend des Matchmaking-Prozesses erst für ein Match ausgewä
 Somit ist gewährleistet, dass immer zuerst die Menschlichen-Spieler ein Spiel beginnen.
 
 Eine weitere Modifikation ist die verwendung einer Schach-AI, da dieser Service als Computerspieler agieren soll. 
-Hierzu kam die Open-Source Chess Engine Stockfish[@stockfish] in der Version 12 zum Einsatz.
+Hierzu kam die Open-Source Chess Engine Stockfish[@stockfish] in der Version 11 zum Einsatz.
+Die Stockfish-Engine bietet noch weitere Features, als nur die nöchst besten Züge zu einem gegebenen Schachbrett zu ermitteln.
+Sie kann auch genutzt werden um Züge zu klassifizieren und bietet Analysemöglichkeiten für Spielstellungen.
 
-* stockfish
+Die AutoPlayer-Instanz kommuniziert über das (+uci) Protokoll[@uciprotocol] mit der Executable der Stockfish-Engine.
+Dieses Protokoll wird in der Regel von Schach-Engines um mit einer (+gui) zu Kommunizieren und die Kommunikation erfolgt über Klartextbefehle.
+Um das aktuelle Spielbrett in der Engine zu setzten wird dieses in der (+fen) Notation mit dem Prefix `position fen ` als Klartext an die Engine übergben.
+
+
+Im Kontext des AutoPlayer-Service wird der Engine nur das aktuelle Spielbrett übermittelt und der nächst beste Zug ausgelsen.
+Dies wird Ausgeführt, wenn der AutoPlayer am Zug ist. Nachdem die Engine einen passenden Zug gefunden hat, wird das Ergebnis über den `make_move` (+rest)-API Call übermittelt. 
+
 
 
 Wenn das Match beendet wird, beendet sich auch die Service-Instanz.
