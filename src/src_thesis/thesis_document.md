@@ -12,21 +12,25 @@
 
 ## Zielsetzung
 
-Das Ziel dieser Arbeit ist es, einen autonomen Schachtisch, welcher in der Lage ist Schachfiguren autonom zu bewegen und auf Benutzerinteraktion zu reagieren.
-Der Schwerpunkt liegt dabei insbesondere auf der Programmierung des eingebetteten Systems und dem Zusammenspiel dieses mit einem aus dem Internet erreichbaren Servers, welcher als Vermittlungsstelle zwischen verschiedenen Schachtischen und anderen Endgeräten dient.
-Dieses besteht zum einem aus der Positionserkennung und Steuerung der Hardwarekomponenten (Schachfiguren) und zum anderen aus der Kommunikation zwischen dem Tisch selbst und einem in einer Cloud befindlichen Server.
+Das Ziel dieser Arbeit ist es, einen autonomen Schachtisch zu entwickeln, welcher in der Lage ist Schachfiguren autonom zu bewegen und auf Benutzerinteraktion zu reagieren.
+Der Schwerpunkt liegt dabei insbesondere auf der Programmierung des eingebetteten Systems und dem Zusammenspiel von diesem mit einem aus dem Internet erreichbaren Servers, welcher als Vermittlungsstelle zwischen verschiedenen Schachtischen und anderen Endgeräten dient.
+Dieses besteht zum einem aus der Positionserkennung und Steuerung der Hardwarekomponenten (Schachfiguren) und zum anderen aus der Kommunikation zwischen dem Tisch selbst und einem in einer Cloud befindlichem Server.
 Mittels der Programmierung werden diverse Technologien von verschiedenen Einzelsystemen zu einem Gesamtprodukt zusammengesetzt.
 
 ## Methodik
 
 Im ersten Abschnitt werden die zum Zeitpunkt existierenden Ansätze und deren Umsetzung beleuchtet.
 Anschliessend werden die zuvor verwendeten Technologien betrachtet, welche bei bei den beiden darauffolgenden Prototypen verwendet wurden.
+
+Das sechste Kapitel widmet sich der realisierung des erste Protoypen des autonomen Schachtischs. Dabei werden alle 
+Im anschliessenden Kapitel, wird auf der Basis des ersten Prototyps und seiner auftretenden Probleme, der finale Prototyp entwickelt.
+Hier werden die Probleme durch ein re-design und vereinfachung der Elektronik gelößt und so ein zufriedenstellendes Produkt entwickelt.
+
 Im darauffolgenden Abschnitt wird die Cloud-Infrastruktur thematisiert, welche für eine Kommunikation zwischen den Prototypen entscheidend ist.
 
-Abschliessend wir ein Ausblick auf
+* controller software
+* fazit
 
-
-* ausblick weitere features
 
 
 
@@ -35,8 +39,8 @@ Abschliessend wir ein Ausblick auf
 
 ## Existierende Systeme im Vergleich
 
-* nieschenprodukt jedoch einige Projekte im OpenSource bereich verfügbar
-* ein kommerzieller hersteller
+* Nischenprodukt, jedoch einige Projekte im OpenSource bereich verfügbar
+* Ein kommerzieller Hersteller
 
 ### Kommerzielle Produkte
 
@@ -50,7 +54,7 @@ Abschliessend wir ein Ausblick auf
 | Konnektivität                            	| Bluetooth                            		| Bluetooth                         				| Seriell           			    | Bluetooth         			|
 | Automatisches Bewegen der Figuren       	| ja                                		| ja                                				| nein                 				| nein                 			|
 | Spiel Livestream                        	| ja                                		| ja                                				| ja                   				| ja                   			|
-| Cloud anbindung (online Spiele)         	| ja (Mobiltelefon + App)      		        | ja (Mobiltelefon + App)      				        | ja (PC + App)   				        | ja (PC + App)   			|
+| Cloud anbindung (online Spiele)         	| ja (Mobiltelefon + App)      		        | ja (Mobiltelefon + App)      				        | ja (PC + App)   				    | ja (PC + App)      			|
 | Parkposition für ausgeschiedene Figuren 	| nein                              		| ja                                				| nein                 				| nein                 			|
 | Stand-Alone Funktionalität               	| nein (Mobiltelefon erforderlich)    		| nein (Mobiltelefon erforderlich)     				| nein (PC erforderlich)			| nein (PC erforderlich)		|   	   
 | Besonderheiten                          	| Akku für 30 Spiele                    	| Akku für 15 Spiele					           	| - 								| -								|
@@ -90,13 +94,15 @@ Auch existieren weitere Abwandlungen von autonomen Schachbrettern, bei welchem d
 | Lizenz                                 		| (+gpl) 3+                                				| (+gpl)                                       				| -                          				|
 
 
-In den bestehenden Projekten ist zu erkennen, dass ein autonomer Schachtisch sehr einfach und mit einfachsten Mittel konstruiert werden kann. Hierbei fehlen in der Regel einige Features, wie das automatische Erkennen von Figuren oder das Spielen über das Internet.
+In den bestehenden Projekten ist zu erkennen, dass ein autonomer Schachtisch sehr einfach und mit simplen Mittel konstruiert werden kann. Hierbei fehlen in der Regel einige Features, wie das automatische Erkennen von Figuren oder das Spielen über das Internet.
 
 Einige Projekte setzten dabei auf eingebettete Systeme, welche direkt im Schachtisch montiert sind, andere hingegen nutzen einen externen PC, welcher die Steuerbefehle an die Elektronik sendet.
 
-Bei der Konstruktion der Mechanik und der Methode mit welcher die Figuren über das Feld bewegt werden ähneln sich jedoch die meisten dieser Projekte. Hier wird in der Regel eine einfache X und Y-Achse verwendet, welche von zwei Schrittmotoren bewegt werden. Die Schachfiguren werden dabei mittels eines Elektromagneten über die Oberseite gezogen. Hierbei ist ein Magnet oder eine kleine Metallplatte in den Fuß der Figuren eingelassen worden.
+Bei der Konstruktion der Mechanik und der Methode mit welcher die Figuren über das Feld bewegt werden ähneln sich jedoch die meisten dieser Projekte. Hier wird in der Regel eine einfache X- und Y-Achse verwendet, welche von zwei Schrittmotoren bewegt werden.
+Die Schachfiguren werden dabei mittels eines Elektromagneten über die Oberseite gezogen. Hierbei ist ein Magnet oder eine kleine Metallplatte in den Fuß der Figuren eingelassen worden.
 
-Die Erkennung der Schachfiguren ist augenscheinlich die schwierigste Aufgabe. Hier wurde in der Mehrzahl der Projekte eine Kamera im Zusammenspiel mit einer auf OpenCV basierenden Figur-Erkennung verwendet. Diese Variante ist je nach Implementierung des Vision-Algorithmus fehleranfälliger bei sich ändernden Lichtverhältnissen, auch muss die Kamera oberhalb der Schachfiguren platziert werden, wenn kein transparentes Schachfeld verwendet werden soll.
+Die Erkennung der Schachfiguren ist augenscheinlich die schwierigste Aufgabe. Hier wurde in der Mehrzahl der Projekte eine Kamera im Zusammenspiel mit einer auf OpenCV basierenden Figur-Erkennung verwendet.
+Diese Variante ist je nach Implementierung des Vision-Algorithmus fehleranfälliger bei sich ändernden Lichtverhältnissen, auch muss die Kamera oberhalb der Schachfiguren platziert werden, wenn kein transparentes Schachfeld verwendet werden soll.
 
 Eine weitere Alternative ist die Verwendung einer Matrix aus Reed-Schaltern oder Halleffekt-Sensoren. Diese werden in einer 8x8 Matrix Konfiguration unterhalb der Platte montiert und reagieren auf die Magnete in den Figuren. So ist es möglich zu erkennen, welches der Schachfelder belegt ist, jedoch nicht konkret von welchem Figurtypen.
 Dieses Problem wird durch eine definierte Ausgangsstellung beim Spielstart gelöst. Nach jedem Zug durch den Spieler und der dadurch resultierenden Änderungen in der Figurpositionen in der Matrix können die neuen Figurstellungen berechnet werden.
@@ -109,10 +115,12 @@ Dieses Problem wird durch eine definierte Ausgangsstellung beim Spielstart gelö
 Ein wichtiger Aspekt bei diesem Projekt stellt die User-Experience dar. Diese beschreibt die Ergonomie der Mensch-Maschine-Interaktion und wird durch die DIN 9241[@din9241] beschrieben.
 Hierbei geht es primär um das Erlebnis, welches der Benutzer bei dem Verwenden eines Produktes erlebt und welche Erwartungen der Benutzer an die Verwendung des Produktes hat.
 
-Bei dem autonomen Schachtisch, soll der Benutzer eine ähnlich einfache Erfahrung erleben, wie bei einer Schachpartie mit einem menschlichen Gegenspieler.
-Der Benutzer soll direkt nach dem Einschalten des Tisches und dem Aufstellen der Figuren in der Lage sein, mit dem Spiel beginnen zu können. Dies soll wie ein reguläres Schachspiel ablaufen; der Spieler vor dem Tisch soll die Figuren mit der Hand bewegen können und der Tisch soll den Gegenspieler darstellen. Dieser bewegt die Figuren der Gegenseite.
+Bei dem autonomen Schachtisch, soll der Benutzer eine ähnlich authentische Erfahrung erleben wie bei einer Schachpartie mit einem menschlichen Gegenspieler.
+Der Benutzer soll direkt nach dem Einschalten des Tisches und dem Aufstellen der Figuren in der Lage sein, mit dem Spiel beginnen zu können. Dies soll wie ein reguläres Schachspiel ablaufen; der Spieler vor dem Tisch soll die Figuren mit der Hand bewegen können und der Tisch soll den Gegenspieler darstellen.
+Dieser bewegt die Figuren der Gegenseite.
 
-Nach Beendigung einer Partie, soll das Spielbrett wieder in die Ausgangssituation gebracht werden; dies kann zum einem vom Tisch selbst oder vom Benutzer manuell geschehen. Danach ist der Tisch für die nächste Partie bereit, welche einfach per Knopfdruck gestartet werden können sollte.
+Nach Beendigung einer Partie, soll das Spielbrett wieder in die Ausgangssituation gebracht werden; dies kann zum einem vom Tisch selbst oder vom Benutzer manuell geschehen.
+Danach ist der Tisch für die nächste Partie bereit, welche einfach per Knopfdruck gestartet werden können sollte.
 
 Dies soll auf für abgebrochene Spiele gelten, welche von Benutzer oder durch das System abgebrochen werden. Hierbei soll das Schachbrett sich ebenfalls selbständig zurücksetzten können.
 
@@ -209,7 +217,7 @@ welche technologien werden benötigt
 * PLA als FDM Filament => einfach verarbeitung und handhabung, keine Mechanische Belastbarkeit gefordert
 
 Da es sich hier nur um einen Protoypen handelt, wurde hier auf ein einfach zu handbabendes Filament vom Typ PLA verwendet.
-Dies ist besonders gut für die Prototypenendwicklung geeignet und kann mit nahezu jeden handelsüblichen FDM 3D Drucker verarbeitet werden.
+Dies ist besonders gut für die Prototypenendwicklung geeignet und kann mit nahezu jeden handelsüblichen (+fdm) 3D-Drucker verarbeitet werden.
 
 * keine hohe genauigkeit, teile nicht sichtbar
 
@@ -221,13 +229,14 @@ Dies betrifft vor allem die Genuigkeit der Bohrungen in den gefertigten Objekten
 Ein Test, welcher die Machbarkeit von Gewinden zeigt wurde nicht durchgeführt, da alle Schrauben später mit der passenden Mutter gesichert werden sollen.
 So soll eine Abnutzung durch häufige Montage der gedruckten Bauteile verhindert werden.
 
-Bei dem Design der zu druckenden Bauteile wurde darauf geachtet, dass diese den Bauraum von 200x200x200mm nicht überschreiten und somit auch von einfachen FDM 3D Druckern verarbeitet werden können.
+Bei dem Design der zu druckenden Bauteile wurde darauf geachtet, dass diese den Bauraum von 200x200x200mm nicht überschreiten und somit auch von einfachen (+fdm) 3D-Druckern verarbeitet werden können.
 
-Als Software wurde der Open-Source Slicer Ultimaker Cura [@ultimakercura] verwendet, da dieser zum einen bereits fertige Konfigurationen für den verwendeten 3D Drucker enhält und zum anderen experimentelle Features bereitstellt.
+Als Software wurde der Open-Source Slicer Ultimaker Cura [@ultimakercura] verwendet, da dieser zum einen bereits fertige Konfigurationen für den verwendeten 3D-Drucker enhält und zum anderen experimentelle Features bereitstellt.
 
 ![3D Druck: Objekt (rot,gelb,grün),Tree Structure (cyan) ](images/3d_print_tree_structure.png)
 
-Hier wurde für die Bauteile, welche eine Sützstruktur benötigen, die von Cura bereitgestellte Tree Support Structure aktiviert. Diese bietet den Vorteil gegenüber anderen Stützstruktiren, dass sich diese leichter entfernen lässt und weniger Rückstände an den Bauteilen hinterlässt. Diese Vorteile wurde mit verschiedenen Testdrucken verifiziert und kommen insbesondere bei komplexen Bauteilen mit innenliegenden Elementen zum tragen bei denen eine Stützstruktur erfoderlich sind.
+Hier wurde für die Bauteile, welche eine Sützstruktur benötigen, die von Cura bereitgestellte Tree Support Structure aktiviert. Diese bietet den Vorteil gegenüber anderen Stützstruktiren, dass sich diese leichter entfernen lässt und weniger Rückstände an den Bauteilen hinterlässt.
+Diese Vorteile wurde mit verschiedenen Testdrucken verifiziert und kommen insbesondere bei komplexen Bauteilen mit innenliegenden Elementen zum tragen bei denen eine Stützstruktur erfoderlich sind.
 
 
 
@@ -244,7 +253,8 @@ Hier wurde für die Bauteile, welche eine Sützstruktur benötigen, die von Cura
 
 
 
-
+* Zeit für den 3D Druck Prozess spiel hier keine Rolle, da selbstbau projekt
+* Parameter lassen sich weiter anpassen z.B. Layerheight auf 0.4
 * finaler protoyp bietet sich abs oder pteg an
 
 
@@ -283,7 +293,7 @@ Hier wurde für die Bauteile, welche eine Sützstruktur benötigen, die von Cura
 
 Da das System die auf dem Feld befindlichen Schachfiguren anhand von (+nfc) Tags erkennt, müssen diese zuerst mit Daten beschrieben werden.
 Die verwendeten NXP NTAG 21 Chips, besitzen einen vom Benutzer verwendbaren Speicher von 180 Byte. Dieser kann über ein (+nfc)-Lese/Schreibgerät mit Daten verschiednster Art beschrieben und wieder ausgelesen werden.
-Moderne Mobiltelefone besitzen in der Regel auch die Fähigkeit mit passenden (+nfc) Tags kommunizieren zu können, somit sind keine Stand-Alone Lesegeräte mehr notwendig.
+Moderne Mobiltelefone besitzen in der Regel auch die Fähigkeit mit passenden (+nfc) Tags kommunizieren zu können; somit sind keine Stand-Alone Lesegeräte mehr notwendig.
 
 Der Schachtisch verwendet dabei das (+ndef) Dateiformat welches Festlegt, wie die Daten auf dem (+nfc) Tag gespeichert werden. Da diesen ein Standatisiertes Format ist, können alle gängigen Lesegeräte und Chipsätze diese Datensätze lesen. Der im autonomen Schachtisch verwendete Chipsatz PN532 von NXP ist dazu ebenfalls in der Lage.
 
@@ -293,7 +303,7 @@ Da (+ndef) Informationen über die Formatierung und der gepeicherten Einträge s
 Per Lesegerät können anschliessend mehrere (+ndef) Records auf den Tag geschrieben werden. Diese sind mit Dateien auf einer Festplatte vergleichbar und können verschiedenen Dateiformate und Dateigrössen annehmen.
 Ein typischer Anwendungsfall ist der (+ndefrtd) URL Datensatz. Dieser kann dazu genutzt werden eine spezifizierte URL auf dem Endgeräte aufzurufen, nachdem der (+nfc) Tag gescant wurde.[@nordicnfclibndef]
 
-Der autonome Schachtisch, verwendet den einfachsten (+ndefrtd) Typ, welcher der Text-Record ist, und zum speichern von Zeichenketten genutzt werden kann, ohne das eine Aktion auf dem Endgerät ausgeführt wird.
+Der autonome Schachtisch verwendet den einfachsten (+ndefrtd) Typ, welcher der Text-Record ist, und zum speichern von Zeichenketten genutzt werden kann, ohne das eine Aktion auf dem Endgerät ausgeführt wird.
 Jeder Tag einer Schafigur, welche für den autonomen Schachtisch verwendet werden kann, besitzt diesen (+ndef) Record an der ersten Position. Alle weiteren eventuell vorhandenen Records werden vom Tisch ignoriert.[@nordicnfclib]
 
 ![Prototyp Hardware: Tool zur Erstellung des NDEF Payloads: ChessFigureIDGenerator.html](images/ATC_ChessFigureIDGenerator.png)
@@ -362,11 +372,11 @@ Die bisherigen genutzen vorgefertigten Figuren funktionierten mit dem ersten Pro
 Sie wiesen aber trotzdem eine zu hohe Fehleranfälligkeit, im Bezug auf das gegenseitige Beeinflussen (abstoßen,anziehen) durch die verwendeten Magnete.
 
 Die größse der Figuren kann durch die fest definierte Feldgrösse von 55mm und der verwendeten (+nfc) Tags nicht verändert werden.
-Nach vielen Testdurchläufen mit dem ersten Prototyp war zu erkennen, dass sich die Figuren je nach aktueller Situation auf dem Spielfeld immernoch merklich magnetisch anziehen.
+Nach vielen Testdurchläufen mit dem ersten Prototyp war zu erkennen, dass sich die Figuren je nach aktueller Situation auf dem Spielfeld immernoch magnetisch anziehen.
 Dies führt je nach Spielverlauf zu Komplikationen, sodass die Figuren manuell wieder mittig auf den Felder platziert werden müssen.
 
 Um dies zu verhindern, wurde einige Figuren zusätzlich mit einer 20mm Unterlegscheibe am Boden versehen, welche diese Problem behob, jedoch das (+nfc) Tag nicht mehr als lesbar erwies.
-Dies resultierte in der Idee die Schachfiguren ebenfalls selbst mit dem 3D Drucker herzustellen und die Magnete direkt in den Boden der Figur einlassen zu können.
+Dies resultierte in der Idee die Schachfiguren ebenfalls selbst mit dem 3D-Drucker herzustellen und die Magnete direkt in den Boden der Figur einlassen zu können.
 
 Die aktuell verwendeten Figuren des ersten Protoyp wiegen 8 Gramm für die Bauern und 10 Gramm für die restlichen Figuren.
 Der Test mit der Unterlegscheibe ergab, dass diese mit 4 Gramm genug Gewicht hinzufügte um die magnetische Beeinflussung zu unterbinden.
@@ -450,7 +460,7 @@ Hierbei stellt die "Cloud", einen Server dar, welcher aus dem Internet über ein
 
 Das System soll so ausgelegt werden, dass es im späteren Zeitpunkt mit verschiedenen Client-Devices mit diesem kommunizieren können.
 Dazu zählen zum einen der autonome Schachtisch, aber z.B. auch einen Web-Client, welcher die Funktionalität eines Schachtisch im Browser abbilden kann.
-Hierzu muss das System eine einheitliche REST bereitstellen.
+Hierzu muss das System eine einheitliche (+rest)-Schnittstelle bereitstellen.
 
 Eine RESTful API bezeichnet eine API welche HTTP-Requests verwendet um auf Daten zugreifen zu können.
 
@@ -523,10 +533,10 @@ Bevor ein Spiel begonnen wird, generiert der MoveValidator das initiale Spielfel
 
 * Beispiel request/repsonse
 
-Der Backend-Service fragt einen neues Spiel an, oder übergibt einen Schachzug inkl. des Spielbretts an den Service. Der Response wird dann vom Backend in der Datenbank gespeichert und weiter an die Client-Devices verteilt.
+Der Backend-Service fragt einen neues Spiel an oder übergibt einen Schachzug inkl. des Spielbretts an den Service. Der Response wird dann vom Backend in der Datenbank gespeichert und weiter an die Client-Devices verteilt.
 
 
-Mit diesem Design ist es möglich auch andere Spielarten im System zu implementieren, nur hier die initialen Spielfelder generiert werden und Züge der Spieler validiert werden müssen.
+Mit diesem Design ist es möglich, auch andere Spielarten im System zu implementieren, nur hier die initialen Spielfelder generiert werden und Züge der Spieler validiert werden müssen.
 
 Allgemein geschieht die Kommunikation über drei API Calls.
 
