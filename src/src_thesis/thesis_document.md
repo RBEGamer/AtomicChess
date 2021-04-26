@@ -150,26 +150,26 @@ Auch muss sich hier die Frage gestellt werden, was mit den ausgeschiedenen Figur
 | Besonderheiten                          	| visuelle Hinweise per Beleuchtung 	|
 
 
-Die Abmessungen und das Gewicht des autonomen Schachtisches, ergeben sich aus mechanischen Umsetzung und werden hier aufgrund der zur Verfügung stehenden Materialen und Fertigungstechniken nicht festgelegt.
+Die Abmessungen und das Gewicht des autonomen Schachtisches, ergeben sich aus mechanischen Umsetzung und werden hier aufgrund der zur Verfügung stehenden Materialen und fertigungstechniken nicht festgelegt.
 Dennoch wird Wert darauf gelgegt, dass das Verhältnis zwischen den Spielfeldabmessungen und den Abmessungen des Tisches so gering wie möglich ausfällt. Auch müssen die Figuren für den Benutzer eine gut handhabbare Grösse aufweisen um ein angenehmes haptisches Spielerlebnis zu gewährleisten.
 
-
+* abmessungen und gewicht ergeben sich aus der Umsetzung der Anforderungen
 
 
 ### Technologien im Makerspace
 
-* vllt kann man sagen dass die meisten Teile im Makerspace der FH erstellt wurden
-* was ist vorhanden ? 
+stehen diese im makerspace zur verfüfung
+
 
 ## Machbarkeitsanalyse
 
-* welche technologien werden benötigt
+welche technologien werden benötigt
 * software architektur anfoderungen
 * hardware anforderungen
 * grosse
 * wiederholgenauigkeit
 * lautstärke
-* vorerfahrnung in cad ed druck und schaltungsdesign => somit kein Problem
+* vorerfahrnung in cad ed druck und schaltungsdesign
 
 
 
@@ -191,61 +191,30 @@ Dennoch wird Wert darauf gelgegt, dass das Verhältnis zwischen den Spielfeldabm
 
 ## Verifikfation NFC Technologie
 
-![Grove PN532 NFC Reader mit Kabelgebundener Antenne](images/ATC_nfc_range_test.png)
-
 * warum gewählter nfc reader => ndef lesen
-* reicheweiten test mit 22mm => kleinster gefundener folienbasierender NFC Tag
+* reicheweiten test mit 22mm
 * test mit benachbarten figuren
 * warum kein RFID => keine speicherung von id auf der controller seite
 * selbherstellung von eigenen figuren ohne modifikation der controllerseite
+
+![Grove PN532 NFC Reader mit Kabelgebundener Antenne](images/ATC_nfc_range_test.png)
+
 * test mit figuren nebeneinander
 
 
 
 
 ## Schrittmotor / Schrittmotorsteuerung
-* warum => einfache ansteuerung, keine zusätzlichen encoder notwendig, da mit keinem Schrittverlust zu rechnen ist
+* warum => einfache ansteuerung
 * keine STEP DIR somit muss embedded nicht echtzeitfähigsein und kann ggf auch andere task abbarbeiten
 * TMC schrittmotortreiber spi configuration
 * und goto move  => wait for move finished irw testen
-* dafür einfacher python testreiber
+* dafür einfacher python testreiber geschribene
 * schrittverlust nicht zu erwarten
 
 
 
 ## 3D Druck für den mechanischen Aufbau
-
-* PLA als FDM Filament => einfach verarbeitung und handhabung, keine Mechanische Belastbarkeit gefordert
-
-Da es sich hier nur um einen Protoypen handelt, wurde hier auf ein einfach zu handbabendes Filament vom Typ PLA verwendet.
-Dies ist besonders gut für die Prototypenendwicklung geeignet und kann mit nahezu jeden handelsüblichen FDM 3D Drucker verarbeitet werden.
-
-* keine hohe genauigkeit, teile nicht sichtbar
-
-
-
-Zuvor wurden einige Testdrucke durchgeführt um die Qualität der zuvor gewählten Druckparameter zu überprüfen und diese gegebenenfalls anzupassen.
-Auch wurden verschiedene Calibrierobjekte gedruckt, an welchen die Toleranzen für die späteren (+cad) Zeichnungen abgeschätz werden können.
-
-Dies betrifft vor allem die Genuigkeit der Bohrungen in den gefertigten Objekten, da hier später Bolzen und Schrauben ein nahezu spielfrei eingeführt werden müssen.
-Ein Test, welcher die Machbarkeit von Gewinden zeigt wurde nicht durchgeführt, da alle Schrauben später mit der passenden Mutter gesichert werden sollen.
-So soll eine Abnutzung durch häufige Montage der gedruckten Bauteile verhindert werden.
-
-Bei dem Design der zu druckenden Bauteile wurde darauf geachtet, dass diese den Bauraum von 200x200x200mm nicht überschreiten und somit auch von einfachen FDM 3D Druckern verarbeitet werden können.
-
-
-: Verwendete 3D Druck Parameter. Temperatur nach Herstellerangaben des Filaments.
-
-| Ender 3 Pro 0.4mm Nozzle 	| PLA  Settings 	|
-|--------------------------	|---------------	|
-| Layer Height             	| 0.2mm         	|
-| Infill                   	| 50.00%        	|
-| Wall Thickness           	| 2.0mm         	|
-| Support Structure        	| Tree          	|
-| Top Layers               	| 4             	|
-| Bottom Layers            	| 4             	|
-
-
 
 
 
