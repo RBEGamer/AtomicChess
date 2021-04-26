@@ -58,7 +58,12 @@ pdflatex ./thesis.tex ./thesis.pdf
 pdflatex ./thesis.tex ./thesis.pdf
 
 echo "------------- PDF EXPORT FINISHED -----------"
+
+
+
 # EXPORT AS HTML
+
+#pandoc -s thesis.tex -o thesis.md
 #pandoc thesis.tex -f latex -t html -s -o thesis.html --bibliography thesis_references.bib
 
 # REMOVE TEMP FILES

@@ -555,7 +555,8 @@ Technologie}\label{verifikfation-nfc-technologie}}
 \begin{figure}
 \centering
 \includegraphics{images/ATC_nfc_range_test.png}
-\caption{Grove PN532 NFC Reader mit Kabelgebundener Antenne}
+\caption{Grove PN532 NFC Reader mit Kabelgebundener Antenne
+\label{ATC_nfc_range_test}}
 \end{figure}
 
 \begin{itemize}
@@ -632,16 +633,18 @@ experimentelle Features bereitstellt.
 \begin{figure}
 \centering
 \includegraphics{images/3d_print_tree_structure.png}
-\caption{3D Druck: Objekt (rot,gelb,grün),Tree Structure (cyan)}
+\caption{3D Druck: Objekt (rot,gelb,grün),Tree Structure (cyan)
+\label{3d_print_tree_structure}}
 \end{figure}
 
 Hier wurde für die Bauteile, welche eine Sützstruktur benötigen, die von
-Cura bereitgestellte Tree Support Structure aktiviert. Diese bietet den
-Vorteil gegenüber anderen Stützstruktiren, dass sich diese leichter
-entfernen lässt und weniger Rückstände an den Bauteilen hinterlässt.
-Diese Vorteile wurde mit verschiedenen Testdrucken verifiziert und
-kommen insbesondere bei komplexen Bauteilen mit innenliegenden Elementen
-zum tragen bei denen eine Stützstruktur erfoderlich sind.
+Cura bereitgestellte Tree Support Structure aktiviert.
+\ref{3d_print_tree_structure} Diese bietet den Vorteil gegenüber anderen
+Stützstruktiren, dass sich diese leichter entfernen lässt und weniger
+Rückstände an den Bauteilen hinterlässt. Diese Vorteile wurde mit
+verschiedenen Testdrucken verifiziert und kommen insbesondere bei
+komplexen Bauteilen mit innenliegenden Elementen zum tragen bei denen
+eine Stützstruktur erfoderlich sind.
 
 \begin{longtable}[]{@{}ll@{}}
 \caption{Verwendete 3D Druck Parameter. Temperatur nach
@@ -686,7 +689,8 @@ Bottom Layers & 4\tabularnewline
 \begin{figure}
 \centering
 \includegraphics{images/table_images/dk.png}
-\caption{Prototyp Hardware: Erster Prototyp des autonomen Schachtisch}
+\caption{Prototyp Hardware: Erster Prototyp des autonomen Schachtisch
+\label{dk}}
 \end{figure}
 
 \hypertarget{mechanik}{%
@@ -756,7 +760,7 @@ ignoriert.\cite{nordicnfclib}
 \centering
 \includegraphics{images/ATC_ChessFigureIDGenerator.png}
 \caption{Prototyp Hardware: Tool zur Erstellung des NDEF Payloads:
-ChessFigureIDGenerator.html}
+ChessFigureIDGenerator.html \label{ATC_ChessFigureIDGenerator}}
 \end{figure}
 
 Um die Payload für den \gls{nfc} Record zu erstellen wurde ein kleine
@@ -764,7 +768,7 @@ Web-Applikation erstellt, welche den Inhalt der Text-Records erstellt.
 Dieser ist für jede Figur individuell und enthält den Figur-Typ und die
 Figur-Farbe. Das Tool untersützt auch das Speichern weiterer Attribute
 wie einem Figur-Index, welcher aber in der finalen Software-Version
-nicht genutzt wird.
+nicht genutzt wird. \ref{ATC_ChessFigureIDGenerator}
 
 Nach dem Beschreiben eines \gls{nfc} Tags ist es möglich diesen gegen
 auslesen oder erneuten Schreiben mittels einer Read/Write-Protection zu
@@ -779,7 +783,7 @@ verwenden.
 \centering
 \includegraphics{images/ndef_record_rook.png}
 \caption{Prototyp Hardware: NDEF Text Record Payload für einen weissen
-Turm}
+Turm \label{ndef_record_rook}}
 \end{figure}
 
 \hypertarget{schaltungsentwurf}{%
@@ -788,7 +792,8 @@ Turm}
 \begin{figure}
 \centering
 \includegraphics{images/ATC_Hardware_Architecture_DK.png}
-\caption{Prototyp Hardware: Blockdiagramm}
+\caption{Prototyp Hardware: Blockdiagramm
+\label{ATC_Hardware_Architecture_DK}}
 \end{figure}
 
 \begin{itemize}
@@ -846,7 +851,8 @@ Prototyp}\label{erstellung-zweiter-prototyp}}
 \begin{figure}
 \centering
 \includegraphics{images/table_images/prod.png}
-\caption{Producation Hardware: Finaler autonomer Schachtisch}
+\caption{Producation Hardware: Finaler autonomer Schachtisch
+\label{prod}}
 \end{figure}
 
 \hypertarget{modifikation-der-mechanik}{%
@@ -931,7 +937,8 @@ keine Beeinflussungen mehr statt.
 \begin{figure}
 \centering
 \includegraphics{images/ATC_Hardware_Architecture_PROD.png}
-\caption{Producation Hardware: Blockdiagramm}
+\caption{Producation Hardware: Blockdiagramm
+\label{ATC_Hardware_Architecture_PROD}}
 \end{figure}
 
 \begin{itemize}
@@ -993,7 +1000,7 @@ eine feste IPv4 und eine IPv6 verfügt und frei konfiguriert werden kann.
 \centering
 \includegraphics{images/ATC_Cloud_Architecture.png}
 \caption{Cloud-Infrastruktur: Gesamtübersicht der verwendeten
-Cloud-Infrastruktur}
+Cloud-Infrastruktur \label{ATC_Cloud_Architecture}}
 \end{figure}
 
 \hypertarget{api-design}{%
@@ -1018,16 +1025,16 @@ auf Daten zugreifen zu können.
 \end{itemize}
 
 Die RESTful API stellt verschiedene Ressourcen bereit, welche durch eine
-URI eindeutig identifizierbar sind. Auf diese können mittels
-verschiedenster HTTP Anfragemethoden (GET, POST, PUT, DELETE)
-zugegriffen werden. Jeder dieser Methoden stellt einen anderen Zugriff
-auf die Ressource dar und beeinflusst somit das Verhalten und die
-Rückantwort dieser.
+URI \ref{ATC_URI_SCHEMES} eindeutig identifizierbar sind. Auf diese
+können mittels verschiedenster HTTP Anfragemethoden (GET, POST, PUT,
+DELETE) zugegriffen werden. Jeder dieser Methoden stellt einen anderen
+Zugriff auf die Ressource dar und beeinflusst somit das Verhalten und
+die Rückantwort dieser.
 
 \begin{figure}
 \centering
 \includegraphics{images/ATC_URI_SCHEMES.png}
-\caption{Cloud-Infrastruktur: Aufbau einer URI}
+\caption{Cloud-Infrastruktur: Aufbau einer URI \label{ATC_URI_SCHEMES}}
 \end{figure}
 
 Eine URI besteht dabei aus mehreren Teilen. Das Schema gibt an wie die
@@ -1065,7 +1072,8 @@ mit dem Server zu erlauben.
 \begin{figure}
 \centering
 \includegraphics{images/ATC_Service_Architecture.png}
-\caption{Cloud-Infrastruktur: Aufbau der Service Architecture}
+\caption{Cloud-Infrastruktur: Aufbau der Service Architecture
+\label{ATC_Service_Architecture}}
 \end{figure}
 
 \hypertarget{voruxfcberlegungen}{%
@@ -1085,7 +1093,8 @@ mit dem Server zu erlauben.
 \begin{figure}
 \centering
 \includegraphics{images/ATC_request_example.png}
-\caption{Cloud-Infrastruktur: Backend Login-Requst und Response}
+\caption{Cloud-Infrastruktur: Backend Login-Requst und Response
+\label{ATC_request_example}}
 \end{figure}
 
 \begin{itemize}
@@ -1155,45 +1164,31 @@ komplett in \gls{js} umgesetzt im Zusammenspiel mit \gls{html} und
 \gls{css} und ist somit komplett im Browser lauffähig.
 
 Ausgeliefert werden die statischen Dateien zur Einfachheit durch den
-Backend-Service. * express router * public folder
+Backend-Service. * express router * public folder * techstack js *
+backend zu testen * menschliche spieler zu simulieren * wärend der
+entwicklungsphase des tisches gezielt spiele simulieren zu können *
+liefert auch statistiken * wird zur einfachheit direkt aus dem abckend
+heraus ausgeliefert da nur statisches html/js/class
 
 \begin{figure}
 \centering
 \includegraphics{images/ATC_webclient.png}
-\caption{Webclient: Spielansicht}
+\caption{Webclient: Spielansicht \label{ATC_webclient}}
 \end{figure}
 
 Während der Implementierung wurde der Webclient weiter ausgebaut und es
 wurde weitere Features ergänzt. Dazu zählt zum einen eine Übersicht über
 vergangene und aktuell laufende Spiele. In dieser können Spiele Zug um
 Zug nachvollzogen werden und weitere Information über den Spielstatus
-angezeigt werden. Auch ist es möglich aktuell laufende Spiele in
-Echtzeit anzeigen zu lassen, somit wurde eine Livestream-Funktionaliät
-implementiert.
+angezeigt werden.\ref{ATC_statistics} Auch ist es möglich aktuell
+laufende Spiele in Echtzeit anzeigen zu lassen, somit wurde eine
+Livestream-Funktionaliät implementiert.
 
 \begin{figure}
 \centering
 \includegraphics{images/ATC_statistics.png}
-\caption{Webclient: Statistiken}
+\caption{Webclient: Statistiken \label{}}
 \end{figure}
-
-\begin{itemize}
-\tightlist
-\item
-  techstack js
-\item
-  backend zu testen
-\item
-  menschliche spieler zu simulieren
-\item
-  wärend der entwicklungsphase des tisches gezielt spiele simulieren zu
-  können
-\item
-  liefert auch statistiken
-\item
-  wird zur einfachheit direkt aus dem abckend heraus ausgeliefert da nur
-  statisches html/js/class
-\end{itemize}
 
 \hypertarget{autoplayer}{%
 \subsubsection{AutoPlayer}\label{autoplayer}}
@@ -1237,14 +1232,15 @@ Wenn das Match beendet wird, beendet sich auch die Service-Instanz.
 Diese wird jedoch wieder gestartet wenn die Anzahl der zur Verfügung
 stehenden Computerspieler unter einen definierten Wert fallen. Somit ist
 dafür gesorgt, dass das System nicht mit ungenutzen AutoPlayer-Instanzen
-gebremst wird. Diese Anzahl ist in der Backend-Configuration frei
-wählbar und kann je nach zu erwartenen Aufkommen angepasst werden.
+gebremst wird. Diese Anzahl \ref{ai_player_count} ist in der
+Backend-Configuration frei wählbar und kann je nach zu erwartenen
+Aufkommen angepasst werden.
 
 \begin{figure}
 \centering
 \includegraphics{images/ai_player_count.png}
 \caption{Webclient: Anzahl der aktiven, sich nicht im Spiel befindenen
-AutoPlayer-Service-Instanzen}
+AutoPlayer-Service-Instanzen \label{ai_player_count}}
 \end{figure}
 
 Allgemein skaliert das System durch diese Art der Ressourcenverwaltung
@@ -1301,7 +1297,8 @@ verwendet.
 \begin{figure}
 \centering
 \includegraphics{images/ATC_gameclient_statemachiene.png}
-\caption{Embedded System Software: Ablaufdiagramm}
+\caption{Embedded System Software: Ablaufdiagramm
+\label{ATC_gameclient_statemachiene}}
 \end{figure}
 
 \hypertarget{figur-bewegungspfadberechnung}{%
@@ -1323,7 +1320,8 @@ Schachzügen}\label{schachfeld-scan-algorithmus-zur-erkennung-von-schachzuxfcgen
 \begin{figure}
 \centering
 \includegraphics{images/ATC_ChessMoveAlgorithm.png}
-\caption{Embedded System Software: Schachfeld Scan Algorithmus Ablauf}
+\caption{Embedded System Software: Schachfeld Scan Algorithmus Ablauf
+\label{ATC_ChessMoveAlgorithm}}
 \end{figure}
 
 \begin{itemize}
@@ -1343,7 +1341,8 @@ Schachzügen}\label{schachfeld-scan-algorithmus-zur-erkennung-von-schachzuxfcgen
 \begin{figure}
 \centering
 \includegraphics{images/ATC_Gui.png}
-\caption{Embedded System Software: User-Interface Mockup}
+\caption{Embedded System Software: User-Interface Mockup
+\label{ATC_Gui}}
 \end{figure}
 
 \begin{itemize}

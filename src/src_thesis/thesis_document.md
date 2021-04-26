@@ -195,7 +195,7 @@ welche technologien werden benötigt
 * warum kein RFID => keine speicherung von id auf der controller seite
 * selbherstellung von eigenen figuren ohne modifikation der controllerseite
 
-![Grove PN532 NFC Reader mit Kabelgebundener Antenne](images/ATC_nfc_range_test.png)
+![Grove PN532 NFC Reader mit Kabelgebundener Antenne \label{ATC_nfc_range_test}](images/ATC_nfc_range_test.png)
 
 * test mit figuren nebeneinander
 
@@ -233,9 +233,10 @@ Bei dem Design der zu druckenden Bauteile wurde darauf geachtet, dass diese den 
 
 Als Software wurde der Open-Source Slicer Ultimaker Cura [@ultimakercura] verwendet, da dieser zum einen bereits fertige Konfigurationen für den verwendeten 3D-Drucker enhält und zum anderen experimentelle Features bereitstellt.
 
-![3D Druck: Objekt (rot,gelb,grün),Tree Structure (cyan) ](images/3d_print_tree_structure.png)
+![3D Druck: Objekt (rot,gelb,grün),Tree Structure (cyan) \label{3d_print_tree_structure}](images/3d_print_tree_structure.png)
 
-Hier wurde für die Bauteile, welche eine Sützstruktur benötigen, die von Cura bereitgestellte Tree Support Structure aktiviert. Diese bietet den Vorteil gegenüber anderen Stützstruktiren, dass sich diese leichter entfernen lässt und weniger Rückstände an den Bauteilen hinterlässt.
+Hier wurde für die Bauteile, welche eine Sützstruktur benötigen, die von Cura bereitgestellte Tree Support Structure aktiviert. \ref{3d_print_tree_structure}
+Diese bietet den Vorteil gegenüber anderen Stützstruktiren, dass sich diese leichter entfernen lässt und weniger Rückstände an den Bauteilen hinterlässt.
 Diese Vorteile wurde mit verschiedenen Testdrucken verifiziert und kommen insbesondere bei komplexen Bauteilen mit innenliegenden Elementen zum tragen bei denen eine Stützstruktur erfoderlich sind.
 
 
@@ -265,7 +266,7 @@ Diese Vorteile wurde mit verschiedenen Testdrucken verifiziert und kommen insbes
 * proof of conzept
 * 
 
-![Prototyp Hardware: Erster Prototyp des autonomen Schachtisch](images/table_images/dk.png)
+![Prototyp Hardware: Erster Prototyp des autonomen Schachtisch \label{dk}](images/table_images/dk.png)
 
 
 
@@ -306,20 +307,21 @@ Ein typischer Anwendungsfall ist der (+ndefrtd) URL Datensatz. Dieser kann dazu 
 Der autonome Schachtisch verwendet den einfachsten (+ndefrtd) Typ, welcher der Text-Record ist, und zum speichern von Zeichenketten genutzt werden kann, ohne das eine Aktion auf dem Endgerät ausgeführt wird.
 Jeder Tag einer Schafigur, welche für den autonomen Schachtisch verwendet werden kann, besitzt diesen (+ndef) Record an der ersten Position. Alle weiteren eventuell vorhandenen Records werden vom Tisch ignoriert.[@nordicnfclib]
 
-![Prototyp Hardware: Tool zur Erstellung des NDEF Payloads: ChessFigureIDGenerator.html](images/ATC_ChessFigureIDGenerator.png)
+![Prototyp Hardware: Tool zur Erstellung des NDEF Payloads: ChessFigureIDGenerator.html \label{ATC_ChessFigureIDGenerator}](images/ATC_ChessFigureIDGenerator.png)
 
 Um die Payload für den (+nfc) Record zu erstellen wurde ein kleine Web-Applikation erstellt, welche den Inhalt der Text-Records erstellt.
-Dieser ist für jede Figur individuell und enthält den Figur-Typ und die Figur-Farbe. Das Tool untersützt auch das Speichern weiterer Attribute wie einem Figur-Index, welcher aber in der finalen Software-Version nicht genutzt wird.
+Dieser ist für jede Figur individuell und enthält den Figur-Typ und die Figur-Farbe. Das Tool untersützt auch das Speichern weiterer Attribute wie einem Figur-Index, welcher aber in der finalen Software-Version nicht genutzt wird. \ref{ATC_ChessFigureIDGenerator}
 
-Nach dem Beschreiben eines (+nfc) Tags ist es möglich diesen gegen auslesen oder erneuten Schreiben mittels einer Read/Write-Protection zu schützen. Diese Funktionalität wird nicht verwendet um das Kopieren von Figuren durch den Benutzer zu ermöglichen.
+Nach dem Beschreiben eines (+nfc) Tags ist es möglich diesen gegen auslesen oder erneuten Schreiben mittels einer Read/Write-Protection zu schützen.
+Diese Funktionalität wird nicht verwendet um das Kopieren von Figuren durch den Benutzer zu ermöglichen.
 Somit kann dieser leicht seine eigenen Figuren erschaffen, ohne auf das Tool angewiesen zu sein. Auch ist es möglich verschiedene Figur-Sets zu mischen, so kann jeder Spieler sein eigenes Set an Figuren mit dem autonomen Schachtisch verwenden.
 
-![Prototyp Hardware: NDEF Text Record Payload für einen weissen Turm](images/ndef_record_rook.png)
+![Prototyp Hardware: NDEF Text Record Payload für einen weissen Turm \label{ndef_record_rook}](images/ndef_record_rook.png)
 
 
 ## Schaltungsentwurf
 
-![Prototyp Hardware: Blockdiagramm](images/ATC_Hardware_Architecture_DK.png)
+![Prototyp Hardware: Blockdiagramm \label{ATC_Hardware_Architecture_DK}](images/ATC_Hardware_Architecture_DK.png)
 
 * auswahl der Motortreiber (leise, bus ansteuerung)
 * ansteuerung pn532 und umsetzung auf uart
@@ -353,7 +355,7 @@ Somit kann dieser leicht seine eigenen Figuren erschaffen, ohne auf das Tool ang
 
 # Erstellung zweiter Prototyp
 
-![Producation Hardware: Finaler autonomer Schachtisch](images/table_images/prod.png)
+![Producation Hardware: Finaler autonomer Schachtisch \label{prod}](images/table_images/prod.png)
 
 # Modifikation der Mechanik
 
@@ -397,7 +399,7 @@ Somit sind im Design zwei verschiedenen Arten von Magneten notwendig, jedoch tra
 
 # Änderungen der Elektronik
 
-![Producation Hardware: Blockdiagramm](images/ATC_Hardware_Architecture_PROD.png)
+![Producation Hardware: Blockdiagramm \label{ATC_Hardware_Architecture_PROD}](images/ATC_Hardware_Architecture_PROD.png)
 
 * verwenung von standarthardware, welche gut zu beschaffen ist
 * implementierung von standart gcode protokol, somit mit universell verwendbaren steuerung verwendbar
@@ -452,7 +454,7 @@ Somit sind im Design zwei verschiedenen Arten von Magneten notwendig, jedoch tra
 Die erste Phase der Entwicklung des Systems bestand in der Entwicklung der Cloud-Infrastruktur und der darauf laufenden Services.
 Hierbei stellt die "Cloud", einen Server dar, welcher aus dem Internet über eine feste IPv4 und eine IPv6 verfügt und frei konfiguriert werden kann.
 
-![Cloud-Infrastruktur: Gesamtübersicht der verwendeten Cloud-Infrastruktur](images/ATC_Cloud_Architecture.png)
+![Cloud-Infrastruktur: Gesamtübersicht der verwendeten Cloud-Infrastruktur \label{ATC_Cloud_Architecture}](images/ATC_Cloud_Architecture.png)
 
 
 
@@ -468,12 +470,14 @@ Eine RESTful API bezeichnet eine API welche HTTP-Requests verwendet um auf Daten
 * 5 requirements
 
 
-Die RESTful API stellt verschiedene Ressourcen bereit, welche durch eine URI eindeutig identifizierbar sind. Auf diese können mittels verschiedenster HTTP Anfragemethoden (GET, POST, PUT, DELETE) zugegriffen werden. Jeder dieser Methoden stellt einen anderen Zugriff auf die Ressource dar und beeinflusst somit das Verhalten und die Rückantwort dieser.
+Die RESTful API stellt verschiedene Ressourcen bereit, welche durch eine URI \ref{ATC_URI_SCHEMES} eindeutig identifizierbar sind.
+Auf diese können mittels verschiedenster HTTP Anfragemethoden (GET, POST, PUT, DELETE) zugegriffen werden. Jeder dieser Methoden stellt einen anderen Zugriff auf die Ressource dar und beeinflusst somit das Verhalten und die Rückantwort dieser.
 
 
-![Cloud-Infrastruktur: Aufbau einer URI](images/ATC_URI_SCHEMES.png)
+![Cloud-Infrastruktur: Aufbau einer URI \label{ATC_URI_SCHEMES}](images/ATC_URI_SCHEMES.png)
 
-Eine URI besteht dabei aus mehreren Teilen. Das Schema  gibt an wie die nachfolgenden Teile interpretiert werden sollen. Dabei wird bei einer RESTful Schnittstelle typischerweise das (+http) Protokoll, sowie (+https) verwendet. Dabei steht (+https) für eine verschlüsselte Verbindung. Desweiteren gibt es viele andere Schema, wie z.B (+ftp) welches
+Eine URI besteht dabei aus mehreren Teilen. Das Schema  gibt an wie die nachfolgenden Teile interpretiert werden sollen.
+Dabei wird bei einer RESTful Schnittstelle typischerweise das (+http) Protokoll, sowie (+https) verwendet. Dabei steht (+https) für eine verschlüsselte Verbindung. Desweiteren gibt es viele andere Schema, wie z.B (+ftp) welches
 
 
 Somit stellt die RESTful API eine Interoperabilität zwischen verschiedenen Anwendungen und Systemen bereit, welche durch ein Netzwerk miteinander verbunden sind.
@@ -490,7 +494,7 @@ Dieser Ansatz ist somit geeignet um die verschiedenen Client Systeme (Schachtisc
 * statelss
 Diese stellen alle wichtigen Funktionen zum Betrieb des autonomen Schachtischs zur verfügung.
 
-![Cloud-Infrastruktur: Aufbau der Service Architecture](images/ATC_Service_Architecture.png)
+![Cloud-Infrastruktur: Aufbau der Service Architecture \label{ATC_Service_Architecture}](images/ATC_Service_Architecture.png)
 
 
 
@@ -510,7 +514,7 @@ Diese stellen alle wichtigen Funktionen zum Betrieb des autonomen Schachtischs z
 
 ### Backend
 
-![Cloud-Infrastruktur: Backend Login-Requst und Response](images/ATC_request_example.png)
+![Cloud-Infrastruktur: Backend Login-Requst und Response \label{ATC_request_example}](images/ATC_request_example.png)
 
 * matchmaking schachlogik
 * zentraler zugriffspunkt auf das System und stellt diese abi bereit
@@ -562,21 +566,22 @@ Dieser wurde dabei komplett in (+js) umgesetzt im Zusammenspiel mit (+html) und 
 Ausgeliefert werden die statischen Dateien zur Einfachheit durch den Backend-Service.
 * express router
 * public folder
-
-![Webclient: Spielansicht](images/ATC_webclient.png)
-
-Während der Implementierung wurde der Webclient weiter ausgebaut und es wurde weitere Features ergänzt.
-Dazu zählt zum einen eine Übersicht über vergangene und aktuell laufende Spiele. In dieser können Spiele Zug um Zug nachvollzogen werden und weitere Information über den Spielstatus angezeigt werden.
-Auch ist es möglich aktuell laufende Spiele in Echtzeit anzeigen zu lassen, somit wurde eine Livestream-Funktionaliät implementiert.
-
-![Webclient: Statistiken](images/ATC_statistics.png)
-
 * techstack js
 * backend zu testen
 * menschliche spieler zu simulieren
 * wärend der entwicklungsphase des tisches gezielt spiele simulieren zu können
 * liefert auch statistiken
 * wird zur einfachheit direkt aus dem abckend heraus ausgeliefert da nur statisches html/js/class
+
+![Webclient: Spielansicht \label{ATC_webclient}](images/ATC_webclient.png)
+
+Während der Implementierung wurde der Webclient weiter ausgebaut und es wurde weitere Features ergänzt.
+Dazu zählt zum einen eine Übersicht über vergangene und aktuell laufende Spiele. In dieser können Spiele Zug um Zug nachvollzogen werden und weitere Information über den Spielstatus angezeigt werden.\ref{ATC_statistics}
+Auch ist es möglich aktuell laufende Spiele in Echtzeit anzeigen zu lassen, somit wurde eine Livestream-Funktionaliät implementiert.
+
+![Webclient: Statistiken \label{}](images/ATC_statistics.png)
+
+
 
 ### AutoPlayer
 
@@ -602,10 +607,11 @@ Dies wird Ausgeführt, wenn der AutoPlayer am Zug ist. Nachdem die Engine einen 
 
 
 Wenn das Match beendet wird, beendet sich auch die Service-Instanz.
-Diese wird jedoch wieder gestartet wenn die Anzahl der zur Verfügung stehenden Computerspieler unter einen definierten Wert fallen.
-Somit ist dafür gesorgt, dass das System nicht mit ungenutzen AutoPlayer-Instanzen gebremst wird. Diese Anzahl ist in der Backend-Configuration frei wählbar und kann je nach zu erwartenen Aufkommen angepasst werden.
+Diese wird jedoch wieder gestartet wenn die Anzahl der zur Verfügung stehenden Computerspieler unter einen definierten Wert fallen. 
+Somit ist dafür gesorgt, dass das System nicht mit ungenutzen AutoPlayer-Instanzen gebremst wird.
+Diese Anzahl \ref{ai_player_count} ist in der Backend-Configuration frei wählbar und kann je nach zu erwartenen Aufkommen angepasst werden.
 
-![Webclient: Anzahl der aktiven, sich nicht im Spiel befindenen AutoPlayer-Service-Instanzen](images/ai_player_count.png)
+![Webclient: Anzahl der aktiven, sich nicht im Spiel befindenen AutoPlayer-Service-Instanzen \label{ai_player_count}](images/ai_player_count.png)
 
 Allgemein skaliert das System durch diese Art der Ressourcenverwaltung auch auf kleinen Systemen sehr flexibel.
 Durch die Art der Implementierung, dass sich der AutoPlayer-Service wie ein normaler Spieler verhält, sind auch andere Arten des Computerspieler möglich.
@@ -663,7 +669,7 @@ Diese Feature wurde insbesondere bei der Entwicklung des Webclienten und der Ste
 
 * vier Schritte (enfernen, bewegen, hinzufügen, bewegen)
 
-![Embedded System Software: Ablaufdiagramm](images/ATC_gameclient_statemachiene.png)
+![Embedded System Software: Ablaufdiagramm \label{ATC_gameclient_statemachiene}](images/ATC_gameclient_statemachiene.png)
 
 
 ## Figur Bewegungspfadberechnung
@@ -673,7 +679,7 @@ Diese Feature wurde insbesondere bei der Entwicklung des Webclienten und der Ste
 
 ## Schachfeld Scan Algorithmus zur Erkennung von Schachzügen
 
-![Embedded System Software: Schachfeld Scan Algorithmus Ablauf](images/ATC_ChessMoveAlgorithm.png)
+![Embedded System Software: Schachfeld Scan Algorithmus Ablauf \label{ATC_ChessMoveAlgorithm}](images/ATC_ChessMoveAlgorithm.png)
 
 * Benutzer bestätigt dass er Schachzug gemacht hat
 * Ermittlung des getätigten Schachzug 
@@ -687,7 +693,7 @@ Diese Feature wurde insbesondere bei der Entwicklung des Webclienten und der Ste
 
 ## Userinterface
 
-![Embedded System Software: User-Interface Mockup](images/ATC_Gui.png)
+![Embedded System Software: User-Interface Mockup \label{ATC_Gui}](images/ATC_Gui.png)
 
 * QT Quick UI, als Package in Buildroot integriert
 * IPC Bibliothek zur Kommunikation mit der controller-Software Instanz
