@@ -497,32 +497,47 @@ Besonderheiten & visuelle Hinweise per Beleuchtung\tabularnewline
 
 Die Abmessungen und das Gewicht des autonomen Schachtisches, ergeben
 sich aus mechanischen Umsetzung und werden hier aufgrund der zur
-Verfügung stehenden Materialen und fertigungstechniken nicht festgelegt.
+Verfügung stehenden Materialen und Fertigungstechniken nicht festgelegt.
 Dennoch wird Wert darauf gelgegt, dass das Verhältnis zwischen den
 Spielfeldabmessungen und den Abmessungen des Tisches so gering wie
 möglich ausfällt. Auch müssen die Figuren für den Benutzer eine gut
 handhabbare Grösse aufweisen um ein angenehmes haptisches Spielerlebnis
 zu gewährleisten.
 
-\begin{itemize}
-\tightlist
-\item
-  abmessungen und gewicht ergeben sich aus der Umsetzung der
-  Anforderungen
-\end{itemize}
-
 \hypertarget{technologien-im-makerspace}{%
 \subsubsection{Technologien im
 Makerspace}\label{technologien-im-makerspace}}
 
-stehen diese im makerspace zur verfüfung
+\begin{itemize}
+\tightlist
+\item
+  vllt kann man sagen dass die meisten Teile im Makerspace der FH
+  erstellt wurden
+\item
+  was ist vorhanden ?
+\end{itemize}
 
 \hypertarget{machbarkeitsanalyse}{%
 \subsection{Machbarkeitsanalyse}\label{machbarkeitsanalyse}}
 
-welche technologien werden benötigt * software architektur anfoderungen
-* hardware anforderungen * grosse * wiederholgenauigkeit * lautstärke *
-vorerfahrnung in cad ed druck und schaltungsdesign
+\begin{itemize}
+\tightlist
+\item
+  welche technologien werden benötigt
+\item
+  software architektur anfoderungen
+\item
+  hardware anforderungen
+\item
+  grosse
+\item
+  wiederholgenauigkeit
+\item
+  lautstärke
+\item
+  vorerfahrnung in cad ed druck und schaltungsdesign =\textgreater{}
+  somit kein Problem
+\end{itemize}
 
 \hypertarget{grundlegende-verifikation-der-ausgewuxe4lten-technologien}{%
 \section{Grundlegende Verifikation der ausgewälten
@@ -550,22 +565,6 @@ Buildroot-Framework}\label{erprobung-buildroot-framework}}
 \subsection{Verifikfation NFC
 Technologie}\label{verifikfation-nfc-technologie}}
 
-\begin{itemize}
-\tightlist
-\item
-  warum gewählter nfc reader =\textgreater{} ndef lesen
-\item
-  reicheweiten test mit 22mm
-\item
-  test mit benachbarten figuren
-\item
-  warum kein RFID =\textgreater{} keine speicherung von id auf der
-  controller seite
-\item
-  selbherstellung von eigenen figuren ohne modifikation der
-  controllerseite
-\end{itemize}
-
 \begin{figure}
 \centering
 \includegraphics{images/ATC_nfc_range_test.png}
@@ -574,6 +573,19 @@ Technologie}\label{verifikfation-nfc-technologie}}
 
 \begin{itemize}
 \tightlist
+\item
+  warum gewählter nfc reader =\textgreater{} ndef lesen
+\item
+  reicheweiten test mit 22mm =\textgreater{} kleinster gefundener
+  folienbasierender NFC Tag
+\item
+  test mit benachbarten figuren
+\item
+  warum kein RFID =\textgreater{} keine speicherung von id auf der
+  controller seite
+\item
+  selbherstellung von eigenen figuren ohne modifikation der
+  controllerseite
 \item
   test mit figuren nebeneinander
 \end{itemize}
@@ -585,7 +597,8 @@ Schrittmotorsteuerung}\label{schrittmotor-schrittmotorsteuerung}}
 \begin{itemize}
 \tightlist
 \item
-  warum =\textgreater{} einfache ansteuerung
+  warum =\textgreater{} einfache ansteuerung, keine zusätzlichen encoder
+  notwendig, da mit keinem Schrittverlust zu rechnen ist
 \item
   keine STEP DIR somit muss embedded nicht echtzeitfähigsein und kann
   ggf auch andere task abbarbeiten
@@ -594,7 +607,7 @@ Schrittmotorsteuerung}\label{schrittmotor-schrittmotorsteuerung}}
 \item
   und goto move =\textgreater{} wait for move finished irw testen
 \item
-  dafür einfacher python testreiber geschribene
+  dafür einfacher python testreiber
 \item
   schrittverlust nicht zu erwarten
 \end{itemize}
@@ -602,6 +615,61 @@ Schrittmotorsteuerung}\label{schrittmotor-schrittmotorsteuerung}}
 \hypertarget{d-druck-fuxfcr-den-mechanischen-aufbau}{%
 \subsection{3D Druck für den mechanischen
 Aufbau}\label{d-druck-fuxfcr-den-mechanischen-aufbau}}
+
+\begin{itemize}
+\tightlist
+\item
+  PLA als FDM Filament =\textgreater{} einfach verarbeitung und
+  handhabung, keine Mechanische Belastbarkeit gefordert
+\end{itemize}
+
+Da es sich hier nur um einen Protoypen handelt, wurde hier auf ein
+einfach zu handbabendes Filament vom Typ PLA verwendet. Dies ist
+besonders gut für die Prototypenendwicklung geeignet und kann mit nahezu
+jeden handelsüblichen FDM 3D Drucker verarbeitet werden.
+
+\begin{itemize}
+\tightlist
+\item
+  keine hohe genauigkeit, teile nicht sichtbar
+\end{itemize}
+
+Zuvor wurden einige Testdrucke durchgeführt um die Qualität der zuvor
+gewählten Druckparameter zu überprüfen und diese gegebenenfalls
+anzupassen. Auch wurden verschiedene Calibrierobjekte gedruckt, an
+welchen die Toleranzen für die späteren \gls{cad} Zeichnungen abgeschätz
+werden können.
+
+Dies betrifft vor allem die Genuigkeit der Bohrungen in den gefertigten
+Objekten, da hier später Bolzen und Schrauben ein nahezu spielfrei
+eingeführt werden müssen. Ein Test, welcher die Machbarkeit von Gewinden
+zeigt wurde nicht durchgeführt, da alle Schrauben später mit der
+passenden Mutter gesichert werden sollen. So soll eine Abnutzung durch
+häufige Montage der gedruckten Bauteile verhindert werden.
+
+Bei dem Design der zu druckenden Bauteile wurde darauf geachtet, dass
+diese den Bauraum von 200x200x200mm nicht überschreiten und somit auch
+von einfachen FDM 3D Druckern verarbeitet werden können.
+
+\begin{longtable}[]{@{}ll@{}}
+\caption{Verwendete 3D Druck Parameter. Temperatur nach
+Herstellerangaben des Filaments.}\tabularnewline
+\toprule
+Ender 3 Pro 0.4mm Nozzle & PLA Settings\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+Ender 3 Pro 0.4mm Nozzle & PLA Settings\tabularnewline
+\midrule
+\endhead
+Layer Height & 0.2mm\tabularnewline
+Infill & 50.00\%\tabularnewline
+Wall Thickness & 2.0mm\tabularnewline
+Support Structure & Tree\tabularnewline
+Top Layers & 4\tabularnewline
+Bottom Layers & 4\tabularnewline
+\bottomrule
+\end{longtable}
 
 \hypertarget{erstellung-erster-prototyp}{%
 \section{Erstellung erster Prototyp}\label{erstellung-erster-prototyp}}
