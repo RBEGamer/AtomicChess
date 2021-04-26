@@ -216,6 +216,44 @@ welche technologien werden benötigt
 
 ## 3D Druck für den mechanischen Aufbau
 
+* PLA als FDM Filament => einfach verarbeitung und handhabung, keine Mechanische Belastbarkeit gefordert
+
+Da es sich hier nur um einen Protoypen handelt, wurde hier auf ein einfach zu handbabendes Filament vom Typ PLA verwendet.
+Dies ist besonders gut für die Prototypenendwicklung geeignet und kann mit nahezu jeden handelsüblichen FDM 3D Drucker verarbeitet werden.
+
+* keine hohe genauigkeit, teile nicht sichtbar
+
+
+Zuvor wurden einige Testdrucke durchgeführt um die Qualität der zuvor gewählten Druckparameter zu überprüfen und diese gegebenenfalls anzupassen.
+Auch wurden verschiedene Calibrierobjekte gedruckt, an welchen die Toleranzen für die späteren (+cad) Zeichnungen abgeschätz werden können.
+
+Dies betrifft vor allem die Genuigkeit der Bohrungen in den gefertigten Objekten, da hier später Bolzen und Schrauben ein nahezu spielfrei eingeführt werden müssen.
+Ein Test, welcher die Machbarkeit von Gewinden zeigt wurde nicht durchgeführt, da alle Schrauben später mit der passenden Mutter gesichert werden sollen.
+So soll eine Abnutzung durch häufige Montage der gedruckten Bauteile verhindert werden.
+
+Bei dem Design der zu druckenden Bauteile wurde darauf geachtet, dass diese den Bauraum von 200x200x200mm nicht überschreiten und somit auch von einfachen FDM 3D Druckern verarbeitet werden können.
+
+Als Software wurde der Open-Source Slicer Ultimaker Cura [@ultimakercura] verwendet, da dieser zum einen bereits fertige Konfigurationen für den verwendeten 3D Drucker enhält und zum anderen experimentelle Features bereitstellt.
+
+![3D Druck: Objekt (rot,gelb,grün),Tree Structure (cyan) ](images/3d_print_tree_structure.png)
+
+Hier wurde für die Bauteile, welche eine Sützstruktur benötigen, die von Cura bereitgestellte Tree Support Structure aktiviert. Diese bietet den Vorteil gegenüber anderen Stützstruktiren, dass sich diese leichter entfernen lässt und weniger Rückstände an den Bauteilen hinterlässt. Diese Vorteile wurde mit verschiedenen Testdrucken verifiziert und kommen insbesondere bei komplexen Bauteilen mit innenliegenden Elementen zum tragen bei denen eine Stützstruktur erfoderlich sind.
+
+
+
+
+
+: Verwendete 3D Druck Parameter. Temperatur nach Herstellerangaben des Filaments.
+
+| Ender 3 Pro 0.4mm Nozzle 	| PLA  Settings 	|
+|--------------------------	|---------------	|
+| Layer Height             	| 0.2mm         	|
+| Infill                   	| 50.00%        	|
+| Wall Thickness           	| 2.0mm         	|
+| Support Structure        	| Tree          	|
+| Top Layers               	| 4             	|
+| Bottom Layers            	| 4             	|
+
 
 
 

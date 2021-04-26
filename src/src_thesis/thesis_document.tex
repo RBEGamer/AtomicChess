@@ -497,47 +497,32 @@ Besonderheiten & visuelle Hinweise per Beleuchtung\tabularnewline
 
 Die Abmessungen und das Gewicht des autonomen Schachtisches, ergeben
 sich aus mechanischen Umsetzung und werden hier aufgrund der zur
-Verfügung stehenden Materialen und Fertigungstechniken nicht festgelegt.
+Verfügung stehenden Materialen und fertigungstechniken nicht festgelegt.
 Dennoch wird Wert darauf gelgegt, dass das Verhältnis zwischen den
 Spielfeldabmessungen und den Abmessungen des Tisches so gering wie
 möglich ausfällt. Auch müssen die Figuren für den Benutzer eine gut
 handhabbare Grösse aufweisen um ein angenehmes haptisches Spielerlebnis
 zu gewährleisten.
 
+\begin{itemize}
+\tightlist
+\item
+  abmessungen und gewicht ergeben sich aus der Umsetzung der
+  Anforderungen
+\end{itemize}
+
 \hypertarget{technologien-im-makerspace}{%
 \subsubsection{Technologien im
 Makerspace}\label{technologien-im-makerspace}}
 
-\begin{itemize}
-\tightlist
-\item
-  vllt kann man sagen dass die meisten Teile im Makerspace der FH
-  erstellt wurden
-\item
-  was ist vorhanden ?
-\end{itemize}
+stehen diese im makerspace zur verfüfung
 
 \hypertarget{machbarkeitsanalyse}{%
 \subsection{Machbarkeitsanalyse}\label{machbarkeitsanalyse}}
 
-\begin{itemize}
-\tightlist
-\item
-  welche technologien werden benötigt
-\item
-  software architektur anfoderungen
-\item
-  hardware anforderungen
-\item
-  grosse
-\item
-  wiederholgenauigkeit
-\item
-  lautstärke
-\item
-  vorerfahrnung in cad ed druck und schaltungsdesign =\textgreater{}
-  somit kein Problem
-\end{itemize}
+welche technologien werden benötigt * software architektur anfoderungen
+* hardware anforderungen * grosse * wiederholgenauigkeit * lautstärke *
+vorerfahrnung in cad ed druck und schaltungsdesign
 
 \hypertarget{grundlegende-verifikation-der-ausgewuxe4lten-technologien}{%
 \section{Grundlegende Verifikation der ausgewälten
@@ -565,19 +550,12 @@ Buildroot-Framework}\label{erprobung-buildroot-framework}}
 \subsection{Verifikfation NFC
 Technologie}\label{verifikfation-nfc-technologie}}
 
-\begin{figure}
-\centering
-\includegraphics{images/ATC_nfc_range_test.png}
-\caption{Grove PN532 NFC Reader mit Kabelgebundener Antenne}
-\end{figure}
-
 \begin{itemize}
 \tightlist
 \item
   warum gewählter nfc reader =\textgreater{} ndef lesen
 \item
-  reicheweiten test mit 22mm =\textgreater{} kleinster gefundener
-  folienbasierender NFC Tag
+  reicheweiten test mit 22mm
 \item
   test mit benachbarten figuren
 \item
@@ -586,6 +564,16 @@ Technologie}\label{verifikfation-nfc-technologie}}
 \item
   selbherstellung von eigenen figuren ohne modifikation der
   controllerseite
+\end{itemize}
+
+\begin{figure}
+\centering
+\includegraphics{images/ATC_nfc_range_test.png}
+\caption{Grove PN532 NFC Reader mit Kabelgebundener Antenne}
+\end{figure}
+
+\begin{itemize}
+\tightlist
 \item
   test mit figuren nebeneinander
 \end{itemize}
@@ -597,8 +585,7 @@ Schrittmotorsteuerung}\label{schrittmotor-schrittmotorsteuerung}}
 \begin{itemize}
 \tightlist
 \item
-  warum =\textgreater{} einfache ansteuerung, keine zusätzlichen encoder
-  notwendig, da mit keinem Schrittverlust zu rechnen ist
+  warum =\textgreater{} einfache ansteuerung
 \item
   keine STEP DIR somit muss embedded nicht echtzeitfähigsein und kann
   ggf auch andere task abbarbeiten
@@ -607,7 +594,7 @@ Schrittmotorsteuerung}\label{schrittmotor-schrittmotorsteuerung}}
 \item
   und goto move =\textgreater{} wait for move finished irw testen
 \item
-  dafür einfacher python testreiber
+  dafür einfacher python testreiber geschribene
 \item
   schrittverlust nicht zu erwarten
 \end{itemize}
@@ -650,6 +637,25 @@ häufige Montage der gedruckten Bauteile verhindert werden.
 Bei dem Design der zu druckenden Bauteile wurde darauf geachtet, dass
 diese den Bauraum von 200x200x200mm nicht überschreiten und somit auch
 von einfachen FDM 3D Druckern verarbeitet werden können.
+
+Als Software wurde der Open-Source Slicer Ultimaker Cura
+\cite{ultimakercura} verwendet, da dieser zum einen bereits fertige
+Konfigurationen für den verwendeten 3D Drucker enhält und zum anderen
+experimentelle Features bereitstellt.
+
+Hier wurde für die Bauteile, welche eine Sützstruktur benötigen, die von
+Cura bereitgestellte Tree Support Structure aktiviert. Diese bietet den
+Vorteil gegenüber anderen Stützstruktiren, dass sich diese leichter
+entfernen lässt und weniger Rückstände an den Bauteilen hinterlässt.
+Diese Vorteile wurde mit verschiedenen Testdrucken verifiziert und
+kommen insbesondere bei komplexen Bauteilen mit innenliegenden Elementen
+zum tragen. Bei diesne Bauteilen
+
+\begin{figure}
+\centering
+\includegraphics{images/3d_print_tree_structure.png}
+\caption{3D Druck: Objekt (rot,gelb,grün),Tree Structure (cyan)}
+\end{figure}
 
 \begin{longtable}[]{@{}ll@{}}
 \caption{Verwendete 3D Druck Parameter. Temperatur nach
