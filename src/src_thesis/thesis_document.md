@@ -353,7 +353,30 @@ Somit kann dieser leicht seine eigenen Figuren erschaffen, ohne auf das Tool ang
 * Motoren fest am rahmen => weniger kabel + gewicht an der Y Achse
 * jedoch komplexerer Aufwand der riemenverlegung so komplexere 3d bauteile
 * Tischabmessungen 620x620mm dabei Bewegungsspielraum vom 580x580 zuvor nur 480x480
+
+
+
 # Optimierungen der Spielfiguren
+
+Die bisherigen genutzen vorgefertigten Figuren funktionierten mit dem ersten Prototyp problemlos.
+Sie wiesen aber trotzdem eine zu hohe Fehleranfälligkeit, im Bezug auf das gegenseitige Beeinflussen (abstoßen,anziehen) durch die verwendeten Magnete.
+
+Die größse der Figuren kann durch die fest definierte Feldgrösse von 55mm und der verwendeten (+nfc) Tags nicht verändert werden.
+Nach vielen Testdurchläufen mit dem ersten Prototyp war zu erkennen, dass sich die Figuren je nach aktueller Situation auf dem Spielfeld immernoch merklich magnetisch anziehen.
+Dies führt je nach Spielverlauf zu Komplikationen, sodass die Figuren manuell wieder mittig auf den Felder platziert werden müssen.
+
+Um dies zu verhindern, wurde einige Figuren zusätzlich mit einer 20mm Unterlegscheibe am Boden versehen, welche diese Problem behob, jedoch das (+nfc) Tag nicht mehr als lesbar erwies.
+Dies resultierte in der Idee die Schachfiguren ebenfalls selbst mit dem 3D Drucker herzustellen und die Magnete direkt in den Boden der Figur einlassen zu können.
+
+Die aktuell verwendeten Figuren des ersten Protoyp wiegen 8 Gramm für die Bauern und 10 Gramm für die restlichen Figuren.
+Der Test mit der Unterlegscheibe ergab, dass diese mit 4 Gramm genug Gewicht hinzufügte um die magnetische Beeinflussung zu unterbinden.
+
+Testweise wurden eingie Figuren mittels 3D Drucker erstellt um so das Gewicht zu erhöhen.
+Nach einem erfolgreichen Test wurde das (+cad) Modell wurde so angepasst, dass sich der Magnet direkt in den Boden der Figure einkleben lässt.
+Desweiteren wurden bei den Bauern (den leichtesten) Figuren die Magnete ausgetauscht. Die zuerst verwendeten 10x3mm Neodym-Magnete wurden bei diesen Figuren gegen 6x3mm Magnete getauscht.
+Somit sind im Design zwei verschiedenen Arten von Magneten notwendig, jedoch traten in den anschliessend durchgeführten Testläufen keine Beeinflussungen mehr statt.
+
+
 
 * komplett 3d gedruckte Figuren mit integrierten Magnet 
 * nfc + filzgleiter
@@ -378,7 +401,8 @@ Somit kann dieser leicht seine eigenen Figuren erschaffen, ohne auf das Tool ang
 * was ist GCODE
 * grundlegend verwendete Kommandos G0 G28 G21 G90 M280
 * erweiterte optionale Kommandos M150 M502 M500 M92
-
+* anhand der hwid und existenz der serial interfaces wird entschieden gcode hardware zu laden
+*
 
 ## Fazit zum finalen Prototypen
 
