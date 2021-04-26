@@ -13,19 +13,9 @@
 ## Zielsetzung
 
 Das Ziel dieser Arbeit ist es, einen autonomen Schachtisch, welcher in der Lage ist Schachfiguren autonom zu bewegen und auf Benutzerinteraktion zu reagieren.
-
-Der Schwerpunkt liegt dabei insbesondere auf der Programmierung des eingebetteten Systems und dem Zusammenspiel dieses mit einem aus dem Internet erreichbaren Servers, welcher als Vermittlungsstelle zwischen verschiedenen Schachtischen dient.
-
+Der Schwerpunkt liegt dabei insbesondere auf der Programmierung des eingebetteten Systems und dem Zusammenspiel dieses mit einem aus dem Internet erreichbaren Servers, welcher als Vermittlungsstelle zwischen verschiedenen Schachtischen und anderen Endgeräten dient.
 Dieses besteht zum einem aus der Positionserkennung und Steuerung der Hardwarekomponenten (Schachfiguren) und zum anderen aus der Kommunikation zwischen dem Tisch selbst und einem in einer Cloud befindlichen Server.
-
-Mittels der Programmierung werden diverse Technologien von verschiedenen Einzelsystemen zu einem Gesamtprodukt zusammengesetzt. Zu diesen Einzelsystemen gehören:
-
-* Programmierung der Motorsteuerung, HMI (zB. Qt oder simple Buttons), NFC-Tag Erkennung
-* Programmierung eines Wrappers für die Kommunikation mit einer Cloud (AWS)
-* State-Maschine und Implementierung der Spielflusssteuerung
-* Backend mit Datenbankanbindung zwischen Server und Embedded-System
-* Verwendung eines CI/CD Systems zum automatisierten Bauen der Linux-Images für das Embedded-System
-
+Mittels der Programmierung werden diverse Technologien von verschiedenen Einzelsystemen zu einem Gesamtprodukt zusammengesetzt.
 
 ## Methodik
 
@@ -241,9 +231,7 @@ Hier wurde für die Bauteile, welche eine Sützstruktur benötigen, die von Cura
 
 
 
-
-
-: Verwendete 3D Druck Parameter. Temperatur nach Herstellerangaben des Filaments.
+: Verwendete 3D Druck Parameter. Temperatur nach Herstellerangaben des verwendeten PLA Filaments.
 
 | Ender 3 Pro 0.4mm Nozzle 	| PLA  Settings 	|
 |--------------------------	|---------------	|
@@ -255,7 +243,7 @@ Hier wurde für die Bauteile, welche eine Sützstruktur benötigen, die von Cura
 | Bottom Layers            	| 4             	|
 
 
-
+* finaler protoyp bietet sich abs an
 
 
 
@@ -284,14 +272,32 @@ Hier wurde für die Bauteile, welche eine Sützstruktur benötigen, die von Cura
 
 ## Parametrisierung Schachfiguren
 
-* benutzung existierender figuren + nfc Tag
-* ndef record
-* was ist NDEF
-* payload einer figur
-* vorteile durch selbst gestaltbare figuren
 
+Da das System die auf dem Feld befindlichen Schachfiguren anhand von (+nfc) Tags erkennt, müssen diese zuerst mit Daten beschrieben werden.
+Die verwendeten NXP NTAG 21 Chips, besitzen einen vom Benutzer verwendbaren Speicher von 180 Byte. Dieser kann über ein (+nfc)-Lese/Schreibgerät mit Daten verschiednster Art beschrieben und wieder ausgelesen werden.
+Moderne Mobiltelefone besitzen in der Regel auch die Fähigkeit mit passenden (+nfc) Tags kommunizieren zu können, somit sind keine Stand-Alone Lesegeräte mehr notwendig.
+
+Der Schachtisch verwendet dabei das (+ndef) Dateiformat welches Festlegt, wie die Daten auf dem (+nfc) Tag gespeichert werden. Da diesen ein Standatisiertes Format ist, können alle gängigen Lesegeräte und Chipsätze diese Datensätze lesen. Der im autonomen Schachtisch verwendete Chipsatz PN532 von NXP ist dazu ebenfalls in der Lage.
+
+Um das (+ndef) Format verwenden zu können, müssen die (+nfc) Tags zuerst auf diese Formatiert werden. Die mesten käuflichen Tags sind bereits derart formatiert. Alternativ kann dies mittels Mobiltelefon und passender App geschehen.
+Da (+ndef) Informationen über die Formatierung und der gepeicherten Einträge speichert, stehen nach der Formatierung nur noch 137 Bytes des NXP NTAG 21 zur verfügung.
+
+Per Lesegerät können anschliessend mehrere (+ndef) Records auf den Tag geschrieben werden. Diese sind mit Dateien auf einer Festplatte vergleichbar und können verschiedenen Dateiformate und Dateigrössen annehmen.
+Ein typischer Anwendungsfall ist der (+ndefrtd) URL Datensatz. Dieser kann dazu genutzt werden eine spezifizierte URL auf dem Endgeräte aufzurufen, nachdem der (+nfc) Tag gescant wurde.
+
+Der autonome Schachtisch, verwendet den einfachsten (+ndefrtd) Typ, welcher der Text-Record ist, und zum speichern von Zeichenketten genutzt werden kann, ohne das eine Aktion auf dem Endgerät ausgeführt wird.
+Jeder Tag einer Schafigur, welche für den autonomen Schachtisch verwendet werden kann, besitzt diesen (+ndef) Record an der ersten Position. Alle weiteren eventuell vorhandenen Records werden vom Tisch ignoriert.
 
 ![Prototyp Hardware: Tool zur Erstellung des NDEF Payloads: ChessFigureIDGenerator.html](images/ATC_ChessFigureIDGenerator.png)
+
+Um die Payload für den (+nfc) Record zu erstellen wurde ein kleine Web-Applikation erstellt, welche den Inhalt der Text-Records erstellt.
+Dieser ist für jede Figur individuell und enthält den Figur-Typ und die Figur-Farbe. Das Tool untersützt auch das Speichern weiterer Attribute wie einem Figur-Index, welcher aber in der finalen Software-Version nicht genutzt wird.
+
+Nach dem Beschreiben eines (+nfc) Tags ist es möglich diesen gegen auslesen oder erneuten Schreiben mittels einer Read/Write-Protection zu schützen. Diese Funktionalität wird nicht verwendet um das Kopieren von Figuren durch den Benutzer zu ermöglichen.
+Somit kann dieser leicht seine eigenen Figuren erschaffen, ohne auf das Tool angewiesen zu sein.
+
+![Prototyp Hardware: NDEF Text Record Payload für einen weissen Turm](images/ndef_record_rook.png)
+
 
 ## Schaltungsentwurf
 
@@ -362,8 +368,8 @@ Hier wurde für die Bauteile, welche eine Sützstruktur benötigen, die von Cura
 ## IMPLEMENTIERUNG GCODE-Sender
 
 * was ist GCODE
-* grundlegend verwendete kommandos
-
+* grundlegend verwendete Kommandos G0 G28 G21 G90 M280
+* erweiterte optionale Kommandos M150 M502 M500 M92
 
 
 ## Fazit zum finalen Prototypen
@@ -372,6 +378,30 @@ Hier wurde für die Bauteile, welche eine Sützstruktur benötigen, die von Cura
 * einfach/gut verfügbare materialien verwendet
 * geänderte Mechnik resultiert in nahezu Spielfreier Mechanik (+- 1mm), welches für diesen Zweck mehr als ausreicht
 * 6h dauertest bestanden
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -507,7 +537,6 @@ Auch ist es möglich aktuell laufende Spiele in Echtzeit anzeigen zu lassen, som
 ![Webclient: Statistiken](images/ATC_statistics.png)
 
 * techstack js
-
 * backend zu testen
 * menschliche spieler zu simulieren
 * wärend der entwicklungsphase des tisches gezielt spiele simulieren zu können
@@ -519,21 +548,48 @@ Auch ist es möglich aktuell laufende Spiele in Echtzeit anzeigen zu lassen, som
 
 * authetifizierung
 * https only
-* zertifikate auf clientseite geniert jedoch nicht abgefragt
+* Zertifikate auf Clientseite geniert jedoch nicht Abgefragt
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 
 # Embedded System Software
 
-* hauptsoftware zur steuerung der Elektrik/Mechanik
-* kommunikation mit dem Cloud-Server
+* Hauptsoftware zur Steuerung der Elektrik/Mechanik
+* Kommunikation mit dem Cloud-Server
 
 
 
 ## Ablaufdiagramm
 
-* dummer client, synchronisierung von gegeben feld mit dem lokalen
+* dummer Client
+* Synchronisierung von gegeben Schachfeld mit dem lokalen Schachfeld
+
+* vier Schritte (enfernen, bewegen, hinzufügen, bewegen)
 
 ![Embedded System Software: Ablaufdiagramm](images/ATC_gameclient_statemachiene.png)
 
@@ -541,21 +597,51 @@ Auch ist es möglich aktuell laufende Spiele in Echtzeit anzeigen zu lassen, som
 ## Figur Bewegungspfadberechnung
 
 * Algorithmus zur Umsetzung eines Schachzugs
-* auftrennung in current und target Board
+* Auftrennung in current und target Board
 
 ## Schachfeld Scan Algorithmus zur Erkennung von Schachzügen
 
 ![Embedded System Software: Schachfeld Scan Algorithmus Ablauf](images/ATC_ChessMoveAlgorithm.png)
 
+* Benutzer bestätigt dass er Schachzug gemacht hat
+* Ermittlung des getätigten Schachzug 
+* Scan der Schachfeld-Veränderungen, durch Vergleich des vorherigen Schachfelds und der möglichen Züge
+
+
+
+
+
+
 
 ## Userinterface
 
-![Embedded System Software: User-Interface Mockup](images/ATC_ChessMoveAlgorithm.png)
+![Embedded System Software: User-Interface Mockup](images/ATC_Gui.png)
 
-* qt quick ui
-* ipc bibliothek zur kommunikation mit der hauptsoftware
-* auf json basiert => einfaches debugging
-* steuerung über andere endgeräte möglich z.B Handy-App welche im selben Netzwerk befindet.
+* QT Quick UI, als Package in Buildroot integriert
+* IPC Bibliothek zur Kommunikation mit der controller-Software Instanz
+* JSON basiert => einfaches Debugging
+* Steuerung über andere Endgeräte möglich z.B Handy-App welche im selben Netzwerk befindet.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -569,5 +655,5 @@ Auch ist es möglich aktuell laufende Spiele in Echtzeit anzeigen zu lassen, som
 
 ## Ausblick
 
-* einbdingung in existeirende Schach-Clouds
+* Einbindung in existeirende Schach-Clouds  z.B. https://lichess.org/
 * user-port für Erweiterungen (z.B. DGT Schachur)
