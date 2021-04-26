@@ -52,7 +52,6 @@ def validate_board():
         err = e
     return jsonify({'err': err, 'is_board_valid': is_board_valid,'legal_moves': legal_mv_coonverted, 'is_game_over': is_go})
 
-# TODO REMOVE
 @app.route('/rest/check_move', methods=['post'])
 def check_move():
     rq = request
@@ -93,7 +92,6 @@ def check_move():
         err = e
     return jsonify({'err': err, 'is_valid': is_valid, 'move': move, 'fen': fen})
 
-# TODO
 @app.route('/rest/execute_move', methods=['post'])
 def execute_move():
     err = None
@@ -127,6 +125,24 @@ def execute_move():
         return jsonify({'err': err, 'new_fen': "", 'move_executed': 0, 'next_player_turn':0})
 
     return jsonify({'err': None, 'new_fen': board.fen(), 'move_executed': True, 'next_player_turn': int(not board.turn)})
+
+@app.route('/rest/init_board', methods=['get'])
+def init_board():
+    err = None
+    rq = request
+
+    try:
+        board = chess.Board()
+        print(board)
+    except Exception as e:
+        err = e
+        logging.warning('/rest/init_board')
+        logging.warning(e)
+        return jsonify({'err': err, 'board': ""})
+
+    return jsonify({'err': None, 'board': board.fen()})
+
+
 
 
 # TODO RATERATE BOARD ->for each player rating

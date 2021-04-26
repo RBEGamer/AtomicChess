@@ -501,14 +501,32 @@ zu gewährleisten.
 \subsubsection{Technologien im
 Makerspace}\label{technologien-im-makerspace}}
 
-stehen diese im makerspace zur verfüfung
+\begin{itemize}
+\tightlist
+\item
+  stehen diese im makerspace zur verfüfung
+\end{itemize}
 
 \hypertarget{machbarkeitsanalyse}{%
 \subsection{Machbarkeitsanalyse}\label{machbarkeitsanalyse}}
 
-welche technologien werden benötigt * software architektur anfoderungen
-* hardware anforderungen * grosse * wiederholgenauigkeit * lautstärke *
-vorerfahrnung in cad ed druck und schaltungsdesign
+\begin{itemize}
+\tightlist
+\item
+  welche technologien werden benötigt
+\item
+  software architektur anfoderungen
+\item
+  hardware anforderungen
+\item
+  grosse
+\item
+  wiederholgenauigkeit
+\item
+  lautstärke
+\item
+  vorerfahrnung in cad ed druck und schaltungsdesign
+\end{itemize}
 
 \hypertarget{grundlegende-verifikation-der-ausgewuxe4lten-technologien}{%
 \section{Grundlegende Verifikation der ausgewälten
@@ -590,23 +608,10 @@ Schrittmotorsteuerung}\label{schrittmotor-schrittmotorsteuerung}}
 \subsection{3D Druck für den mechanischen
 Aufbau}\label{d-druck-fuxfcr-den-mechanischen-aufbau}}
 
-\begin{itemize}
-\tightlist
-\item
-  PLA als FDM Filament =\textgreater{} einfach verarbeitung und
-  handhabung, keine Mechanische Belastbarkeit gefordert
-\end{itemize}
-
 Da es sich hier nur um einen Protoypen handelt, wurde hier auf ein
 einfach zu handbabendes Filament vom Typ PLA verwendet. Dies ist
 besonders gut für die Prototypenendwicklung geeignet und kann mit nahezu
 jeden handelsüblichen \gls{fdm} 3D-Drucker verarbeitet werden.
-
-\begin{itemize}
-\tightlist
-\item
-  keine hohe genauigkeit, teile nicht sichtbar
-\end{itemize}
 
 Zuvor wurden einige Testdrucke durchgeführt um die Qualität der zuvor
 gewählten Druckparameter zu überprüfen und diese gegebenenfalls
@@ -697,6 +702,7 @@ Bottom Layers & 4\tabularnewline
 \subsection{Mechanik}\label{mechanik}}
 
 \begin{itemize}
+\tightlist
 \item
   vorgaben IKEA tisch als grundbasis =\textgreater{} bereits fertiger
   grundrahmen in denen die einzelteile integriert werden können
@@ -917,20 +923,6 @@ getauscht. Somit sind im Design zwei verschiedenen Arten von Magneten
 notwendig, jedoch traten in den anschliessend durchgeführten Testläufen
 keine Beeinflussungen mehr statt.
 
-\begin{itemize}
-\item
-  komplett 3d gedruckte Figuren mit integrierten Magnet
-\item
-  nfc + filzgleiter
-\item
-  durch SLA druck höheres Gewicht somit kein Abstoßen von den anderen
-  Figuren mehr
-\item
-  verschiedene Magnetgrässe/Stärke für Bauern/andere Figuren
-\item
-  jedoch alte figuren weiter verwendbar und austausch / vermischbar
-\end{itemize}
-
 \hypertarget{uxe4nderungen-der-elektronik}{%
 \section{Änderungen der Elektronik}\label{uxe4nderungen-der-elektronik}}
 
@@ -958,6 +950,7 @@ keine Beeinflussungen mehr statt.
 GCODE-Sender}\label{implementierung-gcode-sender}}
 
 \begin{itemize}
+\tightlist
 \item
   was ist GCODE
 \item
@@ -967,7 +960,6 @@ GCODE-Sender}\label{implementierung-gcode-sender}}
 \item
   anhand der hwid und existenz der serial interfaces wird entschieden
   gcode hardware zu laden
-\item
 \end{itemize}
 
 \hypertarget{fazit-zum-finalen-prototypen}{%
@@ -1126,16 +1118,18 @@ Spieler gewonnen oder verloren hat.
 Bevor ein Spiel begonnen wird, generiert der MoveValidator das initiale
 Spielfeld und bestimmt den Spieler, welcher als erstes am Zug ist.
 
-\begin{itemize}
-\tightlist
-\item
-  Beispiel request/repsonse
-\end{itemize}
+\begin{figure}
+\centering
+\includegraphics{images/ATC_movevalidator_execute_move.png}
+\caption{MoveValidator: Beispiel Request zur Ausführung eines Zuges auf
+einem gegebenen Schachbrett \label{ATC_movevalidator_execute_move}}
+\end{figure}
 
 Der Backend-Service fragt einen neues Spiel an oder übergibt einen
-Schachzug inkl. des Spielbretts an den Service. Der Response wird dann
-vom Backend in der Datenbank gespeichert und weiter an die
-Client-Devices verteilt.
+Schachzug inkl. des Spielbretts an den
+Service.\ref{ATC_movevalidator_execute_move} Der Response wird dann vom
+Backend in der Datenbank gespeichert und weiter an die Client-Devices
+verteilt.
 
 Mit diesem Design ist es möglich, auch andere Spielarten im System zu
 implementieren, nur hier die initialen Spielfelder generiert werden und
@@ -1157,6 +1151,12 @@ Allgemein geschieht die Kommunikation über drei API Calls.
 \hypertarget{entwicklung-webclient}{%
 \subsection{Entwicklung Webclient}\label{entwicklung-webclient}}
 
+\begin{figure}
+\centering
+\includegraphics{images/ATC_webclient.png}
+\caption{Webclient: Spielansicht \label{ATC_webclient}}
+\end{figure}
+
 Der Webclient wurde primär dazu entwickelt um das System während der
 Entwicklung zu testen. Dieser simuliert einen autonomen Schachtisch und
 verwendet dabei die gleichen \gls{http} Requests. Dieser wurde dabei
@@ -1164,17 +1164,26 @@ komplett in \gls{js} umgesetzt im Zusammenspiel mit \gls{html} und
 \gls{css} und ist somit komplett im Browser lauffähig.
 
 Ausgeliefert werden die statischen Dateien zur Einfachheit durch den
-Backend-Service. * express router * public folder * techstack js *
-backend zu testen * menschliche spieler zu simulieren * wärend der
-entwicklungsphase des tisches gezielt spiele simulieren zu können *
-liefert auch statistiken * wird zur einfachheit direkt aus dem abckend
-heraus ausgeliefert da nur statisches html/js/class
+Backend-Service, es wurde kein gesonderter Frontend-Service angelegt.
+Durch die Implementierung des Webclienten in \gls{js}, ist dieser sogar
+lokal über einen Browser ausführbar, ohne dass die benötigten Dateien
+über einen Webserver ausgeliefert werden müssen.
 
-\begin{figure}
-\centering
-\includegraphics{images/ATC_webclient.png}
-\caption{Webclient: Spielansicht \label{ATC_webclient}}
-\end{figure}
+Zusätzlich zu dem verwendeten Vanilla-\gls{js} wurde jQuery als \gls{js}
+Bibliothek verwendet, welches eine Manipulation der \gls{html} Elemente
+startk vereinfacht und bietet insbesondere einfach zu nutzende
+HTTP-Request Funktionen.
+
+\begin{itemize}
+\tightlist
+\item
+  backend zu testen
+\item
+  menschliche spieler zu simulieren
+\item
+  wärend der entwicklungsphase des tisches gezielt spiele simulieren zu
+  können
+\end{itemize}
 
 Während der Implementierung wurde der Webclient weiter ausgebaut und es
 wurde weitere Features ergänzt. Dazu zählt zum einen eine Übersicht über

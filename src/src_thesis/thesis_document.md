@@ -519,9 +519,11 @@ Dazu zählen unter anderem das neue Schachbrett und ob ein Spieler gewonnen oder
 
 Bevor ein Spiel begonnen wird, generiert der MoveValidator das initiale Spielfeld und bestimmt den Spieler, welcher als erstes am Zug ist.
 
-* Beispiel request/repsonse
 
-Der Backend-Service fragt einen neues Spiel an oder übergibt einen Schachzug inkl. des Spielbretts an den Service. Der Response wird dann vom Backend in der Datenbank gespeichert und weiter an die Client-Devices verteilt.
+![MoveValidator: Beispiel Request zur Ausführung eines Zuges auf einem gegebenen Schachbrett \label{ATC_movevalidator_execute_move}](images/ATC_movevalidator_execute_move.png)
+
+
+Der Backend-Service fragt einen neues Spiel an oder übergibt einen Schachzug inkl. des Spielbretts an den Service.\ref{ATC_movevalidator_execute_move} Der Response wird dann vom Backend in der Datenbank gespeichert und weiter an die Client-Devices verteilt.
 
 
 Mit diesem Design ist es möglich, auch andere Spielarten im System zu implementieren, nur hier die initialen Spielfelder generiert werden und Züge der Spieler validiert werden müssen.
@@ -543,21 +545,25 @@ Allgemein geschieht die Kommunikation über drei API Calls.
 
 ## Entwicklung Webclient
 
+![Webclient: Spielansicht \label{ATC_webclient}](images/ATC_webclient.png)
+
 Der Webclient wurde primär dazu entwickelt um das System während der Entwicklung zu testen.
 Dieser simuliert einen autonomen Schachtisch und verwendet dabei die gleichen (+http) Requests.
 Dieser wurde dabei komplett in (+js) umgesetzt im Zusammenspiel mit (+html) und (+css) und ist somit komplett im Browser lauffähig.
 
-Ausgeliefert werden die statischen Dateien zur Einfachheit durch den Backend-Service.
-* express router
-* public folder
-* techstack js
+Ausgeliefert werden die statischen Dateien zur Einfachheit durch den Backend-Service, es wurde kein gesonderter Frontend-Service angelegt.
+Durch die Implementierung des Webclienten in (+js), ist dieser sogar lokal über einen Browser ausführbar, ohne dass die benötigten Dateien über einen Webserver ausgeliefert werden müssen.
+
+Zusätzlich zu dem verwendeten Vanilla-(+js) wurde jQuery als (+js) Bibliothek verwendet, welches eine Manipulation der (+html) Elemente startk vereinfacht und bietet insbesondere einfach zu nutzende HTTP-Request Funktionen.
+
+
+
 * backend zu testen
 * menschliche spieler zu simulieren
 * wärend der entwicklungsphase des tisches gezielt spiele simulieren zu können
-* liefert auch statistiken
-* wird zur einfachheit direkt aus dem abckend heraus ausgeliefert da nur statisches html/js/class
 
-![Webclient: Spielansicht \label{ATC_webclient}](images/ATC_webclient.png)
+
+
 
 Während der Implementierung wurde der Webclient weiter ausgebaut und es wurde weitere Features ergänzt.
 Dazu zählt zum einen eine Übersicht über vergangene und aktuell laufende Spiele. In dieser können Spiele Zug um Zug nachvollzogen werden und weitere Information über den Spielstatus angezeigt werden.\ref{ATC_statistics}
