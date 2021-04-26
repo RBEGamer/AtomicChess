@@ -156,12 +156,12 @@ Dennoch wird Wert darauf gelgegt, dass das Verhältnis zwischen den Spielfeldabm
 
 ### Technologien im Makerspace
 
-stehen diese im makerspace zur verfüfung
+ * stehen diese im makerspace zur verfüfung
 
 
 ## Machbarkeitsanalyse
 
-welche technologien werden benötigt
+* welche technologien werden benötigt
 * software architektur anfoderungen
 * hardware anforderungen
 * grosse
@@ -214,13 +214,9 @@ welche technologien werden benötigt
 
 ## 3D Druck für den mechanischen Aufbau
 
-* PLA als FDM Filament => einfach verarbeitung und handhabung, keine Mechanische Belastbarkeit gefordert
 
 Da es sich hier nur um einen Protoypen handelt, wurde hier auf ein einfach zu handbabendes Filament vom Typ PLA verwendet.
 Dies ist besonders gut für die Prototypenendwicklung geeignet und kann mit nahezu jeden handelsüblichen (+fdm) 3D-Drucker verarbeitet werden.
-
-* keine hohe genauigkeit, teile nicht sichtbar
-
 
 Zuvor wurden einige Testdrucke durchgeführt um die Qualität der zuvor gewählten Druckparameter zu überprüfen und diese gegebenenfalls anzupassen.
 Auch wurden verschiedene Calibrierobjekte gedruckt, an welchen die Toleranzen für die späteren (+cad) Zeichnungen abgeschätz werden können.
@@ -278,9 +274,6 @@ Diese Vorteile wurde mit verschiedenen Testdrucken verifiziert und kommen insbes
 
 
 * vorgaben IKEA tisch als grundbasis => bereits fertiger grundrahmen in denen die einzelteile integriert werden können
-
-
-
 * xy riemen führung
 * spiel in Mechanik
 * Einabrietung in Fusion360
@@ -388,15 +381,6 @@ Nach einem erfolgreichen Test wurde das (+cad) Modell wurde so angepasst, dass s
 Desweiteren wurden bei den Bauern (den leichtesten) Figuren die Magnete ausgetauscht. Die zuerst verwendeten 10x3mm Neodym-Magnete wurden bei diesen Figuren gegen 6x3mm Magnete getauscht.
 Somit sind im Design zwei verschiedenen Arten von Magneten notwendig, jedoch traten in den anschliessend durchgeführten Testläufen keine Beeinflussungen mehr statt.
 
-
-
-* komplett 3d gedruckte Figuren mit integrierten Magnet 
-* nfc + filzgleiter
-* durch SLA druck höheres Gewicht somit kein Abstoßen von den anderen Figuren mehr
-* verschiedene Magnetgrässe/Stärke für Bauern/andere Figuren
-
-* jedoch alte figuren weiter verwendbar und austausch / vermischbar
-
 # Änderungen der Elektronik
 
 ![Producation Hardware: Blockdiagramm \label{ATC_Hardware_Architecture_PROD}](images/ATC_Hardware_Architecture_PROD.png)
@@ -414,7 +398,7 @@ Somit sind im Design zwei verschiedenen Arten von Magneten notwendig, jedoch tra
 * grundlegend verwendete Kommandos G0 G28 G21 G90 M280
 * erweiterte optionale Kommandos M150 M502 M500 M92
 * anhand der hwid und existenz der serial interfaces wird entschieden gcode hardware zu laden
-*
+
 
 ## Fazit zum finalen Prototypen
 
