@@ -22,18 +22,18 @@
 \hypertarget{zielsetzung}{%
 \subsection{Zielsetzung}\label{zielsetzung}}
 
-Das Ziel dieser Arbeit ist es, einen autonomen Schachtisch, welcher in
-der Lage ist Schachfiguren autonom zu bewegen und auf
-Benutzerinteraktion zu reagieren. Der Schwerpunkt liegt dabei
+Das Ziel dieser Arbeit ist es, einen autonomen Schachtisch zu
+entwickeln, welcher in der Lage ist Schachfiguren autonom zu bewegen und
+auf Benutzerinteraktion zu reagieren. Der Schwerpunkt liegt dabei
 insbesondere auf der Programmierung des eingebetteten Systems und dem
-Zusammenspiel dieses mit einem aus dem Internet erreichbaren Servers,
-welcher als Vermittlungsstelle zwischen verschiedenen Schachtischen und
-anderen Endgeräten dient. Dieses besteht zum einem aus der
-Positionserkennung und Steuerung der Hardwarekomponenten (Schachfiguren)
-und zum anderen aus der Kommunikation zwischen dem Tisch selbst und
-einem in einer Cloud befindlichen Server. Mittels der Programmierung
-werden diverse Technologien von verschiedenen Einzelsystemen zu einem
-Gesamtprodukt zusammengesetzt.
+Zusammenspiel von diesem mit einem aus dem Internet erreichbaren
+Servers, welcher als Vermittlungsstelle zwischen verschiedenen
+Schachtischen und anderen Endgeräten dient. Dieses besteht zum einem aus
+der Positionserkennung und Steuerung der Hardwarekomponenten
+(Schachfiguren) und zum anderen aus der Kommunikation zwischen dem Tisch
+selbst und einem in einer Cloud befindlichem Server. Mittels der
+Programmierung werden diverse Technologien von verschiedenen
+Einzelsystemen zu einem Gesamtprodukt zusammengesetzt.
 
 \hypertarget{methodik}{%
 \subsection{Methodik}\label{methodik}}
@@ -41,16 +41,24 @@ Gesamtprodukt zusammengesetzt.
 Im ersten Abschnitt werden die zum Zeitpunkt existierenden Ansätze und
 deren Umsetzung beleuchtet. Anschliessend werden die zuvor verwendeten
 Technologien betrachtet, welche bei bei den beiden darauffolgenden
-Prototypen verwendet wurden. Im darauffolgenden Abschnitt wird die
-Cloud-Infrastruktur thematisiert, welche für eine Kommunikation zwischen
-den Prototypen entscheidend ist.
+Prototypen verwendet wurden.
 
-Abschliessend wir ein Ausblick auf
+Das sechste Kapitel widmet sich der realisierung des erste Protoypen des
+autonomen Schachtischs. Dabei werden alle Im anschliessenden Kapitel,
+wird auf der Basis des ersten Prototyps und seiner auftretenden
+Probleme, der finale Prototyp entwickelt. Hier werden die Probleme durch
+ein re-design und vereinfachung der Elektronik gelößt und so ein
+zufriedenstellendes Produkt entwickelt.
+
+Im darauffolgenden Abschnitt wird die Cloud-Infrastruktur thematisiert,
+welche für eine Kommunikation zwischen den Prototypen entscheidend ist.
 
 \begin{itemize}
 \tightlist
 \item
-  ausblick weitere features
+  controller software
+\item
+  fazit
 \end{itemize}
 
 \hypertarget{analyse-bestehender-systeme-und-machbarkeitsanalyse}{%
@@ -64,9 +72,9 @@ Vergleich}\label{existierende-systeme-im-vergleich}}
 \begin{itemize}
 \tightlist
 \item
-  nieschenprodukt jedoch einige Projekte im OpenSource bereich verfügbar
+  Nischenprodukt, jedoch einige Projekte im OpenSource bereich verfügbar
 \item
-  ein kommerzieller hersteller
+  Ein kommerzieller Hersteller
 \end{itemize}
 
 \hypertarget{kommerzielle-produkte}{%
@@ -359,8 +367,8 @@ Lizenz\strut
 \end{longtable}
 
 In den bestehenden Projekten ist zu erkennen, dass ein autonomer
-Schachtisch sehr einfach und mit einfachsten Mittel konstruiert werden
-kann. Hierbei fehlen in der Regel einige Features, wie das automatische
+Schachtisch sehr einfach und mit simplen Mittel konstruiert werden kann.
+Hierbei fehlen in der Regel einige Features, wie das automatische
 Erkennen von Figuren oder das Spielen über das Internet.
 
 Einige Projekte setzten dabei auf eingebettete Systeme, welche direkt im
@@ -369,7 +377,7 @@ welcher die Steuerbefehle an die Elektronik sendet.
 
 Bei der Konstruktion der Mechanik und der Methode mit welcher die
 Figuren über das Feld bewegt werden ähneln sich jedoch die meisten
-dieser Projekte. Hier wird in der Regel eine einfache X und Y-Achse
+dieser Projekte. Hier wird in der Regel eine einfache X- und Y-Achse
 verwendet, welche von zwei Schrittmotoren bewegt werden. Die
 Schachfiguren werden dabei mittels eines Elektromagneten über die
 Oberseite gezogen. Hierbei ist ein Magnet oder eine kleine Metallplatte
@@ -404,14 +412,14 @@ um das Erlebnis, welches der Benutzer bei dem Verwenden eines Produktes
 erlebt und welche Erwartungen der Benutzer an die Verwendung des
 Produktes hat.
 
-Bei dem autonomen Schachtisch, soll der Benutzer eine ähnlich einfache
-Erfahrung erleben, wie bei einer Schachpartie mit einem menschlichen
-Gegenspieler. Der Benutzer soll direkt nach dem Einschalten des Tisches
-und dem Aufstellen der Figuren in der Lage sein, mit dem Spiel beginnen
-zu können. Dies soll wie ein reguläres Schachspiel ablaufen; der Spieler
-vor dem Tisch soll die Figuren mit der Hand bewegen können und der Tisch
-soll den Gegenspieler darstellen. Dieser bewegt die Figuren der
-Gegenseite.
+Bei dem autonomen Schachtisch, soll der Benutzer eine ähnlich
+authentische Erfahrung erleben wie bei einer Schachpartie mit einem
+menschlichen Gegenspieler. Der Benutzer soll direkt nach dem Einschalten
+des Tisches und dem Aufstellen der Figuren in der Lage sein, mit dem
+Spiel beginnen zu können. Dies soll wie ein reguläres Schachspiel
+ablaufen; der Spieler vor dem Tisch soll die Figuren mit der Hand
+bewegen können und der Tisch soll den Gegenspieler darstellen. Dieser
+bewegt die Figuren der Gegenseite.
 
 Nach Beendigung einer Partie, soll das Spielbrett wieder in die
 Ausgangssituation gebracht werden; dies kann zum einem vom Tisch selbst
@@ -591,7 +599,7 @@ Aufbau}\label{d-druck-fuxfcr-den-mechanischen-aufbau}}
 Da es sich hier nur um einen Protoypen handelt, wurde hier auf ein
 einfach zu handbabendes Filament vom Typ PLA verwendet. Dies ist
 besonders gut für die Prototypenendwicklung geeignet und kann mit nahezu
-jeden handelsüblichen FDM 3D Drucker verarbeitet werden.
+jeden handelsüblichen \gls{fdm} 3D-Drucker verarbeitet werden.
 
 \begin{itemize}
 \tightlist
@@ -614,11 +622,11 @@ häufige Montage der gedruckten Bauteile verhindert werden.
 
 Bei dem Design der zu druckenden Bauteile wurde darauf geachtet, dass
 diese den Bauraum von 200x200x200mm nicht überschreiten und somit auch
-von einfachen FDM 3D Druckern verarbeitet werden können.
+von einfachen \gls{fdm} 3D-Druckern verarbeitet werden können.
 
 Als Software wurde der Open-Source Slicer Ultimaker Cura
 \cite{ultimakercura} verwendet, da dieser zum einen bereits fertige
-Konfigurationen für den verwendeten 3D Drucker enhält und zum anderen
+Konfigurationen für den verwendeten 3D-Drucker enhält und zum anderen
 experimentelle Features bereitstellt.
 
 \begin{figure}
@@ -657,6 +665,11 @@ Bottom Layers & 4\tabularnewline
 
 \begin{itemize}
 \tightlist
+\item
+  Zeit für den 3D Druck Prozess spiel hier keine Rolle, da selbstbau
+  projekt
+\item
+  Parameter lassen sich weiter anpassen z.B. Layerheight auf 0.4
 \item
   finaler protoyp bietet sich abs oder pteg an
 \end{itemize}
@@ -707,7 +720,7 @@ werden. Die verwendeten NXP NTAG 21 Chips, besitzen einen vom Benutzer
 verwendbaren Speicher von 180 Byte. Dieser kann über ein
 \gls{nfc}-Lese/Schreibger mit Daten verschiednster Art beschrieben und
 wieder ausgelesen werden. Moderne Mobiltelefone besitzen in der Regel
-auch die Fähigkeit mit passenden \gls{nfc} Tags kommunizieren zu können,
+auch die Fähigkeit mit passenden \gls{nfc} Tags kommunizieren zu können;
 somit sind keine Stand-Alone Lesegeräte mehr notwendig.
 
 Der Schachtisch verwendet dabei das \gls{ndef} Dateiformat welches
@@ -731,7 +744,7 @@ Datensatz. Dieser kann dazu genutzt werden eine spezifizierte URL auf
 dem Endgeräte aufzurufen, nachdem der \gls{nfc} Tag gescant
 wurde.\cite{nordicnfclibndef}
 
-Der autonome Schachtisch, verwendet den einfachsten \gls{ndefrtd} Typ,
+Der autonome Schachtisch verwendet den einfachsten \gls{ndefrtd} Typ,
 welcher der Text-Record ist, und zum speichern von Zeichenketten genutzt
 werden kann, ohne das eine Aktion auf dem Endgerät ausgeführt wird.
 Jeder Tag einer Schafigur, welche für den autonomen Schachtisch
@@ -873,14 +886,14 @@ Die größse der Figuren kann durch die fest definierte Feldgrösse von
 55mm und der verwendeten \gls{nfc} Tags nicht verändert werden. Nach
 vielen Testdurchläufen mit dem ersten Prototyp war zu erkennen, dass
 sich die Figuren je nach aktueller Situation auf dem Spielfeld immernoch
-merklich magnetisch anziehen. Dies führt je nach Spielverlauf zu
-Komplikationen, sodass die Figuren manuell wieder mittig auf den Felder
-platziert werden müssen.
+magnetisch anziehen. Dies führt je nach Spielverlauf zu Komplikationen,
+sodass die Figuren manuell wieder mittig auf den Felder platziert werden
+müssen.
 
 Um dies zu verhindern, wurde einige Figuren zusätzlich mit einer 20mm
 Unterlegscheibe am Boden versehen, welche diese Problem behob, jedoch
 das \gls{nfc} Tag nicht mehr als lesbar erwies. Dies resultierte in der
-Idee die Schachfiguren ebenfalls selbst mit dem 3D Drucker herzustellen
+Idee die Schachfiguren ebenfalls selbst mit dem 3D-Drucker herzustellen
 und die Magnete direkt in den Boden der Figur einlassen zu können.
 
 Die aktuell verwendeten Figuren des ersten Protoyp wiegen 8 Gramm für
@@ -990,8 +1003,8 @@ Das System soll so ausgelegt werden, dass es im späteren Zeitpunkt mit
 verschiedenen Client-Devices mit diesem kommunizieren können. Dazu
 zählen zum einen der autonome Schachtisch, aber z.B. auch einen
 Web-Client, welcher die Funktionalität eines Schachtisch im Browser
-abbilden kann. Hierzu muss das System eine einheitliche REST
-bereitstellen.
+abbilden kann. Hierzu muss das System eine einheitliche
+\gls{rest}-Schnittstelle bereitstellen.
 
 Eine RESTful API bezeichnet eine API welche HTTP-Requests verwendet um
 auf Daten zugreifen zu können.
@@ -1110,12 +1123,12 @@ Spielfeld und bestimmt den Spieler, welcher als erstes am Zug ist.
   Beispiel request/repsonse
 \end{itemize}
 
-Der Backend-Service fragt einen neues Spiel an, oder übergibt einen
+Der Backend-Service fragt einen neues Spiel an oder übergibt einen
 Schachzug inkl. des Spielbretts an den Service. Der Response wird dann
 vom Backend in der Datenbank gespeichert und weiter an die
 Client-Devices verteilt.
 
-Mit diesem Design ist es möglich auch andere Spielarten im System zu
+Mit diesem Design ist es möglich, auch andere Spielarten im System zu
 implementieren, nur hier die initialen Spielfelder generiert werden und
 Züge der Spieler validiert werden müssen.
 
@@ -1130,23 +1143,6 @@ Allgemein geschieht die Kommunikation über drei API Calls.
   python chess packge welche pesudo legal moves generiert
 \item
   beispiel Requests
-\end{itemize}
-
-\hypertarget{autoplayer}{%
-\subsubsection{AutoPlayer}\label{autoplayer}}
-
-Der AutoPlayer-Service stellt den Computerspieler bereit.
-
-\begin{itemize}
-\tightlist
-\item
-  stellt schachai dar
-\item
-  agiert als selbstäniger spieler
-\item
-  wenn nicht genügend menschlich spieler vorhanden sind
-\item
-  jeweils eine instanz ist ein spieler container wird beendet
 \end{itemize}
 
 \hypertarget{entwicklung-webclient}{%
@@ -1198,6 +1194,61 @@ implementiert.
   wird zur einfachheit direkt aus dem abckend heraus ausgeliefert da nur
   statisches html/js/class
 \end{itemize}
+
+\hypertarget{autoplayer}{%
+\subsubsection{AutoPlayer}\label{autoplayer}}
+
+Der AutoPlayer-Service stellt den Computerspieler bereit. Jede
+Service-Instanz stellt einen virtuellen Spieler bereit, welcher die
+gleiche Schnittstellen wie der Webclient oder der autonme Schachtisch
+verwendet. Die einzige Änderung an den verwendeten \gls{rest}-Calls ist
+der Login-Requst. Hier wird das \passthrough{\lstinline!playertype!}
+Flag gesetzt welches den Spieler als Computerspieler gegenüber des
+Systems authentifiziert. Somit wird dieser wärend des
+Matchmaking-Prozesses erst für ein Match ausgewählt, wenn kein anderer
+Spieler mehr zur Verfügung steht, welcher vom Typ Webclient oder
+autonomer Schachtisch ist. Somit ist gewährleistet, dass immer zuerst
+die Menschlichen-Spieler ein Spiel beginnen.
+
+Eine weitere Modifikation ist die verwendung einer Schach-AI, da dieser
+Service als Computerspieler agieren soll. Hierzu kam die Open-Source
+Chess Engine Stockfish\cite{stockfish} in der Version 12 zum
+Einsatz.
+
+\begin{itemize}
+\tightlist
+\item
+  stockfish
+\end{itemize}
+
+Wenn das Match beendet wird, beendet sich auch die Service-Instanz.
+Diese wird jedoch wieder gestartet wenn die Anzahl der zur Verfügung
+stehenden Computerspieler unter einen definierten Wert fallen. Somit ist
+dafür gesorgt, dass das System nicht mit ungenutzen AutoPlayer-Instanzen
+gebremst wird. Diese Anzahl ist in der Backend-Configuration frei
+wählbar und kann je nach zu erwartenen Aufkommen angepasst werden.
+
+\begin{figure}
+\centering
+\includegraphics{images/ai_player_count.png}
+\caption{Webclient: Anzahl der aktiven, sich nicht im Spiel befindenen
+AutoPlayer-Service-Instanzen}
+\end{figure}
+
+Allgemein skaliert das System durch diese Art der Ressourcenverwaltung
+auch auf kleinen Systemen sehr flexibel. Durch die Art der
+Implementierung, dass sich der AutoPlayer-Service wie ein normaler
+Spieler verhält, sind auch andere Arten des Computerspieler möglich. So
+ist es zum Beispiel möglich, die Spielstärke je Spieler anzupassen oder
+einen Computerspieler zu erstellen, welcher nur zufällige Züge zieht.
+
+Ein weiterer Anwendungsfall für den AutoPlayer-Service, ist das Testen
+des weiteren Systems insbesondere des Backend-Service. Durch das
+Matching von zwei AutoPlayer-Instanzen, können automatisierte test
+Schachpartien ausgeführt werden um die Funktionsfähigkeit des restlichen
+Systems zu testen. Diese Feature wurde insbesondere bei der Entwicklung
+des Webclienten und der Steuerungssoftware für den autonomen Schachtisch
+verwendet.
 
 \hypertarget{authetifizierung}{%
 \subsection{Authetifizierung}\label{authetifizierung}}

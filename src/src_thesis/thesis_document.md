@@ -549,14 +549,7 @@ Allgemein geschieht die Kommunikation über drei API Calls.
 * beispiel Requests
 
 
-### AutoPlayer
 
-Der AutoPlayer-Service stellt den Computerspieler bereit.
-
-* stellt schachai dar
-* agiert als selbstäniger spieler
-* wenn nicht genügend menschlich spieler vorhanden sind
-* jeweils eine instanz ist ein spieler container wird beendet
 
 
 
@@ -584,6 +577,34 @@ Auch ist es möglich aktuell laufende Spiele in Echtzeit anzeigen zu lassen, som
 * wärend der entwicklungsphase des tisches gezielt spiele simulieren zu können
 * liefert auch statistiken
 * wird zur einfachheit direkt aus dem abckend heraus ausgeliefert da nur statisches html/js/class
+
+### AutoPlayer
+
+Der AutoPlayer-Service stellt den Computerspieler bereit.
+Jede Service-Instanz stellt einen virtuellen Spieler bereit, welcher die gleiche Schnittstellen wie der Webclient oder der autonme Schachtisch verwendet.
+Die einzige Änderung an den verwendeten (+rest)-Calls ist der Login-Requst. Hier wird das `playertype` Flag gesetzt welches den Spieler als Computerspieler gegenüber des Systems authentifiziert.
+Somit wird dieser wärend des Matchmaking-Prozesses erst für ein Match ausgewählt, wenn kein anderer Spieler mehr zur Verfügung steht, welcher vom Typ Webclient oder autonomer Schachtisch ist.
+Somit ist gewährleistet, dass immer zuerst die Menschlichen-Spieler ein Spiel beginnen.
+
+Eine weitere Modifikation ist die verwendung einer Schach-AI, da dieser Service als Computerspieler agieren soll. 
+Hierzu kam die Open-Source Chess Engine Stockfish[@stockfish] in der Version 12 zum Einsatz.
+
+* stockfish
+
+
+Wenn das Match beendet wird, beendet sich auch die Service-Instanz.
+Diese wird jedoch wieder gestartet wenn die Anzahl der zur Verfügung stehenden Computerspieler unter einen definierten Wert fallen.
+Somit ist dafür gesorgt, dass das System nicht mit ungenutzen AutoPlayer-Instanzen gebremst wird. Diese Anzahl ist in der Backend-Configuration frei wählbar und kann je nach zu erwartenen Aufkommen angepasst werden.
+
+![Webclient: Anzahl der aktiven, sich nicht im Spiel befindenen AutoPlayer-Service-Instanzen](images/ai_player_count.png)
+
+Allgemein skaliert das System durch diese Art der Ressourcenverwaltung auch auf kleinen Systemen sehr flexibel.
+Durch die Art der Implementierung, dass sich der AutoPlayer-Service wie ein normaler Spieler verhält, sind auch andere Arten des Computerspieler möglich.
+So ist es zum Beispiel möglich, die Spielstärke je Spieler anzupassen oder einen Computerspieler zu erstellen, welcher nur zufällige Züge zieht.
+
+Ein weiterer Anwendungsfall für den AutoPlayer-Service, ist das Testen des weiteren Systems insbesondere des Backend-Service.
+Durch das Matching von zwei AutoPlayer-Instanzen, können automatisierte test Schachpartien ausgeführt werden um die Funktionsfähigkeit des restlichen Systems zu testen.
+Diese Feature wurde insbesondere bei der Entwicklung des Webclienten und der Steuerungssoftware für den autonomen Schachtisch verwendet.
 
 
 ## Authetifizierung
