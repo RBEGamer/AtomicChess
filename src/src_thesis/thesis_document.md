@@ -252,16 +252,23 @@ Hier wurde für die Bauteile, welche eine Sützstruktur benötigen, die von Cura
 
 # Erstellung erster Prototyp
 
+* proof of conzept
+* 
 
 ![Prototyp Hardware: Erster Prototyp des autonomen Schachtisch](images/table_images/dk.png)
 
 
-* vorgaben IKEA tisch als grundbasis => bereits fertiger grundrahmen in denen die einzelteile integriert werden können
 
 
 
 
 ## Mechanik
+
+
+
+* vorgaben IKEA tisch als grundbasis => bereits fertiger grundrahmen in denen die einzelteile integriert werden können
+
+
 
 * xy riemen führung
 * spiel in Mechanik
@@ -295,7 +302,7 @@ Um die Payload für den (+nfc) Record zu erstellen wurde ein kleine Web-Applikat
 Dieser ist für jede Figur individuell und enthält den Figur-Typ und die Figur-Farbe. Das Tool untersützt auch das Speichern weiterer Attribute wie einem Figur-Index, welcher aber in der finalen Software-Version nicht genutzt wird.
 
 Nach dem Beschreiben eines (+nfc) Tags ist es möglich diesen gegen auslesen oder erneuten Schreiben mittels einer Read/Write-Protection zu schützen. Diese Funktionalität wird nicht verwendet um das Kopieren von Figuren durch den Benutzer zu ermöglichen.
-Somit kann dieser leicht seine eigenen Figuren erschaffen, ohne auf das Tool angewiesen zu sein.
+Somit kann dieser leicht seine eigenen Figuren erschaffen, ohne auf das Tool angewiesen zu sein. Auch ist es möglich verschiedene Figur-Sets zu mischen, so kann jeder Spieler sein eigenes Set an Figuren mit dem autonomen Schachtisch verwenden.
 
 ![Prototyp Hardware: NDEF Text Record Payload für einen weissen Turm](images/ndef_record_rook.png)
 
@@ -325,7 +332,7 @@ Somit kann dieser leicht seine eigenen Figuren erschaffen, ohne auf das Tool ang
 * verwendeten elektromagnete nicht stark genug, somit über aqusserhalb der specs betrieben was zu temeraturproblemen führte
 * gewicht der Figuren zu klein bzw magnete zu start
 * workarounds in der software nötig durch die beiden magnete
-
+* nicht die beste entscheidung direkt auf grösse zu optimieren
 
 
 
