@@ -536,8 +536,7 @@ Allgemein geschieht die Kommunikation über drei API Calls.
 
 * generiter neues brett
 * python chess packge welche pesudo legal moves generiert
-* beispiel Requests
-
+* mit diesem konzept ssind auch andere Spiele möglich
 
 
 
