@@ -350,7 +350,7 @@ Somit kann dieser leicht seine eigenen Figuren erschaffen, ohne auf das Tool ang
 
 ![Producation Hardware: Finaler autonomer Schachtisch \label{prod}](images/table_images/prod.png)
 
-# Modifikation der Mechanik
+## Modifikation der Mechanik
 
 * dauertest hat gezeigt dass mechnik zu viel spiel aufweisst
 * Motorenhalterung der y achse schränkt des bewegungsspielraum um mehr als 10cm ein, welches zu einem unwesentlichen grösseren verhältnis von Spielfeldgrösse und Abmessungen des Schachtischs
@@ -361,7 +361,7 @@ Somit kann dieser leicht seine eigenen Figuren erschaffen, ohne auf das Tool ang
 
 
 
-# Optimierungen der Spielfiguren
+## Optimierungen der Spielfiguren
 
 Die bisherigen genutzen vorgefertigten Figuren funktionierten mit dem ersten Prototyp problemlos.
 Sie wiesen aber trotzdem eine zu hohe Fehleranfälligkeit, im Bezug auf das gegenseitige Beeinflussen (abstoßen,anziehen) durch die verwendeten Magnete.
@@ -381,7 +381,7 @@ Nach einem erfolgreichen Test wurde das (+cad) Modell wurde so angepasst, dass s
 Desweiteren wurden bei den Bauern (den leichtesten) Figuren die Magnete ausgetauscht. Die zuerst verwendeten 10x3mm Neodym-Magnete wurden bei diesen Figuren gegen 6x3mm Magnete getauscht.
 Somit sind im Design zwei verschiedenen Arten von Magneten notwendig, jedoch traten in den anschliessend durchgeführten Testläufen keine Beeinflussungen mehr statt.
 
-# Änderungen der Elektronik
+## Änderungen der Elektronik
 
 ![Producation Hardware: Blockdiagramm \label{ATC_Hardware_Architecture_PROD}](images/ATC_Hardware_Architecture_PROD.png)
 
@@ -392,14 +392,19 @@ Somit sind im Design zwei verschiedenen Arten von Magneten notwendig, jedoch tra
 
 
 
-## IMPLEMENTIERUNG GCODE-Sender
+### Implementierung GCODE-Sender
 
 * was ist GCODE
 * grundlegend verwendete Kommandos G0 G28 G21 G90 M280
 * erweiterte optionale Kommandos M150 M502 M500 M92
 * anhand der hwid und existenz der serial interfaces wird entschieden gcode hardware zu laden
 
+### Implementierung User-Port
 
+* für erweiterungen sub-d9 port
+* serielles protokol + 12v
+* bei initialisierung session unf hwid daten übergeben
+* agiert als eigenständiges modul somit bei ausfall tisch funktionalität nicht beeinträchtigt
 ## Fazit zum finalen Prototypen
 
 * modularer hardware aufbau
@@ -542,7 +547,7 @@ Allgemein geschieht die Kommunikation über drei API Calls.
 
 
 
-## Entwicklung Webclient
+### Entwicklung Webclient
 
 ![Webclient: Spielansicht \label{ATC_webclient}](images/ATC_webclient.png)
 
@@ -611,7 +616,7 @@ Durch das Matching von zwei AutoPlayer-Instanzen, können automatisierte test Sc
 Diese Feature wurde insbesondere bei der Entwicklung des Webclienten und der Steuerungssoftware für den autonomen Schachtisch verwendet.
 
 
-## Authetifizierung
+### Authetifizierung
 
 * authetifizierung
 * https only
@@ -653,7 +658,7 @@ Diese Feature wurde insbesondere bei der Entwicklung des Webclienten und der Ste
 
 ## Ablaufdiagramm
 
-* dummer Client
+* dummer/thin Client
 * Synchronisierung von gegeben Schachfeld mit dem lokalen Schachfeld
 
 * vier Schritte (enfernen, bewegen, hinzufügen, bewegen)
