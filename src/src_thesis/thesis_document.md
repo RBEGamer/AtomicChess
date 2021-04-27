@@ -717,8 +717,14 @@ Diese Feature wurde insbesondere bei der Entwicklung des Webclienten und der Ste
 
 # Fazit
 
-* mit am weitesten forgeschrittener open-source autonomes Schachtisch Projekt
+Zusammenfassend lässt sich festellen, dass das Ziel der Arbeit erreicht wurde.
+Es wurde ein Prototyp eines autonomen Schachtischs entwickelt.
 
+* mit am weitesten forgeschrittener open-source autonomes Schachtisch Projekt
+* vom versierten Benutzer selbstädig aufbaubar
+* leichte bedienung
+* lässt spiel für erweiterungen
+* 
 
 ## Ausblick
 
