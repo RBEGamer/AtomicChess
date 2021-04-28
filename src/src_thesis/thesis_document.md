@@ -402,7 +402,7 @@ Somit sind im Design zwei verschiedenen Arten von Magneten notwendig, jedoch tra
 ### Implementierung User-Port
 
 * für erweiterungen sub-d9 port
-* serielles protokol + 12v
+* TTL Seriell + RST + 12v
 * bei initialisierung session unf hwid daten übergeben
 * agiert als eigenständiges modul somit bei ausfall tisch funktionalität nicht beeinträchtigt
 ## Fazit zum finalen Prototypen
@@ -428,6 +428,8 @@ Somit sind im Design zwei verschiedenen Arten von Magneten notwendig, jedoch tra
 | Stand-Alone Funktionalität              	| ja                                   	|
 | Besonderheiten                          	| User-Port für Erweiterungen           |
 
+* alle anforderungen erfüllt
+* zulasten der geschwindigkeit insbesondere bei der erkennung des User-Move
 
 
 
