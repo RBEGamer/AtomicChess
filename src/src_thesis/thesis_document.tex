@@ -971,7 +971,7 @@ User-Port}\label{implementierung-user-port}}
 \item
   für erweiterungen sub-d9 port
 \item
-  serielles protokol + 12v
+  TTL Seriell + RST + 12v
 \item
   bei initialisierung session unf hwid daten übergeben
 \item
@@ -1011,6 +1011,15 @@ Stand-Alone Funktionalität & ja\tabularnewline
 Besonderheiten & User-Port für Erweiterungen\tabularnewline
 \bottomrule
 \end{longtable}
+
+\begin{itemize}
+\tightlist
+\item
+  alle anforderungen erfüllt
+\item
+  zulasten der geschwindigkeit insbesondere bei der erkennung des
+  User-Move
+\end{itemize}
 
 \hypertarget{entwicklung-der-cloud-infrastruktur}{%
 \section{Entwicklung der Cloud
@@ -1429,3 +1438,14 @@ wurde. Es wurde ein Prototyp eines autonomen Schachtischs entwickelt.
 \item
   user-port für Erweiterungen (z.B. DGT Schachur)
 \end{itemize}
+
+Listing: TEST
+
+```c++ // Your First C++ Program
+
+\#include
+
+int main() \{ std::cout \textless{}\textless{} ``Hello World!''; return
+0; \}
+
+\}

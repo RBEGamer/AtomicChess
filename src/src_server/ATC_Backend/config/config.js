@@ -1,9 +1,9 @@
 var dotenv = null;
-var STATIC_CONFIG = require('./config.json'); //LOAD OUR STATIC CONFIG
+var STATIC_CONFIG = require('./config.json'); //LOAD OUR STATIC CONFIG FROM THE LOCAL FILESYSTEM
 
 
 var config = {};
-
+//INIT CONFIG OBJECT = STATIC_CONFIG + ENV VARIABLES
 function init_config(){
     console.log("init_config");
     console.log(process.env);
