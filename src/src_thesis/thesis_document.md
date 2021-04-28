@@ -136,7 +136,7 @@ Auch muss sich hier die Frage gestellt werden, was mit den ausgeschiedenen Figur
 
 : Auflistung der Anforderungen an den autonomen Schachtisch
 
-|                                         	| autonomer Schachtisch (+atc)        	|
+|                                         	| (+atc) – autonomous Chessboard      	|
 |-----------------------------------------	|-----------------------------------	|
 | Erkennung Schachfigurstellung           	| ja                                 	|
 | Konnektivität                           	| (+wlan), (+usb)                   	|
@@ -412,9 +412,21 @@ Somit sind im Design zwei verschiedenen Arten von Magneten notwendig, jedoch tra
 * geänderte Mechnik resultiert in nahezu Spielfreier Mechanik (+- 1mm), welches für diesen Zweck mehr als ausreicht
 * 6h dauertest bestanden
 
+: Eigenschaften des finalen Prototypen
 
-
-
+|                                         	| (+atc) – autonomous Chessboard    	|
+|-----------------------------------------	|--------------------------------------	|
+| Feldabmessungen (LxBxH)                 	| 57x57mm                              	|
+| Abmessungen (LxBxH)                     	| 620x620x170mm                        	|
+| Gewicht                                 	| 5.7kg                                	|
+| Konnektivität                           	| (+wlan), (+usb)                      	|
+| Automatisches Bewegen der Figuren       	| ja                                   	|
+| Erkennung Schachfigurstellung           	| ja                                   	|
+| Spiel Livestream                        	| ja                                   	|
+| Cloud anbindung (online Spiele)         	| ja                                   	|
+| Parkposition für ausgeschiedene Figuren 	| ja                                   	|
+| Stand-Alone Funktionalität              	| ja                                   	|
+| Besonderheiten                          	| User-Port für Erweiterungen           |
 
 
 

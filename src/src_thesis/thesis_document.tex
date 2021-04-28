@@ -462,11 +462,11 @@ entfernen.
 \caption{Auflistung der Anforderungen an den autonomen
 Schachtisch}\tabularnewline
 \toprule
-& autonomer Schachtisch \gls{atc}\tabularnewline
+& \gls{atc} -- autonomous Chessboard\tabularnewline
 \midrule
 \endfirsthead
 \toprule
-& autonomer Schachtisch \gls{atc}\tabularnewline
+& \gls{atc} -- autonomous Chessboard\tabularnewline
 \midrule
 \endhead
 Erkennung Schachfigurstellung & ja\tabularnewline
@@ -862,7 +862,7 @@ Prototyp}\label{erstellung-zweiter-prototyp}}
 \end{figure}
 
 \hypertarget{modifikation-der-mechanik}{%
-\section{Modifikation der Mechanik}\label{modifikation-der-mechanik}}
+\subsection{Modifikation der Mechanik}\label{modifikation-der-mechanik}}
 
 \begin{itemize}
 \tightlist
@@ -886,7 +886,7 @@ Prototyp}\label{erstellung-zweiter-prototyp}}
 \end{itemize}
 
 \hypertarget{optimierungen-der-spielfiguren}{%
-\section{Optimierungen der
+\subsection{Optimierungen der
 Spielfiguren}\label{optimierungen-der-spielfiguren}}
 
 Die bisherigen genutzen vorgefertigten Figuren funktionierten mit dem
@@ -924,7 +924,8 @@ notwendig, jedoch traten in den anschliessend durchgeführten Testläufen
 keine Beeinflussungen mehr statt.
 
 \hypertarget{uxe4nderungen-der-elektronik}{%
-\section{Änderungen der Elektronik}\label{uxe4nderungen-der-elektronik}}
+\subsection{Änderungen der
+Elektronik}\label{uxe4nderungen-der-elektronik}}
 
 \begin{figure}
 \centering
@@ -946,7 +947,7 @@ keine Beeinflussungen mehr statt.
 \end{itemize}
 
 \hypertarget{implementierung-gcode-sender}{%
-\subsection{IMPLEMENTIERUNG
+\subsubsection{Implementierung
 GCODE-Sender}\label{implementierung-gcode-sender}}
 
 \begin{itemize}
@@ -962,12 +963,20 @@ GCODE-Sender}\label{implementierung-gcode-sender}}
   gcode hardware zu laden
 \end{itemize}
 
-\hypertarget{fazit-zum-finalen-prototypen}{%
-\subsection{Fazit zum finalen
-Prototypen}\label{fazit-zum-finalen-prototypen}}
+\hypertarget{implementierung-user-port}{%
+\subsubsection{Implementierung
+User-Port}\label{implementierung-user-port}}
 
 \begin{itemize}
-\tightlist
+\item
+  für erweiterungen sub-d9 port
+\item
+  serielles protokol + 12v
+\item
+  bei initialisierung session unf hwid daten übergeben
+\item
+  agiert als eigenständiges modul somit bei ausfall tisch funktionalität
+  nicht beeinträchtigt \#\# Fazit zum finalen Prototypen
 \item
   modularer hardware aufbau
 \item
@@ -978,6 +987,30 @@ Prototypen}\label{fazit-zum-finalen-prototypen}}
 \item
   6h dauertest bestanden
 \end{itemize}
+
+\begin{longtable}[]{@{}ll@{}}
+\caption{Eigenschaften des finalen Prototypen}\tabularnewline
+\toprule
+& \gls{atc} -- autonomous Chessboard\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+& \gls{atc} -- autonomous Chessboard\tabularnewline
+\midrule
+\endhead
+Feldabmessungen (LxBxH) & 57x57mm\tabularnewline
+Abmessungen (LxBxH) & 620x620x170mm\tabularnewline
+Gewicht & 5.7kg\tabularnewline
+Konnektivität & \gls{wlan}, \gls{usb}\tabularnewline
+Automatisches Bewegen der Figuren & ja\tabularnewline
+Erkennung Schachfigurstellung & ja\tabularnewline
+Spiel Livestream & ja\tabularnewline
+Cloud anbindung (online Spiele) & ja\tabularnewline
+Parkposition für ausgeschiedene Figuren & ja\tabularnewline
+Stand-Alone Funktionalität & ja\tabularnewline
+Besonderheiten & User-Port für Erweiterungen\tabularnewline
+\bottomrule
+\end{longtable}
 
 \hypertarget{entwicklung-der-cloud-infrastruktur}{%
 \section{Entwicklung der Cloud
@@ -1145,11 +1178,11 @@ Allgemein geschieht die Kommunikation über drei API Calls.
 \item
   python chess packge welche pesudo legal moves generiert
 \item
-  beispiel Requests
+  mit diesem konzept ssind auch andere Spiele möglich
 \end{itemize}
 
 \hypertarget{entwicklung-webclient}{%
-\subsection{Entwicklung Webclient}\label{entwicklung-webclient}}
+\subsubsection{Entwicklung Webclient}\label{entwicklung-webclient}}
 
 \begin{figure}
 \centering
@@ -1268,7 +1301,7 @@ des Webclienten und der Steuerungssoftware für den autonomen Schachtisch
 verwendet.
 
 \hypertarget{authetifizierung}{%
-\subsection{Authetifizierung}\label{authetifizierung}}
+\subsubsection{Authetifizierung}\label{authetifizierung}}
 
 \begin{itemize}
 \tightlist
@@ -1296,7 +1329,7 @@ verwendet.
 
 \begin{itemize}
 \item
-  dummer Client
+  dummer/thin Client
 \item
   Synchronisierung von gegeben Schachfeld mit dem lokalen Schachfeld
 \item
@@ -1370,11 +1403,20 @@ Schachzügen}\label{schachfeld-scan-algorithmus-zur-erkennung-von-schachzuxfcgen
 \hypertarget{fazit}{%
 \section{Fazit}\label{fazit}}
 
+Zusammenfassend lässt sich festellen, dass das Ziel der Arbeit erreicht
+wurde. Es wurde ein Prototyp eines autonomen Schachtischs entwickelt.
+
 \begin{itemize}
-\tightlist
 \item
   mit am weitesten forgeschrittener open-source autonomes Schachtisch
   Projekt
+\item
+  vom versierten Benutzer selbstädig aufbaubar
+\item
+  leichte bedienung
+\item
+  lässt spiel für erweiterungen
+\item
 \end{itemize}
 
 \hypertarget{ausblick}{%
