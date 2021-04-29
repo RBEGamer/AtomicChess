@@ -41,6 +41,8 @@ typedef std::chrono::system_clock::time_point TimePoint;
 #include "StateMachine.h"
 #include "HardwareInterface.h"
 
+//------- INCLUDE EXTENTIONS -------- //
+#include "VoiceRecognitionExtention.h"
 
 
 #include "GCodeSender.h"
@@ -228,9 +230,6 @@ void player_enter_manual_move_start_board_scan(guicommunicator& _gui, ChessBoard
         _gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::PLAYER_ENTER_MANUAL_MOVE_SCREEN);
     }
 }
-
-
-
 
 void signal_callback_handler(int signum)
 {
@@ -563,6 +562,15 @@ int main(int argc, char *argv[])
 
 
 
+    //INIT EXTENTIONS
+    VoiceRecognitionExtention vr_extention(hwid,gamebackend.get_interface_name()); //USE THE SAME ETH INTERFACE AS BACKEND
+    if(!HardwareInterface::getInstance()->is_simulates_hardware()){
+        vr_extention.enable_service(true);
+    }
+
+
+
+
 
     //PERFORM A LOGOUT => IF A PREVIOUS SESSION IS ACTIVE
     if(gamebackend.logout())
@@ -803,6 +811,10 @@ int main(int argc, char *argv[])
                                     make_move_scan_timer = -1;
                                 }
 
+
+                                //RESET VR EXTENTION
+                                vr_extention.reset_move();
+
                             //AUTO TIMER FUNCTION
                             }else if(make_move_mode == 2){
                                 //IF TIMER = 0 TRIGGER EVENT FOR SCAN
@@ -815,7 +827,62 @@ int main(int argc, char *argv[])
                                     make_move_scan_timer--;
                                 }
 
+
+
+                                //PROCESS EXTENTIONS
+                                //EXNTENTION HANDLING ENABLE ALEXA SUPPORT
+                                const VoiceRecognitionExtention::VR_MOVE vre_move = vr_extention.get_move();
+                                ChessPiece::COLOR owcol = ChessPiece::COLOR_UNKNOWN;
+                                if (current_player_state.game_state.im_white_player)
+                                {
+                                    owcol = ChessPiece::COLOR_WHITE;
+                                }else{
+                                    owcol = ChessPiece::COLOR_BLACK;
+                                }
+
+                                if(vre_move.valid){
+                                    //PARSE STRINGS INTO USABLE OBJECTS
+                                    const ChessPiece::FIGURE start_figure =  ChessPiece::getFigureByName(vre_move.figure,owcol);
+                                    if(start_figure.type == ChessPiece::TYPE_INVALID){
+                                        vr_extention.reset_move();
+
+                                    }else {
+                                        ChessBoard::MovePiar mvpair_tmp;
+                                        if (vre_move.to.length() == 4) {
+                                            mvpair_tmp = board.StringToMovePair(vre_move.to);
+                                        } else {
+                                            mvpair_tmp = board.StringToMovePair(vre_move.to + "a1");
+                                        }
+
+                                        const ChessField::CHESS_FILEDS dest_field = mvpair_tmp.from_field; //A1xx B3xx => hacked usage of StringToMovePair
+
+                                        //GET A POSSIBLE MOVE BY USING THE MOVES LIST
+                                        const std::vector<ChessBoard::MovePiar> mves = board.StringToMovePair(
+                                                possible_moves, true);
+                                        const ChessBoard::PossibleUserMoveResult mvpair = board.calculcate_move_from_figure_and_destination(
+                                                start_figure, dest_field, mves);
+
+                                        if (mvpair.error == ChessBoard::BOARD_ERROR::NO_ERROR) {
+                                            //PARSE MOVE TO STRING MOVE
+                                            const std::string mv =
+                                                    ChessField::field_to_string(mvpair.possible_move.from_field) +
+                                                    ChessField::field_to_string(mvpair.possible_move.to_field);
+                                            //MAKE MOVE
+                                            if (!mv.empty() && gamebackend.set_make_move(mv)) {
+                                            }
+                                            //MOVE SUCCESS RESET IT
+                                            vr_extention.reset_move();
+                                        } else {
+                                            //MOVE SUCCESS RESET IT
+                                            vr_extention.reset_move();
+                                        }
+
+                                    }
+                                }
+
                             }
+
+
 
 
                             board.boardFromFen(current_player_state.game_state.current_board_fen, ChessBoard::BOARD_TPYE::TARGET_BOARD);

@@ -149,6 +149,7 @@ public:
 
     static std::vector<std::string> split(std::string _input, char _char);
 
+    static ChessField::CHESS_FILEDS string_to_field(std::string _field_str);
 };
 
 #endif

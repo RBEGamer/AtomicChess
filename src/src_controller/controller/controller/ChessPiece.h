@@ -14,6 +14,9 @@
 #include <iostream>
 #endif
 
+#include <iostream>
+#include <algorithm>
+
 
 class ChessPiece
 {
@@ -69,7 +72,7 @@ public:
 	
 	static bool IsFigureValid(ChessPiece::FIGURE _figure);
 	
-	
+	static FIGURE getFigureByName(std::string _name, ChessPiece::COLOR _color);
 	
 };
 #endif

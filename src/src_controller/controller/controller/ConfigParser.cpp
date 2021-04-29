@@ -267,6 +267,9 @@ void ConfigParser::loadDefaults(std::string _type_str)
         config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_SKIP_USER_NFC_MOVE_SEARCH_AFTER_FIRST_CHANGE] = "1";
         config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_AUTO_SCAN_BOARD_TIME_IF_USERS_TURN] = "-1";
 
+        config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_EXTENTION_VOICE_RECOGNITION_ENABLED] = "1";
+        config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_EXTENTION_VOICE_RECOGNITION_URL] = "http://atomicchess.de:8880";
+
 	}else if (_type_str == "PROD_V1"){
 		config_store[ConfigParser::CFG_ENTRY::NETWORK_BACKEND_URL] = "http://atomicchess.de:3000";
 		config_store[ConfigParser::CFG_ENTRY::NETWORK_HEARTBEAT_INTERVAL_SECS] = "5";
@@ -330,6 +333,9 @@ void ConfigParser::loadDefaults(std::string _type_str)
         config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_MAKE_MOVE_MANUAL_TEST_DO_SYNC] = "0";
         config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_SKIP_USER_NFC_MOVE_SEARCH_AFTER_FIRST_CHANGE] = "1";
         config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_AUTO_SCAN_BOARD_TIME_IF_USERS_TURN] = "10";
+
+        config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_EXTENTION_VOICE_RECOGNITION_ENABLED] = "1";
+        config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_EXTENTION_VOICE_RECOGNITION_URL] = "http://atomicchess.de:8880";
 
     }else if (_type_str == "VIRT"){
         config_store[ConfigParser::CFG_ENTRY::NETWORK_BACKEND_URL] = "http://atomicchess.de:3000";
@@ -395,6 +401,9 @@ void ConfigParser::loadDefaults(std::string _type_str)
         config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_SKIP_USER_NFC_MOVE_SEARCH_AFTER_FIRST_CHANGE] = "1";
         config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_AUTO_SCAN_BOARD_TIME_IF_USERS_TURN] = "-1";
 
+        config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_EXTENTION_VOICE_RECOGNITION_ENABLED] = "0";
+        config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_EXTENTION_VOICE_RECOGNITION_URL] = "http://atomicchess.de:8880";
+
     }
 	else
 	{
@@ -459,6 +468,12 @@ void ConfigParser::loadDefaults(std::string _type_str)
         config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_MAKE_MOVE_MANUAL_TEST_DO_SYNC] = "0";
         config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_SKIP_USER_NFC_MOVE_SEARCH_AFTER_FIRST_CHANGE] = "1";
         config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_AUTO_SCAN_BOARD_TIME_IF_USERS_TURN] = "-1";
+
+
+        config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_EXTENTION_VOICE_RECOGNITION_ENABLED] = "1";
+        config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_EXTENTION_VOICE_RECOGNITION_URL] = "http://atomicchess.de:8880";
+
+
 
     }
 }

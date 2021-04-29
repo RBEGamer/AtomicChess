@@ -185,6 +185,7 @@ public:
     ChessBoard::BOARD_ERROR makeMoveSyncVirtual(ChessBoard::MovePiar _move); //APPLY A MOVE TO THE BOARD BUT WITHOUT MOVING ANYTHING
     ChessBoard::PossibleUserMoveResult scanBoardForPossibleUserMove(std::vector<ChessBoard::MovePiar> _pseudo_legal_moves);
 
+    ChessBoard::PossibleUserMoveResult calculcate_move_from_figure_and_destination(ChessPiece::FIGURE _figure, ChessField::CHESS_FILEDS _field, std::vector<ChessBoard::MovePiar> _pseudo_legal_moves);
 
         private:
 	

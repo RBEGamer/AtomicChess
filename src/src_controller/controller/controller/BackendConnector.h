@@ -202,7 +202,7 @@ private:
 	const std::string URL_UPLOAD_LOG = "/rest/store_user_log";
 	const std::string URL_ABORT_GAME = "/rest/abort_game";
 	
-	std::string ca_client_path = "";
+	std::string ca_client_path = "./";
 	
 	std::string last_error = "";
 	

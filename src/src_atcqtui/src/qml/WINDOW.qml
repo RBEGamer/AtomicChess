@@ -1003,7 +1003,7 @@ Rectangle {
         width: 800
         height: 411
         color: "#07a8a5"
-        visible: true
+        visible: false
 
         Text {
             id: mmem_chosen_move_label

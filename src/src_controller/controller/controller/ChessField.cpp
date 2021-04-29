@@ -27,6 +27,9 @@ std::vector<std::string> ChessField::split(std::string _input, char _char){
     return seglist;
 }
 
+ChessField::CHESS_FILEDS ChessField::string_to_field(std::string _field_str){
+
+}
 
 
 std::string ChessField::field_to_string(ChessField::CHESS_FILEDS _f){
