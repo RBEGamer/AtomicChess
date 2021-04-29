@@ -1,0 +1,8 @@
+{
+  "webserver_default_port":8880,
+  "app_name":"AtomicChess - The Alexa Integraion",
+  "mongodb_connection_url": "mongodb://127.0.0.1:27017",
+  "mongodb_database_name": "ATC",
+  "mongodb_collection": "voice_integration"
+
+}

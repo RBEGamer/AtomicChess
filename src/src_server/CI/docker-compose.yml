@@ -26,7 +26,23 @@ services:
       - REDIS_IP=127.0.0.1:6379
       - MONGO_IP=127.0.0.1:27017
       - MVVALIDATOR_IP=127.0.0.1:5001
+  
+
+
+
+  AtomicChessExtentionVoiceRecognition:
+    container_name: atc_extvoicerecognition
+      build:
+        context: ../ATC_ExtentionVoiceRecognition/
+      image: AtomicChessExtentionVoiceRecognition
+      network_mode: "host"
+      restart: always
+      ports:
+        - 8880:8880
       
+
+            
+
   AtomicChessMoveValidator:
     container_name: atcmovevalidator
     build:
