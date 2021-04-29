@@ -1,12 +1,11 @@
 version: "3"
 services:
   AtomicChessExtentionVoiceRecognition:
-    container_name: atc_extvoicerecognition
+    container_name: atcextvoicerecognition
     build:
-      context: .
-    image: AtomicChessExtentionVoiceRecognition
+      context: ../ATC_ExtentionVoiceRecognition/
+    image: atcextvoicerecognition
     network_mode: "host"
     restart: always
     ports:
       - 8880:8880
-
