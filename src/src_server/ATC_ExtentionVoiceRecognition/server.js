@@ -120,6 +120,24 @@ app.get('/register_table', (req, res) => {
     });
 });
 
+app.get('/enable_service_for_table', (req, res) => {
+    var hwid = req.queryString("hwid");
+    var en = req.queryString("enabled");
+    //CHECK PARAMETER
+    if (!hwid || !en) {
+        res.json({ err: 'parameter missing'});
+        return;
+    }
+
+    res.json({err: null});
+
+});
+
+
+
+
+
+
 app.get('/alexa_register', (req, res) => {
 
     var hwid = req.queryString("userId");
@@ -179,11 +197,7 @@ app.get('/alexa_register', (req, res) => {
             });
 
         }
-
-        //TODO SAVE DEVICE TO DB
     });
-
-
 });
 
 app.get('/get_move', (req, res) => {
