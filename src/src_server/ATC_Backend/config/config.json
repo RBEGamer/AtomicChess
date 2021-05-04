@@ -20,6 +20,6 @@
   "settings_change_pw": "$2b$12$5U/EjaTgIT1bgFmsjpgE6OftfQSBmlKEkSAeEZSFROhIMzU7S30/a",
   "secret_addition":"dfvsgijoamporwemjhioangmvkrnjg",
   "matchmaking_enable_minimum_wait_time": 20,
-  "use_pseudo_legal_moves": 1
+  "use_pseudo_legal_moves": 0
 
 }
