@@ -32,7 +32,7 @@ function get_player_score(_extendet_fen,_callback){
 
 
 function check_board_and_get_legal_moves(_extendet_fen,_callback){
-    request.post({url:CFG.getConfig().chess_move_validator_api_url+"/rest/validate_board", formData: {fen:_extendet_fen}}, function optionalCallback(err, httpResponse, body) {
+    request.post({url:CFG.getConfig().chess_move_validator_api_url+"/rest/validate_board", formData: {fen:_extendet_fen, legal_move_settings:CFG.getConfig().use_pseudo_legal_moves}}, function optionalCallback(err, httpResponse, body) {
         if (err) {
             _callback(err,null);
             return;
@@ -85,7 +85,7 @@ function execute_move(_board,_move, _callback){
         _callback("!_board.ExtendetFen",false,null,false);
         return;
     }
-    request.post({url:CFG.getConfig().chess_move_validator_api_url+"/rest/execute_move", formData: {fen:_board.ExtendetFen,move:_move}}, function optionalCallback(err, httpResponse, body) {
+    request.post({url:CFG.getConfig().chess_move_validator_api_url+"/rest/execute_move", formData: {fen:_board.ExtendetFen,move:_move, legal_move_settings:CFG.getConfig().use_pseudo_legal_moves}}, function optionalCallback(err, httpResponse, body) {
         if (err) {
             _callback(err,null);
             return;

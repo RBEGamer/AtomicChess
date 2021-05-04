@@ -598,7 +598,7 @@ router.get('/get_profile_information_secure',function (req,res,next) {
  - matchmaking_state - the current matchmaking state for the player; eg is waiting or searching; is null is a game is running
  - game_state - if a game is running it contains all nedded information for the player;is_game_running,is_my_turn, the current fen of the board,...
  # @EXAMPLE
- -TODO /rest/get_player_state?hwid=1334&sid=1234 -> {"err":null,"status":"ok","matchmaking_state":null,"game_state":null}
+ - /rest/get_player_state?hwid=1334&sid=1234 -> {"err":null,"status":"ok","matchmaking_state":null,"game_state":null}
  */
 router.get('/get_player_state',function (req,res,next) {
     try{
@@ -766,19 +766,6 @@ router.get('/make_move',function (req,res,next) {
     });
     }catch (e) {
         res.json({err:e, status:null});
-        return;
-    }
-});
-
-
-router.get('/gmm',function (req,res,next) {
-    try{
-
-    CBL.get_board(CBL.get_start_opening_fen(),CBL.get_start_opening_fen(),CBL.PLAYER_TURN.BLACK,false,function (_err,_res) {
-        res.json({err:_err,res:_res});
-    });
-    }catch (e) {
-        res.json({err:e,res:null});
         return;
     }
 });
