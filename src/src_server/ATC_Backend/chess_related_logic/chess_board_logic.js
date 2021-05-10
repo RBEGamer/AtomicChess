@@ -113,13 +113,41 @@ function execute_move(_board,_move, _callback){
 }
 
 
+function get_start_opening_fen(_callback){
+    request.get({url:CFG.getConfig().chess_move_validator_api_url+"/rest/init_board"}, function optionalCallback(err, httpResponse, body) {
+        if (err) {
+            _callback(null,get_start_opening_fen_static());
+            return;
+        }
+        //console.log('Upload successful!  Server responded with:', body);
+        var jsonbody = null;
+        try {
+            jsonbody = JSON.parse(body);
+            if(!jsonbody || jsonbody.err !== null){
+                console.error(jsonbody);
+                _callback(jsonbody.err,null);
+                return;
+            }
+            //IF NOT BOARD GOT FROM SERVICE USE A STATIC ONE
+            if(!jsonbody.board || jsonbody.board === ""){
+                _callback(null,get_start_opening_fen_static());
+            }else{
+                _callback(null, String(jsonbody.board));
+            }
+        }catch (e) {
+            console.error(e);
+            _callback(null,get_start_opening_fen_static());
+        }
+    });
+};
 
 
+function get_start_opening_fen_static() {
+    return "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
+};
 
 module.exports = {
-    get_start_opening_fen: function () {
-    return "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
-    },
+    get_start_opening_fen_static,
 
     get_board: function (_fen,_pturn,_move, _is_initial_board,_turn_count,_callback) {
 
@@ -135,7 +163,6 @@ module.exports = {
         var ext_fen =  _fen + " " + pturn_fen + " - " + "- " + "0 " + String(tc);
 
         check_board_and_get_legal_moves(ext_fen,function (cb_err,cb_is_board_valid,cb_legal_moves,cb_is_game_over) {
-
             _callback(cb_err,{
                 fen:_fen,
                 ExtendetFen:ext_fen,
@@ -146,8 +173,7 @@ module.exports = {
                 legal_moves:cb_legal_moves,
                 is_game_over:cb_is_game_over
             });
-        })
-
+        });
     },
     get_fen_from_board:function (_board) {
         return {}
@@ -157,5 +183,6 @@ module.exports = {
     CHESS_FIGURES,
     PLAYER_TURN,
     check_board_and_get_legal_moves,
-    check_move_validator_state
+    check_move_validator_state,
+    get_start_opening_fen
 };

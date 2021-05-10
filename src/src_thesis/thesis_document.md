@@ -549,7 +549,7 @@ Mit diesem Design ist es möglich, auch andere Spielarten im System zu implement
 
 Allgemein geschieht die Kommunikation über drei API Calls.
 
-* Auflistung der routen
+* Auflistung der routen als tabelle
 
 
 
@@ -674,8 +674,9 @@ Diese Feature wurde insbesondere bei der Entwicklung des Webclienten und der Ste
 
 * dummer/thin Client
 * Synchronisierung von gegeben Schachfeld mit dem lokalen Schachfeld
+* getätigte züfe werden direkt an den schachserver geschickt und dieser generiert darauf hin das neue schachbrett welches von beiden Partner sync
 
-* vier Schritte (enfernen, bewegen, hinzufügen, bewegen)
+
 
 ![Embedded System Software: Ablaufdiagramm \label{ATC_gameclient_statemachiene}](images/ATC_gameclient_statemachiene.png)
 
@@ -684,7 +685,7 @@ Diese Feature wurde insbesondere bei der Entwicklung des Webclienten und der Ste
 
 * Algorithmus zur Umsetzung eines Schachzugs
 * Auftrennung in current und target Board
-
+* vier Schritte (enfernen, bewegen, hinzufügen, bewegen)
 ## Schachfeld Scan Algorithmus zur Erkennung von Schachzügen
 
 ![Embedded System Software: Schachfeld Scan Algorithmus Ablauf \label{ATC_ChessMoveAlgorithm}](images/ATC_ChessMoveAlgorithm.png)
@@ -700,6 +701,14 @@ Diese Feature wurde insbesondere bei der Entwicklung des Webclienten und der Ste
 
 
 ## Userinterface
+
+Das Userinterface ist mit das zentrale Element mit welchem der Benutzer interagiert.
+Hierbei soll dieses nur die nötigsten Funktionen bereitstellen, welche zur Bedienung des Schachtisches nötig sind.
+
+* grosse schaltflächen
+* kleine Menutiefe max. ein untermenü
+
+
 
 ![Embedded System Software: User-Interface Mockup \label{ATC_Gui}](images/ATC_Gui.png)
 

@@ -129,9 +129,6 @@ def execute_move():
         if chess.Move.from_uci(move) not in mv_list:
             return jsonify({'err': 'move not valid', 'new_fen': '', 'move_executed': 0, 'next_player_turn':0})
         board.push(chess.Move.from_uci(move))
-        #TODO CHECK UCI MOVE STRING
-        #TODO PUSH MOVE
-        # RETURN NEW BOARD PLAYER
         #RETURN DRAWS!
     except Exception as e:
         err = e
