@@ -766,7 +766,6 @@ router.get('/make_move',function (req,res,next) {
     });
     }catch (e) {
         res.json({err:e, status:null});
-        return;
     }
 });
 
@@ -779,9 +778,24 @@ router.get('/gmm',function (req,res,next) {
     });
     }catch (e) {
         res.json({err:e,res:null});
-        return;
     }
 });
+
+
+
+router.get('/get_player_list',function (req,res,next) {
+    try{
+
+
+        res.json({err:_err,playerlist_ai:[{name:"ai",virtual_pid:"123",registered_ts:Date.now()}],playerlist_table:[{name:"table",virtual_pid:"123",registered_ts:Date.now()}],playerlist_virt:[{name:"virtual",virtual_pid:"123",registered_ts:Date.now()}]});
+
+    }catch (e) {
+        res.json({err:e});
+    }
+});
+
+
+
 
 router.get('/server_config',function (req,res,next) {
     try{
@@ -805,15 +819,11 @@ router.get('/server_config',function (req,res,next) {
             return;
         }
 
-
-
         CFG.set_key(key,value);
         var cfg = CFG.getConfig();
         res.json({err:null,res:cfg});
-        return;
     }catch (e) {
         res.json({err:e,res:null});
-        return;
     }
 });
 

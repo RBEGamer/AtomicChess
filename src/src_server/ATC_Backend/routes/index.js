@@ -37,6 +37,10 @@ router.get('/profile', function(req, res, next) {
   res.render('statistics_profile', { title: 'Game' });
 });
 
+router.get('/playerlist', function(req, res, next) {
+  res.render('statistics_playerlist', { title: 'Game' });
+});
+
 
 
 router.get('/webclient', function(req, res, next) {

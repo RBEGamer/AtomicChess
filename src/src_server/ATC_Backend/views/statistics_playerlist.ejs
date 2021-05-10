@@ -1,213 +1,138 @@
 <html lang="en">
 
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
-  <meta content="text/html; charset=utf-8" http-equiv="content-type">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
-  <link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png">
-  <link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-icon-72x72.png">
-  <link rel="apple-touch-icon" sizes="76x76" href="/favicon/apple-icon-76x76.png">
-  <link rel="apple-touch-icon" sizes="114x114" href="/favicon/apple-icon-114x114.png">
-  <link rel="apple-touch-icon" sizes="120x120" href="/favicon/apple-icon-120x120.png">
-  <link rel="apple-touch-icon" sizes="144x144" href="/favicon/apple-icon-144x144.png">
-  <link rel="apple-touch-icon" sizes="152x152" href="/favicon/apple-icon-152x152.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-icon-180x180.png">
-  <link rel="icon" type="image/png" sizes="192x192"  href="/favicon/android-icon-192x192.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
-  <link rel="manifest" href="/favicon/manifest.json">
-  <meta name="msapplication-TileColor" content="#ffffff">
-  <meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png">
-  <meta name="theme-color" content="#ffffff">
+    <link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
 
-  <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="/css/landing-page.css" rel="stylesheet">
-  <link href="/css/lightbox.min.css" rel="stylesheet">
-  <link href="/css/photo_gallery.css" rel="stylesheet">
-  <link href="/ionicons/css/ionicons.min.css" rel="stylesheet">
-  <link href="/css/faq.css" rel="stylesheet">
-  <link href="/css/main.css" rel="stylesheet">
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="AtomicChess">
-  <meta name="author" content="Marcel Ochsendorf">
-  <meta http-equiv="cache-control" content="max-age=0" />
-  <meta http-equiv="cache-control" content="no-cache" />
-  <meta http-equiv="expires" content="0" />
-  <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
-  <meta http-equiv="pragma" content="no-cache" />
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/landing-page.css" rel="stylesheet">
+    <link href="/css/lightbox.min.css" rel="stylesheet">
+    <link href="/css/photo_gallery.css" rel="stylesheet">
+    <link href="/ionicons/css/ionicons.min.css" rel="stylesheet">
+    <link href="/css/faq.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="AtomicChess">
+    <meta name="author" content="Marcel Ochsendorf">
+    <meta http-equiv="cache-control" content="max-age=0"/>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta http-equiv="expires" content="0"/>
+    <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+    <meta http-equiv="pragma" content="no-cache"/>
 
-  <link href="/css/dashboard_main.css" rel="stylesheet">
-  <link href="/css/dashboard_cards.css" rel="stylesheet">
-  <link rel="stylesheet" href="/js/PGNViewer/css/pgnvjs.css">
-  <link href="/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/dashboard_main.css" rel="stylesheet">
+    <link href="/css/dashboard_cards.css" rel="stylesheet">
+    <link rel="stylesheet" href="/js/PGNViewer/css/pgnvjs.css">
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="AtomicChess">
-  <meta name="author" content="Marcel Ochsendorf">
-  <meta http-equiv="cache-control" content="max-age=0" />
-  <meta http-equiv="cache-control" content="no-cache" />
-  <meta http-equiv="expires" content="0" />
-  <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
-  <meta http-equiv="pragma" content="no-cache" />
-  <title>ATC BACKEND</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="AtomicChess">
+    <meta name="author" content="Marcel Ochsendorf">
+    <meta http-equiv="cache-control" content="max-age=0"/>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta http-equiv="expires" content="0"/>
+    <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+    <meta http-equiv="pragma" content="no-cache"/>
+    <title>ATC BACKEND</title>
 </head>
 
 <body class="container">
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
-  <a class="navbar-brand" href="/"><img width="64px"  src="/img/icons/chess_icon.png"><b>AtomicChess -  STATISTICS</b></a>
+    <a class="navbar-brand" href="/"><img width="64px" src="/img/icons/chess_icon.png"><b>AtomicChess -
+            PLAYERLIST</b></a>
 
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" id="" href="/">Home</a>
-      </li>
-    </ul>
-  </div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" id="" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="" href="/statistics">Statistics</a>
+            </li>
+        </ul>
+    </div>
 </nav>
 
 
-
-
-
-
-
 <div class="row justify-content-center">
-<div class="col-md-12">
-  <div class="card">
-    <div class="card-header">
-      <h4 class="card-title text-justify">LAST GAMES - HISTORY</h4>
-    </div>
-    <div class="card-body">
-      <div class="text-center">
-        <p class="card-content" id="listed_games"></p>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-
-
-
-<div class="row justify-content-center">
-  <div class="col-md-12">
-    <div class="card">
-      <div class="card-header">
-        <h4 class="card-title text-justify">GAME INFORMATION <span id="game_headline_title"> -- ID --</span></h4>
-      </div>
-      <div class="card-body" id="game_information_container">
-        <div class="text-center">
-          <p class="card-content" id="game_info"></p>
-
-
-
-          <div class="row justify-content-center">
-            <div class="col-md-4 text-center">
-              <div id="fen_viewer_board" style="width: 200px"><img width="200px" src="/img/board_placeholder_400x400.png"></div>
-
-
-
-              <table>
-                <tr><td>
-                    <button onclick="show_prev_move()"><img src="/img/icons/prev.png" width="30px" /></button>
-                  </td><td>
-                    <span id="current_move_text" class="fhcolor_text font-weight-bold"> x / N</span>
-                  </td><td>
-                    <button onclick="show_next_move()"><img src="/img/icons/next.png" width="30px" /></button>
-                  </td></tr>
-              </table>
-
-
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title text-justify">LIST OF REGISTERED PLAYERS</h4>
             </div>
-            <div class="col-md-6">
-              <table class="table">
-                <tbody>
-                <tr>
-                  <th scope="row">PLAYER_TURN</th>
-                  <td id="git_player_turn">---</td>
-                </tr>
-                <tr>
-                  <th scope="row">IS_GAME_OVER</th>
-                  <td id="git_game_over">---</td>
-                </tr>
-                <tr>
-                  <th scope="row">START BOARD FEN</th>
-                  <td id="git_start_board_fen">---</td>
-                </tr>
-                <tr>
-                  <th scope="row">LATEST BOARD FEN</th>
-                  <td id="git_current_board_fen">---</td>
-                </tr>
-                </tbody>
-              </table>
+            <div class="card-body">
+                <div class="text-center">
+                    <div class="row justify-content-center">
+                        <div class="col-md-4"><p class="card-content" id="playerlist_ai"></p></div>
+                        <div class="col-md-4"><p class="card-content" id="playerlist_table"></p></div>
+                        <div class="col-md-4"><p class="card-content" id="playerlist_virt"></p></div>
+                    </div>
+                </div>
             </div>
-          </div>
-
-
-          <div class="row top-buffer"></div>
-
-
-          <div class="row justify-content-center">
-            <div class="col-auto">
-              <h4 class="card-title text-justify">CURRENT BOARD</h4>
-            </div>
-          </div>
-          <div class="row top-buffer"></div>
-          <div class="row justify-content-center">
-            <div class="col-md-12 d-flex justify-content-center">
-              <div id="current_board" style="width: 400px"><img width="400px" src="/img/board_placeholder_400x400.png"></div>
-            </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
-
-
-
 
 
 <!-- Footer -->
 <footer class="footer bg-light">
-  <div class="container text-center">
-    <div class="row top-buffer"><div class="col-md-12"><h4 class="card-title">SERVICE AVAILABILITY</h4></div></div>
-    <div class="row justify-content-center">
-      <div class="col-auto">
-        <table class="table table-responsive">
-          <tbody>
-          <tr>
-            <th>BACKEND</th>
-            <td><img id="sa_backend" width="64px" src="/img/icons/alert_off.png" /></td>
-          </tr>
-          <tr>
-            <th>CHESS LOGIC VALIDATOR</th>
-            <td><img id="sa_mv_validator" width="64px" src="/img/icons/alert_off.png" /></td>
-          </tr>
+    <div class="container text-center">
+        <div class="row top-buffer">
+            <div class="col-md-12"><h4 class="card-title">SERVICE AVAILABILITY</h4></div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-auto">
+                <table class="table table-responsive">
+                    <tbody>
+                    <tr>
+                        <th>BACKEND</th>
+                        <td><img id="sa_backend" width="64px" src="/img/icons/alert_off.png"/></td>
+                    </tr>
+                    <tr>
+                        <th>CHESS LOGIC VALIDATOR</th>
+                        <td><img id="sa_mv_validator" width="64px" src="/img/icons/alert_off.png"/></td>
+                    </tr>
 
-          <tr>
-            <th>AVAILABLE PLAYER AI INSTANCES</th>
-            <td><span id="sa_aaipc"></span></td>
-          </tr>
-          </tbody>
-        </table>
+                    <tr>
+                        <th>AVAILABLE PLAYER AI INSTANCES</th>
+                        <td><span id="sa_aaipc"></span></td>
+                    </tr>
+                    </tbody>
+                </table>
 
-      </div>
-      </div>
-  </div>
+            </div>
+        </div>
+    </div>
 </footer>
-
-
 
 
 <script src="/js/jquery/jquery.min.js"></script>
@@ -217,314 +142,161 @@
 
 <script>
 
-  //GLOBAL VARIABLES
-  var move_data = null;
-  var move_index = -1;
-  var current_board = null;
-  var loaded_game_id = null;
+    //GLOBAL VARIABLES
+    var move_data = null;
+    var move_index = -1;
+    var current_board = null;
+    var loaded_game_id = null;
 
 
-
-  //SORTING TIMESTAMP
-  function compare_created_timestamp( b, a ) {
-    if ( a.created_timestamp < b.created_timestamp ){
-      return -1;
+    //SORTING TIMESTAMP
+    function compare_created_timestamp(b, a) {
+        if (a.created_timestamp < b.created_timestamp) {
+            return -1;
+        }
+        if (a.created_timestamp > b.created_timestamp) {
+            return 1;
+        }
+        return 0;
     }
-    if ( a.created_timestamp > b.created_timestamp ){
-      return 1;
-    }
-    return 0;
-  }
-  //PARSES THE QUERY STRING IN THE URL
-  //https://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
-  function getParameterByName(name, url = window.location.href) {
-    name = name.replace(/[\[\]]/g, '\\$&');
-    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+
+    //PARSES THE QUERY STRING IN THE URL
+    //https://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
+    function getParameterByName(name, url = window.location.href) {
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
             results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, ' '));
-  }
-  //PARSE Date Object into human readable
-  //https://stackoverflow.com/questions/5416920/timestamp-to-human-readable-format
-  function getFormattedDate(_dt) {
-    var date = new Date(_dt);
-    var month = date.getMonth() + 1;
-    var day = date.getDate();
-    var hour = date.getHours();
-    var min = date.getMinutes();
-    var sec = date.getSeconds();
-    //APPEND 0
-    month = (month < 10 ? "0" : "") + month;
-    day = (day < 10 ? "0" : "") + day;
-    hour = (hour < 10 ? "0" : "") + hour;
-    min = (min < 10 ? "0" : "") + min;
-    sec = (sec < 10 ? "0" : "") + sec;
-    var str = date.getFullYear() + "-" + month + "-" + day + "_" +  hour + ":" + min + ":" + sec;
-    return str;
-  }
-  //GET AND DISPLAY INFORMATION ABOUT THE SERVICE UPTIME
-  function check_service_state(){
-    $.getJSON('/rest/service_state',function (data) {
-      //GET MOVEMENT VALIDATOR MICROSERVICE STATE
-      if(data && data.move_validator_state){
-        $("#sa_mv_validator").attr("src", "/img/icons/cloud_online.png");
-      }else{
-        $("#sa_mv_validator").attr("src", "/img/icons/cloud_offline.png");
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
+    //PARSE Date Object into human readable
+    //https://stackoverflow.com/questions/5416920/timestamp-to-human-readable-format
+    function getFormattedDate(_dt) {
+        var date = new Date(_dt);
+        var month = date.getMonth() + 1;
+        var day = date.getDate();
+        var hour = date.getHours();
+        var min = date.getMinutes();
+        var sec = date.getSeconds();
+        //APPEND 0
+        month = (month < 10 ? "0" : "") + month;
+        day = (day < 10 ? "0" : "") + day;
+        hour = (hour < 10 ? "0" : "") + hour;
+        min = (min < 10 ? "0" : "") + min;
+        sec = (sec < 10 ? "0" : "") + sec;
+        var str = date.getFullYear() + "-" + month + "-" + day + "_" + hour + ":" + min + ":" + sec;
+        return str;
+    }
+
+    //GET AND DISPLAY INFORMATION ABOUT THE SERVICE UPTIME
+    function check_service_state() {
+        $.getJSON('/rest/service_state', function (data) {
+            //GET MOVEMENT VALIDATOR MICROSERVICE STATE
+            if (data && data.move_validator_state) {
+                $("#sa_mv_validator").attr("src", "/img/icons/cloud_online.png");
+            } else {
+                $("#sa_mv_validator").attr("src", "/img/icons/cloud_offline.png");
+            }
+
+        });
+        //CHECK STATUS OF THE TABLE COMMUNICATION BACKEND
+        $.getJSON('/rest/client_status', function (data) {
+            if (data && data.status && !data.err) {
+                $("#sa_backend").attr("src", "/img/icons/cloud_online.png");
+            } else {
+                $("#sa_backend").attr("src", "/img/icons/cloud_offline.png");
+            }
+        });
+
+        //GET AVARIABLE AI PLAYER COUNT
+        $.getJSON('/rest/get_avariable_ai_players', function (data) {
+
+            if (data && data.count !== undefined && data.count != null && data.count >= 0) {
+                $("#sa_aaipc").html("<b>" + String(data.count) + "</b>");
+            } else {
+                $("#sa_aaipc").html("---");
+            }
+        });
+    }
+
+
+    function create_player_table(_arr,_table_holder_id, _display_len){
+      if(!_arr){return;}
+
+      var max_items = 0;
+      if (_arr.length < _display_len) {
+        max_items = _arr.length;
+      } else if (_display_len > _arr.length) {
+        max_items = _arr.length;
       }
 
-    });
-    //CHECK STATUS OF THE TABLE COMMUNICATION BACKEND
-    $.getJSON('/rest/client_status',function (data) {
-      if(data && data.status && !data.err){
-        $("#sa_backend").attr("src", "/img/icons/cloud_online.png");
-      }else{
-        $("#sa_backend").attr("src", "/img/icons/cloud_offline.png");
+
+      //CREATE TABLE TABLE
+      var tmp_html = "<div class=\"table-responsive-sm\"><table class=\"table\">";
+      tmp_html += "<thead><tr><th scope=\"col\">#</th><th scope=\"col\">CREATED</th><th scope=\"col\">PLAYER WHITE</th><th scope=\"col\">PLAYER BLACK</th><th scope=\"col\">MOVE COUNT</th><th scope=\"col\">GAME_STATE</th><th scope=\"col\">VIEW</th></tr></thead>";
+      tmp_html += "<tbody>";
+      //POPULATE TABLE BODY WITH ENTRIES
+      for (let i = 0; i < max_items; i++) {
+        const entry =_arr[i];
+        tmp_html += "<tr>";
+        tmp_html += "<th scope=\"row\">" + String(i + 1) + "</th>";
+        tmp_html += "<th scope=\"row\"><a class='fhcolor_text' href='/profile?pid=" + entry.virtual_pid + "'>" + entry.name + "</a></th>";
+        tmp_html += "</tr>";
       }
-    });
-
-    //GET AVARIABLE AI PLAYER COUNT
-    $.getJSON('/rest/get_avariable_ai_players',function (data) {
-
-      if(data && data.count !== undefined&&data.count != null && data.count >=0) {
-        $("#sa_aaipc").html("<b>"+String(data.count)+"</b>");
-      }else{
-        $("#sa_aaipc").html("---");
-      }
-    });
-
-  }
-  //LOADS A FENT TO THE FEN VIEWER
-  function load_fen_to_viewer(_fen){
-    if(_fen == null || _fen === ""){
-      $("#fen_viewer_board").html("");
-      $("#fen_viewer_fen").html("---");
-      return;
-    }
-    $("#fen_viewer_board").html("");
-    $("#fen_viewer_fen").html(""+_fen+"");
-    var fen_viewer_board = pgnBoard('fen_viewer_board', { position: _fen, locale: 'en', pieceStyle: 'wikipedia', theme:'falken' });
-    //fen_viewer_board.position = _fen;
-  }
-  //LOAD NEXT MOVE TO FEN VIWER
-  function show_next_move(){
-    if(!move_data && move_index < 0){
-      return;
-    }
-    move_index++;
-    if(move_index >= move_data.length){
-      move_index = 0;
-    }else{
-
-    }
-   // debugger;
-    load_fen_to_viewer(move_data[move_index].fen);
-    $("#current_move_text").html(move_data[move_index].move +"("+String(move_index+1) + " / " + String(move_data.length)+")");
-  }
-  //LOAD PREV MOVE TO FEN VIEWER
-  function show_prev_move(){
-    if(!move_data && move_index < 0){
-      return;
-    }
-    move_index--;
-    if(move_index < 0){
-      move_index = move_data.length-1;
-    }else{
-
-    }
-    // debugger;
-    load_fen_to_viewer(move_data[move_index].fen);
-    $("#current_move_text").html(move_data[move_index].move +"("+String(move_index+1) + " / " + String(move_data.length)+")");
-  }
-  //CREATES TURN HISTORY TABLE
-  function create_turn_history_table(_data, _update_only){
-  //  debugger;
-    if(!_data || _data.length <= 0){
-      $("#turn_histroy_table").html("--NO TURN HISTORY --");
-    return;
-    }
-    //STORE CURRENT MOVE DATA
-    move_data= _data;
-    //LOAD FEN TO BOARD ONLY AT THE FIRST TIME
-    if(!_update_only){
-      move_index = 0;
-      load_fen_to_viewer(move_data[move_index].fen);
-   }
-    //UPDATE MOVES LIST EVERY TIME
-    $("#current_move_text").html(move_data[move_index].move +"("+String(move_index+1) + " / " + String(move_data.length)+")");
-  }
-  //LOADS MORE INFORMATION ABOUT A SPECIFIC GAME ID
-  function load_game_information(_id, _update_only){
-    //debugger;
-    game_move_history_fen = [];
-    if(!_update_only){
-      load_fen_to_viewer(null);
+      tmp_html += "</tbody></table></div>";
+      $("#" + String(_table_holder_id)).html(tmp_html);
     }
 
-    $.getJSON('/rest/get_game?gid=' +_id,function (data) {
-      //PROCESS GOT GAME LIST RESULT
-      //debugger;
 
-      if(!data || data.err || !data.game_data){
-        return;
-      }
-      //ONLY SAVE ID FOR AUTO REFRESH IF WE GOT VALID DATA
-      loaded_game_id = _id;
-      console.log(data);
-      //SHOW ID
-    //  debugger;
-      if(!_update_only) {
-        $("#game_headline_title").html(String(data.game_data.game_id));
-      }
-      //DISPLAY CURRENT BOARD
-      if(data.game_data.current_board.fen){
-        //CREATE BOARD INSTANCE FIRST TIME
-        if(!_update_only) {
-          $("#current_board").html("");
-          current_board = pgnBoard('current_board', { position: data.game_data.current_board.fen, locale: 'en', pieceStyle: 'wikipedia', theme:'falken' });
+    //LOAD ALL ALVARIABLE GAMES AND DISPLAY THEM IN THE GAME HISTROY CONTAINER
+    function create_listed_games_table() {
+        $.getJSON('/rest/get_player_list', function (data) {
+            //PROCESS GOT GAME LIST RESULT
+            if (!data || data.err || !data.playerlist_ai || !data.playerlist_table || !data.playerlist_virt || !Array.isArray(data.playerlist_ai) || !Array.isArray(data.playerlist_table)|| !Array.isArray(data.playerlist_virt)) {
+                return;
+            }
+            //SORT GAMES BY TIMESTAMP
+            //data.playerlist_ai.sort(compare_created_timestamp);
 
+            //LIMIT TABLE LIST COUNT
+            var max_items = 10;
+
+          create_player_table( data.playerlist_ai,"playerlist_ai", max_items);
+          create_player_table( data.playerlist_table,"playerlist_table", max_items);
+          create_player_table( data.playerlist_virt,"playerlist_virt", max_items);
+        });
+    }
+
+    //SHOWS / HIDES THE GAME_INFORMATION CONTAINER
+    function toggle_visible_information_container(_s) {
+        var x = document.getElementById("game_information_container");
+        if (_s) {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
         }
+    }
 
-        if(current_board != null){
-          //debugger;
-          current_board = pgnBoard('current_board', { position: data.game_data.current_board.fen, locale: 'en', pieceStyle: 'wikipedia', theme:'falken' });
+    //EXECUTES SCRIPT IF PAGE LOADED
+    $(document).ready(function () {
+        //CHECK QUERY PARAMETER TO LOAD A GAME DIRECTLY
+        var gid = getParameterByName("gid");
+        if (gid != undefined && gid != null) {
+            load_game_information(gid);
         }
-
-      }
-      //LOAD AND DISPLAY GENERAL GAME INFO
-      if(data.game_data.current_board.player_turn != null){
-        if(data.game_data.current_board.player_turn == 1){
-          $("#git_player_turn").html("BLACK");
-        }else if(data.game_data.current_board.player_turn == 0){
-          $("#git_player_turn").html("WHITE");
-        }else{
-          $("#git_player_turn").html(String(data.game_data.current_board.player_turn));
-        }
-      }
-
-      if(data.game_data.current_board.is_game_over != null ){
-        $("#git_game_over").html(String(data.game_data.current_board.is_game_over));
-      }
-      if(data.game_data.start_board_string != null){
-        $("#git_start_board_fen").html(String(data.game_data.start_board_string));
-      }
-      if(data.game_data.current_board.fen != null ){
-        $("#git_current_board_fen").html(String(data.game_data.current_board.fen));
-      }
-
-      //VISULIZES MOVES
-      if(data.game_data.turn_history != null){
-        create_turn_history_table(data.game_data.turn_history,_update_only);
-      }
-
-
-
-
-      //SHOW CONTAINER
-        toggle_visible_information_container(true);
-
-
-
+        //HIDE GAME INFORMATION
+        //toggle_visible_information_container(false);
+        check_service_state();
+        create_listed_games_table();
+        //START POLLING REFRESH TIMER
+        var update_timer = setInterval(function () {
+            if (loaded_game_id != null && loaded_game_id !== "") {
+                load_game_information(loaded_game_id, true); //UPDATE GAME STATISTICS ONLY
+            }
+        }, 1000);
     });
-
-  }
-  //LOAD ALL ALVARIABLE GAMES AND DISPLAY THEM IN THE GAME HISTROY CONTAINER
-  function create_listed_games_table(){
-    $.getJSON('/rest/get_game_list',function (data) {
-      //PROCESS GOT GAME LIST RESULT
-      if(!data || data.err || !data.game_data || !Array.isArray(data.game_data)){
-      return;
-      }
-      //SORT GAMES BY TIMESTAMP
-      data.game_data.sort(compare_created_timestamp);
-
-
-      var max_items = 10;
-
-      var t = getParameterByName("list_count");
-      if(t != undefined && t != null){
-        console.log(t);
-        max_items = parseInt(t);
-        console.log(max_items);
-      }
-      if(data.game_data.length < max_items){
-        max_items = data.game_data.length;
-      } else if(max_items > data.game_data.length){
-        max_items = data.game_data.length;
-      }
-      console.log("---");
-      console.log(max_items);
-
-    //CREATE TABLE STRUCTURE AND HEADLINES
-    var tmp_html = "<div class=\"table-responsive-sm\"><table class=\"table\">";
-    tmp_html+="<thead><tr><th scope=\"col\">#</th><th scope=\"col\">CREATED</th><th scope=\"col\">PLAYER WHITE</th><th scope=\"col\">PLAYER BLACK</th><th scope=\"col\">MOVE COUNT</th><th scope=\"col\">GAME_STATE</th><th scope=\"col\">VIEW</th></tr></thead>";
-    tmp_html+="<tbody>";
-    //POPULATE TABLE BODY WITH ENTRIES
-    for (let i= 0; i < max_items;i++){
-      const entry = data.game_data[i];
-      tmp_html+="<tr>";
-      tmp_html+="<th scope=\"row\">"+String(i+1)+"</th>";
-
-      tmp_html+="<th scope=\"row\">"+getFormattedDate(entry.created_timestamp)+"</th>";
-
-      tmp_html+="<th scope=\"row\"><a class='fhcolor_text' href='/profile?pid="+entry.player_white_profile_id+"'>"+entry.player_white_profile_name+"</a></th>";
-      tmp_html+="<th scope=\"row\"><a class='fhcolor_text' href='/profile?pid="+entry.player_black_profile_id+"'>"+entry.player_black_profile_name+"</a></th>";
-      tmp_html+="<th scope=\"row\">"+entry.move_count+"</th>";
-      var gsstring  = "UNKNOWN";
-      switch (entry.game_state){
-        case 0:gsstring = "<p class=\"text-success\">STARTING</p>";break;
-        case 1:gsstring = "<p class=\"text-warning\">STARTING</p>";break;
-        case 8:gsstring = "<p class=\"text-success\">RUNNING</p>";break;
-        case 9:gsstring = "<p class=\"text-success\">RUNNING</p>";break;
-
-        case 10:gsstring = "<p class=\"text-primary\">FINISHED</p>";break;
-        case 11:gsstring = "<p class=\"text-primary\">FINISHED</p>";break;
-
-        case 12:gsstring = "<p class=\"text-danger\">FINISHED</p>";break;
-        default:gsstring = "<p class=\"text-secondary\">UNKNOWN</p>";break;
-      }
-      tmp_html+="<th scope=\"row\">"+gsstring+"</th>";
-
-
-      tmp_html+="<th scope=\"row\"><button type=\"button\" onclick=\"load_game_information('"+entry.game_id+"')\" class=\"btn btn-fh\">SHOW DETAILS</button></th>";
-      tmp_html+="</tr>";
-
-    }
-
-    tmp_html += "</tbody></table></div>";
-
-
-    $("#listed_games").html(tmp_html);
-
-    });
-  }
-  //SHOWS / HIDES THE GAME_INFORMATION CONTAINER
-  function toggle_visible_information_container(_s) {
-    var x = document.getElementById("game_information_container");
-    if (_s) {
-      x.style.display = "block";
-    } else {
-      x.style.display = "none";
-    }
-  }
-  //EXECUTES SCRIPT IF PAGE LOADED
-  $(document).ready(function () {
-    //CHECK QUERY PARAMETER TO LOAD A GAME DIRECTLY
-    var gid = getParameterByName("gid");
-    if(gid != undefined && gid != null){
-      load_game_information(gid);
-    }
-    //HIDE GAME INFORMATION
-   //toggle_visible_information_container(false);
-    check_service_state();
-    create_listed_games_table();
-    //START POLLING REFRESH TIMER
-    var update_timer = setInterval(function (){
-      if(loaded_game_id != null && loaded_game_id !== ""){
-        load_game_information(loaded_game_id,true); //UPDATE GAME STATISTICS ONLY
-      }
-    },1000);
-  });
 </script>
 
 </body>
