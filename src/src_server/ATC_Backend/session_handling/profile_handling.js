@@ -92,9 +92,9 @@ function get_profile_list(_callback){
 
        // {name:"virtual",virtual_pid:"123",registered_ts:Date.now()}
         var res = {
-            playerlist_ai:[],
-            playerlist_table:[],
-            playerlist_virt:[],
+            playerlist_ai:[{name:"ai",virtual_pid:"123",registered_ts:Date.now()}],
+            playerlist_table:[{name:"table",virtual_pid:"123",registered_ts:Date.now()}],
+            playerlist_virt:[{name:"virtual",virtual_pid:"123",registered_ts:Date.now()}],
 
         }
         _callback(err,res);
