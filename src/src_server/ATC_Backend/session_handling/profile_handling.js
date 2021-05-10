@@ -85,7 +85,21 @@ function get_profile_virtual_id(_vid, _callback){
     });
 }
 
+function get_profile_list(_callback){
+    MDB.getProfileCollection().findAll({DOCTYPE:"PROFILE"},function(err,res){
 
+        //SORT
+
+       // {name:"virtual",virtual_pid:"123",registered_ts:Date.now()}
+        var res = {
+            playerlist_ai:[],
+            playerlist_table:[],
+            playerlist_virt:[],
+
+        }
+        _callback(err,res);
+    });
+}
 
 function get_player_config_vid(_vid, _callback){
     MDB.getProfileCollection().findOne({virtual_player_id:_vid, DOCTYPE:"PROFILE"},function(gp_err,gp_res){
@@ -152,5 +166,6 @@ module.exports = {
     get_player_config,
     append_player_log,
     set_player_user_config_key,
-    get_player_config_vid
+    get_player_config_vid,
+    get_profile_list
 }
