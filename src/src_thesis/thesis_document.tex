@@ -728,7 +728,7 @@ Da das System die auf dem Feld befindlichen Schachfiguren anhand von
 \gls{nfc} Tags erkennt, müssen diese zuerst mit Daten beschrieben
 werden. Die verwendeten NXP NTAG 21 Chips, besitzen einen vom Benutzer
 verwendbaren Speicher von 180 Byte. Dieser kann über ein
-\gls{nfc}-Lese/Schreibger mit Daten verschiednster Art beschrieben und
+\gls{nfc}-Lese/Schreibgerät mit Daten verschiednster Art beschrieben und
 wieder ausgelesen werden. Moderne Mobiltelefone besitzen in der Regel
 auch die Fähigkeit mit passenden \gls{nfc} Tags kommunizieren zu können;
 somit sind keine Stand-Alone Lesegeräte mehr notwendig.
@@ -1173,21 +1173,87 @@ Service.\ref{ATC_movevalidator_execute_move} Der Response wird dann vom
 Backend in der Datenbank gespeichert und weiter an die Client-Devices
 verteilt.
 
-Mit diesem Design ist es möglich, auch andere Spielarten im System zu
-implementieren, nur hier die initialen Spielfelder generiert werden und
-Züge der Spieler validiert werden müssen.
+\begin{longtable}[]{@{}llll@{}}
+\caption{MoveValidator-Service API Overview}\tabularnewline
+\toprule
+AtomicChess Move-Validator Service API & API-Route & Method &
+Form-Data\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+AtomicChess Move-Validator Service API & API-Route & Method &
+Form-Data\tabularnewline
+\midrule
+\endhead
+Check Move & /rest/check\_move & POST & * fen * move *
+player\tabularnewline
+Execute Move & /rest/execute\_move & POST & fen * move\tabularnewline
+Validate Board & /rest/validate\_board & POST & fen\tabularnewline
+Init Board & /rest/init\_board & GET &\tabularnewline
+\bottomrule
+\end{longtable}
 
-Allgemein geschieht die Kommunikation über drei API Calls.
+Allgemein geschieht die Kommunikation über vier API Calls, welche vom
+MoveValidator-Service angeboten werden. Als erstes wird vom Backend der
+\passthrough{\lstinline!/rest/init\_board!} Request verwendet, welcher
+ein Spielbrett in der \gls{fen} Notation zurückgibt. Allgemein arbeitet
+wurde das komplette System so umgesetzt, dass dieses mit einem Spielfeld
+in einer Zeichenketten/String arbeitet. Dies hat den Vorteil, dass die
+Spielfeld-Notation leicht angepasst werden kann. Mit diesem Design ist
+es möglich, auch andere Spielarten im System zu implementieren, nur hier
+die initialen Spielfelder generiert werden und Züge der Spieler
+validiert werden müssen.
+
+Die \gls{fen} Notatin ist universal und kann jede Brettstellung
+darstellen. Auch enhält diese nicht nur die Figurstellungen, sondern
+auch weitere Informationen, wie die aktuelle Nummer des Zuges oder
+welcher Spieler gerade an der Reihe ist. Diese werden dann in der
+\gls{xfen} Notation angegeben, bei der zusätzlich zu der Brettstellung
+auch noch die weiteren Informationen angehängt werden.
+
+\begin{longtable}[]{@{}ll@{}}
+\caption{Vergleich FEN - X-FEN}\tabularnewline
+\toprule
+\begin{minipage}[b]{0.42\columnwidth}\raggedright
+FEN\strut
+\end{minipage} & \begin{minipage}[b]{0.52\columnwidth}\raggedright
+X-FEN\strut
+\end{minipage}\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+\begin{minipage}[b]{0.42\columnwidth}\raggedright
+FEN\strut
+\end{minipage} & \begin{minipage}[b]{0.52\columnwidth}\raggedright
+X-FEN\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.42\columnwidth}\raggedright
+rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R\strut
+\end{minipage} & \begin{minipage}[t]{0.52\columnwidth}\raggedright
+rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+Alle gängigen Schachprogramme und Bibliotheken unterstützen das Laden
+von Spielbrettern in der \gls{fen} bzw \gls{xfen} Schreibweise, ebenso
+die für den MoveValidator Service verwendete Python-Chess Blibliothek
+\cite{pythonchesslib}.
 
 \begin{itemize}
-\item
-  Auflistung der routen
+\tightlist
 \item
   generiter neues brett
 \item
   python chess packge welche pesudo legal moves generiert
 \item
   mit diesem konzept ssind auch andere Spiele möglich
+\item
+  spielbrett als string fen notation so einfach zu parsen
+\item
+  aufbau fen
 \end{itemize}
 
 \hypertarget{entwicklung-webclient}{%
@@ -1337,12 +1403,15 @@ verwendet.
 \subsection{Ablaufdiagramm}\label{ablaufdiagramm}}
 
 \begin{itemize}
+\tightlist
 \item
   dummer/thin Client
 \item
   Synchronisierung von gegeben Schachfeld mit dem lokalen Schachfeld
 \item
-  vier Schritte (enfernen, bewegen, hinzufügen, bewegen)
+  getätigte züfe werden direkt an den schachserver geschickt und dieser
+  generiert darauf hin das neue schachbrett welches von beiden Partner
+  sync
 \end{itemize}
 
 \begin{figure}
@@ -1362,11 +1431,10 @@ Bewegungspfadberechnung}\label{figur-bewegungspfadberechnung}}
   Algorithmus zur Umsetzung eines Schachzugs
 \item
   Auftrennung in current und target Board
+\item
+  vier Schritte (enfernen, bewegen, hinzufügen, bewegen) \#\# Schachfeld
+  Scan Algorithmus zur Erkennung von Schachzügen
 \end{itemize}
-
-\hypertarget{schachfeld-scan-algorithmus-zur-erkennung-von-schachzuxfcgen}{%
-\subsection{Schachfeld Scan Algorithmus zur Erkennung von
-Schachzügen}\label{schachfeld-scan-algorithmus-zur-erkennung-von-schachzuxfcgen}}
 
 \begin{figure}
 \centering
@@ -1388,6 +1456,18 @@ Schachzügen}\label{schachfeld-scan-algorithmus-zur-erkennung-von-schachzuxfcgen
 
 \hypertarget{userinterface}{%
 \subsection{Userinterface}\label{userinterface}}
+
+Das Userinterface ist mit das zentrale Element mit welchem der Benutzer
+interagiert. Hierbei soll dieses nur die nötigsten Funktionen
+bereitstellen, welche zur Bedienung des Schachtisches nötig sind.
+
+\begin{itemize}
+\tightlist
+\item
+  grosse schaltflächen
+\item
+  kleine Menutiefe max. ein untermenü
+\end{itemize}
 
 \begin{figure}
 \centering
@@ -1438,14 +1518,3 @@ wurde. Es wurde ein Prototyp eines autonomen Schachtischs entwickelt.
 \item
   user-port für Erweiterungen (z.B. DGT Schachur)
 \end{itemize}
-
-Listing: TEST
-
-```c++ // Your First C++ Program
-
-\#include
-
-int main() \{ std::cout \textless{}\textless{} ``Hello World!''; return
-0; \}
-
-\}

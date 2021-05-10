@@ -545,11 +545,11 @@ Bevor ein Spiel begonnen wird, generiert der MoveValidator das initiale Spielfel
 Der Backend-Service fragt einen neues Spiel an oder übergibt einen Schachzug inkl. des Spielbretts an den Service.\ref{ATC_movevalidator_execute_move} Der Response wird dann vom Backend in der Datenbank gespeichert und weiter an die Client-Devices verteilt.
 
 
-Mit diesem Design ist es möglich, auch andere Spielarten im System zu implementieren, nur hier die initialen Spielfelder generiert werden und Züge der Spieler validiert werden müssen.
 
-: MoveValidator-Service API Overview
 
-| AtomicChess Move-Validator Service API 	| API-Route            	| Method 	| Form-Data             	|
+: MoveValidator-Service (+api) Overview
+
+| AtomicChess Move-Validator Service (+api) | (+api)-Route            	| Method 	| Form-Data             |
 |----------------------------------------	|----------------------	|--------	|-----------------------	|
 | Check Move                             	| /rest/check_move     	| POST   	| * fen * move * player 	|
 | Execute Move                           	| /rest/execute_move   	| POST   	| fen * move             	|
@@ -557,7 +557,28 @@ Mit diesem Design ist es möglich, auch andere Spielarten im System zu implement
 | Init Board                             	| /rest/init_board     	| GET    	|                       	|
 
 
-Allgemein geschieht die Kommunikation über vier API Calls, welche vom MoveValidator-Service angeboten werden.
+Allgemein geschieht die Kommunikation über vier (+api) Calls, welche vom MoveValidator-Service angeboten werden.
+Als erstes wird vom Backend der `/rest/init_board` Request verwendet, welcher ein neues Spielbrett in der (+fen) Notation zurückgibt, welches zum Start der Partie verwendet wird.
+Allgemein arbeitet wurde das komplette System so umgesetzt, dass dieses mit einem Spielfeld in einer Zeichenketten/String arbeitet.
+Dies hat den Vorteil, dass die Spielfeld-Notation leicht angepasst werden kann.
+Mit diesem Design ist es möglich, auch andere Spielarten im System zu implementieren, nur hier die initialen Spielfelder generiert werden und Züge der Spieler validiert werden müssen.
+
+
+Die (+fen) Notatin ist universal und kann jede Brettstellung darstellen. Auch enhält diese nicht nur die Figurstellungen, sondern auch weitere Informationen, wie die aktuelle Nummer des Zuges oder welcher Spieler gerade an der Reihe ist. Diese werden dann in der (+xfen) Notation angegeben, bei der zusätzlich zu der Brettstellung auch noch die weiteren Informationen angehängt werden.
+
+: Vergleich (+fen) - (+xfen)
+
+| FEN                                               	| X-FEN                                                          	|
+|---------------------------------------------------	|----------------------------------------------------------------	|
+| rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R 	| rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2 	|
+
+
+Alle gängigen Schachprogramme und Bibliotheken unterstützen das Laden von Spielbrettern in der (+fen) bzw (+xfen) Schreibweise, ebenso die für den MoveValidator Service verwendete Python-Chess Blibliothek [@pythonchesslib]. Diese unterstützt zusätzlich die Generierung der für den Benutzer möglichen Schachzügen, welche auf dem aktuellen Brett möglich sind. Diese List wird vom System dazu verwendet um sicherzustellen, das der Benutzer nur gültige Züge tätigen kann. Diese Funktion lässt sich zusätzliche abschalten, falls das Spiel nicht nach den allgemeinen Schachregeln ablaufen soll. Bei der Generierung der möglichen Schachzügen, muss zwischen den Legal-Moves und den Pseudo-Legal Schachzügen unterschieden werden. Die Legal-Moves beinhalten nur die nach den Schachregeln möglichen Zügen, welche von Figuren des Spielers ausgeführt werden können.
+Die Pseudo-Legal Schachzüge, sind alle Schachzügen welche von den Figuren auf dem aktuellen Schachbrett möglich, so sind z.B. auch alle anderen Figur-Züge enthalten, wenn der König sich aktuell im Schach befindet.
+
+Wenn ein Spieler an der Reihe ist, sein getätigter Zug mittels der `/rest/check_move` (+api) überprüft, ob dieser gemäss der Legal-Moves durchführbar ist. Ist dies der Fall, wird der Zug auf das Spielbrett angewendet, welches durch die `/rest/execute_move` (+api) geschieht. Diese führ den Zug aus und ermittelt somit das neue Spielbrett und überprüft zusätzlich, ob das Spiel gewonnen oder verloren wurde.
+
+Hat der Benutzer jedoch einen ungültigen Zug ausgeführt, wird dieser vom System storniert und der Client des Benutzers stellt den Zusand des Spielbretts vor dem getätigten Zug wiederher. Danach hat der Benutzer die Möglichkeit einen alternativen Zug auszuführen.
 
 
 
@@ -565,13 +586,6 @@ Allgemein geschieht die Kommunikation über vier API Calls, welche vom MoveValid
 
 
 
-
-
-* generiter neues brett
-* python chess packge welche pesudo legal moves generiert
-* mit diesem konzept ssind auch andere Spiele möglich
-* spielbrett als string fen notation so einfach zu parsen
-* aufbau fen
 
 
 
