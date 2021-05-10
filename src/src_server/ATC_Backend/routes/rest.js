@@ -788,7 +788,7 @@ router.get('/get_player_list',function (req,res,next) {
         if(sp_err){
             res.json({err:"get_profile_list failed"});
         }else{
-            res.json(sp_res);
+            res.json({err:null, data:sp_res});
         }
     });
 });

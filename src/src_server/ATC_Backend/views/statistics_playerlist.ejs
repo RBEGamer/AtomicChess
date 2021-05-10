@@ -222,7 +222,7 @@
     }
 
 
-    function create_player_table(_arr,_table_holder_id, _display_len){
+    function create_player_table(_arr,_table_holder_id, _display_len, _prefix){
       if(!_arr){return;}
 
       var max_items = 0;
@@ -235,11 +235,12 @@
 
       //CREATE TABLE TABLE
       var tmp_html = "<div class=\"table-responsive-sm\"><table class=\"table\">";
-      tmp_html += "<thead><tr><th scope=\"col\">#</th><th scope=\"col\">CREATED</th><th scope=\"col\">PLAYER WHITE</th><th scope=\"col\">PLAYER BLACK</th><th scope=\"col\">MOVE COUNT</th><th scope=\"col\">GAME_STATE</th><th scope=\"col\">VIEW</th></tr></thead>";
+      tmp_html += "<thead><tr><th scope=\"col\">#</th><th scope=\"col\">PLAYER NAME</th></tr></thead>";
       tmp_html += "<tbody>";
       //POPULATE TABLE BODY WITH ENTRIES
       for (let i = 0; i < max_items; i++) {
         const entry =_arr[i];
+        if(!String(entry).includes(_prefix)){continue;}
         tmp_html += "<tr>";
         tmp_html += "<th scope=\"row\">" + String(i + 1) + "</th>";
         tmp_html += "<th scope=\"row\"><a class='fhcolor_text' href='/profile?pid=" + entry.virtual_pid + "'>" + entry.name + "</a></th>";
@@ -263,9 +264,9 @@
             //LIMIT TABLE LIST COUNT
             var max_items = 10;
 
-          create_player_table( data.playerlist_ai,"playerlist_ai", max_items);
-          create_player_table( data.playerlist_table,"playerlist_table", max_items);
-          create_player_table( data.playerlist_virt,"playerlist_virt", max_items);
+          create_player_table( data,"playerlist_ai", max_items,"AI_");
+          create_player_table( data,"playerlist_table", max_items,"TABLE_");
+          create_player_table( data,"playerlist_virt", max_items, "VIRT_");
         });
     }
 
