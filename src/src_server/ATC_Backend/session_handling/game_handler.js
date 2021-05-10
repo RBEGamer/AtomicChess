@@ -451,7 +451,7 @@ function start_match(_player_a_hwid, _player_b_hwid, _callback) {
                         CBL.get_start_opening_fen(function (gsof_err, gsof_res) {
                             //generate our first board, its an intialboard with player white starts
                             //this board will be used to sync the tables of the players
-                            CBL.get_board(start_fen,CBL.PLAYER_TURN.WHITE,null,true,1,function (gb_err,gb_board) {
+                            CBL.get_board(gsof_res,CBL.PLAYER_TURN.WHITE,null,true,1,function (gb_err,gb_board) {
                                 //GET VARIABLE FOR GAME INIT
                                 var game_init_structure = {
                                     id: UUID.v1(),

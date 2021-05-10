@@ -5,7 +5,7 @@
       <env name="PRODUCTION" value="1" />
       <env name="REDIS_IP" value="127.0.0.1:6379" />
       <env name="MONGO_IP" value="127.0.0.1:27017" />
-      <env name="MVVALIDATOR_IP" value="127.0.0.1:5001" />
+      <env name="MVVALIDATOR_IP" value="127.0.0.1:5000" />
     </envs>
     <EXTENSION ID="com.jetbrains.nodejs.run.NodeJSStartBrowserRunConfigurationExtension">
       <browser url="http://localhost:3000/" />

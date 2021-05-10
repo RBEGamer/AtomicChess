@@ -556,7 +556,8 @@ Allgemein geschieht die Kommunikation über drei API Calls.
 * generiter neues brett
 * python chess packge welche pesudo legal moves generiert
 * mit diesem konzept ssind auch andere Spiele möglich
-
+* spielbrett als string fen notation so einfach zu parsen
+* aufbau fen
 
 
 

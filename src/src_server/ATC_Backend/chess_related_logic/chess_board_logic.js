@@ -150,17 +150,22 @@ module.exports = {
     get_start_opening_fen_static,
 
     get_board: function (_fen,_pturn,_move, _is_initial_board,_turn_count,_callback) {
+        var ext_fen = _fen;
 
         //BUILD EXTENDET FEN SIGNATURE
-        var pturn_fen = "w";
-        if(_pturn){
-            pturn_fen = "b";
+        //IF A - IS INCLUDED IN FEN THEN ITS ALREADY AN EXTENDE FEN
+        //TODO REMOVE THIS WORKAROUND
+        if(!String(_fen).includes('-')){
+            var pturn_fen = "w";
+            if(_pturn){
+                pturn_fen = "b";
+            }
+            var tc = _turn_count;
+            if(_is_initial_board){
+                _turn_count = 1;
+            }
+            ext_fen =  _fen + " " + pturn_fen + " - " + "- " + "0 " + String(tc);
         }
-        var tc = _turn_count;
-        if(_is_initial_board){
-            _turn_count = 1;
-        }
-        var ext_fen =  _fen + " " + pturn_fen + " - " + "- " + "0 " + String(tc);
 
         check_board_and_get_legal_moves(ext_fen,function (cb_err,cb_is_board_valid,cb_legal_moves,cb_is_game_over) {
             _callback(cb_err,{

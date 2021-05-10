@@ -9,5 +9,5 @@ RUN pip3 install python-chess
 
 
 RUN rm -f ./RUN_IN_CONTAINER
-EXPOSE 5001
+EXPOSE 5000
 CMD ["python3", "./app.py"]
