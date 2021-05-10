@@ -255,7 +255,7 @@
     function gen_playerlist() {
         $.getJSON('/rest/get_player_list', function (data) {
             //PROCESS GOT GAME LIST RESULT
-            if (!data || data.err || !data.playerlist_ai || !data.playerlist_table || !data.playerlist_virt || !Array.isArray(data.playerlist_ai) || !Array.isArray(data.playerlist_table)|| !Array.isArray(data.playerlist_virt)) {
+            if (!data || data.err || !data.data|| !Array.isArray(data.data)) {
                 return;
             }
             //SORT GAMES BY TIMESTAMP
@@ -264,9 +264,9 @@
             //LIMIT TABLE LIST COUNT
             var max_items = 10;
 
-          create_player_table( data,"playerlist_ai", max_items,"AI_");
-          create_player_table( data,"playerlist_table", max_items,"TABLE_");
-          create_player_table( data,"playerlist_virt", max_items, "VIRT_");
+          create_player_table( data.data,"playerlist_ai", max_items,"AI_");
+          create_player_table( data.data,"playerlist_table", max_items,"TABLE_");
+          create_player_table( data.data,"playerlist_virt", max_items, "VIRT_");
         });
     }
 
