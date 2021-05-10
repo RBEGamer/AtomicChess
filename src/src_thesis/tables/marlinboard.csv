@@ -1,0 +1,4 @@
+,SKR 1.4 Turbo,Ramps 1.4,Anet A8 Mainboard
+Stepper Driver,TMC2209,A4988 / TMC2209,A4988
+LED Strip Port,WS2811 / RGB,-,-
+Firmware,Marlin-FW 2.0,Marlin-FW 1.0,proprietary

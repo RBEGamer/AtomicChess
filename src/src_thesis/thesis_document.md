@@ -388,13 +388,38 @@ Diese wurde im ersten Prototyp manuell Aufgebaut und enthielt viele verschiedene
 
 Die verwendeten Motortreiber stellten sich wärend der Entwicklung als sehr felxibel heraus, stellten aber auch einen grossen Kostenfaktor dar.
 Nach dem Aufbau und erprobung des ersten Prototyps wurde ersichtlich, dass hier nicht alle zuerst angedachten Features der Treiber benötigt werden und so auch andere alternativen in Frage kommen.
-Zusätzlich konnte die Elektronik nur beschränkt mit anderen System verbunden werden, welches insbesondere durch die verwendete (+spi) geschuldet war.
+Zusätzlich konnte die Elektronik nur beschränkt mit anderen System verbunden werden, welches insbesondere durch die verwendete (+spi) Schnittstelle geschuldet war.
 
 
 All diese Faktoren erschweren einen einfachen Zusammenbau des autonomen Schachtischs. Die Lösung stellt die Verwendung von Standardhardware dar.
 Nach dem Herunterbrechen der elektrischen Komponenten und des mechanischen Aufbaus ist zu erkennen, dass der autonome Schachtisch einer CNC-Fräse bzw eines 3D Drucker ähnelt.
+Insbesondere die XY-Achsen Mechanik sowie die ansteuerung von Schrittmotoren, wird in diesen Systemen verwendet.
+Mit den Druchbruch von 3D Druckern im Consumerbereich, sind auch kleine Steuerungen, preisgünstige Steuerungen erhältlich, welche 2-3 Schrittmotoren und einiges anzusätzlicher Hardware ansteuern können.
+
+: Standardhardware 3D Drucker Steuerungen
+
+|                	| SKR 1.4 Turbo 	| Ramps 1.4       	| Anet A8 Mainboard 	|
+|----------------	|---------------	|-----------------	|-------------------	|
+| Stepper Driver 	| TMC2209       	| A4988 / TMC2209 	| A4988             	|
+| LED Strip Port 	| WS2811 / RGB  	| -               	| -                 	|
+| Firmware       	| Marlin-FW 2.0 	| Marlin-FW 1.0   	| Proprietary       	|
+
+
+Hierbei existiert eine grosse Auswahl dieser mit den verschiensten Ausstattungen. Bei der Aufwahl dieser wurde vorallem auf die Möglichkeit geachtet sogenannte Silent-Schrittmotortreiber verwenden zu können um die Geräuschimmissionen durch die Motoren soweit wie möglich zu minimieren. Im ersten Protoyp wurde unter anderem aus diesem Grund die TMC5160-BOB Treiber ausgewählt.
+Hierzu wurde der Schrittmotor-Treiber TMC2209 gewält, welcher diese Features ebenfalls untersützt und in der Variante als Silent-Step-Stick direkt in die meisten 3D Drucker Steuerungen eingesetzt werden können. Hierbei ist es wichtig, dass auf der gewählten Steuerung die Treiber-ICs nicht fest verlötet sind, sondern getauscht werden können.
+
+Ein weitere Punkt ist die Kommunikation der Steuerung mit dem Host-System. Hierbei setzten alle untersuchten Steuerungen auf die (+usb) Schnittstelle und somit ist eine einfache Kommunikation gewährleistet. Das verwendete eingebette System im autonomen Schachtisch bietet vier freie (+usb) Anschlüsse, somit ist eine einfache Integration gewärleistet.
+
+
+
+Nach einer gründlichen Evaluation der zur verfügung stehenden Steuerungen, wurde die SKR 1.4 Turbo Steuerung ausgewählt, da diese trotz des etwas höheren Marktpreises genug Ressourcen auch für spätere Erweiterung bietet und eine Unterstüzung für die neuste Version der Marlin-FW[@marlinfw] bereitstellt.
+Somit wurde die Elektronik durch die verwendete Plug&Play stark vereinfacht \ref{ATC_Hardware_Architecture_PROD}.
 
 ![Producation Hardware: Blockdiagramm \label{ATC_Hardware_Architecture_PROD}](images/ATC_Hardware_Architecture_PROD.png)
+
+Druch wegfall der zuvor eingesetzten Elektronik und der Austausch durch due SKR 1.4 Turbo Steuerung, ist jedoch ein Anschluss des PN532 (+nfc) Moduls nicht mehr möglich. Da dieses mittels (+i2c) Interface direkt mit dem eingebetteten Systems verbunden war
+
+* seperate mikrocontroller zur I2c Seriell umwandlung
 
 * verwenung von standarthardware, welche gut zu beschaffen ist
 * implementierung von standart gcode protokol, somit mit universell verwendbaren steuerung verwendbar
@@ -403,7 +428,7 @@ Nach dem Herunterbrechen der elektrischen Komponenten und des mechanischen Aufba
 
 
 
-### Implementierung GCODE-Sender
+### HAL: Implementierung GCODE-Sender
 
 
 Durch die durchgeführten Änderungen an der Elektronik insbesondere durch die Verwendung einer Marlin-FW[@marlinfw] fähigen Motorsteuerung, ist eine Anpassung der (+hal) notwendig.
