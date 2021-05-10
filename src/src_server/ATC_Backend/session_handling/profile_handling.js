@@ -86,7 +86,7 @@ function get_profile_virtual_id(_vid, _callback){
 }
 
 function get_profile_list(_callback){
-    MDB.getProfileCollection().findAll({DOCTYPE:"PROFILE"},function(err,res){
+    MDB.getProfileCollection().find({DOCTYPE:"PROFILE"},function(err,res){
 
         //SORT
 
