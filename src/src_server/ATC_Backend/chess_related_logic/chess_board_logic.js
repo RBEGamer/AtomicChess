@@ -2,20 +2,20 @@ var request = require('request');
 var CFG = require('../config/config'); //include the cofnig file
 
 const CHESS_FIGURES = Object.freeze({
-    BLACK:{
-        PAWN:"p",
-        KNIGHT:"n",
-        BISHOP:"b",
-        ROOK:"r",
-        QUEEN:"q",
-        KING:"k"
-    },WHITE:{
-        PAWN:"P",
-        KNIGHT:"N",
-        BISHOP:"B",
-        ROOK:"R",
-        QUEEN:"Q",
-        KING:"K"
+    BLACK: {
+        PAWN: "p",
+        KNIGHT: "n",
+        BISHOP: "b",
+        ROOK: "r",
+        QUEEN: "q",
+        KING: "k"
+    }, WHITE: {
+        PAWN: "P",
+        KNIGHT: "N",
+        BISHOP: "B",
+        ROOK: "R",
+        QUEEN: "Q",
+        KING: "K"
     }
 });
 
@@ -25,37 +25,40 @@ const PLAYER_TURN = Object.freeze({
     NONE: 2
 });
 
-function get_player_score(_extendet_fen,_callback){
+function get_player_score(_extendet_fen, _callback) {
     _callback(null, 1000);
     //TODO USE MVALIDATOR THE CALCULATE POINTS
 }
 
 
-function check_board_and_get_legal_moves(_extendet_fen,_callback){
-    request.post({url:CFG.getConfig().chess_move_validator_api_url+"/rest/validate_board", formData: {fen:_extendet_fen, legal_move_settings:CFG.getConfig().use_pseudo_legal_moves}}, function optionalCallback(err, httpResponse, body) {
+function check_board_and_get_legal_moves(_extendet_fen, _callback) {
+    request.post({
+        url: CFG.getConfig().chess_move_validator_api_url + "/rest/validate_board",
+        formData: {fen: _extendet_fen, legal_move_settings: CFG.getConfig().use_pseudo_legal_moves}
+    }, function optionalCallback(err, httpResponse, body) {
         if (err) {
-            _callback(err,null);
+            _callback(err, null);
             return;
         }
         //console.log('Upload successful!  Server responded with:', body);
         var jsonbody = null;
         try {
-             jsonbody = JSON.parse(body);
-             if(!jsonbody || jsonbody.legal_moves == null || jsonbody.is_board_valid == null || jsonbody.is_game_over == null){
-                 console.error(jsonbody);
-                 throw "json result invalid";
-             }
-        }catch (e) {
+            jsonbody = JSON.parse(body);
+            if (!jsonbody || jsonbody.legal_moves == null || jsonbody.is_board_valid == null || jsonbody.is_game_over == null) {
+                console.error(jsonbody);
+                throw "json result invalid";
+            }
+        } catch (e) {
             console.error(e);
-            _callback(e,null,[]);
+            _callback(e, null, []);
             return;
         }
-        _callback(err, jsonbody.is_board_valid, jsonbody.legal_moves,jsonbody.is_game_over);
+        _callback(err, jsonbody.is_board_valid, jsonbody.legal_moves, jsonbody.is_game_over);
     });
 }
 
-function check_move_validator_state(_callback){
-    request.get({url:CFG.getConfig().chess_move_validator_api_url+"/rest/state"}, function optionalCallback(err, httpResponse, body) {
+function check_move_validator_state(_callback) {
+    request.get({url: CFG.getConfig().chess_move_validator_api_url + "/rest/state"}, function optionalCallback(err, httpResponse, body) {
         if (err) {
             _callback(err);
             return;
@@ -64,11 +67,11 @@ function check_move_validator_state(_callback){
         var jsonbody = null;
         try {
             jsonbody = JSON.parse(body);
-            if(!jsonbody || jsonbody.status == null){
+            if (!jsonbody || jsonbody.status == null) {
                 console.error(jsonbody);
                 throw null;
             }
-        }catch (e) {
+        } catch (e) {
             console.error(e);
             _callback(e);
             return;
@@ -80,14 +83,17 @@ function check_move_validator_state(_callback){
 //REST API IF PLAYER HAS STATE THAT THE HAS TO MAKE A MOVE ->check the suggetsted move then use a api to make a move
 //return the new board save it in the database
 //the other player polls the current board via the status
-function execute_move(_board,_move, _callback){
-    if(!_board || !_board.ExtendetFen){
-        _callback("!_board.ExtendetFen",false,null,false);
+function execute_move(_board, _move, _callback) {
+    if (!_board || !_board.ExtendetFen) {
+        _callback("!_board.ExtendetFen", false, null, false);
         return;
     }
-    request.post({url:CFG.getConfig().chess_move_validator_api_url+"/rest/execute_move", formData: {fen:_board.ExtendetFen,move:_move, legal_move_settings:CFG.getConfig().use_pseudo_legal_moves}}, function optionalCallback(err, httpResponse, body) {
+    request.post({
+        url: CFG.getConfig().chess_move_validator_api_url + "/rest/execute_move",
+        formData: {fen: _board.ExtendetFen, move: _move, legal_move_settings: CFG.getConfig().use_pseudo_legal_moves}
+    }, function optionalCallback(err, httpResponse, body) {
         if (err) {
-            _callback(err,null);
+            _callback(err, null);
             return;
         }
 
@@ -95,48 +101,48 @@ function execute_move(_board,_move, _callback){
         try {
             jsonbody = JSON.parse(body);
             //TODO
-            if(!jsonbody || jsonbody.move_executed == null || jsonbody.new_fen == null || jsonbody.next_player_turn == null){
+            if (!jsonbody || jsonbody.move_executed == null || jsonbody.new_fen == null || jsonbody.next_player_turn == null) {
                 console.error(jsonbody);
                 throw "json result invalid";
             }
             //IF ERROR IN RESPONSE THROW IT
-            if(jsonbody.err){
+            if (jsonbody.err) {
                 throw jsonbody.err
             }
-        }catch (e) {
+        } catch (e) {
             console.error(e);
-            _callback(e,null, null,null);
+            _callback(e, null, null, null);
             return;
         }
-        _callback(err, jsonbody.move_executed, jsonbody.new_fen,jsonbody.next_player_turn);
+        _callback(err, jsonbody.move_executed, jsonbody.new_fen, jsonbody.next_player_turn);
     });
 }
 
 
-function get_start_opening_fen(_callback){
-    request.get({url:CFG.getConfig().chess_move_validator_api_url+"/rest/init_board"}, function optionalCallback(err, httpResponse, body) {
+function get_start_opening_fen(_callback) {
+    request.get({url: CFG.getConfig().chess_move_validator_api_url + "/rest/init_board"}, function optionalCallback(err, httpResponse, body) {
         if (err) {
-            _callback(null,get_start_opening_fen_static());
+            _callback(null, get_start_opening_fen_static());
             return;
         }
         //console.log('Upload successful!  Server responded with:', body);
         var jsonbody = null;
         try {
             jsonbody = JSON.parse(body);
-            if(!jsonbody || jsonbody.err !== null){
+            if (!jsonbody || jsonbody.err !== null) {
                 console.error(jsonbody);
-                _callback(jsonbody.err,null);
+                _callback(jsonbody.err, null);
                 return;
             }
             //IF NOT BOARD GOT FROM SERVICE USE A STATIC ONE
-            if(!jsonbody.board || jsonbody.board === ""){
-                _callback(null,get_start_opening_fen_static());
-            }else{
+            if (!jsonbody.board || jsonbody.board === "") {
+                _callback(null, get_start_opening_fen_static());
+            } else {
                 _callback(null, String(jsonbody.board));
             }
-        }catch (e) {
+        } catch (e) {
             console.error(e);
-            _callback(null,get_start_opening_fen_static());
+            _callback(null, get_start_opening_fen_static());
         }
     });
 };
@@ -149,38 +155,38 @@ function get_start_opening_fen_static() {
 module.exports = {
     get_start_opening_fen_static,
 
-    get_board: function (_fen,_pturn,_move, _is_initial_board,_turn_count,_callback) {
+    get_board: function (_fen, _pturn, _move, _is_initial_board, _turn_count, _callback) {
         var ext_fen = _fen;
 
         //BUILD EXTENDET FEN SIGNATURE
         //IF A - IS INCLUDED IN FEN THEN ITS ALREADY AN EXTENDE FEN
         //TODO REMOVE THIS WORKAROUND
-        if(!String(_fen).includes('-')){
+        if (!String(_fen).includes('-')) {
             var pturn_fen = "w";
-            if(_pturn){
+            if (_pturn) {
                 pturn_fen = "b";
             }
             var tc = _turn_count;
-            if(_is_initial_board){
+            if (_is_initial_board) {
                 _turn_count = 1;
             }
-            ext_fen =  _fen + " " + pturn_fen + " - " + "- " + "0 " + String(tc);
+            ext_fen = _fen + " " + pturn_fen + " - " + "- " + "0 " + String(tc);
         }
 
-        check_board_and_get_legal_moves(ext_fen,function (cb_err,cb_is_board_valid,cb_legal_moves,cb_is_game_over) {
-            _callback(cb_err,{
-                fen:_fen,
-                ExtendetFen:ext_fen,
-                player_turn:_pturn,
-                move:_move,
-                initial_board:_is_initial_board,
-                is_board_valid:cb_is_board_valid,
-                legal_moves:cb_legal_moves,
-                is_game_over:cb_is_game_over
+        check_board_and_get_legal_moves(ext_fen, function (cb_err, cb_is_board_valid, cb_legal_moves, cb_is_game_over) {
+            _callback(cb_err, {
+                fen: _fen,
+                ExtendetFen: ext_fen,
+                player_turn: _pturn,
+                move: _move,
+                initial_board: _is_initial_board,
+                is_board_valid: cb_is_board_valid,
+                legal_moves: cb_legal_moves,
+                is_game_over: cb_is_game_over
             });
         });
     },
-    get_fen_from_board:function (_board) {
+    get_fen_from_board: function (_board) {
         return {}
     },
     execute_move,

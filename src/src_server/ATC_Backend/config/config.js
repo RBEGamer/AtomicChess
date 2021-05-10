@@ -3,8 +3,9 @@ var STATIC_CONFIG = require('./config.json'); //LOAD OUR STATIC CONFIG FROM THE 
 
 
 var config = {};
+
 //INIT CONFIG OBJECT = STATIC_CONFIG + ENV VARIABLES
-function init_config(){
+function init_config() {
     console.log("init_config");
     console.log(process.env);
     //LOAD A STATIC CONFIG FROM THE config.json
@@ -13,7 +14,7 @@ function init_config(){
     if (!process.env.PRODUCTION) {
         console.log("NO PRODUCTION ENVIRONMENT - LOADING FROM .ENV");
         dotenv = require('dotenv').config();
-    }else{
+    } else {
         console.log("PRODUCTION ENVIRONMENT - USING ENV VARIABLES GIVEN");
     }
     //NOW LOAD THE REMAINING CONNECTION URLS FOR THE DATABASES ONTOP OF THE CONFIG
@@ -24,7 +25,7 @@ function init_config(){
         console.log("found redis ip in process.env.REDIS_IP");
         config.redis_connection_url = "redis://" + process.env.REDIS_IP
         console.log(config.redis_connection_url)
-    }else{
+    } else {
         console.error("REDIS_IP does not exists in environment variables");
         //process.exit(-1);
     }
@@ -34,7 +35,7 @@ function init_config(){
         console.log("found mongodb ip in process.env.REDIS_IP");
         config.mongodb_connection_url = "mongodb://" + process.env.MONGO_IP
         console.log(config.mongodb_connection_url)
-    }else{
+    } else {
         console.error("MONGO_IP does not exists in environment variables");
         //process.exit(-1);
     }
@@ -44,7 +45,7 @@ function init_config(){
         console.log("found move validator ip in process.env.MVVALIDATOR_IP");
         config.chess_move_validator_api_url = "http://" + process.env.MVVALIDATOR_IP
         console.log(config.chess_move_validator_api_url)
-    }else{
+    } else {
         console.error("MVVALIDATOR_IP does not exists in environment variables");
         process.exit(-1);
     }
@@ -52,12 +53,14 @@ function init_config(){
 
 }
 
-function set_key(_key, _value){
+function set_key(_key, _value) {
     config[String(_key)] = _value;
 }
-function get_key(_key){
+
+function get_key(_key) {
     return config[String(_key)];
 }
+
 module.exports = {
     getConfig: function () {
         return config;
