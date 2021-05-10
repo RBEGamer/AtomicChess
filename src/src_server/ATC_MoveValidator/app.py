@@ -61,6 +61,7 @@ def check_move():
         #GET THE POST REGQUEST FORM DATA
         fen = rq.form['fen']
         move = rq.form['move']
+        use_pseudo_legal_moves = rq.form['legal_move_settings']
 
 
 
@@ -74,7 +75,12 @@ def check_move():
         print(board)
 
         #GENERATE THE LEGAL MOVES TO CHECK AGAINST THE GIVEN MOVE
-        legal_mv = list(board.pseudo_legal_moves)
+        legal_mv = []
+        if (str(use_pseudo_legal_moves) == "1"):
+            legal_mv = list(board.pseudo_legal_moves)
+        else:
+            legal_mv = list(board.legal_moves)
+
         err = None
         #NOW CHECK ALL LEGAL MOVES WITH THE EXISTING MOVE
         for mv in legal_mv:
@@ -100,6 +106,8 @@ def execute_move():
     try:
         fen = rq.form['fen']
         move = rq.form['move']
+        use_pseudo_legal_moves = rq.form['legal_move_settings']
+
         move = str(move).lower()
         # GENERATE A BOARD FROM THE FEN CODE
         board = chess.Board(fen)  # GENERATE A BOARD
@@ -111,7 +119,14 @@ def execute_move():
         if not re.match(mv_patter, move):
             return jsonify({'err': 'move_pattern doesnt match', 'new_fen': '', 'move_executed': 0})
 
-        if chess.Move.from_uci(move) not in board.pseudo_legal_moves:
+
+        mv_list = []
+        if(str(use_pseudo_legal_moves) == "1"):
+            mv_list = board.pseudo_legal_moves
+        else:
+            mv_list = board.legal_moves
+
+        if chess.Move.from_uci(move) not in mv_list:
             return jsonify({'err': 'move not valid', 'new_fen': '', 'move_executed': 0, 'next_player_turn':0})
         board.push(chess.Move.from_uci(move))
         #TODO CHECK UCI MOVE STRING
