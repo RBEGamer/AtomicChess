@@ -784,14 +784,7 @@ router.get('/gmm',function (req,res,next) {
 
 
 router.get('/get_player_list',function (req,res,next) {
-    try{
-
-
         res.json({err:_err,playerlist_ai:[{name:"ai",virtual_pid:"123",registered_ts:Date.now()}],playerlist_table:[{name:"table",virtual_pid:"123",registered_ts:Date.now()}],playerlist_virt:[{name:"virtual",virtual_pid:"123",registered_ts:Date.now()}]});
-
-    }catch (e) {
-        res.json({err:e});
-    }
 });
 
 

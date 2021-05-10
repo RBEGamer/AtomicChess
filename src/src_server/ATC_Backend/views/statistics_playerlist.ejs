@@ -281,21 +281,8 @@
 
     //EXECUTES SCRIPT IF PAGE LOADED
     $(document).ready(function () {
-        //CHECK QUERY PARAMETER TO LOAD A GAME DIRECTLY
-        var gid = getParameterByName("gid");
-        if (gid != undefined && gid != null) {
-            load_game_information(gid);
-        }
-        //HIDE GAME INFORMATION
-        //toggle_visible_information_container(false);
         check_service_state();
         create_listed_games_table();
-        //START POLLING REFRESH TIMER
-        var update_timer = setInterval(function () {
-            if (loaded_game_id != null && loaded_game_id !== "") {
-                load_game_information(loaded_game_id, true); //UPDATE GAME STATISTICS ONLY
-            }
-        }, 1000);
     });
 </script>
 
