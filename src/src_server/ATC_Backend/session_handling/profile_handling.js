@@ -86,7 +86,7 @@ function get_profile_virtual_id(_vid, _callback){
 }
 
 function get_profile_list(_callback){
-    MDB.getProfileCollection().find({DOCTYPE:"PROFILE"},{virtual_player_id:1,account_created:1,friendly_name:1},function(err,res){
+    MDB.getProfileCollection().find({DOCTYPE:"PROFILE"},{projection: {account_created: true,virtual_player_id: true,friendly_name: true}}).toArray(function(err,res){
         _callback(err,res);
     });
 }
