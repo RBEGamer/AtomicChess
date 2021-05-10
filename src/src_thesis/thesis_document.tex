@@ -825,6 +825,8 @@ Turm \label{ndef_record_rook}}
   ansterung des Microncontollers (PN532, LED)
 \item
   integration in controller software
+\item
+  welche funktion stehen bereit tabelle
 \end{itemize}
 
 \hypertarget{fazit-zum-ersten-prototypen}{%
@@ -927,6 +929,26 @@ keine Beeinflussungen mehr statt.
 \subsection{Änderungen der
 Elektronik}\label{uxe4nderungen-der-elektronik}}
 
+Mit ein grösserer Kritikpunkt, welcher bereits wärend des Aufbaus des
+ersten Protoyps zu erkennen war, ist die Umsetzunge der Elektronik.
+Diese wurde im ersten Prototyp manuell Aufgebaut und enthielt viele
+verschiedene Komponenten.
+
+Die verwendeten Motortreiber stellten sich wärend der Entwicklung als
+sehr felxibel heraus, stellten aber auch einen grossen Kostenfaktor dar.
+Nach dem Aufbau und erprobung des ersten Prototyps wurde ersichtlich,
+dass hier nicht alle zuerst angedachten Features der Treiber benötigt
+werden und so auch andere alternativen in Frage kommen. Zusätzlich
+konnte die Elektronik nur beschränkt mit anderen System verbunden
+werden, welches insbesondere durch die verwendete \gls{spi} geschuldet
+war.
+
+All diese Faktoren erschweren einen einfachen Zusammenbau des autonomen
+Schachtischs. Die Lösung stellt die Verwendung von Standardhardware dar.
+Nach dem Herunterbrechen der elektrischen Komponenten und des
+mechanischen Aufbaus ist zu erkennen, dass der autonome Schachtisch
+einer CNC-Fräse bzw eines 3D Drucker ähnelt.
+
 \begin{figure}
 \centering
 \includegraphics{images/ATC_Hardware_Architecture_PROD.png}
@@ -950,33 +972,147 @@ Elektronik}\label{uxe4nderungen-der-elektronik}}
 \subsubsection{Implementierung
 GCODE-Sender}\label{implementierung-gcode-sender}}
 
+Durch die durchgeführten Änderungen an der Elektronik insbesondere durch
+die Verwendung einer Marlin-FW\cite{marlinfw} fähigen
+Motorsteuerung, ist eine Anpassung der \gls{hal} notwendig. Diese
+unterzützt die Ansteuerung der Motoren und anderen Komponenten (z.B.
+Spindeln, Heizelemente) mittels G-Code und wird typischerweise in 3D
+Druckern und CNC-Fräsen eingesetzt. G-Code ist eine
+Marlin-FW\cite{marlinfw} biete dabei einen großen Befehlssatz an
+G-Code Kommandos an. Bei diesem Projekt werden jedoch nur einige G-Code
+Kommandos verwendet, welche sich insbesondere auf die Ansteuerung der
+Motoren beschränken.
+
+\begin{longtable}[]{@{}lll@{}}
+\caption{Grundlegende verwendete G-Code Kommandos}\tabularnewline
+\toprule
+& G-Code Command & Parameters\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+& G-Code Command & Parameters\tabularnewline
+\midrule
+\endhead
+Move X Y & G0 & X Y\tabularnewline
+Move Home Position & G28 &\tabularnewline
+Set Units to Millimeters & G21 &\tabularnewline
+Set Servo Position & M280 & P S\tabularnewline
+Disable Motors & M84 & X Y\tabularnewline
+\bottomrule
+\end{longtable}
+
+Die erforderlichen Kommandos wurden auf eine Minimum beschränk um eine
+maximale Komaptibilität bei verschiedenen G-Code fähigen Steuerungen zu
+gewährleisten. Die Software unterstützt jedoch weitere Kommandos wie
+z.B. \passthrough{\lstinline!M150!} mit welchem spezielle Ausgänge für
+LEDs gesteuert werden können. Dieses Feature bietet die verwendete
+Marlin-FW\cite{marlinfw}, als auch die verwendete Steuerung an.
+Sollte die Steuerung solch ein optionales Kommando nicht untersützen, so
+werden diese ignoriert und somit können auch preisgünstige Steuerungen
+verwendet werden.
+
+Die Kommunikation zwischen Steuerung und eingebetteten System geschieht
+durch eine \gls{usb} Verbinden. Die Steuerung meldet sich als virtuelle
+Serielle Schnittstelle im System an und kann über diese mit der Software
+kommunizieren. Auch werden so keine speziellen Treiber benötigt, da auf
+nahezu jedem System ein Treiber (USB CDC) für die gängisten \gls{usb} zu
+Seriell Wandler bereits instlliert ist. Die Software erkennt anhand der
+zur Verfügung stehenden USB Geräte, sowie deren Vendor und Product-ID
+Informationen die Steuerung automatisch und verwendet diese nach dem
+Start automatisch. Hierzu wurde zuvor eine Liste mit verschiedenen
+getesteten Steuerungen sowie deren USB Vendor und Product-ID angelegt.
+
+\begin{longtable}[]{@{}llll@{}}
+\caption{Hinterlegte G-Code Steuerungen}\tabularnewline
+\toprule
+Product & Vendor-ID & Product-ID & Board-Type\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+Product & Vendor-ID & Product-ID & Board-Type\tabularnewline
+\midrule
+\endhead
+Bigtreetech SKR 1.4 Turbo & 1d50 & 6029 &
+Stepper-Controller\tabularnewline
+Bigtreetech SKR 1.4 & 1d50 & 6029 & Stepper-Controller\tabularnewline
+Bigtreetech SKR 1.3 & 1d50 & 6029 & Stepper-Controller\tabularnewline
+\bottomrule
+\end{longtable}
+
+Damit die Software mit der Steuerung kommunizieren kann, wurde eine
+G-Code Sender Klasse implementiert, welche die gleichen Funtionen wie
+die HAl-Basisklasse bereitstellen. Nach Aufruf einer Funktion zum
+Ansteuern der Motoren, wird aus den übergeben Parametern das passende
+G-Code Kommando in Form einer Zeichenkette zusammengesetzt und auf die
+Serielle Schnittstelle geschrieben.
+
+\begin{lstlisting}[language={C++}]
+//GCodeSender.cpp
+bool GCodeSender::setServo(const int _index,const int _pos) {
+    return write_gcode("M280 P" + std::to_string(_index) + " S" + std::to_string(_pos));     //MOVE SERVO
+}
+
+bool GCodeSender::write_gcode(std::string _gcode_line, bool _ack_check) {
+    //FLUSH INPUT BUFFER
+    port->flushReceiver();
+    //APPEND NEW LINE CHARAKTER IF NEEDED
+    if (_gcode_line.rfind('\n') == std::string::npos)
+    {
+        _gcode_line += '\n';
+    }
+    //WRITE COMMAND TO SERIAL LINE
+    port->writeString(_gcode_line.c_str());
+    //WAIT FOR ACK
+    return wait_for_ack();
+}
+
+bool GCodeSender::wait_for_ack() {  
+    int wait_counter = 0;
+    
+    while (true) {
+        //READ SERIAL REPONSE
+        const std::string resp = read_string_from_serial();
+        //PROCESS
+        if (resp.rfind("ok") != std::string::npos)
+        {
+            break;
+        }else if(resp.rfind("echo:Unknown") != std::string::npos) {
+            break;
+        }else if(resp.rfind("Error:") != std::string::npos) {
+            break;          
+        }else if (resp.rfind("echo:busy: processing") != std::string::npos) {
+            wait_counter = 0;
+            LOG_F("wait_for_ack: busy_processing");
+        }else {
+            //READ ERROR COUNTER AND HANDLING
+            wait_counter++;
+            if (wait_counter > 3)
+            {
+                break;
+            }
+        }   
+    }
+    return true;
+}
+\end{lstlisting}
+
+Die Steuerung verarbeitet diese und bestätigt die Ausführung mit einer
+Acknowledgement-Antwort. Hierbei gibt es verschiedenen Typen. Der
+einfachste Fall ist ein \passthrough{\lstinline!ok!}, welches ein
+erfolgreiche Abarbeitung des Kommandos signalisiert. Ein weitere Fall
+ist die Busy-Antwort \passthrough{\lstinline!echo:busy!}. Diese
+Signalisiert, dass das Kommando noch in der Bearbeitung ist und wird im
+falle des autonomen Schachtisch bei langen und langsamen Bewegungden der
+Mechanik ausgegeben. Das System wartet diese Antworten ab, bis eine
+finale \passthrough{\lstinline!ok!}-Antwort zurückgegeben wird, erst
+dann wird das nächste Kommando abgearbeitet.
+
+\hypertarget{fazit-zum-finalen-prototypen}{%
+\subsection{Fazit zum finalen
+Prototypen}\label{fazit-zum-finalen-prototypen}}
+
 \begin{itemize}
 \tightlist
-\item
-  was ist GCODE
-\item
-  grundlegend verwendete Kommandos G0 G28 G21 G90 M280
-\item
-  erweiterte optionale Kommandos M150 M502 M500 M92
-\item
-  anhand der hwid und existenz der serial interfaces wird entschieden
-  gcode hardware zu laden
-\end{itemize}
-
-\hypertarget{implementierung-user-port}{%
-\subsubsection{Implementierung
-User-Port}\label{implementierung-user-port}}
-
-\begin{itemize}
-\item
-  für erweiterungen sub-d9 port
-\item
-  TTL Seriell + RST + 12v
-\item
-  bei initialisierung session unf hwid daten übergeben
-\item
-  agiert als eigenständiges modul somit bei ausfall tisch funktionalität
-  nicht beeinträchtigt \#\# Fazit zum finalen Prototypen
 \item
   modularer hardware aufbau
 \item
@@ -1028,13 +1164,17 @@ Infrastruktur}\label{entwicklung-der-cloud-infrastruktur}}
 Die erste Phase der Entwicklung des Systems bestand in der Entwicklung
 der Cloud-Infrastruktur und der darauf laufenden Services. Hierbei
 stellt die ``Cloud'', einen Server dar, welcher aus dem Internet über
-eine feste IPv4 und eine IPv6 verfügt und frei konfiguriert werden kann.
+eine feste IPv4 und IPv6-Adresse verfügt und frei konfiguriert werden
+kann. Auf diesem System ist der Schach-Cloud Stack
+\ref{ATC_Cloud_Architecture} installiert, welcher zum einen aus der
+Schach-Software besteht, welche in einem Docker-Stack ausgefphrt wird
+und zum anderen\ldots{}.
 
 \begin{figure}
 \centering
 \includegraphics{images/ATC_Cloud_Architecture.png}
-\caption{Cloud-Infrastruktur: Gesamtübersicht der verwendeten
-Cloud-Infrastruktur \label{ATC_Cloud_Architecture}}
+\caption{Gesamtübersicht der verwendeten Cloud-Infrastruktur
+\label{ATC_Cloud_Architecture}}
 \end{figure}
 
 \hypertarget{api-design}{%
@@ -1174,15 +1314,15 @@ Backend in der Datenbank gespeichert und weiter an die Client-Devices
 verteilt.
 
 \begin{longtable}[]{@{}llll@{}}
-\caption{MoveValidator-Service API Overview}\tabularnewline
+\caption{MoveValidator-Service \gls{api} Overview}\tabularnewline
 \toprule
-AtomicChess Move-Validator Service API & API-Route & Method &
-Form-Data\tabularnewline
+AtomicChess Move-Validator Service \gls{api} & \gls{api}-Route & Method
+& Form-Data\tabularnewline
 \midrule
 \endfirsthead
 \toprule
-AtomicChess Move-Validator Service API & API-Route & Method &
-Form-Data\tabularnewline
+AtomicChess Move-Validator Service \gls{api} & \gls{api}-Route & Method
+& Form-Data\tabularnewline
 \midrule
 \endhead
 Check Move & /rest/check\_move & POST & * fen * move *
@@ -1193,12 +1333,13 @@ Init Board & /rest/init\_board & GET &\tabularnewline
 \bottomrule
 \end{longtable}
 
-Allgemein geschieht die Kommunikation über vier API Calls, welche vom
-MoveValidator-Service angeboten werden. Als erstes wird vom Backend der
-\passthrough{\lstinline!/rest/init\_board!} Request verwendet, welcher
-ein Spielbrett in der \gls{fen} Notation zurückgibt. Allgemein arbeitet
-wurde das komplette System so umgesetzt, dass dieses mit einem Spielfeld
-in einer Zeichenketten/String arbeitet. Dies hat den Vorteil, dass die
+Allgemein geschieht die Kommunikation über vier \gls{api} Calls, welche
+vom MoveValidator-Service angeboten werden. Als erstes wird vom Backend
+der \passthrough{\lstinline!/rest/init\_board!} Request verwendet,
+welcher ein neues Spielbrett in der \gls{fen} Notation zurückgibt,
+welches zum Start der Partie verwendet wird. Allgemein arbeitet wurde
+das komplette System so umgesetzt, dass dieses mit einem Spielfeld in
+einer Zeichenketten/String arbeitet. Dies hat den Vorteil, dass die
 Spielfeld-Notation leicht angepasst werden kann. Mit diesem Design ist
 es möglich, auch andere Spielarten im System zu implementieren, nur hier
 die initialen Spielfelder generiert werden und Züge der Spieler
@@ -1212,7 +1353,7 @@ welcher Spieler gerade an der Reihe ist. Diese werden dann in der
 auch noch die weiteren Informationen angehängt werden.
 
 \begin{longtable}[]{@{}ll@{}}
-\caption{Vergleich FEN - X-FEN}\tabularnewline
+\caption{Vergleich \gls{fen} - \gls{xfen}}\tabularnewline
 \toprule
 \begin{minipage}[b]{0.42\columnwidth}\raggedright
 FEN\strut
@@ -1240,21 +1381,32 @@ rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2\strut
 Alle gängigen Schachprogramme und Bibliotheken unterstützen das Laden
 von Spielbrettern in der \gls{fen} bzw \gls{xfen} Schreibweise, ebenso
 die für den MoveValidator Service verwendete Python-Chess Blibliothek
-\cite{pythonchesslib}.
+\cite{pythonchesslib}. Diese unterstützt zusätzlich die Generierung
+der für den Benutzer möglichen Schachzügen, welche auf dem aktuellen
+Brett möglich sind. Diese List wird vom System dazu verwendet um
+sicherzustellen, das der Benutzer nur gültige Züge tätigen kann. Diese
+Funktion lässt sich zusätzliche abschalten, falls das Spiel nicht nach
+den allgemeinen Schachregeln ablaufen soll. Bei der Generierung der
+möglichen Schachzügen, muss zwischen den Legal-Moves und den
+Pseudo-Legal Schachzügen unterschieden werden. Die Legal-Moves
+beinhalten nur die nach den Schachregeln möglichen Zügen, welche von
+Figuren des Spielers ausgeführt werden können. Die Pseudo-Legal
+Schachzüge, sind alle Schachzügen welche von den Figuren auf dem
+aktuellen Schachbrett möglich, so sind z.B. auch alle anderen Figur-Züge
+enthalten, wenn der König sich aktuell im Schach befindet.
 
-\begin{itemize}
-\tightlist
-\item
-  generiter neues brett
-\item
-  python chess packge welche pesudo legal moves generiert
-\item
-  mit diesem konzept ssind auch andere Spiele möglich
-\item
-  spielbrett als string fen notation so einfach zu parsen
-\item
-  aufbau fen
-\end{itemize}
+Wenn ein Spieler an der Reihe ist, sein getätigter Zug mittels der
+\passthrough{\lstinline!/rest/check\_move!} \gls{api} überprüft, ob
+dieser gemäss der Legal-Moves durchführbar ist. Ist dies der Fall, wird
+der Zug auf das Spielbrett angewendet, welches durch die
+\passthrough{\lstinline!/rest/execute\_move!} \gls{api} geschieht. Diese
+führ den Zug aus und ermittelt somit das neue Spielbrett und überprüft
+zusätzlich, ob das Spiel gewonnen oder verloren wurde.
+
+Hat der Benutzer jedoch einen ungültigen Zug ausgeführt, wird dieser vom
+System storniert und der Client des Benutzers stellt den Zusand des
+Spielbretts vor dem getätigten Zug wiederher. Danach hat der Benutzer
+die Möglichkeit einen alternativen Zug auszuführen.
 
 \hypertarget{entwicklung-webclient}{%
 \subsubsection{Entwicklung Webclient}\label{entwicklung-webclient}}
@@ -1277,21 +1429,30 @@ Durch die Implementierung des Webclienten in \gls{js}, ist dieser sogar
 lokal über einen Browser ausführbar, ohne dass die benötigten Dateien
 über einen Webserver ausgeliefert werden müssen.
 
-Zusätzlich zu dem verwendeten Vanilla-\gls{js} wurde jQuery als \gls{js}
-Bibliothek verwendet, welches eine Manipulation der \gls{html} Elemente
-startk vereinfacht und bietet insbesondere einfach zu nutzende
-HTTP-Request Funktionen.
+Zusätzlich zu dem verwendeten Vanilla-\gls{js} wurde jQuery als
+zusätzliche \gls{js} Bibliothek verwendet, welches eine Manipulation der
+\gls{html} Elemente stark vereinfacht. Diese bietet insbesondere einfach
+zu nutzende HTTP-Request Funktionen bzw. \gls{ajax} an, welche für die
+Kommunikation mit dem Backen-Service verwendet werden. Diese werden im
+Hintergrund eingesetzt, sodass der Webclient automatisch den neuen
+Spielzustand dem Benutzer anzeigt. Dies geschieht mittels
+\passthrough{\lstinline!polling!}, bei dem der Webbrowser in zyklischen
+Abständen die aktuellen Spiel-Informationen vom Backen-Service abfragt.
+Diese Methode wurde verwendet, um eine maximale Kompatibilität mit
+verschiedensten ggf älteren Web-Browsern sicherzustellen. Eine moderne
+alternative ist die Verwendung von Web-Sockets, bei welcher der
+Web-Browser eine direkte TCP-Verbindung zum Webserver (in diesem Fall
+der Backend-Service) aufnhemen kann und so eine direkte Kommunikation
+stattfinden kann ohne Verwendung der
+\passthrough{\lstinline!polling!}-Methode.
 
-\begin{itemize}
-\tightlist
-\item
-  backend zu testen
-\item
-  menschliche spieler zu simulieren
-\item
-  wärend der entwicklungsphase des tisches gezielt spiele simulieren zu
-  können
-\end{itemize}
+Der Hauptanwendungsfall des Webclienten wärend der Entwicklung, ist es
+weitere Spieler zu simulieren und so ein Spiel mit nur einem autonomen
+Schachtisch test zu können. Durch den Webclient ist zusätzliche möglich,
+gezielt Spiele und Spielzüge zu simulieren. Hierzu gehöhren vorallem
+Sonderzüge wie die Rochade oder der En-Passant Zug. Auch können durch
+den Webclient ungültige Züge gezogen werden, welche z.B. durch eine
+Schach-AI nicht getätigt werden.
 
 Während der Implementierung wurde der Webclient weiter ausgebaut und es
 wurde weitere Features ergänzt. Dazu zählt zum einen eine Übersicht über
@@ -1352,13 +1513,6 @@ dafür gesorgt, dass das System nicht mit ungenutzen AutoPlayer-Instanzen
 gebremst wird. Diese Anzahl \ref{ai_player_count} ist in der
 Backend-Configuration frei wählbar und kann je nach zu erwartenen
 Aufkommen angepasst werden.
-
-\begin{figure}
-\centering
-\includegraphics{images/ai_player_count.png}
-\caption{Webclient: Anzahl der aktiven, sich nicht im Spiel befindenen
-AutoPlayer-Service-Instanzen \label{ai_player_count}}
-\end{figure}
 
 Allgemein skaliert das System durch diese Art der Ressourcenverwaltung
 auch auf kleinen Systemen sehr flexibel. Durch die Art der

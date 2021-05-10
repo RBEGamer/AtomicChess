@@ -327,7 +327,7 @@ Somit kann dieser leicht seine eigenen Figuren erschaffen, ohne auf das Tool ang
 * ansteuerung des TMC5160
 * ansterung des Microncontollers (PN532, LED)
 * integration in controller software
-
+* welche funktion stehen bereit tabelle
 
 ## Fazit zum ersten Prototypen
 
@@ -383,6 +383,17 @@ Somit sind im Design zwei verschiedenen Arten von Magneten notwendig, jedoch tra
 
 ## Änderungen der Elektronik
 
+Mit ein grösserer Kritikpunkt, welcher bereits wärend des Aufbaus des ersten Protoyps zu erkennen war, ist die Umsetzunge der Elektronik.
+Diese wurde im ersten Prototyp manuell Aufgebaut und enthielt viele verschiedene Komponenten.
+
+Die verwendeten Motortreiber stellten sich wärend der Entwicklung als sehr felxibel heraus, stellten aber auch einen grossen Kostenfaktor dar.
+Nach dem Aufbau und erprobung des ersten Prototyps wurde ersichtlich, dass hier nicht alle zuerst angedachten Features der Treiber benötigt werden und so auch andere alternativen in Frage kommen.
+Zusätzlich konnte die Elektronik nur beschränkt mit anderen System verbunden werden, welches insbesondere durch die verwendete (+spi) geschuldet war.
+
+
+All diese Faktoren erschweren einen einfachen Zusammenbau des autonomen Schachtischs. Die Lösung stellt die Verwendung von Standardhardware dar.
+Nach dem Herunterbrechen der elektrischen Komponenten und des mechanischen Aufbaus ist zu erkennen, dass der autonome Schachtisch einer CNC-Fräse bzw eines 3D Drucker ähnelt.
+
 ![Producation Hardware: Blockdiagramm \label{ATC_Hardware_Architecture_PROD}](images/ATC_Hardware_Architecture_PROD.png)
 
 * verwenung von standarthardware, welche gut zu beschaffen ist
@@ -394,17 +405,101 @@ Somit sind im Design zwei verschiedenen Arten von Magneten notwendig, jedoch tra
 
 ### Implementierung GCODE-Sender
 
-* was ist GCODE
-* grundlegend verwendete Kommandos G0 G28 G21 G90 M280
-* erweiterte optionale Kommandos M150 M502 M500 M92
-* anhand der hwid und existenz der serial interfaces wird entschieden gcode hardware zu laden
 
-### Implementierung User-Port
+Durch die durchgeführten Änderungen an der Elektronik insbesondere durch die Verwendung einer Marlin-FW[@marlinfw] fähigen Motorsteuerung, ist eine Anpassung der (+hal) notwendig.
+Diese unterzützt die Ansteuerung der Motoren und anderen Komponenten (z.B. Spindeln, Heizelemente) mittels G-Code und wird typischerweise in 3D Druckern und CNC-Fräsen eingesetzt.
+G-Code ist eine
+Marlin-FW[@marlinfw] biete dabei einen großen Befehlssatz an G-Code Kommandos an. Bei diesem Projekt werden jedoch nur einige G-Code Kommandos verwendet, welche sich insbesondere auf die Ansteuerung der Motoren beschränken.
 
-* für erweiterungen sub-d9 port
-* TTL Seriell + RST + 12v
-* bei initialisierung session unf hwid daten übergeben
-* agiert als eigenständiges modul somit bei ausfall tisch funktionalität nicht beeinträchtigt
+: Grundlegende verwendete G-Code Kommandos
+
+|                          	| G-Code Command 	| Parameters                        	|
+|--------------------------	|----------------	|-----------------------------------	|
+| Move X Y                 	| G0             	| X<dest_pos_x_mm> Y<dest_pos_y_mm> 	|
+| Move Home Position       	| G28            	|                                   	|
+| Set Units to Millimeters 	| G21            	|                                   	|
+| Set Servo Position       	| M280           	| P<servo_index> S<servo_position>  	|
+| Disable Motors           	| M84            	| X Y                               	|
+
+
+Die erforderlichen Kommandos wurden auf eine Minimum beschränk um eine maximale Komaptibilität bei verschiedenen G-Code fähigen Steuerungen zu gewährleisten.
+Die Software unterstützt jedoch weitere Kommandos wie z.B. `M150` mit welchem spezielle Ausgänge für LEDs gesteuert werden können. Dieses Feature bietet die verwendete Marlin-FW[@marlinfw], als auch die verwendete Steuerung an. Sollte die Steuerung solch ein optionales Kommando nicht untersützen, so werden diese ignoriert und somit können auch preisgünstige Steuerungen verwendet werden.
+
+Die Kommunikation zwischen Steuerung und eingebetteten System geschieht durch eine (+usb) Verbinden. Die Steuerung meldet sich als virtuelle Serielle Schnittstelle im System an und kann über diese mit der Software kommunizieren. Auch werden so keine speziellen Treiber benötigt, da auf nahezu jedem System ein Treiber (USB CDC) für die gängisten (+usb) zu Seriell Wandler bereits instlliert ist. Die Software erkennt anhand der zur Verfügung stehenden USB Geräte, sowie deren Vendor und Product-ID Informationen die Steuerung automatisch und verwendet diese nach dem Start automatisch. Hierzu wurde zuvor eine Liste mit verschiedenen getesteten Steuerungen sowie deren USB Vendor und Product-ID angelegt.
+
+: Hinterlegte G-Code Steuerungen 
+
+| Product                         | Vendor-ID | Product-ID | Board-Type         |
+|---------------------------------|-----------|------------|--------------------|
+| Bigtreetech SKR 1.4 Turbo       | 1d50      | 6029       | Stepper-Controller |
+| Bigtreetech SKR 1.4             | 1d50      | 6029       | Stepper-Controller |
+| Bigtreetech SKR 1.3             | 1d50      | 6029       | Stepper-Controller |
+
+
+Damit die Software mit der Steuerung kommunizieren kann, wurde eine G-Code Sender Klasse implementiert, welche die gleichen Funtionen wie die HAl-Basisklasse bereitstellen.
+Nach Aufruf einer Funktion zum Ansteuern der Motoren, wird aus den übergeben Parametern das passende G-Code Kommando in Form einer Zeichenkette zusammengesetzt und auf die Serielle Schnittstelle geschrieben.
+
+
+
+```c++
+//GCodeSender.cpp
+bool GCodeSender::setServo(const int _index,const int _pos) {
+	return write_gcode("M280 P" + std::to_string(_index) + " S" + std::to_string(_pos));     //MOVE SERVO
+}
+
+bool GCodeSender::write_gcode(std::string _gcode_line, bool _ack_check) {
+    //FLUSH INPUT BUFFER
+	port->flushReceiver();
+	//APPEND NEW LINE CHARAKTER IF NEEDED
+	if (_gcode_line.rfind('\n') == std::string::npos)
+	{
+		_gcode_line += '\n';
+	}
+	//WRITE COMMAND TO SERIAL LINE
+	port->writeString(_gcode_line.c_str());
+    //WAIT FOR ACK
+    return wait_for_ack();
+}
+
+bool GCodeSender::wait_for_ack() {	
+	int wait_counter = 0;
+	
+	while (true) {
+        //READ SERIAL REPONSE
+		const std::string resp = read_string_from_serial();
+		//PROCESS
+		if (resp.rfind("ok") != std::string::npos)
+		{
+			break;
+		}else if(resp.rfind("echo:Unknown") != std::string::npos) {
+			break;
+		}else if(resp.rfind("Error:") != std::string::npos) {
+			break;			
+		}else if (resp.rfind("echo:busy: processing") != std::string::npos) {
+			wait_counter = 0;
+			LOG_F("wait_for_ack: busy_processing");
+		}else {
+            //READ ERROR COUNTER AND HANDLING
+			wait_counter++;
+			if (wait_counter > 3)
+			{
+				break;
+			}
+		}	
+	}
+	return true;
+}
+```
+Die Steuerung verarbeitet diese und bestätigt die Ausführung mit einer Acknowledgement-Antwort. Hierbei gibt es verschiedenen Typen. Der einfachste Fall ist ein `ok`, welches ein erfolgreiche Abarbeitung des Kommandos signalisiert. Ein weitere Fall ist die Busy-Antwort `echo:busy`. Diese Signalisiert, dass das Kommando noch in der Bearbeitung ist und wird im falle des autonomen Schachtisch bei langen und langsamen Bewegungden der Mechanik ausgegeben. Das System wartet diese Antworten ab, bis eine finale `ok`-Antwort zurückgegeben wird, erst dann wird das nächste Kommando abgearbeitet.
+
+
+
+
+
+
+
+
+
 ## Fazit zum finalen Prototypen
 
 * modularer hardware aufbau
@@ -455,9 +550,10 @@ Somit sind im Design zwei verschiedenen Arten von Magneten notwendig, jedoch tra
 # Entwicklung der Cloud Infrastruktur
 
 Die erste Phase der Entwicklung des Systems bestand in der Entwicklung der Cloud-Infrastruktur und der darauf laufenden Services.
-Hierbei stellt die "Cloud", einen Server dar, welcher aus dem Internet über eine feste IPv4 und eine IPv6 verfügt und frei konfiguriert werden kann.
+Hierbei stellt die "Cloud", einen Server dar, welcher aus dem Internet über eine feste IPv4 und IPv6-Adresse verfügt und frei konfiguriert werden kann.
+Auf diesem System ist der Schach-Cloud Stack \ref{ATC_Cloud_Architecture} installiert, welcher zum einen aus der Schach-Software besteht, welche in einem Docker-Stack ausgefphrt wird und zum anderen....
 
-![Cloud-Infrastruktur: Gesamtübersicht der verwendeten Cloud-Infrastruktur \label{ATC_Cloud_Architecture}](images/ATC_Cloud_Architecture.png)
+![Gesamtübersicht der verwendeten Cloud-Infrastruktur \label{ATC_Cloud_Architecture}](images/ATC_Cloud_Architecture.png)
 
 
 
@@ -530,8 +626,6 @@ Diese stellen alle wichtigen Funktionen zum Betrieb des autonomen Schachtischs z
 
 ### MoveValidator
 
-
-
 Der MoveValidator-Service bildet im System die eigentliche Schachlogik ab.
 Die Aufgabe ist es, die vom Benutzer eingegebenen Züge auf Richtigkeit zu überprüfen und auf daraufhin neuen Spiel-Status zurückzugeben.
 Dazu zählen unter anderem das neue Schachbrett und ob ein Spieler gewonnen oder verloren hat.
@@ -583,13 +677,6 @@ Hat der Benutzer jedoch einen ungültigen Zug ausgeführt, wird dieser vom Syste
 
 
 
-
-
-
-
-
-
-
 ### Entwicklung Webclient
 
 ![Webclient: Spielansicht \label{ATC_webclient}](images/ATC_webclient.png)
@@ -601,14 +688,12 @@ Dieser wurde dabei komplett in (+js) umgesetzt im Zusammenspiel mit (+html) und 
 Ausgeliefert werden die statischen Dateien zur Einfachheit durch den Backend-Service, es wurde kein gesonderter Frontend-Service angelegt.
 Durch die Implementierung des Webclienten in (+js), ist dieser sogar lokal über einen Browser ausführbar, ohne dass die benötigten Dateien über einen Webserver ausgeliefert werden müssen.
 
-Zusätzlich zu dem verwendeten Vanilla-(+js) wurde jQuery als (+js) Bibliothek verwendet, welches eine Manipulation der (+html) Elemente startk vereinfacht und bietet insbesondere einfach zu nutzende HTTP-Request Funktionen.
+Zusätzlich zu dem verwendeten Vanilla-(+js) wurde jQuery als zusätzliche (+js) Bibliothek verwendet, welches eine Manipulation der (+html) Elemente stark vereinfacht. Diese bietet insbesondere einfach zu nutzende HTTP-Request Funktionen bzw. (+ajax) an, welche für die Kommunikation mit dem Backen-Service verwendet werden. Diese werden im Hintergrund eingesetzt, sodass der Webclient automatisch den neuen Spielzustand dem Benutzer anzeigt. Dies geschieht mittels `polling`, bei dem der Webbrowser in zyklischen Abständen die aktuellen Spiel-Informationen vom Backen-Service abfragt. Diese Methode wurde verwendet, um eine maximale Kompatibilität mit verschiedensten ggf älteren Web-Browsern sicherzustellen. Eine moderne alternative ist die Verwendung von Web-Sockets, bei welcher der Web-Browser eine direkte TCP-Verbindung zum Webserver (in diesem Fall der Backend-Service) aufnhemen kann und so eine direkte Kommunikation stattfinden kann ohne Verwendung der `polling`-Methode.
 
 
-
-* backend zu testen
-* menschliche spieler zu simulieren
-* wärend der entwicklungsphase des tisches gezielt spiele simulieren zu können
-
+Der Hauptanwendungsfall des Webclienten wärend der Entwicklung, ist es weitere Spieler zu simulieren und so ein Spiel mit nur einem autonomen Schachtisch test zu können.
+Durch den Webclient ist zusätzliche möglich, gezielt Spiele und Spielzüge zu simulieren. Hierzu gehöhren vorallem Sonderzüge wie die Rochade oder der En-Passant Zug.
+Auch können durch den Webclient ungültige Züge gezogen werden, welche z.B. durch eine Schach-AI nicht getätigt werden.
 
 
 
@@ -617,7 +702,6 @@ Dazu zählt zum einen eine Übersicht über vergangene und aktuell laufende Spie
 Auch ist es möglich aktuell laufende Spiele in Echtzeit anzeigen zu lassen, somit wurde eine Livestream-Funktionaliät implementiert.
 
 ![Webclient: Statistiken \label{}](images/ATC_statistics.png)
-
 
 
 ### AutoPlayer
@@ -647,8 +731,6 @@ Wenn das Match beendet wird, beendet sich auch die Service-Instanz.
 Diese wird jedoch wieder gestartet wenn die Anzahl der zur Verfügung stehenden Computerspieler unter einen definierten Wert fallen. 
 Somit ist dafür gesorgt, dass das System nicht mit ungenutzen AutoPlayer-Instanzen gebremst wird.
 Diese Anzahl \ref{ai_player_count} ist in der Backend-Configuration frei wählbar und kann je nach zu erwartenen Aufkommen angepasst werden.
-
-![Webclient: Anzahl der aktiven, sich nicht im Spiel befindenen AutoPlayer-Service-Instanzen \label{ai_player_count}](images/ai_player_count.png)
 
 Allgemein skaliert das System durch diese Art der Ressourcenverwaltung auch auf kleinen Systemen sehr flexibel.
 Durch die Art der Implementierung, dass sich der AutoPlayer-Service wie ein normaler Spieler verhält, sind auch andere Arten des Computerspieler möglich.

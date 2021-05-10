@@ -1,0 +1,6 @@
+,G-Code Command,Parameters
+Move X Y,G0,X<dest_pos_x_mm> Y<dest_pos_y_mm>
+Move Home Position,G28,
+Set Units to Millimeters,G21,
+Set Servo Position,M280,P<servo_index> S<servo_position>
+Disable Motors,M84,X Y
