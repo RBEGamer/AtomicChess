@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "c3097593-df80-41d8-b95b-37555c5e62e7",
+		"_postman_id": "cefb4cc2-f58f-4650-88d7-939f53c0e176",
 		"name": "AtomicChessChessMoveValidator",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -121,14 +121,30 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "INIT_BOARD",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{ATC_MOVE_VALIDATOR_URL}}/rest/init_board",
+					"host": [
+						"{{ATC_MOVE_VALIDATOR_URL}}"
+					],
+					"path": [
+						"rest",
+						"init_board"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"variable": [
 		{
-			"id": "79e46cd8-d186-423c-963b-037fbbec3ffa",
 			"key": "BASE_URL",
 			"value": "http://127.0.0.1:5000"
 		}
-	],
-	"protocolProfileBehavior": {}
+	]
 }

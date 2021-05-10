@@ -9,8 +9,9 @@
 
   * [CHECK_MOVE](#1-check_move)
   * [EXECUTE_MOVE](#2-execute_move)
-  * [STATE](#3-state)
-  * [VALIDATE_BOARD](#4-validate_board)
+  * [INIT_BOARD](#3-init_board)
+  * [STATE](#4-state)
+  * [VALIDATE_BOARD](#5-validate_board)
 
 
 --------
@@ -67,7 +68,21 @@ URL: {{ATC_MOVE_VALIDATOR_URL}}/rest/execute_move
 
 
 
-### 3. STATE
+### 3. INIT_BOARD
+
+
+
+***Endpoint:***
+
+```bash
+Method: GET
+Type: 
+URL: {{ATC_MOVE_VALIDATOR_URL}}/rest/init_board
+```
+
+
+
+### 4. STATE
 
 
 
@@ -81,7 +96,7 @@ URL: {{ATC_MOVE_VALIDATOR_URL}}/rest/state
 
 
 
-### 4. VALIDATE_BOARD
+### 5. VALIDATE_BOARD
 
 
 
@@ -113,4 +128,4 @@ URL: {{ATC_MOVE_VALIDATOR_URL}}/rest/validate_board
 
 ---
 [Back to top](#atomicchesschessmovevalidator)
-> Made with &#9829; by [thedevsaddam](https://github.com/thedevsaddam) | Generated at: 2021-04-05 23:44:31 by [docgen](https://github.com/thedevsaddam/docgen)
+> Made with &#9829; by [thedevsaddam](https://github.com/thedevsaddam) | Generated at: 2021-05-10 22:06:10 by [docgen](https://github.com/thedevsaddam/docgen)

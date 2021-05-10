@@ -547,9 +547,23 @@ Der Backend-Service fragt einen neues Spiel an oder übergibt einen Schachzug in
 
 Mit diesem Design ist es möglich, auch andere Spielarten im System zu implementieren, nur hier die initialen Spielfelder generiert werden und Züge der Spieler validiert werden müssen.
 
-Allgemein geschieht die Kommunikation über drei API Calls.
+: MoveValidator-Service API Overview
 
-* Auflistung der routen als tabelle
+| AtomicChess Move-Validator Service API 	| API-Route            	| Method 	| Form-Data             	|
+|----------------------------------------	|----------------------	|--------	|-----------------------	|
+| Check Move                             	| /rest/check_move     	| POST   	| * fen * move * player 	|
+| Execute Move                           	| /rest/execute_move   	| POST   	| fen * move             	|
+| Validate Board                         	| /rest/validate_board 	| POST   	| fen                   	|
+| Init Board                             	| /rest/init_board     	| GET    	|                       	|
+
+
+Allgemein geschieht die Kommunikation über vier API Calls, welche vom MoveValidator-Service angeboten werden.
+
+
+
+
+
+
 
 
 

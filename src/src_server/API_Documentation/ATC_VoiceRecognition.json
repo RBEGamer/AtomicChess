@@ -1,0 +1,108 @@
+{
+	"info": {
+		"_postman_id": "db12ce9a-63bf-4cac-8b78-09828809a3c4",
+		"name": "AtomicChessVoiceRecognitionService",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://{{ATC_VOICE_RECOGNITION_URL}}/reset_move?hwid=hwid",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ATC_VOICE_RECOGNITION_URL}}/reset_move?hwid=hwid",
+					"protocol": "http",
+					"host": [
+						"{{ATC_VOICE_RECOGNITION_URL}}"
+					],
+					"path": [
+						"reset_move"
+					],
+					"query": [
+						{
+							"key": "hwid",
+							"value": "hwid",
+							"description": "client / table hwid"
+						}
+					]
+				},
+				"description": "used for reset the last move on the voice system"
+			},
+			"response": []
+		},
+		{
+			"name": "http://{{ATC_VOICE_RECOGNITION_URL}}/alexa_register?userId=1234&userPin=1337",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"requestEnvelope\": {\n    \"version\": \"1.0\",\n    \"session\": {\n      \"new\": false,\n      \"sessionId\": \"amzn1.echo-api.session.0ee27e97-d689-4838-8c67-a6efaaa10ac9\",\n      \"application\": {\n        \"applicationId\": \"amzn1.ask.skill.abc9437c-29d1-4d18-b8b1-c70bf85b405b\"\n      },\n      \"user\": {\n        \"userId\": \"amzn1.ask.account.AFDENJBI4ECYG7GYB7RFYM4FDDYLHGTFEM3VOG5FAUW2JEWJZEKYCVF7HTOBU66HPI2WKQAQZNB4CLX2CDUBB54TSFQGZZUG4KCN4RKWQT65AI76LY3PTNCHVFLOGPVY6YIGLJ6JLLKXKC7IFERPT4VWJBNHKXWOC3NNE7U2RGAPRJN6AUD4ERPMPGISVOH2LGMHWSOHUOVDPTI\"\n      }\n    },\n    \"context\": {\n      \"Extensions\": {\n        \"available\": {}\n      },\n      \"System\": {\n        \"application\": {\n          \"applicationId\": \"amzn1.ask.skill.abc9437c-29d1-4d18-b8b1-c70bf85b405b\"\n        },\n        \"user\": {\n          \"userId\": \"amzn1.ask.account.AFDENJBI4ECYG7GYB7RFYM4FDDYLHGTFEM3VOG5FAUW2JEWJZEKYCVF7HTOBU66HPI2WKQAQZNB4CLX2CDUBB54TSFQGZZUG4KCN4RKWQT65AI76LY3PTNCHVFLOGPVY6YIGLJ6JLLKXKC7IFERPT4VWJBNHKXWOC3NNE7U2RGAPRJN6AUD4ERPMPGISVOH2LGMHWSOHUOVDPTI\"\n        },\n        \"device\": {\n          \"deviceId\": \"amzn1.ask.device.AGWIKJD5PGUDMGPCQK2GBMRA4TIXZVRKN5V46UB63IJRXMWXHP6VTWYCZB23ELVTBSHHOAYKLUG3VFKNLTTIBTYU5AY4GFKJ43KXIKP5U4IH5OBMZKURHJIDLYFQP5YQJ25ER3YCOMUA5PGRIICMF6ALT5DXEDPBJPSQNGNEW24EKVDC56AHG\",\n          \"supportedInterfaces\": {}\n        },\n        \"apiEndpoint\": \"https://api.eu.amazonalexa.com\",\n        \"apiAccessToken\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6IjEifQ.eyJhdWQiOiJodHRwczovL2FwaS5ldS5hbWF6b25hbGV4YS5jb20iLCJpc3MiOiJBbGV4YVNraWxsS2l0Iiwic3ViIjoiYW16bjEuYXNrLnNraWxsLmFiYzk0MzdjLTI5ZDEtNGQxOC1iOGIxLWM3MGJmODViNDA1YiIsImV4cCI6MTYxOTcwNjExOSwiaWF0IjoxNjE5NzA1ODE5LCJuYmYiOjE2MTk3MDU4MTksInByaXZhdGVDbGFpbXMiOnsiY29udGV4dCI6IkFBQUFBQUFBQVFBU3lrOURjOGtqTGtNd1JkNm5SaS93S3dFQUFBQUFBQUIrQW1VSm1pVGJLdDNlWWNCcmoyd2MxT3BnUWZHM2p3NWdmejFSUkNTNms5RURLNFRJc0ZkUVkvbHIzdVNWUWJsR2Y5WWpaT0tON3pBZ1VIdEtiVmpuUEErMkdnTUVickJEazg1bnpFZW1lZlRnckF4OU14Nm12Vm1yU3VvenpVK1ZLTUxLeXhHYVNnWG5OWTd3TkVvYksxb0MzcXh2T1ZPeUdJcE5OSEVvWisvN0o1M3Fybk13b0tMcEJmUFBlazBONjNWeTNHRENSN3JDb3RwcDFJSHZXYUEzeEU0TUJGbjlIeC9JeXB5UnIvaWF2SzhNWHBad2ZVVVBWQ2ZsZzJkSUU5V2NIcEhkeWUrSGE3VTNWa21LSGNtTHIzclR0L0ptRDFZVDdqY0ZOendPTXJqb0FaQ2ZCNXNOVFVUZ2Vtajk3WXA0SVdjdThudStMdTRNeTFabTZPZFAxSUVTeTNXWjlvbFVPbWpnMUxJVmt6bHFqcEcveHkzb1g5eEU3eVMzVHYzbk1SRHJsaG9Va3c9PSIsImNvbnNlbnRUb2tlbiI6bnVsbCwiZGV2aWNlSWQiOiJhbXpuMS5hc2suZGV2aWNlLkFHV0lLSkQ1UEdVRE1HUENRSzJHQk1SQTRUSVhaVlJLTjVWNDZVQjYzSUpSWE1XWEhQNlZUV1lDWkIyM0VMVlRCU0hIT0FZS0xVRzNWRktOTFRUSUJUWVU1QVk0R0ZLSjQzS1hJS1A1VTRJSDVPQk1aS1VSSEpJRExZRlFQNVlRSjI1RVIzWUNPTVVBNVBHUklJQ01GNkFMVDVEWEVEUEJKUFNRTkdORVcyNEVLVkRDNTZBSEciLCJ1c2VySWQiOiJhbXpuMS5hc2suYWNjb3VudC5BRkRFTkpCSTRFQ1lHN0dZQjdSRllNNEZERFlMSEdURkVNM1ZPRzVGQVVXMkpFV0paRUtZQ1ZGN0hUT0JVNjZIUEkyV0tRQVFaTkI0Q0xYMkNEVUJCNTRUU0ZRR1paVUc0S0NONFJLV1FUNjVBSTc2TFkzUFROQ0hWRkxPR1BWWTZZSUdMSjZKTExLWEtDN0lGRVJQVDRWV0pCTkhLWFdPQzNOTkU3VTJSR0FQUkpONkFVRDRFUlBNUEdJU1ZPSDJMR01IV1NPSFVPVkRQVEkifX0.EasxwkMQWK9np72c5XLcda392mv54YRUOmdl-6mHnmWCD4wajjF-M1IUCzpRtenP9sc332FmjTEmCpc7kmySJx26USQpVaWCatropugUUzDLEAs5Jo5LrQR54ECZ9m6Legc5tLGRl4AfFFPCgf7YEHXsUDN3om0wtahIl_jl4DzrjUUXFJx2Yd8e-nmtvMxEbZMU6WDsncfAP29BVa_0CaXx5eDDmPM7MP45-RThZn8fsVy1L2PyjN57hOROnQv2c6OIjNi0UVh0JpHxyPePVUrJiVobmWY3hUGz9ZnwSIe5BhskYTAFiocfTqkrr9VVIbcFDJXFnFMJAQp6z7UDMA\",\n        \"unit\": {\n          \"unitId\": \"amzn1.ask.unit.AERSLAX4OHKUYGVYSCW4MAGEMKRIBR7DYL42IBR5ZT3P6GJICG6YAZJGFGYZGZPWNULG7BHGOQNAZQAVCZITTEP6ZQVODYL2AI32JFMYJO6C7DS4BZTFAFWJ643XN2ICPM\"\n        }\n      }\n    },\n    \"request\": {\n      \"type\": \"IntentRequest\",\n      \"requestId\": \"amzn1.echo-api.request.0615e925-b1bc-4a2b-94c9-c41b1d57fb22\",\n      \"locale\": \"en-US\",\n      \"timestamp\": \"2021-04-29T14:16:59Z\",\n      \"intent\": {\n        \"name\": \"makemove\",\n        \"confirmationStatus\": \"NONE\",\n        \"slots\": {\n          \"column\": {\n            \"name\": \"column\",\n            \"value\": \"a\",\n            \"resolutions\": {\n              \"resolutionsPerAuthority\": [\n                {\n                  \"authority\": \"amzn1.er-authority.echo-sdk.amzn1.ask.skill.abc9437c-29d1-4d18-b8b1-c70bf85b405b.fields_col\",\n                  \"status\": {\n                    \"code\": \"ER_SUCCESS_MATCH\"\n                  },\n                  \"values\": [\n                    {\n                      \"value\": {\n                        \"name\": \"A\",\n                        \"id\": \"a\"\n                      }\n                    }\n                  ]\n                }\n              ]\n            },\n            \"confirmationStatus\": \"NONE\",\n            \"source\": \"USER\"\n          },\n          \"figure\": {\n            \"name\": \"figure\",\n            \"value\": \"pawn\",\n            \"resolutions\": {\n              \"resolutionsPerAuthority\": [\n                {\n                  \"authority\": \"amzn1.er-authority.echo-sdk.amzn1.ask.skill.abc9437c-29d1-4d18-b8b1-c70bf85b405b.figures\",\n                  \"status\": {\n                    \"code\": \"ER_SUCCESS_MATCH\"\n                  },\n                  \"values\": [\n                    {\n                      \"value\": {\n                        \"name\": \"pawn\",\n                        \"id\": \"p\"\n                      }\n                    }\n                  ]\n                }\n              ]\n            },\n            \"confirmationStatus\": \"NONE\",\n            \"source\": \"USER\"\n          },\n          \"row\": {\n            \"name\": \"row\",\n            \"value\": \"5\",\n            \"resolutions\": {\n              \"resolutionsPerAuthority\": [\n                {\n                  \"authority\": \"amzn1.er-authority.echo-sdk.amzn1.ask.skill.abc9437c-29d1-4d18-b8b1-c70bf85b405b.fields_row\",\n                  \"status\": {\n                    \"code\": \"ER_SUCCESS_MATCH\"\n                  },\n                  \"values\": [\n                    {\n                      \"value\": {\n                        \"name\": \"5\",\n                        \"id\": \"5\"\n                      }\n                    }\n                  ]\n                }\n              ]\n            },\n            \"confirmationStatus\": \"NONE\",\n            \"source\": \"USER\"\n          }\n        }\n      },\n      \"dialogState\": \"COMPLETED\",\n      \"sensitivityClassification\": null\n    }\n  },\n  \"context\": {\n    \"callbackWaitsForEmptyEventLoop\": true,\n    \"functionVersion\": \"38\",\n    \"functionName\": \"abc9437c-29d1-4d18-b8b1-c70bf85b405b\",\n    \"memoryLimitInMB\": \"512\",\n    \"logGroupName\": \"/aws/lambda/abc9437c-29d1-4d18-b8b1-c70bf85b405b\",\n    \"logStreamName\": \"2021/04/29/[38]2c001553f0a34e8a90f3f4429aed24ec\",\n    \"invokedFunctionArn\": \"arn:aws:lambda:eu-west-1:202906012113:function:abc9437c-29d1-4d18-b8b1-c70bf85b405b:Release_0\",\n    \"awsRequestId\": \"c1cf4f64-a99b-4490-8339-e09c6076b3f0\"\n  },\n  \"attributesManager\": {},\n  \"responseBuilder\": {},\n  \"registered_user\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ATC_VOICE_RECOGNITION_URL}}/alexa_register?userId=1234&userPin=1337",
+					"protocol": "http",
+					"host": [
+						"{{ATC_VOICE_RECOGNITION_URL}}"
+					],
+					"path": [
+						"alexa_register"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "1234",
+							"description": "Alexa / User ID"
+						},
+						{
+							"key": "userPin",
+							"value": "1337",
+							"description": "alexa skill generated pairing pin"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://{{ATC_VOICE_RECOGNITION_URL}}/get_move?hwid=b42e99fb4a2b",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ATC_VOICE_RECOGNITION_URL}}/get_move?hwid=b42e99fb4a2b",
+					"protocol": "http",
+					"host": [
+						"{{ATC_VOICE_RECOGNITION_URL}}"
+					],
+					"path": [
+						"get_move"
+					],
+					"query": [
+						{
+							"key": "hwid",
+							"value": "b42e99fb4a2b",
+							"description": "client / table hwid"
+						},
+						{
+							"key": "userPin",
+							"value": "1337",
+							"disabled": true
+						}
+					]
+				},
+				"description": "used to get the last move the user entered over the alexa skill\n"
+			},
+			"response": []
+		}
+	]
+}
