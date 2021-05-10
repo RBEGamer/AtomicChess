@@ -251,7 +251,7 @@
 
 
     //LOAD ALL ALVARIABLE GAMES AND DISPLAY THEM IN THE GAME HISTROY CONTAINER
-    function create_listed_games_table() {
+    function gen_playerlist() {
         $.getJSON('/rest/get_player_list', function (data) {
             //PROCESS GOT GAME LIST RESULT
             if (!data || data.err || !data.playerlist_ai || !data.playerlist_table || !data.playerlist_virt || !Array.isArray(data.playerlist_ai) || !Array.isArray(data.playerlist_table)|| !Array.isArray(data.playerlist_virt)) {
@@ -282,7 +282,7 @@
     //EXECUTES SCRIPT IF PAGE LOADED
     $(document).ready(function () {
         check_service_state();
-        create_listed_games_table();
+        gen_playerlist();
     });
 </script>
 
