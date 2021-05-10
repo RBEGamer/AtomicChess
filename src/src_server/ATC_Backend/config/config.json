@@ -12,7 +12,7 @@
   "mongodb_collection_profiles": "profiles",
   "mongodb_collection_games": "games",
   "mongodb_collection_lobby": "lobby",
-  "chess_move_validator_api_url": "http://127.0.0.1:5000",
+  "chess_move_validator_api_url": "http://127.0.0.1:5001",
   "github_repository": "https://github.com/RBEGamer/AtomicChessOS",
   "impressum_ulr": "https://marcelochsendorf.com/impressum",
   "livestream_url": "https://youtu.be/Lt0HTwnXU78",
