@@ -588,7 +588,6 @@ ChessPiece::FIGURE UserBoardController::read_chess_piece_nfc(){
 
 
 
-
 ## Fazit zum finalen Prototypen
 
 * modularer hardware aufbau
