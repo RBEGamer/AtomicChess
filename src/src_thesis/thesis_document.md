@@ -908,6 +908,8 @@ Diese Feature wurde insbesondere bei der Entwicklung des Webclienten und der Ste
 
 
 
+
+
 ## Userinterface
 
 Das Userinterface ist mit das zentrale Element mit welchem der Benutzer interagiert.
@@ -921,16 +923,51 @@ Hierbei soll dieses nur die nötigsten Funktionen bereitstellen, welche zur Bedi
 ![Embedded System Software: User-Interface Mockup \label{ATC_Gui}](images/ATC_Gui.png)
 
 * QT Quick UI, als Package in Buildroot integriert
+
+
+### Inter Prozess Communication
+
 * IPC Bibliothek zur Kommunikation mit der controller-Software Instanz
 * JSON basiert => einfaches Debugging
 * Steuerung über andere Endgeräte möglich z.B Handy-App welche im selben Netzwerk befindet.
+* durch preprozessor define wird der master definiert
+* eventbasiert seperater thread
 
 
+```c++
+//IPC guicommunicator.cpp
+//Simplyfied example calls
 
+//INIT IPC SERVER
+guicommunicator gui;
+gui.start_recieve_thread();
+//CHECK OTHER PROCESS REACHABLE
+while (!gui.check_guicommunicator_reachable()){
+    gui_wait_counter++;
+    if (gui_wait_counter > GUI_WAIT_COUNTER_MAX){
+        break;
+    }
+}
+//...
+//CHECK OTHER PROCESS VERSION NUMBER
+if(gui.check_guicommunicator_version()){
+    LOG_F(WARNING, "guicommunicator version check failed");
+}
 
+//SWITCH MENU ON SCREEN TO PLEASE WAIT SCREEN
+gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::PROCESSING_SCREEN);
+//ROATE SCREEN 180°
+gui.createEvent(guicommunicator::GUI_ELEMENT::QT_UI_SET_ORIENTATION_180, guicommunicator::GUI_VALUE_TYPE::ENABLED);
 
-
-
+//GET EVENT FROM OTHER PROCESSES STORED IN EVENT QUEUE
+guicommunicator::GUI_EVENT ev = gui.get_gui_update_event();
+if (!ev.is_event_valid){
+    gui.debug_event(ev, true);
+    continue;
+}
+//CHECK FOR USER INPUT
+if(ev.event == guicommunicator::GUI_ELEMENT::BEGIN_BTN_SCAN && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {}
+```
 
 
 
