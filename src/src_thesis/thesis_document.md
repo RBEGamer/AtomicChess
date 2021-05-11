@@ -956,7 +956,7 @@ if(gui.check_guicommunicator_version()){
 
 //SWITCH MENU ON SCREEN TO PLEASE WAIT SCREEN
 gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::PROCESSING_SCREEN);
-//ROATE SCREEN 180°
+//FLIP SCREEN ORIENTATION
 gui.createEvent(guicommunicator::GUI_ELEMENT::QT_UI_SET_ORIENTATION_180, guicommunicator::GUI_VALUE_TYPE::ENABLED);
 
 //GET EVENT FROM OTHER PROCESSES STORED IN EVENT QUEUE
