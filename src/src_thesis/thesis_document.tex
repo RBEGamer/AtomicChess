@@ -1204,7 +1204,11 @@ versucht über das PN532 Modul ein \gls{nfc} Tag zu lesen. Wenn dieses
 erkannt wird und einen passenden Payload enthält, anwortet dieser mit
 dem String \passthrough{\lstinline!\_readnfc\_res\_FIGURE-ID\_ok\_!}
 oder wenn kein Tag gefunden wurde mit
-\passthrough{\lstinline!\_readnfc\_red\_\_empty\_!}.
+\passthrough{\lstinline!\_readnfc\_red\_\_empty\_!}. Auch hier wird wie
+bei der G-Code Sender Implementierung auf Fehler bei der Kommunikation
+bzw einem Abbruch durch einen Timeout reagiert. Das System initialisiert
+die Serielle Schnittstelle neu und resettet das System durch setzten des
+DTR GPIO am USB-Seriell Wandler ICs (falls vorhanden).
 
 \begin{lstlisting}[language={C++}]
 //UserBoardController.cpp HOST-SYSTEM
@@ -1239,6 +1243,31 @@ ChessPiece::FIGURE UserBoardController::read_chess_piece_nfc(){
     return fig;
 }
 \end{lstlisting}
+
+Das System erkennt den anschluss der Hardware beim Start auf die gleiche
+Art und Weise wie der G-Code Sender. Hierbei wurden einige verschiedene
+Mikrokontroller System im System hinterlegt, welchen die Firmware
+geteset wurde.
+
+\begin{longtable}[]{@{}llll@{}}
+\caption{Hinterlegte Mikrokontroller}\tabularnewline
+\toprule
+Product & Vendor-ID & Product-ID & Board-Type\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+Product & Vendor-ID & Product-ID & Board-Type\tabularnewline
+\midrule
+\endhead
+Arduino Due {[}Programming Port{]} & 2341 & 003d &
+User-Move-Detector\tabularnewline
+Arduino Due {[}Native SAMX3 Port{]} & 2341 & 003e &
+User-Move-Detector\tabularnewline
+CH340 & 1a86 & 7523 & User-Move-Detector\tabularnewline
+HL-340 & 1a86 & 7523 & User-Move-Detector\tabularnewline
+STM32F411 & 0483 & 5740 & User-Move-Detector\tabularnewline
+\bottomrule
+\end{longtable}
 
 \hypertarget{fazit-zum-finalen-prototypen}{%
 \subsection{Fazit zum finalen

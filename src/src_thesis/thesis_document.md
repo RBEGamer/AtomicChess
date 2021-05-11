@@ -584,7 +584,17 @@ ChessPiece::FIGURE UserBoardController::read_chess_piece_nfc(){
     return fig;
 }
 ```
+Das System erkennt den anschluss der Hardware beim Start auf die gleiche Art und Weise wie der G-Code Sender. Hierbei wurden einige verschiedene Mikrokontroller System im System hinterlegt, welchen die Firmware geteset wurde.
 
+: Hinterlegte Mikrokontroller 
+
+| Product                         | Vendor-ID | Product-ID | Board-Type         |
+|---------------------------------|-----------|------------|--------------------|
+| Arduino Due [Programming Port]  | 2341      | 003d       | User-Move-Detector |
+| Arduino Due [Native SAMX3 Port] | 2341      | 003e       | User-Move-Detector |
+| CH340                           | 1a86      | 7523       | User-Move-Detector |
+| HL-340                          | 1a86      | 7523       | User-Move-Detector |
+| STM32F411                       | 0483      | 5740       | User-Move-Detector |
 
 
 
