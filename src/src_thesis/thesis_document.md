@@ -407,25 +407,12 @@ Mit den Druchbruch von 3D Druckern im Consumerbereich, sind auch kleine Steuerun
 
 Hierbei existiert eine grosse Auswahl dieser mit den verschiensten Ausstattungen. Bei der Aufwahl dieser wurde vorallem auf die Möglichkeit geachtet sogenannte Silent-Schrittmotortreiber verwenden zu können um die Geräuschimmissionen durch die Motoren soweit wie möglich zu minimieren. Im ersten Protoyp wurde unter anderem aus diesem Grund die TMC5160-BOB Treiber ausgewählt.
 Hierzu wurde der Schrittmotor-Treiber TMC2209 gewält, welcher diese Features ebenfalls untersützt und in der Variante als Silent-Step-Stick direkt in die meisten 3D Drucker Steuerungen eingesetzt werden können. Hierbei ist es wichtig, dass auf der gewählten Steuerung die Treiber-ICs nicht fest verlötet sind, sondern getauscht werden können.
-
 Ein weitere Punkt ist die Kommunikation der Steuerung mit dem Host-System. Hierbei setzten alle untersuchten Steuerungen auf die (+usb) Schnittstelle und somit ist eine einfache Kommunikation gewährleistet. Das verwendete eingebette System im autonomen Schachtisch bietet vier freie (+usb) Anschlüsse, somit ist eine einfache Integration gewärleistet.
-
-
-
-Nach einer gründlichen Evaluation der zur verfügung stehenden Steuerungen, wurde die SKR 1.4 Turbo Steuerung ausgewählt, da diese trotz des etwas höheren Marktpreises genug Ressourcen auch für spätere Erweiterung bietet und eine Unterstüzung für die neuste Version der Marlin-FW[@marlinfw] bereitstellt.
-Somit wurde die Elektronik durch die verwendete Plug&Play stark vereinfacht \ref{ATC_Hardware_Architecture_PROD}.
 
 ![Producation Hardware: Blockdiagramm \label{ATC_Hardware_Architecture_PROD}](images/ATC_Hardware_Architecture_PROD.png)
 
-Druch wegfall der zuvor eingesetzten Elektronik und der Austausch durch due SKR 1.4 Turbo Steuerung, ist jedoch ein Anschluss des PN532 (+nfc) Moduls nicht mehr möglich. Da dieses mittels (+i2c) Interface direkt mit dem eingebetteten Systems verbunden war
-
-* seperate mikrocontroller zur I2c Seriell umwandlung
-
-* verwenung von standarthardware, welche gut zu beschaffen ist
-* implementierung von standart gcode protokol, somit mit universell verwendbaren steuerung verwendbar
-* bietet eine hohe flexibilität da nur ein minimales set von Gcode-kommandos vorrausgesetzt wird
-
-
+Nach einer gründlichen Evaluation der zur verfügung stehenden Steuerungen, wurde die SKR 1.4 Turbo Steuerung ausgewählt, da diese trotz des etwas höheren Marktpreises genug Ressourcen auch für spätere Erweiterung bietet und eine Unterstüzung für die neuste Version der Marlin-FW[@marlinfw] bereitstellt.
+Somit wurde die Elektronik durch die verwendete Plug&Play stark vereinfacht \ref{ATC_Hardware_Architecture_PROD}.
 
 
 ### HAL: Implementierung GCODE-Sender
@@ -473,6 +460,8 @@ bool GCodeSender::setServo(const int _index,const int _pos) {
 }
 
 bool GCodeSender::write_gcode(std::string _gcode_line, bool _ack_check) {
+    //...
+    //...
     //FLUSH INPUT BUFFER
 	port->flushReceiver();
 	//APPEND NEW LINE CHARAKTER IF NEEDED
@@ -488,10 +477,13 @@ bool GCodeSender::write_gcode(std::string _gcode_line, bool _ack_check) {
 
 bool GCodeSender::wait_for_ack() {	
 	int wait_counter = 0;
-	
+	//...
+    //...
 	while (true) {
         //READ SERIAL REPONSE
 		const std::string resp = read_string_from_serial();
+        //...
+        //...
 		//PROCESS
 		if (resp.rfind("ok") != std::string::npos)
 		{
@@ -512,6 +504,8 @@ bool GCodeSender::wait_for_ack() {
 			}
 		}	
 	}
+    //...
+    //...
 	return true;
 }
 ```
@@ -519,7 +513,77 @@ Die Steuerung verarbeitet diese und bestätigt die Ausführung mit einer Acknowl
 
 
 
+### HAL: I2C Seriell Umsetzer
 
+Druch wegfall der zuvor eingesetzten Elektronik und der Austausch durch due SKR 1.4 Turbo Steuerung, ist jedoch ein Anschluss des PN532 (+nfc) Moduls nicht mehr möglich. Da dieses mittels (+i2c) Interface direkt mit dem eingebetteten Systems verbunden war. Diese Möglichkeit besteht weiterhin, jedoch wurde auch hier auf eine (+usb) Schnittstelle gewechselt. So ist es möglich das System auch an einem anderen Host-System zu betreiben, wie z.B. an einem handelsüblichen Computer. 
+Dazu wurde ein Schnittstellenwandler hinzugefügt welcher die (+i2c) Schnittstelle zu einer (+usb) Seriell wandelt. Hierzu wurde ein Atmega328p Mikronkontroller eingesetzt, da dieser weit verbreitet und preisgünstig zu beschaffen ist.
+Die Firmware des Mikrokontrollers stellt ein einfaches Komanndobasierte Interface bereit. Die Kommunikation ist mit der Kommunikation und der Implementierung des G-Code Senders vergleichbar und teilen sich die gleichen Funktionen zur Kommunikation mit der Seriellen Schnittstelle.
+
+```c++
+//userboardcontroller.cpp Atmega328p Firmware
+//simplyfied version
+char scan_nfc_tag(){
+    //...
+    if (nfc.tagPresent())
+    {
+        //READ TAG CONTENT
+        NfcTag tag = nfc.read();
+        //READ NDEF PAYLOAD
+        NdefMessage msg = tag.getNdefMessage();
+        if(msg.getRecordCount() > 0){
+            //READ FIRST RECORD
+            NdefRecord record = msg.getRecord(0);
+            const int payloadLength = record.getPayloadLength();
+            byte payload[payloadLength];
+            //...
+            record.getPayload(payload);
+            //...
+            //...
+            //RETURN FIGURE ID
+            if(payloadLength == 6){
+                return payload[3];
+            }
+        }
+    return 0; //VALID TAGS FROM 1-127
+}
+```
+
+Hier wird nur ein Befehl zum auslesen des (+nfc) Tags benötigt. Das Host-System sendet die Zeichenkette `_readnfc_` zum Mikrokontroller und dieser versucht über das PN532 Modul ein (+nfc) Tag zu lesen. Wenn dieses erkannt wird und einen passenden Payload enthält, anwortet dieser mit dem String `_readnfc_res_FIGURE-ID_ok_` oder wenn kein Tag gefunden wurde mit `_readnfc_red__empty_`.
+Auch hier wird wie bei der G-Code Sender Implementierung auf Fehler bei der Kommunikation bzw einem Abbruch durch einen Timeout reagiert. Das System initialisiert die Serielle Schnittstelle neu und resettet das System durch setzten des DTR GPIO am USB-Seriell Wandler ICs (falls vorhanden).
+
+```c++
+//UserBoardController.cpp HOST-SYSTEM
+//simplyfied version
+ChessPiece::FIGURE UserBoardController::read_chess_piece_nfc(){
+
+    ChessPiece::FIGURE fig;
+    fig.type = ChessPiece::TYPE::TYPE_INVALID;
+    //...
+    //READ SERIAL RESULT
+    const std::string readres = send_command_blocking(UBC_COMMAND_READNFC);
+    //...
+    //SPLIT STRING _
+    const std::vector<std::string> re = split(readres,UBC_CMD_SEPERATOR);
+    //READ SECTIONS
+    //...
+    //...
+    const std::string figure = re.at(3);
+    const std::string errorcode = re.at(4);
+    //CHECK READ RESULT
+    if(errorcode == "ok"){
+        if(figure.empty()){
+            break;
+        }
+        //...
+        //...
+        //DETERM FINAL READ FIGURE
+        const char figure_charakter = figure.at(0);
+        fig = ChessPiece::getFigureByCharakter(figure_charakter);
+    }
+    //...
+    return fig;
+}
+```
 
 
 
@@ -682,16 +746,15 @@ Allgemein arbeitet wurde das komplette System so umgesetzt, dass dieses mit eine
 Dies hat den Vorteil, dass die Spielfeld-Notation leicht angepasst werden kann.
 Mit diesem Design ist es möglich, auch andere Spielarten im System zu implementieren, nur hier die initialen Spielfelder generiert werden und Züge der Spieler validiert werden müssen.
 
-
 Die (+fen) Notatin ist universal und kann jede Brettstellung darstellen. Auch enhält diese nicht nur die Figurstellungen, sondern auch weitere Informationen, wie die aktuelle Nummer des Zuges oder welcher Spieler gerade an der Reihe ist. Diese werden dann in der (+xfen) Notation angegeben, bei der zusätzlich zu der Brettstellung auch noch die weiteren Informationen angehängt werden.
 
 : Vergleich (+fen) - (+xfen)
 
-| FEN                                               	| X-FEN                                                          	|
-|---------------------------------------------------	|----------------------------------------------------------------	|
-| rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R 	| rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2 	|
-
-
+| FEN-TYPE                                          	| FEN-String                                                    |
+|---------------------------------------------------	|---------------------------------------------------------------|
+| FEN                                                	| rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R             |
+| X-FEN                                             	| rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2|
+| SCHEMA                                            	| Board Player-Color Rochade En-Passant Halfturn Turn-Number	|
 Alle gängigen Schachprogramme und Bibliotheken unterstützen das Laden von Spielbrettern in der (+fen) bzw (+xfen) Schreibweise, ebenso die für den MoveValidator Service verwendete Python-Chess Blibliothek [@pythonchesslib]. Diese unterstützt zusätzlich die Generierung der für den Benutzer möglichen Schachzügen, welche auf dem aktuellen Brett möglich sind. Diese List wird vom System dazu verwendet um sicherzustellen, das der Benutzer nur gültige Züge tätigen kann. Diese Funktion lässt sich zusätzliche abschalten, falls das Spiel nicht nach den allgemeinen Schachregeln ablaufen soll. Bei der Generierung der möglichen Schachzügen, muss zwischen den Legal-Moves und den Pseudo-Legal Schachzügen unterschieden werden. Die Legal-Moves beinhalten nur die nach den Schachregeln möglichen Zügen, welche von Figuren des Spielers ausgeführt werden können.
 Die Pseudo-Legal Schachzüge, sind alle Schachzügen welche von den Figuren auf dem aktuellen Schachbrett möglich, so sind z.B. auch alle anderen Figur-Züge enthalten, wenn der König sich aktuell im Schach befindet.
 

@@ -966,7 +966,7 @@ Hardware ansteuern können.
 \endhead
 Stepper Driver & TMC2209 & A4988 / TMC2209 & A4988\tabularnewline
 LED Strip Port & WS2811 / RGB & - & -\tabularnewline
-Firmware & Marlin-FW 2.0 & Marlin-FW 1.0 & proprietary\tabularnewline
+Firmware & Marlin-FW 2.0 & Marlin-FW 1.0 & Proprietary\tabularnewline
 \bottomrule
 \end{longtable}
 
@@ -980,16 +980,12 @@ TMC2209 gewält, welcher diese Features ebenfalls untersützt und in der
 Variante als Silent-Step-Stick direkt in die meisten 3D Drucker
 Steuerungen eingesetzt werden können. Hierbei ist es wichtig, dass auf
 der gewählten Steuerung die Treiber-ICs nicht fest verlötet sind,
-sondern getauscht werden können.
-
-Ein weitere Punkt ist die Kommunikation der Steuerung mit dem
-Host-System. Hierbei setzten alle untersuchten Steuerungen auf die
-\gls{usb} Schnittstelle und somit ist eine einfache Kommunikation
-gewährleistet. Das verwendete eingebette System im autonomen Schachtisch
-bietet vier freie \gls{usb} Anschlüsse, somit ist eine einfache
-Integration gewärleistet.
-
-Somit ergibt sich eine
+sondern getauscht werden können. Ein weitere Punkt ist die Kommunikation
+der Steuerung mit dem Host-System. Hierbei setzten alle untersuchten
+Steuerungen auf die \gls{usb} Schnittstelle und somit ist eine einfache
+Kommunikation gewährleistet. Das verwendete eingebette System im
+autonomen Schachtisch bietet vier freie \gls{usb} Anschlüsse, somit ist
+eine einfache Integration gewärleistet.
 
 \begin{figure}
 \centering
@@ -998,18 +994,13 @@ Somit ergibt sich eine
 \label{ATC_Hardware_Architecture_PROD}}
 \end{figure}
 
-\begin{itemize}
-\item
-  seperate mikrocontroller zur I2c Seriell umwandlung
-\item
-  verwenung von standarthardware, welche gut zu beschaffen ist
-\item
-  implementierung von standart gcode protokol, somit mit universell
-  verwendbaren steuerung verwendbar
-\item
-  bietet eine hohe flexibilität da nur ein minimales set von
-  Gcode-kommandos vorrausgesetzt wird
-\end{itemize}
+Nach einer gründlichen Evaluation der zur verfügung stehenden
+Steuerungen, wurde die SKR 1.4 Turbo Steuerung ausgewählt, da diese
+trotz des etwas höheren Marktpreises genug Ressourcen auch für spätere
+Erweiterung bietet und eine Unterstüzung für die neuste Version der
+Marlin-FW\cite{marlinfw} bereitstellt. Somit wurde die Elektronik
+durch die verwendete Plug\&Play stark vereinfacht
+\ref{ATC_Hardware_Architecture_PROD}.
 
 \hypertarget{hal-implementierung-gcode-sender}{%
 \subsubsection{HAL: Implementierung
@@ -1096,6 +1087,8 @@ bool GCodeSender::setServo(const int _index,const int _pos) {
 }
 
 bool GCodeSender::write_gcode(std::string _gcode_line, bool _ack_check) {
+    //...
+    //...
     //FLUSH INPUT BUFFER
     port->flushReceiver();
     //APPEND NEW LINE CHARAKTER IF NEEDED
@@ -1111,10 +1104,13 @@ bool GCodeSender::write_gcode(std::string _gcode_line, bool _ack_check) {
 
 bool GCodeSender::wait_for_ack() {  
     int wait_counter = 0;
-    
+    //...
+    //...
     while (true) {
         //READ SERIAL REPONSE
         const std::string resp = read_string_from_serial();
+        //...
+        //...
         //PROCESS
         if (resp.rfind("ok") != std::string::npos)
         {
@@ -1135,6 +1131,8 @@ bool GCodeSender::wait_for_ack() {
             }
         }   
     }
+    //...
+    //...
     return true;
 }
 \end{lstlisting}
@@ -1149,6 +1147,98 @@ falle des autonomen Schachtisch bei langen und langsamen Bewegungden der
 Mechanik ausgegeben. Das System wartet diese Antworten ab, bis eine
 finale \passthrough{\lstinline!ok!}-Antwort zurückgegeben wird, erst
 dann wird das nächste Kommando abgearbeitet.
+
+\hypertarget{hal-i2c-seriell-umsetzer}{%
+\subsubsection{HAL: I2C Seriell
+Umsetzer}\label{hal-i2c-seriell-umsetzer}}
+
+Druch wegfall der zuvor eingesetzten Elektronik und der Austausch durch
+due SKR 1.4 Turbo Steuerung, ist jedoch ein Anschluss des PN532
+\gls{nfc} Moduls nicht mehr möglich. Da dieses mittels \gls{i2c}
+Interface direkt mit dem eingebetteten Systems verbunden war. Diese
+Möglichkeit besteht weiterhin, jedoch wurde auch hier auf eine \gls{usb}
+Schnittstelle gewechselt. So ist es möglich das System auch an einem
+anderen Host-System zu betreiben, wie z.B. an einem handelsüblichen
+Computer. Dazu wurde ein Schnittstellenwandler hinzugefügt welcher die
+\gls{i2c} Schnittstelle zu einer \gls{usb} Seriell wandelt. Hierzu wurde
+ein Atmega328p Mikronkontroller eingesetzt, da dieser weit verbreitet
+und preisgünstig zu beschaffen ist. Die Firmware des Mikrokontrollers
+stellt ein einfaches Komanndobasierte Interface bereit. Die
+Kommunikation ist mit der Kommunikation und der Implementierung des
+G-Code Senders vergleichbar und teilen sich die gleichen Funktionen zur
+Kommunikation mit der Seriellen Schnittstelle.
+
+\begin{lstlisting}[language={C++}]
+//userboardcontroller.cpp Atmega328p Firmware
+//simplyfied version
+char scan_nfc_tag(){
+    //...
+    if (nfc.tagPresent())
+    {
+        //READ TAG CONTENT
+        NfcTag tag = nfc.read();
+        //READ NDEF PAYLOAD
+        NdefMessage msg = tag.getNdefMessage();
+        if(msg.getRecordCount() > 0){
+            //READ FIRST RECORD
+            NdefRecord record = msg.getRecord(0);
+            const int payloadLength = record.getPayloadLength();
+            byte payload[payloadLength];
+            //...
+            record.getPayload(payload);
+            //...
+            //...
+            //RETURN FIGURE ID
+            if(payloadLength == 6){
+                return payload[3];
+            }
+        }
+    return 0; //VALID TAGS FROM 1-127
+}
+\end{lstlisting}
+
+Hier wird nur ein Befehl zum auslesen des \gls{nfc} Tags benötigt. Das
+Host-System sendet die Zeichenkette
+\passthrough{\lstinline!\_readnfc\_!} zum Mikrokontroller und dieser
+versucht über das PN532 Modul ein \gls{nfc} Tag zu lesen. Wenn dieses
+erkannt wird und einen passenden Payload enthält, anwortet dieser mit
+dem String \passthrough{\lstinline!\_readnfc\_res\_FIGURE-ID\_ok\_!}
+oder wenn kein Tag gefunden wurde mit
+\passthrough{\lstinline!\_readnfc\_red\_\_empty\_!}.
+
+\begin{lstlisting}[language={C++}]
+//UserBoardController.cpp HOST-SYSTEM
+//simplyfied version
+ChessPiece::FIGURE UserBoardController::read_chess_piece_nfc(){
+
+    ChessPiece::FIGURE fig;
+    fig.type = ChessPiece::TYPE::TYPE_INVALID;
+    //...
+    //READ SERIAL RESULT
+    const std::string readres = send_command_blocking(UBC_COMMAND_READNFC);
+    //...
+    //SPLIT STRING _
+    const std::vector<std::string> re = split(readres,UBC_CMD_SEPERATOR);
+    //READ SECTIONS
+    //...
+    //...
+    const std::string figure = re.at(3);
+    const std::string errorcode = re.at(4);
+    //CHECK READ RESULT
+    if(errorcode == "ok"){
+        if(figure.empty()){
+            break;
+        }
+        //...
+        //...
+        //DETERM FINAL READ FIGURE
+        const char figure_charakter = figure.at(0);
+        fig = ChessPiece::getFigureByCharakter(figure_charakter);
+    }
+    //...
+    return fig;
+}
+\end{lstlisting}
 
 \hypertarget{fazit-zum-finalen-prototypen}{%
 \subsection{Fazit zum finalen
@@ -1398,26 +1488,18 @@ auch noch die weiteren Informationen angehängt werden.
 \begin{longtable}[]{@{}ll@{}}
 \caption{Vergleich \gls{fen} - \gls{xfen}}\tabularnewline
 \toprule
-\begin{minipage}[b]{0.42\columnwidth}\raggedright
-FEN\strut
-\end{minipage} & \begin{minipage}[b]{0.52\columnwidth}\raggedright
-X-FEN\strut
-\end{minipage}\tabularnewline
+FEN-TYPE & FEN-String\tabularnewline
 \midrule
 \endfirsthead
 \toprule
-\begin{minipage}[b]{0.42\columnwidth}\raggedright
-FEN\strut
-\end{minipage} & \begin{minipage}[b]{0.52\columnwidth}\raggedright
-X-FEN\strut
-\end{minipage}\tabularnewline
+FEN-TYPE & FEN-String\tabularnewline
 \midrule
 \endhead
-\begin{minipage}[t]{0.42\columnwidth}\raggedright
-rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R\strut
-\end{minipage} & \begin{minipage}[t]{0.52\columnwidth}\raggedright
-rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2\strut
-\end{minipage}\tabularnewline
+FEN & rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R\tabularnewline
+X-FEN & rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1
+2\tabularnewline
+SCHEMA & Board Player-Color Rochade En-Passant Halfturn
+Turn-Number\tabularnewline
 \bottomrule
 \end{longtable}
 
