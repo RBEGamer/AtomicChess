@@ -474,7 +474,6 @@ function start_match(_player_a_hwid, _player_b_hwid, _callback) {
                                     //WRITE TO DB THE NEW GAME CREATED
                                     MDB.getGameCollection().insertOne(game_init_structure, function (io_err, io_res) {
                                         _callback(io_err, io_res);
-                                        return;
                                     });
                                 });
                             });
@@ -482,9 +481,7 @@ function start_match(_player_a_hwid, _player_b_hwid, _callback) {
                     });
                 });
             });
-        }
-    )
-    ;
+        });
 }
 
 
