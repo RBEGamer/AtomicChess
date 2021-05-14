@@ -12,7 +12,7 @@
 
 ## Zielsetzung
 
-Das Ziel dieser Arbeit ist es, einen autonomen Schachtisch zu entwickeln, welcher in der Lage ist Schachfiguren autonom zu bewegen und auf Benutzerinteraktion zu reagieren.
+Das Ziel dieser Arbeit ist es, einen autonomen Schachtisch zu entwickeln, welcher in der Lage, ist Schachfiguren autonom zu bewegen und auf Benutzerinteraktion zu reagieren.
 Der Schwerpunkt liegt dabei insbesondere auf der Programmierung des eingebetteten Systems und dem Zusammenspiel von diesem mit einem aus dem Internet erreichbaren Servers, welcher als Vermittlungsstelle zwischen verschiedenen Schachtischen und anderen Endgeräten dient.
 Dieses besteht zum einem aus der Positionserkennung und Steuerung der Hardwarekomponenten (Schachfiguren) und zum anderen aus der Kommunikation zwischen dem Tisch selbst und einem in einer Cloud befindlichem Server.
 Mittels der Programmierung werden diverse Technologien von verschiedenen Einzelsystemen zu einem Gesamtprodukt zusammengesetzt.
@@ -24,7 +24,7 @@ Anschliessend werden die zuvor verwendeten Technologien betrachtet, welche bei b
 
 Das sechste Kapitel widmet sich der realisierung des erste Protoypen des autonomen Schachtischs. Dabei werden alle 
 Im anschliessenden Kapitel, wird auf der Basis des ersten Prototyps und seiner auftretenden Probleme, der finale Prototyp entwickelt.
-Hier werden die Probleme durch ein re-design und vereinfachung der Elektronik gelößt und so ein zufriedenstellendes Produkt entwickelt.
+Hier werden die Probleme durch ein re-design der Elektronik gelößt und so ein zufriedenstellendes Produkt entwickelt.
 
 Im darauffolgenden Abschnitt wird die Cloud-Infrastruktur thematisiert, welche für eine Kommunikation zwischen den Prototypen entscheidend ist.
 
@@ -216,7 +216,7 @@ Dennoch wird Wert darauf gelgegt, dass das Verhältnis zwischen den Spielfeldabm
 
 
 Da es sich hier nur um einen Protoypen handelt, wurde hier auf ein einfach zu handbabendes Filament vom Typ PLA verwendet.
-Dies ist besonders gut für die Prototypenendwicklung geeignet und kann mit nahezu jeden handelsüblichen (+fdm) 3D-Drucker verarbeitet werden.
+Dieses ist besonders gut für die schnelle Prototypenendwicklung geeignet und kann mit nahezu jeden handelsüblichen (+fdm) 3D-Drucker verarbeitet werden.
 
 Zuvor wurden einige Testdrucke durchgeführt um die Qualität der zuvor gewählten Druckparameter zu überprüfen und diese gegebenenfalls anzupassen.
 Auch wurden verschiedene Calibrierobjekte gedruckt, an welchen die Toleranzen für die späteren (+cad) Zeichnungen abgeschätz werden können.

@@ -152,7 +152,7 @@ def init_board():
         logging.warning(e)
         return jsonify({'err': err, 'board': ""})
 
-    return jsonify({'err': None, 'board': board.fen()})
+    return jsonify({'err': None, 'board': board.fen(), 'ext_board': board.board_fen()})
 
 
 
