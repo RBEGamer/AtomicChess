@@ -48,7 +48,7 @@ services:
     #network_mode: "host"
     restart: always
     ports:
-      - 5001:5001
+      - 500:5000
     environment:
       - PRODUCTION
 
