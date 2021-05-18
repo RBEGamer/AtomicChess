@@ -4,6 +4,10 @@
 
 
 
+In der heutigen Zeit m
+
+
+
 
 * Beginn: Er zieht die Aufmerksamkeit des Lesers durch die Schilderung des Ereignisses auf sich, das zu dem Problem geführt hat.
 * Hintergrundinformationen (Herstellung des Kontexts): Gehe tiefer auf das Ereignis ein, indem du mehr Informationen über es vermittelst und dabei auch den Rahmen deiner Forschung skizzierst.
@@ -12,25 +16,26 @@
 
 ## Zielsetzung
 
-Das Ziel dieser Arbeit ist es, einen autonomen Schachtisch zu entwickeln, welcher in der Lage ist Schachfiguren autonom zu bewegen und auf Benutzerinteraktion zu reagieren.
+Das Ziel der nachfolgenden Arbeit ist es, einen autonomen Schachtisch zu entwickeln, welcher in der Lage ist, Schachfiguren autonom zu bewegen und auf Benutzerinteraktion zu reagieren.
 Der Schwerpunkt liegt dabei insbesondere auf der Programmierung des eingebetteten Systems und dem Zusammenspiel von diesem mit einem aus dem Internet erreichbaren Servers, welcher als Vermittlungsstelle zwischen verschiedenen Schachtischen und anderen Endgeräten dient.
 Dieses besteht zum einem aus der Positionserkennung und Steuerung der Hardwarekomponenten (Schachfiguren) und zum anderen aus der Kommunikation zwischen dem Tisch selbst und einem in einer Cloud befindlichem Server.
 Mittels der Programmierung werden diverse Technologien von verschiedenen Einzelsystemen zu einem Gesamtprodukt zusammengesetzt.
 
 ## Methodik
 
-Im ersten Abschnitt werden die zum Zeitpunkt existierenden Ansätze und deren Umsetzung beleuchtet.
-Anschliessend werden die zuvor verwendeten Technologien betrachtet, welche bei bei den beiden darauffolgenden Prototypen verwendet wurden.
+Im ersten Abschnitt werden die zum Zeitpunkt existierenden Ansätze und deren Umsetzung beleuchtet. Hier wurde insbesondere darauf geachtet
+Anschliessend werden die zuvor verwendeten Technologien betrachtet, welche bei bei den beiden darauffolgenden Prototypen verwendet werden sollen. Hierbei stehen insbesondere solche Technologien im Vordergrund der Untersuchung welche möglichst einfach zu Beschaffen sind und im besten Fall einer breiten Masse zur Verfügung stehen.
 
-Das sechste Kapitel widmet sich der realisierung des erste Protoypen des autonomen Schachtischs. Dabei werden alle 
-Im anschliessenden Kapitel, wird auf der Basis des ersten Prototyps und seiner auftretenden Probleme, der finale Prototyp entwickelt.
-Hier werden die Probleme durch ein re-design und vereinfachung der Elektronik gelößt und so ein zufriedenstellendes Produkt entwickelt.
+Das sechste Kapitel widmet sich der Realisierung des ersten Protoypen des autonomen Schachtischs.
+Hier werden die Erkenntnisse der zuvor evaluierten Technologien verwendet um ein Modell zu entwickeln welches den im ersten Abschnitt erarbeiteten Vorgaben entspricht. Der nach der Implementierung durchgeführte Dauertest, zeigt anschliessend mögliche Probleme auf.
 
-Im darauffolgenden Abschnitt wird die Cloud-Infrastruktur thematisiert, welche für eine Kommunikation zwischen den Prototypen entscheidend ist.
+Im anschließenden Kapitel, wird auf der Basis des ersten Prototyps und seiner im Betrieb auftretenden Probleme, der finale Prototyp entwickelt.
+Hier werden die Probleme durch die Vereinfachung der Elektronik sowie der Mechanik gelößt.
+Die Zuverlässigkeit wurde hier durch stetige Testläufe mit kontrollierten Schachzug-Szenarien überwacht
+und so ein produktreifer Prototyp entwickelt.
 
-* controller software
-* fazit
-
+Im darauffolgenden Abschnitt wird die Cloud-Infrastruktur thematisiert, welche für eine Kommunikation zwischen den autonomen Schachtischen entscheidend ist.
+Auch wird hier die Software, welche auf dem eingebetteten System ausgeführt im Details beschrieben und deren Kommunikation mit der Cloud-Infrastruktur, sowie mit den elektrischen Komponenten.
 
 
 
@@ -260,7 +265,7 @@ Diese Vorteile wurde mit verschiedenen Testdrucken verifiziert und kommen insbes
 # Erstellung erster Prototyp
 
 * proof of conzept
-* 
+*
 
 ![Prototyp Hardware: Erster Prototyp des autonomen Schachtisch \label{dk}](images/table_images/dk.png)
 
@@ -439,7 +444,7 @@ Die Software unterstützt jedoch weitere Kommandos wie z.B. `M150` mit welchem s
 
 Die Kommunikation zwischen Steuerung und eingebetteten System geschieht durch eine (+usb) Verbinden. Die Steuerung meldet sich als virtuelle Serielle Schnittstelle im System an und kann über diese mit der Software kommunizieren. Auch werden so keine speziellen Treiber benötigt, da auf nahezu jedem System ein Treiber (USB CDC) für die gängisten (+usb) zu Seriell Wandler bereits instlliert ist. Die Software erkennt anhand der zur Verfügung stehenden USB Geräte, sowie deren Vendor und Product-ID Informationen die Steuerung automatisch und verwendet diese nach dem Start automatisch. Hierzu wurde zuvor eine Liste mit verschiedenen getesteten Steuerungen sowie deren USB Vendor und Product-ID angelegt.
 
-: Hinterlegte G-Code Steuerungen 
+: Hinterlegte G-Code Steuerungen
 
 | Product                         | Vendor-ID | Product-ID | Board-Type         |
 |---------------------------------|-----------|------------|--------------------|
@@ -475,7 +480,7 @@ bool GCodeSender::write_gcode(std::string _gcode_line, bool _ack_check) {
     return wait_for_ack();
 }
 
-bool GCodeSender::wait_for_ack() {	
+bool GCodeSender::wait_for_ack() {
 	int wait_counter = 0;
 	//...
     //...
@@ -502,7 +507,7 @@ bool GCodeSender::wait_for_ack() {
 			{
 				break;
 			}
-		}	
+		}
 	}
     //...
     //...
@@ -515,7 +520,7 @@ Die Steuerung verarbeitet diese und bestätigt die Ausführung mit einer Acknowl
 
 ### HAL: I2C Seriell Umsetzer
 
-Druch wegfall der zuvor eingesetzten Elektronik und der Austausch durch due SKR 1.4 Turbo Steuerung, ist jedoch ein Anschluss des PN532 (+nfc) Moduls nicht mehr möglich. Da dieses mittels (+i2c) Interface direkt mit dem eingebetteten Systems verbunden war. Diese Möglichkeit besteht weiterhin, jedoch wurde auch hier auf eine (+usb) Schnittstelle gewechselt. So ist es möglich das System auch an einem anderen Host-System zu betreiben, wie z.B. an einem handelsüblichen Computer. 
+Druch wegfall der zuvor eingesetzten Elektronik und der Austausch durch due SKR 1.4 Turbo Steuerung, ist jedoch ein Anschluss des PN532 (+nfc) Moduls nicht mehr möglich. Da dieses mittels (+i2c) Interface direkt mit dem eingebetteten Systems verbunden war. Diese Möglichkeit besteht weiterhin, jedoch wurde auch hier auf eine (+usb) Schnittstelle gewechselt. So ist es möglich das System auch an einem anderen Host-System zu betreiben, wie z.B. an einem handelsüblichen Computer.
 Dazu wurde ein Schnittstellenwandler hinzugefügt welcher die (+i2c) Schnittstelle zu einer (+usb) Seriell wandelt. Hierzu wurde ein Atmega328p Mikronkontroller eingesetzt, da dieser weit verbreitet und preisgünstig zu beschaffen ist.
 Die Firmware des Mikrokontrollers stellt ein einfaches Komanndobasierte Interface bereit. Die Kommunikation ist mit der Kommunikation und der Implementierung des G-Code Senders vergleichbar und teilen sich die gleichen Funktionen zur Kommunikation mit der Seriellen Schnittstelle.
 
@@ -586,7 +591,7 @@ ChessPiece::FIGURE UserBoardController::read_chess_piece_nfc(){
 ```
 Das System erkennt den anschluss der Hardware beim Start auf die gleiche Art und Weise wie der G-Code Sender. Hierbei wurden einige verschiedene Mikrokontroller System im System hinterlegt, welchen die Firmware geteset wurde.
 
-: Hinterlegte Mikrokontroller 
+: Hinterlegte Mikrokontroller
 
 | Product                         | Vendor-ID | Product-ID | Board-Type         |
 |---------------------------------|-----------|------------|--------------------|
@@ -763,7 +768,9 @@ Die (+fen) Notatin ist universal und kann jede Brettstellung darstellen. Auch en
 |---------------------------------------------------	|---------------------------------------------------------------|
 | FEN                                                	| rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R             |
 | X-FEN                                             	| rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2|
-| SCHEMA                                            	| Board Player-Color Rochade En-Passant Halfturn Turn-Number	|
+| SCHEMA                                            	| Board Player-Color Rochade En-Passant Halfturn Turn-Number	  |
+
+
 Alle gängigen Schachprogramme und Bibliotheken unterstützen das Laden von Spielbrettern in der (+fen) bzw (+xfen) Schreibweise, ebenso die für den MoveValidator Service verwendete Python-Chess Blibliothek [@pythonchesslib]. Diese unterstützt zusätzlich die Generierung der für den Benutzer möglichen Schachzügen, welche auf dem aktuellen Brett möglich sind. Diese List wird vom System dazu verwendet um sicherzustellen, das der Benutzer nur gültige Züge tätigen kann. Diese Funktion lässt sich zusätzliche abschalten, falls das Spiel nicht nach den allgemeinen Schachregeln ablaufen soll. Bei der Generierung der möglichen Schachzügen, muss zwischen den Legal-Moves und den Pseudo-Legal Schachzügen unterschieden werden. Die Legal-Moves beinhalten nur die nach den Schachregeln möglichen Zügen, welche von Figuren des Spielers ausgeführt werden können.
 Die Pseudo-Legal Schachzüge, sind alle Schachzügen welche von den Figuren auf dem aktuellen Schachbrett möglich, so sind z.B. auch alle anderen Figur-Züge enthalten, wenn der König sich aktuell im Schach befindet.
 
@@ -809,7 +816,7 @@ Die einzige Änderung an den verwendeten (+rest)-Calls ist der Login-Requst. Hie
 Somit wird dieser wärend des Matchmaking-Prozesses erst für ein Match ausgewählt, wenn kein anderer Spieler mehr zur Verfügung steht, welcher vom Typ Webclient oder autonomer Schachtisch ist.
 Somit ist gewährleistet, dass immer zuerst die Menschlichen-Spieler ein Spiel beginnen.
 
-Eine weitere Modifikation ist die verwendung einer Schach-AI, da dieser Service als Computerspieler agieren soll. 
+Eine weitere Modifikation ist die verwendung einer Schach-AI, da dieser Service als Computerspieler agieren soll.
 Hierzu kam die Open-Source Chess Engine Stockfish[@stockfish] in der Version 11 zum Einsatz.
 Die Stockfish-Engine bietet noch weitere Features, als nur die nöchst besten Züge zu einem gegebenen Schachbrett zu ermitteln.
 Sie kann auch genutzt werden um Züge zu klassifizieren und bietet Analysemöglichkeiten für Spielstellungen.
@@ -820,12 +827,12 @@ Um das aktuelle Spielbrett in der Engine zu setzten wird dieses in der (+fen) No
 
 
 Im Kontext des AutoPlayer-Service wird der Engine nur das aktuelle Spielbrett übermittelt und der nächst beste Zug ausgelsen.
-Dies wird Ausgeführt, wenn der AutoPlayer am Zug ist. Nachdem die Engine einen passenden Zug gefunden hat, wird das Ergebnis über den `make_move` (+rest)-API Call übermittelt. 
+Dies wird Ausgeführt, wenn der AutoPlayer am Zug ist. Nachdem die Engine einen passenden Zug gefunden hat, wird das Ergebnis über den `make_move` (+rest)-API Call übermittelt.
 
 
 
 Wenn das Match beendet wird, beendet sich auch die Service-Instanz.
-Diese wird jedoch wieder gestartet wenn die Anzahl der zur Verfügung stehenden Computerspieler unter einen definierten Wert fallen. 
+Diese wird jedoch wieder gestartet wenn die Anzahl der zur Verfügung stehenden Computerspieler unter einen definierten Wert fallen.
 Somit ist dafür gesorgt, dass das System nicht mit ungenutzen AutoPlayer-Instanzen gebremst wird.
 Diese Anzahl \ref{ai_player_count} ist in der Backend-Configuration frei wählbar und kann je nach zu erwartenen Aufkommen angepasst werden.
 
@@ -899,7 +906,7 @@ Diese Feature wurde insbesondere bei der Entwicklung des Webclienten und der Ste
 ![Embedded System Software: Schachfeld Scan Algorithmus Ablauf \label{ATC_ChessMoveAlgorithm}](images/ATC_ChessMoveAlgorithm.png)
 
 * Benutzer bestätigt dass er Schachzug gemacht hat
-* Ermittlung des getätigten Schachzug 
+* Ermittlung des getätigten Schachzug
 * Scan der Schachfeld-Veränderungen, durch Vergleich des vorherigen Schachfelds und der möglichen Züge
 
 
@@ -926,6 +933,8 @@ Hierbei soll dieses nur die nötigsten Funktionen bereitstellen, welche zur Bedi
 
 
 ### Inter Prozess Communication
+
+Da das Userinterface ein seperates Programm, welches auf dem System ausgeführt wird, muss dieses in der Lage sein mit der Controller-Software zu kommunizieren. Hierzu müssen
 
 * IPC Bibliothek zur Kommunikation mit der controller-Software Instanz
 * JSON basiert => einfaches Debugging
@@ -997,7 +1006,7 @@ Es wurde ein Prototyp eines autonomen Schachtischs entwickelt.
 * vom versierten Benutzer selbstädig aufbaubar
 * leichte bedienung
 * lässt spiel für erweiterungen
-* 
+*
 
 ## Ausblick
 
