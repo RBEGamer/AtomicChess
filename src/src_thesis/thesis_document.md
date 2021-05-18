@@ -966,7 +966,7 @@ Rectangle {
     objectName: "window"
     width: 800
     height: 480
-    //BACKEND LOGIC IMPORT
+    //BACKEND LOGIC INIT => CREATES INSTANCE OF THE MenuManager CLASS
     MenuManager{
         id:main_menu
         objectName: "mainmenu"
@@ -989,15 +989,49 @@ Rectangle {
                 Connections {
                     target: mm_start_random_btn
                     function onClicked(_mouse){
-                        main_menu.mm_search_for_players_toggled(true) //CALL TO BACKEND
+                        //CALL A FUNCTION IN BACKEND LOGIC INSTANCE
+                        main_menu.mm_search_for_players_toggled(true)
                     }
                     //...
                 }
                 //...
 ```
 
-Die anschliessende Implementierung der Backend-Logik des Unter-Interface bestand in der Verbindung
-* backend logce qml elementen
+Die anschliessende Implementierung der Backend-Logik des Unter-Interface bestand in der Verbindung, der in QML erstellten Bedienelemente durch den `Qt Design Studio`-Editor und der User-Interface Backend Logik. Diese beschränkt sich auf die Initialisierung des Fenster und dem anschliessenden laden und darstellen des QML Codes. Die Backend-Logik Funktionalitäten in einem QML Typ `MenuManager` angelegt, welcher vor dem laden des eigentlichen User-Interface QML Codes registriert werden muss.
+
+
+```c++
+#include <QGuiApplication>
+#include <QQmlApplicationEngine>
+#include "menumanager.h" //BACKEND LOGIC
+int main(int argc, char *argv[])
+{
+  QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+  //...
+  //CREATE WINDOW
+  QWindow window;
+  window.setBaseSize(QSize(800,480));
+
+  //REGISTER MainMenu COMPONENT
+  qmlRegisterType<MenuManager>("MenuManager",1,0,"MenuManager");
+  //LOAD User-Interface QML
+  QQuickView view;
+  //...
+  view.engine()->addImportPath("qrc:/qml/imports");
+  view.setSource(QUrl("qrc:/qml/WINDOW.qml"));
+  view.engine()->rootContext()->setContextProperty("app", &app);
+  //...
+
+  //IMPORTANT STEP: AFTER INIT THE MainMenu COMPONENT HAS NO PARENT
+  //SO WE NEED TO SET IT MANUALLY TO MAKE C++ -> QML FUNCATION CALLS WORKING
+  QObject *object = view.rootObject();
+  QObject *rect = object->findChild<QObject*>("mainmenu");
+  if (rect){
+         rect->setParent(object);
+  }
+  //FINALLY SHOW MENU ON SCREEN
+  view.show();
+```
 
 
 
