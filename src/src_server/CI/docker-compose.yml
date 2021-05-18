@@ -16,8 +16,8 @@ services:
       context: ../ATC_Backend/
     network_mode: "host"
     restart: always
-    ports:
-      - 3000:3000
+    #ports:
+    #  - 3000:3000
     environment:
       - PRODUCTION=1
      # - REDIS_IP=AtomicChessRedisDatabase:6379
@@ -25,14 +25,14 @@ services:
      # - MVVALIDATOR_IP=AtomicChessMoveValidator:5001
       - REDIS_IP=127.0.0.1:6379
       - MONGO_IP=127.0.0.1:27017
-      - MVVALIDATOR_IP=127.0.0.1:5001
+      - MVVALIDATOR_IP=127.0.0.1:5000
   
   AtomicChessExtentionVoiceRecognition:
     container_name: atcextvoicerecognition
     build:
       context: ../ATC_ExtentionVoiceRecognition/
     image: atcextvoicerecognition
-    network_mode: "host"
+    #network_mode: "host"
     restart: always
     ports:
       - 8880:8880
@@ -48,7 +48,7 @@ services:
     #network_mode: "host"
     restart: always
     ports:
-      - 5001:5001
+      - 5000:5000
     environment:
       - PRODUCTION
 
@@ -60,13 +60,13 @@ services:
     container_name: atcredis
     ports:
       - 6379:6379
-    network_mode: "host"
+    #network_mode: "host"
 
   AtomicChessMongoDatabase:
     image: mongo:latest
     container_name: atcmongo
     restart: always
-    network_mode: "host"
+    #network_mode: "host"
       #environment:
       #  - MONGO_DATA_DIR=/data/db
       #  - MONGO_LOG_DIR=/dev/null

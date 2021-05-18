@@ -122,8 +122,7 @@ function execute_move(_board, _move, _callback) {
 function get_start_opening_fen(_callback) {
     request.get({url: CFG.getConfig().chess_move_validator_api_url + "/rest/init_board"}, function optionalCallback(err, httpResponse, body) {
         if (err) {
-            _callback(null, get_start_opening_fen_static());
-            return;
+            _callback(null,get_start_opening_fen_static());
         }
         //console.log('Upload successful!  Server responded with:', body);
         var jsonbody = null;
@@ -136,13 +135,14 @@ function get_start_opening_fen(_callback) {
             }
             //IF NOT BOARD GOT FROM SERVICE USE A STATIC ONE
             if (!jsonbody.board || jsonbody.board === "") {
-                _callback(null, get_start_opening_fen_static());
+                _callback(null,jsonbody.board);
             } else {
-                _callback(null, String(jsonbody.board));
+                _callback(null,get_start_opening_fen_static());
+
             }
         } catch (e) {
             console.error(e);
-            _callback(null, get_start_opening_fen_static());
+            _callback(null,get_start_opening_fen_static());
         }
     });
 };
