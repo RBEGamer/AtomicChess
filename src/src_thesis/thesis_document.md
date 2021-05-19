@@ -890,12 +890,28 @@ Diese Feature wurde insbesondere bei der Entwicklung des Webclienten und der Ste
 
 Bei der Entwicklung des System wurde darauf geachtet, dass sich das User-Interface austauschen lässt. Somit ist es auch mögliche eine webbasiertes User-Interface zu integrieren. Dazu wurde eine zusätzliche (+ipc) Layer hinzugefügt, welches eine Abstraktion der von der User-Interface Software verwendeten Funktionen auf der Controller-Software Ebene bereitstellt.
 
+Dazu wurde eine einfache (+ipc) Bibliothek implementiert, welche der Controller- als auch dem User-Interface als Shared-Library zur verfügung steht.
+Diese stellt einfache Funktionen zum Senden und Empfangen von Events bereit und erzeugt nach der Initialisierung einen separaten Thread in welcher die Kommunikation mit den anderen (+ipc) Instanzen verwaltet wird.
 
-* IPC Bibliothek zur Kommunikation mit der controller-Software Instanz
-* JSON basiert => einfaches Debugging
-* Steuerung über andere Endgeräte möglich z.B Handy-App welche im selben Netzwerk befindet.
-* durch preprozessor define wird der master definiert
-* eventbasiert seperater mittels socket nicht per shared memory damit das ui nicht zwangsläufig auf der tisch laufen muss
+Der Haupthread des Programms kann anschliessend über eine (+fifo) Message Queue, die von den anderen Instanzen empfangenen Events in einer Polling-Loop abfragen und Events an die anderen Instanzen absetzten. Diese können mit der gleichen Vorgehensweise
+
+Die Kommunikation zwischen den (+ipc) Instanzen geschieht hierbei über eine (+tcp) Socket-Verbindung. Es wurde keine Shared Memory (Speicherbasierte) Implementierung verwendet, da hier nur eine Kommunikation auf Betriebssystemebene möglich ist.
+
+Durch die Socket Basierende Implementierung ist es möglich die andern (+ipc) Instanzen auszulagern und auf verschiedenen Endgeräten ausführen zu können.
+
+```json
+{
+"event":"BEGIN_BTN_SCAN",
+"type":"CLICKED",
+"dest_process_id":"ui_qt_01",
+"origin_process_id":"controller_sw_01",
+"is_ack":false"
+}
+```
+
+Über die (+tcp) Verbindung werden ausschliesslich Daten im (+json) Format übertragen. Dies macht ein einfaches Debugging und Steuerung über einen Webbrowser möglich, welches die Implementierung während der Entwicklungsphase vereinfachte.
+
+Zusätzlich kann über die Acknowledgement-Funktionalität sichergestellt werden, dass die anderen (+ipc) Instanzen die Event bekommen haben. Diese müssen nach Erhalt das empfangene Event quittieren, dies geschieht mittels des `is_ack` Flag zurückgemeldet werden.
 
 
 ```c++
@@ -933,6 +949,10 @@ if (!ev.is_event_valid){
 if(ev.event == guicommunicator::GUI_ELEMENT::BEGIN_BTN_SCAN && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {}
 ```
 
+* grundlegene Funktionsbeschreibung
+
+
+
 
 
 
@@ -941,16 +961,15 @@ if(ev.event == guicommunicator::GUI_ELEMENT::BEGIN_BTN_SCAN && ev.type == guicom
 ## Userinterface
 
 
-
 Das User-Interface ist mit das zentrale Element mit welchem der Benutzer interagiert.
 Hierbei soll dieses nur die nötigsten Funktionen bereitstellen, welche zur Bedienung des Schachtisches nötig sind.
-Durch die kleinen Abmessungen des Displays mit 4.3", wurde alle Bedienelemente in ihrer Größe angepasst, sodass der Benutzer auch von einer weiter entfernten Position den Zustand direkt erkennen kann. Auch wurden die maximale Anzahl an Bedienelementen in einer Ansicht auf drei begrenzt. Die Spielansicht stellt zudem nur die eigene Spielerfarbe, sowie welcher Spieler gerade am Zug ist dar, somit soll der Spieler nicht vom Spiel abgelenkt werden. Nach dem Spielstart findet keine weitere Interaktion mit dem User-Interface mehr statt.
+Durch die kleinen Abmessungen des Displays mit 4.3 Zoll, wurde alle Bedienelemente in ihrer Größe angepasst, sodass der Benutzer auch von einer weiter entfernten Position den Zustand direkt erkennen kann. Auch wurden die maximale Anzahl an Bedienelementen in einer Ansicht auf drei begrenzt. Die Spielansicht stellt zudem nur die eigene Spielerfarbe, sowie welcher Spieler gerade am Zug ist dar, somit soll der Spieler nicht vom Spiel abgelenkt werden. Nach dem Spielstart findet keine weitere Interaktion mit dem User-Interface mehr statt.
 
 Trotz der Einfachheit der Bedienung und der meist nur also Informationsquelle über den Spielstand dienenden User-Interface, bietet diese viele Möglichkeiten der Konfiguration des Systems. Somit kann auf ein weiteres Eingabegerät, wie z.B. einem Mobiltelefon verzichtet werden, da alle relevanten Einstellungen im Optionen-Menu vorgenommen werden können.
 
 Als Framework wurde hier das Qt[@qtframework] verwendet, da dieses bereits im Buildroot-Framework in der Version 5.12 hinterlegt ist. Somit musste kein anderes derartiges Framework aufwändig in das Buildroot-Framrwork integriert werden.
 
-Das User-Interface wurde gegen Ende der Entwicklung der Controller-Software begonnen, somit waren alle benötigteten Ansichten und Funktionen definiert, trotzdem wurden im Vorfeld bereits mögliche Ansichten und Menüstrukturen mittels Wireframing festgehalten und konnten anhand dieser schnell umgesetzt werden.
+Das User-Interface wurde gegen Ende der Entwicklung der Controller-Software begonnen, somit waren alle benötigten Ansichten und Funktionen definiert, trotzdem wurden im Vorfeld bereits mögliche Ansichten und Menüstrukturen mittels Wireframing festgehalten und konnten anhand dieser schnell umgesetzt werden.
 
 ![Embedded System Software: User-Interface Mockup \label{ATC_Gui}](images/ATC_Gui.png)
 
@@ -1022,7 +1041,6 @@ int main(int argc, char *argv[])
   view.setSource(QUrl("qrc:/qml/WINDOW.qml"));
   view.engine()->rootContext()->setContextProperty("app", &app);
   //...
-
   //IMPORTANT STEP: AFTER INIT THE MainMenu COMPONENT HAS NO PARENT
   //SO WE NEED TO SET IT MANUALLY TO MAKE C++ -> QML FUNCATION CALLS WORKING
   QObject *object = view.rootObject();
@@ -1032,10 +1050,11 @@ int main(int argc, char *argv[])
   }
   //FINALLY SHOW MENU ON SCREEN
   view.show();
+}
 ```
 
 
-Da das User-Interface ein separates Programm, welches auf dem System ausgeführt wird, muss dieses in der Lage sein mit der Controller-Software zu kommunizieren. Hierzu wurde die zuvor erstellte IPC Bibliothek in das Projekt importiert, jedoch wurde in der Makefile das `USES_QT` Define-Flag gesetzt. Wenn dieses gesetzt ist, wird die Bibliothek in den Client-Modus versetzt und stellt somit das Gegenstück zu der Instanz dar, welche in der Controller-Software läuft. Somit werden auch die Funktionen zum senden von `gui.createEvent()` umgekehrt, sodass ein Event in der Controller-Software ausgelöst wird. Dies kann z.B. durch eine Benutzereingabe oder wenn das User-Interface die von der Controller-Software geforderten Zustand angenommen hat.
+Da das User-Interface ein separates Programm, welches auf dem System ausgeführt wird, muss dieses in der Lage sein mit der Controller-Software zu kommunizieren. Hierzu wurde die zuvor erstellte (+ipc) Bibliothek in das Projekt importiert, jedoch wurde in der Makefile das `USES_QT` Define-Flag gesetzt. Wenn dieses gesetzt ist, wird die Bibliothek in den Client-Modus versetzt und stellt somit das Gegenstück zu der Instanz dar, welche in der Controller-Software läuft. Somit werden auch die Funktionen zum senden von `gui.createEvent()` umgekehrt, sodass ein Event in der Controller-Software ausgelöst wird. Dies kann z.B. durch eine Benutzereingabe oder wenn das User-Interface die von der Controller-Software geforderten Zustand angenommen hat.
 
 * c++ example code
 
@@ -1045,8 +1064,7 @@ Da das User-Interface ein separates Programm, welches auf dem System ausgeführt
 
 MenuManager::MenuManager()
 {
-    //...
-    //
+    //START IPC THREAD
     guiconnection.start_recieve_thread();
     //...
 }
@@ -1061,7 +1079,7 @@ void MenuManager::ss_calboard_btn(){
 // MenuManager::updateProgress() CALLED BY SPERATE THREAD
 void MenuManager::updateProgress()
 {
-    //GET LATEST EVENT
+    //GET LATEST EVENT FROM IPC
     const guicommunicator::GUI_EVENT ev =  guiconnection.get_gui_update_event();
     if(!ev.is_event_valid){return;}
     //PROCESS EVENTS
@@ -1071,7 +1089,6 @@ void MenuManager::updateProgress()
     }
     //...
 }
-//...
 ```
 
 
