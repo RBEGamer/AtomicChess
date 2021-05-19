@@ -143,7 +143,7 @@ Hierbei werden vor allem Funktionalitäten berücksichtig, welche die Bedienung 
 
 : Auflistung der Anforderungen an den autonomen Schachtisch
 
-|                                         	| (+atc) – autonomous Chessboard      	|
+|                                         	| (+atc)                               	|
 |-----------------------------------------	|-----------------------------------	  |
 | Erkennung Schachfigurstellung           	| ja                                 	  |
 | Konnektivität                           	| (+wlan), (+usb)                   	  |
@@ -895,7 +895,7 @@ Bei der Entwicklung des System wurde darauf geachtet, dass sich das User-Interfa
 * JSON basiert => einfaches Debugging
 * Steuerung über andere Endgeräte möglich z.B Handy-App welche im selben Netzwerk befindet.
 * durch preprozessor define wird der master definiert
-* eventbasiert seperater thread
+* eventbasiert seperater mittels socket nicht per shared memory damit das ui nicht zwangsläufig auf der tisch laufen muss
 
 
 ```c++
@@ -1001,6 +1001,7 @@ Die anschliessende Implementierung der Backend-Logik des Unter-Interface bestand
 
 
 ```c++
+// main.cpp User-Interface ATC
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include "menumanager.h" //BACKEND LOGIC
@@ -1034,20 +1035,44 @@ int main(int argc, char *argv[])
 ```
 
 
-Da das Userinterface ein seperates Programm, welches auf dem System ausgeführt wird, muss dieses in der Lage sein mit der Controller-Software zu kommunizieren. Hierzu wurde die zuvor erstellte IPC Bibliothek in das Projekt importiert, jedoch wurde in der Makefile das `USES_QT` Define-Flag gesetzt. Wenn dieses gesetzt ist, wird die Bibliothek in den Client-Modus versetzt und stellt somit das Gegenstück zu der Instanz dar, welche in der Controller-Software läuft. Somit werden auch die Funktionen zum senden von `gui.createEvent()` umgekehrt, sodass ein Event in der Controller-Software ausgelößt wird.
+Da das User-Interface ein separates Programm, welches auf dem System ausgeführt wird, muss dieses in der Lage sein mit der Controller-Software zu kommunizieren. Hierzu wurde die zuvor erstellte IPC Bibliothek in das Projekt importiert, jedoch wurde in der Makefile das `USES_QT` Define-Flag gesetzt. Wenn dieses gesetzt ist, wird die Bibliothek in den Client-Modus versetzt und stellt somit das Gegenstück zu der Instanz dar, welche in der Controller-Software läuft. Somit werden auch die Funktionen zum senden von `gui.createEvent()` umgekehrt, sodass ein Event in der Controller-Software ausgelöst wird. Dies kann z.B. durch eine Benutzereingabe oder wenn das User-Interface die von der Controller-Software geforderten Zustand angenommen hat.
 
 * c++ example code
 
 ```c++
+// menumanager.cpp User-Interface ATC
+#include "menumanager.h"
 
+MenuManager::MenuManager()
+{
+    //...
+    //
+    guiconnection.start_recieve_thread();
+    //...
+}
 
+//METHOD CALLED FROM QML ELEMENT ss_calboard_btn
+void MenuManager::ss_calboard_btn(){
+    //SEND EVENT TO CONTROLLER SOFTWARE
+    guiconnection.createEvent(guicommunicator::GUI_VALUE_TYPE::START_CALBOARD_PROC);
+}
 
-
-
+//PROCESSES EVENTS COMMING FROM THE INTER PROCESS COMMUNICATION AND SHOWS MENUS OR SET IMAGES/LABES
+// MenuManager::updateProgress() CALLED BY SPERATE THREAD
+void MenuManager::updateProgress()
+{
+    //GET LATEST EVENT
+    const guicommunicator::GUI_EVENT ev =  guiconnection.get_gui_update_event();
+    if(!ev.is_event_valid){return;}
+    //PROCESS EVENTS
+    //SWITCH MAIN MENU REQUEST
+    if(ev.event == guicommunicator::GUI_ELEMENT::SWITCH_MENU){
+        switch_menu(ev.type);
+    }
+    //...
+}
+//...
 ```
-
-
-
 
 
 
