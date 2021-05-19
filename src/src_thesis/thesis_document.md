@@ -629,7 +629,7 @@ Das System erkennt den Anschluss der Hardware beim Start auf die gleiche Art und
 
 * alle anforderungen erfüllt
 * zulasten der geschwindigkeit insbesondere bei der erkennung des User-Move
-
+* erweitrungsmöglichkeit in hard uns SOFTWARE
 
 
 
@@ -899,8 +899,8 @@ Durch die Socket Basierende Implementierung ist es möglich die andern (+ipc) In
 
 ```json
 {
-"event":"BEGIN_BTN_SCAN",
-"type":"CLICKED",
+"event":12, //BEGIN_BTN_SCAN
+"type":2, //CLICKED
 "dest_process_id":"ui_qt_01",
 "origin_process_id":"controller_sw_01",
 "is_ack":false"
