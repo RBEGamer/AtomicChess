@@ -4,7 +4,7 @@
 
 
 
-In der heutigen Zeit m
+In der heutigen Zeit
 
 
 
@@ -26,11 +26,11 @@ Mittels der Programmierung werden diverse Technologien von verschiedenen Einzels
 Im ersten Abschnitt werden die zum Zeitpunkt existierenden Ansätze und deren Umsetzung beleuchtet. Hier wurde insbesondere darauf geachtet
 Anschliessend werden die zuvor verwendeten Technologien betrachtet, welche bei bei den beiden darauffolgenden Prototypen verwendet werden sollen. Hierbei stehen insbesondere solche Technologien im Vordergrund der Untersuchung welche möglichst einfach zu Beschaffen sind und im besten Fall einer breiten Masse zur Verfügung stehen.
 
-Das sechste Kapitel widmet sich der Realisierung des ersten Protoypen des autonomen Schachtischs.
+Das sechste Kapitel widmet sich der Realisierung des ersten Prototypen des autonomen Schachtischs.
 Hier werden die Erkenntnisse der zuvor evaluierten Technologien verwendet um ein Modell zu entwickeln welches den im ersten Abschnitt erarbeiteten Vorgaben entspricht. Der nach der Implementierung durchgeführte Dauertest, zeigt anschliessend mögliche Probleme auf.
 
 Im anschließenden Kapitel, wird auf der Basis des ersten Prototyps und seiner im Betrieb auftretenden Probleme, der finale Prototyp entwickelt.
-Hier werden die Probleme durch die Vereinfachung der Elektronik sowie der Mechanik gelößt.
+Hier werden die Probleme durch die Vereinfachung der Elektronik sowie der Mechanik gelöst.
 Die Zuverlässigkeit wurde hier durch stetige Testläufe mit kontrollierten Schachzug-Szenarien überwacht
 und so ein produktreifer Prototyp entwickelt.
 
@@ -149,13 +149,13 @@ Hierbei werden vor allem Funktionalitäten berücksichtig, welche die Bedienung 
 | Konnektivität                           	| (+wlan), (+usb)                   	  |
 | Automatisches Bewegen der Figuren       	| ja                                	  |
 | Spiel Livestream                        	| ja                                	  |
-| Cloud anbindung (online Spiele)         	| ja                                	  |
+| Cloudanbindung (online Spiele)         	| ja                                	  |
 | Parkposition für ausgeschiedene Figuren 	| ja                                	  |
 | Stand-Alone Funktionalität              	| ja (Bedienung direkt am Tisch)    	  |
 | Besonderheiten                          	| visuelle Hinweise per Beleuchtung 	  |
 
 
-Die Abmessungen und das Gewicht des autonomen Schachtisches, ergeben sich aus mechanischen Umsetzung und werden hier aufgrund der zur Verfügung stehenden Materialen und fertigungstechniken nicht festgelegt.
+Die Abmessungen und das Gewicht des autonomen Schachtisches, ergeben sich aus mechanischen Umsetzung und werden hier aufgrund der zur Verfügung stehenden Materialen und Fertigungstechniken nicht festgelegt.
 Dennoch wird Wert darauf gelegt, dass das Verhältnis zwischen den Spielfeldabmessungen und den Abmessungen des Tisches so gering wie möglich ausfällt. Auch müssen die Figuren für den Benutzer eine gut handhabbare Grösse aufweisen um ein angenehmes haptisches Spielerlebnis zu gewährleisten. Auch wird kein besonderer Augenmerk auf die Geschwindigkeit der Figurbewegeungen gelegt, da hier die Zuverlässigkeit und Wiederholgenauigkeit dieser im Vordergrund stehen.
 
 
@@ -217,22 +217,22 @@ Dennoch wird Wert darauf gelegt, dass das Verhältnis zwischen den Spielfeldabme
 ## 3D Druck für den mechanischen Aufbau
 
 
-Da es sich hier nur um einen Protoypen handelt, wurde hier auf ein einfach zu handbabendes Filament vom Typ (+pla) zurückgegriffen.
+Da es sich hier nur um einen Prototypen handelt, wurde hier auf ein einfach zu verarbeitendes Filament vom Typ (+pla) zurückgegriffen.
 Dieses ist besonders gut für die Prototypenendwicklung geeignet und kann mit nahezu jeden handelsüblichen (+fdm) 3D-Drucker verarbeitet werden.
 
 Zuvor wurden einige Testdrucke durchgeführt um die Qualität der zuvor gewählten Druckparameter zu überprüfen und diese gegebenenfalls anzupassen.
-Auch wurden verschiedene weitere Bauteile gedruckt, an welchen die Toleranzen für die späteren (+cad) Zeichnungen abgeschätz werden können.
+Auch wurden verschiedene weitere Bauteile gedruckt, an welchen die Toleranzen für die späteren (+cad) Zeichnungen abgeschätzt werden können.
 Dies betrifft vor allem die Genuigkeit der Bohrungen in den gefertigten Objekten, da hier später Bolzen und Schrauben ein nahezu spielfrei eingeführt werden müssen.
 Ein Test, welcher die Machbarkeit von Gewinden zeigt wurde nicht durchgeführt, da alle Schrauben später mit der passenden Mutter gesichert werden sollen.
 So soll eine Abnutzung durch häufige Montage der gedruckten Bauteile verhindert werden.
 
 Bei dem Design der zu druckenden Bauteile wurde darauf geachtet, dass diese den Bauraum von 200x200x200mm nicht überschreiten und somit auch von einfachen (+fdm) 3D-Druckern erstellt werden können.
 
-Als Software wurde der Open-Source Slicer Ultimaker Cura [@ultimakercura] verwendet, da dieser zum einen bereits fertige Konfigurationen für den verwendeten 3D-Drucker enhält und zum anderen experimentelle Features bereitstellt.
+Als Software wurde der Open-Source Slicer Ultimaker Cura [@ultimakercura] verwendet, da dieser zum einen bereits fertige Konfigurationen für den verwendeten 3D-Drucker enthält und zum anderen experimentelle Features bereitstellt.
 
 ![3D Druck: Objekt (rot,gelb,grün),Tree Structure (cyan) \label{3d_print_tree_structure}](images/3d_print_tree_structure.png)
 
-Hier wurde für die Bauteile, welche eine Sützstruktur benötigen, die von Cura bereitgestellte Tree Support Structure aktiviert. \ref{3d_print_tree_structure}
+Hier wurde für die Bauteile, welche eine Stützstruktur benötigen, die von Cura bereitgestellte Tree Support Structure aktiviert. \ref{3d_print_tree_structure}
 Diese bietet den Vorteil gegenüber anderen Stützstrukturen, dass sich diese leichter entfernen lässt und weniger Rückstände an den Bauteilen hinterlässt.
 Diese Vorteile wurde mit verschiedenen Testdrucken verifiziert und kommen insbesondere bei komplexen Bauteilen mit innenliegenden Elementen zum tragen bei denen eine Stützstruktur erforderlich sind.
 
@@ -287,24 +287,24 @@ Zusätzliche Parameter wie die Druckgeschwindigkeit, sind hierbei individuell f�
 ## Parametrisierung Schachfiguren
 
 Da das System die auf dem Feld befindlichen Schachfiguren anhand von (+nfc) Tags erkennt, müssen diese zuerst mit Daten beschrieben werden.
-Die verwendeten NXP NTAG 21 Chips, besitzen einen vom Benutzer verwendbaren Speicher von 180 Byte. Dieser kann über ein (+nfc)-Lese/Schreibgerät mit Daten verschiednster Art beschrieben und wieder ausgelesen werden.
+Die verwendeten NXP NTAG 21 Chips, besitzen einen vom Benutzer verwendbaren Speicher von 180 Byte. Dieser kann über ein (+nfc)-Lese/Schreibgerät mit Daten verschiedenster Art beschrieben und wieder ausgelesen werden.
 Moderne Mobiltelefone besitzen in der Regel auch die Fähigkeit mit passenden (+nfc) Tags kommunizieren zu können; somit sind keine Stand-Alone Lesegeräte mehr notwendig.
 
-Der Schachtisch verwendet dabei das (+ndef) Dateiformat welches Festlegt, wie die Daten auf dem (+nfc) Tag gespeichert werden. Da diesen ein Standatisiertes Format ist, können alle gängigen Lesegeräte und Chipsätze diese Datensätze lesen. Der im autonomen Schachtisch verwendete Chipsatz PN532 von NXP ist dazu ebenfalls in der Lage.
+Der Schachtisch verwendet dabei das (+ndef) Dateiformat welches Festlegt, wie die Daten auf dem (+nfc) Tag gespeichert werden. Da diesen ein Standardisiertes Format ist, können alle gängigen Lesegeräte und Chipsätze diese Datensätze lesen. Der im autonomen Schachtisch verwendete Chipsatz PN532 von NXP ist dazu ebenfalls in der Lage.
 
-Um das (+ndef) Format verwenden zu können, müssen die (+nfc) Tags zuerst auf diese Formatiert werden. Die mesten käuflichen Tags sind bereits derart formatiert. Alternativ kann dies mittels Mobiltelefon und passender App geschehen.
-Da (+ndef) Informationen über die Formatierung und der gepeicherten Einträge speichert, stehen nach der Formatierung nur noch 137 Bytes des NXP NTAG 21 zur verfügung.
+Um das (+ndef) Format verwenden zu können, müssen die (+nfc) Tags zuerst auf diese Formatiert werden. Die meisten käuflichen Tags sind bereits derart formatiert. Alternativ kann dies mittels Mobiltelefon und passender App geschehen.
+Da (+ndef) Informationen über die Formatierung und der gespeicherten Einträge speichert, stehen nach der Formatierung nur noch 137 Bytes des NXP NTAG 21 zur verfügung.
 
 Per Lesegerät können anschliessend mehrere (+ndef) Records auf den Tag geschrieben werden. Diese sind mit Dateien auf einer Festplatte vergleichbar und können verschiedenen Dateiformate und Dateigrössen annehmen.
-Ein typischer Anwendungsfall ist der (+ndefrtd) URL Datensatz. Dieser kann dazu genutzt werden eine spezifizierte URL auf dem Endgeräte aufzurufen, nachdem der (+nfc) Tag gescant wurde.[@nordicnfclibndef]
+Ein typischer Anwendungsfall ist der (+ndefrtd) URL Datensatz. Dieser kann dazu genutzt werden eine spezifizierte URL auf dem Endgeräte aufzurufen, nachdem der (+nfc) Tag gescannt wurde.[@nordicnfclibndef]
 
 Der autonome Schachtisch verwendet den einfachsten (+ndefrtd) Typ, welcher der Text-Record ist, und zum speichern von Zeichenketten genutzt werden kann, ohne das eine Aktion auf dem Endgerät ausgeführt wird.
-Jeder Tag einer Schafigur, welche für den autonomen Schachtisch verwendet werden kann, besitzt diesen (+ndef) Record an der ersten Position. Alle weiteren eventuell vorhandenen Records werden vom Tisch ignoriert.[@nordicnfclib]
+Jeder Tag einer Schachfigur, welche für den autonomen Schachtisch verwendet werden kann, besitzt diesen (+ndef) Record an der ersten Position. Alle weiteren eventuell vorhandenen Records werden vom Tisch ignoriert.[@nordicnfclib]
 
 ![Prototyp Hardware: Tool zur Erstellung des NDEF Payloads: ChessFigureIDGenerator.html \label{ATC_ChessFigureIDGenerator}](images/ATC_ChessFigureIDGenerator.png)
 
 Um die Payload für den (+nfc) Record zu erstellen wurde ein kleine Web-Applikation erstellt, welche den Inhalt der Text-Records erstellt.
-Dieser ist für jede Figur individuell und enthält den Figur-Typ und die Figur-Farbe. Das Tool unterstüzt auch das Speichern weiterer Attribute wie einem Figur-Index, welcher aber in der finalen Software-Version nicht genutzt wird. \ref{ATC_ChessFigureIDGenerator}
+Dieser ist für jede Figur individuell und enthält den Figur-Typ und die Figur-Farbe. Das Tool unterstützt auch das Speichern weiterer Attribute wie einem Figur-Index, welcher aber in der finalen Software-Version nicht genutzt wird. \ref{ATC_ChessFigureIDGenerator}
 
 Nach dem Beschreiben eines (+nfc) Tags ist es zusätzlich möglich, diesen gegen auslesen mittels einer Read/Write-Protection zu schützen.
 Diese Funktionalität wird nicht verwendet um das Kopieren einzelner Figuren durch den Benutzer zu ermöglichen.
@@ -513,7 +513,7 @@ bool GCodeSender::wait_for_ack() {
 	return true;
 }
 ```
-Die Steuerung verarbeitet diese und bestätigt die Ausführung mit einer Acknowledgement-Antwort. Hierbei gibt es verschiedenen Typen. Der einfachste Fall ist ein `ok`, welches ein erfolgreiche Abarbeitung des Kommandos signalisiert. Ein weitere Fall ist die Busy-Antwort `echo:busy`. Diese Signalisiert, dass das Kommando noch in der Bearbeitung ist und wird im falle des autonomen Schachtisch bei langen und langsamen Bewegungen der Mechanik ausgegeben. Das System wartet diese Antworten ab, bis eine finale `ok`-Antwort zurückgegeben wird, erst dann wird das nächste Kommando abgearbeitet.
+Die Steuerung verarbeitet diese und bestätigt die Ausführung mit einer Acknowledgement-Antwort. Hierbei gibt es verschiedenen Typen. Der einfachste Fall ist ein `ok`, welches ein erfolgreiche Abarbeitung des Kommandos signalisiert. Ein weiterer Fall ist die Busy-Antwort `echo:busy`. Diese Signalisiert, dass das Kommando noch in der Bearbeitung ist und wird im falle des autonomen Schachtisch bei langen und langsamen Bewegungen der Mechanik ausgegeben. Das System wartet diese Antworten ab, bis eine finale `ok`-Antwort zurückgegeben wird, erst dann wird das nächste Kommando abgearbeitet.
 
 
 
@@ -523,7 +523,7 @@ Durch den Wegfall der zuvor eingesetzten Elektronik und der Austausch durch die 
 Da dieses mittels (+i2c) Interface direkt mit dem eingebetteten Systems verbunden war. Diese Möglichkeit besteht weiterhin, jedoch wurde auch hier auf eine (+usb) Schnittstelle gewechselt. So ist es möglich das System auch an einem anderen Host-System zu betreiben, wie z.B. an einem handelsüblichen Computer.
 
 Dazu wurde ein Schnittstellenwandler hinzugefügt welcher die (+i2c) Schnittstelle zu einer (+usb) Seriell wandelt. Hierzu wurde ein Atmega328p Mikrokontroller eingesetzt, da dieser weit verbreitet und preisgünstig zu beschaffen ist.
-Die Firmware des Mikrokontrollers stellt ein einfaches kommandobasiertes Interface bereit. Die Kommunikation ist mit der Kommunikation und der Implementierung des G-Code Senders vergleichbar und teilen sich die gleichen Funktionen zur Kommunikation mit der Seriellen Schnittstelle.
+Die Firmware des Mikrokontroller stellt ein einfaches kommandobasiertes Interface bereit. Die Kommunikation ist mit der Kommunikation und der Implementierung des G-Code Senders vergleichbar und teilen sich die gleichen Funktionen zur Kommunikation mit der Seriellen Schnittstelle.
 
 ```c++
 //userboardcontroller.cpp Atmega328p Firmware
@@ -590,7 +590,7 @@ ChessPiece::FIGURE UserBoardController::read_chess_piece_nfc(){
     return fig;
 }
 ```
-Das System erkennt den Anschluss der Hardware beim Start auf die gleiche Art und Weise wie der G-Code Sender. Hierbei wurden einige verschiedene Mikrokontroller im System hinterlegt, auf welchen die Firmware geteset wurde.
+Das System erkennt den Anschluss der Hardware beim Start auf die gleiche Art und Weise wie der G-Code Sender. Hierbei wurden einige verschiedene Mikrokontroller im System hinterlegt, auf welchen die Firmware getestet wurde.
 
 : Hinterlegte Mikrokontroller
 
@@ -622,7 +622,7 @@ Das System erkennt den Anschluss der Hardware beim Start auf die gleiche Art und
 | Automatisches Bewegen der Figuren       	| ja                                   	|
 | Erkennung Schachfigurstellung           	| ja                                   	|
 | Spiel Livestream                        	| ja                                   	|
-| Cloud anbindung (online Spiele)         	| ja                                   	|
+| Cloudanbindung (online Spiele)         	  | ja                                   	|
 | Parkposition für ausgeschiedene Figuren 	| ja                                   	|
 | Stand-Alone Funktionalität              	| ja                                   	|
 | Besonderheiten                          	| User-Port für Erweiterungen           |
@@ -655,7 +655,7 @@ Das System erkennt den Anschluss der Hardware beim Start auf die gleiche Art und
 
 Die erste Phase der Entwicklung des Systems bestand in der Entwicklung der Cloud-Infrastruktur und der darauf laufenden Services.
 Hierbei stellt die "Cloud", einen Server dar, welcher aus dem Internet über eine feste IPv4 und IPv6-Adresse verfügt und frei konfiguriert werden kann.
-Auf diesem System ist der Schach-Cloud Stack \ref{ATC_Cloud_Architecture} installiert, welcher zum einen aus der Schach-Software besteht, welche in einem Docker-Stack ausgefphrt wird und zum anderen....
+Auf diesem System ist der Schach-Cloud Stack \ref{ATC_Cloud_Architecture} installiert, welcher zum einen aus der Schach-Software besteht, welche in einem Docker-Stack ausgeführt wird und zum anderen....
 
 ![Gesamtübersicht der verwendeten Cloud-Infrastruktur \label{ATC_Cloud_Architecture}](images/ATC_Cloud_Architecture.png)
 
@@ -743,8 +743,6 @@ Bevor ein Spiel begonnen wird, generiert der MoveValidator das initiale Spielfel
 Der Backend-Service fragt einen neues Spiel an oder übergibt einen Schachzug inkl. des Spielbretts an den Service.\ref{ATC_movevalidator_execute_move} Der Response wird dann vom Backend in der Datenbank gespeichert und weiter an die Client-Devices verteilt.
 
 
-
-
 : MoveValidator-Service (+api) Overview
 
 | AtomicChess Move-Validator Service (+api) | (+api)-Route            	| Method 	| Form-Data             |
@@ -793,7 +791,7 @@ Dieser wurde dabei komplett in (+js) umgesetzt im Zusammenspiel mit (+html) und 
 Ausgeliefert werden die statischen Dateien zur Einfachheit durch den Backend-Service, es wurde kein gesonderter Frontend-Service angelegt.
 Durch die Implementierung des Webclienten in (+js), ist dieser sogar lokal über einen Browser ausführbar, ohne dass die benötigten Dateien über einen Webserver ausgeliefert werden müssen.
 
-Zusätzlich zu dem verwendeten Vanilla-(+js) wurde jQuery als zusätzliche (+js) Bibliothek verwendet, welches eine Manipulation der (+html) Elemente stark vereinfacht. Diese bietet insbesondere einfach zu nutzende HTTP-Request Funktionen bzw. (+ajax) an, welche für die Kommunikation mit dem Backen-Service verwendet werden. Diese werden im Hintergrund eingesetzt, sodass der Webclient automatisch den neuen Spielzustand dem Benutzer anzeigt. Dies geschieht mittels `polling`, bei dem der Webbrowser in zyklischen Abständen die aktuellen Spiel-Informationen vom Backen-Service abfragt. Diese Methode wurde verwendet, um eine maximale Kompatibilität mit verschiedensten ggf älteren Web-Browsern sicherzustellen. Eine moderne alternative ist die Verwendung von Web-Sockets, bei welcher der Web-Browser eine direkte TCP-Verbindung zum Webserver (in diesem Fall der Backend-Service) aufnehemen kann und so eine direkte Kommunikation stattfinden kann ohne Verwendung der `polling`-Methode.
+Zusätzlich zu dem verwendeten Vanilla-(+js) wurde jQuery als zusätzliche (+js) Bibliothek verwendet, welches eine Manipulation der (+html) Elemente stark vereinfacht. Diese bietet insbesondere einfach zu nutzende HTTP-Request Funktionen bzw. (+ajax) an, welche für die Kommunikation mit dem Backen-Service verwendet werden. Diese werden im Hintergrund eingesetzt, sodass der Webclient automatisch den neuen Spielzustand dem Benutzer anzeigt. Dies geschieht mittels `polling`, bei dem der Webbrowser in zyklischen Abständen die aktuellen Spiel-Informationen vom Backen-Service abfragt. Diese Methode wurde verwendet, um eine maximale Kompatibilität mit verschiedensten ggf älteren Web-Browsern sicherzustellen. Eine moderne alternative ist die Verwendung von Web-Sockets, bei welcher der Web-Browser eine direkte TCP-Verbindung zum Webserver (in diesem Fall der Backend-Service) aufnehmen kann und so eine direkte Kommunikation stattfinden kann ohne Verwendung der `polling`-Methode.
 
 
 Der Hauptanwendungsfall des Webclienten während der Entwicklung, ist es weitere Spieler zu simulieren und so ein Spiel mit nur einem autonomen Schachtisch test zu können.
@@ -819,7 +817,7 @@ Somit ist gewährleistet, dass immer zuerst die menschlichen Spieler ein Spiel b
 Eine weitere Modifikation ist die Verwendung einer Schach-AI, da dieser Service als Computerspieler agieren soll.
 Hierzu kam die Open-Source Chess Engine Stockfish[@stockfish] in der Version 11 zum Einsatz.
 Die Stockfish-Engine bietet noch weitere Features, als nur die nächst besten Züge zu einem gegebenen Schachbrett zu ermitteln.
-Sie kann auch genutzt werden um Züge zu klassifizieren und bietet Analysemöglichkeiten für Spielstellungen.
+
 
 Die AutoPlayer-Instanz kommuniziert über das (+uci) Protokoll[@uciprotocol] mit der Engine.
 Dieses Protokoll wird in der Regel von Schach-Engines verwendet, um mit einer (+gui) zu Kommunizieren.
@@ -842,7 +840,7 @@ So ist es zum Beispiel möglich, die Spielstärke je Spieler anzupassen oder ein
 
 Ein weiterer Anwendungsfall für den AutoPlayer-Service, ist das Testen des weiteren Systems insbesondere des Backend-Service.
 Durch das Erstellen eines Spiels mit zwei AutoPlayer-Instanzen, können automatisierte test Schachpartien ausgeführt werden um die Funktionsfähigkeit des restlichen Systems zu testen.
-Diese Feature wurde insbesondere bei der Entwicklung des Webclienten und der Steuerungssoftware für den autonomen Schachtisch verwendet.
+Diese Feature wurde insbesondere bei der Entwicklung des Webclient und der Steuerungssoftware für den autonomen Schachtisch verwendet.
 
 
 
