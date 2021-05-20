@@ -735,33 +735,45 @@ Bevor ein Spiel begonnen wird, generiert der MoveValidator das initiale Spielfel
 
 Der Backend-Service fragt einen neues Spiel an oder übergibt einen Schachzug inkl. des Spielbretts an den Service.\ref{ATC_movevalidator_execute_move} Der Response wird dann vom Backend in der Datenbank gespeichert und weiter an die Client-Devices verteilt.
 
+<br>
 
 : MoveValidator-Service (+api) Overview
 
-| AtomicChess Move-Validator Service (+api) | (+api)-Route            	| Method 	| Form-Data             |
-|----------------------------------------	|----------------------	|--------	|-----------------------	|
-| Check Move                             	| /rest/check_move     	| POST   	| * fen * move * player 	|
-| Execute Move                           	| /rest/execute_move   	| POST   	| fen * move             	|
-| Validate Board                         	| /rest/validate_board 	| POST   	| fen                   	|
-| Init Board                             	| /rest/init_board     	| GET    	|                       	|
+| AtomicChess Move-Validator Service (+api) | (+api)-Route            	| Method 	| Form-Data               |
+|-------------------------------------------|---------------------------|---------|-------------------------|
+| Check Move                             	  | /rest/check_move     	    | POST   	| * fen * move * player 	|
+| Execute Move                           	  | /rest/execute_move   	    | POST   	| fen * move             	|
+| Validate Board                         	  | /rest/validate_board 	    | POST   	| fen                   	|
+| Init Board                             	  | /rest/init_board     	    | GET    	|                       	|
 
+
+<br>
 
 Allgemein geschieht die Kommunikation über vier (+api) Calls, welche vom MoveValidator-Service angeboten werden.
 Als erstes wird vom Backend der `/rest/init_board` Request verwendet, welcher ein neues Spielbrett in der (+fen) Notation zurückgibt, welches zum Start der Partie verwendet wird.
-Allgemein arbeitet wurde das komplette System so umgesetzt, dass dieses mit einem Spielfeld in einer Zeichenketten/String arbeitet.
+
+<br>
+
+Das komplette System so umgesetzt, dass dieses mit einem Spielfeld in einer Zeichenketten-Representation arbeitet.
 Dies hat den Vorteil, dass die Spielfeld-Notation leicht angepasst werden kann.
 Mit diesem Design ist es möglich, auch andere Spielarten im System zu implementieren, nur hier die initialen Spielfelder generiert werden und Züge der Spieler validiert werden müssen.
 
+<br>
+
 Die (+fen) Notation ist universal und kann jede Brettstellung darstellen. Auch enthält diese nicht nur die Figur Stellungen, sondern auch weitere Informationen, wie die aktuelle Nummer des Zuges oder welcher Spieler gerade an der Reihe ist. Diese werden dann in der (+xfen) Notation angegeben, bei der zusätzlich zu der Brettstellung auch noch die weiteren Informationen angehängt werden.
+
+<br>
 
 : Vergleich (+fen) - (+xfen)
 
 | FEN-TYPE                                          	| FEN-String                                                    |
-|---------------------------------------------------	|---------------------------------------------------------------|
+|-----------------------------------------------------|---------------------------------------------------------------|
 | FEN                                                	| rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R             |
 | X-FEN                                             	| rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2|
 | SCHEMA                                            	| Board Player-Color Rochade En-Passant Halfturn Turn-Number	  |
 
+
+<br>
 
 Alle gängigen Schachprogramme und Bibliotheken unterstützen das Laden von Spielbrettern in der (+fen) bzw (+xfen) Schreibweise, ebenso die für den MoveValidator Service verwendete Python-Chess Bibliothek [@pythonchesslib]. Diese unterstützt zusätzlich die Generierung der für den Benutzer möglichen Schachzügen, welche auf dem aktuellen Brett möglich sind.
 
