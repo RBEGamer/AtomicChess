@@ -3,28 +3,28 @@
 ## Motivation
 
 
-Eingebettete Systeme (Englisch "embedded Systems") sind technische Zusammensetzungen, welche für eine spezifische Funktion entwickelt werden. Im Gegensatz zu Mehrzwecksystemen (Englisch "multi-purpose systems"), wie zum Beispiel einem Personalcomputer, welcher in der Lage ist, diverse Funktionen auszuführen und nicht zwingend an eine Funktion gebunden ist, dienen eingebettete Systeme einer bestimmten Logik. Daraus resutlieren einfacherer und auch ressourcensparendere Systeme, die wesentlich näher an der Technik und der für den Zweck nötigen Komponenten und Software entwickelt werden. Systeme können günster zusammengesetzt und Fehlerquellen schneller entdeckt und behoben werden. Nicht für den Prozess notwendige Komponenten werden gar nicht erst verwendet. Bei einem Mehrzwecksystem wird akzeptiert, dass Komponenten und Schnittstellen existieren, die nicht benötigt werden. Diese veursachen Kosten und können mögliche Fehlerquellen sein.
+Eingebettete Systeme (Englisch "embedded Systems") sind technische Zusammensetzungen, welche für eine spezifische Funktion entwickelt werden. Im Gegensatz zu Mehrzwecksystemen (Englisch "multi-purpose systems"), wie zum Beispiel einem Personal Computer, welcher in der Lage ist, diverse Funktionen auszuführen und nicht zwingend an eine Funktion gebunden ist, dienen eingebettete Systeme einer bestimmten Logik. Daraus resultieren einfacherer und auch Ressourcen-sparendere Systeme, die wesentlich näher an der Technik und der für den Zweck nötigen Komponenten und Software entwickelt werden. Systeme können grünster zusammengesetzt und Fehlerquellen schneller entdeckt und behoben werden. Nicht für den Prozess notwendige Komponenten werden gar nicht erst verwendet. Bei einem Mehrzwecksystem wird akzeptiert, dass Komponenten und Schnittstellen existieren, die nicht benötigt werden. Diese verursachen Kosten und können mögliche Fehlerquellen sein.
 
 <br>
 
-Dennoch ist die Entwicklung eines solchen Systems nicht banal. Es ist abzuwägen, welche Komponeten derzeit auf dem freien Markt erhältlich sind, welche Eigenschaten diese mitbringen oder ermöglichen und wie diese optimal kombiniert werden können. Es bedarf im vorhinein intensiverer Rechere und einem größeren Perpektive über mögliche Zusammenhänge. Im Falle eines Merhzwecksystems ist die Auswahl simpler, da man den Prozess auch im Nachhinein noch anpassen kann, da zusätzliche Funktionen und Komponenten gegeben sind oder leichter ergänzt werden können. Das eingebettete System muss in der Regel aufgewertet oder sogar völlig ersetzt werden, wenn zu einem späteren Zeitpunkt festgestellt wird, dass Funktionen nicht gegeben oder umsetzbar sind. Fertige Systeme sind komplexer in der Aufwertung.
+Dennoch ist die Entwicklung eines solchen Systems nicht banal. Es ist abzuwägen, welche Komponenten derzeit auf dem freien Markt erhältlich sind, welche Eigenschaften diese mitbringen oder ermöglichen und wie diese optimal kombiniert werden können. Es bedarf im Vorhinein intensiverer Recherche und einer größeren Perspektive über mögliche Zusammenhänge. Im Falle eines Merhzwecksystems ist die Auswahl simpler, da man den Prozess auch im Nachhinein noch anpassen kann, da zusätzliche Funktionen und Komponenten gegeben sind oder leichter ergänzt werden können. Das eingebettete System muss in der Regel aufgewertet oder sogar völlig ersetzt werden, wenn zu einem späteren Zeitpunkt festgestellt wird, dass Funktionen nicht gegeben oder umsetzbar sind. Fertige Systeme sind komplexer in der Aufwertung.
 
 <br>
 
-Die Fähigkeit zur Erstellung eines solchen System ist daher nicht leichtfertig anzunehmen und es ist mir wichtig, zum Abschluss meines Studiums mein gewonnenes Wissen über Systeme, Komponenten, Zusammenhänge und deren Verbindung bis hin zur Programmierung nachzuweisen. Die Auswahl eines fertigen Computer oder sogar das simple nutzen existierender Betriebssysteme erweckt nicht den gleichen Reiz, wie es die eigene Erstellung dieser Komponenten auf mich hat. Ich halte es für essentiell, möglichst fachlich die Inhalte meines Studiums in Verbindung mit meinen Vorlieben zu bringen, um letztlich ein optimales Projekt zu erstellen.
+Die Fähigkeit zur Erstellung eines solchen System ist daher nicht leichtfertig anzunehmen und es ist mir wichtig, zum Abschluss meines Studiums mein gewonnenes Wissen über Systeme, Komponenten, Zusammenhänge und deren Verbindung bis hin zur Programmierung nachzuweisen. Die Auswahl eines fertigen Computers oder sogar das simple Nutzen existierender Betriebssysteme erweckt nicht den gleichen Reiz, wie es die eigene Erstellung dieser Komponenten auf mich hat. Ich halte es für essenziell, möglichst fachlich die Inhalte meines Studiums in Verbindung mit meinen Vorlieben zu bringen, um ein optimales Projekt zu erstellen.
 
 <br>
 
-Die Erstellung eines autonomen Schachtischs vereinbart in meinen Augen im großen Umfang die wesentlichen Komponenten des Informatikstudiums mit meiner Vorliebe zur mechanisch-elektrischen Gestaltung. Angefangen mit den Grundlagen der Informatik, insbesondere mit technischem Bezug, über die Berechnung und Auslegung von Systemkomponenten, zudem die objektorientierte Projektplanung und Architektur von Systemen bis hin zu Datenbanken und Webtechnologien und Softwarenentwicklung. Zudem wird mein Studienschwerpunkt, die technische Informatik, mit einem eingetteten System manifestiert.
+Die Erstellung eines autonomen Schachtischs vereinbart in meinen Augen im großen Umfang die wesentlichen Komponenten des Informatikstudiums mit meiner Vorliebe zur mechanisch-elektrischen Gestaltung. Angefangen mit den Grundlagen der Informatik, insbesondere mit technischem Bezug, über die Berechnung und Auslegung von Systemkomponenten, zudem die objektorientierte Projektplanung und Architektur von Systemen bis hin zu Datenbanken und Webtechnologien und Softwarenentwicklung. Zudem wird mein Studienschwerpunkt, die technische Informatik, mit einem einbetteten System manifestiert.
 
 <br>
 
-Der Reiz im Schachprojekt liegt in der Bedeutung und der Seltenheit. Schach ist ein bewärtes, ausnahmslos bekanntes und immer logisches Spiel, welches jedoch im kommerziellen Rahmen nie an Bedeutung gewonnen hat. Die Auswahl der verfügbaren elektrifizierten und programmgesteuerten Schachtisch ist auffallend gering; zudem sind existierende Lösungen oftmals nicht erschwinglich und bedürfen erhebliche Anpassungen des Spielers an das Spiel.
-Innerhalb der vergangenen drei Jahrzehnte bewiesen sich immer mehr Konzerne ihre technische Kompetenz und Überlegenheit und die Fähigkeit ihrer Maschinen mittels der Auswertung von Schachalgorithmen und dem möglichst schnellen besiegen derzeitiger Schach-Meister und -Meisterinnen. Die Algorithmen stehen heute in einer Vielzahl frei zugänglich zur Verfügung, jedoch ist das Interesse daran, für Spieler mögliche Anwendungen zu generieren, verschwindend gering und wird oftmals nur von Experten und Enthuiasten genutzt und auch hinterfragt. 
+Der Reiz im Schachprojekt liegt in der Bedeutung und der Seltenheit. Schach ist ein bewährtes, ausnahmslos bekanntes und immer logisches Spiel, welches jedoch im kommerziellen Rahmen nie an Bedeutung gewonnen hat. Die Auswahl der verfügbare elektrifizierte und programmgesteuerte Schachtisch ist auffallend gering; zudem sind existierende Lösungen oftmals nicht erschwinglich und bedürfen erhebliche Anpassungen des Spielers an das Spiel.
+Innerhalb der vergangenen drei Jahrzehnte bewiesen sich immer mehr Konzerne ihre technische Kompetenz und Überlegenheit und die Fähigkeit ihrer Maschinen mittels der Auswertung von Schachalgorithmen und dem möglichst schnellen besiegen derzeitiger Schach-Meister und -Meisterinnen. Die Algorithmen stehen heute in einer Vielzahl frei zugänglich zur Verfügung, jedoch ist das Interesse daran, für Spieler mögliche Anwendungen zu generieren, verschwindend gering und wird oftmals nur von Experten und Enthusiasten genutzt und auch hinterfragt. 
 
 <br>
 
-Mit dieser Arbeit möchte ich mich diesem Problem stellen und einen möglisch günstigen Tisch entwickeln, welcher das Spielerlebnis ohne Einschränkungen dem Spieler  transferiert. Zudem möchte ich gewonnene Erkentnnisse und aktuelle Ressourcen wie die Cloud-Infrastruktur einbinden, um das Schachspiel, welches zweier Spieler bedarf, für einen Spieler zu ermöglichen. Das Ergbenis sollen nicht nur viele Zeilen Code sein, sondern auch ein handfestes Produkt, dass meine Qualitäten und Enthusiasmus widerspiegelt
+Mit dieser Arbeit möchte ich mich diesem Problem stellen und einen möglich günstigen Tisch entwickeln, welcher das Spielerlebnis ohne Einschränkungen dem Spieler transferiert. Zudem möchte ich gewonnene Erkenntnisse und aktuelle Ressourcen wie die Cloud-Infrastruktur einbinden, um das Schachspiel, welches zweier Spieler bedarf, für einen Spieler zu ermöglichen. Das Ergebnis soll nicht nur viele Zeilen Code sein, sondern auch ein handfestes Produkt, dass meine Qualitäten und Enthusiasmus widerspiegeln. 
 
 <br>
     
@@ -38,18 +38,18 @@ Das Ziel der nachfolgenden Arbeit ist es, einen autonomen Schachtisch zu entwick
 Der Schwerpunkt liegt dabei insbesondere auf der Programmierung des eingebetteten Systems und dem Zusammenspiel von diesem mit einem aus dem Internet erreichbaren Servers, welcher als Vermittlungsstelle zwischen verschiedenen Schachtischen und anderen Endgeräten dient.
 Dieses besteht zum einem aus der Positionserkennung und Steuerung der Hardwarekomponenten (Schachfiguren) und zum anderen aus der Kommunikation zwischen dem Tisch selbst und einem in einer Cloud befindlichem Server.
 Mittels der Programmierung werden diverse Technologien von verschiedenen Einzelsystemen zu einem Gesamtprodukt zusammengesetzt.
-Insgesamt gilt es, einen für Anwender ansprechenden Schachtisch zu entwickeln, der das Spielerlebnis nicht nur orginalgetreu widerspiegelt, sondern das Einzelspieler-Modell zusätzlich noch verbessert.
+Insgesamt gilt es, einen für Anwender ansprechenden Schachtisch zu entwickeln, der das Spielerlebnis nicht nur originalgetreu widerspiegelt, sondern das Einzelspieler-Modell zusätzlich noch verbessert.
 
 <br>
 
 ## Methodik
 
 Im ersten Abschnitt werden die zum Zeitpunkt existierenden Ansätze und deren Umsetzung beleuchtet. Hier wurde insbesondere darauf geachtet, die Grenzen bestehender Systeme darzulegen und auf nur für dieses Projekt zutreffende Funktionen zu vergleichen. 
-Anschließend werden die zuvor verwendeten Technologien betrachtet, welche bei den beiden darauffolgenden Prototypen verwendet wurden. Hierbei stehen insbesondere solche Technologien im Vordergrund der Untersuchung, welche möglichst einfach zu beschaffen sind und optimaler Weise uneingeshränkt und lizenzunabhängig zur Verfügung stehen.
+Anschließend werden die zuvor verwendeten Technologien betrachtet, welche bei den beiden darauffolgenden Prototypen verwendet wurden. Hierbei stehen insbesondere solche Technologien im Vordergrund der Untersuchung, welche möglichst einfach zu beschaffen sind und optimaler Weise uneingeschränkt und lizenzunabhängig zur Verfügung stehen.
 
 <br>
 
-Das sechste Kapitel widmet sich der Realisierung eines ersten Prototypen des autonomen Schachtischs.
+Das sechste Kapitel widmet sich der Realisierung eines ersten Prototyps des autonomen Schachtischs.
 Hier werden die Erkenntnisse der zuvor evaluierten Technologien verwendet, um ein Modell zu entwickeln, welches den im ersten Abschnitt erarbeiteten Vorgaben entspricht. Der nach der Implementierung durchgeführte Dauertest soll zudem weitere Risiken, mögliche Probleme und Fehlerquellen aufdecken.
 
 <br>
@@ -91,7 +91,7 @@ Für die kommerziell käuflichen Schachspiele gibt es kein sehr großes Marktang
 
 <br>
 
-Die Tische eines Hersteller unterscheiden sich kaum in ihren Funktionen; mit steigendem Preis werden zusätzliche Funktionen in Form vonn Sensoren oder Verbindungsoptionen implementiert.
+Die Tische eines Herstellers unterscheiden sich kaum in ihren Funktionen; mit steigendem Preis werden zusätzliche Funktionen in Form von Sensoren oder Verbindungsoptionen implementiert.
 
 <br>
 
@@ -110,7 +110,7 @@ Wie bereits aus zum Teil identischen den Namen ersichtlich, streben alle Tische 
 
 |                                         	| Square Off - Kingdom [@squareoffkingdom]	| Square Off - Grand Kingdom [@squareoffgrand]		  | DGT Smart Board [@dtgsmartboard]	| DGT Bluetooth Wenge [@dtgble] |
 |-------------------------------------------|-------------------------------------------|---------------------------------------------------|-----------------------------------|-------------------------------|
-| Erkennung Figurstellung           	      | nein (Manuell per Ausgangsposition) 		  | nein (Manuell per Ausgangsposition) 				      | ja                  				      | ja                     		    |
+| Erkennung Figur-Stellung           	      | nein (Manuell per Ausgangsposition) 		  | nein (Manuell per Ausgangsposition) 				      | ja                  				      | ja                     		    |
 | Abmessungen (LxBxH)                		    | 486mm x 486mm x 75mm              		    | 671mm x 486mm x 75mm              				        | 540mm x 540mm x 20mm 				      | 540mm x 540mm x 20mm 			    |
 | Konnektivität                            	| Bluetooth                            		  | Bluetooth                         				        | Seriell           			          | Bluetooth         			      |
 | Automatisches Bewegen der Figuren       	| ja                                		    | ja                                				        | nein                 				      | nein                 			    |
@@ -123,19 +123,19 @@ Wie bereits aus zum Teil identischen den Namen ersichtlich, streben alle Tische 
 
 <br>
 
-Die für den Vergleich gewählten Eigenschaften sind jene, welche die im Projekt angestrebten Funtkionen möglichst äquivalent reflketieren. Dennoch schränkt das gerine Angebot an autonomen Tischen die Auswahl stark ein; daher wurde hierbei wertgelegt auf Automation, Cloud-Anbindung und die Abmessungen, welche das Spielerlebnis am deutlichsten beeinflussen.
+Die für den Vergleich gewählten Eigenschaften sind jene, welche die im Projekt angestrebten Funktionen möglichst äquivalent reflektieren. Dennoch schränkt das geringe Angebot an autonomen Tischen die Auswahl stark ein; daher wurde hierbei wertgelegt auf Automation, Cloud-Anbindung und die Abmessungen, welche das Spielerlebnis am deutlichsten beeinflussen.
 
 <br>
 
-Die Bretter des Herstellers DGT erkennen die Position der verwendeten Figuren; eine Auskunft über die die verwendete Technologie erhält man jedoch nicht. Die Square-Off-Schachtische verfügen über keine solche Funktion. 
+Die Bretter des Herstellers DGT erkennen die Position der verwendeten Figuren; eine Auskunft, über die die verwendete Technologie erhält, man jedoch nicht. Die Square-Off-Schachtische verfügen über keine solche Funktion. 
 
 <br>
 
-Die Abmessungen unterscheiden sich nur beim Hersteller Square Off deutlich; der Grand Kingdom Schatisch ist rechteckig konstruiert worden, was das Spielerlebnis deutlich verändert. Der simple Kingdom-Tisch widerum ist kleiner als das vorgegebene Turniermaß, was ebenfalls Einfluss auf das Spielerbenis hat. Mit den Standardmaßen der DGT-Spielbretter und zudem ihrer geringen Höhe gleichen diese deutlich einem Turniertisch. Die Kombination aus geringer Höhe und Erkennung der Figurstellung bei den DGT-Brettern ist auffallend. 
+Die Abmessungen unterscheiden sich nur beim Hersteller Square Off deutlich; der Grand Kingdom Schachtisch ist rechteckig konstruiert worden, was das Spielerlebnis deutlich verändert. Der simple Kingdom-Tisch wiederum ist kleiner als das vorgegebene Turniermaß, was ebenfalls Einfluss auf das Spielererlebnis hat. Mit den Standardmaßen der DGT-Spielbretter und zudem ihrer geringen Höhe gleichen diese deutlich einem Turniertisch. Die Kombination aus geringer Höhe und Erkennung der Figur-Stellung bei den DGT-Brettern ist auffallend. 
 
 <br>
 
-Alle Hersteller bieten eine Bluetooth-Schnittstelle an, einzig das SMart Board des Herstellers DGT nutzt eine serielle, kabelgebundene Schnittstelle.
+Alle Hersteller bieten eine Bluetooth-Schnittstelle an, einzig das Smart-Board des Herstellers DGT nutzt eine serielle, kabelgebundene Schnittstelle.
 
 <br>
 
@@ -147,7 +147,7 @@ Somit gibt es zum Zeitpunkt der Recherche nur einen Hersteller von autonomen Sch
 
 <br>
 
-Ein Spiel-Livestream, eine Darstellung des aktuellen oder vergangener Spiele über eine Webanwendung, ist mit allen Tischen möglich. Da alle Tische eine Cloud-Anbindung besitzen, in der Regel mittels Applikation auf dem Smartphone oder Computer, wird lediglich das Versetzten von Figuren detektiert und in einer Oberfläche dargestellt.
+Ein Spiel-Livestream, eine Darstellung die aktuellen oder vergangenen Spiele über eine Webanwendung, ist mit allen Tischen möglich. Da alle Tische eine Cloud-Anbindung besitzen, in der Regel mittels Applikation auf dem Smartphone oder Computer, wird lediglich des Versetzten von Figuren detektiert und in einer Oberfläche dargestellt.
 
 <br>
 
@@ -163,7 +163,7 @@ Beide Square-Off-Modelle verfügen zudem über die Möglichkeit des Spiels ohne 
 
 <br>
 
-Zusammenfassend ist festzustellen, dass alle vier Tische dank unterschiedlicher Ausführung von Spiel-Eigenschaften zu unterschiedlichen Spiel-Erlebnissen führen. Für Nutzer ist eine Entscheidung anhand von Funktionen kaum möglich; letztlich bedarf es der Auswertung von gewünschten und gegebenenen Funktionen.
+Zusammenfassend ist festzustellen, dass alle vier Tische dank unterschiedlicher Ausführung von Spiel-Eigenschaften zu unterschiedlichen Spiel-Erlebnissen führen. Für Nutzer ist eine Entscheidung anhand von Funktionen kaum möglich; letztlich bedarf es der Auswertung von gewünschten und gegebenen Funktionen.
 Das Ziel soll nun sein, all die positiven Eigenschaften dieser Tische zu vereinbaren und mittels noch zusätzlicher Verbesserungen ein eigenes Produkt zu entwickeln.
 
 <br> 
@@ -186,7 +186,7 @@ Auch existieren weitere Abwandlungen von autonomen Schachbrettern, bei welchem d
 
 |                                         		  | Automated Chess Board (Michael Guerero) [@actproject1]| Automated Chess Board (Akash Ravichandran) [@actproject2]	| DIY Super Smart Chessboard [@actproject3]	|
 |-----------------------------------------------|-------------------------------------------------------|----------------------------------------------------------	|------------------------------------------	|
-| Erkennung Figurstellung              	        | nein (Manuell per Ausgangsposition)     				      | ja (Kamera / OpenCV)                       				        | nein                       				        |
+| Erkennung Figur-Stellung              	        | nein (Manuell per Ausgangsposition)     				      | ja (Kamera / OpenCV)                       				        | nein                       				        |
 | Abmessungen (LxBxH)                			      | keine Angabe                            				      | keine Angabe                               				        | 450mm x 300mm x 50mm       				        |
 | Konnektivität                           		  | (+usb)                                   				      | (+wlan)                           				                | (+wlan)          			            	      |
 | Automatisches Bewegen der Figuren       		  | ja                                      				      | ja                                         				        | nein                       				        |
@@ -257,7 +257,7 @@ Auch muss sich hier die Frage gestellt werden, was mit den ausgeschiedenen Figur
 ## Anforderungsanalyse
 
 Nach Abschluss der Recherche, kann somit eine Auflistung aller Features angefertigt werden, welche ein autonomer Schachtisch aufweisen sollte.
-In diesem Projekt werden vor allem Funktionalitäten berücksichtig, welche die Bedienung und Benutzung des autonomen Schachtisch dem Benutzer einen Mehrwert im Bezug auf die Benutzerfreundlichkeit bieten.
+In diesem Projekt werden vor allem Funktionalitäten berücksichtig, welche die Bedienung und Benutzung des autonomen Schachtisches dem Benutzer einen Mehrwert in Bezug auf die Benutzerfreundlichkeit bieten.
 
 <br>
 
@@ -265,7 +265,7 @@ In diesem Projekt werden vor allem Funktionalitäten berücksichtig, welche die 
 
 |                                         	| (+atc)                               	|
 |-------------------------------------------|---------------------------------------|
-| Erkennung Schachfigurstellung           	| ja                                 	  |
+| Erkennung Figur-Stellung           	| ja                                 	  |
 | Konnektivität                           	| (+wlan), (+usb)                   	  |
 | Automatisches Bewegen der Figuren       	| ja                                	  |
 | Spiel Livestream                        	| ja                                	  |
@@ -278,7 +278,7 @@ In diesem Projekt werden vor allem Funktionalitäten berücksichtig, welche die 
 
 Die Abmessungen und das Gewicht des autonomen Schachtisches ergeben sich aus der mechanischen Umsetzung und werden hier aufgrund der zur Verfügung stehenden Materialen und Fertigungstechniken nicht festgelegt.
 Dennoch wird Wert daraufgelegt, dass das Verhältnis zwischen den Spielfeldabmessungen und den Abmessungen des Tisches so gering wie möglich ausfällt. 
-Auch müssen die Figuren für den Benutzer eine gut handhabbare Größe aufweisen um ein angenehmes haptisches Spielerlebnis zu gewährleisten. Ebenfalls wird kein besonderes Augenmerk auf die Geschwindigkeit der Figur-Bewegung gelegt, da hier die Zuverlässigkeit und Wiederholgenauigkeit dieser im Vordergrund stehen.
+Auch müssen die Figuren für den Benutzer eine gut handhabbare Größe aufweisen, um ein angenehmes haptisches Spielerlebnis zu gewährleisten. Ebenfalls wird kein besonderes Augenmerk auf die Geschwindigkeit der Figur-Bewegung gelegt, da hier die Zuverlässigkeit und Wiederholgenauigkeit dieser im Vordergrund stehen.
 
 
 
@@ -301,17 +301,17 @@ Auch müssen die Figuren für den Benutzer eine gut handhabbare Größe aufweise
 
 
 
-# Grundlegende Verifikation der ausgewälten Technologien
+# Grundlegende Verifikation der ausgewählten Technologien
 
 ## Erprobung Buildroot-Framework
-* erstellen eines einfachen images für das embedded System
+* Erstellen eines einfachen images für das embedded System
 * inkl ssh Server und SFTP
 * qt 5 libraries
 * eigenes package atctp
 * test der toolchain
 
 
-## Verifikfation NFC Technologie
+## Verifikation NFC Technologie
 
 * warum gewählter nfc reader => ndef lesen
 * reicheweiten test mit 22mm
@@ -356,7 +356,7 @@ Als Software wurde der Open-Source Slicer Ultimaker Cura [@ultimakercura] verwen
 
 Hier wurde für die Bauteile, welche eine Stützstruktur benötigen, die von Cura bereitgestellte Tree Support Structure aktiviert. \ref{3d_print_tree_structure}
 Diese bietet den Vorteil gegenüber anderen Stützstrukturen, dass sich diese leichter entfernen lässt und weniger Rückstände an den Bauteilen hinterlässt.
-Diese Vorteile wurde mit verschiedenen Testdrucken verifiziert und kommen insbesondere bei komplexen Bauteilen mit innenliegenden Elementen zum Tragen bei denen eine Stützstruktur erforderlich sind.
+Diese Vorteile wurde mit verschiedenen Testdrucken verifiziert und kommen insbesondere bei komplexen Bauteilen mit innenliegenden Elementen zum Tragen, bei denen eine Stützstruktur erforderlich sind.
 
 
 
@@ -396,20 +396,20 @@ Zusätzliche Parameter wie die Druckgeschwindigkeit, sind hierbei individuell f�
 
 Bei dem mechanischen Aufbau wurde auf ein einfaches Design geachtet. Die Konstruktion wurde im Vorfeld in einem (+cad) Programm durchgeführt und die Grundkonstruktion in mehreren Iterationsschritten verfeinert. Das verwendete (+cad) Programm Autodesk Fusion 360 bietet, eine einfache Umsetzung auch für Personen, welche nicht auch der mechanischen Fachrichtung kommen.
 
-Bei der Initialen Planung wurde hier darauf geachtet, einen möglichst kleinen Fußabdruck des Schachtischs zu realisieren. Es wurde daraus hinaus versucht eine fertige Schachtischplatte als Basis zu verwenden und die Mechanik unter diese herum zu designen. Hier wurde ein IKEA Lack Tisch verwendet, welcher die Idealen Abmessungen von 55x55cm hat und somit eine erforderliche Schachfeldgröße von 55mm möglich ist.
-Durch den bereits vorhandenen Rahmen, ist es einfach möglich weitere Komponenten an diesem zu befestigen. Somit stellt diese Tischplatte eine ideale Basis für den autonomen Schachtisch dar.
+Bei der Initialen Planung wurde hier darauf geachtet, einen möglichst kleinen Fußabdruck des Schachtischs zu realisieren. Es wurde daraus hinaus versucht eine fertige Schachtischplatte als Basis zu verwenden und die Mechanik unter diese herumzudesignen. Hier wurde ein IKEA Lack Tisch verwendet, welcher die Idealen Abmessungen von 55x55cm hat und somit eine erforderliche Schachfeldgröße von 55mm möglich ist.
+Durch den bereits vorhandenen Rahmen ist es einfach möglich weitere Komponenten an diesem zu befestigen. Somit stellt diese Tischplatte eine ideale Basis für den autonomen Schachtisch dar.
 
-Die Achsenführung der zwei X- und Y-Achse wurden Standard 20x20mm Aluminium-Profile verwendet, welche passend zugeschnitten werden konnten. Allgemein wurde eine X-Y Riemenführung verwendet, wobei jede Achse einen separaten Nema 17 Schrittmotor inklusive des passenden Endschalter. Bei den Schlitten welche auf den Aluminium-Profilen laufen, wurden fertige Standartkomponenten verwendet, um das Spiel in der Mechanik zu minimieren. Diese stellen jedoch einen großen Posten in der Preiskalkulation dar, jedoch mussten diese nicht manuell erstellt und getestet werden.
+Die Achsenführung der zwei X- und Y-Achse wurden Standard 20x20mm Aluminium-Profile verwendet, welche passend zugeschnitten werden konnten. Allgemein wurde eine X-Y Riemenführung verwendet, wobei jede Achse einen separaten Nema 17 Schrittmotor inklusive des passenden Endschalter. Bei den Schlitten, welche auf den Aluminium-Profilen laufen, wurden fertige Standartkomponenten verwendet, um das Spiel in der Mechanik zu minimieren. Diese stellen jedoch einen großen Posten in der Preiskalkulation dar, jedoch mussten diese nicht manuell erstellt und getestet werden.
 
 Bereits während des Designprozess konnte anhand einer statischen Simulation des Modells erkannt werden, das trotz der Optimierung des Fahrweges beider Achsen durch die Verkleinerung der Halterungen der Aluminium-Profile, dieser nicht ausreicht. Mit dieser Konstellation können die Figuren nicht ausreichend weit aus dem Spielfeld platziert werden und verbleiben in den äußeren Spielfeldern.
 
-Um dies zu verhindern wurde der zentrale Schlitten der Y-Achse, auf welchem der Elektromagnet für die Figurmitnahme platziert ist, um einen weiteren Elektromagnet erweitert. Diese befinden sich nun nicht mehr mittig auf dem Schlitten, sondern wurden um 110mm in Richtung der X-Achse versetzt. So ist es möglich Figuren bis ganz an den Rand verschieben zu können.
+Um dies zu verhindern wurde der zentrale Schlitten der Y-Achse, auf welchem der Elektromagnet für die Figur-Mitnahme platziert ist, um einen weiteren Elektromagnet erweitert. Diese befinden sich nun nicht mehr mittig auf dem Schlitten, sondern wurden um 110mm in Richtung der X-Achse versetzt. So ist es möglich Figuren bis ganz an den Rand verschieben zu können.
 
 Diese Lösung erfordert jedoch einen komplexeren Bahnplanungs-Algorithmus, da die Elektromagneten zwischen einzelnen Zügen gewechselt werden müssen. Dies führt zu einem kurzen Stillstand der Figur auf dem Schachfeld.
 
 Alle Teile wurden anschließend mittels 3D Druck erstellt und konnten in die Tischlattenbasis eingeschraubt werden. Die Verwendung der aus Holz bestehenden Grundplatte erschwerte jedoch eine akkurate Platzierung der Teile und die bereits existierenden Seitenwände schränkten diese noch zusätzlich ein.
 Somit erforderte der komplette Zusammenbau mehrere Tage und zusätzliche Iterationen des 3D-Designs, um den Einbau spezifischer Teile zu ermöglichen.
-Das Design stellt jedoch eine solide Grundlage darf, welche für die weitere Software und Hardware Entwicklung essentiell ist.
+Das Design stellt jedoch eine solide Grundlage darf, welche für die weitere Software und Hardware-Entwicklung essentiell ist.
 
 
 
@@ -421,10 +421,10 @@ Moderne Mobiltelefone besitzen in der Regel auch die Fähigkeit mit passenden (+
 
 Der Schachtisch verwendet dabei das (+ndef) Dateiformat welches Festlegt, wie die Daten auf dem (+nfc) Tag gespeichert werden. Da diesen ein Standardisiertes Format ist, können alle gängigen Lesegeräte und Chipsätze diese Datensätze lesen. Der im autonomen Schachtisch verwendete Chipsatz PN532 von NXP ist dazu ebenfalls in der Lage.
 
-Um das (+ndef) Format verwenden zu können, müssen die (+nfc) Tags zuerst auf diese Formatiert werden. Die meisten käuflichen Tags sind bereits derart formatiert. Alternativ kann dies mittels Mobiltelefon und passender App geschehen.
+Um das (+ndef) Format verwenden zu können, müssen die (+nfc) Tags zuerst auf diese Formatiert werden. Die meisten käuflichen Tags sind bereits derart formatiert. Alternativ kann dies mittels Mobiltelefons und passender App geschehen.
 Da (+ndef) Informationen über die Formatierung und der gespeicherten Einträge speichert, stehen nach der Formatierung nur noch 137 Bytes des NXP NTAG 21 zur Verfügung.
 
-Per Lesegerät können anschliessend mehrere (+ndef) Records auf den Tag geschrieben werden. Diese sind mit Dateien auf einer Festplatte vergleichbar und können verschiedenen Dateiformate und Dateigrössen annehmen.
+Per Lesegerät können anschließend mehrere (+ndef) Records auf den Tag geschrieben werden. Diese sind mit Dateien auf einer Festplatte vergleichbar und können verschiedenen Dateiformate und Dateigrößen annehmen.
 Ein typischer Anwendungsfall ist der (+ndefrtd) URL Datensatz. Dieser kann dazu genutzt werden eine spezifizierte URL auf dem Endgeräte aufzurufen, nachdem der (+nfc) Tag gescannt wurde. [@nordicnfclibndef]
 
 Der autonome Schachtisch verwendet den einfachsten (+ndefrtd) Typ, welcher der Text-Record ist, und zum Speichern von Zeichenketten genutzt werden kann, ohne das eine Aktion auf dem Endgerät ausgeführt wird.
@@ -460,7 +460,7 @@ Auch ist es möglich so möglich verschiedene Figur-Sets zu mischen, so kann ein
 * integration in controller software
 * welche funktion stehen bereit tabelle
 * step dir interface => erfodert jedoch eine rt fähige
-## Fazit zum ersten Prototypen
+## Fazit bezüglich des ersten Prototypens
 
 * nicht für production geeignet
 * aufbau und calibrierung langwiehrig
@@ -477,13 +477,13 @@ Auch ist es möglich so möglich verschiedene Figur-Sets zu mischen, so kann ein
 
 
 
-# Erstellung zweiter Prototyp
+# Erstellung des zweiter Prototypens
 
 ![Producation Hardware: Finaler autonomer Schachtisch \label{prod}](images/table_images/prod.png)
 
 ## Modifikation der Mechanik
 
-* dauertest hat gezeigt dass mechnik zu viel spiel aufweisst
+* Dauertest hat gezeigt dass Mechanik zu viel spiel aufweisst
 * Motorenhalterung der y achse schränkt des bewegungsspielraum um mehr als 10cm ein, welches zu einem unwesentlichen grösseren verhältnis von Spielfeldgrösse und Abmessungen des Schachtischs
 * CoreXY bietet Vorteil:
 * Motoren fest am rahmen => weniger kabel + gewicht an der Y Achse
@@ -504,7 +504,7 @@ Weiterhin wurden verschiedenen Bewegungsgeschwindigkeiten getestet, brachten hie
 Dies führt je nach Spielverlauf zu Komplikationen, sodass die Figuren manuell vom Benutzer wieder mittig auf den Felder platziert werden müssen.
 
 Um dies zu verhindern, wurde einige Figuren zusätzlich mit einer 20mm Unterlegscheibe am Boden beschwert, welche dieses Problem behob, jedoch das (+nfc) Tag nicht mehr als lesbar erwies.
-Dies resultierte in der Idee die Schachfiguren ebenfalls selbst mit dem 3D-Drucker herzustellen und die Magnete direkt in den Boden der Figur einlassen zu können.
+Dies resultierten in der Idee die Schachfiguren ebenfalls selbst mit dem 3D-Drucker herzustellen und die Magnete direkt in den Boden der Figur einlassen zu können.
 
 Die aktuell verwendeten Figuren des ersten Protoyp wiegen 8 Gramm für die Bauern und 10 Gramm für die restlichen Figuren.
 Der Test mit der Unterlegscheibe ergab das diese mit 5 Gramm zusätzlich, genug Gewicht hinzufügte, um die magnetische Beeinflussung zu unterbinden.
@@ -512,7 +512,7 @@ Der Test mit der Unterlegscheibe ergab das diese mit 5 Gramm zusätzlich, genug 
 Testweise wurden einige Figuren mittels 3D Drucker erstellt, um so das Gewicht zu erhöhen.
 Nach einem erfolgreichen Test wurde das (+cad) Modell wurde so angepasst, dass sich der Magnet direkt in den Boden der Figur einkleben lässt.
 Des Weiteren wurden bei den Bauern die Magnete ausgetauscht. Die zuerst verwendeten 10x3mm Neodym-Magnete wurden bei diesen Figuren gegen 6x3mm Magnete getauscht.
-Somit sind im Design zwei verschiedenen Arten von Magneten notwendig, jedoch traten in den anschliessend durchgeführten Testläufen keine Beeinflussungen mehr auf.
+Somit sind im Design zwei verschiedenen Arten von Magneten notwendig, jedoch traten in den anschließend durchgeführten Testläufen keine Beeinflussungen mehr auf.
 
 ## Änderungen der Elektronik
 
@@ -520,14 +520,14 @@ Mit ein relevanter Kritikpunkt, welcher bereits während des Aufbaus des ersten 
 Diese wurde im ersten Prototyp manuell aufgebaut und enthielt viele verschiedene Komponenten.
 
 Die verwendeten Motortreiber stellten sich während der Entwicklung als sehr flexibel heraus, stellten aber auch einen signifikanten Kostenfaktor dar.
-Nach dem Aufbau und Erprobung des ersten Prototyps wurde ersichtlich, dass hier nicht alle zuerst angedachten Features der Treiber benötigt werden und so auch andere alternativen in Frage kommen.
+Nach dem Aufbau und Erprobung des ersten Prototyps wurde ersichtlich, dass hier nicht alle zuerst angedachten Features der Treiber benötigt werden und so auch Alternativen in Frage kommen.
 Zusätzlich konnte die Elektronik nur beschränkt mit anderem System verbunden werden, welches insbesondere durch die verwendete (+spi) Schnittstelle geschuldet war.
 
 
 All diese Faktoren erschweren einen einfachen Zusammenbau des autonomen Schachtischs. Die Lösung stellt die Verwendung von Standardhardware dar.
 Nach dem Herunterbrechen der elektrischen Komponenten und des mechanischen Aufbaus ist zu erkennen, dass der autonome Schachtisch einer CNC-Fräse bzw. eines 3D Drucker stark ähnelt.
 Insbesondere die XY-Achsen Mechanik sowie die Ansteuerung von Schrittmotoren, wird in diesen Systemen verwendet.
-Mit dem Durchbruch von 3D Druckern im Konsumerbereich, sind auch kleine und  preisgünstige Steuerungen erhältlich, welche 2-3 Schrittmotoren und einiges an zusätzlicher Hardware ansteuern können.
+Mit dem Durchbruch von 3D Druckern im Konsumer-Bereich, sind auch kleine und  preisgünstige Steuerungen erhältlich, welche 2-3 Schrittmotoren und einiges an zusätzlicher Hardware ansteuern können.
 
 : Standardhardware 3D Drucker Steuerungen
 
@@ -538,7 +538,7 @@ Mit dem Durchbruch von 3D Druckern im Konsumerbereich, sind auch kleine und  pre
 | Firmware       	| Marlin-FW 2.0 	| Marlin-FW 1.0   	| Proprietary       	|
 
 
-Hierbei existiert eine große Auswahl dieser mit den verschiedensten Ausstattungen. Bei der Auswahl dieser wurde vor allem auf die Möglichkeit geachtet sogenannte Silent-Schrittmotortreiber verwenden zu können um die Geräuschimmissionen durch die Motoren so weit wie möglich zu minimieren. Im ersten Prototyp wurde unter anderem aus diesem Grund die TMC5160-BOB Treiber ausgewählt.
+Hierbei existiert eine große Auswahl dieser mit den verschiedensten Ausstattungen. Bei der Auswahl dieser wurde vor allem auf die Möglichkeit geachtet sogenannte Silent-Schrittmotortreiber verwenden zu können, um die Geräuschimmissionen durch die Motoren so weit wie möglich zu minimieren. Im ersten Prototyp wurde unter anderem aus diesem Grund die TMC5160-BOB Treiber ausgewählt.
 Hierzu wurde der Schrittmotor-Treiber TMC2209 gewählt, welcher diese Features ebenfalls unterstützt und in der Variante als Silent-Step-Stick direkt in die meisten 3D Drucker Steuerungen eingesetzt werden können. Hierbei ist es wichtig, dass auf der gewählten Steuerung die Treiber-ICs nicht fest verlötet sind, sondern getauscht werden können.
 Ein weiterer Punkt ist die Kommunikation der Steuerung mit dem Host-System. Hierbei setzten alle untersuchten Steuerungen auf die (+usb) Schnittstelle und somit ist eine einfache Kommunikation gewährleistet. Das verwendete eingebettete System im autonomen Schachtisch bietet vier freie (+usb) Anschlüsse, somit ist eine einfache Integration gewährleistet.
 
@@ -567,10 +567,10 @@ Marlin-FW[@marlinfw] biete dabei einen großen Befehlssatz an G-Code Kommandos a
 | Disable Motors           	| M84            	| X Y                               	|
 
 
-Die erforderlichen Kommandos wurden auf ein Minimum beschränk um eine maximale Kompatibilität bei verschiedenen G-Code fähigen Steuerungen zu gewährleisten.
-Die Software unterstützt jedoch weitere Kommandos wie z.B. `M150` mit welchem spezielle Ausgänge für LEDs gesteuert werden können. Dieses Feature bietet die verwendete Marlin-FW[@marlinfw], als auch die verwendete Steuerung an. Sollte die verwendete Steuerung solch ein optionales Kommando nicht unterstützen, so werden diese ignoriert und somit können auch preisgünstige Steuerungen verwendet werden.
+Die erforderlichen Kommandos wurden auf ein Minimum beschränk, um eine maximale Kompatibilität bei verschiedenen G-Code fähigen Steuerungen zu gewährleisten.
+Die Software unterstützt jedoch weitere Kommandos wie z.B. `M150` mit welche speziellen Ausgänge für LEDs gesteuert werden können. Dieses Feature bietet die verwendete Marlin-FW[@marlinfw], als auch die verwendete Steuerung an. Sollte die verwendete Steuerung solch ein optionales Kommando nicht unterstützen, so werden diese ignoriert und somit können auch preisgünstige Steuerungen verwendet werden.
 
-Die Kommunikation zwischen Steuerung und eingebetteten System geschieht durch eine (+usb) Verbinden. Die Steuerung meldet sich als virtuelle Serielle Schnittstelle im System an und kann über diese mit der Software kommunizieren. Auch werden so keine speziellen Treiber benötigt, da auf nahezu jedem System ein Treiber (USB CDC) für die gängigsten (+usb) zu Seriell Wandler bereits installiert ist. Die Software erkennt anhand der zur Verfügung stehenden USB Geräte, sowie deren Vendor und Product-ID Informationen die Steuerung automatisch und verwendet diese nach dem Start automatisch. Hierzu wurde zuvor eine Liste mit verschiedenen getesteten Steuerungen sowie deren USB Vendor und Product-ID angelegt.
+Die Kommunikation zwischen Steuerung und eingebetteten System geschieht durch eine (+usb) Verbinden. Die Steuerung meldet sich als virtuelle Serielle Schnittstelle im System an und kann über diese mit der Software kommunizieren. Auch werden so keine speziellen Treiber benötigt, da auf nahezu jedem System ein Treiber (USB-CDC) für die gängigsten (+usb) zu Seriell Wandler bereits installiert ist. Die Software erkennt anhand der zur Verfügung stehenden USB-Geräte, sowie deren Vendor und Product-ID Informationen die Steuerung automatisch und verwendet diese nach dem Start automatisch. Hierzu wurde zuvor eine Liste mit verschiedenen getesteten Steuerungen sowie deren USB-Vendor und Product-ID angelegt.
 
 : Hinterlegte G-Code Steuerungen
 
@@ -642,7 +642,7 @@ bool GCodeSender::wait_for_ack() {
 	return true;
 }
 ```
-Die Steuerung verarbeitet diese und bestätigt die Ausführung mit einer Acknowledgement-Antwort. Hierbei gibt es verschiedenen Typen. Der einfachste Fall ist ein `ok`, welches eine erfolgreiche Abarbeitung des Kommandos signalisiert. Ein weiterer Fall ist die Busy-Antwort `echo:busy`. Diese Signalisiert, dass das Kommando noch in der Bearbeitung ist und wird im falle des autonomen Schachtisches bei langen und langsamen Bewegungen der Mechanik ausgegeben. Das System wartet diese Antworten ab, bis eine finale `ok`-Antwort zurückgegeben wird, erst dann wird das nächste Kommando abgearbeitet.
+Die Steuerung verarbeitet diese und bestätigt die Ausführung mit einer Acknowledgement-Antwort. Hierbei gibt es verschiedenen Typen. Der einfachste Fall ist ein `ok`, welches eine erfolgreiche Abarbeitung des Kommandos signalisiert. Ein weiterer Fall ist die Busy-Antwort `echo:busy`. Diese Signalisiert, dass das Kommando noch in der Bearbeitung ist und wird im Falle des autonomen Schachtisches bei langen und langsamen Bewegungen der Mechanik ausgegeben. Das System wartet diese Antworten ab, bis eine finale `ok`-Antwort zurückgegeben wird, erst dann wird das nächste Kommando abgearbeitet.
 
 
 
@@ -733,14 +733,14 @@ Das System erkennt den Anschluss der Hardware beim Start auf die gleiche Art und
 
 
 
-## Fazit zum finalen Prototypen
+## Fazit bezüglich des finalen Prototypens
 
 * modularer hardware aufbau
 * einfach/gut verfügbare materialien verwendet
 * geänderte Mechnik resultiert in nahezu Spielfreier Mechanik (+- 1mm), welches für diesen Zweck mehr als ausreicht
 * 6h dauertest bestanden
 
-: Eigenschaften des finalen Prototypen
+: Eigenschaften die finalen Prototypen
 
 |                                         	| (+atc) – autonomous Chessboard    	  |
 |-----------------------------------------	|--------------------------------------	|
@@ -799,7 +799,7 @@ Hierzu muss das System eine einheitliche (+rest)-Schnittstelle bereitstellen.
 ![Cloud-Infrastruktur: Aufbau einer URI \label{ATC_URI_SCHEMES}](images/ATC_URI_SCHEMES.png)
 
 Die RESTful API stellt verschiedene Ressourcen bereit, welche durch eine URI \ref{ATC_URI_SCHEMES} eindeutig identifizierbar sind.
-Auf diese können mittels verschiedenster HTTP Anfragemethoden (GET, POST, PUT, DELETE) zugegriffen werden. Jeder dieser Methoden stellt einen anderen Zugriff auf die Ressource dar und beeinflusst somit das Verhalten und die Rückantwort dieser.
+Auf diese können mittels verschiedenster HTTP Anfragemethoden (GET, POST, PUT, DELETE) zugegriffen werden. Jeder dieser Methoden stellt einen anderen Zugriff auf die Ressource dar und beeinflusst somit das Verhalten und die Rück-Antwort dieser.
 
 Eine URI besteht dabei aus mehreren Teilen. Das Schema gibt an wie die nachfolgenden Teile interpretiert werden sollen.
 Dabei wird bei einer RESTful Schnittstelle typischerweise das (+http) Protokoll, sowie (+https) verwendet. Dabei steht (+https) für eine verschlüsselte Verbindung.
@@ -807,7 +807,7 @@ Dabei wird bei einer RESTful Schnittstelle typischerweise das (+http) Protokoll,
 Somit stellt die RESTful API eine Interoperabilität zwischen verschiedenen Anwendungen und Systemen bereit, welche durch ein Netzwerk miteinander verbunden sind.
 Dieser Ansatz ist somit geeignet um die verschiedenen Client Systeme (Schachtisch, Webclient) eine Kommunikation mit dem Server zu erlauben.
 
-* reverse proxy für https
+* reverse Proxy für https
 
 ## Service Architektur
 
@@ -891,10 +891,10 @@ Die (+fen) Notation ist universal und kann jede Brettstellung darstellen. Auch e
 
 Alle gängigen Schachprogramme und Bibliotheken unterstützen das Laden von Spielbrettern in der (+fen) bzw (+xfen) Schreibweise, ebenso die für den MoveValidator Service verwendete Python-Chess Bibliothek [@pythonchesslib]. Diese unterstützt zusätzlich die Generierung der für den Benutzer möglichen Schachzügen, welche auf dem aktuellen Brett möglich sind.
 
-Diese Liste wird vom System dazu verwendet, um sicherzustellen, das der Benutzer nur gültige Züge tätigen kann. Diese Funktion lässt sich zusätzliche abschalten, falls das Spiel nicht nach den allgemeinen Schachregeln ablaufen soll. Bei der Generierung der möglichen Schachzüge, muss zwischen den Legal-Moves und den Pseudo-Legal Schachzügen unterschieden werden. Die Legal-Moves beinhalten nur die nach den Schachregeln möglichen Zügen, welche von Figuren des Spielers ausgeführt werden können.
+Diese Liste wird vom System dazu verwendet, um sicherzustellen, dass der Benutzer nur gültige Züge tätigen kann. Diese Funktion lässt sich zusätzliche abschalten, falls das Spiel nicht nach den allgemeinen Schachregeln ablaufen soll. Bei der Generierung der möglichen Schachzüge, muss zwischen den Legal-Moves und den Pseudo-Legal Schachzügen unterschieden werden. Die Legal-Moves beinhalten nur die nach den Schachregeln möglichen Zügen, welche von Figuren des Spielers ausgeführt werden können.
 Die Pseudo-Legal Schachzüge, sind alle Schachzüge welche von den Figuren auf dem aktuellen Schachbrett möglich, so sind z.B. auch alle anderen Figur-Züge enthalten, wenn der König sich aktuell im Schach befindet.
 
-Wenn ein Spieler an der Reihe ist, sein getätigter Zug mittels der `/rest/check_move` (+api) überprüft, ob dieser gemäss der Legal-Moves durchführbar ist. Ist dies der Fall, wird der Zug auf das Spielbrett angewendet, welches durch die `/rest/execute_move` (+api) geschieht. Diese führ den Zug aus und ermittelt somit das neue Spielbrett und überprüft zusätzlich, ob das Spiel gewonnen oder verloren wurde.
+Wenn ein Spieler an der Reihe ist, sein getätigter Zug mittels der `/rest/check_move` (+api) überprüft, ob dieser gemäß der Legal-Moves durchführbar ist. Ist dies der Fall, wird der Zug auf das Spielbrett angewendet, welches durch die `/rest/execute_move` (+api) geschieht. Diese führ den Zug aus und ermittelt somit das neue Spielbrett und überprüft zusätzlich, ob das Spiel gewonnen oder verloren wurde.
 
 Hat der Benutzer jedoch einen ungültigen Zug ausgeführt, wird dieser vom System storniert und der Client des Benutzers stellt den Zustand des Spielbretts vor dem getätigten Zug wieder her. Danach hat der Benutzer die Möglichkeit einen alternativen Zug auszuführen.
 
@@ -937,7 +937,7 @@ Somit ist gewährleistet, dass immer zuerst die menschlichen Spieler ein Spiel b
 
 Eine weitere Modifikation ist die Verwendung einer Schach-AI, da dieser Service als Computerspieler agieren soll.
 Hierzu kam die Open-Source Chess Engine Stockfish[@stockfish] in der Version 11 zum Einsatz.
-Die Stockfish-Engine bietet noch weitere Features, als nur die nächst besten Züge zu einem gegebenen Schachbrett zu ermitteln.
+Die Stockfish-Engine bietet noch weitere Features, als nur die nächstbesten Züge zu einem gegebenen Schachbrett zu ermitteln.
 
 
 Die AutoPlayer-Instanz kommuniziert über das (+uci) Protokoll[@uciprotocol] mit der Engine.
@@ -981,7 +981,7 @@ Diese Feature wurde insbesondere bei der Entwicklung des Webclient und der Steue
 
 * dummer/thin Client
 * Synchronisierung von gegeben Schachfeld mit dem lokalen Schachfeld
-* getätigte züfe werden direkt an den schachserver geschickt und dieser generiert darauf hin das neue schachbrett welches von beiden Partner sync
+* getätigte züfe werden direkt an den schachserver geschickt und dieser generiert daraufhin das neue schachbrett welches von beiden Partner sync
 
 
 
@@ -992,13 +992,13 @@ Diese Feature wurde insbesondere bei der Entwicklung des Webclient und der Steue
 
 * Algorithmus zur Umsetzung eines Schachzugs
 * Auftrennung in current und target Board
-* vier Schritte (enfernen, bewegen, hinzufügen, bewegen)
+* vier Schritte (entfernen, bewegen, hinzufügen, bewegen)
 ## Schachfeld Scan Algorithmus zur Erkennung von Schachzügen
 
 ![Embedded System Software: Schachfeld Scan Algorithmus Ablauf \label{ATC_ChessMoveAlgorithm}](images/ATC_ChessMoveAlgorithm.png)
 
-* Benutzer bestätigt dass er Schachzug gemacht hat
-* Ermittlung des getätigten Schachzug
+* Benutzer bestätigt, dass er Schachzug gemacht hat
+* Ermittlung des getätigten Schachzugs
 * Scan der Schachfeld-Veränderungen, durch Vergleich des vorherigen Schachfelds und der möglichen Züge
 
 
@@ -1007,7 +1007,7 @@ Diese Feature wurde insbesondere bei der Entwicklung des Webclient und der Steue
 
 ### Inter Prozess Communication
 
-Bei der Entwicklung des System wurde darauf geachtet, dass sich das User-Interface austauschen lässt. Somit ist es auch mögliche eine webbasiertes User-Interface zu integrieren. Dazu wurde eine zusätzliche (+ipc) Layer hinzugefügt, welches eine Abstraktion, der von der User-Interface Software verwendeten Funktionen auf der Controller-Software Ebene bereitstellt.
+Bei der Entwicklung des Systems wurde darauf geachtet, dass sich das User-Interface austauschen lässt. Somit ist es auch mögliche eine webbasiertes User-Interface zu integrieren. Dazu wurde eine zusätzliche (+ipc) Layer hinzugefügt, welches eine Abstraktion, der von der User-Interface Software verwendeten Funktionen auf der Controller-Software Ebene bereitstellt.
 
 Dazu wurde eine einfache (+ipc) Bibliothek implementiert, welche der Controller- als auch dem User-Interface als Shared-Library zur Verfügung steht.
 Diese stellt einfache Funktionen zum Senden und Empfangen von Events bereit und erzeugt nach der Initialisierung einen separaten Thread in welcher die Kommunikation mit den anderen (+ipc) Instanzen verwaltet wird.
@@ -1030,7 +1030,7 @@ Durch die Socket Basierende Implementierung ist es möglich die andern (+ipc) In
 
 Über die (+tcp) Verbindung werden ausschließlich Daten im (+json) Format übertragen. Dies macht ein einfaches Debugging und Steuerung über einen Webbrowser möglich, welches die Implementierung während der Entwicklungsphase vereinfachte.
 
-Zusätzlich kann über die Acknowledgement-Funktionalität sichergestellt werden, dass die anderen (+ipc) Instanzen die Event bekommen haben. Diese müssen nach Erhalt das empfangene Event quittieren, dies geschieht mittels des `is_ack` Flag zurückgemeldet werden.
+Zusätzlich kann über die Acknowledgement-Funktionalität sichergestellt werden, dass die anderen (+ipc) Instanzen dieses Event bekommen haben. Diese müssen nach Erhalt das empfangene Event quittieren, dies geschieht mittels des `is_ack` Flag zurückgemeldet werden.
 
 
 ```c++
@@ -1092,7 +1092,7 @@ Das User-Interface wurde gegen Ende der Entwicklung der Controller-Software bego
 
 ![Embedded System Software: User-Interface Mockup \label{ATC_Gui}](images/ATC_Gui.png)
 
-Das Qt[@qtframework] bietet dazu einen separaten Editor `Qt Design Studio` an, in denen die zuvor erstellen Wireframe-Grafiken importiert wurden und anschliessen mit den Bedienelementen ersetzt werden könnten. Dieser Prozess gestaltete sich als sehr effizient und so konnte das komplette UI mit moderaten Zeitaufwand umgesetzt werden.
+Das Qt[@qtframework] bietet dazu einen separaten Editor `Qt Design Studio` an, in denen die zuvor erstellen Wireframe-Grafiken importiert wurden und anschliessen mit den Bedienelementen ersetzt werden könnten. Dieser Prozess gestaltete sich als sehr effizient und so konnte das komplette UI mit moderatem Zeitaufwand umgesetzt werden.
 
 ```QML
 // WINDOW.qml User-Interface ATC
@@ -1135,7 +1135,7 @@ Rectangle {
                 //...
 ```
 
-Die anschließende Implementierung der Backend-Logik des Unter-Interface bestand in der Verbindung, der in QML erstellten Bedienelemente durch den `Qt Design Studio`-Editor und der User-Interface Backend Logik. Diese beschränkt sich auf die Initialisierung des Fenster und dem anschließenden laden und darstellen des QML Codes. Die Backend-Logik Funktionalitäten in einem QML Typ `MenuManager` angelegt, welcher vor dem Laden des eigentlichen User-Interface QML Codes registriert werden muss.
+Die anschließende Implementierung der Backend-Logik des Unter-Interface bestand in der Verbindung, der in QML erstellten Bedienelemente durch den `Qt Design Studio`-Editor und der User-Interface Backend Logik. Diese beschränkt sich auf die Initialisierung des Fensters und dem anschließenden laden und darstellen des QML Codes. Die Backend-Logik Funktionalitäten in einem QML Typ `MenuManager` angelegt, welcher vor dem Laden des eigentlichen User-Interface QML Codes registriert werden muss.
 
 
 ```c++
