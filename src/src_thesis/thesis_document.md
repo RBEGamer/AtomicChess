@@ -16,27 +16,26 @@ In der heutigen Zeit
 
 ## Zielsetzung
 
-Das Ziel der nachfolgenden Arbeit ist es, einen autonomen Schachtisch zu entwickeln, welcher in der Lage ist, Schachfiguren autonom zu bewegen und auf Benutzerinteraktion zu reagieren.
+Das Ziel der nachfolgenden Arbeit ist es, einen autonomen Schachtisch zu entwickeln, welcher in der Lage ist, Schachfiguren autonom zu bewegen und auf Benutzerinteraktionen zu reagieren.
 Der Schwerpunkt liegt dabei insbesondere auf der Programmierung des eingebetteten Systems und dem Zusammenspiel von diesem mit einem aus dem Internet erreichbaren Servers, welcher als Vermittlungsstelle zwischen verschiedenen Schachtischen und anderen Endgeräten dient.
 Dieses besteht zum einem aus der Positionserkennung und Steuerung der Hardwarekomponenten (Schachfiguren) und zum anderen aus der Kommunikation zwischen dem Tisch selbst und einem in einer Cloud befindlichem Server.
 Mittels der Programmierung werden diverse Technologien von verschiedenen Einzelsystemen zu einem Gesamtprodukt zusammengesetzt.
+Insgesamt gilt es, einen für Anwender ansprechenden Schachtisch zu entwickeln, der das Spielerlebnis nicht nur orginalgetreu widerspiegelt, sondern das Einzelspieler-Modell zusätzlich noch verbessert.
 
 ## Methodik
 
-Im ersten Abschnitt werden die zum Zeitpunkt existierenden Ansätze und deren Umsetzung beleuchtet. Hier wurde insbesondere darauf geachtet
-Anschließend werden die zuvor verwendeten Technologien betrachtet, welche bei den beiden darauffolgenden Prototypen verwendet werden sollen. Hierbei stehen insbesondere solche Technologien im Vordergrund der Untersuchung, welche möglichst einfach zu beschaffen sind und im besten Fall einer breiten Masse zur Verfügung stehen.
+Im ersten Abschnitt werden die zum Zeitpunkt existierenden Ansätze und deren Umsetzung beleuchtet. Hier wurde insbesondere darauf geachtet, die Grenzen bestehender Systeme darzulegen und auf nur für dieses Projekt zutreffende Funktionen zu vergleichen. 
+Anschließend werden die zuvor verwendeten Technologien betrachtet, welche bei den beiden darauffolgenden Prototypen verwendet wurden. Hierbei stehen insbesondere solche Technologien im Vordergrund der Untersuchung, welche möglichst einfach zu beschaffen sind und optimaler Weise uneingeshränkt und lizenzunabhängig zur Verfügung stehen.
 
 Das sechste Kapitel widmet sich der Realisierung eines ersten Prototypen des autonomen Schachtischs.
-Hier werden die Erkenntnisse der zuvor evaluierten Technologien verwendet, um ein Modell zu entwickeln welches den im ersten Abschnitt erarbeiteten Vorgaben entspricht. Der nach der Implementierung durchgeführte Dauertest, zeigt anschließend mögliche Probleme auf.
+Hier werden die Erkenntnisse der zuvor evaluierten Technologien verwendet, um ein Modell zu entwickeln, welches den im ersten Abschnitt erarbeiteten Vorgaben entspricht. Der nach der Implementierung durchgeführte Dauertest soll zudem weitere Risiken, mögliche Probleme und Fehlerquellen aufdecken.
 
-Im anschließenden Kapitel wird auf der Basis des ersten Prototyps und seiner im Betrieb auftretenden Probleme, der finale Prototyp entwickelt.
-Hier werden die Probleme durch die Vereinfachung der Elektronik sowie der Mechanik gelöst.
-Die Zuverlässigkeit wurde hier durch stetige Testläufe mit kontrollierten Schachzug-Szenarien überwacht
-und so ein produktreifer Prototyp entwickelt.
+Im anschließenden Kapitel wird auf der Basis des ersten Prototypens und dessen im Betrieb verzeichneten Probleme der finale Prototyp entwickelt.
+Hier werden die Schwierigkeiten durch die Vereinfachung der Elektronik sowie der Mechanik gelöst.
+Die Zuverlässigkeit wurde mittels stetiger Testläufe mit kontrollierten Schachzug-Szenarien überwacht und so ein produktreifer Prototyp entwickelt.
 
 Im darauffolgenden Abschnitt wird die Cloud-Infrastruktur thematisiert, welche für eine Kommunikation zwischen den autonomen Schachtischen entscheidend ist.
-Auch wird hier die Software, welche auf dem eingebetteten System ausgeführt im Detail beschrieben und deren Kommunikation mit der Cloud-Infrastruktur, sowie mit den elektrischen Komponenten.
-
+Auch wird dabei die Software, welche auf dem eingebetteten System ausgeführt wird, im Detail beschrieben und deren Kommunikation mit der Cloud-Infrastruktur, sowie mit den elektrischen Komponenten beleuchtet.
 
 
 
@@ -47,7 +46,36 @@ Auch wird hier die Software, welche auf dem eingebetteten System ausgeführt im 
 * Nischenprodukt, jedoch einige Projekte im OpenSource bereich verfügbar
 * Ein kommerzieller Hersteller
 
+Im Folgenden werden vier kommerzielle und drei lizenzunabhängige (Open-Source) Schachtische miteinander verglichen.
+Bei den ausgewählten Tischen handelt es sich um
+
+- Square Off - Kingdome
+- Square Off - Grand Kingdom
+- DGT Smartboard
+- DGT Bluetooth Wenge
+- Automated Chessboard (Michael Guerero)
+- Automated Chessboard (Akash Ravichandran)
+- DIY Super Smart Chessboard
+
+<br>
+
+Für die kommerziell käuflichen Schachspiele gibt es kein sehr großes Marktangebot, weswegen für den Vergleich nur zwei Hersteller mit jeweils zwei verschiedenen Modellen gewählt werden konnte. Derzeit ist nur ein System verfügbar, dass die Figuren unterhalb der Tischplatte mechanisch bewegen kann. Der zweite Hersteller wurde dennoch zum Vergleich der zusätzlichen Funktionen herangezogen. 
+
+<br>
+
+Die Tische eines Hersteller unterscheiden sich kaum in ihren Funktionen; mit steigendem Preis werden zusätzliche Funktionen in Form vonn Sensoren oder Verbindungsoptionen implementiert.
+
+<br>
+
+Das Angebot lizenzfreier Produkte hingegen ist signifikanter, jedoch sind die einzelnen Modelle oftmals Kopien oder Revisionen voneinander. Die möglichen Funktionen unterscheiden sich daher kaum. Für die hier dargestellte Übersicht wurden drei Modelle gewählt, welche in ihren Funktionen signifikante Auffälligkeiten und einen hohen Stellenwert und Bekanntheitsgrad aufweisen.
+Wie bereits aus den Namen ersichtlich, unterscheiden sich die Tische nur in geringen Funktionen, was im Folgenden nun näher erläutert wird.
+
+
+<br>
+
 ### Kommerzielle Produkte
+
+<br>
 
 
 : Auflistung kommerzieller autonomer Schachtische
@@ -71,6 +99,8 @@ Bei Schachturnieren werden diese für die Übertragung der Partien sowie die Auf
 
 
 Somit gibt es zum Zeitpunkt der Recherche nur einen Hersteller von autonomen Schachbrettern, welcher auch die Figuren bewegen kann.
+
+
 
 
 
