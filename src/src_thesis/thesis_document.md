@@ -422,7 +422,7 @@ Nach einer gründlichen Evaluation der zur Verfügung stehenden Steuerungen, wur
 Somit wurde die Elektronik durch die verwendete Plug&Play stark vereinfacht \ref{ATC_Hardware_Architecture_PROD}.
 
 
-## HAL: Implementierung GCODE-Sender
+### HAL: Implementierung GCODE-Sender
 
 
 Durch die durchgeführten Änderungen an der Elektronik insbesondere durch die Verwendung einer Marlin-FW[@marlinfw] fähigen Motorsteuerung, ist eine Anpassung der (+hal) notwendig.
@@ -520,7 +520,7 @@ Die Steuerung verarbeitet diese und bestätigt die Ausführung mit einer Acknowl
 
 
 
-## HAL: I2C Seriell Umsetzer
+### HAL: I2C Seriell Umsetzer
 
 Durch den Wegfall der zuvor eingesetzten Elektronik und der Austausch durch die SKR 1.4 Turbo Steuerung, ist jedoch ein Anschluss des PN532 (+nfc) Moduls nicht mehr direkt möglich.
 Da dieses mittels (+i2c) Interface direkt mit dem eingebetteten System verbunden war. Diese Möglichkeit besteht weiterhin, jedoch wurde auch hier auf eine (+usb) Schnittstelle gewechselt. So ist es möglich das System auch an einem anderen Host-System zu betreiben, wie z.B. an einem handelsüblichen Computer.
