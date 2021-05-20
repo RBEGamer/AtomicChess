@@ -3,6 +3,22 @@
 ## Motivation
 
 
+Eingebettete Systeme (Englisch "embedded Systems") sind technische Zusammensetzungen, welche für eine spezifische Funktion entwickelt werden. Im Gegensatz zu Mehrzwecksystemen (Englisch "multi-purpose systems"), wie zum Beispiel einem Personalcomputer, welcher in der Lage ist, diverse Funktionen auszuführen und nicht zwingend an eine Funktion gebunden ist, dienen eingebettete Systeme einer bestimmten Logik. Daraus resutlieren einfacherer und auch ressourcensparendere Systeme, die wesentlich näher an der Technik und der für den Zweck nötigen Komponenten und Software entwickelt werden. Systeme können günster zusammengesetzt und Fehlerquellen schneller entdeckt und behoben werden. Nicht für den Prozess notwendige Komponenten werden gar nicht erst verwendet. Bei einem Mehrzwecksystem wird akzeptiert, dass Komponenten und Schnittstellen existieren, die nicht benötigt werden. Diese veursachen Kosten und können mögliche Fehlerquellen sein.
+
+<br>
+
+Dennoch ist die Entwicklung eines solchen Systems nicht banal. Es ist abzuwägen, welche Komponeten derzeit auf dem freien Markt erhältlich sind, welche Eigenschaten diese mitbringen oder ermöglichen und wie diese optimal kombiniert werden können. Es bedarf im vorhinein intensiverer Rechere und einem größeren Perpektive über mögliche Zusammenhänge. Im Falle eines Merhzwecksystems ist die Auswahl simpler, da man den Prozess auch im Nachhinein noch anpassen kann, da zusätzliche Funktionen und Komponenten gegeben sind oder leichter ergänzt werden können. Das eingebettete System muss in der Regel aufgewertet oder sogar völlig ersetzt werden, wenn zu einem späteren Zeitpunkt festgestellt wird, dass Funktionen nicht gegeben oder umsetzbar sind. Fertige Systeme sind komplexer in der Aufwertung.
+
+<br>
+
+Die Fähigkeit zur Erstellung eines solchen System ist daher nicht leichtfertig anzunehmen und es ist mir wichtig, zum Abschluss meines Studiums mein gewonnenes Wissen über Systeme, Komponenten, Zusammenhänge und deren Verbindung bis hin zur Programmierung nachzuweisen. Die Auswahl eines fertigen Computer oder sogar das simple nutzen existierender Betriebssysteme erweckt nicht den gleichen Reiz, wie es die eigene Erstellung dieser Komponenten auf mich hat. Ich halte es für essentiell, möglichst fachlich die Inhalte meines Studiums in Verbindung mit meinen Vorlieben zu bringen, um letztlich ein optimales Projekt zu erstellen.
+
+<br>
+
+Die Erstellung eines autonomen Schachtisch vereinbart in meinen Augen im großen Umfang 
+
+
+
 
 In der heutigen Zeit
 
