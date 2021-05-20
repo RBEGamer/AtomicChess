@@ -272,15 +272,22 @@ Zusätzliche Parameter wie die Druckgeschwindigkeit, sind hierbei individuell f�
 
 ## Mechanik
 
+Bei dem mechanischen Aufbau wurde auf ein einfaches Design geachtet. Die Konstruktion wurde im Vorfeld in einem (+cad) Programm durchgeführt und die Grundkonstruktion in mehreren Iterationsschritten verfeinert. Das verwendete (+cad) Programm Autodesk Fusion 360 bietet, eine einfache Umsetzung auch für Personen, welche nicht auch der mechanischen Fachrichtung kommen.
 
+Bei der Initialen Planung wurde hier darauf geachtet, einen möglichst kleinen Fußabdruck des Schachtischs zu realisieren. Es wurde daraus hinaus versucht eine fertige Schachtischplatte als Basis zu verwenden und die Mechanik unter diese herum zu designen. Hier wurde ein IKEA Lack Tisch verwendet, welcher die Idealen Abmessungen von 55x55cm hat und somit eine erforderliche Schachfeldgröße von 55mm möglich ist.
+Durch den bereits vorhandenen Rahmen, ist es einfach möglich weitere Komponenten an diesem zu befestigen. Somit stellt diese Tischplatte eine ideale Basis für den autonomen Schachtisch dar.
 
-* vorgaben IKEA tisch als grundbasis => bereits fertiger grundrahmen in denen die einzelteile integriert werden können
-* xy riemen führung
-* spiel in Mechanik
-* Einabrietung in Fusion360
-* Cad design aller bauteile
-* standartxy
-* erweituerng des spielraums durch zwei Magnete
+Die Achsenführung der zwei X- und Y-Achse wurden Standard 20x20mm Aluminium-Profile verwendet, welche passend zugeschnitten werden konnten. Allgemein wurde eine X-Y Riemenführung verwendet, wobei jede Achse einen separaten Nema 17 Schrittmotor inklusive des passenden Endschalter. Bei den Schlitten welche auf den Aluminium-Profilen laufen, wurden fertige Standartkomponenten verwendet, um das Spiel in der Mechanik zu minimieren. Diese stellen jedoch einen großen Posten in der Preiskalkulation dar, jedoch mussten diese nicht manuell erstellt und getestet werden.
+
+Bereits während des Designprozess konnte anhand einer statischen Simulation des Modells erkannt werden, das trotz der Optimierung des Fahrweges beider Achsen durch die Verkleinerung der Halterungen der Aluminium-Profile, dieser nicht ausreicht. Mit dieser Konstellation können die Figuren nicht ausreichend weit aus dem Spielfeld platziert werden und verbleiben in den äußeren Spielfeldern.
+
+Um dies zu verhindern wurde der zentrale Schlitten der Y-Achse, auf welchem der Elektromagnet für die Figurmitnahme platziert ist, um einen weiteren Elektromagnet erweitert. Diese befinden sich nun nicht mehr mittig auf dem Schlitten, sondern wurden um 110mm in Richtung der X-Achse versetzt. So ist es möglich Figuren bis ganz an den Rand verschieben zu können.
+
+Diese Lösung erfordert jedoch einen komplexeren Bahnplanungs-Algorithmus, da die Elektromagneten zwischen einzelnen Zügen gewechselt werden müssen. Dies führt zu einem kurzen Stillstand der Figur auf dem Schachfeld.
+
+Alle Teile wurden anschließend mittels 3D Druck erstellt und konnten in die Tischlattenbasis eingeschraubt werden. Die Verwendung der aus Holz bestehenden Grundplatte erschwerte jedoch eine akkurate Platzierung der Teile und die bereits existierenden Seitenwände schränkten diese noch zusätzlich ein.
+Somit erforderte der komplette Zusammenbau mehrere Tage und zusätzliche Iterationen des 3D-Designs, um den Einbau spezifischer Teile zu ermöglichen.
+Das Design stellt jedoch eine solide Grundlage darf, welche für die weitere Software und Hardware Entwicklung essentiell ist.
 
 
 
@@ -292,7 +299,7 @@ Moderne Mobiltelefone besitzen in der Regel auch die Fähigkeit mit passenden (+
 
 Der Schachtisch verwendet dabei das (+ndef) Dateiformat welches Festlegt, wie die Daten auf dem (+nfc) Tag gespeichert werden. Da diesen ein Standardisiertes Format ist, können alle gängigen Lesegeräte und Chipsätze diese Datensätze lesen. Der im autonomen Schachtisch verwendete Chipsatz PN532 von NXP ist dazu ebenfalls in der Lage.
 
-Um das (+ndef) Format verwenden zu können, müssen die (+nfc) Tags zuerst auf diese Formatiert werden. Die meisten käuflichen Tags sind bereits derart formatiert. Alternativ kann dies mittels Mobiltelefons und passender App geschehen.
+Um das (+ndef) Format verwenden zu können, müssen die (+nfc) Tags zuerst auf diese Formatiert werden. Die meisten käuflichen Tags sind bereits derart formatiert. Alternativ kann dies mittels Mobiltelefon und passender App geschehen.
 Da (+ndef) Informationen über die Formatierung und der gespeicherten Einträge speichert, stehen nach der Formatierung nur noch 137 Bytes des NXP NTAG 21 zur Verfügung.
 
 Per Lesegerät können anschliessend mehrere (+ndef) Records auf den Tag geschrieben werden. Diese sind mit Dateien auf einer Festplatte vergleichbar und können verschiedenen Dateiformate und Dateigrössen annehmen.
@@ -330,7 +337,7 @@ Auch ist es möglich so möglich verschiedene Figur-Sets zu mischen, so kann ein
 * ansterung des Microncontollers (PN532, LED)
 * integration in controller software
 * welche funktion stehen bereit tabelle
-
+* step dir interface => erfodert jedoch eine rt fähige
 ## Fazit zum ersten Prototypen
 
 * nicht für production geeignet
@@ -360,7 +367,7 @@ Auch ist es möglich so möglich verschiedene Figur-Sets zu mischen, so kann ein
 * Motoren fest am rahmen => weniger kabel + gewicht an der Y Achse
 * jedoch komplexerer Aufwand der riemenverlegung so komplexere 3d bauteile
 * Tischabmessungen 620x620mm dabei Bewegungsspielraum vom 580x580 zuvor nur 480x480
-
+* langer zusammenbau !!
 
 
 ## Optimierungen der Spielfiguren
@@ -432,8 +439,8 @@ Marlin-FW[@marlinfw] biete dabei einen großen Befehlssatz an G-Code Kommandos a
 |                          	| G-Code Command 	| Parameters                        	|
 |--------------------------	|----------------	|-----------------------------------	|
 | Move X Y                 	| G0             	| X<dest_pos_x_mm> Y<dest_pos_y_mm> 	|
-| Move Home Position       	| G28            	|                                   	|
-| Set Units to Millimeters 	| G21            	|                                   	|
+| Move Home Position       	| G28            	| -                                  	|
+| Set Units to Millimeters 	| G21            	| -                                  	|
 | Set Servo Position       	| M280           	| P<servo_index> S<servo_position>  	|
 | Disable Motors           	| M84            	| X Y                               	|
 
@@ -522,7 +529,7 @@ Die Steuerung verarbeitet diese und bestätigt die Ausführung mit einer Acknowl
 Durch den Wegfall der zuvor eingesetzten Elektronik und der Austausch durch die SKR 1.4 Turbo Steuerung, ist jedoch ein Anschluss des PN532 (+nfc) Moduls nicht mehr direkt möglich.
 Da dieses mittels (+i2c) Interface direkt mit dem eingebetteten System verbunden war. Diese Möglichkeit besteht weiterhin, jedoch wurde auch hier auf eine (+usb) Schnittstelle gewechselt. So ist es möglich das System auch an einem anderen Host-System zu betreiben, wie z.B. an einem handelsüblichen Computer.
 
-Dazu wurde ein Schnittstellenwandler hinzugefügt welcher die (+i2c) Schnittstelle zu einer (+usb) Seriell wandelt. Hierzu wurde ein Atmega328p Mikrokontroller eingesetzt, da dieser weit verbreitet und preisgünstig zu beschaffen ist.
+Dazu wurde ein Schnittstellenwandler entwickelt welcher die (+i2c) Schnittstelle zu einer (+usb) Seriell wandelt. Hierzu wurde ein Atmega328p Mikrokontroller eingesetzt, da dieser weit verbreitet und preisgünstig zu beschaffen ist.
 Die Firmware des Mikrokontroller stellt ein einfaches kommandobasiertes Interface bereit. Die Kommunikation ist mit der Kommunikation und der Implementierung des G-Code Senders vergleichbar und teilen sich die gleichen Funktionen zur Kommunikation mit der Seriellen Schnittstelle.
 
 ```c++
@@ -613,7 +620,7 @@ Das System erkennt den Anschluss der Hardware beim Start auf die gleiche Art und
 
 : Eigenschaften des finalen Prototypen
 
-|                                         	| (+atc) – autonomous Chessboard    	|
+|                                         	| (+atc) – autonomous Chessboard    	  |
 |-----------------------------------------	|--------------------------------------	|
 | Feldabmessungen (LxBxH)                 	| 57x57mm                              	|
 | Abmessungen (LxBxH)                     	| 620x620x170mm                        	|
@@ -696,8 +703,6 @@ Diese stellen alle wichtigen Funktionen zum Betrieb des autonomen Schachtischs z
 
 
 ### Vorüberlegungen
-
-
 
 * welche funktionalitäten müssen abgedeckt werden
 * client aktivitendiagram
