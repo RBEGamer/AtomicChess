@@ -739,12 +739,12 @@ Der Backend-Service fragt einen neues Spiel an oder übergibt einen Schachzug in
 
 : MoveValidator-Service (+api) Overview
 
-| AtomicChess Move-Validator Service (+api) | (+api)-Route            	| Method 	| Form-Data               |
-|-------------------------------------------|---------------------------|---------|-------------------------|
-| Check Move                             	  | /rest/check_move     	    | POST   	| * fen * move * player 	|
-| Execute Move                           	  | /rest/execute_move   	    | POST   	| fen * move             	|
-| Validate Board                         	  | /rest/validate_board 	    | POST   	| fen                   	|
-| Init Board                             	  | /rest/init_board     	    | GET    	|                       	|
+| MoveValidator (+api) | (+api)-Route           | Method 	| Form-Data               |
+|----------------------|------------------------|---------|-------------------------|
+| Check Move           | /rest/check_move     	| POST   	| fen, move, player 	    |
+| Execute Move         | /rest/execute_move   	| POST   	| fen, move             	|
+| Validate Board       | /rest/validate_board 	| POST   	| fen                   	|
+| Init Board           | /rest/init_board     	| GET    	| -                      	|
 
 
 <br>
