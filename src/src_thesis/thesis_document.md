@@ -389,14 +389,8 @@ Zus√§tzliche Parameter wie die Druckgeschwindigkeit, sind hierbei individuell f√
 
 # Erstellung erster Prototyp
 
-* proof of conzept
-*
 
 ![Prototyp Hardware: Erster Prototyp des autonomen Schachtisch \label{dk}](images/table_images/dk.png)
-
-
-
-<br>
 
 
 ## Mechanik
