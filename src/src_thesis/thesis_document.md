@@ -813,7 +813,7 @@ Das System erkennt den Anschluss der Hardware beim Start auf die gleiche Art und
 
 : Eigenschaften die finalen Prototypen
 
-|                                         	| (+atc) – autonomous Chessboard    	  |
+|                                         	| (+atc) – autonomous Chessboard    	|
 |-----------------------------------------	|--------------------------------------	|
 | Feldabmessungen (LxBxH)                 	| 57x57mm                              	|
 | Abmessungen (LxBxH)                     	| 620x620x170mm                        	|
@@ -822,7 +822,7 @@ Das System erkennt den Anschluss der Hardware beim Start auf die gleiche Art und
 | Automatisches Bewegen der Figuren       	| ja                                   	|
 | Erkennung Schachfigurstellung           	| ja                                   	|
 | Spiel Livestream                        	| ja                                   	|
-| Cloudanbindung (online Spiele)         	  | ja                                   	|
+| Cloudanbindung (online Spiele)         	| ja                                   	|
 | Parkposition für ausgeschiedene Figuren 	| ja                                   	|
 | Stand-Alone Funktionalität              	| ja                                   	|
 | Besonderheiten                          	| User-Port für Erweiterungen           |
@@ -903,7 +903,7 @@ Diese stellen alle wichtigen Funktionen zum Betrieb des autonomen Schachtischs z
 
 
 
-### Vorüberlegungen
+## Vorüberlegungen
 
 * welche funktionalitäten müssen abgedeckt werden
 * client aktivitendiagram
@@ -913,7 +913,7 @@ Diese stellen alle wichtigen Funktionen zum Betrieb des autonomen Schachtischs z
 
 
 
-### Backend
+## Backend
 
 ![Cloud-Infrastruktur: Backend Login-Requst und Response \label{ATC_request_example}](images/ATC_request_example.png)
 
@@ -926,7 +926,7 @@ Diese stellen alle wichtigen Funktionen zum Betrieb des autonomen Schachtischs z
 
 
 
-### MoveValidator
+## MoveValidator
 
 Der MoveValidator-Service bildet im System die eigentliche Schachlogik ab.
 Die Aufgabe ist es, die vom Benutzer eingegebenen Züge auf Richtigkeit zu überprüfen und auf daraufhin neuen Spiel-Status zurückzugeben.
@@ -943,12 +943,12 @@ Der Backend-Service fragt ein neues Spiel an oder übergibt einen Schachzug inkl
 
 : MoveValidator-Service (+api) Overview
 
-| AtomicChess Move-Validator Service (+api) | (+api)-Route            	| Method 	| Form-Data             |
-|----------------------------------------	|----------------------	|--------	|-----------------------	|
-| Check Move                             	| /rest/check_move     	| POST   	| * fen * move * player 	|
-| Execute Move                           	| /rest/execute_move   	| POST   	| fen * move             	|
-| Validate Board                         	| /rest/validate_board 	| POST   	| fen                   	|
-| Init Board                             	| /rest/init_board     	| GET    	|                       	|
+| MoveValidator (+api) | (+api)-Route           | Method | Form-Data             |
+|----------------------|------------------------|--------|-----------------------|
+| Check Move           | /rest/check_move     	| POST   | * fen * move * player |
+| Execute Move         | /rest/execute_move   	| POST   | fen * move            |
+| Validate Board       | /rest/validate_board 	| POST   | fen                   |
+| Init Board           | /rest/init_board     	| GET    |                       |
 
 
 <br>
@@ -994,7 +994,7 @@ Hat der Benutzer jedoch einen ungültigen Zug ausgeführt, wird dieser vom Syste
 <br>
 
 
-### Entwicklung Webclient
+## Entwicklung Webclient
 
 ![Webclient: Spielansicht \label{ATC_webclient}](images/ATC_webclient.png)
 
@@ -1028,7 +1028,7 @@ Auch ist es möglich, aktuell laufende Spiele in Echtzeit anzeigen zu lassen; so
 ![Webclient: Statistiken \label{}](images/ATC_statistics.png)
 
 
-### AutoPlayer
+## AutoPlayer
 
 Der AutoPlayer-Service stellt den Computerspieler bereit.
 
@@ -1113,7 +1113,7 @@ Diese Feature wurde insbesondere bei der Entwicklung des Webclient und der Steue
 
 
 
-### Inter Prozess Communication
+## Inter Prozess Communication
 
 Bei der Entwicklung des Systems wurde darauf geachtet, dass sich das User-Interface austauschen lässt. Somit ist es auch möglich, ein webbasiertes User-Interface zu integrieren. Dazu wurde ein zusätzliches (+ipc) Layer hinzugefügt, welches eine Abstraktion der von der User-Interface Software verwendeten Funktionen auf der Controller-Software Ebene bereitstellt.
 
