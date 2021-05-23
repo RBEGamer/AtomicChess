@@ -42,9 +42,9 @@ pandoc ./thesis_document.md -o ./thesis_document.tex --from markdown --biblatex 
 sed -i 's/\\autocite{/\\cite{/g' ./thesis_document.tex
 
 
-pandoc ./thesis_declaration.md -o ./thesis_declaration.tex --from markdown
-pandoc ./thesis_abstract.md -o ./thesis_abstract.tex --from markdown
-pandoc ./thesis_attachments.md -o ./thesis_attachments.tex --from markdown
+pandoc ./thesis_declaration.md -o ./thesis_declaration.tex --from markdown --top-level-division=chapter --listings
+pandoc ./thesis_abstract.md -o ./thesis_abstract.tex --from markdown --top-level-division=chapter --listings
+pandoc ./thesis_attachments.md -o ./thesis_attachments.tex --from markdown --top-level-division=chapter --listings
 
 echo "------------- PANDOC GENERATION FINISHED -----------"
 
