@@ -473,6 +473,9 @@ Auch ist es so möglich, verschiedene Figur-Sets zu mischen; somit kann ein Spie
 
 * auswahl der Motortreiber (leise, bus ansteuerung)
 * ansteuerung pn532 und umsetzung auf uart
+
+![Prototyp Hardware: Schaltplan und finaler PCB Entwurf \label{ATC_Schematic_DK}](images/ATC_DK_HW_SCHEM.png)
+
 * platinendesign
 * ansterung elektromagnetet
 
