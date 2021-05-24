@@ -108,17 +108,17 @@ Wie bereits aus zum Teil identischen den Namen ersichtlich, streben alle Tische 
 
 : Auflistung kommerzieller autonomer Schachtische
 
-|                                         	| Square Off - Kingdom [@squareoffkingdom]	| Square Off - Grand Kingdom [@squareoffgrand]		  | DGT Smart Board [@dtgsmartboard]	| DGT Bluetooth Wenge [@dtgble] |
+|                                             | Square Off - Kingdom [@squareoffkingdom]    | Square Off - Grand Kingdom [@squareoffgrand]          | DGT Smart Board [@dtgsmartboard]    | DGT Bluetooth Wenge [@dtgble] |
 |-------------------------------------------|-------------------------------------------|---------------------------------------------------|-----------------------------------|-------------------------------|
-| Erkennung Figur-Stellung           	      | nein (Manuell per Ausgangsposition) 		  | nein (Manuell per Ausgangsposition) 				      | ja                  				      | ja                     		    |
-| Abmessungen (LxBxH)                		    | 486mm x 486mm x 75mm              		    | 671mm x 486mm x 75mm              				        | 540mm x 540mm x 20mm 				      | 540mm x 540mm x 20mm 			    |
-| Konnektivität                            	| Bluetooth                            		  | Bluetooth                         				        | Seriell           			          | Bluetooth         			      |
-| Automatisches Bewegen der Figuren       	| ja                                		    | ja                                				        | nein                 				      | nein                 			    |
-| Spiel Livestream                        	| ja                                		    | ja                                				        | ja                   				      | ja                   			    |
-| Cloud-Anbindung (online Spiele)         	| ja (Mobiltelefon + App)      		          | ja (Mobiltelefon + App)      				              | ja (PC + App)   				          | ja (PC + App)      			      |
-| Parkposition für ausgeschiedene Figuren 	| nein                              		    | ja                                				        | nein                 				      | nein                 			    |
-| Stand-Alone Funktionalität               	| nein (Mobiltelefon erforderlich)    		  | nein (Mobiltelefon erforderlich)     				      | nein (PC)			                    | nein (PC)		                  |   	   
-| Besonderheiten                          	| Akku für 30 Spiele                    	  | Akku für 15 Spiele					           	          | - 								                | -								              |
+| Erkennung Figur-Stellung                     | nein (Manuell per Ausgangsposition)           | nein (Manuell per Ausgangsposition)                       | ja                                        | ja                                 |
+| Abmessungen (LxBxH)                            | 486mm x 486mm x 75mm                          | 671mm x 486mm x 75mm                                      | 540mm x 540mm x 20mm                       | 540mm x 540mm x 20mm                 |
+| Konnektivität                                | Bluetooth                                      | Bluetooth                                                 | Seriell                                 | Bluetooth                           |
+| Automatisches Bewegen der Figuren           | ja                                            | ja                                                        | nein                                       | nein                                 |
+| Spiel Livestream                            | ja                                            | ja                                                        | ja                                         | ja                                   |
+| Cloud-Anbindung (online Spiele)             | ja (Mobiltelefon + App)                        | ja (Mobiltelefon + App)                                    | ja (PC + App)                             | ja (PC + App)                        |
+| Parkposition für ausgeschiedene Figuren     | nein                                          | ja                                                        | nein                                       | nein                                 |
+| Stand-Alone Funktionalität                   | nein (Mobiltelefon erforderlich)              | nein (Mobiltelefon erforderlich)                           | nein (PC)                                | nein (PC)                          |          
+| Besonderheiten                              | Akku für 30 Spiele                          | Akku für 15 Spiele                                             | -                                                 | -                                              |
 
 
 <br>
@@ -184,18 +184,18 @@ Auch existieren weitere Abwandlungen von autonomen Schachbrettern, bei welchem d
 
 : Auflistung von Open-Source Schachtisch Projekten
 
-|                                         		  | Automated Chess Board (Michael Guerero) [@actproject1]| Automated Chess Board (Akash Ravichandran) [@actproject2]	| DIY Super Smart Chessboard [@actproject3]	|
-|-----------------------------------------------|-------------------------------------------------------|----------------------------------------------------------	|------------------------------------------	|
-| Erkennung Figur-Stellung              	        | nein (Manuell per Ausgangsposition)     				      | ja (Kamera / OpenCV)                       				        | nein                       				        |
-| Abmessungen (LxBxH)                			      | keine Angabe                            				      | keine Angabe                               				        | 450mm x 300mm x 50mm       				        |
-| Konnektivität                           		  | (+usb)                                   				      | (+wlan)                           				                | (+wlan)          			            	      |
-| Automatisches Bewegen der Figuren       		  | ja                                      				      | ja                                         				        | nein                       				        |
-| Spiel Livestream                        		  | nein                                    				      | nein                                       				        | nein                       				        |
-| Cloud-Anbindung (online Spiele)         		  | nein                                    				      | nein                                       				        | ja                         				        |
-| Parkposition für ausgeschiedene Figuren 		  | nein                                    				      | nein                                       				        | nein                       				        |
-| Stand-Alone Funktionalität              		  | nein (PC erforderlich)                   				      | ja                                         				        | ja                         				        |
-| Besonderheiten                          		  | -                                       				      | Sprachsteuerung (Amazon Alexa)             				        | Zuganzeige über LED Matrix 				        |
-| Lizenz                                 		    | (+gpl) 3+                                				      | (+gpl)                                       				      | -                          				        |
+|                                                   | Automated Chess Board (Michael Guerero) [@actproject1]| Automated Chess Board (Akash Ravichandran) [@actproject2]    | DIY Super Smart Chessboard [@actproject3]    |
+|-----------------------------------------------|-------------------------------------------------------|----------------------------------------------------------    |------------------------------------------    |
+| Erkennung Figur-Stellung                          | nein (Manuell per Ausgangsposition)                           | ja (Kamera / OpenCV)                                               | nein                                               |
+| Abmessungen (LxBxH)                                  | keine Angabe                                                  | keine Angabe                                                       | 450mm x 300mm x 50mm                               |
+| Konnektivität                                     | (+usb)                                                         | (+wlan)                                                           | (+wlan)                                            |
+| Automatisches Bewegen der Figuren                 | ja                                                            | ja                                                                 | nein                                               |
+| Spiel Livestream                                  | nein                                                          | nein                                                               | nein                                               |
+| Cloud-Anbindung (online Spiele)                   | nein                                                          | nein                                                               | ja                                                 |
+| Parkposition für ausgeschiedene Figuren           | nein                                                          | nein                                                               | nein                                               |
+| Stand-Alone Funktionalität                        | nein (PC erforderlich)                                         | ja                                                                 | ja                                                 |
+| Besonderheiten                                    | -                                                             | Sprachsteuerung (Amazon Alexa)                                     | Zuganzeige über LED Matrix                         |
+| Lizenz                                             | (+gpl) 3+                                                      | (+gpl)                                                             | -                                                  |
 
 
 In den bestehenden Projekten ist zu erkennen, dass ein autonomer Schachtisch sehr einfach und mit simplen Mittel konstruiert werden kann. Hierbei fehlen in der Regel einige Features, wie das automatische Erkennen von Figuren oder das Spielen über das Internet.
@@ -263,16 +263,16 @@ In diesem Projekt werden vor allem Funktionalitäten berücksichtig, welche die 
 
 : Auflistung der Anforderungen an den autonomen Schachtisch
 
-|                                         	| (+atc)                               	|
+|                                             | (+atc)                                   |
 |-------------------------------------------|---------------------------------------|
-| Erkennung Figur-Stellung           	| ja                                 	  |
-| Konnektivität                           	| (+wlan), (+usb)                   	  |
-| Automatisches Bewegen der Figuren       	| ja                                	  |
-| Spiel Livestream                        	| ja                                	  |
-| Cloudanbindung (online Spiele)         	  | ja                                	  |
-| Parkposition für ausgeschiedene Figuren 	| ja                                	  |
-| Stand-Alone Funktionalität              	| ja (Bedienung direkt am Tisch)    	  |
-| Besonderheiten                          	| visuelle Hinweise per Beleuchtung 	  |
+| Erkennung Figur-Stellung               | ja                                       |
+| Konnektivität                               | (+wlan), (+usb)                         |
+| Automatisches Bewegen der Figuren           | ja                                      |
+| Spiel Livestream                            | ja                                      |
+| Cloudanbindung (online Spiele)               | ja                                      |
+| Parkposition für ausgeschiedene Figuren     | ja                                      |
+| Stand-Alone Funktionalität                  | ja (Bedienung direkt am Tisch)          |
+| Besonderheiten                              | visuelle Hinweise per Beleuchtung       |
 
 <br>
 
@@ -370,14 +370,14 @@ Diese Vorteile wurde mit verschiedenen Testdrucken verifiziert und kommen insbes
 
 : Verwendete 3D Druck Parameter. Temperatur nach Herstellerangaben des verwendeten PLA Filament.
 
-| Ender 3 Pro 0.4mm Nozzle 	| PLA Settings 	  |
-|--------------------------	|---------------	|
-| Layer Height             	| 0.2mm         	|
-| Infill                   	| 50.00%        	|
-| Wall Thickness           	| 2.0mm         	|
-| Support Structure        	| Tree          	|
-| Top Layers               	| 4             	|
-| Bottom Layers            	| 4             	|
+| Ender 3 Pro 0.4mm Nozzle     | PLA Settings       |
+|--------------------------    |---------------    |
+| Layer Height                 | 0.2mm             |
+| Infill                       | 50.00%            |
+| Wall Thickness               | 2.0mm             |
+| Support Structure            | Tree              |
+| Top Layers                   | 4                 |
+| Bottom Layers                | 4                 |
 
 <br>
 
@@ -449,35 +449,81 @@ Ein typischer Anwendungsfall ist der (+ndefrtd) URL Datensatz. Dieser kann dazu 
 <br>
 
 Der autonome Schachtisch verwendet den einfachsten (+ndefrtd) Typ, den sogenannten Text-Record, welcher zum Speichern von Zeichenketten genutzt werden kann, ohne das eine Aktion auf dem Endgerät ausgeführt wird.
-Jeder Tag einer Schachfigur, welche für den autonomen Schachtisch verwendet werden kann, besitzt diesen (+ndef) Record an der ersten Speicher-Position. Alle weiteren eventuell vorhandenen Records werden vom Tisch ignoriert. [@nordicnfclib]
+Jeder Tag einer Schachfigur, welche für den autonomen Schachtisch verwendet werden kann, besitzt diesen (+ndef) Record \ref{ndef_record_rook} an der ersten Speicher-Position. Alle weiteren eventuell vorhandenen Records werden vom Tisch ignoriert. [@nordicnfclib]
 
 ![Prototyp Hardware: Tool zur Erstellung des NDEF Payloads: ChessFigureIDGenerator.html \label{ATC_ChessFigureIDGenerator}](images/ATC_ChessFigureIDGenerator.png)
 
-Um die Payload für den (+nfc) Record zu erstellen wurde ein kleine Web-Applikation erstellt, welche den Inhalt der Text-Records erstellt.
-Dieser ist für jede Figur individuell und enthält den Figur-Typ und die Figur-Farbe. Das Tool unterstützt auch das Speichern weiterer Attribute wie einem Figur-Index, welcher aber in der finalen Software-Version nicht genutzt wird. \ref{ATC_ChessFigureIDGenerator}
-
-<br>
-
-Nach dem Beschreiben eines (+nfc) Tags ist es zusätzlich möglich, diesen gegen Auslesen mittels einer Read/Write-Protection zu schützen.
-Diese Funktionalität wird jedoch nicht verwendet, um das Kopieren einzelner Figuren durch den Benutzer zu ermöglichen. Somit kann dieser leicht seine eigenen Figuren erschaffen, ohne auf das Tool angewiesen zu sein.
-Auch ist es so möglich, verschiedene Figur-Sets zu mischen; somit kann ein Spieler verschiedene Sets an Figuren mit dem autonomen Schachtisch verwenden.
+Um die Payload für den (+nfc) Record zu erstellen wurde ein kleine Web-Applikation \ref{ATC_ChessFigureIDGenerator} erstellt, welche den Inhalt der Text-Records erstellt.
+Dieser ist für jede Figur individuell und enthält den Figur-Typ und die Figur-Farbe. Das Tool unterstützt auch das Speichern weiterer Attribute wie einem Figur-Index, welcher aber in der finalen Software-Version nicht genutzt wird.
 
 <br>
 
 ![Prototyp Hardware: NDEF Text Record Payload für einen weißen Turm \label{ndef_record_rook}](images/ndef_record_rook.png)
+
+<br>
+Nach dem Beschreiben eines (+nfc) Tags ist es zusätzlich möglich, diesen gegen Auslesen mittels einer Read/Write-Protection zu schützen.
+Diese Funktionalität wird jedoch nicht verwendet, um das Kopieren einzelner Figuren durch den Benutzer zu ermöglichen. Somit kann dieser leicht seine eigenen Figuren erschaffen, ohne auf das Tool angewiesen zu sein.
+Auch ist es so möglich, verschiedene Figur-Sets zu mischen; somit kann ein Spieler verschiedene Sets an Figuren mit dem autonomen Schachtisch verwenden.
+
+
+
+
 
 
 ## Schaltungsentwurf
 
 ![Prototyp Hardware: Blockdiagramm \label{ATC_Hardware_Architecture_DK}](images/ATC_Hardware_Architecture_DK.png)
 
-* auswahl der Motortreiber (leise, bus ansteuerung)
-* ansteuerung pn532 und umsetzung auf uart
+Durch die zuvor durchgeführte Validierung der verwendeten Technologien, konnte ein Blockdiagramm \ref{ATC_Hardware_Architecture_DK} der verwendeten elektrischen Komponenten angefertigt werden.
+Dieses enthält zum einen die zwei Schrittmotor-Treiber und zum anderen die Komponenten zur Ansteuerung der beiden Elektromagnete und das PN532 Module zum Auslesen der (+nfc) Tags.
+
+<br>
+
+Die wichtigsten Komponenten in der Schaltung sind das eingebettete System und die beiden Schrittmotortreiber `TMC5160-BOB`. Diese sind direkt über einen (+spi) Bus miteinander verbunden. Zusätzlich zu den Schrittmotoren selbst, ist an jedem Treiber der Endschalter zur Durchführung der Referenzfahrt der Achse angeschlossen. Die Treiber bieten dabei Eingänge für zwei Endschalter, hier wird jedoch nur der Endschalter für die minimale Position (Home Position) benötigt. Die Treiber sind direkt mit der Eingangsspannung, werden jedoch durch eine 5A Glassicherung geschützt. Da der (+spi) Bus der Treiber mit dem 3.3V Logikpegel des eingebetteten Systems kompatibel ist, können diese direkt miteinander verbunden werden. Da dieser Bus eine hier in einer Stern-Konfiguration aufgebaut wurde, benötigt jeder Treiber, ein zusätzliches Chip-Select Signal. Diese wurden ebenfalls mit dem eingebetteten System verbunden.
+
+Zusätzlich sind Spannungswandler nötig um um die erforderlichen Spannungen von 12V für die Elektromagnete und 5V für das eingebette System zu erzeugen. Die Schrittmotoren werden direkt mit der Versorgungsspannung von 14-24V betrieben. Alle weiteren verwendeten Komponenten zu denen unter anderem auch das PN532 (+nfc) Modul und die WS2811 (+led) Module gehören werden ebenfalls über die 5V Schiene versorgt.
+
+<br>
+
+Für den Betrieb der beiden Elektromagnete wurde kein N-Channel Mosfet o.ä. verwendet, da hier auf maximale flexibilität der Ansteuerung ausschlaggebend ist, da noch nicht genug Erfahrung mit dem Verhalten dieser im Zusammenspiel mit den magnetischen Schachfiguren gesammelt werden konnte. Deshalb wurde hier eine H-Brücke `DRV8871H` verwendet, somit kann auch die Polarität im nachhinein per Software geändert werden und nicht nur die Spannung über ein (+pwm) Signal. Der verwendete Treiber besitz dazu hinaus zwei Ausgänge, weswegen sich diese Module besonders anbot.
+
+<br>
+
+Für die Erzeugung der (+pwm) Signale für die H-Brücke wurde ein zusätzlicher Mikrokontroller `Atmega328p` benötigt, da hier die Steuersignale nicht direkt vom eingebetten Symstem erzeugt werden, sondern nur die Zustandsinformationen über den (+spi) Bus übertragen werden sollen. Dies spart zusätzliche (+gpio) Anschlüsse und somit sind alle Kompomenten über einen zentralen Bus kontrollierbar, welches einen einfachen tausch des eingebetteten Systems in späteren Revisionen vereinfacht.
+
+<br>
+
+Der zusätzliche Mikrokontroller übernimmt auch die Kommunikation mit dem PN532 Modul, da dieses sonst über seine (+i2c) Schnittstelle mit einem entsprechenden Host-System kommuniziert. Der Mikrokontroller übernimmt somit ebenfalls die Konversation des (+i2c) Bus hin zum zentralen (+spi) Bus. Zu beachten ist, dass hier nur ein zusätzlicher Chip-Select (+gpio) benötigt wird zum ansteuern der Elektromagnete und des PN532 Moduls. Dies wird durch die Firmware welche auf dem Mikrokontroller ausgeführt wird realisiert, welche je nach empfangenen Kommando, die dementsprechende Komponente auswählt.
+
 
 ![Prototyp Hardware: Schaltplan und finaler PCB Entwurf \label{ATC_Schematic_DK}](images/ATC_DK_HW_SCHEM.png)
 
-* platinendesign
-* ansterung elektromagnetet
+Nach der Festlegung der zu verwendenten Komponenten wurde ein entsprechender Schaltplan \ref{ATC_Schematic_DK} nach den Vorgaben entworfen. Hierbei wurde sich strikt an den Vorgaben der Datenblätter und der Application-Notes in diesen Orientiert. Da es sich hier um einen ersten Funktionsentwurf handelt, wurde zusätzliche Testpunkte in das Design eingefügt.
+
+Somit ist es wärend der weiteren Entwicklung möglich , zusätzliches Testequipment wie einen Logic-Analyser direkt an den (+spi) Bus oder ein Oszilloskop an die Ausgänge der H-Brücke dauerhaft anzuschliessen. Desweiteren ist es mögliche die Bus und Spannungsversorgung über Jumper zu trennen um einen Funktionstest einzelner Komponenten durchführen zu können.
+
+<br>
+
+Allgemein verwenden alle Komponenten, 3.3V als Logik-Pegel. Trotzdem wurde ein Levelshifter eingesetzt, welcher die (+spi) Bus des eingebetteten System mit dem der Mikrokontroller trennt.
+
+Test mit dem verwendeten `Atmega328p` haben ergeben, dass dieser nicht direkt mit 3.3V und einer Taktfrequenz von 16MHz betrieben werden kann und es somit zu einem nicht kontrollierbaren Verhalten dieses kommt.
+Dieses verhalten machten sich durch eine gestörte Kommunikation mit dem PN532 Modul bemerkbar und eine Auslesen von (+nfc) Tags war nur in 60% der Fälle fehlerfrei möglich.
+
+Im Anschluss wurde die Versorgungsspannung auf 5V erhöht, welches zufolge hat, dass die Ein- und Ausgänge ebenfalls mit diesem Pegel arbeiten, somit wurde zum Schutz des eingebetteten Systems und dessen (+gpio) Schnittstelle notwendig.
+
+![Prototyp Hardware: Aufbau der Lochrasterplatine \label{ATC_DK_HW_LOCHRASTER}](images/ATC_DK_HW_LOCHRASTER.png)
+
+
+Der Schalplan und dessen Funktionalität, wurden anschliessend durch den Aufbau der kompletten Schaltung auf einer Lochrasterplatine \ref{ATC_DK_HW_LOCHRASTER} im Eurokartenformat manuell aufgebaut und getestet.
+
+Aus diesem Design wurde ein (+pcb) Layout für eine einfache 2 lagige Platine erstellt.
+Dieses orientiert sich dan der zuvor umgesetzten Lochrasterplatine und spiegelt das Layout wieder.
+Auch wurde hier nicht auf den Platzverbrauch geachtet. Es wurde zusätzliche Steckverbindungen für die externen Komponenten eingefügt und passende Bohrungen an den Ecken sowie in der Mitte zur Montage vorgesehen. Auf der obersten Layer wurde der Bestückungsdruck erweitert und mit zusätzlichen Information über die Pin-Belegungen der einzelnen Stecker erweitert.
+
+
+
+
+
 
 
 ### Implementierung HAL
@@ -587,11 +633,11 @@ Mit dem Durchbruch von 3D Druckern im Konsumer-Bereich sind auch kleine und prei
 
 : Standardhardware 3D Drucker Steuerungen
 
-|                	| SKR 1.4 Turbo 	| Ramps 1.4       	| Anet A8 Mainboard 	|
-|----------------	|---------------	|-----------------	|-------------------	|
-| Stepper Driver 	| TMC2209       	| A4988 / TMC2209 	| A4988             	|
-| LED Strip Port 	| WS2811 / RGB  	| -               	| -                 	|
-| Firmware       	| Marlin-FW 2.0 	| Marlin-FW 1.0   	| Proprietary       	|
+|                    | SKR 1.4 Turbo     | Ramps 1.4           | Anet A8 Mainboard     |
+|----------------    |---------------    |-----------------    |-------------------    |
+| Stepper Driver     | TMC2209           | A4988 / TMC2209     | A4988                 |
+| LED Strip Port     | WS2811 / RGB      | -                   | -                     |
+| Firmware           | Marlin-FW 2.0     | Marlin-FW 1.0       | Proprietary           |
 
 
 <br>
@@ -620,13 +666,13 @@ Marlin-FW[@marlinfw] biete dabei einen großen Befehlssatz an G-Code Kommandos a
 
 : Grundlegende verwendete G-Code Kommandos
 
-|                          	| G-Code Command 	| Parameters                        	|
-|--------------------------	|----------------	|-----------------------------------	|
-| Move X Y                 	| G0             	| X<dest_pos_x_mm> Y<dest_pos_y_mm> 	|
-| Move Home Position       	| G28            	| -                                  	|
-| Set Units to Millimeters 	| G21            	| -                                  	|
-| Set Servo Position       	| M280           	| P<servo_index> S<servo_position>  	|
-| Disable Motors           	| M84            	| X Y                               	|
+|                                       | G-Code Command     | Parameters                            |
+|--------------------------   |----------------    |-----------------------------------    |
+| Move X Y                       | G0                 | X<dest_pos_x_mm> Y<dest_pos_y_mm>     |
+| Move Home Position     | G28                | -                                      |
+| Set Units to Millimeters | G21                | -                                      |
+| Set Servo Position        | M280               | P<servo_index> S<servo_position>      |
+| Disable Motors             | M84                | X Y                                   |
 
 
 Die erforderlichen Kommandos wurden auf ein Minimum beschränk, um eine maximale Kompatibilität bei verschiedenen G-Code-fähigen Steuerungen zu gewährleisten.
@@ -655,57 +701,57 @@ Nach Aufruf einer Funktion zum Ansteuern der Motoren, wird aus den übergebenen 
 ```c++
 //GCodeSender.cpp
 bool GCodeSender::setServo(const int _index,const int _pos) {
-	return write_gcode("M280 P" + std::to_string(_index) + " S" + std::to_string(_pos));     //MOVE SERVO
+    return write_gcode("M280 P" + std::to_string(_index) + " S" + std::to_string(_pos));     //MOVE SERVO
 }
 
 bool GCodeSender::write_gcode(std::string _gcode_line, bool _ack_check) {
     //...
     //...
     //FLUSH INPUT BUFFER
-	port->flushReceiver();
-	//APPEND NEW LINE CHARAKTER IF NEEDED
-	if (_gcode_line.rfind('\n') == std::string::npos)
-	{
-		_gcode_line += '\n';
-	}
-	//WRITE COMMAND TO SERIAL LINE
-	port->writeString(_gcode_line.c_str());
+    port->flushReceiver();
+    //APPEND NEW LINE CHARAKTER IF NEEDED
+    if (_gcode_line.rfind('\n') == std::string::npos)
+    {
+        _gcode_line += '\n';
+    }
+    //WRITE COMMAND TO SERIAL LINE
+    port->writeString(_gcode_line.c_str());
     //WAIT FOR ACK
     return wait_for_ack();
 }
 
 bool GCodeSender::wait_for_ack() {
-	int wait_counter = 0;
-	//...
+    int wait_counter = 0;
     //...
-	while (true) {
+    //...
+    while (true) {
         //READ SERIAL REPONSE
-		const std::string resp = read_string_from_serial();
+        const std::string resp = read_string_from_serial();
         //...
         //...
-		//PROCESS
-		if (resp.rfind("ok") != std::string::npos)
-		{
-			break;
-		}else if(resp.rfind("echo:Unknown") != std::string::npos) {
-			break;
-		}else if(resp.rfind("Error:") != std::string::npos) {
-			break;			
-		}else if (resp.rfind("echo:busy: processing") != std::string::npos) {
-			wait_counter = 0;
-			LOG_F("wait_for_ack: busy_processing");
-		}else {
+        //PROCESS
+        if (resp.rfind("ok") != std::string::npos)
+        {
+            break;
+        }else if(resp.rfind("echo:Unknown") != std::string::npos) {
+            break;
+        }else if(resp.rfind("Error:") != std::string::npos) {
+            break;            
+        }else if (resp.rfind("echo:busy: processing") != std::string::npos) {
+            wait_counter = 0;
+            LOG_F("wait_for_ack: busy_processing");
+        }else {
             //READ ERROR COUNTER AND HANDLING
-			wait_counter++;
-			if (wait_counter > 3)
-			{
-				break;
-			}
-		}
-	}
+            wait_counter++;
+            if (wait_counter > 3)
+            {
+                break;
+            }
+        }
+    }
     //...
     //...
-	return true;
+    return true;
 }
 ```
 Die Steuerung verarbeitet diese und bestätigt die Ausführung mit einer Acknowledgement-Antwort. Hierbei gibt es verschiedenen Typen. Der einfachste Fall ist ein `ok`, welches eine erfolgreiche Abarbeitung des Kommandos signalisiert. Ein weiterer Fall ist die Busy-Antwort `echo:busy`. Diese Signalisiert, dass das Kommando noch in der Bearbeitung ist und wird im Falle des autonomen Schachtisches bei langen und langsamen Bewegungen der Mechanik ausgegeben. Das System wartet diese Antworten ab bis eine finale `ok`-Antwort zurückgegeben wird, erst dann wird das nächste Kommando aus der Warteschlange bearbeitet.
@@ -822,19 +868,19 @@ Das System erkennt den Anschluss der Hardware beim Start auf die gleiche Art und
 
 : Eigenschaften die finalen Prototypen
 
-|                                         	| (+atc) – autonomous Chessboard    	|
-|-----------------------------------------	|--------------------------------------	|
-| Feldabmessungen (LxBxH)                 	| 57x57mm                              	|
-| Abmessungen (LxBxH)                     	| 620x620x170mm                        	|
-| Gewicht                                 	| 5.7kg                                	|
-| Konnektivität                           	| (+wlan), (+usb)                      	|
-| Automatisches Bewegen der Figuren       	| ja                                   	|
-| Erkennung Schachfigurstellung           	| ja                                   	|
-| Spiel Livestream                        	| ja                                   	|
-| Cloudanbindung (online Spiele)         	| ja                                   	|
-| Parkposition für ausgeschiedene Figuren 	| ja                                   	|
-| Stand-Alone Funktionalität              	| ja                                   	|
-| Besonderheiten                          	| User-Port für Erweiterungen           |
+|                                             | (+atc) – autonomous Chessboard        |
+|-----------------------------------------    |--------------------------------------    |
+| Feldabmessungen (LxBxH)                     | 57x57mm                                  |
+| Abmessungen (LxBxH)                         | 620x620x170mm                            |
+| Gewicht                                     | 5.7kg                                    |
+| Konnektivität                               | (+wlan), (+usb)                          |
+| Automatisches Bewegen der Figuren           | ja                                       |
+| Erkennung Schachfigurstellung               | ja                                       |
+| Spiel Livestream                            | ja                                       |
+| Cloudanbindung (online Spiele)             | ja                                       |
+| Parkposition für ausgeschiedene Figuren     | ja                                       |
+| Stand-Alone Funktionalität                  | ja                                       |
+| Besonderheiten                              | User-Port für Erweiterungen           |
 
 * alle anforderungen erfüllt
 * zulasten der geschwindigkeit insbesondere bei der erkennung des User-Move
@@ -954,10 +1000,10 @@ Der Backend-Service fragt ein neues Spiel an oder übergibt einen Schachzug inkl
 
 | MoveValidator (+api) | (+api)-Route           | Method | Form-Data             |
 |----------------------|------------------------|--------|-----------------------|
-| Check Move           | /rest/check_move     	| POST   | * fen * move * player |
-| Execute Move         | /rest/execute_move   	| POST   | fen * move            |
-| Validate Board       | /rest/validate_board 	| POST   | fen                   |
-| Init Board           | /rest/init_board     	| GET    |                       |
+| Check Move           | /rest/check_move         | POST   | * fen * move * player |
+| Execute Move         | /rest/execute_move       | POST   | fen * move            |
+| Validate Board       | /rest/validate_board     | POST   | fen                   |
+| Init Board           | /rest/init_board         | GET    |                       |
 
 
 <br>
@@ -976,11 +1022,11 @@ Die (+fen) Notation ist universal und kann jede Brettstellung darstellen. Auch e
 
 : Vergleich (+fen) - (+xfen)
 
-| FEN-TYPE                                          	| FEN-String                                                    |
-|---------------------------------------------------	|---------------------------------------------------------------|
-| FEN                                                	| rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R             |
-| X-FEN                                             	| rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2|
-| SCHEMA                                            	| Board Player-Color Rochade En-Passant Halfturn Turn-Number	  |
+| FEN-TYPE                                              | FEN-String                                                    |
+|---------------------------------------------------    |---------------------------------------------------------------|
+| FEN                                                    | rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R             |
+| X-FEN                                                 | rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2|
+| SCHEMA                                                | Board Player-Color Rochade En-Passant Halfturn Turn-Number      |
 
 
 <br>

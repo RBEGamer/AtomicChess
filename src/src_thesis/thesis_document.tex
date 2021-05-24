@@ -63,10 +63,10 @@ bewiesen sich immer mehr Konzerne ihre technische Kompetenz und
 Überlegenheit und die Fähigkeit ihrer Maschinen mittels der Auswertung
 von Schachalgorithmen und dem möglichst schnellen besiegen derzeitiger
 Schach-Meister und -Meisterinnen. Die Algorithmen stehen heute in einer
-Vielzahl frei zugänglich zur Verfügung, jedoch ist das Interesse daran,
-für Spieler mögliche Anwendungen zu generieren, verschwindend gering und
-wird oftmals nur von Experten und Enthusiasten genutzt und auch
-hinterfragt.
+Vielzahl als open-source Projekte zur Verfügung, jedoch ist das
+Interesse daran, für Spieler mögliche Anwendungen zu generieren,
+verschwindend gering und wird oftmals nur von Experten und Enthusiasten
+genutzt und auch hinterfragt.
 
 Mit dieser Arbeit möchte ich mich diesem Problem stellen und einen
 möglich günstigen Tisch entwickeln, welcher das Spielerlebnis ohne
@@ -133,9 +133,9 @@ eingebetteten System ausgeführt wird, im Detail beschrieben und deren
 Kommunikation mit der Cloud-Infrastruktur, sowie mit den elektrischen
 Komponenten beleuchtet.
 
-\hypertarget{analyse-bestehender-systeme-und-machbarkeitsanalyse}{%
-\chapter{Analyse bestehender Systeme und
-Machbarkeitsanalyse}\label{analyse-bestehender-systeme-und-machbarkeitsanalyse}}
+\hypertarget{analyse-bestehender-systeme}{%
+\chapter{Analyse bestehender
+Systeme}\label{analyse-bestehender-systeme}}
 
 \hypertarget{existierende-systeme-im-vergleich}{%
 \section{Existierende Systeme im
@@ -174,7 +174,7 @@ Die Tische eines Herstellers unterscheiden sich kaum in ihren
 Funktionen; mit steigendem Preis werden zusätzliche Funktionen in Form
 von Sensoren oder Verbindungsoptionen implementiert.
 
-Das Angebot lizenzfreier Produkte hingegen ist signifikanter, jedoch
+Das Angebot von open-source Projekten hingegen ist signifikanter, jedoch
 sind die einzelnen Modelle oftmals Kopien oder Revisionen voneinander.
 Die möglichen Funktionen unterscheiden sich daher kaum. Für die hier
 dargestellte Übersicht wurden drei Modelle gewählt, welche in ihren
@@ -619,7 +619,7 @@ abgedeckt und der Benutzer muss die Figuren selbständig vom Feld
 entfernen.
 
 \hypertarget{anforderungsanalyse}{%
-\section{Anforderungsanalyse}\label{anforderungsanalyse}}
+\chapter{Anforderungsanalyse}\label{anforderungsanalyse}}
 
 Nach Abschluss der Recherche, kann somit eine Auflistung aller Features
 angefertigt werden, welche ein autonomer Schachtisch aufweisen sollte.
@@ -662,7 +662,7 @@ Geschwindigkeit der Figur-Bewegung gelegt, da hier die Zuverlässigkeit
 und Wiederholgenauigkeit dieser im Vordergrund stehen.
 
 \hypertarget{machbarkeitsanalyse}{%
-\section{Machbarkeitsanalyse}\label{machbarkeitsanalyse}}
+\chapter{Machbarkeitsanalyse}\label{machbarkeitsanalyse}}
 
 \begin{itemize}
 \tightlist
@@ -846,9 +846,10 @@ einen guten Kompromiss zwischen Qualität und Druckzeit lieferten.
 Bei dem mechanischen Aufbau wurde auf ein einfaches Design geachtet. Die
 Konstruktion wurde im Vorfeld in einem \gls{cad} Programm durchgeführt
 und die Grundkonstruktion in mehreren Iterationsschritten verfeinert.
-Das verwendete \gls{cad} Programm `Autodesk Fusion 360' bietet, eine
-einfache Umsetzung auch für Personen, welche keine Ausbildung im Bereich
-der Mechanik und Entiwcklung vorweisen können.
+Das verwendete \gls{cad} Programm
+\passthrough{\lstinline!Autodesk Fusion 360!} bietet, eine einfache
+Umsetzung auch für Personen, welche keine Ausbildung im Bereich der
+Mechanik und Entwicklung vorweisen können.
 
 Bei der initialen Planung wurde beachtet, einen möglichst kleinen
 Fußabdruck des Schachtischs zu realisieren. Darüberhinaus wurde
@@ -868,7 +869,7 @@ Schrittmotor inklusive des passenden Endschalters montiert hatte. Bei
 den Schlitten, welche auf den Aluminium-Profilen laufen, wurden fertige
 Standartkomponenten verwendet, um das Spiel in der Mechanik zu
 minimieren. Diese stellen jedoch einen großen Posten in der
-Preiskalkulation dar. Die Vortiele überwogen jedoch, da diese nicht
+Preiskalkulation dar. Die Vorteile überwogen jedoch, da diese nicht
 manuell erstellt und getestet werden müssen.
 
 Bereits während des Designprozess konnte anhand einer statischen
@@ -922,10 +923,10 @@ verwendete Chipsatz PN532 von NXP ist dazu ebenfalls in der Lage.
 
 Um das \gls{ndef} Format verwenden zu können, müssen die \gls{nfc} Tags
 zuerst auf diese formatiert werden. Die meisten käuflichen Tags sind
-bereits derart formatiert. Alternativ kann dies mittels Mobiltelefons
-und passender Applikation geschehen. Da \gls{ndef} Informationen über
-die Formatierung und der gespeicherten Einträge speichert, stehen nach
-der Formatierung nur noch 137 Bytes des NXP NTAG 21 zur Verfügung.
+bereits derart formatiert. Alternativ kann dies mittels Mobiltelefon und
+passender Applikation geschehen. Da \gls{ndef} Informationen über die
+Formatierung und der gespeicherten Einträge speichert, stehen nach der
+Formatierung nur noch 137 Bytes des NXP NTAG 21 zur Verfügung.
 
 Per Lesegerät können anschließend mehrere \gls{ndef} Records auf den Tag
 geschrieben werden. Diese sind mit Dateien auf einer Festplatte
@@ -939,9 +940,10 @@ Der autonome Schachtisch verwendet den einfachsten \gls{ndefrtd} Typ,
 den sogenannten Text-Record, welcher zum Speichern von Zeichenketten
 genutzt werden kann, ohne das eine Aktion auf dem Endgerät ausgeführt
 wird. Jeder Tag einer Schachfigur, welche für den autonomen Schachtisch
-verwendet werden kann, besitzt diesen \gls{ndef} Record an der ersten
-Speicher-Position. Alle weiteren eventuell vorhandenen Records werden
-vom Tisch ignoriert. \cite{nordicnfclib}
+verwendet werden kann, besitzt diesen \gls{ndef} Record
+\ref{ndef_record_rook} an der ersten Speicher-Position. Alle weiteren
+eventuell vorhandenen Records werden vom Tisch ignoriert.
+\cite{nordicnfclib}
 
 \begin{figure}
 \centering
@@ -951,11 +953,18 @@ ChessFigureIDGenerator.html \label{ATC_ChessFigureIDGenerator}}
 \end{figure}
 
 Um die Payload für den \gls{nfc} Record zu erstellen wurde ein kleine
-Web-Applikation erstellt, welche den Inhalt der Text-Records erstellt.
-Dieser ist für jede Figur individuell und enthält den Figur-Typ und die
-Figur-Farbe. Das Tool unterstützt auch das Speichern weiterer Attribute
-wie einem Figur-Index, welcher aber in der finalen Software-Version
-nicht genutzt wird. \ref{ATC_ChessFigureIDGenerator}
+Web-Applikation \ref{ATC_ChessFigureIDGenerator} erstellt, welche den
+Inhalt der Text-Records erstellt. Dieser ist für jede Figur individuell
+und enthält den Figur-Typ und die Figur-Farbe. Das Tool unterstützt auch
+das Speichern weiterer Attribute wie einem Figur-Index, welcher aber in
+der finalen Software-Version nicht genutzt wird.
+
+\begin{figure}
+\centering
+\includegraphics{images/ndef_record_rook.png}
+\caption{Prototyp Hardware: NDEF Text Record Payload für einen weißen
+Turm \label{ndef_record_rook}}
+\end{figure}
 
 Nach dem Beschreiben eines \gls{nfc} Tags ist es zusätzlich möglich,
 diesen gegen Auslesen mittels einer Read/Write-Protection zu schützen.
@@ -965,13 +974,6 @@ leicht seine eigenen Figuren erschaffen, ohne auf das Tool angewiesen zu
 sein. Auch ist es so möglich, verschiedene Figur-Sets zu mischen; somit
 kann ein Spieler verschiedene Sets an Figuren mit dem autonomen
 Schachtisch verwenden.
-
-\begin{figure}
-\centering
-\includegraphics{images/ndef_record_rook.png}
-\caption{Prototyp Hardware: NDEF Text Record Payload für einen weißen
-Turm \label{ndef_record_rook}}
-\end{figure}
 
 \hypertarget{schaltungsentwurf}{%
 \section{Schaltungsentwurf}\label{schaltungsentwurf}}
@@ -983,13 +985,59 @@ Turm \label{ndef_record_rook}}
 \label{ATC_Hardware_Architecture_DK}}
 \end{figure}
 
-\begin{itemize}
-\tightlist
-\item
-  auswahl der Motortreiber (leise, bus ansteuerung)
-\item
-  ansteuerung pn532 und umsetzung auf uart
-\end{itemize}
+Durch die zuvor durchgeführte Validierung der verwendeten Technologien,
+konnte ein Blockdiagramm \ref{ATC_Hardware_Architecture_DK} der
+verwendeten elektrischen Komponenten angefertigt werden. Dieses enthält
+zum einen die zwei Schrittmotor-Treiber und zum anderen die Komponenten
+zur Ansteuerung der beiden Elektromagnete und das PN532 Module zum
+Auslesen der \gls{nfc} Tags.
+
+Die wichtigsten Komponenten in der Schaltung sind das eingebettete
+System und die beiden Schrittmotortreiber
+\passthrough{\lstinline!TMC5160-BOB!}. Diese sind direkt über einen
+\gls{spi} Bus miteinander verbunden. Zusätzlich zu den Schrittmotoren
+selbst, ist an jedem Treiber der Endschalter zur durchführung der
+Referenzfahrt der Achse angeschlossen. Die Treiber bieten dabei Eingänge
+für zwei Endschalter, hier wird jedoch nur der Enschalter für die
+minimale Position (Home Position) benötigt. Die Treiber werden direkt
+mit der Eingangsspannung von 14-24V Versorgt
+
+Zusätzlich sind Spannungswandler nötig um um die erforderlichen
+Spannungen von 12V für die Elektromagnete und 5V für das eingebette
+System zu erzeugen. Die Schrittmotoren werden direkt mit der
+Versorgungsspannung von 14-24V betrieben. Alle weiteren verwendeten
+Komponenten zu denen unter anderem auch das PN532 \gls{nfc} Modul und
+die WS2811 \gls{led} Module gehören werden ebenfalls über die 5V Schiene
+versorgt.
+
+Für den Betrieb der beiden Elektromagnete wurde kein N-Channel Mosfet
+o.ä. verwendet, da hier auf maximale flexibilität der Ansteuerung
+ausschlaggebend ist, da noch nicht genug Erfahrung mit dem Verhalten
+dieser im Zusammenspiel mit den magnetischen Schachfiguren gesammelt
+werden konnte. Deshalb wurde hier eine H-Brücke
+\passthrough{\lstinline!DRV8871H!} verwendet, somit kann auch die
+Polarität im nachhinein per Software geändert werden und nicht nur die
+Spannung über ein \gls{pwm} Signal. Der verwendete Treiber besitz dazu
+hinaus zwei Ausgänge, weswegen sich diese Module besonders anbot.
+
+Für die Erzeugung der \gls{pwm} Signale für die H-Brücke wurde ein
+zusätzlicher Mikrokontroller \passthrough{\lstinline!Atmega328p!}
+benötigt, da hier die Steuersignale nicht direkt vom eingebetten Symstem
+erzeugt werden, sondern nur die Zustandsinformationen über den \gls{spi}
+Bus übertragen werden sollen. Dies spart zusätzliche \gls{gpio}
+Anschlüsse und somit sind alle Kompomenten über einen zentralen Bus
+kontrollierbar, welches einen einfachen tausch des eingebetteten Systems
+in späteren Revisionen vereinfacht.
+
+Der zusätzliche Mikrokontroller übernimmt auch die Kommunikation mit dem
+PN532 Modul, da dieses sonst über seine \gls{i2c} Schnittstelle mit
+einem entsprechenden Host-System kommuniziert. Der Mikrokontroller
+übernimmt somit ebenfalls die Konversation des \gls{i2c} Bus hin zum
+zentralen \gls{spi} Bus. Zu beachten ist, dass hier nur ein zusätzlicher
+Chip-Select \gls{gpio} benötigt wird zum ansteuern der Elektromagnete
+und des PN532 Moduls. Dies wird durch die Firmware welche auf dem
+Mikrokontroller ausgeführt wird realisiert, welche je nach empfangenen
+Kommando, die dementsprechende Komponente auswählt.
 
 \begin{figure}
 \centering
@@ -998,18 +1046,62 @@ Turm \label{ndef_record_rook}}
 \label{ATC_Schematic_DK}}
 \end{figure}
 
-\begin{itemize}
-\tightlist
-\item
-  platinendesign
-\item
-  ansterung elektromagnetet
-\end{itemize}
+Nach der Festlegung der zu verwendenten Komponenten wurde ein
+entsprechender Schaltplan \ref{ATC_Schematic_DK} nach den Vorgaben
+entworfen. Hierbei wurde sich strikt an den Vorgaben der Datenblätter
+und der Application-Notes in diesen Orientiert. Da es sich hier um einen
+ersten Funktionsentwurf handelt, wurde zusätzliche Testpunkte in das
+Design eingefügt.
+
+Somit ist es wärend der weiteren Entwicklung möglich , zusätzliches
+Testequipment wie einen Logic-Analyser direkt an den \gls{spi} Bus oder
+ein Oszilloskop an die Ausgänge der H-Brücke dauerhaft anzuschliessen.
+Desweiteren ist es mögliche die Bus und Spannungsversorgung über Jumper
+zu trennen um einen Funktionstest einzelner Komponenten durchführen zu
+können.
+
+Allgemein verwenden alle Komponenten, 3.3V als Logik-Pegel. Trotzdem
+wurde ein Levelshifter eingesetzt, welcher die \gls{spi} Bus des
+eingebetteten System mit dem der Mikrokontroller trennt.
+
+Test mit dem verwendeten \passthrough{\lstinline!Atmega328p!} haben
+ergeben, dass dieser nicht direkt mit 3.3V und einer Taktfrequenz von
+16MHz betrieben werden kann und es somit zu einem nicht kontrollierbaren
+Verhalten dieses kommt. Dieses verhalten machten sich durch eine
+gestörte Kommunikation mit dem PN532 Modul bemerkbar und eine Auslesen
+von \gls{nfc} Tags war nur in 60\% der Fälle fehlerfrei möglich.
+
+Im Anschluss wurde die Versorgungsspannung auf 5V erhöht, welches
+zufolge hat, dass die Ein- und Ausgänge ebenfalls mit diesem Pegel
+arbeiten, somit wurde zum Schutz des eingebetteten Systems und dessen
+\gls{gpio} Schnittstelle notwendig.
+
+\begin{figure}
+\centering
+\includegraphics{images/ATC_DK_HW_LOCHRASTER.png}
+\caption{Prototyp Hardware: Aufbau der Lochrasterplatine
+\label{ATC_DK_HW_LOCHRASTER}}
+\end{figure}
+
+Der Schalplan und dessen Funktionalität, wurden anschliessend durch den
+Aufbau der kompletten Schaltung auf einer Lochrasterplatine
+\ref{ATC_DK_HW_LOCHRASTER} im Eurokartenformat manuell aufgebaut und
+getestet.
+
+Aus diesem Design wurde ein \gls{pcb} Layout für eine einfache 2 lagige
+Platine erstellt. Dieses orientiert sich dan der zuvor umgesetzten
+Lochrasterplatine und spiegelt das Layout wieder. Auch wurde hier nicht
+auf den Platzverbrauch geachtet. Es wurde zusätzliche Steckverbindungen
+für die externen Komponenten eingefügt und passende Bohrungen an den
+Ecken sowie in der Mitte zur Montage vorgesehen. Auf der obersten Layer
+wurde der Bestückungsdruck erweitert und mit zusätzlichen Information
+über die Pin-Belegungen der einzelnen Stecker erweitert.
 
 \hypertarget{implementierung-hal}{%
 \subsection{Implementierung HAL}\label{implementierung-hal}}
 
 \begin{itemize}
+\tightlist
 \item
   ansteuerung des TMC5160
 \item
@@ -1019,8 +1111,15 @@ Turm \label{ndef_record_rook}}
 \item
   welche funktion stehen bereit tabelle
 \item
-  step dir interface =\textgreater{} erfodert jedoch eine rt fähige \#\#
-  Fazit bezüglich des ersten Prototypens
+  step dir interface =\textgreater{} erfodert jedoch eine rt fähige
+\end{itemize}
+
+\hypertarget{fazit-bezuxfcglich-des-ersten-prototypens}{%
+\section{Fazit bezüglich des ersten
+Prototypens}\label{fazit-bezuxfcglich-des-ersten-prototypens}}
+
+\begin{itemize}
+\tightlist
 \item
   nicht für production geeignet
 \item
