@@ -2408,17 +2408,15 @@ autonomen Schachtisch verwendet.
 \hypertarget{ablaufdiagramm}{%
 \section{Ablaufdiagramm}\label{ablaufdiagramm}}
 
-\begin{itemize}
-\tightlist
-\item
-  dummer/thin Client
-\item
-  Synchronisierung von gegeben Schachfeld mit dem lokalen Schachfeld
-\item
-  getätigte züfe werden direkt an den schachserver geschickt und dieser
-  generiert daraufhin das neue schachbrett welches von beiden Partner
-  sync
-\end{itemize}
+Nach dem Start der Controller-Software folgt diese einem Fest
+vorgegebenen Ablauf \ref{ATC_gameclient_statemachiene}. Dieser wird
+mittels einer State-Machine in der Controller-Software abgebildet.
+Nachdem die Software gestartet ist, wird zuerst eine Verbindung mit dem
+Cloud-Server aufgenommen. Da der Tisch eine art Thin-Client darstellt,
+bei dem die eigentliche Spiellogik auf dem Server ausgeführt wird. Muss
+die Controller-Software nur das vom Server vorgebene Schachfeld mittels
+der Mechanik synchronisieren und entsprechende Schachzüge des Benutzers
+an diesen übermitteln.
 
 \begin{figure}
 \centering
@@ -2426,6 +2424,39 @@ autonomen Schachtisch verwendet.
 \caption{Embedded System Software: Ablaufdiagramm
 \label{ATC_gameclient_statemachiene}}
 \end{figure}
+
+Nach erfolgreicher Anmeldung am Cloud-Server, kann der Benutzer ein
+Spiel starten, welches lediglich zu einem entsprechenden Request an den
+Server führt. Die nachfolgende Dauerschleife überprüft, ob ein Spiel
+gestartet wurde. Dazu wird in zyklischen Intervallen die
+\passthrough{\lstinline!/rest/get\_playerstate!} \gls{api} aufgerufen.
+Diese stellt Informationen ob und in welchem Status sich das Spiel für
+den anfragenden Client befindet.
+
+Wurde das Spiel gerade erst gestartet, beginnt die Sync-Phase. Bei
+dieser müssen beide Clients, die Figuren in die vorgegeben
+Ausgangsstellung bringen und dies bestätigen. Erst dann gilt das Spiel
+für den Server als begonnen und der aktive Spieler wird ausgewählt. Ist
+der Client am Zug, wartet dieser auf einen Zug in Form einer
+Benutzereingabe. Welches entwieder durch manuelles Eintippen des
+Schachzugs über die \gls{gui} geschieht oder über eine manuelle Bewegung
+der Figuren. Auch hier hat der Client keine Informationen darüber ob der
+getätigte Zug gültig ist. Die Zuginformationen werden über die
+entsprechende \gls{api} Route \passthrough{\lstinline!/rest/make\_move!}
+an den Server übermittelt, welcher diesen Zug auf dem Schachbrett
+ausführt. Wenn der Zug ungültig ist, muss der Client den Benutzer
+informieren, diesen Rückgängig zu machen. Ist der Zug jedoch gültig, wir
+dieser vom Server an den anderen Client übermittelt und dieser muss
+anschließend wie beider Sync-Phase das Spielbrett aufbauen.
+
+Nach einem Abbruch oder einem Gewinn/Verlust des Spiels, wartet der
+Client wieder bis ein neues Spiel vom Server aus gestartet wird, oder
+der Benutzer manuell ein Spiel startet. Dieser Zyklus wird dauerhaft
+ausgeführt. Der Client bietet jedoch noch weitere
+Einstellungsmöglichkeiten für den Benutzer über die \gls{gui} an. Diese
+Benutzer-Events seperat verarbeitet und sind vom Spielablauf getrennt.
+Hierzu zählen unter anderem der Kalibierungs-Dialog, sowie eine
+Informationsansicht über den aktuellen Status des Systems.
 
 \hypertarget{figur-bewegungspfadberechnung}{%
 \section{Figur
