@@ -475,54 +475,62 @@ Auch ist es so möglich, verschiedene Figur-Sets zu mischen; somit kann ein Spie
 ![Prototyp Hardware: Blockdiagramm \label{ATC_Hardware_Architecture_DK}](images/ATC_Hardware_Architecture_DK.png)
 
 Durch die zuvor durchgeführte Validierung der verwendeten Technologien, konnte ein Blockdiagramm \ref{ATC_Hardware_Architecture_DK} der verwendeten elektrischen Komponenten angefertigt werden.
-Dieses enthält zum einen die zwei Schrittmotor-Treiber und zum anderen die Komponenten zur Ansteuerung der beiden Elektromagnete und das PN532 Module zum Auslesen der (+nfc) Tags.
+Dieses enthält zum einen die zwei Schrittmotor-Treiber und zum anderen die Komponenten zur Ansteuerung der beiden Elektromagnete sowie das PN532 Module zum Auslesen der (+nfc) Tags.
 
 <br>
 
-Die wichtigsten Komponenten in der Schaltung sind das eingebettete System und die beiden Schrittmotortreiber `TMC5160-BOB`. Diese sind direkt über einen (+spi) Bus miteinander verbunden. Zusätzlich zu den Schrittmotoren selbst, ist an jedem Treiber der Endschalter zur Durchführung der Referenzfahrt der Achse angeschlossen. Die Treiber bieten dabei Eingänge für zwei Endschalter, hier wird jedoch nur der Endschalter für die minimale Position (Home Position) benötigt. Die Treiber sind direkt mit der Eingangsspannung, werden jedoch durch eine 5A Glassicherung geschützt. Da der (+spi) Bus der Treiber mit dem 3.3V Logikpegel des eingebetteten Systems kompatibel ist, können diese direkt miteinander verbunden werden. Da dieser Bus eine hier in einer Stern-Konfiguration aufgebaut wurde, benötigt jeder Treiber, ein zusätzliches Chip-Select Signal. Diese wurden ebenfalls mit dem eingebetteten System verbunden.
-
-Zusätzlich sind Spannungswandler nötig um um die erforderlichen Spannungen von 12V für die Elektromagnete und 5V für das eingebette System zu erzeugen. Die Schrittmotoren werden direkt mit der Versorgungsspannung von 14-24V betrieben. Alle weiteren verwendeten Komponenten zu denen unter anderem auch das PN532 (+nfc) Modul und die WS2811 (+led) Module gehören werden ebenfalls über die 5V Schiene versorgt.
+Die wichtigsten Komponenten in der Schaltung sind das eingebettete System und die beiden Schrittmotortreiber `TMC5160-BOB`. Diese sind direkt über einen (+spi) Bus miteinander verbunden. Zusätzlich zu den Schrittmotoren selbst, ist an jedem Treiber der Endschalter zur Durchführung der Referenzfahrt der Achse angeschlossen. Die Treiber bieten dabei Eingänge für zwei Endschalter, jeodch wird nur ein Endschalter für die minimale Position (Home Position) benötigt. Die Treiber sind direkt mit der Eingangsspannung verbunden, werden jedoch durch eine 5A Glassicherung geschützt. Da der (+spi) Bus und die Treiber mit dem 3.3V Logikpegel des eingebetteten Systems kompatibel sind, können diese direkt miteinander verbunden werden. Dieser Bus ist in einer Stern-Konfiguration aufgebaut, was zur Folge hat, dass jeder Treiber ein zusätzliches Chip-Select Signal benötigt. Diese wurden ebenfalls mit dem eingebetteten System verbunden.
 
 <br>
 
-Für den Betrieb der beiden Elektromagnete wurde kein N-Channel Mosfet o.ä. verwendet, da hier auf maximale flexibilität der Ansteuerung ausschlaggebend ist, da noch nicht genug Erfahrung mit dem Verhalten dieser im Zusammenspiel mit den magnetischen Schachfiguren gesammelt werden konnte. Deshalb wurde hier eine H-Brücke `DRV8871H` verwendet, somit kann auch die Polarität im nachhinein per Software geändert werden und nicht nur die Spannung über ein (+pwm) Signal. Der verwendete Treiber besitz dazu hinaus zwei Ausgänge, weswegen sich diese Module besonders anbot.
+Zusätzlich sind Spannungswandler nötig, um um die erforderlichen Spannungen von 12V für die Elektromagnete und 5V für das eingebette System zu erzeugen. Die Schrittmotoren werden direkt mit der Versorgungsspannung von 14-24V betrieben. Alle weiteren verwendeten Komponenten zu denen unter anderem auch das PN532 (+nfc) Modul und die WS2811 (+led) Module gehören, werden ebenfalls über die 5V Schiene versorgt.
 
 <br>
 
-Für die Erzeugung der (+pwm) Signale für die H-Brücke wurde ein zusätzlicher Mikrokontroller `Atmega328p` benötigt, da hier die Steuersignale nicht direkt vom eingebetten Symstem erzeugt werden, sondern nur die Zustandsinformationen über den (+spi) Bus übertragen werden sollen. Dies spart zusätzliche (+gpio) Anschlüsse und somit sind alle Kompomenten über einen zentralen Bus kontrollierbar, welches einen einfachen tausch des eingebetteten Systems in späteren Revisionen vereinfacht.
+Für den Betrieb der beiden Elektromagnete wurde kein N-Channel Mosfet o.ä. verwendet, da hier auf maximale flexibilität der Ansteuerung ausschlaggebend ist und bisher nicht ausreichend Erfahrung mit dem Verhalten dieser im Zusammenspiel mit den magnetischen Schachfiguren gesammelt werden konnte. Deshalb wurde hier eine H-Brücke `DRV8871H` verwendet, somit kann auch die Polarität im nachhinein per Software geändert werden und nicht nur die Spannung über ein (+pwm) Signal. Der verwendete Treiber besitz darüber hinaus zwei Ausgänge, was den Nutzen dieser Module besonders ausweitet.
 
 <br>
 
-Der zusätzliche Mikrokontroller übernimmt auch die Kommunikation mit dem PN532 Modul, da dieses sonst über seine (+i2c) Schnittstelle mit einem entsprechenden Host-System kommuniziert. Der Mikrokontroller übernimmt somit ebenfalls die Konversation des (+i2c) Bus hin zum zentralen (+spi) Bus. Zu beachten ist, dass hier nur ein zusätzlicher Chip-Select (+gpio) benötigt wird zum ansteuern der Elektromagnete und des PN532 Moduls. Dies wird durch die Firmware welche auf dem Mikrokontroller ausgeführt wird realisiert, welche je nach empfangenen Kommando, die dementsprechende Komponente auswählt.
+Für die Erzeugung der (+pwm) Signale für die H-Brücke wurde ein zusätzlicher Mikrokontroller `Atmega328p` benötigt, da hier die Steuersignale nicht direkt vom eingebetten Symstem erzeugt werden, sondern nur die Zustandsinformationen über den (+spi) Bus übertragen werden sollen. Dies spart zusätzliche (+gpio) Anschlüsse und somit sind alle Kompomenten über einen zentralen Bus kontrollierbar, welches einen möglichen Tausch des eingebetteten Systems in späteren Revisionen vereinfacht.
 
+<br>
+
+Der zusätzliche Mikrokontroller übernimmt auch die Kommunikation mit dem PN532 Modul, da dieses sonst über seine (+i2c) Schnittstelle mit einem entsprechenden Host-System kommuniziert. Der Mikrokontroller übernimmt somit ebenfalls die Konversation des (+i2c) Bus hin zum zentralen (+spi) Bus. Zu beachten ist, dass nun ein zusätzlicher Chip-Select (+gpio) zum ansteuern der Elektromagnete und des PN532 Moduls benötigt wird. Dies wird durch die Firmware, welche auf dem Mikrokontroller ausgeführt wird, realisiert, und je nach empfangenem Kommando die entsprechende Komponente ausgewählt.
+
+<br>
 
 ![Prototyp Hardware: Schaltplan und finaler PCB Entwurf \label{ATC_Schematic_DK}](images/ATC_DK_HW_SCHEM.png)
 
-Nach der Festlegung der zu verwendenten Komponenten wurde ein entsprechender Schaltplan \ref{ATC_Schematic_DK} nach den Vorgaben entworfen. Hierbei wurde sich strikt an den Vorgaben der Datenblätter und der Application-Notes in diesen Orientiert. Da es sich hier um einen ersten Funktionsentwurf handelt, wurde zusätzliche Testpunkte in das Design eingefügt.
+<br>
 
-Somit ist es wärend der weiteren Entwicklung möglich , zusätzliches Testequipment wie einen Logic-Analyser direkt an den (+spi) Bus oder ein Oszilloskop an die Ausgänge der H-Brücke dauerhaft anzuschliessen. Des Weiteren ist es mögliche die Bus und Spannungsversorgung über Jumper zu trennen um einen Funktionstest einzelner Komponenten durchführen zu können.
+Nach der Festlegung der zu verwendenten Komponenten, wurde ein entsprechender Schaltplan \ref{ATC_Schematic_DK} nach den zuvor erörterten Vorgaben entworfen. Hierbei wurde die Vorgaben der Datenblätter und der Application-Notes in diesen Orientiert. Da es sich hier um einen ersten Funktionsentwurf handelt, wurde zusätzliche Testpunkte in das Design eingefügt.
+
+Somit ist es wärend der weiteren Entwicklung möglich, zusätzliches Testequipment wie einen Logic-Analyser direkt an den (+spi) Bus oder ein Oszilloskop an die Ausgänge der H-Brücke dauerhaft anzuschliessen. Desweiteren ist es mögliche die Bus- und Spannungsversorgung über Jumper zu trennen um einen Funktionstest einzelner Komponenten durchführen zu können.
 
 <br>
 
-Allgemein verwenden alle Komponenten, 3.3V als Logik-Pegel. Trotzdem wurde ein Levelshifter eingesetzt, welcher die (+spi) Bus des eingebetteten System mit dem der Mikrokontroller trennt.
+Allgemein verwenden alle Komponenten, 3.3V als Logik-Pegel. Trotzdem wurde ein Levelshifter eingesetzt, welcher den (+spi) Bus des eingebetteten Systems mit dem der Mikrokontroller trennt.
 
-Test mit dem verwendeten `Atmega328p` haben ergeben, dass dieser nicht direkt mit 3.3V und einer Taktfrequenz von 16MHz betrieben werden kann und es somit zu einem nicht kontrollierbaren Verhalten dieses kommt.
-Dieses verhalten machten sich durch eine gestörte Kommunikation mit dem PN532 Modul bemerkbar und eine Auslesen von (+nfc) Tags war nur in 60% der Fälle fehlerfrei möglich.
+<br>
 
-Im Anschluss wurde die Versorgungsspannung auf 5V erhöht, welches zufolge hat, dass die Ein- und Ausgänge ebenfalls mit diesem Pegel arbeiten, somit wurde zum Schutz des eingebetteten Systems und dessen (+gpio) Schnittstelle notwendig.
+Durchgeführte Tests mit dem verwendeten `Atmega328p` haben ergeben, dass dieser nicht direkt mit 3.3V und einer Taktfrequenz von 16MHz betrieben werden kann und es somit zu einem nicht kontrollierbaren Verhalten dieses kommt.
+Dieses Verhalten machten sich durch eine gestörte Kommunikation mit dem PN532 Modul bemerkbar und eine Auslesen von (+nfc) Tags war nur in 60% der Fälle fehlerfrei möglich.
+
+Im Anschluss wurde die Versorgungsspannung auf 5V erhöht, welches zur Folge hat, dass die Ein- und Ausgänge ebenfalls mit diesem Pegel arbeiten; dieser Schritt wurde zum Schutz des eingebetteten Systems und dessen (+gpio) Schnittstelle notwendig.
 
 ![Prototyp Hardware: Aufbau der Lochrasterplatine \label{ATC_DK_HW_LOCHRASTER}](images/ATC_DK_HW_LOCHRASTER.png)
 
+<br>
 
-Der Schalplan und dessen Funktionalität, wurden anschliessend durch den Aufbau der kompletten Schaltung auf einer Lochrasterplatine \ref{ATC_DK_HW_LOCHRASTER} im Eurokartenformat manuell aufgebaut und getestet.
+Der Schalplan und dessen Funktionalität, wurden anschliessend durch den Aufbau der vollständigen Schaltung auf einer Lochrasterplatine \ref{ATC_DK_HW_LOCHRASTER} im Eurokartenformat manuell aufgebaut und getestet.
 
-Aus diesem Design wurde ein (+pcb) Layout für eine einfache 2 lagige Platine \ref{ATC_Schematic_DK} erstellt.
-Dieses orientiert sich dan der zuvor umgesetzten Lochrasterplatine und spiegelt das Layout wieder.
-Auch wurde hier nicht auf den Platzverbrauch geachtet. Es wurde zusätzliche Steckverbindungen für die externen Komponenten eingefügt und passende Bohrungen an den Ecken sowie in der Mitte zur Montage vorgesehen.
-Auf der obersten Layer wurde der Bestückungsdruck erweitert und mit zusätzlichen Information über die Pin-Belegungen der einzelnen Stecker erweitert.
+<br>
+
+Aus diesem Design wurde ein (+pcb) Layout für eine einfache 2 lagige Platine erstellt.Dieses orientiert sich an der zuvor umgesetzten Lochrasterplatine und spiegelt das Layout wieder.
+Auch wurde hier nicht auf den Platzverbrauch geachtet. Es wurde zusätzliche Steckverbindungen für die externen Komponenten eingefügt und passende Bohrungen an den Ecken sowie in der Mitte zur Montage vorgesehen. Auf dem obersten Layer wurde der Bestückungsdruck erhöhrt und mit zusätzlichen Information über die Pin-Belegungen der einzelnen Stecker erweitert.
 
 
-
+<br>
 
 
 
