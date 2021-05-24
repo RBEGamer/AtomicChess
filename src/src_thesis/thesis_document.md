@@ -537,10 +537,110 @@ Auch wurde hier nicht auf den Platzverbrauch geachtet. Es wurde zusätzliche Ste
 
 ## Implementierung HAL
 
+Die (+hal) stellt das Verbindungsglied zwischen der Hardware und der Benutzer-Software dar.
+In diesem Fall übernimmt diese die Übersetzung der Befehle der Controller-Software, in für die Hardware verständlichen Befehlen. Dabei geschieht dies über den zentralen (+spi) Bus, dieser ist im Linux-System als Datei unter dem Pfad `/dev/spidev0.0` eingebunden und kann über Dateioperation (lesen, schreiben) mittels `ioctl` konfiguriert werden.
+Weiterhin können Daten über das File-Handle gelesen- und geschiereben werden.
+Somit ist eine Kommunikation mit der Hardware-Ebene möglich.
 
-### TMC5160 SPI DRIVER
+<br>
 
-* spi kommunikation über eine bibliothek
+Diese Funktionalität wird von der für diese Projekte implementierten (+hal) in Form einer C++ Klasse abgebildet und ermöglicht einen einfachen Zugriff auf die elektrisch verbundenen Komponenten. Zusätzlich wird in dieser auch das Hardware-Versions-Management abgebildet.
+Da im Verlauf der Entwicklung, mehrere Hardware-Revisionen gebaut wurden und die Controller-Software weiterhin mit allen Revisionenn kompatibel sein soll, ermittelt die (+hal) vor dem Start die entsprechende Revision. Dazu wird die Prozessor-(+id) (welche mittels des `cat /proc/cpuinfo | grep Serial | cut -d ' ' -f 2` Kommandos abgefragt werden kann) des Systems abgefragt und mittels einer statischen Liste diese ermittelt.
+Hierbei enthält die Tabelle nur Revisionsinformationen über die wärend der Entwicklung entstandenen Revisionen.
+Sollte die Prozessor-(+id) nicht hinerlegt sein, geht das System von der aktuellsten Revision aus, so ist keine manuelle Pflege der Tabelle wärend einer möglichen Produktion nötig.
+
+<br>
+
+```c++
+//HardwareInterface.h
+//...
+class HardwareInterface
+{
+  enum HI_HARDWARE_REVISION {
+        HI_HWREV_UNKNOWN = 0,
+        HI_HWREV_DK   = 1, //FIRST 55x55cm ATC TABLE WITH TWO COILS
+        HI_HWREV_PROD = 2, //SECONDS GENERATION BASED ON SKR1.3 3D PRINT CONTROLLER
+        HI_HWREV_PROD_V2 =3,  //THIRD GENERATION WITH SKR 1.4 WITH CORE XY MECHANIC
+        HI_HWREV_VIRT=4, //SIMULATED HW FOR TESTING USING THE DOCKERFILE
+    };
+
+  enum HI_COIL
+    {
+        HI_COIL_A   = 0,
+        HI_COIL_B   = 1,
+        HI_COIL_NFC = 2
+    };
+  //....
+  //MOTOR CONTROL FUNCTIONS
+  void enable_motors();
+  void disable_motors();
+  bool is_target_position_reached();
+  void move_to_postion_mm_absolute(const int _x, const int _y, const bool _blocking);
+  void home_sync();
+  //...
+  //LED CONTROL FUNCTIONS
+  bool setTurnStateLight(const HI_TURN_STATE_LIGHT _state);
+  //NFC CONTROL FUNCTIONS
+  ChessPiece::FIGURE ScanNFC();
+  //MAGNET CONTROL FUNCTIONS
+  bool setCoilState(const HI_COIL _coil, const bool _state);
+  //...
+```
+
+<br>
+
+Je nach ermittelter Revision werden die erfoderlichen Hardwarekomponenten initialisiert. Bei allen über den (+spi) Bus angeschlossenen Komponenten, werden nach der Initialisierung des (+spi) Bus auf der Betriebssystem-Ebene, zusätzliche Versionsregister der einzelenen Komponenten abgefragt. Dies stellt sicher, dass alle Komponenten mit dem System verbunden sind. Allgemein kann eine Datentransfer über den (+spi) drei mal fehlschlagen bevor die Software mittels eines Fehlers abbricht. Gerade bei der Kommunikation mit dem Mikrokontroller, kam es bei testläufen zu Fehlern bezüglich der (+spi) Kommunikation, wenn das (+nfc)-Modul aktiv ist. Um einen direktes beenden der Software zu verhindern, wurde diese Art der Fehlerbehandlung eingeführt.
+
+```c++
+//SPICommunications.cpp
+//...
+int SPICommunication::spi_write_ack(SPICommunication::SPI_DEVICE _device, uint8_t* _data, int _len)
+{
+	uint8_t* buffer_r{ new uint8_t[_len] { 0 }};
+	uint8_t* buffer_w{ new uint8_t[_len] { 0 }};
+
+	volatile int res = -1;
+	volatile int c = 0; //RETRY COUNTER
+	while (true)
+	{
+		//RECREATE COMMAND BUFFER
+        //WILL BE OVERWRITTEN AFTER spi_write / spi_read
+		for (size_t i = 0; i < _len; i++)
+		{
+			buffer_w[i] = _data[i];
+            buffer_r[i] = 0;
+		}
+		
+		//WRITE COMMAND
+		res = SPICommunication::getInstance()->spi_write(_device, buffer_w, _len);
+        //WAIT
+        std::this_thread::sleep_for(std::chrono::milliseconds(SPI_RW_DELAY));
+        //READ RESULT BACK
+		res = SPICommunication::getInstance()->spi_write(_device, buffer_r, _len);
+		//PARSE RESULT; CHECK FOR READ SUCCESS
+		if(buffer_r[0] == MAGIC_ACK_BYTE)
+		{
+			break;
+		}
+        //INCREASE ERROR COUNTER
+		c++;
+		if (c > SPI_RW_ACK_RETRY)
+		{
+			break;
+		}
+	}
+	return res;
+}
+//...
+```
+
+Die (+hal) und deren benötigten Softwarekomponenten, zur Buskommunikation und Hardware-Revisionsbestimmung, wurde für die Verwendung innerhalb von mehreren Threads angepasst und somit ist deren Verwendung Threadsafe. Diese Optimierung wurde jedoch nicht verwendet, da jegliche Funktionsaufrufe welche die Hardware betreffen aus dem Main-Thread der Controller-Software ausgehen.
+
+
+### TMC5160 SPI Treiber
+
+Der Treiber für die verwendeten `TMC5160` Schrittmotor-Treiber ist ebenfalls ein Bestandteil der (+hal). Die verwendeten Bausteine bieten mitunter sehr komplexe Konfigurationsmöglichkeiten und je nach Betriebsart sind mehere Lese- und Schreiboperationen über den (+spi) Bus notwendig. Diesbezüglich wurde die komplette Ansteuerung auf der Softwareseite in ein eigenens Modul geschachtelt. 
+
 * ansteuerung des TMC5160
 * target x target reigster
 
@@ -562,26 +662,26 @@ TMC5160::TMC5160(MOTOR_ID _id) {
   default_settings();
   //..
 }
-
+//...
 void TMC5160::default_settings()
 {
-    // MULTISTEP_FILT = 1, EN_PWM_MODE = 1 enables stealthChop
+    // ENABLE STEALTH-CHOP
     write(REGDEF_GCONF, 0x0000000C);
-    // TOFF = 3, HSTRT = 4, HEND = 1, TBL = 2, CHM = 0 (spreadCycle)
+    // SET SPREAD CYCLE PWM
     write(REGDEF_CHOPCONF, 0x000100C3);
     // IHOLD = 2, IRUN = 15 (max current), IHOLDDELAY = 8
     write(REGDEF_IHOLD_IRUN, 0x00080F02);
-    // TPOWERDOWN = 10: Delay before powerdown in standstill
+    // SET MOTOR AUTO POWER OF TO 10 SEC
     write(REGDEF_TPOWERDOWN, 0x0000000A);
     // TPWMTHRS = 500
     write(REGDEF_A1, 0x000001F4);
-    //WRITE THE DEFAULT RAMP PARAMETERS
+    // SET RAMP PARAMETERS
     reset_ramp_defaults();
-    // Position mode
+    // SET DRIVER STATE TO POSITION MODE
     write(REGDEF_RAMPMODE, 0);
-    // Set current positin to 0
+    // SET CURRENT POSITION TO 0
     write(REGDEF_XACTUAL, 0);
-    // Set XTARGET to 0, which holds the motor at the current position
+    // SET TARGET POSITION TO 0
     write(REGDEF_XTARGET, 0);
 }
 
@@ -627,51 +727,10 @@ void TMC5160::go_to(const int _position) {
     write(REGDEF_XTARGET, _position);
   //USE move_to_postion_mm_relative FOR A BLOCKING VARIANT
 }
-```
-
-###
-
-
-* abstraktion über einheitliche HARDWARE klasse
-* inkl revisionsinformationen welche aus der CPU ID GENERIERT WERDEN
-
-
-```c++
-//HardwareInterface.h
 //...
-class HardwareInterface
-{
-  enum HI_HARDWARE_REVISION {
-        HI_HWREV_UNKNOWN = 0,
-        HI_HWREV_DK   = 1, //FIRST 55x55cm ATC TABLE WITH TWO COILS
-        HI_HWREV_PROD = 2, //SECONDS GENERATION BASED ON SKR1.3 3D PRINT CONTROLLER
-        HI_HWREV_PROD_V2 =3,  //THIRD GENERATION WITH SKR 1.4 WITH CORE XY MECHANIC
-        HI_HWREV_VIRT=4, //SIMULATED HW FOR TESTING USING THE DOCKERFILE
-    };
-
-  enum HI_COIL
-    {
-        HI_COIL_A   = 0,
-        HI_COIL_B   = 1,
-        HI_COIL_NFC = 2
-    };
-  //....
-  //MOTOR CONTROL FUNCTIONS
-  void enable_motors();
-  void disable_motors();
-  bool is_target_position_reached();
-  void move_to_postion_mm_absolute(const int _x, const int _y, const bool _blocking);
-  void home_sync();
-  //...
-  //LED CONTROL FUNCTIONS
-  bool setTurnStateLight(const HI_TURN_STATE_LIGHT _state);
-  //NFC CONTROL FUNCTIONS
-  ChessPiece::FIGURE ScanNFC();
-  //MAGNET CONTROL FUNCTIONS
-  bool setCoilState(const HI_COIL _coil, const bool _state);
-  //...
 ```
-* integration in controller software
+
+
 
 
 
