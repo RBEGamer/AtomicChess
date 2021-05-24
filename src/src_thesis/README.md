@@ -1,7 +1,7 @@
 # AtomicChessThesis
 
 Das eigentliche Dokument ist die `thesis_document.md`. Die finale PDF `thesis.pdf` ist soweit aktuell, wenn ich diese erstelle, dies ist hier im Repo noch nicht automatisiert.
-Ein bauen per Dockerimage ist möglich mittels ` build_thesis_docker.sh` Script.
+Ein bauen per Dockerimage ist möglich mittels ` build_thesis_docker.sh` Script und erzeugt die `thesis.pdf` neu.
 
 # CHANGELOG
 
@@ -20,13 +20,13 @@ Ein bauen per Dockerimage ist möglich mittels ` build_thesis_docker.sh` Script.
 
 ## 21.05.2021 - INITIALE VERSION
 
-* 0.3 - Einleitung, Motivation, Methodik
-* 0.4.1 - 0.4.3, Analyse
-* 0.5.4 - 3D Druck
-* 0.6.1 - 0.6.2, Mechanik
-* 0.7.2 - 0.7.3 - Optimierungen HWRev 2, HAL
-* 0.8.5 - 0.8.7 - AutoPlayer WebClient
-* 0.9.3 - 0.9.4 IPC User-Interface
+* 3 - Einleitung, Motivation, Methodik
+* 4.1 - 4.3, Analyse
+* 5.4 - 3D Druck
+* 6.1 - 6.2, Mechanik
+* 7.2 - 7.3 - Optimierungen HWRev 2, HAL
+* 8.5 - 8.7 - AutoPlayer WebClient
+* 9.3 - 9.4 IPC User-Interface
 
 
 
