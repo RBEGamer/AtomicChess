@@ -639,10 +639,25 @@ Die (+hal) und deren benötigten Softwarekomponenten, zur Buskommunikation und H
 
 ### TMC5160 SPI Treiber
 
-Der Treiber für die verwendeten `TMC5160` Schrittmotor-Treiber ist ebenfalls ein Bestandteil der (+hal). Die verwendeten Bausteine bieten mitunter sehr komplexe Konfigurationsmöglichkeiten und je nach Betriebsart sind mehere Lese- und Schreiboperationen über den (+spi) Bus notwendig. Diesbezüglich wurde die komplette Ansteuerung auf der Softwareseite in ein eigenens Modul geschachtelt. 
+Der Treiber für die verwendeten `TMC5160` Schrittmotor-Treiber ist ebenfalls ein Bestandteil der (+hal). Die verwendeten Bausteine bieten mitunter sehr komplexe Konfigurationsmöglichkeiten und je nach Betriebsart sind mehere Lese- und Schreiboperationen über den (+spi) Bus notwendig. Diesbezüglich wurde die komplette Ansteuerung auf der Softwareseite in ein eigenens Modul geschachtelt.
+Dieses stellt verschiedene Funktionen zum Verfahren eines Motors bereit. Hierzu benötigt jeder verwendete Hardware-Treiber eine Inztanz des Moduls zur Ansteuerung, so ist es zusätich möglich für jede Achse verschiedene Parameter setzten zu können im Bezug auf Beschleunigung und Positioniergeschwindigkeit des Motors.
 
-* ansteuerung des TMC5160
-* target x target reigster
+: TMC5160 Beschleunigungskurve / RAMP Parameter
+
+| Parameter 	| Value   	|
+|-----------	|---------	|
+| V_START   	| 1       	|
+| A1        	| 25000   	|
+| V1        	| 250000  	|
+| A_MAX     	| 5000    	|
+| V_MAX     	| 1000000 	|
+| D_MAX     	| 5000    	|
+| D1        	| 50000   	|
+| V_STOP    	| 10      	|
+
+Der Treiber wird hier nur im Position-Mode betrieben, welches ein wesentlichees Feature dessen ist. Hierbei kann über ein Register eine Zielposition in Schritten vorgegeben werden. Der Treiber ermittelt daraufhin die passende Beschleunigungskurve und verfährt den Motor an die vorgebene Position.
+Über ein entsprechende Register kann der Status der Operation abgefagt werden und ob der Motor seine Position erreicht hat bzw ob fehler auftraten. Somit muss nicht auf das erreichen der Zielposition gewartet werden und anderen Aufgaben können wärenddesse ausgeführt werden. Die Beschleunigungskurve kann zusätzlich manuell angepasst werden.
+Hier wurden jedoch die Standartwerte aus dem Datenblatt verwendet, welches sich bei meheren Tests als Ideal herausstellten im Bezug der Geräuchemission des Motors.
 
 
 ```c++
@@ -650,17 +665,15 @@ Der Treiber für die verwendeten `TMC5160` Schrittmotor-Treiber ist ebenfalls ei
 TMC5160::TMC5160(MOTOR_ID _id) {
   //...
   //CHECK SPI INIT
-  if(!SPICommunication::getInstance()->isInitialised()){
-          //...
-      }
-  //REGISTER SPI CS PIN FOR SELECTED MOTOR  ID
-  if (_id == MOTOR_ID::MOTOR_0) {
-          const SPI_CS_DEVICE = SPICommunication::SPI_DEVICE::MOTOR_0; //TODO CAST
-          SPICommunication::getInstance()->register_cs_gpio(SPI_CS_DEVICE, CS_GPIO_NUMBER_MOTOR_0);
-  }
-  //LOAD DEFAULT MOTOR RAMP / CONFIG PARAMETER
-  default_settings();
-  //..
+  if(!SPICommunication::getInstance()->isInitialised()){/*...*/}
+    //REGISTER SPI CS PIN FOR SELECTED MOTOR  ID
+    if (_id == MOTOR_ID::MOTOR_0) {
+        const SPI_CS_DEVICE = SPICommunication::SPI_DEVICE::MOTOR_0; //TODO CAST
+        SPICommunication::getInstance()->register_cs_gpio(SPI_CS_DEVICE, CS_GPIO_NUMBER_MOTOR_0);
+    }
+    //LOAD DEFAULT MOTOR RAMP / CONFIG PARAMETER
+    default_settings();
+    //..
 }
 //...
 void TMC5160::default_settings()
@@ -669,11 +682,11 @@ void TMC5160::default_settings()
     write(REGDEF_GCONF, 0x0000000C);
     // SET SPREAD CYCLE PWM
     write(REGDEF_CHOPCONF, 0x000100C3);
-    // IHOLD = 2, IRUN = 15 (max current), IHOLDDELAY = 8
+    // SET MAX MOTOR CURRENT
     write(REGDEF_IHOLD_IRUN, 0x00080F02);
     // SET MOTOR AUTO POWER OF TO 10 SEC
     write(REGDEF_TPOWERDOWN, 0x0000000A);
-    // TPWMTHRS = 500
+    // SET MAX VELOCITY IN STEALTH-CHOP MODE
     write(REGDEF_A1, 0x000001F4);
     // SET RAMP PARAMETERS
     reset_ramp_defaults();
@@ -722,13 +735,46 @@ int TMC5160::read(const int _address)
 //EXAMPLE USAGE, GOTO POSITION
 void TMC5160::go_to(const int _position) {
     write(REGDEF_RAMPMODE, 0);
-  //SET XTARGET REGISTER = TARGET POSITION
-  //NON BLOCKING
+    //SET XTARGET REGISTER = TARGET POSITION
+    //NON BLOCKING
     write(REGDEF_XTARGET, _position);
-  //USE move_to_postion_mm_relative FOR A BLOCKING VARIANT
+    //USE move_to_postion_mm_relative FOR A BLOCKING VARIANT
+}
+
+void TMC5160::atc_home_sync()
+{	
+	enable_motor(); //ENABLE MOTOR
+	enable_switch(TMC5160::REF_SWITCH::REF_L, true, true, true); //ENABLE LIMIT SWICHT
+	move_velocity(TMC5160::VELOCITY_DIRECTION::NEGATIVE, HOME_SPEED_VELOCITY, 1000);  //MOVE NEGATIVE TO LIMIT SWITCH
+	//WAIT TO REACH THE ENDSTOP
+	while(!get_ramp_stauts().status_stop_l) {
+		std::this_thread::sleep_for(std::chrono::microseconds(1));		
+	}
+	//STOP MOTOR
+	hold_mode();
+	//SAVE LATCHED POSTION
+	int offset = get_position() - get_latched_position();
+	write(REGDEF_XACTUAL, offset);
+	//SAVE OFFSET
+	int currpos = get_position();
+	set_postion_offset(currpos);
+	//RESET RAMP
+	write(REGDEF_RAMPSTAT, 4);
+	//GOTO THE NEW ZERO POSTION
+	set_AMAX(RAMP_AMAX);
+	set_VMAX(RAMP_VMAX);
+	go_to(0);
+	//DISABLE HARD ENDSTOP 
+	enable_switch(TMC5160::REF_SWITCH::REF_L, true, false, true);
+	disable_motor(); //DISBLE MOTOR
 }
 //...
 ```
+
+* home durch endschalter
+* velocity mode
+
+
 
 
 
