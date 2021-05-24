@@ -1482,7 +1482,7 @@ Rectangle {
                 //...
 ```
 
-Die anschließende Implementierung der Backend-Logik des Unter-Interface bestand in der Verbindung, der in (+qml) erstellten Bedienelemente durch den `Qt Design Studio`-Editor und der User-Interface Backend Logik. Diese beschränkt sich auf die Initialisierung des Fensters und dem anschließenden laden und darstellen des (+qml) Codes. Die Backend-Logik Funktionalitäten in einem (+qml) Typ `MenuManager` angelegt, welcher vor dem Laden des eigentlichen User-Interface (+qml) Codes registriert werden muss.
+Die anschließende Implementierung der Backend-Logik des Unter-Interface bestand in der Verbindung, der in (+qml) erstellten Bedienelemente durch den `Qt Design Studio`-Editor und der User-Interface Backend Logik. Diese beschränkt sich auf die Initialisierung des Fensters und dem anschließenden laden und darstellen des (+qml) Codes. Die Backend-Logik Funktionalitäten in einem (+qml) Typ `MenuManager` angelegt, welcher vor dem Laden des eigentlichen User-Interface (+qml)-Code registriert werden muss.
 
 
 ```c++
