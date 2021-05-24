@@ -772,28 +772,37 @@ void TMC5160::atc_home_sync()
 ```
 
 Eine zusätzliche Besonderheit stellt der Referenzfahrt dar. Nach dem Start des Systems ist es möglich, dass sich der Schlitten einer Achse nicht an der Null-Position befindet, sondern an einer unbekannten Position auf der Achse.
-Deswegen muss diese zuerst an die Home-Position gefahren werden. Dazu besitzt das System zwei Endschalter, welches jeweils mit einem Schrittmotor-Treiber verbunden sind. Diese besitzen zwei solcher Taster-Eingänge `REF_L / REF_R`.
+Deswegen muss diese zuerst an die Home-Position gefahren werden. Dazu besitzt das System zwei Endschalter, welches jeweils mit einem Schrittmotor-Treiber verbunden sind. Diese besitzen zwei solcher Taster-Eingänge `REF_L`/`REF_R`.
 
 Bei einer wechselnden Flanke an diesem Eingang kann der Motor-Treiber verschiedene Funktionen ausführen. In diesem Fall wurde die Motor-Stopp Funktion mittels Registereintrag gewählt, welche den Motor stoppt, sobald der Schalter betätigt wird. Dies stellt schlussendlich die Home-Position dar.
 Dies kann jedoch nicht im Position-Mode des Treibers umgesetzt werden, da das Ziel-Positionsregister auf 0 gesetzt wird. Hierzu muss der Treiber in den Velocity-Modus geschaltet werden, welches ein Verfahren des Motors in eine Richtung ohne Zeitbegrenzung erlaubt.
 Dies wird so lange in negativer Bewegungsrichtung ausgeführt bis der Endschalter erreicht wurde, somit ist die Achse an ihrer Home-Position angekommen und kann anschließend im Positions-Modus normal verfahren werden.
 
 
-
-
-
 ## Fazit bezüglich des ersten Prototypens
 
-* nicht für production geeignet
-* aufbau und calibrierung langwiehrig
-* trotzdem robustes design auf kleinem formfaktor
-* verwendeten elektromagnete nicht stark genug, somit über aqusserhalb der specs betrieben was zu temeraturproblemen führte
-* gewicht der Figuren zu klein bzw magnete zu start
-* workarounds in der software nötig durch die beiden magnete
-* nicht die beste entscheidung direkt auf grösse zu optimieren
+
+Die Fertigstellung des ersten Prototyp stellt einen ersten großen Erfolg dar, in Hinsicht zum autonomen Schachtisch.
+Trotz allem, konnten nicht alle zuvor gestellten Requirements mit diesem Design umgesetzt werden.
+
+Dazu zählt zum einen der Bewegungsspielraum der einzelnen Achsen. Dieser wurde bereits wären der Entwicklung durch die Verwendundung von zwei Elektromagneten künstlich verlängert. Nach einem Langzeittest stelle sich jedoch diese Methode als zu Fehleranfällig dar. Die Parkpositionen welche sich an den zwei Seiten des Spielbrett befinden, konnten nicht durchgehen zuverlässig angefahren werden und boten nur Platz für 14 ausgeschiedene Figuren pro Spielerfarbe. Somit ist ein komplette Abräumen des Spielfeldes nicht möglich, was jedoch in der Praxis selten vorkommt.
+
+<br>
+
+Zum anderen ist der Aufbau und die anschliessende Kalibierung der Mechanik und der entsprechenden Offset-Werte in der Software nicht trivial und benötigen einiges an Zeit. Durch die Verwendung der Tischplatte und des hözernen Grundrahmens, konnte jedoch ein robustes Design in einem kleinen Formfaktor umgesetzt werden, welches zusätzlichen Platz für erweiterungen bietet.  
+
+Gerade die Verwendung von den verschraubten Holzplatten machen jedoch eine Vervielfältigung mit gleicher Qualität schwierig. Ein Redesign der inneren Komponenten gestaltet sich schwierig, da hier bereits mehrere Iterationen durchgeführt wurden, um eine maximalen möglichen verfahrweg zu ermöglichen.
 
 
+<br>
 
+Auf seiten der Elektronik, arbeitet diese ehr zuverlässig und bereitete keinerlei Probleme. Jedoch stellen die verwendeten Motortreiber einen größeren Kostenfaktor dar und der Zeitaufwand für den Zusammenbau und Überprüfen dieser dar. Die verwendeten Elektromagnete sind für 9V Betriebsspannung ausgelegt, mussten jedoch über ihren Spezifikationen mit 12V betreieben werden, welche bei einem Dauerbetriebn zu stark erhöhten Temperaturen führte.
+
+<br>
+
+Allgemein war hier die Entscheidung auf die Außenmaße des Tisches zu optimieren nicht ideal und führt zu einigen Problemen. Diese konnten jedoch mit verschiedenen Workarounds behoben werden konnten. Ein Spiel ist mit diesem Prototypen mit Enschränkungen möglich und bildet bis auf die nicht funktionierenden Parkpositionen die zuvor festgelegten Requirements ab.
+Im weiteren Verlauf der Entwicklung steht jedoch die Verbesserung der Zuverlässigkeit und die fehlerfreie Umsetzung der Parkposition für ausgeschiedene Figuren. Ein einfacherer Zusammenbau auch für dritte sollte ebenfalls ins Auge gefasst werden.
+Hierzu wird ein komplettes Redesign der Mechanik sowie der Elektronik nötig sein. Anpassungen der Software ist dadurch ebenfalls nötig, stellt jedoch durch den modularen Aufbau dieser kein Hindernis dar. Die durch diesen Prototypen gewonnenen Erkenntnisse können somit direkt in das neue Design einfließen.
 
 
 
@@ -804,6 +813,9 @@ Dies wird so lange in negativer Bewegungsrichtung ausgeführt bis der Endschalte
 ![Producation Hardware: Finaler autonomer Schachtisch \label{prod}](images/table_images/prod.png)
 
 ## Modifikation der Mechanik
+
+* ALUPROFILE
+
 
 Während sich das Design des Schachtischs bestehend aus Gehäuse, Dimensionen und allen Außenelementen von der Entwicklung des ersten Prototypens zum zweiten nicht verändert hat, so wurde jedoch die Mechanik gänzlich verändert.
 In der ersten Revision wurde noch jede Achse über einen separaten Riemen gesteuert, sodass ein Schrittmotor die Bewegung des Schlittens entlang der Y-Achse und ein weiterer die Bewegung der gesamten Y-Achse, bestehend aus Motor, Riemen, Schlitten und Führungsschiene, entlang der X-Achse ermöglicht. Die Führung entlang der X-Achse erfolgt in der Mitte des Tischs, die Y-Achse wurde links und rechtsseitig rollbar gelagert und in der Mitte über einen Riemen gezogen. Dies hat zur Folge, dass bei entstehender Unwucht, welche durch die Bewegung des Schlittens auf der Y-Achse natürlich ist, die Y-Achse in ihren Lagerungen nicht mehr parallel verläuft, sondern beim Betätigen des Motors der X-Achse die Y-Achse in einem unerwünschten Winkel bewegt wird. 
@@ -1041,7 +1053,7 @@ Durch den Wegfall der zuvor eingesetzten Elektronik und der Austausch durch die 
 
 <br>
 
-Dazu wurde ein Schnittstellenwandler entwickelt welcher die (+i2c) Schnittstelle zu einer (+usb) Seriell wandelt. Indes wurde ein Atmega328p Mikrokontroller eingesetzt, da dieser weit verbreitet und preisgünstig zu beschaffen ist.
+Dazu wurde ein Schnittstellenwandler entwickelt welcher die (+i2c) Schnittstelle zu einer (+usb) Seriell wandelt. Indes wurde ein `Atmega328p` Mikrokontroller eingesetzt, da dieser weit verbreitet und preisgünstig zu beschaffen ist.
 Die Firmware des Mikrokontroller stellt ein einfaches kommandobasiertes Interface bereit. Die Kommunikation ist mit der Kommunikation und der Implementierung des G-Code Senders vergleichbar und teilen sich die gleichen Funktionen zur Kommunikation mit der Seriellen Schnittstelle.
 
 <br>
@@ -1078,7 +1090,7 @@ char scan_nfc_tag(){
 <br>
 
 In diesem Falle wird nur ein Befehl zum Auslesen des (+nfc) Tags benötigt. Das Host-System sendet die Zeichenkette `_readnfc_` zum Mikrokontroller und dieser versucht über das `PN532` Modul ein (+nfc) Tag zu lesen. Wenn dieses erkannt wird und einen passenden Payload enthält, antwortet dieser mit dem String `_readnfc_res_FIGURE-ID_ok_` oder wenn kein Tag gefunden wurde mit `_readnfc_red__empty_`.
-Auch hier wird wie bei der G-Code Sender Implementierung auf Fehler bei der Kommunikation bzw. einem Abbruch durch einen Timeout reagiert. Das System initialisiert die Serielle Schnittstelle neu und resettet das System durch setzten des `DTR`-GPIO am USB-Seriell Wandler ICs (falls vorhanden).
+Auch hier wird wie bei der G-Code Sender Implementierung auf Fehler bei der Kommunikation bzw. einem Abbruch durch einen Timeout reagiert. Das System initialisiert die Serielle Schnittstelle neu und resettet das System durch setzten des `DTR`-(+gpio) am (+usb)-Seriell Wandler (+ic) (falls vorhanden).
 
 <br>
 

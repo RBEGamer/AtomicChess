@@ -1404,7 +1404,8 @@ nicht an der Null-Position befindet, sondern an einer unbekannten
 Position auf der Achse. Deswegen muss diese zuerst an die Home-Position
 gefahren werden. Dazu besitzt das System zwei Endschalter, welches
 jeweils mit einem Schrittmotor-Treiber verbunden sind. Diese besitzen
-zwei solcher Taster-Eingänge \passthrough{\lstinline!REF\_L / REF\_R!}.
+zwei solcher Taster-Eingänge
+\passthrough{\lstinline!REF\_L!}/\passthrough{\lstinline!REF\_R!}.
 
 Bei einer wechselnden Flanke an diesem Eingang kann der Motor-Treiber
 verschiedene Funktionen ausführen. In diesem Fall wurde die Motor-Stopp
@@ -1423,24 +1424,55 @@ werden.
 \section{Fazit bezüglich des ersten
 Prototypens}\label{fazit-bezuxfcglich-des-ersten-prototypens}}
 
-\begin{itemize}
-\tightlist
-\item
-  nicht für production geeignet
-\item
-  aufbau und calibrierung langwiehrig
-\item
-  trotzdem robustes design auf kleinem formfaktor
-\item
-  verwendeten elektromagnete nicht stark genug, somit über aqusserhalb
-  der specs betrieben was zu temeraturproblemen führte
-\item
-  gewicht der Figuren zu klein bzw magnete zu start
-\item
-  workarounds in der software nötig durch die beiden magnete
-\item
-  nicht die beste entscheidung direkt auf grösse zu optimieren
-\end{itemize}
+Die Fertigstellung des ersten Prototyp stellt einen ersten großen Erfolg
+dar, in Hinsicht zum autonomen Schachtisch. Trotz allem, konnten nicht
+alle zuvor gestellten Requirements mit diesem Design umgesetzt werden.
+
+Dazu zählt zum einen der Bewegungsspielraum der einzelnen Achsen. Dieser
+wurde bereits wären der Entwicklung durch die Verwendundung von zwei
+Elektromagneten künstlich verlängert. Nach einem Langzeittest stelle
+sich jedoch diese Methode als zu Fehleranfällig dar. Die Parkpositionen
+welche sich an den zwei Seiten des Spielbrett befinden, konnten nicht
+durchgehen zuverlässig angefahren werden und boten nur Platz für 14
+ausgeschiedene Figuren pro Spielerfarbe. Somit ist ein komplette
+Abräumen des Spielfeldes nicht möglich, was jedoch in der Praxis selten
+vorkommt.
+
+Zum anderen ist der Aufbau und die anschliessende Kalibierung der
+Mechanik und der entsprechenden Offset-Werte in der Software nicht
+trivial und benötigen einiges an Zeit. Durch die Verwendung der
+Tischplatte und des hözernen Grundrahmens, konnte jedoch ein robustes
+Design in einem kleinen Formfaktor umgesetzt werden, welches
+zusätzlichen Platz für erweiterungen bietet.
+
+Gerade die Verwendung von den verschraubten Holzplatten machen jedoch
+eine Vervielfältigung mit gleicher Qualität schwierig. Ein Redesign der
+inneren Komponenten gestaltet sich schwierig, da hier bereits mehrere
+Iterationen durchgeführt wurden, um eine maximalen möglichen verfahrweg
+zu ermöglichen.
+
+Auf seiten der Elektronik, arbeitet diese ehr zuverlässig und bereitete
+keinerlei Probleme. Jedoch stellen die verwendeten Motortreiber einen
+größeren Kostenfaktor dar und der Zeitaufwand für den Zusammenbau und
+Überprüfen dieser dar. Die verwendeten Elektromagnete sind für 9V
+Betriebsspannung ausgelegt, mussten jedoch über ihren Spezifikationen
+mit 12V betreieben werden, welche bei einem Dauerbetriebn zu stark
+erhöhten Temperaturen führte.
+
+Allgemein war hier die Entscheidung auf die Außenmaße des Tisches zu
+optimieren nicht ideal und führt zu einigen Problemen. Diese konnten
+jedoch mit verschiedenen Workarounds behoben werden konnten. Ein Spiel
+ist mit diesem Prototypen mit Enschränkungen möglich und bildet bis auf
+die nicht funktionierenden Parkpositionen die zuvor festgelegten
+Requirements ab. Im weiteren Verlauf der Entwicklung steht jedoch die
+Verbesserung der Zuverlässigkeit und die fehlerfreie Umsetzung der
+Parkposition für ausgeschiedene Figuren. Ein einfacherer Zusammenbau
+auch für dritte sollte ebenfalls ins Auge gefasst werden. Hierzu wird
+ein komplettes Redesign der Mechanik sowie der Elektronik nötig sein.
+Anpassungen der Software ist dadurch ebenfalls nötig, stellt jedoch
+durch den modularen Aufbau dieser kein Hindernis dar. Die durch diesen
+Prototypen gewonnenen Erkenntnisse können somit direkt in das neue
+Design einfließen.
 
 \hypertarget{erstellung-des-zweiter-prototypens}{%
 \chapter{Erstellung des zweiter
@@ -1455,6 +1487,12 @@ Prototypens}\label{erstellung-des-zweiter-prototypens}}
 
 \hypertarget{modifikation-der-mechanik}{%
 \section{Modifikation der Mechanik}\label{modifikation-der-mechanik}}
+
+\begin{itemize}
+\tightlist
+\item
+  ALUPROFILE
+\end{itemize}
 
 Während sich das Design des Schachtischs bestehend aus Gehäuse,
 Dimensionen und allen Außenelementen von der Entwicklung des ersten
@@ -1836,12 +1874,12 @@ handelsüblichen Computer.
 
 Dazu wurde ein Schnittstellenwandler entwickelt welcher die \gls{i2c}
 Schnittstelle zu einer \gls{usb} Seriell wandelt. Indes wurde ein
-Atmega328p Mikrokontroller eingesetzt, da dieser weit verbreitet und
-preisgünstig zu beschaffen ist. Die Firmware des Mikrokontroller stellt
-ein einfaches kommandobasiertes Interface bereit. Die Kommunikation ist
-mit der Kommunikation und der Implementierung des G-Code Senders
-vergleichbar und teilen sich die gleichen Funktionen zur Kommunikation
-mit der Seriellen Schnittstelle.
+\passthrough{\lstinline!Atmega328p!} Mikrokontroller eingesetzt, da
+dieser weit verbreitet und preisgünstig zu beschaffen ist. Die Firmware
+des Mikrokontroller stellt ein einfaches kommandobasiertes Interface
+bereit. Die Kommunikation ist mit der Kommunikation und der
+Implementierung des G-Code Senders vergleichbar und teilen sich die
+gleichen Funktionen zur Kommunikation mit der Seriellen Schnittstelle.
 
 \begin{lstlisting}[language={C++}]
 //userboardcontroller.cpp Atmega328p Firmware
@@ -1884,8 +1922,8 @@ Tag gefunden wurde mit
 bei der G-Code Sender Implementierung auf Fehler bei der Kommunikation
 bzw. einem Abbruch durch einen Timeout reagiert. Das System
 initialisiert die Serielle Schnittstelle neu und resettet das System
-durch setzten des \passthrough{\lstinline!DTR!}-GPIO am USB-Seriell
-Wandler ICs (falls vorhanden).
+durch setzten des \passthrough{\lstinline!DTR!}-\gls{gpio} am
+\gls{usb}-Seriell Wandler \gls{ic} (falls vorhanden).
 
 \begin{lstlisting}[language={C++}]
 //UserBoardController.cpp HOST-SYSTEM
