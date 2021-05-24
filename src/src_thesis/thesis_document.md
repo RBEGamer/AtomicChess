@@ -108,17 +108,17 @@ Wie bereits aus zum Teil identischen den Namen ersichtlich, streben alle Tische 
 
 : Auflistung kommerzieller autonomer Schachtische
 
-|                                           | Square Off - Kingdom [@squareoffkingdom]  | Square Off - Grand Kingdom [@squareoffgrand] | DGT Smart Board [@dtgsmartboard]  | DGT Bluetooth Wenge [@dtgble] |
-|-------------------------------------------|-------------------------------------------|----------------------------------------------|-----------------------------------|-------------------------------|
-| Erkennung Figur-Stellung                  | nein (Manuell per Ausgangsposition)       | nein (Manuell per Ausgangsposition)          | ja                                | ja                            |
-| Abmessungen (LxBxH)                       | 486mm x 486mm x 75mm                      | 671mm x 486mm x 75mm                         | 540mm x 540mm x 20mm              | 540mm x 540mm x 20mm          |
-| Konnektivität                             | Bluetooth                                 | Bluetooth                                    | Seriell                           | Bluetooth                     |
-| Automatisches Bewegen der Figuren         | ja                                        | ja                                           | nein                              | nein                          |
-| Spiel Livestream                          | ja                                        | ja                                           | ja                                | ja                            |
-| Cloud-Anbindung (online Spiele)           | ja (Mobiltelefon + App)                   | ja (Mobiltelefon + App)                      | ja (PC + App)                     | ja (PC + App)                 |
-| Parkposition für ausgeschiedene Figuren   | nein                                      | ja                                           | nein                              | nein                          |
-| Stand-Alone Funktionalität                | nein (Mobiltelefon erforderlich)          | nein (Mobiltelefon erforderlich)             | nein (PC)                         | nein (PC)                     |          
-| Besonderheiten                            | Akku für 30 Spiele                        | Akku für 15 Spiele                           | -                                 | -                             |
+|                                             | Square Off - Kingdom [@squareoffkingdom]    | Square Off - Grand Kingdom [@squareoffgrand]          | DGT Smart Board [@dtgsmartboard]    | DGT Bluetooth Wenge [@dtgble] |
+|-------------------------------------------|-------------------------------------------|---------------------------------------------------|-----------------------------------|-------------------------------|
+| Erkennung Figur-Stellung                     | nein (Manuell per Ausgangsposition)           | nein (Manuell per Ausgangsposition)                       | ja                                        | ja                                 |
+| Abmessungen (LxBxH)                            | 486mm x 486mm x 75mm                          | 671mm x 486mm x 75mm                                      | 540mm x 540mm x 20mm                       | 540mm x 540mm x 20mm                 |
+| Konnektivität                                | Bluetooth                                      | Bluetooth                                                 | Seriell                                 | Bluetooth                           |
+| Automatisches Bewegen der Figuren           | ja                                            | ja                                                        | nein                                       | nein                                 |
+| Spiel Livestream                            | ja                                            | ja                                                        | ja                                         | ja                                   |
+| Cloud-Anbindung (online Spiele)             | ja (Mobiltelefon + App)                        | ja (Mobiltelefon + App)                                    | ja (PC + App)                             | ja (PC + App)                        |
+| Parkposition für ausgeschiedene Figuren     | nein                                          | ja                                                        | nein                                       | nein                                 |
+| Stand-Alone Funktionalität                   | nein (Mobiltelefon erforderlich)              | nein (Mobiltelefon erforderlich)                           | nein (PC)                                | nein (PC)                          |          
+| Besonderheiten                              | Akku für 30 Spiele                          | Akku für 15 Spiele                                             | -                                                 | -                                              |
 
 
 <br>
@@ -184,18 +184,18 @@ Auch existieren weitere Abwandlungen von autonomen Schachbrettern, bei welchem d
 
 : Auflistung von Open-Source Schachtisch Projekten
 
-|                                         | Automated Chess Board (Michael Guerero) [@actproject1]| Automated Chess Board (Akash Ravichandran) [@actproject2]| DIY Super Smart Chessboard [@actproject3]|
-|-----------------------------------------|-------------------------------------------------------|----------------------------------------------------------|------------------------------------------|
-| Erkennung Figur-Stellung                | nein (Manuell per Ausgangsposition)                   | ja (Kamera / OpenCV)                                     | nein                                     |
-| Abmessungen (LxBxH)                     | keine Angabe                                          | keine Angabe                                             | 450mm x 300mm x 50mm                     |
-| Konnektivität                           | (+usb)                                                | (+wlan)                                                  | (+wlan)                                  |
-| Automatisches Bewegen der Figuren       | ja                                                    | ja                                                       | nein                                     |
-| Spiel Livestream                        | nein                                                  | nein                                                     | nein                                     |
-| Cloud-Anbindung (online Spiele)         | nein                                                  | nein                                                     | ja                                       |
-| Parkposition für ausgeschiedene Figuren | nein                                                  | nein                                                     | nein                                     |
-| Stand-Alone Funktionalität              | nein (PC erforderlich)                                | ja                                                       | ja                                       |
-| Besonderheiten                          | -                                                     | Sprachsteuerung (Amazon Alexa)                           | Zuganzeige über (+led) Matrix            |
-| Lizenz                                  | (+gpl) 3+                                             | (+gpl)                                                   | -                                        |
+|                                                   | Automated Chess Board (Michael Guerero) [@actproject1]| Automated Chess Board (Akash Ravichandran) [@actproject2]    | DIY Super Smart Chessboard [@actproject3]    |
+|-----------------------------------------------|-------------------------------------------------------|----------------------------------------------------------    |------------------------------------------    |
+| Erkennung Figur-Stellung                          | nein (Manuell per Ausgangsposition)                           | ja (Kamera / OpenCV)                                               | nein                                               |
+| Abmessungen (LxBxH)                                  | keine Angabe                                                  | keine Angabe                                                       | 450mm x 300mm x 50mm                               |
+| Konnektivität                                     | (+usb)                                                         | (+wlan)                                                           | (+wlan)                                            |
+| Automatisches Bewegen der Figuren                 | ja                                                            | ja                                                                 | nein                                               |
+| Spiel Livestream                                  | nein                                                          | nein                                                               | nein                                               |
+| Cloud-Anbindung (online Spiele)                   | nein                                                          | nein                                                               | ja                                                 |
+| Parkposition für ausgeschiedene Figuren           | nein                                                          | nein                                                               | nein                                               |
+| Stand-Alone Funktionalität                        | nein (PC erforderlich)                                         | ja                                                                 | ja                                                 |
+| Besonderheiten                                    | -                                                             | Sprachsteuerung (Amazon Alexa)                                     | Zuganzeige über LED Matrix                         |
+| Lizenz                                             | (+gpl) 3+                                                      | (+gpl)                                                             | -                                                  |
 
 
 In den bestehenden Projekten ist zu erkennen, dass ein autonomer Schachtisch sehr einfach und mit simplen Mittel konstruiert werden kann. Hierbei fehlen in der Regel einige Features, wie das automatische Erkennen von Figuren oder das Spielen über das Internet.
@@ -263,13 +263,13 @@ In diesem Projekt werden vor allem Funktionalitäten berücksichtig, welche die 
 
 : Auflistung der Anforderungen an den autonomen Schachtisch
 
-|                                             | (+atc)                                  |
-|-------------------------------------------  |---------------------------------------  |
-| Erkennung Figur-Stellung                    | ja                                      |
+|                                             | (+atc)                                   |
+|-------------------------------------------|---------------------------------------|
+| Erkennung Figur-Stellung               | ja                                       |
 | Konnektivität                               | (+wlan), (+usb)                         |
 | Automatisches Bewegen der Figuren           | ja                                      |
 | Spiel Livestream                            | ja                                      |
-| Cloudanbindung (online Spiele)              | ja                                      |
+| Cloudanbindung (online Spiele)               | ja                                      |
 | Parkposition für ausgeschiedene Figuren     | ja                                      |
 | Stand-Alone Funktionalität                  | ja (Bedienung direkt am Tisch)          |
 | Besonderheiten                              | visuelle Hinweise per Beleuchtung       |
@@ -370,14 +370,14 @@ Diese Vorteile wurde mit verschiedenen Testdrucken verifiziert und kommen insbes
 
 : Verwendete 3D Druck Parameter. Temperatur nach Herstellerangaben des verwendeten PLA Filament.
 
-| Ender 3 Pro 0.4mm Nozzle  | PLA Settings  |
-|---------------------------|---------------|
-| Layer Height              | 0.2mm         |
-| Infill                    | 50.00%        |
-| Wall Thickness            | 2.0mm         |
-| Support Structure         | Tree          |
-| Top Layers                | 4             |
-| Bottom Layers             | 4             |
+| Ender 3 Pro 0.4mm Nozzle     | PLA Settings       |
+|--------------------------    |---------------    |
+| Layer Height                 | 0.2mm             |
+| Infill                       | 50.00%            |
+| Wall Thickness               | 2.0mm             |
+| Support Structure            | Tree              |
+| Top Layers                   | 4                 |
+| Bottom Layers                | 4                 |
 
 <br>
 
@@ -429,12 +429,12 @@ Das Design stellt jedoch eine solide Grundlage darf, welche für die weitere Sof
 ## Parametrisierung Schachfiguren
 
 Da das System die auf dem Feld befindlichen Schachfiguren anhand von (+nfc) Tags erkennt, müssen diese zuerst mit Daten beschrieben werden.
-Die verwendeten NXP `NTAG 21`[@nxpntag21] (+ic), besitzen einen vom Benutzer verwendbaren Speicher von 180 Byte. Dieser kann über ein (+nfc)-Lese/Schreibgerät mit Daten verschiedenster Art beschrieben und wieder ausgelesen werden.
+Die verwendeten NXP NTAG 21 Chips, besitzen einen vom Benutzer verwendbaren Speicher von 180 Byte. Dieser kann über ein (+nfc)-Lese/Schreibgerät mit Daten verschiedenster Art beschrieben und wieder ausgelesen werden.
 Moderne Mobiltelefone besitzen in der Regel auch die Fähigkeit mit passenden (+nfc) Tags kommunizieren zu können; somit sind keine Stand-Alone Lesegeräte mehr notwendig.
 
 <br>
 
-Der Schachtisch verwendet dabei das (+ndef) Dateiformat welches Festlegt, wie die Daten auf dem (+nfc) Tag gespeichert werden. Da diesen ein Standardisiertes Format ist, können alle gängigen Lesegeräte und Chipsätze diese Datensätze lesen. Der im autonomen Schachtisch verwendete Chipsatz `PN532` von NXP ist dazu ebenfalls in der Lage.
+Der Schachtisch verwendet dabei das (+ndef) Dateiformat welches Festlegt, wie die Daten auf dem (+nfc) Tag gespeichert werden. Da diesen ein Standardisiertes Format ist, können alle gängigen Lesegeräte und Chipsätze diese Datensätze lesen. Der im autonomen Schachtisch verwendete Chipsatz PN532 von NXP ist dazu ebenfalls in der Lage.
 
 <br>
 
@@ -475,7 +475,7 @@ Auch ist es so möglich, verschiedene Figur-Sets zu mischen; somit kann ein Spie
 ![Prototyp Hardware: Blockdiagramm \label{ATC_Hardware_Architecture_DK}](images/ATC_Hardware_Architecture_DK.png)
 
 Durch die zuvor durchgeführte Validierung der verwendeten Technologien, konnte ein Blockdiagramm \ref{ATC_Hardware_Architecture_DK} der verwendeten elektrischen Komponenten angefertigt werden.
-Dieses enthält zum einen die zwei Schrittmotor-Treiber und zum anderen die Komponenten zur Ansteuerung der beiden Elektromagnete sowie das `PN532` Module zum Auslesen der (+nfc) Tags.
+Dieses enthält zum einen die zwei Schrittmotor-Treiber und zum anderen die Komponenten zur Ansteuerung der beiden Elektromagnete sowie das PN532 Module zum Auslesen der (+nfc) Tags.
 
 <br>
 
@@ -483,7 +483,7 @@ Die wichtigsten Komponenten in der Schaltung sind das eingebettete System und di
 
 <br>
 
-Zusätzlich sind Spannungswandler nötig, um um die erforderlichen Spannungen von 12V für die Elektromagnete und 5V für das eingebette System zu erzeugen. Die Schrittmotoren werden direkt mit der Versorgungsspannung von 14-24V betrieben. Alle weiteren verwendeten Komponenten zu denen unter anderem auch das `PN532` (+nfc) Modul und die `WS2811` (+led) Module gehören, werden ebenfalls über die 5V Schiene versorgt.
+Zusätzlich sind Spannungswandler nötig, um um die erforderlichen Spannungen von 12V für die Elektromagnete und 5V für das eingebette System zu erzeugen. Die Schrittmotoren werden direkt mit der Versorgungsspannung von 14-24V betrieben. Alle weiteren verwendeten Komponenten zu denen unter anderem auch das PN532 (+nfc) Modul und die WS2811 (+led) Module gehören, werden ebenfalls über die 5V Schiene versorgt.
 
 <br>
 
@@ -495,7 +495,7 @@ Für die Erzeugung der (+pwm) Signale für die H-Brücke wurde ein zusätzlicher
 
 <br>
 
-Der zusätzliche Mikrokontroller übernimmt auch die Kommunikation mit dem `PN532` Modul, da dieses sonst über seine (+i2c) Schnittstelle mit einem entsprechenden Host-System kommuniziert. Der Mikrokontroller übernimmt somit ebenfalls die Konversation des (+i2c) Bus hin zum zentralen (+spi) Bus. Zu beachten ist, dass nun ein zusätzlicher Chip-Select (+gpio) zum ansteuern der Elektromagnete und des `PN532` Moduls benötigt wird. Dies wird durch die Firmware, welche auf dem Mikrokontroller ausgeführt wird, realisiert, und je nach empfangenem Kommando die entsprechende Komponente ausgewählt.
+Der zusätzliche Mikrokontroller übernimmt auch die Kommunikation mit dem PN532 Modul, da dieses sonst über seine (+i2c) Schnittstelle mit einem entsprechenden Host-System kommuniziert. Der Mikrokontroller übernimmt somit ebenfalls die Konversation des (+i2c) Bus hin zum zentralen (+spi) Bus. Zu beachten ist, dass nun ein zusätzlicher Chip-Select (+gpio) zum ansteuern der Elektromagnete und des PN532 Moduls benötigt wird. Dies wird durch die Firmware, welche auf dem Mikrokontroller ausgeführt wird, realisiert, und je nach empfangenem Kommando die entsprechende Komponente ausgewählt.
 
 <br>
 
@@ -514,7 +514,7 @@ Allgemein verwenden alle Komponenten, 3.3V als Logik-Pegel. Trotzdem wurde ein L
 <br>
 
 Durchgeführte Tests mit dem verwendeten `Atmega328p` haben ergeben, dass dieser nicht direkt mit 3.3V und einer Taktfrequenz von 16MHz betrieben werden kann und es somit zu einem nicht kontrollierbaren Verhalten dieses kommt.
-Dieses Verhalten machten sich durch eine gestörte Kommunikation mit dem `PN532` Modul bemerkbar und eine Auslesen von (+nfc) Tags war nur in 60% der Fälle fehlerfrei möglich.
+Dieses Verhalten machten sich durch eine gestörte Kommunikation mit dem PN532 Modul bemerkbar und eine Auslesen von (+nfc) Tags war nur in 60% der Fälle fehlerfrei möglich.
 
 Im Anschluss wurde die Versorgungsspannung auf 5V erhöht, welches zur Folge hat, dass die Ein- und Ausgänge ebenfalls mit diesem Pegel arbeiten; dieser Schritt wurde zum Schutz des eingebetteten Systems und dessen (+gpio) Schnittstelle notwendig.
 
@@ -555,7 +555,7 @@ TMC5160::TMC5160(MOTOR_ID _id) {
       }
   //REGISTER SPI CS PIN FOR SELECTED MOTOR  ID
   if (_id == MOTOR_ID::MOTOR_0) {
-          const SPI_CS_DEVICE = SPICommunication::SPI_DEVICE::MOTOR_0; //TODO CAST
+          SPI_CS_DEVICE = SPICommunication::SPI_DEVICE::MOTOR_0;
           SPICommunication::getInstance()->register_cs_gpio(SPI_CS_DEVICE, CS_GPIO_NUMBER_MOTOR_0);
   }
   //LOAD DEFAULT MOTOR RAMP / CONFIG PARAMETER
@@ -566,15 +566,15 @@ TMC5160::TMC5160(MOTOR_ID _id) {
 void TMC5160::default_settings()
 {
     // MULTISTEP_FILT = 1, EN_PWM_MODE = 1 enables stealthChop
-    write(REGDEF_GCONF, 0x0000000C);
+       write(REGDEF_GCONF, 0x0000000C);
     // TOFF = 3, HSTRT = 4, HEND = 1, TBL = 2, CHM = 0 (spreadCycle)
-    write(REGDEF_CHOPCONF, 0x000100C3);
+       write(REGDEF_CHOPCONF, 0x000100C3);
     // IHOLD = 2, IRUN = 15 (max current), IHOLDDELAY = 8
-    write(REGDEF_IHOLD_IRUN, 0x00080F02);
+        write(REGDEF_IHOLD_IRUN, 0x00080F02);
     // TPOWERDOWN = 10: Delay before powerdown in standstill
-    write(REGDEF_TPOWERDOWN, 0x0000000A);
+       write(REGDEF_TPOWERDOWN, 0x0000000A);
     // TPWMTHRS = 500
-    write(REGDEF_A1, 0x000001F4);
+       write(REGDEF_A1, 0x000001F4);
     //WRITE THE DEFAULT RAMP PARAMETERS
     reset_ramp_defaults();
     // Position mode
@@ -585,10 +585,10 @@ void TMC5160::default_settings()
     write(REGDEF_XTARGET, 0);
 }
 
-int TMC5160::write(const int _address, const int _data)
+int TMC5160::write(int _address, int _data)
 {
     const size_t DATA_LEN = 5;
-    //POPULATE WRITE DATA BUFFER
+  //POPULATE WRITE DATA BUFFER
     uint8_t write_buffer[] = { _address | 0x80, 0, 0, 0, 0 };
     write_buffer[1] = 0xFF & (_data >> 24);
     write_buffer[2] = 0xFF & (_data >> 16);
@@ -598,17 +598,18 @@ int TMC5160::write(const int _address, const int _data)
     return  SPICommunication::getInstance()->spi_write(SPI_CS_DEVICE ,write_buffer, DATA_LEN);
 }
 
-int TMC5160::read(const int _address)
+int TMC5160::read(int _address)
 {
   //POPULATE WRITEBUFFER = READ REGISTER ADDRESS
     const size_t DATA_LEN = 5;
     uint8_t write_buffer[] = {  _address & 0x7F, 0, 0, 0, 0 };
     uint8_t read_buffer[] = {  _address & 0x7F, 0, 0, 0, 0 };
-    //FIRST WRITE REGISTER ADRESS TO READ
+
+  //FIRST WRITE REGISTER ADRESS TO READ
     int res = SPICommunication::getInstance()->spi_write(SPI_CS_DEVICE ,write_buffer, DATA_LEN);
-    //READ RESULT
+  //READ RESULT
     res = SPICommunication::getInstance()->spi_write(SPI_CS_DEVICE, read_buffer, DATA_LEN);
-    //PARSE RESULT INTO INT
+  //PARSE RESULT INTO INT
     int value = read_buffer[1];
     value = value << 8;
     value |= read_buffer[2];
@@ -620,7 +621,7 @@ int TMC5160::read(const int _address)
 }
 
 //EXAMPLE USAGE, GOTO POSITION
-void TMC5160::go_to(const int _position) {
+void TMC5160::go_to(int _position) {
     write(REGDEF_RAMPMODE, 0);
   //SET XTARGET REGISTER = TARGET POSITION
   //NON BLOCKING
@@ -636,7 +637,7 @@ void TMC5160::go_to(const int _position) {
 * inkl revisionsinformationen welche aus der CPU ID GENERIERT WERDEN
 
 
-```c++
+```
 //HardwareInterface.h
 //...
 class HardwareInterface
@@ -658,17 +659,17 @@ class HardwareInterface
   //....
   //MOTOR CONTROL FUNCTIONS
   void enable_motors();
-  void disable_motors();
+    void disable_motors();
   bool is_target_position_reached();
-  void move_to_postion_mm_absolute(const int _x, const int _y, const bool _blocking);
+    void move_to_postion_mm_absolute(int _x,int _y, bool _blocking);
   void home_sync();
   //...
   //LED CONTROL FUNCTIONS
-  bool setTurnStateLight(const HI_TURN_STATE_LIGHT _state);
+  bool setTurnStateLight(HI_TURN_STATE_LIGHT _state);
   //NFC CONTROL FUNCTIONS
   ChessPiece::FIGURE ScanNFC();
   //MAGNET CONTROL FUNCTIONS
-  bool setCoilState(const HI_COIL _coil, const bool _state);
+  bool setCoilState(HI_COIL _coil, bool _state);
   //...
 ```
 * integration in controller software
@@ -708,6 +709,8 @@ class HardwareInterface
 ![Producation Hardware: Finaler autonomer Schachtisch \label{prod}](images/table_images/prod.png)
 
 ## Modifikation der Mechanik
+
+### CoreXY
 
 Während sich das Design des Schachtischs bestehend aus Gehäuse, Dimensionen und allen Außenelementen von der Entwicklung des ersten Prototypens zum zweiten nicht verändert hat, so wurde jedoch die Mechanik gänzlich verändert.
 In der ersten Revision wurde noch jede Achse über einen separaten Riemen gesteuert, sodass ein Schrittmotor die Bewegung des Schlittens entlang der Y-Achse und ein weiterer die Bewegung der gesamten Y-Achse, bestehend aus Motor, Riemen, Schlitten und Führungsschiene, entlang der X-Achse ermöglicht. Die Führung entlang der X-Achse erfolgt in der Mitte des Tischs, die Y-Achse wurde links und rechtsseitig rollbar gelagert und in der Mitte über einen Riemen gezogen. Dies hat zur Folge, dass bei entstehender Unwucht, welche durch die Bewegung des Schlittens auf der Y-Achse natürlich ist, die Y-Achse in ihren Lagerungen nicht mehr parallel verläuft, sondern beim Betätigen des Motors der X-Achse die Y-Achse in einem unerwünschten Winkel bewegt wird. 
@@ -756,6 +759,7 @@ Zudem ist die Steuerung des CoreXY-Systems bereits in der Firmware Marlin integr
 
 In der Komplexität des Aufbaus und dessen Zeitaufwand war kein Unterschied zwischen der ersten und zweiten Revision zu erkennen. Für Anfänger im Bereich CoreXY ist das Verlegen und insbesondere das stramme Spannen der Riemen eine Herausforderung, die sich aber durch die Konstruktion der Bauteile verinfachen lässt. Insbesondere die Verbindung an der Lagerung der Y-Achse ist so erstellt worden, dass die Riemen nach der Durchführung nur in eine definierte Richtung gespannt werden können. 
 
+<br>
 
 
 
@@ -791,7 +795,7 @@ Nach einem erfolgreichen Test wurde das (+cad) Modell so angepasst, dass sich de
 Des Weiteren wurden bei den Bauern die Magnete ausgetauscht. Die zuerst verwendeten 10x3mm Neodym-Magnete wurden bei diesen Figuren gegen 6x3mm Magnete getauscht.
 Somit sind im Design zwei verschiedenen Arten von Magneten notwendig, jedoch traten in den anschließend durchgeführten Testläufen keine Beeinflussungen mehr auf.
 
-
+<br>
 
 ## Änderungen der Elektronik
 
@@ -824,19 +828,20 @@ Mit dem Durchbruch von 3D Druckern im Konsumer-Bereich sind auch kleine und prei
 
 <br>
 
-Hierbei existiert eine große Auswahl dieser mit den verschiedensten Ausstattungen. Bei der Auswahl dieser wurde vor allem auf die Möglichkeit geachtet sogenannte Silent-Schrittmotortreiber verwenden zu können, um die Geräuschimmissionen durch die Motoren so weit wie möglich zu minimieren. Im ersten Prototyp wurde unter anderem aus diesem Grund die `TMC5160-BOB` Treiber ausgewählt.
-Hierzu wurde der Schrittmotor-Treiber `TMC2209` gewählt, welcher diese Features ebenfalls unterstützt und in der Variante als Silent-Step-Stick direkt in die meisten 3D Drucker Steuerungen eingesetzt werden können. Hierbei ist es wichtig, dass auf der gewählten Steuerung die Treiber-ICs nicht fest verlötet sind, sondern getauscht werden können.
+Hierbei existiert eine große Auswahl dieser mit den verschiedensten Ausstattungen. Bei der Auswahl dieser wurde vor allem auf die Möglichkeit geachtet sogenannte Silent-Schrittmotortreiber verwenden zu können, um die Geräuschimmissionen durch die Motoren so weit wie möglich zu minimieren. Im ersten Prototyp wurde unter anderem aus diesem Grund die TMC5160-BOB Treiber ausgewählt.
+Hierzu wurde der Schrittmotor-Treiber TMC2209 gewählt, welcher diese Features ebenfalls unterstützt und in der Variante als Silent-Step-Stick direkt in die meisten 3D Drucker Steuerungen eingesetzt werden können. Hierbei ist es wichtig, dass auf der gewählten Steuerung die Treiber-ICs nicht fest verlötet sind, sondern getauscht werden können.
 Ein weiterer Punkt ist die Kommunikation der Steuerung mit dem Host-System. Hierbei setzten alle untersuchten Steuerungen auf die (+usb) Schnittstelle und somit ist eine einfache Kommunikation gewährleistet. Das verwendete eingebettete System im autonomen Schachtisch bietet vier freie (+usb) Anschlüsse, somit ist eine einfache Integration gewährleistet.
 
 <br>
 
 ![Producation Hardware: Blockdiagramm \label{ATC_Hardware_Architecture_PROD}](images/ATC_Hardware_Architecture_PROD.png)
 
-Nach einer gründlichen Evaluation der zur Verfügung stehenden Steuerungen, wurde die `SKR 1.4 Turbo`-Steuerung ausgewählt, da diese trotz des geringfügig höheren Marktpreises genug Ressourcen auch für spätere Erweiterung bietet und eine Unterstützung für die neuste Version der Marlin-FW[@marlinfw] bereitstellt.
+Nach einer gründlichen Evaluation der zur Verfügung stehenden Steuerungen, wurde die SKR 1.4 Turbo Steuerung ausgewählt, da diese trotz des geringfügig höheren Marktpreises genug Ressourcen auch für spätere Erweiterung bietet und eine Unterstützung für die neuste Version der Marlin-FW[@marlinfw] bereitstellt.
 Somit wurde die Elektronik durch die verwendete Plug&Play stark vereinfacht \ref{ATC_Hardware_Architecture_PROD}.
 
-## Anpassungen HAL
-### Implementierung GCODE-Sender
+<br>
+
+### HAL: Implementierung GCODE-Sender
 
 Durch die durchgeführten Änderungen an der Elektronik insbesondere durch die Verwendung einer Marlin-FW[@marlinfw] fähigen Motorsteuerung, ist eine Anpassung der (+hal) notwendig.
 Diese unterstütz die Ansteuerung der Motoren und anderen Komponenten (z.B. Spindeln, Heizelemente) mittels G-Code und wird typischerweise in 3D Druckern und CNC-Fräsen eingesetzt.
@@ -847,29 +852,29 @@ Marlin-FW[@marlinfw] biete dabei einen großen Befehlssatz an G-Code Kommandos a
 
 : Grundlegende verwendete G-Code Kommandos
 
-|                           | G-Code Command    | Parameters                            |
-|-------------------------- |-------------------|-----------------------------------    |
-| Move X Y                  | G0                | X<dest_pos_x_mm> Y<dest_pos_y_mm>     |
-| Move Home Position        | G28               | -                                     |
-| Set Units to Millimeters  | G21               | -                                     |
-| Set Servo Position        | M280              | P<servo_index> S<servo_position>      |
-| Disable Motors            | M84               | X Y                                   |
+|                                       | G-Code Command     | Parameters                            |
+|--------------------------   |----------------    |-----------------------------------    |
+| Move X Y                       | G0                 | X<dest_pos_x_mm> Y<dest_pos_y_mm>     |
+| Move Home Position     | G28                | -                                      |
+| Set Units to Millimeters | G21                | -                                      |
+| Set Servo Position        | M280               | P<servo_index> S<servo_position>      |
+| Disable Motors             | M84                | X Y                                   |
 
 
 Die erforderlichen Kommandos wurden auf ein Minimum beschränk, um eine maximale Kompatibilität bei verschiedenen G-Code-fähigen Steuerungen zu gewährleisten.
 Die Software unterstützt jedoch weitere Kommandos wie z.B. `M150` mit welche speziellen Ausgänge für LEDs gesteuert werden können. Dieses Feature bietet sowohl die verwendete Marlin-FW[@marlinfw] als auch die verwendete Steuerung an. Sollte die verwendete Steuerung solch ein optionales Kommando nicht unterstützen, so werden diese ignoriert was zur Folge hat, dass auch preisgünstige Steuerungen verwendet werden können.
 
-Die Kommunikation zwischen Steuerung und eingebetteten System geschieht durch eine (+usb) Verbinden. Die Steuerung meldet sich als virtuelle Serielle Schnittstelle im System an und kann über diese mit der Software kommunizieren. Auch werden so keine speziellen Treiber benötigt, da auf nahezu jedem System ein Treiber `USB-CDC` für die gängigsten (+usb) zu Seriell Wandler bereits installiert ist. Die Software erkennt anhand der zur Verfügung stehenden (+usb)-Geräte sowie deren Vendor und Product-ID Informationen die verbundene Steuerung und verwendet diese nach dem Start automatisch. Hierzu wurde zuvor eine Liste mit verschiedenen getesteten Steuerungen sowie deren USB-Vendor und Product-ID angelegt.
+Die Kommunikation zwischen Steuerung und eingebetteten System geschieht durch eine (+usb) Verbinden. Die Steuerung meldet sich als virtuelle Serielle Schnittstelle im System an und kann über diese mit der Software kommunizieren. Auch werden so keine speziellen Treiber benötigt, da auf nahezu jedem System ein Treiber (USB-CDC) für die gängigsten (+usb) zu Seriell Wandler bereits installiert ist. Die Software erkennt anhand der zur Verfügung stehenden USB-Geräte sowie deren Vendor und Product-ID Informationen die verbundene Steuerung und verwendet diese nach dem Start automatisch. Hierzu wurde zuvor eine Liste mit verschiedenen getesteten Steuerungen sowie deren USB-Vendor und Product-ID angelegt.
 
 <br>
 
 : Hinterlegte G-Code Steuerungen
 
-| Product                   | Vendor-ID | Product-ID | Board-Type         |
-|---------------------------|-----------|------------|--------------------|
-| Bigtreetech SKR 1.4 Turbo | 1d50      | 6029       | Stepper-Controller |
-| Bigtreetech SKR 1.4       | 1d50      | 6029       | Stepper-Controller |
-| Bigtreetech SKR 1.3       | 1d50      | 6029       | Stepper-Controller |
+| Product                         | Vendor-ID | Product-ID | Board-Type         |
+|---------------------------------|-----------|------------|--------------------|
+| Bigtreetech SKR 1.4 Turbo       | 1d50      | 6029       | Stepper-Controller |
+| Bigtreetech SKR 1.4             | 1d50      | 6029       | Stepper-Controller |
+| Bigtreetech SKR 1.3             | 1d50      | 6029       | Stepper-Controller |
 
 <br>
 
@@ -885,7 +890,7 @@ bool GCodeSender::setServo(const int _index,const int _pos) {
     return write_gcode("M280 P" + std::to_string(_index) + " S" + std::to_string(_pos));     //MOVE SERVO
 }
 
-bool GCodeSender::write_gcode(const std::string _gcode_line, bool _ack_check) {
+bool GCodeSender::write_gcode(std::string _gcode_line, bool _ack_check) {
     //...
     //...
     //FLUSH INPUT BUFFER
@@ -939,9 +944,9 @@ Die Steuerung verarbeitet diese und bestätigt die Ausführung mit einer Acknowl
 
 <br>
 
-### I2C-Seriell Umsetzer
+### HAL: I2C Seriell Umsetzer
 
-Durch den Wegfall der zuvor eingesetzten Elektronik und der Austausch durch die `SKR 1.4 Turbo` Steuerung, ist jedoch ein Anschluss des `PN532` (+nfc) Moduls nicht mehr direkt möglich, da dieses mittels (+i2c) Interface direkt mit dem eingebetteten System verbunden war. Dieses Interface entfällt nun. Dennnoch besteht weiterhin die Möglichkeit, jedoch wurde auch hier auf eine (+usb) Schnittstelle gewechselt. So ist es möglich das System auch an einem anderen Host-System zu betreiben, wie z.B. an einem handelsüblichen Computer.
+Durch den Wegfall der zuvor eingesetzten Elektronik und der Austausch durch die SKR 1.4 Turbo Steuerung, ist jedoch ein Anschluss des PN532 (+nfc) Moduls nicht mehr direkt möglich, da dieses mittels (+i2c) Interface direkt mit dem eingebetteten System verbunden war. Dieses Interface entfällt nun. Dennnoch besteht weiterhin die Möglichkeit, jedoch wurde auch hier auf eine (+usb) Schnittstelle gewechselt. So ist es möglich das System auch an einem anderen Host-System zu betreiben, wie z.B. an einem handelsüblichen Computer.
 
 <br>
 
@@ -981,8 +986,8 @@ char scan_nfc_tag(){
 
 <br>
 
-In diesem Falle wird nur ein Befehl zum Auslesen des (+nfc) Tags benötigt. Das Host-System sendet die Zeichenkette `_readnfc_` zum Mikrokontroller und dieser versucht über das `PN532` Modul ein (+nfc) Tag zu lesen. Wenn dieses erkannt wird und einen passenden Payload enthält, antwortet dieser mit dem String `_readnfc_res_FIGURE-ID_ok_` oder wenn kein Tag gefunden wurde mit `_readnfc_red__empty_`.
-Auch hier wird wie bei der G-Code Sender Implementierung auf Fehler bei der Kommunikation bzw. einem Abbruch durch einen Timeout reagiert. Das System initialisiert die Serielle Schnittstelle neu und resettet das System durch setzten des `DTR`-GPIO am USB-Seriell Wandler ICs (falls vorhanden).
+In diesem Falle wird nur ein Befehl zum Auslesen des (+nfc) Tags benötigt. Das Host-System sendet die Zeichenkette `_readnfc_` zum Mikrokontroller und dieser versucht über das PN532 Modul ein (+nfc) Tag zu lesen. Wenn dieses erkannt wird und einen passenden Payload enthält, antwortet dieser mit dem String `_readnfc_res_FIGURE-ID_ok_` oder wenn kein Tag gefunden wurde mit `_readnfc_red__empty_`.
+Auch hier wird wie bei der G-Code Sender Implementierung auf Fehler bei der Kommunikation bzw. einem Abbruch durch einen Timeout reagiert. Das System initialisiert die Serielle Schnittstelle neu und resettet das System durch setzten des DTR GPIO am USB-Seriell Wandler ICs (falls vorhanden).
 
 <br>
 
@@ -1049,19 +1054,19 @@ Das System erkennt den Anschluss der Hardware beim Start auf die gleiche Art und
 
 : Eigenschaften die finalen Prototypen
 
-|                                         | (+atc) – autonomous Chessboard  |
-|-----------------------------------------|---------------------------------|
-| Feldabmessungen (LxBxH)                 | 57x57mm                         |
-| Abmessungen (LxBxH)                     | 620x620x170mm                   |
-| Gewicht                                 | 5.7kg                           |
-| Konnektivität                           | (+wlan), (+usb)                 |
-| Automatisches Bewegen der Figuren       | ja                              |
-| Erkennung Schachfigurstellung           | ja                              |
-| Spiel Livestream                        | ja                              |
-| Cloudanbindung (online Spiele)          | ja                              |
-| Parkposition für ausgeschiedene Figuren | ja                              |
-| Stand-Alone Funktionalität              | ja                              |
-| Besonderheiten                          | User-Port für Erweiterungen     |
+|                                             | (+atc) – autonomous Chessboard        |
+|-----------------------------------------    |--------------------------------------    |
+| Feldabmessungen (LxBxH)                     | 57x57mm                                  |
+| Abmessungen (LxBxH)                         | 620x620x170mm                            |
+| Gewicht                                     | 5.7kg                                    |
+| Konnektivität                               | (+wlan), (+usb)                          |
+| Automatisches Bewegen der Figuren           | ja                                       |
+| Erkennung Schachfigurstellung               | ja                                       |
+| Spiel Livestream                            | ja                                       |
+| Cloudanbindung (online Spiele)             | ja                                       |
+| Parkposition für ausgeschiedene Figuren     | ja                                       |
+| Stand-Alone Funktionalität                  | ja                                       |
+| Besonderheiten                              | User-Port für Erweiterungen           |
 
 * alle anforderungen erfüllt
 * zulasten der geschwindigkeit insbesondere bei der erkennung des User-Move
@@ -1107,7 +1112,7 @@ Hierzu muss das System eine einheitliche (+rest)-Schnittstelle bereitstellen.
 
 <br>
 
-Die RESTful (+api) stellt verschiedene Ressourcen bereit, welche durch eine URI \ref{ATC_URI_SCHEMES} eindeutig identifizierbar sind.
+Die RESTful API stellt verschiedene Ressourcen bereit, welche durch eine URI \ref{ATC_URI_SCHEMES} eindeutig identifizierbar sind.
 Auf diese können mittels verschiedenster HTTP Anfragemethoden (GET, POST, PUT, DELETE) zugegriffen werden. Jeder dieser Methoden stellt einen anderen Zugriff auf die Ressource dar und beeinflusst somit das Verhalten und die Rück-Antwort dieser.
 
 <br>
@@ -1117,9 +1122,12 @@ Dabei wird bei einer RESTful Schnittstelle typischerweise das (+http) Protokoll,
 
 <br>
 
-Somit stellt die RESTful (+api) eine Interoperabilität zwischen verschiedenen Anwendungen und Systemen bereit, welche durch ein Netzwerk miteinander verbunden sind.
+Somit stellt die RESTful API eine Interoperabilität zwischen verschiedenen Anwendungen und Systemen bereit, welche durch ein Netzwerk miteinander verbunden sind.
 Dieser Ansatz ist somit geeignet um die verschiedenen Client Systeme (Schachtisch, Webclient) eine Kommunikation mit dem Server zu erlauben.
 
+<br>
+
+* reverse Proxy für https
 
 ## Service Architektur
 
@@ -1171,25 +1179,24 @@ Bevor ein Spiel begonnen wird, generiert der MoveValidator das initiale Spielfel
 ![MoveValidator: Beispiel Request zur Ausführung eines Zuges auf einem gegebenen Schachbrett \label{ATC_movevalidator_execute_move}](images/ATC_movevalidator_execute_move.png)
 
 
-Der Backend-Service fragt ein neues Spiel an oder übergibt einen Schachzug inkl. des aktuellen Spielbrett-Aufbaus an den Service.\ref{ATC_movevalidator_execute_move}
-Der Response wird dann vom Backend in der Datenbank gespeichert und weiter an die Client-Devices verteilt.
+Der Backend-Service fragt ein neues Spiel an oder übergibt einen Schachzug inkl. des aktuellen Spielbrett-Aufbaus an den Service.\ref{ATC_movevalidator_execute_move} Der Response wird dann vom Backend in der Datenbank gespeichert und weiter an die Client-Devices verteilt.
 
 
 : MoveValidator-Service (+api) Overview
 
-| MoveValidator-Function    | (+api)-Route             | Method | Form-Data             |
-|---------------------------|--------------------------|--------|-----------------------|
-| Check Move                | /rest/check_move         | POST   | fen, move, player     |
-| Execute Move              | /rest/execute_move       | POST   | fen, move             |
-| Validate Board            | /rest/validate_board     | POST   | fen                   |
-| Init Board                | /rest/init_board         | GET    |                       |
+| MoveValidator (+api) | (+api)-Route           | Method | Form-Data             |
+|----------------------|------------------------|--------|-----------------------|
+| Check Move           | /rest/check_move         | POST   | * fen * move * player |
+| Execute Move         | /rest/execute_move       | POST   | fen * move            |
+| Validate Board       | /rest/validate_board     | POST   | fen                   |
+| Init Board           | /rest/init_board         | GET    |                       |
 
 
 <br>
 
 Allgemein geschieht die Kommunikation über vier (+api) Calls, welche vom MoveValidator-Service angeboten werden.
 Als erstes wird vom Backend der `/rest/init_board` Request verwendet, welcher ein neues Spielbrett in der (+fen) Notation zurückgibt, welches zum Start der Partie verwendet wird.
-Allgemein arbeitet wurde das komplette System so umgesetzt, dass dieses mit einem Spielfeld in einer Zeichenketten representation arbeitet.
+Allgemein arbeitet wurde das komplette System so umgesetzt, dass dieses mit einem Spielfeld in einer Zeichenketten/String arbeitet.
 Dies hat den Vorteil, dass die Spielfeld-Notation leicht angepasst werden kann.
 Mit diesem Design ist es möglich, auch andere Spielarten im System zu implementieren, da nur an dieser Stelle die initialen Spielfelder generiert werden und Züge der Spieler validiert werden müssen.
 
@@ -1201,11 +1208,11 @@ Die (+fen) Notation ist universal und kann jede Brettstellung darstellen. Auch e
 
 : Vergleich (+fen) - (+xfen)
 
-| FEN-TYPE  | FEN-String                                                    |
-|-----------|---------------------------------------------------------------|
-| FEN       | rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R             |
-| X-FEN     | rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2|
-| SCHEMA    | Board Player-Color Rochade En-Passant Halfturn Turn-Number    |
+| FEN-TYPE                                              | FEN-String                                                    |
+|---------------------------------------------------    |---------------------------------------------------------------|
+| FEN                                                    | rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R             |
+| X-FEN                                                 | rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2|
+| SCHEMA                                                | Board Player-Color Rochade En-Passant Halfturn Turn-Number      |
 
 
 <br>
@@ -1243,13 +1250,13 @@ Durch die Implementierung des Webclienten in (+js) ist dieser sogar lokal über 
 
 <br>
 
-Zusätzlich zu dem verwendeten Vanilla-(+js) wurde jQuery als zusätzliche (+js) Bibliothek verwendet, welches eine Manipulation der (+html) Elemente stark vereinfacht. Diese bietet insbesondere einfach zu nutzende (+http)-Request Funktionen bzw. (+ajax) an, welche für die Kommunikation mit dem Backen-Service verwendet werden. Diese werden im Hintergrund eingesetzt, sodass der Webclient automatisch den neuen Spielzustand dem Benutzer anzeigt. Dies geschieht mittels `polling`, bei dem der Webbrowser in zyklischen Abständen die aktuellen Spiel-Informationen vom Backen-Service abfragt. Diese Methode wurde verwendet, um eine maximale Kompatibilität mit verschiedensten gegebenenfalls älteren Web-Browsern sicherzustellen. Eine moderne alternative ist die Verwendung von Web-Sockets, bei welcher der Web-Browser eine direkte (+tcp)-Verbindung zum Webserver (in diesem Fall der Backend-Service) aufnehmen und so eine direkte Kommunikation stattfinden kann ohne Verwendung der `polling`-Methode.
+Zusätzlich zu dem verwendeten Vanilla-(+js) wurde jQuery als zusätzliche (+js) Bibliothek verwendet, welches eine Manipulation der (+html) Elemente stark vereinfacht. Diese bietet insbesondere einfach zu nutzende HTTP-Request Funktionen bzw. (+ajax) an, welche für die Kommunikation mit dem Backen-Service verwendet werden. Diese werden im Hintergrund eingesetzt, sodass der Webclient automatisch den neuen Spielzustand dem Benutzer anzeigt. Dies geschieht mittels `polling`, bei dem der Webbrowser in zyklischen Abständen die aktuellen Spiel-Informationen vom Backen-Service abfragt. Diese Methode wurde verwendet, um eine maximale Kompatibilität mit verschiedensten gegebenenfalls älteren Web-Browsern sicherzustellen. Eine moderne alternative ist die Verwendung von Web-Sockets, bei welcher der Web-Browser eine direkte TCP-Verbindung zum Webserver (in diesem Fall der Backend-Service) aufnehmen und so eine direkte Kommunikation stattfinden kann ohne Verwendung der `polling`-Methode.
 
 <br>
 
-Der Hauptanwendungsfall des Webclienten \ref{ATC_webclient} während der Entwicklung ist es, weitere Spieler zu simulieren und so ein Spiel mit nur einem autonomen Schachtisch testen zu können.
+Der Hauptanwendungsfall des Webclienten während der Entwicklung ist es, weitere Spieler zu simulieren und so ein Spiel mit nur einem autonomen Schachtisch testen zu können.
 Durch den Webclient ist zusätzliche möglich, gezielt Spiele und Spielzüge zu simulieren. Hierzu gehören vor allem Sonderzüge wie die Rochade oder der En-Passant Zug.
-Auch können durch den Webclient ungültige Züge simuliert werden, welche durch die Verwendete Schach-(+ai) nicht getätigt werden.
+Auch können durch den Webclient ungültige Züge simuliert werden, welche durch die Verwendete Schach-AI nicht getätigt werden.
 
 <br>
 
@@ -1259,7 +1266,7 @@ Auch ist es möglich, aktuell laufende Spiele in Echtzeit anzeigen zu lassen; so
 
 <br>
 
-![Webclient: Statistiken \label{ATC_statistics}](images/ATC_statistics.png)
+![Webclient: Statistiken \label{}](images/ATC_statistics.png)
 
 
 ## AutoPlayer
@@ -1275,7 +1282,7 @@ Dieser Prozess gewährleistet zudem, dass immer zuerst die menschlichen Spieler 
 
 <br>
 
-Eine weitere Modifikation ist die Verwendung einer Schach-(+ai), da dieser Service als Computerspieler agieren soll.
+Eine weitere Modifikation ist die Verwendung einer Schach-AI, da dieser Service als Computerspieler agieren soll.
 Hierzu kam die Open-Source Chess Engine Stockfish[@stockfish] in der Version 11 zum Einsatz.
 Die Stockfish-Engine bietet noch weitere Features, als nur die nächstbesten Züge zu einem gegebenen Schachbrett zu ermitteln.
 
@@ -1286,12 +1293,12 @@ Dieses Protokoll wird in der Regel von Schach-Engines verwendet, um mit einer (+
 
 <br>
 
-Um das aktuelle Spielbrett in der Engine zu setzten wird dieses in der (+xfen) Notation mit dem Prefix `position fen` als Klartext an die Engine übergeben und sendet daraufhin eine List möglicher Züge zurück. Der erste Index dieser Liste ist dabei der am besten bewerteten Zug der Engine.
+Um das aktuelle Spielbrett in der Engine zu setzten wird dieses in der (+xfen) Notation mit dem Prefix `position fen ` als Klartext an die Engine übergeben und sendet daraufhin eine List möglicher Züge zurück. Der erste Index dieser Liste ist dabei der am besten bewerteten Zug der Engine.
 
 <br>
 
 Im Kontext des AutoPlayer-Service wird der Engine nur das aktuelle Spielbrett übermittelt und der nächstbeste Zug auslesen.
-Dies wird ausgeführt, wenn der AutoPlayer am Zug ist. Nachdem die Engine einen passenden Zug gefunden hat, wird das Ergebnis über den `make_move` (+rest)-(+api) Call übermittelt.
+Dies wird ausgeführt, wenn der AutoPlayer am Zug ist. Nachdem die Engine einen passenden Zug gefunden hat, wird das Ergebnis über den `make_move` (+rest)-API Call übermittelt.
 
 <br>
 
@@ -1424,6 +1431,14 @@ if(ev.event == guicommunicator::GUI_ELEMENT::BEGIN_BTN_SCAN && ev.type == guicom
 ```
 
 
+
+<br>
+
+
+
+
+
+
 ## Userinterface
 
 
@@ -1433,15 +1448,15 @@ Durch die kleinen Abmessungen des Displays mit 4.3 Zoll, wurde alle Bedienelemen
 
 Trotz der Einfachheit der Bedienung und der meist nur also Informationsquelle über den Spielstand dienenden User-Interface, bietet diese viele Möglichkeiten der Konfiguration des Systems. Somit kann auf ein weiteres Eingabegerät, wie z.B. einem Mobiltelefon verzichtet werden, da alle relevanten Einstellungen im Optionen-Menu vorgenommen werden können.
 
-Als Framework wurde hier das Qt[@qtframework] verwendet, da dieses bereits im Buildroot-Framework in der Version `5.12` hinterlegt ist. Somit musste kein anderes derartiges Framework aufwändig in das Buildroot-Framrwork integriert werden.
+Als Framework wurde hier das Qt[@qtframework] verwendet, da dieses bereits im Buildroot-Framework in der Version 5.12 hinterlegt ist. Somit musste kein anderes derartiges Framework aufwändig in das Buildroot-Framrwork integriert werden.
 
-Das User-Interface wurde gegen Ende der Entwicklung der Controller-Software begonnen, somit waren alle benötigten Ansichten und Funktionen definiert, trotzdem wurden im Vorfeld bereits mögliche Ansichten und Menüstrukturen mittels Wireframing \ref{ATC_Gui} festgehalten und konnten anhand dieser schnell umgesetzt werden.
+Das User-Interface wurde gegen Ende der Entwicklung der Controller-Software begonnen, somit waren alle benötigten Ansichten und Funktionen definiert, trotzdem wurden im Vorfeld bereits mögliche Ansichten und Menüstrukturen mittels Wireframing festgehalten und konnten anhand dieser schnell umgesetzt werden.
 
 ![Embedded System Software: User-Interface Mockup \label{ATC_Gui}](images/ATC_Gui.png)
 
 Das Qt[@qtframework] bietet dazu einen separaten Editor `Qt Design Studio` an, in denen die zuvor erstellen Wireframe-Grafiken importiert wurden und anschliessen mit den Bedienelementen ersetzt werden könnten. Dieser Prozess gestaltete sich als sehr effizient und so konnte das komplette UI mit moderatem Zeitaufwand umgesetzt werden.
 
-```qml
+```QML
 // WINDOW.qml User-Interface ATC
 import QtQuick 2.15
 import QtQuick.Controls 2.15
@@ -1482,7 +1497,7 @@ Rectangle {
                 //...
 ```
 
-Die anschließende Implementierung der Backend-Logik des Unter-Interface bestand in der Verbindung, der in (+qml) erstellten Bedienelemente durch den `Qt Design Studio`-Editor und der User-Interface Backend Logik. Diese beschränkt sich auf die Initialisierung des Fensters und dem anschließenden laden und darstellen des (+qml) Codes. Die Backend-Logik Funktionalitäten in einem (+qml) Typ `MenuManager` angelegt, welcher vor dem Laden des eigentlichen User-Interface (+qml) Codes registriert werden muss.
+Die anschließende Implementierung der Backend-Logik des Unter-Interface bestand in der Verbindung, der in QML erstellten Bedienelemente durch den `Qt Design Studio`-Editor und der User-Interface Backend Logik. Diese beschränkt sich auf die Initialisierung des Fensters und dem anschließenden laden und darstellen des QML Codes. Die Backend-Logik Funktionalitäten in einem QML Typ `MenuManager` angelegt, welcher vor dem Laden des eigentlichen User-Interface QML Codes registriert werden muss.
 
 
 ```c++
@@ -1559,6 +1574,12 @@ void MenuManager::updateProgress()
 
 
 
+<br>
+
+
+
+
+
 
 # Fazit
 
@@ -1570,8 +1591,6 @@ Es wurde ein Prototyp eines autonomen Schachtischs entwickelt.
 * leichte bedienung
 * lässt spiel für erweiterungen
 *
-
-## Persönliches Fazit
 
 ## Ausblick
 
