@@ -1465,9 +1465,80 @@ Diese Benutzer-Events seperat verarbeitet und sind vom Spielablauf getrennt. Hie
 
 ## Figur Bewegungspfadberechnung
 
-* Algorithmus zur Umsetzung eines Schachzugs
-* Auftrennung in current und target Board
-* vier Schritte (entfernen, bewegen, hinzufügen, bewegen)
+
+
+Nach dem Start der Software wird durch das abscannen jedes einzelnen Feldes die Anzahl und Typen der Figuren ermittelt. Dies stellt sichder dass sich die Erforderliche Anzahl der Figuren beim Systemstart auf dem Spielbrett befinden, ansonsten in ein Start des Programms nicht möglich.
+
+Wärend der Sync-Phase muss die Software das vorgegebene Schachfeld herstellen. Dazu hält die Software den aktuellen Bretzustand vor und vergleicht diese mit dem Ziel-Schachbrett.
+Durch einen vergleich dieser, können die sich geänderten Figuren lokalisiert werden. Dadurch dass immer Ziel und Aktuelles-Spielbrett miteinander verglichen werden, können mehrere Züge auf einemal Durchgeführt werden. Hierbei ist es auch möglich auf Spielbrett in einem Zustand X, wieder die Ausgangsposition herstellen zu können.
+Somit kann ein belibiges Spielfeld vorgegeben werden, welches der Tisch dementsprechend aufbaut.
+
+<br>
+
+Um dies zu ermöglichen, wird aus der Vergleich der beiden Spielbretter eine Differenz in Form einer Liste gebildet. In dieser sind alle Änderungen eines einzelnen Feldes vermerkt.
+Eine Änderung besteht aus der Figur welche sich aktuell auf dem Brett befindet und dem Ziel-Zustand.
+
+```c++
+//ChessBoard.cpp
+std::vector<ChessBoard::FigureFieldPair>
+ChessBoard::compareBoards(ChessPiece::FIGURE *_board_a, ChessPiece::FIGURE *_board_b, bool _include_park_pos) {
+    std::vector<ChessBoard::FigureFieldPair> diff_list;
+    ChessPiece::FIGURE *board_current = get_board_pointer(ChessBoard::BOARD_TPYE::REAL_BOARD);
+    ChessPiece::FIGURE *board_target = get_board_pointer(ChessBoard::BOARD_TPYE::TARGET_BOARD);
+    //..
+    //NOW CHECK BOARD DIFFERENCES
+    for (int i = ChessField::field2Index(ChessField::CHESS_FILEDS::CHESS_FIELD_A1);
+         i < ChessField::field2Index(ChessField::CHESS_FILEDS::CHESS_FIELD_PARK_POSTION_WHITE_1); i++) {
+        ChessPiece::FIGURE tmp_curr = getFigureOnField(board_current, ChessField::Index2Field(i));
+        ChessPiece::FIGURE tmp_target = getFigureOnField(board_target, ChessField::Index2Field(i));
+        //CHECK IF EQUAL FIGURES
+        if (ChessPiece::compareFigures(tmp_curr, tmp_target)) {
+            continue;
+        }
+        ChessBoard::FigureFieldPair tmp;
+        tmp.field_curr = ChessBoard::FigureField(ChessField::Index2Field(i), tmp_curr);
+        tmp.field_target = ChessBoard::FigureField(ChessField::Index2Field(i), tmp_target);
+        tmp.processed = false;
+        diff_list.push_back(tmp);
+    }
+    return diff_list;
+}
+```
+<br>
+Aus dieser Liste können anschliessend einzelne Figur-Bewegungen abgeleitet werden. Dazu wird zu einer Änderung des Start-Feldes in der Liste ein weiteres Listenelement gesucht, bei welchem die Änderung im Zielfeld liegt. Somit kann Start- und Zielfeld für eine Figur bestimmt werden. Anzumerken ist, dass die errechneten Züge nicht die logischsten oder kürzesten darstellen müssen.
+Da hier die Reihenfolge der Änderungen nach vorkommen in der Liste entscheident ist.
+Somit ensteht eine weitere Liste an Feld-Operationen, bei denen Figuren hinzugefügt, bewegt, entfernt werden können.
+
+- überschüssige Figuren entfernen
+    - wenn allgemien zu viele Figuren auf dem Feld sind
+    - wenn bei dem auszuführenden Zug eine Figur geschlagen wird
+- möglichen Zug ausführen
+    - falls Figuren fehlen diese hinzufügen
+    - sonst Figur an Zielposition bewegen
+- Figur fehlt
+    - Figur aus Park-Position auf das Spielbrett holen
+
+Dieser Vorgang wird rekursiv solange ausgeführt bis es keine Änderungen auf dem Spielbrett mehr gibt. Der rekursive Ansatz ist notwendig, da nicht alle Figuren ihren Bestimmungsort einnehmen können, wenn diese noch von einer anderen Figur belegt sind. Diese muss zuerst auf deren Ziel-Feld geschoben werden.
+
+<br>
+
+Aus den Start und Ziel-Feldern werden im letzten Schritt Wegpunkte \ref{ATC_FigureMoveAlgorithm} generiert.
+Diese beschreiben den Weg welche die Figur ablaufen muss von Start zum Zielfeld.
+Das Spielbrett wurde so designed, dass zwischen jeder Figur auf dem Feld immer eine weitere Figur platz hat.
+Somit ist es möglich, dass die sich bewegenden Figuren zwischen zwei auf ihren Feldern stehenden hindurchbewegt werden können.
+Der Algorithmus berechnet genau diese Wegpunkte. Nachdem die Figur aus der Mitte des Feldes und an den Rand dieses Bewegt wurde, kann die Figur ungehindert zwischen den anderen vorbei bewegt werden. Die Figur wird anschliessend in Richtung der X-Achse auf die Höhe des Zielfeldes bewegt um anschliessend auf der Y-Achse an die Kante des Zielfeldes bewegt zu werden.
+Der letzte Wegpunkt liegt im inneren des Zielfelds, sodass sich die Figur in der Mitte diesem befindet.
+
+<br>
+
+Anzumerken ist, dass dieser Algorithmus nicht weiter Optimiert wurde, somit führen die Figuren auch einen Zick-Zack-Weg aus auch wenn das Zielfeld direkt nebem dem Start-Feld liegt.
+
+<br>
+
+![Embedded System Software: Figur Wegpunkte \label{ATC_FigureMoveAlgorithm}](images/ATC_FigureMoveAlgorithm.png)
+
+
+
 ## Schachfeld Scan Algorithmus zur Erkennung von Schachzügen
 
 ![Embedded System Software: Schachfeld Scan Algorithmus Ablauf \label{ATC_ChessMoveAlgorithm}](images/ATC_ChessMoveAlgorithm.png)
