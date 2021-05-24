@@ -639,8 +639,8 @@ Die (+hal) und deren benötigten Softwarekomponenten, zur Buskommunikation und H
 
 ### TMC5160 SPI Treiber
 
-Der Treiber für die verwendeten `TMC5160` Schrittmotor-Treiber ist ebenfalls ein Bestandteil der (+hal). Die verwendeten Bausteine bieten mitunter sehr komplexe Konfigurationsmöglichkeiten und je nach Betriebsart sind mehere Lese- und Schreiboperationen über den (+spi) Bus notwendig. Diesbezüglich wurde die komplette Ansteuerung auf der Softwareseite in ein eigenens Modul geschachtelt.
-Dieses stellt verschiedene Funktionen zum Verfahren eines Motors bereit. Hierzu benötigt jeder verwendete Hardware-Treiber eine Inztanz des Moduls zur Ansteuerung, so ist es zusätich möglich für jede Achse verschiedene Parameter setzten zu können im Bezug auf Beschleunigung und Positioniergeschwindigkeit des Motors.
+Der Treiber für die verwendeten `TMC5160` Schrittmotor-Treiber ist ebenfalls ein Bestandteil der (+hal). Die verwendeten Bausteine bieten mitunter sehr komplexe Konfigurationsmöglichkeiten und je nach Betriebsart sind mehrere Lese- und Schreiboperationen über den (+spi) Bus notwendig. Diesbezüglich wurde die komplette Ansteuerung auf der Softwareseite in ein eigenes Modul geschachtelt.
+Dieses stellt verschiedene Funktionen zum Verfahren eines Motors bereit. Hierzu benötigt jeder verwendete Hardware-Treiber eine Instanz des Moduls zur Ansteuerung, so ist es zusätzlich möglich für jede Achse verschiedene Parameter setzten zu können in Bezug auf Beschleunigung und Positioniergeschwindigkeit des Motors.
 
 : TMC5160 Beschleunigungskurve / RAMP Parameter
 
@@ -655,9 +655,9 @@ Dieses stellt verschiedene Funktionen zum Verfahren eines Motors bereit. Hierzu 
 | D1        	| 50000   	|
 | V_STOP    	| 10      	|
 
-Der Treiber wird hier nur im Position-Mode betrieben, welches ein wesentlichees Feature dessen ist. Hierbei kann über ein Register eine Zielposition in Schritten vorgegeben werden. Der Treiber ermittelt daraufhin die passende Beschleunigungskurve und verfährt den Motor an die vorgebene Position.
-Über ein entsprechende Register kann der Status der Operation abgefagt werden und ob der Motor seine Position erreicht hat bzw ob fehler auftraten. Somit muss nicht auf das erreichen der Zielposition gewartet werden und anderen Aufgaben können wärenddesse ausgeführt werden. Die Beschleunigungskurve kann zusätzlich manuell angepasst werden.
-Hier wurden jedoch die Standartwerte aus dem Datenblatt verwendet, welches sich bei meheren Tests als Ideal herausstellten im Bezug der Geräuchemission des Motors.
+Der Treiber wird hier nur im Position-Mode betrieben, welches ein wesentliches Feature dessen ist. Hierbei kann über ein Register eine Zielposition in Schritten vorgegeben werden. Der Treiber ermittelt daraufhin die passende Beschleunigungskurve und verfährt den Motor an diese Position.
+Über ein entsprechende Register kann der Status der Operation abgefragt werden und ob der Motor seine Position erreicht hat bzw. ob Fehler auftraten. Somit muss nicht auf das erreichen der Zielposition gewartet werden und anderen Aufgaben können währenddessen ausgeführt werden. Die Beschleunigungskurve kann zusätzlich manuell angepasst werden.
+Hier wurden jedoch die Standardwerte aus dem Datenblatt verwendet, welches sich bei mehreren Tests als Ideal herausstellten in Bezug der Geräuschemission des Motors.
 
 
 ```c++
@@ -771,10 +771,12 @@ void TMC5160::atc_home_sync()
 //...
 ```
 
-Eine zusätzliche Besonderheit stellt der Referenzfahrt dar. Nach dem Start des System ist es möglich, dass sich der Schlitten einer Achse nicht an der Null-Position befindet, sondern an einer unbekannten Position auf der Achse. Deswegen muss diese zuerst ann die Home-Position gefahren werden. Dazu besitzt das System zwei Endschalter, welches jeweils mit einem Schrittmotor-Treiber verbunden sind. Diese beistzen zwei solcher Taster-Eingänge.
+Eine zusätzliche Besonderheit stellt der Referenzfahrt dar. Nach dem Start des Systems ist es möglich, dass sich der Schlitten einer Achse nicht an der Null-Position befindet, sondern an einer unbekannten Position auf der Achse.
+Deswegen muss diese zuerst an die Home-Position gefahren werden. Dazu besitzt das System zwei Endschalter, welches jeweils mit einem Schrittmotor-Treiber verbunden sind. Diese besitzen zwei solcher Taster-Eingänge `REF_L / REF_R`.
 
-Bei einer wechselnden Flanke an diesem Eingang kann der Motor-Treiber verschiedene Funktionen ausführen. In diesem Fall wurde die Motor-Stopp Funktion mittels Registereintrag gewählt, welche den Motor stoppt sobald der Schalter betätigt wird. Dies stellt das die Home-Position dar.
-Dies kann jedoch nicht im Position-Mode des Treiber umgesetzt werden, da das Ziel-Positionsregister auf ß gesetzt wird. Hierzu muss der Treiber in den Velocity-Modus geschaltet werden, welches ein Verfahren des Motors in eine Richtung ohne Zeitbegrenzung erlaubt. Dies wird solange in negativer Bewegungsrichtung ausgeführt bis der Endschalter erreicht wurde, somit ist die Achse an ihrere Home-Position angekommen und kann anschliessend im Positions-Modus normal verfahren werden.
+Bei einer wechselnden Flanke an diesem Eingang kann der Motor-Treiber verschiedene Funktionen ausführen. In diesem Fall wurde die Motor-Stopp Funktion mittels Registereintrag gewählt, welche den Motor stoppt, sobald der Schalter betätigt wird. Dies stellt schlussendlich die Home-Position dar.
+Dies kann jedoch nicht im Position-Mode des Treibers umgesetzt werden, da das Ziel-Positionsregister auf 0 gesetzt wird. Hierzu muss der Treiber in den Velocity-Modus geschaltet werden, welches ein Verfahren des Motors in eine Richtung ohne Zeitbegrenzung erlaubt.
+Dies wird so lange in negativer Bewegungsrichtung ausgeführt bis der Endschalter erreicht wurde, somit ist die Achse an ihrer Home-Position angekommen und kann anschließend im Positions-Modus normal verfahren werden.
 
 
 
