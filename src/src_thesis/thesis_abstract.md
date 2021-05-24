@@ -1,6 +1,3 @@
-# Abstract
-
-
 Die Kurzfassung gibt auf ein bis zwei Seiten die wesentlichen Inhalte und Ergebnisse der Abschlussarbeit wieder. 
 
 Sie gliedert sich inhaltlich in

@@ -575,7 +575,7 @@ int main(int argc, char *argv[])
     //PERFORM A LOGOUT => IF A PREVIOUS SESSION IS ACTIVE
     if(gamebackend.logout())
     {
-        LOG_F(ERROR, "gamebackend - LOGIN");
+        LOG_F(INFO, "gamebackend - LOGOUT SUCCESS");
     }else
     {
         LOG_F(ERROR, "gamebackend - logout failed");

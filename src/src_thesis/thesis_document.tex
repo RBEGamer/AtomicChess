@@ -1,8 +1,8 @@
 \hypertarget{einleitung}{%
-\section{Einleitung}\label{einleitung}}
+\chapter{Einleitung}\label{einleitung}}
 
 \hypertarget{motivation}{%
-\subsection{Motivation}\label{motivation}}
+\section{Motivation}\label{motivation}}
 
 Eingebettete Systeme (Englisch ``embedded Systems'') sind technische
 Zusammensetzungen, welche für eine spezifische Funktion entwickelt
@@ -10,10 +10,10 @@ werden. Im Gegensatz zu Mehrzwecksystemen (Englisch ``multi-purpose
 systems''), wie zum Beispiel einem Personal Computer, welcher in der
 Lage ist, diverse Funktionen auszuführen und nicht zwingend an eine
 Funktion gebunden ist, dienen eingebettete Systeme einer bestimmten
-Logik. Daraus resultieren einfacherer und auch Ressourcen-sparendere
+Logik. Daraus resultieren simplere und auch Ressourcen-sparendere
 Systeme, die wesentlich näher an der Technik und der für den Zweck
 nötigen Komponenten und Software entwickelt werden. Systeme können
-grünster zusammengesetzt und Fehlerquellen schneller entdeckt und
+günstiger zusammengesetzt und Fehlerquellen schneller entdeckt und
 behoben werden. Nicht für den Prozess notwendige Komponenten werden gar
 nicht erst verwendet. Bei einem Mehrzwecksystem wird akzeptiert, dass
 Komponenten und Schnittstellen existieren, die nicht benötigt werden.
@@ -29,8 +29,8 @@ da man den Prozess auch im Nachhinein noch anpassen kann, da zusätzliche
 Funktionen und Komponenten gegeben sind oder leichter ergänzt werden
 können. Das eingebettete System muss in der Regel aufgewertet oder sogar
 völlig ersetzt werden, wenn zu einem späteren Zeitpunkt festgestellt
-wird, dass Funktionen nicht gegeben oder umsetzbar sind. Fertige Systeme
-sind komplexer in der Aufwertung.
+wird, dass Funktionen nicht gegeben oder umsetzbar sind. Fertiggestellte
+Systeme sind komplexer in der Aufwertung.
 
 Die Fähigkeit zur Erstellung eines solchen System ist daher nicht
 leichtfertig anzunehmen und es ist mir wichtig, zum Abschluss meines
@@ -48,7 +48,7 @@ meiner Vorliebe zur mechanisch-elektrischen Gestaltung. Angefangen mit
 den Grundlagen der Informatik, insbesondere mit technischem Bezug, über
 die Berechnung und Auslegung von Systemkomponenten, zudem die
 objektorientierte Projektplanung und Architektur von Systemen bis hin zu
-Datenbanken und Webtechnologien und Softwarenentwicklung. Zudem wird
+Datenbanken und Webtechnologien und Softwareenentwicklung. Zudem wird
 mein Studienschwerpunkt, die technische Informatik, mit einem
 einbetteten System manifestiert.
 
@@ -63,10 +63,10 @@ bewiesen sich immer mehr Konzerne ihre technische Kompetenz und
 Überlegenheit und die Fähigkeit ihrer Maschinen mittels der Auswertung
 von Schachalgorithmen und dem möglichst schnellen besiegen derzeitiger
 Schach-Meister und -Meisterinnen. Die Algorithmen stehen heute in einer
-Vielzahl frei zugänglich zur Verfügung, jedoch ist das Interesse daran,
-für Spieler mögliche Anwendungen zu generieren, verschwindend gering und
-wird oftmals nur von Experten und Enthusiasten genutzt und auch
-hinterfragt.
+Vielzahl als open-source Projekte zur Verfügung, jedoch ist das
+Interesse daran, für Spieler mögliche Anwendungen zu generieren,
+verschwindend gering und wird oftmals nur von Experten und Enthusiasten
+genutzt und auch hinterfragt.
 
 Mit dieser Arbeit möchte ich mich diesem Problem stellen und einen
 möglich günstigen Tisch entwickeln, welcher das Spielerlebnis ohne
@@ -78,7 +78,7 @@ sein, sondern auch ein handfestes Produkt, dass meine Qualitäten und
 Enthusiasmus widerspiegeln.
 
 \hypertarget{zielsetzung}{%
-\subsection{Zielsetzung}\label{zielsetzung}}
+\section{Zielsetzung}\label{zielsetzung}}
 
 Das Ziel der nachfolgenden Arbeit ist es, einen autonomen Schachtisch zu
 entwickeln, welcher in der Lage ist, Schachfiguren autonom zu bewegen
@@ -99,7 +99,7 @@ originalgetreu widerspiegelt, sondern das Einzelspieler-Modell
 zusätzlich noch verbessert.
 
 \hypertarget{methodik}{%
-\subsection{Methodik}\label{methodik}}
+\section{Methodik}\label{methodik}}
 
 Im ersten Abschnitt werden die zum Zeitpunkt existierenden Ansätze und
 deren Umsetzung beleuchtet. Hier wurde insbesondere darauf geachtet, die
@@ -133,12 +133,12 @@ eingebetteten System ausgeführt wird, im Detail beschrieben und deren
 Kommunikation mit der Cloud-Infrastruktur, sowie mit den elektrischen
 Komponenten beleuchtet.
 
-\hypertarget{analyse-bestehender-systeme-und-machbarkeitsanalyse}{%
-\section{Analyse bestehender Systeme und
-Machbarkeitsanalyse}\label{analyse-bestehender-systeme-und-machbarkeitsanalyse}}
+\hypertarget{analyse-bestehender-systeme}{%
+\chapter{Analyse bestehender
+Systeme}\label{analyse-bestehender-systeme}}
 
 \hypertarget{existierende-systeme-im-vergleich}{%
-\subsection{Existierende Systeme im
+\section{Existierende Systeme im
 Vergleich}\label{existierende-systeme-im-vergleich}}
 
 Im Folgenden werden vier kommerzielle und drei lizenzunabhängige
@@ -174,7 +174,7 @@ Die Tische eines Herstellers unterscheiden sich kaum in ihren
 Funktionen; mit steigendem Preis werden zusätzliche Funktionen in Form
 von Sensoren oder Verbindungsoptionen implementiert.
 
-Das Angebot lizenzfreier Produkte hingegen ist signifikanter, jedoch
+Das Angebot von open-source Projekten hingegen ist signifikanter, jedoch
 sind die einzelnen Modelle oftmals Kopien oder Revisionen voneinander.
 Die möglichen Funktionen unterscheiden sich daher kaum. Für die hier
 dargestellte Übersicht wurden drei Modelle gewählt, welche in ihren
@@ -185,7 +185,7 @@ unterscheiden sich daher nur in geringen Funktionen, was im Folgenden
 nun näher erläutert wird.
 
 \hypertarget{kommerzielle-produkte}{%
-\subsubsection{Kommerzielle Produkte}\label{kommerzielle-produkte}}
+\subsection{Kommerzielle Produkte}\label{kommerzielle-produkte}}
 
 \begin{longtable}[]{@{}lllll@{}}
 \caption{Auflistung kommerzieller autonomer Schachtische}\tabularnewline
@@ -391,7 +391,7 @@ mittels noch zusätzlicher Verbesserungen ein eigenes Produkt zu
 entwickeln.
 
 \hypertarget{open-source-projekte}{%
-\subsubsection{Open-Source Projekte}\label{open-source-projekte}}
+\subsection{Open-Source Projekte}\label{open-source-projekte}}
 
 Bei allen Open-Source Projekten wurden die Eigenschaften anhand der
 Beschreibung und der aktuellen Software extrahiert.
@@ -572,7 +572,7 @@ resultierenden Änderungen in der Figur Positionen in der Matrix können
 die neuen Figur Stellungen berechnet werden.
 
 \hypertarget{user-experience}{%
-\subsection{User Experience}\label{user-experience}}
+\section{User Experience}\label{user-experience}}
 
 Ein wichtiger Aspekt bei diesem Projekt stellt die User-Experience dar.
 Diese beschreibt die Ergonomie der Mensch-Maschine-Interaktion und wird
@@ -619,7 +619,7 @@ abgedeckt und der Benutzer muss die Figuren selbständig vom Feld
 entfernen.
 
 \hypertarget{anforderungsanalyse}{%
-\subsection{Anforderungsanalyse}\label{anforderungsanalyse}}
+\chapter{Anforderungsanalyse}\label{anforderungsanalyse}}
 
 Nach Abschluss der Recherche, kann somit eine Auflistung aller Features
 angefertigt werden, welche ein autonomer Schachtisch aufweisen sollte.
@@ -662,7 +662,7 @@ Geschwindigkeit der Figur-Bewegung gelegt, da hier die Zuverlässigkeit
 und Wiederholgenauigkeit dieser im Vordergrund stehen.
 
 \hypertarget{machbarkeitsanalyse}{%
-\subsection{Machbarkeitsanalyse}\label{machbarkeitsanalyse}}
+\chapter{Machbarkeitsanalyse}\label{machbarkeitsanalyse}}
 
 \begin{itemize}
 \tightlist
@@ -683,11 +683,11 @@ und Wiederholgenauigkeit dieser im Vordergrund stehen.
 \end{itemize}
 
 \hypertarget{grundlegende-verifikation-der-ausgewuxe4hlten-technologien}{%
-\section{Grundlegende Verifikation der ausgewählten
+\chapter{Grundlegende Verifikation der ausgewählten
 Technologien}\label{grundlegende-verifikation-der-ausgewuxe4hlten-technologien}}
 
 \hypertarget{erprobung-buildroot-framework}{%
-\subsection{Erprobung
+\section{Erprobung
 Buildroot-Framework}\label{erprobung-buildroot-framework}}
 
 \begin{itemize}
@@ -705,7 +705,7 @@ Buildroot-Framework}\label{erprobung-buildroot-framework}}
 \end{itemize}
 
 \hypertarget{verifikation-nfc-technologie}{%
-\subsection{Verifikation NFC
+\section{Verifikation NFC
 Technologie}\label{verifikation-nfc-technologie}}
 
 \begin{itemize}
@@ -738,7 +738,7 @@ Technologie}\label{verifikation-nfc-technologie}}
 \end{itemize}
 
 \hypertarget{schrittmotor-schrittmotorsteuerung}{%
-\subsection{Schrittmotor /
+\section{Schrittmotor /
 Schrittmotorsteuerung}\label{schrittmotor-schrittmotorsteuerung}}
 
 \begin{itemize}
@@ -759,7 +759,7 @@ Schrittmotorsteuerung}\label{schrittmotor-schrittmotorsteuerung}}
 \end{itemize}
 
 \hypertarget{d-druck-fuxfcr-den-mechanischen-aufbau}{%
-\subsection{3D Druck für den mechanischen
+\section{3D Druck für den mechanischen
 Aufbau}\label{d-druck-fuxfcr-den-mechanischen-aufbau}}
 
 Da es sich hier nur um einen Prototyp handelt, wurde hier auf ein
@@ -831,7 +831,7 @@ wurden hier die Standarteinstellungen verwendet, welche in diesem Falle
 einen guten Kompromiss zwischen Qualität und Druckzeit lieferten.
 
 \hypertarget{erstellung-erster-prototyp}{%
-\section{Erstellung erster Prototyp}\label{erstellung-erster-prototyp}}
+\chapter{Erstellung erster Prototyp}\label{erstellung-erster-prototyp}}
 
 \begin{figure}
 \centering
@@ -841,14 +841,15 @@ einen guten Kompromiss zwischen Qualität und Druckzeit lieferten.
 \end{figure}
 
 \hypertarget{mechanik}{%
-\subsection{Mechanik}\label{mechanik}}
+\section{Mechanik}\label{mechanik}}
 
 Bei dem mechanischen Aufbau wurde auf ein einfaches Design geachtet. Die
 Konstruktion wurde im Vorfeld in einem \gls{cad} Programm durchgeführt
 und die Grundkonstruktion in mehreren Iterationsschritten verfeinert.
-Das verwendete \gls{cad} Programm `Autodesk Fusion 360' bietet, eine
-einfache Umsetzung auch für Personen, welche keine Ausbildung im Bereich
-der Mechanik und Entiwcklung vorweisen können.
+Das verwendete \gls{cad} Programm
+\passthrough{\lstinline!Autodesk Fusion 360!} bietet, eine einfache
+Umsetzung auch für Personen, welche keine Ausbildung im Bereich der
+Mechanik und Entwicklung vorweisen können.
 
 Bei der initialen Planung wurde beachtet, einen möglichst kleinen
 Fußabdruck des Schachtischs zu realisieren. Darüberhinaus wurde
@@ -868,7 +869,7 @@ Schrittmotor inklusive des passenden Endschalters montiert hatte. Bei
 den Schlitten, welche auf den Aluminium-Profilen laufen, wurden fertige
 Standartkomponenten verwendet, um das Spiel in der Mechanik zu
 minimieren. Diese stellen jedoch einen großen Posten in der
-Preiskalkulation dar. Die Vortiele überwogen jedoch, da diese nicht
+Preiskalkulation dar. Die Vorteile überwogen jedoch, da diese nicht
 manuell erstellt und getestet werden müssen.
 
 Bereits während des Designprozess konnte anhand einer statischen
@@ -902,17 +903,17 @@ eine solide Grundlage darf, welche für die weitere Software und
 Hardware-Entwicklung essentiell ist.
 
 \hypertarget{parametrisierung-schachfiguren}{%
-\subsection{Parametrisierung
+\section{Parametrisierung
 Schachfiguren}\label{parametrisierung-schachfiguren}}
 
 Da das System die auf dem Feld befindlichen Schachfiguren anhand von
 \gls{nfc} Tags erkennt, müssen diese zuerst mit Daten beschrieben
 werden. Die verwendeten NXP NTAG 21 Chips, besitzen einen vom Benutzer
 verwendbaren Speicher von 180 Byte. Dieser kann über ein
-\gls{nfc}-Lese/Schreibgerät mit Daten verschiedenster Art beschrieben
-und wieder ausgelesen werden. Moderne Mobiltelefone besitzen in der
-Regel auch die Fähigkeit mit passenden \gls{nfc} Tags kommunizieren zu
-können; somit sind keine Stand-Alone Lesegeräte mehr notwendig.
+\gls{nfc}-Lese/Schreibger mit Daten verschiedenster Art beschrieben und
+wieder ausgelesen werden. Moderne Mobiltelefone besitzen in der Regel
+auch die Fähigkeit mit passenden \gls{nfc} Tags kommunizieren zu können;
+somit sind keine Stand-Alone Lesegeräte mehr notwendig.
 
 Der Schachtisch verwendet dabei das \gls{ndef} Dateiformat welches
 Festlegt, wie die Daten auf dem \gls{nfc} Tag gespeichert werden. Da
@@ -922,10 +923,10 @@ verwendete Chipsatz PN532 von NXP ist dazu ebenfalls in der Lage.
 
 Um das \gls{ndef} Format verwenden zu können, müssen die \gls{nfc} Tags
 zuerst auf diese formatiert werden. Die meisten käuflichen Tags sind
-bereits derart formatiert. Alternativ kann dies mittels Mobiltelefons
-und passender Applikation geschehen. Da \gls{ndef} Informationen über
-die Formatierung und der gespeicherten Einträge speichert, stehen nach
-der Formatierung nur noch 137 Bytes des NXP NTAG 21 zur Verfügung.
+bereits derart formatiert. Alternativ kann dies mittels Mobiltelefon und
+passender Applikation geschehen. Da \gls{ndef} Informationen über die
+Formatierung und der gespeicherten Einträge speichert, stehen nach der
+Formatierung nur noch 137 Bytes des NXP NTAG 21 zur Verfügung.
 
 Per Lesegerät können anschließend mehrere \gls{ndef} Records auf den Tag
 geschrieben werden. Diese sind mit Dateien auf einer Festplatte
@@ -939,9 +940,10 @@ Der autonome Schachtisch verwendet den einfachsten \gls{ndefrtd} Typ,
 den sogenannten Text-Record, welcher zum Speichern von Zeichenketten
 genutzt werden kann, ohne das eine Aktion auf dem Endgerät ausgeführt
 wird. Jeder Tag einer Schachfigur, welche für den autonomen Schachtisch
-verwendet werden kann, besitzt diesen \gls{ndef} Record an der ersten
-Speicher-Position. Alle weiteren eventuell vorhandenen Records werden
-vom Tisch ignoriert. \cite{nordicnfclib}
+verwendet werden kann, besitzt diesen \gls{ndef} Record
+\ref{ndef_record_rook} an der ersten Speicher-Position. Alle weiteren
+eventuell vorhandenen Records werden vom Tisch ignoriert.
+\cite{nordicnfclib}
 
 \begin{figure}
 \centering
@@ -951,11 +953,18 @@ ChessFigureIDGenerator.html \label{ATC_ChessFigureIDGenerator}}
 \end{figure}
 
 Um die Payload für den \gls{nfc} Record zu erstellen wurde ein kleine
-Web-Applikation erstellt, welche den Inhalt der Text-Records erstellt.
-Dieser ist für jede Figur individuell und enthält den Figur-Typ und die
-Figur-Farbe. Das Tool unterstützt auch das Speichern weiterer Attribute
-wie einem Figur-Index, welcher aber in der finalen Software-Version
-nicht genutzt wird. \ref{ATC_ChessFigureIDGenerator}
+Web-Applikation \ref{ATC_ChessFigureIDGenerator} erstellt, welche den
+Inhalt der Text-Records erstellt. Dieser ist für jede Figur individuell
+und enthält den Figur-Typ und die Figur-Farbe. Das Tool unterstützt auch
+das Speichern weiterer Attribute wie einem Figur-Index, welcher aber in
+der finalen Software-Version nicht genutzt wird.
+
+\begin{figure}
+\centering
+\includegraphics{images/ndef_record_rook.png}
+\caption{Prototyp Hardware: NDEF Text Record Payload für einen weißen
+Turm \label{ndef_record_rook}}
+\end{figure}
 
 Nach dem Beschreiben eines \gls{nfc} Tags ist es zusätzlich möglich,
 diesen gegen Auslesen mittels einer Read/Write-Protection zu schützen.
@@ -966,15 +975,8 @@ sein. Auch ist es so möglich, verschiedene Figur-Sets zu mischen; somit
 kann ein Spieler verschiedene Sets an Figuren mit dem autonomen
 Schachtisch verwenden.
 
-\begin{figure}
-\centering
-\includegraphics{images/ndef_record_rook.png}
-\caption{Prototyp Hardware: NDEF Text Record Payload für einen weißen
-Turm \label{ndef_record_rook}}
-\end{figure}
-
 \hypertarget{schaltungsentwurf}{%
-\subsection{Schaltungsentwurf}\label{schaltungsentwurf}}
+\section{Schaltungsentwurf}\label{schaltungsentwurf}}
 
 \begin{figure}
 \centering
@@ -983,22 +985,123 @@ Turm \label{ndef_record_rook}}
 \label{ATC_Hardware_Architecture_DK}}
 \end{figure}
 
-\begin{itemize}
-\tightlist
-\item
-  auswahl der Motortreiber (leise, bus ansteuerung)
-\item
-  ansteuerung pn532 und umsetzung auf uart
-\item
-  platinendesign
-\item
-  ansterung elektromagnetet
-\end{itemize}
+Durch die zuvor durchgeführte Validierung der verwendeten Technologien,
+konnte ein Blockdiagramm \ref{ATC_Hardware_Architecture_DK} der
+verwendeten elektrischen Komponenten angefertigt werden. Dieses enthält
+zum einen die zwei Schrittmotor-Treiber und zum anderen die Komponenten
+zur Ansteuerung der beiden Elektromagnete und das PN532 Module zum
+Auslesen der \gls{nfc} Tags.
+
+Die wichtigsten Komponenten in der Schaltung sind das eingebettete
+System und die beiden Schrittmotortreiber
+\passthrough{\lstinline!TMC5160-BOB!}. Diese sind direkt über einen
+\gls{spi} Bus miteinander verbunden. Zusätzlich zu den Schrittmotoren
+selbst, ist an jedem Treiber der Endschalter zur durchführung der
+Referenzfahrt der Achse angeschlossen. Die Treiber bieten dabei Eingänge
+für zwei Endschalter, hier wird jedoch nur der Enschalter für die
+minimale Position (Home Position) benötigt. Die Treiber werden direkt
+mit der Eingangsspannung von 14-24V Versorgt
+
+Zusätzlich sind Spannungswandler nötig um um die erforderlichen
+Spannungen von 12V für die Elektromagnete und 5V für das eingebette
+System zu erzeugen. Die Schrittmotoren werden direkt mit der
+Versorgungsspannung von 14-24V betrieben. Alle weiteren verwendeten
+Komponenten zu denen unter anderem auch das PN532 \gls{nfc} Modul und
+die WS2811 \gls{led} Module gehören werden ebenfalls über die 5V Schiene
+versorgt.
+
+Für den Betrieb der beiden Elektromagnete wurde kein N-Channel Mosfet
+o.ä. verwendet, da hier auf maximale flexibilität der Ansteuerung
+ausschlaggebend ist, da noch nicht genug Erfahrung mit dem Verhalten
+dieser im Zusammenspiel mit den magnetischen Schachfiguren gesammelt
+werden konnte. Deshalb wurde hier eine H-Brücke
+\passthrough{\lstinline!DRV8871H!} verwendet, somit kann auch die
+Polarität im nachhinein per Software geändert werden und nicht nur die
+Spannung über ein \gls{pwm} Signal. Der verwendete Treiber besitz dazu
+hinaus zwei Ausgänge, weswegen sich diese Module besonders anbot.
+
+Für die Erzeugung der \gls{pwm} Signale für die H-Brücke wurde ein
+zusätzlicher Mikrokontroller \passthrough{\lstinline!Atmega328p!}
+benötigt, da hier die Steuersignale nicht direkt vom eingebetten Symstem
+erzeugt werden, sondern nur die Zustandsinformationen über den \gls{spi}
+Bus übertragen werden sollen. Dies spart zusätzliche \gls{gpio}
+Anschlüsse und somit sind alle Kompomenten über einen zentralen Bus
+kontrollierbar, welches einen einfachen tausch des eingebetteten Systems
+in späteren Revisionen vereinfacht.
+
+Der zusätzliche Mikrokontroller übernimmt auch die Kommunikation mit dem
+PN532 Modul, da dieses sonst über seine \gls{i2c} Schnittstelle mit
+einem entsprechenden Host-System kommuniziert. Der Mikrokontroller
+übernimmt somit ebenfalls die Konversation des \gls{i2c} Bus hin zum
+zentralen \gls{spi} Bus. Zu beachten ist, dass hier nur ein zusätzlicher
+Chip-Select \gls{gpio} benötigt wird zum ansteuern der Elektromagnete
+und des PN532 Moduls. Dies wird durch die Firmware welche auf dem
+Mikrokontroller ausgeführt wird realisiert, welche je nach empfangenen
+Kommando, die dementsprechende Komponente auswählt.
+
+\begin{figure}
+\centering
+\includegraphics{images/ATC_DK_HW_SCHEM.png}
+\caption{Prototyp Hardware: Schaltplan und finaler PCB Entwurf
+\label{ATC_Schematic_DK}}
+\end{figure}
+
+Nach der Festlegung der zu verwendenten Komponenten wurde ein
+entsprechender Schaltplan \ref{ATC_Schematic_DK} nach den Vorgaben
+entworfen. Hierbei wurde sich strikt an den Vorgaben der Datenblätter
+und der Application-Notes in diesen Orientiert. Da es sich hier um einen
+ersten Funktionsentwurf handelt, wurde zusätzliche Testpunkte in das
+Design eingefügt.
+
+Somit ist es wärend der weiteren Entwicklung möglich , zusätzliches
+Testequipment wie einen Logic-Analyser direkt an den \gls{spi} Bus oder
+ein Oszilloskop an die Ausgänge der H-Brücke dauerhaft anzuschliessen.
+Desweiteren ist es mögliche die Bus und Spannungsversorgung über Jumper
+zu trennen um einen Funktionstest einzelner Komponenten durchführen zu
+können.
+
+Allgemein verwenden alle Komponenten, 3.3V als Logik-Pegel. Trotzdem
+wurde ein Levelshifter eingesetzt, welcher die \gls{spi} Bus des
+eingebetteten System mit dem der Mikrokontroller trennt.
+
+Test mit dem verwendeten \passthrough{\lstinline!Atmega328p!} haben
+ergeben, dass dieser nicht direkt mit 3.3V und einer Taktfrequenz von
+16MHz betrieben werden kann und es somit zu einem nicht kontrollierbaren
+Verhalten dieses kommt. Dieses verhalten machten sich durch eine
+gestörte Kommunikation mit dem PN532 Modul bemerkbar und eine Auslesen
+von \gls{nfc} Tags war nur in 60\% der Fälle fehlerfrei möglich.
+
+Im Anschluss wurde die Versorgungsspannung auf 5V erhöht, welches
+zufolge hat, dass die Ein- und Ausgänge ebenfalls mit diesem Pegel
+arbeiten, somit wurde zum Schutz des eingebetteten Systems und dessen
+\gls{gpio} Schnittstelle notwendig.
+
+\begin{figure}
+\centering
+\includegraphics{images/ATC_DK_HW_LOCHRASTER.png}
+\caption{Prototyp Hardware: Aufbau der Lochrasterplatine
+\label{ATC_DK_HW_LOCHRASTER}}
+\end{figure}
+
+Der Schalplan und dessen Funktionalität, wurden anschliessend durch den
+Aufbau der kompletten Schaltung auf einer Lochrasterplatine
+\ref{ATC_DK_HW_LOCHRASTER} im Eurokartenformat manuell aufgebaut und
+getestet.
+
+Aus diesem Design wurde ein \gls{pcb} Layout für eine einfache 2 lagige
+Platine erstellt. Dieses orientiert sich dan der zuvor umgesetzten
+Lochrasterplatine und spiegelt das Layout wieder. Auch wurde hier nicht
+auf den Platzverbrauch geachtet. Es wurde zusätzliche Steckverbindungen
+für die externen Komponenten eingefügt und passende Bohrungen an den
+Ecken sowie in der Mitte zur Montage vorgesehen. Auf der obersten Layer
+wurde der Bestückungsdruck erweitert und mit zusätzlichen Information
+über die Pin-Belegungen der einzelnen Stecker erweitert.
 
 \hypertarget{implementierung-hal}{%
-\subsubsection{Implementierung HAL}\label{implementierung-hal}}
+\subsection{Implementierung HAL}\label{implementierung-hal}}
 
 \begin{itemize}
+\tightlist
 \item
   ansteuerung des TMC5160
 \item
@@ -1008,8 +1111,15 @@ Turm \label{ndef_record_rook}}
 \item
   welche funktion stehen bereit tabelle
 \item
-  step dir interface =\textgreater{} erfodert jedoch eine rt fähige \#\#
-  Fazit bezüglich des ersten Prototypens
+  step dir interface =\textgreater{} erfodert jedoch eine rt fähige
+\end{itemize}
+
+\hypertarget{fazit-bezuxfcglich-des-ersten-prototypens}{%
+\section{Fazit bezüglich des ersten
+Prototypens}\label{fazit-bezuxfcglich-des-ersten-prototypens}}
+
+\begin{itemize}
+\tightlist
 \item
   nicht für production geeignet
 \item
@@ -1028,7 +1138,7 @@ Turm \label{ndef_record_rook}}
 \end{itemize}
 
 \hypertarget{erstellung-des-zweiter-prototypens}{%
-\section{Erstellung des zweiter
+\chapter{Erstellung des zweiter
 Prototypens}\label{erstellung-des-zweiter-prototypens}}
 
 \begin{figure}
@@ -1039,7 +1149,7 @@ Prototypens}\label{erstellung-des-zweiter-prototypens}}
 \end{figure}
 
 \hypertarget{modifikation-der-mechanik}{%
-\subsection{Modifikation der Mechanik}\label{modifikation-der-mechanik}}
+\section{Modifikation der Mechanik}\label{modifikation-der-mechanik}}
 
 \begin{itemize}
 \tightlist
@@ -1065,7 +1175,7 @@ Prototypens}\label{erstellung-des-zweiter-prototypens}}
 \end{itemize}
 
 \hypertarget{optimierungen-der-spielfiguren}{%
-\subsection{Optimierungen der
+\section{Optimierungen der
 Spielfiguren}\label{optimierungen-der-spielfiguren}}
 
 Die bisherigen genutzten vorgefertigten Figuren funktionierten mit dem
@@ -1107,8 +1217,7 @@ verschiedenen Arten von Magneten notwendig, jedoch traten in den
 anschließend durchgeführten Testläufen keine Beeinflussungen mehr auf.
 
 \hypertarget{uxe4nderungen-der-elektronik}{%
-\subsection{Änderungen der
-Elektronik}\label{uxe4nderungen-der-elektronik}}
+\section{Änderungen der Elektronik}\label{uxe4nderungen-der-elektronik}}
 
 Mit ein relevanter Kritikpunkt, welcher bereits während des Aufbaus des
 ersten Prototyps zu erkennen war, ist die Umsetzung der Elektronik.
@@ -1183,7 +1292,7 @@ Elektronik durch die verwendete Plug\&Play stark vereinfacht
 \ref{ATC_Hardware_Architecture_PROD}.
 
 \hypertarget{hal-implementierung-gcode-sender}{%
-\subsubsection{HAL: Implementierung
+\subsection{HAL: Implementierung
 GCODE-Sender}\label{hal-implementierung-gcode-sender}}
 
 Durch die durchgeführten Änderungen an der Elektronik insbesondere durch
@@ -1329,8 +1438,7 @@ finale \passthrough{\lstinline!ok!}-Antwort zurückgegeben wird, erst
 dann wird das nächste Kommando aus der Warteschlange bearbeitet.
 
 \hypertarget{hal-i2c-seriell-umsetzer}{%
-\subsubsection{HAL: I2C Seriell
-Umsetzer}\label{hal-i2c-seriell-umsetzer}}
+\subsection{HAL: I2C Seriell Umsetzer}\label{hal-i2c-seriell-umsetzer}}
 
 Durch den Wegfall der zuvor eingesetzten Elektronik und der Austausch
 durch die SKR 1.4 Turbo Steuerung, ist jedoch ein Anschluss des PN532
@@ -1452,7 +1560,7 @@ STM32F411 & 0483 & 5740 & User-Move-Detector\tabularnewline
 \end{longtable}
 
 \hypertarget{fazit-bezuxfcglich-des-finalen-prototypens}{%
-\subsection{Fazit bezüglich des finalen
+\section{Fazit bezüglich des finalen
 Prototypens}\label{fazit-bezuxfcglich-des-finalen-prototypens}}
 
 \begin{itemize}
@@ -1504,7 +1612,7 @@ Besonderheiten & User-Port für Erweiterungen\tabularnewline
 \end{itemize}
 
 \hypertarget{entwicklung-der-cloud-infrastruktur}{%
-\section{Entwicklung der Cloud
+\chapter{Entwicklung der Cloud
 Infrastruktur}\label{entwicklung-der-cloud-infrastruktur}}
 
 Die erste Phase der Entwicklung des Systems bestand in der Auslegung und
@@ -1524,7 +1632,7 @@ und zum anderen\ldots{}.
 \end{figure}
 
 \hypertarget{api-design}{%
-\subsection{API Design}\label{api-design}}
+\section{API Design}\label{api-design}}
 
 Das System soll so ausgelegt werden, dass es zu einem späteren Zeitpunkt
 mit verschiedenen Client-Devices mit diesem kommunizieren können. Dazu
@@ -1565,7 +1673,7 @@ mit dem Server zu erlauben.
 \end{itemize}
 
 \hypertarget{service-architektur}{%
-\subsection{Service Architektur}\label{service-architektur}}
+\section{Service Architektur}\label{service-architektur}}
 
 \begin{itemize}
 \tightlist
@@ -1591,7 +1699,7 @@ mit dem Server zu erlauben.
 \end{figure}
 
 \hypertarget{voruxfcberlegungen}{%
-\subsection{Vorüberlegungen}\label{voruxfcberlegungen}}
+\section{Vorüberlegungen}\label{voruxfcberlegungen}}
 
 \begin{itemize}
 \tightlist
@@ -1602,7 +1710,7 @@ mit dem Server zu erlauben.
 \end{itemize}
 
 \hypertarget{backend}{%
-\subsection{Backend}\label{backend}}
+\section{Backend}\label{backend}}
 
 \begin{figure}
 \centering
@@ -1629,7 +1737,7 @@ mit dem Server zu erlauben.
 \end{itemize}
 
 \hypertarget{movevalidator}{%
-\subsection{MoveValidator}\label{movevalidator}}
+\section{MoveValidator}\label{movevalidator}}
 
 Der MoveValidator-Service bildet im System die eigentliche Schachlogik
 ab. Die Aufgabe ist es, die vom Benutzer eingegebenen Züge auf
@@ -1745,7 +1853,7 @@ Spielbretts vor dem getätigten Zug wieder her. Danach hat der Benutzer
 die Möglichkeit einen alternativen Zug auszuführen.
 
 \hypertarget{entwicklung-webclient}{%
-\subsection{Entwicklung Webclient}\label{entwicklung-webclient}}
+\section{Entwicklung Webclient}\label{entwicklung-webclient}}
 
 \begin{figure}
 \centering
@@ -1805,7 +1913,7 @@ Livestream-Funktionalität implementiert.
 \end{figure}
 
 \hypertarget{autoplayer}{%
-\subsection{AutoPlayer}\label{autoplayer}}
+\section{AutoPlayer}\label{autoplayer}}
 
 Der AutoPlayer-Service stellt den Computerspieler bereit.
 
@@ -1869,7 +1977,7 @@ der Entwicklung des Webclient und der Steuerungssoftware für den
 autonomen Schachtisch verwendet.
 
 \hypertarget{embedded-system-software}{%
-\section{Embedded System Software}\label{embedded-system-software}}
+\chapter{Embedded System Software}\label{embedded-system-software}}
 
 \begin{itemize}
 \tightlist
@@ -1880,7 +1988,7 @@ autonomen Schachtisch verwendet.
 \end{itemize}
 
 \hypertarget{ablaufdiagramm}{%
-\subsection{Ablaufdiagramm}\label{ablaufdiagramm}}
+\section{Ablaufdiagramm}\label{ablaufdiagramm}}
 
 \begin{itemize}
 \tightlist
@@ -1902,7 +2010,7 @@ autonomen Schachtisch verwendet.
 \end{figure}
 
 \hypertarget{figur-bewegungspfadberechnung}{%
-\subsection{Figur
+\section{Figur
 Bewegungspfadberechnung}\label{figur-bewegungspfadberechnung}}
 
 \begin{itemize}
@@ -1935,7 +2043,7 @@ Bewegungspfadberechnung}\label{figur-bewegungspfadberechnung}}
 \end{itemize}
 
 \hypertarget{inter-prozess-communication}{%
-\subsection{Inter Prozess
+\section{Inter Prozess
 Communication}\label{inter-prozess-communication}}
 
 Bei der Entwicklung des Systems wurde darauf geachtet, dass sich das
@@ -2022,7 +2130,7 @@ if(ev.event == guicommunicator::GUI_ELEMENT::BEGIN_BTN_SCAN && ev.type == guicom
 \end{lstlisting}
 
 \hypertarget{userinterface}{%
-\subsection{Userinterface}\label{userinterface}}
+\section{Userinterface}\label{userinterface}}
 
 Das User-Interface ist mit eines des zentralen Elements mit welchem der
 Benutzer interagiert. Hierbei soll dieses nur die nötigsten Funktionen
@@ -2199,7 +2307,7 @@ void MenuManager::updateProgress()
 \end{lstlisting}
 
 \hypertarget{fazit}{%
-\section{Fazit}\label{fazit}}
+\chapter{Fazit}\label{fazit}}
 
 Zusammenfassend lässt sich feststellen, dass das Ziel der Arbeit
 erreicht wurde. Es wurde ein Prototyp eines autonomen Schachtischs
@@ -2219,7 +2327,7 @@ entwickelt.
 \end{itemize}
 
 \hypertarget{ausblick}{%
-\subsection{Ausblick}\label{ausblick}}
+\section{Ausblick}\label{ausblick}}
 
 \begin{itemize}
 \tightlist
