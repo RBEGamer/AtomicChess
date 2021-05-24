@@ -744,7 +744,7 @@ void TMC5160::go_to(const int _position) {
 void TMC5160::atc_home_sync()
 {	
 	enable_motor(); //ENABLE MOTOR
-	enable_switch(TMC5160::REF_SWITCH::REF_L, true, true, true); //ENABLE LIMIT SWICHT
+	enable_switch(TMC5160::REF_SWITCH::REF_L, true, true, true); //ENABLE LIMIT SWICHT => ENABLE HARD ENDSTOP
 	move_velocity(TMC5160::VELOCITY_DIRECTION::NEGATIVE, HOME_SPEED_VELOCITY, 1000);  //MOVE NEGATIVE TO LIMIT SWITCH
 	//WAIT TO REACH THE ENDSTOP
 	while(!get_ramp_stauts().status_stop_l) {
@@ -771,21 +771,10 @@ void TMC5160::atc_home_sync()
 //...
 ```
 
-* home durch endschalter
-* velocity mode
+Eine zusätzliche Besonderheit stellt der Referenzfahrt dar. Nach dem Start des System ist es möglich, dass sich der Schlitten einer Achse nicht an der Null-Position befindet, sondern an einer unbekannten Position auf der Achse. Deswegen muss diese zuerst ann die Home-Position gefahren werden. Dazu besitzt das System zwei Endschalter, welches jeweils mit einem Schrittmotor-Treiber verbunden sind. Diese beistzen zwei solcher Taster-Eingänge.
 
-
-
-
-
-
-
-
-
-
-
-
-
+Bei einer wechselnden Flanke an diesem Eingang kann der Motor-Treiber verschiedene Funktionen ausführen. In diesem Fall wurde die Motor-Stopp Funktion mittels Registereintrag gewählt, welche den Motor stoppt sobald der Schalter betätigt wird. Dies stellt das die Home-Position dar.
+Dies kann jedoch nicht im Position-Mode des Treiber umgesetzt werden, da das Ziel-Positionsregister auf ß gesetzt wird. Hierzu muss der Treiber in den Velocity-Modus geschaltet werden, welches ein Verfahren des Motors in eine Richtung ohne Zeitbegrenzung erlaubt. Dies wird solange in negativer Bewegungsrichtung ausgeführt bis der Endschalter erreicht wurde, somit ist die Achse an ihrere Home-Position angekommen und kann anschliessend im Positions-Modus normal verfahren werden.
 
 
 
