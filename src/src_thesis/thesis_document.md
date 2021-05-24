@@ -500,7 +500,7 @@ Der zusätzliche Mikrokontroller übernimmt auch die Kommunikation mit dem PN532
 
 Nach der Festlegung der zu verwendenten Komponenten wurde ein entsprechender Schaltplan \ref{ATC_Schematic_DK} nach den Vorgaben entworfen. Hierbei wurde sich strikt an den Vorgaben der Datenblätter und der Application-Notes in diesen Orientiert. Da es sich hier um einen ersten Funktionsentwurf handelt, wurde zusätzliche Testpunkte in das Design eingefügt.
 
-Somit ist es wärend der weiteren Entwicklung möglich , zusätzliches Testequipment wie einen Logic-Analyser direkt an den (+spi) Bus oder ein Oszilloskop an die Ausgänge der H-Brücke dauerhaft anzuschliessen. Desweiteren ist es mögliche die Bus und Spannungsversorgung über Jumper zu trennen um einen Funktionstest einzelner Komponenten durchführen zu können.
+Somit ist es wärend der weiteren Entwicklung möglich , zusätzliches Testequipment wie einen Logic-Analyser direkt an den (+spi) Bus oder ein Oszilloskop an die Ausgänge der H-Brücke dauerhaft anzuschliessen. Des Weiteren ist es mögliche die Bus und Spannungsversorgung über Jumper zu trennen um einen Funktionstest einzelner Komponenten durchführen zu können.
 
 <br>
 
@@ -516,9 +516,10 @@ Im Anschluss wurde die Versorgungsspannung auf 5V erhöht, welches zufolge hat, 
 
 Der Schalplan und dessen Funktionalität, wurden anschliessend durch den Aufbau der kompletten Schaltung auf einer Lochrasterplatine \ref{ATC_DK_HW_LOCHRASTER} im Eurokartenformat manuell aufgebaut und getestet.
 
-Aus diesem Design wurde ein (+pcb) Layout für eine einfache 2 lagige Platine erstellt.
+Aus diesem Design wurde ein (+pcb) Layout für eine einfache 2 lagige Platine \ref{ATC_Schematic_DK} erstellt.
 Dieses orientiert sich dan der zuvor umgesetzten Lochrasterplatine und spiegelt das Layout wieder.
-Auch wurde hier nicht auf den Platzverbrauch geachtet. Es wurde zusätzliche Steckverbindungen für die externen Komponenten eingefügt und passende Bohrungen an den Ecken sowie in der Mitte zur Montage vorgesehen. Auf der obersten Layer wurde der Bestückungsdruck erweitert und mit zusätzlichen Information über die Pin-Belegungen der einzelnen Stecker erweitert.
+Auch wurde hier nicht auf den Platzverbrauch geachtet. Es wurde zusätzliche Steckverbindungen für die externen Komponenten eingefügt und passende Bohrungen an den Ecken sowie in der Mitte zur Montage vorgesehen.
+Auf der obersten Layer wurde der Bestückungsdruck erweitert und mit zusätzlichen Information über die Pin-Belegungen der einzelnen Stecker erweitert.
 
 
 
@@ -526,13 +527,146 @@ Auch wurde hier nicht auf den Platzverbrauch geachtet. Es wurde zusätzliche Ste
 
 
 
-### Implementierung HAL
+## Implementierung HAL
 
+
+### TMC5160 SPI DRIVER
+
+* spi kommunikation über eine bibliothek
 * ansteuerung des TMC5160
-* ansterung des Microncontollers (PN532, LED)
+* target x target reigster
+
+
+```c++
+///TMC5160.cpp
+TMC5160::TMC5160(MOTOR_ID _id) {
+  //...
+  //CHECK SPI INIT
+  if(!SPICommunication::getInstance()->isInitialised()){
+          //...
+      }
+  //REGISTER SPI CS PIN FOR SELECTED MOTOR  ID
+  if (_id == MOTOR_ID::MOTOR_0) {
+          SPI_CS_DEVICE = SPICommunication::SPI_DEVICE::MOTOR_0;
+          SPICommunication::getInstance()->register_cs_gpio(SPI_CS_DEVICE, CS_GPIO_NUMBER_MOTOR_0);
+  }
+  //LOAD DEFAULT MOTOR RAMP / CONFIG PARAMETER
+  default_settings();
+  //..
+}
+
+void TMC5160::default_settings()
+{
+    // MULTISTEP_FILT = 1, EN_PWM_MODE = 1 enables stealthChop
+       write(REGDEF_GCONF, 0x0000000C);
+    // TOFF = 3, HSTRT = 4, HEND = 1, TBL = 2, CHM = 0 (spreadCycle)
+       write(REGDEF_CHOPCONF, 0x000100C3);
+    // IHOLD = 2, IRUN = 15 (max current), IHOLDDELAY = 8
+        write(REGDEF_IHOLD_IRUN, 0x00080F02);
+    // TPOWERDOWN = 10: Delay before powerdown in standstill
+       write(REGDEF_TPOWERDOWN, 0x0000000A);
+    // TPWMTHRS = 500
+       write(REGDEF_A1, 0x000001F4);
+    //WRITE THE DEFAULT RAMP PARAMETERS
+    reset_ramp_defaults();
+    // Position mode
+    write(REGDEF_RAMPMODE, 0);
+    // Set current positin to 0
+    write(REGDEF_XACTUAL, 0);
+    // Set XTARGET to 0, which holds the motor at the current position
+    write(REGDEF_XTARGET, 0);
+}
+
+int TMC5160::write(int _address, int _data)
+{
+    const size_t DATA_LEN = 5;
+  //POPULATE WRITE DATA BUFFER
+    uint8_t write_buffer[] = { _address | 0x80, 0, 0, 0, 0 };
+    write_buffer[1] = 0xFF & (_data >> 24);
+    write_buffer[2] = 0xFF & (_data >> 16);
+    write_buffer[3] = 0xFF & (_data >> 8);
+    write_buffer[4] = 0xFF & _data;
+    //WRITE DATA OVER SPI
+    return  SPICommunication::getInstance()->spi_write(SPI_CS_DEVICE ,write_buffer, DATA_LEN);
+}
+
+int TMC5160::read(int _address)
+{
+  //POPULATE WRITEBUFFER = READ REGISTER ADDRESS
+    const size_t DATA_LEN = 5;
+    uint8_t write_buffer[] = {  _address & 0x7F, 0, 0, 0, 0 };
+    uint8_t read_buffer[] = {  _address & 0x7F, 0, 0, 0, 0 };
+
+  //FIRST WRITE REGISTER ADRESS TO READ
+    int res = SPICommunication::getInstance()->spi_write(SPI_CS_DEVICE ,write_buffer, DATA_LEN);
+  //READ RESULT
+    res = SPICommunication::getInstance()->spi_write(SPI_CS_DEVICE, read_buffer, DATA_LEN);
+  //PARSE RESULT INTO INT
+    int value = read_buffer[1];
+    value = value << 8;
+    value |= read_buffer[2];
+    value = value << 8;
+    value |= read_buffer[3];
+    value = value << 8;
+    value |= read_buffer[4];
+    return value;
+}
+
+//EXAMPLE USAGE, GOTO POSITION
+void TMC5160::go_to(int _position) {
+    write(REGDEF_RAMPMODE, 0);
+  //SET XTARGET REGISTER = TARGET POSITION
+  //NON BLOCKING
+    write(REGDEF_XTARGET, _position);
+  //USE move_to_postion_mm_relative FOR A BLOCKING VARIANT
+}
+```
+
+###
+
+
+* abstraktion über einheitliche HARDWARE klasse
+* inkl revisionsinformationen welche aus der CPU ID GENERIERT WERDEN
+
+
+```
+//HardwareInterface.h
+//...
+class HardwareInterface
+{
+  enum HI_HARDWARE_REVISION {
+        HI_HWREV_UNKNOWN = 0,
+        HI_HWREV_DK   = 1, //FIRST 55x55cm ATC TABLE WITH TWO COILS
+        HI_HWREV_PROD = 2, //SECONDS GENERATION BASED ON SKR1.3 3D PRINT CONTROLLER
+        HI_HWREV_PROD_V2 =3,  //THIRD GENERATION WITH SKR 1.4 WITH CORE XY MECHANIC
+        HI_HWREV_VIRT=4, //SIMULATED HW FOR TESTING USING THE DOCKERFILE
+    };
+
+  enum HI_COIL
+    {
+        HI_COIL_A   = 0,
+        HI_COIL_B   = 1,
+        HI_COIL_NFC = 2
+    };
+  //....
+  //MOTOR CONTROL FUNCTIONS
+  void enable_motors();
+    void disable_motors();
+  bool is_target_position_reached();
+    void move_to_postion_mm_absolute(int _x,int _y, bool _blocking);
+  void home_sync();
+  //...
+  //LED CONTROL FUNCTIONS
+  bool setTurnStateLight(HI_TURN_STATE_LIGHT _state);
+  //NFC CONTROL FUNCTIONS
+  ChessPiece::FIGURE ScanNFC();
+  //MAGNET CONTROL FUNCTIONS
+  bool setCoilState(HI_COIL _coil, bool _state);
+  //...
+```
 * integration in controller software
-* welche funktion stehen bereit tabelle
-* step dir interface => erfodert jedoch eine rt fähige
+
+
 
 
 
