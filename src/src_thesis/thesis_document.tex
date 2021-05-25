@@ -21,17 +21,16 @@ Diese verursachen Kosten und können mögliche Fehlerquellen sein.
 
 Dennoch ist die Entwicklung eines solchen Systems nicht banal. Es ist
 abzuwägen, welche Komponenten derzeit auf dem freien Markt erhältlich
-sind, welche Eigenschaften diese mitbringen oder ermöglichen und wie
-diese optimal kombiniert werden können. Es bedarf im Vorhinein
-intensiverer Recherche und einer größeren Perspektive über mögliche
-Zusammenhänge. Im Falle eines Merhzwecksystems ist die Auswahl simpler,
-da man den Prozess auch im Nachhinein noch anpassen kann, weil
-zusätzliche Funktionen und Komponenten gegeben sind oder leichter
-ergänzt werden können. Das eingebettete System muss in der Regel
-aufgewertet oder sogar völlig ersetzt werden, wenn zu einem späteren
-Zeitpunkt festgestellt wird, dass Funktionen nicht gegeben oder
-umsetzbar sind. Fertiggestellte Systeme sind komplexer in der
-Aufwertung.
+sind, welche Funktionen diese mitbringen oder ermöglichen und wie diese
+optimal kombiniert werden können. Es bedarf im Vorhinein intensiverer
+Recherche und einer größeren Perspektive über mögliche Zusammenhänge. Im
+Falle eines Merhzwecksystems ist die Auswahl simpler, da man den Prozess
+auch im Nachhinein noch anpassen kann, weil zusätzliche Funktionen und
+Komponenten gegeben sind oder leichter ergänzt werden können. Das
+eingebettete System muss in der Regel aufgewertet oder sogar völlig
+ersetzt werden, wenn zu einem späteren Zeitpunkt festgestellt wird, dass
+Funktionen nicht gegeben oder umsetzbar sind. Fertiggestellte Systeme
+sind komplexer in der Aufwertung.
 
 Die Fähigkeit zur Erstellung eines solchen System ist daher nicht
 leichtfertig anzunehmen und es ist mir wichtig, zum Abschluss meines
@@ -166,10 +165,12 @@ Tischen handelt es sich um
 
 Für die kommerziell käuflichen Schachspiele gibt es kein sehr großes
 Marktangebot, weswegen für den Vergleich nur zwei Hersteller mit jeweils
-zwei verschiedenen Modellen gewählt werden konnte. Derzeit integriert
+zwei verschiedenen Modellen gewählt werden konnte. (Derzeit integriert
 nur ein Unternehmen eine Funktion, welche die Figuren unterhalb der
-Tischplatte mechanisch bewegen kann. Der zweite Hersteller wurde dennoch
-zum Vergleich der zusätzlichen Funktionen herangezogen.
+Tischplatte mechanisch bewegen kann.)
+
+Der zweite Hersteller wurde dennoch zum Vergleich von zusätzlichen
+Funktionen herangezogen.
 
 Die Tische eines Herstellers unterscheiden sich kaum in ihren
 Funktionen; mit steigendem Preis werden zusätzliche Funktionen in Form
@@ -378,9 +379,9 @@ Berechnungen der Spielerzüge vornimmt. Keiner dieser Tische kann ein
 simples Spiel nach einem verbindungslosen Start ausführen. Ohne Internet
 verlieren die Tische all ihre Funktionalität.
 
-Beide Square-Off-Modelle verfügen zudem über die Möglichkeit des Spiels
-ohne Energieversorgung, welche durch eingebaute Akkus ermöglicht werden.
-Diese Funktionalität sorgt für eine zusätzliche Nutzerzufriedenheit.
+Beide Square-Off-Modelle ermöglichen durch eingebaute Akkus auch eine
+mobile Nutzung, was dem Nutzer mehr Flexibilität, z.B. Spielen im Freien
+erlaubt.
 
 Zusammenfassend ist festzustellen, dass alle vier Tische dank
 unterschiedlicher Ausführung von Spiel-Eigenschaften zu
@@ -413,8 +414,8 @@ welchem die Figuren von oberhalb des Spielbretts gegriffen bzw. bewegt
 werden. In einigen Projekten wird dies mittels eines Industrie-Roboters
 \cite{actprojectrobot} oder eines modifizierten
 3D-Druckers\cite{atcproject3dprinter} realisiert. Diese wurden hier
-aufgrund der Mechanik, welche über dem Spielbrett montiert werden muss,
-nicht berücksichtigt.
+aufgrund der Mechanik, welche über dem Spielbrett montiert werden muss
+und damit das Spielerlebnis erheblich beinflusst, nicht berücksichtigt.
 
 \begin{longtable}[]{@{}llll@{}}
 \caption{Auflistung von Open-Source Schachtisch
@@ -881,12 +882,19 @@ können die Figuren nicht ausreichend weit aus dem Spielfeld platziert
 werden und verbleiben in den äußeren Spielfeldern. Dieser Effekt war
 unerwünscht und schränkt das Spielerlebnis deutlich ein.
 
+\begin{figure}
+\centering
+\includegraphics{images/ATC_DK_HW_DUAL_COIL.png}
+\caption{Zwei Elektromagnete. Schlitten befindet sich in den Ecken
+\label{ATC_DK_HW_DUAL_COIL}}
+\end{figure}
+
 Um dies zu verhindern wurde der zentrale Schlitten der Y-Achse, auf
 welchem der Elektromagnet für die Figur-Mitnahme platziert ist, um einen
 weiteren Elektromagnet erweitert. Diese befinden sich nun nicht mehr
 mittig auf dem Schlitten, sondern wurden um 110mm in Richtung der
-X-Achse versetzt. So ist es möglich Figuren bis ganz an den Rand
-verschieben zu können.
+X-Achse versetzt \ref{ATC_DK_HW_DUAL_COIL}. So ist es möglich Figuren
+bis ganz an den Rand verschieben zu können.
 
 Diese Lösung erfordert jedoch einen komplexeren
 Bahnplanungs-Algorithmus, da die Elektromagneten zwischen einzelnen
@@ -1877,7 +1885,10 @@ die Verwendung einer Marlin-FW\cite{marlinfw} fähigen
 Motorsteuerung, ist eine Anpassung der \gls{hal} notwendig. Diese
 unterstütz die Ansteuerung der Motoren und anderen Komponenten (z.B.
 Spindeln, Heizelemente) mittels G-Code und wird typischerweise in 3D
-Druckern und CNC-Fräsen eingesetzt. G-Code ist eine
+Druckern und CNC-Fräsen eingesetzt.
+
+G-Code ist eine
+
 Marlin-FW\cite{marlinfw} biete dabei einen großen Befehlssatz an
 G-Code Kommandos an. Bei diesem Projekt werden jedoch nur einige G-Code
 Kommandos verwendet, welche sich insbesondere auf die Ansteuerung der
@@ -2743,6 +2754,12 @@ Schachzügen}\label{schachfeld-scan-algorithmus-zur-erkennung-von-schachzuxfcgen
 \caption{Embedded System Software: Schachfeld Scan Algorithmus Ablauf
 \label{ATC_ChessMoveAlgorithm}}
 \end{figure}
+
+Ein weiterer wichtiger Teil der Controller-Software ist die Erfassung,
+der Schachzüge welche vom Benutzer getätigt wurden. Das System bietet
+dem Benutzer hier zwei Möglichkeiten. Über das \gls{ui} des autonomen
+Schachtischs kann der Benutzer, wenn dieser am Zug ist manuell
+eingegeben werden. Hierbei wird das Start- und Ziel-Feld
 
 \begin{itemize}
 \tightlist

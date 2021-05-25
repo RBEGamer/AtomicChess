@@ -434,9 +434,12 @@ Bereits während des Designprozess konnte anhand einer statischen Simulation des
 
 <br>
 
-Um dies zu verhindern wurde der zentrale Schlitten der Y-Achse, auf welchem der Elektromagnet für die Figur-Mitnahme platziert ist, um einen weiteren Elektromagnet erweitert. Diese befinden sich nun nicht mehr mittig auf dem Schlitten, sondern wurden um 110mm in Richtung der X-Achse versetzt. So ist es möglich Figuren bis ganz an den Rand verschieben zu können.
+![Zwei Elektromagnete. Schlitten befindet sich jeweils in den Ecken \label{ATC_DK_HW_DUAL_COIL}](images/ATC_DK_HW_DUAL_COIL.png)
 
-<!-- Ich glaube hier wäre ein Bild gut -->
+<br>
+
+Um dies zu verhindern wurde der zentrale Schlitten der Y-Achse, auf welchem der Elektromagnet für die Figur-Mitnahme platziert ist, um einen weiteren Elektromagnet erweitert. Diese befinden sich nun nicht mehr mittig auf dem Schlitten, sondern wurden um 110mm in Richtung der X-Achse versetzt \ref{ATC_DK_HW_DUAL_COIL}. So ist es möglich Figuren bis ganz an den Rand verschieben zu können.
+
 
 <br>
 
