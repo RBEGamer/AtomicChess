@@ -48,11 +48,23 @@ Insgesamt gilt es, einen für Anwender ansprechenden Schachtisch zu entwickeln, 
 
 ## Methodik
 
-Im ersten Abschnitt werden die zum Zeitpunkt existierenden Ansätze und deren Umsetzung beleuchtet. Hier wurde insbesondere darauf geachtet, die Grenzen bestehender Systeme darzulegen und auf nur für dieses Projekt zutreffende Funktionen zu vergleichen.
-Anschließend werden die zuvor verwendeten Technologien betrachtet, welche bei den beiden darauffolgenden Prototypen verwendet wurden. Hierbei stehen insbesondere solche Technologien im Vordergrund der Untersuchung, welche möglichst einfach zu beschaffen sind und optimaler Weise uneingeschränkt und lizenzunabhängig zur Verfügung stehen.
+Im zweiten Kapitel werden die zum Zeitpunkt existierenden Ansätze und deren Umsetzung beleuchtet. Hier wurde insbesondere darauf geachtet, die Grenzen bestehender Systeme darzulegen und auf nur für dieses Projekt zutreffende Funktionen zu vergleichen.
 
-<!--- Hier würde ich auch schon die Kapitelnummern nennen, in denen die einzelenen Schritte beschrieben werden. Ansonsten kommt der nächste Absatz mit Kapitel 6 etwas unvermittelt.-->
 
+
+<br>
+
+Die Anforderungsanalyse im dritten Kapitel, fasst alle zuvor recherchierten Funktionen bestehender Systeme zusammen und leitet daraus eine Auflistung der Anforderungen ab, welche in den nachfolgenden Prototypen realisiert werden sollen.
+Hierbei wird darauf geachtet, dem Benutzer einen Mehrweiter in Bezug auf den Benutzerfreundlichkeit und dem Umfang an Features zu bieten.
+
+<br>
+
+Nach der Festlegung der Anfoderungen, wird im vierten Kapitel eine Machbarkeitsanalyse durchgeführt.
+In dieser wird untersucht, welche Technologien benötigt werden um, diese Anforderungen durch einen Prototyp erfüllen zu können.
+
+<br>
+
+Anschließend werden im fünften Kapitel die zuvor verwendeten Technologien betrachtet, welche bei den beiden darauffolgenden Prototypen verwendet wurden. Hierbei stehen insbesondere solche Technologien im Vordergrund der Untersuchung, welche möglichst einfach zu beschaffen sind und optimaler Weise uneingeschränkt und lizenzunabhängig zur Verfügung stehen.
 
 <br>
 
@@ -61,22 +73,26 @@ Hier werden die Erkenntnisse der zuvor evaluierten Technologien verwendet, um ei
 
 <br>
 
-Im anschließenden Kapitel wird auf der Basis des ersten Prototypens und dessen im Betrieb verzeichneten Probleme der finale Prototyp entwickelt.
-
-<br>
+Im anschließenden siebten Kapitel wird auf der Basis des ersten Prototypens und dessen im Betrieb verzeichneten Probleme der finale Prototyp entwickelt.
 
 Hier werden die Schwierigkeiten durch die Vereinfachung der Elektronik sowie der Mechanik gelöst.
 Die Zuverlässigkeit wurde mittels stetiger Testläufe mit kontrollierten Schachzug-Szenarien überwacht und so ein produktreifer Prototyp entwickelt.
 
 <br>
 
-Im darauffolgenden Abschnitt wird die Cloud-Infrastruktur thematisiert, welche für eine Kommunikation zwischen den autonomen Schachtischen entscheidend ist.
+Im darauffolgenden achten Kaptiel wird die Cloud-Infrastruktur thematisiert, welche für eine Kommunikation zwischen den autonomen Schachtischen entscheidend ist.
 Auch wird dabei die Software, welche auf dem eingebetteten System ausgeführt wird, im Detail beschrieben und deren Kommunikation mit der Cloud-Infrastruktur, sowie mit den elektrischen Komponenten beleuchtet.
-
-<!--- eigentlich muss man das weiter fassen oder, also auch auch die Kommunikation z.B. mit dem Webinterface oder? -->
+Zusätzlich zu dieser, wurde ein Webclient entwickelt, mit dem es Benutzern möglich ist über einen Webbrowser gegen den Tisch zu spielen.
+Dieser Client bietet außerdem die Möglichkeit das System wärend der Entwicklung testen zu können.
 
 <br>
 
+Das neute Kapitel beschäftligt sich mit der Software, welche auf dem eingebetteten System ausgeführt wird.
+Diese übersetzt die Spieldaten welche von der Cloud-Infrastruktur abgefragt werden in Zug-Befehle welche von der Mechanik umgesetzt werden. Dabei gilt ein besonderes Augenmkert der Berechnung der Figurbewegung und dem Erkennen von durch den Benutzer getätigten Schachzügen.
+
+<br>
+
+Das zehnte und abschliessende Kapitel, befasst sich mit dem Fazit und gibt einen Ausblick auf mögliche Erweiterungen und Verbesserungen.
 
 
 # Analyse bestehender Systeme
@@ -292,7 +308,7 @@ In diesem Projekt werden vor allem Funktionalitäten berücksichtig, welche die 
 | Cloudanbindung (online Spiele)              | ja                                      |
 | Parkposition für ausgeschiedene Figuren     | ja                                      |
 | Stand-Alone Funktionalität                  | ja (Bedienung direkt am Tisch)          |
-| Besonderheiten                              | visuelle Hinweise per Beleuchtung       |
+
 
 <br>
 
@@ -300,7 +316,6 @@ Die Abmessungen und das Gewicht des autonomen Schachtisches ergeben sich aus der
 Dennoch wird Wert daraufgelegt, dass das Verhältnis zwischen den Spielfeldabmessungen und den Abmessungen des Tisches so gering wie möglich ausfällt.
 Auch müssen die Figuren für den Benutzer eine gut handhabbare Größe aufweisen, um ein angenehmes haptisches Spielerlebnis zu gewährleisten. Ebenfalls wird kein besonderes Augenmerk auf die Geschwindigkeit der Figur-Bewegung gelegt, da hier die Zuverlässigkeit und Wiederholgenauigkeit dieser im Vordergrund stehen.
 
-<!--- Die visuellen Hinweise hängen hier etwas in der Luft. Entweder würe ich diese erst später als zusätzliches Feature (sie die Sprachsteuerung auch) nennen, oder kurz im Text erläutern, dass z.B. durch die Beleuchtung angezeigt werden kann, wer gerade am Zug ist.--> 
 
 
 
@@ -1275,20 +1290,21 @@ Das System erkennt den Anschluss der Hardware beim Start auf die gleiche Art und
 
 : Eigenschaften die finalen Prototypen
 
-|                                         | (+atc) – autonomous Chessboard  |
-|-----------------------------------------|---------------------------------|
-| Feldabmessungen (LxBxH)                 | 57x57mm                         |
-| Abmessungen (LxBxH)                     | 620x620x170mm                   |
-| Gewicht                                 | 5.7kg                           |
-| Konnektivität                           | (+wlan), (+usb)                 |
-| Automatisches Bewegen der Figuren       | ja                              |
-| Erkennung Schachfigurstellung           | ja                              |
-| Spiel Livestream                        | ja                              |
-| Cloudanbindung (online Spiele)          | ja                              |
-| Parkposition für ausgeschiedene Figuren | ja                              |
-| Stand-Alone Funktionalität              | ja                              |
-| Besonderheiten                          | User-Port für Erweiterungen     |
+|                                         | (+atc) – autonomous Chessboard      |
+|-----------------------------------------|-------------------------------------|
+| Feldabmessungen (LxBxH)                 | 57x57mm                             |
+| Abmessungen (LxBxH)                     | 620x620x170mm                       |
+| Gewicht                                 | 5.7kg                               |
+| Konnektivität                           | (+wlan), (+usb)                     |
+| Automatisches Bewegen der Figuren       | ja                                  |
+| Erkennung Schachfigurstellung           | ja                                  |
+| Spiel Livestream                        | ja                                  |
+| Cloudanbindung (online Spiele)          | ja                                  |
+| Parkposition für ausgeschiedene Figuren | ja                                  |
+| Stand-Alone Funktionalität              | ja                                  |
+| Besonderheiten                          | visuelle Hinweise per Beleuchtung   |
 
+<!--- Die visuellen Hinweise hängen hier etwas in der Luft. Entweder würe ich diese erst später als zusätzliches Feature (sie die Sprachsteuerung auch) nennen, oder kurz im Text erläutern, dass z.B. durch die Beleuchtung angezeigt werden kann, wer gerade am Zug ist.--> 
 * alle anforderungen erfüllt
 * zulasten der geschwindigkeit insbesondere bei der erkennung des User-Move
 * erweitrungsmöglichkeit in hard uns SOFTWARE
