@@ -5,6 +5,16 @@ Ein bauen per Dockerimage ist möglich mittels ` build_thesis_docker.sh` Script 
 
 # CHANGELOG
 
+## 25.05.2021
+
+
+* 6.5 - Fazit des ersten Prototypens
+* 7.1.1 - Gehäuse und Design
+* 7.1.2 - 3D-Komponenten
+* 7.1.3 Positions-Mechanik
+* 9.1 - Ablaufdiagramm
+* 9.2 - Figur Bewegungspfadberechnung
+
 ## 24.05.2021
 
 * 6.3 - Schaltungsentwurf

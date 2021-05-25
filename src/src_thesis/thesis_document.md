@@ -808,13 +808,13 @@ Hierzu wird ein komplettes Re-Design der Mechanik sowie der Elektronik nötig se
 
 
 
-# Erstellung des zweiter Prototypens
+# Aufbau des zweiten Prototypen
 
 ![Producation Hardware: Finaler autonomer Schachtisch \label{prod}](images/table_images/prod.png)
 
 ## Modifikation der Mechanik
 
-### Gehäuse und Designs
+### Gehäuse und Design
 
 Mit der Entscheidung, auf die hölzerne Struktur des Systems gänzlich zu verzichten, wurden massive Veränderungen des Designs des Schachtischs bestehend aus Gehäuse, Dimensionen und allen Außenelementen nötig.
 
@@ -877,7 +877,7 @@ Dennoch überwiegen die Vorteile der Universalität dank der gegebenen Normungen
 
 <br>
 
-### 3D-Komponenten.
+### 3D-Komponenten
 
 Die Masse an selbst-erstellten 3D-Komponenten wurde aufgrund des selbst erstellten Korpus in der zweiten Revision erhöht. Aluprofile bieten die Möglichkeit der einfachen Montage von zusätzlichen Komponenten. Mittels sogenannter Nutensteine, welche in das Profil geschoben werden, ist es möglich, diese Komponenten einfach an das Profil zu Schrauben, indem man in das im Nutenstein befindliche Gewinde schraubt. Dank der Schienen-ähnlichen Gestaltung der Profile sind die Positionen dieser Nutensteine individuell anpassbar.
 Ausgehend von den gewählten Maßen der Stangen wurden Nutensteine vom „Typ 6“ mit einem M5 Gewinde gewählt.
@@ -1048,15 +1048,15 @@ Marlin-FW[@marlinfw] biete dabei einen großen Befehlssatz an G-Code Kommandos a
 
 |                           | G-Code Command    | Parameters                            |
 |-------------------------- |-------------------|-----------------------------------    |
-| Move X Y                  | G0                | X<dest_pos_x_mm> Y<dest_pos_y_mm>     |
+| Move X Y                  | G0                | X`dest_pos_x_mm` Y`dest_pos_y_mm`     |
 | Move Home Position        | G28               | -                                     |
 | Set Units to Millimeters  | G21               | -                                     |
-| Set Servo Position        | M280              | P<servo_index> S<servo_position>      |
+| Set Servo Position        | M280              | P`servo_index` S`servo_position`      |
 | Disable Motors            | M84               | X Y                                   |
 
 
 Die erforderlichen Kommandos wurden auf ein Minimum beschränk, um eine maximale Kompatibilität bei verschiedenen G-Code-fähigen Steuerungen zu gewährleisten.
-Die Software unterstützt jedoch weitere Kommandos wie z.B. `M150` mit welchem speziellen Ausgänge für LEDs gesteuert werden können. Dieses Feature bietet sowohl die verwendete Marlin-FW[@marlinfw] als auch die verwendete Steuerung an. Sollte die verwendete Steuerung solch ein optionales Kommando nicht unterstützen, so werden diese ignoriert was zur Folge hat, dass auch preisgünstige Steuerungen verwendet werden können.
+Die Software unterstützt jedoch weitere Kommandos wie z.B. `M150` mit welchem speziellen Ausgänge für (+led)s gesteuert werden können. Dieses Feature bietet sowohl die verwendete Marlin-FW[@marlinfw] als auch die verwendete Steuerung an. Sollte die verwendete Steuerung solch ein optionales Kommando nicht unterstützen, so werden diese ignoriert was zur Folge hat, dass auch preisgünstige Steuerungen verwendet werden können.
 
 Die Kommunikation zwischen Steuerung und eingebetteten System geschieht durch eine (+usb) Verbinden. Die Steuerung meldet sich als virtuelle Serielle Schnittstelle im System an und kann über diese mit der Software kommunizieren. Auch werden so keine speziellen Treiber benötigt, da auf nahezu jedem System ein Treiber `USB-CDC` für die gängigsten (+usb) zu seriell Wandler bereits installiert ist. Die Software erkennt anhand der zur Verfügung stehenden (+usb)-Geräte sowie deren Vendor und Product-ID Informationen die verbundene Steuerung und verwendet diese nach dem Start automatisch. Hierzu wurde zuvor eine Liste mit verschiedenen getesteten Steuerungen sowie deren USB-Vendor und Product-ID angelegt.
 
@@ -1081,11 +1081,10 @@ Nach Aufruf einer Funktion zum Ansteuern der Motoren, wird aus den übergebenen 
 ```c++
 //GCodeSender.cpp
 bool GCodeSender::setServo(const int _index,const int _pos) {
-    return write_gcode("M280 P" + std::to_string(_index) + " S" + std::to_string(_pos));     //MOVE SERVO
+    return write_gcode("M280 P" + std::to_string(_index) + " S" + std::to_string(_pos));
 }
 
 bool GCodeSender::write_gcode(const std::string _gcode_line, bool _ack_check) {
-    //...
     //...
     //FLUSH INPUT BUFFER
     port->flushReceiver();
@@ -1103,13 +1102,11 @@ bool GCodeSender::write_gcode(const std::string _gcode_line, bool _ack_check) {
 bool GCodeSender::wait_for_ack() {
     int wait_counter = 0;
     //...
-    //...
     while (true) {
         //READ SERIAL REPONSE
         const std::string resp = read_string_from_serial();
         //...
-        //...
-        //PROCESS
+        //PROCESS RESPONSE
         if (resp.rfind("ok") != std::string::npos)
         {
             break;
@@ -1123,17 +1120,17 @@ bool GCodeSender::wait_for_ack() {
         }else {
             //READ ERROR COUNTER AND HANDLING
             wait_counter++;
-            if (wait_counter > 3)
+            if (wait_counter > GCODE_ERROR_RETRY_COUNT)
             {
                 break;
             }
         }
     }
     //...
-    //...
     return true;
 }
 ```
+
 Die Steuerung verarbeitet diese und bestätigt die Ausführung mit einer Acknowledgement-Antwort. Hierbei gibt es verschiedenen Typen. Der einfachste Fall ist ein `ok`, welches eine erfolgreiche Abarbeitung des Kommandos signalisiert. Ein weiterer Fall ist die Busy-Antwort `echo:busy`. Diese Signalisiert, dass das Kommando noch in der Bearbeitung ist und wird im Falle des autonomen Schachtisches bei langen und langsamen Bewegungen der Mechanik ausgegeben. Das System wartet diese Antworten ab bis eine finale `ok`-Antwort zurückgegeben wird, erst dann wird das nächste Kommando aus der Warteschlange bearbeitet.
 
 <br>
@@ -1187,9 +1184,7 @@ Auch hier wird wie bei der G-Code Sender Implementierung auf Fehler bei der Komm
 
 ```c++
 //UserBoardController.cpp HOST-SYSTEM
-//simplyfied version
 ChessPiece::FIGURE UserBoardController::read_chess_piece_nfc(){
-
     ChessPiece::FIGURE fig;
     fig.type = ChessPiece::TYPE::TYPE_INVALID;
     //...
@@ -1200,7 +1195,6 @@ ChessPiece::FIGURE UserBoardController::read_chess_piece_nfc(){
     const std::vector<std::string> re = split(readres,UBC_CMD_SEPERATOR);
     //READ SECTIONS
     //...
-    //...
     const std::string figure = re.at(3);
     const std::string errorcode = re.at(4);
     //CHECK READ RESULT
@@ -1208,7 +1202,6 @@ ChessPiece::FIGURE UserBoardController::read_chess_piece_nfc(){
         if(figure.empty()){
             break;
         }
-        //...
         //...
         //DETERM FINAL READ FIGURE
         const char figure_charakter = figure.at(0);
@@ -1596,6 +1589,7 @@ ChessBoard::compareBoards(ChessPiece::FIGURE *_board_a, ChessPiece::FIGURE *_boa
 }
 ```
 <br>
+
 Aus dieser Liste können anschließend einzelne Figur-Bewegungen abgeleitet werden. Dazu wird zu einer Änderung des Start-Feldes in der Liste ein weiteres Listenelement gesucht, bei welchem die Änderung im Zielfeld liegt. Somit kann Start- und Zielfeld für eine Figur bestimmt werden. Anzumerken ist, dass die errechneten Züge nicht die logischsten oder kürzesten darstellen müssen.
 Da hier die Reihenfolge der Änderungen nach vorkommen in der Liste entscheidend ist.
 Somit entsteht eine weitere Liste an Feld-Operationen, bei denen Figuren hinzugefügt, bewegt, entfernt werden können.
@@ -1671,7 +1665,7 @@ Durch die Socket Basierende Implementierung ist es möglich die andern (+ipc) In
 "type":2, //CLICKED
 "dest_process_id":"ui_qt_01",
 "origin_process_id":"controller_sw_01",
-"is_ack":false"
+"is_ack":false //Qos
 }
 ```
 
@@ -1685,7 +1679,7 @@ Zusätzlich kann über die Acknowledgement-Funktionalität sichergestellt werden
 
 ```c++
 //IPC guicommunicator.cpp
-//Simplyfied example calls
+//SIMPLIFIED EXAMPLE USAGE
 
 //INIT IPC SERVER
 guicommunicator gui;
@@ -1714,21 +1708,25 @@ if (!ev.is_event_valid){
     gui.debug_event(ev, true);
     continue;
 }
-//CHECK FOR USER INPUT
+//CHECK EVENT QUEUE FOR USER INPUT
 if(ev.event == guicommunicator::GUI_ELEMENT::BEGIN_BTN_SCAN && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {}
 ```
 
 
 ## Userinterface
 
-
 Das User-Interface ist mit eines des zentralen Elements mit welchem der Benutzer interagiert.
 Hierbei soll dieses nur die nötigsten Funktionen bereitstellen, welche zur Bedienung des Schachtisches nötig sind.
-Durch die kleinen Abmessungen des Displays mit 4.3 Zoll, wurde alle Bedienelemente in ihrer Größe angepasst, sodass der Benutzer auch von einer weiter entfernten Position den Zustand direkt erkennen kann. Auch wurden die maximale Anzahl an Bedienelementen in einer Ansicht auf drei begrenzt. Die Spielansicht stellt zudem nur die eigene Spielerfarbe, sowie welcher Spieler gerade am Zug ist dar, somit soll der Spieler nicht vom Spiel abgelenkt werden. Nach dem Spielstart findet keine weitere Interaktion mit dem User-Interface mehr statt.
+Durch die kleinen Abmessungen des Displays mit 4.3 Zoll, wurde alle Bedienelemente in ihrer Größe angepasst, sodass der Benutzer auch von einer weiter entfernten Position den Zustand direkt erkennen kann. Auch wurden die maximale Anzahl an Bedienelementen in einer Ansicht auf drei begrenzt.
+Die Spielansicht stellt zudem nur die eigene Spielerfarbe, sowie welcher Spieler gerade am Zug ist dar, somit soll der Spieler nicht vom Spiel abgelenkt werden. Nach dem Spielstart findet keine weitere Interaktion mit dem User-Interface mehr statt.
+
+<br>
 
 Trotz der Einfachheit der Bedienung und der meist nur also Informationsquelle über den Spielstand dienenden User-Interface, bietet diese viele Möglichkeiten der Konfiguration des Systems. Somit kann auf ein weiteres Eingabegerät, wie z.B. einem Mobiltelefon verzichtet werden, da alle relevanten Einstellungen im Optionen-Menu vorgenommen werden können.
 
 Als Framework wurde hier das Qt[@qtframework] verwendet, da dieses bereits im Buildroot-Framework in der Version `5.12` hinterlegt ist. Somit musste kein anderes derartiges Framework aufwändig in das Buildroot-Framrwork integriert werden.
+
+<br>
 
 Das User-Interface wurde gegen Ende der Entwicklung der Controller-Software begonnen, somit waren alle benötigten Ansichten und Funktionen definiert, trotzdem wurden im Vorfeld bereits mögliche Ansichten und Menüstrukturen mittels Wireframing \ref{ATC_Gui} festgehalten und konnten anhand dieser schnell umgesetzt werden.
 
@@ -1777,8 +1775,11 @@ Rectangle {
                 //...
 ```
 
+<br>
+
 Die anschließende Implementierung der Backend-Logik des Unter-Interface bestand in der Verbindung, der in (+qml) erstellten Bedienelemente durch den `Qt Design Studio`-Editor und der User-Interface Backend Logik. Diese beschränkt sich auf die Initialisierung des Fensters und dem anschließenden laden und darstellen des (+qml) Codes. Die Backend-Logik Funktionalitäten in einem (+qml) Typ `MenuManager` angelegt, welcher vor dem Laden des eigentlichen User-Interface (+qml)-Code registriert werden muss.
 
+<br>
 
 ```c++
 // main.cpp User-Interface ATC
@@ -1814,8 +1815,11 @@ int main(int argc, char *argv[])
 }
 ```
 
+<br>
 
-Da das User-Interface ein separates Programm ist, welches auf dem System ausgeführt wird, muss dieses in der Lage sein mit der Controller-Software zu kommunizieren. Hierzu wurde die zuvor erstellte (+ipc) Bibliothek in das Projekt importiert, jedoch wurde in der Makefile das `USES_QT` Define-Flag gesetzt. Wenn dieses gesetzt ist, wird die Bibliothek in den Client-Modus versetzt und stellt somit das Gegenstück zu der Instanz dar, welche in der Controller-Software läuft. Somit werden auch die Funktionen zum Senden von `gui.createEvent()` umgekehrt, sodass ein Event in der Controller-Software ausgelöst wird. Dies kann z.B. durch eine Benutzereingabe oder wenn das User-Interface die von der Controller-Software geforderten Zustand angenommen hat.
+Da das User-Interface ein separates Programm ist, welches auf dem System ausgeführt wird, muss dieses in der Lage sein mit der Controller-Software zu kommunizieren. Hierzu wurde die zuvor erstellte (+ipc) Bibliothek in das Projekt importiert, jedoch wurde in der Makefile das `USES_QT` Define-Flag gesetzt.
+Wenn dieses gesetzt ist, wird die Bibliothek in den Client-Modus versetzt und stellt somit das Gegenstück zu der Instanz dar, welche in der Controller-Software läuft. Somit werden auch die Funktionen zum Senden von `gui.createEvent()` umgekehrt, sodass ein Event in der Controller-Software ausgelöst wird.
+Dies kann z.B. durch eine Benutzereingabe oder wenn das User-Interface die von der Controller-Software geforderten Zustand angenommen hat.
 
 <br>
 
