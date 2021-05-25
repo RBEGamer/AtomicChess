@@ -7,7 +7,8 @@ Eingebettete Systeme (Englisch "embedded Systems") sind technische Zusammensetzu
 
 <br>
 
-Dennoch ist die Entwicklung eines solchen Systems nicht banal. Es ist abzuwägen, welche Komponenten derzeit auf dem freien Markt erhältlich sind, welche Eigenschaften diese mitbringen oder ermöglichen und wie diese optimal kombiniert werden können. Es bedarf im Vorhinein intensiverer Recherche und einer größeren Perspektive über mögliche Zusammenhänge. Im Falle eines Merhzwecksystems ist die Auswahl simpler, da man den Prozess auch im Nachhinein noch anpassen kann, weil zusätzliche Funktionen und Komponenten gegeben sind oder leichter ergänzt werden können. Das eingebettete System muss in der Regel aufgewertet oder sogar völlig ersetzt werden, wenn zu einem späteren Zeitpunkt festgestellt wird, dass Funktionen nicht gegeben oder umsetzbar sind. Fertiggestellte Systeme sind komplexer in der Aufwertung.
+Dennoch ist die Entwicklung eines solchen Systems nicht banal. Es ist abzuwägen, welche Komponenten derzeit auf dem freien Markt erhältlich sind, welche Funktionen diese mitbringen oder ermöglichen und wie diese optimal kombiniert werden können. Es bedarf im Vorhinein intensiverer Recherche und einer größeren Perspektive über mögliche Zusammenhänge.
+Im Falle eines Merhzwecksystems ist die Auswahl simpler, da man den Prozess auch im Nachhinein noch anpassen kann, weil zusätzliche Funktionen und Komponenten gegeben sind oder leichter ergänzt werden können. Das eingebettete System muss in der Regel aufgewertet oder sogar völlig ersetzt werden, wenn zu einem späteren Zeitpunkt festgestellt wird, dass Funktionen nicht gegeben oder umsetzbar sind. Fertiggestellte Systeme sind komplexer in der Aufwertung.
 
 <br>
 
@@ -33,12 +34,15 @@ Mit dieser Arbeit möchte ich mich diesem Problem stellen und einen möglich gü
 
 Das Ziel der nachfolgenden Arbeit ist es, einen autonomen Schachtisch zu entwickeln, welcher in der Lage ist, Schachfiguren autonom zu bewegen und auf Benutzerinteraktionen zu reagieren.
 
+<!--- Sie verweisen später wieder auf die Funktionalitäten, welche der Tisch bieten soll. Vielleicht können Sie diese hier einmal z.B. als Aufzählung sammeln.-->
+
 <br>
 
 Der Schwerpunkt liegt dabei insbesondere auf der Programmierung des eingebetteten Systems und dem Zusammenspiel von diesem mit einem aus dem Internet erreichbaren Servers, welcher als Vermittlungsstelle zwischen verschiedenen Schachtischen und anderen Endgeräten dient.
 Dieses besteht zum einem aus der Positionserkennung und Steuerung der Hardwarekomponenten (Schachfiguren) und zum anderen aus der Kommunikation zwischen dem Tisch selbst und einem in einer Cloud befindlichem Server.
 Mittels der Programmierung werden diverse Technologien von verschiedenen Einzelsystemen zu einem Gesamtprodukt zusammengesetzt.
 Insgesamt gilt es, einen für Anwender ansprechenden Schachtisch zu entwickeln, der das Spielerlebnis nicht nur originalgetreu widerspiegelt, sondern das Einzelspieler-Modell zusätzlich noch verbessert.
+<!--- inwiefern können Sie das benennen, wie der Tisch das tun soll?-->
 
 <br>
 
@@ -46,6 +50,9 @@ Insgesamt gilt es, einen für Anwender ansprechenden Schachtisch zu entwickeln, 
 
 Im ersten Abschnitt werden die zum Zeitpunkt existierenden Ansätze und deren Umsetzung beleuchtet. Hier wurde insbesondere darauf geachtet, die Grenzen bestehender Systeme darzulegen und auf nur für dieses Projekt zutreffende Funktionen zu vergleichen.
 Anschließend werden die zuvor verwendeten Technologien betrachtet, welche bei den beiden darauffolgenden Prototypen verwendet wurden. Hierbei stehen insbesondere solche Technologien im Vordergrund der Untersuchung, welche möglichst einfach zu beschaffen sind und optimaler Weise uneingeschränkt und lizenzunabhängig zur Verfügung stehen.
+
+<!--- Hier würde ich auch schon die Kapitelnummern nennen, in denen die einzelenen Schritte beschrieben werden. Ansonsten kommt der nächste Absatz mit Kapitel 6 etwas unvermittelt.-->
+
 
 <br>
 
@@ -65,6 +72,8 @@ Die Zuverlässigkeit wurde mittels stetiger Testläufe mit kontrollierten Schach
 
 Im darauffolgenden Abschnitt wird die Cloud-Infrastruktur thematisiert, welche für eine Kommunikation zwischen den autonomen Schachtischen entscheidend ist.
 Auch wird dabei die Software, welche auf dem eingebetteten System ausgeführt wird, im Detail beschrieben und deren Kommunikation mit der Cloud-Infrastruktur, sowie mit den elektrischen Komponenten beleuchtet.
+
+<!--- eigentlich muss man das weiter fassen oder, also auch auch die Kommunikation z.B. mit dem Webinterface oder? -->
 
 <br>
 
@@ -87,7 +96,9 @@ Bei den ausgewählten Tischen handelt es sich um
 
 <br>
 
-Für die kommerziell käuflichen Schachspiele gibt es kein sehr großes Marktangebot, weswegen für den Vergleich nur zwei Hersteller mit jeweils zwei verschiedenen Modellen gewählt werden konnte. Derzeit integriert nur ein Unternehmen eine Funktion, welche die Figuren unterhalb der Tischplatte mechanisch bewegen kann. Der zweite Hersteller wurde dennoch zum Vergleich der zusätzlichen Funktionen herangezogen.
+Für die kommerziell käuflichen Schachspiele gibt es kein sehr großes Marktangebot, weswegen für den Vergleich nur zwei Hersteller mit jeweils zwei verschiedenen Modellen gewählt werden konnte. (Derzeit integriert nur ein Unternehmen eine Funktion, welche die Figuren unterhalb der Tischplatte mechanisch bewegen kann.)
+
+Der zweite Hersteller <!--- siehe oben -->wurde dennoch zum Vergleich von zusätzlichen Funktionen <!--- wie ... --> herangezogen.
 
 <br>
 
@@ -119,6 +130,9 @@ Wie bereits aus zum Teil identischen den Namen ersichtlich, streben alle Tische 
 | Parkposition für ausgeschiedene Figuren   | nein                                      | ja                                           | nein                              | nein                          |
 | Stand-Alone Funktionalität                | nein (Mobiltelefon erforderlich)          | nein (Mobiltelefon erforderlich)             | nein (PC)                         | nein (PC)                     |          
 | Besonderheiten                            | Akku für 30 Spiele                        | Akku für 15 Spiele                           | -                                 | -                             |
+
+
+<!--- Anmerkunf zum Layout der Tabelle: Das ist im pdf so etwas schwer zu lesen. Vielleicht kann man das Layout durch Spaltenbreiten, Leerzeilen, grunen Hintergrund für jede 2. Zeile oder ähnliches verbesser. Ist aber nur Kosmetik. --> 
 
 
 <br>
@@ -157,13 +171,17 @@ Auffallend ist, dass nur einer der ausgewählten Tische über eine Parkposition 
 
 Ebenfalls erwähnenswert ist, dass keiner der Tische eine Stand-Alone-Funktionalität besitzt. Jeder Tisch benötigt eine Verbindung zu einem externen Gerät, wie einem Smartphone oder Computer, welche die Berechnungen der Spielerzüge vornimmt. Keiner dieser Tische kann ein simples Spiel nach einem verbindungslosen Start ausführen. Ohne Internet verlieren die Tische all ihre Funktionalität.
 
+<!--- Interessant finde ich hier noch, ob eine Anbindung an eine Hersteller-Cloud o.Ä. nötig ist (was wahrscheinlich der Fall ist). Das wiegt aus meiner Sicht schwerer (Datenschutz etc.), als wenn nur eine (lokale) Anbindung an das Smartphone nötig ist.-->
+
+
 <br>
 
-Beide Square-Off-Modelle verfügen zudem über die Möglichkeit des Spiels ohne Energieversorgung, welche durch eingebaute Akkus ermöglicht werden. Diese Funktionalität sorgt für eine zusätzliche Nutzerzufriedenheit.
+Beide Square-Off-Modelle ermöglichen durch eingebaute Akkus auch eine mobile Nutzung, was dem Nutzer mehr Flexibilität, z.B. Spielen im Freien erlaubt.
+
 
 <br>
 
-Zusammenfassend ist festzustellen, dass alle vier Tische dank unterschiedlicher Ausführung von Spiel-Eigenschaften zu unterschiedlichen Spiel-Erlebnissen führen. Für Nutzer ist eine Entscheidung anhand von Funktionen kaum möglich; letztlich bedarf es der Auswertung von gewünschten und gegebenen Funktionen.
+Zusammenfassend ist festzustellen, dass alle vier Tische dank unterschiedlicher Ausführung von Spiel-Eigenschaften zu unterschiedlichen Spiel-Erlebnissen führen. Für Nutzer ist eine Entscheidung anhand von Funktionen kaum möglich; <!--- Sie meinen, dass es nicht so etwas wie eine kmplette Lösung (klaren Testsieger) gibt oder? Dann könnten Sie auch schreiben: Kein kommerzieller Tisch bieter alle angestrebten Funktionalitäten...--> letztlich bedarf es der Auswertung von gewünschten und gegebenen Funktionen.
 Das Ziel soll nun sein, all die positiven Eigenschaften dieser Tische zu vereinbaren und mittels noch zusätzlicher Verbesserungen ein eigenes Produkt zu entwickeln.
 
 <br>
@@ -180,7 +198,7 @@ Besonders bei Projekten, welche sich noch in der Entwicklung befinden, können s
 
 Zusätzlich zu den genannten Projekten sind weitere derartige Projekte verfügbar; in der Tabelle wurde nur jene aufgelistet, welche sich von anderen Projekten in mindestens einem Feature unterscheiden.
 
-Auch existieren weitere Abwandlungen von autonomen Schachbrettern, bei welchem die Figuren von oberhalb des Spielbretts gegriffen bzw. bewegt werden. In einigen Projekten wird dies mittels eines Industrie-Roboters [@actprojectrobot] oder eines modifizierten 3D-Druckers[@atcproject3dprinter] realisiert. Diese wurden hier aufgrund der Mechanik, welche über dem Spielbrett montiert werden muss, nicht berücksichtigt.
+Auch existieren weitere Abwandlungen von autonomen Schachbrettern, bei welchem die Figuren von oberhalb des Spielbretts gegriffen bzw. bewegt werden. In einigen Projekten wird dies mittels eines Industrie-Roboters [@actprojectrobot] oder eines modifizierten 3D-Druckers[@atcproject3dprinter] realisiert. Diese wurden hier aufgrund der Mechanik, welche über dem Spielbrett montiert werden muss und damit das Spielerlebnis erheblich beinflusst, nicht berücksichtigt.
 
 : Auflistung von Open-Source Schachtisch Projekten
 
@@ -196,6 +214,8 @@ Auch existieren weitere Abwandlungen von autonomen Schachbrettern, bei welchem d
 | Stand-Alone Funktionalität              | nein (PC erforderlich)                                | ja                                                       | ja                                       |
 | Besonderheiten                          | -                                                     | Sprachsteuerung (Amazon Alexa)                           | Zuganzeige über (+led) Matrix            |
 | Lizenz                                  | (+gpl) 3+                                             | (+gpl)                                                   | -                                        |
+
+<!--- Layout der Tabelle ist noch nicht optimal, wie bei anderer Tabelle auch -->
 
 
 In den bestehenden Projekten ist zu erkennen, dass ein autonomer Schachtisch sehr einfach und mit simplen Mittel konstruiert werden kann. Hierbei fehlen in der Regel einige Features, wie das automatische Erkennen von Figuren oder das Spielen über das Internet.
@@ -279,6 +299,8 @@ In diesem Projekt werden vor allem Funktionalitäten berücksichtig, welche die 
 Die Abmessungen und das Gewicht des autonomen Schachtisches ergeben sich aus der mechanischen Umsetzung und werden hier aufgrund der zur Verfügung stehenden Materialen und Fertigungstechniken nicht festgelegt.
 Dennoch wird Wert daraufgelegt, dass das Verhältnis zwischen den Spielfeldabmessungen und den Abmessungen des Tisches so gering wie möglich ausfällt.
 Auch müssen die Figuren für den Benutzer eine gut handhabbare Größe aufweisen, um ein angenehmes haptisches Spielerlebnis zu gewährleisten. Ebenfalls wird kein besonderes Augenmerk auf die Geschwindigkeit der Figur-Bewegung gelegt, da hier die Zuverlässigkeit und Wiederholgenauigkeit dieser im Vordergrund stehen.
+
+<!--- Die visuellen Hinweise hängen hier etwas in der Luft. Entweder würe ich diese erst später als zusätzliches Feature (sie die Sprachsteuerung auch) nennen, oder kurz im Text erläutern, dass z.B. durch die Beleuchtung angezeigt werden kann, wer gerade am Zug ist.--> 
 
 
 
@@ -413,6 +435,8 @@ Bereits während des Designprozess konnte anhand einer statischen Simulation des
 <br>
 
 Um dies zu verhindern wurde der zentrale Schlitten der Y-Achse, auf welchem der Elektromagnet für die Figur-Mitnahme platziert ist, um einen weiteren Elektromagnet erweitert. Diese befinden sich nun nicht mehr mittig auf dem Schlitten, sondern wurden um 110mm in Richtung der X-Achse versetzt. So ist es möglich Figuren bis ganz an den Rand verschieben zu können.
+
+<!-- Ich glaube hier wäre ein Bild gut -->
 
 <br>
 
@@ -963,6 +987,9 @@ Das Resultat übertrifft sogar die Erwartungen. Die Mechanik ist robust und es k
 Die bisherigen genutzten vorgefertigten Figuren funktionierten mit dem ersten Prototyp ohne erkennbare Fehler.
 Sie wiesen aber trotzdem eine zu hohe Fehleranfälligkeit, in Bezug auf das gegenseitige Beeinflussen (abstoßen, anziehen) durch die verwendeten Magnete auf.
 
+<!--- das kingt wie ein Widerspruch, vielleicht eher:
+Die bisher genutzten vorgefertigten Figuren funktionierten grundsätzlich gut mit dem ersten Prototyp. Allerdings wiesen sie eine zu hohe Fehleranfälligkeit, in Bezug auf das gegenseitige Beeinflussen (abstoßen, anziehen) durch die verwendeten Magnete auf. --> 
+
 <br>
 
 Die Größe der Figuren kann durch die fest definierte Schachfeldgröße von 55mm und der verwendeten (+nfc) Tags nicht verändert werden.
@@ -977,7 +1004,7 @@ Dies führt je nach Spielverlauf zu Komplikationen, sodass die Figuren manuell v
 
 Um dies zu verhindern, wurde einige Figuren zusätzlich mit einer 20mm Unterlegscheibe am Boden beschwert. Diese behob das Problem, jedoch erwies sich das (+nfc) Tag nicht mehr als lesbar.
 Dies resultierten aus dem Prozessgedanken, die Schachfiguren ebenfalls selbst mit dem 3D-Drucker herzustellen und die Magnete direkt in den Boden der Figur einlassen zu können.
-
+<!--- Den letzten Satz verstehe ich nicht -->
 <br>
 
 Die aktuell verwendeten Figuren des ersten Prototyps wiegen zwischen 8 Gramm für die Bauern und 10 Gramm für die restlichen Figuren.
@@ -1009,7 +1036,7 @@ All diese Faktoren erschweren einen einfachen Zusammenbau des autonomen Schachti
 Nach der Minimierung der elektrischen Komponenten und des mechanischen Aufbaus ist zu erkennen, dass der autonome Schachtisch einer CNC-Fräse bzw. eines 3D Drucker stark ähnelt.
 Insbesondere die XY-Achsen Mechanik sowie die Ansteuerung von Schrittmotoren wird in diesen Systemen verwendet.
 Mit dem Durchbruch von 3D Druckern im Konsumer-Bereich sind auch kleine und preisgünstige Steuerungen erhältlich, welche 2-3 Schrittmotoren und diverse zusätzliche Hardware ansteuern können.
-
+<!-- Hier fehlt noch eine Überleitung zur Tabelle-->
 <br>
 
 : Standardhardware 3D Drucker Steuerungen
@@ -1039,7 +1066,11 @@ Somit wurde die Elektronik durch die verwendete Plug&Play stark vereinfacht \ref
 
 Durch die durchgeführten Änderungen an der Elektronik insbesondere durch die Verwendung einer Marlin-FW[@marlinfw] fähigen Motorsteuerung, ist eine Anpassung der (+hal) notwendig.
 Diese unterstütz die Ansteuerung der Motoren und anderen Komponenten (z.B. Spindeln, Heizelemente) mittels G-Code und wird typischerweise in 3D Druckern und CNC-Fräsen eingesetzt.
+
 G-Code ist eine
+<!--- hier fehlt was --> 
+
+
 Marlin-FW[@marlinfw] biete dabei einen großen Befehlssatz an G-Code Kommandos an. Bei diesem Projekt werden jedoch nur einige G-Code Kommandos verwendet, welche sich insbesondere auf die Ansteuerung der Motoren beschränken.
 
 <br>
@@ -1616,17 +1647,22 @@ Der letzte Wegpunkt liegt im inneren des Zielfelds, sodass sich die Figur in der
 
 <br>
 
-Anzumerken ist, dass dieser Algorithmus nicht weiter optimiert wurde, somit führen die Figuren auch einen Zick-Zack-Weg aus auch wenn das Zielfeld direkt neben dem Start-Feld liegt.
+![Embedded System Software: Figur Wegpunkte \label{ATC_FigureMoveAlgorithm}](images/ATC_FigureMoveAlgorithm.png)
 
 <br>
 
-![Embedded System Software: Figur Wegpunkte \label{ATC_FigureMoveAlgorithm}](images/ATC_FigureMoveAlgorithm.png)
+Anzumerken ist, dass dieser Algorithmus nicht weiter optimiert wurde, somit führen die Figuren auch einen Zick-Zack-Weg aus auch wenn das Zielfeld direkt neben dem Start-Feld liegt.
 
 
 
 ## Schachfeld Scan Algorithmus zur Erkennung von Schachzügen
 
+
+
 ![Embedded System Software: Schachfeld Scan Algorithmus Ablauf \label{ATC_ChessMoveAlgorithm}](images/ATC_ChessMoveAlgorithm.png)
+
+Ein weiterer wichtiger Teil der Controller-Software ist die Erfassung, der Schachzüge welche vom Benutzer getätigt wurden.
+Das System bietet dem Benutzer hier zwei Möglichkeiten. Über das (+ui) des autonomen Schachtischs kann der Benutzer, wenn dieser am Zug ist manuell eingegeben werden. Hierbei wird das Start- und Ziel-Feld 
 
 * Benutzer bestätigt, dass er Schachzug gemacht hat
 * Ermittlung des getätigten Schachzugs
