@@ -227,11 +227,12 @@ Tischen handelt es sich um
   \end{itemize}
 \end{itemize}
 
-Für die kommerziell käuflichen Schachspiele gibt es kein sehr großes
-Marktangebot, weswegen für den Vergleich nur zwei Hersteller mit jeweils
-zwei verschiedenen Modellen gewählt werden konnte. (Derzeit integriert
-nur das Unternehmen \passthrough{\lstinline!Square Off!} eine Funktion,
-welche die Figuren unterhalb der Tischplatte mechanisch bewegen kann.)
+Für die kommerziell käuflichen Schachspiele \ref{commchesstables} gibt
+es kein sehr großes Marktangebot, weswegen für den Vergleich nur zwei
+Hersteller mit jeweils zwei verschiedenen Modellen gewählt werden
+konnte. (Derzeit integriert nur das Unternehmen
+\passthrough{\lstinline!Square Off!} eine Funktion, welche die Figuren
+unterhalb der Tischplatte mechanisch bewegen kann.)
 
 Der zweite Hersteller \passthrough{\lstinline!DGT!} wurde dennoch zum
 Vergleich von zusätzlichen Funktionen herangezogen, da dessen
@@ -242,21 +243,22 @@ sich kaum in ihren Basis-Funktionen; mit steigendem Preis werden
 zusätzliche Funktionen in Form von Sensoren oder Verbindungsoptionen
 implementiert.
 
-Das Angebot von open-source Projekten hingegen ist signifikanter, jedoch
-sind die einzelnen Modelle oftmals Kopien oder Revisionen voneinander.
-Die möglichen Funktionen unterscheiden sich daher kaum. Für die hier
-dargestellte Übersicht wurden drei Modelle gewählt, welche in ihren
-Funktionen signifikante Auffälligkeiten und einen hohen Stellenwert und
-Bekanntheitsgrad aufweisen. Wie bereits aus zum Teil identischen den
-Namen ersichtlich, streben alle Tische das gleiche Ziel an und
-unterscheiden sich daher nur in geringen Funktionen, was im Folgenden
-nun näher erläutert wird.
+Das Angebot von open-source Projekten \ref{oschesstables} hingegen ist
+signifikanter, jedoch sind die einzelnen Modelle oftmals Kopien oder
+Revisionen voneinander. Die möglichen Funktionen unterscheiden sich
+daher kaum. Für die hier dargestellte Übersicht wurden drei Modelle
+gewählt, welche in ihren Funktionen signifikante Auffälligkeiten und
+einen hohen Stellenwert und Bekanntheitsgrad aufweisen. Wie bereits aus
+zum Teil identischen den Namen ersichtlich, streben alle Tische das
+gleiche Ziel an und unterscheiden sich daher nur in geringen Funktionen,
+was im Folgenden nun näher erläutert wird.
 
 \hypertarget{kommerzielle-produkte}{%
 \subsection{Kommerzielle Produkte}\label{kommerzielle-produkte}}
 
 \begin{longtable}[]{@{}llccr@{}}
-\caption{Auflistung kommerzieller autonomer Schachtische}\tabularnewline
+\caption{Auflistung kommerzieller autonomer Schachtische
+\label{commchesstables}}\tabularnewline
 \toprule
 \begin{minipage}[b]{0.19\columnwidth}\raggedright
 \strut
@@ -474,7 +476,7 @@ kommerziellen Seite.
 \subsection{Open-Source Projekte}\label{open-source-projekte}}
 
 Bei allen Open-Source Projekten wurden die Eigenschaften anhand der
-Beschreibung und der aktuellen Software extrahiert.
+Beschreibung und der aktuellen Software extrahiert \ref{oschesstables}.
 
 Besonders bei Projekten, welche sich noch in der Entwicklung befinden,
 können sich die Eigenschaften noch verändern und so weitere
@@ -496,8 +498,8 @@ aufgrund der Mechanik, welche über dem Spielbrett montiert werden muss
 und damit das Spielerlebnis erheblich beinflusst, nicht berücksichtigt.
 
 \begin{longtable}[]{@{}lccr@{}}
-\caption{Auflistung von Open-Source Schachtisch
-Projekten}\tabularnewline
+\caption{Auflistung von Open-Source Schachtisch Projekten
+\label{oschesstables}}\tabularnewline
 \toprule
 \begin{minipage}[b]{0.19\columnwidth}\raggedright
 \strut
@@ -708,14 +710,15 @@ entfernen.
 \chapter{Anforderungsanalyse}\label{anforderungsanalyse}}
 
 Nach Abschluss der Recherche, kann somit eine Auflistung aller Features
-angefertigt werden, welche ein autonomer Schachtisch aufweisen sollte.
-In diesem Projekt werden vor allem Funktionalitäten berücksichtig,
-welche die Bedienung und Benutzung des autonomen Schachtisches dem
-Benutzer einen Mehrwert in Bezug auf die Benutzerfreundlichkeit bieten.
+\ref{atcrequirements} angefertigt werden, welche ein autonomer
+Schachtisch aufweisen sollte. In diesem Projekt werden vor allem
+Funktionalitäten berücksichtig, welche die Bedienung und Benutzung des
+autonomen Schachtisches dem Benutzer einen Mehrwert in Bezug auf die
+Benutzerfreundlichkeit bieten.
 
 \begin{longtable}[]{@{}lr@{}}
-\caption{Auflistung der Anforderungen an den autonomen
-Schachtisch}\tabularnewline
+\caption{Auflistung der Anforderungen an den autonomen Schachtisch
+\label{atcrequirements}}\tabularnewline
 \toprule
 & \gls{atc}\tabularnewline
 \midrule
@@ -854,16 +857,16 @@ mit nahezu jeden handelsüblichen \gls{fdm} 3D-Drucker verarbeitet
 werden.
 
 Zuvor wurden einige Testdrucke durchgeführt, um die Qualität der zuvor
-gewählten Druckparameter zu überprüfen und diese gegebenenfalls
-anzupassen. Auch wurden verschiedene weitere Bauteile gedruckt, an
-welchen die Toleranzen für die späteren \gls{cad} Zeichnungen
-abgeschätzt werden können. Dies betrifft vor allem die Genauigkeit der
-Bohrungen in den gefertigten Objekten, da hier später Bolzen und
-Schrauben ein nahezu spielfrei eingeführt werden müssen. Ein Test,
-welcher die Machbarkeit von Gewinden zeigt, wurde nicht durchgeführt, da
-alle Schrauben später mit der passenden Mutter gesichert werden sollen.
-So soll eine Abnutzung durch häufige Montage der gedruckten Bauteile
-verhindert werden.
+gewählten Druckparameter \ref{3dprintsettings} zu überprüfen und diese
+gegebenenfalls anzupassen. Auch wurden verschiedene weitere Bauteile
+gedruckt, an welchen die Toleranzen für die späteren \gls{cad}
+Zeichnungen abgeschätzt werden können. Dies betrifft vor allem die
+Genauigkeit der Bohrungen in den gefertigten Objekten, da hier später
+Bolzen und Schrauben ein nahezu spielfrei eingeführt werden müssen. Ein
+Test, welcher die Machbarkeit von Gewinden zeigt, wurde nicht
+durchgeführt, da alle Schrauben später mit der passenden Mutter
+gesichert werden sollen. So soll eine Abnutzung durch häufige Montage
+der gedruckten Bauteile verhindert werden.
 
 Bei dem Design der zu druckenden Bauteile wurde darauf geachtet, dass
 diese den Bauraum von 200x200x200mm nicht überschreiten und somit auch
@@ -892,7 +895,8 @@ eine Stützstruktur erforderlich sind.
 
 \begin{longtable}[]{@{}lr@{}}
 \caption{Verwendete 3D Druck Parameter. Temperatur nach
-Herstellerangaben des verwendeten PLA Filament.}\tabularnewline
+Herstellerangaben des verwendeten PLA Filament.
+\label{3dprintsettings}}\tabularnewline
 \toprule
 Ender 3 Pro 0.4mm Nozzle & PLA Settings\tabularnewline
 \midrule
@@ -1341,11 +1345,13 @@ wurde die komplette Ansteuerung auf der Softwareseite in ein eigenes
 Modul geschachtelt. Dieses stellt verschiedene Funktionen zum Verfahren
 eines Motors bereit. Hierzu benötigt jeder verwendete Hardware-Treiber
 eine Instanz des Moduls zur Ansteuerung; so ist es zusätzlich möglich,
-für jede Achse verschiedene Parameter setzten zu können in Bezug auf
-Beschleunigung und Positioniergeschwindigkeit des Motors.
+für jede Achse verschiedene Parameter \ref{tmcrampparams} setzten zu
+können in Bezug auf Beschleunigung und Positioniergeschwindigkeit des
+Motors.
 
 \begin{longtable}[]{@{}lr@{}}
-\caption{TMC5160 Beschleunigungskurve / RAMP Parameter}\tabularnewline
+\caption{TMC5160 Beschleunigungskurve / RAMP Parameter
+\label{tmcrampparams}}\tabularnewline
 \toprule
 Parameter & Value\tabularnewline
 \midrule
@@ -1928,11 +1934,13 @@ Aufbaus ist zu erkennen, dass der autonome Schachtisch einer CNC-Fräse
 bzw. eines 3D Drucker stark ähnelt. Insbesondere die XY-Achsen Mechanik
 sowie die Ansteuerung von Schrittmotoren wird in diesen Systemen
 verwendet. Mit dem Durchbruch von 3D Druckern im Konsumer-Bereich sind
-auch kleine und preisgünstige Steuerungen erhältlich, welche 2-3
-Schrittmotoren und diverse zusätzliche Hardware ansteuern können.
+auch kleine und preisgünstige Steuerungen \ref{3dmarlinctl} erhältlich,
+welche 2-3 Schrittmotoren und diverse zusätzliche Hardware ansteuern
+können.
 
 \begin{longtable}[]{@{}lccr@{}}
-\caption{Standardhardware 3D Drucker Steuerungen}\tabularnewline
+\caption{Standardhardware 3D Drucker Steuerungen
+\label{3dmarlinctl}}\tabularnewline
 \toprule
 & SKR 1.4 Turbo & Ramps 1.4 & Anet A8 Mainboard\tabularnewline
 \midrule
@@ -1998,11 +2006,12 @@ G-Code ist eine
 
 Marlin-FW\cite{marlinfw} biete dabei einen großen Befehlssatz an
 G-Code Kommandos an. Bei diesem Projekt werden jedoch nur einige G-Code
-Kommandos verwendet, welche sich insbesondere auf die Ansteuerung der
-Motoren beschränken.
+Kommandos verwendet \ref{gcodecmd}, welche sich insbesondere auf die
+Ansteuerung der Motoren beschränken.
 
 \begin{longtable}[]{@{}lcr@{}}
-\caption{Grundlegende verwendete G-Code Kommandos}\tabularnewline
+\caption{Grundlegende verwendete G-Code Kommandos
+\label{gcodecmd}}\tabularnewline
 \toprule
 & G-Code Command & Parameters\tabularnewline
 \midrule
@@ -2040,11 +2049,12 @@ die gängigsten \gls{usb} zu seriell Wandler bereits installiert ist. Die
 Software erkennt anhand der zur Verfügung stehenden \gls{usb}-Ger sowie
 deren Vendor und Product-ID Informationen die verbundene Steuerung und
 verwendet diese nach dem Start automatisch. Hierzu wurde zuvor eine
-Liste mit verschiedenen getesteten Steuerungen sowie deren USB-Vendor
-und Product-ID angelegt.
+Liste \ref{gcodeusbctl} mit verschiedenen getesteten Steuerungen sowie
+deren \gls{usb}-Vendor und Product-ID angelegt.
 
 \begin{longtable}[]{@{}lccr@{}}
-\caption{Hinterlegte G-Code Steuerungen}\tabularnewline
+\caption{Hinterlegte G-Code Steuerungen
+\label{gcodeusbctl}}\tabularnewline
 \toprule
 Product & Vendor-ID & Product-ID & Board-Type\tabularnewline
 \midrule
@@ -2229,11 +2239,11 @@ ChessPiece::FIGURE UserBoardController::read_chess_piece_nfc(){
 
 Das System erkennt den Anschluss der Hardware beim Start auf die gleiche
 Art und Weise wie der G-Code Sender. Dafür wurden einige verschiedene
-Mikrokontroller im System hinterlegt, auf welchen die Firmware getestet
-wurde.
+Mikrokontroller im System hinterlegt \ref{umbdctl}, auf welchen die
+Firmware getestet wurde.
 
 \begin{longtable}[]{@{}lccr@{}}
-\caption{Hinterlegte Mikrokontroller}\tabularnewline
+\caption{Hinterlegte Mikrokontroller \label{umbdctl}}\tabularnewline
 \toprule
 Product & Vendor-ID & Product-ID & Board-Type\tabularnewline
 \midrule
@@ -2269,8 +2279,11 @@ Prototypens}\label{fazit-bezuxfcglich-des-finalen-prototypens}}
   6h dauertest bestanden
 \end{itemize}
 
+\label{finalfeaturesatc}
+
 \begin{longtable}[]{@{}lr@{}}
-\caption{Eigenschaften die finalen Prototypen}\tabularnewline
+\caption{Eigenschaften die finalen Prototypen
+\label{finalfeaturesatc}}\tabularnewline
 \toprule
 & \gls{atc} -- autonomous Chessboard\tabularnewline
 \midrule
@@ -2430,10 +2443,9 @@ Der MoveValidator-Service bildet im System die eigentliche Schachlogik
 ab. Die Aufgabe ist es, die vom Benutzer eingegebenen Züge auf
 Richtigkeit zu überprüfen und auf daraufhin neuen Spiel-Status
 zurückzugeben. Dazu zählen unter anderem das neue Schachbrett und ob ein
-Spieler gewonnen oder verloren hat.
-
-Bevor ein Spiel begonnen wird, generiert der MoveValidator das initiale
-Spielfeld und bestimmt den Spieler, welcher als erstes am Zug ist.
+Spieler gewonnen oder verloren hat. Bevor ein Spiel begonnen wird,
+generiert der MoveValidator das initiale Spielfeld und bestimmt den
+Spieler, welcher als erstes am Zug ist.
 
 \begin{figure}
 \centering
@@ -2449,7 +2461,8 @@ Backend in der Datenbank gespeichert und weiter an die Client-Devices
 verteilt.
 
 \begin{longtable}[]{@{}lccr@{}}
-\caption{MoveValidator-Service \gls{api} Overview}\tabularnewline
+\caption{MoveValidator-Service \gls{api} Overview
+\label{finalfeaturesatc}}\tabularnewline
 \toprule
 MoveValidator-Function & \gls{api}-Route & Method &
 Form-Data\tabularnewline
@@ -2468,26 +2481,27 @@ Init Board & /rest/init\_board & GET &\tabularnewline
 \end{longtable}
 
 Allgemein geschieht die Kommunikation über vier \gls{api} Calls, welche
-vom MoveValidator-Service angeboten werden. Als erstes wird vom Backend
-der \passthrough{\lstinline!/rest/init\_board!} Request verwendet,
-welcher ein neues Spielbrett in der \gls{fen} Notation zurückgibt,
-welches zum Start der Partie verwendet wird. Allgemein arbeitet wurde
-das komplette System so umgesetzt, dass dieses mit einem Spielfeld in
-einer Zeichenketten representation arbeitet. Dies hat den Vorteil, dass
-die Spielfeld-Notation leicht angepasst werden kann. Mit diesem Design
-ist es möglich, auch andere Spielarten im System zu implementieren, da
-nur an dieser Stelle die initialen Spielfelder generiert werden und Züge
-der Spieler validiert werden müssen.
+vom MoveValidator-Service angeboten werden \ref{finalfeaturesatc}. Als
+erstes wird vom Backend der \passthrough{\lstinline!/rest/init\_board!}
+Request verwendet, welcher ein neues Spielbrett in der \gls{fen}
+Notation zurückgibt, welches zum Start der Partie verwendet wird.
+Allgemein arbeitet wurde das komplette System so umgesetzt, dass dieses
+mit einem Spielfeld in einer Zeichenketten representation arbeitet. Dies
+hat den Vorteil, dass die Spielfeld-Notation leicht angepasst werden
+kann. Mit diesem Design ist es möglich, auch andere Spielarten im System
+zu implementieren, da nur an dieser Stelle die initialen Spielfelder
+generiert werden und Züge der Spieler validiert werden müssen.
 
 Die \gls{fen} Notation ist universal und kann jede Brettstellung
 darstellen. Auch enthält diese nicht nur die Figur Stellungen, sondern
 auch weitere Informationen, wie die aktuelle Nummer des Zuges oder
 welcher Spieler gerade an der Reihe ist. Diese werden dann in der
 \gls{xfen} Notation angegeben, bei der zusätzlich zu der Brettstellung
-auch noch die weiteren Informationen angehängt werden.
+auch noch die weiteren Informationen angehängt werden \ref{fenxfen}.
 
 \begin{longtable}[]{@{}lr@{}}
-\caption{Vergleich \gls{fen} - \gls{xfen}}\tabularnewline
+\caption{Vergleich \gls{fen} - \gls{xfen}
+\label{fenxfen}}\tabularnewline
 \toprule
 FEN-TYPE & FEN-String\tabularnewline
 \midrule

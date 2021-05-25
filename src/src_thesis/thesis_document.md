@@ -124,7 +124,7 @@ Bei den ausgewählten Tischen handelt es sich um
 
 <br>
 
-Für die kommerziell käuflichen Schachspiele gibt es kein sehr großes Marktangebot, weswegen für den Vergleich nur zwei Hersteller mit jeweils zwei verschiedenen Modellen gewählt werden konnte. (Derzeit integriert nur das Unternehmen `Square Off` eine Funktion, welche die Figuren unterhalb der Tischplatte mechanisch bewegen kann.)
+Für die kommerziell käuflichen Schachspiele \ref{commchesstables} gibt es kein sehr großes Marktangebot, weswegen für den Vergleich nur zwei Hersteller mit jeweils zwei verschiedenen Modellen gewählt werden konnte. (Derzeit integriert nur das Unternehmen `Square Off` eine Funktion, welche die Figuren unterhalb der Tischplatte mechanisch bewegen kann.)
 
 Der zweite Hersteller `DGT` wurde dennoch zum Vergleich von zusätzlichen Funktionen herangezogen, da dessen Schachbretter die aktuelle Figurstellungen erkennen können.
 
@@ -134,7 +134,7 @@ Die Tische des Herstellers `DTG` unterscheiden sich kaum in ihren Basis-Funktion
 
 <br>
 
-Das Angebot von open-source Projekten hingegen ist signifikanter, jedoch sind die einzelnen Modelle oftmals Kopien oder Revisionen voneinander. Die möglichen Funktionen unterscheiden sich daher kaum. Für die hier dargestellte Übersicht wurden drei Modelle gewählt, welche in ihren Funktionen signifikante Auffälligkeiten und einen hohen Stellenwert und Bekanntheitsgrad aufweisen.
+Das Angebot von open-source Projekten \ref{oschesstables} hingegen ist signifikanter, jedoch sind die einzelnen Modelle oftmals Kopien oder Revisionen voneinander. Die möglichen Funktionen unterscheiden sich daher kaum. Für die hier dargestellte Übersicht wurden drei Modelle gewählt, welche in ihren Funktionen signifikante Auffälligkeiten und einen hohen Stellenwert und Bekanntheitsgrad aufweisen.
 Wie bereits aus zum Teil identischen den Namen ersichtlich, streben alle Tische das gleiche Ziel an und unterscheiden sich daher nur in geringen Funktionen, was im Folgenden nun näher erläutert wird.
 
 
@@ -145,7 +145,7 @@ Wie bereits aus zum Teil identischen den Namen ersichtlich, streben alle Tische 
 <br>
 
 
-: Auflistung kommerzieller autonomer Schachtische
+: Auflistung kommerzieller autonomer Schachtische \label{commchesstables}
 
 |                                           | Square Off - Kingdom [@squareoffkingdom]  | Square Off - Grand Kingdom [@squareoffgrand] | DGT Smart Board [@dtgsmartboard]  | DGT Bluetooth Wenge [@dtgble] |
 |:------------------------------------------|-------------------------------------------|:--------------------------------------------:|:---------------------------------:|------------------------------:|
@@ -216,7 +216,7 @@ Zusammenfassend ist festzustellen, dass alle vier Tische dank unterschiedlicher 
 
 ### Open-Source Projekte
 
-Bei allen Open-Source Projekten wurden die Eigenschaften anhand der Beschreibung und der aktuellen Software extrahiert.
+Bei allen Open-Source Projekten wurden die Eigenschaften anhand der Beschreibung und der aktuellen Software extrahiert \ref{oschesstables}.
 
 <br>
 
@@ -228,7 +228,7 @@ Zusätzlich zu den genannten Projekten sind weitere derartige Projekte verfügba
 
 Auch existieren weitere Abwandlungen von autonomen Schachbrettern, bei welchem die Figuren von oberhalb des Spielbretts gegriffen bzw. bewegt werden. In einigen Projekten wird dies mittels eines Industrie-Roboters [@actprojectrobot] oder eines modifizierten 3D-Druckers[@atcproject3dprinter] realisiert. Diese wurden hier aufgrund der Mechanik, welche über dem Spielbrett montiert werden muss und damit das Spielerlebnis erheblich beinflusst, nicht berücksichtigt.
 
-: Auflistung von Open-Source Schachtisch Projekten
+: Auflistung von Open-Source Schachtisch Projekten \label{oschesstables}
 
 |                                         | Automated Chess Board (Michael Guerero) [@actproject1]| Automated Chess Board (Akash Ravichandran) [@actproject2]| DIY Super Smart Chessboard [@actproject3]|
 |:----------------------------------------|:-----------------------------------------------------:|:--------------------------------------------------------:|-----------------------------------------:|
@@ -303,12 +303,12 @@ Auch muss sich hier die Frage gestellt werden, was mit den ausgeschiedenen Figur
 
 # Anforderungsanalyse
 
-Nach Abschluss der Recherche, kann somit eine Auflistung aller Features angefertigt werden, welche ein autonomer Schachtisch aufweisen sollte.
+Nach Abschluss der Recherche, kann somit eine Auflistung aller Features \ref{atcrequirements} angefertigt werden, welche ein autonomer Schachtisch aufweisen sollte.
 In diesem Projekt werden vor allem Funktionalitäten berücksichtig, welche die Bedienung und Benutzung des autonomen Schachtisches dem Benutzer einen Mehrwert in Bezug auf die Benutzerfreundlichkeit bieten.
 
 <br>
 
-: Auflistung der Anforderungen an den autonomen Schachtisch
+: Auflistung der Anforderungen an den autonomen Schachtisch \label{atcrequirements}
 
 |                                             | (+atc)                                  |
 |:------------------------------------------  |----------------------------------------:|
@@ -392,7 +392,7 @@ Dieses ist besonders gut für die Prototypenendwicklung geeignet und kann mit na
 
 <br>
 
-Zuvor wurden einige Testdrucke durchgeführt, um die Qualität der zuvor gewählten Druckparameter zu überprüfen und diese gegebenenfalls anzupassen.
+Zuvor wurden einige Testdrucke durchgeführt, um die Qualität der zuvor gewählten Druckparameter \ref{3dprintsettings} zu überprüfen und diese gegebenenfalls anzupassen.
 Auch wurden verschiedene weitere Bauteile gedruckt, an welchen die Toleranzen für die späteren (+cad) Zeichnungen abgeschätzt werden können.
 Dies betrifft vor allem die Genauigkeit der Bohrungen in den gefertigten Objekten, da hier später Bolzen und Schrauben ein nahezu spielfrei eingeführt werden müssen.
 Ein Test, welcher die Machbarkeit von Gewinden zeigt, wurde nicht durchgeführt, da alle Schrauben später mit der passenden Mutter gesichert werden sollen.
@@ -416,7 +416,7 @@ Diese Vorteile wurde mit verschiedenen Testdrucken verifiziert und kommen insbes
 
 <br>
 
-: Verwendete 3D Druck Parameter. Temperatur nach Herstellerangaben des verwendeten PLA Filament.
+: Verwendete 3D Druck Parameter. Temperatur nach Herstellerangaben des verwendeten PLA Filament. \label{3dprintsettings}
 
 | Ender 3 Pro 0.4mm Nozzle  | PLA Settings  |
 |:--------------------------|--------------:|
@@ -693,9 +693,9 @@ Die (+hal) und deren benötigten Softwarekomponenten zur Buskommunikation und Ha
 ### TMC5160 SPI Treiber
 
 Der Treiber für die verwendeten `TMC5160` Schrittmotor-Treiber ist ebenfalls ein Bestandteil der (+hal). Die verwendeten Bausteine bieten mitunter sehr komplexe Konfigurationsmöglichkeiten und je nach Betriebsart sind mehrere Lese- und Schreiboperationen über den (+spi) Bus notwendig. Diesbezüglich wurde die komplette Ansteuerung auf der Softwareseite in ein eigenes Modul geschachtelt.
-Dieses stellt verschiedene Funktionen zum Verfahren eines Motors bereit. Hierzu benötigt jeder verwendete Hardware-Treiber eine Instanz des Moduls zur Ansteuerung; so ist es zusätzlich möglich, für jede Achse verschiedene Parameter setzten zu können in Bezug auf Beschleunigung und Positioniergeschwindigkeit des Motors.
+Dieses stellt verschiedene Funktionen zum Verfahren eines Motors bereit. Hierzu benötigt jeder verwendete Hardware-Treiber eine Instanz des Moduls zur Ansteuerung; so ist es zusätzlich möglich, für jede Achse verschiedene Parameter \ref{tmcrampparams} setzten zu können in Bezug auf Beschleunigung und Positioniergeschwindigkeit des Motors.
 
-: TMC5160 Beschleunigungskurve / RAMP Parameter
+: TMC5160 Beschleunigungskurve / RAMP Parameter \label{tmcrampparams}
 
 | Parameter 	| Value   	|
 |:--------------|----------:|
@@ -1067,11 +1067,12 @@ Zusätzlich konnte die Elektronik nur beschränkt mit anderen Systemen verbunden
 All diese Faktoren erschweren einen einfachen Zusammenbau des autonomen Schachtischs. Die Lösung stellt die Verwendung von Standardhardware dar.
 Nach der Minimierung der elektrischen Komponenten und des mechanischen Aufbaus ist zu erkennen, dass der autonome Schachtisch einer CNC-Fräse bzw. eines 3D Drucker stark ähnelt.
 Insbesondere die XY-Achsen Mechanik sowie die Ansteuerung von Schrittmotoren wird in diesen Systemen verwendet.
-Mit dem Durchbruch von 3D Druckern im Konsumer-Bereich sind auch kleine und preisgünstige Steuerungen erhältlich, welche 2-3 Schrittmotoren und diverse zusätzliche Hardware ansteuern können.
+Mit dem Durchbruch von 3D Druckern im Konsumer-Bereich sind auch kleine und preisgünstige Steuerungen \ref{3dmarlinctl} erhältlich, welche 2-3 Schrittmotoren und diverse zusätzliche Hardware ansteuern können.
+
 <!-- Hier fehlt noch eine Überleitung zur Tabelle-->
 <br>
 
-: Standardhardware 3D Drucker Steuerungen
+: Standardhardware 3D Drucker Steuerungen \label{3dmarlinctl}
 
 |                    | SKR 1.4 Turbo     | Ramps 1.4           | Anet A8 Mainboard     |
 |:-------------------|:-----------------:|:-------------------:|----------------------:|
@@ -1103,11 +1104,11 @@ G-Code ist eine
 <!--- hier fehlt was --> 
 
 
-Marlin-FW[@marlinfw] biete dabei einen großen Befehlssatz an G-Code Kommandos an. Bei diesem Projekt werden jedoch nur einige G-Code Kommandos verwendet, welche sich insbesondere auf die Ansteuerung der Motoren beschränken.
+Marlin-FW[@marlinfw] biete dabei einen großen Befehlssatz an G-Code Kommandos an. Bei diesem Projekt werden jedoch nur einige G-Code Kommandos verwendet \ref{gcodecmd}, welche sich insbesondere auf die Ansteuerung der Motoren beschränken.
 
 <br>
 
-: Grundlegende verwendete G-Code Kommandos
+: Grundlegende verwendete G-Code Kommandos \label{gcodecmd}
 
 |                           | G-Code Command    | Parameters                            |
 |:------------------------- |:-----------------:|--------------------------------------:|
@@ -1121,11 +1122,11 @@ Marlin-FW[@marlinfw] biete dabei einen großen Befehlssatz an G-Code Kommandos a
 Die erforderlichen Kommandos wurden auf ein Minimum beschränk, um eine maximale Kompatibilität bei verschiedenen G-Code-fähigen Steuerungen zu gewährleisten.
 Die Software unterstützt jedoch weitere Kommandos wie z.B. `M150` mit welchem speziellen Ausgänge für (+led)s gesteuert werden können. Dieses Feature bietet sowohl die verwendete Marlin-FW[@marlinfw] als auch die verwendete Steuerung an. Sollte die verwendete Steuerung solch ein optionales Kommando nicht unterstützen, so werden diese ignoriert was zur Folge hat, dass auch preisgünstige Steuerungen verwendet werden können.
 
-Die Kommunikation zwischen Steuerung und eingebetteten System geschieht durch eine (+usb) Verbinden. Die Steuerung meldet sich als virtuelle Serielle Schnittstelle im System an und kann über diese mit der Software kommunizieren. Auch werden so keine speziellen Treiber benötigt, da auf nahezu jedem System ein Treiber `USB-CDC` für die gängigsten (+usb) zu seriell Wandler bereits installiert ist. Die Software erkennt anhand der zur Verfügung stehenden (+usb)-Geräte sowie deren Vendor und Product-ID Informationen die verbundene Steuerung und verwendet diese nach dem Start automatisch. Hierzu wurde zuvor eine Liste mit verschiedenen getesteten Steuerungen sowie deren USB-Vendor und Product-ID angelegt.
+Die Kommunikation zwischen Steuerung und eingebetteten System geschieht durch eine (+usb) Verbinden. Die Steuerung meldet sich als virtuelle Serielle Schnittstelle im System an und kann über diese mit der Software kommunizieren. Auch werden so keine speziellen Treiber benötigt, da auf nahezu jedem System ein Treiber `USB-CDC` für die gängigsten (+usb) zu seriell Wandler bereits installiert ist. Die Software erkennt anhand der zur Verfügung stehenden (+usb)-Geräte sowie deren Vendor und Product-ID Informationen die verbundene Steuerung und verwendet diese nach dem Start automatisch. Hierzu wurde zuvor eine Liste \ref{gcodeusbctl} mit verschiedenen getesteten Steuerungen sowie deren (+usb)-Vendor und Product-ID angelegt.
 
 <br>
 
-: Hinterlegte G-Code Steuerungen
+: Hinterlegte G-Code Steuerungen \label{gcodeusbctl}
 
 | Product                   | Vendor-ID | Product-ID | Board-Type         |
 |:--------------------------|:---------:|:----------:|-------------------:|
@@ -1277,11 +1278,11 @@ ChessPiece::FIGURE UserBoardController::read_chess_piece_nfc(){
 
 <br>
 
-Das System erkennt den Anschluss der Hardware beim Start auf die gleiche Art und Weise wie der G-Code Sender. Dafür wurden einige verschiedene Mikrokontroller im System hinterlegt, auf welchen die Firmware getestet wurde.
+Das System erkennt den Anschluss der Hardware beim Start auf die gleiche Art und Weise wie der G-Code Sender. Dafür wurden einige verschiedene Mikrokontroller im System hinterlegt \ref{umbdctl}, auf welchen die Firmware getestet wurde.
 
 <br>
 
-: Hinterlegte Mikrokontroller
+: Hinterlegte Mikrokontroller \label{umbdctl}
 
 | Product                         | Vendor-ID | Product-ID | Board-Type         |
 |:--------------------------------|:---------:|:----------:|-------------------:|
@@ -1302,7 +1303,10 @@ Das System erkennt den Anschluss der Hardware beim Start auf die gleiche Art und
 * geänderte Mechnik resultiert in nahezu Spielfreier Mechanik (+- 1mm), welches für diesen Zweck mehr als ausreicht
 * 6h dauertest bestanden
 
-: Eigenschaften die finalen Prototypen
+\label{finalfeaturesatc}
+
+
+: Eigenschaften die finalen Prototypen \label{finalfeaturesatc}
 
 |                                         | (+atc) – autonomous Chessboard      |
 |:----------------------------------------|------------------------------------:|
@@ -1420,7 +1424,6 @@ Diese stellen alle wichtigen Funktionen zum Betrieb des autonomen Schachtischs z
 Der MoveValidator-Service bildet im System die eigentliche Schachlogik ab.
 Die Aufgabe ist es, die vom Benutzer eingegebenen Züge auf Richtigkeit zu überprüfen und auf daraufhin neuen Spiel-Status zurückzugeben.
 Dazu zählen unter anderem das neue Schachbrett und ob ein Spieler gewonnen oder verloren hat.
-
 Bevor ein Spiel begonnen wird, generiert der MoveValidator das initiale Spielfeld und bestimmt den Spieler, welcher als erstes am Zug ist.
 
 
@@ -1431,7 +1434,7 @@ Der Backend-Service fragt ein neues Spiel an oder übergibt einen Schachzug inkl
 Der Response wird dann vom Backend in der Datenbank gespeichert und weiter an die Client-Devices verteilt.
 
 
-: MoveValidator-Service (+api) Overview
+: MoveValidator-Service (+api) Overview \label{finalfeaturesatc}
 
 | MoveValidator-Function    | (+api)-Route             | Method | Form-Data             |
 |:--------------------------|:------------------------:|:------:|----------------------:|
@@ -1443,7 +1446,7 @@ Der Response wird dann vom Backend in der Datenbank gespeichert und weiter an di
 
 <br>
 
-Allgemein geschieht die Kommunikation über vier (+api) Calls, welche vom MoveValidator-Service angeboten werden.
+Allgemein geschieht die Kommunikation über vier (+api) Calls, welche vom MoveValidator-Service angeboten werden \ref{finalfeaturesatc}.
 Als erstes wird vom Backend der `/rest/init_board` Request verwendet, welcher ein neues Spielbrett in der (+fen) Notation zurückgibt, welches zum Start der Partie verwendet wird.
 Allgemein arbeitet wurde das komplette System so umgesetzt, dass dieses mit einem Spielfeld in einer Zeichenketten representation arbeitet.
 Dies hat den Vorteil, dass die Spielfeld-Notation leicht angepasst werden kann.
@@ -1451,11 +1454,11 @@ Mit diesem Design ist es möglich, auch andere Spielarten im System zu implement
 
 <br>
 
-Die (+fen) Notation ist universal und kann jede Brettstellung darstellen. Auch enthält diese nicht nur die Figur Stellungen, sondern auch weitere Informationen, wie die aktuelle Nummer des Zuges oder welcher Spieler gerade an der Reihe ist. Diese werden dann in der (+xfen) Notation angegeben, bei der zusätzlich zu der Brettstellung auch noch die weiteren Informationen angehängt werden.
+Die (+fen) Notation ist universal und kann jede Brettstellung darstellen. Auch enthält diese nicht nur die Figur Stellungen, sondern auch weitere Informationen, wie die aktuelle Nummer des Zuges oder welcher Spieler gerade an der Reihe ist. Diese werden dann in der (+xfen) Notation angegeben, bei der zusätzlich zu der Brettstellung auch noch die weiteren Informationen angehängt werden \ref{fenxfen}.
 
 <br>
 
-: Vergleich (+fen) - (+xfen)
+: Vergleich (+fen) - (+xfen) \label{fenxfen}
 
 | FEN-TYPE  | FEN-String                                                    |
 |:----------|--------------------------------------------------------------:|
