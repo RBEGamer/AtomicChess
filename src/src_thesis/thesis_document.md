@@ -7,7 +7,7 @@ Eingebettete Systeme (Englisch "embedded Systems") sind technische Zusammensetzu
 
 <br>
 
-Dennoch ist die Entwicklung eines solchen Systems nicht banal. Es ist abzuwägen, welche Komponenten derzeit auf dem freien Markt erhältlich sind, welche Eigenschaften diese mitbringen oder ermöglichen und wie diese optimal kombiniert werden können. Es bedarf im Vorhinein intensiverer Recherche und einer größeren Perspektive über mögliche Zusammenhänge. Im Falle eines Merhzwecksystems ist die Auswahl simpler, da man den Prozess auch im Nachhinein noch anpassen kann, da zusätzliche Funktionen und Komponenten gegeben sind oder leichter ergänzt werden können. Das eingebettete System muss in der Regel aufgewertet oder sogar völlig ersetzt werden, wenn zu einem späteren Zeitpunkt festgestellt wird, dass Funktionen nicht gegeben oder umsetzbar sind. Fertiggestellte Systeme sind komplexer in der Aufwertung.
+Dennoch ist die Entwicklung eines solchen Systems nicht banal. Es ist abzuwägen, welche Komponenten derzeit auf dem freien Markt erhältlich sind, welche Eigenschaften diese mitbringen oder ermöglichen und wie diese optimal kombiniert werden können. Es bedarf im Vorhinein intensiverer Recherche und einer größeren Perspektive über mögliche Zusammenhänge. Im Falle eines Merhzwecksystems ist die Auswahl simpler, da man den Prozess auch im Nachhinein noch anpassen kann, weil zusätzliche Funktionen und Komponenten gegeben sind oder leichter ergänzt werden können. Das eingebettete System muss in der Regel aufgewertet oder sogar völlig ersetzt werden, wenn zu einem späteren Zeitpunkt festgestellt wird, dass Funktionen nicht gegeben oder umsetzbar sind. Fertiggestellte Systeme sind komplexer in der Aufwertung.
 
 <br>
 
@@ -15,11 +15,11 @@ Die Fähigkeit zur Erstellung eines solchen System ist daher nicht leichtfertig 
 
 <br>
 
-Die Erstellung eines autonomen Schachtischs vereinbart in meinen Augen im großen Umfang die wesentlichen Komponenten des Informatikstudiums mit meiner Vorliebe zur mechanisch-elektrischen Gestaltung. Angefangen mit den Grundlagen der Informatik, insbesondere mit technischem Bezug, über die Berechnung und Auslegung von Systemkomponenten, zudem die objektorientierte Projektplanung und Architektur von Systemen bis hin zu Datenbanken und Webtechnologien und Softwareenentwicklung. Zudem wird mein Studienschwerpunkt, die technische Informatik, mit einem einbetteten System manifestiert.
+Die Erstellung eines autonomen Schachtischs vereinbart in meinen Augen im großen Umfang die wesentlichen Komponenten des Informatikstudiums mit meiner Vorliebe zur mechanisch-elektrischen Gestaltung. Angefangen mit den Grundlagen der Informatik, insbesondere mit technischem Bezug, über die Berechnung und Auslegung von Systemkomponenten, zudem die objektorientierte Projektplanung und Architektur von Systemen bis hin zu Datenbanken und Webtechnologien und Softwareentwicklung. Zudem wird mein Studienschwerpunkt, die technische Informatik, mit einem einbetteten System manifestiert.
 
 <br>
 
-Der Reiz im Schachprojekt liegt in der Bedeutung und der Seltenheit. Schach ist ein bewährtes, ausnahmslos bekanntes und immer logisches Spiel, welches jedoch im kommerziellen Rahmen nie an Bedeutung gewonnen hat. Die Auswahl der verfügbare elektrifizierte und programmgesteuerte Schachtisch ist auffallend gering; zudem sind existierende Lösungen oftmals nicht erschwinglich und bedürfen erhebliche Anpassungen des Spielers an das Spiel.
+Der Reiz im Schachprojekt liegt in der Bedeutung und der Seltenheit. Schach ist ein bewährtes, ausnahmslos bekanntes und immer logisches Spiel, welches jedoch im kommerziellen Rahmen nie an Bedeutung gewonnen hat. Die Auswahl der verfügbare elektrifizierten und programmgesteuerten Schachtische ist auffallend gering; zudem sind existierende Lösungen oftmals nicht erschwinglich und bedürfen erhebliche Anpassungen des Spielers an das Spiel.
 Innerhalb der vergangenen drei Jahrzehnte bewiesen sich immer mehr Konzerne ihre technische Kompetenz und Überlegenheit und die Fähigkeit ihrer Maschinen mittels der Auswertung von Schachalgorithmen und dem möglichst schnellen besiegen derzeitiger Schach-Meister und -Meisterinnen. Die Algorithmen stehen heute in einer Vielzahl als open-source Projekte zur Verfügung, jedoch ist das Interesse daran, für Spieler mögliche Anwendungen zu generieren, verschwindend gering und wird oftmals nur von Experten und Enthusiasten genutzt und auch hinterfragt.
 
 <br>
@@ -399,7 +399,7 @@ Bei dem mechanischen Aufbau wurde auf ein einfaches Design geachtet. Die Konstru
 
 <br>
 
-Bei der initialen Planung wurde beachtet, einen möglichst kleinen Fußabdruck des Schachtischs zu realisieren. Darüberhinaus wurde beabsichtigt, eine fertige Schachtischplatte als Basis zu verwenden und die Mechanik unter diese zu konstruieren. Um dies zu ermöglichen wurde ein IKEA Lack Tisch verwendet, welcher die Idealen Abmessungen von 55x55cm hat und somit eine erforderliche Schachfeldgröße von 55mm möglich ist.
+Bei der initialen Planung wurde beachtet, einen möglichst kleinen Fußabdruck des Schachtischs zu realisieren. Darüber hinaus wurde beabsichtigt, eine fertige Schachtischplatte als Basis zu verwenden und die Mechanik unter diese zu konstruieren. Um dies zu ermöglichen wurde ein IKEA Lack Tisch verwendet, welcher die Idealen Abmessungen von 55x55cm hat und somit eine erforderliche Schachfeldgröße von 55mm möglich ist.
 Durch den bereits vorhandenen Rahmen ist es simpel möglich, weitere Komponenten an diesem zu befestigen. Somit stellt diese Tischplatte eine ideale Basis für den autonomen Schachtisch dar.
 
 <br>
@@ -483,19 +483,19 @@ Die wichtigsten Komponenten in der Schaltung sind das eingebettete System und di
 
 <br>
 
-Zusätzlich sind Spannungswandler nötig, um um die erforderlichen Spannungen von 12V für die Elektromagnete und 5V für das eingebette System zu erzeugen. Die Schrittmotoren werden direkt mit der Versorgungsspannung von 14-24V betrieben. Alle weiteren verwendeten Komponenten zu denen unter anderem auch das `PN532` (+nfc) Modul und die `WS2811` (+led) Module gehören, werden ebenfalls über die 5V Schiene versorgt.
+Zusätzlich sind Spannungswandler nötig, um die erforderlichen Spannungen von 12V für die Elektromagnete und 5V für das eingebettete System zu erzeugen. Die Schrittmotoren werden direkt mit der Versorgungsspannung von 14-24V betrieben. Alle weiteren verwendeten Komponenten zu denen unter anderem auch das `PN532` (+nfc) Modul und die `WS2811` (+led) Module gehören, werden ebenfalls über die 5V Schiene versorgt.
 
 <br>
 
-Für den Betrieb der beiden Elektromagnete wurde kein N-Channel Mosfet o.ä. verwendet, da hier auf maximale flexibilität der Ansteuerung ausschlaggebend ist und bisher nicht ausreichend Erfahrung mit dem Verhalten dieser im Zusammenspiel mit den magnetischen Schachfiguren gesammelt werden konnte. Deshalb wurde hier eine H-Brücke `DRV8871H` verwendet, somit kann auch die Polarität im nachhinein per Software geändert werden und nicht nur die Spannung über ein (+pwm) Signal. Der verwendete Treiber besitz darüber hinaus zwei Ausgänge, was den Nutzen dieser Module besonders ausweitet.
+Für den Betrieb der beiden Elektromagnete wurde kein N-Channel Mosfet o.ä. verwendet, da hier auf maximale Flexibilität der Ansteuerung ausschlaggebend ist und bisher nicht ausreichend Erfahrung mit dem Verhalten dieser im Zusammenspiel mit den magnetischen Schachfiguren gesammelt werden konnte. Deshalb wurde hier eine H-Brücke `DRV8871H` verwendet, somit kann auch die Polarität im Nachhinein per Software geändert werden und nicht nur die Spannung über ein (+pwm) Signal. Der verwendete Treiber besitz darüber hinaus zwei Ausgänge, was den Nutzen dieser Module besonders ausweitet.
 
 <br>
 
-Für die Erzeugung der (+pwm) Signale für die H-Brücke wurde ein zusätzlicher Mikrokontroller `Atmega328p` benötigt, da hier die Steuersignale nicht direkt vom eingebetten Symstem erzeugt werden, sondern nur die Zustandsinformationen über den (+spi) Bus übertragen werden sollen. Dies spart zusätzliche (+gpio) Anschlüsse und somit sind alle Kompomenten über einen zentralen Bus kontrollierbar, welches einen möglichen Tausch des eingebetteten Systems in späteren Revisionen vereinfacht.
+Für die Erzeugung der (+pwm) Signale für die H-Brücke wurde ein zusätzlicher Mikrokontroller `Atmega328p` benötigt, da hier die Steuersignale nicht direkt vom eingebetteten System erzeugt werden, sondern nur die Zustandsinformationen über den (+spi) Bus übertragen werden sollen. Dies spart zusätzliche (+gpio) Anschlüsse und somit sind alle Kompomenten über einen zentralen Bus kontrollierbar, welches einen möglichen Tausch des eingebetteten Systems in späteren Revisionen vereinfacht.
 
 <br>
 
-Der zusätzliche Mikrokontroller übernimmt auch die Kommunikation mit dem `PN532` Modul, da dieses sonst über seine (+i2c) Schnittstelle mit einem entsprechenden Host-System kommuniziert. Der Mikrokontroller übernimmt somit ebenfalls die Konversation des (+i2c) Bus hin zum zentralen (+spi) Bus. Zu beachten ist, dass nun ein zusätzlicher Chip-Select (+gpio) zum ansteuern der Elektromagnete und des `PN532` Moduls benötigt wird. Dies wird durch die Firmware, welche auf dem Mikrokontroller ausgeführt wird, realisiert, und je nach empfangenem Kommando die entsprechende Komponente ausgewählt.
+Der zusätzliche Mikrokontroller übernimmt auch die Kommunikation mit dem `PN532` Modul, da dieses sonst über seine (+i2c) Schnittstelle mit einem entsprechenden Host-System kommuniziert. Der Mikrokontroller übernimmt somit ebenfalls die Konversation des (+i2c) Bus hin zum zentralen (+spi) Bus. Zu beachten ist, dass nun ein zusätzlicher Chip-Select (+gpio) zum Ansteuern der Elektromagnete und des `PN532` Moduls benötigt wird. Dies wird durch die Firmware, welche auf dem Mikrokontroller ausgeführt wird, realisiert, und je nach empfangenem Kommando die entsprechende Komponente ausgewählt.
 
 <br>
 
@@ -503,9 +503,9 @@ Der zusätzliche Mikrokontroller übernimmt auch die Kommunikation mit dem `PN53
 
 <br>
 
-Nach der Festlegung der zu verwendenten Komponenten, wurde ein entsprechender Schaltplan \ref{ATC_Schematic_DK} nach den zuvor erörterten Vorgaben entworfen. Hierbei wurde die Vorgaben der Datenblätter und der Application-Notes in diesen Orientiert. Da es sich hier um einen ersten Funktionsentwurf handelt, wurde zusätzliche Testpunkte in das Design eingefügt.
+Nach der Festlegung der zu verwendenden Komponenten, wurde ein entsprechender Schaltplan \ref{ATC_Schematic_DK} nach den zuvor erörterten Vorgaben entworfen. Hierbei wurde die Vorgaben der Datenblätter und der Application-Notes in diesen Orientiert. Da es sich hier um einen ersten Funktionsentwurf handelt, wurde zusätzliche Testpunkte in das Design eingefügt.
 
-Somit ist es wärend der weiteren Entwicklung möglich, zusätzliches Testequipment wie einen Logic-Analyser direkt an den (+spi) Bus oder ein Oszilloskop an die Ausgänge der H-Brücke dauerhaft anzuschliessen. Desweiteren ist es mögliche die Bus- und Spannungsversorgung über Jumper zu trennen um einen Funktionstest einzelner Komponenten durchführen zu können.
+Somit ist es während der weiteren Entwicklung möglich, zusätzliches Testequipment wie einen Logic-Analyser direkt an den (+spi) Bus oder ein Oszilloskop an die Ausgänge der H-Brücke dauerhaft anzuschliessen. Desweiteren ist es mögliche die Bus- und Spannungsversorgung über Jumper zu trennen, um einen Funktionstest einzelner Komponenten durchführen zu können.
 
 <br>
 
@@ -522,12 +522,12 @@ Im Anschluss wurde die Versorgungsspannung auf 5V erhöht, welches zur Folge hat
 
 <br>
 
-Der Schalplan und dessen Funktionalität, wurden anschliessend durch den Aufbau der vollständigen Schaltung auf einer Lochrasterplatine \ref{ATC_DK_HW_LOCHRASTER} im Eurokartenformat manuell aufgebaut und getestet.
+Der Schalplan und dessen Funktionalität, wurden anschließend durch den Aufbau der vollständigen Schaltung auf einer Lochrasterplatine \ref{ATC_DK_HW_LOCHRASTER} im Eurokartenformat manuell aufgebaut und getestet.
 
 <br>
 
-Aus diesem Design wurde ein (+pcb) Layout für eine einfache 2 lagige Platine erstellt.Dieses orientiert sich an der zuvor umgesetzten Lochrasterplatine und spiegelt das Layout wieder.
-Auch wurde hier nicht auf den Platzverbrauch geachtet. Es wurde zusätzliche Steckverbindungen für die externen Komponenten eingefügt und passende Bohrungen an den Ecken sowie in der Mitte zur Montage vorgesehen. Auf dem obersten Layer wurde der Bestückungsdruck erhöhrt und mit zusätzlichen Information über die Pin-Belegungen der einzelnen Stecker erweitert.
+Aus diesem Design wurde ein (+pcb) Layout für eine einfache 2 lagige Platine erstellt. Dieses orientiert sich an der zuvor umgesetzten Lochrasterplatine und spiegelt das Layout wider.
+Auch wurde hier nicht auf den Platzverbrauch geachtet. Es wurde zusätzliche Steckverbindungen für die externen Komponenten eingefügt und passende Bohrungen an den Ecken sowie in der Mitte zur Montage vorgesehen. Auf dem obersten Layer wurde der Bestückungsdruck erhöht und mit zusätzlicher Information über die Pin-Belegungen der einzelnen Stecker erweitert.
 
 
 <br>
@@ -538,16 +538,16 @@ Auch wurde hier nicht auf den Platzverbrauch geachtet. Es wurde zusätzliche Ste
 ## Implementierung HAL
 
 Die (+hal) stellt das Verbindungsglied zwischen der Hardware und der Benutzer-Software dar.
-In diesem Fall übernimmt diese die Übersetzung der Befehle der Controller-Software, in für die Hardware verständlichen Befehlen. Dabei geschieht dies über den zentralen (+spi) Bus, dieser ist im Linux-System als Datei unter dem Pfad `/dev/spidev0.0` eingebunden und kann über Dateioperation (lesen, schreiben) mittels `ioctl` konfiguriert werden.
-Weiterhin können Daten über das File-Handle gelesen- und geschiereben werden.
+In diesem Fall übernimmt diese die Übersetzung der Befehle der Controller-Software in für die Hardware verständliche Befehle. Dabei geschieht dies über den zentralen (+spi) Bus, welcher im Linux-System als Datei unter dem Pfad `/dev/spidev0.0` eingebunden wird und über Dateioperation (lesen, schreiben) mittels `ioctl` konfiguriert werden kann.
+Weiterhin können Daten über das File-Handle gelesen- und geschrieben werden.
 Somit ist eine Kommunikation mit der Hardware-Ebene möglich.
 
 <br>
 
 Diese Funktionalität wird von der für diese Projekte implementierten (+hal) in Form einer C++ Klasse abgebildet und ermöglicht einen einfachen Zugriff auf die elektrisch verbundenen Komponenten. Zusätzlich wird in dieser auch das Hardware-Versions-Management abgebildet.
-Da im Verlauf der Entwicklung, mehrere Hardware-Revisionen gebaut wurden und die Controller-Software weiterhin mit allen Revisionenn kompatibel sein soll, ermittelt die (+hal) vor dem Start die entsprechende Revision. Dazu wird die Prozessor-(+id) (welche mittels des `cat /proc/cpuinfo | grep Serial | cut -d ' ' -f 2` Kommandos abgefragt werden kann) des Systems abgefragt und mittels einer statischen Liste diese ermittelt.
-Hierbei enthält die Tabelle nur Revisionsinformationen über die wärend der Entwicklung entstandenen Revisionen.
-Sollte die Prozessor-(+id) nicht hinerlegt sein, geht das System von der aktuellsten Revision aus, so ist keine manuelle Pflege der Tabelle wärend einer möglichen Produktion nötig.
+Da im Verlauf der Entwicklung mehrere Hardware-Revisionen gebaut wurden und die Controller-Software weiterhin mit allen Revisionen kompatibel sein soll, ermittelt die (+hal) vor dem Start die entsprechende Revision. Dazu wird die Prozessor-(+id) (welche mittels des `cat /proc/cpuinfo | grep Serial | cut -d ' ' -f 2` Kommandos abgefragt werden kann) des Systems abgefragt und mittels einer statischen Liste diese ermittelt.
+Hierbei enthält die Tabelle nur Revisionsinformationen über die während der Entwicklung entstandenen Revisionen.
+Sollte die Prozessor-(+id) nicht hinterlegt sein, geht das System von der aktuellen Revision aus, so ist keine manuelle Pflege der Tabelle während einer möglichen Produktion nötig.
 
 <br>
 
@@ -589,7 +589,7 @@ class HardwareInterface
 
 <br>
 
-Je nach ermittelter Revision werden die erfoderlichen Hardwarekomponenten initialisiert. Bei allen über den (+spi) Bus angeschlossenen Komponenten, werden nach der Initialisierung des (+spi) Bus auf der Betriebssystem-Ebene, zusätzliche Versionsregister der einzelenen Komponenten abgefragt. Dies stellt sicher, dass alle Komponenten mit dem System verbunden sind. Allgemein kann eine Datentransfer über den (+spi) drei mal fehlschlagen bevor die Software mittels eines Fehlers abbricht. Gerade bei der Kommunikation mit dem Mikrokontroller, kam es bei testläufen zu Fehlern bezüglich der (+spi) Kommunikation, wenn das (+nfc)-Modul aktiv ist. Um einen direktes beenden der Software zu verhindern, wurde diese Art der Fehlerbehandlung eingeführt.
+Je nach ermittelter Revision werden die erforderlichen Hardwarekomponenten initialisiert. Bei allen über den (+spi) Bus angeschlossenen Komponenten, werden nach der Initialisierung des (+spi) Bus auf der Betriebssystem-Ebene, zusätzliche Versionsregister der einzelnen Komponenten abgefragt. Dies stellt sicher, dass alle Komponenten mit dem System verbunden sind. Allgemein kann eine Datentransfer über den (+spi) drei Mal fehlschlagen bevor die Software mittels eines Fehlers abbricht. Gerade bei der Kommunikation mit dem Mikrokontroller, kam es bei Testläufen zu Fehlern bezüglich der (+spi) Kommunikation, sofern das (+nfc)-Modul aktiv war. Um ein direktes Beenden der Software zu verhindern, wurde diese Art der Fehlerbehandlung eingeführt.
 
 ```c++
 //SPICommunications.cpp
@@ -634,13 +634,13 @@ int SPICommunication::spi_write_ack(SPICommunication::SPI_DEVICE _device, uint8_
 //...
 ```
 
-Die (+hal) und deren benötigten Softwarekomponenten, zur Buskommunikation und Hardware-Revisionsbestimmung, wurde für die Verwendung innerhalb von mehreren Threads angepasst und somit ist deren Verwendung Threadsafe. Diese Optimierung wurde jedoch nicht verwendet, da jegliche Funktionsaufrufe welche die Hardware betreffen aus dem Main-Thread der Controller-Software ausgehen.
+Die (+hal) und deren benötigten Softwarekomponenten zur Buskommunikation und Hardware-Revisionsbestimmung wurde für die Verwendung innerhalb von mehreren Threads angepasst und somit ist deren Verwendung Threadsafe. Diese Optimierung wurde jedoch nicht verwendet, da jegliche Funktionsaufrufe, welche die Hardware betreffen, aus dem Main-Thread der Controller-Software ausgehen.
 
 
 ### TMC5160 SPI Treiber
 
 Der Treiber für die verwendeten `TMC5160` Schrittmotor-Treiber ist ebenfalls ein Bestandteil der (+hal). Die verwendeten Bausteine bieten mitunter sehr komplexe Konfigurationsmöglichkeiten und je nach Betriebsart sind mehrere Lese- und Schreiboperationen über den (+spi) Bus notwendig. Diesbezüglich wurde die komplette Ansteuerung auf der Softwareseite in ein eigenes Modul geschachtelt.
-Dieses stellt verschiedene Funktionen zum Verfahren eines Motors bereit. Hierzu benötigt jeder verwendete Hardware-Treiber eine Instanz des Moduls zur Ansteuerung, so ist es zusätzlich möglich für jede Achse verschiedene Parameter setzten zu können in Bezug auf Beschleunigung und Positioniergeschwindigkeit des Motors.
+Dieses stellt verschiedene Funktionen zum Verfahren eines Motors bereit. Hierzu benötigt jeder verwendete Hardware-Treiber eine Instanz des Moduls zur Ansteuerung; so ist es zusätzlich möglich, für jede Achse verschiedene Parameter setzten zu können in Bezug auf Beschleunigung und Positioniergeschwindigkeit des Motors.
 
 : TMC5160 Beschleunigungskurve / RAMP Parameter
 
@@ -655,9 +655,9 @@ Dieses stellt verschiedene Funktionen zum Verfahren eines Motors bereit. Hierzu 
 | D1        	| 50000   	|
 | V_STOP    	| 10      	|
 
-Der Treiber wird hier nur im Position-Mode betrieben, welches ein wesentliches Feature dessen ist. Hierbei kann über ein Register eine Zielposition in Schritten vorgegeben werden. Der Treiber ermittelt daraufhin die passende Beschleunigungskurve und verfährt den Motor an diese Position.
-Über ein entsprechende Register kann der Status der Operation abgefragt werden und ob der Motor seine Position erreicht hat bzw. ob Fehler auftraten. Somit muss nicht auf das erreichen der Zielposition gewartet werden und anderen Aufgaben können währenddessen ausgeführt werden. Die Beschleunigungskurve kann zusätzlich manuell angepasst werden.
-Hier wurden jedoch die Standardwerte aus dem Datenblatt verwendet, welches sich bei mehreren Tests als Ideal herausstellten in Bezug der Geräuschemission des Motors.
+Der Treiber wird nur im Position-Mode betrieben, welcher eine wesentliche Eigenschaft dessen ist. Hierbei kann über ein Register eine Zielposition in Schritten vorgegeben werden. Der Treiber ermittelt daraufhin die passende Beschleunigungskurve und verfährt den Motor an diese Position.
+Über ein entsprechendes Register kann der Status der Operation abgefragt werden und ob der Motor seine Position erreicht hat bzw. ob Fehler auftraten. Somit muss nicht auf das Erreichen der Zielposition gewartet werden und anderen Aufgaben können währenddessen ausgeführt werden. Die Beschleunigungskurve kann zusätzlich manuell angepasst werden.
+Hier wurden jedoch die Standardwerte aus dem Datenblatt verwendet, welches sich bei mehreren Tests als optimal in Bezug der Geräuschemission des Motors herausstellten.
 
 
 ```c++
@@ -782,29 +782,29 @@ Dies wird so lange in negativer Bewegungsrichtung ausgeführt bis der Endschalte
 ## Fazit bezüglich des ersten Prototypens
 
 
-Die Fertigstellung des ersten Prototyp stellt einen ersten großen Erfolg dar, in Hinsicht zum autonomen Schachtisch.
-Trotz allem, konnten nicht alle zuvor gestellten Requirements mit diesem Design umgesetzt werden.
+In Hinsicht auf den Umsetzungsprozess des autonomen Schachtischs stellt die Fertigstellung des ersten Prototypens einen ersten großen Erfolg dar 
+Dennoch konnten nicht alle zuvor gestellten Requirements mit diesem Design umgesetzt werden.
 
-Dazu zählt zum einen der Bewegungsspielraum der einzelnen Achsen. Dieser wurde bereits wären der Entwicklung durch die Verwendundung von zwei Elektromagneten künstlich verlängert. Nach einem Langzeittest stelle sich jedoch diese Methode als zu Fehleranfällig dar. Die Parkpositionen welche sich an den zwei Seiten des Spielbrett befinden, konnten nicht durchgehen zuverlässig angefahren werden und boten nur Platz für 14 ausgeschiedene Figuren pro Spielerfarbe. Somit ist ein komplette Abräumen des Spielfeldes nicht möglich, was jedoch in der Praxis selten vorkommt.
-
-<br>
-
-Zum anderen ist der Aufbau und die anschliessende Kalibierung der Mechanik und der entsprechenden Offset-Werte in der Software nicht trivial und benötigen einiges an Zeit. Durch die Verwendung der Tischplatte und des hözernen Grundrahmens, konnte jedoch ein robustes Design in einem kleinen Formfaktor umgesetzt werden, welches zusätzlichen Platz für erweiterungen bietet.  
-
-Gerade die Verwendung von den verschraubten Holzplatten machen jedoch eine Vervielfältigung mit gleicher Qualität schwierig. Ein Redesign der inneren Komponenten gestaltet sich schwierig, da hier bereits mehrere Iterationen durchgeführt wurden, um eine maximalen möglichen verfahrweg zu ermöglichen.
-
+Dazu zählt zum einen der Bewegungsspielraum der einzelnen Achsen. Dieser wurde bereits wären der Entwicklung durch die Verwendung von zwei Elektromagneten künstlich verlängert. Nach einem Langzeittest stelle sich jedoch diese Methode als zu Fehleranfällig dar. Die Parkpositionen, welche sich an den zwei Seiten des Spielbrettes befinden, konnten nicht durchgehen zuverlässig angefahren werden und boten nur Platz für 14 ausgeschiedene Figuren pro Spielerfarbe. Somit ist ein komplettes Abräumen des Spielfeldes nicht möglich, was jedoch in der Praxis selten vorkommt.
 
 <br>
 
-Auf seiten der Elektronik, arbeitet diese ehr zuverlässig und bereitete keinerlei Probleme. Jedoch stellen die verwendeten Motortreiber einen größeren Kostenfaktor dar und der Zeitaufwand für den Zusammenbau und Überprüfen dieser dar. Die verwendeten Elektromagnete sind für 9V Betriebsspannung ausgelegt, mussten jedoch über ihren Spezifikationen mit 12V betreieben werden, welche bei einem Dauerbetriebn zu stark erhöhten Temperaturen führte.
+Zum anderen ist der Aufbau und die anschließende Kalibrierung der Mechanik und der entsprechenden Offset-Werte in der Software nicht trivial und benötigen einiges an Zeit. Durch die Verwendung der Tischplatte und des hölzernen Grundrahmens, konnte jedoch ein robustes Design in einem kleinen Formfaktor umgesetzt werden, welches zusätzlichen Platz für Erweiterungen bietet.  
+
+Gerade die Verwendung von den verschraubten Holzplatten machen jedoch eine Vervielfältigung mit gleicher Qualität schwierig. Ein Re-Design der inneren Komponenten gestaltet sich schwierig, da hier bereits mehrere Iterationen durchgeführt wurden, um eine maximalen möglichen Verfahrweg zu ermöglichen.
+
 
 <br>
 
-Allgemein war hier die Entscheidung auf die Außenmaße des Tisches zu optimieren nicht ideal und führt zu einigen Problemen. Diese konnten jedoch mit verschiedenen Workarounds behoben werden konnten. Ein Spiel ist mit diesem Prototypen mit Enschränkungen möglich und bildet bis auf die nicht funktionierenden Parkpositionen die zuvor festgelegten Requirements ab.
+Auf Seiten der Elektronik arbeitet diese ehr zuverlässig und bereitete keinerlei Probleme. Jedoch stellen die verwendeten Motortreiber einen größeren Kostenfaktor dar und der Zeitaufwand für den Zusammenbau und Überprüfen dieser dar. Die verwendeten Elektromagnete sind für 9V Betriebsspannung ausgelegt, mussten jedoch über ihren Spezifikationen mit 12V betrieben werden, welche bei einem Dauerbetrieb zu stark erhöhten Temperaturen führte.
+
+<br>
+
+Allgemein war hier die Entscheidung die Außenmaße des Tisches zu optimieren nicht ideal und führt zu diversen Problemen. Diese konnten jedoch mit verschiedenen Workarounds behoben werden konnten. Ein Spiel ist mit diesen Prototypen mit Einschränkungen möglich und bildet bis auf das Fehlen der nicht funktionstüchtigen Parkpositionen die zuvor festgelegten Requirements ab.
 Im weiteren Verlauf der Entwicklung steht jedoch die Verbesserung der Zuverlässigkeit und die fehlerfreie Umsetzung der Parkposition für ausgeschiedene Figuren. Ein einfacherer Zusammenbau auch für dritte sollte ebenfalls ins Auge gefasst werden.
-Hierzu wird ein komplettes Redesign der Mechanik sowie der Elektronik nötig sein. Anpassungen der Software ist dadurch ebenfalls nötig, stellt jedoch durch den modularen Aufbau dieser kein Hindernis dar. Die durch diesen Prototypen gewonnenen Erkenntnisse können somit direkt in das neue Design einfließen.
+Hierzu wird ein komplettes Re-Design der Mechanik sowie der Elektronik nötig sein. Anpassungen der Software ist dadurch ebenfalls nötig, stellt jedoch durch den modularen Aufbau dieser kein Hindernis dar. Die durch diese Prototypen gewonnenen Erkenntnisse können somit direkt in das neue Design einfließen.
 
-
+<br>
 
 
 
@@ -814,10 +814,97 @@ Hierzu wird ein komplettes Redesign der Mechanik sowie der Elektronik nötig sei
 
 ## Modifikation der Mechanik
 
-* ALUPROFILE
+### Gehäuse und Designs
+
+Mit der Entscheidung, auf die hölzerne Struktur des Systems gänzlich zu verzichten, wurden massive Veränderungen des Designs des Schachtischs bestehend aus Gehäuse, Dimensionen und allen Außenelementen nötig.
+
+<br>
+
+Zuvor bestand der Quader-förmige Schachtisch aus einem Lack-Tisch als Deckel, welcher mit einem selbsterstellten Untergestell bestehend aus Rahmen und Boden verschraubt wurden. Nun muss der Quader selbst konstruiert werden. 
+
+<br>
+
+Die Wahl des neuen Materials war jedoch simpel; aufgrund der langjährigen Bewährtheit, der Stabilität und der einfachen Möglichkeit der Anpassung wurde als Basis des neuen System Aluminium-Profilstangen gewählt. Da der Tisch keine größeren Kräfte aufnehmen muss, wurde ein Stangengrundmaß von 20 x 20 mm gewählt. Diese sind dennoch stabil genug, um möglichen Außeneinwirkungen wie Stößen oder Drücken standzuhalten. 
+
+<br>
+
+Als Außenmaße wurden 620 x 620 x 170 mm (Länge, Breite, Höhe) gewählt. Das Außenmaß ergab sich aus der Berechnung der benötigten Spielfeldgröße, der Parkpositionen und der gegebenen Stangenbreite. Die Schachfiguren besitzen einen maximalen Durchmesser von 22 mm. Damit Figuren einander ohne Berührung vorbeigeführt werden können, ist somit eine Größe von mindestens 44 mm für ein Feld nötig. Da eine Distanz eingerechnet werde muss, um ein Anziehen der Figuren zu verhindern und Fehler bei der mittigen Positionierung der Figuren möglich sind, wurde hierfür eine zusätzliche Toleranz von 11 mm ergänzt und somit ein Idealmaß von 55 mm Seitenlänge pro Feld errechnet. 
+Bei einem vollständigen Schachtisch ergibt sich daraus eine Feldgröße von 500 x 500 mm. 
+Für die Parkpositionen wurden zusätzlich noch einmal 30 mm berechnet mit einem Abstand zum Feld von weiteren 25mm.
+Somit ergibt sich, wenn man das Feld quadratisch auslegt, eine Seitenlänge von 610 mm. Als Plattenmaß wurde 620mm gewählt, um eine Toleranz für die Befestigung zu Berücksichtigen und zudem mögliche Einschränkungen der Mechanik vorzubeugen.
+
+<br>
+
+Die Platte wird dann in Alu-Profilstangen eingelassen; die Stangen sollen die Platte umrahmen. Mit einem Grundmaß von 20 x 20 mm für die Profilstangen ergibt sich somit ein Gesamtmaß von 660 mm x 660 mm.
+Benötigt werden 8 Profilstangen der Länge 620 mm und 4 der Länge 170 mm, welche zu einem Quadratischen Kasten zusammengesetzt werden. Für die X-Achsen werden zudem zwei Profilstangen der Länge 610 mm und für die Y-Achse noch eine weitere der Länge 620 mm benötigt. 
+
+<br>
+
+Die für die Montage üblicherweise verwendeten Winkel wurden jedoch aufgrund der Größe nicht verwendet. Es wurden eigene Winkel mittels 3D-Druck erstellt oder auch Komponenten zur Befestigung direkt als Winkel-Elemente integriert. So wird der obere Quadrant des Korpus von 4 Winkel gehalten, welche zum einen als Auflage für die Tischplatte fungieren und zum anderen das Befestigen der beiden X-Achsen Profilstangen dient.
+
+<br>
+
+Da die Tischpatte nur aufliegt, ist es zusätzlich möglich, den Raum unterhalb der Profilstangen als Konstruktionsraum zu verwenden. Dabei ist zu beachten, dass an allen Seiten des Tischens noch Seitenelemente bestehend aus 620 x 130 x 5 mm Acrylglas-Platten eingelassen werden. Somit beträgt die exakte Länge der für die Konstruktion nutzbaren Seiten 650 mm. Lediglich die Ecken, welche die Höhenelemente der Aluprofile beinhalten, bieten nur eine Länge von 620 mm.
+
+<br>
+
+Um das Design optisch zu verbessern, wurden die Acrylglas-Elemente in weiß gewählt. Transparente Elemente ermöglichen zwar eine Sicht auf die Mechanik im Inneren, jedoch wurde hierbei insbesondere Wert auf den Gesamteindruck gelegt, welcher durch die weiße Struktur des Glases aufgewertet wird.
+Zudem wurden im Inneren noch zusätzlich LED-Streifen verlegt, welche dank des verwendeten TMC-Boards einfach angeschlossen werden konnten. Die weißen Glaselemente streuen das Licht günstiger und ermöglichen so ein unterschwelliges Leuchten.
+
+<br>
+
+Um das System vollständig zu verschließen und somit auch besser zu schützen wurde zudem eine Bodenplatte mit identischen Maßen zur Tischplatte eingelassen und mit Stützelementen verschraubt. 
+
+<br>
+
+Nachteil der verwendeten Aluminium-Profilstangen und der weißen Acrylglas-Elemente sind die höheren Kosten und der Aufwand. Der verwendete Lack-Tisch und auch das selbsterstellte Untergestell als solche waren preisgünstig und leicht erhältlich, zudem war die Tischplatte, welche aus einem einzelnen Tisch bestand, stabil und robust. Aluminiumstangen hingegen, die zusätzlich noch bestellt, selbstständig an die gewünschte Länge angepasst und mit weiteren Komponenten verschraubt werden müssen, sind dementsprechend deutlich kostenintensiver. 
+
+<br>
+
+Zudem wurde die Tischplatte nun durch eine simple Holzplatte ersetzt. Eine Höhe von 3 mm darf aufgrund des Magnetismus zwischen Schlitten und Schachfigur nicht überschritten werden. Um ein Durchbiegen dieser zu verhindern wurden in den Profilstangen horizontale Vorsprünge ergänzt, die die Platte auf einer Ebene mit der Oberkante der Alu-Profilstangen halten.
+
+<br>
+
+Die Beine des zuvor verwendeten Lack-Tischs wurden erneut verwendet; diese konnten für die zweite Revision verwendet werden und so zusätzlich die gleiche Montagehöhe zwischen der ersten und der zweiten Revision erreicht werden. Da selbst die Höhe der Quader des Schachtischs identisch ist, sind beide Tische nun gleich hoch. Eine Alternative Lösung wäre der Erwerb von simplen Hohlleisten der gleichen Länge oder aber das Integrieren weiterer Profilstangen, welche man optimaler Weise auch klappbar lagern könnte. Derzeit sind die Beine verschraubt und nicht klappbar. 
+Der daraus resultierende Nachteil der Tischbeine ist, dass man den gesamten Tisch nun schwerlich auf einen anderen Tisch stellen kann, um die Montage zu erleichtern oder ein Schachspiel auf einer anderen, eventuell bequemeren Höhe durchzuführen. 
+Da hingegen benötigt der Tisch nun keine Unterlage mehr und kann ohne Probleme im offenen Raum platziert werden. 
+Die aktuell verwendeten Beine können je nach Bedarf auch entfernt werden, sodass der Schachtisch wieder als simpler Quader einfach zu handhaben ist. 
+
+<br>
+
+Dennoch überwiegen die Vorteile der Universalität dank der gegebenen Normungen, der einfachen Anpassungsmöglichkeiten in der Länge und dem einfachen Ergänzen und Verschieben von Komponenten. Im Holzrahmen verschraubte Elemente hinterlassen Löcher, die zu Beeinträchtigungen führen können. Zudem ist das Ergänzen von anderen Komponenten im Aluminium-Profil einfacher. 
 
 
-Während sich das Design des Schachtischs bestehend aus Gehäuse, Dimensionen und allen Außenelementen von der Entwicklung des ersten Prototypens zum zweiten nicht verändert hat, so wurde jedoch die Mechanik gänzlich verändert.
+<br>
+
+### 3D-Komponenten.
+
+Die Masse an selbst-erstellten 3D-Komponenten wurde aufgrund des selbst erstellten Korpus in der zweiten Revision erhöht. Aluprofile bieten die Möglichkeit der einfachen Montage von zusätzlichen Komponenten. Mittels sogenannter Nutensteine, welche in das Profil geschoben werden, ist es möglich, diese Komponenten einfach an das Profil zu Schrauben, indem man in das im Nutenstein befindliche Gewinde schraubt. Dank der Schienen-ähnlichen Gestaltung der Profile sind die Positionen dieser Nutensteine individuell anpassbar.
+Ausgehend von den gewählten Maßen der Stangen wurden Nutensteine vom „Typ 6“ mit einem M5 Gewinde gewählt.
+
+<br>
+
+Zudem wurde nur ein einziges 3D-Design angefertigt, indem eine simple Platte erstellt wurde, auf welcher zwei Vorsprünge extrudiert wurden und eine Durchführung des Durchmessers 6,5 mm. Mittels der Durchführung konnte die Platte mit einem Nutenstein verschraubt werden, mittels der Vorsprünge, welche in die Profilschienen ragen, wird ein Drehen der Platte verhindert.
+Dieses 3D-Design wurde für Folgenden als Grundlage für alle neuen Komponenten genommen. Oftmals wurden bestehende Modelle der ersten Revision mit diesem neuen Design verbunden und als eine Komponente gedruckt, was eine Wiedernutzung von etablierten Komponenten ermöglicht.
+
+<br>
+
+Der Grundrahmen als solcher wurde einmalig erstellt und nur in einfachen Strukturen wie der Winkel-Sehnenlängen oder Höhenparametern von Flächen angepasst. Alle weiteren Komponenten im Inneren bedurften mehrerer Revisionen, um die verwendete Mechanik optimal umzusetzen und mehr Kräfte für Riemenspannungen zu ermöglichen. 
+
+<br>
+
+Insgesamt benötigt der gesamte Schachtisch 26 verschiedene mittels FDM 3D-gedruckte Komponenten, durch Mehrfachnutzung werden insgesamt 75 Elemente gedruckt. Dies ergab bei den verwendeten Druckern und dem gewählten Filament eine Druckzeit von 25 Stunden und rund 450 Gramm Filament.
+
+<br>
+
+Zusätzlich zu diesen Komponenten ist es möglich, 32 Schachfiguren mittels SLA 3D-Druck zu erzeugen. 
+
+<br>
+
+
+### Positions-Mechanik 
+
+Die Mechanik des ersten Prototypens wurde für die Erstellung des zweiten Prototypens gänzlich verändert.
 In der ersten Revision wurde noch jede Achse über einen separaten Riemen gesteuert, sodass ein Schrittmotor die Bewegung des Schlittens entlang der Y-Achse und ein weiterer die Bewegung der gesamten Y-Achse, bestehend aus Motor, Riemen, Schlitten und Führungsschiene, entlang der X-Achse ermöglicht. Die Führung entlang der X-Achse erfolgt in der Mitte des Tischs, die Y-Achse wurde links und rechtsseitig rollbar gelagert und in der Mitte über einen Riemen gezogen. Dies hat zur Folge, dass bei entstehender Unwucht, welche durch die Bewegung des Schlittens auf der Y-Achse natürlich ist, die Y-Achse in ihren Lagerungen nicht mehr parallel verläuft, sondern beim Betätigen des Motors der X-Achse die Y-Achse in einem unerwünschten Winkel bewegt wird. 
 
 <br>
@@ -850,7 +937,7 @@ Da die Riemen des Systems dauerhaft auf Spannung gehalten werden, ist kein Spiel
 
 <br>
 
-Ein weiterer Vorteil ist, dass CoreXY das gleiche Bauvolumen bei geringeren Gesamtabmessungen bieten kann. Der Fahrweg der Schachfiguren konnte somit ausgeweitet werden, ohne den Bauraum des Tisches zu ändern, da bei einem CoreXY-System jeder Punkt der gesamten Bauplatte angefahren werden kann, ohne zusätzlichen Platz zu benötigen. Bei einem Außenmaß des Tisches von 620x620 mm wies der erste Prototyp einen Fahrweg von 480x480 mm auf, während die zweite Revision mit selben Außenmaßen einen Fahrweg von 580x580 mm erreicht. Der Fehlende Raum der ersten Version ist insbesondere auf die Lagerung der Motoren zurückzuführen, die jeweil ihre eigene Achse verkürzten. Nun liegen beide Motoren auf der x-Achse und dienen sogar als Bremse vor den Steuerkomponenten. 
+Ein weiterer Vorteil ist, dass CoreXY das gleiche Bauvolumen bei geringeren Gesamtabmessungen bieten kann. Der Fahrweg der Schachfiguren konnte somit ausgeweitet werden, ohne den Bauraum des Tisches zu ändern, da bei einem CoreXY-System jeder Punkt der gesamten Bauplatte angefahren werden kann, ohne zusätzlichen Platz zu benötigen. Bei einem Außenmaß des Tisches von 620x620 mm wies der erste Prototyp einen Fahrweg von 480x480 mm auf, während die zweite Revision mit selben Außenmaßen einen Fahrweg von 580x580 mm erreicht. Der Fehlende Raum der ersten Version ist insbesondere auf die Lagerung der Motoren zurückzuführen, die jeweils ihre eigene Achse verkürzten. Nun liegen beide Motoren auf der x-Achse und dienen sogar als Bremse vor den Steuerkomponenten. 
 
 <br>
 
@@ -862,9 +949,13 @@ Zudem ist die Steuerung des CoreXY-Systems bereits in der Firmware Marlin integr
 
 <br>
 
-In der Komplexität des Aufbaus und dessen Zeitaufwand war kein Unterschied zwischen der ersten und zweiten Revision zu erkennen. Für Anfänger im Bereich CoreXY ist das Verlegen und insbesondere das stramme Spannen der Riemen eine Herausforderung, die sich aber durch die Konstruktion der Bauteile verinfachen lässt. Insbesondere die Verbindung an der Lagerung der Y-Achse ist so erstellt worden, dass die Riemen nach der Durchführung nur in eine definierte Richtung gespannt werden können. 
+In der Komplexität des Aufbaus und dessen Zeitaufwand war kein Unterschied zwischen der ersten und zweiten Revision zu erkennen. Für Anfänger im Bereich CoreXY ist das Verlegen und insbesondere das stramme Spannen der Riemen eine Herausforderung, die sich aber durch die Konstruktion der Bauteile vereinfachen lässt. Insbesondere die Verbindung an der Lagerung der Y-Achse ist so erstellt worden, dass die Riemen nach der Durchführung nur in eine definierte Richtung gespannt werden können. 
 
+<br>
 
+Das Resultat übertrifft sogar die Erwartungen. Die Mechanik ist robust und es konnten keine Fehler mehr im Betrieb festgestellt werden. Einzelne Fehler durch nachgiebige 3D-Konstruktionen wurden ausgebessert und so ein optimales und möglichst beständiges X-Y-System erzeugt.  
+
+<br>
 
 
 ## Optimierungen der Spielfiguren
@@ -889,7 +980,7 @@ Dies resultierten aus dem Prozessgedanken, die Schachfiguren ebenfalls selbst mi
 
 <br>
 
-Die aktuell verwendeten Figuren des ersten Protoyp wiegen zwischen 8 Gramm für die Bauern und 10 Gramm für die restlichen Figuren.
+Die aktuell verwendeten Figuren des ersten Prototyps wiegen zwischen 8 Gramm für die Bauern und 10 Gramm für die restlichen Figuren.
 Der Test mit der Unterlegscheibe ergab das diese mit 5 Gramm zusätzlich genug Gewicht hinzufügen, um die magnetische Beeinflussung zu unterbinden.
 
 <br>
@@ -965,9 +1056,9 @@ Marlin-FW[@marlinfw] biete dabei einen großen Befehlssatz an G-Code Kommandos a
 
 
 Die erforderlichen Kommandos wurden auf ein Minimum beschränk, um eine maximale Kompatibilität bei verschiedenen G-Code-fähigen Steuerungen zu gewährleisten.
-Die Software unterstützt jedoch weitere Kommandos wie z.B. `M150` mit welche speziellen Ausgänge für LEDs gesteuert werden können. Dieses Feature bietet sowohl die verwendete Marlin-FW[@marlinfw] als auch die verwendete Steuerung an. Sollte die verwendete Steuerung solch ein optionales Kommando nicht unterstützen, so werden diese ignoriert was zur Folge hat, dass auch preisgünstige Steuerungen verwendet werden können.
+Die Software unterstützt jedoch weitere Kommandos wie z.B. `M150` mit welchem speziellen Ausgänge für LEDs gesteuert werden können. Dieses Feature bietet sowohl die verwendete Marlin-FW[@marlinfw] als auch die verwendete Steuerung an. Sollte die verwendete Steuerung solch ein optionales Kommando nicht unterstützen, so werden diese ignoriert was zur Folge hat, dass auch preisgünstige Steuerungen verwendet werden können.
 
-Die Kommunikation zwischen Steuerung und eingebetteten System geschieht durch eine (+usb) Verbinden. Die Steuerung meldet sich als virtuelle Serielle Schnittstelle im System an und kann über diese mit der Software kommunizieren. Auch werden so keine speziellen Treiber benötigt, da auf nahezu jedem System ein Treiber `USB-CDC` für die gängigsten (+usb) zu Seriell Wandler bereits installiert ist. Die Software erkennt anhand der zur Verfügung stehenden (+usb)-Geräte sowie deren Vendor und Product-ID Informationen die verbundene Steuerung und verwendet diese nach dem Start automatisch. Hierzu wurde zuvor eine Liste mit verschiedenen getesteten Steuerungen sowie deren USB-Vendor und Product-ID angelegt.
+Die Kommunikation zwischen Steuerung und eingebetteten System geschieht durch eine (+usb) Verbinden. Die Steuerung meldet sich als virtuelle Serielle Schnittstelle im System an und kann über diese mit der Software kommunizieren. Auch werden so keine speziellen Treiber benötigt, da auf nahezu jedem System ein Treiber `USB-CDC` für die gängigsten (+usb) zu seriell Wandler bereits installiert ist. Die Software erkennt anhand der zur Verfügung stehenden (+usb)-Geräte sowie deren Vendor und Product-ID Informationen die verbundene Steuerung und verwendet diese nach dem Start automatisch. Hierzu wurde zuvor eine Liste mit verschiedenen getesteten Steuerungen sowie deren USB-Vendor und Product-ID angelegt.
 
 <br>
 
@@ -1049,7 +1140,7 @@ Die Steuerung verarbeitet diese und bestätigt die Ausführung mit einer Acknowl
 
 ### I2C-Seriell Umsetzer
 
-Durch den Wegfall der zuvor eingesetzten Elektronik und der Austausch durch die `SKR 1.4 Turbo` Steuerung, ist jedoch ein Anschluss des `PN532` (+nfc) Moduls nicht mehr direkt möglich, da dieses mittels (+i2c) Interface direkt mit dem eingebetteten System verbunden war. Dieses Interface entfällt nun. Dennnoch besteht weiterhin die Möglichkeit, jedoch wurde auch hier auf eine (+usb) Schnittstelle gewechselt. So ist es möglich das System auch an einem anderen Host-System zu betreiben, wie z.B. an einem handelsüblichen Computer.
+Durch den Wegfall der zuvor eingesetzten Elektronik und der Austausch durch die `SKR 1.4 Turbo` Steuerung, ist jedoch ein Anschluss des `PN532` (+nfc) Moduls nicht mehr direkt möglich, da dieses mittels (+i2c) Interface direkt mit dem eingebetteten System verbunden war. Dieses Interface entfällt nun. Dennoch besteht weiterhin die Möglichkeit, jedoch wurde auch hier auf eine (+usb) Schnittstelle gewechselt. So ist es möglich das System auch an einem anderen Host-System zu betreiben, wie z.B. an einem handelsüblichen Computer.
 
 <br>
 
@@ -1256,11 +1347,11 @@ Diese stellen alle wichtigen Funktionen zum Betrieb des autonomen Schachtischs z
 
 ## Backend
 
-![Cloud-Infrastruktur: Backend Login-Requst und Response \label{ATC_request_example}](images/ATC_request_example.png)
+![Cloud-Infrastruktur: Backend Login-Request und Response \label{ATC_request_example}](images/ATC_request_example.png)
 
 * matchmaking schachlogik
 * zentraler zugriffspunkt auf das System und stellt diese abi bereit
-* stellt spielerprofile aus datenbanken bereit bereit
+* stellt spielerprofile aus datenbanken bereit
 * authentifizierung der clients und deren sessions
 * weiterleitung der von spielerinteraktionen an move validator
 * spielfelder werden als string übermittelt = hier fen representation; einfach zu parsen; standart
@@ -1327,7 +1418,7 @@ Die Pseudo-Legal Schachzüge sind alle Schachzüge, welche von den Figuren auf d
 
 <br>
 
-Wenn ein Spieler an der Reihe ist und einen Zug getätigt hat, wird sein getätigter Zug mittels der `/rest/check_move` (+api) überprüft und festgestellt, ob dieser gemäß der Legal-Moves durchführbar war. Ist dies der Fall, wird der Zug auf dem onlie-Spielbrett angewendet. Dies geschieht durch die `/rest/execute_move` (+api). Diese führt den Zug aus, ermittelt anschließend das neue Spielbrett und überprüft zusätzlich, ob das Spiel gewonnen oder verloren wurde.
+Wenn ein Spieler an der Reihe ist und einen Zug getätigt hat, wird sein getätigter Zug mittels der `/rest/check_move` (+api) überprüft und festgestellt, ob dieser gemäß der Legal-Moves durchführbar war. Ist dies der Fall, wird der Zug auf dem online-Spielbrett angewendet. Dies geschieht durch die `/rest/execute_move` (+api). Diese führt den Zug aus, ermittelt anschließend das neue Spielbrett und überprüft zusätzlich, ob das Spiel gewonnen oder verloren wurde.
 
 <br>
 
@@ -1377,7 +1468,7 @@ Der AutoPlayer-Service stellt den Computerspieler bereit.
 <br>
 
 Jede Service-Instanz stellt einen virtuellen Spieler bereit, welcher die gleichen Schnittstellen wie der Webclient oder der autonome Schachtisch verwendet.
-Die einzige Änderung an den verwendeten (+rest)-Calls ist der Login-Requst. Hier wird das `playertype` Flag gesetzt welches den Spieler als Computerspieler gegenüber dem System authentifiziert.
+Die einzige Änderung an den verwendeten (+rest)-Calls ist der Login-Request. Hier wird das `playertype` Flag gesetzt welches den Spieler als Computerspieler gegenüber dem System authentifiziert.
 Daraus resultierend wird dieser während des Matchmaking-Prozesses erst für ein Match ausgewählt, wenn keine anderen menschlichen Spieler mehr zur Verfügung stehen. Dieser digitale Gegenspieler ist vom Typ Webclient oder autonomer Schachtisch.
 Dieser Prozess gewährleistet zudem, dass immer zuerst die menschlichen Spieler ein Spiel beginnen und die digitalen nur Alternativen darstellen.
 
@@ -1394,7 +1485,7 @@ Dieses Protokoll wird in der Regel von Schach-Engines verwendet, um mit einer (+
 
 <br>
 
-Um das aktuelle Spielbrett in der Engine zu setzten wird dieses in der (+xfen) Notation mit dem Prefix `position fen` als Klartext an die Engine übergeben und sendet daraufhin eine List möglicher Züge zurück. Der erste Index dieser Liste ist dabei der am besten bewerteten Zug der Engine.
+Um das aktuelle Spielbrett in der Engine zu setzten wird dieses in der (+xfen) Notation mit dem Präfix `position fen` als Klartext an die Engine übergeben und sendet daraufhin eine List möglicher Züge zurück. Der erste Index dieser Liste ist dabei der am besten bewerteten Zug der Engine.
 
 <br>
 
@@ -1413,7 +1504,7 @@ Durch die Art der Implementierung, dass sich der AutoPlayer-Service wie ein norm
 So ist es zum Beispiel möglich, die Spielstärke je Spieler anzupassen oder einen Computerspieler zu erstellen, welcher nur zufällige Züge zieht.
 
 Ein weiterer Anwendungsfall für den AutoPlayer-Service, ist das Testen des weiteren Systems insbesondere des Backend-Service.
-Durch das Erstellen eines Spiels mit zwei AutoPlayer-Instanzen, können automatisierte Schachpartien ausgeführt werden um die Funktionsfähigkeit des restlichen Systems zu testen.
+Durch das Erstellen eines Spiels mit zwei AutoPlayer-Instanzen, können automatisierte Schachpartien ausgeführt werden, um die Funktionsfähigkeit des restlichen Systems zu testen.
 Diese Feature wurde insbesondere bei der Entwicklung des Webclient und der Steuerungssoftware für den autonomen Schachtisch verwendet.
 
 
@@ -1434,7 +1525,7 @@ Diese Feature wurde insbesondere bei der Entwicklung des Webclient und der Steue
 
 Nach dem Start der Controller-Software folgt diese einem Fest vorgegebenen Ablauf \ref{ATC_gameclient_statemachiene}. Dieser wird mittels einer State-Machine in der Controller-Software abgebildet.
 Nachdem die Software gestartet ist, wird zuerst eine Verbindung mit dem Cloud-Server aufgenommen.
-Da der Tisch eine art Thin-Client darstellt, bei dem die eigentliche Spiellogik auf dem Server ausgeführt wird. Muss die Controller-Software nur das vom Server vorgebene Schachfeld mittels der Mechanik synchronisieren und entsprechende Schachzüge des Benutzers an diesen übermitteln.
+Da der Tisch eine Art Thin-Client darstellt, bei dem die eigentliche Spiellogik auf dem Server ausgeführt wird. Muss die Controller-Software nur das vom Server vorgegebene Schachfeld mittels der Mechanik synchronisieren und entsprechende Schachzüge des Benutzers an diesen übermitteln.
 
 <br>
 
@@ -1450,7 +1541,7 @@ Diese stellt Informationen ob und in welchem Status sich das Spiel für den anfr
 
 Wurde das Spiel gerade erst gestartet, beginnt die Sync-Phase. Bei dieser müssen beide Clients, die Figuren in die vorgegeben Ausgangsstellung bringen und dies bestätigen. Erst dann gilt das Spiel für den Server als begonnen und der aktive Spieler wird ausgewählt.
 Ist der Client am Zug, wartet dieser auf einen Zug in Form einer Benutzereingabe.
-Welches entwieder durch manuelles Eintippen des Schachzugs über die (+gui) geschieht oder über eine manuelle Bewegung der Figuren.
+Welches entweder durch manuelles Eintippen des Schachzugs über die (+gui) geschieht oder über eine manuelle Bewegung der Figuren.
 Auch hier hat der Client keine Informationen darüber ob der getätigte Zug gültig ist.
 Die Zuginformationen werden über die entsprechende (+api) Route `/rest/make_move` an den Server übermittelt, welcher diesen Zug auf dem Schachbrett ausführt. Wenn der Zug ungültig ist, muss der Client den Benutzer informieren, diesen Rückgängig zu machen.  Ist der Zug jedoch gültig, wir dieser vom Server an den anderen Client übermittelt und dieser muss anschließend wie beider Sync-Phase das Spielbrett aufbauen.
 
@@ -1458,7 +1549,7 @@ Die Zuginformationen werden über die entsprechende (+api) Route `/rest/make_mov
 
 Nach einem Abbruch oder einem Gewinn/Verlust des Spiels, wartet der Client wieder bis ein neues Spiel vom Server aus gestartet wird, oder der Benutzer manuell ein Spiel startet.
 Dieser Zyklus wird dauerhaft ausgeführt. Der Client bietet jedoch noch weitere Einstellungsmöglichkeiten für den Benutzer über die (+gui) an.
-Diese Benutzer-Events seperat verarbeitet und sind vom Spielablauf getrennt. Hierzu zählen unter anderem der Kalibierungs-Dialog, sowie eine Informationsansicht über den aktuellen Status des Systems.
+Diese Benutzer-Events separat verarbeitet und sind vom Spielablauf getrennt. Hierzu zählen unter anderem der Kalibrierungs-Dialog, sowie eine Informationsansicht über den aktuellen Status des Systems.
 
 
 
@@ -1467,16 +1558,16 @@ Diese Benutzer-Events seperat verarbeitet und sind vom Spielablauf getrennt. Hie
 
 
 
-Nach dem Start der Software wird durch das abscannen jedes einzelnen Feldes die Anzahl und Typen der Figuren ermittelt. Dies stellt sichder dass sich die Erforderliche Anzahl der Figuren beim Systemstart auf dem Spielbrett befinden, ansonsten in ein Start des Programms nicht möglich.
+Nach dem Start der Software wird durch das Abscannen jedes einzelnen Feldes die Anzahl und Typen der Figuren ermittelt. Dies stellt sicher, dass sich die Erforderliche Anzahl der Figuren beim Systemstart auf dem Spielbrett befinden, ansonsten in ein Start des Programms nicht möglich.
 
-Wärend der Sync-Phase muss die Software das vorgegebene Schachfeld herstellen. Dazu hält die Software den aktuellen Bretzustand vor und vergleicht diese mit dem Ziel-Schachbrett.
-Durch einen vergleich dieser, können die sich geänderten Figuren lokalisiert werden. Dadurch dass immer Ziel und Aktuelles-Spielbrett miteinander verglichen werden, können mehrere Züge auf einemal Durchgeführt werden. Hierbei ist es auch möglich auf Spielbrett in einem Zustand X, wieder die Ausgangsposition herstellen zu können.
-Somit kann ein belibiges Spielfeld vorgegeben werden, welches der Tisch dementsprechend aufbaut.
+Während der Sync-Phase muss die Software das vorgegebene Schachfeld herstellen. Dazu hält die Software den aktuellen Brett-Zustand vor und vergleicht diese mit dem Ziel-Schachbrett.
+Durch einen vergleich dieser, können die sich geänderten Figuren lokalisiert werden. Dadurch dass immer Ziel und Aktuelles-Spielbrett miteinander verglichen werden, können mehrere Züge auf einmal durchgeführt werden. Hierbei ist es auch möglich auf Spielbrett in einem Zustand X, wieder die Ausgangsposition herstellen zu können.
+Somit kann ein beliebiges Spielfeld vorgegeben werden, welches der Tisch dementsprechend aufbaut.
 
 <br>
 
 Um dies zu ermöglichen, wird aus der Vergleich der beiden Spielbretter eine Differenz in Form einer Liste gebildet. In dieser sind alle Änderungen eines einzelnen Feldes vermerkt.
-Eine Änderung besteht aus der Figur welche sich aktuell auf dem Brett befindet und dem Ziel-Zustand.
+Eine Änderung besteht aus der Figur, welche sich aktuell auf dem Brett befindet, und dem Ziel-Zustand.
 
 ```c++
 //ChessBoard.cpp
@@ -1505,12 +1596,12 @@ ChessBoard::compareBoards(ChessPiece::FIGURE *_board_a, ChessPiece::FIGURE *_boa
 }
 ```
 <br>
-Aus dieser Liste können anschliessend einzelne Figur-Bewegungen abgeleitet werden. Dazu wird zu einer Änderung des Start-Feldes in der Liste ein weiteres Listenelement gesucht, bei welchem die Änderung im Zielfeld liegt. Somit kann Start- und Zielfeld für eine Figur bestimmt werden. Anzumerken ist, dass die errechneten Züge nicht die logischsten oder kürzesten darstellen müssen.
-Da hier die Reihenfolge der Änderungen nach vorkommen in der Liste entscheident ist.
-Somit ensteht eine weitere Liste an Feld-Operationen, bei denen Figuren hinzugefügt, bewegt, entfernt werden können.
+Aus dieser Liste können anschließend einzelne Figur-Bewegungen abgeleitet werden. Dazu wird zu einer Änderung des Start-Feldes in der Liste ein weiteres Listenelement gesucht, bei welchem die Änderung im Zielfeld liegt. Somit kann Start- und Zielfeld für eine Figur bestimmt werden. Anzumerken ist, dass die errechneten Züge nicht die logischsten oder kürzesten darstellen müssen.
+Da hier die Reihenfolge der Änderungen nach vorkommen in der Liste entscheidend ist.
+Somit entsteht eine weitere Liste an Feld-Operationen, bei denen Figuren hinzugefügt, bewegt, entfernt werden können.
 
 - überschüssige Figuren entfernen
-    - wenn allgemien zu viele Figuren auf dem Feld sind
+    - wenn allgemein zu viele Figuren auf dem Feld sind
     - wenn bei dem auszuführenden Zug eine Figur geschlagen wird
 - möglichen Zug ausführen
     - falls Figuren fehlen diese hinzufügen
@@ -1524,14 +1615,14 @@ Dieser Vorgang wird rekursiv solange ausgeführt bis es keine Änderungen auf de
 
 Aus den Start und Ziel-Feldern werden im letzten Schritt Wegpunkte \ref{ATC_FigureMoveAlgorithm} generiert.
 Diese beschreiben den Weg welche die Figur ablaufen muss von Start zum Zielfeld.
-Das Spielbrett wurde so designed, dass zwischen jeder Figur auf dem Feld immer eine weitere Figur platz hat.
+Das Spielbrett wurde so designt, dass zwischen jeder Figur auf dem Feld immer eine weitere Figur Platz hat.
 Somit ist es möglich, dass die sich bewegenden Figuren zwischen zwei auf ihren Feldern stehenden hindurchbewegt werden können.
-Der Algorithmus berechnet genau diese Wegpunkte. Nachdem die Figur aus der Mitte des Feldes und an den Rand dieses Bewegt wurde, kann die Figur ungehindert zwischen den anderen vorbei bewegt werden. Die Figur wird anschliessend in Richtung der X-Achse auf die Höhe des Zielfeldes bewegt um anschliessend auf der Y-Achse an die Kante des Zielfeldes bewegt zu werden.
+Der Algorithmus berechnet genau diese Wegpunkte. Nachdem die Figur aus der Mitte des Feldes und an den Rand dieses Bewegt wurde, kann die Figur ungehindert zwischen den anderen vorbei bewegt werden. Die Figur wird anschließend in Richtung der X-Achse auf die Höhe des Zielfeldes bewegt um darauffolgend auf der Y-Achse an die Kante des Zielfeldes bewegt zu werden.
 Der letzte Wegpunkt liegt im inneren des Zielfelds, sodass sich die Figur in der Mitte diesem befindet.
 
 <br>
 
-Anzumerken ist, dass dieser Algorithmus nicht weiter Optimiert wurde, somit führen die Figuren auch einen Zick-Zack-Weg aus auch wenn das Zielfeld direkt nebem dem Start-Feld liegt.
+Anzumerken ist, dass dieser Algorithmus nicht weiter optimiert wurde, somit führen die Figuren auch einen Zick-Zack-Weg aus auch wenn das Zielfeld direkt neben dem Start-Feld liegt.
 
 <br>
 
@@ -1553,7 +1644,7 @@ Anzumerken ist, dass dieser Algorithmus nicht weiter Optimiert wurde, somit füh
 
 ## Inter Prozess Communication
 
-Bei der Entwicklung des Systems wurde darauf geachtet, dass sich das User-Interface austauschen lässt. Somit ist es auch möglich, ein webbasiertes User-Interface zu integrieren. Dazu wurde ein zusätzliches (+ipc) Layer hinzugefügt, welches eine Abstraktion der von der User-Interface Software verwendeten Funktionen auf der Controller-Software Ebene bereitstellt.
+Bei der Entwicklung des Systems wurde darauf geachtet, dass sich das User-Interface austauschen lässt. Somit ist es auch möglich, ein webbasiertes User-Interface zu integrieren. Dazu wurde ein zusätzliches (+ipc) Layer hinzugefügt, welches eine Abstraktion, der von der User-Interface Software verwendeten Funktionen auf der Controller-Software Ebene bereitstellt.
 
 <br>
 
