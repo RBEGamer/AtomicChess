@@ -102,23 +102,25 @@ Das zehnte und abschliessende Kapitel, befasst sich mit dem Fazit und gibt einen
 Im Folgenden werden vier kommerzielle und drei lizenzunabhängige (Open-Source) Schachtische miteinander verglichen.
 Bei den ausgewählten Tischen handelt es sich um
 
-- Square Off - Kingdome
-- Square Off - Grand Kingdom
-- DGT Smartboard
-- DGT Bluetooth Wenge
-- Automated Chessboard (Michael Guerero)
-- Automated Chessboard (Akash Ravichandran)
-- DIY Super Smart Chessboard
+- kommerziell
+    - Square Off - Kingdom
+    - Square Off - Grand Kingdom
+    - DGT Smartboard
+    - DGT Bluetooth Wenge
+- open-source:
+    - Automated Chessboard (Michael Guerero)
+    - Automated Chessboard (Akash Ravichandran)
+    - DIY Super Smart Chessboard
 
 <br>
 
-Für die kommerziell käuflichen Schachspiele gibt es kein sehr großes Marktangebot, weswegen für den Vergleich nur zwei Hersteller mit jeweils zwei verschiedenen Modellen gewählt werden konnte. (Derzeit integriert nur ein Unternehmen eine Funktion, welche die Figuren unterhalb der Tischplatte mechanisch bewegen kann.)
+Für die kommerziell käuflichen Schachspiele gibt es kein sehr großes Marktangebot, weswegen für den Vergleich nur zwei Hersteller mit jeweils zwei verschiedenen Modellen gewählt werden konnte. (Derzeit integriert nur das Unternehmen `Square Off` eine Funktion, welche die Figuren unterhalb der Tischplatte mechanisch bewegen kann.)
 
-Der zweite Hersteller <!--- siehe oben -->wurde dennoch zum Vergleich von zusätzlichen Funktionen <!--- wie ... --> herangezogen.
+Der zweite Hersteller `DGT` wurde dennoch zum Vergleich von zusätzlichen Funktionen herangezogen, da dessen Schachbretter die aktuelle Figurstellungen erkennen können.
 
 <br>
 
-Die Tische eines Herstellers unterscheiden sich kaum in ihren Funktionen; mit steigendem Preis werden zusätzliche Funktionen in Form von Sensoren oder Verbindungsoptionen implementiert.
+Die Tische des Herstellers `DTG` unterscheiden sich kaum in ihren Basis-Funktionen; mit steigendem Preis werden zusätzliche Funktionen in Form von Sensoren oder Verbindungsoptionen implementiert.
 
 <br>
 
@@ -136,7 +138,7 @@ Wie bereits aus zum Teil identischen den Namen ersichtlich, streben alle Tische 
 : Auflistung kommerzieller autonomer Schachtische
 
 |                                           | Square Off - Kingdom [@squareoffkingdom]  | Square Off - Grand Kingdom [@squareoffgrand] | DGT Smart Board [@dtgsmartboard]  | DGT Bluetooth Wenge [@dtgble] |
-|-------------------------------------------|-------------------------------------------|----------------------------------------------|-----------------------------------|-------------------------------|
+|:------------------------------------------|-------------------------------------------|:--------------------------------------------:|:---------------------------------:|------------------------------:|
 | Erkennung Figur-Stellung                  | nein (Manuell per Ausgangsposition)       | nein (Manuell per Ausgangsposition)          | ja                                | ja                            |
 | Abmessungen (LxBxH)                       | 486mm x 486mm x 75mm                      | 671mm x 486mm x 75mm                         | 540mm x 540mm x 20mm              | 540mm x 540mm x 20mm          |
 | Konnektivität                             | Bluetooth                                 | Bluetooth                                    | Seriell                           | Bluetooth                     |
@@ -148,7 +150,7 @@ Wie bereits aus zum Teil identischen den Namen ersichtlich, streben alle Tische 
 | Besonderheiten                            | Akku für 30 Spiele                        | Akku für 15 Spiele                           | -                                 | -                             |
 
 
-<!--- Anmerkunf zum Layout der Tabelle: Das ist im pdf so etwas schwer zu lesen. Vielleicht kann man das Layout durch Spaltenbreiten, Leerzeilen, grunen Hintergrund für jede 2. Zeile oder ähnliches verbesser. Ist aber nur Kosmetik. --> 
+<!--- Anmerkung zum Layout der Tabelle: Das ist im pdf so etwas schwer zu lesen. Vielleicht kann man das Layout durch Spaltenbreiten, Leerzeilen, grunen Hintergrund für jede 2. Zeile oder ähnliches verbesser. Ist aber nur Kosmetik. --> 
 
 
 <br>
@@ -197,7 +199,10 @@ Beide Square-Off-Modelle ermöglichen durch eingebaute Akkus auch eine mobile Nu
 
 <br>
 
-Zusammenfassend ist festzustellen, dass alle vier Tische dank unterschiedlicher Ausführung von Spiel-Eigenschaften zu unterschiedlichen Spiel-Erlebnissen führen. Für Nutzer ist eine Entscheidung anhand von Funktionen kaum möglich; <!--- Sie meinen, dass es nicht so etwas wie eine kmplette Lösung (klaren Testsieger) gibt oder? Dann könnten Sie auch schreiben: Kein kommerzieller Tisch bieter alle angestrebten Funktionalitäten...--> letztlich bedarf es der Auswertung von gewünschten und gegebenen Funktionen.
+Zusammenfassend ist festzustellen, dass alle vier Tische dank unterschiedlicher Ausführung von Spiel-Eigenschaften zu unterschiedlichen Spiel-Erlebnissen führen. Für Nutzer ist eine Entscheidung anhand von Funktionen kaum möglich; letztlich bedarf es der Auswertung von gewünschten und gegebenen Funktionen.
+
+
+<!--- Sie meinen, dass es nicht so etwas wie eine kmplette Lösung (klaren Testsieger) gibt oder? Dann könnten Sie auch schreiben: Kein kommerzieller Tisch bieter alle angestrebten Funktionalitäten...-->
 Das Ziel soll nun sein, all die positiven Eigenschaften dieser Tische zu vereinbaren und mittels noch zusätzlicher Verbesserungen ein eigenes Produkt zu entwickeln.
 
 <br>
@@ -219,7 +224,7 @@ Auch existieren weitere Abwandlungen von autonomen Schachbrettern, bei welchem d
 : Auflistung von Open-Source Schachtisch Projekten
 
 |                                         | Automated Chess Board (Michael Guerero) [@actproject1]| Automated Chess Board (Akash Ravichandran) [@actproject2]| DIY Super Smart Chessboard [@actproject3]|
-|-----------------------------------------|-------------------------------------------------------|----------------------------------------------------------|------------------------------------------|
+|:----------------------------------------|:-----------------------------------------------------:|:--------------------------------------------------------:|-----------------------------------------:|
 | Erkennung Figur-Stellung                | nein (Manuell per Ausgangsposition)                   | ja (Kamera / OpenCV)                                     | nein                                     |
 | Abmessungen (LxBxH)                     | keine Angabe                                          | keine Angabe                                             | 450mm x 300mm x 50mm                     |
 | Konnektivität                           | (+usb)                                                | (+wlan)                                                  | (+wlan)                                  |
@@ -300,7 +305,7 @@ In diesem Projekt werden vor allem Funktionalitäten berücksichtig, welche die 
 : Auflistung der Anforderungen an den autonomen Schachtisch
 
 |                                             | (+atc)                                  |
-|-------------------------------------------  |---------------------------------------  |
+|:------------------------------------------  |----------------------------------------:|
 | Erkennung Figur-Stellung                    | ja                                      |
 | Konnektivität                               | (+wlan), (+usb)                         |
 | Automatisches Bewegen der Figuren           | ja                                      |
@@ -408,7 +413,7 @@ Diese Vorteile wurde mit verschiedenen Testdrucken verifiziert und kommen insbes
 : Verwendete 3D Druck Parameter. Temperatur nach Herstellerangaben des verwendeten PLA Filament.
 
 | Ender 3 Pro 0.4mm Nozzle  | PLA Settings  |
-|---------------------------|---------------|
+|:--------------------------|--------------:|
 | Layer Height              | 0.2mm         |
 | Infill                    | 50.00%        |
 | Wall Thickness            | 2.0mm         |
@@ -687,7 +692,7 @@ Dieses stellt verschiedene Funktionen zum Verfahren eines Motors bereit. Hierzu 
 : TMC5160 Beschleunigungskurve / RAMP Parameter
 
 | Parameter 	| Value   	|
-|-----------	|---------	|
+|:--------------|----------:|
 | V_START   	| 1       	|
 | A1        	| 25000   	|
 | V1        	| 250000  	|
@@ -1060,7 +1065,7 @@ Mit dem Durchbruch von 3D Druckern im Konsumer-Bereich sind auch kleine und prei
 : Standardhardware 3D Drucker Steuerungen
 
 |                    | SKR 1.4 Turbo     | Ramps 1.4           | Anet A8 Mainboard     |
-|----------------    |---------------    |-----------------    |-------------------    |
+|:-------------------|:-----------------:|:-------------------:|----------------------:|
 | Stepper Driver     | TMC2209           | A4988 / TMC2209     | A4988                 |
 | LED Strip Port     | WS2811 / RGB      | -                   | -                     |
 | Firmware           | Marlin-FW 2.0     | Marlin-FW 1.0       | Proprietary           |
@@ -1096,7 +1101,7 @@ Marlin-FW[@marlinfw] biete dabei einen großen Befehlssatz an G-Code Kommandos a
 : Grundlegende verwendete G-Code Kommandos
 
 |                           | G-Code Command    | Parameters                            |
-|-------------------------- |-------------------|-----------------------------------    |
+|:------------------------- |:-----------------:|--------------------------------------:|
 | Move X Y                  | G0                | X`dest_pos_x_mm` Y`dest_pos_y_mm`     |
 | Move Home Position        | G28               | -                                     |
 | Set Units to Millimeters  | G21               | -                                     |
@@ -1114,7 +1119,7 @@ Die Kommunikation zwischen Steuerung und eingebetteten System geschieht durch ei
 : Hinterlegte G-Code Steuerungen
 
 | Product                   | Vendor-ID | Product-ID | Board-Type         |
-|---------------------------|-----------|------------|--------------------|
+|:--------------------------|:---------:|:----------:|-------------------:|
 | Bigtreetech SKR 1.4 Turbo | 1d50      | 6029       | Stepper-Controller |
 | Bigtreetech SKR 1.4       | 1d50      | 6029       | Stepper-Controller |
 | Bigtreetech SKR 1.3       | 1d50      | 6029       | Stepper-Controller |
@@ -1270,7 +1275,7 @@ Das System erkennt den Anschluss der Hardware beim Start auf die gleiche Art und
 : Hinterlegte Mikrokontroller
 
 | Product                         | Vendor-ID | Product-ID | Board-Type         |
-|---------------------------------|-----------|------------|--------------------|
+|:--------------------------------|:---------:|:----------:|-------------------:|
 | Arduino Due [Programming Port]  | 2341      | 003d       | User-Move-Detector |
 | Arduino Due [Native SAMX3 Port] | 2341      | 003e       | User-Move-Detector |
 | CH340                           | 1a86      | 7523       | User-Move-Detector |
@@ -1291,7 +1296,7 @@ Das System erkennt den Anschluss der Hardware beim Start auf die gleiche Art und
 : Eigenschaften die finalen Prototypen
 
 |                                         | (+atc) – autonomous Chessboard      |
-|-----------------------------------------|-------------------------------------|
+|:----------------------------------------|------------------------------------:|
 | Feldabmessungen (LxBxH)                 | 57x57mm                             |
 | Abmessungen (LxBxH)                     | 620x620x170mm                       |
 | Gewicht                                 | 5.7kg                               |
@@ -1420,7 +1425,7 @@ Der Response wird dann vom Backend in der Datenbank gespeichert und weiter an di
 : MoveValidator-Service (+api) Overview
 
 | MoveValidator-Function    | (+api)-Route             | Method | Form-Data             |
-|---------------------------|--------------------------|--------|-----------------------|
+|:--------------------------|:------------------------:|:------:|----------------------:|
 | Check Move                | /rest/check_move         | POST   | fen, move, player     |
 | Execute Move              | /rest/execute_move       | POST   | fen, move             |
 | Validate Board            | /rest/validate_board     | POST   | fen                   |
@@ -1444,7 +1449,7 @@ Die (+fen) Notation ist universal und kann jede Brettstellung darstellen. Auch e
 : Vergleich (+fen) - (+xfen)
 
 | FEN-TYPE  | FEN-String                                                    |
-|-----------|---------------------------------------------------------------|
+|:----------|--------------------------------------------------------------:|
 | FEN       | rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R             |
 | X-FEN     | rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2|
 | SCHEMA    | Board Player-Color Rochade En-Passant Halfturn Turn-Number    |
