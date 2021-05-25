@@ -469,8 +469,9 @@ unterschiedlichen Spiel-Erlebnissen führen. Für Nutzer ist eine
 Entscheidung anhand von Funktionen kaum möglich; letztlich bedarf es der
 Auswertung von gewünschten und gegebenen Funktionen. Dadurch dass nur
 die Firma \passthrough{\lstinline!Square Off!} einen wirklich autonomen
-Schachtisch anbietet, hat der Nutzer kaum auswahlmöglichkeiten auf der
-kommerziellen Seite.
+Schachtisch anbietet, auch wenn dieser nicht alle angestrebten
+Funktionalitäten bietet. So hat der Nutzer kaum auswahlmöglichkeiten auf
+der kommerziellen Seite.
 
 \hypertarget{open-source-projekte}{%
 \subsection{Open-Source Projekte}\label{open-source-projekte}}
@@ -1776,7 +1777,7 @@ Schachtischs gewählt, welche auf beide Achsen die gleichen Kräfte ausübt
 und beide Achsen nicht mehr unabhängig voneinander betrachtet.
 
 CoreXY basiert auf der Idee alter Zeichentische und wird heute für
-verschiedene Anwendungen wie den 3D-Druck oder das CNC-Fräsen genutzt,
+verschiedene Anwendungen wie den 3D-Druck oder das \gls{cnc}-Fr genutzt,
 bei dem ein Objekt oder Werkzeug in mehreren Dimensionen bewegt werden
 soll.
 
@@ -1930,13 +1931,22 @@ anderen Systemen verbunden werden, was insbesondere durch die verwendete
 All diese Faktoren erschweren einen einfachen Zusammenbau des autonomen
 Schachtischs. Die Lösung stellt die Verwendung von Standardhardware dar.
 Nach der Minimierung der elektrischen Komponenten und des mechanischen
-Aufbaus ist zu erkennen, dass der autonome Schachtisch einer CNC-Fräse
-bzw. eines 3D Drucker stark ähnelt. Insbesondere die XY-Achsen Mechanik
-sowie die Ansteuerung von Schrittmotoren wird in diesen Systemen
-verwendet. Mit dem Durchbruch von 3D Druckern im Konsumer-Bereich sind
-auch kleine und preisgünstige Steuerungen \ref{3dmarlinctl} erhältlich,
-welche 2-3 Schrittmotoren und diverse zusätzliche Hardware ansteuern
-können.
+Aufbaus ist zu erkennen, dass der autonome Schachtisch einer
+\gls{cnc}-Fr bzw. eines 3D Drucker stark ähnelt. Insbesondere die
+XY-Achsen Mechanik sowie die Ansteuerung von Schrittmotoren wird in
+diesen Systemen verwendet. Mit dem Durchbruch von 3D Druckern im
+Konsumer-Bereich sind auch kleine und preisgünstige Steuerungen
+\ref{3dmarlinctl} erhältlich, welche 2-3 Schrittmotoren und diverse
+zusätzliche Hardware ansteuern können.
+
+Hierbei existiert eine große Auswahl dieser mit den verschiedensten
+Ausstattungen. Bei der Auswahl dieser wurde vor allem auf die
+Möglichkeit geachtet sogenannte Silent-Schrittmotortreiber verwenden zu
+können, um die Geräuschimmissionen durch die Motoren so weit wie möglich
+zu minimieren. Im ersten Prototyp wurde unter anderem aus diesem Grund
+die \passthrough{\lstinline!TMC5160-BOB!} Treiber ausgewählt. Die
+meisten Boards bieten austauschbare Treiber, so ist es auch im
+nachhinein möglich diese auszuwechseln.
 
 \begin{longtable}[]{@{}lccr@{}}
 \caption{Standardhardware 3D Drucker Steuerungen
@@ -1955,13 +1965,7 @@ Firmware & Marlin-FW 2.0 & Marlin-FW 1.0 & Proprietary\tabularnewline
 \bottomrule
 \end{longtable}
 
-Hierbei existiert eine große Auswahl dieser mit den verschiedensten
-Ausstattungen. Bei der Auswahl dieser wurde vor allem auf die
-Möglichkeit geachtet sogenannte Silent-Schrittmotortreiber verwenden zu
-können, um die Geräuschimmissionen durch die Motoren so weit wie möglich
-zu minimieren. Im ersten Prototyp wurde unter anderem aus diesem Grund
-die \passthrough{\lstinline!TMC5160-BOB!} Treiber ausgewählt. Hierzu
-wurde der Schrittmotor-Treiber \passthrough{\lstinline!TMC2209!}
+Hierzu wurde der Schrittmotor-Treiber \passthrough{\lstinline!TMC2209!}
 gewählt, welcher diese Features ebenfalls unterstützt und in der
 Variante als Silent-Step-Stick direkt in die meisten 3D Drucker
 Steuerungen eingesetzt werden können. Hierbei ist es wichtig, dass auf
@@ -2000,9 +2004,20 @@ die Verwendung einer Marlin-FW\cite{marlinfw} fähigen
 Motorsteuerung, ist eine Anpassung der \gls{hal} notwendig. Diese
 unterstütz die Ansteuerung der Motoren und anderen Komponenten (z.B.
 Spindeln, Heizelemente) mittels G-Code und wird typischerweise in 3D
-Druckern und CNC-Fräsen eingesetzt.
+Druckern und \gls{cnc}-Fr eingesetzt.
 
-G-Code ist eine
+G-Code ist eine Programmiersprache, welche mittels einfacher Befehle
+textbasierten Befehle \ref{gcodecmd}, Komponenten dieser Maschienen
+kontrollieren kann. Dabei können einzelne Achsen verfahren werden oder
+die Drehzahl einer Spindel kontrolliert werden. Der G-Code wird von der
+Steuerung interpretiert. In der Regel wird dieser zuvor von einem
+\gls{cad} Programm erzeugt und Zeilenweise übertragen. Bei einem 3D
+Drucker wird dieser vom Slicer generiert und enhält die Wegpunkte welche
+von dem Hotend angefahren werden sollen.
+
+Im falle des autonomen Schachtisch, werden die G-Code Anweisungen
+on-the-fly durch die \gls{hal} erzeugt und die Motorsteuerung verfährt
+die Achsen an die jeweils gewünschten Positionen.
 
 Marlin-FW\cite{marlinfw} biete dabei einen großen Befehlssatz an
 G-Code Kommandos an. Bei diesem Projekt werden jedoch nur einige G-Code
@@ -2047,10 +2062,10 @@ kommunizieren. Auch werden so keine speziellen Treiber benötigt, da auf
 nahezu jedem System ein Treiber \passthrough{\lstinline!USB-CDC!} für
 die gängigsten \gls{usb} zu seriell Wandler bereits installiert ist. Die
 Software erkennt anhand der zur Verfügung stehenden \gls{usb}-Ger sowie
-deren Vendor und Product-ID Informationen die verbundene Steuerung und
-verwendet diese nach dem Start automatisch. Hierzu wurde zuvor eine
+deren Vendor und Product-\gls{id} Informationen die verbundene Steuerung
+und verwendet diese nach dem Start automatisch. Hierzu wurde zuvor eine
 Liste \ref{gcodeusbctl} mit verschiedenen getesteten Steuerungen sowie
-deren \gls{usb}-Vendor und Product-ID angelegt.
+deren \gls{usb}-Vendor und Product-\gls{id} angelegt.
 
 \begin{longtable}[]{@{}lccr@{}}
 \caption{Hinterlegte G-Code Steuerungen
@@ -2266,20 +2281,49 @@ STM32F411 & 0483 & 5740 & User-Move-Detector\tabularnewline
 \section{Fazit bezüglich des finalen
 Prototypens}\label{fazit-bezuxfcglich-des-finalen-prototypens}}
 
-\begin{itemize}
-\tightlist
-\item
-  modularer hardware aufbau
-\item
-  einfach/gut verfügbare materialien verwendet
-\item
-  geänderte Mechnik resultiert in nahezu Spielfreier Mechanik (+- 1mm),
-  welches für diesen Zweck mehr als ausreicht
-\item
-  6h dauertest bestanden
-\end{itemize}
+Der in der zweiten Iteration entstandene Prototyp, wurdem viele Elemente
+aus der ersten Iteration grundlegend überarbeitet. Dabei endstand ein
+endstand ein völlig neues Design, welches sich auf einfach zu
+beschaffende Komponenten und Materialien stützt. Diese ermöglichen einen
+einfachen und zeiteffektiven zusammenbau des kompletten autonomen
+Schachtischs und bieten die Möglichkeit auf eine einfache Erweiterung
+des Systems.
 
-\label{finalfeaturesatc}
+Aus der Verwendung des CoreXY Aufbaus resultierte eine nahezu spielfreie
+Mechanik (+-1mm), welche für diesen Zweck mehr als ausreicht. Somit
+wurde die mechanischen Probleme vom ersten Prototyp komplett eliminiert
+und führen somit zu einem zuverlässigen Spielgefühl. Diese
+Zuverlässigkeit wurde im mehreren Testläufen verifiziert und ein
+abschliessender sechs Stunden Dauertest bestätigt diese zusätzlich. Auch
+konnte die Bewegungsgeschwindikeit des Schlittens erhöht werden, welches
+zu einem schnelleren Platzieren der Figuren führt.
+
+Ein großer Kritikpunkt am ersten Prototyp, waren die nicht komplett
+Funktionsfähigen Park-Positionen für die ausgeschiedenen Figuren. Durch
+die Vergrößerung des Bewegungsspielraums der Achsen und der Anpassungen
+in der Software, ist es nun möglich alle Figuren von dem Spielbrett
+entfernen zu können. Das System ist danach in der Lage, diese wieder in
+das Spielgeschehen zurückholen zu können. Somit ist kein manuelles
+Eingreifen durch den Benutzer mehr notwendig, wenn ein neues Spiel
+gestartet werden soll.
+
+Zusätzlich wurde durch das transparente Design, eine neue Art der
+Benutzerinteraktion geschaffen. Durch die visuellen Hinweise, welcher
+der Tisch durch seine \gls{led} Beleuchtung geben kann, ist der Nutzer
+nicht mehr auf die \gls{gui} angewiesen ob dieser am Zug ist. Der Nutzer
+kann auf einen Blick erkennen in welchem Zustand sich der autonome
+Schachtisch befindet.
+
+Zudem konnte eine reibunglose erkennung des getätigten Schachzug
+umgesetzt werden, welches bei der vorherigen Version nicht komplett
+möglich war. Durch den modularen Aufbau der \gls{hal} und des erweiteren
+Revisions-Management, ist es zudem möglich die Software auf allen bisher
+erstellen Prototypen ausführen zu können.
+
+Somit ist festzuhalten, dass mit der zweiten Revision alle zuvor
+geforderten Eigenschaften \ref{finalfeaturesatc} zufriedenstellend
+umgesetzt werden konnten. Die erstellte Hard- und Software bietet
+zusätzliche zahlreiche Erweiterungsmöglichkeiten.
 
 \begin{longtable}[]{@{}lr@{}}
 \caption{Eigenschaften die finalen Prototypen
@@ -2306,16 +2350,14 @@ Besonderheiten & visuelle Hinweise per Beleuchtung\tabularnewline
 \bottomrule
 \end{longtable}
 
-\begin{itemize}
-\tightlist
-\item
-  alle anforderungen erfüllt
-\item
-  zulasten der geschwindigkeit insbesondere bei der erkennung des
-  User-Move
-\item
-  erweitrungsmöglichkeit in hard uns SOFTWARE
-\end{itemize}
+Troz allem, ist dieser Stand der Projektes noch nicht perfekt und bietet
+noch einiges an Verbesserungspotential. Hierzu zählt unter anderem die
+Erkennung des getätigten Schachzuges durch den Benutzer. Durch die
+Verwendung des \gls{nfc} Moduls und dem Scanvorgang des Schachfeldes,
+muss eine gewisse Wartezeit von ca. 20 Sekunden in Kauf genommen werden,
+bevor das System einen Zug erkennt. Somit sind keine schnellen Partien
+möglich bzw. andere Schachformen wie z.B. Schnellschach bei denen die
+Zugzeit begrenzt ist.
 
 \hypertarget{entwicklung-der-cloud-infrastruktur}{%
 \chapter{Entwicklung der Cloud
@@ -2419,16 +2461,203 @@ mit dem Server zu erlauben.
 \label{ATC_request_example}}
 \end{figure}
 
+Das Backend, welches den zentralen Teil der Service-Archtitektur bilder,
+bildet den Zugriffspunkt für die autonomen Schachtische und den
+Webclient (s.u.) dar. Diese stellt die \gls{api} zur Aussenwelt bereit,
+mit dem sich die einzelnen Clients verbinden.
+
+Dies geschieht zusätzlich durch einen \gls{tls}-Reverse Proxy, welcher
+eine verschlüsselte Verbindung \gls{https} bereitstellt. Diese verwendet
+zum einen eine self-signed Certificate, sowohl als auch ein Zertifikat
+der Lets Entrypt Organisation\cite{letsencrpyt}. Somit ist die vom
+Backend bereitgestellte \gls{api} und zum späteren Zeitpunt erstellen
+Webclient (s.u.) für alle modernen Webbrowser vertrauenswürdig.
+
+Bei dem eingerichteten Reverse-Proxy werden alle verbindungen aus dem
+öffentlichen Internet, mit einem Service verbunden, welcher im lokalen
+Netzwerk betrieben wird. In diesem Fall ist dies der lokale Server auf
+dem der Backend-Service auf dem Port 3000 ausgeührt wird.
+
+\begin{lstlisting}
+# APACHE 2 REVERSE PROXY CONFIGURATION
+<VirtualHost *:80>
+        ServerName atomicchess.de
+        ProxyPreserveHost On 
+        DocumentRoot /var/www/html
+        ProxyPass /.well-known !
+        ProxyPass / http://127.0.0.1:3000/
+        ProxyPassReverse / http://127.0.0.1:3000/   
+    ServerAdmin webmaster@atomicchess.de
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+    RewriteEngine on
+    RewriteCond %{SERVER_NAME} =atomicchess.de
+    RewriteRule ^ https://%{SERVER_NAME}%{REQUEST_URI} [END,NE,R=permanent]
+</VirtualHost>
+\end{lstlisting}
+
+Durch diese Methode wird eine sichere Verbindung zwischen dem Service
+und dem Nutzer-Device hergestellt. Der Vorteil ist, dass die Services im
+privaten Netzwerk keine \gls{tls} Zertifikate benötigen um in diesem
+Netz miteinander kommunizieren zu können. Lediglich bei einer Verbindung
+zum öffentlichen Internet wird eine sichere Verbindung durch die
+Forward-Proxy Funktion des Apache 2 Webservers hergestellt.
+
+Der Backen-Service stellt die Grundlegegenden Funktionen bereit, welche
+die Clients benötigen. Dazu zählen unter anderem:
+
 \begin{itemize}
 \tightlist
 \item
-  matchmaking schachlogik
+  Profilverwaltung
 \item
-  zentraler zugriffspunkt auf das System und stellt diese abi bereit
+  Matchmaking
 \item
-  stellt spielerprofile aus datenbanken bereit
+  Spielstatus
 \item
-  authentifizierung der clients und deren sessions
+  Client authentifizierung
+\end{itemize}
+
+Jeder Client meldet sich mittels der
+\passthrough{\lstinline!/rest/login!} Route an. Das Backend prüft ob
+bereits ein Spielerprofil der Datenbank angelegt wurde und erstellt ggf.
+ein neues für das Device. Dabei werden der Spieler-Typ
+(\gls{ai},autonomer Schachtisch, Webclient), als auch die Geräte-(id)
+festgehalten. Nach einem erfolgreichen Login \ref{ATC_request_example}
+erhält der Client einen Session-Token. Nur mit diesem Token, können
+weitere Funktionen des Backends verwendet werden. Dieser Token ändert
+sich nach jedem Login-Prozess, somit kann nur ein Client Token-Inhaber
+sein und andere zuvor angemeldete Clients wird dieser entzogen.
+
+Nach einem erfolgreichen Login kann der Client den aktuellen Spielstatus
+abfragen, in dem er sich befindet:
+
+\begin{itemize}
+\tightlist
+\item
+  Idle: kein Spiel aktiv und nicht auf der Suche nach einem Spiel
+\item
+  Matchmaking: Spieler sucht aktiv nach einem Spiel
+\item
+  Game-Running: Client ist einem aktiven Spiel zugewiesen
+\end{itemize}
+
+Der \passthrough{\lstinline!Idle!}-Status, wird direkt nach einem Login
+gesetzt. Somit wird der Client nicht automatisch Spielen zugewiesen.
+Dies kann durch die \passthrough{\lstinline!/rest/set\_player\_state!}
+\gls{api} Route geänder werden. Diese wird vom Client aufgerufen, wenn
+dieser ein Spiel starten möchte. Dazu wird ein Eintrag in der
+Lobby-Tabelle der Datenbank eingetragen. In dieser befinden sich alle
+Spieler, welche auf der Suche nach einem Spiel sind. Dabei wird
+zusätzlich der Zeitpunk des Eintretens gespeichert.
+
+Wenn mindestens zwei Clients auf der Suche nach einem Spiel sind und
+sich somit in der Lobby-Tabelle befinden, wird der
+Matchmaking-Algorithmus aktiv. Dieser Sortiert die Clients nach
+Zeitpunkt des Eintretens und nach dem Spieler-Typ. Durch den Typ werden
+zuerst mit zwei Spielern ein Match gestartet, wenn diese vom Typ:
+
+\begin{itemize}
+\tightlist
+\item
+  autonomer Schachtisch
+\item
+  Webclient
+\end{itemize}
+
+sind.
+
+\begin{lstlisting}
+//ATC_BACKEND matchmaking_logic.js
+var matchmaking_job = new CronJob('*/' + CFG.getConfig().matchmaking_runner_interval + ' * * * * *', function () {
+    //GET ALL PLAYERS WITH SEARCHING FOR A NEW GAME IS ENABLED
+    LH.get_player_for_matchmaking(function (gpfm_err, gpfm_res) {
+        //...
+        //CHECK IF MORE THEN TWO PLAYERS ARE SEARCHING (HUMAN + AI)
+        if (!gpfm_res || gpfm_res.combined_player_searching.length <= 1) {
+            return;
+        }
+        // 1 HUMAN AND 1 AI SEARCHING => DIRECT MATCH
+        if (CFG.getConfig().matchmaking_ai_enable === true && gpfm_res.player_searching_human.length === 1 && gpfm_res.player_searching_ai.length >= 1) {
+            //...
+            //START A MATCH FOR THESES TWO PLAYERS => REMOVE LOBBY ENTRY FROM DB AND CREATE A NEW GAME IN THE GAME DATABASE
+            GH.start_match(gpfm_res.player_searching_human[0].hwid, gpfm_res.player_searching_ai[0].hwid, function (sm_err, sm_res) {
+                if (sm_err) {
+                    //ON ANY ERROR THE CLIENT WILL RESET THE FAULTY STATE ITSELF AND RELOGIN TO THE SYSTEM
+                    console.error(sm_err);
+                }
+            });
+        //MORE THAN 1 HUMAN PLAYER WAITING
+        } else if (gpfm_res.player_searching_human.length > 1) {
+            //THEN MAKE A MATCH BEWEEN THE TWO HUMAN PLAYER
+            //SORT PLAYER WITH THE LONGEST WAIT TIME IN THE LOBBY
+            gpfm_res.player_searching_human.sort(player_sort_function_swt);
+            //SELECT THE MOST WAITING PLAYER
+            const  p1 = gpfm_res.player_searching_human[0];
+            //SELECT A RANDOM OTHER PLAYER
+            const  p2 = gpfm_res.player_searching_human[HELPER_FUNCTIONS.randomInteger(1, gpfm_res.player_searching_human.length - 1)];
+            //...
+            //START A MATCH
+            GH.start_match(p1.hwid, p2.hwid, function (sm_err, sm_res) {
+                if (sm_err) {
+                    //ON ANY ERROR THE CLIENT WILL RESET THE FAULTY STATE ITSELF AND RELOGIN TO THE SYSTEM
+                    console.error(sm_err);
+                }
+            });
+        }
+    }, true);
+});
+\end{lstlisting}
+
+Somit wird sichergestellt, dass zuerst allemMenschlichen Spieler
+zusammen ein Spiel beginnen und erst im letzten Schritt, ein Mensch
+gegen dem Computer spielen muss. kommt ein Match zustande, werden die
+Spielereinträge aus der Lobby-Tabelle entfernt und es wird ein neues
+Spiel in der Game-Tabelle der Datenbank angelegt.
+
+Diese enthält alle Spiele und deren aktuellen Status:
+
+\begin{itemize}
+\tightlist
+\item
+  aktuelles Spielbrett
+\item
+  aktueller Spieler am Zug
+\item
+  Anzahl Schachzüge
+\item
+  Spieler-(id)s
+\item
+  Spielerfarbe
+\item
+  Spiel-Status (abgebrochen, beendet)
+\end{itemize}
+
+Diesen Eintrag fragen die Clients in regelmäßigen Intervallen über die
+\passthrough{\lstinline!/rest/player\_state!} Route ab. Somit kennen sie
+das aktuelle Spielfeld und ob sie gerade am Zug sind. Ein Zug wird
+mittels der \passthrough{\lstinline!/rest/make\_move!} Route
+übermittelt. Das Backend überprüft diesen mittels de
+MoveValidator-Services und speichert das Ergebnis in dem passenden
+Datenbank-Record zum Spiel ab. Nach beendigung eines Spiels, werden die
+Clients wieder in den \passthrough{\lstinline!Idle!}-Status
+zurückversetzt, somit können diese ein neues Spiel beginnen. Nach einem
+Sieg ermittelt das Backend einen Score für den Client, welcher gewonnen
+hat. Dieser wird in dem Profil-Record gespeichert und kann abgefragt
+werden. Somit wurde ein einfaches Profil-System implementiert.
+
+Ein Client muss sich außerdem in regelmäßigen Abständen über die
+\passthrough{\lstinline!/rest/hearbeat!} Route zurückmelden. Somit weiß
+der Backen-Service, dass der Client noch existiert. Bleibt ein Request
+innerhalb einer bestimmten Zeit aus, werden alle akutellen Spiele
+beendet und der Client wird aus dem System entfernt. Somit wird
+sichergestellt, dass beide Parteien bei einem gestarteten Spiel noch
+aktiv sind, auch wenn diese keine Schachzüge ausführen.
+
+\begin{itemize}
+\tightlist
 \item
   weiterleitung der von spielerinteraktionen an move validator
 \item
@@ -2862,12 +3091,40 @@ Zielfelds, sodass sich die Figur in der Mitte diesem befindet.
 \end{figure}
 
 Anzumerken ist, dass dieser Algorithmus nicht weiter optimiert wurde,
-somit führen die Figuren auch einen Zick-Zack-Weg aus auch wenn das
+somit führen die Figuren auch eine Zick-Zack-Bewegung aus auch wenn das
 Zielfeld direkt neben dem Start-Feld liegt.
 
 \hypertarget{schachfeld-scan-algorithmus-zur-erkennung-von-schachzuxfcgen}{%
 \section{Schachfeld Scan Algorithmus zur Erkennung von
 Schachzügen}\label{schachfeld-scan-algorithmus-zur-erkennung-von-schachzuxfcgen}}
+
+Ein weiterer wichtiger Teil der Controller-Software ist die Erfassung,
+der Schachzüge welche vom Benutzer getätigt wurden. Das System bietet
+dem Benutzer hier zwei Möglichkeiten. Über das \gls{ui} des autonomen
+Schachtischs kann der Benutzer, wenn dieser am Zug ist manuell
+eingegeben werden. Hierbei wird das Start- und Ziel-Feld angegeben,
+woraus das System automatisch den gewünschten zug ermittelt. Dies ist
+jedoch bei einer Schachpartie nicht praktikabel. Der Benutzer muss eine
+Möglichkeit haben, die Schachfiguren händisch bewegen zu können. Das
+System muss aus den geänderten Figuren den getätigten Schachzu ermitteln
+könnnen.
+
+Da das Schachbrett in beiden Revisions-Varianten über keine Sensoren
+unter den einzelnen Schachfelder verfügt, wurde der existierenden
+\gls{nfc} Scanner verwendet. Mit dem ist es möglich gezielt Figuren auf
+zuvor bestimmten Feldern zu ermitteln. Der Nachteil dieser Methode ist
+die Wartezeit welche durch den Scan-Prozess eintritt. Ein Scan aller 64
+Felder ist nicht praktikabel, da jeder Scan und der Bewegung der
+Mechanik ca 3 Sekunden benötigt. Zusätzlich verlängert sich die
+Scandauer durch ein leeres Schachfeld, da der Scanner mehrere Versuche
+unternimmt ein gültiges \gls{nfc} Tag zu erkennen.
+
+Somit muss mittels eines Algoritmus \ref{ATC_ChessMoveAlgorithm}
+entschieden werden, welches Felder als mögliche Kandidaten in Fragen
+kommen. Hinweise auf diese Felder bietet der aktuelle Spiel-Status,
+welche vom System über den Cloud-Service abgefragt wird. Dieser liefert
+nicht nur das aktuelle Schachbrett, sondern auch die möglichen
+Schachzüge, welche vom Benutzer ausgeführt werden können.
 
 \begin{figure}
 \centering
@@ -2876,22 +3133,29 @@ Schachzügen}\label{schachfeld-scan-algorithmus-zur-erkennung-von-schachzuxfcgen
 \label{ATC_ChessMoveAlgorithm}}
 \end{figure}
 
-Ein weiterer wichtiger Teil der Controller-Software ist die Erfassung,
-der Schachzüge welche vom Benutzer getätigt wurden. Das System bietet
-dem Benutzer hier zwei Möglichkeiten. Über das \gls{ui} des autonomen
-Schachtischs kann der Benutzer, wenn dieser am Zug ist manuell
-eingegeben werden. Hierbei wird das Start- und Ziel-Feld
+Durch diese Auflistung an mögliche Zügen, wird anschließend eine Liste
+mit den mögliche Start-Feldern der Figuren erstellt. Nach dieser Liste,
+werden die Felder mittels des \gls{nfc} Moduls auf veränderungen
+überprüft. Stellt das System eine Änderung fest, wird ermittelt auf
+welche Felder die Figur auf dem Feld ziehen kann. Anschließend werden
+alle Ziel-Feld Positionen der Figur abgescannt, bis auch hier eine
+Änderung detektiert wurde. Aus diesen beiden Informationen lässt sich
+der getätigte Zug ableiten. Dieser wird anschliessend an der
+Cloud-Service zur überprügung weitergeleitet.
 
-\begin{itemize}
-\tightlist
-\item
-  Benutzer bestätigt, dass er Schachzug gemacht hat
-\item
-  Ermittlung des getätigten Schachzugs
-\item
-  Scan der Schachfeld-Veränderungen, durch Vergleich des vorherigen
-  Schachfelds und der möglichen Züge
-\end{itemize}
+Sollte kein Zug bestimmt werden können, gibt es zwei möglichkeiten für
+das System. Zum einen kann der Benutzer Informiert werden, dass sein
+getätigter Zug ungültig ist und zum anderen ist es möglich alle
+Schachfelder auf einen möglichen alternativen Zug abzuscannen. Darauf
+hin kann der autonome Schachtisch den getätigten Zug manuell
+zurücksetzen. Dies kann vom Benutzer her in den Einstellungen
+eingestellt werden, da ein manuelles zurücksetzten wesentlich schneller
+durchgeführt werden kann. Danach hat der Benutzer die möglichkeit einen
+weiteren Zug durchzuführen, solange bis der getätigte Zug gültig ist.
+
+Der gesamte Prozess des Scanvorgangs dauert je nach Anzahl der
+Möglichkeiten welche der Spieler hat, um die 20 Sekunden bis das System
+den getätigten Zug ermittelt hat.
 
 \hypertarget{inter-prozess-communication}{%
 \section{Inter Prozess

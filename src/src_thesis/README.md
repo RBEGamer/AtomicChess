@@ -10,7 +10,7 @@ Ein bauen per Dockerimage ist möglich mittels ` build_thesis_docker.sh` Script 
 ## 25.05.2021 II
 
 * einarbeitung Kommentare 11:49
-* einfügen referenzen für tabellen
+* einfügen Referenzen für Tabellen
 
 ## 25.05.2021 I
 

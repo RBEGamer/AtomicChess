@@ -41,7 +41,6 @@ var matchmaking_job = new CronJob('*/' + CFG.getConfig().matchmaking_runner_inte
                     console.error(sm_err);
                 }
             });
-
         //MORE THAN 1 HUMAN PLAYER WAITING
         } else if (gpfm_res.player_searching_human.length > 1) {
             //THEN MAKE A MATCH BEWEEN THE TWO HUMAN PLAYER

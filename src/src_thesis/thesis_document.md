@@ -199,7 +199,6 @@ Auffallend ist, dass nur einer der ausgewählten Tische über eine Parkposition 
 
 Ebenfalls erwähnenswert ist, dass keiner der Tische eine Stand-Alone-Funktionalität besitzt. Jeder Tisch benötigt eine Verbindung zu einem externen Gerät, wie einem Smartphone oder Computer, welche die Berechnungen der Spielerzüge vornimmt. Keiner dieser Tische kann ein simples Spiel nach einem verbindungslosen Start ausführen.
 
-<!--- Interessant finde ich hier noch, ob eine Anbindung an eine Hersteller-Cloud o.Ä. nötig ist (was wahrscheinlich der Fall ist). Das wiegt aus meiner Sicht schwerer (Datenschutz etc.), als wenn nur eine (lokale) Anbindung an das Smartphone nötig ist.-->
 Für die Schachtische der Firma `Square Off` ist eine Smartphone App `Square Off - Chess App`[@squareoffapp] für die Verwendung notwendig.
 Nach einer Analyse der Companion-App, ist zu erkennen, dass hier eine Registrierung inkl Profilerstellung notwendig ist um mit der Verwendung der App forfahren zu können. Erst danach ist ein Spiel gegen den Computer ohne Internet möglich. Alle weiteren Optionen (Spiel gegen andere Spieler, Live-Stream) ist nur über einen Online-Zugang möglich und erfodert je nach gewählter Optionen auch einen weiteren Account bei anderen Schach-Cloud anbietern wie `Chess.com` oder `Lichess`.
 
@@ -209,8 +208,7 @@ Beide Square-Off-Modelle ermöglichen durch eingebaute Akkus auch eine mobile Nu
 
 <br>
 
-<!--- Sie meinen, dass es nicht so etwas wie eine kmplette Lösung (klaren Testsieger) gibt oder? Dann könnten Sie auch schreiben: Kein kommerzieller Tisch bieter alle angestrebten Funktionalitäten...-->
-Zusammenfassend ist festzustellen, dass alle vier Tische dank unterschiedlicher Ausführung von Spiel-Eigenschaften zu unterschiedlichen Spiel-Erlebnissen führen. Für Nutzer ist eine Entscheidung anhand von Funktionen kaum möglich; letztlich bedarf es der Auswertung von gewünschten und gegebenen Funktionen. Dadurch dass nur die Firma `Square Off` einen wirklich autonomen Schachtisch anbietet, hat der Nutzer kaum auswahlmöglichkeiten auf der kommerziellen Seite.
+Zusammenfassend ist festzustellen, dass alle vier Tische dank unterschiedlicher Ausführung von Spiel-Eigenschaften zu unterschiedlichen Spiel-Erlebnissen führen. Für Nutzer ist eine Entscheidung anhand von Funktionen kaum möglich; letztlich bedarf es der Auswertung von gewünschten und gegebenen Funktionen. Dadurch dass nur die Firma `Square Off` einen wirklich autonomen Schachtisch anbietet, auch wenn dieser nicht alle angestrebten Funktionalitäten bietet. So hat der Nutzer kaum auswahlmöglichkeiten auf der kommerziellen Seite.
 
 <br>
 
@@ -974,7 +972,7 @@ Deswegen wurde ein völlig anderes System für die zweite Revision des Schachtis
 
 <br>
 
-CoreXY basiert auf der Idee alter Zeichentische und wird heute für verschiedene Anwendungen wie den 3D-Druck oder das CNC-Fräsen genutzt, bei dem ein Objekt oder Werkzeug in mehreren Dimensionen bewegt werden soll. 
+CoreXY basiert auf der Idee alter Zeichentische und wird heute für verschiedene Anwendungen wie den 3D-Druck oder das (+cnc)-Fräsen genutzt, bei dem ein Objekt oder Werkzeug in mehreren Dimensionen bewegt werden soll. 
 
 <br>
 
@@ -1065,11 +1063,15 @@ Zusätzlich konnte die Elektronik nur beschränkt mit anderen Systemen verbunden
 <br>
 
 All diese Faktoren erschweren einen einfachen Zusammenbau des autonomen Schachtischs. Die Lösung stellt die Verwendung von Standardhardware dar.
-Nach der Minimierung der elektrischen Komponenten und des mechanischen Aufbaus ist zu erkennen, dass der autonome Schachtisch einer CNC-Fräse bzw. eines 3D Drucker stark ähnelt.
+Nach der Minimierung der elektrischen Komponenten und des mechanischen Aufbaus ist zu erkennen, dass der autonome Schachtisch einer (+cnc)-Fräse bzw. eines 3D Drucker stark ähnelt.
 Insbesondere die XY-Achsen Mechanik sowie die Ansteuerung von Schrittmotoren wird in diesen Systemen verwendet.
 Mit dem Durchbruch von 3D Druckern im Konsumer-Bereich sind auch kleine und preisgünstige Steuerungen \ref{3dmarlinctl} erhältlich, welche 2-3 Schrittmotoren und diverse zusätzliche Hardware ansteuern können.
 
 <!-- Hier fehlt noch eine Überleitung zur Tabelle-->
+
+
+Hierbei existiert eine große Auswahl dieser mit den verschiedensten Ausstattungen. Bei der Auswahl dieser wurde vor allem auf die Möglichkeit geachtet sogenannte Silent-Schrittmotortreiber verwenden zu können, um die Geräuschimmissionen durch die Motoren so weit wie möglich zu minimieren. Im ersten Prototyp wurde unter anderem aus diesem Grund die `TMC5160-BOB` Treiber ausgewählt. Die meisten Boards bieten austauschbare Treiber, so ist es auch im nachhinein möglich diese auszuwechseln.
+
 <br>
 
 : Standardhardware 3D Drucker Steuerungen \label{3dmarlinctl}
@@ -1083,7 +1085,6 @@ Mit dem Durchbruch von 3D Druckern im Konsumer-Bereich sind auch kleine und prei
 
 <br>
 
-Hierbei existiert eine große Auswahl dieser mit den verschiedensten Ausstattungen. Bei der Auswahl dieser wurde vor allem auf die Möglichkeit geachtet sogenannte Silent-Schrittmotortreiber verwenden zu können, um die Geräuschimmissionen durch die Motoren so weit wie möglich zu minimieren. Im ersten Prototyp wurde unter anderem aus diesem Grund die `TMC5160-BOB` Treiber ausgewählt.
 Hierzu wurde der Schrittmotor-Treiber `TMC2209` gewählt, welcher diese Features ebenfalls unterstützt und in der Variante als Silent-Step-Stick direkt in die meisten 3D Drucker Steuerungen eingesetzt werden können. Hierbei ist es wichtig, dass auf der gewählten Steuerung die Treiber-ICs nicht fest verlötet sind, sondern getauscht werden können.
 Ein weiterer Punkt ist die Kommunikation der Steuerung mit dem Host-System. Hierbei setzten alle untersuchten Steuerungen auf die (+usb) Schnittstelle und somit ist eine einfache Kommunikation gewährleistet. Das verwendete eingebettete System im autonomen Schachtisch bietet vier freie (+usb) Anschlüsse, somit ist eine einfache Integration gewährleistet.
 
@@ -1098,11 +1099,15 @@ Somit wurde die Elektronik durch die verwendete Plug&Play stark vereinfacht \ref
 ### Implementierung GCODE-Sender
 
 Durch die durchgeführten Änderungen an der Elektronik insbesondere durch die Verwendung einer Marlin-FW[@marlinfw] fähigen Motorsteuerung, ist eine Anpassung der (+hal) notwendig.
-Diese unterstütz die Ansteuerung der Motoren und anderen Komponenten (z.B. Spindeln, Heizelemente) mittels G-Code und wird typischerweise in 3D Druckern und CNC-Fräsen eingesetzt.
+Diese unterstütz die Ansteuerung der Motoren und anderen Komponenten (z.B. Spindeln, Heizelemente) mittels G-Code und wird typischerweise in 3D Druckern und (+cnc)-Fräsen eingesetzt.
 
-G-Code ist eine
 <!--- hier fehlt was --> 
+G-Code ist eine Programmiersprache, welche mittels einfacher Befehle textbasierten Befehle \ref{gcodecmd}, Komponenten dieser Maschienen kontrollieren kann.
+Dabei können einzelne Achsen verfahren werden oder die Drehzahl einer Spindel kontrolliert werden. Der G-Code wird von der Steuerung interpretiert. In der Regel wird dieser zuvor von einem (+cad) Programm erzeugt und Zeilenweise übertragen. Bei einem 3D Drucker wird dieser vom Slicer generiert und enhält die Wegpunkte welche von dem Hotend angefahren werden sollen. 
 
+<br>
+
+Im falle des autonomen Schachtisch, werden die G-Code Anweisungen on-the-fly durch die (+hal) erzeugt und die Motorsteuerung verfährt die Achsen an die jeweils gewünschten Positionen.
 
 Marlin-FW[@marlinfw] biete dabei einen großen Befehlssatz an G-Code Kommandos an. Bei diesem Projekt werden jedoch nur einige G-Code Kommandos verwendet \ref{gcodecmd}, welche sich insbesondere auf die Ansteuerung der Motoren beschränken.
 
@@ -1122,7 +1127,7 @@ Marlin-FW[@marlinfw] biete dabei einen großen Befehlssatz an G-Code Kommandos a
 Die erforderlichen Kommandos wurden auf ein Minimum beschränk, um eine maximale Kompatibilität bei verschiedenen G-Code-fähigen Steuerungen zu gewährleisten.
 Die Software unterstützt jedoch weitere Kommandos wie z.B. `M150` mit welchem speziellen Ausgänge für (+led)s gesteuert werden können. Dieses Feature bietet sowohl die verwendete Marlin-FW[@marlinfw] als auch die verwendete Steuerung an. Sollte die verwendete Steuerung solch ein optionales Kommando nicht unterstützen, so werden diese ignoriert was zur Folge hat, dass auch preisgünstige Steuerungen verwendet werden können.
 
-Die Kommunikation zwischen Steuerung und eingebetteten System geschieht durch eine (+usb) Verbinden. Die Steuerung meldet sich als virtuelle Serielle Schnittstelle im System an und kann über diese mit der Software kommunizieren. Auch werden so keine speziellen Treiber benötigt, da auf nahezu jedem System ein Treiber `USB-CDC` für die gängigsten (+usb) zu seriell Wandler bereits installiert ist. Die Software erkennt anhand der zur Verfügung stehenden (+usb)-Geräte sowie deren Vendor und Product-ID Informationen die verbundene Steuerung und verwendet diese nach dem Start automatisch. Hierzu wurde zuvor eine Liste \ref{gcodeusbctl} mit verschiedenen getesteten Steuerungen sowie deren (+usb)-Vendor und Product-ID angelegt.
+Die Kommunikation zwischen Steuerung und eingebetteten System geschieht durch eine (+usb) Verbinden. Die Steuerung meldet sich als virtuelle Serielle Schnittstelle im System an und kann über diese mit der Software kommunizieren. Auch werden so keine speziellen Treiber benötigt, da auf nahezu jedem System ein Treiber `USB-CDC` für die gängigsten (+usb) zu seriell Wandler bereits installiert ist. Die Software erkennt anhand der zur Verfügung stehenden (+usb)-Geräte sowie deren Vendor und Product-(+id) Informationen die verbundene Steuerung und verwendet diese nach dem Start automatisch. Hierzu wurde zuvor eine Liste \ref{gcodeusbctl} mit verschiedenen getesteten Steuerungen sowie deren (+usb)-Vendor und Product-(+id) angelegt.
 
 <br>
 
@@ -1298,12 +1303,31 @@ Das System erkennt den Anschluss der Hardware beim Start auf die gleiche Art und
 
 ## Fazit bezüglich des finalen Prototypens
 
-* modularer hardware aufbau
-* einfach/gut verfügbare materialien verwendet
-* geänderte Mechnik resultiert in nahezu Spielfreier Mechanik (+- 1mm), welches für diesen Zweck mehr als ausreicht
-* 6h dauertest bestanden
 
-\label{finalfeaturesatc}
+Der in der zweiten Iteration entstandene Prototyp, wurdem viele Elemente aus der ersten Iteration grundlegend überarbeitet.
+Dabei endstand ein endstand ein völlig neues Design, welches sich auf einfach zu beschaffende Komponenten und Materialien stützt.
+Diese ermöglichen einen einfachen und zeiteffektiven zusammenbau des kompletten autonomen Schachtischs und bieten die Möglichkeit auf eine einfache Erweiterung des Systems.
+
+Aus der Verwendung des CoreXY Aufbaus resultierte eine nahezu spielfreie Mechanik (+-1mm), welche für diesen Zweck mehr als ausreicht.
+Somit wurde die mechanischen Probleme vom ersten Prototyp komplett eliminiert und führen somit zu einem zuverlässigen Spielgefühl.
+Diese Zuverlässigkeit wurde im mehreren Testläufen verifiziert und ein abschliessender sechs Stunden Dauertest bestätigt diese zusätzlich.
+Auch konnte die Bewegungsgeschwindikeit des Schlittens erhöht werden, welches zu einem schnelleren Platzieren der Figuren führt.
+
+<br>
+
+Ein großer Kritikpunkt am ersten Prototyp, waren die nicht komplett Funktionsfähigen Park-Positionen für die ausgeschiedenen Figuren.
+Durch die Vergrößerung des Bewegungsspielraums der Achsen und der Anpassungen in der Software, ist es nun möglich alle Figuren von dem Spielbrett entfernen zu können.
+Das System ist danach in der Lage, diese wieder in das Spielgeschehen zurückholen zu können. Somit ist kein manuelles Eingreifen durch den Benutzer mehr notwendig, wenn ein neues Spiel gestartet werden soll.
+
+Zusätzlich wurde durch das transparente Design, eine neue Art der Benutzerinteraktion geschaffen. Durch die visuellen Hinweise, welcher der Tisch durch seine (+led) Beleuchtung geben kann, ist der Nutzer nicht mehr auf die (+gui) angewiesen ob dieser am Zug ist. Der Nutzer kann auf einen Blick erkennen in welchem Zustand sich der autonome Schachtisch befindet.
+
+<br>
+
+Zudem konnte eine reibunglose erkennung des getätigten Schachzug umgesetzt werden, welches bei der vorherigen Version nicht komplett möglich war.
+Durch den modularen Aufbau der (+hal) und des erweiteren Revisions-Management, ist es zudem möglich die Software auf allen bisher erstellen Prototypen ausführen zu können.
+
+Somit ist festzuhalten, dass mit der zweiten Revision alle zuvor geforderten Eigenschaften \ref{finalfeaturesatc} zufriedenstellend umgesetzt werden konnten.
+Die erstellte Hard- und Software bietet zusätzliche zahlreiche Erweiterungsmöglichkeiten.
 
 
 : Eigenschaften die finalen Prototypen \label{finalfeaturesatc}
@@ -1322,27 +1346,11 @@ Das System erkennt den Anschluss der Hardware beim Start auf die gleiche Art und
 | Stand-Alone Funktionalität              | ja                                  |
 | Besonderheiten                          | visuelle Hinweise per Beleuchtung   |
 
-<!--- Die visuellen Hinweise hängen hier etwas in der Luft. Entweder würe ich diese erst später als zusätzliches Feature (sie die Sprachsteuerung auch) nennen, oder kurz im Text erläutern, dass z.B. durch die Beleuchtung angezeigt werden kann, wer gerade am Zug ist.--> 
-* alle anforderungen erfüllt
-* zulasten der geschwindigkeit insbesondere bei der erkennung des User-Move
-* erweitrungsmöglichkeit in hard uns SOFTWARE
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Troz allem, ist dieser Stand der Projektes noch nicht perfekt und bietet noch einiges an Verbesserungspotential.
+Hierzu zählt unter anderem die Erkennung des getätigten Schachzuges durch den Benutzer.
+Durch die Verwendung des (+nfc) Moduls und dem Scanvorgang des Schachfeldes, muss eine gewisse Wartezeit von ca. 20 Sekunden in Kauf genommen werden, bevor das System einen Zug erkennt.
+Somit sind keine schnellen Partien möglich bzw. andere Schachformen wie z.B. Schnellschach bei denen die Zugzeit begrenzt ist.
 
 
 
@@ -1410,10 +1418,140 @@ Diese stellen alle wichtigen Funktionen zum Betrieb des autonomen Schachtischs z
 
 ![Cloud-Infrastruktur: Backend Login-Request und Response \label{ATC_request_example}](images/ATC_request_example.png)
 
-* matchmaking schachlogik
-* zentraler zugriffspunkt auf das System und stellt diese abi bereit
-* stellt spielerprofile aus datenbanken bereit
-* authentifizierung der clients und deren sessions
+Das Backend, welches den zentralen Teil der Service-Archtitektur bilder, bildet den Zugriffspunkt für die autonomen Schachtische und den Webclient (s.u.) dar.
+Diese stellt die (+api) zur Aussenwelt bereit, mit dem sich die einzelnen Clients verbinden.
+
+<br>
+
+Dies geschieht zusätzlich durch einen (+tls)-Reverse Proxy, welcher eine verschlüsselte Verbindung (+https) bereitstellt.
+Diese verwendet zum einen eine self-signed Certificate, sowohl als auch ein Zertifikat der Lets Entrypt Organisation[@letsencrpyt].
+Somit ist die vom Backend bereitgestellte (+api) und zum späteren Zeitpunt erstellen Webclient (s.u.) für alle modernen Webbrowser vertrauenswürdig.
+
+Bei dem eingerichteten Reverse-Proxy werden alle verbindungen aus dem öffentlichen Internet, mit einem Service verbunden, welcher im lokalen Netzwerk betrieben wird. In diesem Fall ist dies der lokale Server auf dem der Backend-Service auf dem Port 3000 ausgeührt wird.
+
+```conf
+# APACHE 2 REVERSE PROXY CONFIGURATION
+<VirtualHost *:80>
+        ServerName atomicchess.de
+        ProxyPreserveHost On 
+        DocumentRoot /var/www/html
+        ProxyPass /.well-known !
+        ProxyPass / http://127.0.0.1:3000/
+        ProxyPassReverse / http://127.0.0.1:3000/	
+	ServerAdmin webmaster@atomicchess.de
+
+	ErrorLog ${APACHE_LOG_DIR}/error.log
+	CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+	RewriteEngine on
+	RewriteCond %{SERVER_NAME} =atomicchess.de
+	RewriteRule ^ https://%{SERVER_NAME}%{REQUEST_URI} [END,NE,R=permanent]
+</VirtualHost>
+```
+
+Durch diese Methode wird eine sichere Verbindung zwischen dem Service und dem Nutzer-Device hergestellt. Der Vorteil ist, dass die Services im privaten Netzwerk keine (+tls) Zertifikate benötigen um in diesem Netz miteinander kommunizieren zu können. Lediglich bei einer Verbindung zum öffentlichen Internet wird eine sichere Verbindung durch die Forward-Proxy Funktion des Apache 2 Webservers hergestellt.
+
+
+<br>
+
+Der Backen-Service stellt die Grundlegegenden Funktionen bereit, welche die Clients benötigen. Dazu zählen unter anderem:
+
+- Profilverwaltung
+- Matchmaking
+- Spielstatus
+- Client authentifizierung
+
+Jeder Client meldet sich mittels der `/rest/login` Route an. Das Backend prüft ob bereits ein Spielerprofil der  Datenbank angelegt wurde und erstellt ggf. ein neues für das Device. Dabei werden der Spieler-Typ ((+ai),autonomer Schachtisch, Webclient), als auch die Geräte-(id) festgehalten. Nach einem erfolgreichen Login \ref{ATC_request_example} erhält der Client einen Session-Token. Nur mit diesem Token, können weitere Funktionen des Backends verwendet werden.
+Dieser Token ändert sich nach jedem Login-Prozess, somit kann nur ein Client Token-Inhaber sein und andere zuvor angemeldete Clients wird dieser entzogen.
+
+<br>
+
+Nach einem erfolgreichen Login kann der Client den aktuellen Spielstatus abfragen, in dem er sich befindet:
+
+- Idle: kein Spiel aktiv und nicht auf der Suche nach einem Spiel
+- Matchmaking: Spieler sucht aktiv nach einem Spiel
+- Game-Running: Client ist einem aktiven Spiel zugewiesen
+
+Der `Idle`-Status, wird direkt nach einem Login gesetzt. Somit wird der Client nicht automatisch Spielen zugewiesen. Dies kann durch die `/rest/set_player_state` (+api) Route geänder werden.
+Diese wird vom Client aufgerufen, wenn dieser ein Spiel starten möchte. Dazu wird ein Eintrag in der Lobby-Tabelle der Datenbank eingetragen. In dieser befinden sich alle Spieler, welche auf der Suche nach einem Spiel sind. Dabei wird zusätzlich der Zeitpunk des Eintretens gespeichert.
+
+<br>
+
+Wenn mindestens zwei Clients auf der Suche nach einem Spiel sind und sich somit in der Lobby-Tabelle befinden, wird der Matchmaking-Algorithmus aktiv.
+Dieser Sortiert die Clients nach Zeitpunkt des Eintretens und nach dem Spieler-Typ. Durch den Typ werden zuerst mit zwei Spielern ein Match gestartet, wenn diese vom Typ:
+
+- autonomer Schachtisch
+- Webclient
+
+sind.
+
+```js
+//ATC_BACKEND matchmaking_logic.js
+var matchmaking_job = new CronJob('*/' + CFG.getConfig().matchmaking_runner_interval + ' * * * * *', function () {
+    //GET ALL PLAYERS WITH SEARCHING FOR A NEW GAME IS ENABLED
+    LH.get_player_for_matchmaking(function (gpfm_err, gpfm_res) {
+        //...
+        //CHECK IF MORE THEN TWO PLAYERS ARE SEARCHING (HUMAN + AI)
+        if (!gpfm_res || gpfm_res.combined_player_searching.length <= 1) {
+            return;
+        }
+        // 1 HUMAN AND 1 AI SEARCHING => DIRECT MATCH
+        if (CFG.getConfig().matchmaking_ai_enable === true && gpfm_res.player_searching_human.length === 1 && gpfm_res.player_searching_ai.length >= 1) {
+            //...
+            //START A MATCH FOR THESES TWO PLAYERS => REMOVE LOBBY ENTRY FROM DB AND CREATE A NEW GAME IN THE GAME DATABASE
+            GH.start_match(gpfm_res.player_searching_human[0].hwid, gpfm_res.player_searching_ai[0].hwid, function (sm_err, sm_res) {
+                if (sm_err) {
+                    //ON ANY ERROR THE CLIENT WILL RESET THE FAULTY STATE ITSELF AND RELOGIN TO THE SYSTEM
+                    console.error(sm_err);
+                }
+            });
+        //MORE THAN 1 HUMAN PLAYER WAITING
+        } else if (gpfm_res.player_searching_human.length > 1) {
+            //THEN MAKE A MATCH BEWEEN THE TWO HUMAN PLAYER
+            //SORT PLAYER WITH THE LONGEST WAIT TIME IN THE LOBBY
+            gpfm_res.player_searching_human.sort(player_sort_function_swt);
+            //SELECT THE MOST WAITING PLAYER
+            const  p1 = gpfm_res.player_searching_human[0];
+            //SELECT A RANDOM OTHER PLAYER
+            const  p2 = gpfm_res.player_searching_human[HELPER_FUNCTIONS.randomInteger(1, gpfm_res.player_searching_human.length - 1)];
+            //...
+            //START A MATCH
+            GH.start_match(p1.hwid, p2.hwid, function (sm_err, sm_res) {
+                if (sm_err) {
+                    //ON ANY ERROR THE CLIENT WILL RESET THE FAULTY STATE ITSELF AND RELOGIN TO THE SYSTEM
+                    console.error(sm_err);
+                }
+            });
+        }
+    }, true);
+});
+```
+
+
+Somit wird sichergestellt, dass zuerst allemMenschlichen Spieler zusammen ein Spiel beginnen und erst im letzten Schritt, ein Mensch gegen dem Computer spielen muss.
+kommt ein Match zustande, werden die Spielereinträge aus der Lobby-Tabelle entfernt und es wird ein neues Spiel in der Game-Tabelle der Datenbank angelegt.
+
+Diese enthält alle Spiele und deren aktuellen Status:
+
+- aktuelles Spielbrett
+- aktueller Spieler am Zug
+- Anzahl Schachzüge
+- Spieler-(id)s
+- Spielerfarbe
+- Spiel-Status (abgebrochen, beendet)
+
+Diesen Eintrag fragen die Clients in regelmäßigen Intervallen über die `/rest/player_state` Route ab. Somit kennen sie das aktuelle Spielfeld und ob sie gerade am Zug sind.
+Ein Zug wird mittels der `/rest/make_move` Route übermittelt. Das Backend überprüft diesen mittels de MoveValidator-Services und speichert das Ergebnis in dem passenden Datenbank-Record zum Spiel ab.
+Nach beendigung eines Spiels, werden die Clients wieder in den `Idle`-Status zurückversetzt, somit können diese ein neues Spiel beginnen. Nach einem Sieg ermittelt das Backend einen Score für den Client, welcher gewonnen hat. Dieser wird in dem Profil-Record gespeichert und kann abgefragt werden. Somit wurde ein einfaches Profil-System implementiert.
+
+<br>
+
+Ein Client muss sich außerdem in regelmäßigen Abständen über die `/rest/hearbeat` Route zurückmelden. Somit weiß der Backen-Service, dass der Client noch existiert.
+Bleibt ein Request innerhalb einer bestimmten Zeit aus, werden alle akutellen Spiele beendet und der Client wird aus dem System entfernt.
+Somit wird sichergestellt, dass beide Parteien bei einem gestarteten Spiel noch aktiv sind, auch wenn diese keine Schachzüge ausführen.
+
+
+
 * weiterleitung der von spielerinteraktionen an move validator
 * spielfelder werden als string übermittelt = hier fen representation; einfach zu parsen; standart
 
@@ -1580,9 +1718,6 @@ Diese Feature wurde insbesondere bei der Entwicklung des Webclient und der Steue
 
 ## Ablaufdiagramm
 
-
-
-
 Nach dem Start der Controller-Software folgt diese einem Fest vorgegebenen Ablauf \ref{ATC_gameclient_statemachiene}. Dieser wird mittels einer State-Machine in der Controller-Software abgebildet.
 Nachdem die Software gestartet ist, wird zuerst eine Verbindung mit dem Cloud-Server aufgenommen.
 Da der Tisch eine Art Thin-Client darstellt, bei dem die eigentliche Spiellogik auf dem Server ausgeführt wird. Muss die Controller-Software nur das vom Server vorgegebene Schachfeld mittels der Mechanik synchronisieren und entsprechende Schachzüge des Benutzers an diesen übermitteln.
@@ -1615,8 +1750,6 @@ Diese Benutzer-Events separat verarbeitet und sind vom Spielablauf getrennt. Hie
 
 
 ## Figur Bewegungspfadberechnung
-
-
 
 Nach dem Start der Software wird durch das Abscannen jedes einzelnen Feldes die Anzahl und Typen der Figuren ermittelt. Dies stellt sicher, dass sich die Erforderliche Anzahl der Figuren beim Systemstart auf dem Spielbrett befinden, ansonsten in ein Start des Programms nicht möglich.
 
@@ -1687,7 +1820,7 @@ Der letzte Wegpunkt liegt im inneren des Zielfelds, sodass sich die Figur in der
 
 <br>
 
-Anzumerken ist, dass dieser Algorithmus nicht weiter optimiert wurde, somit führen die Figuren auch einen Zick-Zack-Weg aus auch wenn das Zielfeld direkt neben dem Start-Feld liegt.
+Anzumerken ist, dass dieser Algorithmus nicht weiter optimiert wurde, somit führen die Figuren auch eine Zick-Zack-Bewegung aus auch wenn das Zielfeld direkt neben dem Start-Feld liegt.
 
 
 
@@ -1695,17 +1828,48 @@ Anzumerken ist, dass dieser Algorithmus nicht weiter optimiert wurde, somit füh
 
 
 
-![Embedded System Software: Schachfeld Scan Algorithmus Ablauf \label{ATC_ChessMoveAlgorithm}](images/ATC_ChessMoveAlgorithm.png)
+
 
 Ein weiterer wichtiger Teil der Controller-Software ist die Erfassung, der Schachzüge welche vom Benutzer getätigt wurden.
-Das System bietet dem Benutzer hier zwei Möglichkeiten. Über das (+ui) des autonomen Schachtischs kann der Benutzer, wenn dieser am Zug ist manuell eingegeben werden. Hierbei wird das Start- und Ziel-Feld 
+Das System bietet dem Benutzer hier zwei Möglichkeiten.
+Über das (+ui) des autonomen Schachtischs kann der Benutzer, wenn dieser am Zug ist manuell eingegeben werden. Hierbei wird das Start- und Ziel-Feld angegeben, woraus das System automatisch den gewünschten zug ermittelt.
+Dies ist jedoch bei einer Schachpartie nicht praktikabel. Der Benutzer muss eine Möglichkeit haben, die Schachfiguren händisch bewegen zu können. 
+Das System muss aus den geänderten Figuren den getätigten Schachzu ermitteln könnnen. 
 
-* Benutzer bestätigt, dass er Schachzug gemacht hat
-* Ermittlung des getätigten Schachzugs
-* Scan der Schachfeld-Veränderungen, durch Vergleich des vorherigen Schachfelds und der möglichen Züge
+<br>
 
+Da das Schachbrett in beiden Revisions-Varianten über keine Sensoren unter den einzelnen Schachfelder verfügt, wurde der existierenden (+nfc) Scanner verwendet.
+Mit dem ist es möglich gezielt Figuren auf zuvor bestimmten Feldern zu ermitteln. 
+Der Nachteil dieser Methode ist die Wartezeit welche durch den Scan-Prozess eintritt. Ein Scan aller 64 Felder ist nicht praktikabel, da jeder Scan und der Bewegung der Mechanik ca 3 Sekunden benötigt.
+Zusätzlich verlängert sich die Scandauer durch ein leeres Schachfeld, da der Scanner mehrere Versuche unternimmt ein gültiges (+nfc) Tag zu erkennen.
 
+<br>
 
+Somit muss mittels eines Algoritmus \ref{ATC_ChessMoveAlgorithm} entschieden werden, welches Felder als mögliche Kandidaten in Fragen kommen.
+Hinweise auf diese Felder bietet der aktuelle Spiel-Status, welche vom System über den Cloud-Service abgefragt wird.
+Dieser liefert nicht nur das aktuelle Schachbrett, sondern auch die möglichen Schachzüge, welche vom Benutzer ausgeführt werden können.
+
+<br>
+
+![Embedded System Software: Schachfeld Scan Algorithmus Ablauf \label{ATC_ChessMoveAlgorithm}](images/ATC_ChessMoveAlgorithm.png)
+
+<br>
+
+Durch diese Auflistung an mögliche Zügen, wird anschließend eine Liste mit den mögliche Start-Feldern der Figuren erstellt.
+Nach dieser Liste, werden die Felder mittels des (+nfc) Moduls auf veränderungen überprüft.
+Stellt das System eine Änderung fest, wird ermittelt auf welche Felder die Figur auf dem Feld ziehen kann.
+Anschließend werden alle Ziel-Feld Positionen der Figur abgescannt, bis auch hier eine Änderung detektiert wurde.
+Aus diesen beiden Informationen lässt sich der getätigte Zug ableiten. Dieser wird anschliessend an der Cloud-Service zur überprügung weitergeleitet.
+
+<br>
+Sollte kein Zug bestimmt werden können, gibt es zwei möglichkeiten für das System.
+Zum einen kann der Benutzer Informiert werden, dass sein getätigter Zug ungültig ist und zum anderen ist es möglich alle Schachfelder auf einen möglichen alternativen Zug abzuscannen.
+Darauf hin kann der autonome Schachtisch den getätigten Zug manuell zurücksetzen. Dies kann vom Benutzer her in den Einstellungen eingestellt werden, da ein manuelles zurücksetzten wesentlich schneller durchgeführt werden kann.
+Danach hat der Benutzer die möglichkeit einen weiteren Zug durchzuführen, solange bis der getätigte Zug gültig ist.
+
+<br>
+
+Der gesamte Prozess des Scanvorgangs dauert je nach Anzahl der Möglichkeiten welche der Spieler hat, um die 20 Sekunden bis das System den getätigten Zug ermittelt hat.
 
 
 ## Inter Prozess Communication
