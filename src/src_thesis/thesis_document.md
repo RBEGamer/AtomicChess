@@ -187,9 +187,15 @@ Auffallend ist, dass nur einer der ausgewählten Tische über eine Parkposition 
 
 <br>
 
-Ebenfalls erwähnenswert ist, dass keiner der Tische eine Stand-Alone-Funktionalität besitzt. Jeder Tisch benötigt eine Verbindung zu einem externen Gerät, wie einem Smartphone oder Computer, welche die Berechnungen der Spielerzüge vornimmt. Keiner dieser Tische kann ein simples Spiel nach einem verbindungslosen Start ausführen. Ohne Internet verlieren die Tische all ihre Funktionalität.
+Ebenfalls erwähnenswert ist, dass keiner der Tische eine Stand-Alone-Funktionalität besitzt. Jeder Tisch benötigt eine Verbindung zu einem externen Gerät, wie einem Smartphone oder Computer, welche die Berechnungen der Spielerzüge vornimmt. Keiner dieser Tische kann ein simples Spiel nach einem verbindungslosen Start ausführen.
 
 <!--- Interessant finde ich hier noch, ob eine Anbindung an eine Hersteller-Cloud o.Ä. nötig ist (was wahrscheinlich der Fall ist). Das wiegt aus meiner Sicht schwerer (Datenschutz etc.), als wenn nur eine (lokale) Anbindung an das Smartphone nötig ist.-->
+Für die Schachtische der Firma `Square Off` ist eine Smartphone App `Square Off - Chess App`[@squareoffapp] für die Verwendung notwendig.
+Nach einer Analyse der Companion-App, ist zu erkennen, dass hier eine Registrierung inkl Profilerstellung notwendig ist um mit der Verwendung der App forfahren zu können. Erst danach ist ein Spiel gegen den Computer ohne Internet möglich. Alle weiteren Optionen (Spiel gegen andere Spieler, Live-Stream) ist nur über einen Online-Zugang möglich und erfodert je nach gewählter Optionen auch einen weiteren Account bei anderen Schach-Cloud anbietern wie `Chess.com` oder `Lichess`.
+
+
+
+
 
 
 <br>
@@ -446,7 +452,7 @@ Durch den bereits vorhandenen Rahmen ist es simpel möglich, weitere Komponenten
 
 <br>
 
-Für die Achsenführung der beiden X- und Y-Achsen wurden konventionelle 20x20mm Aluminium-Profile verwendet, welche mit einfachen Mitteln und wenig Geschick passend zugeschnitten werden können. Allgemein wurde eine X-Y Riemenführung verwendet, wobei jede Achse einen separaten Nema 17 Schrittmotor inklusive des passenden Endschalters montiert hatte. Bei den Schlitten, welche auf den Aluminium-Profilen laufen, wurden fertige Standartkomponenten verwendet, um das Spiel in der Mechanik zu minimieren. Diese stellen jedoch einen großen Posten in der Preiskalkulation dar. Die Vorteile überwogen jedoch, da diese nicht manuell erstellt und getestet werden müssen.
+Für die Achsenführung der beiden X- und Y-Achsen wurden konventionelle 20x20mm V-Slot Aluminium-Profile verwendet, welche mit einfachen Mitteln und wenig Geschick passend zugeschnitten werden können. Allgemein wurde eine X-Y Riemenführung verwendet, wobei jede Achse einen separaten Nema 17 Schrittmotor inklusive des passenden Endschalters montiert hatte. Bei den Schlitten, welche auf den Aluminium-Profilen laufen, wurden fertige Standartkomponenten verwendet, um das Spiel in der Mechanik zu minimieren. Diese stellen jedoch einen großen Posten in der Preiskalkulation dar. Die Vorteile überwogen jedoch, da diese nicht manuell erstellt und getestet werden müssen.
 
 <br>
 
