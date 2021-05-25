@@ -1431,7 +1431,8 @@ Bei dem eingerichteten Reverse-Proxy werden alle verbindungen aus dem öffentlic
 
 ```conf
 # APACHE 2 REVERSE PROXY CONFIGURATION
-<VirtualHost *:80>
+<IfModule mod_ssl.c>
+<VirtualHost *:443>
         ServerName atomicchess.de
         ProxyPreserveHost On 
         DocumentRoot /var/www/html
@@ -1443,10 +1444,11 @@ Bei dem eingerichteten Reverse-Proxy werden alle verbindungen aus dem öffentlic
 	ErrorLog ${APACHE_LOG_DIR}/error.log
 	CustomLog ${APACHE_LOG_DIR}/access.log combined
 
-	RewriteEngine on
-	RewriteCond %{SERVER_NAME} =atomicchess.de
-	RewriteRule ^ https://%{SERVER_NAME}%{REQUEST_URI} [END,NE,R=permanent]
+	SSLCertificateFile /etc/letsencrypt/live/atomicchess.de/fullchain.pem
+	SSLCertificateKeyFile /etc/letsencrypt/live/atomicchess.de/privkey.pem
+	Include /etc/letsencrypt/options-ssl-apache.conf
 </VirtualHost>
+</IfModule>
 ```
 
 Durch diese Methode wird eine sichere Verbindung zwischen dem Service und dem Nutzer-Device hergestellt. Der Vorteil ist, dass die Services im privaten Netzwerk keine (+tls) Zertifikate benötigen um in diesem Netz miteinander kommunizieren zu können. Lediglich bei einer Verbindung zum öffentlichen Internet wird eine sichere Verbindung durch die Forward-Proxy Funktion des Apache 2 Webservers hergestellt.
@@ -1477,13 +1479,12 @@ Diese wird vom Client aufgerufen, wenn dieser ein Spiel starten möchte. Dazu wi
 
 <br>
 
-Wenn mindestens zwei Clients auf der Suche nach einem Spiel sind und sich somit in der Lobby-Tabelle befinden, wird der Matchmaking-Algorithmus aktiv.
-Dieser Sortiert die Clients nach Zeitpunkt des Eintretens und nach dem Spieler-Typ. Durch den Typ werden zuerst mit zwei Spielern ein Match gestartet, wenn diese vom Typ:
+Wenn mindestens zwei Clients auf der Suche nach einem Spiel sind und somit sich somit in der Lobby-Tabelle befinden, wird der Matchmaking-Algorithmus aktiv.
+Dieser sortiert die Clients nach Zeitpunkt des Eintretens und nach dem Spieler-Typ. Durch den Typ werden zuerst mit zwei Spielern ein Match gestartet, wenn diese vom einem dieser Typen ist:
 
 - autonomer Schachtisch
 - Webclient
 
-sind.
 
 ```js
 //ATC_BACKEND matchmaking_logic.js
