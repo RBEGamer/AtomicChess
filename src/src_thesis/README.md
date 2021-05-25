@@ -9,10 +9,9 @@ Ein bauen per Dockerimage ist möglich mittels ` build_thesis_docker.sh` Script 
 
 ## 25.05.2021 II
 
-* einarbeitung Kommentare E-Mail T.D. 11:49
+* einarbeitung Kommentare 11:49
 
 ## 25.05.2021 I
-
 
 * 6.5 - Fazit des ersten Prototypens
 * 7.1.1 - Gehäuse und Design
@@ -32,7 +31,6 @@ Ein bauen per Dockerimage ist möglich mittels ` build_thesis_docker.sh` Script 
 * pandoc chapter numbering fix
 * delaration, abstract toc fix
 * pcb, schematic img added
-
 
 ## 21.05.2021 - INITIALE VERSION
 

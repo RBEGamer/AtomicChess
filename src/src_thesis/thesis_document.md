@@ -35,6 +35,14 @@ Mit dieser Arbeit möchte ich mich diesem Problem stellen und einen möglich gü
 Das Ziel der nachfolgenden Arbeit ist es, einen autonomen Schachtisch zu entwickeln, welcher in der Lage ist, Schachfiguren autonom zu bewegen und auf Benutzerinteraktionen zu reagieren.
 
 <!--- Sie verweisen später wieder auf die Funktionalitäten, welche der Tisch bieten soll. Vielleicht können Sie diese hier einmal z.B. als Aufzählung sammeln.-->
+Darüber hinaus sollte der autonome Schachtisch weitere folgende Funktionalitäten aufweisen:
+
+- Erkennung Figur-Stellung
+- Automatisches Bewegen der Figuren
+- Spiel Livestream
+- Parkposition für ausgeschiedene Figuren
+- Stand-Alone Funktionalität 
+
 
 <br>
 
@@ -42,9 +50,11 @@ Der Schwerpunkt liegt dabei insbesondere auf der Programmierung des eingebettete
 Dieses besteht zum einem aus der Positionserkennung und Steuerung der Hardwarekomponenten (Schachfiguren) und zum anderen aus der Kommunikation zwischen dem Tisch selbst und einem in einer Cloud befindlichem Server.
 Mittels der Programmierung werden diverse Technologien von verschiedenen Einzelsystemen zu einem Gesamtprodukt zusammengesetzt.
 Insgesamt gilt es, einen für Anwender ansprechenden Schachtisch zu entwickeln, der das Spielerlebnis nicht nur originalgetreu widerspiegelt, sondern das Einzelspieler-Modell zusätzlich noch verbessert.
-<!--- inwiefern können Sie das benennen, wie der Tisch das tun soll?-->
 
-<br>
+<!--- inwiefern können Sie das benennen, wie der Tisch das tun soll?-->
+Dies soll mittels eines kompakten und minimalistischen Designs realisiert werden. Darüber hinaus, spielt nicht nur das Design eine Rolle, sondern auch die Handhabung. Dazu muss der Benutzer in der Lage sein, den Tisch in wenigen Handgriffen betriebsbereit machen zu können und über eine einfach Bedienoberfläche eine neue Partie gegen den Computer oder einen anderen Menschlichen spieler beginnen zu können. 
+
+
 
 ## Methodik
 
@@ -193,23 +203,14 @@ Ebenfalls erwähnenswert ist, dass keiner der Tische eine Stand-Alone-Funktional
 Für die Schachtische der Firma `Square Off` ist eine Smartphone App `Square Off - Chess App`[@squareoffapp] für die Verwendung notwendig.
 Nach einer Analyse der Companion-App, ist zu erkennen, dass hier eine Registrierung inkl Profilerstellung notwendig ist um mit der Verwendung der App forfahren zu können. Erst danach ist ein Spiel gegen den Computer ohne Internet möglich. Alle weiteren Optionen (Spiel gegen andere Spieler, Live-Stream) ist nur über einen Online-Zugang möglich und erfodert je nach gewählter Optionen auch einen weiteren Account bei anderen Schach-Cloud anbietern wie `Chess.com` oder `Lichess`.
 
-
-
-
-
-
 <br>
 
 Beide Square-Off-Modelle ermöglichen durch eingebaute Akkus auch eine mobile Nutzung, was dem Nutzer mehr Flexibilität, z.B. Spielen im Freien erlaubt.
 
-
 <br>
 
-Zusammenfassend ist festzustellen, dass alle vier Tische dank unterschiedlicher Ausführung von Spiel-Eigenschaften zu unterschiedlichen Spiel-Erlebnissen führen. Für Nutzer ist eine Entscheidung anhand von Funktionen kaum möglich; letztlich bedarf es der Auswertung von gewünschten und gegebenen Funktionen.
-
-
 <!--- Sie meinen, dass es nicht so etwas wie eine kmplette Lösung (klaren Testsieger) gibt oder? Dann könnten Sie auch schreiben: Kein kommerzieller Tisch bieter alle angestrebten Funktionalitäten...-->
-Das Ziel soll nun sein, all die positiven Eigenschaften dieser Tische zu vereinbaren und mittels noch zusätzlicher Verbesserungen ein eigenes Produkt zu entwickeln.
+Zusammenfassend ist festzustellen, dass alle vier Tische dank unterschiedlicher Ausführung von Spiel-Eigenschaften zu unterschiedlichen Spiel-Erlebnissen führen. Für Nutzer ist eine Entscheidung anhand von Funktionen kaum möglich; letztlich bedarf es der Auswertung von gewünschten und gegebenen Funktionen. Dadurch dass nur die Firma `Square Off` einen wirklich autonomen Schachtisch anbietet, hat der Nutzer kaum auswahlmöglichkeiten auf der kommerziellen Seite.
 
 <br>
 
@@ -246,9 +247,6 @@ Auch existieren weitere Abwandlungen von autonomen Schachbrettern, bei welchem d
 
 
 In den bestehenden Projekten ist zu erkennen, dass ein autonomer Schachtisch sehr einfach und mit simplen Mittel konstruiert werden kann. Hierbei fehlen in der Regel einige Features, wie das automatische Erkennen von Figuren oder das Spielen über das Internet.
-
-<br>
-
 Einige Projekte setzten dabei auf eingebettete Systeme, welche direkt im Schachtisch montiert sind, andere hingegen nutzen einen externen PC, welcher die Steuerbefehle an die Elektronik sendet.
 
 <br>
@@ -267,7 +265,9 @@ Eine weitere Alternative ist die Verwendung einer Matrix aus Reed-Schaltern oder
 Dieses Problem wird durch eine definierte Ausgangsstellung beim Spielstart gelöst. Nach jedem Zug durch den Spieler und der dadurch resultierenden Änderungen in der Figur Positionen in der Matrix können die neuen Figur Stellungen berechnet werden.
 
 <br>
-
+<!--- Sie meinen, dass es nicht so etwas wie eine kmplette Lösung (klaren Testsieger) gibt oder? Dann könnten Sie auch schreiben: Kein kommerzieller Tisch bieter alle angestrebten Funktionalitäten...-->
+Jedoch ist abschließend zu festzuhalten dass es auch bei den open-source Projekten kein Projekt gibt, welches alle gewünschten Features abbildet. Auch fehlen weitestgehend Features, welche die kommerziellen Projekte bieten.
+Das Ziel soll nun sein, all die positiven Eigenschaften dieser Tische zu vereinbaren und mittels noch zusätzlicher Verbesserungen ein eigenes Produkt zu entwickeln.
 
 ## User Experience
 
@@ -1013,11 +1013,16 @@ Das Resultat übertrifft sogar die Erwartungen. Die Mechanik ist robust und es k
 
 ## Optimierungen der Spielfiguren
 
-Die bisherigen genutzten vorgefertigten Figuren funktionierten mit dem ersten Prototyp ohne erkennbare Fehler.
-Sie wiesen aber trotzdem eine zu hohe Fehleranfälligkeit, in Bezug auf das gegenseitige Beeinflussen (abstoßen, anziehen) durch die verwendeten Magnete auf.
+![Schachfiguren im Vergleich \label{ATC_ChessFigures}](images/ATC_ChessFigures.png)
 
-<!--- das kingt wie ein Widerspruch, vielleicht eher:
-Die bisher genutzten vorgefertigten Figuren funktionierten grundsätzlich gut mit dem ersten Prototyp. Allerdings wiesen sie eine zu hohe Fehleranfälligkeit, in Bezug auf das gegenseitige Beeinflussen (abstoßen, anziehen) durch die verwendeten Magnete auf. --> 
+Die bisher genutzten vorgefertigten Figuren funktionierten grundsätzlich gut mit dem ersten Prototyp. Allerdings wiesen sie eine zu hohe Fehleranfälligkeit, in Bezug auf das gegenseitige Beeinflussen (abstoßen, anziehen) durch die verwendeten Magnete auf. Zusätzlich stellt der Fertigungsprozess einer Figur einen zeitlichen Aufwand dar, diese jeweils aus fünf \ref{ATC_ChessFigures} Einzelteilen bestehen:
+
+- Figur
+- Basisplatte
+- Magnet
+- (+nfc) Tag
+- Filzgleiter
+
 
 <br>
 
@@ -1028,12 +1033,8 @@ Um diesen Fehler zu beheben wurden verschiedenen Bewegungsgeschwindigkeiten gete
 <br>
 
 Dies führt je nach Spielverlauf zu Komplikationen, sodass die Figuren manuell vom Benutzer wieder mittig auf den Felder platziert werden müssen.
-
-<br>
-
 Um dies zu verhindern, wurde einige Figuren zusätzlich mit einer 20mm Unterlegscheibe am Boden beschwert. Diese behob das Problem, jedoch erwies sich das (+nfc) Tag nicht mehr als lesbar.
-Dies resultierten aus dem Prozessgedanken, die Schachfiguren ebenfalls selbst mit dem 3D-Drucker herzustellen und die Magnete direkt in den Boden der Figur einlassen zu können.
-<!--- Den letzten Satz verstehe ich nicht -->
+
 <br>
 
 Die aktuell verwendeten Figuren des ersten Prototyps wiegen zwischen 8 Gramm für die Bauern und 10 Gramm für die restlichen Figuren.
@@ -1047,6 +1048,8 @@ Des Weiteren wurden bei den Bauern die Magnete ausgetauscht. Die zuerst verwende
 Somit sind im Design zwei verschiedenen Arten von Magneten notwendig, jedoch traten in den anschließend durchgeführten Testläufen keine Beeinflussungen mehr auf.
 
 
+Durch diese Veränderungen am Figur-Design, konnte zusätzlich die Zeit für den Zusammenbau einer einzelnen Figur gesenkt werden.
+Es werden nur noch vier \ref{ATC_ChessFigures} Einzelteile (Figur, Magnet, NFC-Tag, Filzgleiter) verwendet und zusätzliches verkleben dieser ist nicht mehr notwendig. Diese können direkt in den Fuß der Figur mittels einer Presspassung eingelegt werden.
 
 ## Änderungen der Elektronik
 
