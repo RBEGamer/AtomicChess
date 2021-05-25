@@ -2475,8 +2475,8 @@ Webclient (s.u.) für alle modernen Webbrowser vertrauenswürdig.
 
 Bei dem eingerichteten Reverse-Proxy werden alle verbindungen aus dem
 öffentlichen Internet, mit einem Service verbunden, welcher im lokalen
-Netzwerk betrieben wird. In diesem Fall ist dies der lokale Server auf
-dem der Backend-Service auf dem Port 3000 ausgeührt wird.
+Netzwerk betrieben wird. In diesem Fall ist dies der lokale Server bzw
+Localhost auf dem der Backend-Service auf dem Port 3000 ausgeührt wird.
 
 \begin{lstlisting}
 # APACHE 2 REVERSE PROXY CONFIGURATION
@@ -2507,7 +2507,7 @@ Netz miteinander kommunizieren zu können. Lediglich bei einer Verbindung
 zum öffentlichen Internet wird eine sichere Verbindung durch die
 Forward-Proxy Funktion des Apache 2 Webservers hergestellt.
 
-Der Backen-Service stellt die Grundlegegenden Funktionen bereit, welche
+Der Backen-Service stellt die grundlegegenden Funktionen bereit, welche
 die Clients benötigen. Dazu zählen unter anderem:
 
 \begin{itemize}
@@ -2549,9 +2549,9 @@ abfragen, in dem er sich befindet:
 Der \passthrough{\lstinline!Idle!}-Status, wird direkt nach einem Login
 gesetzt. Somit wird der Client nicht automatisch Spielen zugewiesen.
 Dies kann durch die \passthrough{\lstinline!/rest/set\_player\_state!}
-\gls{api} Route geänder werden. Diese wird vom Client aufgerufen, wenn
+\gls{api} Route geändert werden. Diese wird vom Client aufgerufen, wenn
 dieser ein Spiel starten möchte. Dazu wird ein Eintrag in der
-Lobby-Tabelle der Datenbank eingetragen. In dieser befinden sich alle
+Lobby-Tabelle der Datenbank erzeugt. In dieser befinden sich alle
 Spieler, welche auf der Suche nach einem Spiel sind. Dabei wird
 zusätzlich der Zeitpunk des Eintretens gespeichert.
 
@@ -2559,8 +2559,8 @@ Wenn mindestens zwei Clients auf der Suche nach einem Spiel sind und
 somit sich somit in der Lobby-Tabelle befinden, wird der
 Matchmaking-Algorithmus aktiv. Dieser sortiert die Clients nach
 Zeitpunkt des Eintretens und nach dem Spieler-Typ. Durch den Typ werden
-zuerst mit zwei Spielern ein Match gestartet, wenn diese vom einem
-dieser Typen ist:
+zuerst mit zwei Spielern ein Match gestartet, wenn diese vom einem der
+folgenden Typen ist:
 
 \begin{itemize}
 \tightlist
@@ -2612,9 +2612,9 @@ var matchmaking_job = new CronJob('*/' + CFG.getConfig().matchmaking_runner_inte
 });
 \end{lstlisting}
 
-Somit wird sichergestellt, dass zuerst allemMenschlichen Spieler
+Somit wird sichergestellt, dass zuerst alle menschlichen Spieler
 zusammen ein Spiel beginnen und erst im letzten Schritt, ein Mensch
-gegen dem Computer spielen muss. kommt ein Match zustande, werden die
+gegen dem Computer spielen muss. Kommt ein Match zustande, werden die
 Spielereinträge aus der Lobby-Tabelle entfernt und es wird ein neues
 Spiel in der Game-Tabelle der Datenbank angelegt.
 
@@ -2642,7 +2642,7 @@ das aktuelle Spielfeld und ob sie gerade am Zug sind. Ein Zug wird
 mittels der \passthrough{\lstinline!/rest/make\_move!} Route
 übermittelt. Das Backend überprüft diesen mittels de
 MoveValidator-Services und speichert das Ergebnis in dem passenden
-Datenbank-Record zum Spiel ab. Nach beendigung eines Spiels, werden die
+Datenbank-Record zum Spiel ab. Nach Beendigung eines Spiels, werden die
 Clients wieder in den \passthrough{\lstinline!Idle!}-Status
 zurückversetzt, somit können diese ein neues Spiel beginnen. Nach einem
 Sieg ermittelt das Backend einen Score für den Client, welcher gewonnen
@@ -2653,18 +2653,9 @@ Ein Client muss sich außerdem in regelmäßigen Abständen über die
 \passthrough{\lstinline!/rest/hearbeat!} Route zurückmelden. Somit weiß
 der Backen-Service, dass der Client noch existiert. Bleibt ein Request
 innerhalb einer bestimmten Zeit aus, werden alle akutellen Spiele
-beendet und der Client wird aus dem System entfernt. Somit wird
+beendet und der Client wird aus dem System entfernt. Somit ist
 sichergestellt, dass beide Parteien bei einem gestarteten Spiel noch
 aktiv sind, auch wenn diese keine Schachzüge ausführen.
-
-\begin{itemize}
-\tightlist
-\item
-  weiterleitung der von spielerinteraktionen an move validator
-\item
-  spielfelder werden als string übermittelt = hier fen representation;
-  einfach zu parsen; standart
-\end{itemize}
 
 \hypertarget{movevalidator}{%
 \section{MoveValidator}\label{movevalidator}}

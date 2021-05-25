@@ -1427,7 +1427,7 @@ Dies geschieht zusätzlich durch einen (+tls)-Reverse Proxy, welcher eine versch
 Diese verwendet zum einen eine self-signed Certificate, sowohl als auch ein Zertifikat der Lets Entrypt Organisation[@letsencrpyt].
 Somit ist die vom Backend bereitgestellte (+api) und zum späteren Zeitpunt erstellen Webclient (s.u.) für alle modernen Webbrowser vertrauenswürdig.
 
-Bei dem eingerichteten Reverse-Proxy werden alle verbindungen aus dem öffentlichen Internet, mit einem Service verbunden, welcher im lokalen Netzwerk betrieben wird. In diesem Fall ist dies der lokale Server auf dem der Backend-Service auf dem Port 3000 ausgeührt wird.
+Bei dem eingerichteten Reverse-Proxy werden alle verbindungen aus dem öffentlichen Internet, mit einem Service verbunden, welcher im lokalen Netzwerk betrieben wird. In diesem Fall ist dies der lokale Server bzw Localhost auf dem der Backend-Service auf dem Port 3000 ausgeührt wird.
 
 ```conf
 # APACHE 2 REVERSE PROXY CONFIGURATION
@@ -1456,7 +1456,7 @@ Durch diese Methode wird eine sichere Verbindung zwischen dem Service und dem Nu
 
 <br>
 
-Der Backen-Service stellt die Grundlegegenden Funktionen bereit, welche die Clients benötigen. Dazu zählen unter anderem:
+Der Backen-Service stellt die grundlegegenden Funktionen bereit, welche die Clients benötigen. Dazu zählen unter anderem:
 
 - Profilverwaltung
 - Matchmaking
@@ -1474,13 +1474,13 @@ Nach einem erfolgreichen Login kann der Client den aktuellen Spielstatus abfrage
 - Matchmaking: Spieler sucht aktiv nach einem Spiel
 - Game-Running: Client ist einem aktiven Spiel zugewiesen
 
-Der `Idle`-Status, wird direkt nach einem Login gesetzt. Somit wird der Client nicht automatisch Spielen zugewiesen. Dies kann durch die `/rest/set_player_state` (+api) Route geänder werden.
-Diese wird vom Client aufgerufen, wenn dieser ein Spiel starten möchte. Dazu wird ein Eintrag in der Lobby-Tabelle der Datenbank eingetragen. In dieser befinden sich alle Spieler, welche auf der Suche nach einem Spiel sind. Dabei wird zusätzlich der Zeitpunk des Eintretens gespeichert.
+Der `Idle`-Status, wird direkt nach einem Login gesetzt. Somit wird der Client nicht automatisch Spielen zugewiesen. Dies kann durch die `/rest/set_player_state` (+api) Route geändert werden.
+Diese wird vom Client aufgerufen, wenn dieser ein Spiel starten möchte. Dazu wird ein Eintrag in der Lobby-Tabelle der Datenbank erzeugt. In dieser befinden sich alle Spieler, welche auf der Suche nach einem Spiel sind. Dabei wird zusätzlich der Zeitpunk des Eintretens gespeichert.
 
 <br>
 
 Wenn mindestens zwei Clients auf der Suche nach einem Spiel sind und somit sich somit in der Lobby-Tabelle befinden, wird der Matchmaking-Algorithmus aktiv.
-Dieser sortiert die Clients nach Zeitpunkt des Eintretens und nach dem Spieler-Typ. Durch den Typ werden zuerst mit zwei Spielern ein Match gestartet, wenn diese vom einem dieser Typen ist:
+Dieser sortiert die Clients nach Zeitpunkt des Eintretens und nach dem Spieler-Typ. Durch den Typ werden zuerst mit zwei Spielern ein Match gestartet, wenn diese vom einem der folgenden Typen ist:
 
 - autonomer Schachtisch
 - Webclient
@@ -1529,8 +1529,8 @@ var matchmaking_job = new CronJob('*/' + CFG.getConfig().matchmaking_runner_inte
 ```
 
 
-Somit wird sichergestellt, dass zuerst allemMenschlichen Spieler zusammen ein Spiel beginnen und erst im letzten Schritt, ein Mensch gegen dem Computer spielen muss.
-kommt ein Match zustande, werden die Spielereinträge aus der Lobby-Tabelle entfernt und es wird ein neues Spiel in der Game-Tabelle der Datenbank angelegt.
+Somit wird sichergestellt, dass zuerst alle menschlichen Spieler zusammen ein Spiel beginnen und erst im letzten Schritt, ein Mensch gegen dem Computer spielen muss.
+Kommt ein Match zustande, werden die Spielereinträge aus der Lobby-Tabelle entfernt und es wird ein neues Spiel in der Game-Tabelle der Datenbank angelegt.
 
 Diese enthält alle Spiele und deren aktuellen Status:
 
@@ -1543,18 +1543,13 @@ Diese enthält alle Spiele und deren aktuellen Status:
 
 Diesen Eintrag fragen die Clients in regelmäßigen Intervallen über die `/rest/player_state` Route ab. Somit kennen sie das aktuelle Spielfeld und ob sie gerade am Zug sind.
 Ein Zug wird mittels der `/rest/make_move` Route übermittelt. Das Backend überprüft diesen mittels de MoveValidator-Services und speichert das Ergebnis in dem passenden Datenbank-Record zum Spiel ab.
-Nach beendigung eines Spiels, werden die Clients wieder in den `Idle`-Status zurückversetzt, somit können diese ein neues Spiel beginnen. Nach einem Sieg ermittelt das Backend einen Score für den Client, welcher gewonnen hat. Dieser wird in dem Profil-Record gespeichert und kann abgefragt werden. Somit wurde ein einfaches Profil-System implementiert.
+Nach Beendigung eines Spiels, werden die Clients wieder in den `Idle`-Status zurückversetzt, somit können diese ein neues Spiel beginnen. Nach einem Sieg ermittelt das Backend einen Score für den Client, welcher gewonnen hat. Dieser wird in dem Profil-Record gespeichert und kann abgefragt werden. Somit wurde ein einfaches Profil-System implementiert.
 
 <br>
 
 Ein Client muss sich außerdem in regelmäßigen Abständen über die `/rest/hearbeat` Route zurückmelden. Somit weiß der Backen-Service, dass der Client noch existiert.
 Bleibt ein Request innerhalb einer bestimmten Zeit aus, werden alle akutellen Spiele beendet und der Client wird aus dem System entfernt.
-Somit wird sichergestellt, dass beide Parteien bei einem gestarteten Spiel noch aktiv sind, auch wenn diese keine Schachzüge ausführen.
-
-
-
-* weiterleitung der von spielerinteraktionen an move validator
-* spielfelder werden als string übermittelt = hier fen representation; einfach zu parsen; standart
+Somit ist sichergestellt, dass beide Parteien bei einem gestarteten Spiel noch aktiv sind, auch wenn diese keine Schachzüge ausführen.
 
 
 
