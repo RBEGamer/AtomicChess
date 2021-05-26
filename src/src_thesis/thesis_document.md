@@ -1423,7 +1423,7 @@ Diese stellen alle wichtigen Funktionen zum Betrieb des autonomen Schachtischs z
 
 ![Cloud-Infrastruktur: Backend Login-Request und Response \label{ATC_request_example}](images/ATC_request_example.png)
 
-Das Backend, welches den zentralen Teil der Service-Archtitektur bilder, bildet den Zugriffspunkt für die autonomen Schachtische und den Webclient (s.u.) dar.
+Das Backend, welches den zentralen Teil der Service-Archtitektur bildet, stellt den Zugriffspunkt für die autonomen Schachtische und den Webclient (s.u.) dar.
 Diese stellt die (+api) zur Aussenwelt bereit, mit dem sich die einzelnen Clients verbinden.
 
 <br>
@@ -1432,7 +1432,7 @@ Dies geschieht zusätzlich durch einen (+tls)-Reverse Proxy, welcher eine versch
 Diese verwendet zum einen eine self-signed Certificate, sowohl als auch ein Zertifikat der Lets Entrypt Organisation[@letsencrpyt].
 Somit ist die vom Backend bereitgestellte (+api) und zum späteren Zeitpunt erstellen Webclient (s.u.) für alle modernen Webbrowser vertrauenswürdig.
 
-Bei dem eingerichteten Reverse-Proxy werden alle verbindungen aus dem öffentlichen Internet, mit einem Service verbunden, welcher im lokalen Netzwerk betrieben wird. In diesem Fall ist dies der lokale Server bzw Localhost auf dem der Backend-Service auf dem Port 3000 ausgeührt wird.
+Bei dem eingerichteten Reverse-Proxy werden alle Verbindungen aus dem öffentlichen Internet mit einem Service verbunden, welcher im lokalen Netzwerk betrieben wird. In diesem Fall ist dies der lokale Server bzw Localhost auf dem der Backend-Service auf dem Port 3000 ausgeührt wird.
 
 ```conf
 # APACHE 2 REVERSE PROXY CONFIGURATION
@@ -1473,7 +1473,7 @@ Dieser Token ändert sich nach jedem Login-Prozess, somit kann nur ein Client To
 
 <br>
 
-Nach einem erfolgreichen Login kann der Client den aktuellen Spielstatus abfragen, in dem er sich befindet:
+Nach einem erfolgreichen Login kann der Client den Spielstatus abfragen, in welchem er sich befindet:
 
 - Idle: kein Spiel aktiv und nicht auf der Suche nach einem Spiel
 - Matchmaking: Spieler sucht aktiv nach einem Spiel
