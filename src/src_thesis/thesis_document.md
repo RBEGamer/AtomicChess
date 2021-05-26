@@ -69,7 +69,7 @@ Hierbei wird darauf geachtet, dem Benutzer einen Mehrweiter in Bezug auf den Ben
 
 <br>
 
-Nach der Festlegung der Anfoderungen, wird im vierten Kapitel eine Machbarkeitsanalyse durchgeführt.
+Nach der Festlegung der Anfoderungen wird im vierten Kapitel eine Machbarkeitsanalyse durchgeführt.
 In dieser wird untersucht, welche Technologien benötigt werden um, diese Anforderungen durch einen Prototyp erfüllen zu können.
 
 <br>
@@ -266,6 +266,8 @@ Dieses Problem wird durch eine definierte Ausgangsstellung beim Spielstart gelö
 <!--- Sie meinen, dass es nicht so etwas wie eine kmplette Lösung (klaren Testsieger) gibt oder? Dann könnten Sie auch schreiben: Kein kommerzieller Tisch bieter alle angestrebten Funktionalitäten...-->
 Jedoch ist abschließend zu festzuhalten dass es auch bei den open-source Projekten kein Projekt gibt, welches alle gewünschten Features abbildet. Auch fehlen weitestgehend Features, welche die kommerziellen Projekte bieten.
 Das Ziel soll nun sein, all die positiven Eigenschaften dieser Tische zu vereinbaren und mittels noch zusätzlicher Verbesserungen ein eigenes Produkt zu entwickeln.
+
+<br>
 
 ## User Experience
 
@@ -517,7 +519,7 @@ Diese Funktionalität wird jedoch nicht verwendet, um das Kopieren einzelner Fig
 Auch ist es so möglich, verschiedene Figur-Sets zu mischen; somit kann ein Spieler verschiedene Sets an Figuren mit dem autonomen Schachtisch verwenden.
 
 
-
+<br>
 
 
 
@@ -879,10 +881,10 @@ Die Wahl des neuen Materials war jedoch simpel; aufgrund der langjährigen Bewä
 
 <br>
 
-Als Außenmaße wurden 620 x 620 x 170 mm (Länge, Breite, Höhe) gewählt. Das Außenmaß ergab sich aus der Berechnung der benötigten Spielfeldgröße, der Parkpositionen und der gegebenen Stangenbreite. Die Schachfiguren besitzen einen maximalen Durchmesser von 22 mm. Damit Figuren einander ohne Berührung vorbeigeführt werden können, ist somit eine Größe von mindestens 44 mm für ein Feld nötig. Da eine Distanz eingerechnet werde muss, um ein Anziehen der Figuren zu verhindern und Fehler bei der mittigen Positionierung der Figuren möglich sind, wurde hierfür eine zusätzliche Toleranz von 11 mm ergänzt und somit ein Idealmaß von 55 mm Seitenlänge pro Feld errechnet. 
-Bei einem vollständigen Schachtisch ergibt sich daraus eine Feldgröße von 500 x 500 mm. 
-Für die Parkpositionen wurden zusätzlich noch einmal 30 mm berechnet mit einem Abstand zum Feld von weiteren 25mm.
-Somit ergibt sich, wenn man das Feld quadratisch auslegt, eine Seitenlänge von 610 mm. Als Plattenmaß wurde 620mm gewählt, um eine Toleranz für die Befestigung zu Berücksichtigen und zudem mögliche Einschränkungen der Mechanik vorzubeugen.
+Als Außenmaße wurden 620 x 620 x 170 mm (Länge, Breite, Höhe) gewählt. Das Außenmaß ergab sich aus der Berechnung der benötigten Spielfeldgröße, der Parkpositionen und der gegebenen Stangenbreite. Die Schachfiguren besitzen einen maximalen Durchmesser von 22 mm. Damit Figuren einander ohne Berührung vorbeigeführt werden können, ist somit eine Größe von mindestens 44 mm für ein Feld nötig. Da eine Distanz eingerechnet werde muss, um ein Anziehen der Figuren zu verhindern und Fehler bei der mittigen Positionierung der Figuren möglich sind, wurde hierfür eine zusätzliche Toleranz von 13 mm ergänzt und somit ein Idealmaß von 57 mm Seitenlänge pro Feld errechnet. 
+Bei einem vollständigen Schachtisch ergibt sich daraus eine Feldgröße von 456 x 456 mm. 
+Für die Parkpositionen wurden zusätzlich noch einmal 30 mm berechnet mit einem Abstand zum Feld von weiteren 37 mm.
+Somit ergibt sich, wenn man das Feld quadratisch auslegt, eine Seitenlänge von 590 mm. Als Plattenmaß wurde 620mm gewählt, um eine Toleranz für die Befestigung zu Berücksichtigen und zudem mögliche Einschränkungen der Mechanik vorzubeugen.
 
 <br>
 
@@ -1024,7 +1026,7 @@ Die bisher genutzten vorgefertigten Figuren funktionierten grundsätzlich gut mi
 
 <br>
 
-Die Größe der Figuren kann durch die fest definierte Schachfeldgröße von 55mm und der verwendeten (+nfc) Tags nicht verändert werden.
+Die Größe der Figuren kann durch die fest definierte Schachfeldgröße von 57mm und der verwendeten (+nfc) Tags nicht verändert werden.
 Nach einigen Testdurchläufen mit dem ersten Prototyp war zu erkennen, dass sich die Figuren je nach aktueller Situation auf dem Spielfeld weiterhin magnetisch anziehen.
 Um diesen Fehler zu beheben wurden verschiedenen Bewegungsgeschwindigkeiten getestet, ergaben allerdings für diesen Anwendungsfall keine merkliche Verbesserung.
 
@@ -1094,6 +1096,8 @@ Ein weiterer Punkt ist die Kommunikation der Steuerung mit dem Host-System. Hier
 
 Nach einer gründlichen Evaluation der zur Verfügung stehenden Steuerungen, wurde die `SKR 1.4 Turbo`-Steuerung ausgewählt, da diese trotz des geringfügig höheren Marktpreises genug Ressourcen auch für spätere Erweiterung bietet und eine Unterstützung für die neuste Version der Marlin-FW[@marlinfw] bereitstellt.
 Somit wurde die Elektronik durch die verwendete Plug&Play stark vereinfacht \ref{ATC_Hardware_Architecture_PROD}.
+
+<br>
 
 ## Anpassungen HAL
 ### Implementierung GCODE-Sender
@@ -1304,27 +1308,29 @@ Das System erkennt den Anschluss der Hardware beim Start auf die gleiche Art und
 ## Fazit bezüglich des finalen Prototypens
 
 
-Der in der zweiten Iteration entstandene Prototyp, wurdem viele Elemente aus der ersten Iteration grundlegend überarbeitet.
-Dabei endstand ein endstand ein völlig neues Design, welches sich auf einfach zu beschaffende Komponenten und Materialien stützt.
-Diese ermöglichen einen einfachen und zeiteffektiven zusammenbau des kompletten autonomen Schachtischs und bieten die Möglichkeit auf eine einfache Erweiterung des Systems.
+Der in der zweiten Iteration entstandene Prototyp wurde in viele Elemente aus der ersten Iteration grundlegend überarbeitet.
+Dabei endstand ein völlig neues Design, welches sich auf einfach zu beschaffende Komponenten und Materialien stützt.
+Diese ermöglichen einen simpleren und zeitlich effektiven Zusammenbau des vollständigen autonomen Schachtischs und bieten die Möglichkeit auf eine einfache Erweiterung des Systems.
 
-Aus der Verwendung des CoreXY Aufbaus resultierte eine nahezu spielfreie Mechanik (+-1mm), welche für diesen Zweck mehr als ausreicht.
-Somit wurde die mechanischen Probleme vom ersten Prototyp komplett eliminiert und führen somit zu einem zuverlässigen Spielgefühl.
+<br>
+
+Aus der Verwendung des CoreXY Aufbaus resultierte eine nahezu spiel- und verlustfreie Mechanik (+-1mm), welche für diesen Zweck überaus geeignet ist.
+Somit konnten die mechanischen Probleme vom ersten Prototyp vollständig eliminiert werden und führen somit zu einer zuverlässigen Spielführung.
 Diese Zuverlässigkeit wurde im mehreren Testläufen verifiziert und ein abschliessender sechs Stunden Dauertest bestätigt diese zusätzlich.
-Auch konnte die Bewegungsgeschwindikeit des Schlittens erhöht werden, welches zu einem schnelleren Platzieren der Figuren führt.
+Auch konnte die Bewegungsgeschwindikeit des Schlittens erhöht werden, was zu einem schnelleren Platzieren der Figuren führt.
 
 <br>
 
-Ein großer Kritikpunkt am ersten Prototyp, waren die nicht komplett Funktionsfähigen Park-Positionen für die ausgeschiedenen Figuren.
-Durch die Vergrößerung des Bewegungsspielraums der Achsen und der Anpassungen in der Software, ist es nun möglich alle Figuren von dem Spielbrett entfernen zu können.
-Das System ist danach in der Lage, diese wieder in das Spielgeschehen zurückholen zu können. Somit ist kein manuelles Eingreifen durch den Benutzer mehr notwendig, wenn ein neues Spiel gestartet werden soll.
+Ein großer Kritikpunkt des ersten Prototypens war die nicht vollständig funktionsfähigen Park-Positionen für die ausgeschiedenen Figuren.
+Durch die Vergrößerung des Bewegungsspielraums der Achsen und der Anpassungen in der Software, ist es nun möglich, alle Figuren vom Spielbrett entfernen zu können.
+Das System ist darauffolgend auch in der Lage, diese wieder in das Spielgeschehen zurückholen zu können. Somit ist kein manuelles Eingreifen durch den Benutzer mehr notwendig, wenn ein neues Spiel gestartet werden soll.
 
-Zusätzlich wurde durch das transparente Design, eine neue Art der Benutzerinteraktion geschaffen. Durch die visuellen Hinweise, welcher der Tisch durch seine (+led) Beleuchtung geben kann, ist der Nutzer nicht mehr auf die (+gui) angewiesen ob dieser am Zug ist. Der Nutzer kann auf einen Blick erkennen in welchem Zustand sich der autonome Schachtisch befindet.
+Zusätzlich wurde durch das transparente Design eine neue Art der Benutzerinteraktion geschaffen. Durch die visuellen Hinweise, welcher der Tisch mittels der (+led) Beleuchtung geben kann, ist der Nutzer nicht mehr auf die (+gui) angewiesen und erfährt visell, ob der gegnerische Spielzug beendet wurde. Der Nutzer kann ohne Aufwand erkennen, in welchem Zustand sich der autonome Schachtisch befindet.
 
 <br>
 
-Zudem konnte eine reibunglose erkennung des getätigten Schachzug umgesetzt werden, welches bei der vorherigen Version nicht komplett möglich war.
-Durch den modularen Aufbau der (+hal) und des erweiteren Revisions-Management, ist es zudem möglich die Software auf allen bisher erstellen Prototypen ausführen zu können.
+Zudem konnte eine reibunglose Erkennung des getätigten Schachzug umgesetzt werden, welches bei der vorherigen Version nicht vollständig umsetzbar war.
+Durch den modularen Aufbau der (+hal) und des erweiteren Revisions-Management ist es zudem möglich, die Software auf allen bisher erstellen Prototypen ausführen zu können.
 
 Somit ist festzuhalten, dass mit der zweiten Revision alle zuvor geforderten Eigenschaften \ref{finalfeaturesatc} zufriedenstellend umgesetzt werden konnten.
 Die erstellte Hard- und Software bietet zusätzliche zahlreiche Erweiterungsmöglichkeiten.
@@ -1347,13 +1353,13 @@ Die erstellte Hard- und Software bietet zusätzliche zahlreiche Erweiterungsmög
 | Besonderheiten                          | visuelle Hinweise per Beleuchtung   |
 
 
-Troz allem, ist dieser Stand der Projektes noch nicht perfekt und bietet noch einiges an Verbesserungspotential.
-Hierzu zählt unter anderem die Erkennung des getätigten Schachzuges durch den Benutzer.
-Durch die Verwendung des (+nfc) Moduls und dem Scanvorgang des Schachfeldes, muss eine gewisse Wartezeit von ca. 20 Sekunden in Kauf genommen werden, bevor das System einen Zug erkennt.
-Somit sind keine schnellen Partien möglich bzw. andere Schachformen wie z.B. Schnellschach bei denen die Zugzeit begrenzt ist.
+Dennoch ist zu beachten, dass dieser Stand des Projekts noch nicht vollständig ausgereift ist und noch Verbesserungspotential bietet, welche zum Beispiel vor einem kommerziellen Verkauf des Produktes notwendig wären.
+Dabei besonders markant ist die Erkennung der vom Benutzer getätigten Schachzüge.
+Durch die Verwendung des (+nfc) Moduls und dem Scanvorgang des Schachfeldes muss eine gewisse Wartezeit von ca. 20 Sekunden in Kauf genommen werden, bevor das System einen Zug erkennt.
+Somit sind keine schnellen Partien möglich wie zum Beispiel andere Schachformen wie das Schnellschach, bei denen die Zugzeit begrenzt ist.
 
 
-
+<br>
 
 # Entwicklung der Cloud Infrastruktur
 
@@ -1716,7 +1722,7 @@ Diese Feature wurde insbesondere bei der Entwicklung des Webclient und der Steue
 
 Nach dem Start der Controller-Software folgt diese einem Fest vorgegebenen Ablauf \ref{ATC_gameclient_statemachiene}. Dieser wird mittels einer State-Machine in der Controller-Software abgebildet.
 Nachdem die Software gestartet ist, wird zuerst eine Verbindung mit dem Cloud-Server aufgenommen.
-Da der Tisch eine Art Thin-Client darstellt, bei dem die eigentliche Spiellogik auf dem Server ausgeführt wird. Muss die Controller-Software nur das vom Server vorgegebene Schachfeld mittels der Mechanik synchronisieren und entsprechende Schachzüge des Benutzers an diesen übermitteln.
+Da der Tisch eine Art Thin-Client darstellt, bei dem die eigentliche Spiellogik auf dem Server ausgeführt wird, mss die Controller-Software nur das vom Server vorgegebene Schachfeld mittels der Mechanik synchronisieren und entsprechende Schachzüge des Benutzers an diesen übermitteln.
 
 <br>
 
@@ -1738,9 +1744,9 @@ Die Zuginformationen werden über die entsprechende (+api) Route `/rest/make_mov
 
 <br>
 
-Nach einem Abbruch oder einem Gewinn/Verlust des Spiels, wartet der Client wieder bis ein neues Spiel vom Server aus gestartet wird, oder der Benutzer manuell ein Spiel startet.
+Nach einem Abbruch oder einem Gewinn oder Verlust des Spiels, wartet der Client wieder, bis ein neues Spiel vom Server aus gestartet wird, oder der Benutzer manuell ein Spiel startet.
 Dieser Zyklus wird dauerhaft ausgeführt. Der Client bietet jedoch noch weitere Einstellungsmöglichkeiten für den Benutzer über die (+gui) an.
-Diese Benutzer-Events separat verarbeitet und sind vom Spielablauf getrennt. Hierzu zählen unter anderem der Kalibrierungs-Dialog, sowie eine Informationsansicht über den aktuellen Status des Systems.
+Diese Benutzer-Events werden separat verarbeitet und sind vom Spielablauf getrennt. Hierzu zählen unter anderem der Kalibrierungs-Dialog sowie eine Informationsansicht über den aktuellen Status des Systems.
 
 
 
@@ -1750,7 +1756,7 @@ Diese Benutzer-Events separat verarbeitet und sind vom Spielablauf getrennt. Hie
 Nach dem Start der Software wird durch das Abscannen jedes einzelnen Feldes die Anzahl und Typen der Figuren ermittelt. Dies stellt sicher, dass sich die Erforderliche Anzahl der Figuren beim Systemstart auf dem Spielbrett befinden, ansonsten in ein Start des Programms nicht möglich.
 
 Während der Sync-Phase muss die Software das vorgegebene Schachfeld herstellen. Dazu hält die Software den aktuellen Brett-Zustand vor und vergleicht diese mit dem Ziel-Schachbrett.
-Durch einen vergleich dieser, können die sich geänderten Figuren lokalisiert werden. Dadurch dass immer Ziel und Aktuelles-Spielbrett miteinander verglichen werden, können mehrere Züge auf einmal durchgeführt werden. Hierbei ist es auch möglich auf Spielbrett in einem Zustand X, wieder die Ausgangsposition herstellen zu können.
+Durch einen Vergleich dieser können die sich geänderten Figuren lokalisiert werden. Dadurch dass immer Ziel und Aktuelles-Spielbrett miteinander verglichen werden, können mehrere Züge auf einmal durchgeführt werden. Hierbei ist es auch möglich auf Spielbrett in einem Zustand X, wieder die Ausgangsposition herstellen zu können.
 Somit kann ein beliebiges Spielfeld vorgegeben werden, welches der Tisch dementsprechend aufbaut.
 
 <br>
@@ -1803,8 +1809,8 @@ Dieser Vorgang wird rekursiv solange ausgeführt bis es keine Änderungen auf de
 
 <br>
 
-Aus den Start und Ziel-Feldern werden im letzten Schritt Wegpunkte \ref{ATC_FigureMoveAlgorithm} generiert.
-Diese beschreiben den Weg welche die Figur ablaufen muss von Start zum Zielfeld.
+Aus den Start und Ziel-Feldern werden im letzten Schritt-Wegpunkte \ref{ATC_FigureMoveAlgorithm} generiert.
+Diese beschreiben den Weg, welchen die Figur von Start zum Zielfeld ablaufen muss.
 Das Spielbrett wurde so designt, dass zwischen jeder Figur auf dem Feld immer eine weitere Figur Platz hat.
 Somit ist es möglich, dass die sich bewegenden Figuren zwischen zwei auf ihren Feldern stehenden hindurchbewegt werden können.
 Der Algorithmus berechnet genau diese Wegpunkte. Nachdem die Figur aus der Mitte des Feldes und an den Rand dieses Bewegt wurde, kann die Figur ungehindert zwischen den anderen vorbei bewegt werden. Die Figur wird anschließend in Richtung der X-Achse auf die Höhe des Zielfeldes bewegt um darauffolgend auf der Y-Achse an die Kante des Zielfeldes bewegt zu werden.
@@ -1822,13 +1828,9 @@ Anzumerken ist, dass dieser Algorithmus nicht weiter optimiert wurde, somit füh
 
 ## Schachfeld Scan Algorithmus zur Erkennung von Schachzügen
 
-
-
-
-
 Ein weiterer wichtiger Teil der Controller-Software ist die Erfassung, der Schachzüge welche vom Benutzer getätigt wurden.
-Das System bietet dem Benutzer hier zwei Möglichkeiten.
-Über das (+ui) des autonomen Schachtischs kann der Benutzer, wenn dieser am Zug ist manuell eingegeben werden. Hierbei wird das Start- und Ziel-Feld angegeben, woraus das System automatisch den gewünschten zug ermittelt.
+Das System bietet dem Benutzer hier zwei Möglichkeiten, welche im Folgenden erläutert werden.
+Über das (+ui) des autonomen Schachtischs kann der Benutzer, wenn dieser am Zug ist, manuell eingegeben werden. Hierbei wird das Start- und Ziel-Feld angegeben, woraus das System automatisch den gewünschten zug ermittelt.
 Dies ist jedoch bei einer Schachpartie nicht praktikabel. Der Benutzer muss eine Möglichkeit haben, die Schachfiguren händisch bewegen zu können. 
 Das System muss aus den geänderten Figuren den getätigten Schachzu ermitteln könnnen. 
 
@@ -1836,7 +1838,7 @@ Das System muss aus den geänderten Figuren den getätigten Schachzu ermitteln k
 
 Da das Schachbrett in beiden Revisions-Varianten über keine Sensoren unter den einzelnen Schachfelder verfügt, wurde der existierenden (+nfc) Scanner verwendet.
 Mit dem ist es möglich gezielt Figuren auf zuvor bestimmten Feldern zu ermitteln. 
-Der Nachteil dieser Methode ist die Wartezeit welche durch den Scan-Prozess eintritt. Ein Scan aller 64 Felder ist nicht praktikabel, da jeder Scan und der Bewegung der Mechanik ca 3 Sekunden benötigt.
+Der Nachteil dieser Methode ist die Wartezeit, welche aufgrund des Scan-Prozesses nötig ist. Ein Scan aller 64 Felder ist nicht praktikabel, da jeder Scan und der Bewegung der Mechanik ca 3 Sekunden benötigt.
 Zusätzlich verlängert sich die Scandauer durch ein leeres Schachfeld, da der Scanner mehrere Versuche unternimmt ein gültiges (+nfc) Tag zu erkennen.
 
 <br>
@@ -1852,16 +1854,17 @@ Dieser liefert nicht nur das aktuelle Schachbrett, sondern auch die möglichen S
 <br>
 
 Durch diese Auflistung an mögliche Zügen, wird anschließend eine Liste mit den mögliche Start-Feldern der Figuren erstellt.
-Nach dieser Liste, werden die Felder mittels des (+nfc) Moduls auf veränderungen überprüft.
-Stellt das System eine Änderung fest, wird ermittelt auf welche Felder die Figur auf dem Feld ziehen kann.
+Anhand dieser Liste werden die Felder mittels des (+nfc) Moduls auf Veränderungen überprüft.
+Stellt das System eine Änderung fest, wird ermittelt, auf welche Felder die Figur auf dem Feld ziehen kann.
 Anschließend werden alle Ziel-Feld Positionen der Figur abgescannt, bis auch hier eine Änderung detektiert wurde.
 Aus diesen beiden Informationen lässt sich der getätigte Zug ableiten. Dieser wird anschliessend an der Cloud-Service zur überprügung weitergeleitet.
 
 <br>
+
 Sollte kein Zug bestimmt werden können, gibt es zwei möglichkeiten für das System.
 Zum einen kann der Benutzer Informiert werden, dass sein getätigter Zug ungültig ist und zum anderen ist es möglich alle Schachfelder auf einen möglichen alternativen Zug abzuscannen.
-Darauf hin kann der autonome Schachtisch den getätigten Zug manuell zurücksetzen. Dies kann vom Benutzer her in den Einstellungen eingestellt werden, da ein manuelles zurücksetzten wesentlich schneller durchgeführt werden kann.
-Danach hat der Benutzer die möglichkeit einen weiteren Zug durchzuführen, solange bis der getätigte Zug gültig ist.
+Darauf hin kann der autonome Schachtisch den getätigten Zug manuell zurücksetzen. Dies kann vom Benutzer in den Einstellungen eingestellt werden, da ein manuelles zurücksetzten wesentlich schneller durchgeführt werden kann.
+Danach hat der Benutzer die Möglichkeit, einen weiteren Zug durchzuführen, solange bis der getätigte Zug gültig ist.
 
 <br>
 
@@ -1870,12 +1873,12 @@ Der gesamte Prozess des Scanvorgangs dauert je nach Anzahl der Möglichkeiten we
 
 ## Inter Prozess Communication
 
-Bei der Entwicklung des Systems wurde darauf geachtet, dass sich das User-Interface austauschen lässt. Somit ist es auch möglich, ein webbasiertes User-Interface zu integrieren. Dazu wurde ein zusätzliches (+ipc) Layer hinzugefügt, welches eine Abstraktion, der von der User-Interface Software verwendeten Funktionen auf der Controller-Software Ebene bereitstellt.
+Bei der Entwicklung des Systems wurde darauf geachtet, dass das User-Interface auswechselbar bleibt. Somit ist es auch möglich, ein webbasiertes User-Interface zu integrieren. Dazu wurde ein zusätzliches (+ipc) Layer hinzugefügt, welches eine Abstraktion, der von der User-Interface Software verwendeten Funktionen auf der Controller-Software Ebene bereitstellt.
 
 <br>
 
-Dazu wurde eine einfache (+ipc) Bibliothek implementiert, welche dem Controller- als auch dem User-Interface als Shared-Library zur Verfügung steht.
-Diese stellt einfache Funktionen zum Senden und Empfangen von Events bereit und erzeugt nach der Initialisierung einen separaten Thread in welcher die Kommunikation mit den anderen (+ipc) Instanzen verwaltet wird.
+Desweiteren wurde eine einfache (+ipc) Bibliothek implementiert, welche sowohl dem Controller- als auch dem User-Interface als Shared-Library zur Verfügung steht.
+Diese stellt einfache Funktionen zum Senden und Empfangen von Events bereit und erzeugt nach der Initialisierung einen separaten Thread, in welcher die Kommunikation mit den anderen (+ipc) Instanzen verwaltet wird.
 
 <br>
 
