@@ -6,6 +6,12 @@ Ein bauen per Dockerimage ist möglich mittels ` build_thesis_docker.sh` Script 
 # CHANGELOG
 
 
+## 26.05.2021
+
+* 1.1 - Motivation (überarbeitet)
+* 6.1 - Mechanik (Bild eingefügt)
+* 7.2 - Optimierungen der Spielfiguren (Bild eingefügt)
+* 7.5 - Fazit bezüglich des finalen Prototypens (neu)
 
 ## 25.05.2021 II
 

@@ -33,8 +33,6 @@ Mit dieser Arbeit möchte ich mich diesem Problem stellen und einen möglich gü
 ## Zielsetzung
 
 Das Ziel der nachfolgenden Arbeit ist es, einen autonomen Schachtisch zu entwickeln, welcher in der Lage ist, Schachfiguren autonom zu bewegen und auf Benutzerinteraktionen zu reagieren.
-
-<!--- Sie verweisen später wieder auf die Funktionalitäten, welche der Tisch bieten soll. Vielleicht können Sie diese hier einmal z.B. als Aufzählung sammeln.-->
 Darüber hinaus sollte der autonome Schachtisch weitere folgende Funktionalitäten aufweisen:
 
 - Erkennung Figur-Stellung
@@ -264,7 +262,8 @@ Dieses Problem wird durch eine definierte Ausgangsstellung beim Spielstart gelö
 
 <br>
 <!--- Sie meinen, dass es nicht so etwas wie eine kmplette Lösung (klaren Testsieger) gibt oder? Dann könnten Sie auch schreiben: Kein kommerzieller Tisch bieter alle angestrebten Funktionalitäten...-->
-Jedoch ist abschließend zu festzuhalten dass es auch bei den open-source Projekten kein Projekt gibt, welches alle gewünschten Features abbildet. Auch fehlen weitestgehend Features, welche die kommerziellen Projekte bieten.
+Jedoch ist abschließend zu festzuhalten dass es auch bei den open-source Projekten kein Projekt gibt, welches alle gewünschten Features abbildet.
+Auch fehlen weitestgehend Features, welche die kommerziellen Projekte bieten.
 Das Ziel soll nun sein, all die positiven Eigenschaften dieser Tische zu vereinbaren und mittels noch zusätzlicher Verbesserungen ein eigenes Produkt zu entwickeln.
 
 <br>
@@ -882,7 +881,7 @@ Die Wahl des neuen Materials war jedoch simpel; aufgrund der langjährigen Bewä
 <br>
 
 Als Außenmaße wurden 620 x 620 x 170 mm (Länge, Breite, Höhe) gewählt. Das Außenmaß ergab sich aus der Berechnung der benötigten Spielfeldgröße, der Parkpositionen und der gegebenen Stangenbreite. Die Schachfiguren besitzen einen maximalen Durchmesser von 22 mm. Damit Figuren einander ohne Berührung vorbeigeführt werden können, ist somit eine Größe von mindestens 44 mm für ein Feld nötig. Da eine Distanz eingerechnet werde muss, um ein Anziehen der Figuren zu verhindern und Fehler bei der mittigen Positionierung der Figuren möglich sind, wurde hierfür eine zusätzliche Toleranz von 13 mm ergänzt und somit ein Idealmaß von 57 mm Seitenlänge pro Feld errechnet. 
-Bei einem vollständigen Schachtisch ergibt sich daraus eine Feldgröße von 456 x 456 mm. 
+Bei einem vollständigen Schachtisch ergibt sich daraus eine Schachfeldgröße von 456 x 456 mm. 
 Für die Parkpositionen wurden zusätzlich noch einmal 30 mm berechnet mit einem Abstand zum Feld von weiteren 37 mm.
 Somit ergibt sich, wenn man das Feld quadratisch auslegt, eine Seitenlänge von 590 mm. Als Plattenmaß wurde 620mm gewählt, um eine Toleranz für die Befestigung zu Berücksichtigen und zudem mögliche Einschränkungen der Mechanik vorzubeugen.
 
@@ -1722,7 +1721,7 @@ Diese Feature wurde insbesondere bei der Entwicklung des Webclient und der Steue
 
 Nach dem Start der Controller-Software folgt diese einem Fest vorgegebenen Ablauf \ref{ATC_gameclient_statemachiene}. Dieser wird mittels einer State-Machine in der Controller-Software abgebildet.
 Nachdem die Software gestartet ist, wird zuerst eine Verbindung mit dem Cloud-Server aufgenommen.
-Da der Tisch eine Art Thin-Client darstellt, bei dem die eigentliche Spiellogik auf dem Server ausgeführt wird, mss die Controller-Software nur das vom Server vorgegebene Schachfeld mittels der Mechanik synchronisieren und entsprechende Schachzüge des Benutzers an diesen übermitteln.
+Da der Tisch eine Art Thin-Client darstellt, bei dem die eigentliche Spiellogik auf dem Server ausgeführt wird, muss die Controller-Software nur das vom Server vorgegebene Schachfeld mittels der Mechanik synchronisieren und entsprechende Schachzüge des Benutzers an diesen übermitteln.
 
 <br>
 
