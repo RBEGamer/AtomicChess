@@ -44,6 +44,7 @@ services:
     container_name: atcmovevalidator
     build:
       context: ../ATC_MoveValidator/
+      dockerfile: ../ATC_MoveValidator/Dockerfile_rpi3
     image: atcmovevalidator:latest
     #network_mode: "host"
     restart: always
