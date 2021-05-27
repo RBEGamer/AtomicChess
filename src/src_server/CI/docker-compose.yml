@@ -97,35 +97,34 @@ services:
       #- USE_HOSTNAME_HWID=TRUE # USE THE LOCAL MACHINE HOSTNAME AS HWID
       #- PLAYER_TYPE_HUMAN=1 # SIMULATE A HUMAN PLAYER TYPE
 
-  AtomicChessAutoPlayerHuman:
-    #depends_on:
-    #  - AtomicChessBackend
-    #container_name: atcautoplayer
-    build:
-      context: ../ATC_AutoPlayer/
-    image: atcautoplayer:latest
-    network_mode: "host"
-    #links:
-    #  - "AtomicChessBackend:AtomicChessBackend"
-    restart: "always"
-
-    environment:
-      - PRODUCTION
-      - BACKEND_IP=127.0.0.1:3000 #HOST IP:PORT OF BACKEND EXAMPLE 127.0.0.1:3000 USING ONLY HTTP
-      #- USE_HOSTNAME_HWID=TRUE # USE THE LOCAL MACHINE HOSTNAME AS HWID
-      - PLAYER_TYPE_HUMAN=1 # SIMULATE A HUMAN PLAYER TYPE
-
+ # AtomicChessAutoPlayerHuman:
+ #   #depends_on:
+ #   #  - AtomicChessBackend
+ #   #container_name: atcautoplayer
+ #   build:
+ #     context: ../ATC_AutoPlayer/
+ #   image: atcautoplayer:latest
+ #   network_mode: "host"
+ #   #links:
+ #   #  - "AtomicChessBackend:AtomicChessBackend"
+ #   restart: "always"#
+ #   environment:
+ #     - PRODUCTION
+ #     - BACKEND_IP=127.0.0.1:3000 #HOST IP:PORT OF BACKEND EXAMPLE 127.0.0.1:3000 USING ONLY HTTP
+ #     #- USE_HOSTNAME_HWID=TRUE # USE THE LOCAL MACHINE HOSTNAME AS HWID
+ #     - PLAYER_TYPE_HUMAN=1 # SIMULATE A HUMAN PLAYER TYPE
 
 
-  redis-commander:
-    container_name: redis-commander
-    hostname: redis-commander
-    image: rediscommander/redis-commander:latest
-    restart: always
-    environment:
-    - REDIS_HOSTS=local:atcredis:6379
-    ports:
-    - "8081:8081"
+
+  #redis-commander:
+  #  container_name: redis-commander
+  #  hostname: redis-commander
+  #  image: rediscommander/redis-commander:latest
+  #  restart: always
+  #  environment:
+  #  - REDIS_HOSTS=local:atcredis:6379
+  #  ports:
+  #  - "8081:8081"
 
  # AtomicChessAutoPlayerSpanwer:
  #   depends_on:
