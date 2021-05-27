@@ -84,6 +84,7 @@ services:
     #container_name: atcautoplayer
     build:
       context: ../ATC_AutoPlayer/
+      dockerfile: ../ATC_AutoPlayer/Dockerfile_rpi3
     image: atcautoplayer:latest
     network_mode: "host"
     #links:
