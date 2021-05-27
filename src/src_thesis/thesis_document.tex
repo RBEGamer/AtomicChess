@@ -2417,21 +2417,14 @@ mit dem Server zu erlauben.
 \hypertarget{service-architektur}{%
 \section{Service Architektur}\label{service-architektur}}
 
-\begin{itemize}
-\tightlist
-\item
-  was ist ein Service
-\item
-  microservice ansatz
-\item
-  Kapselung der Schach spiel spzifischen funktionaliutäten
-\item
-  verwendung von NoSQL Datenbanken somit müssen Tabellen nicht spziell
-  auf Schach spezifische Felder ausgelegt sein
-\item
-  statelss Diese stellen alle wichtigen Funktionen zum Betrieb des
-  autonomen Schachtischs zur verfügung.
-\end{itemize}
+Der komplette Software-Stack, welcher zum Betrieb der Schach-Cloud
+notwendig ist, wurde in einer sehr vereinfachten
+Mikroservice-Archtivektur angelegt. Dies bedeutet, dass hier zum Betrieb
+notwendige Softwarekomponenten in mehrere kleinere Bestandteile
+ausgelagert wurden \ref{ATC_Service_Architecture}. Durch dieses Design
+ist es zusätzlich möglich, die eigentliche Schach-Logik auslagern zu
+können und somit ist es theoretisch möglich auch andere Spiele
+implementieren zu können.
 
 \begin{figure}
 \centering
@@ -2440,19 +2433,174 @@ mit dem Server zu erlauben.
 \label{ATC_Service_Architecture}}
 \end{figure}
 
-\hypertarget{voruxfcberlegungen}{%
-\section{Vorüberlegungen}\label{voruxfcberlegungen}}
+Diese einzelnen Komponent en sind eigenständig ausführbar und erst die
+vernetzung dieser in einem gemeinsamen privaten Netzwerk bilden eine
+funktionfähige Schachcloud. Somit setzt sich diese aus den folgenden
+Komponenten zusammen:
 
 \begin{itemize}
 \tightlist
 \item
-  welche funktionalitäten müssen abgedeckt werden
+  Backend
 \item
-  client aktivitendiagram
+  MoveValidator
+\item
+  AutoPlayer
 \end{itemize}
 
-\hypertarget{backend}{%
-\section{Backend}\label{backend}}
+Da jede dieser Services stateless und und keine eigenen Daten speichert,
+werden zwei Datenbank-Services benötigt um die Spieldaten zu speichern:
+
+\begin{itemize}
+\tightlist
+\item
+  Mongo NoSQL Datenbank
+\item
+  Redis In-Memory Key Value Datenbank
+\end{itemize}
+
+Hierbei wurde auf zwei verschiedenen Datenbanken gesetzt. Die
+\passthrough{\lstinline!Redis!} Datenbank wird ausschließlich für die
+Speicherung der aktiven Sessions der einzelnen verbundenen Clients
+verwendet. Durch das verwendete Sessionsystem, bei dem jeder Clients in
+kurzen Intervallen seine aktivität bestätigen muss. Bietet diese
+Datenbank den Vorteil, dass diese durch ihre Archtiektur sehr schnell
+auf die angeforderten Datensätze zugreifen kann. Auch wird hier nur der
+Datensatz gespeichert, welche die notwendigen Informationen zu der
+aktiven Session des Clients gespeichert. Diese werden durch die \gls{id}
+des Clients abgefragt. Hierzu wird der Zeitstempel der Anmeldung, sowie
+die letzte Anfrage des Clients in Form eines \gls{json} Dokuments
+gespeichert.
+
+\begin{lstlisting}
+{
+ "client_hwid":"h34724",
+ "login_ts": 1622128754,
+ "heartbeat_ts":1622158754
+}
+\end{lstlisting}
+
+Durch den Key-Value ansatz, sowie den hohen Verbrauch an
+Arbeitsspeicher, eignet sich diese Datenbank jedoch nicht zum Speichern
+der Spieldaten. Hierzu wurde ein zusätzlicher
+\passthrough{\lstinline!Mongo!} Datenbank Serice erstellt, in welchem
+diese Daten abgegelgt werden. Zusätzlich zu den Spieldaten (Spiele,
+Spielstände, Statistiken), werden auch die Nutzerprofile speichert. Ein
+Profile wird beim ersten Anmeldevorgang erstellt und enthält außer den
+Profilinformationen (Geräte-(id), Namen, Spielertyp) auch die Referenzen
+auf die gewonnen und verlorenen Spiele. Die können später für die
+Visualisierung verwendet werden.
+
+\begin{itemize}
+\tightlist
+\item
+  docker bzw docker compose Alle aufgelisteten Services werden in
+  seperaten Containern betrieben. Die Containervirtualisierung geschieht
+  mittels der Software \passthrough{\lstinline!Docker!}. Diese stellt
+  ein einfaches Interface zur Erstellung von Containern und der
+  Verwaltung dieser. Um einen Container auf dem System starten zu
+  können, muss dieser zunächst aus einem Image heraus erstellt werden.
+  Diese Image wird mittels einer \passthrough{\lstinline!Dockerfile!}
+  beschrieben und besteht aus einer Reihe an Kommandos, welche den
+  Aufbau des Images beschreiben.
+\end{itemize}
+
+Bei diesem Projekt besteht ein Image in der Regel aus einem
+vorgefertigten \passthrough{\lstinline!Ubuntu 20.04!} Image, in welchem
+zusätzliche Software zur welche zur Ausführung der eingentlichen
+Software benötigt wird. Auch existieren bereits vorgefertigte Images,
+welche bereits Software für einen spezifischen Anwendungsfall enthält.
+
+\begin{lstlisting}
+# Dockerfile for ATC_AutoPlayer
+
+FROM golang:latest #USE golang AS BASE IMAGE
+RUN mkdir /app
+ADD . /app/ # COPY SOURCE FILE OVER
+WORKDIR /app
+RUN ls
+RUN cd ./stockfish-11-linux/src/ && make clean && make build ARCH=autodetect
+RUN go mod init AutoPlayer ; exit 0
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main .
+CMD ["/app/main"] # START APP
+\end{lstlisting}
+
+\begin{lstlisting}
+
+version: "3"
+services:
+  AtomicChessBackend:
+    container_name: atcbackend
+    depends_on:
+      - AtomicChessRedisDatabase
+      - AtomicChessMongoDatabase
+      - AtomicChessMoveValidator
+    #links: 
+      - "AtomicChessRedisDatabase:AtomicChessRedisDatabase"
+      - "AtomicChessMongoDatabase:AtomicChessMongoDatabase"
+      - "AtomicChessMoveValidator:AtomicChessMoveValidator"
+    image: atcbackend:latest
+    build: 
+      context: ../ATC_Backend/
+    restart: always
+    #ports:
+      - 3000:3000
+    environment:
+      - PRODUCTION=1
+
+  AtomicChessMoveValidator:
+    container_name: atcmovevalidator
+    build:
+      context: ../ATC_MoveValidator/
+    image: atcmovevalidator:latest
+    #network_mode: "host"
+    restart: always
+    ports:
+      - 5000:5000
+    environment:
+      - PRODUCTION
+
+  AtomicChessRedisDatabase:
+    image: redis:latest
+    restart: always
+    container_name: atcredis
+    ports:
+      - 6379:6379
+    #network_mode: "host"
+    
+  AtomicChessMongoDatabase:
+    image: mongo:latest
+    container_name: atcmongo
+    restart: always
+    environment:
+        - MONGO_DATA_DIR=/data/db
+        - MONGO_LOG_DIR=/dev/null
+      #volumes:
+     #   - ./data/db:/data/db
+    ports:
+      - 27017:27017
+    command: mongod --logpath=/dev/null # --quiet
+
+
+  AtomicChessAutoPlayer:
+    #depends_on:
+      - AtomicChessBackend
+    #container_name: atcautoplayer
+    build:
+      context: ../ATC_AutoPlayer/
+    image: atcautoplayer:latest
+    network_mode: "host"
+    restart: "always"
+    scale: 3 # SPAWN THREE INSTANCES
+    environment:
+      - PRODUCTION
+      - BACKEND_IP=127.0.0.1:3000 #HOST IP:PORT OF BACKEND EXAMPLE 127.0.0.1:3000 USING ONLY HTTP
+      #- USE_HOSTNAME_HWID=TRUE # USE THE LOCAL MACHINE HOSTNAME AS HWID
+      #- PLAYER_TYPE_HUMAN=1 # SIMULATE A HUMAN PLAYER TYPE
+\end{lstlisting}
+
+\hypertarget{service-backend}{%
+\section{Service: Backend}\label{service-backend}}
 
 \begin{figure}
 \centering
@@ -2657,8 +2805,8 @@ beendet und der Client wird aus dem System entfernt. Somit ist
 sichergestellt, dass beide Parteien bei einem gestarteten Spiel noch
 aktiv sind, auch wenn diese keine Schachzüge ausführen.
 
-\hypertarget{movevalidator}{%
-\section{MoveValidator}\label{movevalidator}}
+\hypertarget{service-movevalidator}{%
+\section{Service: MoveValidator}\label{service-movevalidator}}
 
 Der MoveValidator-Service bildet im System die eigentliche Schachlogik
 ab. Die Aufgabe ist es, die vom Benutzer eingegebenen Züge auf
@@ -2773,8 +2921,8 @@ System storniert und der Client des Benutzers stellt den Zustand des
 Spielbretts vor dem getätigten Zug wieder her. Danach hat der Benutzer
 die Möglichkeit einen alternativen Zug auszuführen.
 
-\hypertarget{entwicklung-webclient}{%
-\section{Entwicklung Webclient}\label{entwicklung-webclient}}
+\hypertarget{service-webclient}{%
+\section{Service: Webclient}\label{service-webclient}}
 
 \begin{figure}
 \centering
@@ -2833,8 +2981,8 @@ Livestream-Funktionalität implementiert.
 \caption{Webclient: Statistiken \label{ATC_statistics}}
 \end{figure}
 
-\hypertarget{autoplayer}{%
-\section{AutoPlayer}\label{autoplayer}}
+\hypertarget{service-autoplayer}{%
+\section{Service: AutoPlayer}\label{service-autoplayer}}
 
 Der AutoPlayer-Service stellt den Computerspieler bereit.
 

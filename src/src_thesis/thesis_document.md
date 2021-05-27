@@ -1396,30 +1396,146 @@ Dieser Ansatz ist somit geeignet um die verschiedenen Client Systeme (Schachtisc
 
 ## Service Architektur
 
-* was ist ein Service
-* microservice ansatz
-* Kapselung der Schach spiel spzifischen funktionaliutäten
-* verwendung von NoSQL Datenbanken somit müssen Tabellen nicht spziell auf Schach spezifische Felder ausgelegt sein
-* statelss
-Diese stellen alle wichtigen Funktionen zum Betrieb des autonomen Schachtischs zur verfügung.
+Der komplette Software-Stack, welcher zum Betrieb der Schach-Cloud notwendig ist, wurde in einer sehr vereinfachten Mikroservice-Archtivektur angelegt.
+Dies bedeutet, dass hier zum Betrieb notwendige Softwarekomponenten in mehrere kleinere Bestandteile ausgelagert wurden \ref{ATC_Service_Architecture}.
+Durch dieses Design ist es zusätzlich möglich, die eigentliche Schach-Logik auslagern zu können und somit ist es theoretisch möglich auch andere Spiele implementieren zu können.
 
 ![Cloud-Infrastruktur: Aufbau der Service Architecture \label{ATC_Service_Architecture}](images/ATC_Service_Architecture.png)
 
+Diese einzelnen Komponent en sind eigenständig ausführbar und erst die vernetzung dieser in einem gemeinsamen privaten Netzwerk bilden eine funktionfähige Schachcloud.
+Somit setzt sich diese aus den folgenden Komponenten zusammen:
+
+- Backend
+- MoveValidator
+- AutoPlayer
+
+Da jede dieser Services stateless und und keine eigenen Daten speichert, werden zwei Datenbank-Services benötigt um die Spieldaten zu speichern:
+
+- Mongo NoSQL Datenbank
+- Redis In-Memory Key Value Datenbank
+
+Hierbei wurde auf zwei verschiedenen Datenbanken gesetzt. Die `Redis` Datenbank wird ausschließlich für die Speicherung der aktiven Sessions der einzelnen verbundenen Clients verwendet.
+Durch das verwendete Sessionsystem, bei dem jeder Clients in kurzen Intervallen seine aktivität bestätigen muss. Bietet diese Datenbank den Vorteil, dass diese durch ihre Archtiektur sehr schnell auf die angeforderten Datensätze zugreifen kann. Auch wird hier nur der Datensatz gespeichert, welche die notwendigen Informationen zu der aktiven Session des Clients gespeichert. Diese werden durch die (+id) des Clients abgefragt.
+Hierzu wird der Zeitstempel der Anmeldung, sowie die letzte Anfrage des Clients in Form eines (+json) Dokuments gespeichert.
+
+```json
+{
+ "client_hwid":"h34724",
+ "login_ts": 1622128754,
+ "heartbeat_ts":1622158754
+}
+```
+
+Durch den Key-Value ansatz, sowie den hohen Verbrauch an Arbeitsspeicher, eignet sich diese Datenbank jedoch nicht zum Speichern der Spieldaten.
+Hierzu wurde ein zusätzlicher  `Mongo` Datenbank Serice erstellt, in welchem diese  Daten abgegelgt werden. Zusätzlich zu den Spieldaten (Spiele, Spielstände, Statistiken), werden auch die Nutzerprofile speichert. Ein Profile wird  beim ersten Anmeldevorgang erstellt und enthält außer  den Profilinformationen (Geräte-(id), Namen, Spielertyp) auch die Referenzen auf die gewonnen und verlorenen Spiele. Die können später für die Visualisierung verwendet werden.
+
+
+* docker bzw docker compose
+Alle aufgelisteten Services werden in seperaten Containern betrieben. Die Containervirtualisierung geschieht mittels der Software `Docker`. Diese stellt ein einfaches Interface zur Erstellung von Containern und der Verwaltung dieser. Um einen Container auf dem System starten zu können, muss dieser zunächst aus einem Image heraus erstellt werden. Diese Image wird mittels einer `Dockerfile` beschrieben und besteht aus einer Reihe an Kommandos, welche den Aufbau des Images beschreiben. 
+
+Bei diesem Projekt besteht ein Image in der Regel aus einem vorgefertigten `Ubuntu 20.04` Image, in welchem zusätzliche Software zur welche zur Ausführung der eingentlichen Software benötigt wird. Auch existieren bereits vorgefertigte Images, welche bereits Software für einen spezifischen Anwendungsfall enthält.
+
+```Dockerfile
+# Dockerfile for ATC_AutoPlayer
+
+FROM golang:latest #USE golang AS BASE IMAGE
+RUN mkdir /app
+ADD . /app/ # COPY SOURCE FILE OVER
+WORKDIR /app
+RUN ls
+RUN cd ./stockfish-11-linux/src/ && make clean && make build ARCH=autodetect
+RUN go mod init AutoPlayer ; exit 0
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main .
+CMD ["/app/main"] # START APP
+```
+
+Da die Architektur aus mehr als einem Container besteht, gestaltet sich eine manuelles Management dieser als nicht praktikabel.
+Manuelles starten/stoppen und verwalten der internene Netzwerke
 
 
 
-
-## Vorüberlegungen
-
-* welche funktionalitäten müssen abgedeckt werden
-* client aktivitendiagram
+* was ist docker compose
+* warum verwendet
+* dev stack
 
 
+```yaml
+# docker-compose.yml src_server
+version: "3"
+services:
+  AtomicChessBackend:
+    container_name: atcbackend
+    depends_on:
+      - AtomicChessRedisDatabase
+      - AtomicChessMongoDatabase
+      - AtomicChessMoveValidator
+    #links: 
+      - "AtomicChessRedisDatabase:AtomicChessRedisDatabase"
+      - "AtomicChessMongoDatabase:AtomicChessMongoDatabase"
+      - "AtomicChessMoveValidator:AtomicChessMoveValidator"
+    image: atcbackend:latest
+    build: 
+      context: ../ATC_Backend/
+    restart: always
+    #ports:
+      - 3000:3000
+    environment:
+      - PRODUCTION=1
+
+  AtomicChessMoveValidator:
+    container_name: atcmovevalidator
+    build:
+      context: ../ATC_MoveValidator/
+    image: atcmovevalidator:latest
+    #network_mode: "host"
+    restart: always
+    ports:
+      - 5000:5000
+    environment:
+      - PRODUCTION
+
+  AtomicChessRedisDatabase:
+    image: redis:latest
+    restart: always
+    container_name: atcredis
+    ports:
+      - 6379:6379
+    #network_mode: "host"
+    
+  AtomicChessMongoDatabase:
+    image: mongo:latest
+    container_name: atcmongo
+    restart: always
+    environment:
+        - MONGO_DATA_DIR=/data/db
+        - MONGO_LOG_DIR=/dev/null
+      #volumes:
+     #   - ./data/db:/data/db
+    ports:
+      - 27017:27017
+    command: mongod --logpath=/dev/null # --quiet
 
 
+  AtomicChessAutoPlayer:
+    #depends_on:
+      - AtomicChessBackend
+    #container_name: atcautoplayer
+    build:
+      context: ../ATC_AutoPlayer/
+    image: atcautoplayer:latest
+    network_mode: "host"
+    restart: "always"
+    scale: 3 # SPAWN THREE INSTANCES
+    environment:
+      - PRODUCTION
+      - BACKEND_IP=127.0.0.1:3000 #HOST IP:PORT OF BACKEND EXAMPLE 127.0.0.1:3000 USING ONLY HTTP
+      #- USE_HOSTNAME_HWID=TRUE # USE THE LOCAL MACHINE HOSTNAME AS HWID
+      #- PLAYER_TYPE_HUMAN=1 # SIMULATE A HUMAN PLAYER TYPE
+
+```
 
 
-## Backend
+## Service: Backend
 
 ![Cloud-Infrastruktur: Backend Login-Request und Response \label{ATC_request_example}](images/ATC_request_example.png)
 
@@ -1558,7 +1674,7 @@ Somit ist sichergestellt, dass beide Parteien bei einem gestarteten Spiel noch a
 
 
 
-## MoveValidator
+## Service: MoveValidator
 
 Der MoveValidator-Service bildet im System die eigentliche Schachlogik ab.
 Die Aufgabe ist es, die vom Benutzer eingegebenen Züge auf Richtigkeit zu überprüfen und auf daraufhin neuen Spiel-Status zurückzugeben.
@@ -1626,7 +1742,7 @@ Hat der Benutzer jedoch einen ungültigen Zug ausgeführt, wird dieser vom Syste
 <br>
 
 
-## Entwicklung Webclient
+## Service: Webclient
 
 ![Webclient: Spielansicht \label{ATC_webclient}](images/ATC_webclient.png)
 
@@ -1660,7 +1776,7 @@ Auch ist es möglich, aktuell laufende Spiele in Echtzeit anzeigen zu lassen; so
 ![Webclient: Statistiken \label{ATC_statistics}](images/ATC_statistics.png)
 
 
-## AutoPlayer
+## Service: AutoPlayer
 
 Der AutoPlayer-Service stellt den Computerspieler bereit.
 
@@ -1715,6 +1831,16 @@ Diese Feature wurde insbesondere bei der Entwicklung des Webclient und der Steue
 * Hauptsoftware zur Steuerung der Elektrik/Mechanik
 * Kommunikation mit dem Cloud-Server
 
+
+### Anmerkungen Compiler
+
+Die Controller-Software wurde in C++ erstellt und verwendet Features des C++ 17 Standart:
+
+* constexpr lambda
+* lambda capture
+
+Diese Features werden im (+ipc) Modul (s.u.) , sowie einigen verwendeten Bibliotheken verwendet.
+Auf dem Host-Entwicklungssystem, sowie dem eingebetteten System wurde der GCC-Compiler mit der Version `10.2` installiert und wird für das Erstellen der einzelnen Software-Componenten verwendet.
 
 
 ## Ablaufdiagramm
