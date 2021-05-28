@@ -1,57 +1,57 @@
 version: "3"
 services:
-  AtomicChessBackend:
-    container_name: atcbackend
-    depends_on:
-      - AtomicChessRedisDatabase
-      - AtomicChessMongoDatabase
-      - AtomicChessMoveValidator
+  #AtomicChessBackend:
+  #  container_name: atcbackend
+  #  depends_on:
+  #    - AtomicChessRedisDatabase
+  #    - AtomicChessMongoDatabase
+  #    - AtomicChessMoveValidator
     #inks: 
     #  - "AtomicChessRedisDatabase:AtomicChessRedisDatabase"
     #  - "AtomicChessMongoDatabase:AtomicChessMongoDatabase"
     #  - "AtomicChessMoveValidator:AtomicChessMoveValidator"
 
-    image: atcbackend:latest
-    build: 
-      context: ../ATC_Backend/
-    network_mode: "host"
-    restart: always
+  #  image: atcbackend:latest
+  #  build: 
+  #    context: ../ATC_Backend/
+  #  network_mode: "host"
+  #  restart: always
     #ports:
     #  - 3000:3000
-    environment:
-      - PRODUCTION=1
+  #  environment:
+  #    - PRODUCTION=1
      # - REDIS_IP=AtomicChessRedisDatabase:6379
      # - MONGO_IP=AtomicChessMongoDatabase:27017
      # - MVVALIDATOR_IP=AtomicChessMoveValidator:5001
-      - REDIS_IP=127.0.0.1:6379
-      - MONGO_IP=127.0.0.1:27017
-      - MVVALIDATOR_IP=127.0.0.1:5000
+  #    - REDIS_IP=127.0.0.1:6379
+  #    - MONGO_IP=127.0.0.1:27017
+  #    - MVVALIDATOR_IP=127.0.0.1:5000
   
-  AtomicChessExtentionVoiceRecognition:
-    container_name: atcextvoicerecognition
-    build:
-      context: ../ATC_ExtentionVoiceRecognition/
-    image: atcextvoicerecognition
-    network_mode: "host"
-    restart: always
-    ports:
-      - 8880:8880
+  #AtomicChessExtentionVoiceRecognition:
+  #  container_name: atcextvoicerecognition
+  #  build:
+  #    context: ../ATC_ExtentionVoiceRecognition/
+  #  image: atcextvoicerecognition
+  #  network_mode: "host"
+  #  restart: always
+  #  ports:
+  #    - 8880:8880
       
 
             
 
-  AtomicChessMoveValidator:
-    container_name: atcmovevalidator
-    build:
-      context: ../ATC_MoveValidator/
-      dockerfile: ../ATC_MoveValidator/Dockerfile_rpi3
-    image: atcmovevalidator:latest
-    #network_mode: "host"
-    restart: always
-    ports:
-      - 5000:5000
-    environment:
-      - PRODUCTION
+  #AtomicChessMoveValidator:
+  #  container_name: atcmovevalidator
+  #  build:
+  #    context: ../ATC_MoveValidator/
+  #    dockerfile: ../ATC_MoveValidator/Dockerfile_rpi3
+  #  image: atcmovevalidator:latest
+  #  #network_mode: "host"
+  #  restart: always
+  #  ports:
+  #    - 5000:5000
+  #  environment:
+  #    - PRODUCTION#
 
  
 
@@ -79,25 +79,25 @@ services:
 
 
 
-  AtomicChessAutoPlayer:
-    #depends_on:
-    #  - AtomicChessBackend
-    #container_name: atcautoplayer
-    build:
-      context: ../ATC_AutoPlayer/
-      dockerfile: ../ATC_AutoPlayer/Dockerfile_rpi3
-    image: atcautoplayer:latest
-    network_mode: "host"
-    #links:
-    #  - "AtomicChessBackend:AtomicChessBackend"
-    restart: "always"
+  #AtomicChessAutoPlayer:
+  #  #depends_on:
+  #  #  - AtomicChessBackend
+  #  #container_name: atcautoplayer
+  #  build:
+  #    context: ../ATC_AutoPlayer/
+  #    dockerfile: ../ATC_AutoPlayer/Dockerfile_rpi3
+  #  image: atcautoplayer:latest
+  #  network_mode: "host"
+  #  #links:
+  #  #  - "AtomicChessBackend:AtomicChessBackend"
+  #  restart: "always"
     
-    scale: 2
-    environment:
-      - PRODUCTION
-      - BACKEND_IP=127.0.0.1:3000 #HOST IP:PORT OF BACKEND EXAMPLE 127.0.0.1:3000 USING ONLY HTTP
-      #- USE_HOSTNAME_HWID=TRUE # USE THE LOCAL MACHINE HOSTNAME AS HWID
-      #- PLAYER_TYPE_HUMAN=1 # SIMULATE A HUMAN PLAYER TYPE
+  #  scale: 2
+  #  environment:
+  #    - PRODUCTION
+  #    - BACKEND_IP=127.0.0.1:3000 #HOST IP:PORT OF BACKEND EXAMPLE 127.0.0.1:3000 USING ONLY HTTP
+  #    #- USE_HOSTNAME_HWID=TRUE # USE THE LOCAL MACHINE HOSTNAME AS HWID
+  #    #- PLAYER_TYPE_HUMAN=1 # SIMULATE A HUMAN PLAYER TYPE#
 
  # AtomicChessAutoPlayerHuman:
  #   #depends_on:
