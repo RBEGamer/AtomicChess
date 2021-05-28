@@ -2,12 +2,12 @@
 clear
 export ARCH=RPI3
 
-docker-compose -f ./docker-compose_rpi3.yml build --no-cache
-docker-compose -f ./docker-compose_rpi3.yml down -v
+docker-compose -f ./docker-compose_rpi3.yml build
+docker-compose -f ./docker-compose_rpi3.yml down
 
-docker-compose -f ./docker-compose_rpi3.yml up -d AtomicChessMongoDatabase AtomicChessRedisDatabase AtomicChessMoveValidator redis-commander AtomicChessExtentionVoiceRecognition
+docker-compose -f ./docker-compose_rpi3.yml up -d AtomicChessMongoDatabase AtomicChessRedisDatabase #AtomicChessMoveValidator redis-commander AtomicChessExtentionVoiceRecognition
 
-sleep 30s
-docker-compose -f ./docker-compose_rpi3.yml up -d AtomicChessBackend
-sleep 30s
-docker-compose -f ./docker-compose_rpi3.yml up -d AtomicChessAutoPlayer
+sleep 20s
+#docker-compose -f ./docker-compose_rpi3.yml up -d AtomicChessBackend
+#sleep 30s
+#docker-compose -f ./docker-compose_rpi3.yml up -d AtomicChessAutoPlayer
