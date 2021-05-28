@@ -44,6 +44,7 @@ services:
     container_name: atcmovevalidator
     build:
       context: ../ATC_MoveValidator/
+      dockerfile: ../ATC_MoveValidator/Dockerfile_rpi3
     image: atcmovevalidator:latest
     #network_mode: "host"
     restart: always
@@ -63,7 +64,7 @@ services:
     #network_mode: "host"
 
   AtomicChessMongoDatabase:
-    image: mongo:latest
+    image: andresvidal/rpi3-mongodb3
     container_name: atcmongo
     restart: always
     #network_mode: "host"
@@ -84,13 +85,14 @@ services:
     #container_name: atcautoplayer
     build:
       context: ../ATC_AutoPlayer/
+      dockerfile: ../ATC_AutoPlayer/Dockerfile_rpi3
     image: atcautoplayer:latest
     network_mode: "host"
     #links:
     #  - "AtomicChessBackend:AtomicChessBackend"
     restart: "always"
     
-    scale: 3
+    scale: 2
     environment:
       - PRODUCTION
       - BACKEND_IP=127.0.0.1:3000 #HOST IP:PORT OF BACKEND EXAMPLE 127.0.0.1:3000 USING ONLY HTTP
@@ -150,4 +152,3 @@ services:
  #     - /var/run/docker.sock:/var/run/docker.sock
  #     - /root/.docker/config.json:"$(pwd)/watchtower_config.json"
  #   command: --interval 30
-
