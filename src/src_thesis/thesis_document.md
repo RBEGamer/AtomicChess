@@ -1430,7 +1430,6 @@ Durch den Key-Value ansatz, sowie den hohen Verbrauch an Arbeitsspeicher, eignet
 Hierzu wurde ein zusätzlicher  `Mongo` Datenbank Serice erstellt, in welchem diese  Daten abgegelgt werden. Zusätzlich zu den Spieldaten (Spiele, Spielstände, Statistiken), werden auch die Nutzerprofile speichert. Ein Profile wird  beim ersten Anmeldevorgang erstellt und enthält außer  den Profilinformationen (Geräte-(id), Namen, Spielertyp) auch die Referenzen auf die gewonnen und verlorenen Spiele. Die können später für die Visualisierung verwendet werden.
 
 
-* docker bzw docker compose
 Alle aufgelisteten Services werden in seperaten Containern betrieben. Die Containervirtualisierung geschieht mittels der Software `Docker`. Diese stellt ein einfaches Interface zur Erstellung von Containern und der Verwaltung dieser. Um einen Container auf dem System starten zu können, muss dieser zunächst aus einem Image heraus erstellt werden. Diese Image wird mittels einer `Dockerfile` beschrieben und besteht aus einer Reihe an Kommandos, welche den Aufbau des Images beschreiben. 
 
 Bei diesem Projekt besteht ein Image in der Regel aus einem vorgefertigten `Ubuntu 20.04` Image, in welchem zusätzliche Software zur welche zur Ausführung der eingentlichen Software benötigt wird. Auch existieren bereits vorgefertigte Images, welche bereits Software für einen spezifischen Anwendungsfall enthält.
@@ -1450,17 +1449,15 @@ CMD ["/app/main"] # START APP
 ```
 
 Da die Architektur aus mehr als einem Container besteht, gestaltet sich eine manuelles Management dieser als nicht praktikabel.
-Manuelles starten/stoppen und verwalten der internene Netzwerke
-
-
-
-* was ist docker compose
-* warum verwendet
-* dev stack
-
+Zu diesem Zweck existieren mehrere Tools und Systeme um solche Aufgaben zu automatisieren. 
+Ein weitere Punkt sind abhänigkeiten, welche unter den Container bestehen.
+In diesem Fall benötigt der Backend-Service die beiden Datenbanken um starten zu können.
+Somit ist es essentiell, dass diese bereits zuvor erstellt wurden und ausgeführt werden.
+Solche Funktionalitäten deckt das sehr leichtgewichtigte Tool `docker-compose` ab.
+Durch eine entsprechende Konfiugrationsdatei, kann ein so genannter Stack aus mehreren Containern aufgebaut werden.
 
 ```yaml
-# docker-compose.yml src_server
+# docker-compose.yml STACK CONFIGURATION src_server
 version: "3"
 services:
   AtomicChessBackend:

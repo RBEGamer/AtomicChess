@@ -2491,19 +2491,14 @@ Profilinformationen (Geräte-(id), Namen, Spielertyp) auch die Referenzen
 auf die gewonnen und verlorenen Spiele. Die können später für die
 Visualisierung verwendet werden.
 
-\begin{itemize}
-\tightlist
-\item
-  docker bzw docker compose Alle aufgelisteten Services werden in
-  seperaten Containern betrieben. Die Containervirtualisierung geschieht
-  mittels der Software \passthrough{\lstinline!Docker!}. Diese stellt
-  ein einfaches Interface zur Erstellung von Containern und der
-  Verwaltung dieser. Um einen Container auf dem System starten zu
-  können, muss dieser zunächst aus einem Image heraus erstellt werden.
-  Diese Image wird mittels einer \passthrough{\lstinline!Dockerfile!}
-  beschrieben und besteht aus einer Reihe an Kommandos, welche den
-  Aufbau des Images beschreiben.
-\end{itemize}
+Alle aufgelisteten Services werden in seperaten Containern betrieben.
+Die Containervirtualisierung geschieht mittels der Software
+\passthrough{\lstinline!Docker!}. Diese stellt ein einfaches Interface
+zur Erstellung von Containern und der Verwaltung dieser. Um einen
+Container auf dem System starten zu können, muss dieser zunächst aus
+einem Image heraus erstellt werden. Diese Image wird mittels einer
+\passthrough{\lstinline!Dockerfile!} beschrieben und besteht aus einer
+Reihe an Kommandos, welche den Aufbau des Images beschreiben.
 
 Bei diesem Projekt besteht ein Image in der Regel aus einem
 vorgefertigten \passthrough{\lstinline!Ubuntu 20.04!} Image, in welchem
@@ -2525,8 +2520,20 @@ RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main .
 CMD ["/app/main"] # START APP
 \end{lstlisting}
 
-\begin{lstlisting}
+Da die Architektur aus mehr als einem Container besteht, gestaltet sich
+eine manuelles Management dieser als nicht praktikabel. Zu diesem Zweck
+existieren mehrere Tools und Systeme um solche Aufgaben zu
+automatisieren. Ein weitere Punkt sind abhänigkeiten, welche unter den
+Container bestehen. In diesem Fall benötigt der Backend-Service die
+beiden Datenbanken um starten zu können. Somit ist es essentiell, dass
+diese bereits zuvor erstellt wurden und ausgeführt werden. Solche
+Funktionalitäten deckt das sehr leichtgewichtigte Tool
+\passthrough{\lstinline!docker-compose!} ab. Durch eine entsprechende
+Konfiugrationsdatei, kann ein so genannter Stack aus mehreren Containern
+aufgebaut werden.
 
+\begin{lstlisting}
+# docker-compose.yml STACK CONFIGURATION src_server
 version: "3"
 services:
   AtomicChessBackend:
@@ -3055,6 +3062,26 @@ Steuerungssoftware für den autonomen Schachtisch verwendet.
 \item
   Kommunikation mit dem Cloud-Server
 \end{itemize}
+
+\hypertarget{anmerkungen-compiler}{%
+\subsection{Anmerkungen Compiler}\label{anmerkungen-compiler}}
+
+Die Controller-Software wurde in C++ erstellt und verwendet Features des
+C++ 17 Standart:
+
+\begin{itemize}
+\tightlist
+\item
+  constexpr lambda
+\item
+  lambda capture
+\end{itemize}
+
+Diese Features werden im \gls{ipc} Modul (s.u.) , sowie einigen
+verwendeten Bibliotheken verwendet. Auf dem Host-Entwicklungssystem,
+sowie dem eingebetteten System wurde der GCC-Compiler mit der Version
+\passthrough{\lstinline!10.2!} installiert und wird für das Erstellen
+der einzelnen Software-Componenten verwendet.
 
 \hypertarget{ablaufdiagramm}{%
 \section{Ablaufdiagramm}\label{ablaufdiagramm}}
