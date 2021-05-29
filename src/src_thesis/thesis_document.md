@@ -1398,11 +1398,11 @@ Dieser Ansatz ist somit geeignet um die verschiedenen Client Systeme (Schachtisc
 
 Der komplette Software-Stack, welcher zum Betrieb der Schach-Cloud notwendig ist, wurde in einer sehr vereinfachten Mikroservice-Archtivektur angelegt.
 Dies bedeutet, dass hier zum Betrieb notwendige Softwarekomponenten in mehrere kleinere Bestandteile ausgelagert wurden \ref{ATC_Service_Architecture}.
-Durch dieses Design ist es zusätzlich möglich, die eigentliche Schach-Logik auslagern zu können und somit ist es theoretisch möglich auch andere Spiele implementieren zu können.
+Durch dieses modulae Design ist es zusätzlich möglich, die eigentliche Schach-Logik auslagern und in der Theorie auch andere Spiele implementieren zu können.
 
 ![Cloud-Infrastruktur: Aufbau der Service Architecture \label{ATC_Service_Architecture}](images/ATC_Service_Architecture.png)
 
-Diese einzelnen Komponent en sind eigenständig ausführbar und erst die vernetzung dieser in einem gemeinsamen privaten Netzwerk bilden eine funktionfähige Schachcloud.
+Diese einzelnen Komponent en sind eigenständig ausführbar und erst die Vernetzung dieser in einem gemeinsamen privaten Netzwerk bilden eine funktionfähige Schachcloud.
 Somit setzt sich diese aus den folgenden Komponenten zusammen:
 
 - Backend
@@ -1414,8 +1414,9 @@ Da jede dieser Services stateless und und keine eigenen Daten speichert, werden 
 - Mongo NoSQL Datenbank
 - Redis In-Memory Key Value Datenbank
 
-Hierbei wurde auf zwei verschiedenen Datenbanken gesetzt. Die `Redis` Datenbank wird ausschließlich für die Speicherung der aktiven Sessions der einzelnen verbundenen Clients verwendet.
-Durch das verwendete Sessionsystem, bei dem jeder Clients in kurzen Intervallen seine aktivität bestätigen muss. Bietet diese Datenbank den Vorteil, dass diese durch ihre Archtiektur sehr schnell auf die angeforderten Datensätze zugreifen kann. Auch wird hier nur der Datensatz gespeichert, welche die notwendigen Informationen zu der aktiven Session des Clients gespeichert. Diese werden durch die (+id) des Clients abgefragt.
+Hierbei wurde auf zwei verschiedenen Datenbanken gesetzt, welche im Folgenden erläutert werden. 
+Die `Redis` Datenbank wird ausschließlich für die Speicherung der aktiven Sessions der einzelnen verbundenen Clients verwendet.
+Durch das verwendete Sessionsystem, bei dem jeder Clients in kurzen Intervallen seine aktivität bestätigen muss, bietet diese Datenbank den Vorteil, dass diese durch ihre Archtiektur sehr schnell auf die angeforderten Datensätze zugreifen kann. Auch wird hier nur der Datensatz gespeichert, welche die notwendigen Informationen zu der aktiven Session des Clients gespeichert. Diese werden durch die (+id) des Clients abgefragt.
 Hierzu wird der Zeitstempel der Anmeldung, sowie die letzte Anfrage des Clients in Form eines (+json) Dokuments gespeichert.
 
 ```json
@@ -1426,9 +1427,8 @@ Hierzu wird der Zeitstempel der Anmeldung, sowie die letzte Anfrage des Clients 
 }
 ```
 
-Durch den Key-Value ansatz, sowie den hohen Verbrauch an Arbeitsspeicher, eignet sich diese Datenbank jedoch nicht zum Speichern der Spieldaten.
-Hierzu wurde ein zusätzlicher  `Mongo` Datenbank Serice erstellt, in welchem diese  Daten abgegelgt werden. Zusätzlich zu den Spieldaten (Spiele, Spielstände, Statistiken), werden auch die Nutzerprofile speichert. Ein Profile wird  beim ersten Anmeldevorgang erstellt und enthält außer  den Profilinformationen (Geräte-(id), Namen, Spielertyp) auch die Referenzen auf die gewonnen und verlorenen Spiele. Die können später für die Visualisierung verwendet werden.
-
+Durch den Key-Value-Ansatz sowie den hohen Verbrauch an Arbeitsspeicher eignet sich diese Datenbank jedoch nicht zum Speichern der Spieldaten.
+Hierzu wurde ein zusätzlicher `Mongo` Datenbank Serice erstellt, in welchem diese Daten abgegelgt werden. Zusätzlich zu den Spieldaten (Spiele, Spielstände, Statistiken), werden auch die Nutzerprofile speichert. Ein Profile wird  beim ersten Anmeldevorgang erstellt und enthält neben den Profilinformationen (Geräte-(id), Namen, Spielertyp) auch die Referenzen auf die gewonnen und verlorenen Spiele. Die können später für die Visualisierung verwendet werden.
 
 Alle aufgelisteten Services werden in seperaten Containern betrieben. Die Containervirtualisierung geschieht mittels der Software `Docker`. Diese stellt ein einfaches Interface zur Erstellung von Containern und der Verwaltung dieser. Um einen Container auf dem System starten zu können, muss dieser zunächst aus einem Image heraus erstellt werden. Diese Image wird mittels einer `Dockerfile` beschrieben und besteht aus einer Reihe an Kommandos, welche den Aufbau des Images beschreiben. 
 
@@ -1450,7 +1450,7 @@ CMD ["/app/main"] # START APP
 
 Da die Architektur aus mehr als einem Container besteht, gestaltet sich eine manuelles Management dieser als nicht praktikabel.
 Zu diesem Zweck existieren mehrere Tools und Systeme um solche Aufgaben zu automatisieren. 
-Ein weitere Punkt sind abhänigkeiten, welche unter den Container bestehen.
+Ein weitere nicht zu vernachlässingender Punkt ist die Abhänigkeit, welche unter den Container besteht.
 In diesem Fall benötigt der Backend-Service die beiden Datenbanken um starten zu können.
 Somit ist es essentiell, dass diese bereits zuvor erstellt wurden und ausgeführt werden.
 Solche Funktionalitäten deckt das sehr leichtgewichtigte Tool `docker-compose` ab.
@@ -1579,9 +1579,9 @@ Der Backen-Service stellt die grundlegegenden Funktionen bereit, welche die Clie
 - Profilverwaltung
 - Matchmaking
 - Spielstatus
-- Client authentifizierung
+- Authentifizierung der Clients
 
-Jeder Client meldet sich mittels der `/rest/login` Route an. Das Backend prüft ob bereits ein Spielerprofil der  Datenbank angelegt wurde und erstellt ggf. ein neues für das Device. Dabei werden der Spieler-Typ ((+ai),autonomer Schachtisch, Webclient), als auch die Geräte-(id) festgehalten. Nach einem erfolgreichen Login \ref{ATC_request_example} erhält der Client einen Session-Token. Nur mit diesem Token, können weitere Funktionen des Backends verwendet werden.
+Jeder Client meldet sich mittels der `/rest/login` Route an. Das Backend prüft, ob bereits ein Spielerprofil der Datenbank angelegt wurde und erstellt ggf. ein neues für das Device. Dabei werden der Spieler-Typ ((+ai),autonomer Schachtisch, Webclient), als auch die Geräte-(id) festgehalten. Nach einem erfolgreichen Login \ref{ATC_request_example} erhält der Client einen Session-Token. Nur mit diesem Token können weitere Funktionen des Backends verwendet werden.
 Dieser Token ändert sich nach jedem Login-Prozess, somit kann nur ein Client Token-Inhaber sein und andere zuvor angemeldete Clients wird dieser entzogen.
 
 <br>
@@ -1647,19 +1647,19 @@ var matchmaking_job = new CronJob('*/' + CFG.getConfig().matchmaking_runner_inte
 ```
 
 
-Somit wird sichergestellt, dass zuerst alle menschlichen Spieler zusammen ein Spiel beginnen und erst im letzten Schritt, ein Mensch gegen dem Computer spielen muss.
+Somit wird sichergestellt, dass zuerst alle menschlichen Spieler zusammen ein Spiel beginnen und erst im letzten Schritt ein Mensch gegen dem Computer spielen kann.
 Kommt ein Match zustande, werden die Spielereinträge aus der Lobby-Tabelle entfernt und es wird ein neues Spiel in der Game-Tabelle der Datenbank angelegt.
 
 Diese enthält alle Spiele und deren aktuellen Status:
 
 - aktuelles Spielbrett
-- aktueller Spieler am Zug
+- welcher Spieler aktuell am Zug ist
 - Anzahl Schachzüge
 - Spieler-(id)s
 - Spielerfarbe
 - Spiel-Status (abgebrochen, beendet)
 
-Diesen Eintrag fragen die Clients in regelmäßigen Intervallen über die `/rest/player_state` Route ab. Somit kennen sie das aktuelle Spielfeld und ob sie gerade am Zug sind.
+Diese Einträge fragen die Clients in regelmäßigen Intervallen über die `/rest/player_state` Route ab. Somit kennen sie das aktuelle Spielfeld und ob sie gerade am Zug sind.
 Ein Zug wird mittels der `/rest/make_move` Route übermittelt. Das Backend überprüft diesen mittels de MoveValidator-Services und speichert das Ergebnis in dem passenden Datenbank-Record zum Spiel ab.
 Nach Beendigung eines Spiels, werden die Clients wieder in den `Idle`-Status zurückversetzt, somit können diese ein neues Spiel beginnen. Nach einem Sieg ermittelt das Backend einen Score für den Client, welcher gewonnen hat. Dieser wird in dem Profil-Record gespeichert und kann abgefragt werden. Somit wurde ein einfaches Profil-System implementiert.
 
