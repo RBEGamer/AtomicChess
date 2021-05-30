@@ -440,15 +440,31 @@ Das somit erstellte Test-Paket `atctp` bildet somit eine funktionierende Grundla
 
 ## Verifikation NFC Technologie
 
-* warum gewählter nfc reader => ndef lesen
-* reicheweiten test mit 22mm
-* test mit benachbarten figuren
-* warum kein RFID => keine speicherung von id auf der controller seite
-* selbherstellung von eigenen figuren ohne modifikation der controllerseite
+Ein weiterer wichtiger Bestandteil soll die Erkennung der sich auf dem Feld befindlichen Schachfiguren sein.
+Hierbei muss zum einen der Figur-Typ (Bauer, König, Dame, ..) und die Figur-Farbe (schwarz, weiss) vom System erkannt werden.
+Da hier keine aufwendige Elektronik entwickelt werden soll, sondern auf Standard-Komponenten zurückgegriffen werden soll, scheidet ein komplexes (+hf) Antennen-Array unter dem Schachfeld aus, wie es bei einigen kommerziellen Produkten umgesetzt ist.
+Eine einfache 8x8 Matrix aus Drucktastern oder Hall-Effekt-Sensore scheidet ebenfalls aus, da hier die Eingabe über den Benutzer erfolgt und nur Rückschlüsse auf die veränderte Figur anhand einer Manuellen Bewegung der Figur nachvollzogen werden kann.
+
+Somit eignet sich hier die (+nfc) Technologie, welche auch bei modernen Smartphone eingesetzt wird.
+Hierzu werden kleine (+nfc)-Tags bzw. Aufkleber, welche aus einem Chip und einer Antenne bestehen so programmiert, dass diese eine definierte Aktion beim Lesegerät auslösen.
+Dies kann zum Beispiel das öffnen einer Internetseite auf dem Mobilen-Endgerät, nach dem Scan eines Filmplakats sein.
 
 ![Grove PN532 NFC Reader mit Kabelgebundener Antenne \label{ATC_nfc_range_test}](images/ATC_nfc_range_test.png)
 
-* test mit figuren nebeneinander
+Ein  Vorteil dieser Technologie ist, dass diese auch im Konsumerbereich bereits breit  verfügbar ist. Durch das einfache Programmieren dieser (+nfc)-Tag über das Smartphone, wird kein zusätzliches Lese-/Schreib-Gerät benötigt.
+Hier muss jedoch zuvor getestet werden, welchen maximaler Abstand nötig ist um solch ein Tag scannen zu können.
+Auch ist der Abstand zwischen den einzelnen Tags entscheident, wie nah diese beieinander Platziert werden können um diese einwandfrei auslesen zu könnnen.
+
+Hierzu wurde ein kleiner Testaufbau \ref{ATC_nfc_range_test} entwickelt, um verschieden Abstände testen zu können.
+
+Als Lesegerät wurde ein `PN532` Modul zum Auslesen der (+nfc) Tags eingesetzt, da dieser einfach angesteuert werden kann und eine abnehmbare Antenne besitzt.
+Dieser wurde bereits in anderen Projekten eingesetzt und erwies sich als zuverlässig.
+
+Die im Test verwendeten (+nfc) Tag, haben einen Durchmesser von 22mm und sind somit ein Standart-Produkt.
+Im Test stellte sich heruas, dass diese im gewählten Setup, einen Abstand von 5mm zueinander benötigen.
+Der Abstand des Lesegeräts bzw. der Antenne zu einem Tag kann dabei bis zu 14mm betragen.
+
+Somit eignet sich die Kombination aus Tag und Lesegerät zu einer der Schachfiguren, wobei sich das Lesegerät unter der Schachtischplatte befindet.
 
 
 
