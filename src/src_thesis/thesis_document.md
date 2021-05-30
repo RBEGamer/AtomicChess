@@ -2371,32 +2371,60 @@ Abschließend lässt sich feststellen, dass ein funktionstüchtiger Schachtich k
 
 ## Persönliches Fazit
 
+Im Verlauf dieser Arbeit bin ich persönlich weit über mich hinausgewachsen und ich bin sehr stolz, mein fertiges Projekt präsentieren zu können. Ich konnte nicht nur theoretisch die Machbarkeit meines Konzepts beweisen, sondern auch einen physischen Prototypen erstellen.
 
-* mit am weitesten forgeschrittener open-source autonomes Schachtisch Projekt
-* lässt spiel fürErweiterungen
-* iterativer Ansatz schnell Lösungen
-* reibungslos 
-* viele neue Techniken erlernt 
+<br>
+Natürlich bietet das System noch schwächen und Bedarf diverser Ergänzungen, bevor man es als Produkt betrachten kann. Dazu gehören auch diverse Untersuchungen, wie ein Langzeittest oder schleifenbasierte Hardwareüberprüfungen. Es wäre von Vorteil gewesen, das System durch einen erfahrenen Schachspieler bewerten zu lassen oder Rückmeldung über die Struktur und Menüführung von Anfängern zu erhalten. Diese Option blieb aufgrund von Versammlungs- und Zusammentreffens-Reglementierungen jedoch verwehrt. Für eine vollständige Analyse fehlen daher wichtige statistische Daten.
 
+<br>
 
-Gutes Projekt
-Schwächen: 
-Ziemlich geil, funktioniert
-Breite Masse nicht getestet aber von einzelnen (kein 0815 User) kein Endverbraucher
-Kein Langzeittest (außer 6 Stunden Test)
-Entwicklungsprozess iterativ in schritten
-Daten fehlen – Statistiken – funktioniert es gut? Lässt es sich nutzen
-Sehr umfangreich, viele Facetten (rein informatik, sondern auch Mechanik)
-Anreize, weiterzumachen
-Regelmäßig Spiel
-(Markdown)
+Doch genau solche Erkenntnisse geben mir einen Anreiz, das Projekt auch nach Abschluss des Studiums nicht zu beenden, sondern weitere Ideen umzusetzen und anschließend auch mit Testpersonen zu erproben. 
 
-Aufgrund der geringen Anzahl an Teilnehmenden an der Studie B, können keine allgemeingültigen Schlussforlgerungen gezogen werden. Da es sich jedoch um qualitative Forschung handelte, die das Verhalten individueller Personen untersuchte, liefert die Studie dennoch wertvolle und aussagekräftige Ergebnisse.
+<br>
 
+Der iterative Prozess der Erstellung des Schachtichs ist zeitaufwändig und kostspielig, ermöglicht allerdings das frühzeitige Erkennen von Schwachstellen und das Ausbessern der jeweiligen modularen Komponente, noch eher eine Etablierung im System erfolgen kann. Ebenso ermöglicht es ein einfacheres Verständnis über alle Komponenten, lediglich die Zusammensetzung und Beziehung dieser muss rechtzeitig überdacht werden. 
 
+<br>
+
+Insgesamt ist das Projekt selbst recht umfangreich und umfasst in verschiedenen Facetten diverse Themenbereiche meines Studiums, was mir von Beginn an ein Anliegen war. Es manifestiert meinen Studienschwerpunkt, die technische Informatik, und hat mich dazu verleitet, noch tiefgründiger in die Materie zu schauen. Zudem wurden noch weitere Kompetenzen erfordert, welche zuvor gar nicht oder nur teilweise gegeben waren, wie das Konstruieren von 3D-Komponenten oder das Gestalten von Produkten. Umso beeindruckter bin ich selbst von der Bewegungsmechanik des Systems, welche sich im Entwicklungsprozess sehr stark verändert hat und letztlich zu einem fehlerlosen Resultat führte. 
+
+<br>
+
+Neben diesen projektspezifischen Kompetenzen ist es zudem möglich gewesen, weitere Erfahrungen im Bereich der Projektplanung und Organisation zu sammeln. Im optimalen Verlauf wäre ein fertiger Prototyp bereits zum Ende des Winters möglich gewesen, jedoch erforderte die Veränderung der Mechanik vom XY-System zu CoreXY und verschiedene unvorhergesehene Schwächen mit den verwendeten Magneten weitere Umsetzungsiterationen, die Rückblickend nötig und zielführend waren. 
+
+<br>
+
+Auch die Erstellung der Thesis und das Formatieren von Vorlagen und Befehlen in Markdown und Latex erwies sich als lehrreich und innovativ. 
+
+<br>
+
+Insgesamt bin ich sehr zufrieden mit meinem Ergebnis, aber auch mit mir selbst und meiner erbrachten Leistung. 
+
+<br>
 
 ## Ausblick
 
-* Alexa
-* Einbindung in existeirende Schach-Clouds  z.B. https://lichess.org/
-* user-port für Erweiterungen (z.B. DGT Schachur)
+Wie jedes Produkt und insbesondere jeder Prototyp nach Abschluss eines Projekts lassen sich auch hierbei Aussagen zu Verbesserungen und Ergänzungen tätigen.
+
+<br>
+
+In erster Linie besteht die Möglichkeit, diversen Modifikationen des traditionellen Schachs in das System zu integrieren. Diese Option wurde im Laufe des Projekts bewusst ausgelassen.
+Doch auch Erweiterungen auf diverse andere Brettspiele, wie beispielsweise Mühle, Dame oder Mensch-ärgere-dich nicht wären optional möglich. Mittels eines bildgebenden Systems oberhalb des Tisches oder Lichtelementen und Strukturen unterhalb einer durchsichtigen Tischplatte wäre es möglich, diverse Strukturen anzuzeigen und als Spielbrett darzustellen.
+
+<br>
+
+Auch weitere Hardware kann mittels Porterweiterungen wie (+usb) zum Tisch ergänzt werden. So wäre zum Beispiel eine Schachuhr optional, welche bei öffentlichen Turnieren erforderlich ist. Eine Uhr würde zudem erkenntlich machen, wann ein Spieler den eigenen Zug beendet hat. Derzeit geschieht dies über eine Nutzereingabe oder bei Ablauf eines Timers.
+
+<br>
+
+Zudem ermöglicht die Verbindung zum Internet unzählige Kapazitäten, wie die Einbindung anderer, existierender Schach-Clouds wie beispielsweise „licchess.org“. 
+
+<br>
+
+Ebenso könnten Sprachassistenten ergänzt werden, die das Spiel somit auch für körperlich eingeschränkte Personen möglich macht. Diese könnten zudem auch über aktuelle Zustände auditiv informieren oder weitere Befehle berücksichtigen.
+
+<br>
+
+Der derzeitige Systemzustand ermöglicht ein autonomes Schachspiel mit möglichst äquivalentem Spielerlebnis im Vergleich zu einem konventionellen Schachspiel. Auf Basis dessen ist der Anzahl der möglichen Ergänzungen und Ideen zur Verbesserung sind keine Grenze gesetzt. Erfahrene Entwickler ist die Möglichkeit geboten, diese mittels der diversen Schnittstellen eigenständig zu integrieren. 
+Das System als solches ist dennoch ein abgeschlossenes Projekt mit einem präsentablen Resultat. 
+
