@@ -151,7 +151,9 @@ Wie bereits aus zum Teil identischen den Namen ersichtlich, streben alle Tische 
 <br>
 
 
-: Auflistung kommerzieller autonomer Schachtische \label{commchesstables}
+![Auflistung kommerzieller autonomer Schachtische \label{commchesstables}](tables/commercial_chessboard_projects.csv)
+
+
 
 |                                           | Square Off - Kingdom [@squareoffkingdom]  | Square Off - Grand Kingdom [@squareoffgrand] | DGT Smart Board [@dtgsmartboard]  | DGT Bluetooth Wenge [@dtgble] |
 |:------------------------------------------|-------------------------------------------|:--------------------------------------------:|:---------------------------------:|------------------------------:|
@@ -2111,7 +2113,6 @@ Durch die Socket Basierende Implementierung ist es möglich die andern (+ipc) In
 
 Über die (+tcp) Verbindung werden ausschließlich Daten im (+json) Format übertragen. Dies macht ein einfaches Debugging und Steuerung über einen Webbrowser möglich, welches die Implementierung während der Entwicklungsphase vereinfachte.
 
-<br>
 
 Zusätzlich kann über die Acknowledgement-Funktionalität sichergestellt werden, dass die anderen (+ipc) Instanzen dieses Event erhalten haben. Diese müssen nach Erhalt das empfangene Event quittieren, was mittels des `is_ack` Flag zurückgemeldet wird.
 
