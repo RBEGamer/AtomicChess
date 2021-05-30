@@ -151,9 +151,7 @@ Wie bereits aus zum Teil identischen den Namen ersichtlich, streben alle Tische 
 <br>
 
 
-![Auflistung kommerzieller autonomer Schachtische \label{commchesstables}](tables/commercial_chessboard_projects.csv)
-
-
+: Auflistung kommerzieller autonomer Schachtische \label{commchesstables}
 
 |                                           | Square Off - Kingdom [@squareoffkingdom]  | Square Off - Grand Kingdom [@squareoffgrand] | DGT Smart Board [@dtgsmartboard]  | DGT Bluetooth Wenge [@dtgble] |
 |:------------------------------------------|-------------------------------------------|:--------------------------------------------:|:---------------------------------:|------------------------------:|
@@ -361,80 +359,11 @@ Auch müssen die Figuren für den Benutzer eine gut handhabbare Größe aufweise
 # Grundlegende Verifikation der ausgewählten Technologien
 
 ## Erprobung Buildroot-Framework
-
-Eine Hürde, welche bei diesem Projekt genommen werden muss, ist die Erstellung der Software welche auf dem autonomen Schachtisch ausgeführt wird.
-Hierbei soll diese nicht von Grund auf neu entwickelt werden, sondern auf einer soliden Basis aufbauen.
-Allgemien soll hier auf ein minimales Linux-System gesetzt werden, in welches die Software des autonomen Schachtisch integriert wird. 
-Auf dem Basis-System müssen die folgenden Software-Pakete installiert sein, bzw einfach integrierbar sein:
-
-- (+ssh) für den Remote-Zugriff
-- (+dhcp) Client zur automatischen (+ip) Adressvergabe
-- (+udev) zur Ein-/Ausgabe Geräte verwaltung (Touchscreen)
-- Qt[@qtframework] - (+gui) Framework
-- SW-Update zur Durchführung eines Remote-Update
-
-Zusätzlich zu diesen auf dem Linux-System benötigten Paketen, muss es möglich sein durch das eingebettete System bootbares Dateiimage zu erzeugen.
-Auf seiten der Entwicklung ist eine Toolchain notwendig, mit welcher es möglich ist in C++ geschriebene Programme auf dem System ausführen und mittels (+gdb) auf Fehler überprüfen zu können. Dazu sollte der C++ Compiler mindesten den C++17 Standart untersützen.
-
-Für diesen Zweck existieren einige Open-Source Projekte, welche solch ein Build-System bereitstelle. Hierbei existieren zwei weit verbreitete Systeme.
-Das `Yocot`-Projekt[@yoctoproject] und das `Buildroot`-Framework[@buildroot].
-Hierbei unterscheiden sich diese im Aufbau und der Funktionsweise teils stark, vor allem wärend der ersten Verwendung.
-
-: Vergleich `Yocto`- `Buildroot` [@yoctobuildroot]  \label{commchesstables}
-
-|                                                         | YOCTO     | BUILDROOT     |
-|------------------------------               |-------    |-----------                |
-| Dependency-Management             | Nein     | Ja                           |
-|  Partielle Updates                           | Ja         | Nein                       |
-| automatischer Paket-Download     | Nein     | Ja                           |
-| verwendung Build-Cache               | Ja        | Nein                        |
-| einfache Konfiguration                   | Nein     | Ja                            |
-|                                                        |              |                                |
-
-Hierbei stellt das `Yocto`- Projekt, eine größere Einsteigshürde, durch ein komplexes Layer-System dar. Es bietet sich jedoch für komplexe Projekte an, welche einen hohen Grad an Individualisierung benötigen. Ein Nachteil dessen, ist da dadurch auch viel vom Nutzer selber konfiguriert werden muss, bevor ein minimales System in Betrieb genommen werden kann.
-
-Das `Buildroot`-Framework bietet bereits eine große Anzahl an vorgefertigteten Ziel-Systemen an, für welche es bereits alle nötigen Parameter enthält um ein minimales System erstellen zu können. Auch ist  bereits eine optimierte Konfiguration für das eingebettete System vorhanden, welche direkt gestartet werden kann. Nach einem Erfolgreichem erstellen, des Images kann dieses direkt über das eingebettete System gestartet werden.
-Bei jedem Build-Vorgang müssen jedoch alle Pakete erneut gebaut werden, bevor diese zu einem finalen Image zusammengefügt werden.
-Hierbei kann dieser Vorgang je nach Umfang der verwendeten Pakete mehrere Stunden dauern. Das `Yocot`-Projekt unterstüzt hierbei das erstellen einzelner Pakete, somit müssen nur Änderungen neu gebaut werden.
-Da hier nur eine minimale Anzahl von Paketen benötigt werden, somit hält sich dieser Bauvorgang zeitlich in grenzen und ist allgemein für diese Projekt nicht entscheidend.
-
-
-
-```yaml
-#atctp - Config.in - Package Configuration
-config BR2_PACKAGE_ATCTP
-    bool "ATC_TEST_PACKAGE"
-    help
-        This package is a test package to verify the buildroot build process
-```
-
-Zusätzlich wurde ein eigenes C++ Paket erstellt und in das `Buildroot`-Framework integriert. Hierzu sind zu dem Quellcode, zwei weitere Dateien notwenig.
-Die `Config.in` beschreibt das Paket und setzt möglicherweise benötigte Abhängigkeiten zu anderen Paketen fest.  Die zweite Datei ist die `PAKET_NAME.mk` Makefile, welche die Schritte beschreibt, welche zum Erstellen und Installieren des Paketes durchgeführt werden müssen. 
-
-
-```yaml
-# atctp - atctp.mk - Makefile
-
-ATCTP_VERSION = 1.0.0
-ATCTP_SITE = ./package/atctp/src
-ATCTP_SITE_METHOD = local
-ATCTP_LICENSE = GPL-2.0+
-
-define ATCTP_BUILD_CMDS
-    @echo ATCTP_BUILD!
-    @echo $(@D)
-    @echo -----------------
-    $(MAKE) $(TARGET_CONFIGURE_OPTS) -C $(@D)
-endef
-
-define ATCTP_INSTALL_TARGET_CMDS
-    @echo ATCTP_INSTALL!
-    $(INSTALL) -D -m 0755 $(@D)/hello $(TARGET_DIR)/usr/ATC/atc_testpackage
-endef
-
-$(eval $(generic-package))
-```
-Das somit erstellte Test-Paket `atctp` bildet somit eine funktionierende Grundlage für das System. Somit eignet sich das `Buildroot`-Framework optimal für diese Projekt, da hier der Prozess zur Integration von eigener Software sich als sehr einfach gestaltet.
+* Erstellen eines einfachen images für das embedded System
+* inkl ssh Server und SFTP
+* qt 5 libraries
+* eigenes package atctp
+* test der toolchain
 
 
 ## Verifikation NFC Technologie
@@ -1545,15 +1474,15 @@ services:
       - AtomicChessRedisDatabase
       - AtomicChessMongoDatabase
       - AtomicChessMoveValidator
-    links: 
-      - "redisdb:AtomicChessRedisDatabase"
-      - "mongodb:AtomicChessMongoDatabase"
-      - "movevalidator:AtomicChessMoveValidator"
+    #links: 
+      - "AtomicChessRedisDatabase:AtomicChessRedisDatabase"
+      - "AtomicChessMongoDatabase:AtomicChessMongoDatabase"
+      - "AtomicChessMoveValidator:AtomicChessMoveValidator"
     image: atcbackend:latest
     build: 
       context: ../ATC_Backend/
     restart: always
-    ports:
+    #ports:
       - 3000:3000
     environment:
       - PRODUCTION=1
@@ -1563,6 +1492,7 @@ services:
     build:
       context: ../ATC_MoveValidator/
     image: atcmovevalidator:latest
+    #network_mode: "host"
     restart: always
     ports:
       - 5000:5000
@@ -1575,6 +1505,7 @@ services:
     container_name: atcredis
     ports:
       - 6379:6379
+    #network_mode: "host"
     
   AtomicChessMongoDatabase:
     image: mongo:latest
@@ -1583,28 +1514,28 @@ services:
     environment:
         - MONGO_DATA_DIR=/data/db
         - MONGO_LOG_DIR=/dev/null
-    volumes:
-        - ./data/db:/data/db
+      #volumes:
+     #   - ./data/db:/data/db
     ports:
       - 27017:27017
     command: mongod --logpath=/dev/null # --quiet
 
 
   AtomicChessAutoPlayer:
-    depends_on:
+    #depends_on:
       - AtomicChessBackend
-    links: 
-        - "backend:AtomicChessBackend"
+    #container_name: atcautoplayer
     build:
       context: ../ATC_AutoPlayer/
     image: atcautoplayer:latest
-    restart: always
-    scale: 5 # SPAWN THREE INSTANCES
+    network_mode: "host"
+    restart: "always"
+    scale: 3 # SPAWN THREE INSTANCES
     environment:
-      - PRODUCTION=1
-      - BACKEND_IP=backend:3000 #HOST IP:PORT OF BACKEND EXAMPLE 127.0.0.1:3000 USING ONLY HTTP
+      - PRODUCTION
+      - BACKEND_IP=127.0.0.1:3000 #HOST IP:PORT OF BACKEND EXAMPLE 127.0.0.1:3000 USING ONLY HTTP
       #- USE_HOSTNAME_HWID=TRUE # USE THE LOCAL MACHINE HOSTNAME AS HWID
-      #- PLAYER_TYPE_HUMAN=1 # SIMULATE A HUMAN PLAYER TYPE FOR TESTING
+      #- PLAYER_TYPE_HUMAN=1 # SIMULATE A HUMAN PLAYER TYPE
 
 ```
 
@@ -2105,6 +2036,7 @@ Durch die Socket Basierende Implementierung ist es möglich die andern (+ipc) In
 
 Über die (+tcp) Verbindung werden ausschließlich Daten im (+json) Format übertragen. Dies macht ein einfaches Debugging und Steuerung über einen Webbrowser möglich, welches die Implementierung während der Entwicklungsphase vereinfachte.
 
+<br>
 
 Zusätzlich kann über die Acknowledgement-Funktionalität sichergestellt werden, dass die anderen (+ipc) Instanzen dieses Event erhalten haben. Diese müssen nach Erhalt das empfangene Event quittieren, was mittels des `is_ack` Flag zurückgemeldet wird.
 
@@ -2324,22 +2256,28 @@ Die Bedienung des Systems mittels des verbauten Bildschirms ist ebenfalls auf ei
 
 <br>
 
-
-Letzlich 
-
+Grundsätzlich ist festzuhalten, dass es sich beim Resultat der Arbeit um kein finalisiertes Produkt, sondern um einen strukturellen Prototyp handelt. Weitere Prüfungen, wie Nutzungsstatistiken oder Sicherheitsprüfungen, müssten durchgeführt werden, ehe der Schachtisch als kommerzielles Produkt betrachtet werden kann. Auch fehlen diverse Langzeittests. Ein Betriebstest mit einer Dauer von 6 Stunden verlief ohne erkennbare Zwischenfälle, für aussagekräftige Verschleiß- und Fehlererkennungen bedarf es jedoch noch weiterer und längerer Untersuchungen. 
 
 <br> 
 
+Der Prototyp lässt sich jedoch mit kommerziell erhältlichen und open-source verfügbaren Schachtischen vergleichen. Das Ziel, alle wünschenswerten Funktionen und Implementationen dieser Tische in den Prototypen zu integrieren, konnten erfolgreich umgesetzt werden. Darüber hinaus wurde weitere Funktionalitäten eingegliedert, wie eine Stand-Alone Funktionalität oder einer Schnittstelle zum Erstellen weiterer Erweiterungen. 
+
+<br>
+
+Das System und insbesondere der implementierte Cloud-Service sind online erreichbar und erweiterbar. Dies ermöglicht unter anderem das Bauen eines eigenen Tisches unter der Verwendung des AtomicChess Systems, aber auch die Integration weiterer Komponenten. Erfahrene Entwickler können somit das Spiel beliebig ausweiten oder sogar andere Spiele ergänzen. Die für das Projekt entworfene Mechanik und Spielführung kann dementsprechend auch für diverse andere Tischbrettspiele verwendet werden.
+
+<br>
+
+Neben diversen im Studium erlernten Fähigkeiten wurden im Laufe des Projekts noch diverse andere Leistungen erforderlich, wie die Erstellung einer Mechanik oder das Konstruieren von Komponenten, welche das Aneignen von zusätzlichem Wissen erfordern. Die resultierende Mechanik ist ungeachtet dessen ist fehlerlos und nahezu spielfrei, was ein reibungsloses Spiel ermöglicht
+
+<br>
+
+Abschließend lässt sich feststellen, dass ein funktionstüchtiger Schachtich konstruiert wurde, der basierend auf einem eingebetteten System und einer Cloud-Infrastruktur als gelungener Abschluss eins Informatikstudiums bezeichnet werden kann.
 
 <br>
 
 ## Persönliches Fazit
 
-* mit am weitesten forgeschrittener open-source autonomes Schachtisch Projekt
-* lässt spiel fürErweiterungen
-* iterativer Ansatz schnell Lösungen
-* reibungslos 
-* viele neue Techniken erlernt 
 
 
 Gutes Projekt
