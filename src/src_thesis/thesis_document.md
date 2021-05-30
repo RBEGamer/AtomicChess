@@ -396,7 +396,7 @@ Hierbei stellt das `Yocto`- Projekt, eine größere Einsteigshürde, durch ein k
 
 Das `Buildroot`-Framework bietet bereits eine große Anzahl an vorgefertigteten Ziel-Systemen an, für welche es bereits alle nötigen Parameter enthält um ein minimales System erstellen zu können. Auch ist  bereits eine optimierte Konfiguration für das eingebettete System vorhanden, welche direkt gestartet werden kann. Nach einem Erfolgreichem erstellen, des Images kann dieses direkt über das eingebettete System gestartet werden.
 Bei jedem Build-Vorgang müssen jedoch alle Pakete erneut gebaut werden, bevor diese zu einem finalen Image zusammengefügt werden.
-Hierbei kann dieser Vorgang je nach Umfang der verwendeten Pakete mehrere Stunden dauern. Das `Yocot`-Projekt unterstüzt hierbei das erstellen einzelner Pakete, somit müssen nur Änderungen neu gebaut werden.
+Hierbei kann dieser Vorgang je nach Umfang der verwendeten Pakete mehrere Stunden dauern. Das `Yocto`-Projekt unterstüzt hierbei das erstellen einzelner Pakete, somit müssen nur Änderungen neu gebaut werden.
 Da hier nur eine minimale Anzahl von Paketen benötigt werden, somit hält sich dieser Bauvorgang zeitlich in grenzen und ist allgemein für diese Projekt nicht entscheidend.
 
 
