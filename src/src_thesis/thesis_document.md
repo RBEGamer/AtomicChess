@@ -402,7 +402,6 @@ Da hier nur eine minimale Anzahl von Paketen benötigt werden, somit hält sich 
 
 ```yaml
 #atctp - Config.in - Package Configuration
-
 config BR2_PACKAGE_ATCTP
     bool "ATC_TEST_PACKAGE"
     help
@@ -415,17 +414,11 @@ Die `Config.in` beschreibt das Paket und setzt möglicherweise benötigte Abhän
 
 ```yaml
 # atctp - atctp.mk - Makefile
-################################################################################
-#
-# atctp; For ATC Project; Marcel Ochsendorf; marcelochsendorf.com atomicchess.de
-#
-################################################################################
 
 ATCTP_VERSION = 1.0.0
 ATCTP_SITE = ./package/atctp/src
 ATCTP_SITE_METHOD = local
 ATCTP_LICENSE = GPL-2.0+
-
 
 define ATCTP_BUILD_CMDS
     @echo ATCTP_BUILD!
@@ -433,7 +426,6 @@ define ATCTP_BUILD_CMDS
     @echo -----------------
     $(MAKE) $(TARGET_CONFIGURE_OPTS) -C $(@D)
 endef
-
 
 define ATCTP_INSTALL_TARGET_CMDS
     @echo ATCTP_INSTALL!
