@@ -8,6 +8,9 @@ Ein bauen per Dockerimage ist möglich mittels ` build_thesis_docker.sh` Script 
 # 28.05.2021
 
 * 8.2 - Service Architektur (neu)
+* added Haskel to Dockerfile
+* added csv2table pandoc filter
+* added bib ref for docker, redis, mongo, docker-compose
 
 # 27.05.2021 
 
