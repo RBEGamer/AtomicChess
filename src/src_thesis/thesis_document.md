@@ -2289,6 +2289,16 @@ void MenuManager::updateProgress()
 }
 ```
 
+### Anmerkungen Compiler
+
+Die Controller-Software wurde in C++ erstellt und verwendet Features des C++ 17 Standart:
+
+* constexpr lambda
+* lambda capture
+
+Diese Features werden im (+ipc) Modul , sowie einigen verwendeten Bibliotheken verwendet.
+Auf dem Host-Entwicklungssystem, sowie dem eingebetteten System wurde der GCC-Compiler mit der Version `10.2` installiert und wird für das Erstellen der einzelnen Software-Componenten verwendet.
+
 
 # Fazit
 
