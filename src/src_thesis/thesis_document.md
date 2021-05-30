@@ -470,12 +470,30 @@ Somit eignet sich die Kombination aus Tag und Lesegerät zu einer der Schachfigu
 
 
 ## Schrittmotor / Schrittmotorsteuerung
-* warum => einfache ansteuerung
-* keine STEP DIR somit muss embedded nicht echtzeitfähigsein und kann ggf auch andere task abbarbeiten
-* TMC schrittmotortreiber spi configuration
-* und goto move  => wait for move finished irw testen
-* dafür einfacher python testreiber geschribene
-* schrittverlust nicht zu erwarten
+
+Da die einzelnen Figuren über das Schachfeld bewegt werden sollen, ist hierfür eine akkurate Positionierung dieser notwendig.
+Da die Figuren einen Durchmesser von 22mm haben und somit ein einzelnes Schachfeld ein Größe ca 55mm besitzt, reicht eine Wiederholgenauigkeit von +-1mm.
+Auch wird bei der Wahl der passenden Motoren angenommen dass das Spiel, welches durch die Mechanik in das System eingebracht wird, vernachlässigbar klein ist.
+Es ist auch davon auszugehen, das die Kraft welche von dem Motoren benötigt wird um eine Achse zu bewegen nicht mehr als 45Ncm beträgt.
+
+
+
+Dies entspricht den Werten einer X-Y-Achsenkonfiguration, wie sie in einem handelüberlichen 3D-Drucker zu finden ist und welche mit `Nema 17`-Schrittmotoren ausgestattet sind.
+Der geplante Aufbau des autonomen Schachtischs, ähnelt einer solchen Konfiguration sehr, da auch hier die Figuren in X-Y Richtung verfahren werden.
+Einzig die Z-Achse kommt hier nicht zum einsatz. Somit werden für erste Tests diese Motoren gewählt.
+
+
+
+Deswegen bietet sich hier auch die verwendung von Schrittmotoren an, da diese sehr kostengünstig in der geforderten Leistungsklasse zu erwerben sind und zudem kann die Ansteuerung einfach realisiert werden. Hierzu gibt es verschiedene Schrittmotor-Treiber, welche die Ansteuerung übernehmen. Diese biete in der Regel ein `STEP`, `DIR` Interface an. Der Schrittmotor-Treiber besitzt diese beiden Eingänge und jeder Elektrische-Impuls sorgt dafür dass der Motor einen Schritt ausführt. Je nach gewälten Motor entspricht dies einer Rotation um 1.8 Grad und dies reicht somit für die Positioniergenauigkeit aus.
+
+Da auf dem eingebetteten System auf einem nicht echtzeitfähigen Linux-System aufsetzt, ist hier eine zeitkritische Ansteuerung der Motortreiber nicht gewährleistet.
+Somit stellt sich das `STEP`,`DIR`-Interface für diesen Anwendungsfall als nicht Ideal heraus. Um diese Problem zu umgehen, kann hier ein zusätzlicher Mikrokontroller eingesetzt werden, welcher die benötigten Impulse generiert.
+
+Diese Option wurde zuvor getestet und erwies sich als eine robuste alternative, jedoch existieren Schrittmotor-Treiber, welche über zusätzliche Bus Schnittstellen verfügen.
+Hier wurde auf den `TMC5160-BOB` gesetzt, da dieser über eine (+spi) Interface verfügt, welches direkt an das eingebettete System angeschlossen werden kann.
+
+Somit stellen die Schrittmotoren und die gewählte Ansteuerung einen vielversprechendes Antriebskonzept für den autonomen Schachtisch dar.
+
 
 
 
