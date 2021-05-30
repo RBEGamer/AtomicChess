@@ -151,9 +151,10 @@ Wie bereits aus zum Teil identischen den Namen ersichtlich, streben alle Tische 
 <br>
 
 
-![Auflistung kommerzieller autonomer Schachtische \label{commchesstables}](tables/commercial_chessboard_projects.csv)
+<!-- ![Auflistung kommerzieller autonomer Schachtische \label{commchesstables}](tables/commercial_chessboard_projects.csv) -->
 
 
+: Auflistung kommerzieller autonomer Schachtische \label{commchesstables}
 
 |                                           | Square Off - Kingdom [@squareoffkingdom]  | Square Off - Grand Kingdom [@squareoffgrand] | DGT Smart Board [@dtgsmartboard]  | DGT Bluetooth Wenge [@dtgble] |
 |:------------------------------------------|-------------------------------------------|:--------------------------------------------:|:---------------------------------:|------------------------------:|
