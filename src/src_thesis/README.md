@@ -5,6 +5,10 @@ Ein bauen per Dockerimage ist möglich mittels ` build_thesis_docker.sh` Script 
 
 # CHANGELOG
 
+# 30.05.2021
+
+* 9.1 - Fazit (neu)
+
 # 28.05.2021
 
 * 8.2 - Service Architektur (neu)
