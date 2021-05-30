@@ -381,7 +381,7 @@ Für diesen Zweck existieren einige Open-Source Projekte, welche solch ein Build
 Das `Yocot`-Projekt[@yoctoproject] und das `Buildroot`-Framework[@buildroot].
 Hierbei unterscheiden sich diese im Aufbau und der Funktionsweise teils stark, vor allem wärend der ersten Verwendung.
 
-: Vergleich `Yocto`- `Buildroot` [@yoctobuildroot]  \label{commchesstables}
+: Vergleich Yocto - Buildroot \label{commchesstables}
 
 |                                                         | YOCTO     | BUILDROOT     |
 |------------------------------               |-------    |-----------                |
