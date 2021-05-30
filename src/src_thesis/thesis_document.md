@@ -3,7 +3,7 @@
 ## Motivation
 
 
-Eingebettete Systeme (Englisch "embedded Systems") sind technische Zusammensetzungen, welche für eine spezifische Funktion entwickelt werden. Im Gegensatz zu Mehrzwecksystemen (Englisch "multi-purpose systems"), wie zum Beispiel einem Personal Computer, welcher in der Lage ist, diverse Funktionen auszuführen und nicht zwingend an eine Funktion gebunden ist, dienen eingebettete Systeme einer bestimmten Logik. Daraus resultieren simplere und auch Ressourcen-sparendere Systeme, die wesentlich näher an der Technik und der für den Zweck nötigen Komponenten und Software entwickelt werden. Systeme können günstiger zusammengesetzt und Fehlerquellen schneller entdeckt und behoben werden. Nicht für den Prozess notwendige Komponenten werden gar nicht erst verwendet. Bei einem Mehrzwecksystem wird akzeptiert, dass Komponenten und Schnittstellen existieren, die nicht benötigt werden. Diese verursachen Kosten und können mögliche Fehlerquellen sein.
+Eingebettete Systeme (Englisch "embedded Systems") sind technische Zusammensetzungen, welche für eine spezifische Funktion entwickelt werden. Im Gegensatz zu Mehrzwecksystemen (Englisch "multi-purpose systems"), wie zum Beispiel einem Personal Computer, welcher in der Lage ist, diverse Funktionen auszuführen und nicht zwingend an eine Funktion gebunden ist, dienen eingebettete Systeme einer bestimmten Logik. Daraus resultieren simplere und auch Ressourcen-sparsamere Systeme, die wesentlich näher an der Technik und der für den Zweck nötigen Komponenten und Software entwickelt werden. Systeme können günstiger zusammengesetzt und Fehlerquellen schneller entdeckt und behoben werden. Nicht für den Prozess notwendige Komponenten werden gar nicht erst verwendet. Bei einem Mehrzwecksystem wird akzeptiert, dass Komponenten und Schnittstellen existieren, die nicht benötigt werden. Diese verursachen Kosten und können mögliche Fehlerquellen sein.
 
 <br>
 
@@ -20,7 +20,7 @@ Die Erstellung eines autonomen Schachtischs vereinbart in meinen Augen im große
 
 <br>
 
-Der Reiz im Schachprojekt liegt in der Bedeutung und der Seltenheit. Schach ist ein bewährtes, ausnahmslos bekanntes und immer logisches Spiel, welches jedoch im kommerziellen Rahmen nie an Bedeutung gewonnen hat. Die Auswahl der verfügbare elektrifizierten und programmgesteuerten Schachtische ist auffallend gering; zudem sind existierende Lösungen oftmals nicht erschwinglich und bedürfen erhebliche Anpassungen des Spielers an das Spiel.
+Der Reiz im Schachprojekt liegt in der Bedeutung und der Seltenheit. Schach ist ein bewährtes, ausnahmslos bekanntes und immer logisches Spiel, welches jedoch im kommerziellen Rahmen nie an Bedeutung gewonnen hat. Die Auswahl der verfügbaren elektrifizierten und programmgesteuerten Schachtische ist auffallend gering; zudem sind existierende Lösungen oftmals nicht erschwinglich und bedürfen erhebliche Anpassungen des Spielers an das Spiel.
 Innerhalb der vergangenen drei Jahrzehnte bewiesen sich immer mehr Konzerne ihre technische Kompetenz und Überlegenheit und die Fähigkeit ihrer Maschinen mittels der Auswertung von Schachalgorithmen und dem möglichst schnellen besiegen derzeitiger Schach-Meister und -Meisterinnen. Die Algorithmen stehen heute in einer Vielzahl als open-source Projekte zur Verfügung, jedoch ist das Interesse daran, für Spieler mögliche Anwendungen zu generieren, verschwindend gering und wird oftmals nur von Experten und Enthusiasten genutzt und auch hinterfragt.
 
 <br>
@@ -41,18 +41,26 @@ Darüber hinaus sollte der autonome Schachtisch weitere folgende Funktionalität
 - Parkposition für ausgeschiedene Figuren
 - Stand-Alone Funktionalität 
 
+<br>
+
+Die Kernfrage der Arbeit bezieht sich somit auf die Überprüfung der Ausführbarkeit inklusive Erstellung und Umsetzung eines eingebetteten Systems und einer Cloud-Infrastruktur. 
 
 <br>
 
 Der Schwerpunkt liegt dabei insbesondere auf der Programmierung des eingebetteten Systems und dem Zusammenspiel von diesem mit einem aus dem Internet erreichbaren Servers, welcher als Vermittlungsstelle zwischen verschiedenen Schachtischen und anderen Endgeräten dient.
-Dieses besteht zum einem aus der Positionserkennung und Steuerung der Hardwarekomponenten (Schachfiguren) und zum anderen aus der Kommunikation zwischen dem Tisch selbst und einem in einer Cloud befindlichem Server.
+Dieses besteht zum einem aus der Positionserkennung und Steuerung der Hardwarekomponenten (Schachfiguren) und zum anderen aus der Kommunikation zwischen dem Tisch selbst und einem in einem in einer Cloud befindlichen Server.
 Mittels der Programmierung werden diverse Technologien von verschiedenen Einzelsystemen zu einem Gesamtprodukt zusammengesetzt.
 Insgesamt gilt es, einen für Anwender ansprechenden Schachtisch zu entwickeln, der das Spielerlebnis nicht nur originalgetreu widerspiegelt, sondern das Einzelspieler-Modell zusätzlich noch verbessert.
 
-<!--- inwiefern können Sie das benennen, wie der Tisch das tun soll?-->
+<br>
+
+Der Grundgedanke dabei ist, dem Spieler die Arbeit des Versetzens der Spielfiguren und das Erwägen von gegnerischen Zügen abzunehmen. Dem Spieler wird die Möglichkeit geboten, gegen andere Spieler an diversen Orten oder gegen eine Schachlogik zu spielen und so Züge auszuführen, die jener im besten Fall nicht einmal vorhergesehen hat. Zudem wird die Korrektheit der getätigten Züge überprüft und sämtliche traditionellen Spielregeln in das Spiel mit einbezogen. Somit ist es nicht nur möglich, dass Anfänger das Spiel erlernen können, sondern auch bewährten Spielern mit unerwarteten Zügen des virtuellen oder realen Gegners neue Methodiken darzustellen.
+
+<br>
+
 Dies soll mittels eines kompakten und minimalistischen Designs realisiert werden. Darüber hinaus, spielt nicht nur das Design eine Rolle, sondern auch die Handhabung. Dazu muss der Benutzer in der Lage sein, den Tisch in wenigen Handgriffen betriebsbereit machen zu können und über eine einfach Bedienoberfläche eine neue Partie gegen den Computer oder einen anderen Menschlichen spieler beginnen zu können. 
 
-
+<br>
 
 ## Methodik
 
@@ -88,19 +96,19 @@ Die Zuverlässigkeit wurde mittels stetiger Testläufe mit kontrollierten Schach
 
 <br>
 
-Im darauffolgenden achten Kaptiel wird die Cloud-Infrastruktur thematisiert, welche für eine Kommunikation zwischen den autonomen Schachtischen entscheidend ist.
+Im darauffolgenden achten Kapitel wird die Cloud-Infrastruktur thematisiert, welche für eine Kommunikation zwischen den autonomen Schachtischen entscheidend ist.
 Auch wird dabei die Software, welche auf dem eingebetteten System ausgeführt wird, im Detail beschrieben und deren Kommunikation mit der Cloud-Infrastruktur, sowie mit den elektrischen Komponenten beleuchtet.
 Zusätzlich zu dieser, wurde ein Webclient entwickelt, mit dem es Benutzern möglich ist über einen Webbrowser gegen den Tisch zu spielen.
-Dieser Client bietet außerdem die Möglichkeit das System wärend der Entwicklung testen zu können.
+Dieser Client bietet außerdem die Möglichkeit das System schon im Laufe des Entwicklungsprozesses testen zu können.
 
 <br>
 
-Das neute Kapitel beschäftligt sich mit der Software, welche auf dem eingebetteten System ausgeführt wird.
-Diese übersetzt die Spieldaten welche von der Cloud-Infrastruktur abgefragt werden in Zug-Befehle welche von der Mechanik umgesetzt werden. Dabei gilt ein besonderes Augenmkert der Berechnung der Figurbewegung und dem Erkennen von durch den Benutzer getätigten Schachzügen.
+Das neunte Kapitel beschäftigt sich mit der Software, welche auf dem eingebetteten System ausgeführt wird.
+Diese übersetzt die Spieldaten, welche von der Cloud-Infrastruktur abgefragt werden in Zug-Befehle, welche von der Mechanik umgesetzt werden. Dabei gilt ein besonderes Augenmerk der Berechnung der Figur-Bewegungen und dem Erkennen von durch den Benutzer getätigten Schachzügen.
 
 <br>
 
-Das zehnte und abschliessende Kapitel, befasst sich mit dem Fazit und gibt einen Ausblick auf mögliche Erweiterungen und Verbesserungen.
+Das zehnte und abschließende Kapitel, befasst sich mit dem Fazit und gibt einen Ausblick auf mögliche Erweiterungen und Verbesserungen.
 
 
 # Analyse bestehender Systeme
@@ -122,9 +130,9 @@ Bei den ausgewählten Tischen handelt es sich um
 
 <br>
 
-Für die kommerziell käuflichen Schachspiele \ref{commchesstables} gibt es kein sehr großes Marktangebot, weswegen für den Vergleich nur zwei Hersteller mit jeweils zwei verschiedenen Modellen gewählt werden konnte. (Derzeit integriert nur das Unternehmen `Square Off` eine Funktion, welche die Figuren unterhalb der Tischplatte mechanisch bewegen kann.)
+Für die kommerziell käuflichen Schachspiele \ref{commchesstables} gibt es kein sehr großes Marktangebot, weswegen für den Vergleich nur zwei Hersteller mit jeweils zwei verschiedenen Modellen gewählt werden konnte. Derzeit integriert nur eins dieser Unternehmen, `Square Off`, eine Funktion, welche die Figuren unterhalb der Tischplatte mechanisch bewegen kann.
 
-Der zweite Hersteller `DGT` wurde dennoch zum Vergleich von zusätzlichen Funktionen herangezogen, da dessen Schachbretter die aktuelle Figurstellungen erkennen können.
+Der zweite Hersteller `DGT` wurde dennoch zum Vergleich von zusätzlichen Funktionen herangezogen, da dessen Schachbretter die aktuelle Figur-Stellungen erkennen können.
 
 <br>
 
@@ -158,7 +166,7 @@ Wie bereits aus zum Teil identischen den Namen ersichtlich, streben alle Tische 
 | Besonderheiten                            | Akku für 30 Spiele                        | Akku für 15 Spiele                           | -                                 | -                             |
 
 
-<!--- Anmerkung zum Layout der Tabelle: Das ist im pdf so etwas schwer zu lesen. Vielleicht kann man das Layout durch Spaltenbreiten, Leerzeilen, grunen Hintergrund für jede 2. Zeile oder ähnliches verbesser. Ist aber nur Kosmetik. --> 
+<!--- Anmerkung zum Layout der Tabelle: Das ist im pdf so etwas schwer zu lesen. Vielleicht kann man das Layout durch Spaltenbreiten, Leerzeilen, grauen Hintergrund für jede 2. Zeile oder ähnliches verbessern. Ist aber nur Kosmetik. --> 
 
 
 <br>
@@ -198,7 +206,7 @@ Auffallend ist, dass nur einer der ausgewählten Tische über eine Parkposition 
 Ebenfalls erwähnenswert ist, dass keiner der Tische eine Stand-Alone-Funktionalität besitzt. Jeder Tisch benötigt eine Verbindung zu einem externen Gerät, wie einem Smartphone oder Computer, welche die Berechnungen der Spielerzüge vornimmt. Keiner dieser Tische kann ein simples Spiel nach einem verbindungslosen Start ausführen.
 
 Für die Schachtische der Firma `Square Off` ist eine Smartphone App `Square Off - Chess App`[@squareoffapp] für die Verwendung notwendig.
-Nach einer Analyse der Companion-App, ist zu erkennen, dass hier eine Registrierung inkl Profilerstellung notwendig ist um mit der Verwendung der App forfahren zu können. Erst danach ist ein Spiel gegen den Computer ohne Internet möglich. Alle weiteren Optionen (Spiel gegen andere Spieler, Live-Stream) ist nur über einen Online-Zugang möglich und erfodert je nach gewählter Optionen auch einen weiteren Account bei anderen Schach-Cloud anbietern wie `Chess.com` oder `Lichess`.
+Nach einer Analyse der Companion-App, ist zu erkennen, dass hier eine Registrierung inklusive Profilerstellung notwendig ist, um mit der Verwendung der App fortfahren zu können. Erst danach ist ein Spiel gegen den Computer ohne Internet möglich. Alle weiteren Optionen (wie bspw. Spiel gegen andere Spieler, Live-Stream) ist nur über einen Online-Zugang möglich und erfordert je nach gewählten Optionen auch einen weiteren Account bei anderen Schach-Cloud-Anbietern wie `Chess.com` oder `Lichess`.
 
 <br>
 
@@ -206,7 +214,7 @@ Beide Square-Off-Modelle ermöglichen durch eingebaute Akkus auch eine mobile Nu
 
 <br>
 
-Zusammenfassend ist festzustellen, dass alle vier Tische dank unterschiedlicher Ausführung von Spiel-Eigenschaften zu unterschiedlichen Spiel-Erlebnissen führen. Für Nutzer ist eine Entscheidung anhand von Funktionen kaum möglich; letztlich bedarf es der Auswertung von gewünschten und gegebenen Funktionen. Dadurch dass nur die Firma `Square Off` einen wirklich autonomen Schachtisch anbietet, auch wenn dieser nicht alle angestrebten Funktionalitäten bietet. So hat der Nutzer kaum auswahlmöglichkeiten auf der kommerziellen Seite.
+Zusammenfassend ist festzustellen, dass alle vier Tische dank unterschiedlicher Ausführung von Spiel-Eigenschaften zu unterschiedlichen Spiel-Erlebnissen führen. Für Nutzer ist eine Entscheidung anhand von Funktionen kaum möglich; letztlich bedarf es vor einem Kauf der Auswertung von gewünschten und gegebenen Funktionen. Es ist erkennbar, dass nur die Firma `Square Off` einen absolut autonomen Schachtisch anbietet, auch wenn dieser nicht alle in diesem Projekt angestrebten Funktionalitäten bietet. So hat der Nutzer im Hinblick auf kommerzielle Angebote kaum Auswahlmöglichkeiten.
 
 <br>
 
@@ -1415,7 +1423,7 @@ Da jede dieser Services stateless und und keine eigenen Daten speichert, werden 
 - Redis In-Memory Key Value Datenbank
 
 Hierbei wurde auf zwei verschiedenen Datenbanken gesetzt, welche im Folgenden erläutert werden. 
-Die `Redis` Datenbank wird ausschließlich für die Speicherung der aktiven Sessions der einzelnen verbundenen Clients verwendet.
+Die `Redis` [@redis] Datenbank wird ausschließlich für die Speicherung der aktiven Sessions der einzelnen verbundenen Clients verwendet.
 Durch das verwendete Sessionsystem, bei dem jeder Clients in kurzen Intervallen seine aktivität bestätigen muss, bietet diese Datenbank den Vorteil, dass diese durch ihre Archtiektur sehr schnell auf die angeforderten Datensätze zugreifen kann. Auch wird hier nur der Datensatz gespeichert, welche die notwendigen Informationen zu der aktiven Session des Clients gespeichert. Diese werden durch die (+id) des Clients abgefragt.
 Hierzu wird der Zeitstempel der Anmeldung, sowie die letzte Anfrage des Clients in Form eines (+json) Dokuments gespeichert.
 
@@ -1428,9 +1436,9 @@ Hierzu wird der Zeitstempel der Anmeldung, sowie die letzte Anfrage des Clients 
 ```
 
 Durch den Key-Value-Ansatz sowie den hohen Verbrauch an Arbeitsspeicher eignet sich diese Datenbank jedoch nicht zum Speichern der Spieldaten.
-Hierzu wurde ein zusätzlicher `Mongo` Datenbank Serice erstellt, in welchem diese Daten abgegelgt werden. Zusätzlich zu den Spieldaten (Spiele, Spielstände, Statistiken), werden auch die Nutzerprofile speichert. Ein Profile wird  beim ersten Anmeldevorgang erstellt und enthält neben den Profilinformationen (Geräte-(id), Namen, Spielertyp) auch die Referenzen auf die gewonnen und verlorenen Spiele. Die können später für die Visualisierung verwendet werden.
+Hierzu wurde ein zusätzlicher `Mongo` [@mogodb] Datenbank Service erstellt, in welchem diese Daten abgelegt werden. Zusätzlich zu den Spieldaten (Spiele, Spielstände, Statistiken), werden auch die Nutzerprofile speichert. Ein Profile wird  beim ersten Anmeldevorgang erstellt und enthält neben den Profilinformationen (Geräte-(id), Namen, Spielertyp) auch die Referenzen auf die gewonnen und verlorenen Spiele. Die können später für die Visualisierung verwendet werden.
 
-Alle aufgelisteten Services werden in seperaten Containern betrieben. Die Containervirtualisierung geschieht mittels der Software `Docker`. Diese stellt ein einfaches Interface zur Erstellung von Containern und der Verwaltung dieser. Um einen Container auf dem System starten zu können, muss dieser zunächst aus einem Image heraus erstellt werden. Diese Image wird mittels einer `Dockerfile` beschrieben und besteht aus einer Reihe an Kommandos, welche den Aufbau des Images beschreiben. 
+Alle aufgelisteten Services werden in seperaten Containern betrieben. Die Containervirtualisierung geschieht mittels der Software `Docker` [@docker]. Diese stellt ein einfaches Interface zur Erstellung von Containern und der Verwaltung dieser. Um einen Container auf dem System starten zu können, muss dieser zunächst aus einem Image heraus erstellt werden. Diese Image wird mittels einer `Dockerfile` beschrieben und besteht aus einer Reihe an Kommandos, welche den Aufbau des Images beschreiben. 
 
 Bei diesem Projekt besteht ein Image in der Regel aus einem vorgefertigten `Ubuntu 20.04` Image, in welchem zusätzliche Software zur welche zur Ausführung der eingentlichen Software benötigt wird. Auch existieren bereits vorgefertigte Images, welche bereits Software für einen spezifischen Anwendungsfall enthält.
 
@@ -1453,7 +1461,7 @@ Zu diesem Zweck existieren mehrere Tools und Systeme um solche Aufgaben zu autom
 Ein weitere nicht zu vernachlässingender Punkt ist die Abhänigkeit, welche unter den Container besteht.
 In diesem Fall benötigt der Backend-Service die beiden Datenbanken um starten zu können.
 Somit ist es essentiell, dass diese bereits zuvor erstellt wurden und ausgeführt werden.
-Solche Funktionalitäten deckt das sehr leichtgewichtigte Tool `docker-compose` ab.
+Solche Funktionalitäten deckt das sehr leichtgewichtigte Tool `docker-compose` [@dockercompose] ab.
 Durch eine entsprechende Konfiugrationsdatei, kann ein so genannter Stack aus mehreren Containern aufgebaut werden.
 
 ```yaml
@@ -1754,7 +1762,7 @@ Durch die Implementierung des Webclienten in (+js) ist dieser sogar lokal über 
 
 <br>
 
-Zusätzlich zu dem verwendeten Vanilla-(+js) wurde jQuery als zusätzliche (+js) Bibliothek verwendet, welches eine Manipulation der (+html) Elemente stark vereinfacht. Diese bietet insbesondere einfach zu nutzende (+http)-Request Funktionen bzw. (+ajax) an, welche für die Kommunikation mit dem Backen-Service verwendet werden. Diese werden im Hintergrund eingesetzt, sodass der Webclient automatisch den neuen Spielzustand dem Benutzer anzeigt. Dies geschieht mittels `polling`, bei dem der Webbrowser in zyklischen Abständen die aktuellen Spiel-Informationen vom Backen-Service abfragt. Diese Methode wurde verwendet, um eine maximale Kompatibilität mit verschiedensten gegebenenfalls älteren Web-Browsern sicherzustellen. Eine moderne alternative ist die Verwendung von Web-Sockets, bei welcher der Web-Browser eine direkte (+tcp)-Verbindung zum Webserver (in diesem Fall der Backend-Service) aufnehmen und so eine direkte Kommunikation stattfinden kann ohne Verwendung der `polling`-Methode.
+Zusätzlich zu dem verwendeten Vanilla-(+js) wurde `jQuery´ [@jquery] als zusätzliche (+js) Bibliothek verwendet, welches eine Manipulation der (+html) Elemente stark vereinfacht. Diese bietet insbesondere einfach zu nutzende (+http)-Request Funktionen bzw. (+ajax) an, welche für die Kommunikation mit dem Backen-Service verwendet werden. Diese werden im Hintergrund eingesetzt, sodass der Webclient automatisch den neuen Spielzustand dem Benutzer anzeigt. Dies geschieht mittels `polling`, bei dem der Webbrowser in zyklischen Abständen die aktuellen Spiel-Informationen vom Backen-Service abfragt. Diese Methode wurde verwendet, um eine maximale Kompatibilität mit verschiedensten gegebenenfalls älteren Web-Browsern sicherzustellen. Eine moderne alternative ist die Verwendung von Web-Sockets, bei welcher der Web-Browser eine direkte (+tcp)-Verbindung zum Webserver (in diesem Fall der Backend-Service) aufnehmen und so eine direkte Kommunikation stattfinden kann ohne Verwendung der `polling`-Methode.
 
 <br>
 
@@ -2218,18 +2226,72 @@ void MenuManager::updateProgress()
 
 # Fazit
 
-Zusammenfassend lässt sich feststellen, dass das Ziel der Arbeit erreicht wurde.
-Es wurde ein Prototyp eines autonomen Schachtischs entwickelt.
+Zusammenfassend lässt sich feststellen, dass das Ziel der Arbeit erreicht wurde. Die Kernfrage, welche die Überprüfung der Ausführbarkeit inklusive Erstellung und Umsetzung eines eingebetteten Systems und einer Cloud-Infrastruktur umfasst, konnte abschließend positiv beantwortet werden.
 
-* mit am weitesten forgeschrittener open-source autonomes Schachtisch Projekt
-* vom versierten Benutzer selbstädig aufbaubar
-* leichte bedienung
-* lässt spiel für erweiterungen
-*
+Es wurde iterativ ein autonomer Schachtisch entwickelt, welcher alle zuvor gestellten Anforderungen erfüllt. 
+Die Positionen der Schachfiguren können mittels NFC-Tags in den Füßen der Figuren und eines NFC-Lesers unterhalb des Schachfelds umgesetzt werden. 
+Die Mechanik zur Bewegung des NFC-Lesers und eines Magnetes in dessen Mitten ermöglicht zudem durch gegenpolige Magnete in den Füßen der Figuren ein automatisches Bewegen der Figuren ohne manuelle Interaktionen. 
+Die Größe des Feldes ist so ausgelegt, dass Figuren ohne Kontraktionen aneinander vorbeigeführt und am Rand des Spielfeldes positioniert werden können, sofern sie aus dem Spiel ausgeschieden sind. Dadurch war eine kleinere Revision des Tisches nicht anwendbar, dennoch konnten mittels der größeren Dimensionen der letzten Revision diese Funktion und weitere, wie die Mechanik zur Bewegung, optimiert und adäquater umgesetzt werden. 
+
+<br>
+
+Der Tisch verfügt über eine Stand-Alone Funktionalität, welche das Starten und Auswerten eines Spiels ohne Anbindung zum Internet oder zu externen Geräten, wie eines Smartphones, ermöglicht. 
+Dennoch ist es über eine Verbindung zum Internet mittels eines Cloud-Services möglich, zusätzliche Funktionen wie das Spiel gegen andere, reale Spieler oder gegen eine Schachlogik zu nutzen oder einen Livestream zum Darstellen von gegenwärtigen Spielen aufzubauen.
+
+<br>
+
+Anhand der Durchführung von iterativen Verbesserungen und einzelnen Revisionen des Modells lassen sich definierte Aussagen zu Fortschritten und Veränderungen des Gesamtsystems treffen.
+Der Schachtich als eingebettetes System besteht aus einem modularen Aufbau, welches sich im Verlauf der Iterationen durch das Anpassen einzelner Komponenten aufwerten ließ. Derartige Systeme erfordern in der Vorbereitung ein hohes Verständnis der Zusammenhänge von Komponenten, da spätere Veränderungen komplexer sind; da hierbei in den verschiedenen Iterationen aber nur einzelne Modulgruppen verändert wurden, musste lediglich die Verbindung des jeweiligen Moduls neu berücksichtig werden und keine gänzliche Aufwertung aller Komponenten erfolgen. 
+Anders als Mehrzwecksystemen, welche oftmals weniger einzelne Module beinhalten, konnte hier eine separierte Betrachtung der Komponenten erfolgen.
+
+<br>
+
+Nicht nur der Aufbau der Komponenten erfolgt modular, sondern auch das Erstellen allen Softwarekomponenten und die Konstruktion des Schachtischt. 
+Letzteres führt zu einem einfachen Aufbau des Tisches, welcher auch von versierten oder motivierten Anwendern ausgeführt werden könnten. Eine aussagekräftige Versuchsführung dazu liegt jedoch nicht vor.
+Zudem sind nahezu alle verwendeten Materialien mühelos erhältlich, nur 3D-Komponenten müssen separat gedruckt werden. Die alle Ressourcen einschließlich der (+cad) -Modelle sind online zur Verfügung gestellt worden. 
+
+<br>
+
+Die Bedienung des Systems mittels des verbauten Bildschirms ist ebenfalls auf eine simple Benutzerführung spezifiziert. Auch unerfahrene Spieler können ein Spiel beginnen ohne eine differenzierte Einweisung erhalten zu haben. Diese Funktionalität wurde an einzelnen Probanden getestet, eine aussagekräftige Statistik liegt jedoch nicht vor. 
+
+<br>
+
+
+Letzlich 
+
+
+<br> 
+
+
+<br>
 
 ## Persönliches Fazit
 
+* mit am weitesten forgeschrittener open-source autonomes Schachtisch Projekt
+* lässt spiel fürErweiterungen
+* iterativer Ansatz schnell Lösungen
+* reibungslos 
+* viele neue Techniken erlernt 
+
+
+Gutes Projekt
+Schwächen: 
+Ziemlich geil, funktioniert
+Breite Masse nicht getestet aber von einzelnen (kein 0815 User) kein Endverbraucher
+Kein Langzeittest (außer 6 Stunden Test)
+Entwicklungsprozess iterativ in schritten
+Daten fehlen – Statistiken – funktioniert es gut? Lässt es sich nutzen
+Sehr umfangreich, viele Facetten (rein informatik, sondern auch Mechanik)
+Anreize, weiterzumachen
+Regelmäßig Spiel
+(Markdown)
+
+Aufgrund der geringen Anzahl an Teilnehmenden an der Studie B, können keine allgemeingültigen Schlussforlgerungen gezogen werden. Da es sich jedoch um qualitative Forschung handelte, die das Verhalten individueller Personen untersuchte, liefert die Studie dennoch wertvolle und aussagekräftige Ergebnisse.
+
+
+
 ## Ausblick
 
+* Alexa
 * Einbindung in existeirende Schach-Clouds  z.B. https://lichess.org/
 * user-port für Erweiterungen (z.B. DGT Schachur)
