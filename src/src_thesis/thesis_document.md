@@ -359,11 +359,88 @@ Auch müssen die Figuren für den Benutzer eine gut handhabbare Größe aufweise
 # Grundlegende Verifikation der ausgewählten Technologien
 
 ## Erprobung Buildroot-Framework
-* Erstellen eines einfachen images für das embedded System
-* inkl ssh Server und SFTP
-* qt 5 libraries
-* eigenes package atctp
-* test der toolchain
+
+Eine Hürde, welche bei diesem Projekt genommen werden muss, ist die Erstellung der Software welche auf dem autonomen Schachtisch ausgeführt wird.
+Hierbei soll diese nicht von Grund auf neu entwickelt werden, sondern auf einer soliden Basis aufbauen.
+Allgemien soll hier auf ein minimales Linux-System gesetzt werden, in welches die Software des autonomen Schachtisch integriert wird. 
+Auf dem Basis-System müssen die folgenden Software-Pakete installiert sein, bzw einfach integrierbar sein:
+
+- (+ssh) für den Remote-Zugriff
+- (+dhcp) Client zur automatischen (+ip) Adressvergabe
+- (+udev) zur Ein-/Ausgabe Geräte verwaltung (Touchscreen)
+- Qt[@qtframework] - (+gui) Framework
+- SW-Update zur Durchführung eines Remote-Update
+
+Zusätzlich zu diesen auf dem Linux-System benötigten Paketen, muss es möglich sein durch das eingebettete System bootbares Dateiimage zu erzeugen.
+Auf seiten der Entwicklung ist eine Toolchain notwendig, mit welcher es möglich ist in C++ geschriebene Programme auf dem System ausführen und mittels (+gdb) auf Fehler überprüfen zu können. Dazu sollte der C++ Compiler mindesten den C++17 Standart untersützen.
+
+Für diesen Zweck existieren einige Open-Source Projekte, welche solch ein Build-System bereitstelle. Hierbei existieren zwei weit verbreitete Systeme.
+Das `Yocot`-Projekt[@yoctoproject] und das `Buildroot`-Framework[@buildroot].
+Hierbei unterscheiden sich diese im Aufbau und der Funktionsweise teils stark, vor allem wärend der ersten Verwendung.
+
+: Vergleich `Yocto`- `Buildroot` [@yoctobuildroot]  \label{commchesstables}
+
+|                                                         | YOCTO     | BUILDROOT     |
+|------------------------------               |-------    |-----------                |
+| Dependency-Management             | Nein     | Ja                           |
+|  Partielle Updates                           | Ja         | Nein                       |
+| automatischer Paket-Download     | Nein     | Ja                           |
+| verwendung Build-Cache               | Ja        | Nein                        |
+| einfache Konfiguration                   | Nein     | Ja                            |
+|                                                        |              |                                |
+
+Hierbei stellt das `Yocto`- Projekt, eine größere Einsteigshürde, durch ein komplexes Layer-System dar. Es bietet sich jedoch für komplexe Projekte an, welche einen hohen Grad an Individualisierung benötigen. Ein Nachteil dessen, ist da dadurch auch viel vom Nutzer selber konfiguriert werden muss, bevor ein minimales System in Betrieb genommen werden kann.
+
+Das `Buildroot`-Framework bietet bereits eine große Anzahl an vorgefertigteten Ziel-Systemen an, für welche es bereits alle nötigen Parameter enthält um ein minimales System erstellen zu können. Auch ist  bereits eine optimierte Konfiguration für das eingebettete System vorhanden, welche direkt gestartet werden kann. Nach einem Erfolgreichem erstellen, des Images kann dieses direkt über das eingebettete System gestartet werden.
+Bei jedem Build-Vorgang müssen jedoch alle Pakete erneut gebaut werden, bevor diese zu einem finalen Image zusammengefügt werden.
+Hierbei kann dieser Vorgang je nach Umfang der verwendeten Pakete mehrere Stunden dauern. Das `Yocot`-Projekt unterstüzt hierbei das erstellen einzelner Pakete, somit müssen nur Änderungen neu gebaut werden.
+Da hier nur eine minimale Anzahl von Paketen benötigt werden, somit hält sich dieser Bauvorgang zeitlich in grenzen und ist allgemein für diese Projekt nicht entscheidend.
+
+
+
+```yaml
+#atctp - Config.in - Package Configuration
+
+config BR2_PACKAGE_ATCTP
+    bool "ATC_TEST_PACKAGE"
+    help
+        This package is a test package to verify the buildroot build process
+```
+
+Zusätzlich wurde ein eigenes C++ Paket erstellt und in das `Buildroot`-Framework integriert. Hierzu sind zu dem Quellcode, zwei weitere Dateien notwenig.
+Die `Config.in` beschreibt das Paket und setzt möglicherweise benötigte Abhängigkeiten zu anderen Paketen fest.  Die zweite Datei ist die `PAKET_NAME.mk` Makefile, welche die Schritte beschreibt, welche zum Erstellen und Installieren des Paketes durchgeführt werden müssen. 
+
+
+```yaml
+# atctp - atctp.mk - Makefile
+################################################################################
+#
+# atctp; For ATC Project; Marcel Ochsendorf; marcelochsendorf.com atomicchess.de
+#
+################################################################################
+
+ATCTP_VERSION = 1.0.0
+ATCTP_SITE = ./package/atctp/src
+ATCTP_SITE_METHOD = local
+ATCTP_LICENSE = GPL-2.0+
+
+
+define ATCTP_BUILD_CMDS
+    @echo ATCTP_BUILD!
+    @echo $(@D)
+    @echo -----------------
+    $(MAKE) $(TARGET_CONFIGURE_OPTS) -C $(@D)
+endef
+
+
+define ATCTP_INSTALL_TARGET_CMDS
+    @echo ATCTP_INSTALL!
+    $(INSTALL) -D -m 0755 $(@D)/hello $(TARGET_DIR)/usr/ATC/atc_testpackage
+endef
+
+$(eval $(generic-package))
+```
+Das somit erstellte Test-Paket `atctp` bildet somit eine funktionierende Grundlage für das System. Somit eignet sich das `Buildroot`-Framework optimal für diese Projekt, da hier der Prozess zur Integration von eigener Software sich als sehr einfach gestaltet.
 
 
 ## Verifikation NFC Technologie
@@ -1474,15 +1551,15 @@ services:
       - AtomicChessRedisDatabase
       - AtomicChessMongoDatabase
       - AtomicChessMoveValidator
-    #links: 
-      - "AtomicChessRedisDatabase:AtomicChessRedisDatabase"
-      - "AtomicChessMongoDatabase:AtomicChessMongoDatabase"
-      - "AtomicChessMoveValidator:AtomicChessMoveValidator"
+    links: 
+      - "redisdb:AtomicChessRedisDatabase"
+      - "mongodb:AtomicChessMongoDatabase"
+      - "movevalidator:AtomicChessMoveValidator"
     image: atcbackend:latest
     build: 
       context: ../ATC_Backend/
     restart: always
-    #ports:
+    ports:
       - 3000:3000
     environment:
       - PRODUCTION=1
@@ -1492,7 +1569,6 @@ services:
     build:
       context: ../ATC_MoveValidator/
     image: atcmovevalidator:latest
-    #network_mode: "host"
     restart: always
     ports:
       - 5000:5000
@@ -1505,7 +1581,6 @@ services:
     container_name: atcredis
     ports:
       - 6379:6379
-    #network_mode: "host"
     
   AtomicChessMongoDatabase:
     image: mongo:latest
@@ -1514,28 +1589,28 @@ services:
     environment:
         - MONGO_DATA_DIR=/data/db
         - MONGO_LOG_DIR=/dev/null
-      #volumes:
-     #   - ./data/db:/data/db
+    volumes:
+        - ./data/db:/data/db
     ports:
       - 27017:27017
     command: mongod --logpath=/dev/null # --quiet
 
 
   AtomicChessAutoPlayer:
-    #depends_on:
+    depends_on:
       - AtomicChessBackend
-    #container_name: atcautoplayer
+    links: 
+        - "backend:AtomicChessBackend"
     build:
       context: ../ATC_AutoPlayer/
     image: atcautoplayer:latest
-    network_mode: "host"
-    restart: "always"
-    scale: 3 # SPAWN THREE INSTANCES
+    restart: always
+    scale: 5 # SPAWN THREE INSTANCES
     environment:
-      - PRODUCTION
-      - BACKEND_IP=127.0.0.1:3000 #HOST IP:PORT OF BACKEND EXAMPLE 127.0.0.1:3000 USING ONLY HTTP
+      - PRODUCTION=1
+      - BACKEND_IP=backend:3000 #HOST IP:PORT OF BACKEND EXAMPLE 127.0.0.1:3000 USING ONLY HTTP
       #- USE_HOSTNAME_HWID=TRUE # USE THE LOCAL MACHINE HOSTNAME AS HWID
-      #- PLAYER_TYPE_HUMAN=1 # SIMULATE A HUMAN PLAYER TYPE
+      #- PLAYER_TYPE_HUMAN=1 # SIMULATE A HUMAN PLAYER TYPE FOR TESTING
 
 ```
 
