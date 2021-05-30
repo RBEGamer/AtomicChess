@@ -5,7 +5,7 @@ Ein bauen per Dockerimage ist möglich mittels ` build_thesis_docker.sh` Script 
 
 # CHANGELOG
 
-# 30.05.2021
+# 30.05.2021 --PDF NOCH NICHT AKTUALISIERT --
 
 * 9.1 - Fazit (neu)
 
