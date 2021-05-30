@@ -2290,8 +2290,6 @@ void MenuManager::updateProgress()
 ```
 
 
-
-
 # Fazit
 
 Zusammenfassend lässt sich feststellen, dass das Ziel der Arbeit erreicht wurde. Die Kernfrage, welche die Überprüfung der Ausführbarkeit inklusive Erstellung und Umsetzung eines eingebetteten Systems und einer Cloud-Infrastruktur umfasst, konnte abschließend positiv beantwortet werden.
@@ -2324,16 +2322,28 @@ Die Bedienung des Systems mittels des verbauten Bildschirms ist ebenfalls auf ei
 
 <br>
 
-
-Letzlich 
-
+Grundsätzlich ist festzuhalten, dass es sich beim Resultat der Arbeit um kein finalisiertes Produkt, sondern um einen strukturellen Prototyp handelt. Weitere Prüfungen, wie Nutzungsstatistiken oder Sicherheitsprüfungen, müssten durchgeführt werden, ehe der Schachtisch als kommerzielles Produkt betrachtet werden kann. Auch fehlen diverse Langzeittests. Ein Betriebstest mit einer Dauer von 6 Stunden verlief ohne erkennbare Zwischenfälle, für aussagekräftige Verschleiß- und Fehlererkennungen bedarf es jedoch noch weiterer und längerer Untersuchungen. 
 
 <br> 
 
+Der Prototyp lässt sich jedoch mit kommerziell erhältlichen und open-source verfügbaren Schachtischen vergleichen. Das Ziel, alle wünschenswerten Funktionen und Implementationen dieser Tische in den Prototypen zu integrieren, konnten erfolgreich umgesetzt werden. Darüber hinaus wurde weitere Funktionalitäten eingegliedert, wie eine Stand-Alone Funktionalität oder einer Schnittstelle zum Erstellen weiterer Erweiterungen. 
+
+<br>
+
+Das System und insbesondere der implementierte Cloud-Service sind online erreichbar und erweiterbar. Dies ermöglicht unter anderem das Bauen eines eigenen Tisches unter der Verwendung des AtomicChess Systems, aber auch die Integration weiterer Komponenten. Erfahrene Entwickler können somit das Spiel beliebig ausweiten oder sogar andere Spiele ergänzen. Die für das Projekt entworfene Mechanik und Spielführung kann dementsprechend auch für diverse andere Tischbrettspiele verwendet werden.
+
+<br>
+
+Neben diversen im Studium erlernten Fähigkeiten wurden im Laufe des Projekts noch diverse andere Leistungen erforderlich, wie die Erstellung einer Mechanik oder das Konstruieren von Komponenten, welche das Aneignen von zusätzlichem Wissen erfordern. Die resultierende Mechanik ist ungeachtet dessen ist fehlerlos und nahezu spielfrei, was ein reibungsloses Spiel ermöglicht
+
+<br>
+
+Abschließend lässt sich feststellen, dass ein funktionstüchtiger Schachtich konstruiert wurde, der basierend auf einem eingebetteten System und einer Cloud-Infrastruktur als gelungener Abschluss eins Informatikstudiums bezeichnet werden kann.
 
 <br>
 
 ## Persönliches Fazit
+
 
 * mit am weitesten forgeschrittener open-source autonomes Schachtisch Projekt
 * lässt spiel fürErweiterungen
