@@ -369,7 +369,7 @@ Allgemien soll hier auf ein minimales Linux-System gesetzt werden, in welches di
 Auf dem Basis-System müssen die folgenden Software-Pakete installiert sein, bzw einfach integrierbar sein:
 
 - (+ssh) für den Remote-Zugriff
-- (+dhcp) Client zur automatischen (+ip) Adressvergabe
+- (+dhcp) Client zur automatischen IPv4-Adressvergabe
 - (+udev) zur Ein-/Ausgabe Geräte verwaltung (Touchscreen)
 - Qt[@qtframework] - (+gui) Framework
 - SW-Update zur Durchführung eines Remote-Update
