@@ -66,8 +66,6 @@ Dies soll mittels eines kompakten und minimalistischen Designs realisiert werden
 
 Im zweiten Kapitel werden die zum Zeitpunkt existierenden Ansätze und deren Umsetzung beleuchtet. Hier wurde insbesondere darauf geachtet, die Grenzen bestehender Systeme darzulegen und auf nur für dieses Projekt zutreffende Funktionen zu vergleichen.
 
-
-
 <br>
 
 Die Anforderungsanalyse im dritten Kapitel, fasst alle zuvor recherchierten Funktionen bestehender Systeme zusammen und leitet daraus eine Auflistung der Anforderungen ab, welche in den nachfolgenden Prototypen realisiert werden sollen.
@@ -341,27 +339,16 @@ Auch müssen die Figuren für den Benutzer eine gut handhabbare Größe aufweise
 
 
 
-# Machbarkeitsanalyse
+# Machbarkeitsanalyse und Verifikation der ausgewählter Technologien
 
 * welche technologien werden benötigt
 * software architektur anfoderungen
-* hardware anforderungen
-* grosse
-* wiederholgenauigkeit
-* lautstärke
-* vorerfahrnung in cad ed druck und schaltungsdesign
 
 
 
 
 
-
-
-
-
-# Grundlegende Verifikation der ausgewählten Technologien
-
-## Erprobung Buildroot-Framework
+## Buildroot-Framework
 
 Eine Hürde, welche bei diesem Projekt genommen werden muss, ist die Erstellung der Software welche auf dem autonomen Schachtisch ausgeführt wird.
 Hierbei soll diese nicht von Grund auf neu entwickelt werden, sondern auf einer soliden Basis aufbauen.
@@ -438,7 +425,7 @@ $(eval $(generic-package))
 Das somit erstellte Test-Paket `atctp` bildet somit eine funktionierende Grundlage für das System. Somit eignet sich das `Buildroot`-Framework optimal für diese Projekt, da hier der Prozess zur Integration von eigener Software sich als sehr einfach gestaltet.
 
 
-## Verifikation NFC Technologie
+## NFC Technologie
 
 Ein weiterer wichtiger Bestandteil soll die Erkennung der sich auf dem Feld befindlichen Schachfiguren sein.
 Hierbei muss zum einen der Figur-Typ (Bauer, König, Dame, ..) und die Figur-Farbe (schwarz, weiss) vom System erkannt werden.

@@ -10,7 +10,7 @@ werden. Im Gegensatz zu Mehrzwecksystemen (Englisch ``multi-purpose
 systems''), wie zum Beispiel einem Personal Computer, welcher in der
 Lage ist, diverse Funktionen auszuführen und nicht zwingend an eine
 Funktion gebunden ist, dienen eingebettete Systeme einer bestimmten
-Logik. Daraus resultieren simplere und auch Ressourcen-sparendere
+Logik. Daraus resultieren simplere und auch Ressourcen-sparsamere
 Systeme, die wesentlich näher an der Technik und der für den Zweck
 nötigen Komponenten und Software entwickelt werden. Systeme können
 günstiger zusammengesetzt und Fehlerquellen schneller entdeckt und
@@ -55,18 +55,18 @@ System manifestiert.
 Der Reiz im Schachprojekt liegt in der Bedeutung und der Seltenheit.
 Schach ist ein bewährtes, ausnahmslos bekanntes und immer logisches
 Spiel, welches jedoch im kommerziellen Rahmen nie an Bedeutung gewonnen
-hat. Die Auswahl der verfügbare elektrifizierten und programmgesteuerten
-Schachtische ist auffallend gering; zudem sind existierende Lösungen
-oftmals nicht erschwinglich und bedürfen erhebliche Anpassungen des
-Spielers an das Spiel. Innerhalb der vergangenen drei Jahrzehnte
-bewiesen sich immer mehr Konzerne ihre technische Kompetenz und
-Überlegenheit und die Fähigkeit ihrer Maschinen mittels der Auswertung
-von Schachalgorithmen und dem möglichst schnellen besiegen derzeitiger
-Schach-Meister und -Meisterinnen. Die Algorithmen stehen heute in einer
-Vielzahl als open-source Projekte zur Verfügung, jedoch ist das
-Interesse daran, für Spieler mögliche Anwendungen zu generieren,
-verschwindend gering und wird oftmals nur von Experten und Enthusiasten
-genutzt und auch hinterfragt.
+hat. Die Auswahl der verfügbaren elektrifizierten und
+programmgesteuerten Schachtische ist auffallend gering; zudem sind
+existierende Lösungen oftmals nicht erschwinglich und bedürfen
+erhebliche Anpassungen des Spielers an das Spiel. Innerhalb der
+vergangenen drei Jahrzehnte bewiesen sich immer mehr Konzerne ihre
+technische Kompetenz und Überlegenheit und die Fähigkeit ihrer Maschinen
+mittels der Auswertung von Schachalgorithmen und dem möglichst schnellen
+besiegen derzeitiger Schach-Meister und -Meisterinnen. Die Algorithmen
+stehen heute in einer Vielzahl als open-source Projekte zur Verfügung,
+jedoch ist das Interesse daran, für Spieler mögliche Anwendungen zu
+generieren, verschwindend gering und wird oftmals nur von Experten und
+Enthusiasten genutzt und auch hinterfragt.
 
 Mit dieser Arbeit möchte ich mich diesem Problem stellen und einen
 möglich günstigen Tisch entwickeln, welcher das Spielerlebnis ohne
@@ -99,19 +99,34 @@ autonome Schachtisch weitere folgende Funktionalitäten aufweisen:
   Stand-Alone Funktionalität
 \end{itemize}
 
+Die Kernfrage der Arbeit bezieht sich somit auf die Überprüfung der
+Ausführbarkeit inklusive Erstellung und Umsetzung eines eingebetteten
+Systems und einer Cloud-Infrastruktur.
+
 Der Schwerpunkt liegt dabei insbesondere auf der Programmierung des
 eingebetteten Systems und dem Zusammenspiel von diesem mit einem aus dem
 Internet erreichbaren Servers, welcher als Vermittlungsstelle zwischen
 verschiedenen Schachtischen und anderen Endgeräten dient. Dieses besteht
 zum einem aus der Positionserkennung und Steuerung der
 Hardwarekomponenten (Schachfiguren) und zum anderen aus der
-Kommunikation zwischen dem Tisch selbst und einem in einer Cloud
-befindlichem Server. Mittels der Programmierung werden diverse
+Kommunikation zwischen dem Tisch selbst und einem in einem in einer
+Cloud befindlichen Server. Mittels der Programmierung werden diverse
 Technologien von verschiedenen Einzelsystemen zu einem Gesamtprodukt
 zusammengesetzt. Insgesamt gilt es, einen für Anwender ansprechenden
 Schachtisch zu entwickeln, der das Spielerlebnis nicht nur
 originalgetreu widerspiegelt, sondern das Einzelspieler-Modell
 zusätzlich noch verbessert.
+
+Der Grundgedanke dabei ist, dem Spieler die Arbeit des Versetzens der
+Spielfiguren und das Erwägen von gegnerischen Zügen abzunehmen. Dem
+Spieler wird die Möglichkeit geboten, gegen andere Spieler an diversen
+Orten oder gegen eine Schachlogik zu spielen und so Züge auszuführen,
+die jener im besten Fall nicht einmal vorhergesehen hat. Zudem wird die
+Korrektheit der getätigten Züge überprüft und sämtliche traditionellen
+Spielregeln in das Spiel mit einbezogen. Somit ist es nicht nur möglich,
+dass Anfänger das Spiel erlernen können, sondern auch bewährten Spielern
+mit unerwarteten Zügen des virtuellen oder realen Gegners neue
+Methodiken darzustellen.
 
 Dies soll mittels eines kompakten und minimalistischen Designs
 realisiert werden. Darüber hinaus, spielt nicht nur das Design eine
@@ -163,7 +178,7 @@ sowie der Mechanik gelöst. Die Zuverlässigkeit wurde mittels stetiger
 Testläufe mit kontrollierten Schachzug-Szenarien überwacht und so ein
 produktreifer Prototyp entwickelt.
 
-Im darauffolgenden achten Kaptiel wird die Cloud-Infrastruktur
+Im darauffolgenden achten Kapitel wird die Cloud-Infrastruktur
 thematisiert, welche für eine Kommunikation zwischen den autonomen
 Schachtischen entscheidend ist. Auch wird dabei die Software, welche auf
 dem eingebetteten System ausgeführt wird, im Detail beschrieben und
@@ -171,16 +186,17 @@ deren Kommunikation mit der Cloud-Infrastruktur, sowie mit den
 elektrischen Komponenten beleuchtet. Zusätzlich zu dieser, wurde ein
 Webclient entwickelt, mit dem es Benutzern möglich ist über einen
 Webbrowser gegen den Tisch zu spielen. Dieser Client bietet außerdem die
-Möglichkeit das System wärend der Entwicklung testen zu können.
+Möglichkeit das System schon im Laufe des Entwicklungsprozesses testen
+zu können.
 
-Das neute Kapitel beschäftligt sich mit der Software, welche auf dem
-eingebetteten System ausgeführt wird. Diese übersetzt die Spieldaten
-welche von der Cloud-Infrastruktur abgefragt werden in Zug-Befehle
+Das neunte Kapitel beschäftigt sich mit der Software, welche auf dem
+eingebetteten System ausgeführt wird. Diese übersetzt die Spieldaten,
+welche von der Cloud-Infrastruktur abgefragt werden in Zug-Befehle,
 welche von der Mechanik umgesetzt werden. Dabei gilt ein besonderes
-Augenmkert der Berechnung der Figurbewegung und dem Erkennen von durch
+Augenmerk der Berechnung der Figur-Bewegungen und dem Erkennen von durch
 den Benutzer getätigten Schachzügen.
 
-Das zehnte und abschliessende Kapitel, befasst sich mit dem Fazit und
+Das zehnte und abschließende Kapitel, befasst sich mit dem Fazit und
 gibt einen Ausblick auf mögliche Erweiterungen und Verbesserungen.
 
 \hypertarget{analyse-bestehender-systeme}{%
@@ -228,13 +244,13 @@ Tischen handelt es sich um
 Für die kommerziell käuflichen Schachspiele \ref{commchesstables} gibt
 es kein sehr großes Marktangebot, weswegen für den Vergleich nur zwei
 Hersteller mit jeweils zwei verschiedenen Modellen gewählt werden
-konnte. (Derzeit integriert nur das Unternehmen
-\passthrough{\lstinline!Square Off!} eine Funktion, welche die Figuren
-unterhalb der Tischplatte mechanisch bewegen kann.)
+konnte. Derzeit integriert nur eins dieser Unternehmen,
+\passthrough{\lstinline!Square Off!}, eine Funktion, welche die Figuren
+unterhalb der Tischplatte mechanisch bewegen kann.
 
 Der zweite Hersteller \passthrough{\lstinline!DGT!} wurde dennoch zum
 Vergleich von zusätzlichen Funktionen herangezogen, da dessen
-Schachbretter die aktuelle Figurstellungen erkennen können.
+Schachbretter die aktuelle Figur-Stellungen erkennen können.
 
 Die Tische des Herstellers \passthrough{\lstinline!DTG!} unterscheiden
 sich kaum in ihren Basis-Funktionen; mit steigendem Preis werden
@@ -448,13 +464,13 @@ Für die Schachtische der Firma \passthrough{\lstinline!Square Off!} ist
 eine Smartphone App
 \passthrough{\lstinline!Square Off - Chess App!}\cite{squareoffapp}
 für die Verwendung notwendig. Nach einer Analyse der Companion-App, ist
-zu erkennen, dass hier eine Registrierung inkl Profilerstellung
-notwendig ist um mit der Verwendung der App forfahren zu können. Erst
+zu erkennen, dass hier eine Registrierung inklusive Profilerstellung
+notwendig ist, um mit der Verwendung der App fortfahren zu können. Erst
 danach ist ein Spiel gegen den Computer ohne Internet möglich. Alle
-weiteren Optionen (Spiel gegen andere Spieler, Live-Stream) ist nur über
-einen Online-Zugang möglich und erfodert je nach gewählter Optionen auch
-einen weiteren Account bei anderen Schach-Cloud anbietern wie
-\passthrough{\lstinline!Chess.com!} oder
+weiteren Optionen (wie bspw. Spiel gegen andere Spieler, Live-Stream)
+ist nur über einen Online-Zugang möglich und erfordert je nach gewählten
+Optionen auch einen weiteren Account bei anderen Schach-Cloud-Anbietern
+wie \passthrough{\lstinline!Chess.com!} oder
 \passthrough{\lstinline!Lichess!}.
 
 Beide Square-Off-Modelle ermöglichen durch eingebaute Akkus auch eine
@@ -464,12 +480,12 @@ erlaubt.
 Zusammenfassend ist festzustellen, dass alle vier Tische dank
 unterschiedlicher Ausführung von Spiel-Eigenschaften zu
 unterschiedlichen Spiel-Erlebnissen führen. Für Nutzer ist eine
-Entscheidung anhand von Funktionen kaum möglich; letztlich bedarf es der
-Auswertung von gewünschten und gegebenen Funktionen. Dadurch dass nur
-die Firma \passthrough{\lstinline!Square Off!} einen wirklich autonomen
-Schachtisch anbietet, auch wenn dieser nicht alle angestrebten
-Funktionalitäten bietet. So hat der Nutzer kaum auswahlmöglichkeiten auf
-der kommerziellen Seite.
+Entscheidung anhand von Funktionen kaum möglich; letztlich bedarf es vor
+einem Kauf der Auswertung von gewünschten und gegebenen Funktionen. Es
+ist erkennbar, dass nur die Firma \passthrough{\lstinline!Square Off!}
+einen absolut autonomen Schachtisch anbietet, auch wenn dieser nicht
+alle in diesem Projekt angestrebten Funktionalitäten bietet. So hat der
+Nutzer im Hinblick auf kommerzielle Angebote kaum Auswahlmöglichkeiten.
 
 \hypertarget{open-source-projekte}{%
 \subsection{Open-Source Projekte}\label{open-source-projekte}}
@@ -748,8 +764,9 @@ zu gewährleisten. Ebenfalls wird kein besonderes Augenmerk auf die
 Geschwindigkeit der Figur-Bewegung gelegt, da hier die Zuverlässigkeit
 und Wiederholgenauigkeit dieser im Vordergrund stehen.
 
-\hypertarget{machbarkeitsanalyse}{%
-\chapter{Machbarkeitsanalyse}\label{machbarkeitsanalyse}}
+\hypertarget{machbarkeitsanalyse-und-verifikation-der-ausgewuxe4hlter-technologien}{%
+\chapter{Machbarkeitsanalyse und Verifikation der ausgewählter
+Technologien}\label{machbarkeitsanalyse-und-verifikation-der-ausgewuxe4hlter-technologien}}
 
 \begin{itemize}
 \tightlist
@@ -757,59 +774,159 @@ und Wiederholgenauigkeit dieser im Vordergrund stehen.
   welche technologien werden benötigt
 \item
   software architektur anfoderungen
-\item
-  hardware anforderungen
-\item
-  grosse
-\item
-  wiederholgenauigkeit
-\item
-  lautstärke
-\item
-  vorerfahrnung in cad ed druck und schaltungsdesign
 \end{itemize}
 
-\hypertarget{grundlegende-verifikation-der-ausgewuxe4hlten-technologien}{%
-\chapter{Grundlegende Verifikation der ausgewählten
-Technologien}\label{grundlegende-verifikation-der-ausgewuxe4hlten-technologien}}
+\hypertarget{buildroot-framework}{%
+\section{Buildroot-Framework}\label{buildroot-framework}}
 
-\hypertarget{erprobung-buildroot-framework}{%
-\section{Erprobung
-Buildroot-Framework}\label{erprobung-buildroot-framework}}
+Eine Hürde, welche bei diesem Projekt genommen werden muss, ist die
+Erstellung der Software welche auf dem autonomen Schachtisch ausgeführt
+wird. Hierbei soll diese nicht von Grund auf neu entwickelt werden,
+sondern auf einer soliden Basis aufbauen. Allgemien soll hier auf ein
+minimales Linux-System gesetzt werden, in welches die Software des
+autonomen Schachtisch integriert wird. Auf dem Basis-System müssen die
+folgenden Software-Pakete installiert sein, bzw einfach integrierbar
+sein:
 
 \begin{itemize}
 \tightlist
 \item
-  Erstellen eines einfachen images für das embedded System
+  \gls{ssh} für den Remote-Zugriff
 \item
-  inkl ssh Server und SFTP
+  \gls{dhcp} Client zur automatischen IPv4-Adressvergabe
 \item
-  qt 5 libraries
+  \gls{udev} zur Ein-/Ausgabe Geräte verwaltung (Touchscreen)
 \item
-  eigenes package atctp
+  Qt\cite{qtframework} - \gls{gui} Framework
 \item
-  test der toolchain
+  SW-Update zur Durchführung eines Remote-Update
 \end{itemize}
 
-\hypertarget{verifikation-nfc-technologie}{%
-\section{Verifikation NFC
-Technologie}\label{verifikation-nfc-technologie}}
+Zusätzlich zu diesen auf dem Linux-System benötigten Paketen, muss es
+möglich sein durch das eingebettete System bootbares Dateiimage zu
+erzeugen. Auf seiten der Entwicklung ist eine Toolchain notwendig, mit
+welcher es möglich ist in C++ geschriebene Programme auf dem System
+ausführen und mittels \gls{gdb} auf Fehler überprüfen zu können. Dazu
+sollte der C++ Compiler mindesten den C++17 Standart untersützen.
 
-\begin{itemize}
-\tightlist
-\item
-  warum gewählter nfc reader =\textgreater{} ndef lesen
-\item
-  reicheweiten test mit 22mm
-\item
-  test mit benachbarten figuren
-\item
-  warum kein RFID =\textgreater{} keine speicherung von id auf der
-  controller seite
-\item
-  selbherstellung von eigenen figuren ohne modifikation der
-  controllerseite
-\end{itemize}
+Für diesen Zweck existieren einige Open-Source Projekte, welche solch
+ein Build-System bereitstelle. Hierbei existieren zwei weit verbreitete
+Systeme. Das
+\passthrough{\lstinline!Yocot!}-Projekt\cite{yoctoproject} und das
+\passthrough{\lstinline!Buildroot!}-Framework\cite{buildroot}.
+Hierbei unterscheiden sich diese im Aufbau und der Funktionsweise teils
+stark, vor allem wärend der ersten Verwendung.
+
+\begin{longtable}[]{@{}lll@{}}
+\caption{Vergleich Yocto - Buildroot
+\label{commchesstables}}\tabularnewline
+\toprule
+& YOCTO & BUILDROOT\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+& YOCTO & BUILDROOT\tabularnewline
+\midrule
+\endhead
+Dependency-Management & Nein & Ja\tabularnewline
+Partielle Updates & Ja & Nein\tabularnewline
+automatischer Paket-Download & Nein & Ja\tabularnewline
+verwendung Build-Cache & Ja & Nein\tabularnewline
+einfache Konfiguration & Nein & Ja\tabularnewline
+& &\tabularnewline
+\bottomrule
+\end{longtable}
+
+Hierbei stellt das \passthrough{\lstinline!Yocto!}- Projekt, eine
+größere Einsteigshürde, durch ein komplexes Layer-System dar. Es bietet
+sich jedoch für komplexe Projekte an, welche einen hohen Grad an
+Individualisierung benötigen. Ein Nachteil dessen, ist da dadurch auch
+viel vom Nutzer selber konfiguriert werden muss, bevor ein minimales
+System in Betrieb genommen werden kann.
+
+Das \passthrough{\lstinline!Buildroot!}-Framework bietet bereits eine
+große Anzahl an vorgefertigteten Ziel-Systemen an, für welche es bereits
+alle nötigen Parameter enthält um ein minimales System erstellen zu
+können. Auch ist bereits eine optimierte Konfiguration für das
+eingebettete System vorhanden, welche direkt gestartet werden kann. Nach
+einem Erfolgreichem erstellen, des Images kann dieses direkt über das
+eingebettete System gestartet werden. Bei jedem Build-Vorgang müssen
+jedoch alle Pakete erneut gebaut werden, bevor diese zu einem finalen
+Image zusammengefügt werden. Hierbei kann dieser Vorgang je nach Umfang
+der verwendeten Pakete mehrere Stunden dauern. Das
+\passthrough{\lstinline!Yocot!}-Projekt unterstüzt hierbei das erstellen
+einzelner Pakete, somit müssen nur Änderungen neu gebaut werden. Da hier
+nur eine minimale Anzahl von Paketen benötigt werden, somit hält sich
+dieser Bauvorgang zeitlich in grenzen und ist allgemein für diese
+Projekt nicht entscheidend.
+
+\begin{lstlisting}
+#atctp - Config.in - Package Configuration
+config BR2_PACKAGE_ATCTP
+    bool "ATC_TEST_PACKAGE"
+    help
+        This package is a test package to verify the buildroot build process
+\end{lstlisting}
+
+Zusätzlich wurde ein eigenes C++ Paket erstellt und in das
+\passthrough{\lstinline!Buildroot!}-Framework integriert. Hierzu sind zu
+dem Quellcode, zwei weitere Dateien notwenig. Die
+\passthrough{\lstinline!Config.in!} beschreibt das Paket und setzt
+möglicherweise benötigte Abhängigkeiten zu anderen Paketen fest. Die
+zweite Datei ist die \passthrough{\lstinline!PAKET\_NAME.mk!} Makefile,
+welche die Schritte beschreibt, welche zum Erstellen und Installieren
+des Paketes durchgeführt werden müssen.
+
+\begin{lstlisting}
+# atctp - atctp.mk - Makefile
+
+ATCTP_VERSION = 1.0.0
+ATCTP_SITE = ./package/atctp/src
+ATCTP_SITE_METHOD = local
+ATCTP_LICENSE = GPL-2.0+
+
+define ATCTP_BUILD_CMDS
+    @echo ATCTP_BUILD!
+    @echo $(@D)
+    @echo -----------------
+    $(MAKE) $(TARGET_CONFIGURE_OPTS) -C $(@D)
+endef
+
+define ATCTP_INSTALL_TARGET_CMDS
+    @echo ATCTP_INSTALL!
+    $(INSTALL) -D -m 0755 $(@D)/hello $(TARGET_DIR)/usr/ATC/atc_testpackage
+endef
+
+$(eval $(generic-package))
+\end{lstlisting}
+
+Das somit erstellte Test-Paket \passthrough{\lstinline!atctp!} bildet
+somit eine funktionierende Grundlage für das System. Somit eignet sich
+das \passthrough{\lstinline!Buildroot!}-Framework optimal für diese
+Projekt, da hier der Prozess zur Integration von eigener Software sich
+als sehr einfach gestaltet.
+
+\hypertarget{nfc-technologie}{%
+\section{NFC Technologie}\label{nfc-technologie}}
+
+Ein weiterer wichtiger Bestandteil soll die Erkennung der sich auf dem
+Feld befindlichen Schachfiguren sein. Hierbei muss zum einen der
+Figur-Typ (Bauer, König, Dame, ..) und die Figur-Farbe (schwarz, weiss)
+vom System erkannt werden. Da hier keine aufwendige Elektronik
+entwickelt werden soll, sondern auf Standard-Komponenten zurückgegriffen
+werden soll, scheidet ein komplexes \gls{hf} Antennen-Array unter dem
+Schachfeld aus, wie es bei einigen kommerziellen Produkten umgesetzt
+ist. Eine einfache 8x8 Matrix aus Drucktastern oder Hall-Effekt-Sensore
+scheidet ebenfalls aus, da hier die Eingabe über den Benutzer erfolgt
+und nur Rückschlüsse auf die veränderte Figur anhand einer Manuellen
+Bewegung der Figur nachvollzogen werden kann.
+
+Somit eignet sich hier die \gls{nfc} Technologie, welche auch bei
+modernen Smartphone eingesetzt wird. Hierzu werden kleine \gls{nfc}-Tags
+bzw. Aufkleber, welche aus einem Chip und einer Antenne bestehen so
+programmiert, dass diese eine definierte Aktion beim Lesegerät auslösen.
+Dies kann zum Beispiel das öffnen einer Internetseite auf dem
+Mobilen-Endgerät, nach dem Scan eines Filmplakats sein.
 
 \begin{figure}
 \centering
@@ -818,32 +935,83 @@ Technologie}\label{verifikation-nfc-technologie}}
 \label{ATC_nfc_range_test}}
 \end{figure}
 
-\begin{itemize}
-\tightlist
-\item
-  test mit figuren nebeneinander
-\end{itemize}
+Ein Vorteil dieser Technologie ist, dass diese auch im Konsumerbereich
+bereits breit verfügbar ist. Durch das einfache Programmieren dieser
+\gls{nfc}-Tag über das Smartphone, wird kein zusätzliches
+Lese-/Schreib-Gerät benötigt. Hier muss jedoch zuvor getestet werden,
+welchen maximaler Abstand nötig ist um solch ein Tag scannen zu können.
+Auch ist der Abstand zwischen den einzelnen Tags entscheident, wie nah
+diese beieinander Platziert werden können um diese einwandfrei auslesen
+zu könnnen.
+
+Hierzu wurde ein kleiner Testaufbau \ref{ATC_nfc_range_test} entwickelt,
+um verschieden Abstände testen zu können.
+
+Als Lesegerät wurde ein \passthrough{\lstinline!PN532!} Modul zum
+Auslesen der \gls{nfc} Tags eingesetzt, da dieser einfach angesteuert
+werden kann und eine abnehmbare Antenne besitzt. Dieser wurde bereits in
+anderen Projekten eingesetzt und erwies sich als zuverlässig.
+
+Die im Test verwendeten \gls{nfc} Tag, haben einen Durchmesser von 22mm
+und sind somit ein Standart-Produkt. Im Test stellte sich heruas, dass
+diese im gewählten Setup, einen Abstand von 5mm zueinander benötigen.
+Der Abstand des Lesegeräts bzw. der Antenne zu einem Tag kann dabei bis
+zu 14mm betragen.
+
+Somit eignet sich die Kombination aus Tag und Lesegerät zu einer der
+Schachfiguren, wobei sich das Lesegerät unter der Schachtischplatte
+befindet.
 
 \hypertarget{schrittmotor-schrittmotorsteuerung}{%
 \section{Schrittmotor /
 Schrittmotorsteuerung}\label{schrittmotor-schrittmotorsteuerung}}
 
-\begin{itemize}
-\tightlist
-\item
-  warum =\textgreater{} einfache ansteuerung
-\item
-  keine STEP DIR somit muss embedded nicht echtzeitfähigsein und kann
-  ggf auch andere task abbarbeiten
-\item
-  TMC schrittmotortreiber spi configuration
-\item
-  und goto move =\textgreater{} wait for move finished irw testen
-\item
-  dafür einfacher python testreiber geschribene
-\item
-  schrittverlust nicht zu erwarten
-\end{itemize}
+Da die einzelnen Figuren über das Schachfeld bewegt werden sollen, ist
+hierfür eine akkurate Positionierung dieser notwendig. Da die Figuren
+einen Durchmesser von 22mm haben und somit ein einzelnes Schachfeld ein
+Größe ca 55mm besitzt, reicht eine Wiederholgenauigkeit von +-1mm. Auch
+wird bei der Wahl der passenden Motoren angenommen dass das Spiel,
+welches durch die Mechanik in das System eingebracht wird,
+vernachlässigbar klein ist. Es ist auch davon auszugehen, das die Kraft
+welche von dem Motoren benötigt wird um eine Achse zu bewegen nicht mehr
+als 45Ncm beträgt.
+
+Dies entspricht den Werten einer X-Y-Achsenkonfiguration, wie sie in
+einem handelüberlichen 3D-Drucker zu finden ist und welche mit
+\passthrough{\lstinline!Nema 17!}-Schrittmotoren ausgestattet sind. Der
+geplante Aufbau des autonomen Schachtischs, ähnelt einer solchen
+Konfiguration sehr, da auch hier die Figuren in X-Y Richtung verfahren
+werden. Einzig die Z-Achse kommt hier nicht zum einsatz. Somit werden
+für erste Tests diese Motoren gewählt.
+
+Deswegen bietet sich hier auch die verwendung von Schrittmotoren an, da
+diese sehr kostengünstig in der geforderten Leistungsklasse zu erwerben
+sind und zudem kann die Ansteuerung einfach realisiert werden. Hierzu
+gibt es verschiedene Schrittmotor-Treiber, welche die Ansteuerung
+übernehmen. Diese biete in der Regel ein \passthrough{\lstinline!STEP!},
+\passthrough{\lstinline!DIR!} Interface an. Der Schrittmotor-Treiber
+besitzt diese beiden Eingänge und jeder Elektrische-Impuls sorgt dafür
+dass der Motor einen Schritt ausführt. Je nach gewälten Motor entspricht
+dies einer Rotation um 1.8 Grad und dies reicht somit für die
+Positioniergenauigkeit aus.
+
+Da auf dem eingebetteten System auf einem nicht echtzeitfähigen
+Linux-System aufsetzt, ist hier eine zeitkritische Ansteuerung der
+Motortreiber nicht gewährleistet. Somit stellt sich das
+\passthrough{\lstinline!STEP!},\passthrough{\lstinline!DIR!}-Interface
+für diesen Anwendungsfall als nicht Ideal heraus. Um diese Problem zu
+umgehen, kann hier ein zusätzlicher Mikrokontroller eingesetzt werden,
+welcher die benötigten Impulse generiert.
+
+Diese Option wurde zuvor getestet und erwies sich als eine robuste
+alternative, jedoch existieren Schrittmotor-Treiber, welche über
+zusätzliche Bus Schnittstellen verfügen. Hier wurde auf den
+\passthrough{\lstinline!TMC5160-BOB!} gesetzt, da dieser über eine
+\gls{spi} Interface verfügt, welches direkt an das eingebettete System
+angeschlossen werden kann.
+
+Somit stellen die Schrittmotoren und die gewählte Ansteuerung einen
+vielversprechendes Antriebskonzept für den autonomen Schachtisch dar.
 
 \hypertarget{d-druck-fuxfcr-den-mechanischen-aufbau}{%
 \section{3D Druck für den mechanischen
@@ -2421,10 +2589,9 @@ Der komplette Software-Stack, welcher zum Betrieb der Schach-Cloud
 notwendig ist, wurde in einer sehr vereinfachten
 Mikroservice-Archtivektur angelegt. Dies bedeutet, dass hier zum Betrieb
 notwendige Softwarekomponenten in mehrere kleinere Bestandteile
-ausgelagert wurden \ref{ATC_Service_Architecture}. Durch dieses Design
-ist es zusätzlich möglich, die eigentliche Schach-Logik auslagern zu
-können und somit ist es theoretisch möglich auch andere Spiele
-implementieren zu können.
+ausgelagert wurden \ref{ATC_Service_Architecture}. Durch dieses modulae
+Design ist es zusätzlich möglich, die eigentliche Schach-Logik auslagern
+und in der Theorie auch andere Spiele implementieren zu können.
 
 \begin{figure}
 \centering
@@ -2434,7 +2601,7 @@ implementieren zu können.
 \end{figure}
 
 Diese einzelnen Komponent en sind eigenständig ausführbar und erst die
-vernetzung dieser in einem gemeinsamen privaten Netzwerk bilden eine
+Vernetzung dieser in einem gemeinsamen privaten Netzwerk bilden eine
 funktionfähige Schachcloud. Somit setzt sich diese aus den folgenden
 Komponenten zusammen:
 
@@ -2459,18 +2626,18 @@ werden zwei Datenbank-Services benötigt um die Spieldaten zu speichern:
   Redis In-Memory Key Value Datenbank
 \end{itemize}
 
-Hierbei wurde auf zwei verschiedenen Datenbanken gesetzt. Die
-\passthrough{\lstinline!Redis!} Datenbank wird ausschließlich für die
-Speicherung der aktiven Sessions der einzelnen verbundenen Clients
-verwendet. Durch das verwendete Sessionsystem, bei dem jeder Clients in
-kurzen Intervallen seine aktivität bestätigen muss. Bietet diese
-Datenbank den Vorteil, dass diese durch ihre Archtiektur sehr schnell
-auf die angeforderten Datensätze zugreifen kann. Auch wird hier nur der
-Datensatz gespeichert, welche die notwendigen Informationen zu der
-aktiven Session des Clients gespeichert. Diese werden durch die \gls{id}
-des Clients abgefragt. Hierzu wird der Zeitstempel der Anmeldung, sowie
-die letzte Anfrage des Clients in Form eines \gls{json} Dokuments
-gespeichert.
+Hierbei wurde auf zwei verschiedenen Datenbanken gesetzt, welche im
+Folgenden erläutert werden. Die \passthrough{\lstinline!Redis!}
+\cite{redis} Datenbank wird ausschließlich für die Speicherung der
+aktiven Sessions der einzelnen verbundenen Clients verwendet. Durch das
+verwendete Sessionsystem, bei dem jeder Clients in kurzen Intervallen
+seine aktivität bestätigen muss, bietet diese Datenbank den Vorteil,
+dass diese durch ihre Archtiektur sehr schnell auf die angeforderten
+Datensätze zugreifen kann. Auch wird hier nur der Datensatz gespeichert,
+welche die notwendigen Informationen zu der aktiven Session des Clients
+gespeichert. Diese werden durch die \gls{id} des Clients abgefragt.
+Hierzu wird der Zeitstempel der Anmeldung, sowie die letzte Anfrage des
+Clients in Form eines \gls{json} Dokuments gespeichert.
 
 \begin{lstlisting}
 {
@@ -2480,25 +2647,26 @@ gespeichert.
 }
 \end{lstlisting}
 
-Durch den Key-Value ansatz, sowie den hohen Verbrauch an
-Arbeitsspeicher, eignet sich diese Datenbank jedoch nicht zum Speichern
-der Spieldaten. Hierzu wurde ein zusätzlicher
-\passthrough{\lstinline!Mongo!} Datenbank Serice erstellt, in welchem
-diese Daten abgegelgt werden. Zusätzlich zu den Spieldaten (Spiele,
-Spielstände, Statistiken), werden auch die Nutzerprofile speichert. Ein
-Profile wird beim ersten Anmeldevorgang erstellt und enthält außer den
+Durch den Key-Value-Ansatz sowie den hohen Verbrauch an Arbeitsspeicher
+eignet sich diese Datenbank jedoch nicht zum Speichern der Spieldaten.
+Hierzu wurde ein zusätzlicher \passthrough{\lstinline!Mongo!}
+\cite{mogodb} Datenbank Service erstellt, in welchem diese Daten
+abgelegt werden. Zusätzlich zu den Spieldaten (Spiele, Spielstände,
+Statistiken), werden auch die Nutzerprofile speichert. Ein Profile wird
+beim ersten Anmeldevorgang erstellt und enthält neben den
 Profilinformationen (Geräte-(id), Namen, Spielertyp) auch die Referenzen
 auf die gewonnen und verlorenen Spiele. Die können später für die
 Visualisierung verwendet werden.
 
 Alle aufgelisteten Services werden in seperaten Containern betrieben.
 Die Containervirtualisierung geschieht mittels der Software
-\passthrough{\lstinline!Docker!}. Diese stellt ein einfaches Interface
-zur Erstellung von Containern und der Verwaltung dieser. Um einen
-Container auf dem System starten zu können, muss dieser zunächst aus
-einem Image heraus erstellt werden. Diese Image wird mittels einer
-\passthrough{\lstinline!Dockerfile!} beschrieben und besteht aus einer
-Reihe an Kommandos, welche den Aufbau des Images beschreiben.
+\passthrough{\lstinline!Docker!} \cite{docker}. Diese stellt ein
+einfaches Interface zur Erstellung von Containern und der Verwaltung
+dieser. Um einen Container auf dem System starten zu können, muss dieser
+zunächst aus einem Image heraus erstellt werden. Diese Image wird
+mittels einer \passthrough{\lstinline!Dockerfile!} beschrieben und
+besteht aus einer Reihe an Kommandos, welche den Aufbau des Images
+beschreiben.
 
 Bei diesem Projekt besteht ein Image in der Regel aus einem
 vorgefertigten \passthrough{\lstinline!Ubuntu 20.04!} Image, in welchem
@@ -2523,12 +2691,13 @@ CMD ["/app/main"] # START APP
 Da die Architektur aus mehr als einem Container besteht, gestaltet sich
 eine manuelles Management dieser als nicht praktikabel. Zu diesem Zweck
 existieren mehrere Tools und Systeme um solche Aufgaben zu
-automatisieren. Ein weitere Punkt sind abhänigkeiten, welche unter den
-Container bestehen. In diesem Fall benötigt der Backend-Service die
-beiden Datenbanken um starten zu können. Somit ist es essentiell, dass
-diese bereits zuvor erstellt wurden und ausgeführt werden. Solche
-Funktionalitäten deckt das sehr leichtgewichtigte Tool
-\passthrough{\lstinline!docker-compose!} ab. Durch eine entsprechende
+automatisieren. Ein weitere nicht zu vernachlässingender Punkt ist die
+Abhänigkeit, welche unter den Container besteht. In diesem Fall benötigt
+der Backend-Service die beiden Datenbanken um starten zu können. Somit
+ist es essentiell, dass diese bereits zuvor erstellt wurden und
+ausgeführt werden. Solche Funktionalitäten deckt das sehr
+leichtgewichtigte Tool \passthrough{\lstinline!docker-compose!}
+\cite{dockercompose} ab. Durch eine entsprechende
 Konfiugrationsdatei, kann ein so genannter Stack aus mehreren Containern
 aufgebaut werden.
 
@@ -2542,15 +2711,15 @@ services:
       - AtomicChessRedisDatabase
       - AtomicChessMongoDatabase
       - AtomicChessMoveValidator
-    #links: 
-      - "AtomicChessRedisDatabase:AtomicChessRedisDatabase"
-      - "AtomicChessMongoDatabase:AtomicChessMongoDatabase"
-      - "AtomicChessMoveValidator:AtomicChessMoveValidator"
+    links: 
+      - "redisdb:AtomicChessRedisDatabase"
+      - "mongodb:AtomicChessMongoDatabase"
+      - "movevalidator:AtomicChessMoveValidator"
     image: atcbackend:latest
     build: 
       context: ../ATC_Backend/
     restart: always
-    #ports:
+    ports:
       - 3000:3000
     environment:
       - PRODUCTION=1
@@ -2560,7 +2729,6 @@ services:
     build:
       context: ../ATC_MoveValidator/
     image: atcmovevalidator:latest
-    #network_mode: "host"
     restart: always
     ports:
       - 5000:5000
@@ -2573,7 +2741,6 @@ services:
     container_name: atcredis
     ports:
       - 6379:6379
-    #network_mode: "host"
     
   AtomicChessMongoDatabase:
     image: mongo:latest
@@ -2582,28 +2749,28 @@ services:
     environment:
         - MONGO_DATA_DIR=/data/db
         - MONGO_LOG_DIR=/dev/null
-      #volumes:
-     #   - ./data/db:/data/db
+    volumes:
+        - ./data/db:/data/db
     ports:
       - 27017:27017
     command: mongod --logpath=/dev/null # --quiet
 
 
   AtomicChessAutoPlayer:
-    #depends_on:
+    depends_on:
       - AtomicChessBackend
-    #container_name: atcautoplayer
+    links: 
+        - "backend:AtomicChessBackend"
     build:
       context: ../ATC_AutoPlayer/
     image: atcautoplayer:latest
-    network_mode: "host"
-    restart: "always"
-    scale: 3 # SPAWN THREE INSTANCES
+    restart: always
+    scale: 5 # SPAWN THREE INSTANCES
     environment:
-      - PRODUCTION
-      - BACKEND_IP=127.0.0.1:3000 #HOST IP:PORT OF BACKEND EXAMPLE 127.0.0.1:3000 USING ONLY HTTP
+      - PRODUCTION=1
+      - BACKEND_IP=backend:3000 #HOST IP:PORT OF BACKEND EXAMPLE 127.0.0.1:3000 USING ONLY HTTP
       #- USE_HOSTNAME_HWID=TRUE # USE THE LOCAL MACHINE HOSTNAME AS HWID
-      #- PLAYER_TYPE_HUMAN=1 # SIMULATE A HUMAN PLAYER TYPE
+      #- PLAYER_TYPE_HUMAN=1 # SIMULATE A HUMAN PLAYER TYPE FOR TESTING
 \end{lstlisting}
 
 \hypertarget{service-backend}{%
@@ -2674,16 +2841,16 @@ die Clients benötigen. Dazu zählen unter anderem:
 \item
   Spielstatus
 \item
-  Client authentifizierung
+  Authentifizierung der Clients
 \end{itemize}
 
 Jeder Client meldet sich mittels der
-\passthrough{\lstinline!/rest/login!} Route an. Das Backend prüft ob
+\passthrough{\lstinline!/rest/login!} Route an. Das Backend prüft, ob
 bereits ein Spielerprofil der Datenbank angelegt wurde und erstellt ggf.
 ein neues für das Device. Dabei werden der Spieler-Typ
 (\gls{ai},autonomer Schachtisch, Webclient), als auch die Geräte-(id)
 festgehalten. Nach einem erfolgreichen Login \ref{ATC_request_example}
-erhält der Client einen Session-Token. Nur mit diesem Token, können
+erhält der Client einen Session-Token. Nur mit diesem Token können
 weitere Funktionen des Backends verwendet werden. Dieser Token ändert
 sich nach jedem Login-Prozess, somit kann nur ein Client Token-Inhaber
 sein und andere zuvor angemeldete Clients wird dieser entzogen.
@@ -2768,8 +2935,8 @@ var matchmaking_job = new CronJob('*/' + CFG.getConfig().matchmaking_runner_inte
 \end{lstlisting}
 
 Somit wird sichergestellt, dass zuerst alle menschlichen Spieler
-zusammen ein Spiel beginnen und erst im letzten Schritt, ein Mensch
-gegen dem Computer spielen muss. Kommt ein Match zustande, werden die
+zusammen ein Spiel beginnen und erst im letzten Schritt ein Mensch gegen
+dem Computer spielen kann. Kommt ein Match zustande, werden die
 Spielereinträge aus der Lobby-Tabelle entfernt und es wird ein neues
 Spiel in der Game-Tabelle der Datenbank angelegt.
 
@@ -2780,7 +2947,7 @@ Diese enthält alle Spiele und deren aktuellen Status:
 \item
   aktuelles Spielbrett
 \item
-  aktueller Spieler am Zug
+  welcher Spieler aktuell am Zug ist
 \item
   Anzahl Schachzüge
 \item
@@ -2791,7 +2958,7 @@ Diese enthält alle Spiele und deren aktuellen Status:
   Spiel-Status (abgebrochen, beendet)
 \end{itemize}
 
-Diesen Eintrag fragen die Clients in regelmäßigen Intervallen über die
+Diese Einträge fragen die Clients in regelmäßigen Intervallen über die
 \passthrough{\lstinline!/rest/player\_state!} Route ab. Somit kennen sie
 das aktuelle Spielfeld und ob sie gerade am Zug sind. Ein Zug wird
 mittels der \passthrough{\lstinline!/rest/make\_move!} Route
@@ -2949,10 +3116,11 @@ Durch die Implementierung des Webclienten in \gls{js} ist dieser sogar
 lokal über einen Browser ausführbar, ohne dass die benötigten Dateien
 über einen Webserver ausgeliefert werden müssen.
 
-Zusätzlich zu dem verwendeten Vanilla-\gls{js} wurde jQuery als
-zusätzliche \gls{js} Bibliothek verwendet, welches eine Manipulation der
-\gls{html} Elemente stark vereinfacht. Diese bietet insbesondere einfach
-zu nutzende \gls{http}-Request Funktionen bzw. \gls{ajax} an, welche für
+Zusätzlich zu dem verwendeten Vanilla-\gls{js} wurde
+\passthrough{\lstinline!jQuery!}\cite{jquery} als zusätzliche
+\gls{js} Bibliothek verwendet, welches eine Manipulation der \gls{html}
+Elemente stark vereinfacht. Diese bietet insbesondere einfach zu
+nutzende \gls{http}-Request Funktionen bzw. \gls{ajax} an, welche für
 die Kommunikation mit dem Backen-Service verwendet werden. Diese werden
 im Hintergrund eingesetzt, sodass der Webclient automatisch den neuen
 Spielzustand dem Benutzer anzeigt. Dies geschieht mittels
@@ -3594,34 +3762,196 @@ void MenuManager::updateProgress()
 \chapter{Fazit}\label{fazit}}
 
 Zusammenfassend lässt sich feststellen, dass das Ziel der Arbeit
-erreicht wurde. Es wurde ein Prototyp eines autonomen Schachtischs
-entwickelt.
+erreicht wurde. Die Kernfrage, welche die Überprüfung der Ausführbarkeit
+inklusive Erstellung und Umsetzung eines eingebetteten Systems und einer
+Cloud-Infrastruktur umfasst, konnte abschließend positiv beantwortet
+werden.
 
-\begin{itemize}
-\item
-  mit am weitesten forgeschrittener open-source autonomes Schachtisch
-  Projekt
-\item
-  vom versierten Benutzer selbstädig aufbaubar
-\item
-  leichte bedienung
-\item
-  lässt spiel für erweiterungen
-\item
-\end{itemize}
+Es wurde iterativ ein autonomer Schachtisch entwickelt, welcher alle
+zuvor gestellten Anforderungen erfüllt. Die Positionen der Schachfiguren
+können mittels NFC-Tags in den Füßen der Figuren und eines NFC-Lesers
+unterhalb des Schachfelds umgesetzt werden. Die Mechanik zur Bewegung
+des NFC-Lesers und eines Magnetes in dessen Mitten ermöglicht zudem
+durch gegenpolige Magnete in den Füßen der Figuren ein automatisches
+Bewegen der Figuren ohne manuelle Interaktionen. Die Größe des Feldes
+ist so ausgelegt, dass Figuren ohne Kontraktionen aneinander
+vorbeigeführt und am Rand des Spielfeldes positioniert werden können,
+sofern sie aus dem Spiel ausgeschieden sind. Dadurch war eine kleinere
+Revision des Tisches nicht anwendbar, dennoch konnten mittels der
+größeren Dimensionen der letzten Revision diese Funktion und weitere,
+wie die Mechanik zur Bewegung, optimiert und adäquater umgesetzt werden.
+
+Der Tisch verfügt über eine Stand-Alone Funktionalität, welche das
+Starten und Auswerten eines Spiels ohne Anbindung zum Internet oder zu
+externen Geräten, wie eines Smartphones, ermöglicht. Dennoch ist es über
+eine Verbindung zum Internet mittels eines Cloud-Services möglich,
+zusätzliche Funktionen wie das Spiel gegen andere, reale Spieler oder
+gegen eine Schachlogik zu nutzen oder einen Livestream zum Darstellen
+von gegenwärtigen Spielen aufzubauen.
+
+Anhand der Durchführung von iterativen Verbesserungen und einzelnen
+Revisionen des Modells lassen sich definierte Aussagen zu Fortschritten
+und Veränderungen des Gesamtsystems treffen. Der Schachtich als
+eingebettetes System besteht aus einem modularen Aufbau, welches sich im
+Verlauf der Iterationen durch das Anpassen einzelner Komponenten
+aufwerten ließ. Derartige Systeme erfordern in der Vorbereitung ein
+hohes Verständnis der Zusammenhänge von Komponenten, da spätere
+Veränderungen komplexer sind; da hierbei in den verschiedenen
+Iterationen aber nur einzelne Modulgruppen verändert wurden, musste
+lediglich die Verbindung des jeweiligen Moduls neu berücksichtig werden
+und keine gänzliche Aufwertung aller Komponenten erfolgen. Anders als
+Mehrzwecksystemen, welche oftmals weniger einzelne Module beinhalten,
+konnte hier eine separierte Betrachtung der Komponenten erfolgen.
+
+Nicht nur der Aufbau der Komponenten erfolgt modular, sondern auch das
+Erstellen allen Softwarekomponenten und die Konstruktion des
+Schachtischt. Letzteres führt zu einem einfachen Aufbau des Tisches,
+welcher auch von versierten oder motivierten Anwendern ausgeführt werden
+könnten. Eine aussagekräftige Versuchsführung dazu liegt jedoch nicht
+vor. Zudem sind nahezu alle verwendeten Materialien mühelos erhältlich,
+nur 3D-Komponenten müssen separat gedruckt werden. Die alle Ressourcen
+einschließlich der \gls{cad} -Modelle sind online zur Verfügung gestellt
+worden.
+
+Die Bedienung des Systems mittels des verbauten Bildschirms ist
+ebenfalls auf eine simple Benutzerführung spezifiziert. Auch unerfahrene
+Spieler können ein Spiel beginnen ohne eine differenzierte Einweisung
+erhalten zu haben. Diese Funktionalität wurde an einzelnen Probanden
+getestet, eine aussagekräftige Statistik liegt jedoch nicht vor.
+
+Grundsätzlich ist festzuhalten, dass es sich beim Resultat der Arbeit um
+kein finalisiertes Produkt, sondern um einen strukturellen Prototyp
+handelt. Weitere Prüfungen, wie Nutzungsstatistiken oder
+Sicherheitsprüfungen, müssten durchgeführt werden, ehe der Schachtisch
+als kommerzielles Produkt betrachtet werden kann. Auch fehlen diverse
+Langzeittests. Ein Betriebstest mit einer Dauer von 6 Stunden verlief
+ohne erkennbare Zwischenfälle, für aussagekräftige Verschleiß- und
+Fehlererkennungen bedarf es jedoch noch weiterer und längerer
+Untersuchungen.
+
+Der Prototyp lässt sich jedoch mit kommerziell erhältlichen und
+open-source verfügbaren Schachtischen vergleichen. Das Ziel, alle
+wünschenswerten Funktionen und Implementationen dieser Tische in den
+Prototypen zu integrieren, konnten erfolgreich umgesetzt werden. Darüber
+hinaus wurde weitere Funktionalitäten eingegliedert, wie eine
+Stand-Alone Funktionalität oder einer Schnittstelle zum Erstellen
+weiterer Erweiterungen.
+
+Das System und insbesondere der implementierte Cloud-Service sind online
+erreichbar und erweiterbar. Dies ermöglicht unter anderem das Bauen
+eines eigenen Tisches unter der Verwendung des AtomicChess Systems, aber
+auch die Integration weiterer Komponenten. Erfahrene Entwickler können
+somit das Spiel beliebig ausweiten oder sogar andere Spiele ergänzen.
+Die für das Projekt entworfene Mechanik und Spielführung kann
+dementsprechend auch für diverse andere Tischbrettspiele verwendet
+werden.
+
+Neben diversen im Studium erlernten Fähigkeiten wurden im Laufe des
+Projekts noch diverse andere Leistungen erforderlich, wie die Erstellung
+einer Mechanik oder das Konstruieren von Komponenten, welche das
+Aneignen von zusätzlichem Wissen erfordern. Die resultierende Mechanik
+ist ungeachtet dessen ist fehlerlos und nahezu spielfrei, was ein
+reibungsloses Spiel ermöglicht
+
+Abschließend lässt sich feststellen, dass ein funktionstüchtiger
+Schachtich konstruiert wurde, der basierend auf einem eingebetteten
+System und einer Cloud-Infrastruktur als gelungener Abschluss eins
+Informatikstudiums bezeichnet werden kann.
 
 \hypertarget{persuxf6nliches-fazit}{%
 \section{Persönliches Fazit}\label{persuxf6nliches-fazit}}
 
+Im Verlauf dieser Arbeit bin ich persönlich weit über mich
+hinausgewachsen und ich bin sehr stolz, mein fertiges Projekt
+präsentieren zu können. Ich konnte nicht nur theoretisch die Machbarkeit
+meines Konzepts beweisen, sondern auch einen physischen Prototypen
+erstellen.
+
+Natürlich bietet das System noch schwächen und Bedarf diverser
+Ergänzungen, bevor man es als Produkt betrachten kann. Dazu gehören auch
+diverse Untersuchungen, wie ein Langzeittest oder schleifenbasierte
+Hardwareüberprüfungen. Es wäre von Vorteil gewesen, das System durch
+einen erfahrenen Schachspieler bewerten zu lassen oder Rückmeldung über
+die Struktur und Menüführung von Anfängern zu erhalten. Diese Option
+blieb aufgrund von Versammlungs- und Zusammentreffens-Reglementierungen
+jedoch verwehrt. Für eine vollständige Analyse fehlen daher wichtige
+statistische Daten.
+
+Doch genau solche Erkenntnisse geben mir einen Anreiz, das Projekt auch
+nach Abschluss des Studiums nicht zu beenden, sondern weitere Ideen
+umzusetzen und anschließend auch mit Testpersonen zu erproben.
+
+Der iterative Prozess der Erstellung des Schachtichs ist zeitaufwändig
+und kostspielig, ermöglicht allerdings das frühzeitige Erkennen von
+Schwachstellen und das Ausbessern der jeweiligen modularen Komponente,
+noch eher eine Etablierung im System erfolgen kann. Ebenso ermöglicht es
+ein einfacheres Verständnis über alle Komponenten, lediglich die
+Zusammensetzung und Beziehung dieser muss rechtzeitig überdacht werden.
+
+Insgesamt ist das Projekt selbst recht umfangreich und umfasst in
+verschiedenen Facetten diverse Themenbereiche meines Studiums, was mir
+von Beginn an ein Anliegen war. Es manifestiert meinen
+Studienschwerpunkt, die technische Informatik, und hat mich dazu
+verleitet, noch tiefgründiger in die Materie zu schauen. Zudem wurden
+noch weitere Kompetenzen erfordert, welche zuvor gar nicht oder nur
+teilweise gegeben waren, wie das Konstruieren von 3D-Komponenten oder
+das Gestalten von Produkten. Umso beeindruckter bin ich selbst von der
+Bewegungsmechanik des Systems, welche sich im Entwicklungsprozess sehr
+stark verändert hat und letztlich zu einem fehlerlosen Resultat führte.
+
+Neben diesen projektspezifischen Kompetenzen ist es zudem möglich
+gewesen, weitere Erfahrungen im Bereich der Projektplanung und
+Organisation zu sammeln. Im optimalen Verlauf wäre ein fertiger Prototyp
+bereits zum Ende des Winters möglich gewesen, jedoch erforderte die
+Veränderung der Mechanik vom XY-System zu CoreXY und verschiedene
+unvorhergesehene Schwächen mit den verwendeten Magneten weitere
+Umsetzungsiterationen, die Rückblickend nötig und zielführend waren.
+
+Auch die Erstellung der Thesis und das Formatieren von Vorlagen und
+Befehlen in Markdown und Latex erwies sich als lehrreich und innovativ.
+
+Insgesamt bin ich sehr zufrieden mit meinem Ergebnis, aber auch mit mir
+selbst und meiner erbrachten Leistung.
+
 \hypertarget{ausblick}{%
 \section{Ausblick}\label{ausblick}}
 
-\begin{itemize}
-\tightlist
-\item
-  Einbindung in existeirende Schach-Clouds z.B. https://lichess.org/
-\item
-  user-port für Erweiterungen (z.B. DGT Schachur)
-\end{itemize}
+Wie jedes Produkt und insbesondere jeder Prototyp nach Abschluss eines
+Projekts lassen sich auch hierbei Aussagen zu Verbesserungen und
+Ergänzungen tätigen.
+
+In erster Linie besteht die Möglichkeit, diversen Modifikationen des
+traditionellen Schachs in das System zu integrieren. Diese Option wurde
+im Laufe des Projekts bewusst ausgelassen. Doch auch Erweiterungen auf
+diverse andere Brettspiele, wie beispielsweise Mühle, Dame oder
+Mensch-ärgere-dich nicht wären optional möglich. Mittels eines
+bildgebenden Systems oberhalb des Tisches oder Lichtelementen und
+Strukturen unterhalb einer durchsichtigen Tischplatte wäre es möglich,
+diverse Strukturen anzuzeigen und als Spielbrett darzustellen.
+
+Auch weitere Hardware kann mittels Porterweiterungen wie \gls{usb} zum
+Tisch ergänzt werden. So wäre zum Beispiel eine Schachuhr optional,
+welche bei öffentlichen Turnieren erforderlich ist. Eine Uhr würde zudem
+erkenntlich machen, wann ein Spieler den eigenen Zug beendet hat.
+Derzeit geschieht dies über eine Nutzereingabe oder bei Ablauf eines
+Timers.
+
+Zudem ermöglicht die Verbindung zum Internet unzählige Kapazitäten, wie
+die Einbindung anderer, existierender Schach-Clouds wie beispielsweise
+„licchess.org``.
+
+Ebenso könnten Sprachassistenten ergänzt werden, die das Spiel somit
+auch für körperlich eingeschränkte Personen möglich macht. Diese könnten
+zudem auch über aktuelle Zustände auditiv informieren oder weitere
+Befehle berücksichtigen.
+
+Der derzeitige Systemzustand ermöglicht ein autonomes Schachspiel mit
+möglichst äquivalentem Spielerlebnis im Vergleich zu einem
+konventionellen Schachspiel. Auf Basis dessen ist der Anzahl der
+möglichen Ergänzungen und Ideen zur Verbesserung sind keine Grenze
+gesetzt. Erfahrene Entwickler ist die Möglichkeit geboten, diese mittels
+der diversen Schnittstellen eigenständig zu integrieren. Das System als
+solches ist dennoch ein abgeschlossenes Projekt mit einem präsentablen
+Resultat.
 
 
