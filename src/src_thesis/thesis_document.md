@@ -1928,8 +1928,23 @@ Diese Feature wurde insbesondere bei der Entwicklung des Webclient und der Steue
 
 # Embedded System Software
 
-* Hauptsoftware zur Steuerung der Elektrik/Mechanik
-* Kommunikation mit dem Cloud-Server
+
+Die Embedded System Software ist die Hauptsoftware, welche auf dem eingebetteten System ausgeführt wird.
+Als Basis-System dient das über das `Buildroot` erstellte Linux-System, in welchem die Software nach dem Start ausgeführt wird.
+
+![Embedded System Software: Buildroot Pakete  \label{buildroot_packages_1}](images/buildroot_packages_1.png)
+
+Um eine einfache Integration in das Linux-System zu gewährleisten, wurde ein `Buildroot`-Paket erstellt \ref{buildroot_packages_1}, welches über den Konfigurations-Dialog ausgewählt werden kann. Somit kann ein komplettes System-Image erstellt werden, welches die Software für den autonomen Schachtisch und dessen eingebettetes System enthält.
+
+Hierbei ist die Software in zwei Teile aufgeteilt:
+
+- Controller
+- (+gui)
+
+Dabei stellt die Controller-Software die Hauptsoftware zur Ansteuerung der Mechanik dar. Auch übernimmt diese die Kommunikation mit der Cloud-Infrastruktur und die Berechnung der Figur Positionen.
+
+Die (+gui) Anwendung stellt dabei die Schnittstelle mit dem Benutzer dar. Diese generiert alle visuellen Elemente, welche über das Display am autonomen Schachtisch dargestellt werden, soll und leitet Eingaben des Nutzers an die Controller-Software weiter.
+
 
 
 ## Ablaufdiagramm
@@ -2161,7 +2176,7 @@ if(ev.event == guicommunicator::GUI_ELEMENT::BEGIN_BTN_SCAN && ev.type == guicom
 ```
 
 
-## Userinterface
+## User-Interface
 
 Das User-Interface ist mit eines des zentralen Elements mit welchem der Benutzer interagiert.
 Hierbei soll dieses nur die nötigsten Funktionen bereitstellen, welche zur Bedienung des Schachtisches nötig sind.
@@ -2172,7 +2187,7 @@ Die Spielansicht stellt zudem nur die eigene Spielerfarbe, sowie welcher Spieler
 
 Trotz der Einfachheit der Bedienung und der meist nur also Informationsquelle über den Spielstand dienenden User-Interface, bietet diese viele Möglichkeiten der Konfiguration des Systems. Somit kann auf ein weiteres Eingabegerät, wie z.B. einem Mobiltelefon verzichtet werden, da alle relevanten Einstellungen im Optionen-Menu vorgenommen werden können.
 
-Als Framework wurde hier das Qt[@qtframework] verwendet, da dieses bereits im Buildroot-Framework in der Version `5.12` hinterlegt ist. Somit musste kein anderes derartiges Framework aufwändig in das Buildroot-Framrwork integriert werden.
+Als Framework wurde hier das `Qt`[@qtframework] verwendet, da dieses bereits im Buildroot-Framework in der Version `5.12` hinterlegt ist. Somit musste kein anderes derartiges Framework aufwändig in das Buildroot-Framrwork integriert werden.
 
 <br>
 
@@ -2180,7 +2195,7 @@ Das User-Interface wurde gegen Ende der Entwicklung der Controller-Software bego
 
 ![Embedded System Software: User-Interface Mockup \label{ATC_Gui}](images/ATC_Gui.png)
 
-Das Qt[@qtframework] bietet dazu einen separaten Editor `Qt Design Studio` an, in denen die zuvor erstellen Wireframe-Grafiken importiert wurden und anschliessen mit den Bedienelementen ersetzt werden könnten. Dieser Prozess gestaltete sich als sehr effizient und so konnte das komplette UI mit moderatem Zeitaufwand umgesetzt werden.
+Das `Qt` bietet dazu einen separaten Editor `Qt Design Studio` an, in denen die zuvor erstellen Wireframe-Grafiken importiert wurden und anschliessen mit den Bedienelementen ersetzt werden könnten. Dieser Prozess gestaltete sich als sehr effizient und so konnte das komplette UI mit moderatem Zeitaufwand umgesetzt werden.
 
 ```qml
 // WINDOW.qml User-Interface ATC

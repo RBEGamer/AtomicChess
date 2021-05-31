@@ -5,6 +5,19 @@ Ein bauen per Dockerimage ist möglich mittels ` build_thesis_docker.sh` Script 
 
 # CHANGELOG
 
+# 31.05.2021
+
+* anpassungen Bilder (überarbeitet)
+* abstract (neu)
+* Zusammenfassung Kapitel 4 +5 => Machbarkeitsanalyse und Verifikation ausgewählter Technologien
+
+* 4 Machbarkeitsanalyse und Verifikation ausgewählter Technologien (neu)
+* 4.1 ErprobungBuildroot-Framework (neu)
+* 4.2 Verifikation NFC Technologie (neu)
+* 4.3 Schrittmotor/Schrittmotorsteuerung (neu)
+
+* 8.0 Embedded System Software (neu)
+
 # 30.05.2021
 
 * 10 - Fazit (neu)
@@ -22,7 +35,7 @@ Ein bauen per Dockerimage ist möglich mittels ` build_thesis_docker.sh` Script 
 
 # 27.05.2021 
 
-* anpassungen Bilder
+* anpassungen Bilder (überarbeitet)
 
 
 # 26.05.2021 II

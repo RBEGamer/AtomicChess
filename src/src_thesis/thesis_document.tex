@@ -3226,13 +3226,43 @@ Steuerungssoftware für den autonomen Schachtisch verwendet.
 \hypertarget{embedded-system-software}{%
 \chapter{Embedded System Software}\label{embedded-system-software}}
 
+Die Embedded System Software ist die Hauptsoftware, welche auf dem
+eingebetteten System ausgeführt wird. Als Basis-System dient das über
+das \passthrough{\lstinline!Buildroot!} erstellte Linux-System, in
+welchem die Software nach dem Start ausgeführt wird.
+
+\begin{figure}
+\centering
+\includegraphics{images/buildroot_packages_1.png}
+\caption{Embedded System Software: Buildroot Pakete
+\label{buildroot_packages_1}}
+\end{figure}
+
+Um eine einfache Integration in das Linux-System zu gewährleisten, wurde
+ein \passthrough{\lstinline!Buildroot!}-Paket erstellt
+\ref{buildroot_packages_1}, welches über den Konfigurations-Dialog
+ausgewählt werden kann. Somit kann ein komplettes System-Image erstellt
+werden, welches die Software für den autonomen Schachtisch und dessen
+eingebettetes System enthält.
+
+Hierbei ist die Software in zwei Teile aufgeteilt:
+
 \begin{itemize}
 \tightlist
 \item
-  Hauptsoftware zur Steuerung der Elektrik/Mechanik
+  Controller
 \item
-  Kommunikation mit dem Cloud-Server
+  \gls{gui}
 \end{itemize}
+
+Dabei stellt die Controller-Software die Hauptsoftware zur Ansteuerung
+der Mechanik dar. Auch übernimmt diese die Kommunikation mit der
+Cloud-Infrastruktur und die Berechnung der Figur Positionen.
+
+Die \gls{gui} Anwendung stellt dabei die Schnittstelle mit dem Benutzer
+dar. Diese generiert alle visuellen Elemente, welche über das Display am
+autonomen Schachtisch dargestellt werden, soll und leitet Eingaben des
+Nutzers an die Controller-Software weiter.
 
 \hypertarget{ablaufdiagramm}{%
 \section{Ablaufdiagramm}\label{ablaufdiagramm}}
@@ -3562,8 +3592,8 @@ if (!ev.is_event_valid){
 if(ev.event == guicommunicator::GUI_ELEMENT::BEGIN_BTN_SCAN && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {}
 \end{lstlisting}
 
-\hypertarget{userinterface}{%
-\section{Userinterface}\label{userinterface}}
+\hypertarget{user-interface}{%
+\section{User-Interface}\label{user-interface}}
 
 Das User-Interface ist mit eines des zentralen Elements mit welchem der
 Benutzer interagiert. Hierbei soll dieses nur die nötigsten Funktionen
@@ -3584,8 +3614,9 @@ ein weiteres Eingabegerät, wie z.B. einem Mobiltelefon verzichtet
 werden, da alle relevanten Einstellungen im Optionen-Menu vorgenommen
 werden können.
 
-Als Framework wurde hier das Qt\cite{qtframework} verwendet, da
-dieses bereits im Buildroot-Framework in der Version
+Als Framework wurde hier das
+\passthrough{\lstinline!Qt!}\cite{qtframework} verwendet, da dieses
+bereits im Buildroot-Framework in der Version
 \passthrough{\lstinline!5.12!} hinterlegt ist. Somit musste kein anderes
 derartiges Framework aufwändig in das Buildroot-Framrwork integriert
 werden.
@@ -3603,7 +3634,7 @@ festgehalten und konnten anhand dieser schnell umgesetzt werden.
 \label{ATC_Gui}}
 \end{figure}
 
-Das Qt\cite{qtframework} bietet dazu einen separaten Editor
+Das \passthrough{\lstinline!Qt!} bietet dazu einen separaten Editor
 \passthrough{\lstinline!Qt Design Studio!} an, in denen die zuvor
 erstellen Wireframe-Grafiken importiert wurden und anschliessen mit den
 Bedienelementen ersetzt werden könnten. Dieser Prozess gestaltete sich
