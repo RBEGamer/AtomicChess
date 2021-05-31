@@ -463,10 +463,11 @@ Somit eignet sich die Kombination aus Tag und Lesegerät zu einer der Schachfigu
 ## Schrittmotor / Schrittmotorsteuerung
 
 Da die einzelnen Figuren über das Schachfeld bewegt werden sollen, ist hierfür eine akkurate Positionierung dieser notwendig.
-Da die Figuren einen Durchmesser von 22mm haben und somit ein einzelnes Schachfeld eine Größe ca. 55mm besitzt, reicht eine Wiederholgenauigkeit von +-1mm.
+Da die Figuren einen Durchmesser von 22mm haben und somit ein einzelnes Schachfeld eine Größe ca. 55mm besitzt, reicht eine Wiederholgenauigkeit \ref{nema17_accuary_test} von +-1mm.
 Auch wird bei der Wahl der passenden Motoren, angenommen dass das Spiel, welches durch die Mechanik in das System eingebracht wird, vernachlässigbar klein ist.
 Es ist auch davon auszugehen, dass die Kraft, welche von den Motoren benötigt wird, um eine Achse zu bewegen nicht mehr als 45Ncm beträgt.
 
+![Nema 17 Schrittmotor: Test der Wiederholgenauigkeit\label{nema17_accuary_test}](images/nema17_accuary_test.png)
 
 Dies entspricht den Werten einer X-Y-Achsenkonfiguration, wie sie in einem handelsüblichen 3D-Drucker zu finden ist und welche mit `Nema 17`-Schrittmotoren ausgestattet sind.
 Der geplante Aufbau des autonomen Schachtischs, ähnelt einer solchen Konfiguration sehr, da auch hier die Figuren in X-Y Richtung verfahren werden.
