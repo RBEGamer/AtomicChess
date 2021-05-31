@@ -352,21 +352,22 @@ Auch müssen die Figuren für den Benutzer eine gut handhabbare Größe aufweise
 
 Eine Hürde, welche bei diesem Projekt genommen werden muss, ist die Erstellung der Software welche auf dem autonomen Schachtisch ausgeführt wird.
 Hierbei soll diese nicht von Grund auf neu entwickelt werden, sondern auf einer soliden Basis aufbauen.
-Allgemien soll hier auf ein minimales Linux-System gesetzt werden, in welches die Software des autonomen Schachtisch integriert wird. 
-Auf dem Basis-System müssen die folgenden Software-Pakete installiert sein, bzw einfach integrierbar sein:
+Allgemein soll hier auf ein minimales Linux-System gesetzt werden, in welches die Software des autonomen Schachtisches integriert wird. 
+Auf dem Basis-System müssen die folgenden Software-Pakete installiert sein, bzw. einfach integrierbar sein:
 
 - (+ssh) für den Remote-Zugriff
 - (+dhcp) Client zur automatischen IPv4-Adressvergabe
-- (+udev) zur Ein-/Ausgabe Geräte verwaltung (Touchscreen)
+- (+udev) zur Ein-/Ausgabe Geräte Verwaltung (Touchscreen)
 - Qt[@qtframework] - (+gui) Framework
 - SW-Update zur Durchführung eines Remote-Update
 
 Zusätzlich zu diesen auf dem Linux-System benötigten Paketen, muss es möglich sein durch das eingebettete System bootbares Dateiimage zu erzeugen.
-Auf seiten der Entwicklung ist eine Toolchain notwendig, mit welcher es möglich ist in C++ geschriebene Programme auf dem System ausführen und mittels (+gdb) auf Fehler überprüfen zu können. Dazu sollte der C++ Compiler mindesten den C++17 Standart untersützen.
+Auf seitens der Entwicklung ist eine Toolchain notwendig, mit welcher es möglich ist in C++ geschriebene Programme auf dem System ausführen und mittels (+gdb) auf Fehler überprüfen zu können. Dazu sollte der C++ Compiler mindesten den C++17 Standard unterstützen.
 
 Für diesen Zweck existieren einige Open-Source Projekte, welche solch ein Build-System bereitstelle. Hierbei existieren zwei weit verbreitete Systeme.
 Das `Yocot`-Projekt[@yoctoproject] und das `Buildroot`-Framework[@buildroot].
-Hierbei unterscheiden sich diese im Aufbau und der Funktionsweise teils stark, vor allem wärend der ersten Verwendung.
+Hierbei unterscheiden sich diese im Aufbau und der Funktionsweise teils stark, vor allem während der ersten Verwendung.
+
 
 : Vergleich Yocto - Buildroot \label{commchesstables}
 
@@ -379,12 +380,13 @@ Hierbei unterscheiden sich diese im Aufbau und der Funktionsweise teils stark, v
 | einfache Konfiguration                   | Nein     | Ja                            |
 |                                                        |              |                                |
 
-Hierbei stellt das `Yocto`- Projekt, eine größere Einsteigshürde, durch ein komplexes Layer-System dar. Es bietet sich jedoch für komplexe Projekte an, welche einen hohen Grad an Individualisierung benötigen. Ein Nachteil dessen, ist da dadurch auch viel vom Nutzer selber konfiguriert werden muss, bevor ein minimales System in Betrieb genommen werden kann.
+Hierbei stellt das `Yocto`- Projekt, eine größere Einstiegshürde, durch ein komplexes Layer-System dar. Es bietet sich jedoch für komplexe Projekte an, welche einen hohen Grad an Individualisierung benötigen. Ein Nachteil dessen, ist da dadurch auch viel vom Nutzer selber konfiguriert werden muss, bevor ein minimales System in Betrieb genommen werden kann.
 
-Das `Buildroot`-Framework bietet bereits eine große Anzahl an vorgefertigteten Ziel-Systemen an, für welche es bereits alle nötigen Parameter enthält um ein minimales System erstellen zu können. Auch ist  bereits eine optimierte Konfiguration für das eingebettete System vorhanden, welche direkt gestartet werden kann. Nach einem Erfolgreichem erstellen, des Images kann dieses direkt über das eingebettete System gestartet werden.
+Das `Buildroot`-Framework bietet bereits eine große Anzahl an vorgefertigteten Ziel-Systemen an, für welche es bereits alle nötigen Parameter enthält, um ein minimales System erstellen zu können. Auch ist bereits eine optimierte Konfiguration für das eingebettete System vorhanden, welche direkt gestartet werden kann. Nach einem Erfolgreichem erstellen, des Images kann dieses direkt über das eingebettete System gestartet werden.
 Bei jedem Build-Vorgang müssen jedoch alle Pakete erneut gebaut werden, bevor diese zu einem finalen Image zusammengefügt werden.
-Hierbei kann dieser Vorgang je nach Umfang der verwendeten Pakete mehrere Stunden dauern. Das `Yocto`-Projekt unterstüzt hierbei das erstellen einzelner Pakete, somit müssen nur Änderungen neu gebaut werden.
-Da hier nur eine minimale Anzahl von Paketen benötigt werden, somit hält sich dieser Bauvorgang zeitlich in grenzen und ist allgemein für diese Projekt nicht entscheidend.
+Hierbei kann dieser Vorgang je nach Umfang der verwendeten Pakete mehrere Stunden dauern. Das `Yocto`-Projekt unterstützt hierbei das Erstellen einzelner Pakete, somit müssen nur Änderungen neu gebaut werden.
+Da hier nur eine minimale Anzahl von Paketen benötigt werden, somit hält sich dieser Bauvorgang zeitlich in Grenzen und ist allgemein für diese Projekt nicht entscheidend.
+
 
 
 
@@ -396,8 +398,8 @@ config BR2_PACKAGE_ATCTP
         This package is a test package to verify the buildroot build process
 ```
 
-Zusätzlich wurde ein eigenes C++ Paket erstellt und in das `Buildroot`-Framework integriert. Hierzu sind zu dem Quellcode, zwei weitere Dateien notwenig.
-Die `Config.in` beschreibt das Paket und setzt möglicherweise benötigte Abhängigkeiten zu anderen Paketen fest.  Die zweite Datei ist die `PAKET_NAME.mk` Makefile, welche die Schritte beschreibt, welche zum Erstellen und Installieren des Paketes durchgeführt werden müssen. 
+Zusätzlich wurde ein eigenes C++ Paket erstellt und in das `Buildroot`-Framework integriert. Hierzu sind zu dem Quellcode, zwei weitere Dateien notwendig.
+Die `Config.in` beschreibt das Paket und setzt möglicherweise benötigte Abhängigkeiten zu anderen Paketen fest.  Die zweite Datei ist die `PAKET_NAME.mk` Makefile, welche die Schritte beschreibt, welche zum Erstellen und Installieren des Paketes durchgeführt werden müssen.
 
 
 ```yaml
@@ -428,30 +430,32 @@ Das somit erstellte Test-Paket `atctp` bildet somit eine funktionierende Grundla
 ## Verifikation NFC Technologie
 
 Ein weiterer wichtiger Bestandteil soll die Erkennung der sich auf dem Feld befindlichen Schachfiguren sein.
-Hierbei muss zum einen der Figur-Typ (Bauer, König, Dame, ..) und die Figur-Farbe (schwarz, weiss) vom System erkannt werden.
+Hierbei muss zum einen der Figur-Typ und die Figur-Farbe vom System erkannt werden.
 Da hier keine aufwendige Elektronik entwickelt werden soll, sondern auf Standard-Komponenten zurückgegriffen werden soll, scheidet ein komplexes (+hf) Antennen-Array unter dem Schachfeld aus, wie es bei einigen kommerziellen Produkten umgesetzt ist.
-Eine einfache 8x8 Matrix aus Drucktastern oder Hall-Effekt-Sensore scheidet ebenfalls aus, da hier die Eingabe über den Benutzer erfolgt und nur Rückschlüsse auf die veränderte Figur anhand einer Manuellen Bewegung der Figur nachvollzogen werden kann.
+Eine einfache 8x8 Matrix aus Drucktastern oder Hall-Effekt-Sensoren scheidet ebenfalls aus, da hier die Eingabe über den Benutzer erfolgt und nur Rückschlüsse auf die veränderte Figur anhand einer Manuellen Bewegung der Figur nachvollzogen werden kann.
 
-Somit eignet sich hier die (+nfc) Technologie, welche auch bei modernen Smartphone eingesetzt wird.
+Somit eignet sich hier die (+nfc) Technologie, welche auch bei modernem Smartphone eingesetzt wird.
 Hierzu werden kleine (+nfc)-Tags bzw. Aufkleber, welche aus einem Chip und einer Antenne bestehen so programmiert, dass diese eine definierte Aktion beim Lesegerät auslösen.
-Dies kann zum Beispiel das öffnen einer Internetseite auf dem Mobilen-Endgerät, nach dem Scan eines Filmplakats sein.
+Dies kann zum Beispiel das Öffnen einer Internetseite auf dem Mobilen-Endgerät, nach dem Scan eines Filmplakats sein.
 
 ![Grove PN532 NFC Reader mit Kabelgebundener Antenne \label{ATC_nfc_range_test}](images/ATC_nfc_range_test.png)
 
-Ein  Vorteil dieser Technologie ist, dass diese auch im Konsumerbereich bereits breit  verfügbar ist. Durch das einfache Programmieren dieser (+nfc)-Tag über das Smartphone, wird kein zusätzliches Lese-/Schreib-Gerät benötigt.
-Hier muss jedoch zuvor getestet werden, welchen maximaler Abstand nötig ist um solch ein Tag scannen zu können.
-Auch ist der Abstand zwischen den einzelnen Tags entscheident, wie nah diese beieinander Platziert werden können um diese einwandfrei auslesen zu könnnen.
+Ein Vorteil dieser Technologie ist, dass diese auch im Konsumerbereich bereits breit verfügbar ist. Durch das einfache Programmieren dieser (+nfc)-Tag über das Smartphone, wird kein zusätzliches Lese-/Schreib-Gerät benötigt.
+Hier muss jedoch zuvor getestet werden, welchen maximalen Abstand nötig ist, um solch ein Tag scannen zu können.
+Auch ist der Abstand zwischen den einzelnen Tags entscheidend, wie nah diese beieinander platziert werden können, um diese einwandfrei auslesen zu können.
 
 Hierzu wurde ein kleiner Testaufbau \ref{ATC_nfc_range_test} entwickelt, um verschieden Abstände testen zu können.
 
-Als Lesegerät wurde ein `PN532` Modul zum Auslesen der (+nfc) Tags eingesetzt, da dieser einfach angesteuert werden kann und eine abnehmbare Antenne besitzt.
+Als Lesegerät wurde ein `PN532` Modul zum Auslesen der (+nfc)-Tags eingesetzt, da dieser einfach angesteuert werden kann und eine abnehmbare Antenne besitzt.
 Dieser wurde bereits in anderen Projekten eingesetzt und erwies sich als zuverlässig.
 
-Die im Test verwendeten (+nfc) Tag, haben einen Durchmesser von 22mm und sind somit ein Standart-Produkt.
-Im Test stellte sich heruas, dass diese im gewählten Setup, einen Abstand von 5mm zueinander benötigen.
+Die im Test verwendeten (+nfc)-Tag, haben einen Durchmesser von 22mm und sind somit ein Standart-Produkt.
+Im Test stellte sich heraus, dass diese im gewählten Setup, einen Abstand von 5mm zueinander benötigen.
 Der Abstand des Lesegeräts bzw. der Antenne zu einem Tag kann dabei bis zu 14mm betragen.
 
 Somit eignet sich die Kombination aus Tag und Lesegerät zu einer der Schachfiguren, wobei sich das Lesegerät unter der Schachtischplatte befindet.
+
+
 
 
 

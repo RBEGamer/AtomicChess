@@ -764,9 +764,9 @@ zu gewährleisten. Ebenfalls wird kein besonderes Augenmerk auf die
 Geschwindigkeit der Figur-Bewegung gelegt, da hier die Zuverlässigkeit
 und Wiederholgenauigkeit dieser im Vordergrund stehen.
 
-\hypertarget{machbarkeitsanalyse-und-verifikation-der-ausgewuxe4hlter-technologien}{%
-\chapter{Machbarkeitsanalyse und Verifikation der ausgewählter
-Technologien}\label{machbarkeitsanalyse-und-verifikation-der-ausgewuxe4hlter-technologien}}
+\hypertarget{machbarkeitsanalyse-und-verifikation-ausgewuxe4hlter-technologien}{%
+\chapter{Machbarkeitsanalyse und Verifikation ausgewählter
+Technologien}\label{machbarkeitsanalyse-und-verifikation-ausgewuxe4hlter-technologien}}
 
 \begin{itemize}
 \tightlist
@@ -776,16 +776,17 @@ Technologien}\label{machbarkeitsanalyse-und-verifikation-der-ausgewuxe4hlter-tec
   software architektur anfoderungen
 \end{itemize}
 
-\hypertarget{buildroot-framework}{%
-\section{Buildroot-Framework}\label{buildroot-framework}}
+\hypertarget{erprobung-buildroot-framework}{%
+\section{Erprobung
+Buildroot-Framework}\label{erprobung-buildroot-framework}}
 
 Eine Hürde, welche bei diesem Projekt genommen werden muss, ist die
 Erstellung der Software welche auf dem autonomen Schachtisch ausgeführt
 wird. Hierbei soll diese nicht von Grund auf neu entwickelt werden,
-sondern auf einer soliden Basis aufbauen. Allgemien soll hier auf ein
+sondern auf einer soliden Basis aufbauen. Allgemein soll hier auf ein
 minimales Linux-System gesetzt werden, in welches die Software des
-autonomen Schachtisch integriert wird. Auf dem Basis-System müssen die
-folgenden Software-Pakete installiert sein, bzw einfach integrierbar
+autonomen Schachtisches integriert wird. Auf dem Basis-System müssen die
+folgenden Software-Pakete installiert sein, bzw. einfach integrierbar
 sein:
 
 \begin{itemize}
@@ -795,7 +796,7 @@ sein:
 \item
   \gls{dhcp} Client zur automatischen IPv4-Adressvergabe
 \item
-  \gls{udev} zur Ein-/Ausgabe Geräte verwaltung (Touchscreen)
+  \gls{udev} zur Ein-/Ausgabe Geräte Verwaltung (Touchscreen)
 \item
   Qt\cite{qtframework} - \gls{gui} Framework
 \item
@@ -804,10 +805,10 @@ sein:
 
 Zusätzlich zu diesen auf dem Linux-System benötigten Paketen, muss es
 möglich sein durch das eingebettete System bootbares Dateiimage zu
-erzeugen. Auf seiten der Entwicklung ist eine Toolchain notwendig, mit
+erzeugen. Auf seitens der Entwicklung ist eine Toolchain notwendig, mit
 welcher es möglich ist in C++ geschriebene Programme auf dem System
 ausführen und mittels \gls{gdb} auf Fehler überprüfen zu können. Dazu
-sollte der C++ Compiler mindesten den C++17 Standart untersützen.
+sollte der C++ Compiler mindesten den C++17 Standard unterstützen.
 
 Für diesen Zweck existieren einige Open-Source Projekte, welche solch
 ein Build-System bereitstelle. Hierbei existieren zwei weit verbreitete
@@ -815,7 +816,7 @@ Systeme. Das
 \passthrough{\lstinline!Yocot!}-Projekt\cite{yoctoproject} und das
 \passthrough{\lstinline!Buildroot!}-Framework\cite{buildroot}.
 Hierbei unterscheiden sich diese im Aufbau und der Funktionsweise teils
-stark, vor allem wärend der ersten Verwendung.
+stark, vor allem während der ersten Verwendung.
 
 \begin{longtable}[]{@{}lll@{}}
 \caption{Vergleich Yocto - Buildroot
@@ -838,7 +839,7 @@ einfache Konfiguration & Nein & Ja\tabularnewline
 \end{longtable}
 
 Hierbei stellt das \passthrough{\lstinline!Yocto!}- Projekt, eine
-größere Einsteigshürde, durch ein komplexes Layer-System dar. Es bietet
+größere Einstiegshürde, durch ein komplexes Layer-System dar. Es bietet
 sich jedoch für komplexe Projekte an, welche einen hohen Grad an
 Individualisierung benötigen. Ein Nachteil dessen, ist da dadurch auch
 viel vom Nutzer selber konfiguriert werden muss, bevor ein minimales
@@ -846,7 +847,7 @@ System in Betrieb genommen werden kann.
 
 Das \passthrough{\lstinline!Buildroot!}-Framework bietet bereits eine
 große Anzahl an vorgefertigteten Ziel-Systemen an, für welche es bereits
-alle nötigen Parameter enthält um ein minimales System erstellen zu
+alle nötigen Parameter enthält, um ein minimales System erstellen zu
 können. Auch ist bereits eine optimierte Konfiguration für das
 eingebettete System vorhanden, welche direkt gestartet werden kann. Nach
 einem Erfolgreichem erstellen, des Images kann dieses direkt über das
@@ -854,11 +855,11 @@ eingebettete System gestartet werden. Bei jedem Build-Vorgang müssen
 jedoch alle Pakete erneut gebaut werden, bevor diese zu einem finalen
 Image zusammengefügt werden. Hierbei kann dieser Vorgang je nach Umfang
 der verwendeten Pakete mehrere Stunden dauern. Das
-\passthrough{\lstinline!Yocot!}-Projekt unterstüzt hierbei das erstellen
-einzelner Pakete, somit müssen nur Änderungen neu gebaut werden. Da hier
-nur eine minimale Anzahl von Paketen benötigt werden, somit hält sich
-dieser Bauvorgang zeitlich in grenzen und ist allgemein für diese
-Projekt nicht entscheidend.
+\passthrough{\lstinline!Yocto!}-Projekt unterstützt hierbei das
+Erstellen einzelner Pakete, somit müssen nur Änderungen neu gebaut
+werden. Da hier nur eine minimale Anzahl von Paketen benötigt werden,
+somit hält sich dieser Bauvorgang zeitlich in Grenzen und ist allgemein
+für diese Projekt nicht entscheidend.
 
 \begin{lstlisting}
 #atctp - Config.in - Package Configuration
@@ -870,7 +871,7 @@ config BR2_PACKAGE_ATCTP
 
 Zusätzlich wurde ein eigenes C++ Paket erstellt und in das
 \passthrough{\lstinline!Buildroot!}-Framework integriert. Hierzu sind zu
-dem Quellcode, zwei weitere Dateien notwenig. Die
+dem Quellcode, zwei weitere Dateien notwendig. Die
 \passthrough{\lstinline!Config.in!} beschreibt das Paket und setzt
 möglicherweise benötigte Abhängigkeiten zu anderen Paketen fest. Die
 zweite Datei ist die \passthrough{\lstinline!PAKET\_NAME.mk!} Makefile,
@@ -906,26 +907,27 @@ das \passthrough{\lstinline!Buildroot!}-Framework optimal für diese
 Projekt, da hier der Prozess zur Integration von eigener Software sich
 als sehr einfach gestaltet.
 
-\hypertarget{nfc-technologie}{%
-\section{NFC Technologie}\label{nfc-technologie}}
+\hypertarget{verifikation-nfc-technologie}{%
+\section{Verifikation NFC
+Technologie}\label{verifikation-nfc-technologie}}
 
 Ein weiterer wichtiger Bestandteil soll die Erkennung der sich auf dem
 Feld befindlichen Schachfiguren sein. Hierbei muss zum einen der
-Figur-Typ (Bauer, König, Dame, ..) und die Figur-Farbe (schwarz, weiss)
-vom System erkannt werden. Da hier keine aufwendige Elektronik
-entwickelt werden soll, sondern auf Standard-Komponenten zurückgegriffen
-werden soll, scheidet ein komplexes \gls{hf} Antennen-Array unter dem
-Schachfeld aus, wie es bei einigen kommerziellen Produkten umgesetzt
-ist. Eine einfache 8x8 Matrix aus Drucktastern oder Hall-Effekt-Sensore
-scheidet ebenfalls aus, da hier die Eingabe über den Benutzer erfolgt
-und nur Rückschlüsse auf die veränderte Figur anhand einer Manuellen
-Bewegung der Figur nachvollzogen werden kann.
+Figur-Typ und die Figur-Farbe vom System erkannt werden. Da hier keine
+aufwendige Elektronik entwickelt werden soll, sondern auf
+Standard-Komponenten zurückgegriffen werden soll, scheidet ein komplexes
+\gls{hf} Antennen-Array unter dem Schachfeld aus, wie es bei einigen
+kommerziellen Produkten umgesetzt ist. Eine einfache 8x8 Matrix aus
+Drucktastern oder Hall-Effekt-Sensoren scheidet ebenfalls aus, da hier
+die Eingabe über den Benutzer erfolgt und nur Rückschlüsse auf die
+veränderte Figur anhand einer Manuellen Bewegung der Figur nachvollzogen
+werden kann.
 
 Somit eignet sich hier die \gls{nfc} Technologie, welche auch bei
-modernen Smartphone eingesetzt wird. Hierzu werden kleine \gls{nfc}-Tags
+modernem Smartphone eingesetzt wird. Hierzu werden kleine \gls{nfc}-Tags
 bzw. Aufkleber, welche aus einem Chip und einer Antenne bestehen so
 programmiert, dass diese eine definierte Aktion beim Lesegerät auslösen.
-Dies kann zum Beispiel das öffnen einer Internetseite auf dem
+Dies kann zum Beispiel das Öffnen einer Internetseite auf dem
 Mobilen-Endgerät, nach dem Scan eines Filmplakats sein.
 
 \begin{figure}
@@ -939,21 +941,21 @@ Ein Vorteil dieser Technologie ist, dass diese auch im Konsumerbereich
 bereits breit verfügbar ist. Durch das einfache Programmieren dieser
 \gls{nfc}-Tag über das Smartphone, wird kein zusätzliches
 Lese-/Schreib-Gerät benötigt. Hier muss jedoch zuvor getestet werden,
-welchen maximaler Abstand nötig ist um solch ein Tag scannen zu können.
-Auch ist der Abstand zwischen den einzelnen Tags entscheident, wie nah
-diese beieinander Platziert werden können um diese einwandfrei auslesen
-zu könnnen.
+welchen maximalen Abstand nötig ist, um solch ein Tag scannen zu können.
+Auch ist der Abstand zwischen den einzelnen Tags entscheidend, wie nah
+diese beieinander platziert werden können, um diese einwandfrei auslesen
+zu können.
 
 Hierzu wurde ein kleiner Testaufbau \ref{ATC_nfc_range_test} entwickelt,
 um verschieden Abstände testen zu können.
 
 Als Lesegerät wurde ein \passthrough{\lstinline!PN532!} Modul zum
-Auslesen der \gls{nfc} Tags eingesetzt, da dieser einfach angesteuert
+Auslesen der \gls{nfc}-Tags eingesetzt, da dieser einfach angesteuert
 werden kann und eine abnehmbare Antenne besitzt. Dieser wurde bereits in
 anderen Projekten eingesetzt und erwies sich als zuverlässig.
 
-Die im Test verwendeten \gls{nfc} Tag, haben einen Durchmesser von 22mm
-und sind somit ein Standart-Produkt. Im Test stellte sich heruas, dass
+Die im Test verwendeten \gls{nfc}-Tag, haben einen Durchmesser von 22mm
+und sind somit ein Standart-Produkt. Im Test stellte sich heraus, dass
 diese im gewählten Setup, einen Abstand von 5mm zueinander benötigen.
 Der Abstand des Lesegeräts bzw. der Antenne zu einem Tag kann dabei bis
 zu 14mm betragen.
@@ -968,38 +970,38 @@ Schrittmotorsteuerung}\label{schrittmotor-schrittmotorsteuerung}}
 
 Da die einzelnen Figuren über das Schachfeld bewegt werden sollen, ist
 hierfür eine akkurate Positionierung dieser notwendig. Da die Figuren
-einen Durchmesser von 22mm haben und somit ein einzelnes Schachfeld ein
-Größe ca 55mm besitzt, reicht eine Wiederholgenauigkeit von +-1mm. Auch
-wird bei der Wahl der passenden Motoren angenommen dass das Spiel,
+einen Durchmesser von 22mm haben und somit ein einzelnes Schachfeld eine
+Größe ca. 55mm besitzt, reicht eine Wiederholgenauigkeit von +-1mm. Auch
+wird bei der Wahl der passenden Motoren, angenommen dass das Spiel,
 welches durch die Mechanik in das System eingebracht wird,
-vernachlässigbar klein ist. Es ist auch davon auszugehen, das die Kraft
-welche von dem Motoren benötigt wird um eine Achse zu bewegen nicht mehr
-als 45Ncm beträgt.
+vernachlässigbar klein ist. Es ist auch davon auszugehen, dass die
+Kraft, welche von den Motoren benötigt wird, um eine Achse zu bewegen
+nicht mehr als 45Ncm beträgt.
 
 Dies entspricht den Werten einer X-Y-Achsenkonfiguration, wie sie in
-einem handelüberlichen 3D-Drucker zu finden ist und welche mit
+einem handelsüblichen 3D-Drucker zu finden ist und welche mit
 \passthrough{\lstinline!Nema 17!}-Schrittmotoren ausgestattet sind. Der
 geplante Aufbau des autonomen Schachtischs, ähnelt einer solchen
 Konfiguration sehr, da auch hier die Figuren in X-Y Richtung verfahren
-werden. Einzig die Z-Achse kommt hier nicht zum einsatz. Somit werden
+werden. Einzig die Z-Achse kommt hier nicht zum Einsatz. Somit werden
 für erste Tests diese Motoren gewählt.
 
-Deswegen bietet sich hier auch die verwendung von Schrittmotoren an, da
+Deswegen bietet sich hier auch die Verwendung von Schrittmotoren an, da
 diese sehr kostengünstig in der geforderten Leistungsklasse zu erwerben
 sind und zudem kann die Ansteuerung einfach realisiert werden. Hierzu
 gibt es verschiedene Schrittmotor-Treiber, welche die Ansteuerung
 übernehmen. Diese biete in der Regel ein \passthrough{\lstinline!STEP!},
 \passthrough{\lstinline!DIR!} Interface an. Der Schrittmotor-Treiber
-besitzt diese beiden Eingänge und jeder Elektrische-Impuls sorgt dafür
-dass der Motor einen Schritt ausführt. Je nach gewälten Motor entspricht
-dies einer Rotation um 1.8 Grad und dies reicht somit für die
+besitzt diese beiden Eingänge und jeder Elektrische-Impuls sorgt dafür,
+dass der Motor einen Schritt ausführt. Je nach ausgewähltem Motor
+entspricht dies einer Rotation um 1.8 Grad und dies reicht somit für die
 Positioniergenauigkeit aus.
 
 Da auf dem eingebetteten System auf einem nicht echtzeitfähigen
 Linux-System aufsetzt, ist hier eine zeitkritische Ansteuerung der
 Motortreiber nicht gewährleistet. Somit stellt sich das
-\passthrough{\lstinline!STEP!},\passthrough{\lstinline!DIR!}-Interface
-für diesen Anwendungsfall als nicht Ideal heraus. Um diese Problem zu
+\passthrough{\lstinline!STEP!}, \passthrough{\lstinline!DIR!}-Interface
+für diesen Anwendungsfall als nicht ideal heraus. Um dieses Problem zu
 umgehen, kann hier ein zusätzlicher Mikrokontroller eingesetzt werden,
 welcher die benötigten Impulse generiert.
 
@@ -1633,13 +1635,13 @@ void TMC5160::go_to(const int _position) {
 }
 
 void TMC5160::atc_home_sync()
-{   
+{    
     enable_motor(); //ENABLE MOTOR
     enable_switch(TMC5160::REF_SWITCH::REF_L, true, true, true); //ENABLE LIMIT SWICHT => ENABLE HARD ENDSTOP
     move_velocity(TMC5160::VELOCITY_DIRECTION::NEGATIVE, HOME_SPEED_VELOCITY, 1000);  //MOVE NEGATIVE TO LIMIT SWITCH
     //WAIT TO REACH THE ENDSTOP
     while(!get_ramp_stauts().status_stop_l) {
-        std::this_thread::sleep_for(std::chrono::microseconds(1));      
+        std::this_thread::sleep_for(std::chrono::microseconds(1));        
     }
     //STOP MOTOR
     hold_mode();
@@ -2809,7 +2811,7 @@ Localhost auf dem der Backend-Service auf dem Port 3000 ausgeührt wird.
         DocumentRoot /var/www/html
         ProxyPass /.well-known !
         ProxyPass / http://127.0.0.1:3000/
-        ProxyPassReverse / http://127.0.0.1:3000/   
+        ProxyPassReverse / http://127.0.0.1:3000/    
     ServerAdmin webmaster@atomicchess.de
 
     ErrorLog ${APACHE_LOG_DIR}/error.log
@@ -3230,26 +3232,6 @@ Steuerungssoftware für den autonomen Schachtisch verwendet.
 \item
   Kommunikation mit dem Cloud-Server
 \end{itemize}
-
-\hypertarget{anmerkungen-compiler}{%
-\subsection{Anmerkungen Compiler}\label{anmerkungen-compiler}}
-
-Die Controller-Software wurde in C++ erstellt und verwendet Features des
-C++ 17 Standart:
-
-\begin{itemize}
-\tightlist
-\item
-  constexpr lambda
-\item
-  lambda capture
-\end{itemize}
-
-Diese Features werden im \gls{ipc} Modul (s.u.) , sowie einigen
-verwendeten Bibliotheken verwendet. Auf dem Host-Entwicklungssystem,
-sowie dem eingebetteten System wurde der GCC-Compiler mit der Version
-\passthrough{\lstinline!10.2!} installiert und wird für das Erstellen
-der einzelnen Software-Componenten verwendet.
 
 \hypertarget{ablaufdiagramm}{%
 \section{Ablaufdiagramm}\label{ablaufdiagramm}}
