@@ -66,6 +66,8 @@ Dies soll mittels eines kompakten und minimalistischen Designs realisiert werden
 
 Im zweiten Kapitel werden die zum Zeitpunkt existierenden Ansätze und deren Umsetzung beleuchtet. Hier wurde insbesondere darauf geachtet, die Grenzen bestehender Systeme darzulegen und auf nur für dieses Projekt zutreffende Funktionen zu vergleichen.
 
+
+
 <br>
 
 Die Anforderungsanalyse im dritten Kapitel, fasst alle zuvor recherchierten Funktionen bestehender Systeme zusammen und leitet daraus eine Auflistung der Anforderungen ab, welche in den nachfolgenden Prototypen realisiert werden sollen.
@@ -339,16 +341,14 @@ Auch müssen die Figuren für den Benutzer eine gut handhabbare Größe aufweise
 
 
 
-# Machbarkeitsanalyse und Verifikation der ausgewählter Technologien
+# Machbarkeitsanalyse und Verifikation ausgewählter Technologien
 
 * welche technologien werden benötigt
 * software architektur anfoderungen
 
 
 
-
-
-## Buildroot-Framework
+## Erprobung Buildroot-Framework
 
 Eine Hürde, welche bei diesem Projekt genommen werden muss, ist die Erstellung der Software welche auf dem autonomen Schachtisch ausgeführt wird.
 Hierbei soll diese nicht von Grund auf neu entwickelt werden, sondern auf einer soliden Basis aufbauen.
@@ -425,7 +425,7 @@ $(eval $(generic-package))
 Das somit erstellte Test-Paket `atctp` bildet somit eine funktionierende Grundlage für das System. Somit eignet sich das `Buildroot`-Framework optimal für diese Projekt, da hier der Prozess zur Integration von eigener Software sich als sehr einfach gestaltet.
 
 
-## NFC Technologie
+## Verifikation NFC Technologie
 
 Ein weiterer wichtiger Bestandteil soll die Erkennung der sich auf dem Feld befindlichen Schachfiguren sein.
 Hierbei muss zum einen der Figur-Typ (Bauer, König, Dame, ..) und die Figur-Farbe (schwarz, weiss) vom System erkannt werden.
@@ -749,40 +749,40 @@ Je nach ermittelter Revision werden die erforderlichen Hardwarekomponenten initi
 //...
 int SPICommunication::spi_write_ack(SPICommunication::SPI_DEVICE _device, uint8_t* _data, int _len)
 {
-	uint8_t* buffer_r{ new uint8_t[_len] { 0 }};
-	uint8_t* buffer_w{ new uint8_t[_len] { 0 }};
+    uint8_t* buffer_r{ new uint8_t[_len] { 0 }};
+    uint8_t* buffer_w{ new uint8_t[_len] { 0 }};
 
-	volatile int res = -1;
-	volatile int c = 0; //RETRY COUNTER
-	while (true)
-	{
-		//RECREATE COMMAND BUFFER
+    volatile int res = -1;
+    volatile int c = 0; //RETRY COUNTER
+    while (true)
+    {
+        //RECREATE COMMAND BUFFER
         //WILL BE OVERWRITTEN AFTER spi_write / spi_read
-		for (size_t i = 0; i < _len; i++)
-		{
-			buffer_w[i] = _data[i];
+        for (size_t i = 0; i < _len; i++)
+        {
+            buffer_w[i] = _data[i];
             buffer_r[i] = 0;
-		}
-		
-		//WRITE COMMAND
-		res = SPICommunication::getInstance()->spi_write(_device, buffer_w, _len);
+        }
+        
+        //WRITE COMMAND
+        res = SPICommunication::getInstance()->spi_write(_device, buffer_w, _len);
         //WAIT
         std::this_thread::sleep_for(std::chrono::milliseconds(SPI_RW_DELAY));
         //READ RESULT BACK
-		res = SPICommunication::getInstance()->spi_write(_device, buffer_r, _len);
-		//PARSE RESULT; CHECK FOR READ SUCCESS
-		if(buffer_r[0] == MAGIC_ACK_BYTE)
-		{
-			break;
-		}
+        res = SPICommunication::getInstance()->spi_write(_device, buffer_r, _len);
+        //PARSE RESULT; CHECK FOR READ SUCCESS
+        if(buffer_r[0] == MAGIC_ACK_BYTE)
+        {
+            break;
+        }
         //INCREASE ERROR COUNTER
-		c++;
-		if (c > SPI_RW_ACK_RETRY)
-		{
-			break;
-		}
-	}
-	return res;
+        c++;
+        if (c > SPI_RW_ACK_RETRY)
+        {
+            break;
+        }
+    }
+    return res;
 }
 //...
 ```
@@ -797,16 +797,16 @@ Dieses stellt verschiedene Funktionen zum Verfahren eines Motors bereit. Hierzu 
 
 : TMC5160 Beschleunigungskurve / RAMP Parameter \label{tmcrampparams}
 
-| Parameter 	| Value   	|
+| Parameter     | Value       |
 |:--------------|----------:|
-| V_START   	| 1       	|
-| A1        	| 25000   	|
-| V1        	| 250000  	|
-| A_MAX     	| 5000    	|
-| V_MAX     	| 1000000 	|
-| D_MAX     	| 5000    	|
-| D1        	| 50000   	|
-| V_STOP    	| 10      	|
+| V_START       | 1           |
+| A1            | 25000       |
+| V1            | 250000      |
+| A_MAX         | 5000        |
+| V_MAX         | 1000000     |
+| D_MAX         | 5000        |
+| D1            | 50000       |
+| V_STOP        | 10          |
 
 Der Treiber wird nur im Position-Mode betrieben, welcher eine wesentliche Eigenschaft dessen ist. Hierbei kann über ein Register eine Zielposition in Schritten vorgegeben werden. Der Treiber ermittelt daraufhin die passende Beschleunigungskurve und verfährt den Motor an diese Position.
 Über ein entsprechendes Register kann der Status der Operation abgefragt werden und ob der Motor seine Position erreicht hat bzw. ob Fehler auftraten. Somit muss nicht auf das Erreichen der Zielposition gewartet werden und anderen Aufgaben können währenddessen ausgeführt werden. Die Beschleunigungskurve kann zusätzlich manuell angepasst werden.
@@ -895,31 +895,31 @@ void TMC5160::go_to(const int _position) {
 }
 
 void TMC5160::atc_home_sync()
-{	
-	enable_motor(); //ENABLE MOTOR
-	enable_switch(TMC5160::REF_SWITCH::REF_L, true, true, true); //ENABLE LIMIT SWICHT => ENABLE HARD ENDSTOP
-	move_velocity(TMC5160::VELOCITY_DIRECTION::NEGATIVE, HOME_SPEED_VELOCITY, 1000);  //MOVE NEGATIVE TO LIMIT SWITCH
-	//WAIT TO REACH THE ENDSTOP
-	while(!get_ramp_stauts().status_stop_l) {
-		std::this_thread::sleep_for(std::chrono::microseconds(1));		
-	}
-	//STOP MOTOR
-	hold_mode();
-	//SAVE LATCHED POSTION
-	int offset = get_position() - get_latched_position();
-	write(REGDEF_XACTUAL, offset);
-	//SAVE OFFSET
-	int currpos = get_position();
-	set_postion_offset(currpos);
-	//RESET RAMP
-	write(REGDEF_RAMPSTAT, 4);
-	//GOTO THE NEW ZERO POSTION
-	set_AMAX(RAMP_AMAX);
-	set_VMAX(RAMP_VMAX);
-	go_to(0);
-	//DISABLE HARD ENDSTOP 
-	enable_switch(TMC5160::REF_SWITCH::REF_L, true, false, true);
-	disable_motor(); //DISBLE MOTOR
+{    
+    enable_motor(); //ENABLE MOTOR
+    enable_switch(TMC5160::REF_SWITCH::REF_L, true, true, true); //ENABLE LIMIT SWICHT => ENABLE HARD ENDSTOP
+    move_velocity(TMC5160::VELOCITY_DIRECTION::NEGATIVE, HOME_SPEED_VELOCITY, 1000);  //MOVE NEGATIVE TO LIMIT SWITCH
+    //WAIT TO REACH THE ENDSTOP
+    while(!get_ramp_stauts().status_stop_l) {
+        std::this_thread::sleep_for(std::chrono::microseconds(1));        
+    }
+    //STOP MOTOR
+    hold_mode();
+    //SAVE LATCHED POSTION
+    int offset = get_position() - get_latched_position();
+    write(REGDEF_XACTUAL, offset);
+    //SAVE OFFSET
+    int currpos = get_position();
+    set_postion_offset(currpos);
+    //RESET RAMP
+    write(REGDEF_RAMPSTAT, 4);
+    //GOTO THE NEW ZERO POSTION
+    set_AMAX(RAMP_AMAX);
+    set_VMAX(RAMP_VMAX);
+    go_to(0);
+    //DISABLE HARD ENDSTOP 
+    enable_switch(TMC5160::REF_SWITCH::REF_L, true, false, true);
+    disable_motor(); //DISBLE MOTOR
 }
 //...
 ```
@@ -1655,15 +1655,15 @@ Bei dem eingerichteten Reverse-Proxy werden alle Verbindungen aus dem öffentlic
         DocumentRoot /var/www/html
         ProxyPass /.well-known !
         ProxyPass / http://127.0.0.1:3000/
-        ProxyPassReverse / http://127.0.0.1:3000/	
-	ServerAdmin webmaster@atomicchess.de
+        ProxyPassReverse / http://127.0.0.1:3000/    
+    ServerAdmin webmaster@atomicchess.de
 
-	ErrorLog ${APACHE_LOG_DIR}/error.log
-	CustomLog ${APACHE_LOG_DIR}/access.log combined
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
 
-	SSLCertificateFile /etc/letsencrypt/live/atomicchess.de/fullchain.pem
-	SSLCertificateKeyFile /etc/letsencrypt/live/atomicchess.de/privkey.pem
-	Include /etc/letsencrypt/options-ssl-apache.conf
+    SSLCertificateFile /etc/letsencrypt/live/atomicchess.de/fullchain.pem
+    SSLCertificateKeyFile /etc/letsencrypt/live/atomicchess.de/privkey.pem
+    Include /etc/letsencrypt/options-ssl-apache.conf
 </VirtualHost>
 </IfModule>
 ```
@@ -1926,17 +1926,6 @@ Diese Feature wurde insbesondere bei der Entwicklung des Webclient und der Steue
 
 * Hauptsoftware zur Steuerung der Elektrik/Mechanik
 * Kommunikation mit dem Cloud-Server
-
-
-### Anmerkungen Compiler
-
-Die Controller-Software wurde in C++ erstellt und verwendet Features des C++ 17 Standart:
-
-* constexpr lambda
-* lambda capture
-
-Diese Features werden im (+ipc) Modul (s.u.) , sowie einigen verwendeten Bibliotheken verwendet.
-Auf dem Host-Entwicklungssystem, sowie dem eingebetteten System wurde der GCC-Compiler mit der Version `10.2` installiert und wird für das Erstellen der einzelnen Software-Componenten verwendet.
 
 
 ## Ablaufdiagramm
