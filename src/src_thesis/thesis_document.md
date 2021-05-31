@@ -366,10 +366,10 @@ Auf seitens der Entwicklung ist eine Toolchain notwendig, mit welcher es möglic
 
 Für diesen Zweck existieren einige Open-Source Projekte, welche solch ein Build-System bereitstelle. Hierbei existieren zwei weit verbreitete Systeme.
 Das `Yocot`-Projekt[@yoctoproject] und das `Buildroot`-Framework[@buildroot].
-Hierbei unterscheiden sich diese im Aufbau und der Funktionsweise teils stark, vor allem während der ersten Verwendung.
+Hierbei unterscheiden sich diese im Aufbau und der Funktionsweise teils stark  \ref{yoctobuildrootcomp} , vor allem während der ersten Verwendung.
 
 
-: Vergleich Yocto - Buildroot \label{commchesstables}
+: Vergleich Yocto - Buildroot \label{yoctobuildrootcomp}
 
 |                                                         | YOCTO     | BUILDROOT     |
 |------------------------------               |-------    |-----------                |
@@ -508,7 +508,7 @@ Bei dem Design der zu druckenden Bauteile wurde darauf geachtet, dass diese den 
 
 <br>
 
-Als Software wurde der Open-Source Slicer Ultimaker Cura [@ultimakercura] verwendet, da dieser zum einen bereits fertige Konfigurationen für den verwendeten 3D-Drucker enthält und zum anderen experimentelle Features bereitstellt.
+Als Software wurde der Open-Source Slicer Ultimaker Cura [@ultimakercura] verwendet, da dieser zum einen bereits fertige Konfigurationen \ref{3dprintsettings} für den verwendeten 3D-Drucker enthält und zum anderen experimentelle Features bereitstellt.
 
 <br>
 
@@ -524,12 +524,12 @@ Diese Vorteile wurde mit verschiedenen Testdrucken verifiziert und kommen insbes
 
 | Ender 3 Pro 0.4mm Nozzle  | PLA Settings  |
 |:--------------------------|--------------:|
-| Layer Height              | 0.2mm         |
-| Infill                    | 50.00%        |
+| Layer Height                | 0.2mm        |
+| Infill                              | 50.00%       |
 | Wall Thickness            | 2.0mm         |
-| Support Structure         | Tree          |
-| Top Layers                | 4             |
-| Bottom Layers             | 4             |
+| Support Structure       | Tree             |
+| Top Layers                  | 4                  |
+| Bottom Layers            | 4                  |
 
 <br>
 
