@@ -358,7 +358,7 @@ Auf dem Basis-System müssen die folgenden Software-Pakete installiert sein, bzw
 - (+ssh) für den Remote-Zugriff
 - (+dhcp) Client zur automatischen IPv4-Adressvergabe
 - (+udev) zur Ein-/Ausgabe Geräte Verwaltung (Touchscreen)
-- Qt[@qtframework] - (+gui) Framework
+- `Qt`[@qtframework] - (+gui) Framework
 - SW-Update zur Durchführung eines Remote-Update
 
 Zusätzlich zu diesen auf dem Linux-System benötigten Paketen, muss es möglich sein durch das eingebettete System bootbares Dateiimage zu erzeugen.
