@@ -359,7 +359,7 @@ Auf dem Basis-System müssen die folgenden Software-Pakete installiert sein, bzw
 - (+dhcp) Client zur automatischen IPv4-Adressvergabe
 - (+udev) zur Ein-/Ausgabe Geräte Verwaltung (Touchscreen)
 - `Qt`[@qtframework] - (+gui) Framework
-- SW-Update zur Durchführung eines Remote-Update
+- SWUpdate zur Durchführung eines Remote-Update
 
 Zusätzlich zu diesen auf dem Linux-System benötigten Paketen, muss es möglich sein durch das eingebettete System bootbares Dateiimage zu erzeugen.
 Auf seitens der Entwicklung ist eine Toolchain notwendig, mit welcher es möglich ist in C++ geschriebene Programme auf dem System ausführen und mittels (+gdb) auf Fehler überprüfen zu können. Dazu sollte der C++ Compiler mindesten den C++17 Standard unterstützen.
