@@ -2323,9 +2323,13 @@ void MenuManager::updateProgress()
 
 # Fazit
 
+
+![Erstellten Protottypen \label{ATC_PROD_TABLE_FINAL_IMG}](images/ATC_PROD_TABLE_FINAL_IMG.png)
+
+
 Zusammenfassend lässt sich feststellen, dass das Ziel der Arbeit erreicht wurde. Die Kernfrage, welche die Überprüfung der Ausführbarkeit inklusive Erstellung und Umsetzung eines eingebetteten Systems und einer Cloud-Infrastruktur umfasst, konnte abschließend positiv beantwortet werden.
 
-Es wurde iterativ ein autonomer Schachtisch entwickelt, welcher alle zuvor gestellten Anforderungen erfüllt. 
+Es wurde iterativ ein autonomer Schachtisch \ref{ATC_PROD_TABLE_FINAL_IMG} entwickelt, welcher alle zuvor gestellten Anforderungen erfüllt. 
 Die Positionen der Schachfiguren können mittels NFC-Tags in den Füßen der Figuren und eines NFC-Lesers unterhalb des Schachfelds umgesetzt werden. 
 Die Mechanik zur Bewegung des NFC-Lesers und eines Magnetes in dessen Mitten ermöglicht zudem durch gegenpolige Magnete in den Füßen der Figuren ein automatisches Bewegen der Figuren ohne manuelle Interaktionen. 
 Die Größe des Feldes ist so ausgelegt, dass Figuren ohne Kontraktionen aneinander vorbeigeführt und am Rand des Spielfeldes positioniert werden können, sofern sie aus dem Spiel ausgeschieden sind. Dadurch war eine kleinere Revision des Tisches nicht anwendbar, dennoch konnten mittels der größeren Dimensionen der letzten Revision diese Funktion und weitere, wie die Mechanik zur Bewegung, optimiert und adäquater umgesetzt werden. 
