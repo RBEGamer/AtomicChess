@@ -227,11 +227,13 @@ Bei allen Open-Source Projekten wurden die Eigenschaften anhand der Beschreibung
 
 <br>
 
-Besonders bei Projekten, welche sich noch in der Entwicklung befinden, können sich die Eigenschaften noch verändern und so weitere Funktionalitäten hinzugefügt werden. Alle Eigenschaften der Projekte wurden zum Zeitpunkt der Recherche analysiert und dokumentiert und mit Beginn der Entwicklung als Struktur-Fixpunkt festgelegt. Nachfolgende Entwicklungen werden zu diesem Zeitpunkt nicht mehr berücksichtigt.
+Besonders bei Projekten, welche sich noch in der Entwicklung befinden, können sich die Eigenschaften noch verändern und so weitere Funktionalitäten hinzugefügt werden. Alle Eigenschaften dieser Projekte wurden zum Zeitpunkt der Recherche analysiert und dokumentiert und mit Beginn der Entwicklung als Struktur-Fixpunkt festgelegt. Nachfolgende Entwicklungen werden zu diesem Zeitpunkt nicht mehr berücksichtigt.
 
 <br>
 
-Zusätzlich zu den genannten Projekten sind weitere derartige Projekte verfügbar; in der Tabelle wurde nur jene aufgelistet, welche sich von anderen Projekten in mindestens einem Feature unterscheiden.
+Zusätzlich zu den genannten Projekten sind weitere derartige Projekte verfügbar; in der Tabelle wurde nur jene aufgelistet, welche sich von anderen Projekten in mindestens einer Eigenschaft unterscheiden.
+
+<br>
 
 Auch existieren weitere Abwandlungen von autonomen Schachbrettern, bei welchem die Figuren von oberhalb des Spielbretts gegriffen bzw. bewegt werden. In einigen Projekten wird dies mittels eines Industrie-Roboters [@actprojectrobot] oder eines modifizierten 3D-Druckers[@atcproject3dprinter] realisiert. Diese wurden hier aufgrund der Mechanik, welche über dem Spielbrett montiert werden muss und damit das Spielerlebnis erheblich beinflusst, nicht berücksichtigt.
 
@@ -268,13 +270,12 @@ Diese Variante ist je nach Implementierung des Vision-Algorithmus fehleranfälli
 
 <br>
 
-Eine weitere Alternative ist die Verwendung einer Matrix aus Reed-Schaltern oder Halleffekt-Sensoren. Diese werden in einer 8x8 Matrix Konfiguration unterhalb der Platte montiert und reagieren auf die Magnete in den Figuren. So ist es möglich zu erkennen, welches der Schachfelder belegt ist, jedoch nicht konkret von welchem Figur Typen.
+Eine Alternative ist die Verwendung einer Matrix aus Reed-Schaltern oder Halleffekt-Sensoren. Diese werden in einer 8x8 Matrix Konfiguration unterhalb der Platte montiert und reagieren auf die Magnete in den Figuren. So ist es möglich, zu erkennen, welches der Schachfelder belegt ist, jedoch nicht konkret von welchem Figur Typen.
 Dieses Problem wird durch eine definierte Ausgangsstellung beim Spielstart gelöst. Nach jedem Zug durch den Spieler und der dadurch resultierenden Änderungen in der Figur Positionen in der Matrix können die neuen Figur Stellungen berechnet werden.
 
 <br>
-<!--- Sie meinen, dass es nicht so etwas wie eine kmplette Lösung (klaren Testsieger) gibt oder? Dann könnten Sie auch schreiben: Kein kommerzieller Tisch bieter alle angestrebten Funktionalitäten...-->
-Jedoch ist abschließend zu festzuhalten dass es auch bei den open-source Projekten kein Projekt gibt, welches alle gewünschten Features abbildet.
-Auch fehlen weitestgehend Features, welche die kommerziellen Projekte bieten.
+Jedoch ist abschließend zu festzuhalten, dass es auch bei den open-source Projekten kein Projekt gibt, welches alle gewünschten Eigenschaften abbildet.
+Auch fehlen weitestgehend Eigenschaften, welche die kommerziellen Projekte bieten.
 Das Ziel soll nun sein, all die positiven Eigenschaften dieser Tische zu vereinbaren und mittels noch zusätzlicher Verbesserungen ein eigenes Produkt zu entwickeln.
 
 <br>
@@ -350,7 +351,7 @@ Auch müssen die Figuren für den Benutzer eine gut handhabbare Größe aufweise
 
 ## Erprobung Buildroot-Framework
 
-Eine Hürde, welche bei diesem Projekt genommen werden muss, ist die Erstellung der Software welche auf dem autonomen Schachtisch ausgeführt wird.
+Eine Hürde, die bei diesem Projekt genommen werden muss, ist die Erstellung der Software, welche auf dem autonomen Schachtisch ausgeführt wird.
 Hierbei soll diese nicht von Grund auf neu entwickelt werden, sondern auf einer soliden Basis aufbauen.
 Allgemein soll hier auf ein minimales Linux-System gesetzt werden, in welches die Software des autonomen Schachtisches integriert wird. 
 Auf dem Basis-System müssen die folgenden Software-Pakete installiert sein, bzw. einfach integrierbar sein:
@@ -365,8 +366,8 @@ Zusätzlich zu diesen auf dem Linux-System benötigten Paketen, muss es möglich
 Auf seitens der Entwicklung ist eine Toolchain notwendig, mit welcher es möglich ist in C++ geschriebene Programme auf dem System ausführen und mittels (+gdb) auf Fehler überprüfen zu können. Dazu sollte der C++ Compiler mindesten den C++17 Standard unterstützen.
 
 Für diesen Zweck existieren einige Open-Source Projekte, welche solch ein Build-System bereitstelle. Hierbei existieren zwei weit verbreitete Systeme.
-Das `Yocot`-Projekt[@yoctoproject] und das `Buildroot`-Framework[@buildroot].
-Hierbei unterscheiden sich diese im Aufbau und der Funktionsweise teils stark  \ref{yoctobuildrootcomp} , vor allem während der ersten Verwendung.
+Das `Yocto`-Projekt[@yoctoproject] und das `Buildroot`-Framework[@buildroot].
+Hierbei unterscheiden sich diese im Aufbau und der Funktionsweise teils stark \ref{yoctobuildrootcomp}, vor allem während der ersten Verwendung.
 
 
 : Vergleich Yocto - Buildroot \label{yoctobuildrootcomp}
@@ -380,11 +381,11 @@ Hierbei unterscheiden sich diese im Aufbau und der Funktionsweise teils stark  \
 | einfache Konfiguration                   | Nein     | Ja                            |
 |                                                        |              |                                |
 
-Hierbei stellt das `Yocto`- Projekt, eine größere Einstiegshürde, durch ein komplexes Layer-System dar. Es bietet sich jedoch für komplexe Projekte an, welche einen hohen Grad an Individualisierung benötigen. Ein Nachteil dessen, ist da dadurch auch viel vom Nutzer selber konfiguriert werden muss, bevor ein minimales System in Betrieb genommen werden kann.
+Das `Yocto`- Projekt stellt hierbei durch ein komplexes Layer-System eine größere Einstiegshürde dar. Es bietet sich jedoch für komplexe Projekte an, welche einen hohen Grad an Individualisierung benötigen. Ein Nachteil dessen, ist da dadurch auch viel vom Nutzer selbst konfiguriert werden muss, bevor ein minimales System in Betrieb genommen werden kann.
 
-Das `Buildroot`-Framework bietet bereits eine große Anzahl an vorgefertigteten Ziel-Systemen an, für welche es bereits alle nötigen Parameter enthält, um ein minimales System erstellen zu können. Auch ist bereits eine optimierte Konfiguration für das eingebettete System vorhanden, welche direkt gestartet werden kann. Nach einem Erfolgreichem erstellen, des Images kann dieses direkt über das eingebettete System gestartet werden.
+Das `Buildroot`-Framework bietet bereits eine große Anzahl an vorgefertigten Ziel-Systemen an, für welche es bereits alle nötigen Parameter enthält, um ein minimales System erstellen zu können. Auch ist bereits eine optimierte Konfiguration für das eingebettete System vorhanden, welche direkt gestartet werden kann. Nach einem Erfolgreichem erstellen, des Images kann dieses direkt über das eingebettete System gestartet werden.
 Bei jedem Build-Vorgang müssen jedoch alle Pakete erneut gebaut werden, bevor diese zu einem finalen Image zusammengefügt werden.
-Hierbei kann dieser Vorgang je nach Umfang der verwendeten Pakete mehrere Stunden dauern. Das `Yocto`-Projekt unterstützt hierbei das Erstellen einzelner Pakete, somit müssen nur Änderungen neu gebaut werden.
+Hierbei kann dieser Vorgang je nach Umfang der verwendeten Pakete mehrere Stunden dauern. Das `Yocto`-Projekt unterstützt das Erstellen einzelner Pakete, somit müssen nur Änderungen neu gebaut werden.
 Da hier nur eine minimale Anzahl von Paketen benötigt werden, somit hält sich dieser Bauvorgang zeitlich in Grenzen und ist allgemein für diese Projekt nicht entscheidend.
 
 
@@ -398,7 +399,7 @@ config BR2_PACKAGE_ATCTP
         This package is a test package to verify the buildroot build process
 ```
 
-Zusätzlich wurde ein eigenes C++ Paket erstellt und in das `Buildroot`-Framework integriert. Hierzu sind zu dem Quellcode, zwei weitere Dateien notwendig.
+Zusätzlich wurde ein eigenes C++ Paket erstellt und in das `Buildroot`-Framework integriert. Hierzu sind zusätzlich zum Quellcode zwei weitere Dateien notwendig.
 Die `Config.in` beschreibt das Paket und setzt möglicherweise benötigte Abhängigkeiten zu anderen Paketen fest.  Die zweite Datei ist die `PAKET_NAME.mk` Makefile, welche die Schritte beschreibt, welche zum Erstellen und Installieren des Paketes durchgeführt werden müssen.
 
 
@@ -424,23 +425,23 @@ endef
 
 $(eval $(generic-package))
 ```
-Das somit erstellte Test-Paket `atctp` bildet somit eine funktionierende Grundlage für das System. Somit eignet sich das `Buildroot`-Framework optimal für diese Projekt, da hier der Prozess zur Integration von eigener Software sich als sehr einfach gestaltet.
+Das erstellte Test-Paket `atctp` bildet somit eine funktionierende Grundlage für das System. Dadurch eignet sich das `Buildroot`-Framework optimal für diese Projekt, da hier der Prozess zur Integration von eigener Software sich als sehr einfach gestaltet.
 
 
 ## Verifikation NFC Technologie
 
 Ein weiterer wichtiger Bestandteil soll die Erkennung der sich auf dem Feld befindlichen Schachfiguren sein.
 Hierbei muss zum einen der Figur-Typ und die Figur-Farbe vom System erkannt werden.
-Da hier keine aufwendige Elektronik entwickelt werden soll, sondern auf Standard-Komponenten zurückgegriffen werden soll, scheidet ein komplexes (+hf) Antennen-Array unter dem Schachfeld aus, wie es bei einigen kommerziellen Produkten umgesetzt ist.
-Eine einfache 8x8 Matrix aus Drucktastern oder Hall-Effekt-Sensoren scheidet ebenfalls aus, da hier die Eingabe über den Benutzer erfolgt und nur Rückschlüsse auf die veränderte Figur anhand einer Manuellen Bewegung der Figur nachvollzogen werden kann.
+Da hier keine aufwendige Elektronik entwickelt werden soll, sondern auf Standard-Komponenten zurückgegriffen wird, scheidet ein komplexes (+hf) Antennen-Array unter dem Schachfeld aus, wie es bei einigen kommerziellen Produkten umgesetzt ist.
+Eine einfache 8x8 Matrix aus Drucktastern oder Hall-Effekt-Sensoren scheidet ebenfalls aus, da hier die Eingabe über den Benutzer erfolgt und nur Rückschlüsse auf die veränderte Figur anhand einer manuellen Bewegung der Figur nachvollzogen werden kann.
 
-Somit eignet sich hier die (+nfc) Technologie, welche auch bei modernem Smartphone eingesetzt wird.
-Hierzu werden kleine (+nfc)-Tags bzw. Aufkleber, welche aus einem Chip und einer Antenne bestehen so programmiert, dass diese eine definierte Aktion beim Lesegerät auslösen.
-Dies kann zum Beispiel das Öffnen einer Internetseite auf dem Mobilen-Endgerät, nach dem Scan eines Filmplakats sein.
+Daraus resultiert, dass sich hier die (+nfc) Technologie eignet, welche auch bei modernem Smartphone eingesetzt wird.
+Hierzu werden kleine (+nfc)-Tags (beziehungsweise Aufkleber), welche aus einem Chip und einer Antenne bestehen so programmiert, dass diese eine definierte Aktion beim Lesegerät auslösen.
+Dies kann zum Beispiel das Öffnen einer Internetseite auf dem mobilen-Endgerät nach dem Scan eines Plakats sein.
 
 ![Grove PN532 NFC Reader mit Kabelgebundener Antenne \label{ATC_nfc_range_test}](images/ATC_nfc_range_test.png)
 
-Ein Vorteil dieser Technologie ist, dass diese auch im Konsumerbereich bereits breit verfügbar ist. Durch das einfache Programmieren dieser (+nfc)-Tag über das Smartphone, wird kein zusätzliches Lese-/Schreib-Gerät benötigt.
+Ein Vorteil dieser Technologie ist, dass diese auch im Konsumerbereich bereits verfügbar ist. Durch das einfache Programmieren dieser (+nfc)-Tag über das Smartphone, wird kein zusätzliches Lese-/Schreib-Gerät benötigt.
 Hier muss jedoch zuvor getestet werden, welchen maximalen Abstand nötig ist, um solch ein Tag scannen zu können.
 Auch ist der Abstand zwischen den einzelnen Tags entscheidend, wie nah diese beieinander platziert werden können, um diese einwandfrei auslesen zu können.
 
@@ -449,9 +450,9 @@ Hierzu wurde ein kleiner Testaufbau \ref{ATC_nfc_range_test} entwickelt, um vers
 Als Lesegerät wurde ein `PN532` Modul zum Auslesen der (+nfc)-Tags eingesetzt, da dieser einfach angesteuert werden kann und eine abnehmbare Antenne besitzt.
 Dieser wurde bereits in anderen Projekten eingesetzt und erwies sich als zuverlässig.
 
-Die im Test verwendeten (+nfc)-Tag, haben einen Durchmesser von 22mm und sind somit ein Standart-Produkt.
-Im Test stellte sich heraus, dass diese im gewählten Setup, einen Abstand von 5mm zueinander benötigen.
-Der Abstand des Lesegeräts bzw. der Antenne zu einem Tag kann dabei bis zu 14mm betragen.
+Die im Test verwendeten (+nfc)-Tags haben einen Durchmesser von 22mm und sind somit ein Standart-Produkt.
+Im Test stellte sich heraus, dass diese im gewählten Setup einen Abstand von 5mm zueinander benötigen, um keine Interferenzen zu erzeugen. 
+Der Abstand des Lesegeräts bzw. der Antenne zu einem Tag kann dabei ohne Hindernisse bis zu 14mm betragen.
 
 Somit eignet sich die Kombination aus Tag und Lesegerät zu einer der Schachfiguren, wobei sich das Lesegerät unter der Schachtischplatte befindet.
 
@@ -464,23 +465,24 @@ Somit eignet sich die Kombination aus Tag und Lesegerät zu einer der Schachfigu
 
 Da die einzelnen Figuren über das Schachfeld bewegt werden sollen, ist hierfür eine akkurate Positionierung dieser notwendig.
 Da die Figuren einen Durchmesser von 22mm haben und somit ein einzelnes Schachfeld eine Größe ca. 55mm besitzt, reicht eine Wiederholgenauigkeit \ref{nema17_accuary_test} von +-1mm.
-Auch wird bei der Wahl der passenden Motoren, angenommen dass das Spiel, welches durch die Mechanik in das System eingebracht wird, vernachlässigbar klein ist.
-Es ist auch davon auszugehen, dass die Kraft, welche von den Motoren benötigt wird, um eine Achse zu bewegen nicht mehr als 45Ncm beträgt.
+Auch wird bei der Wahl der passenden Motoren angenommen, dass das Spiel, welches durch die Mechanik in das System eingebracht wird, vernachlässigbar klein ist.
+Es ist auch davon auszugehen, dass die Kraft, welche von den Motoren benötigt wird, um eine Achse zu bewegen, nicht mehr als 45Ncm beträgt.
 
 ![Nema 17 Schrittmotor: Test der Wiederholgenauigkeit\label{nema17_accuary_test}](images/nema17_accuary_test.png)
 
-Dies entspricht den Werten einer X-Y-Achsenkonfiguration, wie sie in einem handelsüblichen 3D-Drucker zu finden ist und welche mit `Nema 17`-Schrittmotoren ausgestattet sind.
-Der geplante Aufbau des autonomen Schachtischs, ähnelt einer solchen Konfiguration sehr, da auch hier die Figuren in X-Y Richtung verfahren werden.
+Dies entspricht den Werten einer X-Y-Achsenkonfiguration, wie sie in einem handelsüblichen 3D-Drucker zu finden ist und welche in der Regel mit `Nema 17`-Schrittmotoren ausgestattet sind.
+Der geplante Aufbau des autonomen Schachtischs ähnelt einer solchen Konfiguration sehr, da auch hier die Figuren in X-Y Richtung verfahren werden.
 Einzig die Z-Achse kommt hier nicht zum Einsatz. Somit werden für erste Tests diese Motoren gewählt.
 
+<br>
 
 
-Deswegen bietet sich hier auch die Verwendung von Schrittmotoren an, da diese sehr kostengünstig in der geforderten Leistungsklasse zu erwerben sind und zudem kann die Ansteuerung einfach realisiert werden. Hierzu gibt es verschiedene Schrittmotor-Treiber, welche die Ansteuerung übernehmen. Diese biete in der Regel ein `STEP`, `DIR` Interface an. Der Schrittmotor-Treiber besitzt diese beiden Eingänge und jeder Elektrische-Impuls sorgt dafür, dass der Motor einen Schritt ausführt. Je nach ausgewähltem Motor entspricht dies einer Rotation um 1.8 Grad und dies reicht somit für die Positioniergenauigkeit aus.
+Daher bietet sich hier auch die Verwendung von Schrittmotoren an, welche sehr kostengünstig in der geforderten Leistungsklasse zu erwerben sind und zudem kann die Ansteuerung einfach realisiert werden. Hierzu gibt es verschiedene Schrittmotor-Treiber, welche die Ansteuerung übernehmen. Diese biete in der Regel ein `STEP`, `DIR` Interface an. Der Schrittmotor-Treiber besitzt diese beiden Eingänge und jeder Elektrische-Impuls sorgt dafür, dass der Motor einen Schritt ausführt. Je nach ausgewähltem Motor entspricht dies einer Rotation um 1.8 Grad und dies reicht somit für die Positioniergenauigkeit aus.
 
-Da auf dem eingebetteten System auf einem nicht echtzeitfähigen Linux-System aufsetzt, ist hier eine zeitkritische Ansteuerung der Motortreiber nicht gewährleistet.
+Da das eingebettete System auf einem nicht echtzeitfähigen Linux-System aufsetzt, ist hier eine zeitkritische Ansteuerung der Motortreiber nicht gewährleistet.
 Somit stellt sich das `STEP`, `DIR`-Interface für diesen Anwendungsfall als nicht ideal heraus. Um dieses Problem zu umgehen, kann hier ein zusätzlicher Mikrokontroller eingesetzt werden, welcher die benötigten Impulse generiert.
 
-Diese Option wurde zuvor getestet und erwies sich als eine robuste alternative, jedoch existieren Schrittmotor-Treiber, welche über zusätzliche Bus Schnittstellen verfügen.
+Diese Option wurde zuvor getestet und erwies sich als eine robuste Alternative, jedoch existieren Schrittmotor-Treiber, welche über zusätzliche Bus Schnittstellen verfügen.
 Hier wurde auf den `TMC5160-BOB` gesetzt, da dieser über eine (+spi) Interface verfügt, welches direkt an das eingebettete System angeschlossen werden kann.
 
 Somit stellen die Schrittmotoren und die gewählte Ansteuerung einen vielversprechendes Antriebskonzept für den autonomen Schachtisch dar.
@@ -535,7 +537,7 @@ Diese Vorteile wurde mit verschiedenen Testdrucken verifiziert und kommen insbes
 <br>
 
 
-Zusätzliche Parameter wie die Druckgeschwindigkeit, sind hierbei individuell für den zu gewählten 3D Drucker zu ermitteln. Allgemein wurden hier die Standarteinstellungen verwendet, welche in diesem Falle einen guten Kompromiss zwischen Qualität und Druckzeit lieferten.
+Zusätzliche Parameter wie die Druckgeschwindigkeit, sind hierbei individuell für den gewählten 3D Drucker zu ermitteln. Allgemein wurden hier die Standarteinstellungen verwendet, welche in diesem Falle einen guten Kompromiss zwischen Qualität und Druckzeit lieferten.
 
 <br>
 
@@ -552,20 +554,20 @@ Bei dem mechanischen Aufbau wurde auf ein einfaches Design geachtet. Die Konstru
 
 <br>
 
-Bei der initialen Planung wurde beachtet, einen möglichst kleinen Fußabdruck des Schachtischs zu realisieren. Darüber hinaus wurde beabsichtigt, eine fertige Schachtischplatte als Basis zu verwenden und die Mechanik unter diese zu konstruieren. Um dies zu ermöglichen wurde ein IKEA Lack Tisch verwendet, welcher die Idealen Abmessungen von 55x55cm hat und somit eine erforderliche Schachfeldgröße von 55mm möglich ist.
+Bei der initialen Planung wurde beachtet, einen möglichst kleinen Fußabdruck des Schachtischs zu realisieren. Darüber hinaus wurde beabsichtigt, eine fertige Schachtischplatte als Basis zu verwenden und die Mechanik unter diese zu konstruieren. Um dies zu ermöglichen, wurde ein IKEA Lack Tisch verwendet, welcher die idealen Abmessungen von 55x55cm aufweist und somit eine erforderliche Schachfeldgröße von 55mm möglich ist.
 Durch den bereits vorhandenen Rahmen ist es simpel möglich, weitere Komponenten an diesem zu befestigen. Somit stellt diese Tischplatte eine ideale Basis für den autonomen Schachtisch dar.
 
 <br>
 
-Für die Achsenführung der beiden X- und Y-Achsen wurden konventionelle 20x20mm V-Slot Aluminium-Profile verwendet, welche mit einfachen Mitteln und wenig Geschick passend zugeschnitten werden können. Allgemein wurde eine X-Y Riemenführung verwendet, wobei jede Achse einen separaten Nema 17 Schrittmotor inklusive des passenden Endschalters montiert hatte. Bei den Schlitten, welche auf den Aluminium-Profilen laufen, wurden fertige Standartkomponenten verwendet, um das Spiel in der Mechanik zu minimieren. Diese stellen jedoch einen großen Posten in der Preiskalkulation dar. Die Vorteile überwogen jedoch, da diese nicht manuell erstellt und getestet werden müssen.
+Für die Achsenführung der beiden X- und Y-Achsen wurden konventionelle 20x20mm V-Slot Aluminium-Profile verwendet, welche mit einfachen Mitteln und wenig Geschick passend zugeschnitten werden können. Allgemein wurde eine X-Y Riemenführung verwendet, wobei jede Achse einen separaten Nema 17 Schrittmotor inklusive des passenden Endschalters beinhaltete. Bei den Schlitten, welche auf den Aluminium-Profilen laufen, wurden fertige Standartkomponenten verwendet, um das Spiel in der Mechanik zu minimieren. Diese stellen jedoch einen höheren Posten in der Preiskalkulation dar. Die Vorteile überwogen jedoch, da diese nicht manuell erstellt und getestet werden müssen.
 
 <br>
 
-Bereits während des Designprozess konnte anhand einer statischen Simulation des Modells erkannt werden, dass trotz der Optimierung des Fahrweges beider Achsen durch die Verkleinerung der Halterungen der Aluminium-Profile dieser nicht ausreicht. Mit dieser Konstellation können die Figuren nicht ausreichend weit aus dem Spielfeld platziert werden und verbleiben in den äußeren Spielfeldern. Dieser Effekt war unerwünscht und schränkt das Spielerlebnis deutlich ein.
+Bereits während des Designprozesses konnte anhand einer statischen Simulation des Modells erkannt werden, dass trotz der Optimierung des Fahrweges beider Achsen durch die Verkleinerung der Halterungen der Aluminium-Profile dieser nicht ausreicht. Mit dieser Konstellation können die Figuren nicht ausreichend weit aus dem Spielfeld platziert werden und verbleiben in den äußeren Spielfeldern. Dieser Effekt war unerwünscht und schränkt das Spielerlebnis deutlich ein.
 
 <br>
 
-![Zwei Elektromagnete. Schlitten befindet sich jeweils in den Ecken \label{ATC_DK_HW_DUAL_COIL}](images/ATC_DK_HW_DUAL_COIL.png)
+![Zwei Elektromagnete; Schlitten befindet sich jeweils in den Ecken \label{ATC_DK_HW_DUAL_COIL}](images/ATC_DK_HW_DUAL_COIL.png)
 
 <br>
 
@@ -574,13 +576,13 @@ Um dies zu verhindern wurde der zentrale Schlitten der Y-Achse, auf welchem der 
 
 <br>
 
-Diese Lösung erfordert jedoch einen komplexeren Bahnplanungs-Algorithmus, da die Elektromagneten zwischen einzelnen Zügen gewechselt werden müssen. Dies führt zu einem zeitlich kürzeren Stillstand der Figur auf dem Schachfeld.
+Diese Lösung erfordert jedoch einen komplexeren Bahnplanungs-Algorithmus, da die Elektromagneten zwischen einzelnen Zügen gewechselt werden müssen. Dies führt zu einem kurzen und unschönen zeitlichen Stillstand der Figur auf dem Schachfeld.
 
 <br>
 
 Alle selbst-konstruierten Teile wurden anschließend mittels 3D Druck erstellt und konnten in die Tischplattenbasis eingeschraubt werden. Die Verwendung der aus Holz bestehenden Grundplatte erschwerte jedoch eine akkurate Platzierung der Teile und die bereits existierenden Seitenwände schränkten diese noch zusätzlich ein.
 Somit erforderte der komplette Zusammenbau mehrere Tage und zusätzliche Iterationen des 3D-Designs, um den Einbau spezifischer Teile zu ermöglichen.
-Das Design stellt jedoch eine solide Grundlage darf, welche für die weitere Software und Hardware-Entwicklung essentiell ist.
+Das Design stellt jedoch eine solide Grundlage darf, welche für die weitere Software und Hardware-Entwicklung essenziell ist.
 
 <br>
 
@@ -592,21 +594,21 @@ Moderne Mobiltelefone besitzen in der Regel auch die Fähigkeit mit passenden (+
 
 <br>
 
-Der Schachtisch verwendet dabei das (+ndef) Dateiformat welches Festlegt, wie die Daten auf dem (+nfc) Tag gespeichert werden. Da diesen ein Standardisiertes Format ist, können alle gängigen Lesegeräte und Chipsätze diese Datensätze lesen. Der im autonomen Schachtisch verwendete Chipsatz `PN532` von NXP ist dazu ebenfalls in der Lage.
+Der Schachtisch verwendet dabei das (+ndef) Dateiformat, welches festlegt, wie die Daten auf dem (+nfc) Tag gespeichert werden. Da diesen ein Standardisiertes Format ist, können alle gängigen Lesegeräte und Chipsätze diese Datensätze lesen. Der im autonomen Schachtisch verwendete Chipsatz `PN532` von NXP ist dazu ebenfalls in der Lage.
 
 <br>
 
-Um das (+ndef) Format verwenden zu können, müssen die (+nfc) Tags zuerst auf diese formatiert werden. Die meisten käuflichen Tags sind bereits derart formatiert. Alternativ kann dies mittels Mobiltelefon und passender Applikation geschehen.
+Um das (+ndef) Format verwenden zu können, müssen die (+nfc) Tags zuerst auf diese formatiert werden. Die meisten käuflichen Tags sind bereits derart formatiert. Alternativ kann dies mittels eines gängigen Mobiltelefons und passender Applikation geschehen.
 Da (+ndef) Informationen über die Formatierung und der gespeicherten Einträge speichert, stehen nach der Formatierung nur noch 137 Bytes des NXP NTAG 21 zur Verfügung.
 
 <br>
 
 Per Lesegerät können anschließend mehrere (+ndef) Records auf den Tag geschrieben werden. Diese sind mit Dateien auf einer Festplatte vergleichbar und können verschiedenen Dateiformate und Dateigrößen annehmen.
-Ein typischer Anwendungsfall ist der (+ndefrtd) URL Datensatz. Dieser kann dazu genutzt werden eine spezifizierte URL auf dem Endgeräte aufzurufen, nachdem der (+nfc) Tag gescannt wurde. [@nordicnfclibndef]
+Ein typischer Anwendungsfall ist der (+ndefrtd) URL Datensatz. Dieser kann dazu genutzt werden eine spezifizierte URL auf den Endgeräten aufzurufen, nachdem der (+nfc) Tag gescannt wurde. [@nordicnfclibndef]
 
 <br>
 
-Der autonome Schachtisch verwendet den einfachsten (+ndefrtd) Typ, den sogenannten Text-Record, welcher zum Speichern von Zeichenketten genutzt werden kann, ohne das eine Aktion auf dem Endgerät ausgeführt wird.
+Der autonome Schachtisch verwendet den einfachsten (+ndefrtd) Typ, den sogenannten Text-Record, welcher zum Speichern von Zeichenketten genutzt werden kann, ohne dass eine Aktion auf dem Endgerät ausgeführt wird.
 Jeder Tag einer Schachfigur, welche für den autonomen Schachtisch verwendet werden kann, besitzt diesen (+ndef) Record \ref{ndef_record_rook} an der ersten Speicher-Position. Alle weiteren eventuell vorhandenen Records werden vom Tisch ignoriert. [@nordicnfclib]
 
 ![Prototyp Hardware: Tool zur Erstellung des NDEF Payloads: ChessFigureIDGenerator.html \label{ATC_ChessFigureIDGenerator}](images/ATC_ChessFigureIDGenerator.png)
