@@ -345,25 +345,11 @@ Auch müssen die Figuren für den Benutzer eine gut handhabbare Größe aufweise
 
 
 
-# Machbarkeitsanalyse
+# Machbarkeitsanalyse und Verifikation ausgewählter Technologien
 
 * welche technologien werden benötigt
 * software architektur anfoderungen
-* hardware anforderungen
-* grosse
-* wiederholgenauigkeit
-* lautstärke
-* vorerfahrnung in cad ed druck und schaltungsdesign
 
-
-
-
-
-
-
-
-
-# Grundlegende Verifikation der ausgewählten Technologien
 
 ## Erprobung Buildroot-Framework
 
@@ -1955,19 +1941,24 @@ Dieses Feature wurde insbesondere bei der Entwicklung des Webclients und der Ste
 
 # Embedded System Software
 
-* Hauptsoftware zur Steuerung der Elektrik/Mechanik
-* Kommunikation mit dem Cloud-Server
+Die Embedded System Software ist die Hauptsoftware, welche auf dem eingebetteten System ausgeführt wird.
+Als Basis-System dient das über das `Buildroot` erstellte Linux-System, in welchem die Software nach dem Start ausgeführt wird.
+
+![Embedded System Software: Buildroot Pakete  \label{buildroot_packages_1}](images/buildroot_packages_1.png)
+
+Um eine einfache Integration in das Linux-System zu gewährleisten, wurde ein `Buildroot`-Paket erstellt \ref{buildroot_packages_1}, welches über den Konfigurations-Dialog ausgewählt werden kann. Somit kann ein komplettes System-Image erstellt werden, welches die Software für den autonomen Schachtisch und dessen eingebettetes System enthält.
+
+Hierbei ist die Software in zwei Teile aufgeteilt:
+
+- Controller
+- (+gui)
+
+Dabei stellt die Controller-Software die Hauptsoftware zur Ansteuerung der Mechanik dar. Auch übernimmt diese die Kommunikation mit der Cloud-Infrastruktur und die Berechnung der Figur Positionen.
+
+Die (+gui) Anwendung stellt dabei die Schnittstelle mit dem Benutzer dar. Diese generiert alle visuellen Elemente, welche über das Display am autonomen Schachtisch dargestellt werden, soll und leitet Eingaben des Nutzers an die Controller-Software weiter.
 
 
-### Anmerkungen Compiler
 
-Die Controller-Software wurde in C++ erstellt und verwendet Features des C++ 17 Standards:
-
-* constexpr lambda
-* lambda capture
-
-Diese Features werden im (+ipc) Modul (s.u.) sowie einigen verwendeten Bibliotheken verwendet.
-Auf dem Host-Entwicklungssystem sowie dem eingebetteten System wurde der GCC-Compiler mit der Version `10.2` installiert und für das Erstellen der einzelnen Software-Komponenten verwendet.
 
 
 ## Ablaufdiagramm
@@ -2347,9 +2338,13 @@ void MenuManager::updateProgress()
 
 # Fazit
 
+
+![Erstellten Protottypen \label{ATC_PROD_TABLE_FINAL_IMG}](images/ATC_PROD_TABLE_FINAL_IMG.png)
+
+
 Zusammenfassend lässt sich feststellen, dass das Ziel der Arbeit erreicht wurde. Die Kernfrage, welche die Überprüfung der Ausführbarkeit inklusive Erstellung und Umsetzung eines eingebetteten Systems und einer Cloud-Infrastruktur umfasst, konnte abschließend positiv beantwortet werden.
 
-Es wurde iterativ ein autonomer Schachtisch entwickelt, welcher alle zuvor gestellten Anforderungen erfüllt. 
+Es wurde iterativ ein autonomer Schachtisch \ref{ATC_PROD_TABLE_FINAL_IMG} entwickelt, welcher alle zuvor gestellten Anforderungen erfüllt. 
 Die Positionen der Schachfiguren können mittels NFC-Tags in den Füßen der Figuren und eines NFC-Lesers unterhalb des Schachfelds umgesetzt werden. 
 Die Mechanik zur Bewegung des NFC-Lesers und eines Magneten in dessen Mitte ermöglicht zudem durch gegenpolige Magnete in den Füßen der Figuren ein automatisches Bewegen der Figuren ohne manuelle Interaktion. 
 Die Größe der Felder des Schachtischs ist so ausgelegt, dass Figuren ohne Kontraktionen aneinander vorbeigeführt und am Rand des Spielfeldes positioniert werden können, sofern sie aus dem Spiel ausgeschieden sind. Dadurch war eine kleinere Revision des Tisches nicht anwendbar, dennoch konnten mittels der größeren Dimensionen der letzten Revision diese Funktion und weitere, wie die Mechanik zur Bewegung, optimiert und adäquat umgesetzt werden. 
