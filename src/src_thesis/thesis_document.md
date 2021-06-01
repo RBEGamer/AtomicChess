@@ -1,5 +1,25 @@
 # Einleitung
 
+
+
+\begin{table}[]
+\caption{commercial\_chessboard\_projects.csv}
+\label{commercial_chessboard_projects}
+\begin{tabular}{lllll}
+                                        & Square Off – Kingdom {[}@squareoffkingdom{]} & Square Off - Grand Kingdom {[}@squareoffgrand{]} & DGT Smart Board {[}@dtgsmartboard{]} & DGT Bluetooth Wenge {[}@dtgble{]} \\
+Erkennung Schachfigurstellung           & nein (Manuell per Ausgangsposition)          & nein (Manuell per Ausgangsposition)              & ja (Resonanzspulen)                  & ja((+rfid))                       \\
+Abmessungen (LxBxH)                     & 486mm x 486mm x 75mm                         & 671mm x 486mm x 75mm                             & 540mm x 540mm x 20mm                 & 540mm x 540mm x 20mm              \\
+Konnektivität                           & (+ble)                                       & (+ble)                                           & (+usb) / Seriell                     & Bluetooth 2.0                     \\
+Automatisches Bewegen der Figuren       & ja                                           & ja                                               & nein                                 & nein                              \\
+Spiel Livestream                        & ja                                           & ja                                               & ja                                   & ja((+rfid))                       \\
+Cloud anbindung (online Spiele)         & ja (über Mobiltelefon + App)                 & ja (über Mobiltelefon + App)                     & ja (über PC + App)                   & ja (über PC + App)                \\
+Parkposition für ausgeschiedene Figuren & nein                                         & ja                                               & nein                                 & nein                              \\
+Stand-Alone Funktionalität              & nein (Mobiltelefon erforderlich)             & nein (Mobiltelefon erforderlich)                 & nein (PC erforderlich)               & nein (PC erforderlich)            \\
+Besonderheiten                          & Akku für 30 Spiele                           & Akku für 15 Spiele                               & Bussystem                            & -                                
+\end{tabular}
+\end{table}
+
+
 ## Motivation
 
 
