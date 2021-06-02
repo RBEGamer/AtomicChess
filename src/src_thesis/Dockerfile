@@ -10,11 +10,11 @@ RUN apt-get install haskell-platform -y
 RUN apt install cabal-install -y
 
 #RUN apt install locales
-#UN locale-gen en_US.utf8
+#RUN locale-gen en_US.utf8
 
 
-RUN export PATH="$HOME/.cabal/bin:$PATH"
-RUN cabal update
+#RUN export PATH="$HOME/.cabal/bin:$PATH"
+#RUN cabal update
 
 #RUN cabal install alex happy
 #RUN cabal install --ghc-options="+RTS -M7G" -j1 --force-reinstalls pandoc

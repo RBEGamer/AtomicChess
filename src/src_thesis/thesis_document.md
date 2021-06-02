@@ -20,10 +20,11 @@ Die Erstellung eines autonomen Schachtischs vereinbart in meinen Augen im große
 
 <br>
 
-((erst ganz kurz im Überblick das Projekt beschreiben (Schachtisch). Erst danach kann der  Reiz davon erläutert werden. Sonst ist unklar, worum es überhaupt geht…
-Siehe unten: Die hier vorliegende Arbeit entwickelt einen autonomen Schachtisch, welcher in der Lage ist, Schachfiguren autonom zu bewegen und auf Benutzerinteraktionen zu reagieren.))
+<!-- Classen ((erst ganz kurz im Überblick das Projekt beschreiben (Schachtisch). Erst danach kann der  Reiz davon erläutert werden. Sonst ist unklar, worum es überhaupt geht… Siehe unten: Die hier vorliegende Arbeit entwickelt einen autonomen Schachtisch, welcher in der Lage ist, Schachfiguren autonom zu bewegen und auf Benutzerinteraktionen zu reagieren.)) -->
 
-Der Reiz des Schachprojekts liegt in der Bedeutung und der Seltenheit. Schach ist ein bewährtes, ausnahmslos bekanntes und immer logisches Spiel, welches jedoch im kommerziellen Rahmen nie an Bedeutung gewonnen hat. Die Auswahl der verfügbare elektrifizierte und programmgesteuerte Schachtisch ist auffallend gering; zudem sind existierende Lösungen oftmals nicht erschwinglich und bedürfen erheblicher Anpassungen des Spielers an das Spiel.
+
+
+Schach ist ein bewährtes, ausnahmslos bekanntes und immer logisches Spiel, welches jedoch im kommerziellen Rahmen nie an Bedeutung gewonnen hat. Die Auswahl der verfügbare elektrifizierte und programmgesteuerte Schachtisch ist auffallend gering; zudem sind existierende Lösungen oftmals nicht erschwinglich und bedürfen erheblicher Anpassungen des Spielers an das Spiel.
 Innerhalb der vergangenen drei Jahrzehnte bewiesen immer mehr Konzerne ihre technische Kompetenz und Überlegenheit und die Fähigkeit ihrer Maschinen mittels der Optimierung von Schachalgorithmen und dem möglichst schnellen Besiegen derzeitiger Schach-Meister und -Meisterinnen. Die Algorithmen stehen heute in einer Vielzahl frei zugänglich zur Verfügung, jedoch ist das Interesse daran, für Spieler mögliche Anwendungen zu generieren, verschwindend gering und wird oftmals nur von Experten und Enthusiasten genutzt und auch hinterfragt. 
 
 <br>
@@ -67,7 +68,7 @@ Dies soll mittels eines kompakten und minimalistischen Designs realisiert werden
 
 ## Aufbau der Bachelorarbeit
 
-Im zweiten Kapitel der hier vorliegenden Arbeit werden die zum Zeitpunkt des Projektstarts existierenden Ansätze ((was bedeutet "Ansatz" hier? "Schachtische"?)) und deren Umsetzung beleuchtet. Hier wird insbesondere darauf geachtet, die Grenzen bestehender Systeme darzulegen und nur für dieses Projekt zutreffende Funktionen zu vergleichen. 
+Im zweiten Kapitel der hier vorliegenden Arbeit werden die zum Zeitpunkt des Projektstarts existierenden Produkte beziehungsweise öffentlich einsehbare Projekte und deren Umsetzung beleuchtet. Hier wird insbesondere darauf geachtet, die Grenzen bestehender Systeme darzulegen und nur für dieses Projekt zutreffende Funktionen zu vergleichen. 
 
 
 
@@ -148,10 +149,7 @@ Wie bereits aus den zum Teil identischen Namen ersichtlich, streben alle Tische 
 
 ### Kommerzielle Produkte
 
-<br>
 
-
-<!-- ![Auflistung kommerzieller autonomer Schachtische \label{commchesstables}](tables/commercial_chessboard_projects.csv) -->
 
 
 : Auflistung kommerzieller autonomer Schachtische \label{commchesstables}
@@ -169,7 +167,9 @@ Wie bereits aus den zum Teil identischen Namen ersichtlich, streben alle Tische 
 | Besonderheiten                            | Akku für 30 Spiele                        | Akku für 15 Spiele                           | -                                 | -                             |
 
 
-<!--- Anmerkung zum Layout der Tabelle: Das ist im pdf so etwas schwer zu lesen. Vielleicht kann man das Layout durch Spaltenbreiten, Leerzeilen, grauen Hintergrund für jede 2. Zeile oder ähnliches verbessern. Ist aber nur Kosmetik. --> 
+
+
+<!--- Dey: Anmerkung zum Layout der Tabelle: Das ist im pdf so etwas schwer zu lesen. Vielleicht kann man das Layout durch Spaltenbreiten, Leerzeilen, grauen Hintergrund für jede 2. Zeile oder ähnliches verbessern. Ist aber nur Kosmetik. --> 
 
 <!--- Classen: Spendieren Sie der Tabelle ruhig eine ganze Seite. also die Zeilenhöhe erhöhen. Und Färbung jeder zweiten Zeile ist auch eine gute Idee --> 
 
@@ -183,8 +183,10 @@ Die Bretter des Herstellers DGT erkennen die Position der verwendeten Figuren. I
 
 <br>
 
-Die Abmessungen unterscheiden sich nur beim Hersteller Square Off deutlich; 
 <!--- Classen: Was meinen sie mit "unterscheiden sich"? weichen von Standardmass ab? variieren über die Produkte des Herstellers? --> 
+
+
+Die Abmessungen der autonomen Schachtische unterscheiden sich nur beim Hersteller Square Off deutlich; 
 der Grand Kingdom Schachtisch ist rechteckig konstruiert worden, was das Spielerlebnis deutlich verändert. Der simple Kingdom-Tisch ist dabei kleiner als das vorgegebene Turniermaß, was negativen Einfluss auf das Spielererlebnis hat. Mit den Standardmaßen der DGT-Spielbretter und zudem ihrer geringen Höhe gleichen diese deutlich einem Turniertisch. Die Kombination aus geringer Höhe und Erkennung der Figur-Stellung bei den DGT-Brettern ist positiv bemerkenswert.
 
 <br>
@@ -195,7 +197,7 @@ Beide Hersteller bieten eine Bluetooth-Schnittstelle an. Einzig das Smart-Board 
 
 Bei den DGT-Schachbrettern ist zu beachten, dass diese die Schachfiguren nicht autonom bewegen können. Sie wurden jedoch in die Liste aufgenommen, da sie einen Teil der Funktionalitäten der Square Off Schachbrettern abdecken und lediglich die automatische Bewegung der Schachfiguren fehlt.
 Die DGT-Bretter können die Position der Figuren erkennen und ermöglichen so auch Spiele über das Internet; diese können sie auch als Livestream anbieten.
-Bei Schachturnieren werden diese für die Übertragung der Partien sowie die Aufzeichnung der Spielzüge verwendet und bieten Support für den Anschluss von weiterer Peripherie wie z.B. Schachuhren.
+Bei Schachturnieren werden diese für die Übertragung der Partien sowie die Aufzeichnung der Spielzüge verwendet und bieten Support für den Anschluss von weiterer Peripherie wie zum Beispiel Schachuhren.
 
 Somit gibt es zum Zeitpunkt der Recherche nur einen Hersteller von autonomen Schachbrettern, welcher auch die Figuren bewegen kann: Grand Kingdom.
 
@@ -216,7 +218,7 @@ Die App wiederum fordert eine Registrierung inklusive Profilerstellung beim Hers
 
 <br>
 
-Beide Square-Off-Modelle ermöglichen durch eingebaute Akkus auch eine mobile Nutzung, was dem Nutzer mehr Flexibilität, z.B. Spielen im Freien erlaubt.
+Beide Square-Off-Modelle ermöglichen durch eingebaute Akkus auch eine mobile Nutzung, was dem Nutzer mehr Flexibilität, zum Beispiel Spielen im Freien erlaubt.
 
 <br>
 
@@ -253,7 +255,7 @@ Auch existieren weitere Abwandlungen von autonomen Schachbrettern, bei welchen d
 | Besonderheiten                          | -                                                     | Sprachsteuerung (Amazon Alexa)                           | Zuganzeige über (+led) Matrix            |
 | Lizenz                                  | (+gpl) 3+                                             | (+gpl)                                                   | -                                        |
 
-<!--- Layout der Tabelle ist noch nicht optimal, wie bei anderer Tabelle auch -->
+<!--- Dey: Layout der Tabelle ist noch nicht optimal, wie bei anderer Tabelle auch -->
 
 
 In den bestehenden Projekten ist zu erkennen, dass ein autonomer Schachtisch sehr einfach und mit simplen Mittel konstruiert werden kann. Hierbei fehlen in der Regel einige Features, wie das automatische Erkennen von Figuren oder das Spielen über das Internet.
@@ -275,7 +277,9 @@ Eine weitere Alternative ist die Verwendung einer Matrix aus Reed-Schaltern oder
 Dieses Problem wird durch eine definierte Ausgangsstellung beim Spielstart gelöst. Nach jedem Zug durch den Spieler und der dadurch resultierenden Änderungen in den Figurpositionen in der Matrix können die neuen Figurstellungen berechnet werden.
 
 <br>
-<!--- Sie meinen, dass es nicht so etwas wie eine kmplette Lösung (klaren Testsieger) gibt oder? Dann könnten Sie auch schreiben: Kein kommerzieller Tisch bieter alle angestrebten Funktionalitäten...-->
+
+<!--- Dey: Sie meinen, dass es nicht so etwas wie eine kmplette Lösung (klaren Testsieger) gibt oder? Dann könnten Sie auch schreiben: Kein kommerzieller Tisch bieter alle angestrebten Funktionalitäten...-->
+
 Abschließend ist festzuhalten, dass es auch bei den Open-Source Projekten kein Projekt gibt, welches alle gewünschten Features abbildet.
 Auch fehlen dort weitestgehend Features, welche die kommerziellen Projekte bieten.
 
@@ -306,7 +310,7 @@ Dies soll auch für abgebrochene Spiele gelten, welche von Benutzer oder durch d
 <br>
 
 Ein weiter Punkt, welcher bei der User-Experience beachtet werden soll, ist der zeitliche Aspekt. Ein Spiel auf einem normalen Schachspiel hat je nach Spielart kein Zeitlimit. Dies kann für das gesamte Spiel gelten oder auch für die Zeit zwischen einzelnen Zügen.
-Der autonome Schachtisch soll es dem Spieler z.B. ermöglichen, ein Spiel am Morgen zu beginnen und dieses erst am nächsten Tag fortzusetzen.
+Der autonome Schachtisch soll es dem Spieler zum Beispiel ermöglichen, ein Spiel am Morgen zu beginnen und dieses erst am nächsten Tag fortzusetzen.
 
 <br>
 
@@ -324,13 +328,13 @@ In diesem Projekt werden vor allem Funktionalitäten berücksichtigt, welche bei
 
 : Auflistung der Anforderungen an den autonomen Schachtisch \label{atcrequirements}
 
-|                                             | (+atc)                                  |
-|:------------------------------------------  |----------------------------------------:|
-| Erkennung Figur-Stellung                    | ja                                      |
-| Konnektivität                               | (+wlan), (+usb)                         |
-| Automatisches Bewegen der Figuren           | ja                                      |
-| Spiel Livestream                            | ja                                      |
-| Cloudanbindung (online Spiele)              | ja                                      |
+|                                                               | (+atc)                                  |
+|:------------------------------------------   |----------------------------------------:|
+| Erkennung Figur-Stellung                     | ja                                      |
+| Konnektivität                                         | (+wlan), (+usb)                         |
+| Automatisches Bewegen der Figuren   | ja                                      |
+| Spiel Livestream                                   | ja                                      |
+| Cloudanbindung (online Spiele)            | ja                                      |
 | Parkposition für ausgeschiedene Figuren     | ja                                      |
 | Stand-Alone Funktionalität                  | ja (Bedienung direkt am Tisch)          |
 
@@ -347,8 +351,12 @@ Auch müssen die Figuren für den Benutzer eine gut handhabbare Größe aufweise
 
 # Machbarkeitsanalyse und Verifikation ausgewählter Technologien
 
-* welche technologien werden benötigt
-* software architektur anfoderungen
+Da dieses Projekt aus vielen ineinandergreifenden Komponenten besteht wurden zuerst Technologien ausgewählt, welche sich augenscheinlich für die Umsetzung eignet.
+Hier werden Technolgien für die folgenden Komponenten benötigt:
+
+- Erstellung von Software-Paketen für das eingebettete System
+- Identifizierung der Schachfiguren
+- Bewegung der Mechanik
 
 
 ## Erprobung Buildroot-Framework
@@ -368,7 +376,7 @@ Auf Seiten der Entwicklung war eine Toolchain notwendig, mit welcher es möglich
 
 Zusätzlich zu diesen auf dem Linux-System benötigten Paketen sollte es möglich sein, ein durch das eingebettete System bootbares Dateisystemimage zu erzeugen.
 Für diesen Zweck existieren einige Open-Source Projekte, welche solch ein Build-System bereitstellen. Hierbei existieren zwei weit verbreitete Systeme:
-Das `Yocot`-Projekt[@yoctoproject] und das `Buildroot`-Framework[@buildroot].
+Das `Yocot`-Projekt[@yoctoproject] und das Buildroot[@buildrootproject]-Framework.
 Diese unterscheiden sich im Aufbau und der Funktionsweise teils stark, vor allem während der ersten Verwendung.
 
 : Vergleich Yocto - Buildroot \label{commchesstables}
@@ -382,16 +390,26 @@ Diese unterscheiden sich im Aufbau und der Funktionsweise teils stark, vor allem
 | Einfache Konfiguration                   | Nein     | Ja                            |
 |                                                        |              |                                |
 
-Hierbei stellt das `Yocto`- Projekt eine größere Einsteigshürde dar, aufgrund seines komplexen Layer-Systems. 
+
 <!--- Classen:  Erläutern, was das bedeutet und warum das nachteilig ist --> 
-Es bietet sich jedoch für komplexe Projekte an, welche einen hohen Grad an Individualisierung benötigen. Ein Nachteil dessen, ist da dadurch auch viel vom Nutzer selber konfiguriert werden muss, bevor ein minimales System in Betrieb genommen werden kann.
+
+Hierbei stellt das `Yocto`- Projekt eine größere Einsteigshürde dar, aufgrund seines komplexen Layer-Systems.  
+Es bietet sich jedoch für komplexe Projekte an, welche einen hohen Grad an Individualisierung benötigen. Ein Nachteil dessen, ist da dadurch auch viel vom Nutzer selber konfiguriert werden muss, bevor ein minimales System in Betrieb genommen werden kann. Somit muss zuerst eine grundlegende Konfiguration für das eingebettete System angelegt werden.
+Der Aufbau dieser Konfiguration besteht aus verschiedenen Schichten:
+
+- Layer - Build-Metadaten
+- Recipes - Pakete
+- Bitbake - Tool zum erstellen
+
+Eigene Pakete werden dabei in `Recipes` angelegt, welche in einer Makefile ähnlichen Syntax das Paket und die Schritte zum erstellen beschreiben. Diese einzelnen Pakete werden anschließend in `Layern` zu einem gesamtsystem zusammengesetzt. Dies geschieht anschließen mittels des `Bitbake`-Tools, welches das System erstellt.
+
 
 Das `Buildroot`-Framework bietet bereits eine große Anzahl an vorkonfigurierten Ziel-Systemen an, für welche es bereits alle nötigen Parameter enthält, um ein minimales solches System erstellen zu können. Auch ist bereits eine optimierte Konfiguration für das im Rahmen des hier vorliegenden Projekts gewählte eingebettete System vorhanden, welche direkt gestartet werden kann. Nach einem erfolgreichen Erstellen des Images kann dieses direkt über das eingebettete System gestartet werden.
 Bei jedem Build-Vorgang müssen jedoch alle Pakete erneut gebaut werden, bevor diese zu einem finalen Image zusammengefügt werden.
-Hierbei kann dieser Vorgang je nach Umfang der verwendeten Pakete mehrere Stunden dauern. Das `Yocot`-Projekt unterstüzt hierbei das Erstellen einzelner Pakete, somit müssen nur Änderungen neu gebaut werden.
+Hierbei kann dieser Vorgang je nach Umfang der verwendeten Pakete mehrere Stunden dauern. Das `Yocot`-Projekt unterstützt hierbei das Erstellen einzelner Pakete, somit müssen nur Änderungen neu gebaut werden.
 Da im Rahmen dieses Projekts nur eine minimale Anzahl von Paketen benötigt werden, hält sich dieser Buildvorgang zeitlich in Grenzen und ist allgemein für dieses Projekt nicht entscheidend.
 
-Dann wurde prototypisch evaluiert, wie aufwändig es ist, zum `Buildroot` Framework eigene in C++ gechriebene Software hinzuzufügen.
+Dann wurde prototypisch evaluiert, wie aufwändig es ist, zum `Buildroot` Framework eigene in C++ geschriebene Software hinzuzufügen.
 Zu diesem Zweck wurde ein eigenes C++ Paket erstellt und in das `Buildroot`-Framework integriert. Hierzu wurden dem `Buildroot` Quellcode zwei weitere Dateien hinzugefügt.
 
 Die `Config.in` beschreibt das Paket und legt Abhängigkeiten zu anderen Paketen fest.  
@@ -435,7 +453,7 @@ Das somit erstellte Test-Paket `atctp` bildete eine funktionierende Grundlage f�
 ## Verifikation NFC Technologie
 
 Ein weiterer wichtiger Bestandteil sollte die Erkennung der sich auf dem Feld befindlichen Schachfiguren sein.
-Hierbei muss zum einen der Figur-Typ (Bauer, König, Dame, ..) und zum anderen die Figur-Farbe (schwarz, weiss) vom System erkannt werden.
+Hierbei muss zum einen der Figur-Typ (König, Dame, Türme, Läufer, Springer, Bauern) und zum anderen die Figur-Farbe (schwarz, weiss) vom System erkannt werden.
 
 Da hier keine aufwendige Elektronik entwickelt werden sollte, sondern auf Standard-Komponenten zurückgegriffen werden sollte, schied ein komplexes (+hf) Antennen-Array unter dem Schachfeld aus, wie es bei einigen kommerziellen Produkten umgesetzt ist.
 Eine einfache 8x8 Matrix aus Drucktastern oder Hall-Effekt-Sensore schied ebenfalls aus, da hier die Eingabe über den Benutzer erfolgt und nur Rückschlüsse auf die veränderte Figur anhand einer manuellen Bewegung der Figur nachvollzogen werden kann.
@@ -695,7 +713,7 @@ Auch hier wurde nicht auf den Platzverbrauch geachtet. Es wurden zusätzliche St
 
 
 
-## Implementierung Hardware Abstraction Layer (HAL)
+## Implementierung (+hal) 
 
 Der (+hal) stellt das Verbindungsglied zwischen der Hardware und der Benutzer-Software dar.
 In diesem Fall übernimmt er die Übersetzung der Befehle der Controller-Software in für die Hardware verständliche Befehle. Dabei geschieht dies über den zentralen (+spi) Bus, welcher im Linux-System als Datei unter dem Pfad `/dev/spidev0.0` eingebunden wird und über Dateioperation (lesen, schreiben) mittels `ioctl` konfiguriert werden kann.
@@ -818,11 +836,17 @@ Dieses stellt verschiedene Funktionen zum Verfahren eines Motors bereit. Hierzu 
 | D1        	| 50000   	|
 | V_STOP    	| 10      	|
 
-Der Treiber wird nur im Position-Mode betrieben, welcher eine wesentliche Eigenschaft dessen ist. <!--- Classen:  ... komische Formulierung --> 
+Der Treiber untersütz dabei zwei verschiedene Funktionsmodi:
+
+- Position-Mode
+- Velocity-Mode
+
+Der Treiber wird hierbei nur im `Position-Mode` betrieben, da hier eine Ziel-Position für den Motor vorgegeben werden kann.
 Hierbei kann über ein Register eine Zielposition in Schritten vorgegeben werden. Der Treiber ermittelt daraufhin die passende Beschleunigungskurve und verfährt den Motor an diese Position.
 Über ein entsprechendes Register kann der Status der Operation abgefragt werden und ob der Motor seine Position erreicht hat bzw. ob Fehler auftraten. Somit muss nicht auf das Erreichen der Zielposition gewartet werden und andere Aufgaben können währenddessen ausgeführt werden. Die Beschleunigungskurve kann zusätzlich manuell angepasst werden.
 Hier wurden jedoch die Standardwerte aus dem Datenblatt verwendet, welche sich bei mehreren Tests als optimal im Bezug auf Geräuschemission des Motors herausstellten.
 
+Beim dem `Velocity-Mode` hingegen, kann der Motor in einer definierten Geschwindigkeit in eine Richtung verfahren werden. Dabei kann diese Bewegung in einem Dauerlauf durchgeführt werden, welches im `Position-Mode` nicht geht. Hierbei wird dies durch den maximalen möglichen Wert des Ziel-Positions-Register bestimmt.
 
 ```c++
 ///TMC5160.cpp
@@ -939,7 +963,7 @@ Eine zusätzliche Besonderheit stellt der Referenzfahrt dar. Nach dem Start des 
 Deswegen muss diese Achse zuerst an die Home-Position gefahren werden. Dazu besitzt das System zwei Endschalter, welche jeweils mit einem Schrittmotor-Treiber verbunden sind. Diese besitzen zwei solche Taster-Eingänge `REF_L`/`REF_R`.
 
 Bei einer wechselnden Flanke an diesem Eingang kann der Motor-Treiber verschiedene Funktionen ausführen. In diesem Fall wurde die Motor-Stopp Funktion mittels Registereintrag gewählt, welche den Motor stoppt, sobald der Schalter betätigt wird. Dies stellt schlussendlich die Home-Position dar.
-Dies kann jedoch nicht im Position-Mode des Treibers umgesetzt werden, da das Ziel-Positionsregister auf 0 gesetzt wird. Hierzu muss der Treiber in den Velocity-Modus geschaltet werden, welches ein Verfahren des Motors in eine Richtung ohne Zeitbegrenzung erlaubt.
+Dies kann jedoch nicht im `Position-Mode` des Treibers umgesetzt werden, da das Ziel-Positionsregister auf 0 gesetzt wird. Hierzu muss der Treiber in den `Velocity-Modus` geschaltet werden, welches ein Verfahren des Motors in eine Richtung ohne Zeitbegrenzung erlaubt.
 Dies wird so lange in negativer Bewegungsrichtung ausgeführt, bis der Endschalter erreicht wurde. Somit ist die Achse an ihrer Home-Position angekommen und kann anschließend im Positions-Modus normal verfahren werden.
 
 
@@ -1215,12 +1239,14 @@ Somit wurde die Elektronik durch die verwendete Plug&Play Komponenten stark vere
 <br>
 
 ## Anpassungen HAL
+
+
 ### Implementierung GCODE-Sender
 
-Durch die durchgeführten Änderungen an der Elektronik, insbesondere durch die Verwendung einer Marlin-FW[@marlinfw] fähigen Motorsteuerung, war eine Anpassung des (+hal) notwendig.
+Durch die durchgeführten Änderungen an der Elektronik, insbesondere durch die Verwendung einer `Marlin-FW`[@marlinfw] fähigen Motorsteuerung, war eine Anpassung des (+hal) notwendig.
 Diese Steuerung unterstützt die Ansteuerung der Motoren und anderer Komponenten (z.B. Spindeln, Heizelemente) mittels G-Code und wird typischerweise in 3D Druckern und (+cnc)-Fräsen eingesetzt.
 
-<!--- hier fehlt was --> 
+
 G-Code ist eine Programmiersprache, welche mittels einfacher textbasierter Befehle \ref{gcodecmd} Komponenten dieser Maschinen kontrollieren kann.
 Dabei können einzelne Achsen verfahren werden oder die Drehzahl einer Spindel kontrolliert werden. Der G-Code wird von der Steuerung interpretiert. In der Regel wird dieser zuvor von einem (+cad) Programm erzeugt und zeilenweise übertragen. Bei einem 3D Drucker wird dieser vom Slicer generiert und enhält die Wegpunkte, welche vom Hotend angefahren werden sollen. 
 
@@ -1228,7 +1254,7 @@ Dabei können einzelne Achsen verfahren werden oder die Drehzahl einer Spindel k
 
 Im Falle des autonomen Schachtischs werden die G-Code Anweisungen on-the-fly durch den (+hal) erzeugt und die Motorsteuerung verfährt die Achsen an die jeweils gewünschten Positionen.
 
-Marlin-FW[@marlinfw] bietet dabei einen großen Befehlssatz an G-Code Kommandos. Bei diesem Projekt werden jedoch nur einige wenige G-Code Kommandos verwendet \ref{gcodecmd}, welche sich insbesondere auf die Ansteuerung der Motoren beschränken.
+`Marlin-FW` bietet dabei einen großen Befehlssatz an G-Code Kommandos. Bei diesem Projekt werden jedoch nur einige wenige G-Code Kommandos verwendet \ref{gcodecmd}, welche sich insbesondere auf die Ansteuerung der Motoren beschränken.
 
 <br>
 
@@ -1244,7 +1270,7 @@ Marlin-FW[@marlinfw] bietet dabei einen großen Befehlssatz an G-Code Kommandos.
 
 
 Die erforderlichen Kommandos wurden auf ein Minimum beschränkt, um eine maximale Kompatibilität mit verschiedenen G-Code-fähigen Steuerungen zu gewährleisten.
-Die Software unterstützt jedoch weitere Kommandos wie z.B. `M150`, mit welchem spezielle Ausgänge für (+led)s gesteuert werden können. Dieses Feature bietet sowohl die verwendete Marlin-FW[@marlinfw] als auch die verwendete Steuerung an. Sollte die verwendete Steuerung solch ein optionales Kommando nicht unterstützen, so wird dieses ignoriert, was zur Folge hat, dass auch preisgünstige Steuerungen verwendet werden können.
+Die Software unterstützt jedoch weitere Kommandos wie zum Beispiel `M150`, mit welchem spezielle Ausgänge für (+led)s gesteuert werden können. Dieses Feature bietet sowohl die verwendete `Marlin-FW` als auch die verwendete Steuerung an. Sollte die verwendete Steuerung solch ein optionales Kommando nicht unterstützen, so wird dieses ignoriert, was zur Folge hat, dass auch preisgünstige Steuerungen verwendet werden können.
 
 Die Kommunikation zwischen Steuerung und eingebettetem System geschieht über eine (+usb) Verbindung. Die Steuerung meldet sich als virtuelle serielle Schnittstelle im System an und kann über diese mit der Software kommunizieren. Auch werden so keine speziellen Treiber benötigt, da auf nahezu jedem System ein Treiber `USB-CDC` für die gängigsten (+usb)-zu-Seriell Wandler bereits installiert ist. Die Software erkennt anhand der zur Verfügung stehenden (+usb)-Geräte sowie deren Vendor und Product-(+id)-Informationen die verbundene Steuerung und verwendet diese nach dem Start automatisch. Hierzu wurde zuvor eine Liste \ref{gcodeusbctl} mit verschiedenen getesteten Steuerungen sowie deren (+usb)-Vendor und Product-(+id) angelegt.
 
@@ -1325,7 +1351,7 @@ Die Steuerung verarbeitet diese und bestätigt die Ausführung mit einer Acknowl
 
 ### I2C-Seriell Umsetzer
 
-Durch den Wegfall der zuvor eingesetzten Elektronik und den Austausch durch die `SKR 1.4 Turbo` Steuerung ist jedoch ein Anschluss des `PN532` (+nfc) Moduls nicht mehr direkt möglich, da dieses mittels (+i2c) Interface direkt mit dem eingebetteten System verbunden war. Dieses Interface entfällt nun. Dennoch besteht weiterhin eine Anschlussmöglichkeit, jedoch wurde auch hier auf eine (+usb) Schnittstelle gewechselt. So ist es möglich, das System auch an einem anderen Host-System zu betreiben, wie z.B. an einem handelsüblichen Computer.
+Durch den Wegfall der zuvor eingesetzten Elektronik und den Austausch durch die `SKR 1.4 Turbo` Steuerung ist jedoch ein Anschluss des `PN532` (+nfc) Moduls nicht mehr direkt möglich, da dieses mittels (+i2c) Interface direkt mit dem eingebetteten System verbunden war. Dieses Interface entfällt nun. Dennoch besteht weiterhin eine Anschlussmöglichkeit, jedoch wurde auch hier auf eine (+usb) Schnittstelle gewechselt. So ist es möglich, das System auch an einem anderen Host-System zu betreiben, wie zum Beispiel an einem handelsüblichen Computer.
 
 <br>
 
@@ -1478,18 +1504,22 @@ Somit sind keine schnellen Partien möglich wie zum Beispiel bei Schachformen wi
 
 # Entwicklung der Cloud Infrastruktur
 
-Die erste Phase der Entwicklung des Systems bestand in der Auslegung und Erstellung der Cloud-Infrastruktur und der darauf ausgeführten Services.
-Die "Cloud" stellte in diesem Zusammenhang einen Server dar, welcher aus dem Internet über eine feste IPv4 und IPv6-Adresse erreichbar war und frei konfiguriert werden konnte.
-Auf diesem System war der Schach-Cloud Stack \ref{ATC_Cloud_Architecture} installiert, welcher zum einen aus der Schach-Software bestand, welche in einem Docker-Stack ausgeführt wurde und zum anderen.... <!--- Classen:  hier fehlt was --> 
 
 ![Gesamtübersicht der verwendeten Cloud-Infrastruktur \label{ATC_Cloud_Architecture}](images/ATC_Cloud_Architecture.png)
+
+
+Die erste Phase der Entwicklung des Systems bestand in der Auslegung und Erstellung der Cloud-Infrastruktur und der darauf ausgeführten Services.
+Die "Cloud" stellte in diesem Zusammenhang einen Server dar, welcher aus dem Internet über eine feste IPv4 und IPv6-Adresse erreichbar war und frei konfiguriert werden konnte.
+Auf diesem System wird der (+atc)-Cloud Stack \ref{ATC_Cloud_Architecture} installiert, welcher zum einen aus der Schach-Software bestand, welche in einem Docker-Stack ausgeführt wurde und zum anderen, weitere Dienste, welche bei der Entwicklung des Systems genutzt werden. Diese sind jedoch kein Bestandteil des (+atc)-Cloud-Systems.
+
+
 
 
 
 ## API Design
 
 Das System soll so ausgelegt werden, dass zu einem späteren Zeitpunkt verschiedene Client-Devices mit diesem kommunizieren können.
-Dazu zählen zum einen der autonome Schachtisch, aber z.B. auch ein Web-Client, welcher die Funktionalität eines Schachtisches im Browser abbilden kann.
+Dazu zählen zum einen der autonome Schachtisch, aber zum Beispiel auch ein Web-Client, welcher die Funktionalität eines Schachtisches im Browser abbilden kann.
 Hierzu muss das System eine einheitliche (+rest)-Schnittstelle bereitstellen.
 
 ![Cloud-Infrastruktur: Aufbau einer URI \label{ATC_URI_SCHEMES}](images/ATC_URI_SCHEMES.png)
@@ -1545,7 +1575,7 @@ Ferner wird der Zeitstempel der Anmeldung sowie die letzte Anfrage des Clients i
 ```
 
 Durch den Key-Value-Ansatz sowie den hohen Verbrauch an Arbeitsspeicher eignet sich diese Datenbank jedoch nicht zum Speichern der Spieldaten.
-Hierzu wurde ein zusätzlicher `Mongo` [@mogodb] Datenbank Service erstellt, in welchem diese Daten abgelegt werden. Zusätzlich zu den Spieldaten (Spiele, Spielstände, Statistiken) werden auch die Nutzerprofile speichert. Ein Profil wird beim ersten Anmeldevorgang erstellt und enthält neben den Profilinformationen (Geräte-(id), Namen, Spielertyp) auch die Referenzen auf die gewonnenen und verlorenen Spiele. Diese Referenzen können später für die Visualisierung verwendet werden.
+Hierzu wurde ein zusätzlicher `Mongo` [@mogodb] Datenbank Service erstellt, in welchem diese Daten abgelegt werden. Zusätzlich zu den Spieldaten (Spiele, Spielstände, Statistiken) werden auch die Nutzerprofile speichert. Ein Profil wird beim ersten Anmeldevorgang erstellt und enthält neben den Profilinformationen (Geräte-(+id), Namen, Spielertyp) auch die Referenzen auf die gewonnenen und verlorenen Spiele. Diese Referenzen können später für die Visualisierung verwendet werden.
 
 Alle aufgelisteten Services werden in separaten Containern betrieben. Die Containervirtualisierung geschieht mittels der Software `Docker` [@docker]. Diese stellt ein einfaches Interface zur Erstellung und Verwaltung von Containern bereit. Um einen Container auf dem System starten zu können, muss dieser zunächst aus einem Image heraus erstellt werden. Dieses Image wird mittels eines `Dockerfile` beschrieben. Das `Dockerfile` besteht dabei aus einer Reihe an Kommandos, welche den Aufbau des Images beschreiben. 
 
@@ -1703,9 +1733,9 @@ Dieses Token ändert sich nach jedem Login-Prozess. Somit kann nur ein Client To
 
 Nach einem erfolgreichen Login kann der Client den Spielstatus abfragen, in welchem er sich befindet:
 
-- `Idle`: kein Spiel aktiv und nicht auf der Suche nach einem Spiel
-- `Matchmaking`: Spieler sucht aktiv nach einem Spiel
-- `Game-Running`: Client ist einem aktiven Spiel zugewiesen
+- Idle: kein Spiel aktiv und nicht auf der Suche nach einem Spiel
+- Matchmaking: Spieler sucht aktiv nach einem Spiel
+- Game-Running: Client ist einem aktiven Spiel zugewiesen
 
 Der `Idle`-Status, wird direkt nach einem Login gesetzt. Somit wird der Client nicht automatisch Spielen zugewiesen. Dies kann durch die `/rest/set_player_state` (+api) Route geändert werden.
 Diese wird vom Client aufgerufen, wenn dieser ein Spiel starten möchte. Dazu wird ein Eintrag in der Lobby-Tabelle der Datenbank erzeugt. In dieser befinden sich alle Spieler, welche auf der Suche nach einem Spiel sind. Dabei wird zusätzlich der Zeitpunkt des Eintretens gespeichert.
@@ -1837,7 +1867,7 @@ Die (+fen) Notation ist universell und kann jede Brettstellung darstellen. Auch 
 
 <br>
 
-Alle gängigen Schachprogramme und Bibliotheken unterstützen das Laden von Spielbrettern in der (+fen) bzw (+xfen) Schreibweise, ebenso die für den MoveValidator Service verwendete Python-Chess Bibliothek [@pythonchesslib]. Diese unterstützt zusätzlich die Generierung der für den Benutzer möglichen Schachzüge, welche auf dem aktuellen Brett möglich sind.
+Alle gängigen Schachprogramme und Bibliotheken unterstützen das Laden von Spielbrettern in der (+fen) bzw (+xfen) Schreibweise, ebenso die für den MoveValidator Service verwendete `Python-Chess`[@pythonchesslib] Bibliothek. Diese unterstützt zusätzlich die Generierung der für den Benutzer möglichen Schachzüge, welche auf dem aktuellen Brett möglich sind.
 
 <br>
 
@@ -1903,7 +1933,7 @@ Dieser Prozess gewährleistet zudem, dass immer zuerst die menschlichen Spieler 
 <br>
 
 Eine weitere Modifikation ist die Verwendung einer Schach-(+ai), da dieser Service als Computerspieler agieren soll.
-Hierzu kam die Open-Source Chess Engine Stockfish[@stockfish] in der Version 11 zum Einsatz.
+Hierzu kam die Open-Source Chess Engine `Stockfish`[@stockfish] in der Version 11 zum Einsatz.
 Die Stockfish-Engine bietet noch weitere Features als nur die besten Züge zu einem gegebenen Schachbrett zu ermitteln.
 
 <br>
@@ -2065,7 +2095,7 @@ Der letzte Wegpunkt liegt im inneren des Zielfelds, sodass sich die Figur in der
 
 <br>
 
-Anzumerken ist, dass dieser Algorithmus nicht weiter optimiert wurde. Somit führen die Figuren ggfs. Zick-Zack-Bewegungen aus, auch wenn das Zielfeld direkt neben dem Start-Feld liegt.
+Anzumerken ist, dass dieser Algorithmus nicht weiter optimiert wurde. Somit führen die Figuren gegebenenfalls Zick-Zack-Bewegungen aus, auch wenn das Zielfeld direkt neben dem Start-Feld liegt.
 
 
 
@@ -2127,7 +2157,7 @@ Diese stellt einfache Funktionen zum Senden und Empfangen von Events bereit und 
 
 <br>
 
-Der Hauptthread des Programms kann anschließend über eine (+fifo) Message Queue die von den anderen Instanzen empfangenen Events in einer Polling-Loop abfragen und Events an die anderen Instanzen absetzen. Diese können mit der gleichen Vorgehensweise <!--- Classen:  hier fehlt was --> 
+Der Hauptthread des Programms kann anschließend über eine (+fifo) Message Queue die von den anderen Instanzen empfangenen Events in einer Polling-Loop abfragen und Events an die anderen Instanzen absetzen. Diese können mit der gleichen Vorgehensweise Events der jeweils anderen Instanzen empfangen, sowie Events erstellen und senden.
 
 <br>
 
@@ -2201,9 +2231,9 @@ Die Spielansicht stellt zudem nur die eigene Spielerfarbe sowie welcher Spieler 
 
 <br>
 
-Trotz der Einfachheit der Bedienung und dem meist nur also Informationsquelle über den Spielstand dienenden User-Interface bietet dieses viele Möglichkeiten der Konfiguration des Systems. Somit kann auf ein weiteres Eingabegerät, wie z.B. ein Mobiltelefon, verzichtet werden, da alle relevanten Einstellungen im Optionen-Menu vorgenommen werden können.
+Trotz der Einfachheit der Bedienung und dem meist nur also Informationsquelle über den Spielstand dienenden User-Interface bietet dieses viele Möglichkeiten der Konfiguration des Systems. Somit kann auf ein weiteres Eingabegerät, wie zum Beispiel ein Mobiltelefon, verzichtet werden, da alle relevanten Einstellungen im Optionen-Menu vorgenommen werden können.
 
-Als Framework wurde hier das Qt[@qtframework] verwendet, da dieses bereits in der Version `5.12` im Buildroot-Framework hinterlegt ist. Somit musste kein anderes derartiges Framework aufwändig in das Buildroot-Framework integriert werden.
+Als Framework wurde hier das `Qt`[@qtframework] verwendet, da dieses bereits in der Version `5.12` im Buildroot-Framework hinterlegt ist. Somit musste kein anderes derartiges Framework aufwändig in das Buildroot-Framework integriert werden.
 
 <br>
 
@@ -2211,7 +2241,7 @@ Das User-Interface wurde gegen Ende der Entwicklung der Controller-Software bego
 
 ![Embedded System Software: User-Interface Mockup \label{ATC_Gui}](images/ATC_Gui.png)
 
-Das Qt[@qtframework] bietet dazu einen separaten Editor `Qt Design Studio` an, in den die zuvor erstellen Wireframe-Grafiken importiert wurden und anschliessend mit den Bedienelementen ersetzt werden konnten. Dieser Prozess gestaltete sich als sehr effizient und so konnte das komplette UI mit moderatem Zeitaufwand umgesetzt werden.
+Das `Qt` bietet dazu einen separaten Editor `Qt Design Studio` an, in den die zuvor erstellen Wireframe-Grafiken importiert wurden und anschliessend mit den Bedienelementen ersetzt werden konnten. Dieser Prozess gestaltete sich als sehr effizient und so konnte das komplette UI mit moderatem Zeitaufwand umgesetzt werden.
 
 ```qml
 // WINDOW.qml User-Interface ATC
@@ -2298,7 +2328,7 @@ int main(int argc, char *argv[])
 
 Da das User-Interface ein separates Programm ist, welches auf dem System ausgeführt wird, muss dieses in der Lage sein, mit der Controller-Software zu kommunizieren. Hierzu wurde die zuvor erstellte (+ipc) Bibliothek in das Projekt importiert, jedoch wurde im Makefile das `USES_QT` Define-Flag gesetzt.
 Wenn dieses Flag gesetzt ist, wird die Bibliothek in den Client-Modus versetzt und stellt somit das Gegenstück zu der Instanz dar, welche in der Controller-Software läuft. Somit werden auch die Funktionen zum Senden von `gui.createEvent()` umgekehrt, sodass ein Event in der Controller-Software ausgelöst wird.
-Dies kann z.B. durch eine Benutzereingabe geschehen oder wenn das User-Interface den von der Controller-Software geforderten Zustand angenommen hat.
+Dies kann zum Beispiel durch eine Benutzereingabe geschehen oder wenn das User-Interface den von der Controller-Software geforderten Zustand angenommen hat.
 
 <br>
 
@@ -2380,7 +2410,7 @@ Der Prototyp lässt sich jedoch mit kommerziell erhältlichen und open-source ve
 
 <br>
 
-Das System und insbesondere der implementierte Cloud-Service sind online erreichbar und erweiterbar. Dies ermöglicht unter anderem das Bauen eines eigenen Tisches unter Verwendung des AtomicChess Systems, aber auch die Integration weiterer Komponenten. Erfahrene Entwickler können somit das Spiel beliebig ausweiten oder sogar andere Spiele ergänzen. Die für das Projekt entworfene Mechanik und Spielführung kann dementsprechend auch für diverse andere Tischbrettspiele verwendet werden.
+Das System und insbesondere der implementierte Cloud-Service sind online erreichbar und erweiterbar. Dies ermöglicht unter anderem das Bauen eines eigenen Tisches unter Verwendung des (+atc)-Systems, aber auch die Integration weiterer Komponenten. Erfahrene Entwickler können somit das Spiel beliebig ausweiten oder sogar andere Spiele ergänzen. Die für das Projekt entworfene Mechanik und Spielführung kann dementsprechend auch für diverse andere Tischbrettspiele verwendet werden.
 
 <br>
 
@@ -2397,6 +2427,7 @@ Abschließend lässt sich feststellen, dass ein funktionstüchtiger Schachtisch 
 Im Verlauf dieser Arbeit bin ich persönlich weit über mich hinausgewachsen und ich bin sehr stolz, mein fertiges Projekt präsentieren zu können. Ich konnte nicht nur theoretisch die Machbarkeit meines Konzepts beweisen, sondern auch einen physischen Prototypen erstellen.
 
 <br>
+
 Natürlich hat das System noch Schwächen und bedarf diverser Ergänzungen, bevor es als fertiges Produkt betrachtet werden kann. Dazu gehören auch diverse Untersuchungen wie ein Langzeittest oder schleifenbasierte Hardwareüberprüfungen. Es wäre von Vorteil gewesen, das System durch einen erfahrenen Schachspieler bewerten zu lassen oder Rückmeldung über die Struktur und Menüführung von Anfängern zu erhalten. Diese Option blieb aufgrund von Versammlungs- und Zusammentreffens-Reglementierungen während der COVID-19 Pandemie jedoch verwehrt. Für eine vollständige Analyse fehlen daher wichtige statistische Daten.
 
 <br>
