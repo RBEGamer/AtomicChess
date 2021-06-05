@@ -1662,14 +1662,12 @@ services:
     container_name: atcmongo
     restart: always
     environment:
-        - MONGO_DATA_DIR=/data/db
         - MONGO_LOG_DIR=/dev/null
     volumes:
         - ./data/db:/data/db
     ports:
       - 27017:27017
     command: mongod --logpath=/dev/null # --quiet
-
 
   AtomicChessAutoPlayer:
     depends_on:
@@ -1683,10 +1681,9 @@ services:
     scale: 5 # SPAWN THREE INSTANCES
     environment:
       - PRODUCTION=1
-      - BACKEND_IP=backend:3000 #HOST IP:PORT OF BACKEND EXAMPLE 127.0.0.1:3000 USING ONLY HTTP
-      #- USE_HOSTNAME_HWID=TRUE # USE THE LOCAL MACHINE HOSTNAME AS HWID
-      #- PLAYER_TYPE_HUMAN=1 # SIMULATE A HUMAN PLAYER TYPE FOR TESTING
-
+      - BACKEND_IP=backend:3000 #HOST IP:PORT OF BACKEND
+      #- USE_HOSTNAME_HWID=TRUE # USE THE MACHINE HOSTNAME AS HWID
+      #- PLAYER_TYPE_HUMAN=1 # SIMULATE A HUMAN PLAYER
 ```
 
 
@@ -1758,9 +1755,9 @@ Diese wird vom Client aufgerufen, wenn dieser ein Spiel starten möchte. Dazu wi
 Wenn mindestens zwei Clients auf der Suche nach einem Spiel sind und sich somit in der Lobby-Tabelle befinden, wird der Matchmaking-Algorithmus aktiv.
 Dieser sortiert die Clients nach Zeitpunkt des Eintretens und nach dem Spieler-Typ. Der Spieler-Typ kann dabei einer der folgenden Clienten sein:
 
-- autonomer Schachtisch (Human)
-- Webclient (Human)
-- AutoPlayer (AI)
+- autonomer Schachtisch `Human`
+- Webclient  `Human`
+- AutoPlayer `AI`
 
 Das System sortiert die Liste der suchenden Clients nach deren Typ. Somit wird sichergestellt, dass zuerst alle menschlichen Spieler zusammen ein Spiel beginnen und erst im letzten Schritt ein Mensch gegen den Computer spielen muss.
 

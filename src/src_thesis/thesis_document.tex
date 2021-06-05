@@ -2838,14 +2838,12 @@ services:
     container_name: atcmongo
     restart: always
     environment:
-        - MONGO_DATA_DIR=/data/db
         - MONGO_LOG_DIR=/dev/null
     volumes:
         - ./data/db:/data/db
     ports:
       - 27017:27017
     command: mongod --logpath=/dev/null # --quiet
-
 
   AtomicChessAutoPlayer:
     depends_on:
@@ -2859,9 +2857,9 @@ services:
     scale: 5 # SPAWN THREE INSTANCES
     environment:
       - PRODUCTION=1
-      - BACKEND_IP=backend:3000 #HOST IP:PORT OF BACKEND EXAMPLE 127.0.0.1:3000 USING ONLY HTTP
-      #- USE_HOSTNAME_HWID=TRUE # USE THE LOCAL MACHINE HOSTNAME AS HWID
-      #- PLAYER_TYPE_HUMAN=1 # SIMULATE A HUMAN PLAYER TYPE FOR TESTING
+      - BACKEND_IP=backend:3000 #HOST IP:PORT OF BACKEND
+      #- USE_HOSTNAME_HWID=TRUE # USE THE MACHINE HOSTNAME AS HWID
+      #- PLAYER_TYPE_HUMAN=1 # SIMULATE A HUMAN PLAYER
 \end{lstlisting}
 
 \hypertarget{service-backend}{%
@@ -2978,11 +2976,11 @@ dabei einer der folgenden Clienten sein:
 \begin{itemize}
 \tightlist
 \item
-  autonomer Schachtisch (Human)
+  autonomer Schachtisch \passthrough{\lstinline!Human!}
 \item
-  Webclient (Human)
+  Webclient \passthrough{\lstinline!Human!}
 \item
-  AutoPlayer (AI)
+  AutoPlayer \passthrough{\lstinline!AI!}
 \end{itemize}
 
 Das System sortiert die Liste der suchenden Clients nach deren Typ.

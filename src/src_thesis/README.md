@@ -5,6 +5,17 @@ Ein bauen per Dockerimage ist möglich mittels ` build_thesis_docker.sh` Script 
 
 # CHANGELOG
 
+# 05.06.2021
+
+* 7.3 Service: Backend - Matchmaking+Beispiel (bearbeitet)
+* 7.3 Service: Backend - Docker-Compose Code (bearbeitet)
+
+# 04.06.2021
+
+* Abstract - thesis_abstract.md (neu)
+* 9.0 Anhang entfernt (neu)
+
+
 # 02.06.2021
 
 * einarbeitung Kommentare (neu)
@@ -15,12 +26,10 @@ Ein bauen per Dockerimage ist möglich mittels ` build_thesis_docker.sh` Script 
 * anpassungen Bilder (überarbeitet)
 * abstract (neu)
 * Zusammenfassung Kapitel 4 +5 => Machbarkeitsanalyse und Verifikation ausgewählter Technologien
-
 * 4 Machbarkeitsanalyse und Verifikation ausgewählter Technologien (neu)
 * 4.1 ErprobungBuildroot-Framework (neu)
 * 4.2 Verifikation NFC Technologie (neu)
 * 4.3 Schrittmotor/Schrittmotorsteuerung (neu)
-
 * 8.0 Embedded System Software (neu)
 
 # 30.05.2021
@@ -41,7 +50,6 @@ Ein bauen per Dockerimage ist möglich mittels ` build_thesis_docker.sh` Script 
 # 27.05.2021 
 
 * anpassungen Bilder (überarbeitet)
-
 
 # 26.05.2021 II
 
@@ -89,9 +97,6 @@ Ein bauen per Dockerimage ist möglich mittels ` build_thesis_docker.sh` Script 
 * 7.2 - 7.3 - Optimierungen HWRev 2, HAL
 * 8.5 - 8.7 - AutoPlayer WebClient
 * 9.3 - 9.4 IPC User-Interface
-
-
-
 
 
 ## BUILD THESIS thesis_document
