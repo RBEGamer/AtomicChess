@@ -271,6 +271,8 @@ wird.
 \hypertarget{kommerzielle-produkte}{%
 \subsection{Kommerzielle Produkte}\label{kommerzielle-produkte}}
 
+\pagebreak
+
 \begin{longtable}[]{@{}llccr@{}}
 \caption{Auflistung kommerzieller autonomer Schachtische
 \label{commchesstables}}\tabularnewline
@@ -403,6 +405,8 @@ Akku für 15 Spiele\strut
 \end{minipage}\tabularnewline
 \bottomrule
 \end{longtable}
+
+\pagebreak
 
 Die für den Vergleich gewählten Eigenschaften sind jene, welche die im
 Projekt angestrebten Funktionen möglichst äquivalent reflektieren.
@@ -2646,10 +2650,11 @@ abbilden kann. Hierzu muss das System eine einheitliche
 
 Die RESTful \gls{api} stellt verschiedene Ressourcen bereit, welche über
 eine URI \ref{ATC_URI_SCHEMES} eindeutig identifizierbar sind. Auf diese
-können mittels verschiedenster HTTP Anfragemethoden (GET, POST, PUT,
-DELETE) zugegriffen werden. Jede dieser Methoden stellt einen anderen
-Zugriff auf die Ressource dar und beeinflusst somit das Verhalten und
-die Rück-Antwort dieses Zugriffs.
+können mittels verschiedenster HTTP Anfragemethoden (unter anderem:
+\passthrough{\lstinline!GET!}, \passthrough{\lstinline!POST!})
+zugegriffen werden. Jede dieser Methoden stellt einen anderen Zugriff
+auf die Ressource dar und beeinflusst somit das Verhalten und die
+Rück-Antwort dieses Zugriffs.
 
 Eine URI besteht dabei aus mehreren Teilen. Das Schema gibt an, wie die
 nachfolgenden Teile interpretiert werden sollen. Dabei werden bei einer
@@ -2967,17 +2972,103 @@ zusätzlich der Zeitpunkt des Eintretens gespeichert.
 Wenn mindestens zwei Clients auf der Suche nach einem Spiel sind und
 sich somit in der Lobby-Tabelle befinden, wird der
 Matchmaking-Algorithmus aktiv. Dieser sortiert die Clients nach
-Zeitpunkt des Eintretens und nach dem Spieler-Typ. Durch den Typ werden
-zuerst mit zwei Spielern ein Match gestartet, wenn diese vom einem der
-folgenden Typen ist:
+Zeitpunkt des Eintretens und nach dem Spieler-Typ. Der Spieler-Typ kann
+dabei einer der folgenden Clienten sein:
 
 \begin{itemize}
 \tightlist
 \item
-  autonomer Schachtisch
+  autonomer Schachtisch (Human)
 \item
-  Webclient
+  Webclient (Human)
+\item
+  AutoPlayer (AI)
 \end{itemize}
+
+Das System sortiert die Liste der suchenden Clients nach deren Typ.
+Somit wird sichergestellt, dass zuerst alle menschlichen Spieler
+zusammen ein Spiel beginnen und erst im letzten Schritt ein Mensch gegen
+den Computer spielen muss.
+
+Zum Beispiel besteht die Spielerliste welche auf der Suche nach einem
+Match sind aus den folgenden Typen:
+
+\begin{itemize}
+\item
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    Webclient A \passthrough{\lstinline!Human!}
+  \end{enumerate}
+\item
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \setcounter{enumi}{1}
+  \tightlist
+  \item
+    autonomer Schachtisch A \passthrough{\lstinline!Human!}
+  \end{enumerate}
+\item
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \setcounter{enumi}{2}
+  \tightlist
+  \item
+    autonomer Schachtisch B \passthrough{\lstinline!Human!}
+  \end{enumerate}
+\end{itemize}
+
+Alle Spieler sind vom Typ \passthrough{\lstinline!Human!} somit versucht
+das System mit jeweils zwei Spielern ein neues Spiel zu starten. Da der
+\passthrough{\lstinline!Webclient A!} und der
+\passthrough{\lstinline!autonome Schachtisch A!} bereits am längsten
+gewartet haben, werden diese zuerst ausgewählt. Das System entscheidet
+hierbei nicht die beiden autonomen Schachtisch Clienten zu verbinden, da
+hier zuerst auf die Wartezeit der Spieler rücksicht genommen wird. Nach
+dem Matchmaking sieht die Liste folgendermaßen aus:
+
+\begin{itemize}
+\item
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    autonomer Schachtisch B \passthrough{\lstinline!Human!}
+  \end{enumerate}
+\end{itemize}
+
+Somit steht nur noch ein wartender Spieler auf der Liste, da dieser vom
+Typ \passthrough{\lstinline!Human!} ist, wartet das System auf einen
+weiteren Spieler. Solle sich in einer definierten Zeit von circa 20
+Sekunden kein weiterer Spieler vom Typ \passthrough{\lstinline!Human!}
+hinzukommen, wird automatisch ein \passthrough{\lstinline!AI!}-Spieler
+gestartet.
+
+\begin{itemize}
+\item
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    autonomer Schachtisch B \passthrough{\lstinline!Human!}
+  \end{enumerate}
+\item
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \setcounter{enumi}{1}
+  \tightlist
+  \item
+    AutoPlayer \passthrough{\lstinline!AI!}
+  \end{enumerate}
+\end{itemize}
+
+Somit wird mit diesen beiden Spielern ein weiteres Spiel gestartet.
+Somit wird sichergestellt das jeder Spieler welcher mit einem autonomen
+Schachtisch oder Webclient spielt, auch zuerst gegen einen menschlichen
+Spieler spielen kann. Erst zum Schluss kommt ein Match gegen den
+Computer zustande, damit kein Spieler ewig lange auf einen Spielpartner
+warten muss.
 
 \begin{lstlisting}
 //ATC_BACKEND matchmaking_logic.js
@@ -3021,11 +3112,9 @@ var matchmaking_job = new CronJob('*/' + CFG.getConfig().matchmaking_runner_inte
 });
 \end{lstlisting}
 
-Somit wird sichergestellt, dass zuerst alle menschlichen Spieler
-zusammen ein Spiel beginnen und erst im letzten Schritt ein Mensch gegen
-den Computer spielen kann bzw. muss. Kommt ein Match zustande, werden
-die Spielereinträge aus der Lobby-Tabelle entfernt und es wird ein neues
-Spiel in der Game-Tabelle der Datenbank angelegt.
+Kommt ein Match zustande, werden die Spielereinträge aus der
+Lobby-Tabelle entfernt und es wird ein neues Spiel in der Game-Tabelle
+der Datenbank angelegt.
 
 Diese Tabelle enthält alle Spiele und deren aktuellen Status:
 

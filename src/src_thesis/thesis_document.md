@@ -150,7 +150,7 @@ Wie bereits aus den zum Teil identischen Namen ersichtlich, streben alle Tische 
 ### Kommerzielle Produkte
 
 
-
+\pagebreak
 
 : Auflistung kommerzieller autonomer Schachtische \label{commchesstables}
 
@@ -172,6 +172,10 @@ Wie bereits aus den zum Teil identischen Namen ersichtlich, streben alle Tische 
 <!--- Dey: Anmerkung zum Layout der Tabelle: Das ist im pdf so etwas schwer zu lesen. Vielleicht kann man das Layout durch Spaltenbreiten, Leerzeilen, grauen Hintergrund für jede 2. Zeile oder ähnliches verbessern. Ist aber nur Kosmetik. --> 
 
 <!--- Classen: Spendieren Sie der Tabelle ruhig eine ganze Seite. also die Zeilenhöhe erhöhen. Und Färbung jeder zweiten Zeile ist auch eine gute Idee --> 
+
+
+\pagebreak
+
 
 <br>
 
@@ -240,6 +244,12 @@ Zusätzlich zu den genannten Projekten sind weitere derartige Projekte verfügba
 
 Auch existieren weitere Abwandlungen von autonomen Schachbrettern, bei welchen die Figuren von oberhalb des Spielbretts gegriffen bzw. bewegt werden. In einigen Projekten wird dies mittels eines Industrie-Roboters [@actprojectrobot] oder eines modifizierten 3D-Druckers[@atcproject3dprinter] realisiert. Diese wurden hier aufgrund der Mechanik, welche über dem Spielbrett montiert werden muss und damit das Spielerlebnis erheblich beinflusst, nicht berücksichtigt.
 
+
+
+
+
+
+
 : Auflistung von Open-Source Schachtisch Projekten \label{oschesstables}
 
 |                                         | Automated Chess Board (Michael Guerero) [@actproject1]| Automated Chess Board (Akash Ravichandran) [@actproject2]| DIY Super Smart Chessboard [@actproject3]|
@@ -256,6 +266,9 @@ Auch existieren weitere Abwandlungen von autonomen Schachbrettern, bei welchen d
 | Lizenz                                  | (+gpl) 3+                                             | (+gpl)                                                   | -                                        |
 
 <!--- Dey: Layout der Tabelle ist noch nicht optimal, wie bei anderer Tabelle auch -->
+
+
+
 
 
 In den bestehenden Projekten ist zu erkennen, dass ein autonomer Schachtisch sehr einfach und mit simplen Mittel konstruiert werden kann. Hierbei fehlen in der Regel einige Features, wie das automatische Erkennen von Figuren oder das Spielen über das Internet.
@@ -1527,7 +1540,7 @@ Hierzu muss das System eine einheitliche (+rest)-Schnittstelle bereitstellen.
 <br>
 
 Die RESTful (+api) stellt verschiedene Ressourcen bereit, welche über eine URI \ref{ATC_URI_SCHEMES} eindeutig identifizierbar sind.
-Auf diese können mittels verschiedenster HTTP Anfragemethoden (GET, POST, PUT, DELETE) zugegriffen werden. Jede dieser Methoden stellt einen anderen Zugriff auf die Ressource dar und beeinflusst somit das Verhalten und die Rück-Antwort dieses Zugriffs.
+Auf diese können mittels verschiedenster HTTP Anfragemethoden (unter anderem: `GET`, `POST`) zugegriffen werden. Jede dieser Methoden stellt einen anderen Zugriff auf die Ressource dar und beeinflusst somit das Verhalten und die Rück-Antwort dieses Zugriffs.
 
 <br>
 
@@ -1743,10 +1756,30 @@ Diese wird vom Client aufgerufen, wenn dieser ein Spiel starten möchte. Dazu wi
 <br>
 
 Wenn mindestens zwei Clients auf der Suche nach einem Spiel sind und sich somit in der Lobby-Tabelle befinden, wird der Matchmaking-Algorithmus aktiv.
-Dieser sortiert die Clients nach Zeitpunkt des Eintretens und nach dem Spieler-Typ. Durch den Typ werden zuerst mit zwei Spielern ein Match gestartet, wenn diese vom einem der folgenden Typen ist:
+Dieser sortiert die Clients nach Zeitpunkt des Eintretens und nach dem Spieler-Typ. Der Spieler-Typ kann dabei einer der folgenden Clienten sein:
 
-- autonomer Schachtisch
-- Webclient
+- autonomer Schachtisch (Human)
+- Webclient (Human)
+- AutoPlayer (AI)
+
+Das System sortiert die Liste der suchenden Clients nach deren Typ. Somit wird sichergestellt, dass zuerst alle menschlichen Spieler zusammen ein Spiel beginnen und erst im letzten Schritt ein Mensch gegen den Computer spielen muss.
+
+Zum Beispiel besteht die Spielerliste welche auf der Suche nach einem Match sind aus den folgenden Typen:
+
+- 1. Webclient A `Human`
+- 2. autonomer Schachtisch A `Human`
+- 3. autonomer Schachtisch B `Human`
+
+Alle Spieler sind vom Typ `Human` somit versucht das System mit jeweils zwei Spielern ein neues Spiel zu starten. Da der `Webclient A` und der `autonome Schachtisch A` bereits am längsten gewartet haben, werden diese zuerst ausgewählt. Das System entscheidet hierbei nicht  die beiden autonomen Schachtisch Clienten zu verbinden, da hier zuerst auf die Wartezeit der Spieler rücksicht genommen wird. Nach dem Matchmaking sieht die Liste folgendermaßen aus:
+
+- 1. autonomer Schachtisch B `Human`
+
+Somit steht nur noch ein wartender Spieler auf der Liste, da dieser vom Typ `Human` ist, wartet das System auf einen weiteren Spieler. Solle sich in einer definierten Zeit von circa 20 Sekunden kein weiterer Spieler vom Typ `Human` hinzukommen, wird automatisch ein `AI`-Spieler gestartet.
+
+- 1. autonomer Schachtisch B `Human`
+- 2. AutoPlayer `AI`
+
+Somit wird mit diesen beiden Spielern ein weiteres Spiel gestartet. Somit wird sichergestellt das jeder Spieler welcher mit einem autonomen Schachtisch oder Webclient spielt, auch zuerst gegen einen menschlichen Spieler spielen kann. Erst zum Schluss kommt ein Match gegen den Computer zustande, damit kein Spieler ewig lange auf einen Spielpartner warten muss.
 
 
 ```js
@@ -1792,7 +1825,7 @@ var matchmaking_job = new CronJob('*/' + CFG.getConfig().matchmaking_runner_inte
 ```
 
 
-Somit wird sichergestellt, dass zuerst alle menschlichen Spieler zusammen ein Spiel beginnen und erst im letzten Schritt ein Mensch gegen den Computer spielen kann bzw. muss.
+
 Kommt ein Match zustande, werden die Spielereinträge aus der Lobby-Tabelle entfernt und es wird ein neues Spiel in der Game-Tabelle der Datenbank angelegt.
 
 Diese Tabelle enthält alle Spiele und deren aktuellen Status:
