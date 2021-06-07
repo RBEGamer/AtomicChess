@@ -24,7 +24,7 @@ Die Erstellung eines autonomen Schachtischs vereinbart in meinen Augen im große
 
 
 
-Schach ist ein bewährtes, ausnahmslos bekanntes und immer logisches Spiel, welches jedoch im kommerziellen Rahmen nie an Bedeutung gewonnen hat. Die Auswahl der verfügbare elektrifizierte und programmgesteuerte Schachtisch ist auffallend gering; zudem sind existierende Lösungen oftmals nicht erschwinglich und bedürfen erheblicher Anpassungen des Spielers an das Spiel.
+Schach ist ein bewährtes, ausnahmslos bekanntes und immer logisches Spiel, welches jedoch im kommerziellen Rahmen nie an Bedeutung gewonnen hat. Die Auswahl der verfügbaren elektrifizierten und programmgesteuerten Schachtische ist auffallend gering; zudem sind existierende Lösungen oftmals nicht erschwinglich und bedürfen erheblicher Anpassungen des Spielers an das Spiel.
 Innerhalb der vergangenen drei Jahrzehnte bewiesen immer mehr Konzerne ihre technische Kompetenz und Überlegenheit und die Fähigkeit ihrer Maschinen mittels der Optimierung von Schachalgorithmen und dem möglichst schnellen Besiegen derzeitiger Schach-Meister und -Meisterinnen. Die Algorithmen stehen heute in einer Vielzahl frei zugänglich zur Verfügung, jedoch ist das Interesse daran, für Spieler mögliche Anwendungen zu generieren, verschwindend gering und wird oftmals nur von Experten und Enthusiasten genutzt und auch hinterfragt. 
 
 <br>
@@ -51,12 +51,15 @@ Die Kernfrage der Arbeit bezieht sich somit auf die Überprüfung der Ausführba
 
 <br>
 
-Der Schwerpunkt liegt dabei insbesondere auf der Programmierung des eingebetteten Systems und dem Zusammenspiel von diesem mit einem aus dem Internet erreichbaren Servers, welcher als Vermittlungsstelle zwischen verschiedenen Schachtischen und anderen Endgeräten dient.
+Der Schwerpunkt liegt dabei insbesondere auf der Programmierung des eingebetteten Systems und dem Zusammenspiel von diesem mit einem aus dem Internet erreichbaren Server, welcher als Vermittlungsstelle zwischen verschiedenen Schachtischen und anderen Endgeräten dient.
 Das Projekt umfasst zum einem die Positionserkennung und Steuerung der Hardwarekomponenten (Schachfiguren) und zum anderen die Kommunikation zwischen dem Tisch selbst und einem in einer Cloud befindlichem Server.
 Mittels der Programmierung werden diverse Technologien von verschiedenen Einzelsystemen zu einem Gesamtprodukt zusammengesetzt.
 Insgesamt gilt es, einen für Anwender ansprechenden Schachtisch zu entwickeln, der das Spielerlebnis nicht nur originalgetreu widerspiegelt, sondern das Einzelspieler-Modell zusätzlich noch verbessert.
 
 <br>
+
+
+<!---Dey: hier ist mir nicht ganz klar was Sie meinen, es geht ja nicht um einen barrierefreien Tisch, oder meinen Sie das geistige spagat, wenn man gegen sich selber spielen soll.-->
 
 Der Grundgedanke dabei ist, dem Spieler die Arbeit des Versetzens der Spielfiguren und das Erwägen von gegnerischen Zügen abzunehmen. Dem Spieler wird die Möglichkeit geboten, gegen andere Spieler an diversen Orten oder gegen eine Schachlogik zu spielen und so Züge auszuführen, die jener im besten Fall nicht einmal vorhergesehen hat. Zudem wird die Korrektheit der getätigten Züge überprüft und sämtliche traditionellen Spielregeln in das Spiel mit einbezogen. Somit ist es nicht nur möglich, dass Anfänger das Spiel erlernen können, sondern auch bewährten Spielern mit unerwarteten Zügen des virtuellen oder realen Gegners neue Methodiken darzustellen.
 
@@ -84,7 +87,7 @@ In dieser wird untersucht, welche Technologien benötigt werden um, diese Anford
 
 <br>
 
-Anschließend werden im fünften Kapitel die zuvor verwendeten Technologien betrachtet, welche bei den beiden darauffolgenden Prototypen verwendet wurden. Hierbei stehen insbesondere solche Technologien im Vordergrund der Untersuchung, welche möglichst einfach zu beschaffen sind und optimaler Weise uneingeschränkt und lizenzunabhängig zur Verfügung stehen.
+Anschließend werden im fünften Kapitel die zuvor verwendeten Technologien betrachtet, welche bei den beiden darauffolgenden Prototypen verwendet wurden. Hierbei stehen insbesondere solche Technologien im Vordergrund der Untersuchung, welche möglichst einfach zu beschaffen sind und optimalerweise uneingeschränkt und lizenzunabhängig zur Verfügung stehen.
 
 <br>
 
@@ -106,6 +109,10 @@ Zusätzlich zu dieser system-internen Software wurde ein Webclient entwickelt, m
 Dieser Client bot außerdem die Möglichkeit, das System schon im Laufe des Entwicklungsprozesses testen zu können.
 
 <br>
+
+
+<!---Dey: das liest sich wie eine Dopplung zu dem Thema in Kapitel 8: "Auch wird dabei die Software, welche auf dem eingebetteten System ausgeführt wird, im Detail beschrieben ..." Können Sie das spezifizieren und besser von dem Inhalt in Kapitel 8 abgrenzen?--> 
+
 
 Das neunte Kapitel beschreibt die Software, welche auf dem eingebetteten System ausgeführt wird.
 Diese übersetzt die Spieldaten, welche von der Cloud-Infrastruktur abgefragt werden, in Zug-Befehle, welche von der Mechanik umgesetzt werden. Dabei gilt ein besonderes Augenmerk der Berechnung der Figur-Bewegungen und dem Erkennen von durch den Benutzer getätigten Schachzügen.
@@ -141,7 +148,8 @@ Die Tische des Herstellers `DGT` unterscheiden sich kaum in ihren Basis-Funktion
 
 <br>
 
-Das Angebot von open-source Schachtisch-Projekten \ref{oschesstables} hingegen ist signifikanter, jedoch sind die einzelnen Modelle oftmals Kopien oder Revisionen voneinander. Die möglichen Funktionen unterscheiden sich daher kaum. Für die hier dargestellte Übersicht wurden drei Modelle gewählt, welche in ihren Funktionen signifikante Auffälligkeiten und einen hohen Stellenwert und Bekanntheitsgrad aufweisen.
+
+Das Angebot von open-source Schachtisch-Projekten \ref{oschesstables} hingegen ist breiter, jedoch sind die einzelnen Modelle oftmals Kopien oder Revisionen voneinander. Die möglichen Funktionen unterscheiden sich daher kaum. Für die hier dargestellte Übersicht wurden drei Modelle gewählt, welche in ihren Funktionen signifikante Auffälligkeiten und einen hohen Stellenwert und Bekanntheitsgrad aufweisen.
 Wie bereits aus den zum Teil identischen Namen ersichtlich, streben alle Tische das gleiche Ziel an und unterscheiden sich daher nur geringfügig in ihren Funktionen, was im Folgenden nun näher erläutert wird.
 
 
@@ -322,7 +330,7 @@ Dies soll auch für abgebrochene Spiele gelten, welche von Benutzer oder durch d
 
 <br>
 
-Ein weiter Punkt, welcher bei der User-Experience beachtet werden soll, ist der zeitliche Aspekt. Ein Spiel auf einem normalen Schachspiel hat je nach Spielart kein Zeitlimit. Dies kann für das gesamte Spiel gelten oder auch für die Zeit zwischen einzelnen Zügen.
+Ein weiterer Punkt, welcher bei der User-Experience beachtet werden soll, ist der zeitliche Aspekt. Ein Spiel auf einem normalen Schachspiel hat je nach Spielart kein Zeitlimit. Dies kann für das gesamte Spiel gelten oder auch für die Zeit zwischen einzelnen Zügen.
 Der autonome Schachtisch soll es dem Spieler zum Beispiel ermöglichen, ein Spiel am Morgen zu beginnen und dieses erst am nächsten Tag fortzusetzen.
 
 <br>
@@ -356,6 +364,9 @@ In diesem Projekt werden vor allem Funktionalitäten berücksichtigt, welche bei
 
 Die Abmessungen und das Gewicht des autonomen Schachtisches ergeben sich aus der mechanischen Umsetzung und werden hier aufgrund der zur Verfügung stehenden Materialen und Fertigungstechniken nicht festgelegt.
 Dennoch wird Wert daraufgelegt, dass der Unterschied zwischen den Spielfeldabmessungen und den Abmessungen des Tisches so gering wie möglich ausfällt.
+
+<!--- Dey: man könnte noch ergänzen, solange dies das Speilerlebnis nicht stört und dann mit "Darum stehen hier ..." weitermachen-->
+
 Auch müssen die Figuren für den Benutzer eine gut handhabbare Größe aufweisen, um ein angenehmes haptisches Spielerlebnis zu gewährleisten. Ebenfalls wird kein besonderer Augenmerk auf die Geschwindigkeit der Figur-Bewegung gelegt, da hier die Zuverlässigkeit und Wiederholgenauigkeit dieser Bewegungen im Vordergrund stehen sollen.
 
 
@@ -364,12 +375,12 @@ Auch müssen die Figuren für den Benutzer eine gut handhabbare Größe aufweise
 
 # Machbarkeitsanalyse und Verifikation ausgewählter Technologien
 
-Da dieses Projekt aus vielen ineinandergreifenden Komponenten besteht wurden zuerst Technologien ausgewählt, welche sich augenscheinlich für die Umsetzung eignet.
+Da dieses Projekt aus vielen ineinandergreifenden Komponenten besteht wurden zuerst Technologien ausgewählt, welche sich augenscheinlich für die Umsetzung eignen.
 Hier werden Technolgien für die folgenden Komponenten benötigt:
 
 - Erstellung von Software-Paketen für das eingebettete System
 - Identifizierung der Schachfiguren
-- Bewegung der Mechanik
+- Mechaniksche Bewegung der Schachfiguren
 
 
 ## Erprobung Buildroot-Framework
@@ -414,10 +425,15 @@ Der Aufbau dieser Konfiguration besteht aus verschiedenen Schichten:
 - Recipes - Pakete
 - Bitbake - Tool zum erstellen
 
-Eigene Pakete werden dabei in `Recipes` angelegt, welche in einer Makefile ähnlichen Syntax das Paket und die Schritte zum erstellen beschreiben. Diese einzelnen Pakete werden anschließend in `Layern` zu einem gesamtsystem zusammengesetzt. Dies geschieht anschließen mittels des `Bitbake`-Tools, welches das System erstellt.
+Eigene Pakete werden dabei in `Recipes` angelegt, welche in einer Makefile ähnlichen Syntax das Paket und die Schritte zum erstellen beschreiben. Diese einzelnen Pakete werden anschließend in `Layern` zu einem Gesamtsystem zusammengesetzt. Dies geschieht anschließend mittels des `Bitbake`-Tools, welches das System erstellt.
 
 
-Das `Buildroot`-Framework bietet bereits eine große Anzahl an vorkonfigurierten Ziel-Systemen an, für welche es bereits alle nötigen Parameter enthält, um ein minimales solches System erstellen zu können. Auch ist bereits eine optimierte Konfiguration für das im Rahmen des hier vorliegenden Projekts gewählte eingebettete System vorhanden, welche direkt gestartet werden kann. Nach einem erfolgreichen Erstellen des Images kann dieses direkt über das eingebettete System gestartet werden.
+Das `Buildroot`-Framework bietet bereits eine große Anzahl an vorkonfigurierten Ziel-Systemen an, für welche es bereits alle nötigen Parameter enthält, um ein minimales solches System erstellen zu können. Auch ist bereits eine optimierte Konfiguration für das im Rahmen des hier vorliegenden Projekts gewählte eingebettete System vorhanden, welche direkt gestartet werden kann.
+
+Hier wurde ein `Raspberry Pi 3b+` gewählt, da dieser kostengünstig und zugleich einfach beschaffbar ist. Zudem  sind alle wichtigen Schnittstellen zur späteren Verwendung herausgeführt, welches diesen zu einen idealen System zur Prototypen-Entwicklung macht.
+
+
+Nach einem erfolgreichen Erstellen des Images kann dieses direkt über das eingebettete System gestartet werden.
 Bei jedem Build-Vorgang müssen jedoch alle Pakete erneut gebaut werden, bevor diese zu einem finalen Image zusammengefügt werden.
 Hierbei kann dieser Vorgang je nach Umfang der verwendeten Pakete mehrere Stunden dauern. Das `Yocot`-Projekt unterstützt hierbei das Erstellen einzelner Pakete, somit müssen nur Änderungen neu gebaut werden.
 Da im Rahmen dieses Projekts nur eine minimale Anzahl von Paketen benötigt werden, hält sich dieser Buildvorgang zeitlich in Grenzen und ist allgemein für dieses Projekt nicht entscheidend.
@@ -463,21 +479,21 @@ $(eval $(generic-package))
 Das somit erstellte Test-Paket `atctp` bildete eine funktionierende Grundlage für das System. Somit eignet sich das `Buildroot`-Framework optimal für dieses Projekt, da hier der Prozess zur Integration von eigener Software sehr einfach gestaltet ist.
 
 
-## Verifikation NFC Technologie
+## Verifikation NFC Technologie zur Identifizierung der Schachfiguren
 
 Ein weiterer wichtiger Bestandteil sollte die Erkennung der sich auf dem Feld befindlichen Schachfiguren sein.
 Hierbei muss zum einen der Figur-Typ (König, Dame, Türme, Läufer, Springer, Bauern) und zum anderen die Figur-Farbe (schwarz, weiss) vom System erkannt werden.
 
-Da hier keine aufwendige Elektronik entwickelt werden sollte, sondern auf Standard-Komponenten zurückgegriffen werden sollte, schied ein komplexes (+hf) Antennen-Array unter dem Schachfeld aus, wie es bei einigen kommerziellen Produkten umgesetzt ist.
+Da hier keine aufwendige Elektronik entwickelt werden,  sondern auf Standard-Komponenten zurückgegriffen werden sollte, schied ein komplexes (+hf) Antennen-Array unter dem Schachfeld aus, wie es bei einigen kommerziellen Produkten umgesetzt ist.
 Eine einfache 8x8 Matrix aus Drucktastern oder Hall-Effekt-Sensore schied ebenfalls aus, da hier die Eingabe über den Benutzer erfolgt und nur Rückschlüsse auf die veränderte Figur anhand einer manuellen Bewegung der Figur nachvollzogen werden kann.
 
 Stattdessen eignete sich hier die (+nfc) Technologie, welche auch bei modernen Smartphones eingesetzt wird.
 Hierzu werden kleine (+nfc)-Tags bzw. Aufkleber, welche aus einem Chip und einer Antenne bestehen, so programmiert, dass diese eine definierte Aktion beim Lesegerät auslösen.
-Dies kann zum Beispiel das öffnen einer Internetseite auf dem mobilen-Endgerät nach dem Scan eines mit einem NFC Tag ausgestatteten Filmplakats sein.
+Dies kann zum Beispiel das Öffnen einer Internetseite auf dem mobilen-Endgerät nach dem Scan eines mit einem NFC Tag ausgestatteten Filmplakats sein.
 
 ![Grove PN532 NFC Reader mit kabelgebundener Antenne \label{ATC_nfc_range_test}](images/ATC_nfc_range_test.png)
 
-Ein  Vorteil dieser Technologie ist, dass diese auch im Konsumerbereich bereits breit  verfügbar ist. Durch das einfache Programmieren dieser (+nfc)-Tags über das Smartphone wird kein zusätzliches Lese-/Schreib-Gerät benötigt.
+Ein  Vorteil dieser Technologie ist, dass diese auch im Konsumerbereich bereits breit verfügbar ist. Durch das einfache Programmieren dieser (+nfc)-Tags über das Smartphone wird kein zusätzliches Lese-/Schreib-Gerät benötigt.
 Hier musste jedoch zuvor getestet werden, welcher maximale Abstand erlaubt ist, um solch einen Tag noch scannen zu können.
 Auch ist der Abstand zwischen den einzelnen Tags entscheidend, d.h. wie nah diese beieinander platziert werden können, um trotzdem noch einwandfrei individuell ausgelesen werden zu könnnen.
 
@@ -495,10 +511,10 @@ Somit eignet sich die Kombination aus Tag und Lesegerät für eine Positionserke
 
 
 
-## Schrittmotor / Schrittmotorsteuerung
+## Verifikation der Mechanik zur Bewegung der Schachfiguren
 
 Da die einzelnen Figuren über das Schachfeld bewegt werden sollen, ist hierfür eine akkurate Positionierung dieser notwendig.
-Da die Figuren einen Durchmesser von 22mm haben und ein einzelnes Schachfeld ein Größe ca 55mm besitzt, reicht eine Wiederholgenauigkeit von +-1mm.
+Da die Figuren einen Durchmesser von 22mm haben und ein einzelnes Schachfeld ein Größe ca. 55mm besitzt, reicht eine Wiederholgenauigkeit von +-1mm.
 Auch wird bei der Wahl der passenden Motoren angenommen, dass das Spiel, welches durch die Mechanik in das System eingebracht wird, vernachlässigbar klein ist.
 Es ist auch davon auszugehen, dass die Kraft, welche von den Motoren benötigt wird, um eine Achse zu bewegen, nicht mehr als 45 Ncm betragen muss.
 
@@ -593,7 +609,7 @@ Für die Achsenführung der beiden X- und Y-Achsen wurden konventionelle 20x20mm
 
 <br>
 
-Bereits während des Designprozesses konnte anhand einer statischen Simulation des Modells erkannt werden, dass trotz der Optimierung des Fahrweges beider Achsen durch die Verkleinerung der Halterungen der Aluminium-Profile die Gesamtausdenung der Fahrwege nicht ausreichte. Mit dieser Konstellation konnten die Figuren nicht ausreichend weit aus dem Spielfeld platziert werden und verblieben in den äußeren Spielfeldern. Dieser Effekt war unerwünscht und schränkte das Spielerlebnis deutlich ein.
+Bereits während des Designprozesses konnte anhand einer statischen Simulation des Modells erkannt werden, dass trotz der Optimierung des Fahrweges beider Achsen durch die Verkleinerung der Halterungen der Aluminium-Profile die Gesamtausdehnung der Fahrwege nicht ausreichte. Mit dieser Konstellation konnten die Figuren nicht ausreichend weit aus dem Spielfeld platziert werden und verblieben in den äußeren Spielfeldern. Dieser Effekt war unerwünscht und schränkte das Spielerlebnis deutlich ein.
 
 <br>
 
@@ -612,7 +628,7 @@ Diese Lösung erfordert jedoch einen komplexeren Bahnplanungs-Algorithmus, da di
 
 Alle selbst-konstruierten Teile wurden anschließend mittels 3D Druck erstellt und konnten in die Tischplattenbasis eingeschraubt werden. Die Verwendung der aus Holz bestehenden Grundplatte erschwerte jedoch eine akkurate Platzierung der Teile und die bereits existierenden Seitenwände schränkten diese noch zusätzlich ein.
 Somit erforderte der komplette Zusammenbau mehrere Tage und zusätzliche Iterationen des 3D-Designs, um den Einbau spezifischer Teile zu ermöglichen.
-Das Design stellte damit jedoch eine solide Grundlage dar, welche für die weitere Software- und Hardware-Entwicklung essentiell war.
+Das Design stellte damit jedoch eine solide Grundlage dar, welche für die weitere Software- und Hardware-Entwicklung essentiell ist.
 
 <br>
 
@@ -694,20 +710,20 @@ Der zusätzliche Mikrokontroller übernimmt auch die Kommunikation mit dem `PN53
 
 <br>
 
-Nach der Festlegung der zu verwendenden Komponenten wurde ein entsprechender Schaltplan \ref{ATC_Schematic_DK} nach den zuvor erörterten Vorgaben entworfen. Hierbei wurden die Vorgaben der Datenblätter und der Application Notes in diesen integriert. Da es sich hier um einen ersten Funktionsentwurf handelte, wurde zusätzliche Testpunkte in das Design eingefügt.
+Nach der Festlegung der zu verwendenden Komponenten wurde ein entsprechender Schaltplan \ref{ATC_Schematic_DK} nach den zuvor erörterten Vorgaben entworfen. Hierbei wurden die Vorgaben der Datenblätter[@tmc5160db][@atmega328pdb] und der Application Notes [@pn532apn][@drv8833apn] in diesen integriert. Da es sich hier um einen ersten Funktionsentwurf handelte, wurde zusätzliche Testpunkte in das Design eingefügt.
 
 Somit war es während der weiteren Entwicklung möglich, zusätzliches Testequipment wie einen Logic-Analyser direkt an den (+spi) Bus oder ein Oszilloskop an die Ausgänge der H-Brücke dauerhaft anzuschliessen. Desweiteren war es möglich, die Bus- und Spannungsversorgung über Jumper zu trennen, um einen Funktionstest einzelner Komponenten durchführen zu können.
 
 <br>
 
-Allgemein verwenden alle Komponenten 3.3V als Logik-Pegel. Trotzdem wurde ein Levelshifter eingesetzt, welcher den (+spi) Bus des eingebetteten Systems von dem der Mikrokontroller trennt.
+Allgemein verwenden alle Komponenten 3.3V als Logik-Pegel. Trotzdem wurde ein Level-Shifter eingesetzt, welcher den (+spi) Bus des eingebetteten Systems von dem der Mikrokontroller trennt.
 
 <br>
 
 Durchgeführte Tests mit dem verwendeten `Atmega328p` ergaben, dass dieser nicht direkt mit 3.3V und einer Taktfrequenz von 16MHz betrieben werden kann und es somit zu einem nicht kontrollierbaren Verhalten dieses kommt.
 Dieses Verhalten machte sich durch eine gestörte Kommunikation mit dem `PN532` Modul bemerkbar und ein Auslesen von (+nfc) Tags war nur in 60% der Fälle fehlerfrei möglich.
 
-Im Anschluss wurde die Versorgungsspannung auf 5V erhöht, was zur Folge hatte, dass die Ein- und Ausgänge ebenfalls mit diesem Pegel arbeiteten; dieser Schritt wurde zum Schutz des eingebetteten Systems und dessen (+gpio) Schnittstelle notwendig.
+Im Anschluss wurde die Versorgungsspannung auf 5V erhöht, was zur Folge hatte, dass die Ein- und Ausgänge ebenfalls mit diesem Pegel arbeiteten; der einsatz des zusätzlichen Level-Shiter wurde zum Schutz des eingebetteten Systems und dessen (+gpio) Schnittstelle notwendig.
 
 ![Prototyp Hardware: Aufbau der Lochrasterplatine \label{ATC_DK_HW_LOCHRASTER}](images/ATC_DK_HW_LOCHRASTER.png)
 
@@ -849,7 +865,7 @@ Dieses stellt verschiedene Funktionen zum Verfahren eines Motors bereit. Hierzu 
 | D1        	| 50000   	|
 | V_STOP    	| 10      	|
 
-Der Treiber untersütz dabei zwei verschiedene Funktionsmodi:
+Der Treiber untersützt dabei zwei verschiedene Funktionsmodi:
 
 - Position-Mode
 - Velocity-Mode
@@ -986,7 +1002,7 @@ Dies wird so lange in negativer Bewegungsrichtung ausgeführt, bis der Endschalt
 Im Hinblick auf den Umsetzungsprozess des autonomen Schachtischs stellt die Fertigstellung des ersten Prototyps einen ersten großen Erfolg dar.
 Dennoch konnten nicht alle zuvor gestellten Requirements mit diesem Design umgesetzt werden.
 
-Zu den Defiziten zählte zum einen der Bewegungsspielraum der einzelnen Achsen. Dieser wurde bereits wären der Entwicklung durch die Verwendung von zwei Elektromagneten künstlich verlängert. Nach einem Langzeittest stellte sich jedoch diese Methode als zu fehleranfällig heraus. Die Parkpositionen, welche sich an den zwei Seiten des Spielbrettes befinden, konnten nicht durchgängig zuverlässig angefahren werden und boten nur Platz für 14 ausgeschiedene Figuren pro Spielerfarbe. Somit war ein komplettes Abräumen des Spielfeldes nicht möglich, auch wenn dieses in der Praxis selten vorkommt.
+Zu den Defiziten zählte zum einen der Bewegungsspielraum der einzelnen Achsen. Dieser wurde bereits während der Entwicklung durch die Verwendung von zwei Elektromagneten künstlich verlängert. Nach einem Langzeittest stellte sich jedoch diese Methode als zu fehleranfällig heraus. Die Parkpositionen, welche sich an den zwei Seiten des Spielbrettes befinden, konnten nicht durchgängig zuverlässig angefahren werden und boten nur Platz für 14 ausgeschiedene Figuren pro Spielerfarbe. Somit war ein komplettes Abräumen des Spielfeldes nicht möglich, auch wenn dieses in der Praxis selten vorkommt.
 
 <br>
 
@@ -997,7 +1013,7 @@ Gerade die Verwendung von verschraubten Holzplatten machte jedoch eine Vervielf�
 
 <br>
 
-Auf Seiten der Elektronik arbeitete diese eher zuverlässig und bereitete keinerlei Probleme. Jedoch stellten die verwendeten Motortreiber einen größeren Kostenfaktor dar und der Zeitaufwand für den Zusammenbau und Überprüfen dieser war substantiell. Die verwendeten Elektromagnete sind für 9V Betriebsspannung ausgelegt, mussten jedoch über ihren Spezifikationen mit 12V betrieben werden, was bei einem Dauerbetrieb zu stark erhöhten Temperaturen führte.
+Auf Seiten der Elektronik arbeitete diese eher zuverlässig und bereitete keinerlei Probleme. Jedoch stellten die verwendeten Motortreiber einen größeren Kostenfaktor dar und der Zeitaufwand für den Zusammenbau und Überprüfung dieser war substantiell. Die verwendeten Elektromagnete sind für 9V Betriebsspannung ausgelegt, mussten jedoch über ihren Spezifikationen mit 12V betrieben werden, was bei einem Dauerbetrieb zu stark erhöhten Temperaturen führte.
 
 <br>
 
@@ -1070,7 +1086,7 @@ Zudem wurde die Tischplatte nun durch eine simple Holzplatte ersetzt. Eine Höhe
 
 Die Beine des zuvor verwendeten Lack-Tischs wurden erneut verwendet. Diese konnten für die zweite Revision verwendet werden und so zusätzlich die gleiche Montagehöhe zwischen der ersten und der zweiten Revision des Tischs erreicht werden. Da selbst die Höhe der Quader der Schachtisch-Revisionen identisch ist, sind beide Tische nun gleich hoch. Alternative Lösungen wären der Erwerb von simplen Hohlleisten der gleichen Länge oder aber das Integrieren weiterer Profilstangen, welche man optimalerweise auch klappbar lagern könnte. Derzeit sind die Beine verschraubt und nicht klappbar. 
 Der daraus resultierende Nachteil der Tischbeine ist, dass man den gesamten Tisch nun schwerlich auf einen anderen Tisch stellen kann, um die Montage zu erleichtern oder ein Schachspiel auf einer anderen, eventuell bequemeren Höhe durchzuführen. 
-Der Tisch benötigt nun keine Unterlage mehr und kann ohne Probleme im offenen Raum platziert werden. 
+Der Tisch benötigt allerdings auch keine Unterlage mehr und kann ohne Probleme im offenen Raum platziert werden. 
 Die aktuell verwendeten Beine können je nach Bedarf auch entfernt werden, sodass der Schachtisch wieder als simpler Quader einfach zu handhaben ist. 
 
 <br>
@@ -1088,7 +1104,7 @@ Ausgehend von den gewählten Maßen der Stangen wurden Nutensteine vom „Typ 6�
 <br>
 
 Zudem wurde nur ein einziges 3D-Design angefertigt, indem eine simple Platte erstellt wurde, auf welcher zwei Vorsprünge extrudiert wurden und eine Durchführung des Durchmessers 6,5 mm. Mittels der Durchführung konnte die Platte mit einem Nutenstein verschraubt werden, mittels der Vorsprünge, welche in die Profilschienen ragen, wird ein Drehen der Platte verhindert.
-Dieses 3D-Design wurde für Folgenden als Grundlage für alle neuen Komponenten genommen. Oftmals wurden bestehende Modelle der ersten Revision mit diesem neuen Design verbunden und als eine Komponente gedruckt, was eine Wiedernutzung von etablierten Komponenten ermöglicht.
+Dieses 3D-Design wurde im Folgenden als Grundlage für alle neuen Komponenten verwendet. Oftmals wurden bestehende Modelle der ersten Revision mit diesem neuen Design verbunden und als eine Komponente gedruckt, was eine Wiedernutzung von etablierten Komponenten ermöglicht.
 
 <br>
 
@@ -1109,7 +1125,7 @@ Zusätzlich zu diesen Komponenten ist es möglich, 32 Schachfiguren mittels SLA 
 
 Die Mechanik des ersten Prototypen wurde für die Erstellung des zweiten Prototypen gänzlich verändert.
 
-In der ersten Revision wurde noch jede Achse über einen separaten Riemen gesteuert, sodass ein Schrittmotor die Bewegung des Schlittens entlang der Y-Achse und ein weiterer die Bewegung der gesamten Y-Achse, bestehend aus Motor, Riemen, Schlitten und Führungsschiene, entlang der X-Achse ermöglichte. Die Führung entlang der X-Achse erfolgte in der Mitte des Tischs, die Y-Achse wurde links und rechtsseitig rollbar gelagert und in der Mitte über einen Riemen gezogen. Dies hatte zur Folge, dass bei entstehender Unwucht, welche durch die Bewegung des Schlittens auf der Y-Achse natürlich ist, die Y-Achse in ihren Lagerungen nicht mehr parallel verlief, sondern beim Betätigen des Motors der X-Achse die Y-Achse in einem unerwünschten Winkel bewegt wurde. 
+In der ersten Revision wurde noch jede Achse über einen separaten Riemen gesteuert, sodass ein Schrittmotor die Bewegung des Schlittens entlang der Y-Achse und ein weiterer die Bewegung der gesamten Y-Achse, bestehend aus Motor, Riemen, Schlitten und Führungsschiene, entlang der X-Achse ermöglichte. Die Führung entlang der X-Achse erfolgte in der Mitte des Tischs, die Y-Achse wurde links und rechtsseitig rollbar gelagert und in der Mitte über einen Riemen gezogen. Dies hatte zur Folge, dass bei entstehender Unwucht, welche durch die Bewegung des Schlittens auf der Y-Achse auftreten kann, die Y-Achse in ihren Lagerungen nicht mehr parallel verlief, sondern beim Betätigen des Motors der X-Achse die Y-Achse in einem unerwünschten Winkel bewegt wurde. 
 
 <br>
 
@@ -1220,10 +1236,8 @@ Nach der Minimierung der elektrischen Komponenten und des mechanischen Aufbaus w
 Insbesondere die XY-Achsen Mechanik sowie die Ansteuerung von Schrittmotoren wird in diesen Systemen verwendet.
 Mit dem Durchbruch von 3D Druckern im Consumer-Bereich sind auch kleine und preisgünstige Steuerungen \ref{3dmarlinctl} erhältlich, welche 2-3 Schrittmotoren und diverse zusätzliche Hardware ansteuern können.
 
-<!-- Hier fehlt noch eine Überleitung zur Tabelle-->
 
-
-Hierbei existiert eine große Auswahl solcher Steuerungen mit den verschiedensten Ausstattungen. Bei der Auswahl wurde vor allem auf die Möglichkeit geachtet, sogenannte Silent-Schrittmotortreiber verwenden zu können, um die Geräuschemmissionen durch die Motoren so weit wie möglich zu minimieren. Im ersten Prototyp wurden unter anderem aus diesem Grund die `TMC5160-BOB` Treiber ausgewählt. Die meisten Boards bieten austauschbare Treiber, so dass es auch im Nachhinein möglich ist, diese auszuwechseln.
+Hierbei existiert eine große Auswahl solcher Steuerungen mit den verschiedensten Ausstattungen. Bei der Auswahl wurde vor allem auf die Möglichkeit geachtet, sogenannte Silent-Schrittmotortreiber verwenden zu können, um die Geräuschemmissionen durch die Motoren so weit wie möglich zu minimieren. Im ersten Prototyp wurden unter anderem aus diesem Grund die `TMC5160-BOB` Treiber ausgewählt. Die meisten Boards \label{3dmarlinctl} bieten austauschbare Treiber, so dass es auch im Nachhinein möglich ist, diese auszuwechseln.
 
 <br>
 
@@ -1240,7 +1254,9 @@ Hierbei existiert eine große Auswahl solcher Steuerungen mit den verschiedenste
 
 Hierzu wurde der Schrittmotor-Treiber `TMC2209` gewählt, welcher diese Features ebenfalls unterstützt und in der Variante als Silent-Step-Stick direkt in die meisten 3D Drucker Steuerungen eingesetzt werden kann. Hierbei ist es wichtig, dass auf der gewählten Steuerung die Treiber-ICs nicht fest verlötet sind, sondern getauscht werden können.
 
-Ein weiterer Punkt ist die Kommunikation der Steuerung mit dem Host-System. Hierbei setzten alle untersuchten Steuerungen auf die (+usb) Schnittstelle und somit ist eine einfache Kommunikation gewährleistet. Das verwendete eingebettete System im autonomen Schachtisch bietet vier freie (+usb) Anschlüsse, somit ist eine einfache Integration gewährleistet.
+
+
+Ein weiterer Punkt ist die Kommunikation der Steuerung mit dem Host-System. Hierbei setzten alle untersuchten Steuerungen auf die (+usb) Schnittstelle und somit ist eine einfache Kommunikation gewährleistet. Der verwendete `Raspberry Pi` als eingebettetes System im autonomen Schachtisch bietet vier freie (+usb) Anschlüsse, somit ist eine einfache Integration gewährleistet.
 
 <br>
 
@@ -1260,7 +1276,7 @@ Durch die durchgeführten Änderungen an der Elektronik, insbesondere durch die 
 Diese Steuerung unterstützt die Ansteuerung der Motoren und anderer Komponenten (z.B. Spindeln, Heizelemente) mittels G-Code und wird typischerweise in 3D Druckern und (+cnc)-Fräsen eingesetzt.
 
 
-G-Code ist eine Programmiersprache, welche mittels einfacher textbasierter Befehle \ref{gcodecmd} Komponenten dieser Maschinen kontrollieren kann.
+G-Code ist eine Programmiersprache, welche mittels einfacher textbasierter Befehle \ref{gcodecmd} Komponenten diese Maschinen kontrollieren kann.
 Dabei können einzelne Achsen verfahren werden oder die Drehzahl einer Spindel kontrolliert werden. Der G-Code wird von der Steuerung interpretiert. In der Regel wird dieser zuvor von einem (+cad) Programm erzeugt und zeilenweise übertragen. Bei einem 3D Drucker wird dieser vom Slicer generiert und enhält die Wegpunkte, welche vom Hotend angefahren werden sollen. 
 
 <br>
@@ -1462,9 +1478,9 @@ Das System erkennt den Anschluss der Hardware beim Start auf die gleiche Art und
 ## Fazit bezüglich des finalen Prototyps
 
 
-Der in der zweiten Iteration entstandene Prototyp wurde in viele Elemente aus der ersten Iteration grundlegend überarbeitet.
+Der in der zweiten Iteration entstandene Prototyp wurden viele Elemente aus der ersten Iteration grundlegend überarbeitet.
 Dabei endstand ein völlig neues Design, welches sich auf einfach zu beschaffende Komponenten und Materialien stützt.
-Dies ermöglicht einen simpleren und zeitlich effektiveren Zusammenbau des vollständigen autonomen Schachtischs und bieten die Möglichkeit auf eine einfache Erweiterung des Systems.
+Dies ermöglicht einen simpleren und zeitlich effektiveren Zusammenbau des vollständigen autonomen Schachtischs und bietet die Möglichkeit einer einfachen Erweiterung des Systems.
 
 <br>
 
@@ -1519,6 +1535,9 @@ Somit sind keine schnellen Partien möglich wie zum Beispiel bei Schachformen wi
 
 
 ![Gesamtübersicht der verwendeten Cloud-Infrastruktur \label{ATC_Cloud_Architecture}](images/ATC_Cloud_Architecture.png)
+
+
+<!-- Dey: Was meinen Sie hier mit System? Das Gesamtsystem oder die Kommunikation der Tische, ...-->
 
 
 Die erste Phase der Entwicklung des Systems bestand in der Auslegung und Erstellung der Cloud-Infrastruktur und der darauf ausgeführten Services.
@@ -1903,6 +1922,8 @@ Alle gängigen Schachprogramme und Bibliotheken unterstützen das Laden von Spie
 
 Diese Liste wird vom System dazu verwendet, um sicherzustellen, dass der Benutzer nur gültige Züge tätigen kann. Diese Funktion lässt sich zusätzlich abschalten, falls das Spiel nicht nach den allgemeinen Schachregeln verlaufen soll. Bei der Generierung der möglichen Schachzüge muss zwischen den Legal-Moves und den Pseudo-Legal Schachzügen unterschieden werden. Die Legal-Moves beinhalten nur die nach den Schachregeln möglichen Züge, welche von Figuren des Spielers ausgeführt werden können.
 Die Pseudo-Legal Schachzüge sind alle Schachzüge, welche von den Figuren auf dem aktuellen Schachbrett möglich sind; darin sind unter anderem auch alle anderen Figur-Züge enthalten, solange der König des aktuellen Spielers sich auf dem Schachbrett befindet.
+
+<!-- Dey: Was genau meinen Sie damit? Geht es um verbotene Züge, wenn der König im Schach steht? -->
 
 <br>
 
@@ -2436,15 +2457,15 @@ Grundsätzlich ist festzuhalten, dass es sich beim Resultat der Arbeit um kein f
 
 <br> 
 
-Der Prototyp lässt sich jedoch mit kommerziell erhältlichen und open-source verfügbaren Schachtischen vergleichen. Das Ziel, alle wünschenswerten Funktionen und Implementationen dieser Tische in den Prototypen zu integrieren, konnten erfolgreich umgesetzt werden. Darüber hinaus wurde weitere Funktionalitäten eingegliedert, wie eine Stand-Alone Funktionalität oder eine Schnittstelle zum Erstellen weiterer Erweiterungen. 
+Der Prototyp lässt sich jedoch mit kommerziell erhältlichen und open-source verfügbaren Schachtischen vergleichen. Das Ziel, alle wünschenswerten Funktionen und Implementationen dieser Tische in den Prototypen zu integrieren, konnte erfolgreich umgesetzt werden. Darüber hinaus wurde weitere Funktionalitäten eingegliedert, wie eine Stand-Alone Funktionalität oder eine Schnittstelle zum Erstellen weiterer Erweiterungen. 
 
 <br>
 
-Das System und insbesondere der implementierte Cloud-Service sind online erreichbar und erweiterbar. Dies ermöglicht unter anderem das Bauen eines eigenen Tisches unter Verwendung des (+atc)-Systems, aber auch die Integration weiterer Komponenten. Erfahrene Entwickler können somit das Spiel beliebig ausweiten oder sogar andere Spiele ergänzen. Die für das Projekt entworfene Mechanik und Spielführung kann dementsprechend auch für diverse andere Tischbrettspiele verwendet werden.
+Das System und insbesondere der implementierte Cloud-Service sind online erreichbar und erweiterbar. Dies ermöglicht unter anderem das Bauen eines eigenen Tisches unter Verwendung des (+atc)-Systems, aber auch die Integration weiterer Komponenten. Erfahrene Entwickler können somit das Spiel beliebig ausweiten oder sogar andere Spiele ergänzen. Die für das Projekt entworfene Mechanik und Spielführung kann dementsprechend auch für diverse andere Tischbrettspiele wie zum Beispiel Mühle verwendet werden.
 
 <br>
 
-Neben diversen im Studium erlernten Fähigkeiten wurden im Laufe des Projekts noch diverse andere Leistungen erforderlich, wie die Erstellung einer Mechanik oder das Konstruieren von Komponenten, was das Aneignen von zusätzlichem Wissen erforderte. Die resultierende Mechanik ist ungeachtet dessen fehlerlos und nahezu spielfrei, was ein reibungsloses Spiel ermöglicht.
+Neben diversen im Studium erlernten Fähigkeiten wurden im Laufe des Projekts noch diverse andere Leistungen erforderlich, wie die Erstellung einer Mechanik oder das Konstruieren von Komponenten, was das Aneignen von zusätzlichem Wissen erforderte. Die resultierende Mechanik ist ungeachtet dessen fehlerlos und nahezu spielfrei, welches einen reibungslosen Spielablauf ermöglicht.
 
 <br>
 
@@ -2470,11 +2491,11 @@ Der iterative Prozess der Erstellung des Schachtischs ist zeitaufwändig und kos
 
 <br>
 
-Insgesamt ist das Projekt selbst recht umfangreich und umfasst in verschiedenen Facetten diverse Themenbereiche meines Studiums, was mir von Beginn an ein Anliegen war. Es manifestiert meinen Studienschwerpunkt, die technische Informatik, und hat mich dazu verleitet, noch tiefgründiger in die Materie zu schauen. Zudem wurden noch weitere Kompetenzen erfordert, welche zuvor gar nicht oder nur teilweise gegeben waren, wie das Konstruieren von 3D-Komponenten oder das Gestalten von Produkten. Umso beeindruckter bin ich selbst von der Bewegungsmechanik des Systems, welche sich im Entwicklungsprozess sehr stark verändert hat und letztlich zu einem fehlerlosen Resultat führte. 
+Insgesamt ist das Projekt selbst recht umfangreich und umfasst in verschiedenen Facetten diverse Themenbereiche meines Studiums, was mir von Beginn an ein Anliegen war. Es manifestiert meinen Studienschwerpunkt, die technische Informatik, und hat mich dazu motiviert, noch tiefgründiger in die Materie zu schauen. Zudem waren noch weitere Kompetenzen gefordert, welche zuvor gar nicht oder nur teilweise gegeben waren, wie das Konstruieren von 3D-Komponenten oder das Gestalten von Produkten. Umso beeindruckter bin ich selbst von der Bewegungsmechanik des Systems, welche sich im Entwicklungsprozess sehr stark verändert hat und letztlich zu einem fehlerlosen Resultat führte. 
 
 <br>
 
-Neben diesen projektspezifischen Kompetenzen ist es zudem möglich gewesen, weitere Erfahrungen im Bereich der Projektplanung und Organisation zu sammeln. Im optimalen Verlauf wäre ein fertiger Prototyp bereits zum Ende des Winters möglich gewesen, jedoch erforderte die Veränderung der Mechanik vom XY-System zu CoreXY und verschiedene unvorhergesehene Schwächen mit den verwendeten Magneten weitere Umsetzungsiterationen, die rückblickend nötig und zielführend waren. 
+Neben diesen projektspezifischen Kompetenzen ist es zudem möglich gewesen, weitere Erfahrungen im Bereich der Projektplanung und Organisation zu sammeln. Im optimalen Verlauf wäre ein fertiger Prototyp bereits früher möglich gewesen, jedoch erforderte die Veränderung der Mechanik vom XY-System zu CoreXY und verschiedene unvorhergesehene Schwächen mit den verwendeten Magneten weitere Umsetzungsiterationen, die rückblickend nötig und zielführend waren. 
 
 <br>
 
