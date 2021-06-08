@@ -16,7 +16,11 @@ Die Fähigkeit zur Erstellung eines solchen Systems ist daher nicht als eine lei
 
 <br>
 
-Die Erstellung eines autonomen Schachtischs vereinbart in meinen Augen im großen Umfang die wesentlichen Komponenten des Informatikstudiums mit meiner Vorliebe zur mechanisch-elektrischen Gestaltung. Angefangen mit den Grundlagen der Informatik, insbesondere mit technischem Bezug, über die Berechnung und Auslegung von Systemkomponenten, zudem die objektorientierte Projektplanung und Architektur von Systemen bis hin zu Datenbanken und Webtechnologien und Softwareentwicklung. Zudem wird mein Studienschwerpunkt, die technische Informatik, mit einem einbetteten System manifestiert.
+Das dafür gewählte Projekt beinhaltet die Konstruktion und Automatisierung eines Schachtischs. Schach ist ein stratigisches Brettspiel für zwei Personen, bei denen jeder Spieler 16 Figuren mit diversen Zug-Möglichkeiten nutzen kann, um den König des gegnerischen Spielers zu schlagen. Das Spiel basiert auf logischen Regeln und Spielverfahren, die bis hin zu komplexen Formationen und Bewegungen ausgebaut werden können. 
+
+<br>
+
+Die Erstellung eines autonomen Schachtischs vereinbart in meinen Augen im großen Umfang die wesentlichen Komponenten des Informatikstudiums mit meiner Vorliebe zur mechanisch-elektrischen Gestaltung. Angefangen mit den Grundlagen der Informatik, insbesondere mit technischem Bezug, über die Berechnung und Auslegung von Systemkomponenten, zudem die objektorientierte Projektplanung und Architektur von Systemen bis hin zu Datenbanken und Webtechnologien und Softwareentwicklung. Zudem wird mein Studienschwerpunkt, die technische Informatik, mit einem einbetteten System manifestiert. 
 
 <br>
 
