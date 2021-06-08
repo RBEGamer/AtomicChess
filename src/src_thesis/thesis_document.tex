@@ -118,15 +118,17 @@ Spielerlebnis nicht nur originalgetreu widerspiegelt, sondern das
 Einzelspieler-Modell zusätzlich noch verbessert.
 
 Der Grundgedanke dabei ist, dem Spieler die Arbeit des Versetzens der
-Spielfiguren und das Erwägen von gegnerischen Zügen abzunehmen. Dem
-Spieler wird die Möglichkeit geboten, gegen andere Spieler an diversen
-Orten oder gegen eine Schachlogik zu spielen und so Züge auszuführen,
-die jener im besten Fall nicht einmal vorhergesehen hat. Zudem wird die
-Korrektheit der getätigten Züge überprüft und sämtliche traditionellen
-Spielregeln in das Spiel mit einbezogen. Somit ist es nicht nur möglich,
-dass Anfänger das Spiel erlernen können, sondern auch bewährten Spielern
-mit unerwarteten Zügen des virtuellen oder realen Gegners neue
-Methodiken darzustellen.
+Spielfiguren und das Erwägen von gegnerischen Zügen abzunehmen. Somit
+ist ein kompfortables Spiel auch gegen sich selber möglich, da das
+Überlegen und Ausführen von Spielzügen der Gegenseite entfällt. Dem
+Spieler wird zudem die Möglichkeit geboten, gegen andere Spieler an
+diversen Orten oder gegen eine Schachlogik zu spielen und so Züge
+auszuführen, die jener im besten Fall nicht einmal vorhergesehen hat.
+Zudem wird die Korrektheit der getätigten Züge überprüft und sämtliche
+traditionellen Spielregeln in das Spiel mit einbezogen. Somit ist es
+nicht nur möglich, dass Anfänger das Spiel erlernen können, sondern auch
+bewährten Spielern mit unerwarteten Zügen des virtuellen oder realen
+Gegners neue Methodiken darzustellen.
 
 Dies soll mittels eines kompakten und minimalistischen Designs
 realisiert werden. Darüber hinaus spielt nicht nur das Design eine
@@ -191,11 +193,15 @@ Dieser Client bot außerdem die Möglichkeit, das System schon im Laufe
 des Entwicklungsprozesses testen zu können.
 
 Das neunte Kapitel beschreibt die Software, welche auf dem eingebetteten
-System ausgeführt wird. Diese übersetzt die Spieldaten, welche von der
-Cloud-Infrastruktur abgefragt werden, in Zug-Befehle, welche von der
-Mechanik umgesetzt werden. Dabei gilt ein besonderes Augenmerk der
-Berechnung der Figur-Bewegungen und dem Erkennen von durch den Benutzer
-getätigten Schachzügen.
+System ausgeführt wird. Dessen Hauptaufgabe ist die ansteuerung der
+Hardware-Komponenten, welche im autonomen Schachtisch verbaut sind.
+Darunter zählt die Ansteuerung der Motoren um die Figuren autonom
+bewegen zu können und die erkennung der vom Benutzer getätigten
+Schachzüge. Das System befindet sich unterhalb des Spielbretts und
+übersetzt die von der Cloud-Infrastruktur abgefragt über das Internet
+empfangenen Spieldaten in Spielzüge. Dabei gilt ein besonderes Augenmerk
+der Berechnung der Figur-Bewegungen und dem Erkennen von durch den
+Benutzer getätigten Schachzügen.
 
 Das zehnte und abschließende Kapitel umfasst das Fazit und gibt einen
 Ausblick auf mögliche Erweiterungen und Verbesserungen.
@@ -419,15 +425,18 @@ Figuren. Information über die dafür verwendete Technologie ist jedoch
 nicht verfügbar. Die Square-Off-Schachtische verfügen über keine solche
 Funktion.
 
-Die Abmessungen der autonomen Schachtische unterscheiden sich nur beim
-Hersteller Square Off deutlich; der Grand Kingdom Schachtisch ist
-rechteckig konstruiert worden, was das Spielerlebnis deutlich verändert.
-Der simple Kingdom-Tisch ist dabei kleiner als das vorgegebene
-Turniermaß, was negativen Einfluss auf das Spielererlebnis hat. Mit den
-Standardmaßen der DGT-Spielbretter und zudem ihrer geringen Höhe
-gleichen diese deutlich einem Turniertisch. Die Kombination aus geringer
-Höhe und Erkennung der Figur-Stellung bei den DGT-Brettern ist positiv
-bemerkenswert.
+Die Abmessungen (Außenmaße) der autonomen Schachtische unterscheiden
+sich nur beim Hersteller Square Off deutlich; der Grand Kingdom
+Schachtisch ist rechteckig konstruiert worden, was das Spielerlebnis
+deutlich verändert. Der simple Kingdom-Tisch ist dabei kleiner als das
+vorgegebene Turniermaß, was negativen Einfluss auf das Spielererlebnis
+hat. Mit den Standardmaßen der DGT-Spielbretter und zudem ihrer geringen
+Höhe gleichen diese deutlich einem Turniertisch. Die Kombination aus
+geringer Höhe und Erkennung der Figur-Stellung bei den DGT-Brettern ist
+positiv bemerkenswert. Die größe der einzelnen Schachfelder aller
+autonomen Schachtische befinden sich jedoch in den spezifikationen der
+\gls{uscf}\cite{officialuscfrules}, welche sich von 5 bis 6.35cm
+belaufen.
 
 Beide Hersteller bieten eine Bluetooth-Schnittstelle an. Einzig das
 Smart-Board des Herstellers DGT nutzt eine serielle, kabelgebundene
@@ -674,11 +683,13 @@ die neuen Figurstellungen berechnet werden.
 Abschließend ist festzuhalten, dass es auch bei den Open-Source
 Projekten kein Projekt gibt, welches alle gewünschten Features abbildet.
 Auch fehlen dort weitestgehend Features, welche die kommerziellen
-Projekte bieten.
-
-Das Ziel der hier vorliegenden Arbeit soll nun sein, all die positiven
-Eigenschaften dieser Tische zu vereinigen und mittels noch zusätzlicher
-Verbesserungen ein eigenes Produkt zu entwickeln.
+Projekte bieten. Ebenso gilt dies für die komerziellen Projekte, welche
+zwar viele Features bieten, jedoch dies zumeist in einem geschlossenen
+Ökosystem. Somit gibt es auch hier keinen klaren Testsieger, welche alle
+gewünschten Features abbildet. Das Ziel der hier vorliegenden Arbeit
+soll nun sein, all die positiven Eigenschaften dieser Tische zu
+vereinigen und mittels noch zusätzlicher Verbesserungen ein eigenes
+Produkt zu entwickeln.
 
 \hypertarget{user-experience}{%
 \section{User Experience}\label{user-experience}}
@@ -768,9 +779,18 @@ möglich ausfällt.
 
 Auch müssen die Figuren für den Benutzer eine gut handhabbare Größe
 aufweisen, um ein angenehmes haptisches Spielerlebnis zu gewährleisten.
+Diese richten sich hierbei an die Größse des Spielfeldes. Desweiteren
+gibt es auch hier von der \gls{uscf}\cite{officialuscfrules}
+spezifikationen über die Größse der Figuren, jedoch sollen diese hier
+nicht zwingend angewendet werden , da diese speziell für den autonomen
+Schachtisch angepasst werden müssen um eine automatische Erkennung
+dieser durch den Schachtisch gewährleisten zu können.
+
 Ebenfalls wird kein besonderer Augenmerk auf die Geschwindigkeit der
-Figur-Bewegung gelegt, da hier die Zuverlässigkeit und
-Wiederholgenauigkeit dieser Bewegungen im Vordergrund stehen sollen.
+Figur-Bewegung gelegt, solange dies nicht das Spielerlebnis stört. Die
+Zuverlässigkeit und Wiederholgenauigkeit dieser Bewegungen sollen dabei
+im Vordergrund stehen um einen reibungslosen Spielablauf zu
+gewährleisten..
 
 \hypertarget{machbarkeitsanalyse-und-verifikation-ausgewuxe4hlter-technologien}{%
 \chapter{Machbarkeitsanalyse und Verifikation ausgewählter
@@ -861,8 +881,15 @@ Es bietet sich jedoch für komplexe Projekte an, welche einen hohen Grad
 an Individualisierung benötigen. Ein Nachteil dessen, ist da dadurch
 auch viel vom Nutzer selber konfiguriert werden muss, bevor ein
 minimales System in Betrieb genommen werden kann. Somit muss zuerst eine
-grundlegende Konfiguration für das eingebettete System angelegt werden.
-Der Aufbau dieser Konfiguration besteht aus verschiedenen Schichten:
+grundlegende Konfiguration für das eingebettete System angelegt werden
+und es kann nicht direkt mit einem fertigen minimalen System mit der
+eigentlichen Software-Entwicklung gestartet werden. Allgemein sind die
+Anforderungen an die zu erstellende Software und deren benötigte
+requirements sehr gering, sodass hier eine detaillierte Einarbeitung
+zeitlich nicht möglich war.
+
+Der Aufbau dieser Konfiguration des \passthrough{\lstinline!Yocto!}-
+Projekt besteht aus drei Schichten:
 
 \begin{itemize}
 \tightlist
@@ -881,12 +908,14 @@ anschließend in \passthrough{\lstinline!Layern!} zu einem Gesamtsystem
 zusammengesetzt. Dies geschieht anschließend mittels des
 \passthrough{\lstinline!Bitbake!}-Tools, welches das System erstellt.
 
-Das \passthrough{\lstinline!Buildroot!}-Framework bietet bereits eine
-große Anzahl an vorkonfigurierten Ziel-Systemen an, für welche es
-bereits alle nötigen Parameter enthält, um ein minimales solches System
-erstellen zu können. Auch ist bereits eine optimierte Konfiguration für
-das im Rahmen des hier vorliegenden Projekts gewählte eingebettete
-System vorhanden, welche direkt gestartet werden kann.
+Das \passthrough{\lstinline!Buildroot!}-Framework hingegen bietet
+bereits eine große Anzahl an vorkonfigurierten Ziel-Systemen an, für
+welche es bereits alle nötigen Parameter enthält, um ein minimales
+solches System erstellen zu können. Auch ist bereits eine optimierte
+Konfiguration für das im Rahmen des hier vorliegenden Projekts gewählte
+eingebettete System vorhanden, welche direkt gestartet werden kann.
+
+\textless{}! --- PRO CONS EMBEDDED SYSTEM --\textgreater{}
 
 Hier wurde ein \passthrough{\lstinline!Raspberry Pi 3b+!} gewählt, da
 dieser kostengünstig und zugleich einfach beschaffbar ist. Zudem sind
@@ -1759,7 +1788,7 @@ Funktion mittels Registereintrag gewählt, welche den Motor stoppt,
 sobald der Schalter betätigt wird. Dies stellt schlussendlich die
 Home-Position dar. Dies kann jedoch nicht im
 \passthrough{\lstinline!Position-Mode!} des Treibers umgesetzt werden,
-da das Ziel-Positionsregister auf 0 gesetzt wird. Hierzu muss der
+da das Ziel-Positionsregister auf Null gesetzt wird. Hierzu muss der
 Treiber in den \passthrough{\lstinline!Velocity-Modus!} geschaltet
 werden, welches ein Verfahren des Motors in eine Richtung ohne
 Zeitbegrenzung erlaubt. Dies wird so lange in negativer
@@ -1784,7 +1813,7 @@ heraus. Die Parkpositionen, welche sich an den zwei Seiten des
 Spielbrettes befinden, konnten nicht durchgängig zuverlässig angefahren
 werden und boten nur Platz für 14 ausgeschiedene Figuren pro
 Spielerfarbe. Somit war ein komplettes Abräumen des Spielfeldes nicht
-möglich, auch wenn dieses in der Praxis selten vorkommt.
+möglich, auch wenn dieses in der Praxis eher selten vorkommt.
 
 Zum anderen war der Aufbau und die anschließende Kalibrierung der
 Mechanik und der entsprechenden Offset-Werte in der Software nicht
@@ -2629,8 +2658,17 @@ Infrastruktur}\label{entwicklung-der-cloud-infrastruktur}}
 \label{ATC_Cloud_Architecture}}
 \end{figure}
 
-Die erste Phase der Entwicklung des Systems bestand in der Auslegung und
-Erstellung der Cloud-Infrastruktur und der darauf ausgeführten Services.
+Die erste Phase der Entwicklung des Gesamtsystems (autonomer Schachtisch
++ Cloud-Anbindung) bestand in der Auslegung und Erstellung der
+Cloud-Infrastruktur und der darauf ausgeführten Services. Diese stellt
+dabei die Funktionalität der Kommunikation zwischen den einzelnen
+Schachtischen bereit, sodass mit mehreren, Ortsunabhänig gegeneinander
+gespielt werden kann. Zusätzlich stellt diese auch optionale
+Computer-Spieler als Service bereit, sodass Nutzer auch die möglichkeit
+haben gegen den Computer spiele zu können. Dazu stellt die
+Cloud-Infrastruktur zusätzliche Mechanismen bereit um Spieler, welche
+auf der Suche nach einem Spiel sind mit anderen Suchenden zu verbinden.
+
 Die ``Cloud'' stellte in diesem Zusammenhang einen Server dar, welcher
 aus dem Internet über eine feste IPv4 und IPv6-Adresse erreichbar war
 und frei konfiguriert werden konnte. Auf diesem System wird der
@@ -2851,7 +2889,7 @@ services:
         - ./data/db:/data/db
     ports:
       - 27017:27017
-    command: mongod --logpath=/dev/null # --quiet
+    command: mongod --logpath=/dev/null --quiet
 
   AtomicChessAutoPlayer:
     depends_on:
@@ -3257,14 +3295,16 @@ Diese Liste wird vom System dazu verwendet, um sicherzustellen, dass der
 Benutzer nur gültige Züge tätigen kann. Diese Funktion lässt sich
 zusätzlich abschalten, falls das Spiel nicht nach den allgemeinen
 Schachregeln verlaufen soll. Bei der Generierung der möglichen
-Schachzüge muss zwischen den Legal-Moves und den Pseudo-Legal
-Schachzügen unterschieden werden. Die Legal-Moves beinhalten nur die
+Schachzüge muss zwischen den \passthrough{\lstinline!Legal-Moves!} und
+den \passthrough{\lstinline!Pseudo-Legal!} Schachzügen unterschieden
+werden. Die \passthrough{\lstinline!Legal-Moves!} beinhalten nur die
 nach den Schachregeln möglichen Züge, welche von Figuren des Spielers
-ausgeführt werden können. Die Pseudo-Legal Schachzüge sind alle
-Schachzüge, welche von den Figuren auf dem aktuellen Schachbrett möglich
-sind; darin sind unter anderem auch alle anderen Figur-Züge enthalten,
-solange der König des aktuellen Spielers sich auf dem Schachbrett
-befindet.
+ausgeführt werden können. Die \passthrough{\lstinline!Pseudo-Legal!}
+Schachzüge sind alle Schachzüge, welche von den Figuren auf dem
+aktuellen Schachbrett möglich sind. Somit sind hier zum Beispiel auch
+die möglichen Schachzüge aller Figuren enthalten, auch wenn der König im
+Schach steht und so eigentlich nur Züge möglich sind welche diese
+Situation beseitigen.
 
 Wenn ein Spieler an der Reihe ist und einen Zug getätigt hat, wird sein
 getätigter Zug mittels der \passthrough{\lstinline!/rest/check\_move!}

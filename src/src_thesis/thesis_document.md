@@ -59,9 +59,9 @@ Insgesamt gilt es, einen für Anwender ansprechenden Schachtisch zu entwickeln, 
 <br>
 
 
-<!---Dey: hier ist mir nicht ganz klar was Sie meinen, es geht ja nicht um einen barrierefreien Tisch, oder meinen Sie das geistige spagat, wenn man gegen sich selber spielen soll.-->
 
-Der Grundgedanke dabei ist, dem Spieler die Arbeit des Versetzens der Spielfiguren und das Erwägen von gegnerischen Zügen abzunehmen. Dem Spieler wird die Möglichkeit geboten, gegen andere Spieler an diversen Orten oder gegen eine Schachlogik zu spielen und so Züge auszuführen, die jener im besten Fall nicht einmal vorhergesehen hat. Zudem wird die Korrektheit der getätigten Züge überprüft und sämtliche traditionellen Spielregeln in das Spiel mit einbezogen. Somit ist es nicht nur möglich, dass Anfänger das Spiel erlernen können, sondern auch bewährten Spielern mit unerwarteten Zügen des virtuellen oder realen Gegners neue Methodiken darzustellen.
+Der Grundgedanke dabei ist, dem Spieler die Arbeit des Versetzens der Spielfiguren und das Erwägen von gegnerischen Zügen abzunehmen. Somit ist ein kompfortables Spiel auch gegen sich selber möglich, da das Überlegen und Ausführen von Spielzügen der Gegenseite entfällt.
+Dem Spieler wird zudem die Möglichkeit geboten, gegen andere Spieler an diversen Orten oder gegen eine Schachlogik zu spielen und so Züge auszuführen, die jener im besten Fall nicht einmal vorhergesehen hat. Zudem wird die Korrektheit der getätigten Züge überprüft und sämtliche traditionellen Spielregeln in das Spiel mit einbezogen. Somit ist es nicht nur möglich, dass Anfänger das Spiel erlernen können, sondern auch bewährten Spielern mit unerwarteten Zügen des virtuellen oder realen Gegners neue Methodiken darzustellen.
 
 <br>
 
@@ -111,11 +111,12 @@ Dieser Client bot außerdem die Möglichkeit, das System schon im Laufe des Entw
 <br>
 
 
-<!---Dey: das liest sich wie eine Dopplung zu dem Thema in Kapitel 8: "Auch wird dabei die Software, welche auf dem eingebetteten System ausgeführt wird, im Detail beschrieben ..." Können Sie das spezifizieren und besser von dem Inhalt in Kapitel 8 abgrenzen?--> 
-
-
 Das neunte Kapitel beschreibt die Software, welche auf dem eingebetteten System ausgeführt wird.
-Diese übersetzt die Spieldaten, welche von der Cloud-Infrastruktur abgefragt werden, in Zug-Befehle, welche von der Mechanik umgesetzt werden. Dabei gilt ein besonderes Augenmerk der Berechnung der Figur-Bewegungen und dem Erkennen von durch den Benutzer getätigten Schachzügen.
+Dessen Hauptaufgabe ist die ansteuerung der Hardware-Komponenten, welche im autonomen Schachtisch verbaut sind.
+Darunter zählt die Ansteuerung der Motoren um die Figuren autonom bewegen zu können und die erkennung der vom Benutzer getätigten Schachzüge.
+Das System befindet sich unterhalb des Spielbretts und übersetzt die von der Cloud-Infrastruktur abgefragt über das Internet empfangenen Spieldaten in Spielzüge.
+Dabei gilt ein besonderes Augenmerk der Berechnung der Figur-Bewegungen und dem Erkennen von durch den Benutzer getätigten Schachzügen.
+
 
 <br>
 
@@ -177,6 +178,13 @@ Wie bereits aus den zum Teil identischen Namen ersichtlich, streben alle Tische 
 
 
 
+
+
+
+
+
+
+
 <!--- Dey: Anmerkung zum Layout der Tabelle: Das ist im pdf so etwas schwer zu lesen. Vielleicht kann man das Layout durch Spaltenbreiten, Leerzeilen, grauen Hintergrund für jede 2. Zeile oder ähnliches verbessern. Ist aber nur Kosmetik. --> 
 
 <!--- Classen: Spendieren Sie der Tabelle ruhig eine ganze Seite. also die Zeilenhöhe erhöhen. Und Färbung jeder zweiten Zeile ist auch eine gute Idee --> 
@@ -195,11 +203,10 @@ Die Bretter des Herstellers DGT erkennen die Position der verwendeten Figuren. I
 
 <br>
 
-<!--- Classen: Was meinen sie mit "unterscheiden sich"? weichen von Standardmass ab? variieren über die Produkte des Herstellers? --> 
 
 
-Die Abmessungen der autonomen Schachtische unterscheiden sich nur beim Hersteller Square Off deutlich; 
-der Grand Kingdom Schachtisch ist rechteckig konstruiert worden, was das Spielerlebnis deutlich verändert. Der simple Kingdom-Tisch ist dabei kleiner als das vorgegebene Turniermaß, was negativen Einfluss auf das Spielererlebnis hat. Mit den Standardmaßen der DGT-Spielbretter und zudem ihrer geringen Höhe gleichen diese deutlich einem Turniertisch. Die Kombination aus geringer Höhe und Erkennung der Figur-Stellung bei den DGT-Brettern ist positiv bemerkenswert.
+Die Abmessungen (Außenmaße) der autonomen Schachtische unterscheiden sich nur beim Hersteller Square Off deutlich; 
+der Grand Kingdom Schachtisch ist rechteckig konstruiert worden, was das Spielerlebnis deutlich verändert. Der simple Kingdom-Tisch ist dabei kleiner als das vorgegebene Turniermaß, was negativen Einfluss auf das Spielererlebnis hat. Mit den Standardmaßen der DGT-Spielbretter und zudem ihrer geringen Höhe gleichen diese deutlich einem Turniertisch. Die Kombination aus geringer Höhe und Erkennung der Figur-Stellung bei den DGT-Brettern ist positiv bemerkenswert. Die größe der einzelnen Schachfelder aller autonomen Schachtische befinden sich jedoch in den spezifikationen der (+uscf)[@officialuscfrules], welche sich von 5 bis 6.35cm belaufen.
 
 <br>
 
@@ -299,11 +306,9 @@ Dieses Problem wird durch eine definierte Ausgangsstellung beim Spielstart gelö
 
 <br>
 
-<!--- Dey: Sie meinen, dass es nicht so etwas wie eine kmplette Lösung (klaren Testsieger) gibt oder? Dann könnten Sie auch schreiben: Kein kommerzieller Tisch bieter alle angestrebten Funktionalitäten...-->
 
 Abschließend ist festzuhalten, dass es auch bei den Open-Source Projekten kein Projekt gibt, welches alle gewünschten Features abbildet.
-Auch fehlen dort weitestgehend Features, welche die kommerziellen Projekte bieten.
-
+Auch fehlen dort weitestgehend Features, welche die kommerziellen Projekte bieten. Ebenso gilt dies für die komerziellen Projekte, welche zwar viele Features bieten, jedoch dies zumeist in einem geschlossenen Ökosystem. Somit gibt es auch hier keinen klaren Testsieger, welche alle gewünschten Features abbildet.
 Das Ziel der hier vorliegenden Arbeit soll nun sein, all die positiven Eigenschaften dieser Tische zu vereinigen und mittels noch zusätzlicher Verbesserungen ein eigenes Produkt zu entwickeln.
 
 <br>
@@ -365,9 +370,12 @@ In diesem Projekt werden vor allem Funktionalitäten berücksichtigt, welche bei
 Die Abmessungen und das Gewicht des autonomen Schachtisches ergeben sich aus der mechanischen Umsetzung und werden hier aufgrund der zur Verfügung stehenden Materialen und Fertigungstechniken nicht festgelegt.
 Dennoch wird Wert daraufgelegt, dass der Unterschied zwischen den Spielfeldabmessungen und den Abmessungen des Tisches so gering wie möglich ausfällt.
 
-<!--- Dey: man könnte noch ergänzen, solange dies das Speilerlebnis nicht stört und dann mit "Darum stehen hier ..." weitermachen-->
 
-Auch müssen die Figuren für den Benutzer eine gut handhabbare Größe aufweisen, um ein angenehmes haptisches Spielerlebnis zu gewährleisten. Ebenfalls wird kein besonderer Augenmerk auf die Geschwindigkeit der Figur-Bewegung gelegt, da hier die Zuverlässigkeit und Wiederholgenauigkeit dieser Bewegungen im Vordergrund stehen sollen.
+
+Auch müssen die Figuren für den Benutzer eine gut handhabbare Größe aufweisen, um ein angenehmes haptisches Spielerlebnis zu gewährleisten.
+Diese richten sich hierbei an die Größse des Spielfeldes. Desweiteren gibt es auch hier von der (+uscf)[@officialuscfrules] spezifikationen über die Größse der Figuren, jedoch sollen diese hier nicht zwingend angewendet werden , da diese speziell für den autonomen Schachtisch angepasst werden müssen um eine automatische Erkennung dieser durch den Schachtisch gewährleisten zu können.
+
+Ebenfalls wird kein besonderer Augenmerk auf die Geschwindigkeit der Figur-Bewegung gelegt, solange dies nicht das Spielerlebnis stört. Die Zuverlässigkeit und Wiederholgenauigkeit dieser Bewegungen sollen dabei im  Vordergrund  stehen um einen reibungslosen Spielablauf zu gewährleisten..
 
 
 
@@ -418,8 +426,9 @@ Diese unterscheiden sich im Aufbau und der Funktionsweise teils stark, vor allem
 <!--- Classen:  Erläutern, was das bedeutet und warum das nachteilig ist --> 
 
 Hierbei stellt das `Yocto`- Projekt eine größere Einsteigshürde dar, aufgrund seines komplexen Layer-Systems.  
-Es bietet sich jedoch für komplexe Projekte an, welche einen hohen Grad an Individualisierung benötigen. Ein Nachteil dessen, ist da dadurch auch viel vom Nutzer selber konfiguriert werden muss, bevor ein minimales System in Betrieb genommen werden kann. Somit muss zuerst eine grundlegende Konfiguration für das eingebettete System angelegt werden.
-Der Aufbau dieser Konfiguration besteht aus verschiedenen Schichten:
+Es bietet sich jedoch für komplexe Projekte an, welche einen hohen Grad an Individualisierung benötigen. Ein Nachteil dessen, ist da dadurch auch viel vom Nutzer selber konfiguriert werden muss, bevor ein minimales System in Betrieb genommen werden kann. Somit muss zuerst eine grundlegende Konfiguration für das eingebettete System angelegt werden und es kann nicht direkt mit einem fertigen minimalen System mit der eigentlichen Software-Entwicklung gestartet werden.  Allgemein sind die Anforderungen an die zu erstellende Software und deren benötigte requirements sehr gering, sodass hier eine detaillierte Einarbeitung zeitlich nicht möglich war.
+
+Der Aufbau dieser Konfiguration des `Yocto`- Projekt besteht aus drei Schichten:
 
 - Layer - Build-Metadaten
 - Recipes - Pakete
@@ -428,9 +437,16 @@ Der Aufbau dieser Konfiguration besteht aus verschiedenen Schichten:
 Eigene Pakete werden dabei in `Recipes` angelegt, welche in einer Makefile ähnlichen Syntax das Paket und die Schritte zum erstellen beschreiben. Diese einzelnen Pakete werden anschließend in `Layern` zu einem Gesamtsystem zusammengesetzt. Dies geschieht anschließend mittels des `Bitbake`-Tools, welches das System erstellt.
 
 
-Das `Buildroot`-Framework bietet bereits eine große Anzahl an vorkonfigurierten Ziel-Systemen an, für welche es bereits alle nötigen Parameter enthält, um ein minimales solches System erstellen zu können. Auch ist bereits eine optimierte Konfiguration für das im Rahmen des hier vorliegenden Projekts gewählte eingebettete System vorhanden, welche direkt gestartet werden kann.
+
+
+Das `Buildroot`-Framework hingegen bietet bereits eine große Anzahl an vorkonfigurierten Ziel-Systemen an, für welche es bereits alle nötigen Parameter enthält, um ein minimales solches System erstellen zu können. Auch ist bereits eine optimierte Konfiguration für das im Rahmen des hier vorliegenden Projekts gewählte eingebettete System vorhanden, welche direkt gestartet werden kann.
+
+
+<! --- PRO CONS EMBEDDED SYSTEM -->
 
 Hier wurde ein `Raspberry Pi 3b+` gewählt, da dieser kostengünstig und zugleich einfach beschaffbar ist. Zudem  sind alle wichtigen Schnittstellen zur späteren Verwendung herausgeführt, welches diesen zu einen idealen System zur Prototypen-Entwicklung macht.
+
+
 
 
 Nach einem erfolgreichen Erstellen des Images kann dieses direkt über das eingebettete System gestartet werden.
@@ -992,7 +1008,7 @@ Eine zusätzliche Besonderheit stellt der Referenzfahrt dar. Nach dem Start des 
 Deswegen muss diese Achse zuerst an die Home-Position gefahren werden. Dazu besitzt das System zwei Endschalter, welche jeweils mit einem Schrittmotor-Treiber verbunden sind. Diese besitzen zwei solche Taster-Eingänge `REF_L`/`REF_R`.
 
 Bei einer wechselnden Flanke an diesem Eingang kann der Motor-Treiber verschiedene Funktionen ausführen. In diesem Fall wurde die Motor-Stopp Funktion mittels Registereintrag gewählt, welche den Motor stoppt, sobald der Schalter betätigt wird. Dies stellt schlussendlich die Home-Position dar.
-Dies kann jedoch nicht im `Position-Mode` des Treibers umgesetzt werden, da das Ziel-Positionsregister auf 0 gesetzt wird. Hierzu muss der Treiber in den `Velocity-Modus` geschaltet werden, welches ein Verfahren des Motors in eine Richtung ohne Zeitbegrenzung erlaubt.
+Dies kann jedoch nicht im `Position-Mode` des Treibers umgesetzt werden, da das Ziel-Positionsregister auf Null gesetzt wird. Hierzu muss der Treiber in den `Velocity-Modus` geschaltet werden, welches ein Verfahren des Motors in eine Richtung ohne Zeitbegrenzung erlaubt.
 Dies wird so lange in negativer Bewegungsrichtung ausgeführt, bis der Endschalter erreicht wurde. Somit ist die Achse an ihrer Home-Position angekommen und kann anschließend im Positions-Modus normal verfahren werden.
 
 
@@ -1002,7 +1018,7 @@ Dies wird so lange in negativer Bewegungsrichtung ausgeführt, bis der Endschalt
 Im Hinblick auf den Umsetzungsprozess des autonomen Schachtischs stellt die Fertigstellung des ersten Prototyps einen ersten großen Erfolg dar.
 Dennoch konnten nicht alle zuvor gestellten Requirements mit diesem Design umgesetzt werden.
 
-Zu den Defiziten zählte zum einen der Bewegungsspielraum der einzelnen Achsen. Dieser wurde bereits während der Entwicklung durch die Verwendung von zwei Elektromagneten künstlich verlängert. Nach einem Langzeittest stellte sich jedoch diese Methode als zu fehleranfällig heraus. Die Parkpositionen, welche sich an den zwei Seiten des Spielbrettes befinden, konnten nicht durchgängig zuverlässig angefahren werden und boten nur Platz für 14 ausgeschiedene Figuren pro Spielerfarbe. Somit war ein komplettes Abräumen des Spielfeldes nicht möglich, auch wenn dieses in der Praxis selten vorkommt.
+Zu den Defiziten zählte zum einen der Bewegungsspielraum der einzelnen Achsen. Dieser wurde bereits während der Entwicklung durch die Verwendung von zwei Elektromagneten künstlich verlängert. Nach einem Langzeittest stellte sich jedoch diese Methode als zu fehleranfällig heraus. Die Parkpositionen, welche sich an den zwei Seiten des Spielbrettes befinden, konnten nicht durchgängig zuverlässig angefahren werden und boten nur Platz für 14 ausgeschiedene Figuren pro Spielerfarbe. Somit war ein komplettes Abräumen des Spielfeldes nicht möglich, auch wenn dieses in der Praxis eher selten vorkommt.
 
 <br>
 
@@ -1253,8 +1269,6 @@ Hierbei existiert eine große Auswahl solcher Steuerungen mit den verschiedenste
 <br>
 
 Hierzu wurde der Schrittmotor-Treiber `TMC2209` gewählt, welcher diese Features ebenfalls unterstützt und in der Variante als Silent-Step-Stick direkt in die meisten 3D Drucker Steuerungen eingesetzt werden kann. Hierbei ist es wichtig, dass auf der gewählten Steuerung die Treiber-ICs nicht fest verlötet sind, sondern getauscht werden können.
-
-
 
 Ein weiterer Punkt ist die Kommunikation der Steuerung mit dem Host-System. Hierbei setzten alle untersuchten Steuerungen auf die (+usb) Schnittstelle und somit ist eine einfache Kommunikation gewährleistet. Der verwendete `Raspberry Pi` als eingebettetes System im autonomen Schachtisch bietet vier freie (+usb) Anschlüsse, somit ist eine einfache Integration gewährleistet.
 
@@ -1537,10 +1551,9 @@ Somit sind keine schnellen Partien möglich wie zum Beispiel bei Schachformen wi
 ![Gesamtübersicht der verwendeten Cloud-Infrastruktur \label{ATC_Cloud_Architecture}](images/ATC_Cloud_Architecture.png)
 
 
-<!-- Dey: Was meinen Sie hier mit System? Das Gesamtsystem oder die Kommunikation der Tische, ...-->
+Die erste Phase der Entwicklung des Gesamtsystems (autonomer Schachtisch + Cloud-Anbindung) bestand in der Auslegung und Erstellung der Cloud-Infrastruktur und der darauf ausgeführten Services. Diese stellt dabei die Funktionalität der Kommunikation zwischen den einzelnen Schachtischen bereit, sodass mit mehreren, Ortsunabhänig gegeneinander gespielt werden kann.
+Zusätzlich stellt diese auch optionale Computer-Spieler als Service bereit, sodass Nutzer auch die möglichkeit haben gegen den Computer spiele zu können. Dazu stellt die Cloud-Infrastruktur zusätzliche Mechanismen bereit um Spieler, welche auf der Suche nach einem Spiel sind mit anderen Suchenden zu verbinden.
 
-
-Die erste Phase der Entwicklung des Systems bestand in der Auslegung und Erstellung der Cloud-Infrastruktur und der darauf ausgeführten Services.
 Die "Cloud" stellte in diesem Zusammenhang einen Server dar, welcher aus dem Internet über eine feste IPv4 und IPv6-Adresse erreichbar war und frei konfiguriert werden konnte.
 Auf diesem System wird der (+atc)-Cloud Stack \ref{ATC_Cloud_Architecture} installiert, welcher zum einen aus der Schach-Software bestand, welche in einem Docker-Stack ausgeführt wurde und zum anderen, weitere Dienste, welche bei der Entwicklung des Systems genutzt werden. Diese sind jedoch kein Bestandteil des (+atc)-Cloud-Systems.
 
@@ -1686,7 +1699,7 @@ services:
         - ./data/db:/data/db
     ports:
       - 27017:27017
-    command: mongod --logpath=/dev/null # --quiet
+    command: mongod --logpath=/dev/null --quiet
 
   AtomicChessAutoPlayer:
     depends_on:
@@ -1920,10 +1933,9 @@ Alle gängigen Schachprogramme und Bibliotheken unterstützen das Laden von Spie
 
 <br>
 
-Diese Liste wird vom System dazu verwendet, um sicherzustellen, dass der Benutzer nur gültige Züge tätigen kann. Diese Funktion lässt sich zusätzlich abschalten, falls das Spiel nicht nach den allgemeinen Schachregeln verlaufen soll. Bei der Generierung der möglichen Schachzüge muss zwischen den Legal-Moves und den Pseudo-Legal Schachzügen unterschieden werden. Die Legal-Moves beinhalten nur die nach den Schachregeln möglichen Züge, welche von Figuren des Spielers ausgeführt werden können.
-Die Pseudo-Legal Schachzüge sind alle Schachzüge, welche von den Figuren auf dem aktuellen Schachbrett möglich sind; darin sind unter anderem auch alle anderen Figur-Züge enthalten, solange der König des aktuellen Spielers sich auf dem Schachbrett befindet.
-
-<!-- Dey: Was genau meinen Sie damit? Geht es um verbotene Züge, wenn der König im Schach steht? -->
+Diese Liste wird vom System dazu verwendet, um sicherzustellen, dass der Benutzer nur gültige Züge tätigen kann. Diese Funktion lässt sich zusätzlich abschalten, falls das Spiel nicht nach den allgemeinen Schachregeln verlaufen soll. Bei der Generierung der möglichen Schachzüge muss zwischen den `Legal-Moves` und den `Pseudo-Legal` Schachzügen unterschieden werden. Die `Legal-Moves` beinhalten nur die nach den Schachregeln möglichen Züge, welche von Figuren des Spielers ausgeführt werden können.
+Die `Pseudo-Legal` Schachzüge sind alle Schachzüge, welche von den Figuren auf dem aktuellen Schachbrett möglich sind.
+Somit sind hier zum Beispiel auch die möglichen Schachzüge aller Figuren enthalten, auch wenn der König im Schach steht und so eigentlich nur Züge möglich sind welche diese Situation beseitigen.
 
 <br>
 
