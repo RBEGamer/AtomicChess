@@ -1,0 +1,7 @@
+;Raspberry-Pi 3b+;STM32MP157A-DK1;
+Prozessor;Arm Cortex-A53;Arm Cortex A7 + Arm Cortex A4;
+Arbeitsspeicher;1GB LPDDR2 SDRAM;4-Gbit DDR3L;
+Flash-Speicher;SD-Karte;SD-Karte;
+(+gpio)-Header;ja (40 Pol, (+i2c),(+spi));ja (40 Pol, (+i2c),(+spi));
+Netzwerkanschluss;(+lan), (+wlan);(+lan), (+wlan);
+Besonderheiten;64-bit Prozessor;Arm Cortex A4 Co-Prozessor, Secure-Boot, Debugger;

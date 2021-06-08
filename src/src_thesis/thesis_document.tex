@@ -321,9 +321,9 @@ DGT Bluetooth Wenge\strut
 \begin{minipage}[t]{0.19\columnwidth}\raggedright
 Erkennung Figur-Stellung\strut
 \end{minipage} & \begin{minipage}[t]{0.19\columnwidth}\raggedright
-nein (Manuell per Ausgangsposition)\strut
+nein (manuell)\strut
 \end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\centering
-nein (Manuell per Ausgangsposition)\strut
+nein (manuell)\strut
 \end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\centering
 ja\strut
 \end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\raggedleft
@@ -376,9 +376,9 @@ ja\strut
 \begin{minipage}[t]{0.19\columnwidth}\raggedright
 Cloud-Anbindung (online Spiele)\strut
 \end{minipage} & \begin{minipage}[t]{0.19\columnwidth}\raggedright
-ja (Mobiltelefon + App)\strut
+ja (App)\strut
 \end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\centering
-ja (Mobiltelefon + App)\strut
+ja (App)\strut
 \end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\centering
 ja (PC + App)\strut
 \end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\raggedleft
@@ -419,8 +419,6 @@ Akku für 15 Spiele\strut
 \end{minipage}\tabularnewline
 \bottomrule
 \end{longtable}
-
-\pagebreak
 
 Die für den Vergleich gewählten Eigenschaften sind jene, welche die im
 Projekt angestrebten Funktionen möglichst äquivalent reflektieren.
@@ -535,6 +533,8 @@ werden. In einigen Projekten wird dies mittels eines Industrie-Roboters
 aufgrund der Mechanik, welche über dem Spielbrett montiert werden muss
 und damit das Spielerlebnis erheblich beinflusst, nicht berücksichtigt.
 
+\pagebreak
+
 \begin{longtable}[]{@{}lccr@{}}
 \caption{Auflistung von Open-Source Schachtisch Projekten
 \label{oschesstables}}\tabularnewline
@@ -565,9 +565,9 @@ DIY Super Smart Chessboard\strut
 \begin{minipage}[t]{0.19\columnwidth}\raggedright
 Erkennung Figur-Stellung\strut
 \end{minipage} & \begin{minipage}[t]{0.25\columnwidth}\centering
-nein (Manuell per Ausgangsposition)\strut
+nein (manuell)\strut
 \end{minipage} & \begin{minipage}[t]{0.26\columnwidth}\centering
-ja (Kamera / OpenCV)\strut
+ja (Kamera)\strut
 \end{minipage} & \begin{minipage}[t]{0.19\columnwidth}\raggedleft
 nein\strut
 \end{minipage}\tabularnewline
@@ -639,9 +639,9 @@ Besonderheiten\strut
 \end{minipage} & \begin{minipage}[t]{0.25\columnwidth}\centering
 -\strut
 \end{minipage} & \begin{minipage}[t]{0.26\columnwidth}\centering
-Sprachsteuerung (Amazon Alexa)\strut
+Sprachsteuerung\strut
 \end{minipage} & \begin{minipage}[t]{0.19\columnwidth}\raggedleft
-Zuganzeige über \gls{led} Matrix\strut
+Zuganzeige (\gls{led} Matrix)\strut
 \end{minipage}\tabularnewline
 \begin{minipage}[t]{0.19\columnwidth}\raggedright
 Lizenz\strut
@@ -815,6 +815,8 @@ Komponenten benötigt:
 \item
   Erstellung von Software-Paketen für das eingebettete System
 \item
+  Auswahl des eingebetteten Systems
+\item
   Identifizierung der Schachfiguren
 \item
   Mechaniksche Bewegung der Schachfiguren
@@ -859,7 +861,7 @@ möglich sein, ein durch das eingebettete System bootbares
 Dateisystemimage zu erzeugen. Für diesen Zweck existieren einige
 Open-Source Projekte, welche solch ein Build-System bereitstellen.
 Hierbei existieren zwei weit verbreitete Systeme: Das
-\passthrough{\lstinline!Yocot!}-Projekt\cite{yoctoproject} und das
+\passthrough{\lstinline!Yocto!}-Projekt\cite{yoctoproject} und das
 Buildroot\cite{buildrootproject}-Framework. Diese unterscheiden sich
 im Aufbau und der Funktionsweise teils stark, vor allem während der
 ersten Verwendung.
@@ -923,13 +925,6 @@ welche es bereits alle nötigen Parameter enthält, um ein minimales
 solches System erstellen zu können. Auch ist bereits eine optimierte
 Konfiguration für das im Rahmen des hier vorliegenden Projekts gewählte
 eingebettete System vorhanden, welche direkt gestartet werden kann.
-
-\textless{}! --- PRO CONS EMBEDDED SYSTEM --\textgreater{}
-
-Hier wurde ein \passthrough{\lstinline!Raspberry Pi 3b+!} gewählt, da
-dieser kostengünstig und zugleich einfach beschaffbar ist. Zudem sind
-alle wichtigen Schnittstellen zur späteren Verwendung herausgeführt,
-welches diesen zu einen idealen System zur Prototypen-Entwicklung macht.
 
 Nach einem erfolgreichen Erstellen des Images kann dieses direkt über
 das eingebettete System gestartet werden. Bei jedem Build-Vorgang müssen
@@ -1054,6 +1049,102 @@ einem Tag konnte dabei bis zu 14mm betragen.
 Somit eignet sich die Kombination aus Tag und Lesegerät für eine
 Positionserkennung der Schachfiguren, wobei sich das Lesegerät unter der
 Schachtischplatte befindet.
+
+\hypertarget{auswahl-des-eingebetteten-systems}{%
+\section{Auswahl des eingebetteten
+Systems}\label{auswahl-des-eingebetteten-systems}}
+
+Zur Ansteuerung aller elektrischen Komponenten, welche den autonomen
+Schachtisch antreiben, wird ein eingebettetes System benötigt auf
+welchem die zur vor erstellte Software ausgeführt wird. Dies ist in
+diesem Fall, durch das \passthrough{\lstinline!Buildroot!}-Framework
+generierte Linux-Image. Um mit den elektrischen Komponenten
+kommunizieren zu können, werden zusätzlich verschiedene Ein- und
+Ausgabe-Schnittstellen benötigt:
+
+\begin{itemize}
+\tightlist
+\item
+  \gls{hdmi} oder \gls{dsi} Anschluss für externen Bildschirm
+\item
+  \gls{usb}
+\item
+  \gls{gpio} Header mit \gls{spi} / \gls{i2c}-Bus
+\item
+  \gls{lan} oder \gls{wlan}
+\end{itemize}
+
+Da es sich hier um einen Prototyp handelt und die finalen Anforderungen
+der Software und Hardware noch nicht final feststehen, sollte das
+eingebettete System genug Spielraum bieten um spätere Erweiterungen
+umsetzten zu können. Auch spielte bei der Auswahl die Verfügbarkeit zum
+Zeitpunkt der Evaluation eine Rolle, da hier einige andere Systeme mit
+unter anderen langen Lieferzeiten aufwiesen. Zudem wurde darauf
+geachtet, dass das System bereits in einigen anderen Projekten verwendet
+wird, sodass bei möglichen Problemen, Ressourcen für die Fehlerbehebung
+bereitstehen. Somit beschränkte sich die Auswahl für diesen Prototyp,
+angesichts des für die Evaluation abgesteckten zeitlichen Rahmen auf den
+\passthrough{\lstinline!Raspberry-Pi 3b+!} und das
+\passthrough{\lstinline!STM32MP157A-DK1!} \label{ref}.
+
+: Getestete eingebettete Systeme \label{embsystems}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\textbar{} Raspberry-Pi 3b+
+\textbar{} STM32MP157A-DK \textbar{}
+
+\textbar{}:------------------- \textbar{}----------------------------
+\textbar{}---------------------------------------------------
+:\textbar{} \textbar{} Prozessor \textbar{} Arm Cortex-A53 \textbar{}
+Arm Cortex A7 + Arm Cortex A4 \textbar{} \textbar{} Arbeitsspeicher
+\textbar{} 1GB LPDDR2 SDRAM \textbar{} 4-Gbit DDR3L \textbar{}
+\textbar{} Flash-Speicher \textbar{} SD-Karte \textbar{} SD-Karte
+\textbar{} \textbar{} \gls{gpio}-Header \textbar{} ja (40 Pol,
+(+i2c),\gls{spi}) \textbar{} ja (40 Pol, (+i2c),\gls{spi}) \textbar{}
+\textbar{} Netzwerkanschluss \textbar{} \gls{lan}, \gls{wlan} \textbar{}
+\gls{lan}, \gls{wlan} \textbar{} \textbar{} Besonderheiten \textbar{}
+64-bit Prozessor \textbar{} Arm Cortex A4 Co-Prozessor, Secure-Boot,
+Debugger \textbar{}
+
+Diese bieten vergleichbare technische Spezifikationen und siedeln sich
+im gleichen Preissegment an. Je nach Ausführung des
+\passthrough{\lstinline!STM32MP157A-DK!} ist in diesem bereits ein
+\gls{dsi}-Display vorhanden und bietet von der Softwareseite her bereits
+eine Unterstützung für das \passthrough{\lstinline!Yocto!}-Projekt an.
+Ein Vorteil des \passthrough{\lstinline!STM32MP157A-DK!} gegenüber dem
+bekannten \passthrough{\lstinline!Raspberry-Pi 3b+!} ist sein
+zusätzlicher \passthrough{\lstinline!Arm Cortex A4!}-Co-Prozessor,
+welcher als zusätzlicher Mikrokontroller verwendet werden kann. Somit
+kann die Ansteuerung der \gls{gpio}-Anschl sowie Timer und
+Iterrupt-Aufgaben von diesem übernommen werden und die Ergebnisse und
+Steuersignale von \passthrough{\lstinline!Arm Cortex A7!} Hauptprozessor
+und dessen Linux-System bearbeitet werden.
+
+Der \passthrough{\lstinline!Raspberry-Pi 3b+!} hingegen bietet einen
+großen Software-Support an, welches an der großen Open-Source-Community
+liegt, welche das Erfolgreiche System über die Jahre aufbauen konnte.
+Der \passthrough{\lstinline!Arm Cortex-A53!} 64-bit Quad-Core Prozessor
+bietet dabei viele Leistungsreserven und die \gls{gpio} Anschlüssen
+können direkt über das Dateisystem angesteuert werden. Einzig der 1
+Gigabyte große Arbeitsspeicher und der Anschluss des Netzwerk-Chips über
+\gls{usb} sind der Flaschenhals des Systems dar. Somit eignen sich beide
+Systeme von den Spezifikationen her für diesen Prototypen.
+
+Anschließend wurde eine Test-Software erstellt und mittels des
+\passthrough{\lstinline!Buildroot!}-Framworks ein passendes Linux-System
+erstellt. Auf beiden Systemen ist es möglich dieses Auszuführen, jedoch
+war es nicht möglich eine mittels \passthrough{\lstinline!Qt!} und der
+\passthrough{\lstinline!Quick Controls II!} Erweiterung erstellte
+\gls{gui} auf dem \passthrough{\lstinline!STM32MP157A-DK!} auszuführen.
+Dies liegt am zum Zeitpunkt der Evaluation nicht mit der \gls{gpu} des
+Systems lauffähigen Version des
+\passthrough{\lstinline!ELGFS!}-Frameworks. Dieses wird verwendet, um
+Grafik mittels Hardwarebeschleunigung auf dem Display anzeigen zu
+können.
+
+Somit wurde nach mehreren Versuchen dieses Problem zu lösen das
+\passthrough{\lstinline!Raspberry-Pi 3b+!}-System als eingebettetes
+System für den autonomen Schachtisch ausgewählt und die Entwicklung auf
+diesem fortgesetzt.
 
 \hypertarget{verifikation-der-mechanik-zur-bewegung-der-schachfiguren}{%
 \section{Verifikation der Mechanik zur Bewegung der

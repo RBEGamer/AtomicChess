@@ -161,35 +161,17 @@ Wie bereits aus den zum Teil identischen Namen ersichtlich, streben alle Tische 
 
 : Auflistung kommerzieller autonomer Schachtische \label{commchesstables}
 
-|                                           | Square Off - Kingdom  | Square Off - Grand Kingdom | DGT Smart Board  | DGT Bluetooth Wenge |
+|                                                               | Square Off - Kingdom  | Square Off - Grand Kingdom | DGT Smart Board  | DGT Bluetooth Wenge |
 |:------------------------------------------|-------------------------------------------|:--------------------------------------------:|:---------------------------------:|------------------------------:|
-| Erkennung Figur-Stellung                  | nein (Manuell per Ausgangsposition)       | nein (Manuell per Ausgangsposition)          | ja                                | ja                            |
+| Erkennung Figur-Stellung                  | nein (manuell)       | nein (manuell)          | ja                                | ja                            |
 | Abmessungen (LxBxH)                       | 486mm x 486mm x 75mm                      | 671mm x 486mm x 75mm                         | 540mm x 540mm x 20mm              | 540mm x 540mm x 20mm          |
 | Konnektivität                             | Bluetooth                                 | Bluetooth                                    | Seriell                           | Bluetooth                     |
 | Automatisches Bewegen der Figuren         | ja                                        | ja                                           | nein                              | nein                          |
 | Spiel Livestream                          | ja                                        | ja                                           | ja                                | ja                            |
-| Cloud-Anbindung (online Spiele)           | ja (Mobiltelefon + App)                   | ja (Mobiltelefon + App)                      | ja (PC + App)                     | ja (PC + App)                 |
+| Cloud-Anbindung (online Spiele)           | ja (App)                   | ja (App)                      | ja (PC + App)                     | ja (PC + App)                 |
 | Parkposition für ausgeschiedene Figuren   | nein                                      | ja                                           | nein                              | nein                          |
 | Stand-Alone Funktionalität                | nein (Mobiltelefon erforderlich)          | nein (Mobiltelefon erforderlich)             | nein (PC)                         | nein (PC)                     |          
 | Besonderheiten                            | Akku für 30 Spiele                        | Akku für 15 Spiele                           | -                                 | -                             |
-
-
-
-
-
-
-
-
-
-
-
-<!--- Dey: Anmerkung zum Layout der Tabelle: Das ist im pdf so etwas schwer zu lesen. Vielleicht kann man das Layout durch Spaltenbreiten, Leerzeilen, grauen Hintergrund für jede 2. Zeile oder ähnliches verbessern. Ist aber nur Kosmetik. --> 
-
-<!--- Classen: Spendieren Sie der Tabelle ruhig eine ganze Seite. also die Zeilenhöhe erhöhen. Und Färbung jeder zweiten Zeile ist auch eine gute Idee --> 
-
-
-\pagebreak
-
 
 <br>
 
@@ -262,12 +244,13 @@ Auch existieren weitere Abwandlungen von autonomen Schachbrettern, bei welchen d
 
 
 
+\pagebreak
 
 : Auflistung von Open-Source Schachtisch Projekten \label{oschesstables}
 
 |                                         | Automated Chess Board (Michael Guerero) | Automated Chess Board (Akash Ravichandran) | DIY Super Smart Chessboard |
 |:----------------------------------------|:-----------------------------------------------------:|:--------------------------------------------------------:|-----------------------------------------:|
-| Erkennung Figur-Stellung                | nein (Manuell per Ausgangsposition)                   | ja (Kamera / OpenCV)                                     | nein                                     |
+| Erkennung Figur-Stellung                | nein (manuell)                   | ja (Kamera)                                     | nein                                     |
 | Abmessungen (LxBxH)                     | keine Angabe                                          | keine Angabe                                             | 450mm x 300mm x 50mm                     |
 | Konnektivität                           | (+usb)                                                | (+wlan)                                                  | (+wlan)                                  |
 | Automatisches Bewegen der Figuren       | ja                                                    | ja                                                       | nein                                     |
@@ -275,10 +258,9 @@ Auch existieren weitere Abwandlungen von autonomen Schachbrettern, bei welchen d
 | Cloud-Anbindung (online Spiele)         | nein                                                  | nein                                                     | ja                                       |
 | Parkposition für ausgeschiedene Figuren | nein                                                  | nein                                                     | nein                                     |
 | Stand-Alone Funktionalität              | nein (PC erforderlich)                                | ja                                                       | ja                                       |
-| Besonderheiten                          | -                                                     | Sprachsteuerung (Amazon Alexa)                           | Zuganzeige über (+led) Matrix            |
+| Besonderheiten                          | -                                                     | Sprachsteuerung                           | Zuganzeige ((+led) Matrix)            |
 | Lizenz                                  | (+gpl) 3+                                             | (+gpl)                                                   | -                                        |
 
-<!--- Dey: Layout der Tabelle ist noch nicht optimal, wie bei anderer Tabelle auch -->
 
 
 
@@ -385,8 +367,13 @@ Da dieses Projekt aus vielen ineinandergreifenden Komponenten besteht wurden zue
 Hier werden Technolgien für die folgenden Komponenten benötigt:
 
 - Erstellung von Software-Paketen für das eingebettete System
+- Auswahl des eingebetteten Systems
 - Identifizierung der Schachfiguren
 - Mechaniksche Bewegung der Schachfiguren
+
+
+
+
 
 
 ## Erprobung Buildroot-Framework
@@ -406,7 +393,7 @@ Auf Seiten der Entwicklung war eine Toolchain notwendig, mit welcher es möglich
 
 Zusätzlich zu diesen auf dem Linux-System benötigten Paketen sollte es möglich sein, ein durch das eingebettete System bootbares Dateisystemimage zu erzeugen.
 Für diesen Zweck existieren einige Open-Source Projekte, welche solch ein Build-System bereitstellen. Hierbei existieren zwei weit verbreitete Systeme:
-Das `Yocot`-Projekt[@yoctoproject] und das Buildroot[@buildrootproject]-Framework.
+Das `Yocto`-Projekt[@yoctoproject] und das Buildroot[@buildrootproject]-Framework.
 Diese unterscheiden sich im Aufbau und der Funktionsweise teils stark, vor allem während der ersten Verwendung.
 
 : Vergleich Yocto - Buildroot \label{commchesstables}
@@ -438,12 +425,6 @@ Eigene Pakete werden dabei in `Recipes` angelegt, welche in einer Makefile ähnl
 
 
 Das `Buildroot`-Framework hingegen bietet bereits eine große Anzahl an vorkonfigurierten Ziel-Systemen an, für welche es bereits alle nötigen Parameter enthält, um ein minimales solches System erstellen zu können. Auch ist bereits eine optimierte Konfiguration für das im Rahmen des hier vorliegenden Projekts gewählte eingebettete System vorhanden, welche direkt gestartet werden kann.
-
-
-<! --- PRO CONS EMBEDDED SYSTEM -->
-
-Hier wurde ein `Raspberry Pi 3b+` gewählt, da dieser kostengünstig und zugleich einfach beschaffbar ist. Zudem  sind alle wichtigen Schnittstellen zur späteren Verwendung herausgeführt, welches diesen zu einen idealen System zur Prototypen-Entwicklung macht.
-
 
 
 
@@ -521,6 +502,46 @@ Im Test stellte sich heraus, dass diese Tags im gewählten Setup einen Abstand v
 Der Abstand des Lesegeräts bzw. der Antenne zu einem Tag konnte dabei bis zu 14mm betragen.
 
 Somit eignet sich die Kombination aus Tag und Lesegerät für eine Positionserkennung der Schachfiguren, wobei sich das Lesegerät unter der Schachtischplatte befindet.
+
+
+## Auswahl des eingebetteten Systems
+
+Zur Ansteuerung aller elektrischen Komponenten, welche den autonomen Schachtisch antreiben, wird ein eingebettetes System benötigt auf welchem die zur vor erstellte Software ausgeführt wird.
+Dies ist in diesem Fall, durch das `Buildroot`-Framework generierte Linux-Image. Um mit den elektrischen Komponenten kommunizieren zu können, werden zusätzlich verschiedene Ein- und Ausgabe-Schnittstellen benötigt:
+
+- (+hdmi) oder (+dsi) Anschluss für externen Bildschirm
+- (+usb)
+- (+gpio) Header mit (+spi) / (+i2c)-Bus
+- (+lan) oder (+wlan)
+
+Da es sich hier um einen Prototyp handelt und die finalen Anforderungen  der Software und Hardware noch nicht final feststehen, sollte das eingebettete System genug Spielraum bieten um spätere Erweiterungen umsetzten zu können.
+Auch spielte bei der Auswahl die Verfügbarkeit zum Zeitpunkt der Evaluation eine Rolle, da hier einige andere Systeme mit unter anderen langen Lieferzeiten aufwiesen. Zudem wurde darauf geachtet, dass das System bereits in einigen anderen Projekten verwendet wird, sodass bei möglichen Problemen, Ressourcen für die Fehlerbehebung bereitstehen.
+Somit beschränkte sich die Auswahl für diesen Prototyp, angesichts des für die Evaluation abgesteckten zeitlichen Rahmen auf den `Raspberry-Pi 3b+`  und das `STM32MP157A-DK1`  \label{ref}.
+
+: Getestete eingebettete Systeme \label{embsystems}
+
+|                                        | Raspberry-Pi 3b+               | STM32MP157A-DK                                       |
+|:-------------------            |----------------------------    |---------------------------------------------------  :|
+| Prozessor                      | Arm Cortex-A53                 | Arm Cortex A7 + Arm Cortex A4                         |
+| Arbeitsspeicher             | 1GB LPDDR2 SDRAM               | 4-Gbit DDR3L                                          |
+| Flash-Speicher             | SD-Karte                       | SD-Karte                                              |
+| (+gpio)-Header            | ja (40 Pol, (+i2c),(+spi))     | ja (40 Pol, (+i2c),(+spi))                            |
+| Netzwerkanschluss     | (+lan), (+wlan)                | (+lan), (+wlan)                                       | 
+| Besonderheiten        | 64-bit Prozessor               | Arm Cortex A4 Co-Prozessor, Secure-Boot, Debugger     | 
+
+
+Diese bieten vergleichbare technische Spezifikationen und siedeln sich im gleichen Preissegment an.
+Je nach Ausführung des `STM32MP157A-DK` ist in diesem bereits ein (+dsi)-Display vorhanden und bietet von der Softwareseite her bereits eine Unterstützung für das  `Yocto`-Projekt an.
+Ein Vorteil des `STM32MP157A-DK` gegenüber dem bekannten `Raspberry-Pi 3b+` ist sein zusätzlicher `Arm Cortex A4`-Co-Prozessor, welcher als zusätzlicher Mikrokontroller verwendet werden kann.
+Somit kann die Ansteuerung der (+gpio)-Anschlüsse, sowie Timer und Iterrupt-Aufgaben von diesem übernommen werden und die Ergebnisse und Steuersignale von `Arm Cortex A7` Hauptprozessor und dessen Linux-System bearbeitet werden.
+
+Der `Raspberry-Pi 3b+` hingegen bietet einen großen Software-Support an, welches an der großen Open-Source-Community liegt, welche das Erfolgreiche System über die Jahre aufbauen konnte. Der `Arm Cortex-A53` 64-bit Quad-Core Prozessor bietet dabei viele Leistungsreserven und die (+gpio) Anschlüssen können direkt über das Dateisystem angesteuert werden. Einzig der 1 Gigabyte große Arbeitsspeicher und der Anschluss des Netzwerk-Chips über (+usb) sind der Flaschenhals  des Systems dar.
+Somit eignen sich beide Systeme von den Spezifikationen her für diesen Prototypen.
+
+Anschließend wurde eine Test-Software erstellt und mittels des `Buildroot`-Framworks ein passendes Linux-System erstellt. Auf beiden Systemen ist es möglich dieses Auszuführen, jedoch war es nicht möglich eine mittels `Qt` und der `Quick Controls II` Erweiterung erstellte (+gui) auf dem  `STM32MP157A-DK` auszuführen. Dies liegt am zum Zeitpunkt der Evaluation nicht mit der (+gpu) des Systems lauffähigen Version des `ELGFS`-Frameworks.
+Dieses wird verwendet, um Grafik mittels Hardwarebeschleunigung auf dem Display anzeigen zu können. 
+
+Somit wurde nach mehreren Versuchen dieses Problem zu lösen das `Raspberry-Pi 3b+`-System als eingebettetes System für den autonomen Schachtisch ausgewählt und die Entwicklung auf diesem fortgesetzt.
 
 
 

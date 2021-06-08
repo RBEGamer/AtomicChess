@@ -5,6 +5,12 @@ Ein bauen per Dockerimage ist möglich mittels ` build_thesis_docker.sh` Script 
 
 # CHANGELOG
 
+
+# 08.06.2021
+
+* 4.2 - Auswahl des eingebetteten Systems (neu)
+* Tabellen Fix (neu) für  Tabelle 2.1 und Tabelle 2.2
+
 # 07.06.2021
 
 * einarbeitung Kommentare (neu)
