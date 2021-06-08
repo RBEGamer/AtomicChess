@@ -7,7 +7,7 @@ Eingebettete Systeme (Englisch "embedded Systems") sind technische Zusammensetzu
 
 <br>
 
-Dennoch ist die Entwicklung eines solchen Systems nicht banal. Es ist abzuwägen, welche Komponenten derzeit auf dem freien Markt erhältlich sind, welche Eigenschaften diese mitbringen oder ermöglichen und wie diese optimal kombiniert werden können. Es bedarf im Vorhinein intensiverer Recherche und einer größeren Perspektive über mögliche Zusammenhänge. 
+Dennoch ist die Entwicklung eines solchen Systems nicht banal. Es ist abzuwägen, welche Komponenten derzeit auf dem freien Markt erhältlich sind, welche Eigenschaften diese mitbringen oder ermöglichen und wie diese optimal kombiniert werden können. Es bedarf im Vorhinein intensiverer Recherche und einer größeren Perspektive über mögliche Zusammenhänge.
 Im Falle eines Mehrzwecksystems ist die Auswahl simpler, da man den Prozess auch im Nachhinein noch anpassen kann, da zusätzliche Funktionen und Komponenten gegeben sind oder leichter ergänzt werden können. Das eingebettete System muss in der Regel aufgewertet oder sogar völlig ersetzt werden, wenn zu einem späteren Zeitpunkt festgestellt wird, dass Funktionen nicht gegeben oder umsetzbar sind. Fertige Systeme sind komplexer in der Aufwertung.
 
 <br>
@@ -25,11 +25,11 @@ Die Erstellung eines autonomen Schachtischs vereinbart in meinen Augen im große
 <br>
 
 Schach ist ein bewährtes, ausnahmslos bekanntes und immer logisches Spiel, welches jedoch im kommerziellen Rahmen nie an Bedeutung gewonnen hat. Die Auswahl der verfügbaren elektrifizierten und programmgesteuerten Schachtische ist auffallend gering; zudem sind existierende Lösungen oftmals nicht erschwinglich und bedürfen erheblicher Anpassungen des Spielers an das Spiel.
-Innerhalb der vergangenen drei Jahrzehnte bewiesen immer mehr Konzerne ihre technische Kompetenz und Überlegenheit und die Fähigkeit ihrer Maschinen mittels der Optimierung von Schachalgorithmen und dem möglichst schnellen Besiegen derzeitiger Schach-Meister und -Meisterinnen. Die Algorithmen stehen heute in einer Vielzahl frei zugänglich zur Verfügung, jedoch ist das Interesse daran, für Spieler mögliche Anwendungen zu generieren, verschwindend gering und wird oftmals nur von Experten und Enthusiasten genutzt und auch hinterfragt. 
+Innerhalb der vergangenen drei Jahrzehnte bewiesen immer mehr Konzerne ihre technische Kompetenz und Überlegenheit und die Fähigkeit ihrer Maschinen mittels der Optimierung von Schachalgorithmen und dem möglichst schnellen Besiegen derzeitiger Schach-Meister und -Meisterinnen. Die Algorithmen stehen heute in einer Vielzahl frei zugänglich zur Verfügung, jedoch ist das Interesse daran, für Spieler mögliche Anwendungen zu generieren, verschwindend gering und wird oftmals nur von Experten und Enthusiasten genutzt und auch hinterfragt.
 
 <br>
 
-Mit dieser Arbeit möchte ich mich diesem Problem stellen und einen möglich günstigen Tisch entwickeln, welcher das Spielerlebnis ohne Einschränkungen dem Spieler transferiert. Zudem möchte ich gewonnene Erkenntnisse und aktuelle Ressourcen wie die Cloud-Infrastruktur einbinden, um das Schachspiel, welches zweier Spieler bedarf, für einen einzelnen Spieler zu ermöglichen. Das Ergebnis soll nicht nur aus vielen Zeilen Code bestehen, sondern auch ein handfestes Produkt sein, das meine Qualitäten und meinen Enthusiasmus widerspiegelt. 
+Mit dieser Arbeit möchte ich mich diesem Problem stellen und einen möglich günstigen Tisch entwickeln, welcher das Spielerlebnis ohne Einschränkungen dem Spieler transferiert. Zudem möchte ich gewonnene Erkenntnisse und aktuelle Ressourcen wie die Cloud-Infrastruktur einbinden, um das Schachspiel, welches zweier Spieler bedarf, für einen einzelnen Spieler zu ermöglichen. Das Ergebnis soll nicht nur aus vielen Zeilen Code bestehen, sondern auch ein handfestes Produkt sein, das meine Qualitäten und meinen Enthusiasmus widerspiegelt.
 
 <br>
 
@@ -43,11 +43,11 @@ Darüber hinaus sollte der autonome Schachtisch weitere folgende Funktionalität
 - Automatisches Bewegen der Figuren
 - Livestream des Spiels
 - Parkposition für ausgeschiedene Figuren
-- Stand-Alone Funktionalität 
+- Stand-Alone Funktionalität
 
 <br>
 
-Die Kernfrage der Arbeit bezieht sich somit auf die Überprüfung der Ausführbarkeit inklusive Erstellung und Umsetzung eines eingebetteten Systems und einer Cloud-Infrastruktur. 
+Die Kernfrage der Arbeit bezieht sich somit auf die Überprüfung der Ausführbarkeit inklusive Erstellung und Umsetzung eines eingebetteten Systems und einer Cloud-Infrastruktur.
 
 <br>
 
@@ -63,13 +63,13 @@ Dem Spieler wird zudem die Möglichkeit geboten, gegen andere Spieler an diverse
 
 <br>
 
-Dies soll mittels eines kompakten und minimalistischen Designs realisiert werden. Darüber hinaus spielt nicht nur das Design eine Rolle, sondern auch die Handhabung. Dazu muss der Benutzer in der Lage sein, den Tisch in wenigen Handgriffen betriebsbereit machen zu können und über eine einfach Bedienoberfläche eine neue Partie gegen den Computer oder einen anderen Menschlichen spieler beginnen zu können. 
+Dies soll mittels eines kompakten und minimalistischen Designs realisiert werden. Darüber hinaus spielt nicht nur das Design eine Rolle, sondern auch die Handhabung. Dazu muss der Benutzer in der Lage sein, den Tisch in wenigen Handgriffen betriebsbereit machen zu können und über eine einfach Bedienoberfläche eine neue Partie gegen den Computer oder einen anderen Menschlichen spieler beginnen zu können.
 
 <br>
 
 ## Aufbau der Bachelorarbeit
 
-Im zweiten Kapitel der hier vorliegenden Arbeit werden die zum Zeitpunkt des Projektstarts existierenden Produkte beziehungsweise öffentlich einsehbare Projekte und deren Umsetzung beleuchtet. Hier wird insbesondere darauf geachtet, die Grenzen bestehender Systeme darzulegen und nur für dieses Projekt zutreffende Funktionen zu vergleichen. 
+Im zweiten Kapitel der hier vorliegenden Arbeit werden die zum Zeitpunkt des Projektstarts existierenden Produkte beziehungsweise öffentlich einsehbare Projekte und deren Umsetzung beleuchtet. Hier wird insbesondere darauf geachtet, die Grenzen bestehender Systeme darzulegen und nur für dieses Projekt zutreffende Funktionen zu vergleichen.
 
 
 
@@ -129,14 +129,14 @@ Im Folgenden werden vier kommerzielle und drei lizenzunabhängige (Open-Source) 
 Bei den ausgewählten Tischen handelt es sich um
 
 - kommerziell
-    - Square Off - Kingdom
-    - Square Off - Grand Kingdom
-    - DGT Smartboard
-    - DGT Bluetooth Wenge
+    - Square Off - Kingdom [@squareoffkingdom]
+    - Square Off - Grand Kingdom [@squareoffgrand]
+    - DGT Smartboard [@dtgsmartboard]
+    - DGT Bluetooth Wenge [@dtgble]
 - open-source:
-    - Automated Chessboard (Michael Guerero)
-    - Automated Chessboard (Akash Ravichandran)
-    - DIY Super Smart Chessboard
+    - Automated Chessboard (Michael Guerero) [@actproject1]
+    - Automated Chessboard (Akash Ravichandran) [@actproject2]
+    - DIY Super Smart Chessboard [@actproject3]
 
 <br>
 
@@ -157,38 +157,25 @@ Wie bereits aus den zum Teil identischen Namen ersichtlich, streben alle Tische 
 ### Kommerzielle Produkte
 
 
-\pagebreak
-
-: Auflistung kommerzieller autonomer Schachtische \label{commchesstables}
-
-|                                           | Square Off - Kingdom [@squareoffkingdom]  | Square Off - Grand Kingdom [@squareoffgrand] | DGT Smart Board [@dtgsmartboard]  | DGT Bluetooth Wenge [@dtgble] |
-|:------------------------------------------|-------------------------------------------|:--------------------------------------------:|:---------------------------------:|------------------------------:|
-| Erkennung Figur-Stellung                  | nein (Manuell per Ausgangsposition)       | nein (Manuell per Ausgangsposition)          | ja                                | ja                            |
-| Abmessungen (LxBxH)                       | 486mm x 486mm x 75mm                      | 671mm x 486mm x 75mm                         | 540mm x 540mm x 20mm              | 540mm x 540mm x 20mm          |
-| Konnektivität                             | Bluetooth                                 | Bluetooth                                    | Seriell                           | Bluetooth                     |
-| Automatisches Bewegen der Figuren         | ja                                        | ja                                           | nein                              | nein                          |
-| Spiel Livestream                          | ja                                        | ja                                           | ja                                | ja                            |
-| Cloud-Anbindung (online Spiele)           | ja (Mobiltelefon + App)                   | ja (Mobiltelefon + App)                      | ja (PC + App)                     | ja (PC + App)                 |
-| Parkposition für ausgeschiedene Figuren   | nein                                      | ja                                           | nein                              | nein                          |
-| Stand-Alone Funktionalität                | nein (Mobiltelefon erforderlich)          | nein (Mobiltelefon erforderlich)             | nein (PC)                         | nein (PC)                     |          
-| Besonderheiten                            | Akku für 30 Spiele                        | Akku für 15 Spiele                           | -                                 | -                             |
+\begin{sidewaystable}
+\centering
 
 
-
-
-
-
-
-
-
-
-
-<!--- Dey: Anmerkung zum Layout der Tabelle: Das ist im pdf so etwas schwer zu lesen. Vielleicht kann man das Layout durch Spaltenbreiten, Leerzeilen, grauen Hintergrund für jede 2. Zeile oder ähnliches verbessern. Ist aber nur Kosmetik. --> 
-
-<!--- Classen: Spendieren Sie der Tabelle ruhig eine ganze Seite. also die Zeilenhöhe erhöhen. Und Färbung jeder zweiten Zeile ist auch eine gute Idee --> 
-
-
-\pagebreak
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{lllll}
+                                        & Square Off – Kingdom                & Square Off - Grand Kingdom          & DGT Smart Board        & DGT Bluetooth Wenige    \\
+Erkennung Schachfigurstellung           & nein (Manuell per Ausgangsposition) & nein (Manuell per Ausgangsposition) & ja (Resonanzspulen)    & ja((+rfid))              \\
+Abmessungen (LxBxH)                     & 486mm x 486mm x 75mm                & 671mm x 486mm x 75mm                & 540mm x 540mm x 20mm   & 540mm x 540mm x 20mm      \\
+Konnektivität                           & (+ble)                              & (+ble)                              & (+usb) / Seriell       & Bluetooth 2.0  \\
+Automatisches Bewegen der Figuren       & ja                                  & ja                                  & nein                   & nein            \\
+Spiel Livestream                        & ja                                  & ja                                  & ja                     & ja((+rfid))      \\
+Cloud anbindung (online Spiele)         & ja (über Mobiltelefon + App)        & ja (über Mobiltelefon + App)        & ja (über PC + App)     & ja (über PC + App)   \\
+Parkposition für ausgeschiedene Figuren & nein                                & ja                                  & nein                   & nein                   \\
+Stand-Alone Funktionalität              & nein (Mobiltelefon erforderlich)    & nein (Mobiltelefon erforderlich)    & nein (PC erforderlich) & nein (PC erforderlich)   \\
+Besonderheiten                          & Akku für 30 Spiele                  & Akku für 15 Spiele                  & Bussystem              & -                         \\
+                                        &                                     &                                     &                        &
+\end{tabular}
+\end{sidewaystable}
 
 
 <br>
@@ -203,7 +190,7 @@ Die Bretter des Herstellers DGT erkennen die Position der verwendeten Figuren. I
 
 
 
-Die Abmessungen (Außenmaße) der autonomen Schachtische unterscheiden sich nur beim Hersteller Square Off deutlich; 
+Die Abmessungen (Außenmaße) der autonomen Schachtische unterscheiden sich nur beim Hersteller Square Off deutlich;
 der Grand Kingdom Schachtisch ist rechteckig konstruiert worden, was das Spielerlebnis deutlich verändert. Der simple Kingdom-Tisch ist dabei kleiner als das vorgegebene Turniermaß, was negativen Einfluss auf das Spielererlebnis hat. Mit den Standardmaßen der DGT-Spielbretter und zudem ihrer geringen Höhe gleichen diese deutlich einem Turniertisch. Die Kombination aus geringer Höhe und Erkennung der Figur-Stellung bei den DGT-Brettern ist positiv bemerkenswert. Die größe der einzelnen Schachfelder aller autonomen Schachtische befinden sich jedoch in den spezifikationen der (+uscf)[@officialuscfrules], welche sich von 5 bis 6.35cm belaufen.
 
 <br>
@@ -265,23 +252,40 @@ Auch existieren weitere Abwandlungen von autonomen Schachbrettern, bei welchen d
 
 : Auflistung von Open-Source Schachtisch Projekten \label{oschesstables}
 
-|                                         | Automated Chess Board (Michael Guerero) [@actproject1]| Automated Chess Board (Akash Ravichandran) [@actproject2]| DIY Super Smart Chessboard [@actproject3]|
-|:----------------------------------------|:-----------------------------------------------------:|:--------------------------------------------------------:|-----------------------------------------:|
-| Erkennung Figur-Stellung                | nein (Manuell per Ausgangsposition)                   | ja (Kamera / OpenCV)                                     | nein                                     |
-| Abmessungen (LxBxH)                     | keine Angabe                                          | keine Angabe                                             | 450mm x 300mm x 50mm                     |
-| Konnektivität                           | (+usb)                                                | (+wlan)                                                  | (+wlan)                                  |
-| Automatisches Bewegen der Figuren       | ja                                                    | ja                                                       | nein                                     |
-| Spiel Livestream                        | nein                                                  | nein                                                     | nein                                     |
-| Cloud-Anbindung (online Spiele)         | nein                                                  | nein                                                     | ja                                       |
-| Parkposition für ausgeschiedene Figuren | nein                                                  | nein                                                     | nein                                     |
-| Stand-Alone Funktionalität              | nein (PC erforderlich)                                | ja                                                       | ja                                       |
-| Besonderheiten                          | -                                                     | Sprachsteuerung (Amazon Alexa)                           | Zuganzeige über (+led) Matrix            |
-| Lizenz                                  | (+gpl) 3+                                             | (+gpl)                                                   | -                                        |
+\begin{table}[]
+\begin{tabular}{llll}
+                                        & Automated Chess Board (Michael Guerero) {[}@actproject1{]} & Automated Chess Board (Akash Ravichandran) {[}@actproject2{]} & DIY Super Smart Chessboard {[}@actproject3{]} \\
+Erkennung Schachfigurstellung           & nein (Manuell per Ausgangsposition)                        & ja (Kamera / OpenCV)                                          & nein                                          \\
+Abmessungen (LxBxH)                     & keine Angabe                                               & keine                                                         & 450mm x 300mm x 50mm                          \\
+Konnektivität                           & (+usb) / Seriell                                           & Ethernet, (+wlan)                                             & Ethernet, (+wlan)                             \\
+Automatisches Bewegen der Figuren       & ja                                                         & ja                                                            & nein                                          \\
+Spiel Livestream                        & nein                                                       & nein                                                          & nein                                          \\
+Cloud anbindung (online Spiele)         & nein                                                       & nein                                                          & ja                                            \\
+Parkposition für ausgeschiedene Figuren & nein                                                       & nein                                                          & nein                                          \\
+Stand-Alone Funktionalität              & nein (PC erfoderlich)                                      & ja                                                            & ja                                            \\
+Licence                                 & (+gpl) 3+                                                  & (+gpl)                                                        & -                                             \\
+Besonderheiten                          & -                                                          & Sprachsteuerung (Amazon Alexa)                                & Zuganzeige über LED Matrix                   
+\end{tabular}
+\end{table}
 
-<!--- Dey: Layout der Tabelle ist noch nicht optimal, wie bei anderer Tabelle auch -->
 
 
-
+\newcolumntype{g}{>{\columncolor{Gray}}c}
+\begin{table}[ht]
+\centering
+\begin{tabular}{c|g|g|g|g|g|g|g}
+\hline
+\rowcolor{white}
+&col1 &col2 &col3 &col4 & col5 &col6 &col7\\
+\hline
+\rowcolor{white}
+row1& \ra & \ra & \ra & \ra & \ra & \ra & \ra \\
+row2& \ra & \ra & \ra & \ra & \ra & \ra & \ra \\
+\rowcolor{white}
+row3& \ra & \ra & \ra & \ra & \ra & \ra & \ra \\
+\hline
+\end{tabular}
+\end{table}
 
 
 In den bestehenden Projekten ist zu erkennen, dass ein autonomer Schachtisch sehr einfach und mit simplen Mittel konstruiert werden kann. Hierbei fehlen in der Regel einige Features, wie das automatische Erkennen von Figuren oder das Spielen über das Internet.
@@ -393,7 +397,7 @@ Hier werden Technolgien für die folgenden Komponenten benötigt:
 
 Eine Hürde, welche bei diesem Projekt genommen werden musste, war die Erstellung der Software, welche auf dem autonomen Schachtisch ausgeführt wird.
 Hierbei sollte diese nicht von Grund auf neu entwickelt werden, sondern auf einer soliden Basis aufbauen.
-Allgemein soll hier auf ein minimales Linux-System gesetzt werden, in welches die Software des autonomen Schachtisch integriert wird. 
+Allgemein soll hier auf ein minimales Linux-System gesetzt werden, in welches die Software des autonomen Schachtisch integriert wird.
 Auf dem Basis-System müssen die folgenden Software-Pakete installiert sein, bzw einfach integrierbar sein:
 
 - (+ssh) für den Remote-Zugriff
@@ -421,7 +425,7 @@ Diese unterscheiden sich im Aufbau und der Funktionsweise teils stark, vor allem
 |                                                        |              |                                |
 
 
-<!--- Classen:  Erläutern, was das bedeutet und warum das nachteilig ist --> 
+<!--- Classen:  Erläutern, was das bedeutet und warum das nachteilig ist -->
 
 Hierbei stellt das `Yocto`- Projekt eine größere Einsteigshürde dar, aufgrund seines komplexen Layer-Systems.  
 Es bietet sich jedoch für komplexe Projekte an, welche einen hohen Grad an Individualisierung benötigen. Ein Nachteil dessen, ist da dadurch auch viel vom Nutzer selber konfiguriert werden muss, bevor ein minimales System in Betrieb genommen werden kann. Somit muss zuerst eine grundlegende Konfiguration für das eingebettete System angelegt werden und es kann nicht direkt mit einem fertigen minimalen System mit der eigentlichen Software-Entwicklung gestartet werden.  Allgemein sind die Anforderungen an die zu erstellende Software und deren benötigte requirements sehr gering, sodass hier eine detaillierte Einarbeitung zeitlich nicht möglich war.
@@ -465,7 +469,7 @@ config BR2_PACKAGE_ATCTP
         This package is a test package to verify the buildroot build process
 ```
 
-Die zweite Datei ist die `PAKET_NAME.mk - Makefile`, welche die Schritte beschreibt, welche zum Erstellen und Installieren des Paketes durchgeführt werden müssen. 
+Die zweite Datei ist die `PAKET_NAME.mk - Makefile`, welche die Schritte beschreibt, welche zum Erstellen und Installieren des Paketes durchgeführt werden müssen.
 
 ```yaml
 # atctp - atctp.mk - Makefile
@@ -756,7 +760,7 @@ Auch hier wurde nicht auf den Platzverbrauch geachtet. Es wurden zusätzliche St
 
 
 
-## Implementierung (+hal) 
+## Implementierung (+hal)
 
 Der (+hal) stellt das Verbindungsglied zwischen der Hardware und der Benutzer-Software dar.
 In diesem Fall übernimmt er die Übersetzung der Befehle der Controller-Software in für die Hardware verständliche Befehle. Dabei geschieht dies über den zentralen (+spi) Bus, welcher im Linux-System als Datei unter dem Pfad `/dev/spidev0.0` eingebunden wird und über Dateioperation (lesen, schreiben) mittels `ioctl` konfiguriert werden kann.
@@ -811,7 +815,7 @@ class HardwareInterface
 
 <br>
 
-Je nach ermittelter Revision werden die erforderlichen Hardwarekomponenten initialisiert. Bei allen über den (+spi) Bus angeschlossenen Komponenten werden nach der Initialisierung des (+spi) Bus auf der Betriebssystem-Ebene zusätzliche Versionsregister der einzelnen Komponenten abgefragt. Dies stellt sicher, dass alle Komponenten mit dem System verbunden sind. 
+Je nach ermittelter Revision werden die erforderlichen Hardwarekomponenten initialisiert. Bei allen über den (+spi) Bus angeschlossenen Komponenten werden nach der Initialisierung des (+spi) Bus auf der Betriebssystem-Ebene zusätzliche Versionsregister der einzelnen Komponenten abgefragt. Dies stellt sicher, dass alle Komponenten mit dem System verbunden sind.
 
 Allgemein kann eine Datentransfer über den (+spi) drei Mal fehlschlagen, bevor die Software mittels eines Fehlers abbricht. Gerade bei der Kommunikation mit dem Mikrokontroller kam es bei Testläufen zu Fehlern bezüglich der (+spi) Kommunikation, sofern das (+nfc)-Modul aktiv war. Um ein direktes Beenden der Software zu verhindern, wurde diese Art der Fehlerbehandlung eingeführt.
 
@@ -834,7 +838,7 @@ int SPICommunication::spi_write_ack(SPICommunication::SPI_DEVICE _device, uint8_
 			buffer_w[i] = _data[i];
             buffer_r[i] = 0;
 		}
-		
+
 		//WRITE COMMAND
 		res = SPICommunication::getInstance()->spi_write(_device, buffer_w, _len);
         //WAIT
@@ -973,7 +977,7 @@ void TMC5160::go_to(const int _position) {
 }
 
 void TMC5160::atc_home_sync()
-{	
+{
 	enable_motor(); //ENABLE MOTOR
 	enable_switch(TMC5160::REF_SWITCH::REF_L, true, true, true); //ENABLE LIMIT SWICHT => ENABLE HARD ENDSTOP
 	move_velocity(TMC5160::VELOCITY_DIRECTION::NEGATIVE, HOME_SPEED_VELOCITY, 1000);  //MOVE NEGATIVE TO LIMIT SWITCH
@@ -995,7 +999,7 @@ void TMC5160::atc_home_sync()
 	set_AMAX(RAMP_AMAX);
 	set_VMAX(RAMP_VMAX);
 	go_to(0);
-	//DISABLE HARD ENDSTOP 
+	//DISABLE HARD ENDSTOP
 	enable_switch(TMC5160::REF_SWITCH::REF_L, true, false, true);
 	disable_motor(); //DISBLE MOTOR
 }
@@ -1053,23 +1057,23 @@ Mit der Entscheidung, auf die hölzerne Struktur des Systems gänzlich zu verzic
 
 <br>
 
-Zuvor bestand der Quader-förmige Schachtisch aus einem Lack-Tisch als Deckel, welcher mit einem selbsterstellten Untergestell bestehend aus Rahmen und Boden verschraubt wurden. Nun musste der Quader selbst konstruiert werden. 
+Zuvor bestand der Quader-förmige Schachtisch aus einem Lack-Tisch als Deckel, welcher mit einem selbsterstellten Untergestell bestehend aus Rahmen und Boden verschraubt wurden. Nun musste der Quader selbst konstruiert werden.
 
 <br>
 
-Die Wahl des neuen Materials war jedoch simpel; aufgrund der langjährigen Bewährtheit, der Stabilität und der einfachen Möglichkeit der Anpassung wurden als Basis des neuen Systems Aluminium-Profilstangen gewählt. Da der Tisch keine größeren Kräfte aufnehmen muss, wurde ein Stangengrundmaß von 20 x 20 mm gewählt. Diese Stangen sind dennoch stabil genug, um möglichen Außeneinwirkungen wie Stößen oder Drücken standzuhalten. 
+Die Wahl des neuen Materials war jedoch simpel; aufgrund der langjährigen Bewährtheit, der Stabilität und der einfachen Möglichkeit der Anpassung wurden als Basis des neuen Systems Aluminium-Profilstangen gewählt. Da der Tisch keine größeren Kräfte aufnehmen muss, wurde ein Stangengrundmaß von 20 x 20 mm gewählt. Diese Stangen sind dennoch stabil genug, um möglichen Außeneinwirkungen wie Stößen oder Drücken standzuhalten.
 
 <br>
 
-Als Außenmaße wurden 620 x 620 x 170 mm (Länge, Breite, Höhe) gewählt. Das Außenmaß ergab sich aus der Berechnung der benötigten Spielfeldgröße, der Parkpositionen und der gegebenen Stangenbreite. Die Schachfiguren besitzen einen maximalen Durchmesser von 22 mm. Damit Figuren aneinander ohne Berührung vorbeigeführt werden können, ist somit eine Größe von mindestens 44 mm für ein Feld nötig. Da eine Distanz eingerechnet werden muss, um ein magnetisches Anziehen der Figuren zu verhindern und Fehler bei der mittigen Positionierung der Figuren möglich sind, wurde hierfür eine zusätzliche Toleranz von 13 mm ergänzt und somit ein Idealmaß von 57 mm Seitenlänge pro Feld errechnet. 
-Bei einem vollständigen Schachtisch ergibt sich daraus eine Schachfeldgröße von 456 x 456 mm. 
+Als Außenmaße wurden 620 x 620 x 170 mm (Länge, Breite, Höhe) gewählt. Das Außenmaß ergab sich aus der Berechnung der benötigten Spielfeldgröße, der Parkpositionen und der gegebenen Stangenbreite. Die Schachfiguren besitzen einen maximalen Durchmesser von 22 mm. Damit Figuren aneinander ohne Berührung vorbeigeführt werden können, ist somit eine Größe von mindestens 44 mm für ein Feld nötig. Da eine Distanz eingerechnet werden muss, um ein magnetisches Anziehen der Figuren zu verhindern und Fehler bei der mittigen Positionierung der Figuren möglich sind, wurde hierfür eine zusätzliche Toleranz von 13 mm ergänzt und somit ein Idealmaß von 57 mm Seitenlänge pro Feld errechnet.
+Bei einem vollständigen Schachtisch ergibt sich daraus eine Schachfeldgröße von 456 x 456 mm.
 Für die Parkpositionen wurden zusätzlich noch einmal 30 mm berechnet mit einem Abstand zum Feld von weiteren 37 mm.
 Somit ergibt sich, wenn man das Feld quadratisch auslegt, eine Seitenlänge von 590 mm. Als Plattenmaß wurde 620mm gewählt, um eine Toleranz für die Befestigung zu berücksichtigen und zudem möglichen Einschränkungen der Mechanik vorzubeugen.
 
 <br>
 
 Die Platte wurde dann in Alu-Profilstangen eingelassen; die Stangen sollen die Platte umrahmen. Mit einem Grundmaß von 20 x 20 mm für die Profilstangen ergab sich somit ein Gesamtmaß von 660 mm x 660 mm.
-Benötigt wurden 8 Profilstangen der Länge 620 mm und 4 der Länge 170 mm, welche zu einem quadratischen Kasten zusammengesetzt wurden. Für die X-Achsen wurden zudem zwei Profilstangen der Länge 610 mm und für die Y-Achse noch eine weitere der Länge 620 mm benötigt. 
+Benötigt wurden 8 Profilstangen der Länge 620 mm und 4 der Länge 170 mm, welche zu einem quadratischen Kasten zusammengesetzt wurden. Für die X-Achsen wurden zudem zwei Profilstangen der Länge 610 mm und für die Y-Achse noch eine weitere der Länge 620 mm benötigt.
 
 <br>
 
@@ -1086,11 +1090,11 @@ Zudem wurden im Inneren noch zusätzlich LED-Streifen verlegt, welche dank des v
 
 <br>
 
-Um das System vollständig zu verschließen und somit auch besser zu schützen, wurde zudem eine Bodenplatte mit identischen Maßen zur Tischplatte eingelassen und mit Stützelementen verschraubt. 
+Um das System vollständig zu verschließen und somit auch besser zu schützen, wurde zudem eine Bodenplatte mit identischen Maßen zur Tischplatte eingelassen und mit Stützelementen verschraubt.
 
 <br>
 
-Nachteil der verwendeten Aluminium-Profilstangen und der weißen Acrylglas-Elemente sind die höheren Kosten und der Aufwand der Montage. Der verwendete Lack-Tisch und auch das selbsterstellte Untergestell als solches waren preisgünstig und leicht erhältlich. Zudem ist die Tischplatte, welche aus einem einzelnen Tisch bestand, stabil und robust. Aluminiumstangen hingegen, die zusätzlich noch bestellt, selbstständig an die gewünschte Länge angepasst und mit weiteren Komponenten verschraubt werden müssen, sind dementsprechend deutlich kostenintensiver. 
+Nachteil der verwendeten Aluminium-Profilstangen und der weißen Acrylglas-Elemente sind die höheren Kosten und der Aufwand der Montage. Der verwendete Lack-Tisch und auch das selbsterstellte Untergestell als solches waren preisgünstig und leicht erhältlich. Zudem ist die Tischplatte, welche aus einem einzelnen Tisch bestand, stabil und robust. Aluminiumstangen hingegen, die zusätzlich noch bestellt, selbstständig an die gewünschte Länge angepasst und mit weiteren Komponenten verschraubt werden müssen, sind dementsprechend deutlich kostenintensiver.
 
 <br>
 
@@ -1098,14 +1102,14 @@ Zudem wurde die Tischplatte nun durch eine simple Holzplatte ersetzt. Eine Höhe
 
 <br>
 
-Die Beine des zuvor verwendeten Lack-Tischs wurden erneut verwendet. Diese konnten für die zweite Revision verwendet werden und so zusätzlich die gleiche Montagehöhe zwischen der ersten und der zweiten Revision des Tischs erreicht werden. Da selbst die Höhe der Quader der Schachtisch-Revisionen identisch ist, sind beide Tische nun gleich hoch. Alternative Lösungen wären der Erwerb von simplen Hohlleisten der gleichen Länge oder aber das Integrieren weiterer Profilstangen, welche man optimalerweise auch klappbar lagern könnte. Derzeit sind die Beine verschraubt und nicht klappbar. 
-Der daraus resultierende Nachteil der Tischbeine ist, dass man den gesamten Tisch nun schwerlich auf einen anderen Tisch stellen kann, um die Montage zu erleichtern oder ein Schachspiel auf einer anderen, eventuell bequemeren Höhe durchzuführen. 
-Der Tisch benötigt allerdings auch keine Unterlage mehr und kann ohne Probleme im offenen Raum platziert werden. 
-Die aktuell verwendeten Beine können je nach Bedarf auch entfernt werden, sodass der Schachtisch wieder als simpler Quader einfach zu handhaben ist. 
+Die Beine des zuvor verwendeten Lack-Tischs wurden erneut verwendet. Diese konnten für die zweite Revision verwendet werden und so zusätzlich die gleiche Montagehöhe zwischen der ersten und der zweiten Revision des Tischs erreicht werden. Da selbst die Höhe der Quader der Schachtisch-Revisionen identisch ist, sind beide Tische nun gleich hoch. Alternative Lösungen wären der Erwerb von simplen Hohlleisten der gleichen Länge oder aber das Integrieren weiterer Profilstangen, welche man optimalerweise auch klappbar lagern könnte. Derzeit sind die Beine verschraubt und nicht klappbar.
+Der daraus resultierende Nachteil der Tischbeine ist, dass man den gesamten Tisch nun schwerlich auf einen anderen Tisch stellen kann, um die Montage zu erleichtern oder ein Schachspiel auf einer anderen, eventuell bequemeren Höhe durchzuführen.
+Der Tisch benötigt allerdings auch keine Unterlage mehr und kann ohne Probleme im offenen Raum platziert werden.
+Die aktuell verwendeten Beine können je nach Bedarf auch entfernt werden, sodass der Schachtisch wieder als simpler Quader einfach zu handhaben ist.
 
 <br>
 
-Insgesamt überwiegen die Vorteile der Universalität dank der gegebenen Normungen, der einfachen Anpassungsmöglichkeiten in der Länge und dank des einfachen Ergänzens und Verschiebens von Komponenten. Im Holzrahmen verschraubte Elemente hinterlassen Löcher, die zu Beeinträchtigungen führen können. Zudem ist das Ergänzen von anderen Komponenten im Aluminium-Profil einfacher. 
+Insgesamt überwiegen die Vorteile der Universalität dank der gegebenen Normungen, der einfachen Anpassungsmöglichkeiten in der Länge und dank des einfachen Ergänzens und Verschiebens von Komponenten. Im Holzrahmen verschraubte Elemente hinterlassen Löcher, die zu Beeinträchtigungen führen können. Zudem ist das Ergänzen von anderen Komponenten im Aluminium-Profil einfacher.
 
 
 <br>
@@ -1122,7 +1126,7 @@ Dieses 3D-Design wurde im Folgenden als Grundlage für alle neuen Komponenten ve
 
 <br>
 
-Der Grundrahmen als solcher wurde einmalig erstellt und nur in einfachen Strukturen wie der Winkel-Sehnenlängen oder Höhenparametern von Flächen angepasst. Alle weiteren Komponenten im Inneren bedurften mehrerer Revisionen, um die verwendete Mechanik optimal umzusetzen und mehr Kräfte für Riemenspannungen zu ermöglichen. 
+Der Grundrahmen als solcher wurde einmalig erstellt und nur in einfachen Strukturen wie der Winkel-Sehnenlängen oder Höhenparametern von Flächen angepasst. Alle weiteren Komponenten im Inneren bedurften mehrerer Revisionen, um die verwendete Mechanik optimal umzusetzen und mehr Kräfte für Riemenspannungen zu ermöglichen.
 
 <br>
 
@@ -1130,16 +1134,16 @@ Insgesamt benötigt der gesamte Schachtisch 26 verschiedene mittels FDM 3D-gedru
 
 <br>
 
-Zusätzlich zu diesen Komponenten ist es möglich, 32 Schachfiguren mittels SLA 3D-Druck zu erzeugen. 
+Zusätzlich zu diesen Komponenten ist es möglich, 32 Schachfiguren mittels SLA 3D-Druck zu erzeugen.
 
 <br>
 
 
-### Positions-Mechanik 
+### Positions-Mechanik
 
 Die Mechanik des ersten Prototypen wurde für die Erstellung des zweiten Prototypen gänzlich verändert.
 
-In der ersten Revision wurde noch jede Achse über einen separaten Riemen gesteuert, sodass ein Schrittmotor die Bewegung des Schlittens entlang der Y-Achse und ein weiterer die Bewegung der gesamten Y-Achse, bestehend aus Motor, Riemen, Schlitten und Führungsschiene, entlang der X-Achse ermöglichte. Die Führung entlang der X-Achse erfolgte in der Mitte des Tischs, die Y-Achse wurde links und rechtsseitig rollbar gelagert und in der Mitte über einen Riemen gezogen. Dies hatte zur Folge, dass bei entstehender Unwucht, welche durch die Bewegung des Schlittens auf der Y-Achse auftreten kann, die Y-Achse in ihren Lagerungen nicht mehr parallel verlief, sondern beim Betätigen des Motors der X-Achse die Y-Achse in einem unerwünschten Winkel bewegt wurde. 
+In der ersten Revision wurde noch jede Achse über einen separaten Riemen gesteuert, sodass ein Schrittmotor die Bewegung des Schlittens entlang der Y-Achse und ein weiterer die Bewegung der gesamten Y-Achse, bestehend aus Motor, Riemen, Schlitten und Führungsschiene, entlang der X-Achse ermöglichte. Die Führung entlang der X-Achse erfolgte in der Mitte des Tischs, die Y-Achse wurde links und rechtsseitig rollbar gelagert und in der Mitte über einen Riemen gezogen. Dies hatte zur Folge, dass bei entstehender Unwucht, welche durch die Bewegung des Schlittens auf der Y-Achse auftreten kann, die Y-Achse in ihren Lagerungen nicht mehr parallel verlief, sondern beim Betätigen des Motors der X-Achse die Y-Achse in einem unerwünschten Winkel bewegt wurde.
 
 <br>
 
@@ -1151,11 +1155,11 @@ Eine Lösungsmöglichkeit wäre die Ergänzung eines zweiten Motors für die X-A
 
 <br>
 
-Deswegen wurde ein völlig anderes System für die zweite Revision des Schachtischs gewählt, welches auf beide Achsen die gleichen Kräfte ausübt und beide Achsen nicht mehr unabhängig voneinander betrachtet. 
+Deswegen wurde ein völlig anderes System für die zweite Revision des Schachtischs gewählt, welches auf beide Achsen die gleichen Kräfte ausübt und beide Achsen nicht mehr unabhängig voneinander betrachtet.
 
 <br>
 
-CoreXY basiert auf der Idee alter Zeichentische und wird heute für verschiedene Anwendungen wie den 3D-Druck oder das (+cnc)-Fräsen genutzt, bei dem ein Objekt oder Werkzeug in mehreren Dimensionen bewegt werden soll. 
+CoreXY basiert auf der Idee alter Zeichentische und wird heute für verschiedene Anwendungen wie den 3D-Druck oder das (+cnc)-Fräsen genutzt, bei dem ein Objekt oder Werkzeug in mehreren Dimensionen bewegt werden soll.
 
 <br>
 
@@ -1167,23 +1171,23 @@ Einer der größten Vorteile des CoreXY-Systems ist die hohe Bewegungsgeschwindi
 
 <br>
 
-Da die Riemen des Systems dauerhaft auf Spannung gehalten werden, ist kein Spiel mehr im System festzustellen. Positionen der Schachfiguren werden millimetergenau und mit einer hohen Wiederholgenauigkeit angefahren. 
+Da die Riemen des Systems dauerhaft auf Spannung gehalten werden, ist kein Spiel mehr im System festzustellen. Positionen der Schachfiguren werden millimetergenau und mit einer hohen Wiederholgenauigkeit angefahren.
 
 <br>
 
-Ein weiterer Vorteil ist, dass CoreXY das gleiche Bauvolumen bei geringeren Gesamtabmessungen bieten kann. Der Fahrweg der Schachfiguren konnte somit ausgeweitet werden, ohne den Bauraum des Tisches zu ändern, da bei einem CoreXY-System jeder Punkt der gesamten Bauplatte angefahren werden kann, ohne zusätzlichen Platz zu benötigen. Bei einem Außenmaß des Tisches von 620x620 mm wies der erste Prototyp einen Fahrweg von 480x480 mm auf, während die zweite Revision mit selben Außenmaßen einen Fahrweg von 580x580 mm erreicht. Der fehlende Raum der ersten Version ist insbesondere auf die Lagerung der Motoren zurückzuführen, die jeweils ihre eigene Achse verkürzten. Nun liegen beide Motoren auf der x-Achse und dienen sogar als Bremse vor den Steuerkomponenten. 
+Ein weiterer Vorteil ist, dass CoreXY das gleiche Bauvolumen bei geringeren Gesamtabmessungen bieten kann. Der Fahrweg der Schachfiguren konnte somit ausgeweitet werden, ohne den Bauraum des Tisches zu ändern, da bei einem CoreXY-System jeder Punkt der gesamten Bauplatte angefahren werden kann, ohne zusätzlichen Platz zu benötigen. Bei einem Außenmaß des Tisches von 620x620 mm wies der erste Prototyp einen Fahrweg von 480x480 mm auf, während die zweite Revision mit selben Außenmaßen einen Fahrweg von 580x580 mm erreicht. Der fehlende Raum der ersten Version ist insbesondere auf die Lagerung der Motoren zurückzuführen, die jeweils ihre eigene Achse verkürzten. Nun liegen beide Motoren auf der x-Achse und dienen sogar als Bremse vor den Steuerkomponenten.
 
 <br>
 
-Die Konstruktion ist zudem stabiler, es erleichtert das Einschließen und Aufstellen im ausgeschalteten Zustand. 
+Die Konstruktion ist zudem stabiler, es erleichtert das Einschließen und Aufstellen im ausgeschalteten Zustand.
 
 <br>
 
-Zudem ist die Steuerung des CoreXY-Systems bereits in der Firmware Marlin integriert. Sie ist lediglich mittels des Parameters CoreXY zu aktivieren und die Schrittweite auszurechnen. Wird anschließend eine zu fahrende Strecke vorgegeben, berechnet Marlin selbständig, wie schnell und in welche Richtung jeder der beiden Motoren bewegt werden muss. 
+Zudem ist die Steuerung des CoreXY-Systems bereits in der Firmware Marlin integriert. Sie ist lediglich mittels des Parameters CoreXY zu aktivieren und die Schrittweite auszurechnen. Wird anschließend eine zu fahrende Strecke vorgegeben, berechnet Marlin selbständig, wie schnell und in welche Richtung jeder der beiden Motoren bewegt werden muss.
 
 <br>
 
-In der Komplexität des Aufbaus und dem Zeitaufwand der Montage war kein Unterschied zwischen der ersten und zweiten Revision zu erkennen. Für Anfänger im Bereich CoreXY ist das Verlegen und insbesondere das stramme Spannen der Riemen eine Herausforderung, die sich aber durch die Konstruktion der Bauteile vereinfachen lässt. Insbesondere die Verbindung an der Lagerung der Y-Achse ist so erstellt worden, dass die Riemen nach der Durchführung nur in eine definierte Richtung gespannt werden können. 
+In der Komplexität des Aufbaus und dem Zeitaufwand der Montage war kein Unterschied zwischen der ersten und zweiten Revision zu erkennen. Für Anfänger im Bereich CoreXY ist das Verlegen und insbesondere das stramme Spannen der Riemen eine Herausforderung, die sich aber durch die Konstruktion der Bauteile vereinfachen lässt. Insbesondere die Verbindung an der Lagerung der Y-Achse ist so erstellt worden, dass die Riemen nach der Durchführung nur in eine definierte Richtung gespannt werden können.
 
 <br>
 
@@ -1289,7 +1293,7 @@ Diese Steuerung unterstützt die Ansteuerung der Motoren und anderer Komponenten
 
 
 G-Code ist eine Programmiersprache, welche mittels einfacher textbasierter Befehle \ref{gcodecmd} Komponenten diese Maschinen kontrollieren kann.
-Dabei können einzelne Achsen verfahren werden oder die Drehzahl einer Spindel kontrolliert werden. Der G-Code wird von der Steuerung interpretiert. In der Regel wird dieser zuvor von einem (+cad) Programm erzeugt und zeilenweise übertragen. Bei einem 3D Drucker wird dieser vom Slicer generiert und enhält die Wegpunkte, welche vom Hotend angefahren werden sollen. 
+Dabei können einzelne Achsen verfahren werden oder die Drehzahl einer Spindel kontrolliert werden. Der G-Code wird von der Steuerung interpretiert. In der Regel wird dieser zuvor von einem (+cad) Programm erzeugt und zeilenweise übertragen. Bei einem 3D Drucker wird dieser vom Slicer generiert und enhält die Wegpunkte, welche vom Hotend angefahren werden sollen.
 
 <br>
 
@@ -1603,7 +1607,7 @@ Da jeder dieser Services stateless ist und und keine eigenen Daten speichert, we
 - Mongo NoSQL Datenbank
 - Redis In-Memory Key Value Datenbank
 
-Hierbei wurde auf zwei verschiedene Datenbanken gesetzt, was im Folgenden erläutert wird. 
+Hierbei wurde auf zwei verschiedene Datenbanken gesetzt, was im Folgenden erläutert wird.
 
 Die `Redis` [@redis] Datenbank wird ausschließlich für die Speicherung der aktiven Sessions der einzelnen verbundenen Clients verwendet.
 Durch das verwendete Sessionsystem, bei dem jeder Clients in kurzen Intervallen seine Aktivität bestätigen muss, bietet diese Datenbank den Vorteil, dass diese durch ihre Architektur sehr schnell auf die angeforderten Datensätze zugreifen kann. Auch wird hier nur der Datensatz gespeichert, welcher die notwendigen Informationen zu der aktiven Session des Clients speichert. Dieser werden durch die (+id) des Clients abgefragt.
@@ -1620,7 +1624,7 @@ Ferner wird der Zeitstempel der Anmeldung sowie die letzte Anfrage des Clients i
 Durch den Key-Value-Ansatz sowie den hohen Verbrauch an Arbeitsspeicher eignet sich diese Datenbank jedoch nicht zum Speichern der Spieldaten.
 Hierzu wurde ein zusätzlicher `Mongo` [@mogodb] Datenbank Service erstellt, in welchem diese Daten abgelegt werden. Zusätzlich zu den Spieldaten (Spiele, Spielstände, Statistiken) werden auch die Nutzerprofile speichert. Ein Profil wird beim ersten Anmeldevorgang erstellt und enthält neben den Profilinformationen (Geräte-(+id), Namen, Spielertyp) auch die Referenzen auf die gewonnenen und verlorenen Spiele. Diese Referenzen können später für die Visualisierung verwendet werden.
 
-Alle aufgelisteten Services werden in separaten Containern betrieben. Die Containervirtualisierung geschieht mittels der Software `Docker` [@docker]. Diese stellt ein einfaches Interface zur Erstellung und Verwaltung von Containern bereit. Um einen Container auf dem System starten zu können, muss dieser zunächst aus einem Image heraus erstellt werden. Dieses Image wird mittels eines `Dockerfile` beschrieben. Das `Dockerfile` besteht dabei aus einer Reihe an Kommandos, welche den Aufbau des Images beschreiben. 
+Alle aufgelisteten Services werden in separaten Containern betrieben. Die Containervirtualisierung geschieht mittels der Software `Docker` [@docker]. Diese stellt ein einfaches Interface zur Erstellung und Verwaltung von Containern bereit. Um einen Container auf dem System starten zu können, muss dieser zunächst aus einem Image heraus erstellt werden. Dieses Image wird mittels eines `Dockerfile` beschrieben. Das `Dockerfile` besteht dabei aus einer Reihe an Kommandos, welche den Aufbau des Images beschreiben.
 
 Bei diesem Projekt besteht ein Image in der Regel aus einem vorgefertigten `Ubuntu 20.04` Image, in welchem zusätzliche Software installiert wird, die zur Ausführung der eingentlichen Software benötigt wird. Auch existieren bereits vorgefertigte Images, welche bereits Software für einen spezifischen Anwendungsfall enthalten.
 
@@ -1639,7 +1643,7 @@ CMD ["/app/main"] # START APP
 ```
 
 Da die Architektur aus mehr als einem Container besteht, gestaltet sich ein manuelles Management dieser Container als nicht praktikabel.
-Zu diesem Zweck existieren mehrere Tools und Systeme, um solche Aufgaben zu automatisieren. 
+Zu diesem Zweck existieren mehrere Tools und Systeme, um solche Aufgaben zu automatisieren.
 Ein weiterer nicht zu vernachlässigender Punkt sind die Abhängigkeiten, welche unter den Containern bestehen.
 In diesem Fall benötigt der Backend-Service die beiden Datenbanken, um starten zu können.
 Somit ist es essentiell, dass diese bereits zuvor erfolgreich gestartet werden.
@@ -1656,12 +1660,12 @@ services:
       - AtomicChessRedisDatabase
       - AtomicChessMongoDatabase
       - AtomicChessMoveValidator
-    links: 
+    links:
       - "redisdb:AtomicChessRedisDatabase"
       - "mongodb:AtomicChessMongoDatabase"
       - "movevalidator:AtomicChessMoveValidator"
     image: atcbackend:latest
-    build: 
+    build:
       context: ../ATC_Backend/
     restart: always
     ports:
@@ -1686,7 +1690,7 @@ services:
     container_name: atcredis
     ports:
       - 6379:6379
-    
+
   AtomicChessMongoDatabase:
     image: mongo:latest
     container_name: atcmongo
@@ -1702,7 +1706,7 @@ services:
   AtomicChessAutoPlayer:
     depends_on:
       - AtomicChessBackend
-    links: 
+    links:
         - "backend:AtomicChessBackend"
     build:
       context: ../ATC_AutoPlayer/
@@ -1737,11 +1741,11 @@ Bei dem eingerichteten Reverse-Proxy werden alle Verbindungen aus dem öffentlic
 <IfModule mod_ssl.c>
 <VirtualHost *:443>
         ServerName atomicchess.de
-        ProxyPreserveHost On 
+        ProxyPreserveHost On
         DocumentRoot /var/www/html
         ProxyPass /.well-known !
         ProxyPass / http://127.0.0.1:3000/
-        ProxyPassReverse / http://127.0.0.1:3000/	
+        ProxyPassReverse / http://127.0.0.1:3000/
 	ServerAdmin webmaster@atomicchess.de
 
 	ErrorLog ${APACHE_LOG_DIR}/error.log
@@ -2066,7 +2070,7 @@ Da der Tisch eine Art Thin-Client darstellt, bei dem die eigentliche Spiellogik 
 
 Nach erfolgreicher Anmeldung am Cloud-Server kann der Benutzer ein Spiel starten, welches lediglich zu einem entsprechenden Request an den Server führt.
 Die nachfolgende Dauerschleife überprüft, ob ein Spiel gestartet wurde. Dazu wird in zyklischen Intervallen die `/rest/get_playerstate` (+api) aufgerufen.
-Diese stellt Informationen bereit, ob und in welchem Status sich das Spiel für den anfragenden Client befindet. 
+Diese stellt Informationen bereit, ob und in welchem Status sich das Spiel für den anfragenden Client befindet.
 
 <br>
 
@@ -2167,13 +2171,13 @@ Das System bietet dem Benutzer hier zwei Möglichkeiten, welche im Folgenden erl
 
 Über das (+ui) des autonomen Schachtischs kann der Benutzer, wenn dieser am Zug ist, seinen Zug manuell eingeben. Hierbei wird das Start- und Ziel-Feld angegeben, woraus das System automatisch den gewünschten Zug ermittelt.
 
-Dies ist jedoch bei einer Schachpartie nicht praktikabel. Der Benutzer muss eine Möglichkeit haben, die Schachfiguren händisch bewegen zu können. 
-Das System muss aus den geänderten Figuren den getätigten Schachzug ermitteln können. 
+Dies ist jedoch bei einer Schachpartie nicht praktikabel. Der Benutzer muss eine Möglichkeit haben, die Schachfiguren händisch bewegen zu können.
+Das System muss aus den geänderten Figuren den getätigten Schachzug ermitteln können.
 
 <br>
 
 Da das Schachbrett in beiden Revisions-Varianten über keine Sensoren unter den einzelnen Schachfeldern verfügt, wurde der existierende (+nfc) Scanner verwendet.
-Mit dem ist es möglich, gezielt Figuren auf zuvor bestimmten Feldern zu ermitteln. 
+Mit dem ist es möglich, gezielt Figuren auf zuvor bestimmten Feldern zu ermitteln.
 Der Nachteil dieser Methode ist die Wartezeit, welche aufgrund des Scan-Prozesses nötig ist. Ein Scan aller 64 Felder ist nicht praktikabel, da jeder Scan und die Bewegung der Mechanik ca 3 Sekunden benötigt.
 Zusätzlich verlängert sich die Scandauer durch ein leeres Schachfeld, da der Scanner mehrere Versuche unternimmt, dort ein gültiges (+nfc) Tag zu erkennen.
 
@@ -2435,39 +2439,39 @@ void MenuManager::updateProgress()
 
 Zusammenfassend lässt sich feststellen, dass das Ziel der Arbeit erreicht wurde. Die Kernfrage, welche die Überprüfung der Ausführbarkeit inklusive Erstellung und Umsetzung eines eingebetteten Systems und einer Cloud-Infrastruktur umfasst, konnte abschließend positiv beantwortet werden.
 
-Es wurde iterativ ein autonomer Schachtisch \ref{ATC_PROD_TABLE_FINAL_IMG} entwickelt, welcher alle zuvor gestellten Anforderungen erfüllt. 
-Die Positionen der Schachfiguren können mittels NFC-Tags in den Füßen der Figuren und eines NFC-Lesers unterhalb des Schachfelds umgesetzt werden. 
-Die Mechanik zur Bewegung des NFC-Lesers und eines Magneten in dessen Mitte ermöglicht zudem durch gegenpolige Magnete in den Füßen der Figuren ein automatisches Bewegen der Figuren ohne manuelle Interaktion. 
-Die Größe der Felder des Schachtischs ist so ausgelegt, dass Figuren ohne Kontraktionen aneinander vorbeigeführt und am Rand des Spielfeldes positioniert werden können, sofern sie aus dem Spiel ausgeschieden sind. Dadurch war eine kleinere Revision des Tisches nicht anwendbar, dennoch konnten mittels der größeren Dimensionen der letzten Revision diese Funktion und weitere, wie die Mechanik zur Bewegung, optimiert und adäquat umgesetzt werden. 
+Es wurde iterativ ein autonomer Schachtisch \ref{ATC_PROD_TABLE_FINAL_IMG} entwickelt, welcher alle zuvor gestellten Anforderungen erfüllt.
+Die Positionen der Schachfiguren können mittels NFC-Tags in den Füßen der Figuren und eines NFC-Lesers unterhalb des Schachfelds umgesetzt werden.
+Die Mechanik zur Bewegung des NFC-Lesers und eines Magneten in dessen Mitte ermöglicht zudem durch gegenpolige Magnete in den Füßen der Figuren ein automatisches Bewegen der Figuren ohne manuelle Interaktion.
+Die Größe der Felder des Schachtischs ist so ausgelegt, dass Figuren ohne Kontraktionen aneinander vorbeigeführt und am Rand des Spielfeldes positioniert werden können, sofern sie aus dem Spiel ausgeschieden sind. Dadurch war eine kleinere Revision des Tisches nicht anwendbar, dennoch konnten mittels der größeren Dimensionen der letzten Revision diese Funktion und weitere, wie die Mechanik zur Bewegung, optimiert und adäquat umgesetzt werden.
 
 <br>
 
-Der Tisch verfügt über eine Stand-Alone Funktionalität, welche das Starten und Auswerten eines Spiels ohne Anbindung zum Internet oder zu externen Geräten wie Smartphones ermöglicht. 
+Der Tisch verfügt über eine Stand-Alone Funktionalität, welche das Starten und Auswerten eines Spiels ohne Anbindung zum Internet oder zu externen Geräten wie Smartphones ermöglicht.
 Dennoch ist es über eine Verbindung zum Internet mittels eines Cloud-Services möglich, zusätzliche Funktionen wie das Spiel gegen andere reale Spieler oder gegen eine Schachlogik zu nutzen oder einen Livestream zum Darstellen von gegenwärtigen Spielen aufzubauen.
 
 <br>
 
 Anhand der Durchführung von iterativen Verbesserungen und einzelnen Revisionen des Modells lassen sich definierte Aussagen zu Fortschritten und Veränderungen des Gesamtsystems treffen.
-Der Schachtisch als eingebettetes System besteht aus einem modularen Aufbau, welcher sich im Verlauf der Iterationen durch das Anpassen einzelner Komponenten aufwerten ließ. Derartige Systeme erfordern in der Vorbereitung ein hohes Verständnis der Zusammenhänge von Komponenten, da spätere Veränderungen komplexer sind. Da hierbei in den verschiedenen Iterationen aber nur einzelne Modulgruppen verändert wurden, musste lediglich die Verbindung des jeweiligen Moduls neu berücksichtigt werden und keine gänzliche Aufwertung aller Komponenten erfolgen. 
+Der Schachtisch als eingebettetes System besteht aus einem modularen Aufbau, welcher sich im Verlauf der Iterationen durch das Anpassen einzelner Komponenten aufwerten ließ. Derartige Systeme erfordern in der Vorbereitung ein hohes Verständnis der Zusammenhänge von Komponenten, da spätere Veränderungen komplexer sind. Da hierbei in den verschiedenen Iterationen aber nur einzelne Modulgruppen verändert wurden, musste lediglich die Verbindung des jeweiligen Moduls neu berücksichtigt werden und keine gänzliche Aufwertung aller Komponenten erfolgen.
 Anders als Mehrzwecksystemen, welche oftmals wenige einzelne Module beinhalten, konnte hier eine separierte Betrachtung der Komponenten erfolgen.
 
 <br>
 
-Nicht nur der Aufbau der Komponenten erfolgte modular, sondern auch das Erstellen aller Softwarekomponenten und die Konstruktion des Schachtischs. 
+Nicht nur der Aufbau der Komponenten erfolgte modular, sondern auch das Erstellen aller Softwarekomponenten und die Konstruktion des Schachtischs.
 Letzteres führt zu einem einfachen Aufbau des Tisches, welcher auch von versierten oder motivierten Anwendern ausgeführt werden kann. Eine aussagekräftige Versuchsführung dazu liegt jedoch nicht vor.
-Zudem sind nahezu alle verwendeten Materialien mühelos erhältlich, nur 3D-Komponenten müssen separat gedruckt werden. Alle Ressourcen einschließlich der (+cad) -Modelle werden online zur Verfügung gestellt. 
+Zudem sind nahezu alle verwendeten Materialien mühelos erhältlich, nur 3D-Komponenten müssen separat gedruckt werden. Alle Ressourcen einschließlich der (+cad) -Modelle werden online zur Verfügung gestellt.
 
 <br>
 
-Die Bedienung des Systems mittels des verbauten Bildschirms ist ebenfalls auf eine simple Benutzerführung spezifiziert. Auch unerfahrene Spieler können ein Spiel beginnen, ohne eine differenzierte Einweisung erhalten zu haben. Diese Funktionalität wurde an einzelnen Probanden getestet, eine aussagekräftige Statistik liegt jedoch nicht vor. 
+Die Bedienung des Systems mittels des verbauten Bildschirms ist ebenfalls auf eine simple Benutzerführung spezifiziert. Auch unerfahrene Spieler können ein Spiel beginnen, ohne eine differenzierte Einweisung erhalten zu haben. Diese Funktionalität wurde an einzelnen Probanden getestet, eine aussagekräftige Statistik liegt jedoch nicht vor.
 
 <br>
 
-Grundsätzlich ist festzuhalten, dass es sich beim Resultat der Arbeit um kein finalisiertes Produkt, sondern um einen strukturellen Prototyp handelt. Weitere Prüfungen wie Nutzungsstatistiken oder Sicherheitsprüfungen müssten durchgeführt werden, ehe der Schachtisch als kommerzielles Produkt betrachtet werden kann. Auch fehlen diverse Langzeittests. Ein Betriebstest mit einer Dauer von 6 Stunden verlief ohne erkennbare Zwischenfälle, für aussagekräftige Verschleiß- und Fehlererkennungen bedarf es jedoch noch weiterer und längerer Untersuchungen. 
+Grundsätzlich ist festzuhalten, dass es sich beim Resultat der Arbeit um kein finalisiertes Produkt, sondern um einen strukturellen Prototyp handelt. Weitere Prüfungen wie Nutzungsstatistiken oder Sicherheitsprüfungen müssten durchgeführt werden, ehe der Schachtisch als kommerzielles Produkt betrachtet werden kann. Auch fehlen diverse Langzeittests. Ein Betriebstest mit einer Dauer von 6 Stunden verlief ohne erkennbare Zwischenfälle, für aussagekräftige Verschleiß- und Fehlererkennungen bedarf es jedoch noch weiterer und längerer Untersuchungen.
 
-<br> 
+<br>
 
-Der Prototyp lässt sich jedoch mit kommerziell erhältlichen und open-source verfügbaren Schachtischen vergleichen. Das Ziel, alle wünschenswerten Funktionen und Implementationen dieser Tische in den Prototypen zu integrieren, konnte erfolgreich umgesetzt werden. Darüber hinaus wurde weitere Funktionalitäten eingegliedert, wie eine Stand-Alone Funktionalität oder eine Schnittstelle zum Erstellen weiterer Erweiterungen. 
+Der Prototyp lässt sich jedoch mit kommerziell erhältlichen und open-source verfügbaren Schachtischen vergleichen. Das Ziel, alle wünschenswerten Funktionen und Implementationen dieser Tische in den Prototypen zu integrieren, konnte erfolgreich umgesetzt werden. Darüber hinaus wurde weitere Funktionalitäten eingegliedert, wie eine Stand-Alone Funktionalität oder eine Schnittstelle zum Erstellen weiterer Erweiterungen.
 
 <br>
 
@@ -2493,27 +2497,27 @@ Natürlich hat das System noch Schwächen und bedarf diverser Ergänzungen, bevo
 
 <br>
 
-Doch genau solche Erkenntnisse geben mir einen Anreiz, das Projekt auch nach Abschluss des Studiums nicht zu beenden, sondern weitere Ideen umzusetzen und anschließend auch mit Testpersonen zu erproben. 
+Doch genau solche Erkenntnisse geben mir einen Anreiz, das Projekt auch nach Abschluss des Studiums nicht zu beenden, sondern weitere Ideen umzusetzen und anschließend auch mit Testpersonen zu erproben.
 
 <br>
 
-Der iterative Prozess der Erstellung des Schachtischs ist zeitaufwändig und kostspielig, ermöglicht allerdings das frühzeitige Erkennen von Schwachstellen und das Ausbessern der jeweiligen modularen Komponente, noch eher eine Etablierung im System erfolgen kann. Ebenso ermöglicht es ein einfacheres Verständnis über alle Komponenten, lediglich die Zusammensetzung und Beziehung dieser muss rechtzeitig überdacht werden. 
+Der iterative Prozess der Erstellung des Schachtischs ist zeitaufwändig und kostspielig, ermöglicht allerdings das frühzeitige Erkennen von Schwachstellen und das Ausbessern der jeweiligen modularen Komponente, noch eher eine Etablierung im System erfolgen kann. Ebenso ermöglicht es ein einfacheres Verständnis über alle Komponenten, lediglich die Zusammensetzung und Beziehung dieser muss rechtzeitig überdacht werden.
 
 <br>
 
-Insgesamt ist das Projekt selbst recht umfangreich und umfasst in verschiedenen Facetten diverse Themenbereiche meines Studiums, was mir von Beginn an ein Anliegen war. Es manifestiert meinen Studienschwerpunkt, die technische Informatik, und hat mich dazu motiviert, noch tiefgründiger in die Materie zu schauen. Zudem waren noch weitere Kompetenzen gefordert, welche zuvor gar nicht oder nur teilweise gegeben waren, wie das Konstruieren von 3D-Komponenten oder das Gestalten von Produkten. Umso beeindruckter bin ich selbst von der Bewegungsmechanik des Systems, welche sich im Entwicklungsprozess sehr stark verändert hat und letztlich zu einem fehlerlosen Resultat führte. 
+Insgesamt ist das Projekt selbst recht umfangreich und umfasst in verschiedenen Facetten diverse Themenbereiche meines Studiums, was mir von Beginn an ein Anliegen war. Es manifestiert meinen Studienschwerpunkt, die technische Informatik, und hat mich dazu motiviert, noch tiefgründiger in die Materie zu schauen. Zudem waren noch weitere Kompetenzen gefordert, welche zuvor gar nicht oder nur teilweise gegeben waren, wie das Konstruieren von 3D-Komponenten oder das Gestalten von Produkten. Umso beeindruckter bin ich selbst von der Bewegungsmechanik des Systems, welche sich im Entwicklungsprozess sehr stark verändert hat und letztlich zu einem fehlerlosen Resultat führte.
 
 <br>
 
-Neben diesen projektspezifischen Kompetenzen ist es zudem möglich gewesen, weitere Erfahrungen im Bereich der Projektplanung und Organisation zu sammeln. Im optimalen Verlauf wäre ein fertiger Prototyp bereits früher möglich gewesen, jedoch erforderte die Veränderung der Mechanik vom XY-System zu CoreXY und verschiedene unvorhergesehene Schwächen mit den verwendeten Magneten weitere Umsetzungsiterationen, die rückblickend nötig und zielführend waren. 
+Neben diesen projektspezifischen Kompetenzen ist es zudem möglich gewesen, weitere Erfahrungen im Bereich der Projektplanung und Organisation zu sammeln. Im optimalen Verlauf wäre ein fertiger Prototyp bereits früher möglich gewesen, jedoch erforderte die Veränderung der Mechanik vom XY-System zu CoreXY und verschiedene unvorhergesehene Schwächen mit den verwendeten Magneten weitere Umsetzungsiterationen, die rückblickend nötig und zielführend waren.
 
 <br>
 
-Auch die Erstellung der Thesis und das Formatieren von Vorlagen und Befehlen in Markdown und LaTeX erwies sich als lehrreich und innovativ. 
+Auch die Erstellung der Thesis und das Formatieren von Vorlagen und Befehlen in Markdown und LaTeX erwies sich als lehrreich und innovativ.
 
 <br>
 
-Insgesamt bin ich sehr zufrieden mit meinem Ergebnis, aber auch mit mir selbst und meiner erbrachten Leistung. 
+Insgesamt bin ich sehr zufrieden mit meinem Ergebnis, aber auch mit mir selbst und meiner erbrachten Leistung.
 
 <br>
 
@@ -2532,7 +2536,7 @@ Auch weitere Hardware kann mittels Porterweiterungen wie (+usb) zum Tisch ergän
 
 <br>
 
-Zudem ermöglicht die Verbindung zum Internet unzählige Kapazitäten, wie die Einbindung anderer, existierender Schach-Clouds wie beispielsweise „licchess.org“. 
+Zudem ermöglicht die Verbindung zum Internet unzählige Kapazitäten, wie die Einbindung anderer, existierender Schach-Clouds wie beispielsweise „licchess.org“.
 
 <br>
 

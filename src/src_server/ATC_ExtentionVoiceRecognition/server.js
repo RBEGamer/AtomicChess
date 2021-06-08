@@ -128,9 +128,7 @@ app.get('/enable_service_for_table', (req, res) => {
         res.json({ err: 'parameter missing'});
         return;
     }
-
     res.json({err: null});
-
 });
 
 
@@ -276,17 +274,12 @@ app.post('/alexa_move', (req, res) => {
     }
 
     if (user_hash) {
-
-
         get_registered_devices(user_hash, function (grd_err, grd_res) {
-
-
             var move = {
                 figure: String(jsonbody.requestEnvelope.request.intent.slots.figure.value),
                 to_field: String(jsonbody.requestEnvelope.request.intent.slots.column.value) + String(jsonbody.requestEnvelope.request.intent.slots.row.value)
             };
             var move_hash = crypto.createHash('md5').update(move.figure + move.to_field).digest('hex');
-
 
             MDB.getCollection().updateOne({user_hash: user_hash, DOCTYPE: "DEVICES"}, {
                 $set: {
@@ -297,17 +290,22 @@ app.post('/alexa_move', (req, res) => {
             }, function (uo_err, uo_res) {
                 res.json({voice_response: 'move stored', err: ''});
             });
-
-
-
         });
-
-
     } else {
         res.json({voice_response: 'userId not given', err: 'user_hash error'});
         return;
     }
 });
+
+
+
+
+
+
+
+
+
+
 
 
 

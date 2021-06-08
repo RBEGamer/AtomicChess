@@ -201,8 +201,13 @@
 %}%
 %\makeatother
 
+\usepackage{rotating}
+
 \definecolor{LightCyan}{rgb}{0.88,1,1}
 \definecolor{Gray}{gray}{0.9}
+\usepackage[first=0,last=9]{lcg}
+\newcommand{\ra}{\rand0.\arabic{rand}}
+
 
 \begin{document}
 
@@ -221,6 +226,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\frontmatter 	% Wenn der Hauptteil mit Seite 1 beginnen soll
 \pagestyle{plain}
+
+
+
+
+
+
+
 
 \frontmatter
 
@@ -242,6 +254,8 @@
 \hypertarget{abstract}{%
 \section*{Abstract}\label{abstract}}
 \input{thesis_abstract}
+
+
 
 
 
