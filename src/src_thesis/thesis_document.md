@@ -3,7 +3,7 @@
 ## Motivation
 
 
-Eingebettete Systeme (Englisch "embedded Systems") sind technische Zusammensetzungen, welche für eine spezifische Funktion entwickelt werden. Im Gegensatz zu Mehrzwecksystemen (Englisch "multi-purpose systems"), wie zum Beispiel einem Personal Computer, welcher in der Lage ist, diverse Funktionen auszuführen und nicht zwingend an eine Funktion gebunden ist, dienen eingebettete Systeme einer bestimmten Logik. Daraus resultieren einfachere und auch ressourcen-sparendere Systeme, die wesentlich näher an der Technik und der für den Zweck nötigen Komponenten und Software entwickelt werden. Systeme können günstiger zusammengesetzt und Fehlerquellen schneller entdeckt und behoben werden. Nicht für den Prozess notwendige Komponenten werden gar nicht erst verwendet. Bei einem Mehrzwecksystem wird akzeptiert, dass Komponenten und Schnittstellen existieren, die nicht benötigt werden. Diese verursachen Kosten und können mögliche Fehlerquellen sein.
+Eingebettete Systeme (Englisch "embedded Systems") sind technische Zusammensetzungen, welche für eine spezifische Funktion entwickelt werden. Im Gegensatz zu Mehrzwecksystemen (Englisch "multi-purpose systems"), wie zum Beispiel einem Personal Computer, welcher in der Lage ist, diverse Funktionen auszuführen und nicht zwingend an eine Funktion gebunden ist, dienen eingebettete Systeme einer bestimmten Logik. Daraus resultieren einfachere und auch ressourcen-schonendere Systeme, die wesentlich näher an der Technik und der für den Zweck nötigen Komponenten und Software entwickelt werden. Systeme können günstiger zusammengesetzt und Fehlerquellen schneller entdeckt und behoben werden. Nicht für den Prozess notwendige Komponenten werden gar nicht erst verwendet. Bei einem Mehrzwecksystem wird akzeptiert, dass Komponenten und Schnittstellen existieren, die nicht benötigt werden. Diese verursachen Kosten und können mögliche Fehlerquellen sein.
 
 <br>
 
@@ -16,17 +16,13 @@ Die Fähigkeit zur Erstellung eines solchen Systems ist daher nicht als eine lei
 
 <br>
 
-Das dafür gewählte Projekt beinhaltet die Konstruktion und Automatisierung eines Schachtischs. Schach ist ein stratigisches Brettspiel für zwei Personen, bei denen jeder Spieler 16 Figuren mit diversen Zug-Möglichkeiten nutzen kann, um den König des gegnerischen Spielers zu schlagen. Das Spiel basiert auf logischen Regeln und Spielverfahren, die bis hin zu komplexen Formationen und Bewegungen ausgebaut werden können. 
+Das dafür gewählte Projekt beinhaltet die Konstruktion und Automatisierung eines Schachtischs. Schach ist ein strategisches Brettspiel für gewöhnlich zwei Personen, bei welchem jeder Spieler 16 Figuren mit diversen Zug-Möglichkeiten nutzen kann, um den König des gegnerischen Spielers zu schlagen. Das Spiel basiert auf logischen Regeln und Spielverfahren, die bis hin zu komplexen Formationen und Bewegungen ausgebaut werden können. 
 
 <br>
 
 Die Erstellung eines autonomen Schachtischs vereinbart in meinen Augen im großen Umfang die wesentlichen Komponenten des Informatikstudiums mit meiner Vorliebe zur mechanisch-elektrischen Gestaltung. Angefangen mit den Grundlagen der Informatik, insbesondere mit technischem Bezug, über die Berechnung und Auslegung von Systemkomponenten, zudem die objektorientierte Projektplanung und Architektur von Systemen bis hin zu Datenbanken und Webtechnologien und Softwareentwicklung. Zudem wird mein Studienschwerpunkt, die technische Informatik, mit einem einbetteten System manifestiert. 
 
 <br>
-
-<!-- Classen ((erst ganz kurz im Überblick das Projekt beschreiben (Schachtisch). Erst danach kann der  Reiz davon erläutert werden. Sonst ist unklar, worum es überhaupt geht… Siehe unten: Die hier vorliegende Arbeit entwickelt einen autonomen Schachtisch, welcher in der Lage ist, Schachfiguren autonom zu bewegen und auf Benutzerinteraktionen zu reagieren.)) -->
-
-
 
 Schach ist ein bewährtes, ausnahmslos bekanntes und immer logisches Spiel, welches jedoch im kommerziellen Rahmen nie an Bedeutung gewonnen hat. Die Auswahl der verfügbaren elektrifizierten und programmgesteuerten Schachtische ist auffallend gering; zudem sind existierende Lösungen oftmals nicht erschwinglich und bedürfen erheblicher Anpassungen des Spielers an das Spiel.
 Innerhalb der vergangenen drei Jahrzehnte bewiesen immer mehr Konzerne ihre technische Kompetenz und Überlegenheit und die Fähigkeit ihrer Maschinen mittels der Optimierung von Schachalgorithmen und dem möglichst schnellen Besiegen derzeitiger Schach-Meister und -Meisterinnen. Die Algorithmen stehen heute in einer Vielzahl frei zugänglich zur Verfügung, jedoch ist das Interesse daran, für Spieler mögliche Anwendungen zu generieren, verschwindend gering und wird oftmals nur von Experten und Enthusiasten genutzt und auch hinterfragt. 
@@ -45,7 +41,7 @@ Darüber hinaus sollte der autonome Schachtisch weitere folgende Funktionalität
 
 - Erkennung Figur-Stellung
 - Automatisches Bewegen der Figuren
-- Spiel Livestream
+- Livestream des Spiels
 - Parkposition für ausgeschiedene Figuren
 - Stand-Alone Funktionalität 
 
@@ -62,9 +58,7 @@ Insgesamt gilt es, einen für Anwender ansprechenden Schachtisch zu entwickeln, 
 
 <br>
 
-
-
-Der Grundgedanke dabei ist, dem Spieler die Arbeit des Versetzens der Spielfiguren und das Erwägen von gegnerischen Zügen abzunehmen. Somit ist ein kompfortables Spiel auch gegen sich selber möglich, da das Überlegen und Ausführen von Spielzügen der Gegenseite entfällt.
+Der Grundgedanke dabei ist, dem Spieler die Arbeit des Versetzens der Spielfiguren und das Erwägen von gegnerischen Zügen abzunehmen. Somit ist ein komfortables Spiel auch gegen einen virtuellen Gegner möglich, was dazu führt, dass bei einem Einzelspielerspiel das Überlegen und Ausführen von Spielzügen der Gegenseite entfällt.
 Dem Spieler wird zudem die Möglichkeit geboten, gegen andere Spieler an diversen Orten oder gegen eine Schachlogik zu spielen und so Züge auszuführen, die jener im besten Fall nicht einmal vorhergesehen hat. Zudem wird die Korrektheit der getätigten Züge überprüft und sämtliche traditionellen Spielregeln in das Spiel mit einbezogen. Somit ist es nicht nur möglich, dass Anfänger das Spiel erlernen können, sondern auch bewährten Spielern mit unerwarteten Zügen des virtuellen oder realen Gegners neue Methodiken darzustellen.
 
 <br>
@@ -2547,4 +2541,4 @@ Ebenso könnten Sprachassistenten ergänzt werden, die das Spiel somit auch für
 <br>
 
 Der derzeitige Systemzustand ermöglicht ein autonomes Schachspiel mit möglichst äquivalentem Spielerlebnis im Vergleich zu einem konventionellen Schachspiel. Auf Basis dessen ist der Anzahl der möglichen Ergänzungen und Ideen zur Verbesserung keine Grenzen gesetzt. Erfahrene Entwickler wird die Möglichkeit geboten, diese mittels der diverser Schnittstellen eigenständig zu integrieren. 
-Das System als solches ist dennoch ein abgeschlossenes Projekt mit einem präsentablen Resultat. 
+Das System als solches ist dennoch ein abgeschlossenes Projekt mit einem präsentablen Resultat.
