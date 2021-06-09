@@ -190,7 +190,7 @@ der Grand Kingdom Schachtisch ist rechteckig konstruiert worden, was das Spieler
 
 <br>
 
-Beide Hersteller bieten eine Bluetooth-Schnittstelle an. Einzig das Smart-Board des Herstellers DGT nutzt eine serielle, kabelgebundene Schnittstelle.
+Beide Hersteller bieten eine Bluetooth-Schnittstelle an. Einzig das Smart-Board des Herstellers `DGT` nutzt eine serielle, kabelgebundene Schnittstelle.
 
 <br>
 
@@ -1284,7 +1284,7 @@ Hierbei existiert eine große Auswahl solcher Steuerungen mit den verschiedenste
 
 : Standardhardware 3D Drucker Steuerungen \label{3dmarlinctl}
 
-|                    | SKR 1.4 Turbo     | Ramps 1.4           | Anet A8 Mainboard     |
+|                    | `SKR 1.4 Turbo`     | `Ramps 1.4`           | `Anet A8 Mainboard`     |
 |:-------------------|:-----------------:|:-------------------:|----------------------:|
 | Stepper Driver     | TMC2209           | A4988 / TMC2209     | A4988                 |
 | LED Strip Port     | WS2811 / RGB      | -                   | -                     |
