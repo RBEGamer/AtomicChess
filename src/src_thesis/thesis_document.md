@@ -161,7 +161,7 @@ Wie bereits aus den zum Teil identischen Namen ersichtlich, streben alle Tische 
 
 : Auflistung kommerzieller autonomer Schachtische \label{commchesstables}
 
-|                                                               | Square Off - Kingdom  | Square Off - Grand Kingdom | DGT Smart Board  | DGT Bluetooth Wenge |
+|                                                               | `Square Off` - Kingdom  | `Square Off` - Grand Kingdom | `DGT` Smart Board  | `DGT` Bluetooth Wenge |
 |:------------------------------------------|-------------------------------------------|:--------------------------------------------:|:---------------------------------:|------------------------------:|
 | Erkennung Figur-Stellung                  | nein (manuell)       | nein (manuell)          | ja                                | ja                            |
 | Abmessungen (LxBxH)                       | 486mm x 486mm x 75mm                      | 671mm x 486mm x 75mm                         | 540mm x 540mm x 20mm              | 540mm x 540mm x 20mm          |
@@ -179,14 +179,14 @@ Die für den Vergleich gewählten Eigenschaften sind jene, welche die im Projekt
 
 <br>
 
-Die Bretter des Herstellers DGT erkennen die Position der verwendeten Figuren. Information über die dafür verwendete Technologie ist jedoch nicht verfügbar. Die Square-Off-Schachtische verfügen über keine solche Funktion.
+Die Bretter des Herstellers `DGT` erkennen die Position der verwendeten Figuren. Information über die dafür verwendete Technologie ist jedoch nicht verfügbar. Die `Square-Off`-Schachtische verfügen über keine solche Funktion.
 
 <br>
 
 
 
-Die Abmessungen (Außenmaße) der autonomen Schachtische unterscheiden sich nur beim Hersteller Square Off deutlich; 
-der Grand Kingdom Schachtisch ist rechteckig konstruiert worden, was das Spielerlebnis deutlich verändert. Der simple Kingdom-Tisch ist dabei kleiner als das vorgegebene Turniermaß, was negativen Einfluss auf das Spielererlebnis hat. Mit den Standardmaßen der DGT-Spielbretter und zudem ihrer geringen Höhe gleichen diese deutlich einem Turniertisch. Die Kombination aus geringer Höhe und Erkennung der Figur-Stellung bei den DGT-Brettern ist positiv bemerkenswert. Die größe der einzelnen Schachfelder aller autonomen Schachtische befinden sich jedoch in den spezifikationen der (+uscf)[@officialuscfrules], welche sich von 5 bis 6.35cm belaufen.
+Die Außenabmessungen der autonomen Schachtische unterscheiden sich nur beim Hersteller `Square Off` deutlich; 
+der Grand Kingdom Schachtisch ist rechteckig konstruiert worden, was das Spielerlebnis deutlich verändert. Der simple Kingdom-Tisch ist dabei kleiner als das vorgegebene Turniermaß, was negativen Einfluss auf das Spielererlebnis hat. Mit den Standardmaßen der `DGT`-Spielbretter und zudem ihrer geringen Höhe gleichen diese deutlich einem Turniertisch. Die Kombination aus geringer Höhe und Erkennung der Figur-Stellung bei den `DGT`-Brettern ist positiv bemerkenswert. Die größe der einzelnen Schachfelder aller autonomen Schachtische befinden sich jedoch in den spezifikationen der (+uscf)[@officialuscfrules], welche sich von 50mm bis 63mm belaufen.
 
 <br>
 
@@ -194,11 +194,11 @@ Beide Hersteller bieten eine Bluetooth-Schnittstelle an. Einzig das Smart-Board 
 
 <br>
 
-Bei den DGT-Schachbrettern ist zu beachten, dass diese die Schachfiguren nicht autonom bewegen können. Sie wurden jedoch in die Liste aufgenommen, da sie einen Teil der Funktionalitäten der Square Off Schachbrettern abdecken und lediglich die automatische Bewegung der Schachfiguren fehlt.
-Die DGT-Bretter können die Position der Figuren erkennen und ermöglichen so auch Spiele über das Internet; diese können sie auch als Livestream anbieten.
+Bei den `DGT`-Schachbrettern ist zu beachten, dass diese die Schachfiguren nicht autonom bewegen können. Sie wurden jedoch in die Liste aufgenommen, da sie einen Teil der Funktionalitäten der `Square Off` Schachbrettern abdecken und lediglich die automatische Bewegung der Schachfiguren fehlt.
+Die `DGT`-Bretter können die Position der Figuren erkennen und ermöglichen so auch Spiele über das Internet; diese können sie auch als Livestream anbieten.
 Bei Schachturnieren werden diese für die Übertragung der Partien sowie die Aufzeichnung der Spielzüge verwendet und bieten Support für den Anschluss von weiterer Peripherie wie zum Beispiel Schachuhren.
 
-Somit gibt es zum Zeitpunkt der Recherche nur einen Hersteller von autonomen Schachbrettern, welcher auch die Figuren bewegen kann: Grand Kingdom.
+Somit gibt es zum Zeitpunkt der Recherche nur einen Hersteller von autonomen Schachbrettern, welcher auch die Figuren bewegen kann: `Square-Off`-Grand Kingdom bzw. `Square-Off`-Kingdom.
 
 <br>
 
@@ -206,7 +206,7 @@ Ein Spiel-Livestream, d.h. eine Darstellung des aktuellen oder vergangener Spiel
 
 <br>
 
-Auffallend ist, dass nur einer der ausgewählten Tische über eine Parkposition für ausgeschiedene Figuren verfügt. Der Square-Off-Grand, welcher Figuren automatisch verschieben kann, besitzt dank der rechteckigen Tischform die Möglichkeit, Figuren selbständig aus dem Spiel zu entfernen und bei Bedarf wieder ins Spiel zurückzuführen.
+Auffallend ist, dass nur einer der ausgewählten Tische über eine Parkposition für ausgeschiedene Figuren verfügt. Der `Square-Off`-Grand Kingdom, welcher Figuren automatisch verschieben kann, besitzt dank der rechteckigen Tischform die Möglichkeit, Figuren selbständig aus dem Spiel zu entfernen und bei Bedarf wieder ins Spiel zurückzuführen.
 
 <br>
 
@@ -217,7 +217,7 @@ Die App wiederum fordert eine Registrierung inklusive Profilerstellung beim Hers
 
 <br>
 
-Beide Square-Off-Modelle ermöglichen durch eingebaute Akkus auch eine mobile Nutzung, was dem Nutzer mehr Flexibilität, zum Beispiel Spielen im Freien erlaubt.
+Beide `Square-Off`-Modelle ermöglichen durch eingebaute Akkus auch eine mobile Nutzung, was dem Nutzer mehr Flexibilität, zum Beispiel Spielen im Freien erlaubt.
 
 <br>
 
@@ -295,7 +295,7 @@ Das Ziel der hier vorliegenden Arbeit soll nun sein, all die positiven Eigenscha
 
 ## User Experience
 
-Ein wichtiger Aspekt bei diesem Projekt stellt die User-Experience dar. Diese beschreibt die Ergonomie der Mensch-Maschine-Interaktion und wird durch die DIN 9241[@din9241] beschrieben.
+Ein wichtiger Aspekt bei diesem Projekt stellt die User-Experience dar. Diese beschreibt die Ergonomie der Mensch-Maschine-Interaktion und wird durch die `DIN 9241`[@din9241] beschrieben.
 Darin geht es primär um das Erlebnis, welches der Benutzer beim Verwenden eines Produkts erlebt und welche Erwartungen der Benutzer an die Verwendung des Produkts hat.
 
 <br>
@@ -398,7 +398,7 @@ Diese unterscheiden sich im Aufbau und der Funktionsweise teils stark, vor allem
 
 : Vergleich Yocto - Buildroot \label{commchesstables}
 
-|                                                         | YOCTO     | BUILDROOT     |
+|                                                         | `Yocto`-Project     | `Buildroot`-Framework     |
 |------------------------------               |-------    |-----------                |
 | Dependency-Management             | Nein     | Ja                           |
 |  Partielle Updates                           | Ja         | Nein                       |
@@ -506,6 +506,9 @@ Somit eignet sich die Kombination aus Tag und Lesegerät für eine Positionserke
 
 ## Auswahl des eingebetteten Systems
 
+
+![STM32MP1-DK2 \label{stm32mp1}](images/stm32mp1.png)
+
 Zur Ansteuerung aller elektrischen Komponenten, welche den autonomen Schachtisch antreiben, wird ein eingebettetes System benötigt auf welchem die zur vor erstellte Software ausgeführt wird.
 Dies ist in diesem Fall, durch das `Buildroot`-Framework generierte Linux-Image. Um mit den elektrischen Komponenten kommunizieren zu können, werden zusätzlich verschiedene Ein- und Ausgabe-Schnittstellen benötigt:
 
@@ -520,18 +523,19 @@ Somit beschränkte sich die Auswahl für diesen Prototyp, angesichts des für di
 
 : Getestete eingebettete Systeme \label{embsystems}
 
-|                                        | Raspberry-Pi 3b+               | STM32MP157A-DK                                       |
-|:-------------------            |----------------------------    |---------------------------------------------------  :|
-| Prozessor                      | Arm Cortex-A53                 | Arm Cortex A7 + Arm Cortex A4                         |
-| Arbeitsspeicher             | 1GB LPDDR2 SDRAM               | 4-Gbit DDR3L                                          |
-| Flash-Speicher             | SD-Karte                       | SD-Karte                                              |
-| (+gpio)-Header            | ja (40 Pol, (+i2c),(+spi))     | ja (40 Pol, (+i2c),(+spi))                            |
-| Netzwerkanschluss     | (+lan), (+wlan)                | (+lan), (+wlan)                                       | 
-| Besonderheiten        | 64-bit Prozessor               | Arm Cortex A4 Co-Prozessor, Secure-Boot, Debugger     | 
+|                        |`Raspberry-Pi 3b+`          |`STM32MP157A-DK1`                                  |
+|-----------------|--------------------------|-------------------------------------------------|
+|Prozessor        |Arm Cortex-A53            |Arm Cortex A7 + Arm Cortex A4                    |
+|Arbeitsspeicher  |1GB LPDDR2 SDRAM          |4-Gbit DDR3L                                     |
+|Flash-Speicher   |SD-Karte                  |SD-Karte                                         |
+|(+gpio)-Header   |ja (40 Pol, (+i2c),(+spi))|ja (40 Pol, (+i2c),(+spi))                       |
+|Netzwerk|(+lan), (+wlan)           |(+lan), (+wlan)                                  |
+|Besonderheiten   |64-bit Prozessor          |Arm Cortex A4 Co-Prozessor, Secure-Boot, Debugger|
+
 
 
 Diese bieten vergleichbare technische Spezifikationen und siedeln sich im gleichen Preissegment an.
-Je nach Ausführung des `STM32MP157A-DK` ist in diesem bereits ein (+dsi)-Display vorhanden und bietet von der Softwareseite her bereits eine Unterstützung für das  `Yocto`-Projekt an.
+Je nach Ausführung des `STM32MP157A-DK` ist in diesem bereits ein (+dsi)-Display  \ref{stm32mp1} vorhanden und bietet von der Softwareseite her bereits eine Unterstützung für das  `Yocto`-Projekt an.
 Ein Vorteil des `STM32MP157A-DK` gegenüber dem bekannten `Raspberry-Pi 3b+` ist sein zusätzlicher `Arm Cortex A4`-Co-Prozessor, welcher als zusätzlicher Mikrokontroller verwendet werden kann.
 Somit kann die Ansteuerung der (+gpio)-Anschlüsse, sowie Timer und Iterrupt-Aufgaben von diesem übernommen werden und die Ergebnisse und Steuersignale von `Arm Cortex A7` Hauptprozessor und dessen Linux-System bearbeitet werden.
 
@@ -548,8 +552,10 @@ Somit wurde nach mehreren Versuchen dieses Problem zu lösen das `Raspberry-Pi 3
 
 ## Verifikation der Mechanik zur Bewegung der Schachfiguren
 
+![Nema 17 + GT2 Riemen Test \label{nema17_accuary_test}](images/nema17_accuary_test.png)
+
 Da die einzelnen Figuren über das Schachfeld bewegt werden sollen, ist hierfür eine akkurate Positionierung dieser notwendig.
-Da die Figuren einen Durchmesser von 22mm haben und ein einzelnes Schachfeld ein Größe ca. 55mm besitzt, reicht eine Wiederholgenauigkeit von +-1mm.
+Da die Figuren einen Durchmesser von 22mm haben und ein einzelnes Schachfeld ein Größe ca. 55mm besitzt, reicht eine Wiederholgenauigkeit von +-1mm \ref{nema17_accuary_test}.
 Auch wird bei der Wahl der passenden Motoren angenommen, dass das Spiel, welches durch die Mechanik in das System eingebracht wird, vernachlässigbar klein ist.
 Es ist auch davon auszugehen, dass die Kraft, welche von den Motoren benötigt wird, um eine Achse zu bewegen, nicht mehr als 45 Ncm betragen muss.
 
@@ -588,7 +594,7 @@ So sollte eine Abnutzung durch zu häufige Montage der gedruckten Bauteile verhi
 
 <br>
 
-Beim Design der zu druckenden Bauteile wurde darauf geachtet, dass diese den Bauraum von 200x200x200mm nicht überschreiten und somit auch von einfachen (+fdm) 3D-Druckern erstellt werden können.
+Beim Design der zu druckenden Bauteile wurde darauf geachtet, dass diese den Bauraum von 200mm x 200mm x 200mm nicht überschreiten und somit auch von einfachen (+fdm) 3D-Druckern erstellt werden können.
 
 <br>
 
@@ -609,7 +615,7 @@ Diese Vorteile wurden mit verschiedenen Testdrucken verifiziert und kamen insbes
 | Ender 3 Pro 0.4mm Nozzle  | PLA Settings  |
 |:--------------------------|--------------:|
 | Layer Height              | 0.2mm         |
-| Infill                    | 50.00%        |
+| Infill                    | 50%        |
 | Wall Thickness            | 2.0mm         |
 | Support Structure         | Tree          |
 | Top Layers                | 4             |
@@ -670,7 +676,7 @@ Das Design stellte damit jedoch eine solide Grundlage dar, welche für die weite
 ## Parametrisierung der Schachfiguren
 
 Da das System die auf dem Feld befindlichen Schachfiguren anhand von (+nfc) Tags erkennt, müssen diese zuerst mit Daten beschrieben werden.
-Die verwendeten NXP `NTAG 21`[@nxpntag21] (+ic) besitzen einen vom Benutzer verwendbaren Speicher von 180 Bytes. Dieser kann über ein (+nfc)-Lese/Schreibgerät mit Daten verschiedenster Art beschrieben und wieder ausgelesen werden.
+Die verwendeten `NXP NTAG 21`[@nxpntag21] (+ic) besitzen einen vom Benutzer verwendbaren Speicher von 180 Bytes. Dieser kann über ein (+nfc)-Lese/Schreibgerät mit Daten verschiedenster Art beschrieben und wieder ausgelesen werden.
 Moderne Mobiltelefone besitzen in der Regel auch die Fähigkeit, mit passenden (+nfc) Tags kommunizieren zu können. Somit sind keine Stand-Alone Lesegeräte mehr notwendig.
 
 <br>
@@ -733,7 +739,7 @@ Für den Betrieb der beiden Elektromagnete wurde kein N-Channel Mosfet o.ä. ver
 
 <br>
 
-Für die Erzeugung der (+pwm) Signale für die H-Brücke wurde ein zusätzlicher Mikrokontroller `Atmega328p` benötigt, da hier die Steuersignale nicht direkt vom eingebetteten System erzeugt werden sollen, sondern nur die Zustandsinformationen über den (+spi) Bus übertragen werden sollen. Dies spart zusätzliche (+gpio) Anschlüsse und somit sind alle Kompomenten über einen einzigen zentralen Bus kontrollierbar, welches einen möglichen Tausch des eingebetteten Systems in späteren Revisionen vereinfacht.
+Für die Erzeugung der (+pwm) Signale für die H-Brücke wurde ein zusätzlicher Mikrokontroller `Atmega328p` benötigt, da hier die Steuersignale durch die hohen Frequenzen nicht direkt vom eingebetteten System erzeugt werden können, sondern nur die Zustandsinformationen über den (+spi) Bus übertragen werden sollen. Dies spart zusätzliche (+gpio) Anschlüsse und somit sind alle Kompomenten über einen einzigen zentralen Bus kontrollierbar, welches einen möglichen Tausch des eingebetteten Systems in späteren Revisionen vereinfacht.
 
 <br>
 
@@ -1078,19 +1084,19 @@ Zuvor bestand der Quader-förmige Schachtisch aus einem Lack-Tisch als Deckel, w
 
 <br>
 
-Die Wahl des neuen Materials war jedoch simpel; aufgrund der langjährigen Bewährtheit, der Stabilität und der einfachen Möglichkeit der Anpassung wurden als Basis des neuen Systems Aluminium-Profilstangen gewählt. Da der Tisch keine größeren Kräfte aufnehmen muss, wurde ein Stangengrundmaß von 20 x 20 mm gewählt. Diese Stangen sind dennoch stabil genug, um möglichen Außeneinwirkungen wie Stößen oder Drücken standzuhalten. 
+Die Wahl des neuen Materials war jedoch simpel; aufgrund der langjährigen Bewährtheit, der Stabilität und der einfachen Möglichkeit der Anpassung wurden als Basis des neuen Systems Aluminium-Profilstangen gewählt. Da der Tisch keine größeren Kräfte aufnehmen muss, wurde ein Stangengrundmaß von 20mm x 20mm gewählt. Diese Stangen sind dennoch stabil genug, um möglichen Außeneinwirkungen wie Stößen oder Drücken standzuhalten. 
 
 <br>
 
-Als Außenmaße wurden 620 x 620 x 170 mm (Länge, Breite, Höhe) gewählt. Das Außenmaß ergab sich aus der Berechnung der benötigten Spielfeldgröße, der Parkpositionen und der gegebenen Stangenbreite. Die Schachfiguren besitzen einen maximalen Durchmesser von 22 mm. Damit Figuren aneinander ohne Berührung vorbeigeführt werden können, ist somit eine Größe von mindestens 44 mm für ein Feld nötig. Da eine Distanz eingerechnet werden muss, um ein magnetisches Anziehen der Figuren zu verhindern und Fehler bei der mittigen Positionierung der Figuren möglich sind, wurde hierfür eine zusätzliche Toleranz von 13 mm ergänzt und somit ein Idealmaß von 57 mm Seitenlänge pro Feld errechnet. 
-Bei einem vollständigen Schachtisch ergibt sich daraus eine Schachfeldgröße von 456 x 456 mm. 
-Für die Parkpositionen wurden zusätzlich noch einmal 30 mm berechnet mit einem Abstand zum Feld von weiteren 37 mm.
-Somit ergibt sich, wenn man das Feld quadratisch auslegt, eine Seitenlänge von 590 mm. Als Plattenmaß wurde 620mm gewählt, um eine Toleranz für die Befestigung zu berücksichtigen und zudem möglichen Einschränkungen der Mechanik vorzubeugen.
+Als Außenmaße wurden 620mm x 620mm x 170mm (Länge, Breite, Höhe) gewählt. Das Außenmaß ergab sich aus der Berechnung der benötigten Spielfeldgröße, der Parkpositionen und der gegebenen Stangenbreite. Die Schachfiguren besitzen einen maximalen Durchmesser von 22mm. Damit Figuren aneinander ohne Berührung vorbeigeführt werden können, ist somit eine Größe von mindestens 44mm für ein Feld nötig. Da eine Distanz eingerechnet werden muss, um ein magnetisches Anziehen der Figuren zu verhindern und Fehler bei der mittigen Positionierung der Figuren möglich sind, wurde hierfür eine zusätzliche Toleranz von 13mm ergänzt und somit ein Idealmaß von 57mm Seitenlänge pro Feld errechnet. 
+Bei einem vollständigen Schachtisch ergibt sich daraus eine Schachfeldgröße von 456mm x 456mm. 
+Für die Parkpositionen wurden zusätzlich noch einmal 30mm berechnet mit einem Abstand zum Feld von weiteren 37mm.
+Somit ergibt sich, wenn man das Feld quadratisch auslegt, eine Seitenlänge von 590mm. Als Plattenmaß wurde 620mm gewählt, um eine Toleranz für die Befestigung zu berücksichtigen und zudem möglichen Einschränkungen der Mechanik vorzubeugen.
 
 <br>
 
-Die Platte wurde dann in Alu-Profilstangen eingelassen; die Stangen sollen die Platte umrahmen. Mit einem Grundmaß von 20 x 20 mm für die Profilstangen ergab sich somit ein Gesamtmaß von 660 mm x 660 mm.
-Benötigt wurden 8 Profilstangen der Länge 620 mm und 4 der Länge 170 mm, welche zu einem quadratischen Kasten zusammengesetzt wurden. Für die X-Achsen wurden zudem zwei Profilstangen der Länge 610 mm und für die Y-Achse noch eine weitere der Länge 620 mm benötigt. 
+Die Platte wurde dann in Alu-Profilstangen eingelassen; die Stangen sollen die Platte umrahmen. Mit einem Grundmaß von 20mm x 20mm für die Profilstangen ergab sich somit ein Gesamtmaß von 660mm x 660mm.
+Benötigt wurden acht Profilstangen der Länge 620mm und vier der Länge 170mm, welche zu einem quadratischen Kasten zusammengesetzt wurden. Für die X-Achsen wurden zudem zwei Profilstangen der Länge 610mm und für die Y-Achse noch eine weitere der Länge 620mm benötigt. 
 
 <br>
 
@@ -1098,12 +1104,12 @@ Die für die Montage üblicherweise verwendeten Winkel wurden jedoch aufgrund de
 
 <br>
 
-Da die Tischpatte nur aufliegt, ist es zusätzlich möglich, den Raum unterhalb der Profilstangen als Konstruktionsraum zu verwenden. Dabei ist zu beachten, dass an allen Seiten des Tisches noch Seitenelemente, bestehend aus 620 x 130 x 5 mm Acrylglas-Platten, eingelassen werden. Somit beträgt die exakte Länge der für die Konstruktion nutzbaren Seiten 650 mm. Lediglich die Ecken, welche die Höhenelemente der Aluprofile beinhalten, bieten nur eine Länge von 620 mm.
+Da die Tischpatte nur aufliegt, ist es zusätzlich möglich, den Raum unterhalb der Profilstangen als Konstruktionsraum zu verwenden. Dabei ist zu beachten, dass an allen Seiten des Tisches noch Seitenelemente, bestehend aus 620mm x 130mm x 5mm Acrylglas-Platten, eingelassen werden. Somit beträgt die exakte Länge der für die Konstruktion nutzbaren Seiten 650mm. Lediglich die Ecken, welche die Höhenelemente der Aluprofile beinhalten, bieten nur eine Länge von 620mm.
 
 <br>
 
 Um das Design optisch zu verbessern, wurden die Acrylglas-Elemente in weiß gewählt. Transparente Elemente ermöglichen zwar eine Sicht auf die Mechanik im Inneren, jedoch wurde hierbei insbesondere Wert auf den Gesamteindruck gelegt, welcher durch die weiße Struktur des Glases aufgewertet wird.
-Zudem wurden im Inneren noch zusätzlich LED-Streifen verlegt, welche dank des verwendeten TMC-Boards einfach angeschlossen werden konnten. Die weißen Glaselemente streuen das Licht günstiger und ermöglichen so ein unterschwelliges Leuchten.
+Zudem wurden im Inneren noch zusätzlich (+led)-Streifen verlegt, welche dank des verwendeten TMC-Boards einfach angeschlossen werden konnten. Die weißen Glaselemente streuen das Licht günstiger und ermöglichen so ein unterschwelliges Leuchten.
 
 <br>
 
@@ -1115,7 +1121,7 @@ Nachteil der verwendeten Aluminium-Profilstangen und der weißen Acrylglas-Eleme
 
 <br>
 
-Zudem wurde die Tischplatte nun durch eine simple Holzplatte ersetzt. Eine Höhe von 3 mm darf aufgrund des Magnetismus zwischen Schlitten und Schachfigur nicht überschritten werden. Um ein Durchbiegen der Platte zu verhindern, wurden in den Profilstangen horizontale Vorsprünge ergänzt, die die Platte auf einer Ebene mit der Oberkante der Alu-Profilstangen halten.
+Zudem wurde die Tischplatte nun durch eine simple Holzplatte ersetzt. Eine Höhe von 3mm darf aufgrund des Magnetismus zwischen Schlitten und Schachfigur nicht überschritten werden. Um ein Durchbiegen der Platte zu verhindern, wurden in den Profilstangen horizontale Vorsprünge ergänzt, die die Platte auf einer Ebene mit der Oberkante der Alu-Profilstangen halten.
 
 <br>
 
@@ -1134,11 +1140,11 @@ Insgesamt überwiegen die Vorteile der Universalität dank der gegebenen Normung
 ### 3D-Komponenten
 
 Die Masse an selbst-erstellten 3D-Komponenten wurde aufgrund des selbst erstellten Korpus in der zweiten Revision erhöht. Aluprofile bieten die Möglichkeit der einfachen Montage von zusätzlichen Komponenten. Mittels sogenannter Nutensteine, welche in das Profil geschoben werden, ist es möglich, diese Komponenten einfach an das Profil zu schrauben, indem man in das im Nutenstein befindliche Gewinde schraubt. Dank der Schienen-ähnlichen Gestaltung der Profile sind die Positionen dieser Nutensteine individuell anpassbar.
-Ausgehend von den gewählten Maßen der Stangen wurden Nutensteine vom „Typ 6“ mit einem M5 Gewinde gewählt.
+Ausgehend von den gewählten Maßen der Stangen wurden Nutensteine vom Typ `Nut 6I` mit einem M5 Gewinde gewählt.
 
 <br>
 
-Zudem wurde nur ein einziges 3D-Design angefertigt, indem eine simple Platte erstellt wurde, auf welcher zwei Vorsprünge extrudiert wurden und eine Durchführung des Durchmessers 6,5 mm. Mittels der Durchführung konnte die Platte mit einem Nutenstein verschraubt werden, mittels der Vorsprünge, welche in die Profilschienen ragen, wird ein Drehen der Platte verhindert.
+Zudem wurde nur ein einziges 3D-Design angefertigt, indem eine simple Platte erstellt wurde, auf welcher zwei Vorsprünge extrudiert wurden und eine Durchführung des Durchmessers 6.5mm. Mittels der Durchführung konnte die Platte mit einem Nutenstein verschraubt werden, mittels der Vorsprünge, welche in die Profilschienen ragen, wird ein Drehen der Platte verhindert.
 Dieses 3D-Design wurde im Folgenden als Grundlage für alle neuen Komponenten verwendet. Oftmals wurden bestehende Modelle der ersten Revision mit diesem neuen Design verbunden und als eine Komponente gedruckt, was eine Wiedernutzung von etablierten Komponenten ermöglicht.
 
 <br>
@@ -1147,7 +1153,7 @@ Der Grundrahmen als solcher wurde einmalig erstellt und nur in einfachen Struktu
 
 <br>
 
-Insgesamt benötigt der gesamte Schachtisch 26 verschiedene mittels FDM 3D-gedruckte Komponenten, durch Mehrfachnutzung werden insgesamt 75 Elemente gedruckt. Dies ergibt bei den verwendeten Druckern und dem gewählten Filament eine Druckzeit von 25 Stunden und rund 450 Gramm Filament.
+Insgesamt benötigt der gesamte Schachtisch 26 verschiedene mittels FDM 3D-gedruckte Komponenten, durch Mehrfachnutzung werden insgesamt 75 Elemente gedruckt. Dies ergibt bei den verwendeten Druckern und dem gewählten Filament und Parametern eine Druckzeit von 25 Stunden und rund 450 Gramm Filament.
 
 <br>
 
@@ -1192,7 +1198,7 @@ Da die Riemen des Systems dauerhaft auf Spannung gehalten werden, ist kein Spiel
 
 <br>
 
-Ein weiterer Vorteil ist, dass CoreXY das gleiche Bauvolumen bei geringeren Gesamtabmessungen bieten kann. Der Fahrweg der Schachfiguren konnte somit ausgeweitet werden, ohne den Bauraum des Tisches zu ändern, da bei einem CoreXY-System jeder Punkt der gesamten Bauplatte angefahren werden kann, ohne zusätzlichen Platz zu benötigen. Bei einem Außenmaß des Tisches von 620x620 mm wies der erste Prototyp einen Fahrweg von 480x480 mm auf, während die zweite Revision mit selben Außenmaßen einen Fahrweg von 580x580 mm erreicht. Der fehlende Raum der ersten Version ist insbesondere auf die Lagerung der Motoren zurückzuführen, die jeweils ihre eigene Achse verkürzten. Nun liegen beide Motoren auf der x-Achse und dienen sogar als Bremse vor den Steuerkomponenten. 
+Ein weiterer Vorteil ist, dass CoreXY das gleiche Bauvolumen bei geringeren Gesamtabmessungen bieten kann. Der Fahrweg der Schachfiguren konnte somit ausgeweitet werden, ohne den Bauraum des Tisches zu ändern, da bei einem CoreXY-System jeder Punkt der gesamten Bauplatte angefahren werden kann, ohne zusätzlichen Platz zu benötigen. Bei einem Außenmaß des Tisches von 620mm x 620mm wies der erste Prototyp einen Fahrweg von 480mm x 480mm auf, während die zweite Revision mit selben Außenmaßen einen Fahrweg von 580mm x 580mm erreicht. Der fehlende Raum der ersten Version ist insbesondere auf die Lagerung der Motoren zurückzuführen, die jeweils ihre eigene Achse verkürzten. Nun liegen beide Motoren auf der x-Achse und dienen sogar als Bremse vor den Steuerkomponenten. 
 
 <br>
 
@@ -1453,7 +1459,7 @@ char scan_nfc_tag(){
 
 <br>
 
-In diesem Falle wird nur ein Befehl zum Auslesen des (+nfc) Tags benötigt. Das Host-System sendet die Zeichenkette `_readnfc_` zum Mikrokontroller und dieser versucht über das `PN532` Modul ein (+nfc) Tag zu lesen. Wenn dieses erkannt wird und einen passenden Payload enthält, antwortet dieser mit dem String `_readnfc_res_FIGURE-ID_ok_` oder wenn kein Tag gefunden wurde mit `_readnfc_red__empty_`.
+In diesem Falle wird nur ein Befehl zum Auslesen des (+nfc) Tags benötigt. Das Host-System sendet die Zeichenkette `_readnfc_` zum Mikrokontroller und dieser versucht über das `PN532` Modul ein (+nfc) Tag zu lesen. Wenn dieses erkannt wird und einen passenden Payload enthält, antwortet dieser mit dem String `_readnfc_res_FIGURE-ID_ok_` oder wenn kein Tag gefunden wurde mit `_readnfc_res__empty_ok_`.
 Auch hier wird wie bei der G-Code Sender Implementierung auf Fehler bei der Kommunikation bzw. einem Abbruch durch einen Timeout reagiert. Das System initialisiert die serielle Schnittstelle neu und resettet das System durch Setzten des `DTR`-(+gpio) am (+usb)-Seriell Wandler (+ic) (falls vorhanden).
 
 <br>
@@ -2177,7 +2183,7 @@ Der letzte Wegpunkt liegt im inneren des Zielfelds, sodass sich die Figur in der
 
 <br>
 
-Anzumerken ist, dass dieser Algorithmus nicht weiter optimiert wurde. Somit führen die Figuren gegebenenfalls Zick-Zack-Bewegungen aus, auch wenn das Zielfeld direkt neben dem Start-Feld liegt.
+Anzumerken ist, dass dieser Algorithmus nicht weiter optimiert wurde. Somit führen die Figuren gegebenenfalls Zick-Zack-Bewegungen aus, auch wenn das Ziel-Feld direkt neben dem Start-Feld liegt.
 
 
 
@@ -2255,9 +2261,9 @@ Durch die Socket-basierte Implementierung ist es möglich, die anderen (+ipc) In
 {
 "event":12, //BEGIN_BTN_SCAN
 "type":2, //CLICKED
-"dest_process_id":"ui_qt_01",
 "origin_process_id":"controller_sw_01",
-"is_ack":false //Qos
+"dest_process_id":"ui_qt_01",
+"is_ack":false //QOS
 }
 ```
 
@@ -2457,8 +2463,8 @@ void MenuManager::updateProgress()
 Zusammenfassend lässt sich feststellen, dass das Ziel der Arbeit erreicht wurde. Die Kernfrage, welche die Überprüfung der Ausführbarkeit inklusive Erstellung und Umsetzung eines eingebetteten Systems und einer Cloud-Infrastruktur umfasst, konnte abschließend positiv beantwortet werden.
 
 Es wurde iterativ ein autonomer Schachtisch \ref{ATC_PROD_TABLE_FINAL_IMG} entwickelt, welcher alle zuvor gestellten Anforderungen erfüllt. 
-Die Positionen der Schachfiguren können mittels NFC-Tags in den Füßen der Figuren und eines NFC-Lesers unterhalb des Schachfelds umgesetzt werden. 
-Die Mechanik zur Bewegung des NFC-Lesers und eines Magneten in dessen Mitte ermöglicht zudem durch gegenpolige Magnete in den Füßen der Figuren ein automatisches Bewegen der Figuren ohne manuelle Interaktion. 
+Die Positionen der Schachfiguren können mittels (+nfc)-Tags in den Füßen der Figuren und eines (+nfc)-Lesers unterhalb des Schachfelds umgesetzt werden. 
+Die Mechanik zur Bewegung des(+nfc)-Lesers und eines Magneten in dessen Mitte ermöglicht zudem durch gegenpolige Magnete in den Füßen der Figuren ein automatisches Bewegen der Figuren ohne manuelle Interaktion. 
 Die Größe der Felder des Schachtischs ist so ausgelegt, dass Figuren ohne Kontraktionen aneinander vorbeigeführt und am Rand des Spielfeldes positioniert werden können, sofern sie aus dem Spiel ausgeschieden sind. Dadurch war eine kleinere Revision des Tisches nicht anwendbar, dennoch konnten mittels der größeren Dimensionen der letzten Revision diese Funktion und weitere, wie die Mechanik zur Bewegung, optimiert und adäquat umgesetzt werden. 
 
 <br>
@@ -2553,7 +2559,7 @@ Auch weitere Hardware kann mittels Porterweiterungen wie (+usb) zum Tisch ergän
 
 <br>
 
-Zudem ermöglicht die Verbindung zum Internet unzählige Kapazitäten, wie die Einbindung anderer, existierender Schach-Clouds wie beispielsweise „licchess.org“. 
+Zudem ermöglicht die Verbindung zum Internet unzählige Kapazitäten, wie die Einbindung anderer, existierender Schach-Clouds wie beispielsweise `licchess.org`. 
 
 <br>
 
