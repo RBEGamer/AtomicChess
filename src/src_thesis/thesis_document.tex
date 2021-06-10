@@ -236,13 +236,13 @@ Tischen handelt es sich um
   \begin{itemize}
   \tightlist
   \item
-    Square Off - Kingdom \cite{squareoffkingdom}
+    Square Off - Kingdom\cite{squareoffkingdom}
   \item
-    Square Off - Grand Kingdom \cite{squareoffgrand}
+    Square Off - Grand Kingdom\cite{squareoffgrand}
   \item
-    DGT Smartboard \cite{dtgsmartboard}
+    DGT Smartboard\cite{dtgsmartboard}
   \item
-    DGT Bluetooth Wenge \cite{dtgble}
+    DGT Bluetooth Wenge\cite{dtgble}
   \end{itemize}
 \item
   open-source:
@@ -250,11 +250,11 @@ Tischen handelt es sich um
   \begin{itemize}
   \tightlist
   \item
-    Automated Chessboard (Michael Guerero) \cite{actproject1}
+    Automated Chessboard (Michael Guerero)\cite{actproject1}
   \item
-    Automated Chessboard (Akash Ravichandran) \cite{actproject2}
+    Automated Chessboard (Akash Ravichandran)\cite{actproject2}
   \item
-    DIY Super Smart Chessboard \cite{actproject3}
+    DIY Super Smart Chessboard\cite{actproject3}
   \end{itemize}
 \end{itemize}
 
@@ -534,8 +534,8 @@ anderen Projekten in mindestens einem Feature unterschieden.
 
 Auch existieren weitere Abwandlungen von autonomen Schachbrettern, bei
 welchen die Figuren von oberhalb des Spielbretts gegriffen bzw. bewegt
-werden. In einigen Projekten wird dies mittels eines Industrie-Roboters
-\cite{actprojectrobot} oder eines modifizierten
+werden. In einigen Projekten wird dies mittels eines
+Industrie-Roboters\cite{actprojectrobot} oder eines modifizierten
 3D-Druckers\cite{atcproject3dprinter} realisiert. Diese wurden hier
 aufgrund der Mechanik, welche über dem Spielbrett montiert werden muss
 und damit das Spielerlebnis erheblich beeinflusst, nicht berücksichtigt.
@@ -896,11 +896,11 @@ Einfache Konfiguration & Nein & Ja\tabularnewline
 \end{longtable}
 
 Hierbei stellt das \passthrough{\lstinline!Yocto!}- Projekt eine größere
-Einsteigshürde dar, aufgrund seines komplexen Layer-Systems.\\
-Es bietet sich jedoch für komplexe Projekte an, welche einen hohen Grad
-an Individualisierung benötigen. Ein Nachteil dessen ist, dass dadurch
-auch viel vom Nutzer selber konfiguriert werden muss, bevor ein
-minimales System in Betrieb genommen werden kann. Somit muss zuerst eine
+Einsteigshürde dar, aufgrund seines komplexen Layer-Systems. Es bietet
+sich jedoch für komplexe Projekte an, welche einen hohen Grad an
+Individualisierung benötigen. Ein Nachteil dessen ist, dass dadurch auch
+viel vom Nutzer selber konfiguriert werden muss, bevor ein minimales
+System in Betrieb genommen werden kann. Somit muss zuerst eine
 grundlegende Konfiguration für das eingebettete System angelegt werden
 und es kann nicht direkt mit einem fertigen minimalen System mit der
 eigentlichen Software-Entwicklung gestartet werden. Allgemein sind die
@@ -1456,8 +1456,8 @@ geschrieben werden. Diese sind mit Dateien auf einer Festplatte
 vergleichbar und können verschiedene Dateiformate und Dateigrößen
 annehmen. Ein typischer Anwendungsfall ist der \gls{ndefrtd} URL
 Datensatz. Dieser kann dazu genutzt werden, eine spezifizierte URL auf
-dem Endgerät aufzurufen, nachdem der \gls{nfc} Tag gescannt wurde.
-\cite{nordicnfclibndef}
+dem Endgerät aufzurufen, nachdem der \gls{nfc} Tag gescannt
+wurde.\cite{nordicnfclibndef}
 
 Der autonome Schachtisch verwendet den einfachsten \gls{ndefrtd} Typ,
 den sogenannten Text-Record, welcher zum Speichern von Zeichenketten
@@ -1465,8 +1465,8 @@ genutzt werden kann, ohne dass eine Aktion auf dem Endgerät ausgeführt
 wird. Jeder Tag einer Schachfigur, welche für den autonomen Schachtisch
 verwendet werden kann, besitzt diesen \gls{ndef} Record
 \ref{ndef_record_rook} an der ersten Speicher-Position. Alle weiteren
-eventuell vorhandenen Records werden vom Tisch ignoriert.
-\cite{nordicnfclib}
+eventuell vorhandenen Records werden vom Tisch
+ignoriert.\cite{nordicnfclib}
 
 \begin{figure}
 \centering
@@ -1840,7 +1840,7 @@ TMC5160::TMC5160(MOTOR_ID _id) {
   //...
   //CHECK SPI INIT
   if(!SPICommunication::getInstance()->isInitialised()){/*...*/}
-    //REGISTER SPI CS PIN FOR SELECTED MOTOR  ID
+    //REGISTER SPI CS PIN FOR SELECTED MOTOR ID
     if (_id == MOTOR_ID::MOTOR_0) {
         const SPI_CS_DEVICE = SPICommunication::SPI_DEVICE::MOTOR_0; //TODO CAST
         SPICommunication::getInstance()->register_cs_gpio(SPI_CS_DEVICE, CS_GPIO_NUMBER_MOTOR_0);
@@ -1889,8 +1889,8 @@ int TMC5160::read(const int _address)
 {
   //POPULATE WRITEBUFFER = READ REGISTER ADDRESS
     const size_t DATA_LEN = 5;
-    uint8_t write_buffer[] = {  _address & 0x7F, 0, 0, 0, 0 };
-    uint8_t read_buffer[] = {  _address & 0x7F, 0, 0, 0, 0 };
+    uint8_t write_buffer[] = { _address & 0x7F, 0, 0, 0, 0 };
+    uint8_t read_buffer[] = { _address & 0x7F, 0, 0, 0, 0 };
     //FIRST WRITE REGISTER ADRESS TO READ
     int res = SPICommunication::getInstance()->spi_write(SPI_CS_DEVICE ,write_buffer, DATA_LEN);
     //READ RESULT
@@ -1919,10 +1919,10 @@ void TMC5160::atc_home_sync()
 {    
     enable_motor(); //ENABLE MOTOR
     enable_switch(TMC5160::REF_SWITCH::REF_L, true, true, true); //ENABLE LIMIT SWICHT => ENABLE HARD ENDSTOP
-    move_velocity(TMC5160::VELOCITY_DIRECTION::NEGATIVE, HOME_SPEED_VELOCITY, 1000);  //MOVE NEGATIVE TO LIMIT SWITCH
+    move_velocity(TMC5160::VELOCITY_DIRECTION::NEGATIVE, HOME_SPEED_VELOCITY, 1000); //MOVE NEGATIVE TO LIMIT SWITCH
     //WAIT TO REACH THE ENDSTOP
     while(!get_ramp_stauts().status_stop_l) {
-        std::this_thread::sleep_for(std::chrono::microseconds(1));        
+        std::this_thread::sleep_for(std::chrono::microseconds(1));
     }
     //STOP MOTOR
     hold_mode();
@@ -2590,7 +2590,7 @@ bool GCodeSender::wait_for_ack() {
         }else if(resp.rfind("echo:Unknown") != std::string::npos) {
             break;
         }else if(resp.rfind("Error:") != std::string::npos) {
-            break;            
+            break;
         }else if (resp.rfind("echo:busy: processing") != std::string::npos) {
             wait_counter = 0;
             LOG_F("wait_for_ack: busy_processing");
@@ -3122,7 +3122,7 @@ Port 3000 ausgeführt wird.
         DocumentRoot /var/www/html
         ProxyPass /.well-known !
         ProxyPass / http://127.0.0.1:3000/
-        ProxyPassReverse / http://127.0.0.1:3000/    
+        ProxyPassReverse / http://127.0.0.1:3000/
     ServerAdmin webmaster@atomicchess.de
 
     ErrorLog ${APACHE_LOG_DIR}/error.log
@@ -3317,9 +3317,9 @@ var matchmaking_job = new CronJob('*/' + CFG.getConfig().matchmaking_runner_inte
             //SORT PLAYER WITH THE LONGEST WAIT TIME IN THE LOBBY
             gpfm_res.player_searching_human.sort(player_sort_function_swt);
             //SELECT THE MOST WAITING PLAYER
-            const  p1 = gpfm_res.player_searching_human[0];
+            const p1 = gpfm_res.player_searching_human[0];
             //SELECT A RANDOM OTHER PLAYER
-            const  p2 = gpfm_res.player_searching_human[HELPER_FUNCTIONS.randomInteger(1, gpfm_res.player_searching_human.length - 1)];
+            const p2 = gpfm_res.player_searching_human[HELPER_FUNCTIONS.randomInteger(1, gpfm_res.player_searching_human.length - 1)];
             //...
             //START A MATCH
             GH.start_match(p1.hwid, p2.hwid, function (sm_err, sm_res) {
@@ -4168,7 +4168,7 @@ void MenuManager::ss_calboard_btn(){
 void MenuManager::updateProgress()
 {
     //GET LATEST EVENT FROM IPC
-    const guicommunicator::GUI_EVENT ev =  guiconnection.get_gui_update_event();
+    const guicommunicator::GUI_EVENT ev = guiconnection.get_gui_update_event();
     if(!ev.is_event_valid){return;}
     //PROCESS EVENTS
     //SWITCH MAIN MENU REQUEST

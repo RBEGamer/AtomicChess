@@ -441,7 +441,7 @@ Da im Rahmen dieses Projekts nur eine minimale Anzahl von Paketen benötigt werd
 Dann wurde prototypisch evaluiert, wie aufwändig es ist, zum `Buildroot` Framework eigene in C++ geschriebene Software hinzuzufügen.
 Zu diesem Zweck wurde ein eigenes C++ Paket erstellt und in das `Buildroot`-Framework integriert. Hierzu wurden dem `Buildroot` Quellcode zwei weitere Dateien hinzugefügt.
 
-Die `Config.in` beschreibt das Paket und legt Abhängigkeiten zu anderen Paketen fest.  
+Die `Config.in` beschreibt das Paket und legt Abhängigkeiten zu anderen Paketen fest.
 
 ```yaml
 #atctp - Config.in - Package Configuration
@@ -1223,7 +1223,7 @@ In der Komplexität des Aufbaus und dem Zeitaufwand der Montage war kein Untersc
 
 <br>
 
-Das Resultat übertrifft sogar die Erwartungen. Die Mechanik ist robust und es konnten keine Fehler mehr im Betrieb festgestellt werden. Einzelne Fehler durch nachgiebige 3D-Konstruktionen wurden ausgebessert und so ein optimales und möglichst beständiges X-Y-System erzeugt.  
+Das Resultat übertrifft sogar die Erwartungen. Die Mechanik ist robust und es konnten keine Fehler mehr im Betrieb festgestellt werden. Einzelne Fehler durch nachgiebige 3D-Konstruktionen wurden ausgebessert und so ein optimales und möglichst beständiges X-Y-System erzeugt.
 
 <br>
 
