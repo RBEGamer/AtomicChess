@@ -129,14 +129,14 @@ Im Folgenden werden vier kommerzielle und drei lizenzunabhängige (Open-Source) 
 Bei den ausgewählten Tischen handelt es sich um
 
 - kommerziell
-    - Square Off - Kingdom  [@squareoffkingdom]
-    - Square Off - Grand Kingdom [@squareoffgrand]
-    - DGT Smartboard  [@dtgsmartboard]
-    - DGT Bluetooth Wenge  [@dtgble] 
+    - Square Off - Kingdom[@squareoffkingdom]
+    - Square Off - Grand Kingdom[@squareoffgrand]
+    - DGT Smartboard[@dtgsmartboard]
+    - DGT Bluetooth Wenge[@dtgble] 
 - open-source:
-    - Automated Chessboard (Michael Guerero) [@actproject1]
-    - Automated Chessboard (Akash Ravichandran) [@actproject2]
-    - DIY Super Smart Chessboard [@actproject3]
+    - Automated Chessboard (Michael Guerero)[@actproject1]
+    - Automated Chessboard (Akash Ravichandran)[@actproject2]
+    - DIY Super Smart Chessboard[@actproject3]
 
 <br>
 
@@ -237,7 +237,7 @@ Besonders bei Projekten, welche sich noch in der Entwicklung befinden, können s
 
 Zusätzlich zu den genannten Projekten sind weitere derartige Projekte verfügbar; in der Tabelle wurde nur jene aufgelistet, welche sich von anderen Projekten in mindestens einem Feature unterschieden.
 
-Auch existieren weitere Abwandlungen von autonomen Schachbrettern, bei welchen die Figuren von oberhalb des Spielbretts gegriffen bzw. bewegt werden. In einigen Projekten wird dies mittels eines Industrie-Roboters [@actprojectrobot] oder eines modifizierten 3D-Druckers[@atcproject3dprinter] realisiert. Diese wurden hier aufgrund der Mechanik, welche über dem Spielbrett montiert werden muss und damit das Spielerlebnis erheblich beeinflusst, nicht berücksichtigt.
+Auch existieren weitere Abwandlungen von autonomen Schachbrettern, bei welchen die Figuren von oberhalb des Spielbretts gegriffen bzw. bewegt werden. In einigen Projekten wird dies mittels eines Industrie-Roboters[@actprojectrobot] oder eines modifizierten 3D-Druckers[@atcproject3dprinter] realisiert. Diese wurden hier aufgrund der Mechanik, welche über dem Spielbrett montiert werden muss und damit das Spielerlebnis erheblich beeinflusst, nicht berücksichtigt.
 
 
 
@@ -411,8 +411,8 @@ Diese unterscheiden sich im Aufbau und der Funktionsweise teils stark, vor allem
 
 <br>
 
-Hierbei stellt das `Yocto`- Projekt eine größere Einsteigshürde dar, aufgrund seines komplexen Layer-Systems.  
-Es bietet sich jedoch für komplexe Projekte an, welche einen hohen Grad an Individualisierung benötigen. Ein Nachteil dessen ist, dass dadurch auch viel vom Nutzer selber konfiguriert werden muss, bevor ein minimales System in Betrieb genommen werden kann. Somit muss zuerst eine grundlegende Konfiguration für das eingebettete System angelegt werden und es kann nicht direkt mit einem fertigen minimalen System mit der eigentlichen Software-Entwicklung gestartet werden.  Allgemein sind die Anforderungen an die zu erstellende Software und deren benötigte Requirements sehr gering, sodass hier eine detaillierte Einarbeitung zeitlich nicht möglich war.
+Hierbei stellt das `Yocto`- Projekt eine größere Einsteigshürde dar, aufgrund seines komplexen Layer-Systems.
+Es bietet sich jedoch für komplexe Projekte an, welche einen hohen Grad an Individualisierung benötigen. Ein Nachteil dessen ist, dass dadurch auch viel vom Nutzer selber konfiguriert werden muss, bevor ein minimales System in Betrieb genommen werden kann. Somit muss zuerst eine grundlegende Konfiguration für das eingebettete System angelegt werden und es kann nicht direkt mit einem fertigen minimalen System mit der eigentlichen Software-Entwicklung gestartet werden. Allgemein sind die Anforderungen an die zu erstellende Software und deren benötigte Requirements sehr gering, sodass hier eine detaillierte Einarbeitung zeitlich nicht möglich war.
 
 <br>
 
@@ -494,9 +494,9 @@ Dies ist in diesem Fall, ein durch das `Buildroot`-Framework generierte Linux-Im
 - (+lan) oder (+wlan)
 
 
-Da es sich hier um einen Prototyp handelt und die finalen Anforderungen  der Software und Hardware noch nicht final feststehen, sollte das eingebettete System genug Spielraum bieten, um spätere Erweiterungen umsetzten zu können.
+Da es sich hier um einen Prototyp handelt und die finalen Anforderungen der Software und Hardware noch nicht final feststehen, sollte das eingebettete System genug Spielraum bieten, um spätere Erweiterungen umsetzten zu können.
 Auch spielte bei der Auswahl die Verfügbarkeit zum Zeitpunkt der Evaluation eine Rolle, da hier einige andere Systeme unter anderem lange Lieferzeiten aufwiesen. Zudem wurde darauf geachtet, dass das System bereits in einigen anderen Projekten verwendet wird, sodass bei möglichen Problemen, Ressourcen für die Fehlerbehebung bereitstehen.
-Somit beschränkte sich die Auswahl für diesen Prototyp, angesichts des für die Evaluation abgesteckten zeitlichen Rahmen auf den `Raspberry-Pi 3b+`  und das `STM32MP157A-DK1`  \label{ref}.
+Somit beschränkte sich die Auswahl für diesen Prototyp, angesichts des für die Evaluation abgesteckten zeitlichen Rahmen auf den `Raspberry-Pi 3b+` und das `STM32MP157A-DK1` \label{ref}.
 
 : Getestete eingebettete Systeme \label{embsystems}
 
@@ -512,14 +512,14 @@ Somit beschränkte sich die Auswahl für diesen Prototyp, angesichts des für di
 
 
 Diese bieten vergleichbare technische Spezifikationen und siedeln sich im gleichen Preissegment an.
-Je nach Ausführung des `STM32MP157A-DK` ist in diesem bereits ein (+dsi)-Display  \ref{stm32mp1} vorhanden und bietet von der Softwareseite her bereits eine Unterstützung für das  `Yocto`-Projekt an.
+Je nach Ausführung des `STM32MP157A-DK` ist in diesem bereits ein (+dsi)-Display \ref{stm32mp1} vorhanden und bietet von der Softwareseite her bereits eine Unterstützung für das `Yocto`-Projekt an.
 Ein Vorteil des `STM32MP157A-DK` gegenüber dem bekannten `Raspberry-Pi 3b+` ist sein zusätzlicher `Arm Cortex A4`-Co-Prozessor, welcher als zusätzlicher Mikrokontroller verwendet werden kann.
 Somit kann die Ansteuerung der (+gpio)-Anschlüsse, sowie Timer und Iterrupt-Aufgaben von diesem übernommen werden und die Ergebnisse und Steuersignale von `Arm Cortex A7` Hauptprozessor und dessen Linux-System bearbeitet werden.
 
 Der `Raspberry-Pi 3b+` hingegen bietet einen großen Software-Support an, welches an der großen Open-Source-Community liegt, welche das Erfolgreiche System über die Jahre aufbauen konnte. Der `Arm Cortex-A53` 64-bit Quad-Core Prozessor bietet dabei viele Leistungsreserven und die (+gpio) Anschlüssen können direkt über das Dateisystem angesteuert werden. Einzig der 1 Gigabyte große Arbeitsspeicher und der Anschluss des Netzwerk-Chips über (+usb) sind der Flaschenhals des Systems.
 Somit eignen sich beide Systeme von den Spezifikationen her für diesen Prototypen.
 
-Anschließend wurde eine Test-Software erstellt und mittels des `Buildroot`-Framworks ein passendes Linux-System erstellt. Auf beiden Systemen ist es möglich, dieses auszuführen, jedoch war es nicht möglich, eine mittels `Qt` und der `Quick Controls II`-Erweiterung erstellte (+gui) auf dem  `STM32MP157A-DK` auszuführen. Dies liegt am zum Zeitpunkt der Evaluation nicht mit der (+gpu) des Systems lauffähigen Version des `ELGFS`-Frameworks.
+Anschließend wurde eine Test-Software erstellt und mittels des `Buildroot`-Framworks ein passendes Linux-System erstellt. Auf beiden Systemen ist es möglich, dieses auszuführen, jedoch war es nicht möglich, eine mittels `Qt` und der `Quick Controls II`-Erweiterung erstellte (+gui) auf dem `STM32MP157A-DK` auszuführen. Dies liegt am zum Zeitpunkt der Evaluation nicht mit der (+gpu) des Systems lauffähigen Version des `ELGFS`-Frameworks.
 Dieses wird verwendet, um Grafik mittels Hardwarebeschleunigung auf dem Display anzeigen zu können. 
 
 Somit wurde nach mehreren Versuchen, dieses Problem zu lösen, das `Raspberry-Pi 3b+`-System als eingebettetes System für den autonomen Schachtisch ausgewählt und die Entwicklung auf diesem fortgesetzt.
@@ -529,7 +529,7 @@ Somit wurde nach mehreren Versuchen, dieses Problem zu lösen, das `Raspberry-Pi
 Ein weiterer wichtiger Bestandteil sollte die Erkennung der sich auf dem Feld befindlichen Schachfiguren sein.
 Hierbei muss zum einen der Figur-Typ (König, Dame, Türme, Läufer, Springer, Bauern) und zum anderen die Figur-Farbe (schwarz, weiss) vom System erkannt werden.
 
-Da hier keine aufwendige Elektronik entwickelt werden,  sondern auf Standard-Komponenten zurückgegriffen werden sollte, schied ein komplexes (+hf) Antennen-Array unter dem Schachfeld aus, wie es bei einigen kommerziellen Produkten umgesetzt ist.
+Da hier keine aufwendige Elektronik entwickelt werden, sondern auf Standard-Komponenten zurückgegriffen werden sollte, schied ein komplexes (+hf) Antennen-Array unter dem Schachfeld aus, wie es bei einigen kommerziellen Produkten umgesetzt ist.
 Eine einfache 8x8 Matrix aus Drucktastern oder Hall-Effekt-Sensore schied ebenfalls aus, da hier die Eingabe über den Benutzer erfolgt und nur Rückschlüsse auf die veränderte Figur anhand einer manuellen Bewegung der Figur nachvollzogen werden kann.
 
 <br>
@@ -540,7 +540,7 @@ Dies kann zum Beispiel das Öffnen einer Internetseite auf dem mobilen-Endgerät
 
 ![Grove PN532 NFC Reader mit kabelgebundener Antenne \label{ATC_nfc_range_test}](images/ATC_nfc_range_test.png)
 
-Ein  Vorteil dieser Technologie ist, dass diese auch im Konsumerbereich bereits breit verfügbar ist. Durch das einfache Programmieren dieser (+nfc)-Tags über das Smartphone wird kein zusätzliches Lese-/Schreib-Gerät benötigt.
+Ein Vorteil dieser Technologie ist, dass diese auch im Konsumerbereich bereits breit verfügbar ist. Durch das einfache Programmieren dieser (+nfc)-Tags über das Smartphone wird kein zusätzliches Lese-/Schreib-Gerät benötigt.
 Hier musste jedoch zuvor getestet werden, welcher maximale Abstand erlaubt ist, um solch einen Tag noch scannen zu können.
 Auch ist der Abstand zwischen den einzelnen Tags entscheidend, d.h. wie nah können diese beieinander platziert werden, um trotzdem noch einwandfrei individuell ausgelesen werden zu können.
 
@@ -700,12 +700,12 @@ Da (+ndef) eigene Verwaltungsinformationen über die Art der Formatierung und ü
 <br>
 
 Per Lesegerät können anschließend mehrere (+ndef) Records auf den Tag geschrieben werden. Diese sind mit Dateien auf einer Festplatte vergleichbar und können verschiedene Dateiformate und Dateigrößen annehmen.
-Ein typischer Anwendungsfall ist der (+ndefrtd) URL Datensatz. Dieser kann dazu genutzt werden, eine spezifizierte URL auf dem Endgerät aufzurufen, nachdem der (+nfc) Tag gescannt wurde. [@nordicnfclibndef]
+Ein typischer Anwendungsfall ist der (+ndefrtd) URL Datensatz. Dieser kann dazu genutzt werden, eine spezifizierte URL auf dem Endgerät aufzurufen, nachdem der (+nfc) Tag gescannt wurde.[@nordicnfclibndef]
 
 <br>
 
 Der autonome Schachtisch verwendet den einfachsten (+ndefrtd) Typ, den sogenannten Text-Record, welcher zum Speichern von Zeichenketten genutzt werden kann, ohne dass eine Aktion auf dem Endgerät ausgeführt wird.
-Jeder Tag einer Schachfigur, welche für den autonomen Schachtisch verwendet werden kann, besitzt diesen (+ndef) Record \ref{ndef_record_rook} an der ersten Speicher-Position. Alle weiteren eventuell vorhandenen Records werden vom Tisch ignoriert. [@nordicnfclib]
+Jeder Tag einer Schachfigur, welche für den autonomen Schachtisch verwendet werden kann, besitzt diesen (+ndef) Record \ref{ndef_record_rook} an der ersten Speicher-Position. Alle weiteren eventuell vorhandenen Records werden vom Tisch ignoriert.[@nordicnfclib]
 
 ![Prototyp Hardware: Tool zur Erstellung des NDEF Payloads: ChessFigureIDGenerator.html \label{ATC_ChessFigureIDGenerator}](images/ATC_ChessFigureIDGenerator.png)
 
@@ -933,7 +933,7 @@ TMC5160::TMC5160(MOTOR_ID _id) {
   //...
   //CHECK SPI INIT
   if(!SPICommunication::getInstance()->isInitialised()){/*...*/}
-    //REGISTER SPI CS PIN FOR SELECTED MOTOR  ID
+    //REGISTER SPI CS PIN FOR SELECTED MOTOR ID
     if (_id == MOTOR_ID::MOTOR_0) {
         const SPI_CS_DEVICE = SPICommunication::SPI_DEVICE::MOTOR_0; //TODO CAST
         SPICommunication::getInstance()->register_cs_gpio(SPI_CS_DEVICE, CS_GPIO_NUMBER_MOTOR_0);
@@ -982,8 +982,8 @@ int TMC5160::read(const int _address)
 {
   //POPULATE WRITEBUFFER = READ REGISTER ADDRESS
     const size_t DATA_LEN = 5;
-    uint8_t write_buffer[] = {  _address & 0x7F, 0, 0, 0, 0 };
-    uint8_t read_buffer[] = {  _address & 0x7F, 0, 0, 0, 0 };
+    uint8_t write_buffer[] = { _address & 0x7F, 0, 0, 0, 0 };
+    uint8_t read_buffer[] = { _address & 0x7F, 0, 0, 0, 0 };
     //FIRST WRITE REGISTER ADRESS TO READ
     int res = SPICommunication::getInstance()->spi_write(SPI_CS_DEVICE ,write_buffer, DATA_LEN);
     //READ RESULT
@@ -1012,10 +1012,10 @@ void TMC5160::atc_home_sync()
 {    
     enable_motor(); //ENABLE MOTOR
     enable_switch(TMC5160::REF_SWITCH::REF_L, true, true, true); //ENABLE LIMIT SWICHT => ENABLE HARD ENDSTOP
-    move_velocity(TMC5160::VELOCITY_DIRECTION::NEGATIVE, HOME_SPEED_VELOCITY, 1000);  //MOVE NEGATIVE TO LIMIT SWITCH
+    move_velocity(TMC5160::VELOCITY_DIRECTION::NEGATIVE, HOME_SPEED_VELOCITY, 1000); //MOVE NEGATIVE TO LIMIT SWITCH
     //WAIT TO REACH THE ENDSTOP
     while(!get_ramp_stauts().status_stop_l) {
-        std::this_thread::sleep_for(std::chrono::microseconds(1));        
+        std::this_thread::sleep_for(std::chrono::microseconds(1));
     }
     //STOP MOTOR
     hold_mode();
@@ -1056,7 +1056,7 @@ Zu den Defiziten zählte zum einen der Bewegungsspielraum der einzelnen Achsen. 
 
 <br>
 
-Zum anderen war der Aufbau und die anschließende Kalibrierung der Mechanik und der entsprechenden Offset-Werte in der Software nicht trivial und benötigte einiges an Zeit. Durch die Verwendung der Tischplatte und des hölzernen Grundrahmens konnte jedoch ein robustes Design in einem kleinen Formfaktor umgesetzt werden, welches zusätzlichen Platz für Erweiterungen bietet.  
+Zum anderen war der Aufbau und die anschließende Kalibrierung der Mechanik und der entsprechenden Offset-Werte in der Software nicht trivial und benötigte einiges an Zeit. Durch die Verwendung der Tischplatte und des hölzernen Grundrahmens konnte jedoch ein robustes Design in einem kleinen Formfaktor umgesetzt werden, welches zusätzlichen Platz für Erweiterungen bietet.
 
 Gerade die Verwendung von verschraubten Holzplatten machte jedoch eine Vervielfältigung mit gleicher Qualität schwierig. Ein Re-Design der inneren Komponenten gestaltete sich schwierig, da hier bereits mehrere Iterationen durchgeführt wurden, um einen maximalen möglichen Verfahrweg zu schaffen.
 
@@ -1404,7 +1404,7 @@ bool GCodeSender::wait_for_ack() {
         }else if(resp.rfind("echo:Unknown") != std::string::npos) {
             break;
         }else if(resp.rfind("Error:") != std::string::npos) {
-            break;            
+            break;
         }else if (resp.rfind("echo:busy: processing") != std::string::npos) {
             wait_counter = 0;
             LOG_F("wait_for_ack: busy_processing");
@@ -1791,7 +1791,7 @@ Bei dem eingerichteten Reverse-Proxy werden alle Verbindungen aus dem öffentlic
         DocumentRoot /var/www/html
         ProxyPass /.well-known !
         ProxyPass / http://127.0.0.1:3000/
-        ProxyPassReverse / http://127.0.0.1:3000/    
+        ProxyPassReverse / http://127.0.0.1:3000/
     ServerAdmin webmaster@atomicchess.de
 
     ErrorLog ${APACHE_LOG_DIR}/error.log
@@ -1836,7 +1836,7 @@ Wenn mindestens zwei Clients auf der Suche nach einem Spiel sind und sich somit 
 Dieser sortiert die Clients nach Zeitpunkt des Eintretens und nach dem Spieler-Typ. Der Spieler-Typ kann dabei einer der folgenden sein:
 
 - autonomer Schachtisch `Human`
-- Webclient  `Human`
+- Webclient `Human`
 - AutoPlayer `AI`
 
 Das System sortiert die Liste der suchenden Clients nach deren Typ. Somit wird sichergestellt, dass zuerst alle menschlichen Spieler zusammen ein Spiel beginnen und erst im letzten Schritt ein Mensch gegen den Computer spielen muss.
@@ -1847,7 +1847,7 @@ Zum Beispiel besteht die Spielerliste welche auf der Suche nach einem Match sind
 - 2. autonomer Schachtisch A `Human`
 - 3. autonomer Schachtisch B `Human`
 
-Alle Spieler sind vom Typ `Human`, somit versucht das System mit jeweils zwei Spielern ein neues Spiel zu starten. Da der `Webclient A` und der `autonome Schachtisch A` bereits am längsten gewartet haben, werden diese zuerst ausgewählt. Das System entscheidet hierbei nicht  die beiden autonomen Schachtisch Clienten zu verbinden, da hier zuerst auf die Wartezeit der Spieler Rücksicht genommen wird. Nach dem Matchmaking sieht die Liste folgendermaßen aus:
+Alle Spieler sind vom Typ `Human`, somit versucht das System mit jeweils zwei Spielern ein neues Spiel zu starten. Da der `Webclient A` und der `autonome Schachtisch A` bereits am längsten gewartet haben, werden diese zuerst ausgewählt. Das System entscheidet hierbei nicht die beiden autonomen Schachtisch Clienten zu verbinden, da hier zuerst auf die Wartezeit der Spieler Rücksicht genommen wird. Nach dem Matchmaking sieht die Liste folgendermaßen aus:
 
 - 1. autonomer Schachtisch B `Human`
 
@@ -1885,9 +1885,9 @@ var matchmaking_job = new CronJob('*/' + CFG.getConfig().matchmaking_runner_inte
             //SORT PLAYER WITH THE LONGEST WAIT TIME IN THE LOBBY
             gpfm_res.player_searching_human.sort(player_sort_function_swt);
             //SELECT THE MOST WAITING PLAYER
-            const  p1 = gpfm_res.player_searching_human[0];
+            const p1 = gpfm_res.player_searching_human[0];
             //SELECT A RANDOM OTHER PLAYER
-            const  p2 = gpfm_res.player_searching_human[HELPER_FUNCTIONS.randomInteger(1, gpfm_res.player_searching_human.length - 1)];
+            const p2 = gpfm_res.player_searching_human[HELPER_FUNCTIONS.randomInteger(1, gpfm_res.player_searching_human.length - 1)];
             //...
             //START A MATCH
             GH.start_match(p1.hwid, p2.hwid, function (sm_err, sm_res) {
@@ -2088,7 +2088,7 @@ Dieses Feature wurde insbesondere bei der Entwicklung des Webclients und der Ste
 Die Embedded System Software ist die Hauptsoftware, welche auf dem eingebetteten System ausgeführt wird.
 Als Basis-System dient das über das `Buildroot` erstellte Linux-System, in welchem die Software nach dem Start ausgeführt wird.
 
-![Embedded System Software: Buildroot Pakete  \label{buildroot_packages_1}](images/buildroot_packages_1.png)
+![Embedded System Software: Buildroot Pakete \label{buildroot_packages_1}](images/buildroot_packages_1.png)
 
 Um eine einfache Integration in das Linux-System zu gewährleisten, wurde ein `Buildroot`-Paket erstellt \ref{buildroot_packages_1}, welches über den Konfigurations-Dialog ausgewählt werden kann. Somit kann ein komplettes System-Image erstellt werden, welches die Software für den autonomen Schachtisch und dessen eingebettetes System enthält.
 
@@ -2127,7 +2127,7 @@ Wurde das Spiel gerade erst gestartet, beginnt die Sync-Phase. Bei dieser müsse
 Ist der Client am Zug, wartet dieser auf einen Zug in Form einer Benutzereingabe.
 Dies kann entweder durch manuelles Eintippen des Schachzugs über das (+gui) geschehen oder über eine manuelle Bewegung der Figuren auf dem Schachtisch.
 Auch hier hat der Client keine Informationen darüber, ob der getätigte Zug gültig ist.
-Die Zuginformationen werden über die entsprechende (+api) Route `/rest/make_move` an den Server übermittelt, welcher diesen Zug auf dem Schachbrett ausführt. Wenn der Zug ungültig ist, muss der Client den Benutzer informiert werden, diesen Zug rückgängig zu machen.  Ist der Zug jedoch gültig, wird dieser vom Server an den anderen Client übermittelt und dieser muss anschließend wie bei der Sync-Phase das Spielbrett aufbauen bzw. verändern.
+Die Zuginformationen werden über die entsprechende (+api) Route `/rest/make_move` an den Server übermittelt, welcher diesen Zug auf dem Schachbrett ausführt. Wenn der Zug ungültig ist, muss der Client den Benutzer informiert werden, diesen Zug rückgängig zu machen. Ist der Zug jedoch gültig, wird dieser vom Server an den anderen Client übermittelt und dieser muss anschließend wie bei der Sync-Phase das Spielbrett aufbauen bzw. verändern.
 
 <br>
 
@@ -2468,7 +2468,7 @@ void MenuManager::ss_calboard_btn(){
 void MenuManager::updateProgress()
 {
     //GET LATEST EVENT FROM IPC
-    const guicommunicator::GUI_EVENT ev =  guiconnection.get_gui_update_event();
+    const guicommunicator::GUI_EVENT ev = guiconnection.get_gui_update_event();
     if(!ev.is_event_valid){return;}
     //PROCESS EVENTS
     //SWITCH MAIN MENU REQUEST
