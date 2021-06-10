@@ -118,13 +118,14 @@ eingebetteten Systems und dem Zusammenspiel von diesem mit einem aus dem
 Internet erreichbaren Server, welcher als Vermittlungsstelle zwischen
 verschiedenen Schachtischen und anderen Endgeräten dient. Das Projekt
 umfasst zum einem die Positionserkennung und Steuerung der
-Hardwarekomponenten (Schachfiguren) und zum anderen die Kommunikation
-zwischen dem Tisch selbst und einem in einer Cloud befindlichem Server.
-Mittels der Programmierung werden diverse Technologien von verschiedenen
-Einzelsystemen zu einem Gesamtprodukt zusammengesetzt. Insgesamt gilt
-es, einen für Anwender ansprechenden Schachtisch zu entwickeln, der das
-Spielerlebnis nicht nur originalgetreu widerspiegelt, sondern das
-Einzelspieler-Modell zusätzlich noch verbessert.
+Hardwarekomponenten (Motoren, Sensoren) und zum anderen die
+Kommunikation zwischen dem Tisch selbst und einem in einer Cloud
+befindlichem Server. Mittels der Programmierung werden diverse
+Technologien von verschiedenen Einzelsystemen zu einem Gesamtprodukt
+zusammengesetzt. Insgesamt gilt es, einen für Anwender ansprechenden
+Schachtisch zu entwickeln, der das Spielerlebnis nicht nur
+originalgetreu widerspiegelt, sondern das Einzelspieler-Modell
+zusätzlich noch verbessert.
 
 Der Grundgedanke dabei ist, dem Spieler die Arbeit des Versetzens der
 Spielfiguren und das Erwägen von gegnerischen Zügen abzunehmen. Somit
@@ -680,11 +681,12 @@ als Gegenpol in den Fuß der Figuren eingelassen.
 
 Die Erkennung der Schachfiguren ist augenscheinlich die schwierigste
 Aufgabe. Hier wurde in der Mehrzahl der Projekte eine Kamera im
-Zusammenspiel mit einer auf OpenCV-basierten Figur-Erkennung verwendet.
-Diese Variante ist je nach Implementierung des Vision-Algorithmus
-fehleranfällig bei sich ändernden Lichtverhältnissen. Auch muss die
-Kamera oberhalb der Schachfiguren platziert werden, wenn kein
-transparentes Schachfeld verwendet werden soll.
+Zusammenspiel mit einer auf \passthrough{\lstinline!OpenCV!}-basierten
+Figur-Erkennung verwendet. Diese Variante ist je nach Implementierung
+des Vision-Algorithmus fehleranfällig bei sich ändernden
+Lichtverhältnissen. Auch muss die Kamera oberhalb der Schachfiguren
+platziert werden, wenn kein transparentes Schachfeld verwendet werden
+soll.
 
 Eine weitere Alternative ist die Verwendung einer Matrix aus
 Reed-Schaltern oder Halleffekt-Sensoren. Diese werden in einer 8x8
@@ -744,8 +746,8 @@ Schachtisch soll es dem Spieler zum Beispiel ermöglichen, ein Spiel am
 Morgen zu beginnen und dieses erst am nächsten Tag fortzusetzen.
 
 Auch muss die Frage beantwortet werden, was mit den ausgeschiedenen
-Figuren geschehen soll. Bei den autonomen Schachbrettern von Square
-Off\cite{squareoffgrand} werden die Figuren an die Seite auf
+Figuren geschehen soll. Bei den autonomen Schachbrettern von
+\passthrough{\lstinline!Square Off!} werden die Figuren an die Seite auf
 vordefinierte Felder bewegt und können so bei der nächsten Partie vom
 System wieder aufgestellt werden. Viele andere Projekte schieben die
 Figuren aus dem Feld heraus, können diese aber im Anschluss nicht mehr
@@ -898,8 +900,8 @@ Einfache Konfiguration & Nein & Ja\tabularnewline
 Hierbei stellt das \passthrough{\lstinline!Yocto!}- Projekt eine größere
 Einsteigshürde dar, aufgrund seines komplexen Layer-Systems. Es bietet
 sich jedoch für komplexe Projekte an, welche einen hohen Grad an
-Individualisierung benötigen. Ein Nachteil dessen ist, dass dadurch auch
-viel vom Nutzer selber konfiguriert werden muss, bevor ein minimales
+Individualisierung benötigen. Ein Nachteil dessen ist, dass dadurch
+vieles vom Nutzer selber konfiguriert werden muss, bevor ein minimales
 System in Betrieb genommen werden kann. Somit muss zuerst eine
 grundlegende Konfiguration für das eingebettete System angelegt werden
 und es kann nicht direkt mit einem fertigen minimalen System mit der
@@ -971,8 +973,7 @@ durchgeführt werden müssen.
 
 \begin{lstlisting}
 # atctp - atctp.mk - Makefile
-
-ATCTP_VERSION = 1.0.0
+ATCTP_VERSION = 1.0.5
 ATCTP_SITE = ./package/atctp/src
 ATCTP_SITE_METHOD = local
 ATCTP_LICENSE = GPL-2.0+
@@ -986,7 +987,7 @@ endef
 
 define ATCTP_INSTALL_TARGET_CMDS
     @echo ATCTP_INSTALL!
-    $(INSTALL) -D -m 0755 $(@D)/hello $(TARGET_DIR)/usr/ATC/atc_testpackage
+    $(INSTALL) -D -m 0755 $(@D)/atc_testpackage $(TARGET_DIR)/usr/ATC/atc_testpackage
 endef
 
 $(eval $(generic-package))
@@ -1019,7 +1020,7 @@ Ausgabe-Schnittstellen benötigt:
 \begin{itemize}
 \tightlist
 \item
-  \gls{hdmi} oder \gls{dsi} Anschluss für externen Bildschirm
+  \gls{hdmi} oder \gls{dsi}
 \item
   \gls{usb}
 \item
@@ -1130,7 +1131,7 @@ liegt, welche das Erfolgreiche System über die Jahre aufbauen konnte.
 Der \passthrough{\lstinline!Arm Cortex-A53!} 64-bit Quad-Core Prozessor
 bietet dabei viele Leistungsreserven und die \gls{gpio} Anschlüssen
 können direkt über das Dateisystem angesteuert werden. Einzig der 1
-Gigabyte große Arbeitsspeicher und der Anschluss des Netzwerk-Chips über
+Gigabyte große Arbeitsspeicher und die Anbindung des Netzwerk-Chips über
 \gls{usb} sind der Flaschenhals des Systems. Somit eignen sich beide
 Systeme von den Spezifikationen her für diesen Prototypen.
 
@@ -1161,10 +1162,10 @@ Figur-Typ (König, Dame, Türme, Läufer, Springer, Bauern) und zum anderen
 die Figur-Farbe (schwarz, weiss) vom System erkannt werden.
 
 Da hier keine aufwendige Elektronik entwickelt werden, sondern auf
-Standard-Komponenten zurückgegriffen werden sollte, schied ein komplexes
-\gls{hf} Antennen-Array unter dem Schachfeld aus, wie es bei einigen
+Standard-Komponenten zurückgegriffen werden sollte, schied ein \gls{hf}
+Antennen-Array unter dem Schachfeld aus, wie es bei einigen
 kommerziellen Produkten umgesetzt ist. Eine einfache 8x8 Matrix aus
-Drucktastern oder Hall-Effekt-Sensore schied ebenfalls aus, da hier die
+Drucktastern oder Hall-Effekt-Sensoren schied ebenfalls aus, da hier die
 Eingabe über den Benutzer erfolgt und nur Rückschlüsse auf die
 veränderte Figur anhand einer manuellen Bewegung der Figur nachvollzogen
 werden kann.
@@ -1197,9 +1198,8 @@ Hierzu wurde ein kleiner Testaufbau \ref{ATC_nfc_range_test} entwickelt,
 um verschiedene Abstände testen zu können. Als Lesegerät wurde ein
 \passthrough{\lstinline!PN532!} Modul zum Auslesen der \gls{nfc} Tags
 eingesetzt, da dieses Modul einfach angesteuert werden kann und eine
-abnehmbare Antenne besitzt. Dieses Modul wurde vom Autor der hier
-vorliegenden Arbeit bereits in anderen Projekten eingesetzt und erwies
-sich dort als zuverlässig.
+abnehmbare Antenne besitzt. Dieses Modul wurde bereits in anderen
+Projekten eingesetzt und erwies sich dort als zuverlässig.
 
 Die im Test verwendeten \gls{nfc} Tags hatten einen Durchmesser von 22mm
 und waren somit ein Standard-Produkt. Im Test stellte sich heraus, dass
@@ -1228,7 +1228,7 @@ ca. 55mm besitzt, reicht eine Wiederholgenauigkeit von +-1mm
 angenommen, dass das Spiel, welches durch die Mechanik in das System
 eingebracht wird, vernachlässigbar klein ist. Es ist auch davon
 auszugehen, dass die Kraft, welche von den Motoren benötigt wird, um
-eine Achse zu bewegen, nicht mehr als 45 Ncm betragen muss.
+eine Achse zu bewegen, nicht mehr als 45Ncm betragen muss.
 
 Dies entspricht den Werten einer X-Y-Achsenkonfiguration, wie sie in
 einem handelsüblichen 3D-Drucker zu finden ist, die mit
@@ -1260,8 +1260,8 @@ welcher die benötigten Impulse generiert.
 Diese Option wurde zuvor getestet und erwies sich als eine robuste
 Alternative. Jedoch existieren Schrittmotor-Treiber, welche über
 zusätzliche Bus Schnittstellen verfügen. Hier wurde auf den
-\passthrough{\lstinline!TMC5160-BOB!} gesetzt, da dieser über ein
-\gls{spi} Interface verfügt, welches direkt an das eingebettete System
+\passthrough{\lstinline!TMC5160!} gesetzt, da dieser über ein \gls{spi}
+Interface verfügt, welches direkt an das eingebettete System
 angeschlossen werden kann.
 
 Somit stellen die Schrittmotoren und die gewählte Ansteuerung ein
@@ -1292,10 +1292,11 @@ Beim Design der zu druckenden Bauteile wurde darauf geachtet, dass diese
 den Bauraum von 200mm x 200mm x 200mm nicht überschreiten und somit auch
 von einfachen \gls{fdm} 3D-Druckern erstellt werden können.
 
-Als Software wurde der Open-Source Slicer Ultimaker Cura
-\cite{ultimakercura} verwendet, da dieser zum einen bereits fertige
-Konfigurationen für den verwendeten 3D-Drucker enthält und zum anderen
-experimentelle Features bereitstellt.
+Als Software wurde der Open-Source Slicer
+\passthrough{\lstinline!Ultimaker Cura!}\cite{ultimakercura}
+verwendet, da dieser zum einen bereits fertige Konfigurationen für den
+verwendeten 3D-Drucker enthält und zum anderen experimentelle Features
+bereitstellt.
 
 \begin{figure}
 \centering
@@ -1305,13 +1306,13 @@ experimentelle Features bereitstellt.
 \end{figure}
 
 Hier wurde für die Bauteile, welche eine Stützstruktur benötigen, die
-von Cura bereitgestellte experimentelle Tree Support Structure
-aktiviert. \ref{3d_print_tree_structure} Diese bietet den Vorteil
-gegenüber anderen Stützstrukturen, dass sich diese leichter entfernen
-lässt und weniger Rückstände an den Bauteilen hinterlässt. Diese
-Vorteile wurden mit verschiedenen Testdrucken verifiziert und kamen
-insbesondere bei komplexen Bauteilen mit innenliegenden Elementen zum
-Tragen, bei denen eine Stützstruktur erforderlich war.
+von \passthrough{\lstinline!Cura!} bereitgestellte experimentelle Tree
+Support Structure aktiviert. \ref{3d_print_tree_structure} Diese bietet
+den Vorteil gegenüber anderen Stützstrukturen, dass sich diese leichter
+entfernen lässt und weniger Rückstände an den Bauteilen hinterlässt.
+Diese Vorteile wurden mit verschiedenen Testdrucken verifiziert und
+kamen insbesondere bei komplexen Bauteilen mit innenliegenden Elementen
+zum Tragen, bei denen eine Stützstruktur erforderlich war.
 
 \begin{longtable}[]{@{}lr@{}}
 \caption{Verwendete 3D Druck Parameter. Temperatur nach
@@ -1355,27 +1356,24 @@ guten Kompromiss zwischen Qualität und Druckzeit lieferten.
 Bei dem mechanischen Aufbau wurde auf ein einfaches Design geachtet. Die
 Konstruktion wurde im Vorfeld in einem \gls{cad} Programm durchgeführt
 und die Grundkonstruktion in mehreren Iterationsschritten verfeinert.
-Das verwendete \gls{cad} Programm
-\passthrough{\lstinline!Autodesk Fusion 360!} bietet eine einfache
-Umsetzung auch für Personen, welche keine Ausbildung im Bereich der
-Mechanik und Entwicklung vorweisen können.
 
 Bei der initialen Planung wurde beachtet, einen möglichst kleinen
 Fußabdruck des Schachtischs zu realisieren. Darüber hinaus wurde
 beabsichtigt, eine fertige Schachtischplatte als Basis zu verwenden und
 die Mechanik unter diese zu konstruieren. Um dies zu ermöglichen, wurde
-ein IKEA Lack Tisch verwendet, welcher die idealen Abmessungen von
-55x55cm hat und somit eine erforderliche Schachfeldgröße von 55mm
-ermöglicht. Durch den bereits vorhandenen Rahmen ist es auf einfache Art
-möglich, weitere Komponenten an diesem zu befestigen. Somit stellt diese
-Tischplatte eine ideale Basis für den autonomen Schachtisch dar.
+ein \passthrough{\lstinline!IKEA Lack!} -Tisch verwendet, welcher die
+idealen Abmessungen von 55cm x 55cm hat und somit eine erforderliche
+Schachfeldgröße von 55mm ermöglicht. Durch den bereits vorhandenen
+Rahmen ist es auf einfache Art möglich, weitere Komponenten an diesem zu
+befestigen. Somit stellt diese Tischplatte eine ideale Basis für den
+autonomen Schachtisch dar.
 
 Für die Achsenführung der beiden X- und Y-Achsen wurden konventionelle
-20x20mm V-Slot Aluminium-Profile verwendet, welche mit einfachen Mitteln
-und wenig Geschick passend zugeschnitten werden können. Allgemein wurde
-eine X-Y Riemenführung verwendet, wobei jede Achse einen separaten
-\passthrough{\lstinline!Nema 17!} Schrittmotor inklusive des passenden
-Endschalters montiert hat. Bei den Schlitten, welche auf den
+20mm x 20mm V-Slot Aluminium-Profile verwendet, welche mit einfachen
+Mitteln und wenig Geschick passend zugeschnitten werden können.
+Allgemein wurde eine X-Y Riemenführung verwendet, wobei jede Achse einen
+separaten \passthrough{\lstinline!Nema 17!} Schrittmotor inklusive des
+passenden Endschalters montiert hat. Bei den Schlitten, welche auf den
 Aluminium-Profilen laufen, wurden fertige Standardkomponenten verwendet,
 um das Spiel in der Mechanik zu minimieren. Diese stellen jedoch einen
 großen Posten in der Preiskalkulation dar. Die Vorteile überwogen
@@ -1439,8 +1437,8 @@ Der Schachtisch verwendet dabei das \gls{ndef} Dateiformat, welches
 festlegt, wie die Daten auf dem \gls{nfc} Tag gespeichert werden. Da
 dieses ein standardisiertes Format ist, können alle gängigen Lesegeräte
 und Chipsätze diese Datensätze lesen. Der im autonomen Schachtisch
-verwendete Chipsatz \passthrough{\lstinline!PN532!} von NXP ist dazu
-ebenfalls in der Lage.
+verwendete Chipsatz \passthrough{\lstinline!PN532!} von
+\passthrough{\lstinline!NXP!} ist dazu ebenfalls in der Lage.
 
 Um das \gls{ndef} Format verwenden zu können, müssen die \gls{nfc} Tags
 zuerst entsprechend formatiert werden. Die meisten käuflichen Tags sind
@@ -1448,8 +1446,8 @@ bereits derart formatiert. Alternativ kann dies mittels Mobiltelefon und
 passender Applikation geschehen. Da \gls{ndef} eigene
 Verwaltungsinformationen über die Art der Formatierung und über die
 gespeicherten Einträge speichert, stehen nach der Formatierung nur noch
-137 Bytes des NXP NTAG 21 für die Speicherung von Nutzdaten zur
-Verfügung.
+137 Bytes des \passthrough{\lstinline!NXP NTAG 21!} für die Speicherung
+von Nutzdaten zur Verfügung.
 
 Per Lesegerät können anschließend mehrere \gls{ndef} Records auf den Tag
 geschrieben werden. Diese sind mit Dateien auf einer Festplatte
@@ -1517,7 +1515,7 @@ zur Ansteuerung der beiden Elektromagnete sowie das
 
 Die wichtigsten Komponenten in der Schaltung sind das eingebettete
 System und die beiden Schrittmotortreiber
-\passthrough{\lstinline!TMC5160-BOB!}. Diese sind direkt über einen
+\passthrough{\lstinline!TMC5160!}. Diese sind direkt über einen
 \gls{spi} Bus miteinander verbunden. Zusätzlich zu den Schrittmotoren
 selbst ist an jedem Treiber der Endschalter zur Durchführung der
 Referenzfahrt der Achse angeschlossen. Die Treiber bieten dabei Eingänge
@@ -1602,7 +1600,7 @@ Durchgeführte Tests mit dem verwendeten
 mit 3.3V und einer Taktfrequenz von 16MHz betrieben werden kann und es
 somit zu einem nicht kontrollierbaren Verhalten dieses kommt. Dieses
 Verhalten machte sich durch eine gestörte Kommunikation mit dem
-\passthrough{\lstinline!PN532!} Modul bemerkbar und ein Auslesen von
+\passthrough{\lstinline!PN532!} Modul bemerkbar und ein Auslesen des
 \gls{nfc} Tags war nur in 60\% der Fälle fehlerfrei möglich.
 
 Im Anschluss wurde die Versorgungsspannung auf 5V erhöht, was zur Folge
@@ -2059,23 +2057,22 @@ gewählt. Da der Tisch keine größeren Kräfte aufnehmen muss, wurde ein
 Stangengrundmaß von 20mm x 20mm gewählt. Diese Stangen sind dennoch
 stabil genug, um möglichen Außeneinwirkungen wie Stöße standzuhalten.
 
-Als Außenmaße wurden 620mm x 620mm x 170mm (Länge, Breite, Höhe)
-gewählt. Das Außenmaß ergab sich aus der Berechnung der benötigten
-Spielfeldgröße, der Parkpositionen und der gegebenen Stangenbreite. Die
-Schachfiguren besitzen einen maximalen Durchmesser von 22mm. Damit
-Figuren aneinander ohne Berührung vorbeigeführt werden können, ist somit
-eine Größe von mindestens 44mm für ein Feld nötig. Da eine Distanz
-eingerechnet werden muss, um ein magnetisches Anziehen der Figuren zu
-verhindern und Fehler bei der mittigen Positionierung der Figuren
-möglich sind, wurde hierfür eine zusätzliche Toleranz von 13mm ergänzt
-und somit ein Idealmaß von 57mm Seitenlänge pro Feld errechnet. Bei
-einem vollständigen Schachtisch ergibt sich daraus eine Schachfeldgröße
-von 456mm x 456mm. Für die Parkpositionen wurden zusätzlich noch einmal
-30mm berechnet mit einem Abstand zum Feld von weiteren 37mm. Somit
-ergibt sich, wenn man das Feld quadratisch auslegt, eine Seitenlänge von
-590mm. Als Plattenmaß wurde 620mm gewählt, um eine Toleranz für die
-Befestigung zu berücksichtigen und zudem möglichen Einschränkungen der
-Mechanik vorzubeugen.
+Als Außenmaße wurden 620mm x 620mm x 170mm gewählt. Das Außenmaß ergab
+sich aus der Berechnung der benötigten Spielfeldgröße, der
+Parkpositionen und der gegebenen Stangenbreite. Die Schachfiguren
+besitzen einen maximalen Durchmesser von 22mm. Damit Figuren aneinander
+ohne Berührung vorbeigeführt werden können, ist somit eine Größe von
+mindestens 44mm für ein Feld nötig. Da eine Distanz eingerechnet werden
+muss, um ein magnetisches Anziehen der Figuren zu verhindern und Fehler
+bei der mittigen Positionierung der Figuren möglich sind, wurde hierfür
+eine zusätzliche Toleranz von 13mm ergänzt und somit ein Idealmaß von
+57mm Seitenlänge pro Feld errechnet. Bei einem vollständigen Schachtisch
+ergibt sich daraus eine Schachfeldgröße von 456mm x 456mm. Für die
+Parkpositionen wurden zusätzlich noch einmal 30mm berechnet mit einem
+Abstand zum Feld von weiteren 37mm. Somit ergibt sich, wenn man das Feld
+quadratisch auslegt, eine Seitenlänge von 590mm. Als Plattenmaß wurde
+620mm gewählt, um eine Toleranz für die Befestigung zu berücksichtigen
+und zudem möglichen Einschränkungen der Mechanik vorzubeugen.
 
 Die Platte wurde dann in Alu-Profilstangen eingelassen; die Stangen
 sollen die Platte umrahmen. Mit einem Grundmaß von 20mm x 20mm für die
@@ -2105,10 +2102,9 @@ Um das Design optisch zu verbessern, wurden die Acrylglas-Elemente in
 weiß gewählt. Transparente Elemente ermöglichen zwar eine Sicht auf die
 Mechanik im Inneren, jedoch wurde hierbei insbesondere Wert auf den
 Gesamteindruck gelegt, welcher durch die weiße Struktur des Glases
-aufgewertet wird. Zudem wurden im Inneren noch zusätzlich
-\gls{led}-Streifen verlegt, welche dank des verwendeten TMC-Boards
-einfach angeschlossen werden konnten. Die weißen Glaselemente streuen
-das Licht günstiger und ermöglichen so ein unterschwelliges Leuchten.
+aufgewertet wird. Zudem wurden im Inneren noch zusätzliche
+\gls{led}-Streifen verlegt. Die weißen Glaselemente streuen das Licht
+günstiger und ermöglichen so ein indirektes Leuchten.
 
 Um das System vollständig zu verschließen und somit auch besser zu
 schützen, wurde zudem eine Bodenplatte mit identischen Maßen zur
@@ -2125,13 +2121,14 @@ Komponenten verschraubt werden müssen, sind dementsprechend deutlich
 kostenintensiver.
 
 Zudem wurde die Tischplatte nun durch eine simple Holzplatte ersetzt.
-Eine Höhe von 3mm darf aufgrund des Magnetismus zwischen Schlitten und
+Eine Höhe von 4mm darf aufgrund des Magnetismus zwischen Schlitten und
 Schachfigur nicht überschritten werden. Um ein Durchbiegen der Platte zu
 verhindern, wurden in den Profilstangen horizontale Vorsprünge ergänzt,
 die die Platte auf einer Ebene mit der Oberkante der Alu-Profilstangen
 halten.
 
-Die Beine des zuvor verwendeten Lack-Tischs wurden erneut verwendet.
+Die Beine des zuvor verwendeten
+\passthrough{\lstinline!IKEA Lack!}-Tischs wurden erneut verwendet.
 Diese konnten für die zweite Revision verwendet werden und so zusätzlich
 die gleiche Montagehöhe zwischen der ersten und der zweiten Revision des
 Tischs erreicht werden. Da selbst die Höhe der Quader der
@@ -2355,10 +2352,11 @@ Testweise wurden einige Figuren mittels 3D Druck erstellt, um so das
 Gewicht zu erhöhen. Nach einem erfolgreichen Test wurde das \gls{cad}
 Modell so angepasst, dass sich der Magnet direkt in den Boden der Figur
 einkleben lässt. Des Weiteren wurden bei den Bauern die Magnete
-ausgetauscht. Die zuerst verwendeten 10x3mm Neodym-Magnete wurden bei
-diesen Figuren gegen 6x3mm Magnete getauscht. Somit sind im Design zwei
-verschiedene Arten von Magneten notwendig. Jedoch traten in den
-anschließend durchgeführten Testläufen keine Beeinflussungen mehr auf.
+ausgetauscht. Die zuerst verwendeten 10mm x 3mm Neodym-Magnete wurden
+bei diesen Figuren gegen 6mm x 3mm Magnete getauscht. Somit sind im
+Design zwei verschiedene Arten von Magneten notwendig. Jedoch traten in
+den anschließend durchgeführten Testläufen keine Beeinflussungen mehr
+auf.
 
 Durch diese Veränderungen am Figur-Design konnte zusätzlich die Zeit für
 den Zusammenbau einer einzelnen Figur gesenkt werden. Es werden nur noch
@@ -2392,7 +2390,7 @@ einer \gls{cnc}-Fr bzw. einem 3D Drucker stark ähnelt. Insbesondere die
 XY-Achsen Mechanik sowie die Ansteuerung von Schrittmotoren wird in
 diesen Systemen verwendet. Mit dem Durchbruch von 3D Druckern im
 Consumer-Bereich sind auch kleine und preisgünstige Steuerungen
-\ref{3dmarlinctl} erhältlich, welche 2-3 Schrittmotoren und diverse
+\ref{3dmarlinctl} erhältlich, welche 2-4 Schrittmotoren und diverse
 zusätzliche Hardware ansteuern können.
 
 Hierbei existiert eine große Auswahl solcher Steuerungen mit den
@@ -2400,9 +2398,9 @@ verschiedensten Ausstattungen. Bei der Auswahl wurde vor allem auf die
 Möglichkeit geachtet, sogenannte Silent-Schrittmotortreiber verwenden zu
 können, um die Geräuschemmissionen durch die Motoren so weit wie möglich
 zu minimieren. Im ersten Prototyp wurden unter anderem aus diesem Grund
-die \passthrough{\lstinline!TMC5160-BOB!} Treiber ausgewählt. Die
-meisten Boards \label{3dmarlinctl} bieten austauschbare Treiber, so dass
-es auch im Nachhinein möglich ist, diese auszuwechseln.
+die \passthrough{\lstinline!TMC5160!} Treiber ausgewählt. Die meisten
+Boards \label{3dmarlinctl} bieten austauschbare Treiber, so dass es auch
+im Nachhinein möglich ist, diese auszuwechseln.
 
 \begin{longtable}[]{@{}lccr@{}}
 \caption{Standardhardware 3D Drucker Steuerungen
@@ -2479,7 +2477,7 @@ Drucker wird dieser vom Slicer generiert und erhält die Wegpunkte,
 welche vom Druckkopf angefahren werden sollen.
 
 Im Falle des autonomen Schachtischs werden die G-Code Anweisungen
-on-the-fly durch den \gls{hal} erzeugt und die Motorsteuerung verfährt
+on-the-fly durch die \gls{hal} erzeugt und die Motorsteuerung verfährt
 die Achsen an die jeweils gewünschten Positionen.
 
 \passthrough{\lstinline!Marlin-FW!} bietet dabei einen großen
@@ -2524,11 +2522,11 @@ serielle Schnittstelle im System an und kann über diese mit der Software
 kommunizieren. Auch werden so keine speziellen Treiber benötigt, da auf
 nahezu jedem System ein Treiber \passthrough{\lstinline!USB-CDC!} für
 die gängigsten \gls{usb}-zu-Seriell Wandler bereits installiert ist. Die
-Software erkennt anhand der zur Verfügung stehenden \gls{usb}-Ger sowie
-deren Vendor und Product-\gls{id}-Informationen die verbundene Steuerung
-und verwendet diese nach dem Start automatisch. Hierzu wurde zuvor eine
-Liste \ref{gcodeusbctl} mit verschiedenen getesteten Steuerungen sowie
-deren \gls{usb}-Vendor und Product-\gls{id} angelegt.
+Software erkennt anhand der zur Verfügung stehenden \gls{usb}-Devices
+sowie deren Vendor und Product-\gls{id}-Informationen die verbundene
+Steuerung und verwendet diese nach dem Start automatisch. Hierzu wurde
+zuvor eine Liste \ref{gcodeusbctl} mit verschiedenen getesteten
+Steuerungen sowie deren \gls{usb}-Vendor und Product-\gls{id} angelegt.
 
 \begin{longtable}[]{@{}lccr@{}}
 \caption{Hinterlegte G-Code Steuerungen
@@ -2678,7 +2676,7 @@ Tag zu lesen. Wenn dieses erkannt wird und einen passenden Payload
 enthält, antwortet dieser mit dem String
 \passthrough{\lstinline!\_readnfc\_res\_FIGURE-ID\_ok\_!} oder wenn kein
 Tag gefunden wurde mit
-\passthrough{\lstinline!\_readnfc\_res\_\_empty\_ok\_!}. Auch hier wird
+\passthrough{\lstinline!\_readnfc\_res\_empty\_ok\_!}. Auch hier wird
 wie bei der G-Code Sender Implementierung auf Fehler bei der
 Kommunikation bzw. einem Abbruch durch einen Timeout reagiert. Das
 System initialisiert die serielle Schnittstelle neu und resettet das
@@ -2730,10 +2728,10 @@ Product & Vendor-ID & Product-ID & Board-Type\tabularnewline
 Product & Vendor-ID & Product-ID & Board-Type\tabularnewline
 \midrule
 \endhead
-Arduino Due {[}Programming Port{]} & 2341 & 003d &
-User-Move-Detector\tabularnewline
-Arduino Due {[}Native SAMX3 Port{]} & 2341 & 003e &
-User-Move-Detector\tabularnewline
+\passthrough{\lstinline!Arduino!} Due {[}Programming Port{]} & 2341 &
+003d & User-Move-Detector\tabularnewline
+\passthrough{\lstinline!Arduino!} Due {[}Native SAMX3 Port{]} & 2341 &
+003e & User-Move-Detector\tabularnewline
 CH340 & 1a86 & 7523 & User-Move-Detector\tabularnewline
 HL-340 & 1a86 & 7523 & User-Move-Detector\tabularnewline
 STM32F411 & 0483 & 5740 & User-Move-Detector\tabularnewline
@@ -2800,8 +2798,8 @@ zusätzlich zahlreiche Erweiterungsmöglichkeiten.
 & \gls{atc} -- autonomous Chessboard\tabularnewline
 \midrule
 \endhead
-Feldabmessungen (LxBxH) & 57x57mm\tabularnewline
-Abmessungen (LxBxH) & 620x620x170mm\tabularnewline
+Feldabmessungen (LxBxH) & 57mm x 57mm\tabularnewline
+Abmessungen (LxBxH) & 620mm x 620mm x 170mm\tabularnewline
 Gewicht & 5.7kg\tabularnewline
 Konnektivität & \gls{wlan}, \gls{usb}\tabularnewline
 Automatisches Bewegen der Figuren & ja\tabularnewline
@@ -2926,31 +2924,32 @@ Komponenten zusammen:
 \end{itemize}
 
 Da jeder dieser Services stateless ist und und keine eigenen Daten
-speichert, werden zwei Datenbank-Services benötigt, um die Spieldaten zu
-speichern:
+speichert, werden zwei zusätzliche Datenbank-Services benötigt, um die
+Spieldaten zu speichern:
 
 \begin{itemize}
 \tightlist
 \item
-  Mongo NoSQL Datenbank
+  \passthrough{\lstinline!Mongo!}\cite{mongodb} - NoSQL Datenbank
 \item
-  Redis In-Memory Key Value Datenbank
+  \passthrough{\lstinline!Redis!}\cite{redis} - In-Memory Key Value
+  Datenbank
 \end{itemize}
 
 Hierbei wurde auf zwei verschiedene Datenbanken gesetzt, was im
 Folgenden erläutert wird.
 
-Die \passthrough{\lstinline!Redis!}\cite{redis} Datenbank wird
-ausschließlich für die Speicherung der aktiven Sessions der einzelnen
-verbundenen Clients verwendet. Durch das verwendete Sessionsystem, bei
-dem jeder Clients in kurzen Intervallen seine Aktivität bestätigen muss,
-bietet diese Datenbank den Vorteil, dass diese durch ihre Architektur
-sehr schnell auf die angeforderten Datensätze zugreifen kann. Auch wird
-hier nur der Datensatz gespeichert, welcher die notwendigen
-Informationen zu der aktiven Session des Clients speichert. Dieser
-werden durch die \gls{id} des Clients abgefragt. Ferner wird der
-Zeitstempel der Anmeldung sowie die letzte Anfrage des Clients in Form
-eines \gls{json} Dokuments gespeichert.
+Die \passthrough{\lstinline!Redis!} Datenbank wird ausschließlich für
+die Speicherung der aktiven Sessions der einzelnen verbundenen Clients
+verwendet. Durch das verwendete Sessionsystem, bei dem jeder Clients in
+kurzen Intervallen seine Aktivität bestätigen muss, bietet diese
+Datenbank den Vorteil, dass diese durch ihre Architektur sehr schnell
+auf die angeforderten Datensätze zugreifen kann. Auch wird hier nur der
+Datensatz gespeichert, welcher die notwendigen Informationen zu der
+aktiven Session des Clients speichert. Dieser werden durch die \gls{id}
+des Clients abgefragt. Ferner wird der Zeitstempel der Anmeldung sowie
+die letzte Anfrage des Clients in Form eines \gls{json} Dokuments
+gespeichert.
 
 \begin{lstlisting}
 {
@@ -2962,13 +2961,12 @@ eines \gls{json} Dokuments gespeichert.
 
 Durch den Key-Value-Ansatz sowie den hohen Verbrauch an Arbeitsspeicher
 eignet sich diese Datenbank jedoch nicht zum Speichern der Spieldaten.
-Hierzu wurde ein zusätzlicher
-\passthrough{\lstinline!Mongo!}\cite{mogodb} Datenbank Service
-erstellt, in welchem diese Daten abgelegt werden. Zusätzlich zu den
-Spieldaten (Spiele, Spielstände, Statistiken) werden auch die
+Hierzu wurde ein zusätzlicher \passthrough{\lstinline!Mongo!} Datenbank
+Service erstellt, in welchem diese Daten abgelegt werden. Zusätzlich zu
+den Spieldaten (Spiele, Spielstände, Statistiken) werden auch die
 Nutzerprofile speichert. Ein Profil wird beim ersten Anmeldevorgang
-erstellt und enthält neben den Profilinformationen te-\gls{id}, Namen,
-Spielertyp) auch die Referenzen auf die gewonnenen und verlorenen
+erstellt und enthält neben den Profilinformationen (Device-\gls{id},
+Namen, Spielertyp) auch die Referenzen auf die gewonnenen und verlorenen
 Spiele. Diese Referenzen können später für die Visualisierung verwendet
 werden.
 
@@ -3047,26 +3045,12 @@ services:
     ports:
       - 5000:5000
     environment:
-      - PRODUCTION
+      - PRODUCTION=1
 
   AtomicChessRedisDatabase:
-    image: redis:latest
-    restart: always
-    container_name: atcredis
-    ports:
-      - 6379:6379
-    
+    #...
   AtomicChessMongoDatabase:
-    image: mongo:latest
-    container_name: atcmongo
-    restart: always
-    environment:
-        - MONGO_LOG_DIR=/dev/null
-    volumes:
-        - ./data/db:/data/db
-    ports:
-      - 27017:27017
-    command: mongod --logpath=/dev/null --quiet
+    #...
 
   AtomicChessAutoPlayer:
     depends_on:
@@ -3143,7 +3127,7 @@ zum öffentlichen Internet wird eine sichere Verbindung durch die
 Forward-Proxy Funktion des Apache 2 Webservers hergestellt.
 
 Der Backend-Service stellt die grundlegenden Funktionen bereit, welche
-die Clients benötigen. Dazu zählen unter anderem:
+die Clients für ein Online-Spiel benötigen. Dazu zählen unter anderem:
 
 \begin{itemize}
 \tightlist
@@ -3348,7 +3332,7 @@ Diese Tabelle enthält alle Spiele und deren aktuellen Status:
 \item
   Anzahl Schachzüge
 \item
-  Spieler-(id)s
+  Spieler-\gls{id}s
 \item
   Spielerfarbe
 \item
@@ -3539,10 +3523,9 @@ Kommunikation stattfinden kann ohne Verwendung der
 Der Hauptanwendungsfall des Webclienten \ref{ATC_webclient} während der
 Entwicklung war es, weitere Spieler zu simulieren und so ein Spiel mit
 nur einem autonomen Schachtisch testen zu können. Durch den Webclient
-ist zusätzlich möglich, gezielt Spiele und Spielzüge zu simulieren.
-Hierzu gehören vor allem Sonderzüge wie die Rochade oder der En-Passant
-Zug. Auch können durch den Webclient ungültige Züge simuliert werden,
-welche durch die verwendete Schach-\gls{ai} nicht getätigt werden.
+ist zusätzlich möglich, gezielt Spiele und Spielzüge zu simulieren. Auch
+können durch den Webclient ungültige Züge simuliert werden, welche durch
+die verwendete Schach-\gls{ai} nicht getätigt werden.
 
 Während der Implementierung wurde der Webclient weiter ausgebaut und es
 wurden weitere Eigenschaften ergänzt. Dazu zählt zum einen eine
@@ -3912,9 +3895,8 @@ Der gesamte Prozess des Scanvorgangs dauert je nach Anzahl der
 Möglichkeiten, welche der Spieler hat, maximal 30 Sekunden bis das
 System den getätigten Zug ermittelt hat.
 
-\hypertarget{inter-prozess-communication}{%
-\section{Inter Prozess
-Communication}\label{inter-prozess-communication}}
+\hypertarget{ipc}{%
+\section{\texorpdfstring{\gls{ipc}}{}}\label{ipc}}
 
 Bei der Entwicklung des Systems wurde darauf geachtet, dass das
 User-Interface auswechselbar bleibt. Somit ist es auch möglich, ein
@@ -4000,8 +3982,8 @@ if (!ev.is_event_valid){
 if(ev.event == guicommunicator::GUI_ELEMENT::BEGIN_BTN_SCAN && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {}
 \end{lstlisting}
 
-\hypertarget{user-interface}{%
-\section{User Interface}\label{user-interface}}
+\hypertarget{ui}{%
+\section{\texorpdfstring{\gls{ui}}{}}\label{ui}}
 
 Das User-Interface ist mit eines der zentralen Elemente, mit welchem der
 Benutzer interagiert. Hierbei soll dieses nur die nötigsten Funktionen
@@ -4120,9 +4102,9 @@ int main(int argc, char *argv[])
   view.engine()->addImportPath("qrc:/qml/imports");
   view.setSource(QUrl("qrc:/qml/WINDOW.qml"));
   view.engine()->rootContext()->setContextProperty("app", &app);
-  //...
-  //IMPORTANT STEP: AFTER INIT THE MainMenu COMPONENT HAS NO PARENT
-  //SO WE NEED TO SET IT MANUALLY TO MAKE C++ -> QML FUNCATION CALLS WORKING
+  //... 
+  //WORKAROUND: AFTER INIT THE MainMenu COMPONENT HAS NO PARENT
+  //SO WE NEED TO SET IT MANUALLY TO MAKE C++ -> QML CALLS WORKING
   QObject *object = view.rootObject();
   QObject *rect = object->findChild<QObject*>("mainmenu");
   if (rect){
@@ -4335,9 +4317,6 @@ bereits früher möglich gewesen, jedoch erforderte die Veränderung der
 Mechanik vom XY-System zu CoreXY und verschiedene unvorhergesehene
 Schwächen mit den verwendeten Magneten weitere Umsetzungsiterationen,
 die rückblickend nötig und zielführend waren.
-
-Auch die Erstellung der Thesis und das Formatieren von Vorlagen und
-Befehlen in Markdown und LaTeX erwies sich als lehrreich und innovativ.
 
 Insgesamt bin ich sehr zufrieden mit meinem Ergebnis, aber auch mit mir
 selbst und meiner erbrachten Leistung.
