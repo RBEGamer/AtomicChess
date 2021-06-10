@@ -7,7 +7,7 @@ Ein bauen per Dockerimage ist möglich mittels ` build_thesis_docker.sh` Script 
 
 # 10.06.2021
 
-* spelling, " ", code korrektur
+* final spelling, " ", code korrektur/check
 *
 
 # 08.06.2021
