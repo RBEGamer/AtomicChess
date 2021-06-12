@@ -209,6 +209,8 @@ void ConfigParser::loadDefaults(std::string _type_str)
 	{
 		config_store[ConfigParser::CFG_ENTRY::NETWORK_BACKEND_URL] = "http://atomicchess.de:3000";
 		config_store[ConfigParser::CFG_ENTRY::NETWORK_HEARTBEAT_INTERVAL_SECS] = "5";
+        config_store[ConfigParser::CFG_ENTRY::NETWORK_ENABLE_UDP_DISCOVERABLE] = "0";
+        config_store[ConfigParser::CFG_ENTRY::NETWORK_UDP_DISCOVERABLE_USER_DATA] = "ATCTABLE";
 
 		config_store[ConfigParser::CFG_ENTRY::GENERAL_HWID_INTERFACE] = "eth0";
 		config_store[ConfigParser::CFG_ENTRY::GENERAL_VERSION_FILE_PATH] = "/VERSION";
@@ -273,7 +275,8 @@ void ConfigParser::loadDefaults(std::string _type_str)
 	}else if (_type_str == "PROD_V1"){
 		config_store[ConfigParser::CFG_ENTRY::NETWORK_BACKEND_URL] = "http://atomicchess.de:3000";
 		config_store[ConfigParser::CFG_ENTRY::NETWORK_HEARTBEAT_INTERVAL_SECS] = "5";
-	
+        config_store[ConfigParser::CFG_ENTRY::NETWORK_ENABLE_UDP_DISCOVERABLE] = "0";
+        config_store[ConfigParser::CFG_ENTRY::NETWORK_UDP_DISCOVERABLE_USER_DATA] = "ATCTABLE";
 
 		config_store[ConfigParser::CFG_ENTRY::GENERAL_HWID_INTERFACE] = "eth0";
 		config_store[ConfigParser::CFG_ENTRY::GENERAL_VERSION_FILE_PATH] = "/VERSION";
@@ -340,7 +343,8 @@ void ConfigParser::loadDefaults(std::string _type_str)
     }else if (_type_str == "VIRT"){
         config_store[ConfigParser::CFG_ENTRY::NETWORK_BACKEND_URL] = "http://atomicchess.de:3000";
         config_store[ConfigParser::CFG_ENTRY::NETWORK_HEARTBEAT_INTERVAL_SECS] = "5";
-
+        config_store[ConfigParser::CFG_ENTRY::NETWORK_ENABLE_UDP_DISCOVERABLE] = "0";
+        config_store[ConfigParser::CFG_ENTRY::NETWORK_UDP_DISCOVERABLE_USER_DATA] = "ATCTABLE";
 
         config_store[ConfigParser::CFG_ENTRY::GENERAL_HWID_INTERFACE] = "eth0";
         config_store[ConfigParser::CFG_ENTRY::GENERAL_VERSION_FILE_PATH] = "/tmp/VERSION";
@@ -409,6 +413,8 @@ void ConfigParser::loadDefaults(std::string _type_str)
 	{
         config_store[ConfigParser::CFG_ENTRY::NETWORK_BACKEND_URL] = "http://atomicchess.de:3000";
         config_store[ConfigParser::CFG_ENTRY::NETWORK_HEARTBEAT_INTERVAL_SECS] = "5";
+        config_store[ConfigParser::CFG_ENTRY::NETWORK_ENABLE_UDP_DISCOVERABLE] = "1";
+        config_store[ConfigParser::CFG_ENTRY::NETWORK_UDP_DISCOVERABLE_USER_DATA] = "ATCTABLE";
 
         config_store[ConfigParser::CFG_ENTRY::GENERAL_HWID_INTERFACE] = "eth0";
         config_store[ConfigParser::CFG_ENTRY::GENERAL_VERSION_FILE_PATH] = "/VERSION";

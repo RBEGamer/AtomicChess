@@ -40,7 +40,7 @@ typedef std::chrono::system_clock::time_point TimePoint;
 #include "IOController.h"
 #include "StateMachine.h"
 #include "HardwareInterface.h"
-
+#include "UDPDiscovery.h"
 //------- INCLUDE EXTENTIONS -------- //
 #include "VoiceRecognitionExtention.h"
 
@@ -384,6 +384,17 @@ int main(int argc, char *argv[])
         LOG_F(WARNING, "ARGUMENT -autoplayer SET");
         ConfigParser::getInstance()->set(ConfigParser::CFG_ENTRY::GENERAL_ENABLE_RANDOM_MOVE_MATCH, "1", CONFIG_FILE_PATH);
     }
+
+
+
+    //---- ENABLE UDP DISCOVERY FOR EXTERNAL EXTENTIONS LIKE THE DGT3000 EXTENTION --- ///
+    UDPDiscovery udpdic = UDPDiscovery(ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::NETWORK_UDP_DISCOVERABLE_USER_DATA));
+    if(udpdic.enable_service(ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::NETWORK_ENABLE_UDP_DISCOVERABLE)) && ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::NETWORK_ENABLE_UDP_DISCOVERABLE)){
+        LOG_F(INFO,"UDPDiscovery ENABLED");
+    }else{
+        LOG_F(INFO,"UDPDiscovery DISABLED");
+    }
+
 
 
 
