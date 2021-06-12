@@ -1,0 +1,2 @@
+/usr/bin/ar qc libudp-discovery.a  CMakeFiles/udp-discovery.dir/udp_discovery_ip_port.cpp.o CMakeFiles/udp-discovery.dir/udp_discovery_peer.cpp.o CMakeFiles/udp-discovery.dir/udp_discovery_protocol.cpp.o
+/usr/bin/ranlib libudp-discovery.a

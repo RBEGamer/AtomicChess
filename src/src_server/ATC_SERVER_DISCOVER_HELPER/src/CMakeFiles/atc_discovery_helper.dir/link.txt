@@ -1,0 +1,1 @@
+/usr/bin/c++     -pthread -rdynamic CMakeFiles/atc_discovery_helper.dir/atc_discovery_helper.cpp.o  -o atc_discovery_helper  libudp-discovery.a -lrt 

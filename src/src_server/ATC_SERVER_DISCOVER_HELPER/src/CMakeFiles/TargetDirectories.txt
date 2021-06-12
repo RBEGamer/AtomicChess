@@ -1,0 +1,4 @@
+/home/prodevmo/Desktop/AtomiChessOS_/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/CMakeFiles/rebuild_cache.dir
+/home/prodevmo/Desktop/AtomiChessOS_/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/CMakeFiles/edit_cache.dir
+/home/prodevmo/Desktop/AtomiChessOS_/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/CMakeFiles/atc_discovery_helper.dir
+/home/prodevmo/Desktop/AtomiChessOS_/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/CMakeFiles/udp-discovery.dir

@@ -546,10 +546,13 @@ int main(int argc, char *argv[])
         if(!reip.empty()){
             reip = "http://" + reip + ":" + ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::NETWORK_UDP_DISCOVER_ATC_SERVER_PORT);
             start_backend_url = reip;
+            LOG_F(INFO,"GOT IP PROM UDP_ATC_SERVER_DISCOVERY SERVICE");
+            LOG_F(INFO,start_backend_url.c_str());
         }
     }
 
     //CREATE GAME BACKEND INSTANCE => THIS IS THE CONNECTION TO THE GAME SERVER
+
     BackendConnector gamebackend(start_backend_url, ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::GENERAL_HWID_INTERFACE), hwid);
     //SET HEARTBEAT INTERVAL
     int gamebackend_heartbeat_interval = 5;

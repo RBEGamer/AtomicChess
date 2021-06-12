@@ -1,0 +1,44 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/prodevmo/Desktop/AtomiChessOS_/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/atc_discovery_helper.cpp
+string.h
+-
+map
+-
+iostream
+-
+udp_discovery_peer.hpp
+/home/prodevmo/Desktop/AtomiChessOS_/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/udp_discovery_peer.hpp
+windows.h
+-
+unistd.h
+-
+
+/home/prodevmo/Desktop/AtomiChessOS_/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/udp_discovery_discovered_peer.hpp
+stdint.h
+-
+udp_discovery_ip_port.hpp
+/home/prodevmo/Desktop/AtomiChessOS_/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/udp_discovery_ip_port.hpp
+
+/home/prodevmo/Desktop/AtomiChessOS_/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/udp_discovery_ip_port.hpp
+string
+-
+
+/home/prodevmo/Desktop/AtomiChessOS_/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/udp_discovery_peer.hpp
+list
+-
+udp_discovery_discovered_peer.hpp
+/home/prodevmo/Desktop/AtomiChessOS_/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/udp_discovery_discovered_peer.hpp
+udp_discovery_peer_parameters.hpp
+/home/prodevmo/Desktop/AtomiChessOS_/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/udp_discovery_peer_parameters.hpp
+
+/home/prodevmo/Desktop/AtomiChessOS_/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/udp_discovery_peer_parameters.hpp
+stdint.h
+-
+
