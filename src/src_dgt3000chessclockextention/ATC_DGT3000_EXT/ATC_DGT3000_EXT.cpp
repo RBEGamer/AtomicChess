@@ -328,10 +328,11 @@ int main(int argc, char *argv[]) {
 		request_result textres =  make_request(BASE_URL, GET_TEXT_URL + "?devive=ATC_DGT300", INTERFACE);
 		if (!textres.request_failed)
 		{
-			if (old_text != textres.body) {
-				old_text = textres.body;
-				scrol_text(old_text, false, 300);
-			}
+			//if (old_text != textres.body) {
+			//	old_text = textres.body;
+				scrol_text(textres.body, false, 300);
+			std::cout << textres.body << std::endl;
+		//	}
 		}
 		
 		std::this_thread::sleep_for(std::chrono::milliseconds(MAIN_LOOP_SPPED));
