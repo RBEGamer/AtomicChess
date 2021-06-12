@@ -215,6 +215,8 @@ int main(int argc, char *argv[]) {
 	
 	int old_btn_state = -1;
 	int curr_btn_state = 0;
+	std::string old_text = "";
+	
 	while (true) {
 		
 		//PROCESS BTN EVENT
@@ -242,8 +244,12 @@ int main(int argc, char *argv[]) {
 		request_result textres =  make_request(BASE_URL, GET_TEXT_URL + "?devive=ATC_DGT300", INTERFACE);
 		if (!textres.request_failed)
 		{
-			scrol_text(tres.body, false, 300);
+			if (old_text != textres.body) {
+				old_text = textres.body;
+				scrol_text(old_text, false, 300);
+			}
 		}
+		
 		std::this_thread::sleep_for(std::chrono::milliseconds(MAIN_LOOP_SPPED));
 	}
 	/*
