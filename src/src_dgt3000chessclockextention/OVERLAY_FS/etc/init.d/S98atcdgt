@@ -1,7 +1,7 @@
 #!/bin/sh
 # /etc/init.d/S99atc ATCProject Marcel Ochsendorf marcel.ochsendorf.com
 #
-# atc        Starts all ATC pacakges.
+# atc        Starts the ATC ATC_DGT3000_EXT_LOCK pacakge.
 #
 
 
