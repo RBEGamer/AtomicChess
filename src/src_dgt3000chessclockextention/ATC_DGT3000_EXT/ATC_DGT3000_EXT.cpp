@@ -320,11 +320,11 @@ int main(int argc, char *argv[]) {
 			request_result res =  make_request(BASE_URL, BTN_CHANGE_URL + "?devive=ATC_DGT300&raw=" + std::to_string(curr_btn_state) + "&back_btn=" + std::to_string(back_btn) + "&minus_btn=" + std::to_string(minus_btn) + "&play_btn=" + std::to_string(play_btn) + "&plus_btn=" + std::to_string(plus_btn) + "&forward_btn=" + std::to_string(forward_btn) + "&on_btn=" + std::to_string(on_btn) + "&lever_right_down=" + std::to_string(lever_right_down), INTERFACE);
 			if (res.request_failed)
 			{
-				std::cout << res.request_failed << " FAILED";
+				std::cout << res.request_failed << " FAILED BTN_CHANGE_URL";
 			}
 		}
 		
-		
+		std::cout << BASE_URL << GET_TEXT_URL << "?devive=ATC_DGT300"<<std::endl;
 		request_result textres =  make_request(BASE_URL, GET_TEXT_URL + "?devive=ATC_DGT300", INTERFACE);
 		if (!textres.request_failed)
 		{
@@ -333,6 +333,8 @@ int main(int argc, char *argv[]) {
 				scrol_text(textres.body, false, 300);
 			std::cout << textres.body << std::endl;
 		//	}
+		}else{
+			std::cout << res.request_failed << " FAILED GET_TEXT_URL";
 		}
 		
 		std::this_thread::sleep_for(std::chrono::milliseconds(MAIN_LOOP_SPPED));
