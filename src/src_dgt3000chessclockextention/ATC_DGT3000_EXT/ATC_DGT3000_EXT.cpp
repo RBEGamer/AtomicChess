@@ -328,17 +328,17 @@ int main(int argc, char *argv[]) {
 			}
 		}
 		
-		std::cout << BASE_URL << GET_TEXT_URL << "?devive=ATC_DGT300"<<std::endl;
-		request_result textres =  make_request(BASE_URL, GET_TEXT_URL + "?devive=ATC_DGT300", INTERFACE);
+		//std::cout << BASE_URL << GET_TEXT_URL << "?devive=ATC_DGT300"<<std::endl;
+		request_result textres =  make_request(BASE_URL,  "/get_text?devive=ATC_DGT300", INTERFACE);
 		if (!textres.request_failed)
 		{
-			//if (old_text != textres.body) {
-			//	old_text = textres.body;
+			if (old_text != textres.body) {
+				old_text = textres.body;
 			scrol_text(textres.body, false, 300);
-			std::cout << textres.body << std::endl;
-		//	}
+			std::cout << textres.body  << << std::endl;
+			}
 		}else{
-			std::cout << textres.request_failed << " FAILED GET_TEXT_URL";
+			std::cout << textres.request_failed << " FAILED GET_TEXT_URL ";
 		}
 		
 		std::this_thread::sleep_for(std::chrono::milliseconds(MAIN_LOOP_SPPED));
