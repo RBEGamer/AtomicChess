@@ -1,7 +1,7 @@
 #! /bin/sh
-# /usr/ATC/start_atc_controller.sh ATCProject Marcel Ochsendorf marcel.ochsendorf.com
+# /usr/ATC/start_atc_dgt3000.sh ATCProject Marcel Ochsendorf marcel.ochsendorf.com
 #
-# atc        Starts the ATC Controller in an endless loop
+# atc        Starts the ATC ATC_DGT3000_EXT in an endless loop
 #
 while true; do
 	FILEA=/usr/ATC/ATC_DGT3000_EXT
