@@ -237,18 +237,13 @@ BackendConnector::PLAYER_STATUS BackendConnector::get_player_state()
 					for (int i = 0; i < gs_board["legal_moves"].array_items().size(); i++)
 					{
 						json11::Json ttobj = gs_board["legal_moves"].array_items()[i];
-						
 						if (ttobj.is_string()) {
 							std::string tmp = ttobj.string_value();
 							status.game_state.legal_moves.push_back(tmp);
-						}		
-						
+						}
 					}
-						
-					  
 				}
 			}
-			
 		}	
 	}
 	return status;
