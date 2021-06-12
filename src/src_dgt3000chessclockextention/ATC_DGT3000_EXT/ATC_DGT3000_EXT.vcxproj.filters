@@ -36,6 +36,15 @@
     <None Include="ATC_DGT3000_EXT-Release.vgdbsettings">
       <Filter>VisualGDB settings</Filter>
     </None>
+    <ClCompile Include="udp_discovery_ip_port.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="udp_discovery_peer.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="udp_discovery_protocol.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Makefile" />
@@ -55,6 +64,21 @@
       <Filter>Header files</Filter>
     </ClInclude>
     <ClInclude Include="dgtpicom_dgt3000.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="udp_discovery_ip_port.hpp">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="udp_discovery_peer.hpp">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="udp_discovery_protocol.hpp">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="udp_discovery_discovered_peer.hpp">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="udp_discovery_peer_parameters.hpp">
       <Filter>Header files</Filter>
     </ClInclude>
   </ItemGroup>

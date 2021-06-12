@@ -76,7 +76,7 @@ error:
 	$(error Invalid configuration, please check your inputs)
 endif
 
-SOURCEFILES := ATC_DGT3000_EXT.cpp
+SOURCEFILES := ATC_DGT3000_EXT.cpp udp_discovery_ip_port.cpp udp_discovery_peer.cpp udp_discovery_protocol.cpp
 EXTERNAL_LIBS := 
 EXTERNAL_LIBS_COPIED := $(foreach lib, $(EXTERNAL_LIBS),$(BINARYDIR)/$(notdir $(lib)))
 

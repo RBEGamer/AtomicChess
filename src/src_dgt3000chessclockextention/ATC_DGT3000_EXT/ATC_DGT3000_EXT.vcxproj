@@ -68,12 +68,20 @@
     <ClInclude Include="dgtpicom_dgt3000.h" />
     <ClInclude Include="httplib.h" />
     <ClInclude Include="inipp.h" />
+    <ClInclude Include="udp_discovery_discovered_peer.hpp" />
+    <ClInclude Include="udp_discovery_ip_port.hpp" />
+    <ClInclude Include="udp_discovery_peer.hpp" />
+    <ClInclude Include="udp_discovery_peer_parameters.hpp" />
+    <ClInclude Include="udp_discovery_protocol.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
     <ClCompile Include="ATC_DGT3000_EXT.cpp" />
+    <ClCompile Include="udp_discovery_ip_port.cpp" />
+    <ClCompile Include="udp_discovery_peer.cpp" />
+    <ClCompile Include="udp_discovery_protocol.cpp" />
     <None Include="atcdgt3000ext.ini" />
     <None Include="Makefile" />
     <None Include="debug.mak" />

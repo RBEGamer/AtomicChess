@@ -1,5 +1,12 @@
 #include "inipp.h"
 #include "httplib.h"
+#include "udp_discovery_peer.hpp"
+#include "udp_discovery_ip_port.hpp"
+#include "udp_discovery_protocol.hpp"
+#include "udp_discovery_peer_parameters.hpp"
+#define EXPECTED_DISCOVERY_USER_DATA "ATCTABLE"
+#define OWN_DISCOVERY_USER_DATA "ATCCLOCK"
+
 #define debug
 #define DISPLAY_CHARS 11
 #define MAIN_LOOP_SPPED 100
@@ -20,6 +27,10 @@
 #include <thread>
 
 int ww;
+const int kPort = 12021;
+const uint64_t kApplicationId = 7681412;
+const unsigned int kMulticastAddress = (224 << 24) + (0 << 16) + (0 << 8) + 123;  // 224.0.0.123
+
 
 // while loop
 void *wl(void *x) {
@@ -154,10 +165,80 @@ int main(int argc, char *argv[]) {
 	}
 	
 	
-	std::string BASE_URL = "";
-	BASE_URL = reader.Get("GENERAL", "BASE_URL", "BASE_URL: http://127.0.0.1:5000");
+	std::string BASE_URL = ""; //HOLDS THE TBALE REST API HOST http://xxx:port
+	std::string ENABLE_UDP_DISCOVERY = "";
+	bool enudbdis = true;
+	bool device_discoered = false;
+	ENABLE_UDP_DISCOVERY = reader.Get("GENERAL", "ENABLE_UDP_DISCOVERY", "1");
+	if (ENABLE_UDP_DISCOVERY.empty()) {
+		enudbdis = false;
+	}
+	else {
+		if (ENABLE_UDP_DISCOVERY == "1" || ENABLE_UDP_DISCOVERY == "true" || ENABLE_UDP_DISCOVERY == "TRUE")
+		{
+			enudbdis = true;
+		}
+		else
+		{
+			enudbdis = false;
+		}
+	}	
+	//ENABLE DISCOVERY
+	if (enudbdis) {
+		udpdiscovery::PeerParameters parameters;
+		parameters.set_port(kPort);
+		parameters.set_application_id(kApplicationId);
+		parameters.set_can_discover(true);
+		parameters.set_can_use_broadcast(true);
+		parameters.set_multicast_group_address(kMulticastAddress);
+		parameters.set_can_use_multicast(true);
+		
+		scrol_text("-DISCOVERY-", false, 800);
+		
+		udpdiscovery::Peer peer;
+		if (!peer.Start(parameters, OWN_DISCOVERY_USER_DATA)) {
+			return 1;
+			scrol_text("-DISCOVERY FAILED RETRY-", true, 800);
+		}
+		std::list<udpdiscovery::DiscoveredPeer> discovered_peers;
+		std::map<udpdiscovery::IpPort, std::string> last_seen_user_datas;
+		
+		while (!device_discoered) {
+			std::list<udpdiscovery::DiscoveredPeer> new_discovered_peers = peer.ListDiscovered();
+			discovered_peers = new_discovered_peers;
+
+			last_seen_user_datas.clear();
+			for (std::list<udpdiscovery::DiscoveredPeer>::const_iterator it = discovered_peers.begin(); it != discovered_peers.end(); ++it) {
+				last_seen_user_datas.insert(std::make_pair((*it).ip_port(), (*it).user_data()));
+			}
+			std::cout << "Discovered peers: " << discovered_peers.size() << std::endl;
+			for (std::list<udpdiscovery::DiscoveredPeer>::const_iterator it = discovered_peers.begin(); it != discovered_peers.end(); ++it) {
+				std::cout << " - " << udpdiscovery::IpPortToString((*it).ip_port()) << ", " << (*it).user_data() << std::endl;
+				//DEVICE DISCOCERED
+				if ((*it).user_data() == EXPECTED_DISCOVERY_USER_DATA)
+				{
+					device_discoered = true;
+					const std::string ip = udpdiscovery::IpToString((*it).ip_port().ip());
+					
+					BASE_URL = "http://" + ip + ":" + reader.Get("GENERAL", "BASE_URL_PORT_AFTER_DISCOVERY", "5000"); 
+					
+					scrol_text("-DISCOVERY SUCCESS-", false, 800);
+					break;
+				}
+			}
+			
+			int b = 0;
+		}
+	}
+	
+	
+	
+	if (!enudbdis || !device_discoered) {
+		BASE_URL = reader.Get("GENERAL", "BASE_URL", "http://127.0.0.1:5000");
+	}
 	if (BASE_URL.empty()) {
 		scrol_text("BASE_URL EMPTY", true, 300);
+		return -3;
 	}
 	else {
 		scrol_text(BASE_URL, false, 800);
