@@ -335,7 +335,7 @@ int main(int argc, char *argv[]) {
 			if (old_text != textres.body) {
 				old_text = textres.body;
 			scrol_text(textres.body, false, 300);
-			std::cout << textres.body  << << std::endl;
+			std::cout << textres.body  << " " << std::endl;
 			}
 		}else{
 			std::cout << textres.request_failed << " FAILED GET_TEXT_URL ";
