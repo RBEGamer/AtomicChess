@@ -254,7 +254,7 @@ int main(int argc, char *argv[]) {
 	}
 	
 	std::string GET_TEXT_URL = "";
-	GET_TEXT_URL = reader.Get("GENERAL", "BTN_CHANGE_URL", "/get_text");
+	GET_TEXT_URL = reader.Get("GENERAL", "GET_TEXT_URL", "/get_text");
 	if (GET_TEXT_URL.empty()) {
 		scrol_text("GET_TEXT_URL EMPTY", true, 300);
 	}
