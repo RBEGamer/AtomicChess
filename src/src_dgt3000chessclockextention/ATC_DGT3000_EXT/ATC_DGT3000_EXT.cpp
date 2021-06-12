@@ -185,6 +185,7 @@ int main(int argc, char *argv[]) {
 	}	
 	//ENABLE DISCOVERY
 	if (enudbdis) {
+		scrol_text("WAIT DISC", false, 100);
 		udpdiscovery::PeerParameters parameters;
 		parameters.set_port(kPort);
 		parameters.set_application_id(kApplicationId);
@@ -211,7 +212,9 @@ int main(int argc, char *argv[]) {
 			for (std::list<udpdiscovery::DiscoveredPeer>::const_iterator it = discovered_peers.begin(); it != discovered_peers.end(); ++it) {
 				last_seen_user_datas.insert(std::make_pair((*it).ip_port(), (*it).user_data()));
 			}
-			std::cout << "Discovered peers: " << discovered_peers.size() << std::endl;
+			if(discovered_peers.size()){
+				std::cout << "Discovered peers: " << discovered_peers.size() << std::endl;
+			}
 			for (std::list<udpdiscovery::DiscoveredPeer>::const_iterator it = discovered_peers.begin(); it != discovered_peers.end(); ++it) {
 				std::cout << " - " << udpdiscovery::IpPortToString((*it).ip_port()) << ", " << (*it).user_data() << std::endl;
 				//DEVICE DISCOCERED
@@ -222,7 +225,7 @@ int main(int argc, char *argv[]) {
 					
 					BASE_URL = "http://" + ip + ":" + reader.Get("GENERAL", "BASE_URL_PORT_AFTER_DISCOVERY", "5000"); 
 					
-					scrol_text("-DISCOVERY SUCCESS-", false, 800);
+					//scrol_text("-DISCOVERY SUCCESS-", false, 800);
 					break;
 				}
 			}
@@ -241,7 +244,7 @@ int main(int argc, char *argv[]) {
 		return -3;
 	}
 	else {
-		scrol_text(BASE_URL, false, 800);
+		scrol_text(BASE_URL, false, 100);
 	}
 	
 	
@@ -250,7 +253,7 @@ int main(int argc, char *argv[]) {
 	if (BTN_CHANGE_URL.empty()) {
 		scrol_text("BTN_CHANGE_URL EMPTY", true, 300);
 	}else {
-	//	scrol_text(BTN_CHANGE_URL, false, 300);
+		scrol_text(BTN_CHANGE_URL, false, 300);
 	}
 	
 	std::string GET_TEXT_URL = "";
@@ -259,7 +262,7 @@ int main(int argc, char *argv[]) {
 		scrol_text("GET_TEXT_URL EMPTY", true, 300);
 	}
 	else {
-	//	scrol_text(GET_TEXT_URL, false, 300);
+		scrol_text(GET_TEXT_URL, false, 300);
 	}
 	
 	std::string VERSION_URL = "";
