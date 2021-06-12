@@ -42,6 +42,7 @@ typedef std::chrono::system_clock::time_point TimePoint;
 #include "HardwareInterface.h"
 #include "UDPDiscovery.h"
 #include "DGT3000Interface.h"
+#include "UDPServerDiscovery.h"
 //------- INCLUDE EXTENTIONS -------- //
 #include "VoiceRecognitionExtention.h"
 
@@ -533,14 +534,29 @@ int main(int argc, char *argv[])
 
 
 
+
+
+    //-------------- SEARCH FOR LOCAL ATC SERVER IN NETZWORK -------------------------- //
+    std::string start_backend_url = ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::NETWORK_BACKEND_URL);
+    if(ConfigParser::getInstance()->getBool_nocheck(ConfigParser::CFG_ENTRY::NETWORK_UDP_DISCOVER_ATC_SERVER_ENABLE)){
+        UDPServerDiscovery server_disc = UDPServerDiscovery();
+        const std::string sds_epc = ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::NETWORK_UDP_DISCOVER_ATC_SERVER_USER_DATA_EXPECTED);
+
+        std::string reip = server_disc.search_for_server(sds_epc,6,1000);
+        if(!reip.empty()){
+            reip = "http://" + reip + ":" + ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::NETWORK_UDP_DISCOVER_ATC_SERVER_PORT);
+            start_backend_url = reip;
+        }
+    }
+
     //CREATE GAME BACKEND INSTANCE => THIS IS THE CONNECTION TO THE GAME SERVER
-    BackendConnector gamebackend(ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::NETWORK_BACKEND_URL), ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::GENERAL_HWID_INTERFACE), hwid);
+    BackendConnector gamebackend(start_backend_url, ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::GENERAL_HWID_INTERFACE), hwid);
     //SET HEARTBEAT INTERVAL
     int gamebackend_heartbeat_interval = 5;
     ConfigParser::getInstance()->getInt(ConfigParser::CFG_ENTRY::NETWORK_HEARTBEAT_INTERVAL_SECS, gamebackend_heartbeat_interval);
     gamebackend.setHearbeatCallInterval(gamebackend_heartbeat_interval);
     //NOW TRY TO CONNECT TO THE SERVER, WE USE SOME HARDCODED FALL BACK URLs
-    std::string ALTERNATIVE_BACKEND_URL[] = { "http://atomicchess.de:3000", "http://marcelochsendorf.com:3000", "http://marcelochsendorf.com:3001", "http://marcelochsendorf.com:3002", "http://prodevmo.com:3001", "http://prodevmo.com:3002", "http://127.0.0.1:3000","http://127.0.0.1:3001" };
+    std::string ALTERNATIVE_BACKEND_URL[] = { ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::NETWORK_BACKEND_URL),"http://atomicchess.de:3000", "http://marcelochsendorf.com:3000", "http://marcelochsendorf.com:3001", "http://marcelochsendorf.com:3002", "http://prodevmo.com:3001", "http://prodevmo.com:3002", "http://127.0.0.1:3000","http://127.0.0.1:3001" };
     //CHECK IF GAMESERVER IS REACHABLE ELSE TRY AND ITERATE THOUGH THE OTHER HARDCODED URLS
     volatile int abu_counter = 0;
     volatile bool abu_result = true;
