@@ -253,25 +253,29 @@ int main(int argc, char *argv[]) {
 	if (BTN_CHANGE_URL.empty()) {
 		scrol_text("BTN_CHANGE_URL EMPTY", true, 300);
 	}else {
-		scrol_text(BTN_CHANGE_URL, false, 300);
+		//scrol_text(BTN_CHANGE_URL, false, 300);
 	}
 	
 	std::string GET_TEXT_URL = "";
 	GET_TEXT_URL = reader.Get("GENERAL", "GET_TEXT_URL", "/get_text");
 	if (GET_TEXT_URL.empty()) {
 		scrol_text("GET_TEXT_URL EMPTY", true, 300);
+		std::cout << "GET_TEXT_URL: " <<GET_TEXT_URL << std::endl;
 	}
 	else {
-		scrol_text(GET_TEXT_URL, false, 300);
+		//scrol_text(GET_TEXT_URL, false, 300);
+		std::cout << "GET_TEXT_URL: " <<GET_TEXT_URL << std::endl;
 	}
 	
 	std::string VERSION_URL = "";
 	VERSION_URL = reader.Get("GENERAL", "VERSION_URL", "/version");
 	if (VERSION_URL.empty()) {
 		scrol_text("VERSION_URL EMPTY", true, 300);
+		std::cout << "VERSION_URL: " <<VERSION_URL << std::endl;
 	}
 	else {
-	//	scrol_text(GET_TEXT_URL, false, 300);
+		std::cout << "VERSION_URL: " <<VERSION_URL << std::endl;
+	//	scrol_text(VERSION_URL, false, 300);
 	}
 	
 	std::string INTERFACE = "";
@@ -287,12 +291,12 @@ int main(int argc, char *argv[]) {
 	if (tres.request_failed)
 	{
 		std::cout << "TEST REQUEST FAILED";
-		scrol_text("REQUEST TO " + VERSION_URL + " FAILED", true, 300);
+		scrol_text("T REQ ERR", true, 300);
 		return -2;
 	}
 	else
 	{
-		scrol_text(tres.body, false, 300);
+		//scrol_text(tres.body, false, 300);
 	}
 		
 		
