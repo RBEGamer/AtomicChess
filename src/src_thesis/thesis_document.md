@@ -163,6 +163,10 @@ Die für den Vergleich gewählten Eigenschaften sind jene, welche die im Projekt
 
 Die Bretter des Herstellers `DGT` erkennen die Position der verwendeten Figuren. Information über die dafür verwendete Technologie ist jedoch nicht verfügbar. Die `Square-Off`-Schachtische verfügen über keine solche Funktion.
 
+<br>
+
+Die Außenabmessungen der autonomen Schachtische unterscheiden sich nur beim Hersteller `Square Off` deutlich; 
+der Grand Kingdom Schachtisch ist rechteckig konstruiert worden, was das Spielerlebnis deutlich verändert. Der simple Kingdom-Tisch ist dabei kleiner als das vorgegebene Turniermaß, was negativen Einfluss auf das Spielererlebnis hat. Mit den Standardmaßen der `DGT`-Spielbretter und zudem ihrer geringen Höhe gleichen diese deutlich einem Turniertisch. Die Kombination aus geringer Höhe und Erkennung der Figur-Stellung bei den `DGT`-Brettern ist positiv bemerkenswert. Die Größe der einzelnen Schachfelder aller autonomen Schachtische befinden sich jedoch in den Spezifikationen der (+uscf)[@officialuscfrules], welche sich von 50mm bis 63mm belaufen.
 
 
 \pagebreak
@@ -181,14 +185,9 @@ Die Bretter des Herstellers `DGT` erkennen die Position der verwendeten Figuren.
 | Stand-Alone Funktionalität                | nein (Mobiltelefon erforderlich)          | nein (Mobiltelefon erforderlich)             | nein (PC)                         | nein (PC)                     |          
 | Besonderheiten                            | Akku für 30 Spiele                        | Akku für 15 Spiele                           | -                                 | -                             |
 
+\pagebreak
 
-<br>
 
-
-Die Außenabmessungen der autonomen Schachtische unterscheiden sich nur beim Hersteller `Square Off` deutlich; 
-der Grand Kingdom Schachtisch ist rechteckig konstruiert worden, was das Spielerlebnis deutlich verändert. Der simple Kingdom-Tisch ist dabei kleiner als das vorgegebene Turniermaß, was negativen Einfluss auf das Spielererlebnis hat. Mit den Standardmaßen der `DGT`-Spielbretter und zudem ihrer geringen Höhe gleichen diese deutlich einem Turniertisch. Die Kombination aus geringer Höhe und Erkennung der Figur-Stellung bei den `DGT`-Brettern ist positiv bemerkenswert. Die Größe der einzelnen Schachfelder aller autonomen Schachtische befinden sich jedoch in den Spezifikationen der (+uscf)[@officialuscfrules], welche sich von 50mm bis 63mm belaufen.
-
-<br>
 
 Beide Hersteller bieten eine Bluetooth-Schnittstelle an. Einzig das Smart-Board des Herstellers `DGT` nutzt eine serielle, kabelgebundene Schnittstelle.
 
@@ -213,7 +212,11 @@ Auffallend ist, dass nur einer der ausgewählten Tische über eine Parkposition 
 Ebenfalls erwähnenswert ist, dass keiner der Tische eine Stand-Alone-Funktionalität besitzt. Jeder Tisch benötigt eine Verbindung zu einem externen Gerät wie einem Smartphone oder Computer, welches dann die Berechnung der Gegnerzüge vornimmt. Keiner dieser Tische kann ein simples Spiel nach einem verbindungslosen Start ausführen.
 
 Für die Schachtische der Firma `Square Off` ist eine Smartphone App `Square Off - Chess App`[@squareoffapp] für die Verwendung notwendig.
-Die App wiederum fordert eine Registrierung inklusive Profilerstellung beim Hersteller. Erst danach ist ein Spiel gegen den Computer ohne Internet möglich. Alle weiteren Optionen (wie bspw. Spiel gegen andere Spieler, Live-Stream) sind nur über einen Online-Zugang möglich und erfordern je nach gewählten Optionen auch einen weiteren Account bei anderen Schach-Cloud-Anbietern wie `Chess.com` oder `Lichess`.
+Die App wiederum fordert eine Registrierung inklusive Profilerstellung beim Hersteller. Erst danach ist ein Spiel gegen den Computer ohne Internet möglich.
+
+<br>
+
+Alle weiteren Optionen (wie bspw. Spiel gegen andere Spieler, Live-Stream) sind nur über einen Online-Zugang möglich und erfordern je nach gewählten Optionen auch einen weiteren Account bei anderen Schach-Cloud-Anbietern wie `Chess.com` oder `Lichess`.
 
 <br>
 
@@ -221,7 +224,11 @@ Beide `Square-Off`-Modelle ermöglichen durch eingebaute Akkus auch eine mobile 
 
 <br>
 
-Zusammenfassend ist festzustellen, dass alle vier Tische dank unterschiedlicher Ausführung von Spiel-Eigenschaften zu unterschiedlichen Spiel-Erlebnissen führen. Für Nutzer ist eine Entscheidung anhand von Funktionen kaum möglich; letztlich bedarf es vor einem Kauf der Auswertung von gewünschten und gegebenen Funktionen. Es ist erkennbar, dass nur die Firma `Square Off` einen absolut autonomen Schachtisch anbietet, auch wenn dieser nicht alle in diesem Projekt angestrebten Funktionalitäten bietet. So hat der Nutzer im Hinblick auf kommerzielle Angebote kaum Auswahlmöglichkeiten.
+Zusammenfassend ist festzustellen, dass alle vier Tische dank unterschiedlicher Ausführung von Spiel-Eigenschaften zu unterschiedlichen Spiel-Erlebnissen führen. Für Nutzer ist eine Entscheidung anhand von Funktionen kaum möglich; letztlich bedarf es vor einem Kauf der Auswertung von gewünschten und gegebenen Funktionen.
+
+<br>
+
+Es ist erkennbar, dass nur die Firma `Square Off` einen absolut autonomen Schachtisch anbietet, auch wenn dieser nicht alle in diesem Projekt angestrebten Funktionalitäten bietet. So hat der Nutzer im Hinblick auf kommerzielle Angebote kaum Auswahlmöglichkeiten.
 
 <br>
 
@@ -231,11 +238,17 @@ Bei allen Open-Source Projekten wurden die Eigenschaften anhand der Beschreibung
 
 <br>
 
-Besonders bei Projekten, welche sich noch in der Entwicklung befinden, können sich die Eigenschaften noch verändern und so weitere Funktionalitäten hinzukommen. Alle Eigenschaften der Projekte wurden zum Zeitpunkt der Recherche analysiert und dokumentiert und mit Beginn der Entwicklung als Struktur-Fixpunkt festgelegt. Nachfolgende Entwicklungen wurden nach diesem Zeitpunkt nicht mehr berücksichtigt.
+Besonders bei Projekten, welche sich noch in der Entwicklung befinden, können sich die Eigenschaften noch verändern und so weitere Funktionalitäten hinzukommen.
+
+<br>
+
+Alle Eigenschaften der Projekte wurden zum Zeitpunkt der Recherche analysiert und dokumentiert und mit Beginn der Entwicklung als Struktur-Fixpunkt festgelegt. Nachfolgende Entwicklungen wurden nach diesem Zeitpunkt nicht mehr berücksichtigt.
 
 <br>
 
 Zusätzlich zu den genannten Projekten sind weitere derartige Projekte verfügbar; in der Tabelle wurde nur jene aufgelistet, welche sich von anderen Projekten in mindestens einem Feature unterschieden.
+
+<br>
 
 Auch existieren weitere Abwandlungen von autonomen Schachbrettern, bei welchen die Figuren von oberhalb des Spielbretts gegriffen bzw. bewegt werden. In einigen Projekten wird dies mittels eines Industrie-Roboters[@actprojectrobot] oder eines modifizierten 3D-Druckers[@atcproject3dprinter] realisiert. Diese wurden hier aufgrund der Mechanik, welche über dem Spielbrett montiert werden muss und damit das Spielerlebnis erheblich beeinflusst, nicht berücksichtigt.
 
@@ -250,6 +263,17 @@ Einige Projekte setzten dabei auf eingebettete Systeme, welche direkt im Schacht
 
 Bei der Konstruktion der Mechanik und der Methode, mit welcher die Figuren über das Feld bewegt werden, ähneln sich jedoch die meisten dieser Projekte. Hier wurden in der Regel einfache X- und Y-Achsen verwendet, welche von je einem Schrittmotoren bewegt werden.
 Die Schachfiguren werden dabei mittels eines Elektromagneten über die Oberseite gezogen. Dabei ist ein Magnet oder eine kleine Metallplatte als Gegenpol in den Fuß der Figuren eingelassen.
+
+<br>
+
+Die Erkennung der Schachfiguren ist augenscheinlich die schwierigste Aufgabe. Hier wurde in der Mehrzahl der Projekte eine Kamera im Zusammenspiel mit einer auf `OpenCV`-basierten Figur-Erkennung verwendet.
+Diese Variante ist je nach Implementierung des Vision-Algorithmus fehleranfällig bei sich ändernden Lichtverhältnissen. Auch muss die Kamera oberhalb der Schachfiguren platziert werden, wenn kein transparentes Schachfeld verwendet werden soll.
+
+Eine weitere Alternative ist die Verwendung einer Matrix aus Reed-Schaltern oder Halleffekt-Sensoren. Diese werden in einer 8x8 Matrix Konfiguration unterhalb der Platte montiert und reagieren auf die Magnete in den Figuren. So ist es möglich zu erkennen, welches der Schachfelder belegt ist, jedoch nicht konkret von welchem Figurentyp.
+Dieses Problem wird durch eine definierte Ausgangsstellung beim Spielstart gelöst. Nach jedem Zug durch den Spieler und der dadurch resultierenden Änderungen in den Figurenpositionen in der Matrix können die neuen Figurenstellungen berechnet werden.
+
+<br>
+
 
 
 \pagebreak
@@ -270,17 +294,6 @@ Die Schachfiguren werden dabei mittels eines Elektromagneten über die Oberseite
 | Lizenz                                  | (+gpl) 3+                                             | (+gpl)                                                   | -                                        |
 
 
-<br>
-
-Die Erkennung der Schachfiguren ist augenscheinlich die schwierigste Aufgabe. Hier wurde in der Mehrzahl der Projekte eine Kamera im Zusammenspiel mit einer auf `OpenCV`-basierten Figur-Erkennung verwendet.
-Diese Variante ist je nach Implementierung des Vision-Algorithmus fehleranfällig bei sich ändernden Lichtverhältnissen. Auch muss die Kamera oberhalb der Schachfiguren platziert werden, wenn kein transparentes Schachfeld verwendet werden soll.
-
-<br>
-
-Eine weitere Alternative ist die Verwendung einer Matrix aus Reed-Schaltern oder Halleffekt-Sensoren. Diese werden in einer 8x8 Matrix Konfiguration unterhalb der Platte montiert und reagieren auf die Magnete in den Figuren. So ist es möglich zu erkennen, welches der Schachfelder belegt ist, jedoch nicht konkret von welchem Figurentyp.
-Dieses Problem wird durch eine definierte Ausgangsstellung beim Spielstart gelöst. Nach jedem Zug durch den Spieler und der dadurch resultierenden Änderungen in den Figurenpositionen in der Matrix können die neuen Figurenstellungen berechnet werden.
-
-<br>
 
 
 Abschließend ist festzuhalten, dass es auch bei den Open-Source Projekten kein Projekt gibt, welches alle gewünschten Features abbildet.
@@ -387,8 +400,14 @@ Auf dem Basis-System müssen die folgenden Software-Pakete installiert sein bzw.
 
 Auf Seiten der Entwicklung war eine Toolchain notwendig, mit welcher es möglich sein sollte, in C++ geschriebene Programme auf dem System ausführen und mittels (+gdb) auf Fehler überprüfen zu können. Zusätzlich sollte der C++ Compiler mindestens den C++17 Standard unterstützen.
 
+<br>
+
+
 Zusätzlich zu diesen auf dem Linux-System benötigten Paketen sollte es möglich sein, ein durch das eingebettete System bootbares Dateisystemimage zu erzeugen.
-Für diesen Zweck existieren einige Open-Source Projekte, welche solch ein Build-System bereitstellen. Hierbei existieren zwei weit verbreitete Systeme:
+Für diesen Zweck existieren einige Open-Source Projekte, welche solch ein Build-System bereitstellen. 
+
+<br>
+Hierbei existieren zwei weit verbreitete Systeme:
 Das `Yocto`-Projekt[@yoctoproject] und das Buildroot[@buildrootproject]-Framework.
 Diese unterscheiden sich im Aufbau und der Funktionsweise teils stark, vor allem während der ersten Verwendung.
 
@@ -408,7 +427,11 @@ Diese unterscheiden sich im Aufbau und der Funktionsweise teils stark, vor allem
 <br>
 
 Hierbei stellt das `Yocto`- Projekt eine größere Einsteigshürde dar, aufgrund seines komplexen Layer-Systems.
-Es bietet sich jedoch für komplexe Projekte an, welche einen hohen Grad an Individualisierung benötigen. Ein Nachteil dessen ist, dass dadurch vieles vom Nutzer selber konfiguriert werden muss, bevor ein minimales System in Betrieb genommen werden kann. Somit muss zuerst eine grundlegende Konfiguration für das eingebettete System angelegt werden und es kann nicht direkt mit einem fertigen minimalen System mit der eigentlichen Software-Entwicklung gestartet werden. Allgemein sind die Anforderungen an die zu erstellende Software und deren benötigte Requirements sehr gering, sodass hier eine detaillierte Einarbeitung zeitlich nicht möglich war.
+Es bietet sich jedoch für komplexe Projekte an, welche einen hohen Grad an Individualisierung benötigen. Ein Nachteil dessen ist, dass dadurch vieles vom Nutzer selber konfiguriert werden muss, bevor ein minimales System in Betrieb genommen werden kann.
+
+<br>
+
+Somit muss zuerst eine grundlegende Konfiguration für das eingebettete System angelegt werden und es kann nicht direkt mit einem fertigen minimalen System mit der eigentlichen Software-Entwicklung gestartet werden. Allgemein sind die Anforderungen an die zu erstellende Software und deren benötigte Requirements sehr gering, sodass hier eine detaillierte Einarbeitung zeitlich nicht möglich war.
 
 <br>
 
@@ -481,7 +504,11 @@ Das somit erstellte Test-Paket `atctp` bildete eine funktionierende Grundlage f�
 ![STM32MP1-DK2 \label{stm32mp1}](images/stm32mp1.png)
 
 Zur Ansteuerung aller elektrischen Komponenten, welche den autonomen Schachtisch antreiben, wird ein eingebettetes System benötigt, auf welchem die zur vor erstellte Software ausgeführt wird.
-Dies ist in diesem Fall, ein durch das `Buildroot`-Framework generierte Linux-Image. Um mit den elektrischen Komponenten kommunizieren zu können, werden zusätzlich verschiedene Ein- und Ausgabe-Schnittstellen benötigt:
+Dies ist in diesem Fall, ein durch das `Buildroot`-Framework generierte Linux-Image.
+
+<br>
+
+Um mit den elektrischen Komponenten kommunizieren zu können, werden zusätzlich verschiedene Ein- und Ausgabe-Schnittstellen benötigt:
 
 - (+hdmi) oder (+dsi)
 - (+usb)
@@ -490,8 +517,14 @@ Dies ist in diesem Fall, ein durch das `Buildroot`-Framework generierte Linux-Im
 
 
 Da es sich hier um einen Prototyp handelt und die finalen Anforderungen der Software und Hardware noch nicht final feststehen, sollte das eingebettete System genug Spielraum bieten, um spätere Erweiterungen umsetzten zu können.
+
+<br>
+
 Auch spielte bei der Auswahl die Verfügbarkeit zum Zeitpunkt der Evaluation eine Rolle, da hier einige andere Systeme unter anderem lange Lieferzeiten aufwiesen. Zudem wurde darauf geachtet, dass das System bereits in einigen anderen Projekten verwendet wird, sodass bei möglichen Problemen, Ressourcen für die Fehlerbehebung bereitstehen.
-Somit beschränkte sich die Auswahl für diesen Prototyp, angesichts des für die Evaluation abgesteckten zeitlichen Rahmen auf den `Raspberry-Pi 3b+` und das `STM32MP157A-DK1` \label{ref}.
+
+<br>
+
+Somit beschränkte sich die Auswahl für diesen Prototyp, angesichts des für die Evaluation abgesteckten zeitlichen Rahmen auf den `Raspberry-Pi 3b+` und das `STM32MP157A-DK1`\label{ref}.
 
 : Getestete eingebettete Systeme \label{embsystems}
 

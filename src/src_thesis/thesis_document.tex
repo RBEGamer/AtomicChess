@@ -300,6 +300,21 @@ Technologie ist jedoch nicht verfügbar. Die
 \passthrough{\lstinline!Square-Off!}-Schachtische verfügen über keine
 solche Funktion.
 
+Die Außenabmessungen der autonomen Schachtische unterscheiden sich nur
+beim Hersteller \passthrough{\lstinline!Square Off!} deutlich; der Grand
+Kingdom Schachtisch ist rechteckig konstruiert worden, was das
+Spielerlebnis deutlich verändert. Der simple Kingdom-Tisch ist dabei
+kleiner als das vorgegebene Turniermaß, was negativen Einfluss auf das
+Spielererlebnis hat. Mit den Standardmaßen der
+\passthrough{\lstinline!DGT!}-Spielbretter und zudem ihrer geringen Höhe
+gleichen diese deutlich einem Turniertisch. Die Kombination aus geringer
+Höhe und Erkennung der Figur-Stellung bei den
+\passthrough{\lstinline!DGT!}-Brettern ist positiv bemerkenswert. Die
+Größe der einzelnen Schachfelder aller autonomen Schachtische befinden
+sich jedoch in den Spezifikationen der
+\gls{uscf}\cite{officialuscfrules}, welche sich von 50mm bis 63mm
+belaufen.
+
 \pagebreak
 
 \begin{longtable}[]{@{}llccr@{}}
@@ -435,20 +450,7 @@ Akku für 15 Spiele\strut
 \bottomrule
 \end{longtable}
 
-Die Außenabmessungen der autonomen Schachtische unterscheiden sich nur
-beim Hersteller \passthrough{\lstinline!Square Off!} deutlich; der Grand
-Kingdom Schachtisch ist rechteckig konstruiert worden, was das
-Spielerlebnis deutlich verändert. Der simple Kingdom-Tisch ist dabei
-kleiner als das vorgegebene Turniermaß, was negativen Einfluss auf das
-Spielererlebnis hat. Mit den Standardmaßen der
-\passthrough{\lstinline!DGT!}-Spielbretter und zudem ihrer geringen Höhe
-gleichen diese deutlich einem Turniertisch. Die Kombination aus geringer
-Höhe und Erkennung der Figur-Stellung bei den
-\passthrough{\lstinline!DGT!}-Brettern ist positiv bemerkenswert. Die
-Größe der einzelnen Schachfelder aller autonomen Schachtische befinden
-sich jedoch in den Spezifikationen der
-\gls{uscf}\cite{officialuscfrules}, welche sich von 50mm bis 63mm
-belaufen.
+\pagebreak
 
 Beide Hersteller bieten eine Bluetooth-Schnittstelle an. Einzig das
 Smart-Board des Herstellers \passthrough{\lstinline!DGT!} nutzt eine
@@ -495,11 +497,12 @@ eine Smartphone App
 \passthrough{\lstinline!Square Off - Chess App!}\cite{squareoffapp}
 für die Verwendung notwendig. Die App wiederum fordert eine
 Registrierung inklusive Profilerstellung beim Hersteller. Erst danach
-ist ein Spiel gegen den Computer ohne Internet möglich. Alle weiteren
-Optionen (wie bspw. Spiel gegen andere Spieler, Live-Stream) sind nur
-über einen Online-Zugang möglich und erfordern je nach gewählten
-Optionen auch einen weiteren Account bei anderen Schach-Cloud-Anbietern
-wie \passthrough{\lstinline!Chess.com!} oder
+ist ein Spiel gegen den Computer ohne Internet möglich.
+
+Alle weiteren Optionen (wie bspw. Spiel gegen andere Spieler,
+Live-Stream) sind nur über einen Online-Zugang möglich und erfordern je
+nach gewählten Optionen auch einen weiteren Account bei anderen
+Schach-Cloud-Anbietern wie \passthrough{\lstinline!Chess.com!} oder
 \passthrough{\lstinline!Lichess!}.
 
 Beide \passthrough{\lstinline!Square-Off!}-Modelle ermöglichen durch
@@ -510,11 +513,13 @@ Zusammenfassend ist festzustellen, dass alle vier Tische dank
 unterschiedlicher Ausführung von Spiel-Eigenschaften zu
 unterschiedlichen Spiel-Erlebnissen führen. Für Nutzer ist eine
 Entscheidung anhand von Funktionen kaum möglich; letztlich bedarf es vor
-einem Kauf der Auswertung von gewünschten und gegebenen Funktionen. Es
-ist erkennbar, dass nur die Firma \passthrough{\lstinline!Square Off!}
-einen absolut autonomen Schachtisch anbietet, auch wenn dieser nicht
-alle in diesem Projekt angestrebten Funktionalitäten bietet. So hat der
-Nutzer im Hinblick auf kommerzielle Angebote kaum Auswahlmöglichkeiten.
+einem Kauf der Auswertung von gewünschten und gegebenen Funktionen.
+
+Es ist erkennbar, dass nur die Firma
+\passthrough{\lstinline!Square Off!} einen absolut autonomen Schachtisch
+anbietet, auch wenn dieser nicht alle in diesem Projekt angestrebten
+Funktionalitäten bietet. So hat der Nutzer im Hinblick auf kommerzielle
+Angebote kaum Auswahlmöglichkeiten.
 
 \hypertarget{open-source-projekte}{%
 \subsection{Open-Source Projekte}\label{open-source-projekte}}
@@ -524,10 +529,12 @@ Beschreibung und der aktuellen Software extrahiert \ref{oschesstables}.
 
 Besonders bei Projekten, welche sich noch in der Entwicklung befinden,
 können sich die Eigenschaften noch verändern und so weitere
-Funktionalitäten hinzukommen. Alle Eigenschaften der Projekte wurden zum
-Zeitpunkt der Recherche analysiert und dokumentiert und mit Beginn der
-Entwicklung als Struktur-Fixpunkt festgelegt. Nachfolgende Entwicklungen
-wurden nach diesem Zeitpunkt nicht mehr berücksichtigt.
+Funktionalitäten hinzukommen.
+
+Alle Eigenschaften der Projekte wurden zum Zeitpunkt der Recherche
+analysiert und dokumentiert und mit Beginn der Entwicklung als
+Struktur-Fixpunkt festgelegt. Nachfolgende Entwicklungen wurden nach
+diesem Zeitpunkt nicht mehr berücksichtigt.
 
 Zusätzlich zu den genannten Projekten sind weitere derartige Projekte
 verfügbar; in der Tabelle wurde nur jene aufgelistet, welche sich von
@@ -556,6 +563,25 @@ verwendet, welche von je einem Schrittmotoren bewegt werden. Die
 Schachfiguren werden dabei mittels eines Elektromagneten über die
 Oberseite gezogen. Dabei ist ein Magnet oder eine kleine Metallplatte
 als Gegenpol in den Fuß der Figuren eingelassen.
+
+Die Erkennung der Schachfiguren ist augenscheinlich die schwierigste
+Aufgabe. Hier wurde in der Mehrzahl der Projekte eine Kamera im
+Zusammenspiel mit einer auf \passthrough{\lstinline!OpenCV!}-basierten
+Figur-Erkennung verwendet. Diese Variante ist je nach Implementierung
+des Vision-Algorithmus fehleranfällig bei sich ändernden
+Lichtverhältnissen. Auch muss die Kamera oberhalb der Schachfiguren
+platziert werden, wenn kein transparentes Schachfeld verwendet werden
+soll.
+
+Eine weitere Alternative ist die Verwendung einer Matrix aus
+Reed-Schaltern oder Halleffekt-Sensoren. Diese werden in einer 8x8
+Matrix Konfiguration unterhalb der Platte montiert und reagieren auf die
+Magnete in den Figuren. So ist es möglich zu erkennen, welches der
+Schachfelder belegt ist, jedoch nicht konkret von welchem Figurentyp.
+Dieses Problem wird durch eine definierte Ausgangsstellung beim
+Spielstart gelöst. Nach jedem Zug durch den Spieler und der dadurch
+resultierenden Änderungen in den Figurenpositionen in der Matrix können
+die neuen Figurenstellungen berechnet werden.
 
 \pagebreak
 
@@ -678,25 +704,6 @@ Lizenz\strut
 \end{minipage}\tabularnewline
 \bottomrule
 \end{longtable}
-
-Die Erkennung der Schachfiguren ist augenscheinlich die schwierigste
-Aufgabe. Hier wurde in der Mehrzahl der Projekte eine Kamera im
-Zusammenspiel mit einer auf \passthrough{\lstinline!OpenCV!}-basierten
-Figur-Erkennung verwendet. Diese Variante ist je nach Implementierung
-des Vision-Algorithmus fehleranfällig bei sich ändernden
-Lichtverhältnissen. Auch muss die Kamera oberhalb der Schachfiguren
-platziert werden, wenn kein transparentes Schachfeld verwendet werden
-soll.
-
-Eine weitere Alternative ist die Verwendung einer Matrix aus
-Reed-Schaltern oder Halleffekt-Sensoren. Diese werden in einer 8x8
-Matrix Konfiguration unterhalb der Platte montiert und reagieren auf die
-Magnete in den Figuren. So ist es möglich zu erkennen, welches der
-Schachfelder belegt ist, jedoch nicht konkret von welchem Figurentyp.
-Dieses Problem wird durch eine definierte Ausgangsstellung beim
-Spielstart gelöst. Nach jedem Zug durch den Spieler und der dadurch
-resultierenden Änderungen in den Figurenpositionen in der Matrix können
-die neuen Figurenstellungen berechnet werden.
 
 Abschließend ist festzuhalten, dass es auch bei den Open-Source
 Projekten kein Projekt gibt, welches alle gewünschten Features abbildet.
@@ -869,6 +876,7 @@ Zusätzlich zu diesen auf dem Linux-System benötigten Paketen sollte es
 möglich sein, ein durch das eingebettete System bootbares
 Dateisystemimage zu erzeugen. Für diesen Zweck existieren einige
 Open-Source Projekte, welche solch ein Build-System bereitstellen.
+
 Hierbei existieren zwei weit verbreitete Systeme: Das
 \passthrough{\lstinline!Yocto!}-Projekt\cite{yoctoproject} und das
 Buildroot\cite{buildrootproject}-Framework. Diese unterscheiden sich
@@ -902,13 +910,14 @@ Einsteigshürde dar, aufgrund seines komplexen Layer-Systems. Es bietet
 sich jedoch für komplexe Projekte an, welche einen hohen Grad an
 Individualisierung benötigen. Ein Nachteil dessen ist, dass dadurch
 vieles vom Nutzer selber konfiguriert werden muss, bevor ein minimales
-System in Betrieb genommen werden kann. Somit muss zuerst eine
-grundlegende Konfiguration für das eingebettete System angelegt werden
-und es kann nicht direkt mit einem fertigen minimalen System mit der
-eigentlichen Software-Entwicklung gestartet werden. Allgemein sind die
-Anforderungen an die zu erstellende Software und deren benötigte
-Requirements sehr gering, sodass hier eine detaillierte Einarbeitung
-zeitlich nicht möglich war.
+System in Betrieb genommen werden kann.
+
+Somit muss zuerst eine grundlegende Konfiguration für das eingebettete
+System angelegt werden und es kann nicht direkt mit einem fertigen
+minimalen System mit der eigentlichen Software-Entwicklung gestartet
+werden. Allgemein sind die Anforderungen an die zu erstellende Software
+und deren benötigte Requirements sehr gering, sodass hier eine
+detaillierte Einarbeitung zeitlich nicht möglich war.
 
 Der Aufbau dieser Konfiguration des \passthrough{\lstinline!Yocto!}-
 Projekt besteht aus drei Schichten:
@@ -1013,9 +1022,10 @@ Zur Ansteuerung aller elektrischen Komponenten, welche den autonomen
 Schachtisch antreiben, wird ein eingebettetes System benötigt, auf
 welchem die zur vor erstellte Software ausgeführt wird. Dies ist in
 diesem Fall, ein durch das \passthrough{\lstinline!Buildroot!}-Framework
-generierte Linux-Image. Um mit den elektrischen Komponenten
-kommunizieren zu können, werden zusätzlich verschiedene Ein- und
-Ausgabe-Schnittstellen benötigt:
+generierte Linux-Image.
+
+Um mit den elektrischen Komponenten kommunizieren zu können, werden
+zusätzlich verschiedene Ein- und Ausgabe-Schnittstellen benötigt:
 
 \begin{itemize}
 \tightlist
@@ -1032,15 +1042,18 @@ Ausgabe-Schnittstellen benötigt:
 Da es sich hier um einen Prototyp handelt und die finalen Anforderungen
 der Software und Hardware noch nicht final feststehen, sollte das
 eingebettete System genug Spielraum bieten, um spätere Erweiterungen
-umsetzten zu können. Auch spielte bei der Auswahl die Verfügbarkeit zum
-Zeitpunkt der Evaluation eine Rolle, da hier einige andere Systeme unter
-anderem lange Lieferzeiten aufwiesen. Zudem wurde darauf geachtet, dass
-das System bereits in einigen anderen Projekten verwendet wird, sodass
-bei möglichen Problemen, Ressourcen für die Fehlerbehebung bereitstehen.
+umsetzten zu können.
+
+Auch spielte bei der Auswahl die Verfügbarkeit zum Zeitpunkt der
+Evaluation eine Rolle, da hier einige andere Systeme unter anderem lange
+Lieferzeiten aufwiesen. Zudem wurde darauf geachtet, dass das System
+bereits in einigen anderen Projekten verwendet wird, sodass bei
+möglichen Problemen, Ressourcen für die Fehlerbehebung bereitstehen.
+
 Somit beschränkte sich die Auswahl für diesen Prototyp, angesichts des
 für die Evaluation abgesteckten zeitlichen Rahmen auf den
 \passthrough{\lstinline!Raspberry-Pi 3b+!} und das
-\passthrough{\lstinline!STM32MP157A-DK1!} \label{ref}.
+\passthrough{\lstinline!STM32MP157A-DK1!}\label{ref}.
 
 \begin{longtable}[]{@{}lll@{}}
 \caption{Getestete eingebettete Systeme
