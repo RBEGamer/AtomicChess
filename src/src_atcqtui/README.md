@@ -5,7 +5,7 @@
 
 
 
-This branch contains the QT5 User Interface which is running on the RaspberryPi Display.
+This folder contains the QT5 User Interface which is running on the RaspberryPi Display.
 
 
 ## REQUIREMENTS
@@ -132,7 +132,7 @@ The settings menu is accessable in every other menu and the back button, redirec
 
 ![MOCKUP_MAIN_MENU](./documentation_images/SETTINGS.png)
 
-Also a general information menu was added, which shows the table software version, its hardware id (used for communcation with the cloud backend).
+A general information menu was added, which shows the table software version, its hardware id (used for communcation with the cloud backend).
 For debug reasons the last internal errormessage can be shown here.
 
 ![MOCKUP_MAIN_MENU](./documentation_images/INFO.png)
@@ -143,9 +143,9 @@ After creating the mockups, `Qt Design Studio` was used to convert the Mockup in
 ### Qt Design Studio
 
 `Qt` offers several different tool to create a user interface. In this case the `Qt Design Studio`, was used in the first step of implementing the UI form the mockup. It has some advantages over the `Qt Creator`, reagarding the design workflow. It is for example possible to direclty import Adobe Photoshop files, this feature was used for the creation of the icons used in the interface. No manually export of the icon from Adobe Photoshop and reimporting into Qt was needed.
-It also supports live preview of the design as an running application, no compilation needed for reviewing the UI.
+It supports live preview of the design as an running application, no compilation needed for reviewing the UI.
 
-The software uses a simple drag&drop system for elements, like buttons, labels and self designed components. The element can be placed on a empty screen to build the ui from the ground up. It also provides integration for the `QtQuickControl II` component presets, which includes some more advance ui element like the animated spinner or progress bars.
+The software uses a simple drag&drop system for elements, like buttons, labels and self designed components. The element can be placed on a empty screen to build the ui from the ground up. It provides integration for the `QtQuickControl II` component presets, which includes some more advance ui element like the animated spinner or progress bars.
 
 While building the UI in the software, the equivalent QML code is generated which corresponds in an `.qml` file.
 The QML file can now be loaded into a `Qt Quick - Application` project inside of the `Qt Creator` software. 
@@ -167,7 +167,7 @@ The QML file can now be loaded into a `Qt Quick - Application` project inside of
 
 
 ## QML `objectName` ATTRIBUTE
-It is also possible to edit the QML code and add new QML components inside of `Qt Creator`, which offers also a QML visual editor.
+It is also possible to edit the QML code and add new QML components inside of `Qt Creator`, which offers a QML visual editor.
 Here all object which are designed to be changed with C++ code, become a unique name. This happens inside of the QML code with the `objectName` attribute.
 
 For example the content of the version label on the info menu should be changeable, so its gets a unique name with 
@@ -258,7 +258,7 @@ Now every function inside of the UI can call functions in the C++ backend by usi
 
 ### ACCESS MODIFIERS TO WORK WITH THE UI
 In the headerfile `menumanager.h` function can be declared with the access modifiers, for example`public` or `private`.
-In the Qt C++ there are also other modifiers avariable, espacially for connecting with QML.
+In the Qt C++ there are other modifiers avariable, espacially for connecting with QML.
 
 The mainly used modifier for this project is the `public slots` modifiert. Each function declared in this section can be called from the QML side.
 
@@ -327,7 +327,7 @@ void MenuManager::ls_login_btn(){
 
 ### MODIFY QML COMPONENTS | SWITCHING BETWEEN MENUS
 
-Now its possible to react to user events, but the other direction, to send events to the gui is also needed.
+Now its possible to react to user events, but the other direction, to send events to the gui is needed.
 To display the current gamestate or switching between menus.
 
 The `visible` attributes of an element, defines if the element is visible on the ui or not.
@@ -341,7 +341,7 @@ For this purpose each menu container has its own `objectName` attribute.
 * `ls_container`, is the start screen container
 
 To finally switch the a menu the function `switch_menu(QString _container_name)` can be used, for simple menu switching.
-It also poulates a variable called `last_menu_opened`, this stores the menu name the user comes from and makes its possible to switch back to the previous menu.
+It poulates a variable called `last_menu_opened`, this stores the menu name the user comes from and makes its possible to switch back to the previous menu.
 This functionally comes handy, for the settings menu, which can be opened from every other menu and by closing the settings menu the user redirect back to the previous menu.
 
 ```c++
@@ -447,7 +447,7 @@ The deine `USE_QT` is set in the project settings of the Qt project.
 #endif
 ```
 
-Also in the implementation of the functions, the define was used.
+In the implementation of the functions, the define was used.
 
 ```c++
 //SHARED/guicommunicator.cpp
@@ -491,12 +491,14 @@ The critical section is in this case, the read/write access to the queue.
 * needed information
 * generation of the .proto file to cpp code
 * location of the files in shared folder
+
 ##### Webserver
 * advantage for debugging
 * zeromq not wokring
 
 
 ### DEPLOYMENT
+
 * using buildroot pacakge
 * simply use qmake to gerneate makefile
 * and run makefile in buildroot
