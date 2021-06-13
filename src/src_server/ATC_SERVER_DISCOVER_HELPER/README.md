@@ -7,4 +7,4 @@ After setup the server, put this program into the autostart and all tables find 
 
 ## BUILD AND RUN
 
-simply run `$ make` to generate the binary file and execute the file.
+simply run `$ cmake . & make` to generate the binary file and execute the file.
