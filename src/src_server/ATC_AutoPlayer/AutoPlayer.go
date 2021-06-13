@@ -373,10 +373,14 @@ func main() {
 		_, PlayerStateDetails := RestGetPlayerState(HWID,SID)
 	//	fmt.Println(PlayerStateDetails)
 		if PlayerStateDetails.Err != nil{
-			//fmt.Println(PlayerStateDetails.Err)
+			fmt.Println(PlayerStateDetails.Err)
 			break
 		}
 
+		if PlayerStateDetails.Status == "err_session_key_sid_check_failed"{
+			fmt.Println("SID INVALID BREAK")
+			break
+		}
 		//RESET CLIENT THIS AFTER A FINISHED GAMES
 		if game_runned && !PlayerStateDetails.GameState.GameRunning{
 			game_runned = false
