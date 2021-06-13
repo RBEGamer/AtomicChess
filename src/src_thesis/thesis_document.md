@@ -157,6 +157,14 @@ Wie bereits aus den zum Teil identischen Namen ersichtlich, streben alle Tische 
 ### Kommerzielle Produkte
 
 
+Die für den Vergleich gewählten Eigenschaften sind jene, welche die im Projekt angestrebten Funktionen möglichst äquivalent reflektieren. Dennoch schränkt das geringe Angebot an autonomen Tischen die Auswahl stark ein; daher wurde hierbei Wert gelegt auf Automation, Cloud-Anbindung und die Abmessungen, welche das Spielerlebnis am deutlichsten beeinflussen.
+
+<br>
+
+Die Bretter des Herstellers `DGT` erkennen die Position der verwendeten Figuren. Information über die dafür verwendete Technologie ist jedoch nicht verfügbar. Die `Square-Off`-Schachtische verfügen über keine solche Funktion.
+
+
+
 \pagebreak
 
 : Auflistung kommerzieller autonomer Schachtische \label{commchesstables}
@@ -173,16 +181,8 @@ Wie bereits aus den zum Teil identischen Namen ersichtlich, streben alle Tische 
 | Stand-Alone Funktionalität                | nein (Mobiltelefon erforderlich)          | nein (Mobiltelefon erforderlich)             | nein (PC)                         | nein (PC)                     |          
 | Besonderheiten                            | Akku für 30 Spiele                        | Akku für 15 Spiele                           | -                                 | -                             |
 
-<br>
-
-Die für den Vergleich gewählten Eigenschaften sind jene, welche die im Projekt angestrebten Funktionen möglichst äquivalent reflektieren. Dennoch schränkt das geringe Angebot an autonomen Tischen die Auswahl stark ein; daher wurde hierbei Wert gelegt auf Automation, Cloud-Anbindung und die Abmessungen, welche das Spielerlebnis am deutlichsten beeinflussen.
 
 <br>
-
-Die Bretter des Herstellers `DGT` erkennen die Position der verwendeten Figuren. Information über die dafür verwendete Technologie ist jedoch nicht verfügbar. Die `Square-Off`-Schachtische verfügen über keine solche Funktion.
-
-<br>
-
 
 
 Die Außenabmessungen der autonomen Schachtische unterscheiden sich nur beim Hersteller `Square Off` deutlich; 
@@ -239,9 +239,17 @@ Zusätzlich zu den genannten Projekten sind weitere derartige Projekte verfügba
 
 Auch existieren weitere Abwandlungen von autonomen Schachbrettern, bei welchen die Figuren von oberhalb des Spielbretts gegriffen bzw. bewegt werden. In einigen Projekten wird dies mittels eines Industrie-Roboters[@actprojectrobot] oder eines modifizierten 3D-Druckers[@atcproject3dprinter] realisiert. Diese wurden hier aufgrund der Mechanik, welche über dem Spielbrett montiert werden muss und damit das Spielerlebnis erheblich beeinflusst, nicht berücksichtigt.
 
+<br>
 
 
+In den bestehenden Projekten ist zu erkennen, dass ein autonomer Schachtisch sehr einfach und mit simplen Mittel konstruiert werden kann. Hierbei fehlen in der Regel einige Features, wie das automatische Erkennen von Figuren oder das Spielen über das Internet.
+Einige Projekte setzten dabei auf eingebettete Systeme, welche direkt im Schachtisch montiert sind. Andere hingegen nutzen einen externen PC, welcher die Steuerbefehle an die Elektronik sendet.
 
+
+<br>
+
+Bei der Konstruktion der Mechanik und der Methode, mit welcher die Figuren über das Feld bewegt werden, ähneln sich jedoch die meisten dieser Projekte. Hier wurden in der Regel einfache X- und Y-Achsen verwendet, welche von je einem Schrittmotoren bewegt werden.
+Die Schachfiguren werden dabei mittels eines Elektromagneten über die Oberseite gezogen. Dabei ist ein Magnet oder eine kleine Metallplatte als Gegenpol in den Fuß der Figuren eingelassen.
 
 
 \pagebreak
@@ -261,18 +269,6 @@ Auch existieren weitere Abwandlungen von autonomen Schachbrettern, bei welchen d
 | Besonderheiten                          | -                                                     | Sprachsteuerung                           | Zuganzeige ((+led) Matrix)            |
 | Lizenz                                  | (+gpl) 3+                                             | (+gpl)                                                   | -                                        |
 
-
-
-
-
-
-In den bestehenden Projekten ist zu erkennen, dass ein autonomer Schachtisch sehr einfach und mit simplen Mittel konstruiert werden kann. Hierbei fehlen in der Regel einige Features, wie das automatische Erkennen von Figuren oder das Spielen über das Internet.
-Einige Projekte setzten dabei auf eingebettete Systeme, welche direkt im Schachtisch montiert sind. Andere hingegen nutzen einen externen PC, welcher die Steuerbefehle an die Elektronik sendet.
-
-<br>
-
-Bei der Konstruktion der Mechanik und der Methode, mit welcher die Figuren über das Feld bewegt werden, ähneln sich jedoch die meisten dieser Projekte. Hier wurden in der Regel einfache X- und Y-Achsen verwendet, welche von je einem Schrittmotoren bewegt werden.
-Die Schachfiguren werden dabei mittels eines Elektromagneten über die Oberseite gezogen. Dabei ist ein Magnet oder eine kleine Metallplatte als Gegenpol in den Fuß der Figuren eingelassen.
 
 <br>
 
@@ -705,7 +701,7 @@ Ein typischer Anwendungsfall ist der (+ndefrtd) URL Datensatz. Dieser kann dazu 
 Der autonome Schachtisch verwendet den einfachsten (+ndefrtd) Typ, den sogenannten Text-Record, welcher zum Speichern von Zeichenketten genutzt werden kann, ohne dass eine Aktion auf dem Endgerät ausgeführt wird.
 Jeder Tag einer Schachfigur, welche für den autonomen Schachtisch verwendet werden kann, besitzt diesen (+ndef) Record \ref{ndef_record_rook} an der ersten Speicher-Position. Alle weiteren eventuell vorhandenen Records werden vom Tisch ignoriert.[@nordicnfclib]
 
-![Prototyp Hardware: Tool zur Erstellung des NDEF Payloads: ChessFigureIDGenerator.html \label{ATC_ChessFigureIDGenerator}](images/ATC_ChessFigureIDGenerator.png)
+![Prototyp Hardware: Tool zur Erstellung des NDEF Payloads\label{ATC_ChessFigureIDGenerator}](images/ATC_ChessFigureIDGenerator.png)
 
 Um die Payload für den (+nfc) Record zu erstellen, wurde ein kleine Web-Applikation \ref{ATC_ChessFigureIDGenerator} erstellt, welche den Inhalt der Text-Records erstellt.
 Dieser ist für jede Figur individuell und enthält den Figur-Typ und die Figur-Farbe. Das Tool unterstützt auch das Speichern weiterer Attribute wie einem Figur-Index, welcher aber in der finalen Software-Version nicht genutzt wird.
@@ -1919,7 +1915,7 @@ Dazu zählen unter anderem das neue Schachbrett und ob ein Spieler gewonnen oder
 Bevor ein Spiel begonnen wird, generiert der MoveValidator das initiale Spielfeld und bestimmt den Spieler, welcher als erstes am Zug ist.
 
 
-![MoveValidator: Beispiel Request zur Ausführung eines Zuges auf einem gegebenen Schachbrett \label{ATC_movevalidator_execute_move}](images/ATC_movevalidator_execute_move.png)
+![MoveValidator: Beispiel Request zur Ausführung eines Zuges\label{ATC_movevalidator_execute_move}](images/ATC_movevalidator_execute_move.png)
 
 
 Der Backend-Service fragt ein neues Spiel an oder übergibt einen Schachzug inkl. des aktuellen Spielbrett-Aufbaus an den Service.\ref{ATC_movevalidator_execute_move}
