@@ -300,26 +300,6 @@ Technologie ist jedoch nicht verfügbar. Die
 \passthrough{\lstinline!Square-Off!}-Schachtische verfügen über keine
 solche Funktion.
 
-Die Außenabmessungen der autonomen Schachtische unterscheiden sich nur
-beim Hersteller \passthrough{\lstinline!Square Off!} deutlich; der Grand
-Kingdom Schachtisch ist rechteckig konstruiert worden, was das
-Spielerlebnis deutlich verändert. Der simple Kingdom-Tisch ist dabei
-kleiner als das vorgegebene Turniermaß, was negativen Einfluss auf das
-Spielererlebnis hat.
-
-Mit den Standardmaßen der \passthrough{\lstinline!DGT!}-Spielbretter und
-zudem ihrer geringen Höhe gleichen diese deutlich einem Turniertisch.
-Die Kombination aus geringer Höhe und Erkennung der Figur-Stellung bei
-den \passthrough{\lstinline!DGT!}-Brettern ist positiv bemerkenswert.
-Die Größe der einzelnen Schachfelder aller autonomen Schachtische
-befinden sich jedoch in den Spezifikationen der
-\gls{uscf}\cite{officialuscfrules}, welche sich von 50mm bis 63mm
-belaufen.
-
-Beide Hersteller bieten eine Bluetooth-Schnittstelle an. Einzig das
-Smart-Board des Herstellers \passthrough{\lstinline!DGT!} nutzt eine
-serielle, kabelgebundene Schnittstelle.
-
 \pagebreak
 
 \begin{longtable}[]{@{}llccr@{}}
@@ -455,7 +435,24 @@ Akku für 15 Spiele\strut
 \bottomrule
 \end{longtable}
 
-\pagebreak
+Die Außenabmessungen der autonomen Schachtische unterscheiden sich nur
+beim Hersteller \passthrough{\lstinline!Square Off!} deutlich; der Grand
+Kingdom Schachtisch ist rechteckig konstruiert worden, was das
+Spielerlebnis deutlich verändert. Der simple Kingdom-Tisch ist dabei
+kleiner als das vorgegebene Turniermaß, was negativen Einfluss auf das
+Spielererlebnis hat. Mit den Standardmaßen der
+\passthrough{\lstinline!DGT!}-Spielbretter und zudem ihrer geringen Höhe
+gleichen diese deutlich einem Turniertisch. Die Kombination aus geringer
+Höhe und Erkennung der Figur-Stellung bei den
+\passthrough{\lstinline!DGT!}-Brettern ist positiv bemerkenswert. Die
+Größe der einzelnen Schachfelder aller autonomen Schachtische befinden
+sich jedoch in den Spezifikationen der
+\gls{uscf}\cite{officialuscfrules}, welche sich von 50mm bis 63mm
+belaufen.
+
+Beide Hersteller bieten eine Bluetooth-Schnittstelle an. Einzig das
+Smart-Board des Herstellers \passthrough{\lstinline!DGT!} nutzt eine
+serielle, kabelgebundene Schnittstelle.
 
 Bei den \passthrough{\lstinline!DGT!}-Schachbrettern ist zu beachten,
 dass diese die Schachfiguren nicht autonom bewegen können. Sie wurden
@@ -505,8 +502,6 @@ Optionen auch einen weiteren Account bei anderen Schach-Cloud-Anbietern
 wie \passthrough{\lstinline!Chess.com!} oder
 \passthrough{\lstinline!Lichess!}.
 
-\pagebreak
-
 Beide \passthrough{\lstinline!Square-Off!}-Modelle ermöglichen durch
 eingebaute Akkus auch eine mobile Nutzung, was dem Nutzer mehr
 Flexibilität, zum Beispiel das spielen im Freien, erlaubt.
@@ -515,13 +510,11 @@ Zusammenfassend ist festzustellen, dass alle vier Tische dank
 unterschiedlicher Ausführung von Spiel-Eigenschaften zu
 unterschiedlichen Spiel-Erlebnissen führen. Für Nutzer ist eine
 Entscheidung anhand von Funktionen kaum möglich; letztlich bedarf es vor
-einem Kauf der Auswertung von gewünschten und gegebenen Funktionen.
-
-Es ist erkennbar, dass nur die Firma
-\passthrough{\lstinline!Square Off!} einen absolut autonomen Schachtisch
-anbietet, auch wenn dieser nicht alle in diesem Projekt angestrebten
-Funktionalitäten bietet. So hat der Nutzer im Hinblick auf kommerzielle
-Angebote kaum Auswahlmöglichkeiten.
+einem Kauf der Auswertung von gewünschten und gegebenen Funktionen. Es
+ist erkennbar, dass nur die Firma \passthrough{\lstinline!Square Off!}
+einen absolut autonomen Schachtisch anbietet, auch wenn dieser nicht
+alle in diesem Projekt angestrebten Funktionalitäten bietet. So hat der
+Nutzer im Hinblick auf kommerzielle Angebote kaum Auswahlmöglichkeiten.
 
 \hypertarget{open-source-projekte}{%
 \subsection{Open-Source Projekte}\label{open-source-projekte}}
@@ -563,27 +556,6 @@ verwendet, welche von je einem Schrittmotoren bewegt werden. Die
 Schachfiguren werden dabei mittels eines Elektromagneten über die
 Oberseite gezogen. Dabei ist ein Magnet oder eine kleine Metallplatte
 als Gegenpol in den Fuß der Figuren eingelassen.
-
-Die Erkennung der Schachfiguren ist augenscheinlich die schwierigste
-Aufgabe. Hier wurde in der Mehrzahl der Projekte eine Kamera im
-Zusammenspiel mit einer auf \passthrough{\lstinline!OpenCV!}-basierten
-Figur-Erkennung verwendet.
-
-Diese Variante ist je nach Implementierung des Vision-Algorithmus
-fehleranfällig bei sich ändernden Lichtverhältnissen. Auch muss die
-Kamera oberhalb der Schachfiguren platziert werden, wenn kein
-transparentes Schachfeld verwendet werden soll.
-
-Eine weitere Alternative ist die Verwendung einer Matrix aus
-Reed-Schaltern oder Halleffekt-Sensoren. Diese werden in einer 8x8
-Matrix Konfiguration unterhalb der Platte montiert und reagieren auf die
-Magnete in den Figuren. So ist es möglich zu erkennen, welches der
-Schachfelder belegt ist, jedoch nicht konkret von welchem Figurentyp.
-
-Dieses Problem wird durch eine definierte Ausgangsstellung beim
-Spielstart gelöst. Nach jedem Zug durch den Spieler und der dadurch
-resultierenden Änderungen in den Figurenpositionen in der Matrix können
-die neuen Figurenstellungen berechnet werden.
 
 \pagebreak
 
@@ -707,7 +679,24 @@ Lizenz\strut
 \bottomrule
 \end{longtable}
 
-\pagebreak
+Die Erkennung der Schachfiguren ist augenscheinlich die schwierigste
+Aufgabe. Hier wurde in der Mehrzahl der Projekte eine Kamera im
+Zusammenspiel mit einer auf \passthrough{\lstinline!OpenCV!}-basierten
+Figur-Erkennung verwendet. Diese Variante ist je nach Implementierung
+des Vision-Algorithmus fehleranfällig bei sich ändernden
+Lichtverhältnissen. Auch muss die Kamera oberhalb der Schachfiguren
+platziert werden, wenn kein transparentes Schachfeld verwendet werden
+soll.
+
+Eine weitere Alternative ist die Verwendung einer Matrix aus
+Reed-Schaltern oder Halleffekt-Sensoren. Diese werden in einer 8x8
+Matrix Konfiguration unterhalb der Platte montiert und reagieren auf die
+Magnete in den Figuren. So ist es möglich zu erkennen, welches der
+Schachfelder belegt ist, jedoch nicht konkret von welchem Figurentyp.
+Dieses Problem wird durch eine definierte Ausgangsstellung beim
+Spielstart gelöst. Nach jedem Zug durch den Spieler und der dadurch
+resultierenden Änderungen in den Figurenpositionen in der Matrix können
+die neuen Figurenstellungen berechnet werden.
 
 Abschließend ist festzuhalten, dass es auch bei den Open-Source
 Projekten kein Projekt gibt, welches alle gewünschten Features abbildet.
@@ -936,11 +925,9 @@ Projekt besteht aus drei Schichten:
 
 Eigene Pakete werden dabei in \passthrough{\lstinline!Recipes!}
 angelegt, welche in einer Makefile ähnlichen Syntax das Paket und die
-Schritte zum erstellen beschreiben.
-
-Diese einzelnen Pakete werden anschließend in
-\passthrough{\lstinline!Layern!} zu einem Gesamtsystem zusammengesetzt.
-Dies geschieht anschließend mittels des
+Schritte zum erstellen beschreiben. Diese einzelnen Pakete werden
+anschließend in \passthrough{\lstinline!Layern!} zu einem Gesamtsystem
+zusammengesetzt. Dies geschieht anschließend mittels des
 \passthrough{\lstinline!Bitbake!}-Tools, welches das System erstellt.
 
 Das \passthrough{\lstinline!Buildroot!}-Framework hingegen bietet
@@ -953,15 +940,13 @@ eingebettete System vorhanden, welche direkt gestartet werden kann.
 Nach einem erfolgreichen Erstellen des Images kann dieses direkt über
 das eingebettete System gestartet werden. Bei jedem Build-Vorgang müssen
 jedoch alle Pakete erneut gebaut werden, bevor diese zu einem finalen
-Image zusammengefügt werden.
-
-Hierbei kann dieser Vorgang je nach Umfang der verwendeten Pakete
-mehrere Stunden dauern. Das \passthrough{\lstinline!Yocot!}-Projekt
-unterstützt hierbei das Erstellen einzelner Pakete, somit müssen nur
-Änderungen neu gebaut werden. Da im Rahmen dieses Projekts nur eine
-minimale Anzahl von Paketen benötigt werden, hält sich dieser
-Buildvorgang zeitlich in Grenzen und ist allgemein für dieses Projekt
-nicht entscheidend.
+Image zusammengefügt werden. Hierbei kann dieser Vorgang je nach Umfang
+der verwendeten Pakete mehrere Stunden dauern. Das
+\passthrough{\lstinline!Yocot!}-Projekt unterstützt hierbei das
+Erstellen einzelner Pakete, somit müssen nur Änderungen neu gebaut
+werden. Da im Rahmen dieses Projekts nur eine minimale Anzahl von
+Paketen benötigt werden, hält sich dieser Buildvorgang zeitlich in
+Grenzen und ist allgemein für dieses Projekt nicht entscheidend.
 
 Dann wurde prototypisch evaluiert, wie aufwändig es ist, zum
 \passthrough{\lstinline!Buildroot!} Framework eigene in C++ geschriebene
@@ -1057,21 +1042,6 @@ für die Evaluation abgesteckten zeitlichen Rahmen auf den
 \passthrough{\lstinline!Raspberry-Pi 3b+!} und das
 \passthrough{\lstinline!STM32MP157A-DK1!} \label{ref}.
 
-Diese bieten vergleichbare technische Spezifikationen und siedeln sich
-im gleichen Preissegment an. Je nach Ausführung des
-\passthrough{\lstinline!STM32MP157A-DK!} ist in diesem bereits ein
-\gls{dsi}-Display \ref{stm32mp1} vorhanden und bietet von der
-Softwareseite her bereits eine Unterstützung für das
-\passthrough{\lstinline!Yocto!}-Projekt an. Ein Vorteil des
-\passthrough{\lstinline!STM32MP157A-DK!} gegenüber dem bekannten
-\passthrough{\lstinline!Raspberry-Pi 3b+!} ist sein zusätzlicher
-\passthrough{\lstinline!Arm Cortex A4!}-Co-Prozessor, welcher als
-zusätzlicher Mikrokontroller verwendet werden kann. Somit kann die
-Ansteuerung der \gls{gpio}-Anschl sowie Timer und Iterrupt-Aufgaben von
-diesem übernommen werden und die Ergebnisse und Steuersignale von
-\passthrough{\lstinline!Arm Cortex A7!} Hauptprozessor und dessen
-Linux-System bearbeitet werden.
-
 \begin{longtable}[]{@{}lll@{}}
 \caption{Getestete eingebettete Systeme
 \label{embsystems}}\tabularnewline
@@ -1139,6 +1109,21 @@ Arm Cortex A4 Co-Prozessor, Secure-Boot, Debugger\strut
 \end{minipage}\tabularnewline
 \bottomrule
 \end{longtable}
+
+Diese bieten vergleichbare technische Spezifikationen und siedeln sich
+im gleichen Preissegment an. Je nach Ausführung des
+\passthrough{\lstinline!STM32MP157A-DK!} ist in diesem bereits ein
+\gls{dsi}-Display \ref{stm32mp1} vorhanden und bietet von der
+Softwareseite her bereits eine Unterstützung für das
+\passthrough{\lstinline!Yocto!}-Projekt an. Ein Vorteil des
+\passthrough{\lstinline!STM32MP157A-DK!} gegenüber dem bekannten
+\passthrough{\lstinline!Raspberry-Pi 3b+!} ist sein zusätzlicher
+\passthrough{\lstinline!Arm Cortex A4!}-Co-Prozessor, welcher als
+zusätzlicher Mikrokontroller verwendet werden kann. Somit kann die
+Ansteuerung der \gls{gpio}-Anschl sowie Timer und Iterrupt-Aufgaben von
+diesem übernommen werden und die Ergebnisse und Steuersignale von
+\passthrough{\lstinline!Arm Cortex A7!} Hauptprozessor und dessen
+Linux-System bearbeitet werden.
 
 Der \passthrough{\lstinline!Raspberry-Pi 3b+!} hingegen bietet einen
 großen Software-Support an, welches an der großen Open-Source-Community
@@ -1782,17 +1767,19 @@ Main Thread der Controller-Software getätigt werden.
 \subsection{TMC5160 SPI Treiber}\label{tmc5160-spi-treiber}}
 
 Der Treiber für die verwendeten \passthrough{\lstinline!TMC5160!}
-Schrittmotor-Treiber ist ebenfalls ein Bestandteil des \gls{hal}. Die
-verwendeten Bausteine bieten mitunter sehr komplexe
+Schrittmotor-Treiber ist ebenfalls ein Bestandteil des \gls{hal}.
+
+Die verwendeten Bausteine bieten mitunter sehr komplexe
 Konfigurationsmöglichkeiten und je nach Betriebsart sind mehrere Lese-
 und Schreiboperationen über den \gls{spi} Bus notwendig. Diesbezüglich
 wurde die komplette Ansteuerung auf der Softwareseite in ein eigenes
-Modul geschachtelt. Dieses stellt verschiedene Funktionen zum Verfahren
-eines Motors bereit. Hierzu benötigt jeder verwendete Hardware-Treiber
-eine Instanz des Moduls zur Ansteuerung; so ist es zusätzlich möglich,
-für jede Achse verschiedene Parameter \ref{tmcrampparams} setzen zu
-können in Bezug auf Beschleunigung und Positionierungsgeschwindigkeit
-des Motors.
+Modul geschachtelt.
+
+Dieses stellt verschiedene Funktionen zum Verfahren eines Motors bereit.
+Hierzu benötigt jeder verwendete Hardware-Treiber eine Instanz des
+Moduls zur Ansteuerung; so ist es zusätzlich möglich, für jede Achse
+verschiedene Parameter \ref{tmcrampparams} setzen zu können in Bezug auf
+Beschleunigung und Positionierungsgeschwindigkeit des Motors.
 
 \begin{longtable}[]{@{}lr@{}}
 \caption{TMC5160 Beschleunigungskurve / RAMP Parameter
@@ -2401,21 +2388,24 @@ All diese Faktoren erschwerten einen einfachen Zusammenbau des autonomen
 Schachtischs. Die Lösung stellte die Verwendung von Standardhardware
 dar. Nach der Minimierung der elektrischen Komponenten und des
 mechanischen Aufbaus war zu erkennen, dass der autonome Schachtisch
-einer \gls{cnc}-Fr bzw. einem 3D Drucker stark ähnelt. Insbesondere die
-XY-Achsen Mechanik sowie die Ansteuerung von Schrittmotoren wird in
-diesen Systemen verwendet. Mit dem Durchbruch von 3D Druckern im
-Consumer-Bereich sind auch kleine und preisgünstige Steuerungen
-\ref{3dmarlinctl} erhältlich, welche 2-4 Schrittmotoren und diverse
-zusätzliche Hardware ansteuern können.
+einer \gls{cnc}-Fr bzw. einem 3D Drucker stark ähnelt.
+
+Insbesondere die XY-Achsen Mechanik sowie die Ansteuerung von
+Schrittmotoren wird in diesen Systemen verwendet. Mit dem Durchbruch von
+3D Druckern im Consumer-Bereich sind auch kleine und preisgünstige
+Steuerungen \ref{3dmarlinctl} erhältlich, welche 2-4 Schrittmotoren und
+diverse zusätzliche Hardware ansteuern können.
 
 Hierbei existiert eine große Auswahl solcher Steuerungen mit den
 verschiedensten Ausstattungen. Bei der Auswahl wurde vor allem auf die
 Möglichkeit geachtet, sogenannte Silent-Schrittmotortreiber verwenden zu
 können, um die Geräuschemmissionen durch die Motoren so weit wie möglich
-zu minimieren. Im ersten Prototyp wurden unter anderem aus diesem Grund
-die \passthrough{\lstinline!TMC5160!} Treiber ausgewählt. Die meisten
-Boards \label{3dmarlinctl} bieten austauschbare Treiber, so dass es auch
-im Nachhinein möglich ist, diese auszuwechseln.
+zu minimieren.
+
+Im ersten Prototyp wurden unter anderem aus diesem Grund die
+\passthrough{\lstinline!TMC5160!} Treiber ausgewählt. Die meisten Boards
+\label{3dmarlinctl} bieten austauschbare Treiber, so dass es auch im
+Nachhinein möglich ist, diese auszuwechseln.
 
 \begin{longtable}[]{@{}lccr@{}}
 \caption{Standardhardware 3D Drucker Steuerungen
@@ -3017,16 +3007,20 @@ CMD ["/app/main"] # START APP
 \end{lstlisting}
 
 Da die Architektur aus mehr als einem Container besteht, gestaltet sich
-ein manuelles Management dieser Container als nicht praktikabel. Zu
-diesem Zweck existieren mehrere Tools und Systeme, um solche Aufgaben zu
-automatisieren. Ein weiterer nicht zu vernachlässigender Punkt sind die
-Abhängigkeiten, welche unter den Containern bestehen. In diesem Fall
-benötigt der Backend-Service die beiden Datenbanken, um starten zu
-können. Somit ist es essentiell, dass diese bereits zuvor erfolgreich
-gestartet werden. Solche Funktionalitäten deckt das leichtgewichtige
-Tool \passthrough{\lstinline!docker-compose!}\cite{dockercompose}
-ab. Durch eine entsprechende Konfigurationsdatei kann ein so genannter
-Stack aus mehreren Containern aufgebaut werden.
+ein manuelles Management dieser Container als nicht praktikabel.
+
+Zu diesem Zweck existieren mehrere Tools und Systeme, um solche Aufgaben
+zu automatisieren. Ein weiterer nicht zu vernachlässigender Punkt sind
+die Abhängigkeiten, welche unter den Containern bestehen.
+
+In diesem Fall benötigt der Backend-Service die beiden Datenbanken, um
+starten zu können. Somit ist es essentiell, dass diese bereits zuvor
+erfolgreich gestartet werden.
+
+Solche Funktionalitäten deckt das leichtgewichtige Tool
+\passthrough{\lstinline!docker-compose!}\cite{dockercompose} ab.
+Durch eine entsprechende Konfigurationsdatei kann ein so genannter Stack
+aus mehreren Containern aufgebaut werden.
 
 \begin{lstlisting}
 # docker-compose.yml STACK CONFIGURATION src_server
@@ -3060,7 +3054,6 @@ services:
     ports:
       - 5000:5000
     environment:
-      - PRODUCTION=1
 
   AtomicChessRedisDatabase:
     #...
@@ -3078,10 +3071,7 @@ services:
     restart: always
     scale: 5 # SPAWN THREE INSTANCES
     environment:
-      - PRODUCTION=1
       - BACKEND_IP=backend:3000 #HOST IP:PORT OF BACKEND
-      #- USE_HOSTNAME_HWID=TRUE # USE THE MACHINE HOSTNAME AS HWID
-      #- PLAYER_TYPE_HUMAN=1 # SIMULATE A HUMAN PLAYER
 \end{lstlisting}
 
 \hypertarget{service-backend}{%

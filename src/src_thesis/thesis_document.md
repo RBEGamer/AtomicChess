@@ -893,8 +893,17 @@ Der (+hal) und dessen benötigte Softwarekomponenten zur Buskommunikation und Ha
 
 ### TMC5160 SPI Treiber
 
-Der Treiber für die verwendeten `TMC5160` Schrittmotor-Treiber ist ebenfalls ein Bestandteil des (+hal). Die verwendeten Bausteine bieten mitunter sehr komplexe Konfigurationsmöglichkeiten und je nach Betriebsart sind mehrere Lese- und Schreiboperationen über den (+spi) Bus notwendig. Diesbezüglich wurde die komplette Ansteuerung auf der Softwareseite in ein eigenes Modul geschachtelt.
+Der Treiber für die verwendeten `TMC5160` Schrittmotor-Treiber ist ebenfalls ein Bestandteil des (+hal).
+
+<br>
+
+Die verwendeten Bausteine bieten mitunter sehr komplexe Konfigurationsmöglichkeiten und je nach Betriebsart sind mehrere Lese- und Schreiboperationen über den (+spi) Bus notwendig. Diesbezüglich wurde die komplette Ansteuerung auf der Softwareseite in ein eigenes Modul geschachtelt.
+
+<br>
+
 Dieses stellt verschiedene Funktionen zum Verfahren eines Motors bereit. Hierzu benötigt jeder verwendete Hardware-Treiber eine Instanz des Moduls zur Ansteuerung; so ist es zusätzlich möglich, für jede Achse verschiedene Parameter \ref{tmcrampparams} setzen zu können in Bezug auf Beschleunigung und Positionierungsgeschwindigkeit des Motors.
+
+<br>
 
 : TMC5160 Beschleunigungskurve / RAMP Parameter \label{tmcrampparams}
 
@@ -1277,11 +1286,19 @@ Zusätzlich konnte die Elektronik nur beschränkt mit anderen Systemen verbunden
 
 All diese Faktoren erschwerten einen einfachen Zusammenbau des autonomen Schachtischs. Die Lösung stellte die Verwendung von Standardhardware dar.
 Nach der Minimierung der elektrischen Komponenten und des mechanischen Aufbaus war zu erkennen, dass der autonome Schachtisch einer (+cnc)-Fräse bzw. einem 3D Drucker stark ähnelt.
+
+<br>
+
 Insbesondere die XY-Achsen Mechanik sowie die Ansteuerung von Schrittmotoren wird in diesen Systemen verwendet.
 Mit dem Durchbruch von 3D Druckern im Consumer-Bereich sind auch kleine und preisgünstige Steuerungen \ref{3dmarlinctl} erhältlich, welche 2-4 Schrittmotoren und diverse zusätzliche Hardware ansteuern können.
 
+<br>
 
-Hierbei existiert eine große Auswahl solcher Steuerungen mit den verschiedensten Ausstattungen. Bei der Auswahl wurde vor allem auf die Möglichkeit geachtet, sogenannte Silent-Schrittmotortreiber verwenden zu können, um die Geräuschemmissionen durch die Motoren so weit wie möglich zu minimieren. Im ersten Prototyp wurden unter anderem aus diesem Grund die `TMC5160` Treiber ausgewählt. Die meisten Boards \label{3dmarlinctl} bieten austauschbare Treiber, so dass es auch im Nachhinein möglich ist, diese auszuwechseln.
+Hierbei existiert eine große Auswahl solcher Steuerungen mit den verschiedensten Ausstattungen. Bei der Auswahl wurde vor allem auf die Möglichkeit geachtet, sogenannte Silent-Schrittmotortreiber verwenden zu können, um die Geräuschemmissionen durch die Motoren so weit wie möglich zu minimieren.
+
+<br>
+
+Im ersten Prototyp wurden unter anderem aus diesem Grund die `TMC5160` Treiber ausgewählt. Die meisten Boards \label{3dmarlinctl} bieten austauschbare Treiber, so dass es auch im Nachhinein möglich ist, diese auszuwechseln.
 
 <br>
 
@@ -1656,7 +1673,8 @@ Ferner wird der Zeitstempel der Anmeldung sowie die letzte Anfrage des Clients i
 Durch den Key-Value-Ansatz sowie den hohen Verbrauch an Arbeitsspeicher eignet sich diese Datenbank jedoch nicht zum Speichern der Spieldaten.
 Hierzu wurde ein zusätzlicher `Mongo` Datenbank Service erstellt, in welchem diese Daten abgelegt werden. Zusätzlich zu den Spieldaten (Spiele, Spielstände, Statistiken) werden auch die Nutzerprofile speichert. Ein Profil wird beim ersten Anmeldevorgang erstellt und enthält neben den Profilinformationen (Device-(+id), Namen, Spielertyp) auch die Referenzen auf die gewonnenen und verlorenen Spiele. Diese Referenzen können später für die Visualisierung verwendet werden.
 
-Alle aufgelisteten Services werden in separaten Containern betrieben. Die Containervirtualisierung geschieht mittels der Software `Docker`[@docker]. Diese stellt ein einfaches Interface zur Erstellung und Verwaltung von Containern bereit. Um einen Container auf dem System starten zu können, muss dieser zunächst aus einem Image heraus erstellt werden. Dieses Image wird mittels eines `Dockerfile` beschrieben. Das `Dockerfile` besteht dabei aus einer Reihe an Kommandos, welche den Aufbau des Images beschreiben. 
+Alle aufgelisteten Services werden in separaten Containern betrieben. Die Containervirtualisierung geschieht mittels der Software `Docker`[@docker]. Diese stellt ein einfaches Interface zur Erstellung und Verwaltung von Containern bereit.
+Um einen Container auf dem System starten zu können, muss dieser zunächst aus einem Image heraus erstellt werden. Dieses Image wird mittels eines `Dockerfile` beschrieben. Das `Dockerfile` besteht dabei aus einer Reihe an Kommandos, welche den Aufbau des Images beschreiben. 
 
 <br>
 
@@ -1679,10 +1697,19 @@ CMD ["/app/main"] # START APP
 <br>
 
 Da die Architektur aus mehr als einem Container besteht, gestaltet sich ein manuelles Management dieser Container als nicht praktikabel.
+
+<br>
+
 Zu diesem Zweck existieren mehrere Tools und Systeme, um solche Aufgaben zu automatisieren. 
 Ein weiterer nicht zu vernachlässigender Punkt sind die Abhängigkeiten, welche unter den Containern bestehen.
+
+<br>
+
 In diesem Fall benötigt der Backend-Service die beiden Datenbanken, um starten zu können.
 Somit ist es essentiell, dass diese bereits zuvor erfolgreich gestartet werden.
+
+<br>
+
 Solche Funktionalitäten deckt das leichtgewichtige Tool `docker-compose`[@dockercompose] ab.
 Durch eine entsprechende Konfigurationsdatei kann ein so genannter Stack aus mehreren Containern aufgebaut werden.
 
@@ -1720,7 +1747,6 @@ services:
     ports:
       - 5000:5000
     environment:
-      - PRODUCTION=1
 
   AtomicChessRedisDatabase:
     #...
@@ -1738,10 +1764,7 @@ services:
     restart: always
     scale: 5 # SPAWN THREE INSTANCES
     environment:
-      - PRODUCTION=1
       - BACKEND_IP=backend:3000 #HOST IP:PORT OF BACKEND
-      #- USE_HOSTNAME_HWID=TRUE # USE THE MACHINE HOSTNAME AS HWID
-      #- PLAYER_TYPE_HUMAN=1 # SIMULATE A HUMAN PLAYER
 ```
 
 
