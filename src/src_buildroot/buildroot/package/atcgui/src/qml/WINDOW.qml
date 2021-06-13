@@ -1319,11 +1319,12 @@ Rectangle {
 
         Button {
             id: memm_mi_rest_btn
-            x: 304
-            y: 216
-            width: 184
+            x: 285
+            y: 53
+            width: 52
             height: 45
-            text: qsTr("RESET")
+            visible: false
+            text: qsTr("RST")
             font.pointSize: 15
             Connections {
                 target: memm_mi_rest_btn
@@ -1335,10 +1336,10 @@ Rectangle {
 
         Button {
             id: memm_mi_scan_btn
-            x: 307
-            y: 296
+            x: 304
+            y: 219
             width: 184
-            height: 90
+            height: 167
             text: qsTr("SCAN BOARD")
             font.pointSize: 15
             Connections {
@@ -1658,3 +1659,9 @@ Rectangle {
 
 
 
+
+/*##^##
+Designer {
+    D{i:0;autoSize:true;height:480;width:640}
+}
+##^##*/
