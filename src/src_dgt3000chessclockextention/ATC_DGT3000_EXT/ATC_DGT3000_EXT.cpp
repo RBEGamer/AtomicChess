@@ -600,7 +600,7 @@ int dgtpicom_configure() {
 				printf("sending setCentralControll failed three times\n\n");
 				ERROR_PIN_LO;
 #endif
-				return e;
+				//return e;
 			}
 			usleep(10000);
 			dgt3000SetCC();
