@@ -16,6 +16,7 @@ Zu diesen Einzelsystemen gehören:
 * Verwendung eines CI/CD Systems zum automatisierten bauen der Linux-Images für das Embedded-System
 
 
+![Image_Komponentenübersicht](Komponentenübersicht.png)
 
 
 Die Grafik stellt das grundlegende System dar. Der Schachtisch selbst bildet ein kompaktes System, bestehend aus einem echtzeitfähigen STM32 als Steuerelement, welches zudem ein Interface mit Optionsverwaltung bietet. Die Mechanik selbst basiert auf Schrittmotoren, welche die Bewegung eines Moduls bestehend aus NFC-Lesers und einem Elektromagneten in der waagerechten x-y-Ebene ermöglicht um so unterhalb der Tischplatte die mit NFC-Tags versehenen Schachfiguren oberhalb der Tischplatte zu detektieren und bewegen. 
