@@ -139,6 +139,8 @@ bool GCodeSender::init_serial_port(std::string _serial_port_file, int _baud_rate
 	port->DTR(true);
 	port->RTS(false);
 	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+
+    std::this_thread::sleep_for(std::chrono::milliseconds(10000));
 	//READ MAY EXISITNG BUFFER => IGNORING MARLIN CONNECTION INFO LIKE Printer Online,...
 	dummy_read();
 
@@ -327,8 +329,11 @@ void GCodeSender::disable_motors() {
 }
 
 void GCodeSender::reset_eeprom(){
+    std::this_thread::sleep_for(std::chrono::milliseconds(2000));
     write_gcode("M502"); // RESET DEFAULTS
+    std::this_thread::sleep_for(std::chrono::milliseconds(2000));
     write_gcode("M500"); // STORE NEW VALUES
+    std::this_thread::sleep_for(std::chrono::milliseconds(2000));
 }
 bool GCodeSender::set_steps_per_mm(int _x, int _y){
     //M92 X100 Y100

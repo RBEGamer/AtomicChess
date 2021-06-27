@@ -380,6 +380,11 @@ void MenuManager::mm_search_for_players_toggled(bool _state){
     }
 }
 
+
+void MenuManager::mm_en_rnd_sfg_btn(){
+    guiconnection.createEvent(guicommunicator::GUI_ELEMENT::MAINMENU_START_AUTOMOVE_MATCH_BTN, guicommunicator::GUI_VALUE_TYPE::ENABLED);
+}
+
 void MenuManager::message_screen_ok_btn(){
     qInfo() <<"message_screen_ok_btn";
     guiconnection.createEvent(guicommunicator::GUI_ELEMENT::MESSAGEBOX_OK_BTN, guicommunicator::GUI_VALUE_TYPE::CLICKED);

@@ -331,7 +331,7 @@ void ConfigParser::loadDefaults(std::string _type_str)
 		config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_B_INDEX] = "1";
 		config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_BOTTOM_POS] = "0";
 		config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_UPPER_POS] = "115";
-        config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_RESET_EEPROM_TO_DEFAULT_DURING_STARTUP] = "1";
+        config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_RESET_EEPROM_TO_DEFAULT_DURING_STARTUP] = "0";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_RGBW_STRIP_SWITCH_GB] = "1";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_COOLING_FAN_DRIVER_INDEX] = "0";
 
@@ -479,7 +479,7 @@ void ConfigParser::loadDefaults(std::string _type_str)
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_B_INDEX] = "1";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_BOTTOM_POS] = "180";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_UPPER_POS] = "85";
-        config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_RESET_EEPROM_TO_DEFAULT_DURING_STARTUP] = "1";
+        config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_RESET_EEPROM_TO_DEFAULT_DURING_STARTUP] = "0";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_RGBW_STRIP_SWITCH_GB] = "1";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_COOLING_FAN_DRIVER_INDEX] = "0";
 
