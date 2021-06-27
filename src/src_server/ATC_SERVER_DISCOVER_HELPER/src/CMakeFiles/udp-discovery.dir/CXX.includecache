@@ -6,25 +6,25 @@
 
 #IncludeRegexTransform: 
 
-/home/prodevmo/Desktop/AtomiChessOS_/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/udp_discovery_discovered_peer.hpp
+/home/prodevmo/Desktop/AtomicChessOS/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/udp_discovery_discovered_peer.hpp
 stdint.h
 -
 udp_discovery_ip_port.hpp
-/home/prodevmo/Desktop/AtomiChessOS_/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/udp_discovery_ip_port.hpp
+/home/prodevmo/Desktop/AtomicChessOS/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/udp_discovery_ip_port.hpp
 
-/home/prodevmo/Desktop/AtomiChessOS_/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/udp_discovery_ip_port.cpp
+/home/prodevmo/Desktop/AtomicChessOS/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/udp_discovery_ip_port.cpp
 sstream
 -
 udp_discovery_ip_port.hpp
-/home/prodevmo/Desktop/AtomiChessOS_/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/udp_discovery_ip_port.hpp
+/home/prodevmo/Desktop/AtomicChessOS/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/udp_discovery_ip_port.hpp
 
-/home/prodevmo/Desktop/AtomiChessOS_/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/udp_discovery_ip_port.hpp
+/home/prodevmo/Desktop/AtomicChessOS/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/udp_discovery_ip_port.hpp
 string
 -
 
-/home/prodevmo/Desktop/AtomiChessOS_/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/udp_discovery_peer.cpp
+/home/prodevmo/Desktop/AtomicChessOS/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/udp_discovery_peer.cpp
 udp_discovery_peer.hpp
-/home/prodevmo/Desktop/AtomiChessOS_/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/udp_discovery_peer.hpp
+/home/prodevmo/Desktop/AtomicChessOS/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/udp_discovery_peer.hpp
 stdlib.h
 -
 string.h
@@ -34,7 +34,7 @@ iostream
 vector
 -
 udp_discovery_protocol.hpp
-/home/prodevmo/Desktop/AtomiChessOS_/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/udp_discovery_protocol.hpp
+/home/prodevmo/Desktop/AtomicChessOS/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/udp_discovery_protocol.hpp
 winsock2.h
 -
 ws2tcpip.h
@@ -64,25 +64,25 @@ pthread.h
 stdlib.h
 -
 
-/home/prodevmo/Desktop/AtomiChessOS_/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/udp_discovery_peer.hpp
+/home/prodevmo/Desktop/AtomicChessOS/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/udp_discovery_peer.hpp
 list
 -
 udp_discovery_discovered_peer.hpp
-/home/prodevmo/Desktop/AtomiChessOS_/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/udp_discovery_discovered_peer.hpp
+/home/prodevmo/Desktop/AtomicChessOS/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/udp_discovery_discovered_peer.hpp
 udp_discovery_peer_parameters.hpp
-/home/prodevmo/Desktop/AtomiChessOS_/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/udp_discovery_peer_parameters.hpp
+/home/prodevmo/Desktop/AtomicChessOS/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/udp_discovery_peer_parameters.hpp
 
-/home/prodevmo/Desktop/AtomiChessOS_/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/udp_discovery_peer_parameters.hpp
+/home/prodevmo/Desktop/AtomicChessOS/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/udp_discovery_peer_parameters.hpp
 stdint.h
 -
 
-/home/prodevmo/Desktop/AtomiChessOS_/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/udp_discovery_protocol.cpp
+/home/prodevmo/Desktop/AtomicChessOS/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/udp_discovery_protocol.cpp
 udp_discovery_protocol.hpp
-/home/prodevmo/Desktop/AtomiChessOS_/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/udp_discovery_protocol.hpp
+/home/prodevmo/Desktop/AtomicChessOS/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/udp_discovery_protocol.hpp
 algorithm
 -
 
-/home/prodevmo/Desktop/AtomiChessOS_/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/udp_discovery_protocol.hpp
+/home/prodevmo/Desktop/AtomicChessOS/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/udp_discovery_protocol.hpp
 stdint.h
 -
 string

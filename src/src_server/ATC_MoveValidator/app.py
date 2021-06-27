@@ -166,6 +166,6 @@ def get_player_score():
 
 if __name__ == '__main__':
     logging.basicConfig(filename='./ATC_Move_Validator.log', level=logging.DEBUG)
-    logging.info('ATC_Move_Validator - started internal 5000')
-    app.run(host='0.0.0.0', port=5000)
+    logging.info('ATC_Move_Validator - started internal 5003')
+    app.run(host='0.0.0.0', port=5003)
 
