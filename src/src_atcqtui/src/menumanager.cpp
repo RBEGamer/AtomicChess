@@ -237,7 +237,15 @@ void MenuManager::updateProgress()
         qtui_flip_screen(false);
     }else if(ev.event == guicommunicator::GUI_ELEMENT::QT_UI_SET_ORIENTATION_180){
         qtui_flip_screen(true);
+    }else if(ev.event == guicommunicator::GUI_ELEMENT::MATCHMAKING_INDICATOR){
+        if(ev.type == guicommunicator::GUI_VALUE_TYPE::ENABLED){
+           set_sfp_inidcator(true);
+        }else{
+           set_sfp_inidcator(false);
+        }
     }
+
+
 
 
 
@@ -317,6 +325,13 @@ void MenuManager::ls_login_btn(bool _with_scan){
     }
 
 
+}
+
+
+
+
+void MenuManager::set_sfp_inidcator(bool _state){
+set_progress_indicator("mm_container","sfp_indicator",_state);
 }
 
 void MenuManager::is_open_is_screen_btn(){

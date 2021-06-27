@@ -65,6 +65,7 @@ typedef std::chrono::system_clock::time_point TimePoint;
 using namespace std;
 
 bool flip_screen_state = false;
+int last_mm_state_active = -1;
 bool randommove_override = false; //USED FOR THE START RANDOM MOVE MATCH BUTTON TO NOT OVERRIDE THE NORMAL CONFIG
 int game_running_state = 0;
 int mainloop_running = 0;
@@ -83,6 +84,7 @@ int cal_move_step = 5;
 //----- VARS FOR SOLANOID CALIBRATION SCREEN ---- //
 int solcal_move = -1; //-1 disbaled 0=upper pos 1=lower pos
 int solcal_pos = 0;
+
 
 
 //!Reads the system HWID File from the location
@@ -747,6 +749,14 @@ int main(int argc, char *argv[])
                     LOG_F(ERROR, "GOT err_query_paramter_hwid_or_sid_or_not_set");
                 }
 
+                if((bool)last_mm_state_active != current_player_state.matchmaking_state.waiting_for_game){
+                    last_mm_state_active = (int)current_player_state.matchmaking_state.waiting_for_game;
+                    if(last_mm_state_active){
+                        gui.createEvent(guicommunicator::GUI_ELEMENT::MATCHMAKING_INDICATOR,guicommunicator::GUI_VALUE_TYPE::ENABLED);
+                    }else{
+                        gui.createEvent(guicommunicator::GUI_ELEMENT::MATCHMAKING_INDICATOR,guicommunicator::GUI_VALUE_TYPE::DISBALED);
+                    }
+                }
 
                 if(current_player_state.game_state.game_running)
                 {

@@ -184,7 +184,7 @@ Rectangle {
                     target: mm_dis_sfg_btn
                     function onClicked(_mouse){
                         main_menu.mm_search_for_players_toggled(false);
-                        sfp_indicator.visible = false;
+                       // sfp_indicator.visible = false;
                     }
                 }
             }
@@ -202,7 +202,7 @@ Rectangle {
                     target: mm_start_random_btn
                     function onClicked(_mouse){
                         main_menu.mm_search_for_players_toggled(true) //DONT KNOW WHY ITS INVERTED...
-                        sfp_indicator.visible = false;
+                       // sfp_indicator.visible = false;
                     }
                 }
             }
@@ -219,7 +219,7 @@ Rectangle {
                     target: mm_en_sfg_btn
                     function onClicked(_mouse){
                         main_menu.mm_search_for_players_toggled(true);
-                        sfp_indicator.visible = true;
+                       // sfp_indicator.visible = true;
                     }
                 }
             }

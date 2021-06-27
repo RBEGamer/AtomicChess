@@ -101,6 +101,8 @@ public slots:
 
 
     void qtui_flip_screen(bool _flip);
+
+    void set_sfp_inidcator(bool _state);
 private:
     void show_error(QString _err);
     guicommunicator guiconnection;
