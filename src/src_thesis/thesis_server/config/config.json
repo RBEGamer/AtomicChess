@@ -22,7 +22,8 @@
     "ba": "./protected/thesis_document.pdf",
     "rep": "./protected/report_document.pdf",
     "cv": "./protected/cv.pdf",
-    "opentmas": "./protected/opentmas.pdf"
+    "opentmas": "./protected/opentmas.pdf",
+    "openlab2021":"./protexted/cernopenlab2021.pdf"  
 },
   "protected_1338": {
     "cv": "./protected/cv.pdf",
