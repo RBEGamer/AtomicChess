@@ -1,7 +1,6 @@
 software =
 {
         version = "VERSION";
-        description = "Firmware for the AtomicChess Project"
 
         stable = {
                 A: {
@@ -15,7 +14,7 @@ software =
                         }
                         );
 
-                };
+                }
                 B: {
                         images: (
                         {
@@ -26,6 +25,6 @@ software =
                         	compressed = true;
                         }
                         );
-                };
-        };
+                }
+        }
 }
