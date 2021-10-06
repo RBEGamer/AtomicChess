@@ -166,7 +166,7 @@ Rectangle {
             x: 47
             y: 28
             width: 691
-            height: 79
+            height: 188
             visible: true
             color: "#189694"
 
@@ -174,16 +174,17 @@ Rectangle {
 
             Button {
                 id: mm_dis_sfg_btn
-                x: 468
+                x: 424
                 y: 12
-                width: 207
-                height: 55
+                width: 250
+                height: 165
                 text: qsTr("STOP SEARCH FOR GAME")
+                font.bold: true
                 Connections {
                     target: mm_dis_sfg_btn
                     function onClicked(_mouse){
                         main_menu.mm_search_for_players_toggled(false);
-                        sfp_indicator.visible = false;
+                       // sfp_indicator.visible = false;
                     }
                 }
             }
@@ -201,7 +202,7 @@ Rectangle {
                     target: mm_start_random_btn
                     function onClicked(_mouse){
                         main_menu.mm_search_for_players_toggled(true) //DONT KNOW WHY ITS INVERTED...
-                        sfp_indicator.visible = false;
+                       // sfp_indicator.visible = false;
                     }
                 }
             }
@@ -210,14 +211,15 @@ Rectangle {
                 id: mm_en_sfg_btn
                 x: 29
                 y: 12
-                width: 207
-                height: 55
+                width: 250
+                height: 60
                 text: qsTr("START SEARCH FOR GAME")
+                font.bold: true
                 Connections {
                     target: mm_en_sfg_btn
                     function onClicked(_mouse){
                         main_menu.mm_search_for_players_toggled(true);
-                        sfp_indicator.visible = true;
+                       // sfp_indicator.visible = true;
                     }
                 }
             }
@@ -239,6 +241,22 @@ Rectangle {
                 }
             }
 
+            Button {
+                id: mm_en_rnd_sfg_btn
+                x: 29
+                y: 117
+                width: 250
+                height: 60
+                text: qsTr("START RANDOM GAME")
+                Connections {
+                    target: mm_en_rnd_sfg_btn
+                    function onClicked(_mouse){
+                        main_menu.mm_en_rnd_sfg_btn() //DONT KNOW WHY ITS INVERTED...
+                        sfp_indicator.visible = true;
+                    }
+                }
+            }
+
 
 
         }
@@ -246,8 +264,8 @@ Rectangle {
         BusyIndicator {
             id: sfp_indicator
             objectName: "sfp_indicator"
-            x: 300
-            y: 163
+            x: 307
+            y: 232
             width: 171
             height: 171
             visible: false
@@ -1660,8 +1678,4 @@ Rectangle {
 
 
 
-/*##^##
-Designer {
-    D{i:0;autoSize:true;height:480;width:640}
-}
-##^##*/
+
