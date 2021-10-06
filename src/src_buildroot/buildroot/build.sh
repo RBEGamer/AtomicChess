@@ -99,7 +99,7 @@ echo "-- BUILD FINISHED --"
 #cp -R /var/buildroot/output/host /var/build_result
 #cp -R /var/buildroot/output/target /var/build_result
 
-chmod -R 777 ./output
+#chmod -R 777 ./output
 
-touch ./output/BUILD_DOCKER_SUCC
+#touch ./output/BUILD_DOCKER_SUCC
 exit 0
