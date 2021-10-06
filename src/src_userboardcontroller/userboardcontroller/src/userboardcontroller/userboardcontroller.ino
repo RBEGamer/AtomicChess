@@ -17,6 +17,8 @@
  * _state_ => _state_res_OK_
  * 
  * _led_<0-5>_ => _led_res_ok_
+ * 
+ * _servo_<0-255>_ => _servo_res_ok_
  */
 
 
@@ -26,10 +28,13 @@
 #define UBC_COMMAND_STATE "state"
 #define UBC_COMMAND_LED "led"
 #define UBC_COMMAND_COIL "coil"
+#define UBC_COMMAND_SERVO "servo"
+
+#include <Servo.h>
+const int servo_pin = 8;
+Servo myServo;
 
 #include <Wire.h>
-
-
 #include "PN532_I2C.h"
 #include <PN532.h>
 #include <NfcAdapter.h>
@@ -204,7 +209,7 @@ void setup(void) {
   coils_off();
   nfc.begin();
   pixels.begin();
-  set_neopixel(4);
+  pixels.clear();
   
 
   digitalWrite(STATE_LED,HIGH);
@@ -280,6 +285,16 @@ if (readString.length() > 0) {
       set_coil_state(1, 1);
      }
       Serial.println("_coil_res_ok_");
+
+
+  }else if (getValue(readString, '_', 1) == UBC_COMMAND_SERVO) {
+    int pos = getValue(readString, '_', 2).toInt();
+
+    myServo.attach(servo_pin);
+    myServo.write(pos);
+    delay(50);
+    myServo.detach();
+     Serial.println("_servo_res_ok_");
   }
 
 
