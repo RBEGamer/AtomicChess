@@ -15,10 +15,13 @@ HardwareInterface* HardwareInterface::getInstance()
 
 HardwareInterface::HardwareInterface()
 {
+    LOG_F(INFO, "HardwareInterface::HardwareInterface()");
 	//FIRST CHECH WHICH HARDWARE REVISION WE ARE RUNNING ON
 	hwrev = HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_UNKNOWN;
 
 	std::string hwrevstr = ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::HWARDWARE_REVISION);
+
+    LOG_F(INFO, hwrevstr.c_str());
 	if (hwrevstr == "DK")
 	{
 		hwrev = HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_DK;

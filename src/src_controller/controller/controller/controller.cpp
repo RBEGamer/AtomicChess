@@ -415,6 +415,8 @@ int main(int argc, char *argv[])
     if(fwver_tb.empty()){
         fwver_tb = "-ATCTABLE-";
     }
+
+
     DGT3000Interface dgt3000if = DGT3000Interface(fwver_tb);
     dgt3000if.enable_service(ConfigParser::getInstance()->getBool_nocheck(ConfigParser::CFG_ENTRY::USER_RESERVED_EXTENTION_DGT3000_INTERFACE_ENABLED));
     dgt3000if.set_dgt3000_text("booting");
@@ -422,6 +424,9 @@ int main(int argc, char *argv[])
 
 
     //---------  INIT HARDWARE ----------------------------------- ///
+    LOG_F(INFO, "INIT_HARDWARE");
+    //THIS CHECK_HW.. CALL IS ALSO THE FIRST CALL IN THE SINGLETON
+    //SO THE HARDWARE WILL BE INITIALIZED
     if(!HardwareInterface::getInstance()->check_hw_init_complete())
     {
         LOG_F(ERROR, "check_hw_init_complete failed");
