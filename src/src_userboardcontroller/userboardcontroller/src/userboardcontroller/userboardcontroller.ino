@@ -2,6 +2,23 @@
 // MARCEL OCHSENDORF marcelochsendorf.com 
 
 
+/*
+ * COMMANDS:
+ * 
+ * _coil_0_ => ALL OFF
+ * _coil_1_ => A ON
+ * _coil_2_ => B ON
+ * _coil_3_ => A AND B ON
+ * => _coil_res_ok_
+ * 
+ * 
+ * _readnfc_ => _readnfc_res_R_ok_ OR _readnfc_res_R_notagpresent_
+ * _version_ => _version_res_1.04_
+ * _state_ => _state_res_OK_
+ * 
+ * _led_<0-5>_ => _led_res_ok_
+ */
+
 
 
 #define UBC_COMMAND_VERSION "version"
@@ -155,7 +172,7 @@ void coils_off(){
  }
 
 void set_coil_state(int _coil, int _state){
-Serial.println(map(analogRead(COIL_STRENGHT_INPUT),0,1024,0,255));
+//Serial.println(map(analogRead(COIL_STRENGHT_INPUT),0,1024,0,255));
   if(_coil){
     if(_state){
       analogWrite(COILA_A,map(analogRead(COIL_STRENGHT_INPUT),0,1024,0,255));
