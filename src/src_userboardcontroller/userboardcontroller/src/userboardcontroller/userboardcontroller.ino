@@ -13,12 +13,63 @@
 
 
 #include "PN532_I2C.h"
-#include "PN532.h"
+#include <PN532.h>
 #include <NfcAdapter.h>
-
-
 PN532_I2C pn532_i2c(Wire);
 NfcAdapter nfc = NfcAdapter(pn532_i2c);
+
+
+#include "Adafruit_NeoPixel.h"
+#define NUMPIXELS 120
+#define NEOPIXEL_STRIP_PIN  7
+Adafruit_NeoPixel pixels(NUMPIXELS, NEOPIXEL_STRIP_PIN, NEO_GRB + NEO_KHZ800);
+const byte LED_STRIP_COLORS[5] = {240,180,140,90,35}; //LED STRIP COLORS OFF, IDLE, WHITE_TURN, BLACK_TURN, PROCESSING
+
+//GET A COLOR FROM THE HSV WHEEL
+//SEE ADAFRUIT_NEOPIXEL LIB EXAMPLE FOR THE FUNTION
+uint32_t Wheel(byte WheelPos) {
+  if (WheelPos < 85) {
+    return pixels.Color(WheelPos * 3, 255 - WheelPos * 3, 0);
+  } else if (WheelPos < 170) {
+    WheelPos -= 85;
+    return pixels.Color(255 - WheelPos * 3, 0, WheelPos * 3);
+  } else {
+    WheelPos -= 170;
+    return pixels.Color(0, WheelPos * 3, 255 - WheelPos * 3);
+  }
+}
+
+byte current_led_pos = 0;
+void set_neopixel(byte _pos){
+  //GET THE COLOR FROM PREDEFINED COLOR ARRAY ELSE GET ANY COLOR...
+  if(_pos >= 0 && _pos < 5){
+   _pos= LED_STRIP_COLORS[_pos];
+   }
+   //HOW MANY STEPS TO REACH THE TARGET COLOR
+   int steps = abs(_pos - current_led_pos); 
+   if(steps == 0){return;}
+   //MAKE STEPS IN WHICH DIRECTORY OF THE COLOR WHEEL
+   int step_dir = 1;
+   if((_pos-current_led_pos) > 0){
+      step_dir = -1;
+    }
+    
+
+    
+   for(int j =0; j<steps; j++) { 
+    //INC DEC CURRENT LED POS +-1 TO GET CLOSER TO TARGET COLOR
+    current_led_pos += step_dir; 
+   //SET ALL PIXELS TO THE NEW STEP COLOR
+   for(int i=0; i<NUMPIXELS; i++) { 
+    pixels.setPixelColor(i, Wheel(current_led_pos)); 
+  }
+  
+  pixels.show(); //SHOW PIXELS
+  delay(5*(255/steps)); //WAIT SOME TIME BUT MAX 5*255ms FOR A FULL COLOR ROTATION
+  }
+  current_led_pos = _pos; //SAVE NEW COLOR AS CURRENT COLOR
+}
+
 
 
 String readString;
@@ -82,7 +133,7 @@ char scan_nfc_tag(){
   }
 
 
-int STATE_LED = LED_BUILTIN;
+const int STATE_LED = 4;
 
 
 
@@ -92,14 +143,22 @@ int STATE_LED = LED_BUILTIN;
 void setup(void) {
   pinMode(STATE_LED, OUTPUT);
   digitalWrite(STATE_LED,LOW);
-    Serial.begin(115200);
+  delay(100);
+  digitalWrite(STATE_LED,HIGH);
+  delay(100);
+  digitalWrite(STATE_LED,LOW);
   
-    delay(100);
+  Serial.begin(115200);
+  
+    
   
  
 
     nfc.begin();
- 
+
+    pixels.begin();
+    set_neopixel(4);
+  
 
   digitalWrite(STATE_LED,HIGH);
   delay(200);
@@ -109,11 +168,11 @@ void setup(void) {
   delay(200);
   digitalWrite(STATE_LED,LOW);
   Serial.println("_ENTERLOOP_");
-
- 
+  
+  
 }
 void loop() {
-
+ 
 
   while (Serial.available()) {
     delay(30); //delay to allow buffer to fill
@@ -129,6 +188,9 @@ void loop() {
 
 if (readString.length() > 0) {
 
+  digitalWrite(STATE_LED,HIGH);
+  
+  
   if (getValue(readString, '_', 1) == UBC_COMMAND_READNFC) {
 
    char readres = scan_nfc_tag();
@@ -147,11 +209,17 @@ if (readString.length() > 0) {
   }else if (getValue(readString, '_', 1) == UBC_COMMAND_VERSION) {
      Serial.println("_version_res_1.04_");
   }else if (getValue(readString, '_', 1) == UBC_COMMAND_LED) {
+
+
+    int t = getValue(readString, '_', 2).toInt();
+    set_neopixel(t);
+    Serial.println("_version_res_"+ String(t)+"_");
   }
 
 
   
   readString = "";
+  digitalWrite(STATE_LED,LOW);
 }
 
 

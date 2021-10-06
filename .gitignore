@@ -4,3 +4,6 @@ src/src_buildroot/buildroot/SWUPDATE/sw-description
 src/src_buildroot/buildroot/SWUPDATE/sw-description.sig
 
 src/src_controller/controller/controller/atc_controller
+src/.DS_Store
+.DS_Store
+src/src_userboardcontroller/.DS_Store
