@@ -8,6 +8,7 @@
 #define UBC_COMMAND_READNFC "readnfc"
 #define UBC_COMMAND_STATE "state"
 #define UBC_COMMAND_LED "led"
+#define UBC_COMMAND_COIL "coil"
 
 #include <Wire.h>
 
@@ -24,6 +25,15 @@ NfcAdapter nfc = NfcAdapter(pn532_i2c);
 #define NEOPIXEL_STRIP_PIN  7
 Adafruit_NeoPixel pixels(NUMPIXELS, NEOPIXEL_STRIP_PIN, NEO_GRB + NEO_KHZ800);
 const byte LED_STRIP_COLORS[5] = {240,180,140,90,35}; //LED STRIP COLORS OFF, IDLE, WHITE_TURN, BLACK_TURN, PROCESSING
+
+
+
+const int COILA_A = 5;
+const int COILA_B = 9;
+const int COILB_A = 3;
+const int COILB_B = 6;
+const int COIL_STRENGHT_INPUT = A0;
+
 
 //GET A COLOR FROM THE HSV WHEEL
 //SEE ADAFRUIT_NEOPIXEL LIB EXAMPLE FOR THE FUNTION
@@ -137,7 +147,29 @@ const int STATE_LED = 4;
 
 
 
+void coils_off(){
+     digitalWrite(COILA_A,LOW);
+    digitalWrite(COILA_B,LOW);
+    digitalWrite(COILB_A,LOW);
+    digitalWrite(COILB_B,LOW);
+ }
 
+void set_coil_state(int _coil, int _state){
+Serial.println(map(analogRead(COIL_STRENGHT_INPUT),0,1024,0,255));
+  if(_coil){
+    if(_state){
+      analogWrite(COILA_A,map(analogRead(COIL_STRENGHT_INPUT),0,1024,0,255));
+    }else{
+      analogWrite(COILA_A,0);
+    }
+  }else{
+     if(_state){
+      analogWrite(COILB_A,map(analogRead(COIL_STRENGHT_INPUT),0,1024,0,255));
+    }else{
+      analogWrite(COILB_A,0);
+    }
+  } 
+}
 
 
 void setup(void) {
@@ -152,12 +184,10 @@ void setup(void) {
   
     
   
- 
-
-    nfc.begin();
-
-    pixels.begin();
-    set_neopixel(4);
+  coils_off();
+  nfc.begin();
+  pixels.begin();
+  set_neopixel(4);
   
 
   digitalWrite(STATE_LED,HIGH);
@@ -209,12 +239,33 @@ if (readString.length() > 0) {
   }else if (getValue(readString, '_', 1) == UBC_COMMAND_VERSION) {
      Serial.println("_version_res_1.04_");
   }else if (getValue(readString, '_', 1) == UBC_COMMAND_LED) {
-
-
     int t = getValue(readString, '_', 2).toInt();
     set_neopixel(t);
-    Serial.println("_version_res_"+ String(t)+"_");
+    Serial.println("_led_res_ok_");
+
+
+    
+   }else if (getValue(readString, '_', 1) == UBC_COMMAND_COIL) {
+    int coil = getValue(readString, '_', 2).toInt();
+
+    //set_coil_state( COIL 1-0, STATE 1-0)
+    
+     if(coil == 0){
+      set_coil_state(0, 0);
+     }else if(coil == 1){
+      set_coil_state(0, 1);
+      set_coil_state(1, 0);
+     }else if(coil == 2){
+      set_coil_state(0, 0);
+      set_coil_state(1, 1);
+     }else if(coil == 3){
+      set_coil_state(0, 1);
+      set_coil_state(1, 1);
+     }
+      Serial.println("_coil_res_ok_");
   }
+
+
 
 
   
