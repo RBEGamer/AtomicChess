@@ -270,6 +270,54 @@ std::string UserBoardController::send_command_blocking(std::string _cmd) {
 //HARDWARE_UBC_NFC_READ_RETRY_COUNT
 
 
+void UserBoardController::set_led(int _color){
+    for(int i =0; i <GENERAL_UBC_COMMAND_RESPONSE_RETRY;i++){
+        std::string readres = send_command_blocking("_"+ UBC_COMMAND_LED + "_" + std::to_string(_color) + "_");
+        if(readres.empty()){
+            continue;
+        }
+        //SPLIT REPSONSE
+        std::vector<std::string> re = split(readres,UBC_CMD_SEPERATOR);
+        //CHECK SPLIT LENGTH
+        if(re.size() > 4){
+            continue;
+        }
+        //READ RESULT
+        const std::string errorcode = re.at(4);
+
+        //READ STATUS CODE IF READOUT IS VALID / NO TAG PRESENT OR READ FAILED
+        if(errorcode == "ok"){
+            break;
+        }else{
+            LOG_F(WARNING, "UBC_COMMAND_LED ERRORCODE %s", errorcode.c_str());
+        }
+    }
+}
+
+void UserBoardController::set_servo(int _pos){
+    for(int i =0; i <GENERAL_UBC_COMMAND_RESPONSE_RETRY;i++){
+        std::string readres = send_command_blocking("_" + UBC_COMMAND_SERVO + "_" + std::to_string(_pos) + "_");
+        if(readres.empty()){
+            continue;
+        }
+        //SPLIT REPSONSE
+        std::vector<std::string> re = split(readres,UBC_CMD_SEPERATOR);
+        //CHECK SPLIT LENGTH
+        if(re.size() > 4){
+            continue;
+        }
+        //READ RESULT
+        const std::string errorcode = re.at(4);
+
+        //READ STATUS CODE IF READOUT IS VALID / NO TAG PRESENT OR READ FAILED
+        if(errorcode == "ok"){
+            break;
+        }else{
+            LOG_F(WARNING, "UBC_COMMAND_LED ERRORCODE %s", errorcode.c_str());
+        }
+    }
+}
+
 
 ChessPiece::FIGURE UserBoardController::read_chess_piece_nfc(){
 

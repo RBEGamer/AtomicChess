@@ -274,7 +274,7 @@ void ConfigParser::loadDefaults(std::string _type_str)
         config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_SKIP_USER_NFC_MOVE_SEARCH_AFTER_FIRST_CHANGE] = "1";
         config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_AUTO_SCAN_BOARD_TIME_IF_USERS_TURN] = "-1";
 
-        config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_EXTENTION_VOICE_RECOGNITION_ENABLED] = "1";
+        config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_EXTENTION_VOICE_RECOGNITION_ENABLED] = "0";
         config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_EXTENTION_VOICE_RECOGNITION_URL] = "http://atomicchess.de:8880";
 
         config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_EXTENTION_DGT3000_INTERFACE_ENABLED] = "1";
@@ -349,7 +349,7 @@ void ConfigParser::loadDefaults(std::string _type_str)
         config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_SKIP_USER_NFC_MOVE_SEARCH_AFTER_FIRST_CHANGE] = "1";
         config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_AUTO_SCAN_BOARD_TIME_IF_USERS_TURN] = "10";
 
-        config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_EXTENTION_VOICE_RECOGNITION_ENABLED] = "1";
+        config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_EXTENTION_VOICE_RECOGNITION_ENABLED] = "0";
         config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_EXTENTION_VOICE_RECOGNITION_URL] = "http://atomicchess.de:8880";
 
         config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_EXTENTION_DGT3000_INTERFACE_ENABLED] = "1";
@@ -426,9 +426,72 @@ void ConfigParser::loadDefaults(std::string _type_str)
         config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_EXTENTION_VOICE_RECOGNITION_URL] = "http://atomicchess.de:8880";
 
         config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_EXTENTION_DGT3000_INTERFACE_ENABLED] = "0";
-    }
-	else
-	{
+    }else if (_type_str == "PROD_V2"){
+        config_store[ConfigParser::CFG_ENTRY::NETWORK_BACKEND_URL] = "http://atomicchess.de:3000";
+        config_store[ConfigParser::CFG_ENTRY::NETWORK_HEARTBEAT_INTERVAL_SECS] = "5";
+        config_store[ConfigParser::CFG_ENTRY::NETWORK_ENABLE_UDP_DISCOVERABLE] = "1";
+        config_store[ConfigParser::CFG_ENTRY::NETWORK_UDP_DISCOVERABLE_USER_DATA] = "ATCTABLE";
+        config_store[ConfigParser::CFG_ENTRY::NETWORK_UDP_DISCOVER_ATC_SERVER_ENABLE] = "1";
+        config_store[ConfigParser::CFG_ENTRY::NETWORK_UDP_DISCOVER_ATC_SERVER_USER_DATA_EXPECTED] = "ATCSERVER";
+        config_store[ConfigParser::CFG_ENTRY::NETWORK_UDP_DISCOVER_ATC_SERVER_PORT] = "3000";
+        config_store[ConfigParser::CFG_ENTRY::GENERAL_HWID_INTERFACE] = "eth0";
+        config_store[ConfigParser::CFG_ENTRY::GENERAL_VERSION_FILE_PATH] = "/VERSION";
+        config_store[ConfigParser::CFG_ENTRY::GENERAL_HWREV_FILE_PATH] = "/etc/hwrevision";
+        config_store[ConfigParser::CFG_ENTRY::GENERAL_BOOT_PARTION_INFO_FILE_PATH] = "/etc/swupdate/BOOTPART";
+        config_store[ConfigParser::CFG_ENTRY::GENERAL_SYSTEM_TICK_INTERVAL_MS] = "1000";
+        config_store[ConfigParser::CFG_ENTRY::GENERAL_EN_ATCGUI_COMMUNICATION] = "1";
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_STEPS_PER_MM] = "80";//80 steps / mm for CORE XY configuration
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_INVERT_COILS] = "1";
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X] = "50";
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y] = "50";
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_DISTANCE_COILS_MM] = "0";
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_COIL_SWITCH_POSTION_TRIGGER] = "200";
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_CHESS_FIELD_WIDTH_X] = "57";//55
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_CHESS_FIELD_WIDTH_Y] = "57";//440
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_BLACK_X_LINE] = "0";
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_BLACK_FIRST_Y_OFFSET] = "7";
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_WHITE_X_LINE] = "510";
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_WHITE_FIRST_Y_OFFSET] = "5";
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_CELL_BEFORE_OFFSET] = "30";
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_CELL_SIZE] = "30";
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_BOARD_SIZE_550MM_WORKAROUND] = "1";
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_WRITE_COIL_STATE_ALWAYS_MAKE_MOVE] = "0";
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_WRITE_COIL_STATE_ALWAYS_WRITE_OFF] = "0";
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_BOARD_HOME_AFTER_MAKE_MOVE] = "0";
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_DISBABLE_COILSIWTCH_USE_COIL_A_ONLY] = "1";
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_FEEDRATE_TRAVEL] = "7000";
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_FEEDRATE_MOVE] = "4000";
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_FEEDRATE_SIWTHC_XY_AXIS] = "0";
+        config_store[ConfigParser::CFG_ENTRY::BOARD_PRESET_START_POSITION_FEN] = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+        config_store[ConfigParser::CFG_ENTRY::HWARDWARE_REVISION] = "PROD_V2";
+        config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_BOARD_SERIAL_PORT] = "/dev/ttySKR";
+        config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_BOARD_SERIAL_BAUD] = "115200";
+        config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_A_INDEX] = "0";
+        config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_B_INDEX] = "1";
+        config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_BOTTOM_POS] = "180";
+        config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_UPPER_POS] = "85";
+        config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_RESET_EEPROM_TO_DEFAULT_DURING_STARTUP] = "0";
+        config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_RGBW_STRIP_SWITCH_GB] = "1";
+        config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_COOLING_FAN_DRIVER_INDEX] = "0";
+        config_store[ConfigParser::CFG_ENTRY::HARDWARE_UBC_SERIAL_PORT] = "/dev/ttyUBC";
+        config_store[ConfigParser::CFG_ENTRY::HARDWARE_UBC_SERIAL_BAUD] = "115200";
+        config_store[ConfigParser::CFG_ENTRY::HARDWARE_UBC_NFC_READ_RETRY_COUNT] = "3";
+        config_store[ConfigParser::CFG_ENTRY::HARDWARE_QTUI_FLIP_ORIENTATION] = "1";
+        config_store[ConfigParser::CFG_ENTRY::USER_GENERAL_ENABLE_RANDOM_MOVE_MATCH] = "0";
+        config_store[ConfigParser::CFG_ENTRY::USER_GENERAL_ENABLE_AUTO_MATCHMAKING_ENABLE] = "0";
+        config_store[ConfigParser::CFG_ENTRY::USER_GENERAL_ENABLE_AUTOLOGIN] = "0";
+        config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_SKIP_CHESS_PLACEMENT_DIALOG] = "1";
+        config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_MAKE_MOVE_MANUAL_TEST_DO_SYNC] = "0";
+        config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_SKIP_USER_NFC_MOVE_SEARCH_AFTER_FIRST_CHANGE] = "1";
+        config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_AUTO_SCAN_BOARD_TIME_IF_USERS_TURN] = "-1";
+        config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_EXTENTION_VOICE_RECOGNITION_ENABLED] = "0";
+        config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_EXTENTION_VOICE_RECOGNITION_URL] = "http://atomicchess.de:8880";
+        config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_EXTENTION_DGT3000_INTERFACE_ENABLED] = "1";
+
+
+
+    // PROD_V3
+    }else if (_type_str == "PROD_V3"){
         config_store[ConfigParser::CFG_ENTRY::NETWORK_BACKEND_URL] = "http://atomicchess.de:3000";
         config_store[ConfigParser::CFG_ENTRY::NETWORK_HEARTBEAT_INTERVAL_SECS] = "5";
         config_store[ConfigParser::CFG_ENTRY::NETWORK_ENABLE_UDP_DISCOVERABLE] = "1";
@@ -472,7 +535,7 @@ void ConfigParser::loadDefaults(std::string _type_str)
 
         config_store[ConfigParser::CFG_ENTRY::BOARD_PRESET_START_POSITION_FEN] = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
-        config_store[ConfigParser::CFG_ENTRY::HWARDWARE_REVISION] = "PROD_V2";
+        config_store[ConfigParser::CFG_ENTRY::HWARDWARE_REVISION] = "PROD_V3";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_BOARD_SERIAL_PORT] = "/dev/ttySKR";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_BOARD_SERIAL_BAUD] = "115200";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_A_INDEX] = "0";
@@ -498,7 +561,7 @@ void ConfigParser::loadDefaults(std::string _type_str)
         config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_AUTO_SCAN_BOARD_TIME_IF_USERS_TURN] = "-1";
 
 
-        config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_EXTENTION_VOICE_RECOGNITION_ENABLED] = "1";
+        config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_EXTENTION_VOICE_RECOGNITION_ENABLED] = "0";
         config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_EXTENTION_VOICE_RECOGNITION_URL] = "http://atomicchess.de:8880";
 
         config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_EXTENTION_DGT3000_INTERFACE_ENABLED] = "1";

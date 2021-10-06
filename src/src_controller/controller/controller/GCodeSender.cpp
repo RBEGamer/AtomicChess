@@ -39,6 +39,37 @@ GCodeSender::GCodeSender(std::string _serialport_file)
 		
 }
 
+bool GCodeSender::set_led(int _hsv) {
+    int r,g,b,tmp = 0;
+
+
+
+    //CONVERT HSV TO RGB
+    if (_hsv < 85) {
+        r = _hsv * 3;
+        g = 255 - _hsv * 3;
+        b = 0;
+    } else if (_hsv < 170) {
+        _hsv -= 85;
+        r = _hsv * 3;
+        g = 255 - _hsv * 3;
+        b = 0;
+    } else {
+        _hsv -= 170;
+        b = _hsv * 3;
+        g = 255 - _hsv * 3;
+        r= 0;
+    }
+    //SWITCH G AND B COMPONENT DEPENDING ON THE USED WS2812 STRIP
+    if(ConfigParser::getInstance()->getBool_nocheck(ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_RGBW_STRIP_SWITCH_GB)){
+        tmp = g;
+        g = b;
+        b = tmp;
+    }
+
+    return GCodeSender::set_led(r,g,b, 255);
+}
+
 bool GCodeSender::set_led(int _r, int _g, int _b, int _intensity){
 //M150 P255 U255 R255 B255
     //p<intensity> u<green_intensity> r<red_intensity> b<blue_intensity>
@@ -279,13 +310,13 @@ bool GCodeSender::write_gcode(std::string _gcode_line, bool _ack_check) {
 	}
 	//WRITE COMMAND TO SERIAL LINE
 	port->writeString(_gcode_line.c_str());
-	
-	
+
+
 	if (!_ack_check)
 	{
 		return true;
 	}
-		
+
 	//WAIT FOR ACK OK OR ERROR MESSAGE FROM BOARD
 	if(!wait_for_ack())
 	{

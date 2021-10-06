@@ -58,9 +58,9 @@ typedef std::chrono::system_clock::time_point TimePoint;
 //THERE ARE TWO DEVELOPMENT HARDWARE VERSIONS OF THE TABLE
 //DK => 50x50cm IKEA TABLE VERSION WITH TWO COILS
 //PROD_V1 => 60x60cm ITEM VERSION WITH  SKR1.4 BOARD AND CORE_YX MECHANIC
-#define HWID_DK_HARDWARE "b827ebad862f"
+#define HWID_DK_HARDWARE "_b827ebad862f"
 #define HWID_PROD_V1_HARDWARE "----"
-
+#define HWID_PROD_V3_HARDWARE "b827ebad862f"
 #define INVALID_HWID "1nv4l1dm4c"
 using namespace std;
 
@@ -271,6 +271,7 @@ int main(int argc, char *argv[])
         std::cout << "-writeconfig -hwdk      | selects the development kit DK hardware (RPI SPI interface)" <<std::endl;
         std::cout << "-writeconfig -hwprod1   | selects the production hardware version 1 (Marlin XY)" <<std::endl;
         std::cout << "-writeconfig -hwprod2   | selects the production hardware version 2 (Marlin CoreXY)" <<std::endl;
+        std::cout << "-writeconfig -hwprod3   | selects the production hardware version 3 (TMC5160 with UBC Controller)" <<std::endl;
         std::cout << "-autoplayer             | enables the automatic player mode - table will make random moves" <<std::endl;
         std::cout << "-skipplacementdialog    | skips the initial chess board NFC scan and load the default fen from the config file" <<std::endl;
         std::cout << "-preventflipscreen      | ignore gui flip screen config" <<std::endl;
@@ -362,8 +363,14 @@ int main(int argc, char *argv[])
         }else if (hwid == INVALID_HWID || cmdOptionExists(argv, argv + argc, "-hwinvalid")){ //IF HWIF IS INVALID => RETURN ERROR
             LOG_F(ERROR, "--- GOT INVALID HWID TO AVOID DAMAGES ON HARDWARE => TERMINATE PROGRAM -----");
             std::raise(SIGINT);
+
+        }else if (hwid == HWID_PROD_V3_HARDWARE || cmdOptionExists(argv, argv + argc, "-hwprod3")) {
+            LOG_F(WARNING, "PROD_V3 HARDWARE");
+            ConfigParser::getInstance()->loadDefaults("PROD_V3");
+
+
         }else { //EVERY OTHER HWID IS PROD_V2 HWID
-            LOG_F(WARNING, "PROD_V2 HARDWARE");
+            LOG_F(WARNING, "PROD_V2 HARDWARE MAYBE");
             ConfigParser::getInstance()->loadDefaults("PROD_V2");
         }
 

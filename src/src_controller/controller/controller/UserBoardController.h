@@ -22,10 +22,7 @@
 
 //THIS COMMANDS MATCHES THE MICROCONTROLLER FIRMWARE
 
-#define UBC_COMMAND_VERSION "version"
-#define UBC_COMMAND_READNFC "readnfc"
-#define UBC_COMMAND_STATE "state"
-#define UBC_CMD_SEPERATOR '_'
+
 
 
 
@@ -38,9 +35,22 @@ public:
 
 
     ChessPiece::FIGURE read_chess_piece_nfc();
-
+    void set_led(int _color);
+    void set_servo(int _pos);
 
 private:
+
+const std::string UBC_COMMAND_VERSION = "version";
+const std::string  UBC_COMMAND_READNFC = "readnfc";
+const std::string  UBC_COMMAND_STATE = "state";
+const char UBC_CMD_SEPERATOR = '_';
+const std::string  UBC_COMMAND_LED = "led";
+const std::string  UBC_COMMAND_SERVO = "servo";
+
+
+
+
+    const int GENERAL_UBC_COMMAND_RESPONSE_RETRY = 3; //RETRY X TIME TO SUCC SEND A COMMAND
     const int UBC_SERIAL_BAUD_RATE = 115200;
     const unsigned int SERIAL_READ_DEFAULT_TIMEOUT = 500; //WAIT FOR 2000 aMS FOR DATA READ -1 IS INFITIE TIMEOUT
     serialib*  port = nullptr;

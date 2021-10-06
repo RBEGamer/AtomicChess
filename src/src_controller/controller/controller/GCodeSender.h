@@ -42,6 +42,7 @@ public:
 	bool set_steps_per_mm(int _x, int _y);
 
 	bool set_led(int _r, int _g, int _b, int _intensity); //SET THE RGW STRIP COLOR M150 OPTION NEEDED
+    bool set_led(int _hsv);
 
 
 private:

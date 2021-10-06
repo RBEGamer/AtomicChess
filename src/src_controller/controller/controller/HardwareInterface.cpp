@@ -17,18 +17,21 @@ HardwareInterface::HardwareInterface()
 {
 	//FIRST CHECH WHICH HARDWARE REVISION WE ARE RUNNING ON
 	hwrev = HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_UNKNOWN;
-	
+
 	std::string hwrevstr = ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::HWARDWARE_REVISION);
 	if (hwrevstr == "DK")
-	{ 
+	{
 		hwrev = HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_DK;
 	}
 	else if (hwrevstr == "PROD_V1")
-	{ 
+	{
 		hwrev = HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD;
 	}else if (hwrevstr == "PROD_V2")
     {
         hwrev = HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD_V2;
+    }else if (hwrevstr == "PROD_V3")
+    {
+        hwrev = HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD_V3;
     }else if (hwrevstr == "VIRT")
     {
         hwrev = HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_VIRT;
@@ -70,14 +73,14 @@ bool HardwareInterface::init_hardware(HardwareInterface::HI_HARDWARE_REVISION _h
 			tmc5160_y->steps_per_mm(spm);
 
 			LOG_F(INFO, "HardwareInterface::init_hardware set steps per mm setting to: %i" ,spm);
-		}	
+		}
 		tmc5160_x->disable_motor();
 		tmc5160_y->disable_motor();
 		//IO CONTROLLER SETUP
 		if(iocontroller == nullptr)
 		{
 			iocontroller = new IOController();
-			
+
 			if (!iocontroller->isInitialized())
 			{
 				LOG_F(ERROR, "HardwareInterface::init_hardware iocontroller->isInitialized()");
@@ -98,10 +101,10 @@ bool HardwareInterface::init_hardware(HardwareInterface::HI_HARDWARE_REVISION _h
 				iocontroller->invertCoilPolarity(IOController::COIL::COIL_B, true);
 			}
 		}
-		
-		
+
+
 	}
-	else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD || hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD_V2)
+	else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD || hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD_V2 )
 	{
 	    //INIT THE MARLIN GCODE SENDER INTERFACE
 		if (gcode_interface == nullptr) {
@@ -139,12 +142,49 @@ bool HardwareInterface::init_hardware(HardwareInterface::HI_HARDWARE_REVISION _h
             userboardcontroller_interface = new UserBoardController(ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::HARDWARE_UBC_SERIAL_PORT), baud);
 		}
 
+
+    }else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD_V3){
+
+        //MOTOR SETUP
+        if(tmc5160_x == nullptr)
+        {
+            tmc5160_x = new TMC5160(TMC5160::MOTOR_ID::MOTOR_0);
+        }
+        if (tmc5160_y == nullptr)
+        {
+            tmc5160_y = new TMC5160(TMC5160::MOTOR_ID::MOTOR_1);
+        }
+        //LOAD DEFAULT SETINGS
+        tmc5160_x->default_settings();
+        tmc5160_y->default_settings();
+        ///OVERRIDE STEPS PER MM IF CONFIG EXISTS
+        int spm = 0;
+        ConfigParser::getInstance()->getInt(ConfigParser::CFG_ENTRY::MECHANIC_STEPS_PER_MM, spm);
+        if (spm > 0)
+        {
+            tmc5160_x->steps_per_mm(spm);
+            tmc5160_y->steps_per_mm(spm);
+
+            LOG_F(INFO, "HardwareInterface::init_hardware set steps per mm setting to: %i" ,spm);
+        }
+        tmc5160_x->disable_motor();
+        tmc5160_y->disable_motor();
+
+
+        //INIT USERBOARD CONTROLLER TO READ NFC TAGS USING THE ARDUINO SERIAL BASED APPROACH
+        if(userboardcontroller_interface == nullptr){
+            int baud = 115200;
+            ConfigParser::getInstance()->getInt(ConfigParser::CFG_ENTRY::HARDWARE_UBC_SERIAL_BAUD, baud);
+            userboardcontroller_interface = new UserBoardController(ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::HARDWARE_UBC_SERIAL_PORT), baud);
+        }
+
+
 	}else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_VIRT){
         LOG_F(INFO, "HardwareInterface::init_hardware INIT VIRTUAL HARDWARE");
     }else{
 		return false;
 	}
-	
+
 	return true;
 }
 
@@ -163,7 +203,7 @@ HardwareInterface::~HardwareInterface()
 	{
 		delete iocontroller;
 	}
-	
+
 	if (gcode_interface != nullptr)
 	{
 		delete gcode_interface;
@@ -173,7 +213,7 @@ HardwareInterface::~HardwareInterface()
     {
         delete userboardcontroller_interface;
     }
-	
+
 }
 
 //LOAD CONFGI
@@ -215,16 +255,16 @@ bool HardwareInterface::setTurnStateLight(HardwareInterface::HI_TURN_STATE_LIGHT
 		{
 			iocontroller->setTurnStateLight(static_cast<IOController::TURN_STATE_LIGHT>(_state));
 		}
-			
+
 	}
 	else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD || hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD_V2)
 	{
 
 	    //USE THE SAME COLOR MODEL AS THE HWREV_DK VERSION
 	    int hsv_col = 0; //0 is also a color on a 360 degree circle
-	    int intensity = 255;
+
         switch (_state) {
-            case HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_OFF: hsv_col = 240;intensity = 128;break; //SPECIAL CASE DIM THE OFF STATE
+            case HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_OFF: hsv_col = 240;break; //SPECIAL CASE DIM THE OFF STATE
             case HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_IDLE: hsv_col = 180;break;
             case HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_PLAYER_WHITE_TURN: hsv_col = 140;break;
             case HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_PLAYER_BLACK_TURN: hsv_col = 90;break;
@@ -232,39 +272,17 @@ bool HardwareInterface::setTurnStateLight(HardwareInterface::HI_TURN_STATE_LIGHT
             default:hsv_col=0;break;
         }
 
-        int r,g,b,tmp = 0;
 
-
-
-        //CONVERT HSV TO RGB
-            if (hsv_col < 85) {
-                r = hsv_col * 3;
-                g = 255 - hsv_col * 3;
-                b = 0;
-            } else if (hsv_col < 170) {
-                hsv_col -= 85;
-                r = hsv_col * 3;
-                g = 255 - hsv_col * 3;
-                b = 0;
-            } else {
-                hsv_col -= 170;
-                b = hsv_col * 3;
-                g = 255 - hsv_col * 3;
-                r= 0;
-            }
-        //SWITCH G AND B COMPONENT DEPENDING ON THE USED WS2812 STRIP
-        if(ConfigParser::getInstance()->getBool_nocheck(ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_RGBW_STRIP_SWITCH_GB)){
-            tmp = g;
-            g = b;
-            b = tmp;
-        }
 
         if (gcode_interface != nullptr) {
-            gcode_interface->set_led(r,g,b,intensity);
+            gcode_interface->set_led(hsv_col);
         }
 
-
-	}
+    }else if(hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD_V3){
+        if(userboardcontroller_interface != nullptr){
+        userboardcontroller_interface->set_led((int)_state);
+        }
+    }
 	return true;
 }
 
@@ -276,7 +294,7 @@ bool HardwareInterface::setCoilState(HI_COIL _coil, bool _state)
 		{
 			iocontroller->setCoilState(static_cast<IOController::COIL>(_coil), _state);
 		}
-			
+
 	}
 	else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD || hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD_V2)
 	{
@@ -317,9 +335,18 @@ ChessPiece::FIGURE HardwareInterface::ScanNFC()
 	}
 	else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD || hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD_V2)
 	{
-        return userboardcontroller_interface->read_chess_piece_nfc();
+        if(userboardcontroller_interface != nullptr){
+            return userboardcontroller_interface->read_chess_piece_nfc();
+        }
     }else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_VIRT){
         LOG_F(INFO,"HardwareInterface::ScanNFC() return an invalid figure due HWREV_VIRT");
+
+
+
+    }else if(hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD_V3){
+        if(userboardcontroller_interface != nullptr) {
+            return userboardcontroller_interface->read_chess_piece_nfc();
+        }
 	}else{
         LOG_F(ERROR,"HardwareInterface::ScanNFC() return an invalid figure due invalid HW CONFIG");
 	}
@@ -334,11 +361,11 @@ ChessPiece::FIGURE HardwareInterface::ScanNFC()
 	fig.figure_read_failed = true;
 	return fig;
 }
-	
-	
 
-	
-	
+
+
+
+
 
 void HardwareInterface::enable_motors()
 {
@@ -349,12 +376,18 @@ void HardwareInterface::enable_motors()
 			tmc5160_x->enable_motor();
 			tmc5160_y->enable_motor();
 		}
-			
+
 	}
 	else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD || hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD_V2)
 	{
 		//NOT NEEDED FOR REV 2 (GCODE) => MOTORS WILL AUTOMATICLY ACTIVATED AFTER A MOVEMENT COMMAND (G0, G1,...)
-	}
+	}else if(hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD_V3){
+        if (tmc5160_x != nullptr && tmc5160_y != nullptr)
+        {
+            tmc5160_x->enable_motor();
+            tmc5160_y->enable_motor();
+        }
+    }
 }
 
 void HardwareInterface::disable_motors()
@@ -366,7 +399,7 @@ void HardwareInterface::disable_motors()
 			tmc5160_x->disable_motor();
 			tmc5160_y->disable_motor();
 		}
-			
+
 	}
 	else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD || hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD_V2)
 	{
@@ -374,9 +407,16 @@ void HardwareInterface::disable_motors()
 		{
 			gcode_interface->disable_motors();
 		}
+
+    }else if(hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD_V3){
+        if (tmc5160_x != nullptr && tmc5160_y != nullptr)
+        {
+            tmc5160_x->disable_motor();
+            tmc5160_y->disable_motor();
+        }
 	}
 }
-	
+
 bool HardwareInterface::is_target_position_reached()
 {
 	if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_DK)
@@ -389,7 +429,7 @@ bool HardwareInterface::is_target_position_reached()
 			}
 			return false;
 		}
-			
+
 	}
 	else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD || hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD_V2)
 	{
@@ -399,13 +439,23 @@ bool HardwareInterface::is_target_position_reached()
 		}
     }else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_VIRT){
 	    return true;
-	}
+
+    }else if(hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD_V3){
+        if (tmc5160_x != nullptr && tmc5160_y != nullptr)
+        {
+            if (tmc5160_x->is_target_position_reached() && tmc5160_y->is_target_position_reached())
+            {
+                return true;
+            }
+            return false;
+        }
+    }
 
 
 	LOG_F(ERROR,"HardwareInterface::is_target_position_reached() return false due invalid HW CONFIG");
 	return false;
 }
-	
+
 void HardwareInterface::move_to_postion_mm_absolute(int _x, int _y, bool _blocking)
 {
     //CHECK FOR SWITCH X Y AXIS
@@ -420,9 +470,9 @@ void HardwareInterface::move_to_postion_mm_absolute(int _x, int _y, bool _blocki
 		if (tmc5160_x != nullptr && tmc5160_y != nullptr)
 		{
 			tmc5160_x->move_to_postion_mm_absolute(_x, _blocking);
-			tmc5160_y->move_to_postion_mm_absolute(_y, _blocking);	
+			tmc5160_y->move_to_postion_mm_absolute(_y, _blocking);
 		}
-			
+
 	}
 	else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD || hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD_V2)
 	{
@@ -431,9 +481,16 @@ void HardwareInterface::move_to_postion_mm_absolute(int _x, int _y, bool _blocki
 			gcode_interface->move_to_postion_mm_absolute(_x, _y, _blocking);
 			gcode_interface->disable_motors();
 		}
+
+    }else if(hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD_V3){
+        if (tmc5160_x != nullptr && tmc5160_y != nullptr)
+        {
+            tmc5160_x->move_to_postion_mm_absolute(_x, _blocking);
+            tmc5160_y->move_to_postion_mm_absolute(_y, _blocking);
+        }
 	}
 }
-	
+
 void HardwareInterface::home_sync()
 {
 	if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_DK)
@@ -443,7 +500,7 @@ void HardwareInterface::home_sync()
 			tmc5160_x->atc_home_sync();
 			tmc5160_y->atc_home_sync();
 		}
-			
+
 	}
 	else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD || hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD_V2)
 	{
@@ -452,9 +509,17 @@ void HardwareInterface::home_sync()
 			gcode_interface->home_sync();
             gcode_interface->disable_motors();
 		}
+
+
+    }else if(hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD_V3){
+        if (tmc5160_x != nullptr && tmc5160_y != nullptr)
+        {
+            tmc5160_x->atc_home_sync();
+            tmc5160_y->atc_home_sync();
+        }
 	}
 }
-	
+
 void HardwareInterface::set_speed_preset(HardwareInterface::HI_TRAVEL_SPEED_PRESET _preset)
 {
 	if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_DK)
@@ -464,7 +529,7 @@ void HardwareInterface::set_speed_preset(HardwareInterface::HI_TRAVEL_SPEED_PRES
                 tmc5160_x->atc_set_speed_preset(static_cast<TMC5160::TRAVEL_SPEED_PRESET>(_preset));
                 tmc5160_y->atc_set_speed_preset(static_cast<TMC5160::TRAVEL_SPEED_PRESET>(_preset));
 		}
-			
+
 	}
 	else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD || hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD_V2)
 	{
@@ -487,8 +552,16 @@ void HardwareInterface::set_speed_preset(HardwareInterface::HI_TRAVEL_SPEED_PRES
 			default:
 				break;
 			}
-			
+
 		}
+
+
+    }else if(hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD_V3){
+        if (tmc5160_x != nullptr && tmc5160_y != nullptr)
+        {
+            tmc5160_x->atc_set_speed_preset(static_cast<TMC5160::TRAVEL_SPEED_PRESET>(_preset));
+            tmc5160_y->atc_set_speed_preset(static_cast<TMC5160::TRAVEL_SPEED_PRESET>(_preset));
+        }
 	}
 }
 
