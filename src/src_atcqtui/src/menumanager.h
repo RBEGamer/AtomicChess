@@ -42,7 +42,7 @@ public slots:
     void mm_start_ai_btn();
     void mm_player_list_btn();
     void mm_search_for_players_toggled(bool _state);
-    
+    void mm_en_rnd_sfg_btn();
     //------ SETTINGS MENU ---- //
     void sm_open_settings_btn();
 
@@ -101,6 +101,8 @@ public slots:
 
 
     void qtui_flip_screen(bool _flip);
+
+    void set_sfp_inidcator(bool _state);
 private:
     void show_error(QString _err);
     guicommunicator guiconnection;

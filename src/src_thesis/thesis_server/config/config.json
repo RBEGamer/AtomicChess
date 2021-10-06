@@ -14,7 +14,10 @@
       "ba":"/document?doc=ba&toc=",
       "rep":"/document?doc=rep&toc=",
       "cv":"/document?doc=cv&toc=",
-      "opentmas": "/document?doc=opentmas&toc="
+      "opentmas": "/document?doc=opentmas&toc=",
+      "openlab2021": "/document?doc=openlab2021&toc="
+        
+        
     },
 
 
@@ -22,7 +25,8 @@
     "ba": "./protected/thesis_document.pdf",
     "rep": "./protected/report_document.pdf",
     "cv": "./protected/cv.pdf",
-    "opentmas": "./protected/opentmas.pdf"
+    "opentmas": "./protected/opentmas.pdf",
+    "openlab2021":"./protexted/cernopenlab2021.pdf"  
 },
   "protected_1338": {
     "cv": "./protected/cv.pdf",

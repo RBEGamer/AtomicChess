@@ -22,7 +22,7 @@ services:
   #    - PRODUCTION=1
      # - REDIS_IP=AtomicChessRedisDatabase:6379
      # - MONGO_IP=AtomicChessMongoDatabase:27017
-     # - MVVALIDATOR_IP=AtomicChessMoveValidator:5001
+     # - MVVALIDATOR_IP=AtomicChessMoveValidator:5003
   #    - REDIS_IP=127.0.0.1:6379
   #    - MONGO_IP=127.0.0.1:27017
   #    - MVVALIDATOR_IP=127.0.0.1:5000
@@ -49,7 +49,7 @@ services:
   #  #network_mode: "host"
   #  restart: always
   #  ports:
-  #    - 5000:5000
+  #    - 5003:5003
   #  environment:
   #    - PRODUCTION#
 

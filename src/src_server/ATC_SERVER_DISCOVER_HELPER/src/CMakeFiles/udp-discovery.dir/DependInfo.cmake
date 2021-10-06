@@ -4,9 +4,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/prodevmo/Desktop/AtomiChessOS_/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/udp_discovery_ip_port.cpp" "/home/prodevmo/Desktop/AtomiChessOS_/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/CMakeFiles/udp-discovery.dir/udp_discovery_ip_port.cpp.o"
-  "/home/prodevmo/Desktop/AtomiChessOS_/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/udp_discovery_peer.cpp" "/home/prodevmo/Desktop/AtomiChessOS_/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/CMakeFiles/udp-discovery.dir/udp_discovery_peer.cpp.o"
-  "/home/prodevmo/Desktop/AtomiChessOS_/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/udp_discovery_protocol.cpp" "/home/prodevmo/Desktop/AtomiChessOS_/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/CMakeFiles/udp-discovery.dir/udp_discovery_protocol.cpp.o"
+  "/home/prodevmo/Desktop/AtomicChessOS/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/udp_discovery_ip_port.cpp" "/home/prodevmo/Desktop/AtomicChessOS/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/CMakeFiles/udp-discovery.dir/udp_discovery_ip_port.cpp.o"
+  "/home/prodevmo/Desktop/AtomicChessOS/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/udp_discovery_peer.cpp" "/home/prodevmo/Desktop/AtomicChessOS/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/CMakeFiles/udp-discovery.dir/udp_discovery_peer.cpp.o"
+  "/home/prodevmo/Desktop/AtomicChessOS/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/udp_discovery_protocol.cpp" "/home/prodevmo/Desktop/AtomicChessOS/src/src_server/ATC_SERVER_DISCOVER_HELPER/src/CMakeFiles/udp-discovery.dir/udp_discovery_protocol.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

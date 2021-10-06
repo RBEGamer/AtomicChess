@@ -143,6 +143,7 @@ func RestLogout(_hwid string) (error){
 }
 
 
+
 func RestLogin(_hwid string) (error,LoginResult){
 	fmt.Println("AutPlayer ["+_hwid+"]  LOGIN")
 	var lr LoginResult
@@ -379,7 +380,8 @@ func main() {
 
 		if PlayerStateDetails.Status == "err_session_key_sid_check_failed"{
 			fmt.Println("SID INVALID BREAK")
-			break
+			RestLogout(HWID)
+			return;
 		}
 		//RESET CLIENT THIS AFTER A FINISHED GAMES
 		if game_runned && !PlayerStateDetails.GameState.GameRunning{
