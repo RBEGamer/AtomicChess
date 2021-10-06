@@ -399,6 +399,7 @@ int main(int argc, char *argv[])
 
 
 
+
     //---- ENABLE UDP DISCOVERY FOR EXTERNAL EXTENTIONS LIKE THE DGT3000 EXTENTION --- ///
     UDPDiscovery udpdic = UDPDiscovery(ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::NETWORK_UDP_DISCOVERABLE_USER_DATA));
     if(udpdic.enable_service(ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::NETWORK_ENABLE_UDP_DISCOVERABLE)) && ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::NETWORK_ENABLE_UDP_DISCOVERABLE)){
@@ -484,7 +485,7 @@ int main(int argc, char *argv[])
         }
         //DETERM THE HWID BY USING THE MAC ADDRESS OF THE OUTGOING INTERNFACE NAME
         //DISPLAY FIRMARE VERSION NUMBER
-        gui.createEvent(guicommunicator::GUI_ELEMENT::INFOSCREEN_HWID_LABEL, guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING, hwid);
+        gui.createEvent(guicommunicator::GUI_ELEMENT::INFOSCREEN_HWID_LABEL, guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING, hwid + "|" + ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::HWARDWARE_REVISION));
         gui.createEvent(guicommunicator::GUI_ELEMENT::INFOSCREEN_RANK_LABEL, guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING, fwver + "|" + hwrev + "|" + bootpart);
     }
 
