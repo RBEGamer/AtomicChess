@@ -1,12 +1,10 @@
 software =
 {
         version = "VERSION";
+        description = "Firmware for the AtomicChess Project"
 
-
-        stable:
-        {
-                A:
-                {
+        stable = {
+                A: {
                         images: (
                         {
                                 filename = "rootfs.ext2.gz";
@@ -18,8 +16,7 @@ software =
                         );
 
                 };
-                B:
-                {
+                B: {
                         images: (
                         {
                                 filename = "rootfs.ext2.gz";
