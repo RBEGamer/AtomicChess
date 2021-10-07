@@ -14,7 +14,7 @@
  * 
  * _readnfc_ => _readnfc_res_R_ok_ OR _readnfc_res_R_notagpresent_
  * _version_ => _version_res_1.04_
- * _state_ => _state_res_OK_
+ * _state_ => _state_res_ok_
  * 
  * _led_<0-5>_ => _led_res_ok_
  * 
@@ -257,7 +257,7 @@ if (readString.length() > 0) {
    
 
   } else if (getValue(readString, '_', 1) == UBC_COMMAND_STATE) {
-     Serial.println("_state_res_OK_");
+     Serial.println("_state_res_ok_");
   }else if (getValue(readString, '_', 1) == UBC_COMMAND_VERSION) {
      Serial.println("_version_res_1.04_");
   }else if (getValue(readString, '_', 1) == UBC_COMMAND_LED) {
