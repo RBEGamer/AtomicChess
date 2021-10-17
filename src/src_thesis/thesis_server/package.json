@@ -15,7 +15,7 @@
     "dotenv": "^8.2.0",
     "ejs": "^3.0.1",
     "express": "^4.17.1",
-    "express-fileupload": "^1.1.6",
+    "express-fileupload": "^1.1.10",
     "express-list-endpoints": "^4.0.1",
     "express-sanitizer": "^1.0.5",
     "express-session": "^1.17.0",
