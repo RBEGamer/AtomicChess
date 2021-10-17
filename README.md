@@ -1,149 +1,15 @@
-# Integration eines eingebetteten Systems in eine Cloud-Infrastruktur am Beispiel eines autonomen Schachtischs
+# Integration of an embedded system into a cloud infrastructure using the example of an autonomous chess table
 
+## Abstract
 
-## Ziel
+The goal of the work is to develop an autonomous chess table, which is able to move chess pieces autonomously and to react to user interactions. The core question of the thesis thus relates to the verification of the feasibility including the creation and implementation of an embedded system and a cloud infrastructure. The focus is especially on the programming of the embedded system and the interaction of this with a server accessible from the Internet, which serves as an intermediary between different manholes and other end devices.
 
-Das Ziel dieser Arbeit ist es, einen Schach-Tisch zu konstruieren und programmieren, welcher in der Lage ist Schachfiguren autonom zu bewegen. Der Schwerpunkt liegt dabei insbesondere auf der Programmierung des eingebettenen Systems. Dieses besteht zum einem aus der Positionserkennung und Steuerung der Hardwarekomponenten (Schachfiguren) und zum anderen aus der Kommuniktation zwischen dem Tisch selbst und einem in einer Cloud befindlichen Server.
+First, the approaches existing at the time and their implementation are examined. Here, particular attention was paid to illustrating the limitations of existing systems and comparing them to functions that only apply to this project. From the results, the requirements of the autonomous shaft table are derived, which are to be implemented in this work.
 
+Subsequently, two prototypes were implemented iteratively one after the other, which differ strongly from the mechanical design as well as the electrical one. The developed software, on the other hand, was developed modularly so that it can be used on both prototypes. The different designs are due to the fact that in the first iteration of the autonomous chess table, after an endurance test, numerous potential improvements were identified. This led to a complete redesign in the second iteration and thus an autonomous shaft table was developed, which fulfills all requirements.
 
-Mittels der Programmierung werden diverse Technologien von verschiedenen Einzelsystemen zu einem Gesamtprodukt zusammengesetzt.
-Zu diesen Einzelsystemen gehören:
+Basically, it should be noted that the result of the work is not a finalized product, but a structural prototype. Further tests, such as usage statistics or safety tests, would have to be carried out before the shaft table can be considered a commercial product.
 
-* Programmierung der Motorsteuerung, HMI (zB. Qt oder simple Buttons), NFC Tag erkennung
-* Programmierung eines Wrappers für die Kommuniktion mit der Cloud (AWS)
-* Statemaschiene und Implementierung der Spielflusssteuerung
-* Backend mit Datenbankanbindung zwischen Server und Embedded-System
-* Verwendung eines CI/CD Systems zum automatisierten bauen der Linux-Images für das Embedded-System
-
-
-![Image_Komponentenübersicht](Komponentenübersicht.png)
-
-
-Die Grafik stellt das grundlegende System dar. Der Schachtisch selbst bildet ein kompaktes System, bestehend aus einem echtzeitfähigen STM32 als Steuerelement, welches zudem ein Interface mit Optionsverwaltung bietet. Die Mechanik selbst basiert auf Schrittmotoren, welche die Bewegung eines Moduls bestehend aus NFC-Lesers und einem Elektromagneten in der waagerechten x-y-Ebene ermöglicht um so unterhalb der Tischplatte die mit NFC-Tags versehenen Schachfiguren oberhalb der Tischplatte zu detektieren und bewegen. 
-
-Zum einen ist es möglich, einen Spieler gegen einen Tisch als virtuellen Gegner spielen zu lassen. Es wird somit ein Spiel für eine Einzelperson ermöglicht. 
-
-Zum anderen ist es möglich, zwei Tische miteinander zu verbinden und zwei Spieler geneinander spielen zu lassen. Die Tische dienen dann nur als Spiegel der Schachzüge. Die Züge des ersten Spielers werden dann auf den anderen Tisch (beim zweiten Spieler) gespiegelt und umgekehrt. So ist auch ein Spiel möglich, auch wenn sich die Spieler nicht am selben Ort befinden.
-
-Jeder dieser Tische kommuniziert mittels RESTFUL Schnittstelle mit einem Server, welcher die vom Tisch erfassten Züge registriert und folgenden Züge berechnet. Aktuelle Positionen werden gespeichert und können von den Tischen angefragt werden. Mittels der Schach-AI (LC0) werden zudem Züge berechnet, was für ein Spiel gegen einen virtuellen Gegner nötig ist. 
-
-
-## ERWARTETE FEATURES
-
-* automatisches Bewegen der Spielfiguren des Gegenspielers
-* automatisches Matchmaking
-* simples Qt basierendes User Interface zum starten eines Spiels
-* Spielmodi: MENSCH-MENSCH, MENSCH-AI
-* Business-Logik auf zentralem Server, welcher in der Lage ist meherere Spiele gleichzeitig zu handeln
-* Günstige User-Hardware (< 200€ pro Spieltisch, durch 3D Druck und Auslagerung der Logik in die Cloud)
-
-
-## VORTEILE ZU BEREITS EXISTIERENDEN SYSTEMEN
-
-* minimalistisches/intuitives Bedienkonzept
-* automatisches Matchmaking basierend auf Skill des Spielers
-* portables System ohne komplexen Aufbau
-* einfach zu wartene Infrastruktur
-* geringe Kosten auf der Spielerseite (einfaches embeddet system; Spiel-AI auf der Server-Seite)
-* ausgeschiedene Figuren müssen nicht manuell vom Spielbrett entfernt werden
-
-
-## THEMEN | MODULE
-
-* DevOps CI/CD
-* Docker / Container Virtualisierung
-* Embedded Systeme (RPI / STM32) zur Steuerung der Figuren und dem Aufbau der Schaltung inkl Qt HMI
-* Webtechnologien (Backend, WebApp) zur Spielflusssteuerung, Matchmaking
-* Datenbanken (speicherung Spielstatus / Statisitken)
-* IOT-Systeme (MQTT, Coap, Restful) zur Kommuniktation der einzelnen Komponenten
-* System-Engeneering (Lastenheft, Projektplanung)
-
-## GEPLANTE SCHRITTE
-
-Jeder Schritt soll bereits eine grundlegende Dokumentation der Ergebnisse enthalten, um das letztliche erstellen der Gesamtdokumentation zu optimieren. 
-Die hier dargestellte Planung basiert auf eine Laufzeit von 8 Wochen (da PO 15/16 max. 10 Wochen Laufzeit vorsieht)
-
-
-### VORBEREITUNG
-
-* Projektplanung
-* ggf Lastenheft mit Abnahme
-* erster 3D CAD-Prototyp zum verifizieren der mechanischen Machbarkeit
-* testen von möglichen passenden Embedded-Systems (RPI + externen µC oder STM32MP1), kriterien: lauffähigkeit QT Quick 2, Schnittstellen, DiplayInterface
-* ggf Materialbeschaffung ( zB TMC5160-BOB, lieferzeit 6 Wochen aktuell)
-
-### PHASE_1 (3 Wochen)
-
-* finalisierung 3D Design
-* 3D Druck der Teile
-* Materialbeschaffung / Bestellungen
-* Server (OS, Basiskonfiguration) aufsetzten und einrichten
-* CI System konfigurieren
-* Aufsetzten des Embedded.Systems, installation notwendiger Software und bauen eines Basis-Images mit buildroot
-* Erstellung eines einfach Backend-Server zum speichern der Spielstände
-* Einbindung der Schach-AI in den Backend-Server zum berechnen des nächsten Spielzuges bei einem gegeben Spielbrett.
-* Design des Protokolls zur Kommuniktation zwischen Spielbrett und Server (inkl. Authentifizierung, Initialisierung eines neuen Spiels)
-* Programmierung des Motortreibers zum Anfahren aller möglichen Spielfigur-Postionen
-* Programmierung des NFC Lesers zum erkennen der einzelnen Figuren
-
-### PHASE_2 (3 Wochen)
-
-* Zusammenbau zwei Spieltische
-* Test der Kommunikation und der Initalisierung eines Spiel mit dem Server
-* Programmierung der Matchmaking-Logic und das Verarbeiten der Spielzüge
-* Implementierung des QT-UI, einbinden der Motorsteuerung
-* Abschliessende Tests des Gesamsystems
-
-### PHASE_3 (2 Wochen)
-
-* Ausarbeitung, Gesamtdokumentation
-* Bugfixing
-* Live-Demo-Setup / Bugfixing
-
-
-
-  
-
-## ZU VERWENDENDE PROGRAMMIERSPRACHEN
-
-* NodeJS (Backend, Matchmaking Logic, Spielbrett Logik)
-* Python (Schack-Logik zur verifizierung getätigten Spielzüge)
-* C/C++ (Motorsteuerung, QT-UI)
-
-## GEPLANTE SOFTWARENUTZUNG
-
-* Docker, Docker-Compose - Container Hosting
-* Buildroot - automatisiertes bauen von Linux-Images mit allen benötigten Paketen
-* Jenkins - CI/CD
-* Code - PlattformIO
-* Git / GitHub - VCS
-* Fusion360 - CAD Software
-* Hansoft - Projektplanung
-* Jetrains Webstorm,PyCharm
-
-
-
-
-
-## VIDEO - Ähnliche Projekte
-
-* <https://www.youtube.com/watch?v=ta-q7Qbpj4Q>
-* <https://www.youtube.com/watch?v=QEGJUZoUTCE&t=37s>
-* <https://www.youtube.com/watch?v=dX37LFv8jWY>
-* <https://www.youtube.com/watch?v=XCp4M08IWnA>
-* <https://www.youtube.com/watch?v=OjJpzl3qlE8>
-
-
-
-
-# FOLDER / BRANCH STRUCTURE
-
-* buildroot
-* controller
-* documentation
-* qtui
-* server
-* CI
-
+The system and especially the implemented cloud service can be accessed and extended online. Among other things, this allows building your own table using the AtomicChess system, but also integrating other components. Experienced developers can thus expand the game at will or even add to other games. The mechanics and game management designed for the project can accordingly also be used for various other table board games.
 
 
