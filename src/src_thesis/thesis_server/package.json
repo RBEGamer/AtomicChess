@@ -20,7 +20,7 @@
     "express-sanitizer": "^1.0.5",
     "express-session": "^1.17.0",
     "got": "^9.6.0",
-    "i": "^0.3.6",
+    "i": "^0.3.7",
     "influx": "^5.5.1",
     "mqtt": "^3.0.0",
     "node-cron": "^2.0.3",
