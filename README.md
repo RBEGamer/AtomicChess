@@ -1,5 +1,8 @@
 # Integration of an embedded system into a cloud infrastructure using the example of an autonomous chess table
 
+
+
+
 ## Abstract
 
 The goal of the work is to develop an autonomous chess table, which is able to move chess pieces autonomously and to react to user interactions. The core question of the thesis thus relates to the verification of the feasibility including the creation and implementation of an embedded system and a cloud infrastructure. The focus is especially on the programming of the embedded system and the interaction of this with a server accessible from the Internet, which serves as an intermediary between different manholes and other end devices.
@@ -12,4 +15,18 @@ Basically, it should be noted that the result of the work is not a finalized pro
 
 The system and especially the implemented cloud service can be accessed and extended online. Among other things, this allows building your own table using the AtomicChess system, but also integrating other components. Experienced developers can thus expand the game at will or even add to other games. The mechanics and game management designed for the project can accordingly also be used for various other table board games.
 
+
+# CITE
+
+```tex
+@software{Ochsendorf_Marcel_AtomicChessBA_2021,
+author = {Ochsendorf, Marcel},
+license = {GPL-2.0},
+month = {9},
+title = {{Integration of an embedded system into a cloud infrastructure using the example of an autonomous chess table}},
+url = {https://github.com/RBEGamer/AtomicChess},
+version = {0.9.0},
+year = {2021}
+}
+```
 
