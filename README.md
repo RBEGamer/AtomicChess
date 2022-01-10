@@ -15,6 +15,10 @@ Basically, it should be noted that the result of the work is not a finalized pro
 
 The system and especially the implemented cloud service can be accessed and extended online. Among other things, this allows building your own table using the AtomicChess system, but also integrating other components. Experienced developers can thus expand the game at will or even add to other games. The mechanics and game management designed for the project can accordingly also be used for various other table board games.
 
+# PAPER PDF
+
+`./atomicchess_thesis.pdf`
+
 
 # CITE
 
