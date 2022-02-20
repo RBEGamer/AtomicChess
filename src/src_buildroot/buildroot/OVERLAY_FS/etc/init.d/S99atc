@@ -1,5 +1,5 @@
 #!/bin/sh
-# /etc/init.d/S99atc ATCProject Marcel Ochsendorf marcel.ochsendorf.com
+# /etc/init.d/S99atc ATCProject Marcel Ochsendorf marcelochsendorf.com
 #
 # atc        Starts all ATC pacakges.
 #
