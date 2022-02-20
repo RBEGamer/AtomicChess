@@ -1,5 +1,5 @@
 #! /bin/sh
-# /usr/ATC/start_atc_gui.sh ATCProject Marcel Ochsendorf marcel.ochsendorf.com
+# /usr/ATC/start_atc_gui.sh ATCProject Marcel Ochsendorf marcelochsendorf.com
 while true; do
 	FILEA=/usr/ATC/ATC_LOCK
 	if test -f "$FILEA"; then
