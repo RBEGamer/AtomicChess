@@ -156,6 +156,21 @@ bool GCodeSender::init_serial_port(std::string _serial_port_file, int _baud_rate
 	}
 	//configure serialport though 3rd party lib
 	close_serial_port();     //CLOSE PORT IF OPEN
+	
+	if(std::filesystem::is_symlink(_serial_port_file)){
+        LOG_F(INFO, "filesystem::is_symlink(_port) %s", _serial_port_file.c_str());
+        //GET PREFIX EG /dev/
+        std::string prefix = "";
+        const size_t slash_index = _serial_port_file.find_last_of("/\\");
+        if(slash_index){
+            prefix = _serial_port_file.substr(0,slash_index) + '/';
+        }
+        //ADD SYMLINK DESTINATION ttyTEST =>prefix + ttyUSB0 = /dev/ttyUSB0
+        _serial_port_file = prefix + std::filesystem::read_symlink(_serial_port_file).string();
+        LOG_F(INFO, "filesystem::read_symlink(_port) %s", _serial_port_file.c_str());
+    }
+	
+	
 	if(port->openDevice(_serial_port_file.c_str(), _baud_rate) != 1) {
 		LOG_F(ERROR, "serial port open failed %s WITH BAUD %i",_serial_port_file.c_str(),_baud_rate);
 		return false;
