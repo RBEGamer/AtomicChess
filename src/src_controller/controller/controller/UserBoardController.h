@@ -12,6 +12,9 @@
 #include <thread>
 #include <vector>
 #include <sstream>      // std::stringstream, std::stringbuf
+#include <filesystem>
+#include <cstddef>         // std::size_t
+
 //3rd PARTY INCLUDES
 #include "SHARED/loguru-master/loguru.hpp"
 #include "SHARED/serialib-master/lib/serialib.h"
