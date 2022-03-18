@@ -107,7 +107,7 @@ bool UserBoardController::init_serial_port(std::string _serial_port_file, int _b
         LOG_F(INFO, "filesystem::is_symlink(_port) %s", _serial_port_file.c_str());
         //GET PREFIX EG /dev/
         std::string prefix = "";
-        const size_t slash_index = _port.find_last_of("/\\");
+        const size_t slash_index = _serial_port_file.find_last_of("/\\");
         if(slash_index){
             prefix = _serial_port_file.substr(0,slash_index) + '/';
         }
