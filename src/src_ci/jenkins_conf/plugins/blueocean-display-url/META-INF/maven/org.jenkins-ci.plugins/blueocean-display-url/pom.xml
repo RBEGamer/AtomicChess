@@ -17,7 +17,7 @@
     <java.level>8</java.level>
     <blueocean.version>1.24.4</blueocean.version>
     <scm-api.version>2.6.4</scm-api.version>
-    <git.version>4.5.2</git.version>
+    <git.version>4.11.2</git.version>
     <asm.version>9.0</asm.version>
   </properties>
 
