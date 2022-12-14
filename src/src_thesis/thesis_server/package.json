@@ -14,7 +14,7 @@
     "chalk": "^2.4.2",
     "dotenv": "^8.2.0",
     "ejs": "^3.0.1",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "express-fileupload": "^1.1.10",
     "express-list-endpoints": "^4.0.1",
     "express-sanitizer": "^1.0.5",
