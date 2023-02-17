@@ -1,0 +1,5 @@
+/home/marcel/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/home/marcel/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/ninja/linux/x64/ninja -G Ninja -S /home/marcel/AtomicChess/src/src_atctest/src -B /home/marcel/AtomicChess/src/src_atctest/src/cmake-build-debug
+-- ADD DEBUG=1
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/marcel/AtomicChess/src/src_atctest/src/cmake-build-debug

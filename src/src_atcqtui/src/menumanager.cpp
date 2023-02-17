@@ -449,10 +449,18 @@ void MenuManager::memm_enter_move_reset(){
 }
 
 bool MenuManager::is_number(QChar _char){
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     return QString(_char).contains(QRegExp("^[1-8]*$"));
+#else
+
+#endif
 }
 bool MenuManager::is_alpha(QChar _char){
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     return QString(_char).contains(QRegExp("^[a-h]*$"));
+#else
+    QRegularExpression rx("^[a-h]*$");
+#endif
 }
 
 void MenuManager::memm_enter_move_user_input(QString _charakter){

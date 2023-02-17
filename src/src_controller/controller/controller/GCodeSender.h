@@ -12,10 +12,18 @@
 #include <cstddef>         // std::size_t
 //3rd PARTY INCLUDES
 #include "SHARED/loguru-master/loguru.hpp"
-#include "SHARED/serialib-master/lib/serialib.h"
 
+
+//#define USE_ALTERNATIVE_SERIAL_LIB
+
+#ifdef USE_ALTERNATIVE_SERIAL_LIB
+#include "SerialPort.hpp"
+#else
+#include "SHARED/serialib-master/lib/serialib.h"
+#endif
 
 #include "ConfigParser.h"
+
 
 class GCodeSender
 {
@@ -48,13 +56,20 @@ public:
 
 
 private:
+#ifdef USE_ALTERNATIVE_SERIAL_LIB
+    mn::CppLinuxSerial::SerialPort* port = nullptr;
+#else
 	serialib*  port = nullptr;
+#endif
 	const int MARLIN_SERIAL_BAUD_RATE = 115200;
 	const unsigned int SERIAL_READ_DEFAULT_TIMEOUT = 500; //WAIT FOR 2000 aMS FOR DATA READ -1 IS INFITIE TIMEOUT
 	bool init_serial_port(std::string _serial_port_file, int _baud_rate); //INIT (OR REINIT) THE SERIAL PORT AND OPENS IT
 	bool close_serial_port(); //CLOSES THE SERIAL PORT
 	bool check_baud_rate(int _baudrate_to_check); //CHECKS A GIVEN BAUDRATE TO A STANDART VALID ONE
-	
+
+#ifdef USE_ALTERNATIVE_SERIAL_LIB
+    mn::CppLinuxSerial::BaudRate convert_baud_rate(const int _baudrate_to_check);
+#endif
 
 	int current_pos_x;
 	int current_pos_y;
@@ -65,6 +80,7 @@ private:
     bool wait_for_ack(); //WAITS FOR A OK OR UNKNOWN KOMMENT ACK
 	void dummy_read();
 	std::string read_string_from_serial();
+
 	//TODO PREAMBE GCODE => ABS POS
 	//TODO WRITE SEND CODE
 	//WRITE SEND CODE WAIT FOR ACK (TIME)

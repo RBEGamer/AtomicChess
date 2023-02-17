@@ -1,6 +1,10 @@
 #ifndef MAINMENU_H
 #define MAINMENU_H
 
+#include <QtGlobal>
+
+#include <QRegularExpression>
+
 #include <QObject>
 #include <QQuickItem>
 #include <QDebug> //FOR WRITING TO THE APPLICATION OUTPUT CONSOLE WITH qInfo

@@ -5,12 +5,11 @@
 
 #include "DGT3000Interface.h"
 
-
-
 DGT3000Interface::DGT3000Interface(const std::string _ver){
     version = _ver;
     dgt3000_button_event_queue = std::queue<DGT3000Buttons>();
 }
+
 void DGT3000Interface::enable_service(bool _en){
 
     if(_en){
@@ -126,7 +125,7 @@ void DGT3000Interface::recieve_thread_function_dgt(DGT3000Interface* _this){
 
 
     //START WEBSERVER
-    if(!_this->svr.listen(WEBSERVER_BIND_ADDR, WEBSERVER_PORT)){
+    if(!_this->svr.listen(DGT_WEBSERVER_BIND_ADDR, DGT_WEBSERVER_PORT)){
         LOG_F(ERROR,"DGT3000 WEBSERVER BIND FAILED");
     }
     while (_this->thread_running) {

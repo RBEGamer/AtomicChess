@@ -24,8 +24,8 @@
 #define BTN_CHANGE_ROUTE "/btn_changed"
 #define GET_TEXT_URL "/get_text"
 #define VERSION_URL "/version"
-#define WEBSERVER_PORT 5000
-#define WEBSERVER_BIND_ADDR "0.0.0.0"
+#define DGT_WEBSERVER_PORT 5000
+#define DGT_WEBSERVER_BIND_ADDR "0.0.0.0"
 struct DGT3000Buttons{
     bool back_btn;
     bool minus_btn;

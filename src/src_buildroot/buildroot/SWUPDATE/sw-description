@@ -1,6 +1,6 @@
 software =
 {
-        version = "4.4.11";
+        version = "4.5.15";
 
         stable = {
                 A: {
@@ -9,7 +9,7 @@ software =
                                 filename = "rootfs.ext2.gz";
                         	device = "/dev/mmcblk0p2";
                         	type = "raw";
-                        	sha256 = "cd1fea00e0507e81f3c62c137317097be2cc2b47605795adc224e6e246668595";
+                        	sha256 = "3275017dee6741b6c6d01ef762dc452df1023d674cbdfcf7b8c77820a88951d9";
                         	compressed = true;
                         }
                         );
@@ -21,7 +21,7 @@ software =
                                 filename = "rootfs.ext2.gz";
                         	device = "/dev/mmcblk0p3";
                         	type = "raw";
-                        	sha256 = "cd1fea00e0507e81f3c62c137317097be2cc2b47605795adc224e6e246668595";
+                        	sha256 = "3275017dee6741b6c6d01ef762dc452df1023d674cbdfcf7b8c77820a88951d9";
                         	compressed = true;
                         }
                         );

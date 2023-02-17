@@ -540,7 +540,7 @@ ChessBoard::BOARD_ERROR ChessBoard::makeMoveSyncVirtual(ChessBoard::MovePiar _mo
     //board_current[t_index] = from_fig;
     //CREATE EMPTY FIGURE
 
-
+    return ChessBoard::BOARD_ERROR::NO_ERROR;
 }
 
 ChessBoard::MovePiar ChessBoard::StringToMovePair(std::string _mv) {

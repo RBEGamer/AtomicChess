@@ -277,7 +277,7 @@ void ConfigParser::loadDefaults(std::string _type_str)
         config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_EXTENTION_VOICE_RECOGNITION_ENABLED] = "0";
         config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_EXTENTION_VOICE_RECOGNITION_URL] = "http://atomicchess.de:8880";
 
-        config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_EXTENTION_DGT3000_INTERFACE_ENABLED] = "1";
+        config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_EXTENTION_DGT3000_INTERFACE_ENABLED] = "0";
 
 
 	}else if (_type_str == "PROD_V1"){
@@ -352,7 +352,7 @@ void ConfigParser::loadDefaults(std::string _type_str)
         config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_EXTENTION_VOICE_RECOGNITION_ENABLED] = "0";
         config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_EXTENTION_VOICE_RECOGNITION_URL] = "http://atomicchess.de:8880";
 
-        config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_EXTENTION_DGT3000_INTERFACE_ENABLED] = "1";
+        config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_EXTENTION_DGT3000_INTERFACE_ENABLED] = "0";
     }else if (_type_str == "VIRT"){
         config_store[ConfigParser::CFG_ENTRY::NETWORK_BACKEND_URL] = "http://atomicchess.de:3000";
         config_store[ConfigParser::CFG_ENTRY::NETWORK_HEARTBEAT_INTERVAL_SECS] = "5";
@@ -440,7 +440,7 @@ void ConfigParser::loadDefaults(std::string _type_str)
         config_store[ConfigParser::CFG_ENTRY::GENERAL_BOOT_PARTION_INFO_FILE_PATH] = "/etc/swupdate/BOOTPART";
         config_store[ConfigParser::CFG_ENTRY::GENERAL_SYSTEM_TICK_INTERVAL_MS] = "1000";
         config_store[ConfigParser::CFG_ENTRY::GENERAL_EN_ATCGUI_COMMUNICATION] = "1";
-        config_store[ConfigParser::CFG_ENTRY::MECHANIC_STEPS_PER_MM] = "80";//80 steps / mm for CORE XY configuration
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_STEPS_PER_MM] = "10";//80 steps / mm for CORE XY configuration
         config_store[ConfigParser::CFG_ENTRY::MECHANIC_INVERT_COILS] = "1";
         config_store[ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X] = "50";
         config_store[ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y] = "50";
@@ -459,8 +459,8 @@ void ConfigParser::loadDefaults(std::string _type_str)
         config_store[ConfigParser::CFG_ENTRY::MECHANIC_WRITE_COIL_STATE_ALWAYS_WRITE_OFF] = "0";
         config_store[ConfigParser::CFG_ENTRY::MECHANIC_BOARD_HOME_AFTER_MAKE_MOVE] = "0";
         config_store[ConfigParser::CFG_ENTRY::MECHANIC_DISBABLE_COILSIWTCH_USE_COIL_A_ONLY] = "1";
-        config_store[ConfigParser::CFG_ENTRY::MECHANIC_FEEDRATE_TRAVEL] = "7000";
-        config_store[ConfigParser::CFG_ENTRY::MECHANIC_FEEDRATE_MOVE] = "4000";
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_FEEDRATE_TRAVEL] = "9000"; //7000
+        config_store[ConfigParser::CFG_ENTRY::MECHANIC_FEEDRATE_MOVE] = "4000"; // 4000
         config_store[ConfigParser::CFG_ENTRY::MECHANIC_FEEDRATE_SIWTHC_XY_AXIS] = "0";
         config_store[ConfigParser::CFG_ENTRY::BOARD_PRESET_START_POSITION_FEN] = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
         config_store[ConfigParser::CFG_ENTRY::HWARDWARE_REVISION] = "PROD_V2";
@@ -486,7 +486,7 @@ void ConfigParser::loadDefaults(std::string _type_str)
         config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_AUTO_SCAN_BOARD_TIME_IF_USERS_TURN] = "-1";
         config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_EXTENTION_VOICE_RECOGNITION_ENABLED] = "0";
         config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_EXTENTION_VOICE_RECOGNITION_URL] = "http://atomicchess.de:8880";
-        config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_EXTENTION_DGT3000_INTERFACE_ENABLED] = "1";
+        config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_EXTENTION_DGT3000_INTERFACE_ENABLED] = "0";
 
 
 
@@ -564,7 +564,7 @@ void ConfigParser::loadDefaults(std::string _type_str)
         config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_EXTENTION_VOICE_RECOGNITION_ENABLED] = "0";
         config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_EXTENTION_VOICE_RECOGNITION_URL] = "http://atomicchess.de:8880";
 
-        config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_EXTENTION_DGT3000_INTERFACE_ENABLED] = "1";
+        config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_EXTENTION_DGT3000_INTERFACE_ENABLED] = "0";
 
 
     }

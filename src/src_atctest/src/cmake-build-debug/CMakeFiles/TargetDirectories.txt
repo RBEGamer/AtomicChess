@@ -1,0 +1,3 @@
+/home/marcel/AtomicChess/src/src_atctest/src/cmake-build-debug/CMakeFiles/atctest.dir
+/home/marcel/AtomicChess/src/src_atctest/src/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/marcel/AtomicChess/src/src_atctest/src/cmake-build-debug/CMakeFiles/rebuild_cache.dir
