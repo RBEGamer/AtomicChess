@@ -211,13 +211,11 @@ void setup(void) {
   Serial.begin(9600);
   
 
-  pixels.begin();
-  pixels.clear();
-  pixels.show();
-  set_neopixel(5);
 
     
-  return; 
+  
+
+
   coils_off();
   nfc.begin();
 
@@ -232,6 +230,10 @@ void setup(void) {
   Serial.println("_ENTERLOOP_");
 
   
+  pixels.begin();
+  pixels.clear();
+  pixels.show();
+  set_neopixel(5);
 }
 void loop() {
  
@@ -278,7 +280,7 @@ if (readString.length() > 0) {
 
     
    }else if (getValue(readString, '_', 1) == UBC_COMMAND_COIL) {
-    int coil = getValue(readString, '_', 2).toInt();
+    const int coil = getValue(readString, '_', 2).toInt();
 
     //set_coil_state( COIL 1-0, STATE 1-0)
     
@@ -298,9 +300,10 @@ if (readString.length() > 0) {
 
 
   }else if (getValue(readString, '_', 1) == UBC_COMMAND_SERVO) {
-    int pos = getValue(readString, '_', 2).toInt();
+    const int pos = getValue(readString, '_', 2).toInt();
 
     myServo.attach(servo_pin);
+     delay(100);   
     myServo.write(pos);
     delay(50);
     myServo.detach();
