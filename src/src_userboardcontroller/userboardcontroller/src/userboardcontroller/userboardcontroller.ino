@@ -202,7 +202,7 @@ void setup(void) {
   delay(100);
   digitalWrite(STATE_LED,LOW);
   
-  Serial.begin(115200);
+  Serial.begin(9600);
   
     
   
