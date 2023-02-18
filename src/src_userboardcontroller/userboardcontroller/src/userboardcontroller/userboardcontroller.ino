@@ -46,7 +46,7 @@ NfcAdapter nfc = NfcAdapter(pn532_i2c);
 #define NUMPIXELS 120
 #define NEOPIXEL_STRIP_PIN  7
 Adafruit_NeoPixel pixels(NUMPIXELS, NEOPIXEL_STRIP_PIN, NEO_GRB + NEO_KHZ800);
-const byte LED_STRIP_COLORS[5] = {240,180,140,90,35}; //LED STRIP COLORS OFF, IDLE, WHITE_TURN, BLACK_TURN, PROCESSING
+const byte LED_STRIP_COLORS[6] = {240,180,140,90,35, 0}; //LED STRIP COLORS OFF, IDLE, WHITE_TURN, BLACK_TURN, PROCESSING
 
 
 
@@ -220,7 +220,7 @@ void setup(void) {
   delay(200);
   digitalWrite(STATE_LED,LOW);
   Serial.println("_ENTERLOOP_");
-  
+  set_neopixel(5);
   
 }
 void loop() {
