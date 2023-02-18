@@ -44,9 +44,10 @@ NfcAdapter nfc = NfcAdapter(pn532_i2c);
 
 #include "Adafruit_NeoPixel.h"
 #define NUMPIXELS 120
-#define NEOPIXEL_STRIP_PIN  7
+#define NEOPIXEL_STRIP_PIN 6  
 Adafruit_NeoPixel pixels(NUMPIXELS, NEOPIXEL_STRIP_PIN, NEO_GRB + NEO_KHZ800);
-const byte LED_STRIP_COLORS[6] = {240,180,140,90,35, 0}; //LED STRIP COLORS OFF, IDLE, WHITE_TURN, BLACK_TURN, PROCESSING
+#define MAX_COLORS 6
+const byte LED_STRIP_COLORS[MAX_COLORS] = {240,180,140,90,35, 0}; //LED STRIP COLORS OFF, IDLE, WHITE_TURN, BLACK_TURN, PROCESSING
 
 
 
@@ -72,34 +73,39 @@ uint32_t Wheel(byte WheelPos) {
 }
 
 byte current_led_pos = 0;
-void set_neopixel(byte _pos){
+void set_neopixel(const byte _pos){
+  int target_led_pos = 0;
   //GET THE COLOR FROM PREDEFINED COLOR ARRAY ELSE GET ANY COLOR...
-  if(_pos >= 0 && _pos < 5){
-   _pos= LED_STRIP_COLORS[_pos];
+  if(_pos >= 0 && _pos < MAX_COLORS){
+    target_led_pos = LED_STRIP_COLORS[_pos];
    }
    //HOW MANY STEPS TO REACH THE TARGET COLOR
-   int steps = abs(_pos - current_led_pos); 
-   if(steps == 0){return;}
+   const int steps = abs(target_led_pos - current_led_pos); 
+  if(steps == 0){
+    for(int i=0; i<NUMPIXELS; i++) { 
+      pixels.setPixelColor(i, Wheel(current_led_pos)); 
+    }
+    pixels.show();
+  }
    //MAKE STEPS IN WHICH DIRECTORY OF THE COLOR WHEEL
    int step_dir = 1;
-   if((_pos-current_led_pos) > 0){
+   if(target_led_pos < current_led_pos){
       step_dir = -1;
     }
     
-
-    
-   for(int j =0; j<steps; j++) { 
+  
+  for(int j =0; j<steps; j++) { 
     //INC DEC CURRENT LED POS +-1 TO GET CLOSER TO TARGET COLOR
     current_led_pos += step_dir; 
    //SET ALL PIXELS TO THE NEW STEP COLOR
-   for(int i=0; i<NUMPIXELS; i++) { 
-    pixels.setPixelColor(i, Wheel(current_led_pos)); 
-  }
+    for(int i=0; i<NUMPIXELS; i++) { 
+      pixels.setPixelColor(i, Wheel(current_led_pos)); 
+    }
   
   pixels.show(); //SHOW PIXELS
   delay(5*(255/steps)); //WAIT SOME TIME BUT MAX 5*255ms FOR A FULL COLOR ROTATION
   }
-  current_led_pos = _pos; //SAVE NEW COLOR AS CURRENT COLOR
+
 }
 
 
@@ -204,13 +210,17 @@ void setup(void) {
   
   Serial.begin(9600);
   
-    
-  
-  coils_off();
-  nfc.begin();
+
   pixels.begin();
   pixels.clear();
-  
+  pixels.show();
+  set_neopixel(5);
+
+    
+  return; 
+  coils_off();
+  nfc.begin();
+
 
   digitalWrite(STATE_LED,HIGH);
   delay(200);
@@ -220,7 +230,7 @@ void setup(void) {
   delay(200);
   digitalWrite(STATE_LED,LOW);
   Serial.println("_ENTERLOOP_");
-  set_neopixel(5);
+
   
 }
 void loop() {
