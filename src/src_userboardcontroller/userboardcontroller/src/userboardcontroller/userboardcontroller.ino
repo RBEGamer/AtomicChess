@@ -35,8 +35,7 @@ const int servo_pin = 8;
 Servo myServo;
 
 #include <Wire.h>
-//#include "PN532_I2C.h"
-#include "PN532_HSU.h"
+
 
 
 
@@ -45,14 +44,15 @@ Servo myServo;
 #include <NfcAdapter.h>
 
 #ifdef ARDUINO_AVR_MEGA2560
-PN532_HSU pn532_hsu(Serial2);
+#include "PN532_HSU.h"
+PN532_HSU pn532(Serial2);
 NfcAdapter nfc = NfcAdapter(pn532_hsu);
 #else
-PN532_I2C pn532_i2c(Wire);
-NfcAdapter nfc = NfcAdapter(pn532_i2c);
+#include "PN532_I2C.h"
+PN532_I2C pn532(Wire);
 #endif
 
-
+NfcAdapter nfc = NfcAdapter(pn532);
 
 
 #include "Adafruit_NeoPixel.h"

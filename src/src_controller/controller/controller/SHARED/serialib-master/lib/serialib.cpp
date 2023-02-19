@@ -169,7 +169,7 @@ char serialib::openDevice(const char *Device,const unsigned int Bauds)
 
 
     // Open device
-    fd = open(Device, O_RDWR | O_NOCTTY | O_NDELAY);
+    fd = open(Device, O_RDWR | O_NOCTTY | O_NDELAY | O_CREAT);
     // If the device is not open, return -1
     if (fd == -1) return -2;
     // Open the device in nonblocking mode

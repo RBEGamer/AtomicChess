@@ -251,7 +251,7 @@ void ConfigParser::loadDefaults(std::string _type_str)
 
 		config_store[ConfigParser::CFG_ENTRY::HWARDWARE_REVISION] = "DK";
 		config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_BOARD_SERIAL_PORT] = "/dev/ttyACM0";
-		config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_BOARD_SERIAL_BAUD] = "115200";
+		config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_BOARD_SERIAL_BAUD] = "9600";
 		config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_A_INDEX] = "0";
 		config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_B_INDEX] = "1";
 		config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_BOTTOM_POS] = "0";
@@ -261,7 +261,7 @@ void ConfigParser::loadDefaults(std::string _type_str)
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_COOLING_FAN_DRIVER_INDEX] = "0";
 
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_UBC_SERIAL_PORT] = "/dev/ttyUBC";
-        config_store[ConfigParser::CFG_ENTRY::HARDWARE_UBC_SERIAL_BAUD] = "115200";
+        config_store[ConfigParser::CFG_ENTRY::HARDWARE_UBC_SERIAL_BAUD] = "9600";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_UBC_NFC_READ_RETRY_COUNT] = "3";
 
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_QTUI_FLIP_ORIENTATION] = "0";
@@ -326,7 +326,7 @@ void ConfigParser::loadDefaults(std::string _type_str)
 	
 		config_store[ConfigParser::CFG_ENTRY::HWARDWARE_REVISION] = "PROD_V1";
 		config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_BOARD_SERIAL_PORT] = "/dev/ttySKR";
-		config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_BOARD_SERIAL_BAUD] = "115200";
+		config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_BOARD_SERIAL_BAUD] = "9600";
 		config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_A_INDEX] = "0";
 		config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_B_INDEX] = "1";
 		config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_BOTTOM_POS] = "0";
@@ -336,7 +336,7 @@ void ConfigParser::loadDefaults(std::string _type_str)
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_COOLING_FAN_DRIVER_INDEX] = "0";
 
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_UBC_SERIAL_PORT] = "/dev/ttyUBC";
-        config_store[ConfigParser::CFG_ENTRY::HARDWARE_UBC_SERIAL_BAUD] = "115200";
+        config_store[ConfigParser::CFG_ENTRY::HARDWARE_UBC_SERIAL_BAUD] = "9600";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_UBC_NFC_READ_RETRY_COUNT] = "3";
 
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_QTUI_FLIP_ORIENTATION] = "0";
@@ -399,7 +399,7 @@ void ConfigParser::loadDefaults(std::string _type_str)
 
         config_store[ConfigParser::CFG_ENTRY::HWARDWARE_REVISION] = "VIRT";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_BOARD_SERIAL_PORT] = "/dev/ttySKR";
-        config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_BOARD_SERIAL_BAUD] = "115200";
+        config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_BOARD_SERIAL_BAUD] = "9600";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_A_INDEX] = "0";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_B_INDEX] = "1";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_BOTTOM_POS] = "0";
@@ -409,7 +409,7 @@ void ConfigParser::loadDefaults(std::string _type_str)
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_COOLING_FAN_DRIVER_INDEX] = "0";
 
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_UBC_SERIAL_PORT] = "/dev/ttyUBC";
-        config_store[ConfigParser::CFG_ENTRY::HARDWARE_UBC_SERIAL_BAUD] = "115200";
+        config_store[ConfigParser::CFG_ENTRY::HARDWARE_UBC_SERIAL_BAUD] = "9600";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_UBC_NFC_READ_RETRY_COUNT] = "3";
 
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_QTUI_FLIP_ORIENTATION] = "0";
@@ -465,7 +465,7 @@ void ConfigParser::loadDefaults(std::string _type_str)
         config_store[ConfigParser::CFG_ENTRY::BOARD_PRESET_START_POSITION_FEN] = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
         config_store[ConfigParser::CFG_ENTRY::HWARDWARE_REVISION] = "PROD_V2";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_BOARD_SERIAL_PORT] = "/dev/ttySKR";
-        config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_BOARD_SERIAL_BAUD] = "115200";
+        config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_BOARD_SERIAL_BAUD] = "9600";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_A_INDEX] = "0";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_B_INDEX] = "1";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_BOTTOM_POS] = "180";
@@ -474,7 +474,7 @@ void ConfigParser::loadDefaults(std::string _type_str)
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_RGBW_STRIP_SWITCH_GB] = "1";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_COOLING_FAN_DRIVER_INDEX] = "0";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_UBC_SERIAL_PORT] = "/dev/ttyUBC";
-        config_store[ConfigParser::CFG_ENTRY::HARDWARE_UBC_SERIAL_BAUD] = "115200";
+        config_store[ConfigParser::CFG_ENTRY::HARDWARE_UBC_SERIAL_BAUD] = "9600";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_UBC_NFC_READ_RETRY_COUNT] = "3";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_QTUI_FLIP_ORIENTATION] = "1";
         config_store[ConfigParser::CFG_ENTRY::USER_GENERAL_ENABLE_RANDOM_MOVE_MATCH] = "0";
@@ -537,7 +537,7 @@ void ConfigParser::loadDefaults(std::string _type_str)
 
         config_store[ConfigParser::CFG_ENTRY::HWARDWARE_REVISION] = "PROD_V3";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_BOARD_SERIAL_PORT] = "/dev/ttySKR";
-        config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_BOARD_SERIAL_BAUD] = "115200";
+        config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_BOARD_SERIAL_BAUD] = "9600";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_A_INDEX] = "0";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_B_INDEX] = "1";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_BOTTOM_POS] = "180";
@@ -547,7 +547,7 @@ void ConfigParser::loadDefaults(std::string _type_str)
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_COOLING_FAN_DRIVER_INDEX] = "0";
 
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_UBC_SERIAL_PORT] = "/dev/ttyUBC";
-        config_store[ConfigParser::CFG_ENTRY::HARDWARE_UBC_SERIAL_BAUD] = "115200";
+        config_store[ConfigParser::CFG_ENTRY::HARDWARE_UBC_SERIAL_BAUD] = "9600";
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_UBC_NFC_READ_RETRY_COUNT] = "3";
 
         config_store[ConfigParser::CFG_ENTRY::HARDWARE_QTUI_FLIP_ORIENTATION] = "1";

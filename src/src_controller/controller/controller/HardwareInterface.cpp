@@ -250,9 +250,9 @@ bool HardwareInterface::setTurnStateLight(HardwareInterface::HI_TURN_STATE_LIGHT
                 break;
         }
 
-        if (gcode_interface != nullptr) {
-            gcode_interface->set_led(hsv_col);
-        }
+        //if (gcode_interface != nullptr) {
+        //    gcode_interface->set_led(hsv_col);
+        //}
 
         if (userboardcontroller_interface != nullptr) {
             userboardcontroller_interface->set_led(hsv_col);
@@ -278,16 +278,16 @@ bool HardwareInterface::setTurnStateLight(HardwareInterface::HI_TURN_STATE_LIGHT
                     if (_state) {
                         const int pos = ConfigParser::getInstance()->getInt_nocheck(
                                 ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_UPPER_POS);
-                        gcode_interface->setServo(ConfigParser::getInstance()->getInt_nocheck(
-                                ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_A_INDEX), pos);
+                        //gcode_interface->setServo(ConfigParser::getInstance()->getInt_nocheck(
+                        //        ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_A_INDEX), pos);
                         if (userboardcontroller_interface != nullptr) {
                             userboardcontroller_interface->set_servo(pos);
                         }
                     } else {
                         const int pos = ConfigParser::getInstance()->getInt_nocheck(
                                 ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_BOTTOM_POS);
-                        gcode_interface->setServo(ConfigParser::getInstance()->getInt_nocheck(
-                                ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_A_INDEX), pos);
+                        //gcode_interface->setServo(ConfigParser::getInstance()->getInt_nocheck(
+                        //        ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_A_INDEX), pos);
                         if (userboardcontroller_interface != nullptr) {
                             userboardcontroller_interface->set_servo(pos);
                         }
@@ -520,8 +520,8 @@ bool HardwareInterface::setTurnStateLight(HardwareInterface::HI_TURN_STATE_LIGHT
                 return;
             }
             //SET FAN STATE
-            if (gcode_interface != nullptr) {
-                gcode_interface->setFan(fan_index, ((int) _state) * 255);
-            }
+            //if (gcode_interface != nullptr) {
+            //    gcode_interface->setFan(fan_index, ((int) _state) * 255);
+           // }
         }
     };
