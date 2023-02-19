@@ -35,11 +35,24 @@ const int servo_pin = 8;
 Servo myServo;
 
 #include <Wire.h>
-#include "PN532_I2C.h"
+//#include "PN532_I2C.h"
+#include "PN532_HSU.h"
+
+
+
+
 #include <PN532.h>
 #include <NfcAdapter.h>
+
+#ifdef ARDUINO_AVR_MEGA2560
+PN532_HSU pn532_hsu(Serial2);
+NfcAdapter nfc = NfcAdapter(pn532_hsu);
+#else
 PN532_I2C pn532_i2c(Wire);
 NfcAdapter nfc = NfcAdapter(pn532_i2c);
+#endif
+
+
 
 
 #include "Adafruit_NeoPixel.h"
@@ -209,14 +222,18 @@ void setup(void) {
   digitalWrite(STATE_LED,LOW);
   
   Serial.begin(9600);
-  
+   Serial.println("_ENTERSETUP_");
 
-
+  pixels.begin();
+  pixels.clear();
+  pixels.show();
     
   
 
 
   coils_off();
+  Wire.begin();
+  Wire.setClock(80000L);
   nfc.begin();
 
 
@@ -230,9 +247,7 @@ void setup(void) {
   Serial.println("_ENTERLOOP_");
 
   
-  pixels.begin();
-  pixels.clear();
-  pixels.show();
+  
   set_neopixel(5);
 }
 void loop() {
@@ -319,7 +334,5 @@ if (readString.length() > 0) {
 }
 
 
-
-//EINBRENNEN VERHINDERN
 
 }
