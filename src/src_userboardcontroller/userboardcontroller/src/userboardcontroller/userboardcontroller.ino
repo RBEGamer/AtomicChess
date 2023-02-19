@@ -43,14 +43,10 @@ Servo myServo;
 #include <PN532.h>
 #include <NfcAdapter.h>
 
-#ifdef ARDUINO_AVR_MEGA2560
 #include "PN532_HSU.h"
 PN532_HSU pn532(Serial2);
-NfcAdapter nfc = NfcAdapter(pn532_hsu);
-#else
-#include "PN532_I2C.h"
-PN532_I2C pn532(Wire);
-#endif
+
+
 
 NfcAdapter nfc = NfcAdapter(pn532);
 
@@ -58,7 +54,14 @@ NfcAdapter nfc = NfcAdapter(pn532);
 #include "Adafruit_NeoPixel.h"
 #define NUMPIXELS 120
 #define NEOPIXEL_STRIP_PIN 6  
+
+#ifdef ARDUINO_AVR_MEGA2560
 Adafruit_NeoPixel pixels(NUMPIXELS, NEOPIXEL_STRIP_PIN, NEO_GRB + NEO_KHZ800);
+#else
+Adafruit_NeoPixel pixels(NUMPIXELS, NEOPIXEL_STRIP_PIN, NEO_RGB + NEO_KHZ800);
+#endif
+
+
 #define MAX_COLORS 6
 const byte LED_STRIP_COLORS[MAX_COLORS] = {240,180,140,90,35, 0}; //LED STRIP COLORS OFF, IDLE, WHITE_TURN, BLACK_TURN, PROCESSING
 
@@ -247,8 +250,7 @@ void setup(void) {
   Serial.println("_ENTERLOOP_");
 
   
-  
-  set_neopixel(5);
+  set_neopixel(MAX_COLORS-1);
 }
 void loop() {
  
