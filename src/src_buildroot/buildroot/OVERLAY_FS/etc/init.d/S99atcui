@@ -9,8 +9,6 @@
 umask 077
 
 start() {
-	printf "MODPROBE i2c "
-	modprobe i2c-dev
 	printf "Starting ATC GUI"
 	touch /usr/ATC/ATC_LOCK_GUI
     /usr/ATC/start_atc_ui.sh &
