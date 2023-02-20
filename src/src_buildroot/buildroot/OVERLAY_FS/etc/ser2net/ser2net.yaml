@@ -1,13 +1,36 @@
 %YAML 1.1
 ---
+
+default:
+  name: speed
+  value: 9600n81
+
+
 connection: &skr
-    accepter: tcp,7001
+    accepter: telnet,tcp,7001
+    timeout: 600
+    enable: on
     connector: serialdev,
               /dev/ttySKR,
               9600n81,local
+    options:
+        mdns: false
 
 connection: &ubc
-    accepter: tcp,7000
+    accepter: telnet,tcp,7002
+    timeout: 600
+    enable: on
     connector: serialdev,
-              /dev/ttyACM1,
-              38400n81,local
+              /dev/ttyUBC,
+              9600n81,local
+    options:
+        mdns: false
+
+connection: &test
+  accepter: telnet,tcp,7000
+  connector: echo
+  options:
+    openstr: 'Hello\x20there'
+    closestr: 'Goodbye\nnow'
+    closeon: 'ctrl-a\001nil\000'
+    mdns: false
