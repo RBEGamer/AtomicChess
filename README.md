@@ -22,6 +22,8 @@ The chess table acts as an opponent and can move the pieces automatically and re
 
 ### OTHER PROJECTS COMPARISON
 
+
+#### OPENSOURCE PROJECTS
 |                                          | Automated Chess Board | Automated Chess Board | DIY Super Smart Chessboard |
 |:----------------------------------------|:---------------------------------------:|:-------------------------------------------:|-----------------------------------:|
 | Figure Position Detection               | no (manual)                             | yes (camera)                                | no                    |
