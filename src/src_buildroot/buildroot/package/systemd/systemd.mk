@@ -727,7 +727,7 @@ HOST_SYSTEMD_NINJA_ENV = DESTDIR=$(HOST_DIR)
 # * the original path had been tweaked by buildroot via LDFLAGS to add
 #   $(HOST_DIR)/lib
 # * thus re-tweak rpath after the installation for all binaries that need it
-HOST_SYSTEMD_HOST_TOOLS = busctl journalctl systemctl systemd-* udevadm
+HOST_SYSTEMD_HOST_TOOLS = busctl journalctl systemctl systemd-* systemd-machine-id-setup systemd-mount udevadm
 
 define HOST_SYSTEMD_FIX_RPATH
 	for f in $(addprefix $(HOST_DIR)/bin/,$(HOST_SYSTEMD_HOST_TOOLS)); do \
