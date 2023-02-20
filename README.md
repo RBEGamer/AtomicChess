@@ -1,9 +1,16 @@
-# Integration of an embedded system into a cloud infrastructure using the example of an autonomous chess table
+# AtomicChess - The most advanced self playing chess table
 
 
 ![ATC_PROD_TABLE_FINAL_IMG_orig](https://user-images.githubusercontent.com/9280991/220172093-60a4af1e-1d08-4d89-8e21-97ade77841fa.jpg)
 
-## Abstract
+
+
+
+## Integration of an embedded system into a cloud infrastructure using the example of an autonomous chess table
+
+**NOTE**This project is my bachelor thesis in computer science. The thesis with details is also available in this repository.
+
+### Abstract
 
 The goal of the work is to develop an autonomous chess table, which is able to move chess pieces autonomously and to react to user interactions. The core question of the thesis thus relates to the verification of the feasibility including the creation and implementation of an embedded system and a cloud infrastructure. The focus is especially on the programming of the embedded system and the interaction of this with a server accessible from the Internet, which serves as an intermediary between different manholes and other end devices.
 
@@ -15,7 +22,7 @@ Basically, it should be noted that the result of the work is not a finalized pro
 
 The system and especially the implemented cloud service can be accessed and extended online. Among other things, this allows building your own table using the AtomicChess system, but also integrating other components. Experienced developers can thus expand the game at will or even add to other games. The mechanics and game management designed for the project can accordingly also be used for various other table board games.
 
-# PAPER PDF
+### PAPER PDF
 
 `./atomicchess_thesis.pdf`
 
