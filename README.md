@@ -1,7 +1,8 @@
 # AtomicChess - The most advanced self playing chess table
 
 
-![ATC_PROD_TABLE_FINAL_IMG_orig](https://user-images.githubusercontent.com/9280991/220172093-60a4af1e-1d08-4d89-8e21-97ade77841fa.jpg)
+![prod](https://user-images.githubusercontent.com/9280991/220172644-81fd00ce-cb8f-4056-8e39-720ec7858f19.png)
+
 
 
 
@@ -9,6 +10,8 @@
 ## Integration of an embedded system into a cloud infrastructure using the example of an autonomous chess table
 
 **NOTE**This project is my bachelor thesis in computer science. The thesis with details is also available in this repository.
+
+![ATC_PROD_TABLE_FINAL_IMG_orig](https://user-images.githubusercontent.com/9280991/220172093-60a4af1e-1d08-4d89-8e21-97ade77841fa.jpg)
 
 ### Abstract
 
