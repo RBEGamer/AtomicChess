@@ -9,16 +9,16 @@ This automated chess table allows the user to play chess virtually over the Inte
 The chess table acts as an opponent and can move the pieces automatically and recognizes the player's moves and sends them to the opponent (chess table or virtual).
 
 
-|                                               | Atomic Chess Table                        |
-|:----------------------------------------------|------------------------------------------:|
-| Recognition figure position                   | yes, using NFC tags under figures         |
-| Connectivity                                  | LAN, WLAN                                 |
-| Automatic movement of the figures             | yes                                       |
-| Game Livestream                               | yes                                       |
-| Cloud connection (online games)               | yes, central gameserver and matchmaking   |
-| Parking position for eliminated figures       | yes                                       |
-| Stand-alone functionality                     | yes, using stockfish-11                   |
-
+|                                               | Atomic Chess Table                                            |
+|:----------------------------------------------|--------------------------------------------------------------:|
+| Recognition figure position                   | yes, using NFC tags under figures                             |
+| Connectivity                                  | LAN, WLAN                                                     |
+| Automatic movement of the figures             | yes                                                           |
+| Game Livestream                               | yes                                                           |
+| Cloud connection (online games)               | yes, central gameserver and matchmaking                       |
+| Parking position for eliminated figures       | yes                                                           |
+| Stand-alone functionality                     | yes, using stockfish-11                                       |
+| Special features                              | voice control (Amazon Alexa), DGT3000 chess clock integration |
 
 ### OTHER PROJECTS COMPARISON
 
