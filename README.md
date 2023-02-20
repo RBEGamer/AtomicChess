@@ -27,7 +27,7 @@ The system and especially the implemented cloud service can be accessed and exte
 `./atomicchess_thesis.pdf`
 
 
-# CITE
+### CITE
 
 ```tex
 @software{Ochsendorf_Marcel_AtomicChessBA_2021,
