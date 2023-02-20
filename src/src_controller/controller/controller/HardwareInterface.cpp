@@ -260,6 +260,7 @@ bool HardwareInterface::setTurnStateLight(HardwareInterface::HI_TURN_STATE_LIGHT
 
         return true;
     }
+    return false;
 }
 
     bool HardwareInterface::setCoilState(HI_COIL _coil, bool _state) {

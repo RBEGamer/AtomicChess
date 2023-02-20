@@ -1,0 +1,13 @@
+%YAML 1.1
+---
+connection: &skr
+    accepter: tcp,7001
+    connector: serialdev,
+              /dev/ttySKR,
+              9600n81,local
+
+connection: &ubc
+    accepter: tcp,7000
+    connector: serialdev,
+              /dev/ttyACM1,
+              38400n81,local
