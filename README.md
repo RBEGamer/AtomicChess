@@ -3,7 +3,7 @@
 
 ![prod](https://user-images.githubusercontent.com/9280991/220172644-81fd00ce-cb8f-4056-8e39-720ec7858f19.png)
 
-# FEATURES
+## FEATURES
 
 This automated chess table allows the user to play chess virtually over the Internet with other chess tables or via a web client.
 The chess table acts as an opponent and can move the pieces automatically and recognizes the player's moves and sends them to the opponent (chess table or virtual).
@@ -18,6 +18,23 @@ The chess table acts as an opponent and can move the pieces automatically and re
 | Cloud connection (online games)               | yes, central gameserver and matchmaking   |
 | Parking position for eliminated figures       | yes                                       |
 | Stand-alone functionality                     | yes, using stockfish-11                   |
+
+
+### OTHER PROJECTS COMPARISON
+
+| Automated Chess Board (Michael Guerero) | Automated Chess Board (Akash Ravichandran) | DIY Super Smart Chessboard |
+|:----------------------------------------|:-----------------------------------------------------:|:--------------------------------------------------------:|-----------------------------------------:|
+| Figure Position Detection | no (manual) | yes (camera) | no |
+| dimensions (LxWxH) | no specification | no specification | 450mm x 300mm x 50mm |
+| connectivity | USB (PC required) | WIFI |
+| automatic movement of the figures | yes | no |
+| game livestream | no | no |
+| cloud connection (online games) | no | no | yes |
+| Parking position for eliminated figures | no | no | no |
+| stand-alone functionality | no (PC required) | yes | yes |
+| special features | - | voice control | train display (LED matrix) |
+
+
 
 
 ## Integration of an embedded system into a cloud infrastructure using the example of an autonomous chess table
