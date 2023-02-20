@@ -52,7 +52,7 @@ license = {GPL-2.0},
 month = {9},
 title = {{Integration of an embedded system into a cloud infrastructure using the example of an autonomous chess table}},
 url = {https://github.com/RBEGamer/AtomicChess},
-version = {0.9.0},
+version = {1.0.0},
 year = {2021}
 }
 ```
