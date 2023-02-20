@@ -3,8 +3,21 @@
 
 ![prod](https://user-images.githubusercontent.com/9280991/220172644-81fd00ce-cb8f-4056-8e39-720ec7858f19.png)
 
+# FEATURES
+
+This automated chess table allows the user to play chess virtually over the Internet with other chess tables or via a web client.
+The chess table acts as an opponent and can move the pieces automatically and recognizes the player's moves and sends them to the opponent (chess table or virtual).
 
 
+|                                               | Atomic Chess Table                        |
+|:----------------------------------------------|------------------------------------------:|
+| Recognition figure position                   | yes                                       |
+| Connectivity                                  | LAN, WLAN                                 |
+| Automatic movement of the figures             | yes                                       |
+| Game Livestream                               | yes                                       |
+| Cloud connection (online games)               | yes                                       |
+| Parking position for eliminated figures       | yes                                       |
+| Stand-alone functionality                     | yes                                       |
 
 
 ## Integration of an embedded system into a cloud infrastructure using the example of an autonomous chess table
