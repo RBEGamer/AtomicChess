@@ -11,13 +11,13 @@ The chess table acts as an opponent and can move the pieces automatically and re
 
 |                                               | Atomic Chess Table                        |
 |:----------------------------------------------|------------------------------------------:|
-| Recognition figure position                   | yes                                       |
+| Recognition figure position                   | yes, using NFC tags under figures         |
 | Connectivity                                  | LAN, WLAN                                 |
 | Automatic movement of the figures             | yes                                       |
 | Game Livestream                               | yes                                       |
-| Cloud connection (online games)               | yes                                       |
+| Cloud connection (online games)               | yes, central gameserver and matchmaking   |
 | Parking position for eliminated figures       | yes                                       |
-| Stand-alone functionality                     | yes                                       |
+| Stand-alone functionality                     | yes, using stockfish-11                   |
 
 
 ## Integration of an embedded system into a cloud infrastructure using the example of an autonomous chess table
