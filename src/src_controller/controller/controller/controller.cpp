@@ -47,7 +47,7 @@ typedef std::chrono::system_clock::time_point TimePoint;
 
 //---------------------- CONFIG DEFINED --------------------------- //
 #define ATC_CONTROLLER_VERSION "{{VERSION}}"
-#define CONFIG_FILE_PATH "./atccontrollerconfig.ini"
+#define DEFAULT_CONFIG_FILE_PATH "./atccontrollerconfig.ini"
 #define LOG_FILE_PATH "/tmp/atc_controller_log.log"
 #define LOG_FILE_PATH_ERROR "/tmp/atc_controller_error_log.log"
 // THERE ARE TWO DEVELOPMENT HARDWARE VERSIONS OF THE TABLE
@@ -58,6 +58,8 @@ typedef std::chrono::system_clock::time_point TimePoint;
 #define HWID_PROD_V3_HARDWARE "b827ebad862f"
 #define INVALID_HWID "1nv4l1dm4c"
 using namespace std;
+
+
 
 bool flip_screen_state = false;
 int last_mm_state_active = -1;
@@ -141,9 +143,19 @@ std::string read_file_to_string(const std::string &_path)
     }
 }
 
-bool cmdOptionExists(char **begin, char **end, const std::string &option)
+bool cmdOptionExists(char**begin, char**end, const std::string &option)
 {
     return std::find(begin, end, option) != end;
+}
+
+char* getCmdOption(char** begin, char** end, const std::string& option)
+{
+    char** itr = std::find(begin, end, option);
+    if (itr != end && ++itr != end)
+    {
+        return *itr;
+    }
+    return 0;
 }
 
 void update_gamescreen_with_player_state(BackendConnector::PLAYER_STATUS _ps, guicommunicator &_gui)
@@ -274,6 +286,7 @@ int main(int argc, char *argv[])
         std::cout << "-autoplayer             | enables the automatic player mode - table will make random moves" << std::endl;
         std::cout << "-skipplacementdialog    | skips the initial chess board NFC scan and load the default fen from the config file" << std::endl;
         std::cout << "-preventflipscreen      | ignore gui flip screen config" << std::endl;
+        std::cout << "-cfgfolderpath          | set the ABS folder path for the config FORMAT: /xyz/folder/ which contains atccontrollerconfig_<hwid>.ini, if not specified ./atccontrollerconfig.ini is used" << std::endl;
         std::cout << "---- END ATC_CONTROLLER HELP ----" << std::endl;
         return 0;
     }
@@ -295,9 +308,6 @@ int main(int argc, char *argv[])
 
     loguru::g_stderr_verbosity = 1;
     LOG_SCOPE_F(INFO, "ATC CONTROLLER STARTED");
-
-    // READ CONFIG FILE
-    LOG_SCOPE_F(INFO, "LOADING CONFIG FILE ./atccontrollerconfig.ini");
 
     // GET HARDWARE REVISION
     std::string used_if_path = ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::GENERAL_HWID_INTERFACE);
@@ -324,6 +334,28 @@ int main(int argc, char *argv[])
         // used_if_path
     }
     LOG_F(INFO, (const char *)hwid.c_str());
+
+     // READ CONFIG FILE
+    std::string CONFIG_FILE_PATH = DEFAULT_CONFIG_FILE_PATH;
+    //CHECKK FOLDER EXISTS
+    // atccontrollerconfig
+    if(cmdOptionExists(argv, argv + argc, "-cfgfolderpath")){
+        std::string fp =std::string(getCmdOption(argv, argv + argc, "-cfgfolderpath"));
+        LOG_SCOPE_F(INFO, "LOADING CONFIG FILE: -cfgfolderpath IS SET TO", fp.c_str());
+        if(fp.size() > 0){
+            if(fp.at(fp.size()-1) != '/'){
+                fp.append("/");
+            }
+        }else{
+            fp = "./";
+        }
+        // usr/ATC/configs / atccontrollerconfig_<HWID>.ini
+        CONFIG_FILE_PATH = fp + "atccontrollerconfig_" + hwid + ".ini";
+    }
+    //CONFIG_FILE_PATH = "atccontrollerconfig_" + hwid;
+    LOG_SCOPE_F(INFO, "LOADING CONFIG FILE", CONFIG_FILE_PATH.c_str());
+
+
 
     // OVERWRITE WITH EXISTSING CONFIG FILE SETTINGS
     bool new_config_file_written = false;

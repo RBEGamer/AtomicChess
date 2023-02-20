@@ -8,7 +8,7 @@ while true; do
 	FILEA=/usr/ATC/ATC_LOCK_CONTROLLER
 	if test -f "$FILEA"; then
     	echo "STARTING ATC CONTROLLER"
-		/usr/ATC/atc_controller
+		/usr/ATC/atc_controller -cfgfolderpath /usr/ATC/atc_config/
 		sleep 10
 	else
 	    	exit 1

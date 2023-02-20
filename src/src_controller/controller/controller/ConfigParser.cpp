@@ -155,7 +155,7 @@ bool ConfigParser::loadConfigFile(std::string _file)
 
 bool ConfigParser::writeConfigFile(std::string _file)
 {
-    LOG_F(INFO,"onfigParser::writeConfigfile save into %s", _file.c_str());
+    LOG_F(INFO,"ConfigParser::writeConfigfile save into %s", _file.c_str());
 	//OPEN TEXT FILE
 	std::ofstream myfile;
 	myfile.open(_file.c_str());
