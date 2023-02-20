@@ -1,0 +1,45 @@
+#!/bin/sh
+# /etc/init.d/S99atc ATCProject Marcel Ochsendorf marcelochsendorf.com
+#
+# atc        Starts all ATC pacakges.
+#
+
+
+
+umask 077
+
+start() {
+	printf "Starting GENSIO UBC"
+	touch /usr/ATC/ATC_LOCK_GENSIO_UBC
+	start_gensio_ubc.sh
+	echo "OK"
+}
+stop() {
+	printf "Starting GENSIO UBC"
+	rm -f /usr/ATC/ATC_LOCK_GENSIO_UBC
+	killall gensiot
+	echo "OK"
+}
+restart() {
+	stop
+	start
+}
+
+case "$1" in
+  start)
+	start
+	;;
+  stop)
+	stop
+	;;
+  restart|reload)
+	restart
+	;;
+  *)
+	echo "Usage: $0 {start|stop|restart}"
+	exit 1
+esac
+
+exit $?
+
+

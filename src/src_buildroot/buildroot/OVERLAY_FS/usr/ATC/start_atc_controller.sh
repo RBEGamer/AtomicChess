@@ -3,10 +3,11 @@
 #
 # atc        Starts the ATC Controller in an endless loop
 #
+sleep 10
 while true; do
-	FILEA=/usr/ATC/ATC_LOCK
+	FILEA=/usr/ATC/ATC_LOCK_CONTROLLER
 	if test -f "$FILEA"; then
-    		echo "STARTING ATC CONTROLLER"
+    	echo "STARTING ATC CONTROLLER"
 		/usr/ATC/atc_controller
 		sleep 10
 	else
