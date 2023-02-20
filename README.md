@@ -1,7 +1,7 @@
 # Integration of an embedded system into a cloud infrastructure using the example of an autonomous chess table
 
 
-
+![ATC_PROD_TABLE_FINAL_IMG_orig](https://user-images.githubusercontent.com/9280991/220172093-60a4af1e-1d08-4d89-8e21-97ade77841fa.jpg)
 
 ## Abstract
 
