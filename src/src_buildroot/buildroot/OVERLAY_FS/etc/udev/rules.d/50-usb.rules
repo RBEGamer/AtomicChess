@@ -1,12 +1,18 @@
 # MAKERBASE MKS Gen L V2.1
-SUBSYSTEM=="tty", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523", SYMLINK+="ttySKR"
+#SUBSYSTEM=="tty", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523", SYMLINK+="ttySKR"
 # BIGGREENTECH SKAR 1.4 TURBO
-SUBSYSTEM=="tty", ATTRS{idVendor}=="1d50", ATTRS{idProduct}=="6029", SYMLINK+="ttySKR"
+#SUBSYSTEM=="tty", ATTRS{idVendor}=="1d50", ATTRS{idProduct}=="6029", SYMLINK+="ttySKR"
 
 # ARDUINO DUE
-SUBSYSTEM=="tty", ATTRS{idVendor}=="2341", ATTRS{idProduct}=="003d", SYMLINK+="ttyUBC"
-SUBSYSTEM=="tty", ATTRS{idVendor}=="2341", ATTRS{idProduct}=="003e", SYMLINK+="ttyUBC"
+#SUBSYSTEM=="tty", ATTRS{idVendor}=="2341", ATTRS{idProduct}=="003d", SYMLINK+="ttyUBC"
+#SUBSYSTEM=="tty", ATTRS{idVendor}=="2341", ATTRS{idProduct}=="003e", SYMLINK+="ttyUBC"
 
 
 #SUBSYSTEM=="tty", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523", SYMLINK+="ttyUBC"
 #SUBSYSTEM=="tty", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="5740", SYMLINK+="ttyUBC"
+
+
+# ON THE TABLE ITSELF WE USE THE PORTNUMBER TO SYMBLINK
+# THIS AVOIDS SME SYMLINKS WITH BOARDS USING THE SAME USB 
+SUBSYSTEM=="tty", ATTRS{devpath}=="1.6", SYMLINK+="ttySKR"
+SUBSYSTEM=="tty", ATTRS{devpath}=="1.7", SYMLINK+="ttyUBC"
