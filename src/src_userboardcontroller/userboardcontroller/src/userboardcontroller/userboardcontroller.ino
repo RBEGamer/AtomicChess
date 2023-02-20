@@ -53,7 +53,7 @@ NfcAdapter nfc = NfcAdapter(pn532);
 
 #include "Adafruit_NeoPixel.h"
 #define NUMPIXELS 120
-#define NEOPIXEL_STRIP_PIN 6  
+#define NEOPIXEL_STRIP_PIN 5  
 
 #ifdef ARDUINO_AVR_MEGA2560
 Adafruit_NeoPixel pixels(NUMPIXELS, NEOPIXEL_STRIP_PIN, NEO_GRB + NEO_KHZ800);
