@@ -22,17 +22,17 @@ The chess table acts as an opponent and can move the pieces automatically and re
 
 ### OTHER PROJECTS COMPARISON
 
-| Automated Chess Board (Michael Guerero) | Automated Chess Board (Akash Ravichandran) | DIY Super Smart Chessboard |
-|:----------------------------------------|:-----------------------------------------------------:|:--------------------------------------------------------:|-----------------------------------------:|
-| Figure Position Detection | no (manual) | yes (camera) | no |
-| dimensions (LxWxH) | no specification | no specification | 450mm x 300mm x 50mm |
-| connectivity | USB (PC required) | WIFI |
-| automatic movement of the figures | yes | no |
-| game livestream | no | no |
-| cloud connection (online games) | no | no | yes |
-| Parking position for eliminated figures | no | no | no |
-| stand-alone functionality | no (PC required) | yes | yes |
-| special features | - | voice control | train display (LED matrix) |
+                                          | Automated Chess Board (Michael Guerero) | Automated Chess Board (Akash Ravichandran)  | DIY Super Smart Chessboard |
+|:----------------------------------------|:---------------------------------------:|:-------------------------------------------:|-----------------------------------:|
+| Figure Position Detection               | no (manual)                             | yes (camera)                                | no                    |
+| dimensions (LxWxH)                      | no specification                        | no specification                            | 450mm x 300mm x 50mm  |
+| connectivity                            | USB (PC required)                       | WIFI                                        |                       |
+| automatic movement of the figures       | yes                                     | no |                                        |                       |
+| game livestream                         | no                                      | no                                          |                       |
+| cloud connection (online games)         | no                                      | no                                          | yes                   |
+| Parking position for eliminated figures | no                                      | no                                          | no                    |
+| stand-alone functionality               | no (PC required)                        | yes                                         | yes                   |
+| special features                        | -                                       | voice control | train display (LED matrix)  |                       |
 
 
 
