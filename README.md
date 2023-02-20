@@ -22,7 +22,7 @@ The chess table acts as an opponent and can move the pieces automatically and re
 
 ### OTHER PROJECTS COMPARISON
 
-                                          | Automated Chess Board (Michael Guerero) | Automated Chess Board (Akash Ravichandran)  | DIY Super Smart Chessboard |
+|                                          | Automated Chess Board | Automated Chess Board | DIY Super Smart Chessboard |
 |:----------------------------------------|:---------------------------------------:|:-------------------------------------------:|-----------------------------------:|
 | Figure Position Detection               | no (manual)                             | yes (camera)                                | no                    |
 | dimensions (LxWxH)                      | no specification                        | no specification                            | 450mm x 300mm x 50mm  |
