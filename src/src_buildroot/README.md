@@ -43,7 +43,11 @@ These packages can be installed with the `$ sudo apt install <PACKAGE>` command,
 
 * `$ sudo apt  update && apt  upgrade -y`
 * `$ sudo apt install git-all`
-* `$ sudo apt install software-properties-common libncurses-dev` 
+* `$ sudo apt install software-properties-common libncurses-dev` ython3 python3-pip python3-dev python3-setuptools python3-wheel ninja-build libcap-dev libmount-dev
+
+
+
+
 * `$ sudo apt install sed make binutils build-essential socat gcc g++ gzip bzip2 perl tar cpio unzip rsync bc wget git python cpio sed cmake genext2fs libssl-dev  -y`
 * `$ sudo apt install gtk2.0 gtk2.0-dev csv python-glade2 libncurses5 libncurses5-dev -y`
 
