@@ -341,7 +341,7 @@ int main(int argc, char *argv[])
     // atccontrollerconfig
     if(cmdOptionExists(argv, argv + argc, "-cfgfolderpath")){
         std::string fp =std::string(getCmdOption(argv, argv + argc, "-cfgfolderpath"));
-        LOG_SCOPE_F(INFO, "LOADING CONFIG FILE: -cfgfolderpath IS SET TO", fp.c_str());
+        LOG_SCOPE_F(INFO, "LOADING CONFIG FILE: -cfgfolderpath IS SET TO %s", fp.c_str());
         if(fp.size() > 0){
             if(fp.at(fp.size()-1) != '/'){
                 fp.append("/");
@@ -353,7 +353,7 @@ int main(int argc, char *argv[])
         CONFIG_FILE_PATH = fp + "atccontrollerconfig_" + hwid + ".ini";
     }
     //CONFIG_FILE_PATH = "atccontrollerconfig_" + hwid;
-    LOG_SCOPE_F(INFO, "LOADING CONFIG FILE", CONFIG_FILE_PATH.c_str());
+    LOG_SCOPE_F(INFO, "LOADING CONFIG FILE %s", CONFIG_FILE_PATH.c_str());
 
 
 
@@ -364,22 +364,22 @@ int main(int argc, char *argv[])
         LOG_F(WARNING, "--- CREATE LOCAL CONFIG FILE -----");
         LOG_F(WARNING, "1. Failed to load atccontrollerconfig.ini");
         LOG_F(WARNING, "2. ARGUMENT -writeconfig SET => CREATE NEW CONFIG FILE FOR HWID");
-        LOG_F(WARNING, hwid.c_str());
+        LOG_F(INFO, "detected hwid %s", hwid.c_str());
         // LOAD (PUPULATE) ALL CONFIG ENTRIES WITH THE DEFAULT CONFIG
         if (cmdOptionExists(argv, argv + argc, "-hwvirtual"))
         {
-            LOG_F(WARNING, "ARGUMENT -hwvirtual SET");
-            LOG_F(WARNING, "VIRTUAL/SIMULATED HARDWARE");
+            LOG_F(INFO, "ARGUMENT -hwvirtual SET");
+            LOG_F(INFO, "VIRTUAL/SIMULATED HARDWARE");
             ConfigParser::getInstance()->loadDefaults("VIRT");
         }
         else if (hwid == HWID_DK_HARDWARE || cmdOptionExists(argv, argv + argc, "-hwdk"))
         {
-            LOG_F(WARNING, "DK HARDWARE");
+            LOG_F(INFO, "DK HARDWARE");
             ConfigParser::getInstance()->loadDefaults("DK");
         }
         else if (hwid == HWID_PROD_V1_HARDWARE || cmdOptionExists(argv, argv + argc, "-hwprod1"))
         {
-            LOG_F(WARNING, "PROD_V1 HARDWARE");
+            LOG_F(INFO, "PROD_V1 HARDWARE");
             ConfigParser::getInstance()->loadDefaults("PROD_V1");
         }
         else if (hwid == INVALID_HWID || cmdOptionExists(argv, argv + argc, "-hwinvalid"))
@@ -389,7 +389,7 @@ int main(int argc, char *argv[])
         }
         else if (hwid == HWID_PROD_V3_HARDWARE || cmdOptionExists(argv, argv + argc, "-hwprod3"))
         {
-            LOG_F(WARNING, "PROD_V3 HARDWARE");
+            LOG_F(INFO, "PROD_V3 HARDWARE");
             ConfigParser::getInstance()->loadDefaults("PROD_V3");
         }
         else

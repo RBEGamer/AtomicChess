@@ -14,24 +14,17 @@
 #include "SHARED/loguru-master/loguru.hpp"
 
 
-//#define USE_ALTERNATIVE_SERIAL_LIB
 
-#ifdef USE_ALTERNATIVE_SERIAL_LIB
-#include "SerialPort.hpp"
-#else
-#include "SHARED/serialib-master/lib/serialib.h"
-#endif
 
 #include "ConfigParser.h"
-
+#include "SerialInterface.h"
 
 class GCodeSender
 {
 	
 public:
-	
-	GCodeSender(std::string _serialport_file);
-	GCodeSender(std::string _serialport_file,int _baud);
+
+	GCodeSender(const std::string _serialport_file, const int _baud);
 	~GCodeSender();
 	//THREAD ZUM SENDEN
 
@@ -40,50 +33,30 @@ public:
 	//FINALLY WRITE MOTOR HOME/ MOVE TO / SET LIGHT ((I2C))
     void disable_motors();
 	bool is_target_position_reached();
-	void move_to_postion_mm_absolute(int _x, int _y, bool _blocking);
-	void move_to_postion_mm_absolute(int _x, int _y); //JUST FOR CONVENIENCE 	CALLS => void move_to_postion_mm_absolute(int _x, int _y, bool _blocking);
+	void move_to_postion_mm_absolute(const int _x, const int _y,const bool _blocking);
+	void move_to_postion_mm_absolute(const int _x, const int _y); //JUST FOR CONVENIENCE 	CALLS => void move_to_postion_mm_absolute(int _x, int _y, bool _blocking);
 	void reset_eeprom();//RESETS THE INTERNAL EEPROM TO FIRMWARE DEFAULTS //IS A BUGFIX OF UNCONTROLLED BEHAVIOR OG THE MARLIN CONTROLLER
 	void home_sync();
-	void set_speed_preset(int _feedrate);
+	void set_speed_preset(const int _feedrate);
 
 
-	bool setServo(int _index, int _pos);
-	bool setFan(int _index, int _speed);
-	bool set_steps_per_mm(int _x, int _y);
+	bool setServo(const int _index, const int _pos);
+	bool setFan(const int _index,const int _speed);
+	bool set_steps_per_mm(const int _x,const int _y);
 
-	bool set_led(int _r, int _g, int _b, int _intensity); //SET THE RGW STRIP COLOR M150 OPTION NEEDED
-    bool set_led(int _hsv);
+	bool set_led(const int _r, const int _g, const int _b, const int _intensity); //SET THE RGW STRIP COLOR M150 OPTION NEEDED
+    bool set_led(const int _hsv);
 
-
+	bool write_gcode(const std::string _gcode);
+	bool write_gcode(const std::string _gcode, const bool _blocking);
+	bool wait_for_ack();
 private:
-#ifdef USE_ALTERNATIVE_SERIAL_LIB
-    mn::CppLinuxSerial::SerialPort* port = nullptr;
-#else
-	serialib*  port = nullptr;
-#endif
-	const int MARLIN_SERIAL_BAUD_RATE = 115200;
-	const unsigned int SERIAL_READ_DEFAULT_TIMEOUT = 500; //WAIT FOR 2000 aMS FOR DATA READ -1 IS INFITIE TIMEOUT
-	bool init_serial_port(std::string _serial_port_file, int _baud_rate); //INIT (OR REINIT) THE SERIAL PORT AND OPENS IT
-	bool close_serial_port(); //CLOSES THE SERIAL PORT
-	bool check_baud_rate(int _baudrate_to_check); //CHECKS A GIVEN BAUDRATE TO A STANDART VALID ONE
 
-#ifdef USE_ALTERNATIVE_SERIAL_LIB
-    mn::CppLinuxSerial::BaudRate convert_baud_rate(const int _baudrate_to_check);
-#endif
-
+	const int MARLIN_SERIAL_BAUD_RATE = 9600;
 	int current_pos_x;
 	int current_pos_y;
-	//---------- MARLIN GCODE SENDER FUNCTIONS ---------//a
 
-	bool write_gcode(std::string _gcode_line, bool _ack_check); //WRITE GCODE AND WAIT FOR ACK X TIMES ; _ack_check = true waits for the ack repsonse from the board
-	bool write_gcode(std::string _gcode_line);
-    bool wait_for_ack(); //WAITS FOR A OK OR UNKNOWN KOMMENT ACK
-	void dummy_read();
-	std::string read_string_from_serial();
-
-	//TODO PREAMBE GCODE => ABS POS
-	//TODO WRITE SEND CODE
-	//WRITE SEND CODE WAIT FOR ACK (TIME)
+	SerialInterface* serialport = nullptr;
 	
 	
 	
