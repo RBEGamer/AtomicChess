@@ -29,7 +29,7 @@
 #define UBC_COMMAND_LED "led"
 #define UBC_COMMAND_COIL "coil"
 #define UBC_COMMAND_SERVO "servo"
-
+#define UBC_COMMAND_HSV "hsv"
 #include <Servo.h>
 const int servo_pin = 8;
 Servo myServo;
@@ -55,11 +55,11 @@ NfcAdapter nfc = NfcAdapter(pn532);
 #define NUMPIXELS 120
 #define NEOPIXEL_STRIP_PIN 5  
 
-#ifdef ARDUINO_AVR_MEGA2560
-Adafruit_NeoPixel pixels(NUMPIXELS, NEOPIXEL_STRIP_PIN, NEO_GRB + NEO_KHZ800);
-#else
+//#ifdef ARDUINO_AVR_MEGA2560
+//Adafruit_NeoPixel pixels(NUMPIXELS, NEOPIXEL_STRIP_PIN, NEO_GRB + NEO_KHZ800);
+//#else
 Adafruit_NeoPixel pixels(NUMPIXELS, NEOPIXEL_STRIP_PIN, NEO_RGB + NEO_KHZ800);
-#endif
+//#endif
 
 
 #define MAX_COLORS 6
@@ -88,7 +88,14 @@ uint32_t Wheel(byte WheelPos) {
   }
 }
 
+
+
+
+
+
+
 byte current_led_pos = 0;
+
 void set_neopixel(const byte _pos){
   int target_led_pos = 0;
   //GET THE COLOR FROM PREDEFINED COLOR ARRAY ELSE GET ANY COLOR...
@@ -106,6 +113,37 @@ void set_neopixel(const byte _pos){
    //MAKE STEPS IN WHICH DIRECTORY OF THE COLOR WHEEL
    int step_dir = 1;
    if(target_led_pos < current_led_pos){
+      step_dir = -1;
+    }
+    
+  
+  for(int j =0; j<steps; j++) { 
+    //INC DEC CURRENT LED POS +-1 TO GET CLOSER TO TARGET COLOR
+    current_led_pos += step_dir; 
+   //SET ALL PIXELS TO THE NEW STEP COLOR
+    for(int i=0; i<NUMPIXELS; i++) { 
+      pixels.setPixelColor(i, Wheel(current_led_pos)); 
+    }
+  
+  pixels.show(); //SHOW PIXELS
+  delay(5*(255/steps)); //WAIT SOME TIME BUT MAX 5*255ms FOR A FULL COLOR ROTATION
+  }
+
+}
+
+void set_neopixel_hsv(const byte _hsv){
+ 
+   //HOW MANY STEPS TO REACH THE TARGET COLOR
+   const int steps = abs(_hsv - current_led_pos); 
+  if(steps == 0){
+    for(int i=0; i<NUMPIXELS; i++) { 
+      pixels.setPixelColor(i, Wheel(current_led_pos)); 
+    }
+    pixels.show();
+  }
+   //MAKE STEPS IN WHICH DIRECTORY OF THE COLOR WHEEL
+   int step_dir = 1;
+   if(_hsv < current_led_pos){
       step_dir = -1;
     }
     
@@ -224,8 +262,8 @@ void setup(void) {
   delay(100);
   digitalWrite(STATE_LED,LOW);
   
-  Serial.begin(9600);
-   Serial.println("_ENTERSETUP_");
+  
+  //Serial.println("_ENTERSETUP_");
 
   pixels.begin();
   pixels.clear();
@@ -247,10 +285,15 @@ void setup(void) {
   digitalWrite(STATE_LED,HIGH);
   delay(200);
   digitalWrite(STATE_LED,LOW);
-  Serial.println("_ENTERLOOP_");
+  //Serial.println("_ENTERLOOP_");
 
   
   set_neopixel(MAX_COLORS-1);
+
+
+  //INIT SERIAL AT THE END: SO NO MESSAGES FROM THE NFC LIB WILL BE DELIVERED
+  Serial.begin(9600);
+  
 }
 void loop() {
  
@@ -293,6 +336,12 @@ if (readString.length() > 0) {
     int t = getValue(readString, '_', 2).toInt();
     set_neopixel(t);
     Serial.println("_led_res_ok_");
+
+
+  }else if (getValue(readString, '_', 1) == UBC_COMMAND_HSV) {
+    int t = getValue(readString, '_', 2).toInt();
+    set_neopixel_hsv(t);
+    Serial.println("_hsv_res_ok_");
 
 
     
