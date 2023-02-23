@@ -185,6 +185,12 @@
 		<Unit filename="/home/marcel/AtomicChess/src/src_controller/controller/controller/IOController.h">
 			<Option target="controller"/>
 		</Unit>
+		<Unit filename="/home/marcel/AtomicChess/src/src_controller/controller/controller/LinuxSocket.cpp">
+			<Option target="controller"/>
+		</Unit>
+		<Unit filename="/home/marcel/AtomicChess/src/src_controller/controller/controller/LinuxSocket.h">
+			<Option target="controller"/>
+		</Unit>
 		<Unit filename="/home/marcel/AtomicChess/src/src_controller/controller/controller/SHARED/WiringPi-master/wiringPi/piHiPri.c">
 			<Option target="controller"/>
 		</Unit>
@@ -354,6 +360,9 @@
 			<Option target="controller"/>
 		</Unit>
 		<Unit filename="/home/marcel/AtomicChess/src/src_controller/controller/controller/resource.h">
+			<Option target="controller"/>
+		</Unit>
+		<Unit filename="/home/marcel/AtomicChess/src/src_controller/controller/controller/simple_cpp_sockets.h">
 			<Option target="controller"/>
 		</Unit>
 		<Unit filename="/home/marcel/AtomicChess/src/src_controller/controller/controller/udp_discovery_discovered_peer.hpp">

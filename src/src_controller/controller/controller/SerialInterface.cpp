@@ -21,9 +21,15 @@ SerialInterface::SerialInterface(const std::string& _serial_port_file, const int
     if (_serial_port_file.rfind(TCP_PROTOCOL_IDENTIFIER, 0) == 0) {
         LOG_F(INFO, "serial is a tcp ser2net port ");
         is_network_port = true;
-        // s starts with prefix
+        std::vector<std::string> out;
+        tokenize(_serial_port_file, ":", out);
+        if(out.size() == 3){
+            serial_port_file = out.at(1);
+            tcp_port = std::stoi(out.at(2));
+        }else{
+            LOG_F(ERROR, "serial tcp format invlaid, got: %s - please use format tcp:<IP>:<PORT>", serial_port_file.c_str());
+        }
     } else {
-
         //A BAUDRATE IS NEEDED HERE
         baud_rate = _baud_rate;
         LOG_F(INFO, "serial baud set to %i", baud_rate);
@@ -31,27 +37,32 @@ SerialInterface::SerialInterface(const std::string& _serial_port_file, const int
     }
 }
 
-
 SerialInterface::~SerialInterface() {
-    if (is_network_port) {
+    close_port();
 
-    } else {
-#ifdef USE_ALTERNATIVE_SERIAL_LIB
-        if (port) {
-            port->Close();
-        }
-#else
-        port->closeDevice();
-        connected =false;
-#endif
+    if (port != nullptr){
+        delete port;
+    }
+
+}
+//TODO MOVE TO HELPER FUNCTION TOGEHTER WITH SAME FKT IN USBER BOARD CONTROLLER
+void SerialInterface::tokenize(std::string const &str, const char *delim, std::vector<std::string> &out)
+{
+    char *token = strtok(const_cast<char *>(str.c_str()), delim);
+    while (token != nullptr)
+    {
+        out.push_back(std::string(token));
+        token = strtok(nullptr, delim);
     }
 }
 
-
-SerialInterface::SERIAL_PORT_STATE SerialInterface::get_state() {
-
+SerialInterface::SERIAL_PORT_STATE SerialInterface::get_state() const {
     if (is_network_port) {
-
+        if(connected){
+            return SERIAL_PORT_STATE::OPEN;
+        }else{
+            return SERIAL_PORT_STATE::CLOSED;
+        }
     } else {
 #ifdef USE_ALTERNATIVE_SERIAL_LIB
         if (!port) {
@@ -82,7 +93,33 @@ bool SerialInterface::init() {
 }
 
 bool SerialInterface::init_tcp_port() {
+    //CONVERT IP ADDR
+    if(!inet_pton(AF_INET, serial_port_file.c_str(), &socket_addr.sin_addr)){
+        LOG_SCOPE_F(ERROR, "inet_pton converting ip failed %s", serial_port_file.c_str());
+        return false;
+    }
+    // CONVERT PORT
+    if(baud_rate <= 0 || baud_rate > 65536){
+        LOG_SCOPE_F(ERROR, "sin_port converting port failed %i 1-65536", baud_rate);
+        return false;
+    }
+    socket_addr.sin_port = htons(baud_rate);
 
+    close_port();
+    //CREATE SOCKET
+    socket_fd = socket(AF_INET, static_cast<int>(SOCK_STREAM), 0);
+    if(socket_fd == TCP_INVALID_SOCKET){
+        LOG_SCOPE_F(ERROR, "cant create socket to %s:%i", serial_port_file.c_str(), baud_rate);
+        return false;
+    }
+    socket_addr.sin_family = AF_INET;
+    //FINALLY CONNECT SOCKET
+    if(!connect_tcp_socket()) {
+        LOG_SCOPE_F(ERROR, "cant connect socket to %s:%i", serial_port_file.c_str(), baud_rate);
+        return false;
+    }
+    connected = true;
+    return true;
 }
 
 bool SerialInterface::init_serial_port() {
@@ -97,7 +134,7 @@ bool SerialInterface::init_serial_port() {
         return false;
     }
     //configure serialport though 3rd party lib
-    close_serial_port();     //CLOSE PORT IF OPEN
+    close_port();     //CLOSE PORT IF OPEN
 
     if (std::filesystem::is_symlink(serial_port_file)) {
         LOG_F(INFO, "filesystem::is_symlink(_port) %s", serial_port_file.c_str());
@@ -178,17 +215,22 @@ bool SerialInterface::init_serial_port() {
     return true;
 }
 
-bool SerialInterface::close_serial_port() {
-    if (port != nullptr) {
+bool SerialInterface::close_port() {
+    if (is_network_port) {
+        if(socket_fd != TCP_INVALID_SOCKET){
+            close(socket_fd);
+        }
+    } else {
 #ifdef USE_ALTERNATIVE_SERIAL_LIB
-        if (port->GetState() == mn::CppLinuxSerial::State::OPEN) {
+        if (port) {
             port->Close();
         }
 #else
         port->closeDevice();
+        connected = false;
 #endif
     }
-    return true;
+        return true;
 }
 
 void SerialInterface::dummy_read() {
@@ -241,13 +283,21 @@ std::string SerialInterface::read_until(char _termination, unsigned int _max_wai
     }
 }
 
+
+
 std::string SerialInterface::read_until_tcp(char _termination, unsigned int _max_wait) {
+    if(socket_fd == TCP_INVALID_SOCKET){
+        if(!init_tcp_port()){
+            LOG_SCOPE_F(ERROR, "retry of socke init failed cant read");
+            return "";
+        }
+    }
 
 }
 
 std::string SerialInterface::read_until_serial(char _termination, unsigned int _max_wait) {
     int wait_counter = 0;
-    std::string complete = "";
+    std::string complete;
 
     char charr[1024] = {0};
 
@@ -287,7 +337,15 @@ std::string SerialInterface::read_until_serial(char _termination, unsigned int _
     return complete;
 }
 
-bool SerialInterface::write_string(const std::string _data) {
+bool SerialInterface::write_string(const std::string _data){
+    if(is_network_port){
+        return write_string_tcp(_data);
+    }else{
+        return write_string_serial(_data);
+    }
+}
+
+bool SerialInterface::write_string_serial(const std::string _data) {
     //WRITE COMMAND TO SERIAL LINE
     if (!port) {
         LOG_SCOPE_F(ERROR, "SerialInterface::port is null => call init()");
@@ -305,30 +363,26 @@ bool SerialInterface::write_string(const std::string _data) {
         return false;
 }
 
+bool SerialInterface::write_string_tcp(const std::string _data){
+    const size_t length = _data.length();
 
-#ifdef USE_ALTERNATIVE_SERIAL_LIB
-mn::CppLinuxSerial::BaudRate SerialInterface::convert_baud_rate(const int _baudrate_to_check) {
-    switch (_baudrate_to_check) {
-        case 9600:
-            return mn::CppLinuxSerial::BaudRate::B_9600;
-        case 19200:
-            return mn::CppLinuxSerial::BaudRate::B_19200;
-        case 38400:
-            return mn::CppLinuxSerial::BaudRate::B_38400;
-        case 57600:
-            return mn::CppLinuxSerial::BaudRate::B_57600;
-        case 115200:
-            return mn::CppLinuxSerial::BaudRate::B_115200;
-        case 230400:
-            return mn::CppLinuxSerial::BaudRate::B_230400;
-        case 460800:
-            return mn::CppLinuxSerial::BaudRate::B_460800;
-        default:
-            return mn::CppLinuxSerial::BaudRate::B_0;
+    if(socket_fd == TCP_INVALID_SOCKET){
+        if(!init_tcp_port()){
+            LOG_SCOPE_F(ERROR, "retry of socke init failed cant read");
+            return false;
+        }
+    }
+
+    if (send(socket_fd, _data.c_str(), length, 0) < 0)
+    {
+        LOG_SCOPE_F(ERROR, "write_string_tcp data send failed");
+       return false;
+    }
+    else
+    {
+       return true;
     }
 }
-
-#endif
 
 bool SerialInterface::check_baud_rate(const int _baudrate_to_check) {
 #ifdef __MACH__
@@ -359,7 +413,7 @@ bool SerialInterface::check_baud_rate(const int _baudrate_to_check) {
 #endif
 }
 
-bool SerialInterface::is_open() {
+bool SerialInterface::is_open() const {
     if (get_state() >= SERIAL_PORT_STATE::OPEN) {
         return true;
     } else {
@@ -367,5 +421,35 @@ bool SerialInterface::is_open() {
     }
 }
 
+bool SerialInterface::connect_tcp_socket() {
+    if (connect(socket_fd, reinterpret_cast<sockaddr*>(&socket_addr), sizeof(socket_addr)) < 0)
+    {
+        return false;
+    }
+    return true;
+}
 
 
+
+#ifdef USE_ALTERNATIVE_SERIAL_LIB
+mn::CppLinuxSerial::BaudRate SerialInterface::convert_baud_rate(const int _baudrate_to_check) {
+    switch (_baudrate_to_check) {
+        case 9600:
+            return mn::CppLinuxSerial::BaudRate::B_9600;
+        case 19200:
+            return mn::CppLinuxSerial::BaudRate::B_19200;
+        case 38400:
+            return mn::CppLinuxSerial::BaudRate::B_38400;
+        case 57600:
+            return mn::CppLinuxSerial::BaudRate::B_57600;
+        case 115200:
+            return mn::CppLinuxSerial::BaudRate::B_115200;
+        case 230400:
+            return mn::CppLinuxSerial::BaudRate::B_230400;
+        case 460800:
+            return mn::CppLinuxSerial::BaudRate::B_460800;
+        default:
+            return mn::CppLinuxSerial::BaudRate::B_0;
+    }
+}
+#endif
