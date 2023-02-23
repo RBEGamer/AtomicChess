@@ -172,7 +172,7 @@ std::string SerialInterfaceSerial::read_until(char _termination, unsigned int _m
     char charr[128] = { 0 };
     while (true){
         //READ CHARS FORM SERIAL
-        int chars_read = port->readString(charr, _termination, 1024, _max_wait);
+        int chars_read = port->readString(charr, _termination, 128, _max_wait);
         if (chars_read > 0) {
             //complete.append(charr, chars_read);
             for (int i = 0; i < chars_read; i++) {
@@ -181,13 +181,14 @@ std::string SerialInterfaceSerial::read_until(char _termination, unsigned int _m
                     complete += c;
                 }
                 if (c == '\r' || c == '\n') {
+                    //port->flushReceiver();
                     break;
                 }
             }
 
-        }else if (chars_read == 0){ //TIMEOUT REACHED //ADDED ------------------------------------
-                break;
-        }
+        //}else if (chars_read == 0){ //TIMEOUT REACHED //ADDED ------------------------------------
+         //       break;
+
         }else{
             wait_counter++;
         }

@@ -122,7 +122,7 @@ std::string UserBoardController::send_command(std::string _cmd, const bool _bloc
             }
         }
     }
-    LOG_F(ERROR, "invalid response");
+    LOG_F(ERROR, "invalid response for %s" , _cmd.c_str());
     return _cmd + "res_error_";
 }
 // HARDWARE_UBC_NFC_READ_RETRY_COUNT

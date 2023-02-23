@@ -52,9 +52,9 @@ bool ChessBoard::test_make_move_func() {
 bool ChessBoard::MoveWaypointsAlong(std::queue<MV_POSITION> &_mv) {
 
     //LOAD CONFIG FOR MOVEMENT //TODO MOVE TO CONSTRUCTOR
-    bool EN_COIL_UPDATE_ALWAYS = ConfigParser::getInstance()->getBool_nocheck(
+    const bool EN_COIL_UPDATE_ALWAYS = ConfigParser::getInstance()->getBool_nocheck(
             ConfigParser::CFG_ENTRY::MECHANIC_WRITE_COIL_STATE_ALWAYS_MAKE_MOVE);
-    bool EN_COILE_ALWAYS_WRITE_OFF = ConfigParser::getInstance()->getBool_nocheck(
+    const bool EN_COILE_ALWAYS_WRITE_OFF = ConfigParser::getInstance()->getBool_nocheck(
             ConfigParser::CFG_ENTRY::MECHANIC_WRITE_COIL_STATE_ALWAYS_WRITE_OFF);
 
 
@@ -68,37 +68,46 @@ bool ChessBoard::MoveWaypointsAlong(std::queue<MV_POSITION> &_mv) {
     HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, false);
     //ENABLE MOTOR
     HardwareInterface::getInstance()->enable_motors();
-
+    bool is_first_move_in_sequence = true;
     int wait_counter = 0;
     bool ca_changed = false;
     bool cb_changed = false;
     while (!_mv.empty()) {
-        if (EN_COILE_ALWAYS_WRITE_OFF) {
-            HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, false);
-            HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, false);
-        }
+        //if (EN_COILE_ALWAYS_WRITE_OFF) {
+         //   HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, false);
+         //   HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, false);
+        //}
 
 
         const MV_POSITION tmp = _mv.front();
 
         //SOME IMPROVEMENTS => SPI WRITING IS EXPENSIVE
-        if (EN_COIL_UPDATE_ALWAYS || ca_changed != tmp.coil_a_state) {
-            ca_changed = tmp.coil_a_state;
+        //if (EN_COIL_UPDATE_ALWAYS || ca_changed != tmp.coil_a_state) {
+            //ca_changed = tmp.coil_a_state;
             HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, tmp.coil_a_state);
-        }
-        if (EN_COIL_UPDATE_ALWAYS || cb_changed != tmp.coil_b_state) {
-            cb_changed = tmp.coil_b_state;
+        //}
+        //if (EN_COIL_UPDATE_ALWAYS || cb_changed != tmp.coil_b_state) {
+            //cb_changed = tmp.coil_b_state;
             HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, tmp.coil_b_state);
-        }
+        //}
 
 
         HardwareInterface::getInstance()->move_to_postion_mm_absolute(tmp.x, tmp.y,
-                                                                      false);           //MOVE TO X AND NOT WAIT
-        //WAIT FO BOTH MOTORS
-        while (!(HardwareInterface::getInstance()->is_target_position_reached())) {
-            std::this_thread::sleep_for(std::chrono::milliseconds(WAITITME_FOR_MOTORS_TO_ARRIVE));
+                                                                      is_first_move_in_sequence);           //MOVE TO X AND NOT WAIT
+        //WAIT FOR BOTH MOTORS TO FINISH
+        // ADDITION ONLY WAIT AT THE LAST MOVEMENT STEP
+        // SO MOVES BETWEEN CAN BE QUEUED IN MARLIN
+
+        if(_mv.size() == 1 || !HardwareInterface::getInstance()->is_production_hardware()){
+            while (!(HardwareInterface::getInstance()->is_target_position_reached())) {
+                std::this_thread::sleep_for(std::chrono::milliseconds(WAITITME_FOR_MOTORS_TO_ARRIVE));
+            }
         }
         _mv.pop();
+
+        if(is_first_move_in_sequence){
+            is_first_move_in_sequence = false;
+        }
     }
     //DISBALE MOTOR
     HardwareInterface::getInstance()->disable_motors();
