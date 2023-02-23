@@ -227,35 +227,8 @@ bool HardwareInterface::setTurnStateLight(HardwareInterface::HI_TURN_STATE_LIGHT
                hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD_V3) {
 
         //USE THE SAME COLOR MODEL AS THE HWREV_DK VERSION
-        int hsv_col = 0; //0 is also a color on a 360 degree circle
-
-        switch (_state) {
-            case HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_OFF:
-                hsv_col = 240;
-                break; //SPECIAL CASE DIM THE OFF STATE
-            case HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_IDLE:
-                hsv_col = 180;
-                break;
-            case HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_PLAYER_WHITE_TURN:
-                hsv_col = 140;
-                break;
-            case HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_PLAYER_BLACK_TURN:
-                hsv_col = 90;
-                break;
-            case HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_PRECCESSING:
-                hsv_col = 35;
-                break;
-            default:
-                hsv_col = 0;
-                break;
-        }
-
-        //if (gcode_interface != nullptr) {
-        //    gcode_interface->set_led(hsv_col);
-        //}
-
         if (userboardcontroller_interface != nullptr) {
-            userboardcontroller_interface->set_led(hsv_col);
+            userboardcontroller_interface->set_led(_state);
         }
 
         return true;
@@ -275,7 +248,7 @@ bool HardwareInterface::setTurnStateLight(HardwareInterface::HI_TURN_STATE_LIGHT
             //MORE LOGIC NEEDED HERE
             //IT DEPENDS ON THE ONFIGURATION OF MARLIN WHICH INDEX THE SERVOS HAVE TO WE NEED TO LOAD IT FROM THE CONFIG FIRST
             if (gcode_interface != nullptr) {
-                if (_coil == HardwareInterface::HI_COIL::HI_COIL_A || _coil == HardwareInterface::HI_COIL::HI_COIL_B) {
+                if (_coil == HardwareInterface::HI_COIL::HI_COIL_A){ // || _coil == HardwareInterface::HI_COIL::HI_COIL_B) {
                     if (_state) {
                         const int pos = ConfigParser::getInstance()->getInt_nocheck(
                                 ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_UPPER_POS);
@@ -366,7 +339,7 @@ bool HardwareInterface::setTurnStateLight(HardwareInterface::HI_TURN_STATE_LIGHT
         } else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD ||
                    hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD_V2) {
             if (gcode_interface != nullptr) {
-                gcode_interface->disable_motors();
+                //gcode_interface->disable_motors();
             }
 
         } else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD_V3) {
@@ -426,7 +399,7 @@ bool HardwareInterface::setTurnStateLight(HardwareInterface::HI_TURN_STATE_LIGHT
                    hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD_V2) {
             if (gcode_interface != nullptr) {
                 gcode_interface->move_to_postion_mm_absolute(_x, _y, _blocking);
-                gcode_interface->disable_motors();
+                //gcode_interface->disable_motors();
             }
 
         } else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD_V3) {
@@ -448,7 +421,7 @@ bool HardwareInterface::setTurnStateLight(HardwareInterface::HI_TURN_STATE_LIGHT
                    hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD_V2) {
             if (gcode_interface != nullptr) {
                 gcode_interface->home_sync();
-                gcode_interface->disable_motors();
+                //gcode_interface->disable_motors();
             }
 
 

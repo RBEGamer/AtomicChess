@@ -17,7 +17,7 @@
 
 
 #include "ConfigParser.h"
-#include "SerialInterface.h"
+#include "SerialInterface/SerialInterfaceBase.h"
 
 class GCodeSender
 {
@@ -33,7 +33,8 @@ public:
 	//FINALLY WRITE MOTOR HOME/ MOVE TO / SET LIGHT ((I2C))
     void disable_motors();
 	bool is_target_position_reached();
-	void move_to_postion_mm_absolute(const int _x, const int _y,const bool _blocking);
+	void move_to_postion_mm_absolute(const int _x, const int _y, const int _feedrate, const bool _blocking);
+    void move_to_postion_mm_absolute(const int _x, const int _y, const bool _blocking);
 	void move_to_postion_mm_absolute(const int _x, const int _y); //JUST FOR CONVENIENCE 	CALLS => void move_to_postion_mm_absolute(int _x, int _y, bool _blocking);
 	void reset_eeprom();//RESETS THE INTERNAL EEPROM TO FIRMWARE DEFAULTS //IS A BUGFIX OF UNCONTROLLED BEHAVIOR OG THE MARLIN CONTROLLER
 	void home_sync();
@@ -52,16 +53,11 @@ public:
 	bool wait_for_ack();
 private:
 
-	const int MARLIN_SERIAL_BAUD_RATE = 9600;
-	int current_pos_x;
-	int current_pos_y;
+    int last_feedrate = 7000;
+    SerialInterfaceBase* serialport = nullptr;
 
-	SerialInterface* serialport = nullptr;
-	
-	
-	
-	
 
+    void runtime_error(const char *string);
 };
 
 #endif

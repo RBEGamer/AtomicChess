@@ -21,7 +21,7 @@
 
 #include "ChessPiece.h"
 #include "ConfigParser.h"
-#include "SerialInterface.h"
+#include "SerialInterface/SerialInterfaceBase.h"
 //THIS COMMANDS MATCHES THE MICROCONTROLLER FIRMWARE
 
 
@@ -37,6 +37,7 @@ public:
 
     ChessPiece::FIGURE read_chess_piece_nfc();
     void set_led(int _color);
+    void set_led_hsv(int _color);
     void set_servo(int _pos);
 
 private:
@@ -52,11 +53,12 @@ private:
     const char UBC_CMD_SEPERATOR = '_';
     const std::string  UBC_COMMAND_LED = "led";
     const std::string  UBC_COMMAND_SERVO = "servo";
+    const std::string  UBC_COMMAND_HSV = "hsv";
     const int GENERAL_UBC_COMMAND_RESPONSE_RETRY = 3; //RETRY X TIME TO SUCC SEND A COMMAND
     const int UBC_SERIAL_BAUD_RATE = 115200;
     const unsigned int SERIAL_READ_DEFAULT_TIMEOUT = 500; //WAIT FOR 2000 aMS FOR DATA READ -1 IS INFITIE TIMEOUT
 
-    SerialInterface* serialport = nullptr;
+    SerialInterfaceBase* serialport = nullptr;
 
 };
 

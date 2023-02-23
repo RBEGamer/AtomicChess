@@ -8,7 +8,13 @@ GCodeSender::GCodeSender(std::string _serialport_file, int _baud)
 	{
 		delete serialport;
 	}
-	serialport = new SerialInterface(_serialport_file, _baud);
+	serialport = SerialInterfaceBase::get_interface_instance(_serialport_file, _baud);
+
+    if(!serialport){
+        LOG_SCOPE_F(INFO, "cant create SerialInterfaceBase");
+        //throw runtime_error("cant create SerialInterfaceBase");
+        return;
+    }
     // OPEN PORT
     if(!serialport->init()){
         LOG_F(ERROR, "cant create init_serial_port SerialInterface");
@@ -119,21 +125,21 @@ void GCodeSender::set_speed_preset(int _feedrate)
 	{
 		_feedrate = 0;
 	}
-	write_gcode("M203 X" + std::to_string(_feedrate) + " Y" + std::to_string(_feedrate));
-	write_gcode("G0 F" + std::to_string(_feedrate));
+	//write_gcode("M203 X" + std::to_string(_feedrate) + " Y" + std::to_string(_feedrate));
+    last_feedrate = _feedrate;
+	//write_gcode("G0 F" + std::to_string(_feedrate));
 }
 
 void GCodeSender::configure_marlin()
 {
 	write_gcode("G21"); // SET UNIT TO MM
-	std::this_thread::sleep_for(std::chrono::milliseconds(100));
 	write_gcode("G90"); // ABSOLUTE MODE
-	std::this_thread::sleep_for(std::chrono::milliseconds(100));
-	disable_motors(); // DISABLE MOTORD DIRECTLY
+	//disable_motors(); // DISABLE MOTORD DIRECTLY
 }
 
 void GCodeSender::home_sync()
 {
+    set_speed_preset(7000);
 	write_gcode("G28 X Y"); // HOME AXIS
 }
 
@@ -149,16 +155,16 @@ bool GCodeSender::setFan(int _index, int _speed)
 
 void GCodeSender::disable_motors()
 {
-	write_gcode("M84"); // DISBBLE MOTOR
+	//write_gcode("M84"); // DISBBLE MOTOR
 }
 
 void GCodeSender::reset_eeprom()
 {
-	std::this_thread::sleep_for(std::chrono::milliseconds(2000));
-	write_gcode("M502"); // RESET DEFAULTS
-	std::this_thread::sleep_for(std::chrono::milliseconds(2000));
-	write_gcode("M500"); // STORE NEW VALUES
-	std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+//	std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+//	write_gcode("M502"); // RESET DEFAULTS
+//	std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+//	write_gcode("M500"); // STORE NEW VALUES
+//	std::this_thread::sleep_for(std::chrono::milliseconds(2000));
 }
 
 bool GCodeSender::set_steps_per_mm(int _x, int _y)
@@ -183,20 +189,27 @@ bool GCodeSender::write_gcode(std::string _gcode_line)
 
 void GCodeSender::move_to_postion_mm_absolute(int _x, int _y)
 {
-	move_to_postion_mm_absolute(_x, _y, true);
+    write_gcode("G0 X" + std::to_string(_x) + " Y" + std::to_string(_y)); // HOME AXIS
+
+    // WAIT UNTIL M400 RETURNS ok => POSITION REACHED
+    is_target_position_reached();
 }
 
-void GCodeSender::move_to_postion_mm_absolute(int _x, int _y, bool _blocking)
+
+
+void GCodeSender::move_to_postion_mm_absolute(const int _x,const int _y,const bool _blocking) {
+    move_to_postion_mm_absolute(_x, _y, last_feedrate, _blocking);
+}
+void GCodeSender::move_to_postion_mm_absolute(const int _x,const int _y,const int _feedrate,const bool _blocking)
 {
-	write_gcode("G0 X" + std::to_string(_x) + " Y" + std::to_string(_y)); // HOME AXIS
-	current_pos_x = _x;
-	current_pos_y = _y;
+	write_gcode("G0 X" + std::to_string(_x) + " Y" + std::to_string(_y) + " F" + std::to_string(_feedrate)); // HOME AXIS
+
 	// WAIT UNTIL M400 RETURNS ok => POSITION REACHED
 	if (_blocking)
 	{
 		is_target_position_reached();
 	}
-	disable_motors();
+	//disable_motors();
 }
 
 bool GCodeSender::is_target_position_reached()
@@ -279,3 +292,5 @@ bool GCodeSender::set_led(int _r, int _g, int _b, int _intensity)
 	// SET LED BUT DONT WAIT FOR ACK => IF COMMAND ISNT IMPLEMENTED
 	return write_gcode("M150 P" + std::to_string(_intensity) + " U" + std::to_string(_g) + " R" + std::to_string(_r) + " B" + std::to_string(_b), false);
 }
+
+

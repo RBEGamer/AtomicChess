@@ -185,12 +185,6 @@
 		<Unit filename="/home/marcel/AtomicChess/src/src_controller/controller/controller/IOController.h">
 			<Option target="controller"/>
 		</Unit>
-		<Unit filename="/home/marcel/AtomicChess/src/src_controller/controller/controller/LinuxSocket.cpp">
-			<Option target="controller"/>
-		</Unit>
-		<Unit filename="/home/marcel/AtomicChess/src/src_controller/controller/controller/LinuxSocket.h">
-			<Option target="controller"/>
-		</Unit>
 		<Unit filename="/home/marcel/AtomicChess/src/src_controller/controller/controller/SHARED/WiringPi-master/wiringPi/piHiPri.c">
 			<Option target="controller"/>
 		</Unit>
@@ -269,12 +263,6 @@
 		<Unit filename="/home/marcel/AtomicChess/src/src_controller/controller/controller/SHARED/loguru-master/loguru.hpp">
 			<Option target="controller"/>
 		</Unit>
-		<Unit filename="/home/marcel/AtomicChess/src/src_controller/controller/controller/SHARED/serialib-master/lib/serialib.cpp">
-			<Option target="controller"/>
-		</Unit>
-		<Unit filename="/home/marcel/AtomicChess/src/src_controller/controller/controller/SHARED/serialib-master/lib/serialib.h">
-			<Option target="controller"/>
-		</Unit>
 		<Unit filename="/home/marcel/AtomicChess/src/src_controller/controller/controller/SHARED/udp-discovery-cpp-master/udp_discovery_ip_port.cpp">
 			<Option target="controller"/>
 		</Unit>
@@ -302,16 +290,22 @@
 		<Unit filename="/home/marcel/AtomicChess/src/src_controller/controller/controller/SPICommunication.h">
 			<Option target="controller"/>
 		</Unit>
-		<Unit filename="/home/marcel/AtomicChess/src/src_controller/controller/controller/SerialInterface.cpp">
+		<Unit filename="/home/marcel/AtomicChess/src/src_controller/controller/controller/SerialInterface/SerialInterfaceBase.cpp">
 			<Option target="controller"/>
 		</Unit>
-		<Unit filename="/home/marcel/AtomicChess/src/src_controller/controller/controller/SerialInterface.h">
+		<Unit filename="/home/marcel/AtomicChess/src/src_controller/controller/controller/SerialInterface/SerialInterfaceBase.h">
 			<Option target="controller"/>
 		</Unit>
-		<Unit filename="/home/marcel/AtomicChess/src/src_controller/controller/controller/SerialPort.cpp">
+		<Unit filename="/home/marcel/AtomicChess/src/src_controller/controller/controller/SerialInterface/SerialInterfaceSerial.cpp">
 			<Option target="controller"/>
 		</Unit>
-		<Unit filename="/home/marcel/AtomicChess/src/src_controller/controller/controller/SerialPort.hpp">
+		<Unit filename="/home/marcel/AtomicChess/src/src_controller/controller/controller/SerialInterface/SerialInterfaceSerial.h">
+			<Option target="controller"/>
+		</Unit>
+		<Unit filename="/home/marcel/AtomicChess/src/src_controller/controller/controller/SerialInterface/serialib.cpp">
+			<Option target="controller"/>
+		</Unit>
+		<Unit filename="/home/marcel/AtomicChess/src/src_controller/controller/controller/SerialInterface/serialib.h">
 			<Option target="controller"/>
 		</Unit>
 		<Unit filename="/home/marcel/AtomicChess/src/src_controller/controller/controller/StateMachine.cpp">
@@ -360,9 +354,6 @@
 			<Option target="controller"/>
 		</Unit>
 		<Unit filename="/home/marcel/AtomicChess/src/src_controller/controller/controller/resource.h">
-			<Option target="controller"/>
-		</Unit>
-		<Unit filename="/home/marcel/AtomicChess/src/src_controller/controller/controller/simple_cpp_sockets.h">
 			<Option target="controller"/>
 		</Unit>
 		<Unit filename="/home/marcel/AtomicChess/src/src_controller/controller/controller/udp_discovery_discovered_peer.hpp">

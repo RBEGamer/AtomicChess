@@ -2,7 +2,10 @@
 // Created by prodevmo on 28.03.21.
 //
 
+#include <csignal>
 #include "UserBoardController.h"
+
+
 
 UserBoardController::UserBoardController(std::string _serialport_file, int _baud)
 {
@@ -17,13 +20,17 @@ UserBoardController::UserBoardController(std::string _serialport_file, int _baud
     {
         delete serialport;
     }
-    serialport = new SerialInterface(_serialport_file, _baud);
+    serialport = SerialInterfaceBase::get_interface_instance(_serialport_file, _baud);
+    if(!serialport){
+
+    }
     //OPEN PORT
     if(!serialport->init()){
         LOG_F(ERROR, "cant create init_serial_port SerialInterface");
-        return;
+        std::raise(SIGINT);
     }
     // READ MAY EXISTING BUFFER => IGNORING STATUS DATA link FW version,....
+    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
     std::this_thread::sleep_for(std::chrono::milliseconds(1000));
     // READ BUFFER EMPTY
     if (serialport->is_open())
@@ -119,6 +126,7 @@ std::string UserBoardController::send_command(std::string _cmd, const bool _bloc
     // RETURN ALWAYS A GOOD REPSONSE IF WE DISABLE WAIT FOR SUCCESS
     if (!_blocking)
     {
+        //serialport->dummy_read();
         return "_state_res_ok_";
     }
 
@@ -259,4 +267,35 @@ ChessPiece::FIGURE UserBoardController::read_chess_piece_nfc()
         }
     }
     return fig;
+}
+
+void UserBoardController::set_led_hsv(int _color) {
+    // const std::string readres = send_command("_"+ UBC_COMMAND_LED + "_" + std::to_string(_color) + "_", false);
+
+    for (int i = 0; i < GENERAL_UBC_COMMAND_RESPONSE_RETRY; i++)
+    {
+        const std::string readres = send_command("_" + UBC_COMMAND_HSV + "_" + std::to_string(_color) + "_", false);
+        if (readres.empty())
+        {
+            continue;
+        }
+        // SPLIT REPSONSE
+        const std::vector<std::string> re = split(readres, UBC_CMD_SEPERATOR);
+        // CHECK SPLIT LENGTH
+        if (re.size() != 4)
+        {
+            break;
+        }
+        // READ RESULT
+        const std::string &errorcode = re.at(3);
+        // READ STATUS CODE IF READOUT IS VALID / NO TAG PRESENT OR READ FAILED
+        if (errorcode == "ok")
+        {
+            break;
+        }
+        else
+        {
+            LOG_F(WARNING, "UBC_COMMAND_HSV ERRORCODE %s", errorcode.c_str());
+        }
+    }
 }
