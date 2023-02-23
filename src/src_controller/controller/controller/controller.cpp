@@ -1884,7 +1884,7 @@ int main(int argc, char *argv[])
                 // MOVE HOME POS
                 HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, false);
                 HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, false);
-                HardwareInterface::getInstance()->home_sync();
+
 
                 HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, true);
                 HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, true);
@@ -1904,10 +1904,8 @@ int main(int argc, char *argv[])
                 // READ CONFIG VALUES
                 solcal_pos = ConfigParser::getInstance()->getInt_nocheck(
                     ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_BOTTOM_POS);
-
                 HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, false);
                 HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, false);
-                HardwareInterface::getInstance()->home_sync();
             }
             else if (ev.event == guicommunicator::GUI_ELEMENT::SOLANOIDSCREEN_MVUP &&
                      ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED)
