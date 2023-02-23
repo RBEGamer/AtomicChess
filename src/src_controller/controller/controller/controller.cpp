@@ -1594,6 +1594,7 @@ int main(int argc, char *argv[])
                     ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X),
                     ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y),
                     true);
+                HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, true);
                 HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, true);
                 HardwareInterface::getInstance()->move_to_postion_mm_absolute(cal_pos_x +
                                                                                   ConfigParser::getInstance()->getInt_nocheck(
@@ -1622,6 +1623,7 @@ int main(int argc, char *argv[])
                     true);
                 // ENABLE COIL FOR RIGHT SITE
                 HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, true);
+                HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, true);
                 // MOVE TO PARK POS BLACK 1
                 cal_pos_x = ConfigParser::getInstance()->getInt_nocheck(
                     ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_BLACK_X_LINE);
@@ -1648,6 +1650,7 @@ int main(int argc, char *argv[])
                     true);
                 // ENABLE COIL FOR RIGHT SITE
                 HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, true);
+                HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, true);
                 // MOVE TO PARK POS BLACK 1
                 cal_pos_x = ConfigParser::getInstance()->getInt_nocheck(
                     ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_WHITE_X_LINE);

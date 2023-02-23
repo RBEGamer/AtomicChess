@@ -55,8 +55,6 @@ private:
     const std::string  UBC_COMMAND_SERVO = "servo";
     const std::string  UBC_COMMAND_HSV = "hsv";
     const int GENERAL_UBC_COMMAND_RESPONSE_RETRY = 3; //RETRY X TIME TO SUCC SEND A COMMAND
-    const int UBC_SERIAL_BAUD_RATE = 115200;
-    const unsigned int SERIAL_READ_DEFAULT_TIMEOUT = 500; //WAIT FOR 2000 aMS FOR DATA READ -1 IS INFITIE TIMEOUT
 
 
 

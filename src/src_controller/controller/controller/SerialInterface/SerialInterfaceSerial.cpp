@@ -138,6 +138,9 @@ void SerialInterfaceSerial::dummy_read() {
         else if (resp == -2) //ERROR
         {
             break;
+        }else if (resp == 0) //TIMEOUT REACHED //ADDED ------------------------------------
+        {
+            break;
         }
         else
         {
@@ -166,22 +169,25 @@ std::string SerialInterfaceSerial::read_until(char _termination, unsigned int _m
     std::string complete;
 
 
-    char charr[1024] = { 0 };
+    char charr[128] = { 0 };
     while (true){
         //READ CHARS FORM SERIAL
         int chars_read = port->readString(charr, _termination, 1024, _max_wait);
         if (chars_read > 0) {
-               //complete.append(charr, chars_read);
-            for (int i = 0; i < chars_read; i++)
-            {
-                const char c =  charr[i];
-                if(c > 0){
+            //complete.append(charr, chars_read);
+            for (int i = 0; i < chars_read; i++) {
+                const char c = charr[i];
+                if (c > 0) {
                     complete += c;
                 }
-                if(c == '\r' || c == '\n'){
+                if (c == '\r' || c == '\n') {
                     break;
                 }
             }
+
+        }else if (chars_read == 0){ //TIMEOUT REACHED //ADDED ------------------------------------
+                break;
+        }
         }else{
             wait_counter++;
         }
