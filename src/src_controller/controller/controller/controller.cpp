@@ -837,7 +837,7 @@ int main(int argc, char *argv[])
                         if (!board.boardFromFen(current_player_state.game_state.current_board_fen, ChessBoard::BOARD_TPYE::TARGET_BOARD))
                         {
                             gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK, "INVALID BOARD FEN - CANCEL GAME", 4000);
-                            LOG_F(ERROR, current_player_state.game_state.current_board_fen.c_str());
+                            LOG_F(ERROR, "INVALID BOARD FEN - %s - CANCEL GAME", current_player_state.game_state.current_board_fen.c_str());
                             gamebackend.set_player_state(BackendConnector::PLAYER_STATE::PS_IDLE);
                             gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::MAIN_MENU_SCREEN);
                         }
