@@ -1,5 +1,5 @@
 #!/bin/sh
-# /etc/init.d/S99gensioubc ATCProject Marcel Ochsendorf marcelochsendorf.com
+# /etc/init.d/S95wifi ATCProject Marcel Ochsendorf marcelochsendorf.com
 #
 # atc        Starts all ATC pacakges.
 #
@@ -9,15 +9,15 @@
 umask 077
 
 start() {
-	printf "Starting GENSIO UBC"
-	touch /usr/ATC/ATC_LOCK_GENSIO_UBC
-	/usr/ATC/start_gensio_ubc.sh &
+	printf "Starting WIFI"
+	touch /usr/ATC/WIFI
+	/usr/ATC/start_wifi.sh
 	echo "OK"
 }
 stop() {
-	printf "Starting GENSIO UBC"
-	rm -f /usr/ATC/ATC_LOCK_GENSIO_UBC
-	killall gensiot
+	printf "Stopping WIFI"
+	rm -f /usr/ATC/WIFI
+	#killall gensiot
 	echo "OK"
 }
 restart() {

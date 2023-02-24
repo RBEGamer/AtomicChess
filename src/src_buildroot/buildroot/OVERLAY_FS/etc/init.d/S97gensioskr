@@ -1,5 +1,5 @@
 #!/bin/sh
-# /etc/init.d/S99atc ATCProject Marcel Ochsendorf marcelochsendorf.com
+# /etc/init.d/S99gensioskr ATCProject Marcel Ochsendorf marcelochsendorf.com
 #
 # atc        Starts all ATC pacakges.
 #
@@ -11,7 +11,7 @@ umask 077
 start() {
 	printf "Starting GENSIO SKR"
 	touch /usr/ATC/ATC_LOCK_GENSIO_SKR
-	start_gensio_skr.sh
+	/usr/ATC/start_gensio_skr.sh &
 	echo "OK"
 }
 stop() {

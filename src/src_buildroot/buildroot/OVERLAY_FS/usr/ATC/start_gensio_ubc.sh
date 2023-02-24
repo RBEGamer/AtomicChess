@@ -5,7 +5,7 @@ while true; do
 	if test -f "$FILEA"; then
     		echo "STARTING GENSIO"
 		    # gensiot -i serialdev,/dev/ttyUBC,9600N81 -a telnet,tcp,7001
-		    gensiot -i serialdev,/dev/ttyUBC,9600N81 -a tcp,7001
+		    #gensiot -i serialdev,/dev/ttyUBC,9600N81 -a tcp,7001
 
 	else
 	    	exit 1
