@@ -76,3 +76,10 @@ year = {2021}
 }
 ```
 
+
+## PICTURES
+
+![2023-02-24 17 03 09](https://user-images.githubusercontent.com/9280991/221437928-d7c8259f-a40d-4c57-a72c-1b48073c40d2.jpg)
+ 
+![20230225_1726](https://user-images.githubusercontent.com/9280991/221438036-7335cf0b-d087-4c72-b2c8-dbce6368ea8c.JPG)
+
