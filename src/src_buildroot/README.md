@@ -1,14 +1,39 @@
-# BRANCH - BUILDROOT
+# BUILDROOT
 
 This branch contains the buildroot framework to build the AtomicChessOS.
 
 The buildroot configuration is stored under `./buildroot/config_backup`
 
 
+# GETTING STARTED
+
+Only a few commands are needed to build the AtomicChessOS Image
+
+```bash
+$ $ sudo apt  update && apt  upgrade -y
+$ $ sudo apt install git-all
+$ $ sudo apt install software-properties-common libncurses-dev` ython3 python3-pip python3-dev python3-setuptools python3-wheel ninja-build libcap-dev libmount-dev
+
+
+# !!! INSTALL DOCKER !!!
+# SEE https://docs.docker.com/desktop/install/linux-install/
+
+# COPY CUSTOM PACKAGES
+$ bash ./copy_local_packages.sh
+
+# BUILD THE IMAGE USING DOCKER
+# also creates singned swupdate package
+# sudo bash ./build_toolchain_image.sh
+
+# FLASH IMAGE
+## replace target disk
+dd if=./buildroot/output/images/sdcard.img of=/dev/rdiskXxX bs=1m
+```
+
+
+
 
 # NOTES
-
-
 
 ## OVERVIEW BUILDROOT
 
