@@ -23,6 +23,7 @@ $ bash ./copy_local_packages.sh
 
 # BUILD THE IMAGE USING DOCKER
 # also creates singned swupdate package
+# adds double copy update strategy
 $ sudo bash ./build_toolchain_image.sh
 
 # FLASH IMAGE
