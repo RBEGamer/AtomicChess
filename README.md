@@ -1,4 +1,5 @@
-# AtomicChess - The most advanced self playing chess table
+# AtomicChess
+## The most advanced self playing chess table
 
 
 ![prod](https://user-images.githubusercontent.com/9280991/220172644-81fd00ce-cb8f-4056-8e39-720ec7858f19.png)
