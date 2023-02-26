@@ -6,7 +6,7 @@
 ## FEATURES
 
 This automated chess table allows the user to play chess using real pieces over the internet with other chess tables or via a web client.
-The chess table acts as an opponent and can move the pieces automatically and recognizes the player's moves and sends them to the opponent (chess table or virtual).
+The chess table acts as an opponent and can move the pieces automatically and recognizes the player's moves and sends them to the opponent (chess table or virtual). 
 
 
 |                                               | Atomic Chess Table                                            |
