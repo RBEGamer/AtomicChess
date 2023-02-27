@@ -91,3 +91,4 @@ year = {2021}
 * fix ABORT GAME button in UI
 * implement TCP stream SerialInterface and enable gensio again
 * implement webui on table for editing the config
+* modify server to arm images
