@@ -13,8 +13,5 @@
 * src_server => Contains the complete game server, player ai server and the CI setup
 * src_shared => Contains all used 3rd party libraries and the custom made IPC library (guicommunicator)
 * src_thesis => Contains the thesis document and a thesis publishing server
-* src_unitychesssimulation => Contains a chess figure movement algorithm playground, made in Unity
-* src_misc => Contains several other files / config files
-* src_chessboardcomaprealgorithm => Contains a c++ projekt for testing the chess board compare algorithm. Its just a playground
 * src_dgt3000chessclockextention  => Contains the DGT 3000 Chess-Clock extention software for the DGT PI
 * src_userboardcontroller  => Contains the atmega328p nfc reader to serial bridge software used for prod 1,2 models
