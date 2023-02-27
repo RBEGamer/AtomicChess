@@ -117,3 +117,4 @@ year = {2021}
 * modify server to arm images
 * translate/redesign homepage
 * add DGT3000 as package into buildroot
+* rm buildroot testpackage
