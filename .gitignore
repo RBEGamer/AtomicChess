@@ -7,3 +7,11 @@ src/src_controller/controller/controller/atc_controller
 src/.DS_Store
 .DS_Store
 src/src_userboardcontroller/.DS_Store
+src/src_dgt3000/src/cmake-build-debug/.ninja_deps
+src/src_dgt3000/src/cmake-build-debug/.ninja_deps
+src/src_dgt3000/src/cmake-build-debug/.ninja_log
+src/src_dgt3000/src/cmake-build-debug/atc_dgt3000ext
+*.o
+src/src_dgt3000/src/cmake-build-debug/.ninja_deps
+src/src_dgt3000/src/cmake-build-debug/.ninja_log
+*.log
