@@ -17,10 +17,9 @@ This folder contains all mechanical drawings (CAD, SVG, STL files). During devel
 ## HARDWARE REVISIONS
 
 * `HARDWARE_PROD_V2` => Contains the final version with CoreXY configuration. For this a control board (SKR) with Marlin needed. Firmware in `src_marlinfw`. 
-* `HARDWARE_PROD_V1` => Contains a all CAD files for the first generation with standard xy configuration; this version was used on the FH Aachen HIT 06.02.2021.
 
 * `HARDWARE DEV` => Contains the IKEA Lack Table version of the chess table using self developed hardware and pcbs and a two coil system.
-* `HARDWARE_MOCKUP` => Contains the first mockup and concept testing version; only images.
+
 
 ## NOTES
 
