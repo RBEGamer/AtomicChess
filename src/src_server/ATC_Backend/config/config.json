@@ -1,6 +1,6 @@
 {
   "webserver_default_port":3000,
-  "app_name":"AtomicChess - The selfplaying Chesstable",
+  "app_name":"AtomicChess - The most advanced self playing chess table",
   "mongodb_connection_url": "mongodb://127.0.0.1:27017",
   "redis_connection_url": "redis://127.0.0.1:6379",
   "session_lifetime_in_seconds": 10,
