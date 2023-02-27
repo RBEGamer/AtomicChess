@@ -3,10 +3,16 @@
 #
 # atc        Starts the ATC ATC_DGT3000_EXT in an endless loop
 #
+
+if test -f "/usr/ATC/ATC_DGT3000_EXT"; then
+    touch /usr/ATC/ATC_DGT3000_EXT
+else
+    exit 1
+fi
+
 while true; do
-	FILEA=/usr/ATC/ATC_DGT3000_EXT
-	if test -f "$FILEA"; then
-    		echo "STARTING ATC ATC_DGT3000_EXT"
+	if test -f "/usr/ATC/ATC_DGT3000_EXT"; then
+        echo "STARTING ATC ATC_DGT3000_EXT"
 		/usr/ATC/ATC_DGT3000_EXT
 		sleep 10
 	else
