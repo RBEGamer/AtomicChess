@@ -92,3 +92,4 @@ year = {2021}
 * implement TCP stream SerialInterface and enable gensio again
 * implement webui on table for editing the config
 * modify server to arm images
+* translate/redesign homepage
