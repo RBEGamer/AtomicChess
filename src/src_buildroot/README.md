@@ -12,7 +12,7 @@ Only a few commands are needed to build the AtomicChessOS Image with all needed 
 ```bash
 $ sudo apt  update && apt  upgrade -y
 $ sudo apt install git-all
-$ sudo apt install software-properties-common libncurses-dev` ython3 python3-pip python3-dev python3-setuptools python3-wheel ninja-build libcap-dev libmount-dev
+$ sudo apt install software-properties-common libncurses-dev python3 python3-pip python3-dev python3-setuptools python3-wheel ninja-build libcap-dev libmount-dev
 
 
 # !!! INSTALL DOCKER !!! (or execute ./buildroot/build.sh twice if you dont want to use docker)
