@@ -151,11 +151,11 @@ int main(int argc, char *argv[]) {
 	}
 			
 	//READ CONFIG FILE
-	INIReader reader("/usr/ATC/atcdgt3000ext.ini");
+	INIReader reader("/usr/ATC/atc_config/atcdgt3000ext.ini");
 	bool readres;
 	if (reader.ParseError() != 0) {
-		std::cout << "READING /usr/ATC/atcdgt3000ext.ini FAILED";
-		scrol_text("READING /usr/ATC/atcdgt3000ext.ini FAILED", true, 500);
+		std::cout << "READING /usr/ATC/atc_config/atcdgt3000ext.ini FAILED";
+		scrol_text("READING /usr/ATC/atc_config/atcdgt3000ext.ini FAILED", true, 500);
 		return -1;
 	}
 	
