@@ -27,7 +27,7 @@
 					[
 						0
 					],
-					"name" : "dgt3000ext",
+					"name" : "atc_dgt3000ext",
 					"targetIndexes" : 
 					[
 						0
@@ -38,9 +38,9 @@
 			[
 				{
 					"directoryIndex" : 0,
-					"id" : "dgt3000ext::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-dgt3000ext-Debug-bc203aacaa889f39b424.json",
-					"name" : "dgt3000ext",
+					"id" : "atc_dgt3000ext::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-atc_dgt3000ext-Debug-c1225676e9f20a7218b7.json",
+					"name" : "atc_dgt3000ext",
 					"projectIndex" : 0
 				}
 			]

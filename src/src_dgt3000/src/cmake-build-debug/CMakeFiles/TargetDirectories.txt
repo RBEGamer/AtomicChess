@@ -1,3 +1,3 @@
-/Users/marcelochsendorf/Downloads/AtomicChess/src/src_dgt3000/src/cmake-build-debug/CMakeFiles/dgt3000ext.dir
+/Users/marcelochsendorf/Downloads/AtomicChess/src/src_dgt3000/src/cmake-build-debug/CMakeFiles/atc_dgt3000ext.dir
 /Users/marcelochsendorf/Downloads/AtomicChess/src/src_dgt3000/src/cmake-build-debug/CMakeFiles/edit_cache.dir
 /Users/marcelochsendorf/Downloads/AtomicChess/src/src_dgt3000/src/cmake-build-debug/CMakeFiles/rebuild_cache.dir

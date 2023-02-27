@@ -8,7 +8,7 @@
 # =============================================================================
 
 # =============================================================================
-# Project: dgt3000ext
+# Project: atc_dgt3000ext
 # Configurations: Debug
 # =============================================================================
 
@@ -38,53 +38,58 @@ include CMakeFiles/rules.ninja
 
 cmake_ninja_workdir = /Users/marcelochsendorf/Downloads/AtomicChess/src/src_dgt3000/src/cmake-build-debug/
 # =============================================================================
-# Object build statements for EXECUTABLE target dgt3000ext
+# Object build statements for EXECUTABLE target atc_dgt3000ext
 
 
 #############################################
-# Order-only phony target for dgt3000ext
+# Order-only phony target for atc_dgt3000ext
 
-build cmake_object_order_depends_target_dgt3000ext: phony || CMakeFiles/dgt3000ext.dir
+build cmake_object_order_depends_target_atc_dgt3000ext: phony || CMakeFiles/atc_dgt3000ext.dir
 
-build CMakeFiles/dgt3000ext.dir/main.cpp.o: CXX_COMPILER__dgt3000ext_Debug /Users/marcelochsendorf/Downloads/AtomicChess/src/src_dgt3000/src/main.cpp || cmake_object_order_depends_target_dgt3000ext
-  DEP_FILE = CMakeFiles/dgt3000ext.dir/main.cpp.o.d
-  FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk -fcolor-diagnostics -std=gnu++11
-  OBJECT_DIR = CMakeFiles/dgt3000ext.dir
-  OBJECT_FILE_DIR = CMakeFiles/dgt3000ext.dir
+build CMakeFiles/atc_dgt3000ext.dir/main.cpp.o: CXX_COMPILER__atc_dgt3000ext_Debug /Users/marcelochsendorf/Downloads/AtomicChess/src/src_dgt3000/src/main.cpp || cmake_object_order_depends_target_atc_dgt3000ext
+  DEFINES = -DDEBUG=1 -DVERSION=\"1.0.0\"
+  DEP_FILE = CMakeFiles/atc_dgt3000ext.dir/main.cpp.o.d
+  FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk -fcolor-diagnostics -std=gnu++17
+  OBJECT_DIR = CMakeFiles/atc_dgt3000ext.dir
+  OBJECT_FILE_DIR = CMakeFiles/atc_dgt3000ext.dir
 
-build CMakeFiles/dgt3000ext.dir/udp_discovery_ip_port.cpp.o: CXX_COMPILER__dgt3000ext_Debug /Users/marcelochsendorf/Downloads/AtomicChess/src/src_dgt3000/src/udp_discovery_ip_port.cpp || cmake_object_order_depends_target_dgt3000ext
-  DEP_FILE = CMakeFiles/dgt3000ext.dir/udp_discovery_ip_port.cpp.o.d
-  FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk -fcolor-diagnostics -std=gnu++11
-  OBJECT_DIR = CMakeFiles/dgt3000ext.dir
-  OBJECT_FILE_DIR = CMakeFiles/dgt3000ext.dir
+build CMakeFiles/atc_dgt3000ext.dir/udp_discovery_ip_port.cpp.o: CXX_COMPILER__atc_dgt3000ext_Debug /Users/marcelochsendorf/Downloads/AtomicChess/src/src_dgt3000/src/udp_discovery_ip_port.cpp || cmake_object_order_depends_target_atc_dgt3000ext
+  DEFINES = -DDEBUG=1 -DVERSION=\"1.0.0\"
+  DEP_FILE = CMakeFiles/atc_dgt3000ext.dir/udp_discovery_ip_port.cpp.o.d
+  FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk -fcolor-diagnostics -std=gnu++17
+  OBJECT_DIR = CMakeFiles/atc_dgt3000ext.dir
+  OBJECT_FILE_DIR = CMakeFiles/atc_dgt3000ext.dir
 
-build CMakeFiles/dgt3000ext.dir/udp_discovery_peer.cpp.o: CXX_COMPILER__dgt3000ext_Debug /Users/marcelochsendorf/Downloads/AtomicChess/src/src_dgt3000/src/udp_discovery_peer.cpp || cmake_object_order_depends_target_dgt3000ext
-  DEP_FILE = CMakeFiles/dgt3000ext.dir/udp_discovery_peer.cpp.o.d
-  FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk -fcolor-diagnostics -std=gnu++11
-  OBJECT_DIR = CMakeFiles/dgt3000ext.dir
-  OBJECT_FILE_DIR = CMakeFiles/dgt3000ext.dir
+build CMakeFiles/atc_dgt3000ext.dir/udp_discovery_peer.cpp.o: CXX_COMPILER__atc_dgt3000ext_Debug /Users/marcelochsendorf/Downloads/AtomicChess/src/src_dgt3000/src/udp_discovery_peer.cpp || cmake_object_order_depends_target_atc_dgt3000ext
+  DEFINES = -DDEBUG=1 -DVERSION=\"1.0.0\"
+  DEP_FILE = CMakeFiles/atc_dgt3000ext.dir/udp_discovery_peer.cpp.o.d
+  FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk -fcolor-diagnostics -std=gnu++17
+  OBJECT_DIR = CMakeFiles/atc_dgt3000ext.dir
+  OBJECT_FILE_DIR = CMakeFiles/atc_dgt3000ext.dir
 
-build CMakeFiles/dgt3000ext.dir/udp_discovery_protocol.cpp.o: CXX_COMPILER__dgt3000ext_Debug /Users/marcelochsendorf/Downloads/AtomicChess/src/src_dgt3000/src/udp_discovery_protocol.cpp || cmake_object_order_depends_target_dgt3000ext
-  DEP_FILE = CMakeFiles/dgt3000ext.dir/udp_discovery_protocol.cpp.o.d
-  FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk -fcolor-diagnostics -std=gnu++11
-  OBJECT_DIR = CMakeFiles/dgt3000ext.dir
-  OBJECT_FILE_DIR = CMakeFiles/dgt3000ext.dir
+build CMakeFiles/atc_dgt3000ext.dir/udp_discovery_protocol.cpp.o: CXX_COMPILER__atc_dgt3000ext_Debug /Users/marcelochsendorf/Downloads/AtomicChess/src/src_dgt3000/src/udp_discovery_protocol.cpp || cmake_object_order_depends_target_atc_dgt3000ext
+  DEFINES = -DDEBUG=1 -DVERSION=\"1.0.0\"
+  DEP_FILE = CMakeFiles/atc_dgt3000ext.dir/udp_discovery_protocol.cpp.o.d
+  FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk -fcolor-diagnostics -std=gnu++17
+  OBJECT_DIR = CMakeFiles/atc_dgt3000ext.dir
+  OBJECT_FILE_DIR = CMakeFiles/atc_dgt3000ext.dir
 
 
 # =============================================================================
-# Link build statements for EXECUTABLE target dgt3000ext
+# Link build statements for EXECUTABLE target atc_dgt3000ext
 
 
 #############################################
-# Link the executable dgt3000ext
+# Link the executable atc_dgt3000ext
 
-build dgt3000ext: CXX_EXECUTABLE_LINKER__dgt3000ext_Debug CMakeFiles/dgt3000ext.dir/main.cpp.o CMakeFiles/dgt3000ext.dir/udp_discovery_ip_port.cpp.o CMakeFiles/dgt3000ext.dir/udp_discovery_peer.cpp.o CMakeFiles/dgt3000ext.dir/udp_discovery_protocol.cpp.o
+build atc_dgt3000ext: CXX_EXECUTABLE_LINKER__atc_dgt3000ext_Debug CMakeFiles/atc_dgt3000ext.dir/main.cpp.o CMakeFiles/atc_dgt3000ext.dir/udp_discovery_ip_port.cpp.o CMakeFiles/atc_dgt3000ext.dir/udp_discovery_peer.cpp.o CMakeFiles/atc_dgt3000ext.dir/udp_discovery_protocol.cpp.o
   FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk
-  OBJECT_DIR = CMakeFiles/dgt3000ext.dir
+  LINK_LIBRARIES = -lpthread
+  OBJECT_DIR = CMakeFiles/atc_dgt3000ext.dir
   POST_BUILD = :
   PRE_LINK = :
-  TARGET_FILE = dgt3000ext
-  TARGET_PDB = dgt3000ext.dbg
+  TARGET_FILE = atc_dgt3000ext
+  TARGET_PDB = atc_dgt3000ext.dbg
 
 
 #############################################
@@ -120,7 +125,7 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 #############################################
 # Folder: /Users/marcelochsendorf/Downloads/AtomicChess/src/src_dgt3000/src/cmake-build-debug
 
-build all: phony dgt3000ext
+build all: phony atc_dgt3000ext
 
 # =============================================================================
 # Built-in targets

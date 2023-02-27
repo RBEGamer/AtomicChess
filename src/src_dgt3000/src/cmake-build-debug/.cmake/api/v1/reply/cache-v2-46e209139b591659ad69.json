@@ -819,7 +819,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "dgt3000ext"
+			"value" : "atc_dgt3000ext"
 		},
 		{
 			"name" : "CMAKE_RANLIB",
@@ -1100,6 +1100,78 @@
 			],
 			"type" : "BOOL",
 			"value" : "FALSE"
+		},
+		{
+			"name" : "atc_dgt3000ext_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/Users/marcelochsendorf/Downloads/AtomicChess/src/src_dgt3000/src/cmake-build-debug"
+		},
+		{
+			"name" : "atc_dgt3000ext_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "ON"
+		},
+		{
+			"name" : "atc_dgt3000ext_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/Users/marcelochsendorf/Downloads/AtomicChess/src/src_dgt3000/src"
+		},
+		{
+			"name" : "atctest_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/Users/marcelochsendorf/Downloads/AtomicChess/src/src_dgt3000/src/cmake-build-debug"
+		},
+		{
+			"name" : "atctest_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "ON"
+		},
+		{
+			"name" : "atctest_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/Users/marcelochsendorf/Downloads/AtomicChess/src/src_dgt3000/src"
 		},
 		{
 			"name" : "dgt3000ext_BINARY_DIR",

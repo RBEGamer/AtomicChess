@@ -1,4 +1,5 @@
 "/Users/marcelochsendorf/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/CLion.app/Contents/bin/cmake/mac/bin/cmake" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=/Users/marcelochsendorf/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/CLion.app/Contents/bin/ninja/mac/ninja" -G Ninja -S /Users/marcelochsendorf/Downloads/AtomicChess/src/src_dgt3000/src -B /Users/marcelochsendorf/Downloads/AtomicChess/src/src_dgt3000/src/cmake-build-debug
+-- ADD DEBUG=1
 -- Configuring done
 -- Generating done
 -- Build files have been written to: /Users/marcelochsendorf/Downloads/AtomicChess/src/src_dgt3000/src/cmake-build-debug

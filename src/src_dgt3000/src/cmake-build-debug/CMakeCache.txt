@@ -146,7 +146,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=dgt3000ext
+CMAKE_PROJECT_NAME:STATIC=atc_dgt3000ext
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=/Library/Developer/CommandLineTools/usr/bin/ranlib
@@ -209,6 +209,24 @@ CMAKE_STRIP:FILEPATH=/Library/Developer/CommandLineTools/usr/bin/strip
 // during the make.  This is useful for debugging only. With Visual
 // Studio IDE projects all commands are done without /nologo.
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
+
+//Value Computed by CMake
+atc_dgt3000ext_BINARY_DIR:STATIC=/Users/marcelochsendorf/Downloads/AtomicChess/src/src_dgt3000/src/cmake-build-debug
+
+//Value Computed by CMake
+atc_dgt3000ext_IS_TOP_LEVEL:STATIC=ON
+
+//Value Computed by CMake
+atc_dgt3000ext_SOURCE_DIR:STATIC=/Users/marcelochsendorf/Downloads/AtomicChess/src/src_dgt3000/src
+
+//Value Computed by CMake
+atctest_BINARY_DIR:STATIC=/Users/marcelochsendorf/Downloads/AtomicChess/src/src_dgt3000/src/cmake-build-debug
+
+//Value Computed by CMake
+atctest_IS_TOP_LEVEL:STATIC=ON
+
+//Value Computed by CMake
+atctest_SOURCE_DIR:STATIC=/Users/marcelochsendorf/Downloads/AtomicChess/src/src_dgt3000/src
 
 //Value Computed by CMake
 dgt3000ext_BINARY_DIR:STATIC=/Users/marcelochsendorf/Downloads/AtomicChess/src/src_dgt3000/src/cmake-build-debug

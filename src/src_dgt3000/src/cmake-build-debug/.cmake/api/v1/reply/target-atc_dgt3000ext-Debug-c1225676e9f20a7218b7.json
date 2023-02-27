@@ -2,7 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "dgt3000ext"
+			"path" : "atc_dgt3000ext"
 		}
 	],
 	"backtrace" : 1,
@@ -10,7 +10,9 @@
 	{
 		"commands" : 
 		[
-			"add_executable"
+			"add_executable",
+			"target_link_libraries",
+			"target_compile_definitions"
 		],
 		"files" : 
 		[
@@ -24,7 +26,25 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 6,
+				"line" : 14,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 32,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 17,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 23,
 				"parent" : 0
 			}
 		]
@@ -38,7 +58,18 @@
 					"fragment" : "-g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk -fcolor-diagnostics"
 				},
 				{
-					"fragment" : "-std=gnu++11"
+					"fragment" : "-std=gnu++17"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 3,
+					"define" : "DEBUG=1"
+				},
+				{
+					"backtrace" : 4,
+					"define" : "VERSION=\"1.0.0\""
 				}
 			],
 			"language" : "CXX",
@@ -48,7 +79,7 @@
 				[
 					1
 				],
-				"standard" : "11"
+				"standard" : "17"
 			},
 			"sourceIndexes" : 
 			[
@@ -59,7 +90,7 @@
 			]
 		}
 	],
-	"id" : "dgt3000ext::@6890427a1f51a3e7e1df",
+	"id" : "atc_dgt3000ext::@6890427a1f51a3e7e1df",
 	"link" : 
 	{
 		"commandFragments" : 
@@ -71,12 +102,17 @@
 			{
 				"fragment" : "",
 				"role" : "flags"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "-lpthread",
+				"role" : "libraries"
 			}
 		],
 		"language" : "CXX"
 	},
-	"name" : "dgt3000ext",
-	"nameOnDisk" : "dgt3000ext",
+	"name" : "atc_dgt3000ext",
+	"nameOnDisk" : "atc_dgt3000ext",
 	"paths" : 
 	{
 		"build" : ".",

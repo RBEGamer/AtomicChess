@@ -20,7 +20,7 @@ ATCTP_INSTALL_TARGET = YES
 #
 define ATCDGT3000_INSTALL_TARGET_CMDS
 	@echo ATCDGT3000_INSTALL!
-	$(INSTALL) -D -m 0755 $(@D)/atcdgt3000 $(TARGET_DIR)/usr/ATC/atc_dgt3000
+	$(INSTALL) -D -m 0755 $(@D)/atc_dgt3000ext $(TARGET_DIR)/usr/ATC/atc_dgt3000
 endef
 
 #$(eval $(generic-package))
