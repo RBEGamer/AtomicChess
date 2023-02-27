@@ -6,9 +6,5 @@ if [ "$EUID" -ne 0 ]
 fi
 
 # COPY PACKAGE SOURCES
-cd ../src_atctest && bash copy_to_buildroot_package.sh && cd ../src_buildroot
-cd ../src_atcqtui && bash copy_to_buildroot_package.sh && cd ../src_buildroot
-cd ../src_controller && bash copy_to_buildroot_package.sh && cd ../src_buildroot
-
-
+bash ./copy_local_packages.sh
 cd ./buildroot && bash ./build_docker.sh && cd ../
