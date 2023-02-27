@@ -116,3 +116,4 @@ year = {2021}
 * implement webui on table for editing the config
 * modify server to arm images
 * translate/redesign homepage
+* add DGT3000 as package into buildroot
