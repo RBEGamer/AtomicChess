@@ -15,6 +15,7 @@ The chess table acts as an opponent and can move the pieces automatically and re
 | Connectivity                                  | LAN, WLAN                                                     |
 | Automatic movement of the figures             | yes                                                           |
 | Game Livestream                               | yes                                                           |
+| Game history and player scoring               | yes                                                           |
 | Cloud connection (online games)               | yes, central gameserver and matchmaking                       |
 | Parking position for eliminated figures       | yes                                                           |
 | Stand-alone functionality                     | yes, using stockfish-11                                       |
