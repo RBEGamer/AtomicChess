@@ -15,11 +15,15 @@ $ sudo apt install git-all
 $ sudo apt install software-properties-common libncurses-dev` ython3 python3-pip python3-dev python3-setuptools python3-wheel ninja-build libcap-dev libmount-dev
 
 
-# !!! INSTALL DOCKER !!!
+# !!! INSTALL DOCKER !!! (or execute ./buildroot/build.sh twice if you dont want to use docker)
 # SEE https://docs.docker.com/desktop/install/linux-install/
 
 # COPY CUSTOM PACKAGES
 $ bash ./copy_local_packages.sh
+
+
+# GENERATE SWUPDATE FIRMWARE UPDATE SIGNING KEYS
+$ bash ./buildroot/SWUPDATE/generate_keys.sh
 
 # BUILD THE IMAGE USING DOCKER
 # also creates singned swupdate package
