@@ -9,17 +9,17 @@ This automated chess table allows the user to play chess using real pieces over 
 The chess table acts as an opponent and can move the pieces automatically and recognizes the player's moves and sends them to the opponent (chess table or virtual). 
 
 
-|                                               | Atomic Chess Table                                            |
-|:----------------------------------------------|--------------------------------------------------------------:|
-| Recognition figure position                   | yes, using NFC tags under figures                             |
-| Connectivity                                  | LAN, WLAN                                                     |
-| Automatic movement of the figures             | yes                                                           |
-| Game Livestream                               | yes                                                           |
-| Game history and player scoring               | yes                                                           |
-| Cloud connection (online games)               | yes, central gameserver and matchmaking                       |
-| Parking position for eliminated figures       | yes                                                           |
-| Stand-alone functionality                     | yes, using stockfish-11                                       |
-| Special features                              | voice control (Amazon Alexa), DGT3000 chess clock integration |
+|                                               | Atomic Chess Table                                                                  |
+|:----------------------------------------------|------------------------------------------------------------------------------------:|
+| Recognition figure position                   | yes, using NFC tags under figures                                                   |
+| Connectivity                                  | LAN, WLAN                                                                           |
+| Automatic movement of the figures             | yes                                                                                 |
+| Game Livestream                               | yes                                                                                 |
+| Game history and player scoring               | yes                                                                                 |
+| Cloud connection (online games)               | yes, central gameserver and matchmaking                                             |
+| Parking position for eliminated figures       | yes                                                                                 |
+| Stand-alone functionality                     | yes, using stockfish-11 (player profile dependent playing strength)                 |                       
+| Special features                              | voice control (Amazon Alexa), DGT3000 chess clock integration, customizable figures |
 
 ### OTHER PROJECTS COMPARISON
 
