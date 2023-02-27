@@ -105,7 +105,7 @@ year = {2021}
 
 * chess.com & lichess.org integration
 * possible target position lights
-
+* rewrite gameserver(ai player in c++ and integrate into buildroot
 ## TODO
 
 * cad: fixed nfc antenna position. only move magnet
