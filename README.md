@@ -83,3 +83,11 @@ year = {2021}
  
 ![20230225_1726](https://user-images.githubusercontent.com/9280991/221438036-7335cf0b-d087-4c72-b2c8-dbce6368ea8c.JPG)
 
+
+## TODO
+
+* fix wifi dhcp issues in buildroot image
+* fix/create io controller pcb with cm4 module
+* fix ABORT GAME button in UI
+* implement TCP stream SerialInterface and enable gensio again
+* implement webui on table for editing the config
