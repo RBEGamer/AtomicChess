@@ -22,6 +22,21 @@ The chess table acts as an opponent and can move the pieces automatically and re
 
 ### OTHER PROJECTS COMPARISON
 
+#### COMMERCIAL PRODUCTS
+
+
+|                           | Square Off-Kingdom | Square Off-Grand Kingdom | DGT-Smart Board | DGT Bluetooth Wenge |
+|:------------------------------------------|-------------------------------------------|:--------------------------------------------:|:---------------------------------:|------------------------------:|
+| detection figure position                  | no (manual) | no (manual) | yes | yes |
+| Dimensions (LxWxH)                         | 486mm x 486mm x 75mm | 671mm x 486mm x 75mm | 540mm x 540mm x 20mm | 540mm x 540mm x 20mm |
+| Connectivity | Bluetooth                   | Serial | Bluetooth |
+| automatic movement of the figures          | yes | yes | no | no |
+| Game Livestream                            | yes | yes | yes | yes |
+| Cloud connection (online games)            | yes (App) | yes (PC + App) | yes (PC + App) |
+| parking position for eliminated characters | no | yes | no | no |
+| stand-alone functionality                  | no (cell phone required) | no (cell phone required) | no (PC) | no (PC) |          
+| special features                           | battery for 30 games | battery for 15 games | - | -  
+
 
 #### OPENSOURCE PROJECTS
 |                                          | Automated Chess Board | Automated Chess Board | DIY Super Smart Chessboard |
