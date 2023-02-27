@@ -99,8 +99,14 @@ year = {2021}
 ![20230225_1726](https://user-images.githubusercontent.com/9280991/221438036-7335cf0b-d087-4c72-b2c8-dbce6368ea8c.JPG)
 
 
+## IDEAS
+
+* chess.com & lichess.org integration
+* possible target position lights
+
 ## TODO
 
+* cad: fixed nfc antenna position. only move magnet
 * fix wifi dhcp issues in buildroot image
 * fix/create io controller pcb with cm4 module
 * fix ABORT GAME button in UI
