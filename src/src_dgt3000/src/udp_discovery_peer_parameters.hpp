@@ -70,7 +70,7 @@ namespace udpdiscovery {
       return send_timeout_ms_;
     }
 
-    void set_send_timeout_ms(long send_timeout_ms) {
+      __attribute__((unused)) void set_send_timeout_ms(long send_timeout_ms) {
       if (send_timeout_ms < 0)
         return;
       send_timeout_ms_ = send_timeout_ms;
@@ -90,7 +90,7 @@ namespace udpdiscovery {
       return can_be_discovered_;
     }
 
-    void set_can_be_discovered(bool can_be_discovered) {
+      __attribute__((unused)) void set_can_be_discovered(bool can_be_discovered) {
       can_be_discovered_ = can_be_discovered;
     }
 
@@ -106,7 +106,7 @@ namespace udpdiscovery {
       return discover_self_;
     }
 
-    void set_discover_self(bool discover_self) {
+      __attribute__((unused)) void set_discover_self(bool discover_self) {
       discover_self_ = discover_self;
     }
 
@@ -114,7 +114,7 @@ namespace udpdiscovery {
       return same_peer_mode_;
     }
 
-    void set_same_peer_mode(SamePeerMode same_peer_mode) {
+      __attribute__((unused)) void set_same_peer_mode(SamePeerMode same_peer_mode) {
       same_peer_mode_ = same_peer_mode;
     }
 
@@ -131,6 +131,6 @@ namespace udpdiscovery {
     bool discover_self_;
     SamePeerMode same_peer_mode_;
   };
-};
+}
 
 #endif

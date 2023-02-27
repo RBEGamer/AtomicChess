@@ -22,4 +22,4 @@ namespace udpdiscovery {
 		std::string ip_string = IpToString(ip_port.ip());
 		return ip_string;
 	}
-};
+}

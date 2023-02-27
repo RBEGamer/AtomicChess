@@ -1,7 +1,7 @@
 #ifndef __DISCOVERY_DISCOVERED_PEER_H_
 #define __DISCOVERY_DISCOVERED_PEER_H_
 
-#include <stdint.h>
+#include <cstdint>
 #include "udp_discovery_ip_port.hpp"
 
 namespace udpdiscovery {
@@ -42,6 +42,6 @@ namespace udpdiscovery {
     uint64_t last_received_packet_;
     long last_updated_;
   };
-};
+}
 
 #endif

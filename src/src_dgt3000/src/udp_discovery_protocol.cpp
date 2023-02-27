@@ -52,13 +52,13 @@ bool MakePacket(const PacketHeader& header, const std::string& user_data,
     return false;
   }
 
-  uint16_t user_data_size = (uint16_t)user_data.size();
-  uint16_t padding_size_16 = (uint16_t)padding_size;
+  auto user_data_size = (uint16_t)user_data.size();
+  auto padding_size_16 = (uint16_t)padding_size;
 
   packet_data_out.resize(packet_size);
   char* ptr = (char*)packet_data_out.data();
 
-  PacketHeader* packet_header = (PacketHeader*)ptr;
+  auto* packet_header = (PacketHeader*)ptr;
   ptr += sizeof(PacketHeader);
 
   (*packet_header) = header;
@@ -90,14 +90,14 @@ bool MakePacket(const PacketHeader& header, const std::string& user_data,
 bool ParsePacketHeader(const char* buffer, size_t buffer_size,
                        PacketHeader& header_out, const char*& buffer_left_out,
                        size_t& buffer_left_size_out) {
-  buffer_left_out = 0;
+  buffer_left_out = nullptr;
   buffer_left_size_out = 0;
 
   if (buffer_size < sizeof(PacketHeader)) {
     return false;
   }
 
-  const PacketHeader* header = (const PacketHeader*)buffer;
+  const auto* header = (const PacketHeader*)buffer;
   if (!header->TestMagic()) {
     return false;
   }

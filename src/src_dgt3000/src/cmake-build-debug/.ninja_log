@@ -1,0 +1,4 @@
+# ninja log v5
+1	262	1677538296589842939	CMakeFiles/dgt3000ext.dir/udp_discovery_protocol.cpp.o	6885c897d4fd8868
+0	314	1677538296642231735	CMakeFiles/dgt3000ext.dir/udp_discovery_ip_port.cpp.o	1519373e7a9a315a
+1	411	1677538296739025736	CMakeFiles/dgt3000ext.dir/udp_discovery_peer.cpp.o	1d2ca441bba61e79

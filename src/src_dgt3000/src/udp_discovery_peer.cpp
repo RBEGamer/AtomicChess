@@ -1,7 +1,6 @@
 #include "udp_discovery_peer.hpp"
 
-#include <stdlib.h>
-#include <string.h>
+#include <cstring>
 
 #include <iostream>
 #include <vector>
@@ -18,9 +17,7 @@ typedef int AddressLenType;
 const SocketType kInvalidSocket = INVALID_SOCKET;
 #else
 #include <netinet/in.h>
-#include <stdlib.h>
 #include <sys/socket.h>
-#include <sys/types.h>
 #include <unistd.h>
 typedef int SocketType;
 typedef socklen_t AddressLenType;
@@ -30,12 +27,12 @@ const SocketType kInvalidSocket = -1;
 // time
 #if defined(__APPLE__)
 #include <mach/mach_time.h>
-#include <stdint.h>
+#include <cstdint>
 #endif
 #if !defined(_WIN32)
 #include <sys/time.h>
 #endif
-#include <time.h>
+#include <ctime>
 
 // threads
 #if defined(_WIN32)
@@ -43,7 +40,7 @@ const SocketType kInvalidSocket = -1;
 #include <windows.h>
 #else
 #include <pthread.h>
-#include <stdlib.h>
+#include <cstdlib>
 #endif
 
 static void InitSockets() {
@@ -58,7 +55,7 @@ static void SetSocketTimeout(SocketType sock, int param, int timeout_ms) {
   setsockopt(sock, SOL_SOCKET, param, (const char*)&timeout_ms,
              sizeof(timeout_ms));
 #else
-  struct timeval timeout;
+  struct timeval timeout{};
   timeout.tv_sec = timeout_ms / 1000;
   timeout.tv_usec = 1000 * (timeout_ms % 1000);
   setsockopt(sock, SOL_SOCKET, param, (const char*)&timeout, sizeof(timeout));
@@ -125,7 +122,7 @@ static bool IsRightTime(long last_action_time, long now_time, long timeout,
 namespace udpdiscovery {
 namespace impl {
 uint32_t MakeRandomId() {
-  srand((unsigned int)time(0));
+  srand((unsigned int)time(nullptr));
   return (uint32_t)rand();
 }
 
@@ -135,7 +132,7 @@ class MinimalisticMutex {
 #if defined(_WIN32)
     InitializeCriticalSection(&critical_section_);
 #else
-    pthread_mutex_init(&mutex_, 0);
+    pthread_mutex_init(&mutex_, nullptr);
 #endif
   }
 
@@ -179,7 +176,7 @@ class MinimalisticThread : public MinimalisticThreadInterface {
   }
 #else
   MinimalisticThread(void* (*f)(void*), void* env) : detached_(false) {
-    pthread_create(&thread_, 0, f, env);
+    pthread_create(&thread_, nullptr, f, env);
   }
 #endif
 
@@ -194,7 +191,7 @@ class MinimalisticThread : public MinimalisticThreadInterface {
     WaitForSingleObject(thread_, INFINITE);
     CloseHandle(thread_);
 #else
-    pthread_join(thread_, 0);
+    pthread_join(thread_, nullptr);
 #endif
     detached_ = true;
   }
@@ -228,7 +225,7 @@ class PeerEnv : public PeerEnvInterface {
         ref_count_(0),
         exit_(false) {}
 
-  ~PeerEnv() {
+  ~PeerEnv() override {
     if (binding_sock_ != kInvalidSocket) {
       CloseSocket(binding_sock_);
     }
@@ -344,7 +341,7 @@ class PeerEnv : public PeerEnvInterface {
     return result;
   }
 
-  void Exit() {
+  void Exit() override {
     lock_.Lock();
     exit_ = true;
     lock_.Unlock();
@@ -589,7 +586,7 @@ void* SendingThreadFunc(void* env_typeless) {
   PeerEnv* env = (PeerEnv*)env_typeless;
   env->SendingThreadFunc();
 
-  return 0;
+  return nullptr;
 }
 #endif
 
@@ -605,12 +602,12 @@ void* ReceivingThreadFunc(void* env_typeless) {
   PeerEnv* env = (PeerEnv*)env_typeless;
   env->ReceivingThreadFunc();
 
-  return 0;
+  return nullptr;
 }
 #endif
-};  // namespace impl
+} // namespace impl
 
-Peer::Peer() : env_(0), sending_thread_(0), receiving_thread_(0) {}
+Peer::Peer() : env_(nullptr), sending_thread_(nullptr), receiving_thread_(nullptr) {}
 
 Peer::~Peer() { Stop(false); }
 
@@ -621,7 +618,7 @@ bool Peer::Start(const PeerParameters& parameters,
   impl::PeerEnv* env = new impl::PeerEnv();
   if (!env->Start(parameters, user_data)) {
     delete env;
-    env = 0;
+    env = nullptr;
 
     return false;
   }
@@ -665,7 +662,7 @@ void Peer::Stop(bool wait_for_threads) {
 
   // Threads live longer than the object itself. So env will be deleted in one
   // of the threads.
-  env_ = 0;
+  env_ = nullptr;
 
   if (wait_for_threads) {
     if (sending_thread_) {
@@ -686,9 +683,9 @@ void Peer::Stop(bool wait_for_threads) {
   }
 
   delete sending_thread_;
-  sending_thread_ = 0;
+  sending_thread_ = nullptr;
   delete receiving_thread_;
-  receiving_thread_ = 0;
+  receiving_thread_ = nullptr;
 }
 
 bool Same(PeerParameters::SamePeerMode mode, const IpPort& lhv,
@@ -704,7 +701,7 @@ bool Same(PeerParameters::SamePeerMode mode, const IpPort& lhv,
   return false;
 }
 
-bool Same(PeerParameters::SamePeerMode mode,
+    __attribute__((unused)) bool Same(PeerParameters::SamePeerMode mode,
           const std::list<DiscoveredPeer>& lhv,
           const std::list<DiscoveredPeer>& rhv) {
   for (std::list<DiscoveredPeer>::const_iterator lhv_it = lhv.begin();
@@ -725,8 +722,8 @@ bool Same(PeerParameters::SamePeerMode mode,
 
   for (std::list<DiscoveredPeer>::const_iterator rhv_it = rhv.begin();
        rhv_it != rhv.end(); ++rhv_it) {
-    std::list<DiscoveredPeer>::const_iterator in_lhv = lhv.end();
-    for (std::list<DiscoveredPeer>::const_iterator lhv_it = lhv.begin();
+    auto in_lhv = lhv.end();
+    for (auto lhv_it = lhv.begin();
          lhv_it != lhv.end(); ++lhv_it) {
       if (Same(mode, (*rhv_it).ip_port(), (*lhv_it).ip_port())) {
         in_lhv = lhv_it;
@@ -741,4 +738,4 @@ bool Same(PeerParameters::SamePeerMode mode,
 
   return true;
 }
-};  // namespace udpdiscovery
+} // namespace udpdiscovery

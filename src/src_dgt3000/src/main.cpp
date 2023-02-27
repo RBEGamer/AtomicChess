@@ -2,7 +2,6 @@
 #include "httplib.h"
 #include "udp_discovery_peer.hpp"
 #include "udp_discovery_ip_port.hpp"
-#include "udp_discovery_protocol.hpp"
 #include "udp_discovery_peer_parameters.hpp"
 #define EXPECTED_DISCOVERY_USER_DATA "ATCTABLE"
 #define OWN_DISCOVERY_USER_DATA "ATCCLOCK"
@@ -11,13 +10,11 @@
 #define DISPLAY_CHARS 11
 #define MAIN_LOOP_SPPED 100
 #include <fcntl.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
 #include <unistd.h>
 #include <sys/mman.h>
-#include <string.h>
+#include <cstring>
 #include <pthread.h>
-#include <sched.h>
 
 #include "dgtpicom.h"
 #include "dgtpicom_dgt3000.h"
@@ -33,10 +30,10 @@ const unsigned int kMulticastAddress = (224 << 24) + (0 << 16) + (0 << 8) + 123;
 
 
 // while loop
-void *wl(void *x) {
+__attribute__((unused)) void *wl(void *x) {
 	int e;
 	int i = 0;
-	while (1)
+	while (true)
 		if (ww) {
 			e = dgtpicom_configure();
 			if (e < 0)
@@ -55,7 +52,7 @@ void *wl(void *x) {
 		else {
 			usleep(10000);
 		}
-	return 0;
+	return nullptr;
 }
 
 
@@ -104,12 +101,11 @@ struct request_result
 	bool request_failed;
 	std::string body;
 	httplib::Error error;
-	int status_code;
-	std::string uri;
+    std::string uri;
 };
 
 
-request_result make_request(std::string _base_url,std::string _path, std::string _interface)
+request_result make_request(const std::string& _base_url,const std::string& _path, const std::string& _interface)
 {
 	//PORT AND PROTOCOL IS ALREADY INCLUDED IN BASE URL LIKE http://127.0.0.1:3000
 	httplib::Client cli(_base_url.c_str());
@@ -128,8 +124,7 @@ request_result make_request(std::string _base_url,std::string _path, std::string
 	//PERFORM REQUEST
     httplib::Result res = cli.Get(_path.c_str());
 	if (res && res->status >= 200 && res->status < 300) {
-		req_res.status_code = res->status;
-		//CHECK STATUS CODE 200 IS VALID
+        //CHECK STATUS CODE 200 IS VALID
 		req_res.body = res->body;
 		req_res.request_failed = false;
 	}
@@ -157,7 +152,7 @@ int main(int argc, char *argv[]) {
 			
 	//READ CONFIG FILE
 	INIReader reader("/usr/ATC/atcdgt3000ext.ini");
-	bool readres = true;
+	bool readres;
 	if (reader.ParseError() != 0) {
 		std::cout << "READING /usr/ATC/atcdgt3000ext.ini FAILED";
 		scrol_text("READING /usr/ATC/atcdgt3000ext.ini FAILED", true, 500);
@@ -165,9 +160,9 @@ int main(int argc, char *argv[]) {
 	}
 	
 	
-	std::string BASE_URL = ""; //HOLDS THE TBALE REST API HOST http://xxx:port
-	std::string ENABLE_UDP_DISCOVERY = "";
-	bool enudbdis = true;
+	std::string BASE_URL; //HOLDS THE TBALE REST API HOST http://xxx:port
+	std::string ENABLE_UDP_DISCOVERY;
+	bool enudbdis;
 	bool device_discoered = false;
 	ENABLE_UDP_DISCOVERY = reader.Get("GENERAL", "ENABLE_UDP_DISCOVERY", "1");
 	if (ENABLE_UDP_DISCOVERY.empty()) {
@@ -230,7 +225,7 @@ int main(int argc, char *argv[]) {
 				}
 			}
 			
-			int b = 0;
+
 		}
 	}
 	
@@ -248,7 +243,7 @@ int main(int argc, char *argv[]) {
 	}
 	
 	
-	std::string BTN_CHANGE_URL = "";
+	std::string BTN_CHANGE_URL;
 	BTN_CHANGE_URL = reader.Get("GENERAL", "BTN_CHANGE_URL", "/btn_changed");
 	if (BTN_CHANGE_URL.empty()) {
 		scrol_text("BTN_CHANGE_URL EMPTY", true, 300);
@@ -256,7 +251,7 @@ int main(int argc, char *argv[]) {
 		//scrol_text(BTN_CHANGE_URL, false, 300);
 	}
 	
-	std::string GET_TEXT_URL = "";
+	std::string GET_TEXT_URL;
 	GET_TEXT_URL = reader.Get("GENERAL", "GET_TEXT_URL", "/get_text");
 	if (GET_TEXT_URL.empty()) {
 		scrol_text("GET_TEXT_URL EMPTY", true, 300);
@@ -267,7 +262,7 @@ int main(int argc, char *argv[]) {
 		std::cout << "GET_TEXT_URL: " <<GET_TEXT_URL << std::endl;
 	}
 	
-	std::string VERSION_URL = "";
+	std::string VERSION_URL;
 	VERSION_URL = reader.Get("GENERAL", "VERSION_URL", "/version");
 	if (VERSION_URL.empty()) {
 		scrol_text("VERSION_URL EMPTY", true, 300);
@@ -278,7 +273,7 @@ int main(int argc, char *argv[]) {
 	//	scrol_text(VERSION_URL, false, 300);
 	}
 	
-	std::string INTERFACE = "";
+	std::string INTERFACE;
 	GET_TEXT_URL = reader.Get("GENERAL", "INTERFACE", "");
 	
 	
@@ -303,7 +298,7 @@ int main(int argc, char *argv[]) {
 	
 	int old_btn_state = -1;
 	int curr_btn_state = 0;
-	std::string old_text = "";
+	std::string old_text;
 	
 	while (true) {
 		
@@ -440,10 +435,10 @@ int dgtpicom_init() {
 		return ERROR_MEM;
 	}
 
-	gpio_map = mmap(NULL, 4096, PROT_READ | PROT_WRITE, MAP_SHARED, memfd, GPIO_BASE + base);
-	timer_map = mmap(NULL, 4096, PROT_READ | PROT_WRITE, MAP_SHARED, memfd, TIMER_BASE + base);
-	i2c_slave_map = mmap(NULL, 4096, PROT_READ | PROT_WRITE, MAP_SHARED, memfd, I2C_SLAVE_BASE + base);
-	i2c_master_map = mmap(NULL, 4096, PROT_READ | PROT_WRITE, MAP_SHARED, memfd, I2C_MASTER_BASE + base);
+	gpio_map = mmap(nullptr, 4096, PROT_READ | PROT_WRITE, MAP_SHARED, memfd, GPIO_BASE + base);
+	timer_map = mmap(nullptr, 4096, PROT_READ | PROT_WRITE, MAP_SHARED, memfd, TIMER_BASE + base);
+	i2c_slave_map = mmap(nullptr, 4096, PROT_READ | PROT_WRITE, MAP_SHARED, memfd, I2C_SLAVE_BASE + base);
+	i2c_master_map = mmap(nullptr, 4096, PROT_READ | PROT_WRITE, MAP_SHARED, memfd, I2C_MASTER_BASE + base);
 
 	close(memfd);
 
@@ -566,7 +561,7 @@ int dgtpicom_init() {
 
 	dgtRx.on = 1;
 
-	pthread_create(&receiveThread, NULL, dgt3000Receive, NULL);
+	pthread_create(&receiveThread, nullptr, dgt3000Receive, nullptr);
 
 	// give thread max priority
 	params.sched_priority = sched_get_priority_max(SCHED_FIFO);
@@ -584,7 +579,7 @@ int dgtpicom_configure() {
 
 
 	// get the clock into the right state
-	while(1) {
+	while(true) {
 		// set to mode 25 and run
 		e = dgt3000Mode25();
 		if (e == ERROR_NACK || e == ERROR_NOACK) {
@@ -673,7 +668,7 @@ int dgtpicom_set_and_run(char lr,
 
 	crc_calc(setnrun);
 
-	while (1) {
+	while (true) {
 		sendCount++;
 		if (sendCount > 3) {
 #ifdef debug
@@ -694,7 +689,7 @@ int dgtpicom_set_and_run(char lr,
 }
 
 // Send set and run command to the dgt3000 with current clock values.
-int dgtpicom_run(char lr, char rr) {
+__attribute__((unused)) int dgtpicom_run(char lr, char rr) {
 	return dgtpicom_set_and_run(
 				lr,
 		dgtRx.time[0],
@@ -707,7 +702,7 @@ int dgtpicom_run(char lr, char rr) {
 }
 
 // Set a text message on the DGT3000.
-int dgtpicom_set_text(char text[], char beep, char ld, char rd) {
+int dgtpicom_set_text(const char text[], char beep, char ld, char rd) {
 	int i, e;
 	int sendCount = 0;
 
@@ -727,7 +722,7 @@ int dgtpicom_set_text(char text[], char beep, char ld, char rd) {
 
 	crc_calc(display);
 
-	while (1) {
+	while (true) {
 		sendCount++;
 		if (sendCount > 3) {
 #ifdef debug
@@ -746,7 +741,7 @@ int dgtpicom_set_text(char text[], char beep, char ld, char rd) {
 	}
 
 	sendCount = 0;
-	while (1) {
+	while (true) {
 		sendCount++;
 		if (sendCount > 3) {
 #ifdef debug
@@ -766,11 +761,11 @@ int dgtpicom_set_text(char text[], char beep, char ld, char rd) {
 }
 
 // End a text message on the DGT3000 an return to clock mode.
-int dgtpicom_end_text() {
+__attribute__((unused)) int dgtpicom_end_text() {
 	int e;
 	int sendCount = 0;
 
-	while (1) {
+	while (true) {
 		sendCount++;
 		if (sendCount > 3) {
 #ifdef debug
@@ -790,7 +785,7 @@ int dgtpicom_end_text() {
 }
 
 // Put the last received time message in time[].
-void dgtpicom_get_time(char time[]) {
+__attribute__((unused)) void dgtpicom_get_time(char time[]) {
 	time[0] = dgtRx.time[0];
 	time[1] = ((dgtRx.time[1] & 0xf0) >> 4) * 10 + (dgtRx.time[1] & 0x0f);
 	time[2] = ((dgtRx.time[2] & 0xf0) >> 4) * 10 + (dgtRx.time[2] & 0x0f);
@@ -801,7 +796,7 @@ void dgtpicom_get_time(char time[]) {
 
 // Get a button message from the buffer returns number of messages in
 // the buffer or recieve error if one occured.
-int dgtpicom_get_button_message(char *buttons, char *time) {
+__attribute__((unused)) int dgtpicom_get_button_message(char *buttons, char *time) {
 	int e = dgtRx.error;
 	dgtRx.error = 0;
 	if (e < 0)
@@ -824,7 +819,7 @@ int dgtpicom_get_button_state() {
 }
 
 // Turn off the dgt3000.
-int dgtpicom_off(char returnMode) {
+__attribute__((unused)) int dgtpicom_off(char returnMode) {
 	int e;
 
 	mode25[4] = 32 + returnMode;
@@ -884,7 +879,7 @@ void dgtpicom_stop() {
 	dgtRx.on = 0;
 
 	// wait for thread to finish
-	pthread_join(receiveThread, NULL);
+	pthread_join(receiveThread, nullptr);
 
 	// disable i2cSlave device
 	*i2cSlaveCR = 0;
@@ -1384,7 +1379,7 @@ void *dgt3000Receive(void *a) {
 
 // wait for an Ack message
 int dgt3000GetAck(char adr, char cmd, long long int timeOut) {
-	struct timespec receiveTimeOut;
+	struct timespec receiveTimeOut{};
 
 
 	pthread_mutex_lock(&receiveMutex);
@@ -1421,7 +1416,7 @@ int dgt3000GetAck(char adr, char cmd, long long int timeOut) {
 
 
 // send message using I2CMaster
-int i2cSend(char message[], char ackAdr) {
+int i2cSend(const char message[], char ackAdr) {
 	int i, n;
 	long long int timeOut;
 
@@ -1808,20 +1803,20 @@ int checkPiModel() {
 	FILE *cpuFd;
 	char line[120];
 
-	if ((cpuFd = fopen("/proc/cpuinfo", "r")) == NULL)
+	if ((cpuFd = fopen("/proc/cpuinfo", "r")) == nullptr)
 #ifdef debug
 		printf("Unable to open /proc/cpuinfo") 
 #endif
 		;
 
 	// looking for the revision....
-	while(fgets(line, 120, cpuFd) != NULL)
+	while(fgets(line, 120, cpuFd) != nullptr)
 		if(strncmp(line, "Revision", 8) == 0) {
 		// See if it's BCM2708 or BCM2709
-		if(strstr(line, "a01041") != NULL || strstr(line, "a21041") != NULL) {
+		if(strstr(line, "a01041") != nullptr || strstr(line, "a21041") != nullptr) {
 			fclose(cpuFd);
 			return 2;	// PI 2
-		} else if(strstr(line, "a02082") != NULL || strstr(line, "a22082") != NULL) {
+		} else if(strstr(line, "a02082") != nullptr || strstr(line, "a22082") != nullptr) {
 			fclose(cpuFd);
 			return 3;	// PI 3
 		} else {

@@ -27,7 +27,7 @@
 /* Get direct access to BCM2708/9 chip.
  *   Run this first and only once (or again after a dgtpicom_stop())
  */
-int dgtpicom_init(void);
+int dgtpicom_init();
 
 /* Configure the dgt3000: turn it on, set central control and set
  * mode 25. If neccesary reset the I2C hardware.
@@ -53,7 +53,7 @@ int dgtpicom_set_and_run(char lr,
 /* Send set and run command to the dgt3000 with current clock values.
  *   lr/rr = left/right run mode, 0=stop, 1=count down, 2=count up
  */
-int dgtpicom_run(char lr, char rr);				
+__attribute__((unused)) int dgtpicom_run(char lr, char rr);
 
 /* Set a text message on the dgt3000.
  *   text = message to display
@@ -66,16 +66,16 @@ int dgtpicom_run(char lr, char rr);
  * 	   16=dot,
  * 	   32=extra dot (left only)
  */
-int dgtpicom_set_text(char text[], char beep, char ld, char rd);
+int dgtpicom_set_text(const char text[], char beep, char ld, char rd);
 
 /* End a text message on the dgt3000 and return to clock mode.
  */
-int dgtpicom_end_text();
+__attribute__((unused)) int dgtpicom_end_text();
 
 /* Put the last received time message in time[].
  *   time[] = 6 byte time descriptor
  */
-void dgtpicom_get_time(char time[]);
+__attribute__((unused)) void dgtpicom_get_time(char time[]);
 
 /* Get a button message from the buffer and put it in buttons and time
  * returns number of messages in the buffer or an error code if a
@@ -94,7 +94,7 @@ void dgtpicom_get_time(char time[]);
  *       0xc0 / Lever changed, left side down
  *   time = time the buttons were pressed in 100ms
  */
-int dgtpicom_get_button_message(char *buttons, char *time);
+__attribute__((unused)) int dgtpicom_get_button_message(char *buttons, char *time);
 
 /* Return current button state.
  *   returns:
@@ -112,7 +112,7 @@ int dgtpicom_get_button_state();
 /* Turn off the dgt3000.
  *   returnMode = timing method the clock will start in when turned on
  */
-int dgtpicom_off(char returnMode);
+__attribute__((unused)) int dgtpicom_off(char returnMode);
 
 /* Disable the I2C hardware.
  *   run this before you end the program

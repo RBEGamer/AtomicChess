@@ -10,7 +10,7 @@ namespace udpdiscovery {
 namespace impl {
 class PeerEnvInterface {
  public:
-  virtual ~PeerEnvInterface() {}
+  virtual ~PeerEnvInterface() = default;
 
   virtual void SetUserData(const std::string& user_data) = 0;
 
@@ -21,13 +21,13 @@ class PeerEnvInterface {
 
 class MinimalisticThreadInterface {
  public:
-  virtual ~MinimalisticThreadInterface() {}
+  virtual ~MinimalisticThreadInterface() = default;
 
   virtual void Detach() = 0;
 
   virtual void Join() = 0;
 };
-};  // namespace impl
+} // namespace impl
 
 class Peer {
  public:
@@ -80,9 +80,10 @@ class Peer {
 
 bool Same(PeerParameters::SamePeerMode mode, const IpPort& lhv,
           const IpPort& rhv);
-bool Same(PeerParameters::SamePeerMode mode,
+
+    __attribute__((unused)) bool Same(PeerParameters::SamePeerMode mode,
           const std::list<DiscoveredPeer>& lhv,
           const std::list<DiscoveredPeer>& rhv);
-};  // namespace udpdiscovery
+} // namespace udpdiscovery
 
 #endif

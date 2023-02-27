@@ -1,7 +1,7 @@
 #ifndef __UDP_DISCOVERY_PROTOCOL_H_
 #define __UDP_DISCOVERY_PROTOCOL_H_
 
-#include <stdint.h>
+#include <cstdint>
 
 #include <string>
 
@@ -9,7 +9,7 @@ namespace udpdiscovery {
 namespace detail {
 template <typename ValueType>
 void StoreBigEndian(ValueType value, void* out) {
-  unsigned char* out_typed = (unsigned char*)out;
+  auto* out_typed = (unsigned char*)out;
 
   const size_t n = sizeof(ValueType);
   for (size_t i = 0; i < n; ++i)
@@ -18,7 +18,7 @@ void StoreBigEndian(ValueType value, void* out) {
 
 template <typename ValueType>
 ValueType ReadBigEndian(const void* in) {
-  const unsigned char* in_typed = (const unsigned char*)in;
+  const auto* in_typed = (const unsigned char*)in;
 
   ValueType result = 0;
 
@@ -56,14 +56,14 @@ struct PacketHeader {
 
   bool TestMagic() const;
 
-  unsigned char magic[4];
-  unsigned char reserved[4];
+  unsigned char magic[4]{};
+  unsigned char reserved[4]{};
   unsigned char packet_type;
-  uint32_t application_id;
-  uint32_t peer_id;
+  uint32_t application_id{};
+  uint32_t peer_id{};
   PacketIndex packet_index;
-  uint16_t user_data_size;
-  uint16_t padding_size;
+  uint16_t user_data_size{};
+  uint16_t padding_size{};
 };
 #pragma pack(pop)
 
@@ -94,7 +94,7 @@ bool ReadPadding(const char* buffer, size_t buffer_size,
 inline bool ParsePacket(const char* buffer, size_t buffer_size,
                         PacketHeader& header_out, std::string& user_data_out) {
   PacketHeader header;
-  const char* buffer_left = 0;
+  const char* buffer_left = nullptr;
   size_t buffer_left_size = 0;
 
   if (!ParsePacketHeader(buffer, buffer_size, header, buffer_left,
@@ -118,6 +118,6 @@ inline bool ParsePacket(const char* buffer, size_t buffer_size,
 
   return true;
 }
-};  // namespace udpdiscovery
+} // namespace udpdiscovery
 
 #endif
