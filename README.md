@@ -106,8 +106,10 @@ year = {2021}
 * chess.com & lichess.org integration
 * possible target position lights
 * rewrite gameserver(ai player in c++ and integrate into buildroot
+
 ## TODO
 
+* implement natural moves if possible => e.g. rook
 * cad: fixed nfc antenna position. only move magnet
 * fix wifi dhcp issues in buildroot image
 * fix/create io controller pcb with cm4 module
