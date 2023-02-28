@@ -226,19 +226,26 @@ bool SerialInterfaceSerial::check_baud_rate(int _baudrate_to_check) {
     switch (_baudrate_to_check)
     {
         case 9600:
-            return B9600;
+            //return B9600;
+            return true;
         case 19200:
-            return B19200;
+            //return B19200;
+            return true;
         case 38400:
-            return B38400;
+            //return B38400;
+            return true;
         case 57600:
-            return B57600;
+            //return B57600;
+            return true;
         case 115200:
-            return B115200;
+            //return B115200;
+            return true;
         case 230400:
-            return B230400;
+            //return B230400;
+            return true;
         case 460800:
-            return B460800;
+            //return B460800;
+            return true;
         default:
             return false;
     }

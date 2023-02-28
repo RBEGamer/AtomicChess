@@ -30,4 +30,7 @@ define ATCCTL_INSTALL_TARGET_CMDS
 endef
 
 $(eval $(cmake-package))
-#$(eval $(generic-package))
+
+
+
+

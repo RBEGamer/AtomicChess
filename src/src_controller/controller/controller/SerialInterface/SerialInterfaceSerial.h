@@ -29,13 +29,13 @@ public:
     SerialInterfaceSerial(const std::string& _serial_port_file,int _baud_rate);
     ~SerialInterfaceSerial();
 
-    bool init();
-    bool close(); //CLOSES THE SERIAL OR TCP PORT
+    bool init() override;
+    bool close() override; //CLOSES THE SERIAL OR TCP PORT
     SerialInterfaceBase::SERIAL_PORT_STATE get_state() override;
-    void dummy_read();
-    std::string read_line();
-    std::string read_until(char _termination, unsigned int _max_wait); 
-    bool write_string(std::string _data);
+    void dummy_read() override;
+    std::string read_line() override;
+    std::string read_until(char _termination, unsigned int _max_wait) override;
+    bool write_string(std::string _data) override;
     bool is_open() override;
     
     private:

@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
-project(controller)
-set(PROJECT_NAME controller)
+project(atc_controller)
+set(PROJECT_NAME atc_controller)
 
 # project version
 set(VERSION_MAJOR 1)
