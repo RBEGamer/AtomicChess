@@ -119,3 +119,4 @@ year = {2021}
 * add DGT3000 as package into buildroot
 * convert DGT3000 code to cmake
 * rm buildroot testpackage
+* move servo down before each home/travel
