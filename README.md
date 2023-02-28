@@ -76,7 +76,7 @@ The system and especially the implemented cloud service can be accessed and exte
 
 ### PAPER PDF
 
-`./atomicchess_thesis.pdf`
+`./documentation/atomicchess_thesis.pdf`
 
 
 ### CITE
