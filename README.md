@@ -108,7 +108,7 @@ year = {2021}
 * rewrite gameserver(ai player in c++ and integrate into buildroot
 
 ## TODO
-
+* rm dk hardware workaround in controller software
 * implement natural moves if possible => e.g. rook
 * cad: fixed nfc antenna position. only move magnet
 * fix wifi dhcp issues in buildroot image
