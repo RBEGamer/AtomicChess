@@ -21,9 +21,17 @@ $ sudo apt install software-properties-common libncurses-dev python3 python3-pip
 # COPY CUSTOM PACKAGES
 $ bash ./copy_local_packages.sh
 
+# CREATE DOCKER IMAGE
+$ bash ./buildroot/build_docker_image.sh
 
 # GENERATE SWUPDATE FIRMWARE UPDATE SIGNING KEYS
 $ bash ./buildroot/SWUPDATE/generate_keys.sh
+
+### RUN THE FOLLOWING COMMANDS IF YOU WANT TO BUILD A SDCARD IMAGE AND FIRMWARE UPDATE FILE
+### BUT RUN IT AT LEAST ONCE !
+### CAN TAKE UP TO FOUR HOURS, ON FIRST TIME RUN
+### REQUIRES ABOUT 20GB OF FREE DISK SPACE TO DOWNLOAD PACKAGE SOURCES
+
 
 # BUILD THE IMAGE USING DOCKER
 # also creates singned swupdate package
