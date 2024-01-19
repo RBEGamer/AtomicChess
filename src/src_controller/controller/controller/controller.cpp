@@ -610,7 +610,7 @@ int main(int argc, char *argv[])
     ConfigParser::getInstance()->getInt(ConfigParser::CFG_ENTRY::NETWORK_HEARTBEAT_INTERVAL_SECS, gamebackend_heartbeat_interval);
     gamebackend.setHearbeatCallInterval(gamebackend_heartbeat_interval);
     // NOW TRY TO CONNECT TO THE SERVER, WE USE SOME HARDCODED FALL BACK URLs
-    std::string ALTERNATIVE_BACKEND_URL[] = {ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::NETWORK_BACKEND_URL), "http://atomicchess.de:3000", "http://marcelochsendorf.com:3000", "http://marcelochsendorf.com:3001", "http://marcelochsendorf.com:3002", "http://prodevmo.com:3001", "http://prodevmo.com:3002", "http://127.0.0.1:3000", "http://127.0.0.1:3001"};
+    std::string ALTERNATIVE_BACKEND_URL[] = {ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::NETWORK_BACKEND_URL), "http://atomicchess.de", "http://atomicchess.de:3000", "http://127.0.0.1:3000", "http://127.0.0.1:3001"};
     // CHECK IF GAMESERVER IS REACHABLE ELSE TRY AND ITERATE THOUGH THE OTHER HARDCODED URLS
     volatile int abu_counter = 0;
     volatile bool abu_result = true;
