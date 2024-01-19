@@ -213,7 +213,7 @@ Rectangle {
                 y: 12
                 width: 250
                 height: 60
-                text: qsTr("START SEARCH FOR GAME")
+                text: qsTr("START MATCH")
                 font.bold: true
                 Connections {
                     target: mm_en_sfg_btn
@@ -292,7 +292,7 @@ Rectangle {
             y: 139
             width: 359
             height: 118
-            text: qsTr("BEGIN WITH BOARD SCAN")
+            text: qsTr("SCAN BOARD")
             font.pointSize: 18
             Connections {
                 target: ls_login_btn_scan
@@ -307,7 +307,7 @@ Rectangle {
             y: 139
             width: 359
             height: 118
-            text: qsTr("BEGIN WITH DEFAULT BOARD")
+            text: qsTr("USE DEFAULT BOARD")
             font.pointSize: 18
             Connections {
                 target: ls_login_btn_default
