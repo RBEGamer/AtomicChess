@@ -505,9 +505,11 @@ BackendConnector::PLAYER_PROFILE BackendConnector::getPlayerProfile()
 //CHECKS IF BACKEND REACHABLE
 bool BackendConnector::check_connection()
 {
+	 
 	request_result tmp = make_request(URL_CONNECTION_CHECK);
 	if (!tmp.body.empty() && !tmp.request_failed)
 	{
+		LOG_F(INFO, tmp.body.c_str());
 		//PARSE JSON
 		std::string jp_err = "";
 		json11::Json t = json11::Json::parse(tmp.body.c_str(), jp_err);
@@ -519,6 +521,8 @@ bool BackendConnector::check_connection()
 			}	
 		}
 	}
+	LOG_F(INFO, "BackendConnector::check_connection()");
+	LOG_F(WARNING, tmp.body.c_str());
 	return false;
 }
 
@@ -538,6 +542,7 @@ bool BackendConnector::login(PLAYER_TYPE _pt)
 	if (tmp.request_failed)
 	{
 		last_error = "login - request failed";
+		LOG_F(WARNING, last_error.c_str());
 		return false;
 	}
 	//PARSE THE JSON RESULT
@@ -594,6 +599,7 @@ bool BackendConnector::login(PLAYER_TYPE _pt)
 	//SAVE SESSION ID
 	//SAVE IMPORTANT PROFILE DATA
 	last_error = "login - body empty";
+	LOG_F(WARNING, last_error.c_str());
 	return false;
 }
 		
