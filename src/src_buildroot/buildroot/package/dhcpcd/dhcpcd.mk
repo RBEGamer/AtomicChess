@@ -4,20 +4,25 @@
 #
 ################################################################################
 
-DHCPCD_VERSION = 9.4.0
+DHCPCD_VERSION = 10.0.4
 DHCPCD_SOURCE = dhcpcd-$(DHCPCD_VERSION).tar.xz
-DHCPCD_SITE = http://roy.marples.name/downloads/dhcpcd
+DHCPCD_SITE = https://github.com/NetworkConfiguration/dhcpcd/releases/download/v$(DHCPCD_VERSION)
 DHCPCD_DEPENDENCIES = host-pkgconf
 DHCPCD_LICENSE = BSD-2-Clause
 DHCPCD_LICENSE_FILES = LICENSE
+DHCPCD_CPE_ID_VENDOR = dhcpcd_project
 
 DHCPCD_CONFIG_OPTS = \
 	--libexecdir=/lib/dhcpcd \
 	--os=linux \
 	--privsepuser=dhcpcd
 
-# AUDIT_ARCH_NDS32 is only available since kernel >= 5.2
-ifeq ($(BR2_nds32):$(BR2_TOOLCHAIN_HEADERS_AT_LEAST_5_2),y:)
+DHCPCD_MAKE_OPTS = \
+	BINMODE=755
+
+ifeq ($(BR2_PACKAGE_DHCPCD_ENABLE_PRIVSEP),y)
+DHCPCD_CONFIG_OPTS += --enable-privsep
+else
 DHCPCD_CONFIG_OPTS += --disable-privsep
 endif
 
@@ -33,7 +38,7 @@ DHCPCD_CONFIG_OPTS += --enable-static
 endif
 
 ifeq ($(BR2_USE_MMU),)
-DHCPCD_CONFIG_OPTS += --disable-fork --disable-privsep
+DHCPCD_CONFIG_OPTS += --disable-fork
 endif
 
 define DHCPCD_CONFIGURE_CMDS
@@ -41,11 +46,11 @@ define DHCPCD_CONFIGURE_CMDS
 endef
 
 define DHCPCD_BUILD_CMDS
-	$(TARGET_MAKE_ENV) $(MAKE) -C $(@D) all
+	$(TARGET_MAKE_ENV) $(MAKE) -C $(@D) $(DHCPCD_MAKE_OPTS) all
 endef
 
 define DHCPCD_INSTALL_TARGET_CMDS
-	$(TARGET_MAKE_ENV) $(MAKE) -C $(@D) install DESTDIR=$(TARGET_DIR)
+	$(TARGET_MAKE_ENV) $(MAKE) -C $(@D) $(DHCPCD_MAKE_OPTS) install DESTDIR=$(TARGET_DIR)
 endef
 
 # When network-manager is enabled together with dhcpcd, it will use

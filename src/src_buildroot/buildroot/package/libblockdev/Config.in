@@ -5,6 +5,7 @@ config BR2_PACKAGE_LIBBLOCKDEV
 	depends on BR2_TOOLCHAIN_HAS_THREADS # libglib2
 	depends on BR2_USE_MMU # libglib2
 	depends on BR2_PACKAGE_HAS_UDEV
+	depends on BR2_ENABLE_LOCALE
 	select BR2_PACKAGE_KMOD
 	select BR2_PACKAGE_LIBGLIB2
 	help
@@ -24,6 +25,7 @@ config BR2_PACKAGE_LIBBLOCKDEV_CRYPTO
 	bool "crypto"
 	depends on BR2_TOOLCHAIN_HAS_SYNC_4 # cryptsetup -> json-c
 	select BR2_PACKAGE_CRYPTSETUP
+	select BR2_PACKAGE_KEYUTILS
 
 config BR2_PACKAGE_LIBBLOCKDEV_FS
 	bool "filesystem"
@@ -31,6 +33,7 @@ config BR2_PACKAGE_LIBBLOCKDEV_FS
 	select BR2_PACKAGE_UTIL_LINUX
 	select BR2_PACKAGE_UTIL_LINUX_LIBMOUNT
 	select BR2_PACKAGE_PARTED
+	select BR2_PACKAGE_E2FSPROGS
 
 comment "filesystem plugin needs a toolchain w/ locale"
 	depends on !BR2_ENABLE_LOCALE
@@ -51,10 +54,16 @@ config BR2_PACKAGE_LIBBLOCKDEV_MDRAID
 	bool "mdraid"
 	select BR2_PACKAGE_LIBBYTESIZE
 
+config BR2_PACKAGE_LIBBLOCKDEV_NVME
+	bool "nvme"
+	select BR2_PACKAGE_LIBNVME
+
 config BR2_PACKAGE_LIBBLOCKDEV_PART
 	bool "part"
 	depends on BR2_ENABLE_LOCALE # parted
 	select BR2_PACKAGE_PARTED
+	select BR2_PACKAGE_UTIL_LINUX
+	select BR2_PACKAGE_UTIL_LINUX_LIBFDISK
 
 comment "part plugin needs a toolchain w/ locale"
 	depends on !BR2_ENABLE_LOCALE
@@ -66,7 +75,8 @@ config BR2_PACKAGE_LIBBLOCKDEV_SWAP
 
 endif
 
-comment "libblockdev needs udev /dev management and a toolchain w/ wchar, threads, dynamic library"
+comment "libblockdev needs udev /dev management and a toolchain w/ wchar, threads, dynamic library, locale"
 	depends on BR2_USE_MMU
 	depends on !BR2_PACKAGE_HAS_UDEV || BR2_STATIC_LIBS || \
-		!BR2_USE_WCHAR || !BR2_TOOLCHAIN_HAS_THREADS
+		!BR2_USE_WCHAR || !BR2_TOOLCHAIN_HAS_THREADS || \
+		!BR2_ENABLE_LOCALE

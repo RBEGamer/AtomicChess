@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-WEBKITGTK_VERSION = 2.30.5
+WEBKITGTK_VERSION = 2.40.5
 WEBKITGTK_SITE = https://www.webkitgtk.org/releases
 WEBKITGTK_SOURCE = webkitgtk-$(WEBKITGTK_VERSION).tar.xz
 WEBKITGTK_INSTALL_STAGING = YES
@@ -13,23 +13,24 @@ WEBKITGTK_LICENSE_FILES = \
 	Source/WebCore/LICENSE-APPLE \
 	Source/WebCore/LICENSE-LGPL-2.1
 WEBKITGTK_CPE_ID_VENDOR = webkitgtk
-WEBKITGTK_DEPENDENCIES = host-ruby host-python host-gperf \
-	enchant harfbuzz icu jpeg libgcrypt libgtk3 libsecret libsoup \
+WEBKITGTK_DEPENDENCIES = host-ruby host-python3 host-gperf host-unifdef \
+	enchant harfbuzz icu jpeg libgcrypt libgtk3 libsecret libsoup3 \
 	libtasn1 libxml2 libxslt openjpeg sqlite webp woff2
+
+WEBKITGTK_CMAKE_BACKEND = ninja
+
 WEBKITGTK_CONF_OPTS = \
 	-DENABLE_API_TESTS=OFF \
+	-DENABLE_DOCUMENTATION=OFF \
 	-DENABLE_GEOLOCATION=OFF \
-	-DENABLE_GTKDOC=OFF \
-	-DENABLE_INTROSPECTION=OFF \
 	-DENABLE_MINIBROWSER=ON \
 	-DENABLE_SPELLCHECK=ON \
+	-DENABLE_WEB_RTC=OFF \
 	-DPORT=GTK \
-	-DSILENCE_CROSS_COMPILATION_NOTICES=ON \
-	-DUSE_LIBNOTIFY=OFF \
+	-DUSE_AVIF=OFF \
 	-DUSE_LIBHYPHEN=OFF \
 	-DUSE_OPENJPEG=ON \
-	-DUSE_WOFF2=ON \
-	-DUSE_WPE_RENDERER=OFF
+	-DUSE_WOFF2=ON
 
 ifeq ($(BR2_PACKAGE_WEBKITGTK_SANDBOX),y)
 WEBKITGTK_CONF_OPTS += \
@@ -45,7 +46,7 @@ ifeq ($(BR2_PACKAGE_WEBKITGTK_MULTIMEDIA),y)
 WEBKITGTK_CONF_OPTS += \
 	-DENABLE_VIDEO=ON \
 	-DENABLE_WEB_AUDIO=ON
-WEBKITGTK_DEPENDENCIES += gstreamer1 gst1-libav gst1-plugins-base gst1-plugins-good
+WEBKITGTK_DEPENDENCIES += gstreamer1 gst1-libav gst1-plugins-base
 else
 WEBKITGTK_CONF_OPTS += \
 	-DENABLE_VIDEO=OFF \
@@ -58,45 +59,60 @@ else
 WEBKITGTK_CONF_OPTS += -DENABLE_WEBDRIVER=OFF
 endif
 
-# Only one target platform can be built, assume X11 > Wayland
-
-# GTK3-X11 target gives OpenGL from newer libgtk3 versions
-# Consider this better than EGL + maybe GLESv2 since both can't be built
-# 2D CANVAS acceleration requires OpenGL proper with cairo-gl
-ifeq ($(BR2_PACKAGE_LIBGTK3_X11),y)
-WEBKITGTK_CONF_OPTS += \
-	-DENABLE_ACCELERATED_2D_CANVAS=ON \
-	-DENABLE_GLES2=OFF \
-	-DENABLE_GRAPHICS_CONTEXT_GL=ON \
-	-DENABLE_X11_TARGET=ON
-WEBKITGTK_DEPENDENCIES += libgl \
-	xlib_libXcomposite xlib_libXdamage xlib_libXrender xlib_libXt
-# It can use libgtk2 for npapi plugins
-ifeq ($(BR2_PACKAGE_LIBGTK2),y)
-WEBKITGTK_CONF_OPTS += -DENABLE_PLUGIN_PROCESS_GTK2=ON
-WEBKITGTK_DEPENDENCIES += libgtk2
+ifeq ($(BR2_PACKAGE_LCMS2),y)
+WEBKITGTK_CONF_OPTS += -DUSE_LCMS=ON
+WEBKITGTK_DEPENDENCIES += lcms2
 else
-WEBKITGTK_CONF_OPTS += -DENABLE_PLUGIN_PROCESS_GTK2=OFF
+WEBKITGTK_CONF_OPTS += -DUSE_LCMS=OFF
 endif
-else # !X11
-# GTK3-BROADWAY/WAYLAND needs at least EGL
-WEBKITGTK_DEPENDENCIES += libegl
-# GLESv2 support is optional though
-ifeq ($(BR2_PACKAGE_HAS_LIBGLES),y)
-WEBKITGTK_CONF_OPTS += \
-	-DENABLE_GLES2=ON \
-	-DENABLE_GRAPHICS_CONTEXT_GL=ON
+
+ifeq ($(BR2_PACKAGE_GOBJECT_INTROSPECTION),y)
+WEBKITGTK_CONF_OPTS += -DENABLE_INTROSPECTION=ON
+WEBKITGTK_DEPENDENCIES += gobject-introspection
+else
+WEBKITGTK_CONF_OPTS += -DENABLE_INTROSPECTION=OFF
+endif
+
+ifeq ($(BR2_PACKAGE_LIBMANETTE),y)
+WEBKITGTK_CONF_OPTS += -DENABLE_GAMEPAD=ON
+WEBKITGTK_DEPENDENCIES += libmanette
+else
+WEBKITGTK_CONF_OPTS += -DENABLE_GAMEPAD=OFF
+endif
+
+# Use GLES if available and desktop GL is not.
+ifeq ($(BR2_PACKAGE_HAS_LIBGL):$(BR2_PACKAGE_HAS_LIBGLES),:y)
+WEBKITGTK_CONF_OPTS += -DENABLE_GLES2=ON
 WEBKITGTK_DEPENDENCIES += libgles
 else
-# Disable general OpenGL (shading) if there's no GLESv2
-WEBKITGTK_CONF_OPTS += \
-	-DENABLE_GLES2=OFF \
-	-DENABLE_GRAPHICS_CONTEXT_GL=OFF
+WEBKITGTK_CONF_OPTS += -DENABLE_GLES2=OFF
 endif
-# We must explicitly state the wayland target
+
+ifeq ($(BR2_PACKAGE_LIBGTK3_X11),y)
+WEBKITGTK_CONF_OPTS += -DENABLE_X11_TARGET=ON
+WEBKITGTK_DEPENDENCIES += libgl \
+	xlib_libXcomposite xlib_libXdamage xlib_libXrender xlib_libXt
+else
+WEBKITGTK_CONF_OPTS += -DENABLE_X11_TARGET=OFF
+endif
+
 ifeq ($(BR2_PACKAGE_LIBGTK3_WAYLAND),y)
 WEBKITGTK_CONF_OPTS += -DENABLE_WAYLAND_TARGET=ON
+WEBKITGTK_DEPENDENCIES += libegl
+else
+WEBKITGTK_CONF_OPTS += -DENABLE_WAYLAND_TARGET=OFF
 endif
+
+# If only the GTK Broadway backend is enabled, EGL is still needed.
+ifeq ($(BR2_PACKAGE_LIBGTK3_X11):$(BR2_PACKAGE_LIBGTK3_WAYLAND):$(BR2_PACKAGE_LIBGTK3_BROADWAY),::y)
+WEBKITGTK_DEPENDENCIES += libegl
+endif
+
+ifeq ($(BR2_PACKAGE_LIBGTK3_WAYLAND)$(BR2_PACKAGE_WPEBACKEND_FDO),yy)
+WEBKITGTK_CONF_OPTS += -DUSE_WPE_RENDERER=ON
+WEBKITGTK_DEPENDENCIES += wpebackend-fdo
+else
+WEBKITGTK_CONF_OPTS += -DUSE_WPE_RENDERER=OFF
 endif
 
 ifeq ($(BR2_PACKAGE_WEBKITGTK_USE_GSTREAMER_GL),y)
@@ -106,10 +122,10 @@ WEBKITGTK_CONF_OPTS += -DUSE_GSTREAMER_GL=OFF
 endif
 
 ifeq ($(BR2_INIT_SYSTEMD),y)
-WEBKITGTK_CONF_OPTS += -DUSE_SYSTEMD=ON
+WEBKITGTK_CONF_OPTS += -DENABLE_JOURNALD_LOG=ON
 WEBKITGTK_DEPENDENCIES += systemd
 else
-WEBKITGTK_CONF_OPTS += -DUSE_SYSTEMD=OFF
+WEBKITGTK_CONF_OPTS += -DENABLE_JOURNALD_LOG=OFF
 endif
 
 # JIT is not supported for MIPS r6, but the WebKit build system does not

@@ -5,7 +5,7 @@
 ################################################################################
 
 ifeq ($(BR2_PACKAGE_LUA_5_4),y)
-LUA_VERSION = 5.4.2
+LUA_VERSION = 5.4.6
 else ifeq ($(BR2_PACKAGE_LUA_5_3),y)
 LUA_VERSION = 5.3.6
 else
@@ -31,6 +31,14 @@ else ifeq ($(BR2_PACKAGE_LUA_5_3),y)
 LUA_CFLAGS += -DLUA_COMPAT_5_2
 endif
 
+ifeq ($(BR2_PACKAGE_LUA_CVT_N2S),)
+LUA_CFLAGS += -DLUA_NOCVTN2S
+endif
+
+ifeq ($(BR2_PACKAGE_LUA_CVT_S2N),)
+LUA_CFLAGS += -DLUA_NOCVTS2N
+endif
+
 ifeq ($(BR2_STATIC_LIBS),y)
 LUA_BUILDMODE = static
 else
@@ -40,12 +48,12 @@ LUA_MYLIBS += -ldl
 endif
 
 ifeq ($(BR2_PACKAGE_LUA_READLINE),y)
-LUA_DEPENDENCIES = readline ncurses
+LUA_DEPENDENCIES += readline ncurses
 LUA_MYLIBS += -lreadline -lhistory -lncurses
 LUA_CFLAGS += -DLUA_USE_READLINE
 else
 ifeq ($(BR2_PACKAGE_LUA_LINENOISE),y)
-LUA_DEPENDENCIES = linenoise
+LUA_DEPENDENCIES += linenoise
 LUA_MYLIBS += -llinenoise
 LUA_CFLAGS += -DLUA_USE_LINENOISE
 endif
@@ -60,7 +68,7 @@ LUA_POST_PATCH_HOOKS += LUA_32BITS_LUACONF
 endif
 
 define HOST_LUA_LUACONF
-	$(SED) 's|#define LUA_ROOT.*|#define LUA_ROOT "$(HOST_DIR)/usr/"|' $(@D)/src/luaconf.h
+	$(SED) 's|#define LUA_ROOT.*|#define LUA_ROOT "$(HOST_DIR)/"|' $(@D)/src/luaconf.h
 endef
 HOST_LUA_POST_PATCH_HOOKS += HOST_LUA_LUACONF
 

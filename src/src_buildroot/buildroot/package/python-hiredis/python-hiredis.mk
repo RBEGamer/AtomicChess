@@ -4,11 +4,11 @@
 #
 ################################################################################
 
-PYTHON_HIREDIS_VERSION = 1.1.0
+PYTHON_HIREDIS_VERSION = 2.2.3
 PYTHON_HIREDIS_SOURCE = hiredis-$(PYTHON_HIREDIS_VERSION).tar.gz
-PYTHON_HIREDIS_SITE = https://files.pythonhosted.org/packages/3d/9f/abc69e73055f73d42ddf9c46b3e01a08b9e74b579b8fc413cbd31112a749
+PYTHON_HIREDIS_SITE = https://files.pythonhosted.org/packages/b0/04/dab6792584fc548803ffa50b5bb2b99f01d3ab04d7c7f64e85f1a22fb847
 PYTHON_HIREDIS_SETUP_TYPE = setuptools
 PYTHON_HIREDIS_LICENSE = BSD-3-Clause
-PYTHON_HIREDIS_LICENSE_FILES = COPYING vendor/hiredis/COPYING
+PYTHON_HIREDIS_LICENSE_FILES = LICENSE vendor/hiredis/COPYING
 
 $(eval $(python-package))

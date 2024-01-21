@@ -4,11 +4,12 @@
 #
 ################################################################################
 
-OPENBLAS_VERSION = 0.3.9
-OPENBLAS_SITE = $(call github,xianyi,OpenBLAS,v$(OPENBLAS_VERSION))
+OPENBLAS_VERSION = 0.3.24
+OPENBLAS_SITE = https://github.com/xianyi/OpenBLAS/releases/download/v$(OPENBLAS_VERSION)
 OPENBLAS_LICENSE = BSD-3-Clause
 OPENBLAS_LICENSE_FILES = LICENSE
 OPENBLAS_INSTALL_STAGING = YES
+OPENBLAS_CPE_ID_VENDOR = openblas_project
 
 # Initialise OpenBLAS make options to $(TARGET_CONFIGURE_OPTS)
 OPENBLAS_MAKE_OPTS = $(TARGET_CONFIGURE_OPTS)
@@ -42,10 +43,16 @@ endif
 OPENBLAS_MAKE_OPTS += USE_OPENMP=0
 
 # Static-only/Shared-only toggle
+# Note: static library is always generated so that applications can link
+# statically for size reduction, even if BR2_STATIC_LIBS is not set.
 ifeq ($(BR2_STATIC_LIBS),y)
 OPENBLAS_MAKE_OPTS += NO_SHARED=1
-else ifeq ($(BR2_SHARED_LIBS),y)
-OPENBLAS_MAKE_OPTS += NO_STATIC=1
+endif
+
+ifeq ($(BR2_ARCH_IS_64),y)
+OPENBLAS_MAKE_OPTS += BINARY=64
+else
+OPENBLAS_MAKE_OPTS += BINARY=32
 endif
 
 # binutils version <= 2.23.2 has a bug
@@ -75,5 +82,24 @@ define OPENBLAS_INSTALL_TARGET_CMDS
 	$(TARGET_MAKE_ENV) $(MAKE) $(OPENBLAS_MAKE_OPTS) \
 		-C $(@D) install PREFIX=$(TARGET_DIR)/usr
 endef
+
+ifeq ($(BR2_PACKAGE_OPENBLAS_INSTALL_TESTS),y)
+# Tests are always built, but are not installed, so we need to install
+# them manually. The set of available tests may fluctuate depending on
+# the architecture and other options, so only install whatever gets
+# built.
+define OPENBLAS_INSTALL_TESTS
+	mkdir -p $(TARGET_DIR)/usr/libexec/openblas/tests
+	find $(@D)/ctest \
+		-type f -name "x[sdcz]cblat[123]" -perm -0100 \
+		-exec $(INSTALL) -m 0755 {} \
+			$(TARGET_DIR)/usr/libexec/openblas/tests \;
+	find $(@D)/ctest \
+		-type f -name "[sdcz]in[123]" \
+		-exec $(INSTALL) -m 0644 {} \
+			$(TARGET_DIR)/usr/libexec/openblas/tests \;
+endef
+OPENBLAS_POST_INSTALL_TARGET_HOOKS += OPENBLAS_INSTALL_TESTS
+endif
 
 $(eval $(generic-package))

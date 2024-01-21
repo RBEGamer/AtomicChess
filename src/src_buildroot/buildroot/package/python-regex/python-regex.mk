@@ -4,11 +4,12 @@
 #
 ################################################################################
 
-# Please keep in sync with package/python3-regex/python3-regex.mk
-PYTHON_REGEX_VERSION = 2020.2.20
+PYTHON_REGEX_VERSION = 2022.10.31
 PYTHON_REGEX_SOURCE = regex-$(PYTHON_REGEX_VERSION).tar.gz
-PYTHON_REGEX_SITE = https://files.pythonhosted.org/packages/e8/76/8ac7f467617b9cfbafcef3c76df6f22b15de654a62bea719792b00a83195
+PYTHON_REGEX_SITE = https://files.pythonhosted.org/packages/27/b5/92d404279fd5f4f0a17235211bb0f5ae7a0d9afb7f439086ec247441ed28
 PYTHON_REGEX_SETUP_TYPE = setuptools
-PYTHON_REGEX_LICENSE = CNRI-Python
+PYTHON_REGEX_LICENSE = Apache-2.0
+PYTHON_REGEX_LICENSE_FILES = LICENSE.txt
 
 $(eval $(python-package))
+$(eval $(host-python-package))

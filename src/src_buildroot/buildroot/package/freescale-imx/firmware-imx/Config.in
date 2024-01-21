@@ -24,6 +24,7 @@ config BR2_PACKAGE_FIRMWARE_IMX_SDMA_FW_NAME
 	default "imx7d" if BR2_PACKAGE_FREESCALE_IMX_PLATFORM_IMX8M
 	default "imx7d" if BR2_PACKAGE_FREESCALE_IMX_PLATFORM_IMX8MM
 	default "imx7d" if BR2_PACKAGE_FREESCALE_IMX_PLATFORM_IMX8MN
+	default "imx7d" if BR2_PACKAGE_FREESCALE_IMX_PLATFORM_IMX8MP
 
 config BR2_PACKAGE_FIRMWARE_IMX_VPU_FW_NAME
 	string
@@ -33,10 +34,15 @@ config BR2_PACKAGE_FIRMWARE_IMX_VPU_FW_NAME
 	default "imx6"  if BR2_PACKAGE_FREESCALE_IMX_PLATFORM_IMX6Q
 	default "imx8"  if BR2_PACKAGE_FREESCALE_IMX_PLATFORM_IMX8
 	default "imx8"  if BR2_PACKAGE_FREESCALE_IMX_PLATFORM_IMX8X
+	default "imx8"  if BR2_PACKAGE_FREESCALE_IMX_PLATFORM_IMX8DXL
 
 config BR2_PACKAGE_FIRMWARE_IMX_NEEDS_HDMI_FW
 	bool
 	default y if BR2_PACKAGE_FREESCALE_IMX_PLATFORM_IMX8M
+
+config BR2_PACKAGE_FIRMWARE_IMX_NEEDS_EASRC_FW
+	bool
+	default y if BR2_PACKAGE_FREESCALE_IMX_PLATFORM_IMX8MN
 
 config BR2_PACKAGE_FIRMWARE_IMX_NEEDS_EPDC_FW
 	bool
@@ -48,6 +54,7 @@ config BR2_PACKAGE_FIRMWARE_IMX_NEEDS_DDR_FW
 	default y if BR2_PACKAGE_FREESCALE_IMX_PLATFORM_IMX8M
 	default y if BR2_PACKAGE_FREESCALE_IMX_PLATFORM_IMX8MM
 	default y if BR2_PACKAGE_FREESCALE_IMX_PLATFORM_IMX8MN
+	default y if BR2_PACKAGE_FREESCALE_IMX_PLATFORM_IMX8MP
 
 if BR2_PACKAGE_FIRMWARE_IMX_NEEDS_DDR_FW
 
@@ -69,7 +76,22 @@ config BR2_PACKAGE_FIRMWARE_IMX_DDR4
 	help
 	  Use DDR4 binaries (i.e.: ddr4_*_201810.bin).
 
+config BR2_PACKAGE_FIRMWARE_IMX_DDR3
+	bool "DDR3"
+	help
+	  Use DDR3 binaries (i.e.: ddr3_*_201810.bin).
+
 endchoice # DDR training FW
+
+config BR2_PACKAGE_FIRMWARE_IMX_DDR_VERSION
+	string "DDR3/DDR4/LPDDR4 firmware version"
+	# Needed for backward compatibility, the package used to
+	# unconditionally use HW version 201810 when DDR3/DDR4 was
+	# selected
+	default "201810" if BR2_PACKAGE_FIRMWARE_IMX_DDR3 || BR2_PACKAGE_FIRMWARE_IMX_DDR4
+	help
+	  Use a specific version of the imx ddr binaries. Leaving this
+	  field empty will select the default version.
 
 config BR2_PACKAGE_FIRMWARE_IMX_IMEM_LEN
 	hex "(LP)DDR IMEM padding length"

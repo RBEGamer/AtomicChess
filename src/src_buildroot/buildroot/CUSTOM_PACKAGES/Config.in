@@ -1,0 +1,6 @@
+menu "AtomicChessPackages"
+	source "CUSTOM_PACKAGES/atcgui/Config.in"
+	source "CUSTOM_PACKAGES/atctp/Config.in"
+	source "CUSTOM_PACKAGES/atcctl/Config.in"
+    source "CUSTOM_PACKAGES/atcdgt3000/Config.in"
+endmenu

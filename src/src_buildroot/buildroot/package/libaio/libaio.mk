@@ -4,11 +4,12 @@
 #
 ################################################################################
 
-LIBAIO_VERSION = 0.3.112
+LIBAIO_VERSION = 0.3.113
 LIBAIO_SITE = https://releases.pagure.org/libaio
 LIBAIO_INSTALL_STAGING = YES
 LIBAIO_LICENSE = LGPL-2.1+
 LIBAIO_LICENSE_FILES = COPYING
+LIBAIO_CPE_ID_VENDOR = libaio_project
 
 LIBAIO_CONFIGURE_OPTS = $(TARGET_CONFIGURE_OPTS)
 

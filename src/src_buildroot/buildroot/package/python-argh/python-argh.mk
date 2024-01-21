@@ -4,11 +4,11 @@
 #
 ################################################################################
 
-PYTHON_ARGH_VERSION = 0.26.2
+PYTHON_ARGH_VERSION = 0.30.4
 PYTHON_ARGH_SOURCE = argh-$(PYTHON_ARGH_VERSION).tar.gz
-PYTHON_ARGH_SITE = https://pypi.python.org/packages/e3/75/1183b5d1663a66aebb2c184e0398724b624cecd4f4b679cb6e25de97ed15
-PYTHON_ARGH_SETUP_TYPE = setuptools
+PYTHON_ARGH_SITE = https://files.pythonhosted.org/packages/37/3a/175f4a2c47e8c20e59cf25fe69546f76cf1196251a377b182e8f4542b4c4
+PYTHON_ARGH_SETUP_TYPE = flit
 PYTHON_ARGH_LICENSE = LGPL-3.0+
-PYTHON_ARGH_LICENSE_FILES = README.rst
+PYTHON_ARGH_LICENSE_FILES = COPYING COPYING.LESSER
 
 $(eval $(python-package))

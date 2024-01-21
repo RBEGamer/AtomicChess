@@ -4,20 +4,19 @@
 #
 ################################################################################
 
-RHASH_VERSION = 1.4.1
+RHASH_VERSION = 1.4.3
 RHASH_SOURCE = rhash-$(RHASH_VERSION)-src.tar.gz
 RHASH_SITE = https://sourceforge.net/projects/rhash/files/rhash/$(RHASH_VERSION)
 RHASH_LICENSE = 0BSD
 RHASH_LICENSE_FILES = COPYING
-RHASH_CPE_ID_VALID = YES
+RHASH_CPE_ID_VENDOR = rhash_project
 RHASH_INSTALL_STAGING = YES
 RHASH_DEPENDENCIES = $(TARGET_NLS_DEPENDENCIES)
-RHASH_ADDLDFLAGS = $(TARGET_NLS_LIBS)
 
 ifeq ($(BR2_SYSTEM_ENABLE_NLS),y)
-RHASH_CONF_OPTS += --disable-gettext
-else
 RHASH_CONF_OPTS += --enable-gettext
+else
+RHASH_CONF_OPTS += --disable-gettext
 endif
 
 ifeq ($(BR2_PACKAGE_OPENSSL)x$(BR2_STATIC_LIBS),yx)

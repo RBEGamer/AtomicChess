@@ -24,7 +24,9 @@
 # Hook to sync Qt headers
 #
 define QT_HEADERS_SYNC_HOOK
-	$(Q)cd $($(PKG)_BUILDDIR) && $(HOST_DIR)/bin/syncqt.pl -version $(QT5_VERSION)
+	sed -e '/^MODULE_VERSION/s/5\.15\.[3456789]/$(QT5_VERSION)/' -i \
+		$($(PKG)_BUILDDIR)/.qmake.conf
+	touch $($(PKG)_BUILDDIR)/.git
 endef
 
 ################################################################################
@@ -40,10 +42,6 @@ endef
 
 define inner-qmake-package
 
-$(2)_CONF_ENV			?=
-$(2)_CONF_OPTS			?=
-$(2)_MAKE_ENV			?=
-$(2)_MAKE_OPTS			?=
 $(2)_INSTALL_STAGING_OPTS	?= install
 $(2)_INSTALL_TARGET_OPTS	?= $$($(2)_INSTALL_STAGING_OPTS)
 
@@ -52,9 +50,10 @@ $(2)_DEPENDENCIES 		+= qt5base
 endif
 
 ifeq ($$($(2)_SYNC_QT_HEADERS),YES)
-$(2)_DEPENDENCIES 		+= host-perl
 $(2)_PRE_CONFIGURE_HOOKS        += QT_HEADERS_SYNC_HOOK
 endif
+
+$(2)_POST_PREPARE_HOOKS += QT5_QT_CONF_FIXUP
 
 #
 # Configure step. Only define it if not already defined by the package
@@ -62,7 +61,6 @@ endif
 #
 ifndef $(2)_CONFIGURE_CMDS
 define $(2)_CONFIGURE_CMDS
-	$$(QT5_QT_CONF_FIXUP)
 	cd $$($(2)_BUILDDIR) && \
 	$$(TARGET_MAKE_ENV) $$($(2)_CONF_ENV) $$(QT5_QMAKE) $$($(2)_CONF_OPTS)
 endef

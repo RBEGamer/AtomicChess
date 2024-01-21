@@ -4,8 +4,8 @@
 #
 ################################################################################
 
-PHP_VERSION = 7.4.15
-PHP_SITE = http://www.php.net/distributions
+PHP_VERSION = 8.2.14
+PHP_SITE = https://www.php.net/distributions
 PHP_SOURCE = php-$(PHP_VERSION).tar.xz
 PHP_INSTALL_STAGING = YES
 PHP_INSTALL_STAGING_OPTS = INSTALL_ROOT=$(STAGING_DIR) install
@@ -14,6 +14,7 @@ PHP_DEPENDENCIES = host-pkgconf pcre2
 PHP_LICENSE = PHP-3.01
 PHP_LICENSE_FILES = LICENSE
 PHP_CPE_ID_VENDOR = php
+
 PHP_CONF_OPTS = \
 	--mandir=/usr/share/man \
 	--infodir=/usr/share/info \
@@ -33,6 +34,10 @@ endif
 
 ifeq ($(BR2_STATIC_LIBS)$(BR2_TOOLCHAIN_HAS_THREADS),yy)
 PHP_STATIC_LIBS += -lpthread
+endif
+
+ifeq ($(BR2_TOOLCHAIN_HAS_LIBATOMIC),y)
+PHP_EXTRA_LIBS += -latomic
 endif
 
 ifeq ($(call qstrip,$(BR2_TARGET_LOCALTIME)),)
@@ -62,7 +67,7 @@ PHP_CXXFLAGS = $(TARGET_CXXFLAGS)
 # The OPcache extension isn't cross-compile friendly
 # Throw some defines here to avoid patching heavily
 ifeq ($(BR2_PACKAGE_PHP_EXT_OPCACHE),y)
-PHP_CONF_OPTS += --enable-opcache
+PHP_CONF_OPTS += --enable-opcache --disable-opcache-jit
 PHP_CONF_ENV += ac_cv_func_mprotect=yes
 PHP_CFLAGS += \
 	-DHAVE_SHM_IPC \
@@ -80,6 +85,13 @@ else
 PHP_CONF_ENV += ac_cv_func_dlopen=no ac_cv_lib_dl_dlopen=no
 endif
 
+# php has some assembly function that is not present in Thumb mode:
+# Error: selected processor does not support `umlal r2,r1,r0,r3' in Thumb mode
+# so, we desactivate Thumb mode
+ifeq ($(BR2_ARM_INSTRUCTIONS_THUMB),y)
+PHP_CFLAGS += -marm
+endif
+
 PHP_CONF_OPTS += $(if $(BR2_PACKAGE_PHP_SAPI_CLI),--enable-cli,--disable-cli)
 PHP_CONF_OPTS += $(if $(BR2_PACKAGE_PHP_SAPI_CGI),--enable-cgi,--disable-cgi)
 PHP_CONF_OPTS += $(if $(BR2_PACKAGE_PHP_SAPI_FPM),--enable-fpm,--disable-fpm)
@@ -90,7 +102,7 @@ PHP_CONF_OPTS += --with-apxs2=$(STAGING_DIR)/usr/bin/apxs
 
 # Enable thread safety option if Apache MPM is event or worker
 ifeq ($(BR2_PACKAGE_APACHE_MPM_EVENT)$(BR2_PACKAGE_APACHE_MPM_WORKER),y)
-PHP_CONF_OPTS += --enable-maintainer-zts
+PHP_CONF_OPTS += --enable-zts
 endif
 endif
 
@@ -107,7 +119,6 @@ PHP_CONF_OPTS += \
 	$(if $(BR2_PACKAGE_PHP_EXT_XMLWRITER),--enable-xmlwriter) \
 	$(if $(BR2_PACKAGE_PHP_EXT_EXIF),--enable-exif) \
 	$(if $(BR2_PACKAGE_PHP_EXT_FTP),--enable-ftp) \
-	$(if $(BR2_PACKAGE_PHP_EXT_JSON),--enable-json) \
 	$(if $(BR2_PACKAGE_PHP_EXT_TOKENIZER),--enable-tokenizer) \
 	$(if $(BR2_PACKAGE_PHP_EXT_PCNTL),--enable-pcntl) \
 	$(if $(BR2_PACKAGE_PHP_EXT_SHMOP),--enable-shmop) \
@@ -137,11 +148,6 @@ PHP_CONF_OPTS += --enable-mbstring
 PHP_DEPENDENCIES += oniguruma
 endif
 
-ifeq ($(BR2_PACKAGE_PHP_EXT_MCRYPT),y)
-PHP_CONF_OPTS += --with-mcrypt=$(STAGING_DIR)/usr
-PHP_DEPENDENCIES += libmcrypt
-endif
-
 ifeq ($(BR2_PACKAGE_PHP_EXT_OPENSSL),y)
 PHP_CONF_OPTS += --with-openssl=$(STAGING_DIR)/usr
 PHP_DEPENDENCIES += openssl
@@ -154,18 +160,6 @@ ifeq ($(BR2_PACKAGE_PHP_EXT_LIBXML2),y)
 PHP_CONF_ENV += php_cv_libxml_build_works=yes
 PHP_CONF_OPTS += --with-libxml
 PHP_DEPENDENCIES += libxml2
-endif
-
-ifeq ($(BR2_PACKAGE_PHP_EXT_WDDX),y)
-PHP_CONF_OPTS += --enable-wddx --with-libexpat-dir=$(STAGING_DIR)/usr
-PHP_DEPENDENCIES += expat
-endif
-
-ifeq ($(BR2_PACKAGE_PHP_EXT_XMLRPC),y)
-PHP_CONF_OPTS += \
-	--with-xmlrpc \
-	$(if $(BR2_PACKAGE_LIBICONV),--with-iconv-dir=$(STAGING_DIR)/usr)
-PHP_DEPENDENCIES += $(if $(BR2_PACKAGE_LIBICONV),libiconv)
 endif
 
 ifeq ($(BR2_PACKAGE_PHP_EXT_ZIP),y)
@@ -194,13 +188,8 @@ endif
 endif
 
 ifeq ($(BR2_PACKAGE_PHP_EXT_INTL),y)
-PHP_CONF_OPTS += --enable-intl --with-icu-dir=$(STAGING_DIR)/usr
-PHP_CXXFLAGS += "`$(STAGING_DIR)/usr/bin/icu-config --cxxflags`"
+PHP_CONF_OPTS += --enable-intl
 PHP_DEPENDENCIES += icu
-# The intl module is implemented in C++, but PHP fails to use
-# g++ as the compiler for the final link. As a workaround,
-# tell it to link libstdc++.
-PHP_EXTRA_LIBS += -lstdc++
 endif
 
 ifeq ($(BR2_PACKAGE_PHP_EXT_GMP),y)
@@ -366,4 +355,24 @@ PHP_POST_INSTALL_TARGET_HOOKS += PHP_INSTALL_FIXUP
 
 PHP_CONF_ENV += CFLAGS="$(PHP_CFLAGS)" CXXFLAGS="$(PHP_CXXFLAGS)"
 
+HOST_PHP_CONF_OPTS = \
+	--disable-all \
+	--without-pear \
+	--with-config-file-path=$(HOST_DIR)/etc \
+	--disable-phpdbg \
+	--with-external-pcre \
+	--enable-phar \
+	--enable-json \
+	--enable-filter \
+	--enable-mbstring \
+	--enable-tokenizer \
+	--with-openssl=$(HOST_DIR)
+
+HOST_PHP_DEPENDENCIES = \
+	host-oniguruma \
+	host-openssl \
+	host-pcre2 \
+	host-pkgconf
+
 $(eval $(autotools-package))
+$(eval $(host-autotools-package))

@@ -4,13 +4,12 @@
 #
 ################################################################################
 
-ZEROMQ_VERSION = 4.3.4
+ZEROMQ_VERSION = 4.3.5
 ZEROMQ_SITE = https://github.com/zeromq/libzmq/releases/download/v$(ZEROMQ_VERSION)
 ZEROMQ_INSTALL_STAGING = YES
-ZEROMQ_DEPENDENCIES = util-linux
 ZEROMQ_CONF_OPTS = --disable-Werror --without-documentation
-ZEROMQ_LICENSE = LGPL-3.0+ with exceptions
-ZEROMQ_LICENSE_FILES = COPYING COPYING.LESSER
+ZEROMQ_LICENSE = MPL-2.0
+ZEROMQ_LICENSE_FILES = LICENSE
 ZEROMQ_CPE_ID_VENDOR = zeromq
 ZEROMQ_CPE_ID_PRODUCT = libzmq
 
@@ -18,7 +17,10 @@ ZEROMQ_CPE_ID_PRODUCT = libzmq
 # SOCK_CLOEXEC, since linux v2.6.27.
 # Note: the flag TCP_KEEPALIVE is NOT available so we do not include it.
 ZEROMQ_CONF_ENV = libzmq_cv_sock_cloexec=yes \
+	libzmq_cv_o_cloexec=yes \
 	libzmq_cv_so_keepalive=yes \
+	libzmq_cv_so_priority=yes \
+	libzmq_cv_so_bindtodevice=yes \
 	libzmq_cv_tcp_keepcnt=yes \
 	libzmq_cv_tcp_keepidle=yes \
 	libzmq_cv_tcp_keepintvl=yes
