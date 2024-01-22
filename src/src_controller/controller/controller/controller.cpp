@@ -862,6 +862,7 @@ int main(int argc, char *argv[]) {
                         board.syncRealWithTargetBoard();
 
                         // IF RANDOM MOVE MATCH IS ENABLED
+                        bool autoplayer_failed = false;
                         if (cmdOptionExists(argv, argv + argc, "-autoplayer") ||
                             ConfigParser::getInstance()->getBool_nocheck(
                                     ConfigParser::CFG_ENTRY::USER_GENERAL_ENABLE_RANDOM_MOVE_MATCH) ||
@@ -871,12 +872,9 @@ int main(int argc, char *argv[]) {
                                 const int rnd_idnex = (int) (std::rand() % (current_player_state.game_state.legal_moves.size() - 1));
                                 gamebackend.set_make_move(current_player_state.game_state.legal_moves.at(rnd_idnex));
                             } else {
-                                gamebackend.set_abort_game();
-                                gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
-                                                guicommunicator::GUI_VALUE_TYPE::MAIN_MENU_SCREEN);
-                                LOG_F(ERROR, "LEGAL_MOVES_EMPTY - CANCEL GAME");
+                                autoplayer_failed = true;
                             }
-                        } else if (make_move_mode != 2) {
+                        } else if (make_move_mode != 2 || autoplayer_failed) {
                             // ELSE SHOW MANUAL MOVE ENTER SCREEN
                             // SHOW UP MAKE MANUAL MOVE GUI
                             gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
@@ -1283,6 +1281,7 @@ int main(int argc, char *argv[]) {
                 // SET PLAYERSTATE TO OPEN FO A MATCH
                 if (!gamebackend.set_player_state(BackendConnector::PLAYER_STATE::PS_SEARCHING)) {
                     gui.show_error_message_on_gui("ENABLE MATCHMAKING FAILED");
+                    gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,guicommunicator::GUI_VALUE_TYPE::MAIN_MENU_SCREEN);
                     LOG_F(WARNING, "ENABLE MATCHMAKING FAILED TRIGGERED BY USER BUTTON");
                 }
             } else if (ev.event == guicommunicator::GUI_ELEMENT::MAINMENU_START_AUTOMOVE_MATCH_BTN &&
@@ -1294,6 +1293,7 @@ int main(int argc, char *argv[]) {
                 // SET PLAYERSTATE TO OPEN FO A MATCH
                 if (!gamebackend.set_player_state(BackendConnector::PLAYER_STATE::PS_SEARCHING)) {
                     gui.show_error_message_on_gui("ENABLE MATCHMAKING FAILED");
+                    gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,guicommunicator::GUI_VALUE_TYPE::MAIN_MENU_SCREEN);
                     LOG_F(WARNING, "ENABLE MATCHMAKING FAILED TRIGGERED BY USER BUTTON");
                 }
             } else if (ev.event == guicommunicator::GUI_ELEMENT::MAINMENU_START_AI_MATCH_BTN &&
@@ -1304,6 +1304,7 @@ int main(int argc, char *argv[]) {
                 // SET PLAYERSTATE TO OPEN FO A MATCH
                 if (!gamebackend.set_player_state(BackendConnector::PLAYER_STATE::PS_IDLE)) {
                     LOG_F(WARNING, "DISABLE MATCHMAKING FAILED TRIGGERED BY USER BUTTON");
+                    gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,guicommunicator::GUI_VALUE_TYPE::MAIN_MENU_SCREEN);
                 }
             } else if (ev.event == guicommunicator::GUI_ELEMENT::GAMESCREEN_ABORT_GAME &&
                        ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {

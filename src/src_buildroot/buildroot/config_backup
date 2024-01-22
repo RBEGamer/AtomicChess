@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Buildroot -g4a2622211-dirty Configuration
+# Buildroot -g8902fdead-dirty Configuration
 #
 BR2_HAVE_DOT_CONFIG=y
 BR2_HOST_GCC_AT_LEAST_4_9=y
@@ -596,7 +596,7 @@ BR2_PACKAGE_ATCCTL=y
 #
 # -------- OPTIONAL FEATURES PACKAGES ---------
 #
-BR2_PACKAGE_ATCDGT3000=y
+# BR2_PACKAGE_ATCDGT3000 is not set
 
 #
 # ----------- TEST / DEBUG PACKAGES -----------
