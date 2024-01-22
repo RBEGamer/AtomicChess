@@ -1,9 +1,9 @@
 
+menu "Atomic Chess Target packages"
+	source "ATC_PACKAGES/Config.in"
+endmenu
 
 menu "Target packages"
-
-	
-
 	source "package/busybox/Config.in"
 	source "package/skeleton/Config.in"
 	source "package/skeleton-custom/Config.in"

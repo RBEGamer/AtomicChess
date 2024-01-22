@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Buildroot -g4cb755924-dirty Configuration
+# Buildroot -g2d635e28c-dirty Configuration
 #
 BR2_HAVE_DOT_CONFIG=y
 BR2_HOST_GCC_AT_LEAST_4_9=y
@@ -582,6 +582,28 @@ BR2_LINUX_KERNEL_NEEDS_HOST_OPENSSL=y
 # BR2_PACKAGE_LINUX_TOOLS_PERF is not set
 # BR2_PACKAGE_LINUX_TOOLS_SELFTESTS is not set
 # BR2_PACKAGE_LINUX_TOOLS_TMON is not set
+
+#
+# Atomic Chess Target packages
+#
+
+#
+# ---------- REQUIRED CORE PACKAGES -----------
+#
+BR2_PACKAGE_ATCGUI=y
+BR2_PACKAGE_ATCCTL=y
+
+#
+# -------- OPTIONAL FEATURES PACKAGES ---------
+#
+BR2_PACKAGE_ATCDGT3000=y
+
+#
+# ----------- TEST / DEBUG PACKAGES -----------
+#
+# BR2_PACKAGE_ATCTP is not set
+# BR2_PACKAGE_ATCMRPC is not set
+# BR2_PACKAGE_ATCMISC is not set
 
 #
 # Target packages
@@ -3776,14 +3798,6 @@ BR2_PACKAGE_NANO=y
 BR2_PACKAGE_NANO_TINY=y
 # BR2_PACKAGE_UEMACS is not set
 # BR2_PACKAGE_VIM is not set
-
-#
-# Target Packages: AtomicChess
-#
-BR2_PACKAGE_ATCGUI=y
-BR2_PACKAGE_ATCTP=y
-BR2_PACKAGE_ATCCTL=y
-BR2_PACKAGE_ATCDGT3000=y
 
 #
 # Filesystem images
