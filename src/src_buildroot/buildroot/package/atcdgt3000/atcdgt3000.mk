@@ -10,14 +10,14 @@ ATCTP_SITE_METHOD = local
 ATCTP_LICENSE = GPL-2.0+
 ATCTP_INSTALL_TARGET = YES
 
-#define ATCTP_BUILD_CMDS
-#	@echo ATCTP_BUILD!
-#	@echo $(@D)
-#	@echo -----------------
-#	$(MAKE) $(TARGET_CONFIGURE_OPTS) -C $(@D)
-#endef
-#
-#
+define ATCDGT3000_BUILD_CMDS
+	@echo ATCDGT3000_BUILD!
+	@echo $(@D)
+	@echo -----------------
+	$(MAKE) $(TARGET_CONFIGURE_OPTS) -C $(@D) CONFIG=DEBUGLOCAL TARGETNAME=atc_dgt3000 CXXFLAGS='-std=c++17'
+endef
+
+
 define ATCDGT3000_INSTALL_TARGET_CMDS
 	@echo ATCDGT3000_INSTALL!
 	$(INSTALL) -D -m 0755 $(@D)/atc_dgt3000ext $(TARGET_DIR)/usr/ATC/atc_dgt3000
