@@ -21,6 +21,11 @@ fi
 
 
 
+
+
+
+
+
 echo "-- COPY CONFIG FILE --"
 bash ./restore_config.sh
 
@@ -29,10 +34,32 @@ make -j10
 
 
 
-# FORCE TO BUILD THE ATC PACKAGES
-make atcgui-dirclean && rm -Rf ./dl/atcgui/
-make atcctl-dirclean && rm -Rf ./dl/atcctl/
-make atctp-dirclean && rm -Rf ./dl/atctp/
+echo "-- COPY PACKAGES OVER --"
+# COPY CUSTOM PACKAGES OVER
+for f in ATC_PACKAGES/*; do
+    if [ -d "$f" ]; then
+        # Will not run if no directories are available
+        echo "$f"
+        
+        # DELETE OLD PACKAE FILES IN PACKAGE FOLDER
+        echo "./package/$(basename $f)"
+        rm -R "./package/$(basename $f)" || true
+        
+        # COPY NEW CONTENT OVER
+        # USE RSYNC ?
+        cp -Rf "$f" "./package/$(basename $f)"
+        
+        # FORCE TO BUILD THE ATC PACKAGES
+        rm -Rf "./dl/$(basename $f)/" || true
+
+        make "$(basename $f)-dirclean"
+    fi
+done
+
+
+
+
+
 
 # INCREMENT VERSION
 cd ./VERSIONING && bash ./increment_version.sh && cd ..
@@ -78,7 +105,7 @@ echo "-- PATCH config.txt --"
 
 
 echo "--BUILD FINAL WITH PATCHED config.txt--"
-make -j10
+make -j8
 
 
 

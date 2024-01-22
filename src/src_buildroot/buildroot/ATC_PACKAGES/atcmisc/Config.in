@@ -1,0 +1,8 @@
+config BR2_PACKAGE_ATCMISC
+    bool "ATC_MISC"
+    help
+        This package adds nessessary libraries for the atc project.
+	Its needed for the other ATC packages
+
+        http://marcelochsendorf.com
+

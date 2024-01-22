@@ -21,6 +21,7 @@
 // USED FOR SYSTEM TICK IN MAIN LOOP
 #include <ctime>
 #include <chrono>
+
 typedef std::chrono::high_resolution_clock Clock;
 typedef std::chrono::system_clock::time_point TimePoint;
 #define CHRONO_DURATION_MS(x, y) std::chrono::duration_cast<std::chrono::milliseconds>(x - y).count()
@@ -60,7 +61,6 @@ typedef std::chrono::system_clock::time_point TimePoint;
 using namespace std;
 
 
-
 bool flip_screen_state = false;
 int last_mm_state_active = -1;
 bool randommove_override = false; // USED FOR THE START RANDOM MOVE MATCH BUTTON TO NOT OVERRIDE THE NORMAL CONFIG
@@ -82,8 +82,7 @@ int solcal_move = -1; //-1 disbaled 0=upper pos 1=lower pos
 int solcal_pos = 0;
 
 //! Reads the system HWID File from the location
-std::string readHWID(std::string _file)
-{
+std::string readHWID(std::string _file) {
     std::ifstream t(_file.c_str());
     std::string str;
 
@@ -96,16 +95,14 @@ std::string readHWID(std::string _file)
     return str;
 }
 
-std::string get_interface_mac_address(const string &_ifname)
-{
+std::string get_interface_mac_address(const string &_ifname) {
     LOG_F(INFO, "get_interface_mac_address=>");
     LOG_F(INFO, "/sys/class/net/IF_NAME/address");
     LOG_F(INFO, _ifname.c_str());
     std::ifstream iface;
 
     iface.open("/sys/class/net/" + _ifname + "/address");
-    if (!iface)
-    {
+    if (!iface) {
         LOG_F(ERROR, "CANT OPEN FILE");
         LOG_F(ERROR, "/sys/class/net/IF_NAME/address");
         LOG_F(ERROR, _ifname.c_str());
@@ -115,151 +112,132 @@ std::string get_interface_mac_address(const string &_ifname)
     // READ FILE
     std::string str((istreambuf_iterator<char>(iface)), istreambuf_iterator<char>());
     // CHECK LENGTH
-    if (!str.empty() && str != "00:00:00:00:00:00")
-    {
+    if (!str.empty() && str != "00:00:00:00:00:00") {
         LOG_F(INFO, str.c_str());
         // REPLACE ILLEGAL CHARAKTERS
         std::string hex = regex_replace(str, std::regex("[,:.;/\\\n\t\r ]"), "");
         LOG_F(INFO, hex.c_str());
         return hex;
-    }
-    else
-    {
+    } else {
         return INVALID_HWID;
     }
 }
 
-std::string read_file_to_string(const std::string &_path)
-{
+std::string read_file_to_string(const std::string &_path) {
     ifstream iface(_path);
     std::string str((istreambuf_iterator<char>(iface)), istreambuf_iterator<char>());
-    if (str.length() > 0)
-    {
+    if (str.length() > 0) {
         return str;
-    }
-    else
-    {
+    } else {
         return "";
     }
 }
 
-bool cmdOptionExists(char**begin, char**end, const std::string &option)
-{
+bool cmdOptionExists(char **begin, char **end, const std::string &option) {
     return std::find(begin, end, option) != end;
 }
 
-char* getCmdOption(char** begin, char** end, const std::string& option)
-{
-    char** itr = std::find(begin, end, option);
-    if (itr != end && ++itr != end)
-    {
+char *getCmdOption(char **begin, char **end, const std::string &option) {
+    char **itr = std::find(begin, end, option);
+    if (itr != end && ++itr != end) {
         return *itr;
     }
     return 0;
 }
 
-void update_gamescreen_with_player_state(BackendConnector::PLAYER_STATUS _ps, guicommunicator &_gui)
-{
-    if (_ps.game_state.game_running)
-    {
+void update_gamescreen_with_player_state(BackendConnector::PLAYER_STATUS _ps, guicommunicator &_gui) {
+    if (_ps.game_state.game_running) {
         // gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::GAME_SCREEN);
-        if (_ps.game_state.im_white_player)
-        {
-            _gui.createEvent(guicommunicator::GUI_ELEMENT::GAMESCREEN_PLAYER_COLOR, guicommunicator::GUI_VALUE_TYPE::CHESS_COLOR_WHITE);
+        if (_ps.game_state.im_white_player) {
+            _gui.createEvent(guicommunicator::GUI_ELEMENT::GAMESCREEN_PLAYER_COLOR,
+                             guicommunicator::GUI_VALUE_TYPE::CHESS_COLOR_WHITE);
+        } else {
+            _gui.createEvent(guicommunicator::GUI_ELEMENT::GAMESCREEN_PLAYER_COLOR,
+                             guicommunicator::GUI_VALUE_TYPE::CHESS_COLOR_BLACK);
         }
-        else
-        {
-            _gui.createEvent(guicommunicator::GUI_ELEMENT::GAMESCREEN_PLAYER_COLOR, guicommunicator::GUI_VALUE_TYPE::CHESS_COLOR_BLACK);
-        }
-        if (_ps.game_state.is_my_turn && _ps.game_state.im_white_player)
-        {
-            _gui.createEvent(guicommunicator::GUI_ELEMENT::GAMESCREEN_PLAYER_TURN_COLOR, guicommunicator::GUI_VALUE_TYPE::CHESS_COLOR_WHITE);
-        }
-        else if (_ps.game_state.is_my_turn && !_ps.game_state.im_white_player)
-        {
-            _gui.createEvent(guicommunicator::GUI_ELEMENT::GAMESCREEN_PLAYER_TURN_COLOR, guicommunicator::GUI_VALUE_TYPE::CHESS_COLOR_BLACK);
+        if (_ps.game_state.is_my_turn && _ps.game_state.im_white_player) {
+            _gui.createEvent(guicommunicator::GUI_ELEMENT::GAMESCREEN_PLAYER_TURN_COLOR,
+                             guicommunicator::GUI_VALUE_TYPE::CHESS_COLOR_WHITE);
+        } else if (_ps.game_state.is_my_turn && !_ps.game_state.im_white_player) {
+            _gui.createEvent(guicommunicator::GUI_ELEMENT::GAMESCREEN_PLAYER_TURN_COLOR,
+                             guicommunicator::GUI_VALUE_TYPE::CHESS_COLOR_BLACK);
         }
 
-        if (_ps.game_state.legal_moves.size() > 0)
-        {
+        if (_ps.game_state.legal_moves.size() > 0) {
             std::string tmp_lm = "";
             size_t max_items = 10;
-            if (_ps.game_state.legal_moves.size() < max_items)
-            {
+            if (_ps.game_state.legal_moves.size() < max_items) {
                 max_items = _ps.game_state.legal_moves.size();
             }
 
-            for (size_t i = 0; i < max_items; i++)
-            {
+            for (size_t i = 0; i < max_items; i++) {
                 tmp_lm += _ps.game_state.legal_moves.at(i) + "\n";
             }
-            _gui.createEvent(guicommunicator::GUI_ELEMENT::GAMESCREEN_POSSIBLE_MOVES, guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING, tmp_lm);
-        }
-        else
-        {
-            _gui.createEvent(guicommunicator::GUI_ELEMENT::GAMESCREEN_POSSIBLE_MOVES, guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING, "");
+            _gui.createEvent(guicommunicator::GUI_ELEMENT::GAMESCREEN_POSSIBLE_MOVES,
+                             guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING, tmp_lm);
+        } else {
+            _gui.createEvent(guicommunicator::GUI_ELEMENT::GAMESCREEN_POSSIBLE_MOVES,
+                             guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING, "");
         }
     }
 }
 
-void player_enter_manual_move_start_board_scan(guicommunicator &_gui, ChessBoard &_board, BackendConnector &_gamebackend, std::vector<std::string> _possible_moves)
-{
-    if (_possible_moves.size() > 0)
-    {
+void
+player_enter_manual_move_start_board_scan(guicommunicator &_gui, ChessBoard &_board, BackendConnector &_gamebackend,
+                                          std::vector<std::string> _possible_moves) {
+    if (_possible_moves.size() > 0) {
         // PARSE THE STRING MOVES INTO MovePair
         const std::vector<ChessBoard::MovePiar> moves = _board.StringToMovePair(_possible_moves, true);
         // SCAN THE BOARD FOR A POSSIBLE MOVE USING THE LEGAL MOVES
         const ChessBoard::PossibleUserMoveResult possible_move_result = _board.scanBoardForPossibleUserMove(moves);
 
-        if (possible_move_result.error == ChessBoard::BOARD_ERROR::POSSIBLE_USER_MOVE_RESULT_MULTIBLE_MOVE_CANDIDATES)
-        {
-            _gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK, "MULTIBLE MOVES - PLEASE REWIND FIGURES AND ENTER MOVE MANUALLY", 10000);
-            _gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::PLAYER_ENTER_MANUAL_MOVE_SCREEN);
-        }
-        else if (possible_move_result.error == ChessBoard::BOARD_ERROR::POSSIBLE_USER_MOVE_MOVE_INVALID)
-        {
-            _gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK, "MOVE INVALID - PLEASE REWIND FIGURES AND ENTER MOVE MANUALLY", 10000);
-            _gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::PLAYER_ENTER_MANUAL_MOVE_SCREEN);
-        }
-        else if (possible_move_result.possible_move.is_valid)
-        {
+        if (possible_move_result.error == ChessBoard::BOARD_ERROR::POSSIBLE_USER_MOVE_RESULT_MULTIBLE_MOVE_CANDIDATES) {
+            _gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK,
+                                  "MULTIBLE MOVES - PLEASE REWIND FIGURES AND ENTER MOVE MANUALLY", 10000);
+            _gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
+                             guicommunicator::GUI_VALUE_TYPE::PLAYER_ENTER_MANUAL_MOVE_SCREEN);
+        } else if (possible_move_result.error == ChessBoard::BOARD_ERROR::POSSIBLE_USER_MOVE_MOVE_INVALID) {
+            _gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK,
+                                  "MOVE INVALID - PLEASE REWIND FIGURES AND ENTER MOVE MANUALLY", 10000);
+            _gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
+                             guicommunicator::GUI_VALUE_TYPE::PLAYER_ENTER_MANUAL_MOVE_SCREEN);
+        } else if (possible_move_result.possible_move.is_valid) {
             // CONVERT MOVE BACK TO STRING
-            std::string move_made_str = ChessField::field_to_string(possible_move_result.possible_move.from_field) + ChessField::field_to_string(possible_move_result.possible_move.to_field);
+            std::string move_made_str = ChessField::field_to_string(possible_move_result.possible_move.from_field) +
+                                        ChessField::field_to_string(possible_move_result.possible_move.to_field);
             // SEND MOVE TO BACKEND
-            if (_gamebackend.set_make_move(move_made_str))
-            {
+            if (_gamebackend.set_make_move(move_made_str)) {
                 // UPDATE THE REAL_BOARD WITH THE MADE MOVE =>
                 _board.makeMoveSyncVirtual(_board.StringToMovePair(move_made_str));
                 // board.syncRealWithTargetBoard();
-                _gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::GAME_SCREEN);
+                _gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
+                                 guicommunicator::GUI_VALUE_TYPE::GAME_SCREEN);
                 make_move_mode = 0; // MOVE VALID
-            }
-            else
-            {
-                _gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK, "MOVE INVALID - PLEASE REWIND FIGURES AND ENTER MOVE MANUALLY", 10000);
-                _gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::PLAYER_ENTER_MANUAL_MOVE_SCREEN);
+            } else {
+                _gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK,
+                                      "MOVE INVALID - PLEASE REWIND FIGURES AND ENTER MOVE MANUALLY", 10000);
+                _gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
+                                 guicommunicator::GUI_VALUE_TYPE::PLAYER_ENTER_MANUAL_MOVE_SCREEN);
                 make_move_mode = 2; // MOVE INVALID => SHOW USER MOVE ENTRY UI AGAIN
             }
         }
         // USER HAS NO MOVE OPTIONS
-    }
-    else
-    {
-        _gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK, "NO LEGAL MOVE LEFT - PLEASE ENTER MOVE MANUALLY", 10000);
-        _gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::PLAYER_ENTER_MANUAL_MOVE_SCREEN);
+    } else {
+        _gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK,
+                              "NO LEGAL MOVE LEFT - PLEASE ENTER MOVE MANUALLY", 10000);
+        _gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
+                         guicommunicator::GUI_VALUE_TYPE::PLAYER_ENTER_MANUAL_MOVE_SCREEN);
     }
 }
 
-void signal_callback_handler(int signum)
-{
+void signal_callback_handler(int signum) {
     printf("Caught signal %d\n", signum);
 
     LOG_F(ERROR, "Caught signal %d\n", signum);
     loguru::flush();
     // IF GOT A SIGNAL READ LOGFILE AND UPLOAD THEM
     std::string log = read_file_to_string(LOG_FILE_PATH_ERROR);
-    if (!log.empty() && gamebackend_logupload)
-    {
+    if (!log.empty() && gamebackend_logupload) {
         gamebackend_logupload->upload_logfile(log);
     }
 
@@ -267,33 +245,39 @@ void signal_callback_handler(int signum)
     // exit(signum);
 }
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
     // REGISTER SIGNAL HANDLER
     signal(SIGINT, signal_callback_handler);
 
     //---- PRINT HELP MESSAGE ------------------------------------------------------ //
-    if (cmdOptionExists(argv, argv + argc, "-help"))
-    {
+    if (cmdOptionExists(argv, argv + argc, "-help")) {
         std::cout << "---- ATC_CONTROLLER HELP ----" << std::endl;
         std::cout << "-help                   | prints this message" << std::endl;
-        std::cout << "-writeconfig            | overrides existing or creates new config file with defaults" << std::endl;
-        std::cout << "-writeconfig -hwvirtual | selects the virtual hardware which enables testing without hardware" << std::endl;
-        std::cout << "-writeconfig -hwdk      | selects the development kit DK hardware (RPI SPI interface)" << std::endl;
+        std::cout << "-writeconfig            | overrides existing or creates new config file with defaults"
+                  << std::endl;
+        std::cout << "-writeconfig -hwvirtual | selects the virtual hardware which enables testing without hardware"
+                  << std::endl;
+        std::cout << "-writeconfig -hwdk      | selects the development kit DK hardware (RPI SPI interface)"
+                  << std::endl;
         std::cout << "-writeconfig -hwprod1   | selects the production hardware version 1 (Marlin XY)" << std::endl;
         std::cout << "-writeconfig -hwprod2   | selects the production hardware version 2 (Marlin CoreXY)" << std::endl;
-        std::cout << "-writeconfig -hwprod3   | selects the production hardware version 3 (TMC5160 with UBC Controller)" << std::endl;
-        std::cout << "-autoplayer             | enables the automatic player mode - table will make random moves" << std::endl;
-        std::cout << "-skipplacementdialog    | skips the initial chess board NFC scan and load the default fen from the config file" << std::endl;
+        std::cout << "-writeconfig -hwprod3   | selects the production hardware version 3 (TMC5160 with UBC Controller)"
+                  << std::endl;
+        std::cout << "-autoplayer             | enables the automatic player mode - table will make random moves"
+                  << std::endl;
+        std::cout
+                << "-skipplacementdialog    | skips the initial chess board NFC scan and load the default fen from the config file"
+                << std::endl;
         std::cout << "-preventflipscreen      | ignore gui flip screen config" << std::endl;
-        std::cout << "-cfgfolderpath          | set the ABS folder path for the config FORMAT: /xyz/folder/ which contains atccontrollerconfig_<hwid>.ini, if not specified ./atccontrollerconfig.ini is used" << std::endl;
+        std::cout
+                << "-cfgfolderpath          | set the ABS folder path for the config FORMAT: /xyz/folder/ which contains atccontrollerconfig_<hwid>.ini, if not specified ./atccontrollerconfig.ini is used"
+                << std::endl;
         std::cout << "---- END ATC_CONTROLLER HELP ----" << std::endl;
         return 0;
     }
 
     //---- PRINT VERSION MESSAGE ------------------------------------------------------ //
-    if (cmdOptionExists(argv, argv + argc, "-version"))
-    {
+    if (cmdOptionExists(argv, argv + argc, "-version")) {
         std::cout << "---- ATC_CONTROLLER VERSION ----" << std::endl;
         std::cout << "atc_controller version:" << ATC_CONTROLLER_VERSION << std::endl;
         std::cout << "atc_controller build date:" << __DATE__ << std::endl;
@@ -314,39 +298,37 @@ int main(int argc, char *argv[])
     std::string hwid = get_interface_mac_address(used_if_path);
     // IF INVALID TRY OTHER PATH IF
 
-    if (hwid == INVALID_HWID)
-    {
+    if (hwid == INVALID_HWID) {
         const size_t HWID_IF_ALTERNATIVES_COUNT = 5;
-        const std::string HWID_IF_ALTERNATIVES[HWID_IF_ALTERNATIVES_COUNT] = {"eth0", "wlan0", "enp5s0", "wlo1", "docker0"};
+        const std::string HWID_IF_ALTERNATIVES[HWID_IF_ALTERNATIVES_COUNT] = {"eth0", "wlan0", "enp5s0", "wlo1",
+                                                                              "docker0"};
         // CYCLE THOUGHT SOME ALTERNATIVES INTERFACE NAMES
-        for (size_t i = 0; i < HWID_IF_ALTERNATIVES_COUNT; i++)
-        {
+        for (size_t i = 0; i < HWID_IF_ALTERNATIVES_COUNT; i++) {
             LOG_SCOPE_F(INFO, "TRY ALTERNATIVE HWINTERFACE");
             LOG_SCOPE_F(INFO, HWID_IF_ALTERNATIVES[i].c_str());
 
             hwid = get_interface_mac_address(HWID_IF_ALTERNATIVES[i]);
-            if (hwid != INVALID_HWID)
-            {
+            if (hwid != INVALID_HWID) {
                 used_if_path = HWID_IF_ALTERNATIVES[i]; // STORE USED INTERFACE NAME / PATH
                 break;
             }
         }
         // used_if_path
     }
-    LOG_F(INFO, (const char *)hwid.c_str());
+    LOG_F(INFO, (const char *) hwid.c_str());
 
-     // READ CONFIG FILE
+    // READ CONFIG FILE
     std::string CONFIG_FILE_PATH = DEFAULT_CONFIG_FILE_PATH;
     //CHECKK FOLDER EXISTS
     // atccontrollerconfig
-    if(cmdOptionExists(argv, argv + argc, "-cfgfolderpath")){
-        std::string fp =std::string(getCmdOption(argv, argv + argc, "-cfgfolderpath"));
+    if (cmdOptionExists(argv, argv + argc, "-cfgfolderpath")) {
+        std::string fp = std::string(getCmdOption(argv, argv + argc, "-cfgfolderpath"));
         LOG_SCOPE_F(INFO, "LOADING CONFIG FILE: -cfgfolderpath IS SET TO %s", fp.c_str());
-        if(fp.size() > 0){
-            if(fp.at(fp.size()-1) != '/'){
+        if (fp.size() > 0) {
+            if (fp.at(fp.size() - 1) != '/') {
                 fp.append("/");
             }
-        }else{
+        } else {
             fp = "./";
         }
         // usr/ATC/configs / atccontrollerconfig_<HWID>.ini
@@ -359,41 +341,31 @@ int main(int argc, char *argv[])
 
     // OVERWRITE WITH EXISTSING CONFIG FILE SETTINGS
     bool new_config_file_written = false;
-    if (!ConfigParser::getInstance()->loadConfigFile(CONFIG_FILE_PATH) || cmdOptionExists(argv, argv + argc, "-writeconfig"))
-    {
+    if (!ConfigParser::getInstance()->loadConfigFile(CONFIG_FILE_PATH) ||
+        cmdOptionExists(argv, argv + argc, "-writeconfig")) {
         LOG_F(WARNING, "--- CREATE LOCAL CONFIG FILE -----");
         LOG_F(WARNING, "1. Failed to load atccontrollerconfig.ini");
         LOG_F(WARNING, "2. ARGUMENT -writeconfig SET => CREATE NEW CONFIG FILE FOR HWID");
         LOG_F(INFO, "detected hwid %s", hwid.c_str());
         // LOAD (PUPULATE) ALL CONFIG ENTRIES WITH THE DEFAULT CONFIG
-        if (cmdOptionExists(argv, argv + argc, "-hwvirtual"))
-        {
+        if (cmdOptionExists(argv, argv + argc, "-hwvirtual")) {
             LOG_F(INFO, "ARGUMENT -hwvirtual SET");
             LOG_F(INFO, "VIRTUAL/SIMULATED HARDWARE");
             ConfigParser::getInstance()->loadDefaults("VIRT");
-        }
-        else if (hwid == HWID_DK_HARDWARE || cmdOptionExists(argv, argv + argc, "-hwdk"))
-        {
+        } else if (hwid == HWID_DK_HARDWARE || cmdOptionExists(argv, argv + argc, "-hwdk")) {
             LOG_F(INFO, "DK HARDWARE");
             ConfigParser::getInstance()->loadDefaults("DK");
-        }
-        else if (hwid == HWID_PROD_V1_HARDWARE || cmdOptionExists(argv, argv + argc, "-hwprod1"))
-        {
+        } else if (hwid == HWID_PROD_V1_HARDWARE || cmdOptionExists(argv, argv + argc, "-hwprod1")) {
             LOG_F(INFO, "PROD_V1 HARDWARE");
             ConfigParser::getInstance()->loadDefaults("PROD_V1");
-        }
-        else if (hwid == INVALID_HWID || cmdOptionExists(argv, argv + argc, "-hwinvalid"))
-        { // IF HWIF IS INVALID => RETURN ERROR
+        } else if (hwid == INVALID_HWID ||
+                   cmdOptionExists(argv, argv + argc, "-hwinvalid")) { // IF HWIF IS INVALID => RETURN ERROR
             LOG_F(ERROR, "--- GOT INVALID HWID TO AVOID DAMAGES ON HARDWARE => TERMINATE PROGRAM -----");
             std::raise(SIGINT);
-        }
-        else if (hwid == HWID_PROD_V3_HARDWARE || cmdOptionExists(argv, argv + argc, "-hwprod3"))
-        {
+        } else if (hwid == HWID_PROD_V3_HARDWARE || cmdOptionExists(argv, argv + argc, "-hwprod3")) {
             LOG_F(INFO, "PROD_V3 HARDWARE");
             ConfigParser::getInstance()->loadDefaults("PROD_V3");
-        }
-        else
-        { // EVERY OTHER HWID IS PROD_V2 HWID
+        } else { // EVERY OTHER HWID IS PROD_V2 HWID
             LOG_F(WARNING, "PROD_V2 HARDWARE MAYBE");
             ConfigParser::getInstance()->loadDefaults("PROD_V2");
         }
@@ -403,7 +375,8 @@ int main(int argc, char *argv[])
 
         // WRITE CONFIG FILE TO FILESYSTEM
         ConfigParser::getInstance()->createConfigFile(CONFIG_FILE_PATH, false);
-        ConfigParser::getInstance()->set(ConfigParser::CFG_ENTRY::GENERAL_HWID_INTERFACE, used_if_path, CONFIG_FILE_PATH);
+        ConfigParser::getInstance()->set(ConfigParser::CFG_ENTRY::GENERAL_HWID_INTERFACE, used_if_path,
+                                         CONFIG_FILE_PATH);
 
         LOG_F(ERROR, "WRITE NEW CONFIGFILE DUE MISSING ONE atccontrollerconfig.ini");
         new_config_file_written = true;
@@ -411,46 +384,42 @@ int main(int argc, char *argv[])
     LOG_F(INFO, "CONFIG FILE LOADED");
 
     //---- ENABLE AUTOPLAYER ------------------------------------------------------ //
-    if (cmdOptionExists(argv, argv + argc, "-autoplayer"))
-    {
+    if (cmdOptionExists(argv, argv + argc, "-autoplayer")) {
         LOG_F(WARNING, "ARGUMENT -autoplayer SET");
-        ConfigParser::getInstance()->set(ConfigParser::CFG_ENTRY::GENERAL_ENABLE_RANDOM_MOVE_MATCH, "1", CONFIG_FILE_PATH);
-    }
-    else
-    {
+        ConfigParser::getInstance()->set(ConfigParser::CFG_ENTRY::GENERAL_ENABLE_RANDOM_MOVE_MATCH, "1",
+                                         CONFIG_FILE_PATH);
+    } else {
         LOG_SCOPE_F(INFO, "ARGUMENT -autoplayer NOTSET");
     }
 
     //---- ENABLE UDP DISCOVERY FOR EXTERNAL EXTENTIONS LIKE THE DGT3000 EXTENTION --- ///
-    UDPDiscovery udpdic = UDPDiscovery(ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::NETWORK_UDP_DISCOVERABLE_USER_DATA));
-    if (udpdic.enable_service(ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::NETWORK_ENABLE_UDP_DISCOVERABLE)) && ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::NETWORK_ENABLE_UDP_DISCOVERABLE))
-    {
+    UDPDiscovery udpdic = UDPDiscovery(
+            ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::NETWORK_UDP_DISCOVERABLE_USER_DATA));
+    if (udpdic.enable_service(
+            ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::NETWORK_ENABLE_UDP_DISCOVERABLE)) &&
+        ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::NETWORK_ENABLE_UDP_DISCOVERABLE)) {
         LOG_F(INFO, "UDPDiscovery ENABLED");
-    }
-    else
-    {
+    } else {
         LOG_F(INFO, "UDPDiscovery DISABLED");
     }
 
     //--- ENABLE DGT3000 EXTENTION ----------------------------------------------- ///
     // read_file_to_string
-    std::string fwver_tb = read_file_to_string(ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::GENERAL_VERSION_FILE_PATH));
-    if (fwver_tb.empty())
-    {
+    std::string fwver_tb = read_file_to_string(
+            ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::GENERAL_VERSION_FILE_PATH));
+    if (fwver_tb.empty()) {
         fwver_tb = "-ATCTABLE-";
     }
 
     LOG_F(INFO, "DGT3000Interface");
-    const bool dgten = ConfigParser::getInstance()->getBool_nocheck(ConfigParser::CFG_ENTRY::USER_RESERVED_EXTENTION_DGT3000_INTERFACE_ENABLED);
+    const bool dgten = ConfigParser::getInstance()->getBool_nocheck(
+            ConfigParser::CFG_ENTRY::USER_RESERVED_EXTENTION_DGT3000_INTERFACE_ENABLED);
     DGT3000Interface dgt3000if = DGT3000Interface(fwver_tb);
-    if (dgten)
-    {
+    if (dgten) {
         dgt3000if.enable_service(dgten);
         dgt3000if.set_dgt3000_text("booting");
         LOG_F(INFO, "DGT3000Interface ENABLED");
-    }
-    else
-    {
+    } else {
         LOG_F(INFO, "DGT3000Interface DISABLED");
     }
 
@@ -458,8 +427,7 @@ int main(int argc, char *argv[])
     LOG_F(INFO, "INIT_HARDWARE");
     // THIS CHECK_HW.. CALL IS ALSO THE FIRST CALL IN THE SINGLETON
     // SO THE HARDWARE WILL BE INITIALIZED
-    if (!HardwareInterface::getInstance()->check_hw_init_complete())
-    {
+    if (!HardwareInterface::getInstance()->check_hw_init_complete()) {
         LOG_F(ERROR, "check_hw_init_complete failed");
         std::raise(SIGINT);
     }
@@ -467,37 +435,33 @@ int main(int argc, char *argv[])
     // ------------ INIT GUI ---------------------------------- ///
     std::string fwver = ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::GENERAL_VERSION_FILE_PATH);
     std::string hwrev = ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::GENERAL_HWREV_FILE_PATH);
-    std::string bootpart = ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::GENERAL_BOOT_PARTION_INFO_FILE_PATH);
+    std::string bootpart = ConfigParser::getInstance()->get(
+            ConfigParser::CFG_ENTRY::GENERAL_BOOT_PARTION_INFO_FILE_PATH);
     LOG_F(INFO, "FWVER: %s HWREV: %s BOOTPARTITION: %s", fwver.c_str(), hwrev.c_str(), bootpart.c_str());
 
     // SARTING GUI COMMUNICATOR PROCESS
     guicommunicator gui;
     // USE GUICOMMUNICATOR ONLY IF WE HAVE REAL HARDWARE
-    if (!HardwareInterface::getInstance()->is_simulates_hardware())
-    {
+    if (!HardwareInterface::getInstance()->is_simulates_hardware()) {
         LOG_F(INFO, "guicommunicator startig ipc thread");
         gui.start_recieve_thread(); // START RECEIEVE WEBSERVER
 
         // USER_GENERAL_EN_ATCGUI_COMMUNICATION
         bool cfg_res = false;
-        if (ConfigParser::getInstance()->getBool(ConfigParser::CFG_ENTRY::GENERAL_EN_ATCGUI_COMMUNICATION, cfg_res))
-        {
+        if (ConfigParser::getInstance()->getBool(ConfigParser::CFG_ENTRY::GENERAL_EN_ATCGUI_COMMUNICATION, cfg_res)) {
             gui.enable_qt_communication(cfg_res);
         }
         // WAIT FOR GUI TO BECOME REACHABLE
         int gui_wait_counter = 0;
         // TRY X TIMES BEFORE RETURN AN ERROR
         const int GUI_WAIT_COUNTER_MAX = 100;
-        while (!gui.check_guicommunicator_reachable())
-        {
+        while (!gui.check_guicommunicator_reachable()) {
             gui_wait_counter++;
-            if (gui_wait_counter > GUI_WAIT_COUNTER_MAX)
-            {
+            if (gui_wait_counter > GUI_WAIT_COUNTER_MAX) {
                 break;
             }
         }
-        if (gui_wait_counter > GUI_WAIT_COUNTER_MAX)
-        {
+        if (gui_wait_counter > GUI_WAIT_COUNTER_MAX) {
             LOG_F(WARNING, "guicommunicator check_guicommunicator_reachable check failed");
 #ifdef DEBUG
             std::raise(SIGINT);
@@ -507,49 +471,47 @@ int main(int argc, char *argv[])
         gui.createEvent(guicommunicator::GUI_ELEMENT::QT_UI_RESET, guicommunicator::GUI_VALUE_TYPE::ENABLED);
 
         // ROTATE SCREEN IF NEEDED
-        if (ConfigParser::getInstance()->getBool_nocheck(ConfigParser::CFG_ENTRY::HARDWARE_QTUI_FLIP_ORIENTATION) && !cmdOptionExists(argv, argv + argc, "-preventflipscreen"))
-        {
-            gui.createEvent(guicommunicator::GUI_ELEMENT::QT_UI_SET_ORIENTATION_180, guicommunicator::GUI_VALUE_TYPE::ENABLED);
+        if (ConfigParser::getInstance()->getBool_nocheck(ConfigParser::CFG_ENTRY::HARDWARE_QTUI_FLIP_ORIENTATION) &&
+            !cmdOptionExists(argv, argv + argc, "-preventflipscreen")) {
+            gui.createEvent(guicommunicator::GUI_ELEMENT::QT_UI_SET_ORIENTATION_180,
+                            guicommunicator::GUI_VALUE_TYPE::ENABLED);
             flip_screen_state = true;
-        }
-        else
-        {
-            gui.createEvent(guicommunicator::GUI_ELEMENT::QT_UI_SET_ORIENTATION_0, guicommunicator::GUI_VALUE_TYPE::ENABLED);
+        } else {
+            gui.createEvent(guicommunicator::GUI_ELEMENT::QT_UI_SET_ORIENTATION_0,
+                            guicommunicator::GUI_VALUE_TYPE::ENABLED);
             flip_screen_state = false;
         }
         // SET PROCESSING SCREEN
         gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::PROCESSING_SCREEN);
         // CHECK VERSION ON GUI SIDE
-        if (gui.check_guicommunicator_version())
-        {
+        if (gui.check_guicommunicator_version()) {
             LOG_F(WARNING, "guicommunicator version check failed");
         }
         // DETERM THE HWID BY USING THE MAC ADDRESS OF THE OUTGOING INTERNFACE NAME
         // DISPLAY FIRMARE VERSION NUMBER
-        gui.createEvent(guicommunicator::GUI_ELEMENT::INFOSCREEN_HWID_LABEL, guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING, hwid + "|" + ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::HWARDWARE_REVISION));
-        gui.createEvent(guicommunicator::GUI_ELEMENT::INFOSCREEN_RANK_LABEL, guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING, fwver + "|" + hwrev + "|" + bootpart);
+        gui.createEvent(guicommunicator::GUI_ELEMENT::INFOSCREEN_HWID_LABEL,
+                        guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING,
+                        hwid + "|" + ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::HWARDWARE_REVISION));
+        gui.createEvent(guicommunicator::GUI_ELEMENT::INFOSCREEN_RANK_LABEL,
+                        guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING, fwver + "|" + hwrev + "|" + bootpart);
     }
 
     // INIT CHESSBOARD
-    if (dgten)
-    {
+    if (dgten) {
         dgt3000if.set_dgt3000_text("init board");
     }
     ChessBoard board;
-    HardwareInterface::getInstance()->setTurnStateLight(HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_PLAYER_WHITE_TURN);
+    HardwareInterface::getInstance()->setTurnStateLight(
+            HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_PLAYER_WHITE_TURN);
     bool board_scan = false;
     // ASKS THE USER TO PLACE THE FIGURE CORRECTLY OR A SCAN SHOULD BE DONE
-    if (cmdOptionExists(argv, argv + argc, "-skipplacementdialog") || ConfigParser::getInstance()->getBool_nocheck(ConfigParser::CFG_ENTRY::USER_RESERVED_SKIP_CHESS_PLACEMENT_DIALOG))
-    {
+    if (cmdOptionExists(argv, argv + argc, "-skipplacementdialog") || ConfigParser::getInstance()->getBool_nocheck(
+            ConfigParser::CFG_ENTRY::USER_RESERVED_SKIP_CHESS_PLACEMENT_DIALOG)) {
         board_scan = false;
         LOG_F(WARNING, "USER_RESERVED_SKIP_CHESS_PLACEMENT_DIALOG IS SET skip board scan");
-    }
-    else if (ConfigParser::getInstance()->getBool_nocheck(ConfigParser::CFG_ENTRY::USER_GENERAL_ENABLE_AUTOLOGIN))
-    {
+    } else if (ConfigParser::getInstance()->getBool_nocheck(ConfigParser::CFG_ENTRY::USER_GENERAL_ENABLE_AUTOLOGIN)) {
         board_scan = true;
-    }
-    else if (HardwareInterface::getInstance()->is_simulates_hardware())
-    {
+    } else if (HardwareInterface::getInstance()->is_simulates_hardware()) {
         board_scan = false;
     }
 
@@ -559,27 +521,24 @@ int main(int argc, char *argv[])
     gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::PROCESSING_SCREEN);
 
     ChessBoard::BOARD_ERROR board_init_err = ChessBoard::BOARD_ERROR::ERROR;
-    while (board_init_err != ChessBoard::BOARD_ERROR::INIT_COMPLETE)
-    {
+    while (board_init_err != ChessBoard::BOARD_ERROR::INIT_COMPLETE) {
         // INIT BOARD
         board_init_err = board.initBoard(board_scan);
         // IF NO ERROR GO FURTHER
-        if (board_init_err == ChessBoard::BOARD_ERROR::INIT_COMPLETE)
-        {
+        if (board_init_err == ChessBoard::BOARD_ERROR::INIT_COMPLETE) {
             break;
         }
         // CHECK FOR FIGURE MISSING ERROR
-        if (board_scan && board_init_err == ChessBoard::BOARD_ERROR::FIGURES_MISSING)
-        {
-            if (gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_A_OK_CANCEL, "FIGURE MISSING ! PLEASE PLACE ALL FIGURES INSIDE THE FIELDS (H1 to A8)", 5000) != guicommunicator::GUI_MESSAGE_BOX_RESULT::MSGBOX_RES_OK)
-            {
+        if (board_scan && board_init_err == ChessBoard::BOARD_ERROR::FIGURES_MISSING) {
+            if (gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_A_OK_CANCEL,
+                                     "FIGURE MISSING ! PLEASE PLACE ALL FIGURES INSIDE THE FIELDS (H1 to A8)", 5000) !=
+                guicommunicator::GUI_MESSAGE_BOX_RESULT::MSGBOX_RES_OK) {
                 break;
             }
-        }
-        else
-        {
-            if (gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_A_OK_CANCEL, "BOARD_INIT_FAILED RETRY?", 5000) != guicommunicator::GUI_MESSAGE_BOX_RESULT::MSGBOX_RES_OK)
-            {
+        } else {
+            if (gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_A_OK_CANCEL,
+                                     "BOARD_INIT_FAILED RETRY?", 5000) !=
+                guicommunicator::GUI_MESSAGE_BOX_RESULT::MSGBOX_RES_OK) {
                 break;
             }
         }
@@ -587,15 +546,15 @@ int main(int argc, char *argv[])
 
     //-------------- SEARCH FOR LOCAL ATC SERVER IN NETZWORK -------------------------- //
     std::string start_backend_url = ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::NETWORK_BACKEND_URL);
-    if (ConfigParser::getInstance()->getBool_nocheck(ConfigParser::CFG_ENTRY::NETWORK_UDP_DISCOVER_ATC_SERVER_ENABLE))
-    {
+    if (ConfigParser::getInstance()->getBool_nocheck(ConfigParser::CFG_ENTRY::NETWORK_UDP_DISCOVER_ATC_SERVER_ENABLE)) {
         UDPServerDiscovery server_disc = UDPServerDiscovery();
-        const std::string sds_epc = ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::NETWORK_UDP_DISCOVER_ATC_SERVER_USER_DATA_EXPECTED);
+        const std::string sds_epc = ConfigParser::getInstance()->get(
+                ConfigParser::CFG_ENTRY::NETWORK_UDP_DISCOVER_ATC_SERVER_USER_DATA_EXPECTED);
 
         std::string reip = server_disc.search_for_server(sds_epc, 6, 1000);
-        if (!reip.empty())
-        {
-            reip = "http://" + reip + ":" + ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::NETWORK_UDP_DISCOVER_ATC_SERVER_PORT);
+        if (!reip.empty()) {
+            reip = "http://" + reip + ":" +
+                   ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::NETWORK_UDP_DISCOVER_ATC_SERVER_PORT);
             start_backend_url = reip;
             LOG_F(INFO, "GOT IP PROM UDP_ATC_SERVER_DISCOVERY SERVICE");
             LOG_F(INFO, start_backend_url.c_str());
@@ -604,18 +563,22 @@ int main(int argc, char *argv[])
 
     // CREATE GAME BACKEND INSTANCE => THIS IS THE CONNECTION TO THE GAME SERVER
 
-    BackendConnector gamebackend(start_backend_url, ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::GENERAL_HWID_INTERFACE), hwid);
+    BackendConnector gamebackend(start_backend_url,
+                                 ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::GENERAL_HWID_INTERFACE),
+                                 hwid);
     // SET HEARTBEAT INTERVAL
     int gamebackend_heartbeat_interval = 5;
-    ConfigParser::getInstance()->getInt(ConfigParser::CFG_ENTRY::NETWORK_HEARTBEAT_INTERVAL_SECS, gamebackend_heartbeat_interval);
+    ConfigParser::getInstance()->getInt(ConfigParser::CFG_ENTRY::NETWORK_HEARTBEAT_INTERVAL_SECS,
+                                        gamebackend_heartbeat_interval);
     gamebackend.setHearbeatCallInterval(gamebackend_heartbeat_interval);
     // NOW TRY TO CONNECT TO THE SERVER, WE USE SOME HARDCODED FALL BACK URLs
-    std::string ALTERNATIVE_BACKEND_URL[] = {ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::NETWORK_BACKEND_URL), "http://atomicchess.de", "http://atomicchess.de:3000"};
+    std::string ALTERNATIVE_BACKEND_URL[] = {
+            ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::NETWORK_BACKEND_URL), "http://atomicchess.de",
+            "http://atomicchess.de:3000"};
     // CHECK IF GAMESERVER IS REACHABLE ELSE TRY AND ITERATE THOUGH THE OTHER HARDCODED URLS
     volatile int abu_counter = 0;
     volatile bool abu_result = true;
-    while (!gamebackend.check_connection())
-    {
+    while (!gamebackend.check_connection()) {
         gamebackend.set_backend_base_url(ALTERNATIVE_BACKEND_URL[abu_counter]);
         LOG_F(WARNING, "gamebackend - change backendurl due prev not abariable");
         LOG_F(WARNING, "%s", ALTERNATIVE_BACKEND_URL[abu_counter].c_str());
@@ -624,8 +587,7 @@ int main(int argc, char *argv[])
 #endif
         abu_counter++;
         // MARK SEARCH FAILED
-        if (abu_counter >= 6)
-        {
+        if (abu_counter >= 6) {
             abu_result = false;
             break;
         }
@@ -633,97 +595,91 @@ int main(int argc, char *argv[])
     // SET POINTER TO GAMEBACKEND FOR UPLOAD THE LOGFILES TO CLOUD IF CATCH A SIGNAL
     gamebackend_logupload = &gamebackend;
     // UPDATE GUI THAT NETWORK IS ONLINE
-    if (abu_result)
-    {
+    if (abu_result) {
         gui.createEvent(guicommunicator::GUI_ELEMENT::NETWORK_STATUS, guicommunicator::GUI_VALUE_TYPE::ONLINE);
         // SHOW MESSAGEBOX IF THE CURRENT URL IS A DIFFERENT THAN IN THE CONFIG
-        if (gamebackend.get_backend_base_url() != ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::NETWORK_BACKEND_URL))
-        {
-            if (gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK, "GAME_SERVER_URL_CHANGED:" + gamebackend.get_backend_base_url(), 100) != guicommunicator::GUI_MESSAGE_BOX_RESULT::MSGBOX_RES_OK)
-            {
-                gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::PROCESSING_SCREEN);
+        if (gamebackend.get_backend_base_url() !=
+            ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::NETWORK_BACKEND_URL)) {
+            if (gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK,
+                                     "GAME_SERVER_URL_CHANGED:" + gamebackend.get_backend_base_url(), 100) !=
+                guicommunicator::GUI_MESSAGE_BOX_RESULT::MSGBOX_RES_OK) {
+                gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
+                                guicommunicator::GUI_VALUE_TYPE::PROCESSING_SCREEN);
             }
         }
-    }
-    else
-    {
+    } else {
         // CONNECTION FAILED => EXIT
         gui.createEvent(guicommunicator::GUI_ELEMENT::NETWORK_STATUS, guicommunicator::GUI_VALUE_TYPE::OFFLINE);
-        gui.show_error_message_on_gui("Cant connect to game server. (ERR01) [" + gamebackend.get_backend_base_url() + "]");
+        gui.show_error_message_on_gui(
+                "Cant connect to game server. (ERR01) [" + gamebackend.get_backend_base_url() + "]");
 
         std::raise(SIGINT);
     }
 
     //------ INIT VOICE EXTENTION ---------------------------------------- ///
     // USES THE GAME_BACKEND FOR SERVER COMMUNICATION THE THIS HAVE TO INIT FIRST
-    VoiceRecognitionExtention vr_extention(hwid, gamebackend.get_interface_name()); // USE THE SAME ETH INTERFACE AS BACKEND
-    if (!HardwareInterface::getInstance()->is_simulates_hardware())
-    {
+    VoiceRecognitionExtention vr_extention(hwid,
+                                           gamebackend.get_interface_name()); // USE THE SAME ETH INTERFACE AS BACKEND
+    if (!HardwareInterface::getInstance()->is_simulates_hardware()) {
         vr_extention.enable_service(true);
     }
 
     // PERFORM A LOGOUT => IF A PREVIOUS SESSION IS ACTIVE
-    if (gamebackend.logout())
-    {
+    if (gamebackend.logout()) {
         LOG_F(INFO, "gamebackend - LOGOUT SUCCESS");
-    }
-    else
-    {
+    } else {
         LOG_F(ERROR, "gamebackend - logout failed");
         gui.show_error_message_on_gui("LOGOUT FAILED");
     }
 
     // AUTOLOGIN => IF SET PERFORM AN AUTOLOGIN AND GOTO THE MAIN MENU
-    if (ConfigParser::getInstance()->getBool_nocheck(ConfigParser::CFG_ENTRY::USER_GENERAL_ENABLE_AUTOLOGIN))
-    {
-        if (gamebackend.login(BackendConnector::PLAYER_TYPE::PT_HUMAN) && !gamebackend.get_session_id().empty())
-        {
+    if (ConfigParser::getInstance()->getBool_nocheck(ConfigParser::CFG_ENTRY::USER_GENERAL_ENABLE_AUTOLOGIN)) {
+        if (gamebackend.login(BackendConnector::PLAYER_TYPE::PT_HUMAN) && !gamebackend.get_session_id().empty()) {
             // LOAD USER CONFIG FROM SERVER (MAYBE)
             // IF NOT EXISTS UPLOAD THEM
-            if (!gamebackend.download_config(ConfigParser::getInstance(), true))
-            {
+            if (!gamebackend.download_config(ConfigParser::getInstance(), true)) {
                 LOG_F(WARNING, "download_config failed - upload current config");
                 gamebackend.upload_config(ConfigParser::getInstance());
             }
             // START HEARTBEAT THREAD
-            if (gamebackend.start_heartbeat_thread())
-            {
+            if (gamebackend.start_heartbeat_thread()) {
                 // SWITCH TO MAIN MENU
-                gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::MAIN_MENU_SCREEN);
-                if (dgten)
-                {
+                gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
+                                guicommunicator::GUI_VALUE_TYPE::MAIN_MENU_SCREEN);
+                if (dgten) {
                     dgt3000if.set_dgt3000_text("main menu");
                 }
                 // PLACE THE GOT SESSION ID ON THE INFO SCREEN
-                gui.createEvent(guicommunicator::GUI_ELEMENT::INFOSCREEN_SESSIONID_LABEL, guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING, gamebackend.get_session_id());
+                gui.createEvent(guicommunicator::GUI_ELEMENT::INFOSCREEN_SESSIONID_LABEL,
+                                guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING, gamebackend.get_session_id());
                 // SHOW PLAYERNAME ON INFO SCREEN
-                gui.createEvent(guicommunicator::GUI_ELEMENT::INFOSCREEN_VERSION, guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING, "Playername: " + gamebackend.getPlayerProfile().friendly_name + " | " + gamebackend.getPlayerProfile().elo_rank_readable);
+                gui.createEvent(guicommunicator::GUI_ELEMENT::INFOSCREEN_VERSION,
+                                guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING,
+                                "Playername: " + gamebackend.getPlayerProfile().friendly_name + " | " +
+                                gamebackend.getPlayerProfile().elo_rank_readable);
 
                 // SET USER TO AUTO SEARCHING
-                if (ConfigParser::getInstance()->getBool_nocheck(ConfigParser::CFG_ENTRY::USER_GENERAL_ENABLE_AUTO_MATCHMAKING_ENABLE))
-                {
+                if (ConfigParser::getInstance()->getBool_nocheck(
+                        ConfigParser::CFG_ENTRY::USER_GENERAL_ENABLE_AUTO_MATCHMAKING_ENABLE)) {
                     LOG_F(WARNING, "USER_GENERAL_ENABLE_AUTO_MATCHMAKING_ENABLE IS SET call set_player_state");
                     gamebackend.set_player_state(BackendConnector::PLAYER_STATE::PS_SEARCHING);
                 }
 
                 // IF NEW CONFIG FILE WAS CREATED => UPLOAD IT TO SERVER
-                if (new_config_file_written)
-                {
+                if (new_config_file_written) {
                     gamebackend.upload_config(ConfigParser::getInstance());
                     loguru::flush();
                     gamebackend.upload_logfile(read_file_to_string(LOG_FILE_PATH_ERROR));
                 }
-            }
-            else
-            {
-                gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK, "LOGIN_FAILED_HEARTBEAT", 4000);
+            } else {
+                gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK, "LOGIN_FAILED_HEARTBEAT",
+                                     4000);
                 LOG_F(ERROR, "GOT LOGIN_FAILED_HEARTBEAT START THREAD");
-                gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::LOGIN_SCREEN);
+                gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
+                                guicommunicator::GUI_VALUE_TYPE::LOGIN_SCREEN);
             }
         }
-    }
-    else
-    {
+    } else {
         gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::LOGIN_SCREEN);
     }
 
@@ -737,8 +693,8 @@ int main(int argc, char *argv[])
 #endif
 
     int SYSTEM_TICK_DELAY = 0;
-    if (!ConfigParser::getInstance()->getInt(ConfigParser::CFG_ENTRY::GENERAL_SYSTEM_TICK_INTERVAL_MS, SYSTEM_TICK_DELAY))
-    {
+    if (!ConfigParser::getInstance()->getInt(ConfigParser::CFG_ENTRY::GENERAL_SYSTEM_TICK_INTERVAL_MS,
+                                             SYSTEM_TICK_DELAY)) {
         LOG_F(ERROR, "GENERAL_SYSTEM_TICK_INTERVAL_MS - config get entry  failed");
     }
     LOG_F(INFO, "SYSTEM_TICK_DELAY SET %i", SYSTEM_TICK_DELAY);
@@ -751,8 +707,7 @@ int main(int argc, char *argv[])
     gui.clearPreviousEvents();
     // ENTERING MIAN LOOP
     HardwareInterface::getInstance()->setTurnStateLight(HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_IDLE);
-    while (mainloop_running == 0)
-    {
+    while (mainloop_running == 0) {
 // SOME PREPOS DEFINES FOR MAC OSX
 #ifdef __MACH__
         clock_serv_t cclock;
@@ -773,50 +728,45 @@ int main(int argc, char *argv[])
 #else
         t2 = Clock::now();
         // IF TIME DIFFERENCE IS BIG ENOUGHT => CALL THE TIMER EVENT
-        if (CHRONO_DURATION_MS(t2, t1) > SYSTEM_TICK_DELAY)
-        {
+        if (CHRONO_DURATION_MS(t2, t1) > SYSTEM_TICK_DELAY) {
             t1 = Clock::now();
 #endif
 
             // IF A VALID SESSION
-            if (gamebackend.check_login_state())
-            {
+            if (gamebackend.check_login_state()) {
                 // THE THE PLAYER STATUS
                 // WHICH CONTAINS ALL INFORMATION ABOUT THE CURRENT STATE OF GAME / MATCHMAKING / GENERAL STATE OF THE CLIENT
                 current_player_state = gamebackend.get_player_state();
                 // BASIC ERROR HANDLING
                 // HANDLING LOGOUT / INVALID SESSION
-                if (current_player_state.err == "err_session_key_sid_check_failed" || current_player_state.err == "err_session_check_failed" || current_player_state.err == "err_session_key_sid_check_failed")
-                {
-                    if (gamebackend.stop_heartbeat_thread())
-                    {
-                        gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK, "LOGOUT_FAILED_HEARTBEAT_STOP", 4000);
+                if (current_player_state.err == "err_session_key_sid_check_failed" ||
+                    current_player_state.err == "err_session_check_failed" ||
+                    current_player_state.err == "err_session_key_sid_check_failed") {
+                    if (gamebackend.stop_heartbeat_thread()) {
+                        gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK,
+                                             "LOGOUT_FAILED_HEARTBEAT_STOP", 4000);
                         LOG_F(ERROR, "GOT LOGIN_FAILED_HEARTBEAT STOP THREAD");
                     }
 
-                    gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::LOGIN_SCREEN);
-                }
-                else if (current_player_state.err == "err_query_paramter_hwid_or_sid_or_not_set")
-                {
+                    gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
+                                    guicommunicator::GUI_VALUE_TYPE::LOGIN_SCREEN);
+                } else if (current_player_state.err == "err_query_paramter_hwid_or_sid_or_not_set") {
                     gui.show_error_message_on_gui("get_player_state - ERROR err_query_paramter_hwid_or_sid_or_not_set");
                     LOG_F(ERROR, "GOT err_query_paramter_hwid_or_sid_or_not_set");
                 }
 
-                if ((bool)last_mm_state_active != current_player_state.matchmaking_state.waiting_for_game)
-                {
-                    last_mm_state_active = (int)current_player_state.matchmaking_state.waiting_for_game;
-                    if (last_mm_state_active)
-                    {
-                        gui.createEvent(guicommunicator::GUI_ELEMENT::MATCHMAKING_INDICATOR, guicommunicator::GUI_VALUE_TYPE::ENABLED);
-                    }
-                    else
-                    {
-                        gui.createEvent(guicommunicator::GUI_ELEMENT::MATCHMAKING_INDICATOR, guicommunicator::GUI_VALUE_TYPE::DISBALED);
+                if ((bool) last_mm_state_active != current_player_state.matchmaking_state.waiting_for_game) {
+                    last_mm_state_active = (int) current_player_state.matchmaking_state.waiting_for_game;
+                    if (last_mm_state_active) {
+                        gui.createEvent(guicommunicator::GUI_ELEMENT::MATCHMAKING_INDICATOR,
+                                        guicommunicator::GUI_VALUE_TYPE::ENABLED);
+                    } else {
+                        gui.createEvent(guicommunicator::GUI_ELEMENT::MATCHMAKING_INDICATOR,
+                                        guicommunicator::GUI_VALUE_TYPE::DISBALED);
                     }
                 }
 
-                if (current_player_state.game_state.game_running)
-                {
+                if (current_player_state.game_state.game_running) {
                     // IN THIS SECIONT THE IMMEDIATES STATE WILL BE HANDLED
                     // EG FROM NO_GAME_RUNNING TO GAME_RUNNING, THE SCREEN HAVE TO BE SWITCHED, ...
 
@@ -824,265 +774,235 @@ int main(int argc, char *argv[])
                     update_gamescreen_with_player_state(current_player_state, gui);
 
                     // IF BOARD IS IN SYNC PHASE => SETUP BOARD BIECES
-                    if (current_player_state.game_state.is_syncing_phase)
-                    {
+                    if (current_player_state.game_state.is_syncing_phase) {
                         game_running_state = 1;
                         make_move_mode = 0;
                         // SHOW THE PROCESSING SCREEN
                         // gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::PROCESSING_SCREEN);
-                        gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::GAME_SCREEN);
-                        HardwareInterface::getInstance()->setTurnStateLight(HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_PRECCESSING);
+                        gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
+                                        guicommunicator::GUI_VALUE_TYPE::GAME_SCREEN);
+                        HardwareInterface::getInstance()->setTurnStateLight(
+                                HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_PRECCESSING);
                         // LOAD THE FEN TO THE TARGET BOARD
                         // IF RETURNS FALSE => THE FEN IS INVALID
-                        if (!board.boardFromFen(current_player_state.game_state.current_board_fen, ChessBoard::BOARD_TPYE::TARGET_BOARD))
-                        {
-                            gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK, "INVALID BOARD FEN - CANCEL GAME", 4000);
-                            LOG_F(ERROR, "INVALID BOARD FEN - %s - CANCEL GAME", current_player_state.game_state.current_board_fen.c_str());
+                        if (!board.boardFromFen(current_player_state.game_state.current_board_fen,
+                                                ChessBoard::BOARD_TPYE::TARGET_BOARD)) {
+                            gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK,
+                                                 "INVALID BOARD FEN - CANCEL GAME", 4000);
+                            LOG_F(ERROR, "INVALID BOARD FEN - %s - CANCEL GAME",
+                                  current_player_state.game_state.current_board_fen.c_str());
                             gamebackend.set_player_state(BackendConnector::PLAYER_STATE::PS_IDLE);
-                            gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::MAIN_MENU_SCREEN);
+                            gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
+                                            guicommunicator::GUI_VALUE_TYPE::MAIN_MENU_SCREEN);
                         }
                         // NOW SYNC THE TWO BOARDS => THE TARGET CHESS POSITIONS WITH THE REAL WORLD MECHANICAL POSTIONS
-                        if (board.syncRealWithTargetBoard())
-                        {
+                        if (board.syncRealWithTargetBoard()) {
                             // BOARD SYNCED => UPDATE STATE ON SERVER THAT BOARD IS SYNCED
                             gamebackend.set_player_setup_confirmation(BackendConnector::PLAYER_SETUP_STATE::PSP_READY);
-                            gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::GAME_SCREEN);
-                        }
-                        else
-                        {
+                            gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
+                                            guicommunicator::GUI_VALUE_TYPE::GAME_SCREEN);
+                        } else {
                             // BOARD INIT FAILED => SHOW OPTION TO CONTIOUE
-                            if (gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_A_OK_CANCEL, "BOARD SETUP FAILED? CONTINUE", 4000) == guicommunicator::GUI_MESSAGE_BOX_RESULT::MSGBOX_RES_OK)
-                            {
+                            if (gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_A_OK_CANCEL,
+                                                     "BOARD SETUP FAILED? CONTINUE", 4000) ==
+                                guicommunicator::GUI_MESSAGE_BOX_RESULT::MSGBOX_RES_OK) {
                                 // SEND BOARD INIT COMPLETE CALL
-                                gamebackend.set_player_setup_confirmation(BackendConnector::PLAYER_SETUP_STATE::PSP_READY);
-                                gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::GAME_SCREEN);
-                            }
-                            else
-                            {
+                                gamebackend.set_player_setup_confirmation(
+                                        BackendConnector::PLAYER_SETUP_STATE::PSP_READY);
+                                gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
+                                                guicommunicator::GUI_VALUE_TYPE::GAME_SCREEN);
+                            } else {
                                 // RESET PLAYER STATE => ABORTS GAME
                                 gamebackend.set_player_state(BackendConnector::PLAYER_STATE::PS_IDLE);
                                 // GO BACK TO MAIN_MENU SCREEN
-                                gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::MAIN_MENU_SCREEN);
+                                gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
+                                                guicommunicator::GUI_VALUE_TYPE::MAIN_MENU_SCREEN);
                             }
                         }
 
                         // ELSE IF THE OPPONEND TURN
-                    }
-                    else if (!current_player_state.game_state.is_my_turn)
-                    {
+                    } else if (!current_player_state.game_state.is_my_turn) {
                         make_move_mode = 0;
                         // SET TURN LIGHT RIGHT
-                        if (current_player_state.game_state.im_white_player)
-                        {
-                            if (dgten)
-                            {
+                        if (current_player_state.game_state.im_white_player) {
+                            if (dgten) {
                                 dgt3000if.set_dgt3000_text("--WAIT --");
                             }
-                            HardwareInterface::getInstance()->setTurnStateLight(HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_PLAYER_BLACK_TURN);
-                        }
-                        else
-                        {
-                            HardwareInterface::getInstance()->setTurnStateLight(HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_PLAYER_WHITE_TURN);
+                            HardwareInterface::getInstance()->setTurnStateLight(
+                                    HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_PLAYER_BLACK_TURN);
+                        } else {
+                            HardwareInterface::getInstance()->setTurnStateLight(
+                                    HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_PLAYER_WHITE_TURN);
                         }
                         // SYNC BOARDS
-                        board.boardFromFen(current_player_state.game_state.current_board_fen, ChessBoard::BOARD_TPYE::TARGET_BOARD);
+                        board.boardFromFen(current_player_state.game_state.current_board_fen,
+                                           ChessBoard::BOARD_TPYE::TARGET_BOARD);
                         board.syncRealWithTargetBoard();
                         make_move_mode = 0;
                         // ELSE IF IF MY TURN
-                    }
-                    else if (current_player_state.game_state.is_my_turn)
-                    { // IS MY TURN TRIGGER DIALOG
+                    } else if (current_player_state.game_state.is_my_turn) { // IS MY TURN TRIGGER DIALOG
                         // SET TURN LIGHT RIGHT
-                        if (current_player_state.game_state.im_white_player)
-                        {
-                            if (dgten)
-                            {
+                        if (current_player_state.game_state.im_white_player) {
+                            if (dgten) {
                                 dgt3000if.set_dgt3000_text("YOUR TURN WHITE");
                             }
-                            HardwareInterface::getInstance()->setTurnStateLight(HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_PLAYER_WHITE_TURN);
-                        }
-                        else
-                        {
-                            if (dgten)
-                            {
+                            HardwareInterface::getInstance()->setTurnStateLight(
+                                    HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_PLAYER_WHITE_TURN);
+                        } else {
+                            if (dgten) {
                                 dgt3000if.set_dgt3000_text("YOUR TURN BLACK");
                             }
-                            HardwareInterface::getInstance()->setTurnStateLight(HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_PLAYER_BLACK_TURN);
+                            HardwareInterface::getInstance()->setTurnStateLight(
+                                    HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_PLAYER_BLACK_TURN);
                         }
 
                         // SYNC BOARDS
-                        board.boardFromFen(current_player_state.game_state.current_board_fen, ChessBoard::BOARD_TPYE::TARGET_BOARD);
+                        board.boardFromFen(current_player_state.game_state.current_board_fen,
+                                           ChessBoard::BOARD_TPYE::TARGET_BOARD);
                         board.syncRealWithTargetBoard();
 
-                        // ENABLE AUTO PLAY FEATURE
-                        if (cmdOptionExists(argv, argv + argc, "-autoplayer") || ConfigParser::getInstance()->getBool_nocheck(ConfigParser::CFG_ENTRY::USER_GENERAL_ENABLE_RANDOM_MOVE_MATCH) || randommove_override)
-                        {
-                            if (current_player_state.game_state.legal_moves.size() > 0)
-                            {
-                                const int rnd_idnex = (int)(std::rand() % (current_player_state.game_state.legal_moves.size() - 1));
-                                if (!gamebackend.set_make_move(current_player_state.game_state.legal_moves.at(rnd_idnex)))
-                                {
-                                }
-                            }
-                            else
-                            {
-                                gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK, "LEGAL_MOVES_EMPTY - CANCEL GAME", 4000);
+                        // IF RANDOM MOVE MATCH IS ENABLED
+                        if (cmdOptionExists(argv, argv + argc, "-autoplayer") ||
+                            ConfigParser::getInstance()->getBool_nocheck(
+                                    ConfigParser::CFG_ENTRY::USER_GENERAL_ENABLE_RANDOM_MOVE_MATCH) ||
+                            randommove_override) {
+                            if (!current_player_state.game_state.legal_moves.empty()) {
+                                // GET RANDOM MOVE
+                                const int rnd_idnex = (int) (std::rand() % (current_player_state.game_state.legal_moves.size() - 1));
+                                gamebackend.set_make_move(current_player_state.game_state.legal_moves.at(rnd_idnex));
+                            } else {
+                                gamebackend.set_abort_game();
+                                gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
+                                                guicommunicator::GUI_VALUE_TYPE::MAIN_MENU_SCREEN);
                                 LOG_F(ERROR, "LEGAL_MOVES_EMPTY - CANCEL GAME");
                             }
-                        }
-                        else
-                        {
+                        } else if (make_move_mode != 2) {
                             // ELSE SHOW MANUAL MOVE ENTER SCREEN
-                            if (make_move_mode != 2)
-                            {
-                                // SHOW UP MAKE MANUAL MOVE GUI
-                                gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::PLAYER_ENTER_MANUAL_MOVE_SCREEN);
-                                make_move_mode = 2;
-                                // STORE ALL POSSIBLE MOVES
-                                possible_moves = current_player_state.game_state.legal_moves; // STORE MOVES
-                                // ENABLE BOARD AUTOSCAN AFTER X SECONDS
-                                if (!ConfigParser::getInstance()->getInt(ConfigParser::CFG_ENTRY::USER_RESERVED_AUTO_SCAN_BOARD_TIME_IF_USERS_TURN, make_move_scan_timer))
-                                {
-                                    make_move_scan_timer = -1;
-                                }
-
-                                // RESET VR EXTENTION
-                                vr_extention.reset_move();
-
-                                // AUTO TIMER FUNCTION
+                            // SHOW UP MAKE MANUAL MOVE GUI
+                            gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
+                                            guicommunicator::GUI_VALUE_TYPE::PLAYER_ENTER_MANUAL_MOVE_SCREEN);
+                            make_move_mode = 2;
+                            // STORE ALL POSSIBLE MOVES
+                            possible_moves = current_player_state.game_state.legal_moves; // STORE MOVES
+                            // ENABLE BOARD AUTOSCAN AFTER X SECONDS
+                            if (!ConfigParser::getInstance()->getInt(
+                                    ConfigParser::CFG_ENTRY::USER_RESERVED_AUTO_SCAN_BOARD_TIME_IF_USERS_TURN,
+                                    make_move_scan_timer)) {
+                                make_move_scan_timer = -1;
                             }
-                            else if (make_move_mode == 2)
-                            {
-                                // IF TIMER = 0 TRIGGER EVENT FOR SCAN
-                                if (make_move_scan_timer == 0)
-                                {
-                                    // TRIGGER A SCAN EVENT
-                                    player_enter_manual_move_start_board_scan(gui, board, gamebackend, possible_moves);
-                                    // DISBALE TIMER
-                                    make_move_scan_timer = -1;
-                                }
-                                else if (make_move_scan_timer > 0)
-                                {
-                                    make_move_scan_timer--;
-                                }
 
-                                // PROCESS EXTENTIONS
-                                // EXNTENTION HANDLING ENABLE ALEXA SUPPORT
-                                const VoiceRecognitionExtention::VR_MOVE vre_move = vr_extention.get_move();
-                                ChessPiece::COLOR owcol = ChessPiece::COLOR_UNKNOWN;
-                                if (current_player_state.game_state.im_white_player)
-                                {
-                                    owcol = ChessPiece::COLOR_WHITE;
-                                }
-                                else
-                                {
-                                    owcol = ChessPiece::COLOR_BLACK;
-                                }
+                            // RESET VR EXTENSION
+                            vr_extention.reset_move();
 
-                                if (vre_move.valid)
-                                {
-                                    // PARSE STRINGS INTO USABLE OBJECTS
-                                    const ChessPiece::FIGURE start_figure = ChessPiece::getFigureByName(vre_move.figure, owcol);
-                                    if (start_figure.type == ChessPiece::TYPE_INVALID)
-                                    {
-                                        vr_extention.reset_move();
+                            // AUTO TIMER FUNCTION
+                        } else if (make_move_mode == 2) {
+                            // IF TIMER = 0 TRIGGER EVENT FOR SCAN
+                            if (make_move_scan_timer == 0) {
+                                // TRIGGER A SCAN EVENT
+                                player_enter_manual_move_start_board_scan(gui, board, gamebackend, possible_moves);
+                                // DISBALE TIMER
+                                make_move_scan_timer = -1;
+                            } else if (make_move_scan_timer > 0) {
+                                make_move_scan_timer--;
+                            }
+
+                            // PROCESS EXTENTIONS
+                            // EXNTENTION HANDLING ENABLE ALEXA SUPPORT
+                            const VoiceRecognitionExtention::VR_MOVE vre_move = vr_extention.get_move();
+                            ChessPiece::COLOR owcol = ChessPiece::COLOR_UNKNOWN;
+                            if (current_player_state.game_state.im_white_player) {
+                                owcol = ChessPiece::COLOR_WHITE;
+                            } else {
+                                owcol = ChessPiece::COLOR_BLACK;
+                            }
+
+                            if (vre_move.valid) {
+                                // PARSE STRINGS INTO USABLE OBJECTS
+                                const ChessPiece::FIGURE start_figure = ChessPiece::getFigureByName(vre_move.figure,
+                                                                                                    owcol);
+                                if (start_figure.type == ChessPiece::TYPE_INVALID) {
+                                    vr_extention.reset_move();
+                                } else {
+                                    ChessBoard::MovePiar mvpair_tmp;
+                                    if (vre_move.to.length() == 4) {
+                                        mvpair_tmp = board.StringToMovePair(vre_move.to);
+                                    } else {
+                                        mvpair_tmp = board.StringToMovePair(vre_move.to + "a1");
                                     }
-                                    else
-                                    {
-                                        ChessBoard::MovePiar mvpair_tmp;
-                                        if (vre_move.to.length() == 4)
-                                        {
-                                            mvpair_tmp = board.StringToMovePair(vre_move.to);
-                                        }
-                                        else
-                                        {
-                                            mvpair_tmp = board.StringToMovePair(vre_move.to + "a1");
-                                        }
 
-                                        const ChessField::CHESS_FILEDS dest_field = mvpair_tmp.from_field; // A1xx B3xx => hacked usage of StringToMovePair
+                                    const ChessField::CHESS_FILEDS dest_field = mvpair_tmp.from_field; // A1xx B3xx => hacked usage of StringToMovePair
 
-                                        // GET A POSSIBLE MOVE BY USING THE MOVES LIST
-                                        const std::vector<ChessBoard::MovePiar> mves = board.StringToMovePair(
+                                    // GET A POSSIBLE MOVE BY USING THE MOVES LIST
+                                    const std::vector<ChessBoard::MovePiar> mves = board.StringToMovePair(
                                             possible_moves, true);
-                                        const ChessBoard::PossibleUserMoveResult mvpair = board.calculcate_move_from_figure_and_destination(
+                                    const ChessBoard::PossibleUserMoveResult mvpair = board.calculcate_move_from_figure_and_destination(
                                             start_figure, dest_field, mves);
 
-                                        if (mvpair.error == ChessBoard::BOARD_ERROR::NO_ERROR)
-                                        {
-                                            // PARSE MOVE TO STRING MOVE
-                                            const std::string mv =
+                                    if (mvpair.error == ChessBoard::BOARD_ERROR::NO_ERROR) {
+                                        // PARSE MOVE TO STRING MOVE
+                                        const std::string mv =
                                                 ChessField::field_to_string(mvpair.possible_move.from_field) +
                                                 ChessField::field_to_string(mvpair.possible_move.to_field);
-                                            // MAKE MOVE
-                                            if (!mv.empty() && gamebackend.set_make_move(mv))
-                                            {
-                                            }
-                                            // MOVE SUCCESS RESET IT
-                                            vr_extention.reset_move();
+                                        // MAKE MOVE
+                                        if (!mv.empty() && gamebackend.set_make_move(mv)) {
                                         }
-                                        else
-                                        {
-                                            // MOVE SUCCESS RESET IT
-                                            vr_extention.reset_move();
-                                        }
+                                        // MOVE SUCCESS RESET IT
+                                        vr_extention.reset_move();
+                                    } else {
+                                        // MOVE SUCCESS RESET IT
+                                        vr_extention.reset_move();
                                     }
                                 }
                             }
-
-                            board.boardFromFen(current_player_state.game_state.current_board_fen, ChessBoard::BOARD_TPYE::TARGET_BOARD);
-                            board.syncRealWithTargetBoard();
                         }
-                    }
-                    else if (current_player_state.game_state.is_game_over)
-                    {
+
+                        board.boardFromFen(current_player_state.game_state.current_board_fen,
+                                           ChessBoard::BOARD_TPYE::TARGET_BOARD);
+                        board.syncRealWithTargetBoard();
+
+                    } else if (current_player_state.game_state.is_game_over) {
                         // IS GAME OVER => ABORT GAME TO SERVER AND  GOTO MAIN MENU
-                        board.boardFromFen(current_player_state.game_state.current_board_fen, ChessBoard::BOARD_TPYE::TARGET_BOARD);
+                        board.boardFromFen(current_player_state.game_state.current_board_fen,
+                                           ChessBoard::BOARD_TPYE::TARGET_BOARD);
                         board.syncRealWithTargetBoard();
                         // SET GAME OVER AND GOTO MAIN MENU
                         gamebackend.set_abort_game();
-                        gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::MAIN_MENU_SCREEN);
-                    }
-                    else
-                    {
+                        gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
+                                        guicommunicator::GUI_VALUE_TYPE::MAIN_MENU_SCREEN);
+                    } else {
                         // SYNC THE TWO BORDS
-                        board.boardFromFen(current_player_state.game_state.current_board_fen, ChessBoard::BOARD_TPYE::TARGET_BOARD);
+                        board.boardFromFen(current_player_state.game_state.current_board_fen,
+                                           ChessBoard::BOARD_TPYE::TARGET_BOARD);
                         board.syncRealWithTargetBoard();
                     }
-                }
-                else
-                {
+                } else {
                     // RETURN TO THE MAIN MENU IF GAME WAS STARTEN AND NOW EXITED
-                    if (game_running_state == 1)
-                    {
+                    if (game_running_state == 1) {
 
                         game_running_state = 2;
-                        gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::MAIN_MENU_SCREEN);
+                        gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
+                                        guicommunicator::GUI_VALUE_TYPE::MAIN_MENU_SCREEN);
                     }
                 }
             }
         }
 
         // player_enter_manual_move_start_board_scan(gui,board,gamebackend,possible_moves);
-        if (dgten)
-        {
+        if (dgten) {
             DGT3000Buttons dgt_btn_state = dgt3000if.get_dgt3000_buttons_state();
-            if (dgt_btn_state.is_event_valid)
-            {
-                if (dgt_btn_state.play_btn)
-                {
-                    if (!gamebackend.set_player_state(BackendConnector::PLAYER_STATE::PS_SEARCHING))
-                    {
+            if (dgt_btn_state.is_event_valid) {
+                if (dgt_btn_state.play_btn) {
+                    if (!gamebackend.set_player_state(BackendConnector::PLAYER_STATE::PS_SEARCHING)) {
                         dgt3000if.set_dgt3000_text("SEARCHING");
                         gui.show_error_message_on_gui("ENABLE MATCHMAKING FAILED");
                         LOG_F(WARNING, "ENABLE MATCHMAKING FAILED TRIGGERED BY USER BUTTON");
                     }
                 }
-                if (current_player_state.game_state.game_running && current_player_state.game_state.is_my_turn)
-                {
+                if (current_player_state.game_state.game_running && current_player_state.game_state.is_my_turn) {
                     // CHECK IF LEVER POSITION HAS CHANGED
-                    if (dgt_btn_state_old.lever_right_down != dgt_btn_state.lever_right_down)
-                    {
-                        gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::PROCESSING_SCREEN);
+                    if (dgt_btn_state_old.lever_right_down != dgt_btn_state.lever_right_down) {
+                        gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
+                                        guicommunicator::GUI_VALUE_TYPE::PROCESSING_SCREEN);
                         dgt3000if.set_dgt3000_text("PROCESSING");
                         player_enter_manual_move_start_board_scan(gui, board, gamebackend, possible_moves);
                     }
@@ -1093,32 +1013,27 @@ int main(int argc, char *argv[])
 
         // HANDLE UI EVENTS UI LOOP
         guicommunicator::GUI_EVENT ev = gui.get_gui_update_event();
-        if (ev.is_event_valid)
-        {
+        if (ev.is_event_valid) {
 
             //-----------------------------------------------------------
             //---------------- PROCESS EVENTS ---------------------------
             //-----------------------------------------------------------
             if (ev.event == guicommunicator::GUI_ELEMENT::BEGIN_BTN_SCAN &&
-                ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED)
-            {
+                ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
                 //-----------------------------------------------------------
                 //----------------LOGIN BUTTON WITH BOARD INIT AND NFC SCAN--
                 //-----------------------------------------------------------
                 // PERFORM A LOGIN AS HUMAN
                 if (gamebackend.login(BackendConnector::PLAYER_TYPE::PT_HUMAN) &&
-                    !gamebackend.get_session_id().empty())
-                {
+                    !gamebackend.get_session_id().empty()) {
                     // LOAD USER CONFIG FROM SERVER (MAYBE)
                     // IF NOT EXISTS UPLOAD THEM
-                    if (!gamebackend.download_config(ConfigParser::getInstance(), true))
-                    {
+                    if (!gamebackend.download_config(ConfigParser::getInstance(), true)) {
                         LOG_F(WARNING, "download_config failed - upload current config");
                         gamebackend.upload_config(ConfigParser::getInstance());
                     }
                     // START HEARTBEAT THREAD
-                    if (gamebackend.start_heartbeat_thread())
-                    {
+                    if (gamebackend.start_heartbeat_thread()) {
                         // PLACE THE GOT SESSION ID ON THE INFO SCREEN
                         gui.createEvent(guicommunicator::GUI_ELEMENT::INFOSCREEN_SESSIONID_LABEL,
                                         guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING,
@@ -1127,61 +1042,51 @@ int main(int argc, char *argv[])
                         gui.createEvent(guicommunicator::GUI_ELEMENT::INFOSCREEN_VERSION,
                                         guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING,
                                         "Playername: " + gamebackend.getPlayerProfile().friendly_name + " | " +
-                                            gamebackend.getPlayerProfile().elo_rank_readable);
+                                        gamebackend.getPlayerProfile().elo_rank_readable);
                         // NOW INIT BOARD AGAIN WITH SCAN
                         HardwareInterface::getInstance()->setTurnStateLight(
-                            HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_PRECCESSING);
+                                HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_PRECCESSING);
                         gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
                                         guicommunicator::GUI_VALUE_TYPE::PROCESSING_SCREEN);
                         board.initBoard(true);
                         HardwareInterface::getInstance()->setTurnStateLight(
-                            HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_IDLE);
+                                HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_IDLE);
                         gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
                                         guicommunicator::GUI_VALUE_TYPE::MAIN_MENU_SCREEN);
                         // SET USER TO AUTO SEARCHING
                         if (ConfigParser::getInstance()->getBool_nocheck(
-                                ConfigParser::CFG_ENTRY::USER_GENERAL_ENABLE_AUTO_MATCHMAKING_ENABLE))
-                        {
+                                ConfigParser::CFG_ENTRY::USER_GENERAL_ENABLE_AUTO_MATCHMAKING_ENABLE)) {
                             gamebackend.set_player_state(BackendConnector::PLAYER_STATE::PS_SEARCHING);
                         }
-                    }
-                    else
-                    {
+                    } else {
                         gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK,
                                              "LOGIN_FAILED_HEARTBEAT", 4000);
                         LOG_F(ERROR, "GOT LOGIN_FAILED_HEARTBEAT START THREAD");
                         gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
                                         guicommunicator::GUI_VALUE_TYPE::LOGIN_SCREEN);
                     }
-                }
-                else
-                {
+                } else {
                     gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK, "LOGIN_FAILED", 4000);
                     LOG_F(ERROR, "GOT LOGIN FAILED");
                     gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
                                     guicommunicator::GUI_VALUE_TYPE::LOGIN_SCREEN);
                 }
-            }
-            else if (ev.event == guicommunicator::GUI_ELEMENT::BEGIN_BTN_DEFAULT &&
-                     ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED)
-            {
+            } else if (ev.event == guicommunicator::GUI_ELEMENT::BEGIN_BTN_DEFAULT &&
+                       ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
                 //-------------------------------------------------------------
                 // LOGIN TO SERVER WITH INIT BOARD WITH DEFAULT FIGURE POSTION--
                 //-------------------------------------------------------------
                 // PERFORM A LOGIN AS HUMAN
                 if (gamebackend.login(BackendConnector::PLAYER_TYPE::PT_HUMAN) &&
-                    !gamebackend.get_session_id().empty())
-                {
+                    !gamebackend.get_session_id().empty()) {
                     // LOAD USER CONFIG FROM SERVER (MAYBE)
                     // IF NOT EXISTS UPLOAD THEM
-                    if (!gamebackend.download_config(ConfigParser::getInstance(), true))
-                    {
+                    if (!gamebackend.download_config(ConfigParser::getInstance(), true)) {
                         LOG_F(WARNING, "download_config failed - upload current config");
                         gamebackend.upload_config(ConfigParser::getInstance());
                     }
                     // START HEARTBEAT THREAD
-                    if (gamebackend.start_heartbeat_thread())
-                    {
+                    if (gamebackend.start_heartbeat_thread()) {
                         // PLACE THE GOT SESSION ID ON THE INFO SCREEN
                         gui.createEvent(guicommunicator::GUI_ELEMENT::INFOSCREEN_SESSIONID_LABEL,
                                         guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING,
@@ -1190,66 +1095,54 @@ int main(int argc, char *argv[])
                         gui.createEvent(guicommunicator::GUI_ELEMENT::INFOSCREEN_VERSION,
                                         guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING,
                                         "Playername: " + gamebackend.getPlayerProfile().friendly_name + " | " +
-                                            gamebackend.getPlayerProfile().elo_rank_readable);
+                                        gamebackend.getPlayerProfile().elo_rank_readable);
 
                         // NOW INIT BOARD AGAIN WITH SCAN
                         HardwareInterface::getInstance()->setTurnStateLight(
-                            HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_PRECCESSING);
+                                HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_PRECCESSING);
                         gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
                                         guicommunicator::GUI_VALUE_TYPE::PROCESSING_SCREEN);
                         // INIT BOARD
                         board_init_err = board.initBoard(false);
-                        if (board_init_err == ChessBoard::BOARD_ERROR::FIGURES_MISSING)
-                        {
+                        if (board_init_err == ChessBoard::BOARD_ERROR::FIGURES_MISSING) {
                             // FIGURE IS MISSING ON BOARD
                             gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK,
                                                  "FIGURES MISSING - PLEASE CHECK ON BOARD", 10000);
                             gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
                                             guicommunicator::GUI_VALUE_TYPE::LOGIN_SCREEN);
-                        }
-                        else if (board_init_err == ChessBoard::BOARD_ERROR::INIT_COMPLETE)
-                        {
+                        } else if (board_init_err == ChessBoard::BOARD_ERROR::INIT_COMPLETE) {
                             // IF NO ERROR GOTO MAIN MENU
                             gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
                                             guicommunicator::GUI_VALUE_TYPE::MAIN_MENU_SCREEN);
                             HardwareInterface::getInstance()->setTurnStateLight(
-                                HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_IDLE);
+                                    HardwareInterface::HI_TURN_STATE_LIGHT::HI_TSL_IDLE);
                             // SET USER TO AUTO SEARCHING
                             if (ConfigParser::getInstance()->getBool_nocheck(
-                                    ConfigParser::CFG_ENTRY::USER_GENERAL_ENABLE_AUTO_MATCHMAKING_ENABLE))
-                            {
+                                    ConfigParser::CFG_ENTRY::USER_GENERAL_ENABLE_AUTO_MATCHMAKING_ENABLE)) {
                                 gamebackend.set_player_state(BackendConnector::PLAYER_STATE::PS_SEARCHING);
                             }
-                        }
-                        else
-                        {
+                        } else {
                             // UNKNOWN ERROR => GO BACK LOGIN SCREEN
                             gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK,
                                                  "BOARD INIT FAILED UNKNOWN ERROR", 10000);
                             gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
                                             guicommunicator::GUI_VALUE_TYPE::LOGIN_SCREEN);
                         }
-                    }
-                    else
-                    {
+                    } else {
                         gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK,
                                              "LOGIN_FAILED_HEARTBEAT", 4000);
                         LOG_F(ERROR, "GOT LOGIN_FAILED_HEARTBEAT START THREAD");
                         gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
                                         guicommunicator::GUI_VALUE_TYPE::LOGIN_SCREEN);
                     }
-                }
-                else
-                {
+                } else {
                     gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK, "LOGIN_FAILED", 4000);
                     LOG_F(ERROR, "GOT LOGIN FAILED");
                     gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
                                     guicommunicator::GUI_VALUE_TYPE::LOGIN_SCREEN);
                 }
-            }
-            else if (ev.event == guicommunicator::GUI_ELEMENT::INIT_BTN &&
-                     ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED)
-            {
+            } else if (ev.event == guicommunicator::GUI_ELEMENT::INIT_BTN &&
+                       ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
                 //--------------------------------------------------------
                 //----------------BOARD INIT BUTTON-----------------------
                 //--------------------------------------------------------
@@ -1257,47 +1150,37 @@ int main(int argc, char *argv[])
                                 guicommunicator::GUI_VALUE_TYPE::PROCESSING_SCREEN);
                 // INIT BOARD ON PRODUCTATION HARDWARE ALWAYS
                 board_init_err = board.initBoard(
-                    board_scan | HardwareInterface::getInstance()->is_production_hardware());
+                        board_scan | HardwareInterface::getInstance()->is_production_hardware());
                 // CHECK FOR FIGURE MISSING ERROR
-                if (board_init_err == ChessBoard::BOARD_ERROR::FIGURES_MISSING)
-                {
+                if (board_init_err == ChessBoard::BOARD_ERROR::FIGURES_MISSING) {
                     // gui.show_error_message_on_gui("FIGURES MISSING");
                     gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK,
                                          "FIGURES MISSING - PLEASE CHECK ON BOARD", 10000);
-                }
-                else if (board_init_err != ChessBoard::BOARD_ERROR::INIT_COMPLETE)
-                {
+                } else if (board_init_err != ChessBoard::BOARD_ERROR::INIT_COMPLETE) {
                     // gui.show_error_message_on_gui("BOARD INIT FAILED UNKNOWN ERROR");
                     gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK,
                                          "BOARD INIT FAILED UNKNOWN ERROR", 10000);
                 }
                 gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
                                 guicommunicator::GUI_VALUE_TYPE::SETTINGS_SCREEN);
-            }
-            else if ((ev.event == guicommunicator::GUI_ELEMENT::SCAN_BOARD_BTN) &&
-                     ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED)
-            {
+            } else if ((ev.event == guicommunicator::GUI_ELEMENT::SCAN_BOARD_BTN) &&
+                       ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
                 //--------------------------------------------------------
                 //----------------CALIBRATE BOARD BTN---------------------
                 //--------------------------------------------------------
                 gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
                                 guicommunicator::GUI_VALUE_TYPE::PROCESSING_SCREEN);
-                if (board.calibrate_home_pos() == ChessBoard::BOARD_ERROR::NO_ERROR)
-                {
+                if (board.calibrate_home_pos() == ChessBoard::BOARD_ERROR::NO_ERROR) {
                     gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK,
                                          "TABLE REACHED HOME POSITION", 10000);
-                }
-                else
-                {
+                } else {
                     gui.show_error_message_on_gui("board.initBoard() FAILED");
                 }
                 HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, false);
                 gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
                                 guicommunicator::GUI_VALUE_TYPE::SETTINGS_SCREEN);
-            }
-            else if (ev.event == guicommunicator::GUI_ELEMENT::DEBUG_FUNCTION_B &&
-                     ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED)
-            {
+            } else if (ev.event == guicommunicator::GUI_ELEMENT::DEBUG_FUNCTION_B &&
+                       ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
                 //--------------------------------------------------------
                 //----------------DEBUG - LOAD CONFIG BUTTON--------------
                 //--------------------------------------------------------
@@ -1308,10 +1191,8 @@ int main(int argc, char *argv[])
                                      10000);
                 gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
                                 guicommunicator::GUI_VALUE_TYPE::SETTINGS_SCREEN);
-            }
-            else if (ev.event == guicommunicator::GUI_ELEMENT::DEBUG_FUNCTION_C &&
-                     ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED)
-            {
+            } else if (ev.event == guicommunicator::GUI_ELEMENT::DEBUG_FUNCTION_C &&
+                       ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
                 //--------------------------------------------------------
                 //----------------DEBUG - MAKE MOVE --------------
                 //--------------------------------------------------------
@@ -1320,26 +1201,21 @@ int main(int argc, char *argv[])
                 board.test_make_move_func();
                 gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
                                 guicommunicator::GUI_VALUE_TYPE::DEBUG_SCREEN);
-            }
-            else if (ev.event == guicommunicator::GUI_ELEMENT::DEBUG_FUNCTION_D &&
-                     ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED)
-            {
+            } else if (ev.event == guicommunicator::GUI_ELEMENT::DEBUG_FUNCTION_D &&
+                       ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
                 //--------------------------------------------------------
                 //----------------DEBUG - CORNER TEST--------------
                 //--------------------------------------------------------
                 board.corner_move_test();
             }
             if (ev.event == guicommunicator::GUI_ELEMENT::DEBUG_FUNCTION_E &&
-                ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED)
-            {
+                ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
                 //--------------------------------------------------------
                 //----------------DEBUG - UPLOAD CONFIG BUTTON------------
                 //--------------------------------------------------------
                 gamebackend.upload_config(ConfigParser::getInstance());
-            }
-            else if (ev.event == guicommunicator::GUI_ELEMENT::DEBUG_FUNCTION_F &&
-                     ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED)
-            {
+            } else if (ev.event == guicommunicator::GUI_ELEMENT::DEBUG_FUNCTION_F &&
+                       ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
                 //--------------------------------------------------------
                 //----------------DEBUG - UPLOAD LOG BUTTON---------------
                 //--------------------------------------------------------
@@ -1348,18 +1224,15 @@ int main(int argc, char *argv[])
                 loguru::flush();
                 // IF GOT A SIGNAL READ LOGFILE AND UPLOAD THEM
                 std::string log = read_file_to_string(LOG_FILE_PATH_ERROR);
-                if (!log.empty())
-                {
+                if (!log.empty()) {
                     gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
                                     guicommunicator::GUI_VALUE_TYPE::PROCESSING_SCREEN);
                     gamebackend.upload_logfile(log);
                     gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
                                     guicommunicator::GUI_VALUE_TYPE::DEBUG_SCREEN);
                 }
-            }
-            else if (ev.event == guicommunicator::GUI_ELEMENT::DEBUG_FUNCTION_H &&
-                     ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED)
-            {
+            } else if (ev.event == guicommunicator::GUI_ELEMENT::DEBUG_FUNCTION_H &&
+                       ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
                 //--------------------------------------------------------
                 //----------------DEBUG - DOWNLOAD CONFIG BUTTON----------
                 //--------------------------------------------------------
@@ -1367,38 +1240,29 @@ int main(int argc, char *argv[])
                 make_move_mode = 1;
                 gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
                                 guicommunicator::GUI_VALUE_TYPE::PLAYER_ENTER_MANUAL_MOVE_SCREEN);
-            }
-            else if (ev.event == guicommunicator::GUI_ELEMENT::DEBUG_FUNCTION_G &&
-                     ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED)
-            {
+            } else if (ev.event == guicommunicator::GUI_ELEMENT::DEBUG_FUNCTION_G &&
+                       ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
                 //--------------------------------------------------------
                 //----------------DEBUG - DOWNLOAD CONFIG BUTTON----------
                 //--------------------------------------------------------
                 LOG_F(WARNING, "DEBUG - DOWNLOAD CONFIG BUTTON TRIGGERED ");
                 gamebackend.download_config(ConfigParser::getInstance(), true);
-            }
-            else if (ev.event == guicommunicator::GUI_ELEMENT::DEBUG_FUNCTION_I &&
-                     ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED)
-            {
+            } else if (ev.event == guicommunicator::GUI_ELEMENT::DEBUG_FUNCTION_I &&
+                       ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
                 //--------------------------------------------------------
                 //----------------DEBUG - FLIP SCREEN---------------------
                 //--------------------------------------------------------
                 LOG_F(WARNING, "DEBUG - FLIP ROATION ");
                 flip_screen_state = !flip_screen_state;
-                if (flip_screen_state)
-                {
+                if (flip_screen_state) {
                     gui.createEvent(guicommunicator::GUI_ELEMENT::QT_UI_SET_ORIENTATION_180,
                                     guicommunicator::GUI_VALUE_TYPE::ENABLED);
-                }
-                else
-                {
+                } else {
                     gui.createEvent(guicommunicator::GUI_ELEMENT::QT_UI_SET_ORIENTATION_0,
                                     guicommunicator::GUI_VALUE_TYPE::ENABLED);
                 }
-            }
-            else if (ev.event == guicommunicator::GUI_ELEMENT::LOGOUT_BTN &&
-                     ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED)
-            {
+            } else if (ev.event == guicommunicator::GUI_ELEMENT::LOGOUT_BTN &&
+                       ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
                 //--------------------------------------------------------
                 //----------------LOGOUT BUTTON --------------------------
                 //--------------------------------------------------------
@@ -1410,51 +1274,39 @@ int main(int argc, char *argv[])
                 gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
                                 guicommunicator::GUI_VALUE_TYPE::LOGIN_SCREEN);
                 //}
-            }
-            else if (ev.event == guicommunicator::GUI_ELEMENT::MAINMENU_START_AI_MATCH_BTN &&
-                     ev.type == guicommunicator::GUI_VALUE_TYPE::ENABLED)
-            {
+            } else if (ev.event == guicommunicator::GUI_ELEMENT::MAINMENU_START_AI_MATCH_BTN &&
+                       ev.type == guicommunicator::GUI_VALUE_TYPE::ENABLED) {
                 //--------------------------------------------------------
                 //----------------ENABLE MATCHMAKING BUTTON --------------
                 //--------------------------------------------------------
                 randommove_override = false;
                 // SET PLAYERSTATE TO OPEN FO A MATCH
-                if (!gamebackend.set_player_state(BackendConnector::PLAYER_STATE::PS_SEARCHING))
-                {
+                if (!gamebackend.set_player_state(BackendConnector::PLAYER_STATE::PS_SEARCHING)) {
                     gui.show_error_message_on_gui("ENABLE MATCHMAKING FAILED");
                     LOG_F(WARNING, "ENABLE MATCHMAKING FAILED TRIGGERED BY USER BUTTON");
                 }
-            }
-            else if (ev.event == guicommunicator::GUI_ELEMENT::MAINMENU_START_AUTOMOVE_MATCH_BTN &&
-                     ev.type == guicommunicator::GUI_VALUE_TYPE::ENABLED)
-            {
+            } else if (ev.event == guicommunicator::GUI_ELEMENT::MAINMENU_START_AUTOMOVE_MATCH_BTN &&
+                       ev.type == guicommunicator::GUI_VALUE_TYPE::ENABLED) {
                 //--------------------------------------------------------
                 //----------------ENABLE AUOPLAYER MATCHMAKING BUTTON --------------
                 //--------------------------------------------------------
                 randommove_override = true;
                 // SET PLAYERSTATE TO OPEN FO A MATCH
-                if (!gamebackend.set_player_state(BackendConnector::PLAYER_STATE::PS_SEARCHING))
-                {
+                if (!gamebackend.set_player_state(BackendConnector::PLAYER_STATE::PS_SEARCHING)) {
                     gui.show_error_message_on_gui("ENABLE MATCHMAKING FAILED");
                     LOG_F(WARNING, "ENABLE MATCHMAKING FAILED TRIGGERED BY USER BUTTON");
                 }
-            }
-            else if (ev.event == guicommunicator::GUI_ELEMENT::MAINMENU_START_AI_MATCH_BTN &&
-                     ev.type == guicommunicator::GUI_VALUE_TYPE::DISBALED)
-            {
+            } else if (ev.event == guicommunicator::GUI_ELEMENT::MAINMENU_START_AI_MATCH_BTN &&
+                       ev.type == guicommunicator::GUI_VALUE_TYPE::DISBALED) {
                 //--------------------------------------------------------
                 //----------------DISBALE MATCHMAKING BUTTON -------------
                 //--------------------------------------------------------
                 // SET PLAYERSTATE TO OPEN FO A MATCH
-                if (!gamebackend.set_player_state(BackendConnector::PLAYER_STATE::PS_IDLE))
-                {
-                    gui.show_error_message_on_gui("DISBALE MATCHMAKING FAILED");
-                    LOG_F(WARNING, "DISBALE MATCHMAKING FAILED TRIGGERED BY USER BUTTON");
+                if (!gamebackend.set_player_state(BackendConnector::PLAYER_STATE::PS_IDLE)) {
+                    LOG_F(WARNING, "DISABLE MATCHMAKING FAILED TRIGGERED BY USER BUTTON");
                 }
-            }
-            else if (ev.event == guicommunicator::GUI_ELEMENT::GAMESCREEN_ABORT_GAME &&
-                     ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED)
-            {
+            } else if (ev.event == guicommunicator::GUI_ELEMENT::GAMESCREEN_ABORT_GAME &&
+                       ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
                 //--------------------------------------------------------
                 //----------------ABORT GAME BUTTON ----------------------
                 //--------------------------------------------------------
@@ -1469,39 +1321,31 @@ int main(int argc, char *argv[])
                 // ROTATE SCREEN IF NEEDED
                 if (ConfigParser::getInstance()->getBool_nocheck(
                         ConfigParser::CFG_ENTRY::HARDWARE_QTUI_FLIP_ORIENTATION) &&
-                    !cmdOptionExists(argv, argv + argc, "-preventflipscreen"))
-                {
+                    !cmdOptionExists(argv, argv + argc, "-preventflipscreen")) {
                     gui.createEvent(guicommunicator::GUI_ELEMENT::QT_UI_SET_ORIENTATION_180,
                                     guicommunicator::GUI_VALUE_TYPE::ENABLED);
                     flip_screen_state = true;
-                }
-                else
-                {
+                } else {
                     gui.createEvent(guicommunicator::GUI_ELEMENT::QT_UI_SET_ORIENTATION_0,
                                     guicommunicator::GUI_VALUE_TYPE::ENABLED);
                     flip_screen_state = false;
                 }
                 gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
                                 guicommunicator::GUI_VALUE_TYPE::LOGIN_SCREEN);
-            }
-            else if (ev.event == guicommunicator::GUI_ELEMENT::PLAYER_EMM_INPUT &&
-                     ev.type == guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING && make_move_mode > 0)
-            {
+            } else if (ev.event == guicommunicator::GUI_ELEMENT::PLAYER_EMM_INPUT &&
+                       ev.type == guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING && make_move_mode > 0) {
                 //--------------------------------------------------------
                 //----------------PLAYER MAKE MANUAL MOVE-----------------
                 //--------------------------------------------------------
                 make_move_scan_timer = -1;
                 ChessBoard::MovePiar mvpair = board.StringToMovePair(ev.value);
-                if (mvpair.is_valid)
-                {
+                if (mvpair.is_valid) {
                     // FOR TEST
-                    if (make_move_mode == 1)
-                    {
+                    if (make_move_mode == 1) {
                         // PERFORM THE MOVE ON THE BOARD => MOVE FIGURES
                         board.makeMoveSync(mvpair, false, false, false);
                         if (ConfigParser::getInstance()->getBool_nocheck(
-                                ConfigParser::CFG_ENTRY::USER_RESERVED_MAKE_MOVE_MANUAL_TEST_DO_SYNC))
-                        {
+                                ConfigParser::CFG_ENTRY::USER_RESERVED_MAKE_MOVE_MANUAL_TEST_DO_SYNC)) {
                             LOG_F(INFO,
                                   "USER_RESERVED_MAKE_MOVE_MANUAL_TEST_DO_SYNC IS SET => PERFORMING  board.syncRealWithTargetBoard();");
                             board.syncRealWithTargetBoard();
@@ -1509,44 +1353,35 @@ int main(int argc, char *argv[])
                         gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
                                         guicommunicator::GUI_VALUE_TYPE::DEBUG_SCREEN);
                         make_move_mode = 0;
-                    }
-                    else if (make_move_mode == 2)
-                    {
+                    } else if (make_move_mode == 2) {
                         // FOR RUNNING GAME FIRST CHECK VIA BACKEN IF THE MOVE IS VALID
                         gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
                                         guicommunicator::GUI_VALUE_TYPE::GAME_SCREEN);
-                        if (gamebackend.set_make_move(ev.value))
-                        {
+                        if (gamebackend.set_make_move(ev.value)) {
                             // board.makeMoveSync(board.StringToMovePair(ev.value),false,true,false);
                             // board.syncRealWithTargetBoard();
                             make_move_mode = 0; // MOVE VALID
-                        }
-                        else
-                        {
+                        } else {
                             make_move_mode = 2;
                             gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
                                             guicommunicator::GUI_VALUE_TYPE::PLAYER_ENTER_MANUAL_MOVE_SCREEN);
                         }
                     }
                 }
-            }
-            else if (ev.event == guicommunicator::GUI_ELEMENT::PLAYER_EMM_SCAN_BOARD &&
-                     ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED &&
-                     make_move_mode > 0)
-            { // THE SCNA BOARD FOR MOVE BTN
+            } else if (ev.event == guicommunicator::GUI_ELEMENT::PLAYER_EMM_SCAN_BOARD &&
+                       ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED &&
+                       make_move_mode > 0) { // THE SCNA BOARD FOR MOVE BTN
                 //--------------------------------------------------------
                 //--LAYER ENTER MANUAL MOVE SCAN BOARD FOR MOVE BUTTON ---
                 //--------------------------------------------------------
                 player_enter_manual_move_start_board_scan(gui, board, gamebackend, possible_moves);
-            }
-            else if (ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_H1POS &&
-                     ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED)
-            {
+            } else if (ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_H1POS &&
+                       ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
                 //--------------------------------------------------------
                 //----------------CALIBRATION SCREEN ---------------------
                 //--------------------------------------------------------
                 HardwareInterface::getInstance()->set_speed_preset(
-                    HardwareInterface::HI_TRAVEL_SPEED_PRESET::HI_TSP_MOVE);
+                        HardwareInterface::HI_TRAVEL_SPEED_PRESET::HI_TSP_MOVE);
                 cal_move = 0;
                 cal_move_step = 5; // SET USER ARROW KEY TO 5mm PER PRESS
                 LOG_F(WARNING, "CALIBRATION SCREEN - H1 POSITION");
@@ -1557,21 +1392,19 @@ int main(int argc, char *argv[])
 
                 // READ CONFIG VALUES
                 cal_pos_x = ConfigParser::getInstance()->getInt_nocheck(
-                    ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X);
+                        ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X);
                 cal_pos_y = ConfigParser::getInstance()->getInt_nocheck(
-                    ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y);
+                        ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y);
                 // MOVE TO NEW H1 POSITION
                 HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, true);
                 HardwareInterface::getInstance()->move_to_postion_mm_absolute(cal_pos_x, cal_pos_y, true);
-            }
-            else if (ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_A8POS &&
-                     ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED)
-            {
+            } else if (ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_A8POS &&
+                       ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
                 //--------------------------------------------------------
                 //----------------CALIBRATION SCREEN CAL A8 POSITION------
                 //--------------------------------------------------------
                 HardwareInterface::getInstance()->set_speed_preset(
-                    HardwareInterface::HI_TRAVEL_SPEED_PRESET::HI_TSP_MOVE);
+                        HardwareInterface::HI_TRAVEL_SPEED_PRESET::HI_TSP_MOVE);
                 cal_move = 1;
                 cal_move_step = 5; // SET USER ARROW KEY TO 5mm PER PRESS
                 LOG_F(WARNING, "CALIBRATION SCREEN - H1 POSITION");
@@ -1583,32 +1416,30 @@ int main(int argc, char *argv[])
                 // READ CONFIG VALUES
                 // THE CHESS BOARD IS SQUARED SO X AND Y ARE DIAGONALLY THE SAME
                 cal_pos_x = ConfigParser::getInstance()->getInt_nocheck(
-                                ConfigParser::CFG_ENTRY::MECHANIC_CHESS_FIELD_WIDTH_X) *
+                        ConfigParser::CFG_ENTRY::MECHANIC_CHESS_FIELD_WIDTH_X) *
                             7;
                 cal_pos_y = ConfigParser::getInstance()->getInt_nocheck(
-                                ConfigParser::CFG_ENTRY::MECHANIC_CHESS_FIELD_WIDTH_Y) *
+                        ConfigParser::CFG_ENTRY::MECHANIC_CHESS_FIELD_WIDTH_Y) *
                             7;
 
                 // MOVE TO NEW A8 POSITION
                 HardwareInterface::getInstance()->move_to_postion_mm_absolute(
-                    ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X),
-                    ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y),
-                    true);
+                        ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X),
+                        ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y),
+                        true);
                 HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, true);
                 HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, true);
                 HardwareInterface::getInstance()->move_to_postion_mm_absolute(cal_pos_x +
-                                                                                  ConfigParser::getInstance()->getInt_nocheck(
+                                                                              ConfigParser::getInstance()->getInt_nocheck(
                                                                                       ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X),
                                                                               cal_pos_y +
-                                                                                  ConfigParser::getInstance()->getInt_nocheck(
+                                                                              ConfigParser::getInstance()->getInt_nocheck(
                                                                                       ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y),
                                                                               true);
-            }
-            else if (ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_PPBLACK1 &&
-                     ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED)
-            {
+            } else if (ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_PPBLACK1 &&
+                       ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
                 HardwareInterface::getInstance()->set_speed_preset(
-                    HardwareInterface::HI_TRAVEL_SPEED_PRESET::HI_TSP_MOVE);
+                        HardwareInterface::HI_TRAVEL_SPEED_PRESET::HI_TSP_MOVE);
                 cal_move = 2;
                 cal_move_step = 2; // SET USER ARROW KEY TO 2mm PER PRESS
                 LOG_F(WARNING, "CALIBRATION SCREEN -PARK POSITION BLACK 1");
@@ -1618,24 +1449,22 @@ int main(int argc, char *argv[])
                 HardwareInterface::getInstance()->home_sync();
                 // MOVE H1
                 HardwareInterface::getInstance()->move_to_postion_mm_absolute(
-                    ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X),
-                    ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y),
-                    true);
+                        ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X),
+                        ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y),
+                        true);
                 // ENABLE COIL FOR RIGHT SITE
                 HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, true);
                 HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, true);
                 // MOVE TO PARK POS BLACK 1
                 cal_pos_x = ConfigParser::getInstance()->getInt_nocheck(
-                    ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_BLACK_X_LINE);
+                        ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_BLACK_X_LINE);
                 cal_pos_y = ConfigParser::getInstance()->getInt_nocheck(
-                    ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_BLACK_FIRST_Y_OFFSET);
+                        ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_BLACK_FIRST_Y_OFFSET);
                 HardwareInterface::getInstance()->move_to_postion_mm_absolute(cal_pos_x, cal_pos_y, true);
-            }
-            else if (ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_PPWHITE1 &&
-                     ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED)
-            {
+            } else if (ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_PPWHITE1 &&
+                       ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
                 HardwareInterface::getInstance()->set_speed_preset(
-                    HardwareInterface::HI_TRAVEL_SPEED_PRESET::HI_TSP_MOVE);
+                        HardwareInterface::HI_TRAVEL_SPEED_PRESET::HI_TSP_MOVE);
                 cal_move = 3;
                 cal_move_step = 2; // SET USER ARROW KEY TO 2mm PER PRESS
                 LOG_F(WARNING, "CALIBRATION SCREEN -PARK POSITION WHITE 1");
@@ -1645,24 +1474,22 @@ int main(int argc, char *argv[])
                 HardwareInterface::getInstance()->home_sync();
                 // MOVE H1
                 HardwareInterface::getInstance()->move_to_postion_mm_absolute(
-                    ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X),
-                    ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y),
-                    true);
+                        ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X),
+                        ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y),
+                        true);
                 // ENABLE COIL FOR RIGHT SITE
                 HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, true);
                 HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, true);
                 // MOVE TO PARK POS BLACK 1
                 cal_pos_x = ConfigParser::getInstance()->getInt_nocheck(
-                    ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_WHITE_X_LINE);
+                        ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_WHITE_X_LINE);
                 cal_pos_y = ConfigParser::getInstance()->getInt_nocheck(
-                    ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_WHITE_FIRST_Y_OFFSET);
+                        ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_WHITE_FIRST_Y_OFFSET);
                 HardwareInterface::getInstance()->move_to_postion_mm_absolute(cal_pos_x, cal_pos_y, true);
-            }
-            else if (ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_PPBLACK16 &&
-                     ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED)
-            {
+            } else if (ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_PPBLACK16 &&
+                       ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
                 HardwareInterface::getInstance()->set_speed_preset(
-                    HardwareInterface::HI_TRAVEL_SPEED_PRESET::HI_TSP_MOVE);
+                        HardwareInterface::HI_TRAVEL_SPEED_PRESET::HI_TSP_MOVE);
                 cal_move = 4;
                 cal_move_step = 2; // SET USER ARROW KEY TO 2mm PER PRESS
                 LOG_F(WARNING, "CALIBRATION SCREEN -PARK POSITION BLACK 16");
@@ -1672,138 +1499,113 @@ int main(int argc, char *argv[])
                 HardwareInterface::getInstance()->home_sync();
                 // MOVE H1
                 HardwareInterface::getInstance()->move_to_postion_mm_absolute(
-                    ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X),
-                    ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y),
-                    true);
+                        ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X),
+                        ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y),
+                        true);
                 // ENABLE COIL FOR RIGHT SITE
                 HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, true);
                 // MOVE TO PARK POS BLACK 16
                 cal_pos_y = ConfigParser::getInstance()->getInt_nocheck(
-                    ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_BLACK_FIRST_Y_OFFSET);
+                        ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_BLACK_FIRST_Y_OFFSET);
                 // GET THE Y POSITION OF THE 16th PARK POS
                 cal_pos_y += (16 - 1) * ConfigParser::getInstance()->getInt_nocheck(
-                                            ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_CELL_SIZE);
+                        ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_CELL_SIZE);
 
                 // FIRST MOVE TO PP BLACK 16 BEFORE ENTRY
                 cal_pos_x = ConfigParser::getInstance()->getInt_nocheck(
-                    ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_BLACK_X_LINE);
+                        ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_BLACK_X_LINE);
                 cal_pos_x = ConfigParser::getInstance()->getInt_nocheck(
-                    ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_CELL_BEFORE_OFFSET);
+                        ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_CELL_BEFORE_OFFSET);
                 HardwareInterface::getInstance()->move_to_postion_mm_absolute(cal_pos_x, cal_pos_y, true);
                 // THEN INTO THE PARK POSITION
                 cal_pos_x = ConfigParser::getInstance()->getInt_nocheck(
-                    ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_BLACK_X_LINE);
+                        ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_BLACK_X_LINE);
                 HardwareInterface::getInstance()->move_to_postion_mm_absolute(cal_pos_x, cal_pos_y, true);
-            }
-            else if (ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_MVUP &&
-                     ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED)
-            {
+            } else if (ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_MVUP &&
+                       ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
                 LOG_F(WARNING, "CALIBRATION SCREEN - UP");
                 // MOVE TO NEW POSITION
                 cal_pos_y += cal_move_step;
 
                 // WORKAROUND FOR A8
-                if (cal_move == 1)
-                {
+                if (cal_move == 1) {
                     HardwareInterface::getInstance()->move_to_postion_mm_absolute(cal_pos_x +
-                                                                                      ConfigParser::getInstance()->getInt_nocheck(
+                                                                                  ConfigParser::getInstance()->getInt_nocheck(
                                                                                           ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X),
                                                                                   cal_pos_y +
-                                                                                      ConfigParser::getInstance()->getInt_nocheck(
+                                                                                  ConfigParser::getInstance()->getInt_nocheck(
                                                                                           ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y),
                                                                                   true);
-                }
-                else
-                {
+                } else {
                     HardwareInterface::getInstance()->move_to_postion_mm_absolute(cal_pos_x, cal_pos_y, true);
                 }
-            }
-            else if (ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_MVDOWN &&
-                     ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED)
-            {
+            } else if (ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_MVDOWN &&
+                       ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
                 LOG_F(WARNING, "CALIBRATION SCREEN - DOWN");
                 // MOVE TO NEW POSITION
                 cal_pos_y -= cal_move_step;
                 // WORKAROUND FOR A8
-                if (cal_move == 1)
-                {
+                if (cal_move == 1) {
                     HardwareInterface::getInstance()->move_to_postion_mm_absolute(cal_pos_x +
-                                                                                      ConfigParser::getInstance()->getInt_nocheck(
+                                                                                  ConfigParser::getInstance()->getInt_nocheck(
                                                                                           ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X),
                                                                                   cal_pos_y +
-                                                                                      ConfigParser::getInstance()->getInt_nocheck(
+                                                                                  ConfigParser::getInstance()->getInt_nocheck(
                                                                                           ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y),
                                                                                   true);
-                }
-                else
-                {
+                } else {
                     HardwareInterface::getInstance()->move_to_postion_mm_absolute(cal_pos_x, cal_pos_y, true);
                 }
-            }
-            else if (ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_MVLEFT &&
-                     ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED)
-            {
+            } else if (ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_MVLEFT &&
+                       ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
                 LOG_F(WARNING, "CALIBRATION SCREEN - LEFT");
                 // MOVE TO NEW POSITION
                 cal_pos_x += cal_move_step;
                 // WORKAROUND FOR A8
-                if (cal_move == 1)
-                {
+                if (cal_move == 1) {
                     HardwareInterface::getInstance()->move_to_postion_mm_absolute(cal_pos_x +
-                                                                                      ConfigParser::getInstance()->getInt_nocheck(
+                                                                                  ConfigParser::getInstance()->getInt_nocheck(
                                                                                           ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X),
                                                                                   cal_pos_y +
-                                                                                      ConfigParser::getInstance()->getInt_nocheck(
+                                                                                  ConfigParser::getInstance()->getInt_nocheck(
                                                                                           ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y),
                                                                                   true);
-                }
-                else
-                {
+                } else {
                     HardwareInterface::getInstance()->move_to_postion_mm_absolute(cal_pos_x, cal_pos_y, true);
                 }
-            }
-            else if (ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_MVRIGHT &&
-                     ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED)
-            {
+            } else if (ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_MVRIGHT &&
+                       ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
                 LOG_F(WARNING, "CALIBRATION SCREEN - RIGHT");
                 // MOVE TO NEW POSITION
                 cal_pos_x -= cal_move_step;
 
                 // WORKAROUND FOR A8
-                if (cal_move == 1)
-                {
+                if (cal_move == 1) {
                     HardwareInterface::getInstance()->move_to_postion_mm_absolute(cal_pos_x +
-                                                                                      ConfigParser::getInstance()->getInt_nocheck(
+                                                                                  ConfigParser::getInstance()->getInt_nocheck(
                                                                                           ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X),
                                                                                   cal_pos_y +
-                                                                                      ConfigParser::getInstance()->getInt_nocheck(
+                                                                                  ConfigParser::getInstance()->getInt_nocheck(
                                                                                           ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y),
                                                                                   true);
-                }
-                else
-                {
+                } else {
                     HardwareInterface::getInstance()->move_to_postion_mm_absolute(cal_pos_x, cal_pos_y, true);
                 }
 
                 // SAVE CALIBRAION DATA
-            }
-            else if (ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_SAVE &&
-                     ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED)
-            {
+            } else if (ev.event == guicommunicator::GUI_ELEMENT::CALIBRATIONSCREEN_SAVE &&
+                       ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
                 LOG_F(WARNING, "CALIBRATION SCREEN - SAVE");
                 HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, false);
                 HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, false);
 
                 // INVALID SAVE COMMAND
-                if (cal_move == -1)
-                {
+                if (cal_move == -1) {
 
                     gui.show_error_message_on_gui("CALIBRATION SAVE FAILED -> PLEASE SELECT CONRNER");
 
                     // SAVE H1
-                }
-                else if (cal_move == 0)
-                {
+                } else if (cal_move == 0) {
                     ConfigParser::getInstance()->setInt(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_X, cal_pos_x,
                                                         CONFIG_FILE_PATH);
                     ConfigParser::getInstance()->setInt(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y, cal_pos_y,
@@ -1811,9 +1613,7 @@ int main(int argc, char *argv[])
                     gui.show_error_message_on_gui("CALIBRATION SAVED FOR H1");
                     LOG_F(INFO, "CALIBRATION SAVED FOR H1 H1_OFFSET_MM_X %i H1_OFFSET_MM_Y %i", cal_pos_x, cal_pos_y);
                     // SAVE A8
-                }
-                else if (cal_move == 1)
-                {
+                } else if (cal_move == 1) {
                     // ONLY DIV 7 DUE 8 but only 7 moves from a1->a8 or a1->h1
                     cal_pos_x = cal_pos_x / (8 - 1);
                     cal_pos_y = cal_pos_y / (8 - 1);
@@ -1826,9 +1626,7 @@ int main(int argc, char *argv[])
                     gui.show_error_message_on_gui("CALIBRATION SAVED FOR A8");
                     LOG_F(INFO, "CALIBRATION SAVED FOR A8 FILED_WIDTH, BOARD_WIDTH X:%i Y:%i", cal_pos_x, cal_pos_y);
 
-                }
-                else if (cal_move == 2)
-                {
+                } else if (cal_move == 2) {
                     ConfigParser::getInstance()->setInt(ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_BLACK_X_LINE,
                                                         cal_pos_x, CONFIG_FILE_PATH);
                     ConfigParser::getInstance()->setInt(ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_BLACK_FIRST_Y_OFFSET,
@@ -1839,9 +1637,7 @@ int main(int argc, char *argv[])
                           cal_pos_x, cal_pos_y);
 
                     // SAVE PARKPOS WHITE 1 => LINE OFFSET X AND START
-                }
-                else if (cal_move == 3)
-                {
+                } else if (cal_move == 3) {
                     ConfigParser::getInstance()->setInt(ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_WHITE_X_LINE,
                                                         cal_pos_x, CONFIG_FILE_PATH);
                     ConfigParser::getInstance()->setInt(ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_WHITE_FIRST_Y_OFFSET,
@@ -1850,13 +1646,11 @@ int main(int argc, char *argv[])
                     LOG_F(INFO,
                           "CALIBRATION SAVED FOR PARK POS WHITE 1 MECHANIC_PARK_POS_WHITE_X_LINE %i MECHANIC_PARK_POS_WHITE_FIRST_Y_OFFSET %i",
                           cal_pos_x, cal_pos_y);
-                }
-                else if (cal_move == 4)
-                {
+                } else if (cal_move == 4) {
                     // INTS ONLY NEEDED FOR ONE SITE BECAUSE THE WHITE PARK POS ARE THE SAME DIMENSIONS
                     // GET OFFSET FROM FIRST CELL
                     const int first_park_cell_offset = ConfigParser::getInstance()->getInt_nocheck(
-                        ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_BLACK_FIRST_Y_OFFSET);
+                            ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_BLACK_FIRST_Y_OFFSET);
                     // CALC PARK POS CELL POS
                     const int park_positions_length = (cal_pos_y - first_park_cell_offset) / (16 - 1);
                     // SAVE PARK POS CELL OFFSET
@@ -1876,11 +1670,10 @@ int main(int argc, char *argv[])
                 //--------------------------------------------------------
                 //----------------SOLANOID CALIBRATION SCREEN ---------------------
                 //--------------------------------------------------------
-            }
-            else if (ev.event == guicommunicator::GUI_ELEMENT::SOLANOIDSCREEN_UPPER_POS && ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED)
-            {
+            } else if (ev.event == guicommunicator::GUI_ELEMENT::SOLANOIDSCREEN_UPPER_POS &&
+                       ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
                 HardwareInterface::getInstance()->set_speed_preset(
-                    HardwareInterface::HI_TRAVEL_SPEED_PRESET::HI_TSP_MOVE);
+                        HardwareInterface::HI_TRAVEL_SPEED_PRESET::HI_TSP_MOVE);
                 solcal_move = 0;
 
                 LOG_F(WARNING, "SOLANOID CALIBRATION SCREEN - MAGNET UPPER POSITION");
@@ -1893,73 +1686,59 @@ int main(int argc, char *argv[])
                 HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, true);
                 // READ CONFIG VALUES
                 solcal_pos = ConfigParser::getInstance()->getInt_nocheck(
-                    ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_UPPER_POS);
-            }
-            else if (ev.event == guicommunicator::GUI_ELEMENT::SOLANOIDSCREEN_BOTTOM_POS &&
-                     ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED)
-            {
+                        ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_UPPER_POS);
+            } else if (ev.event == guicommunicator::GUI_ELEMENT::SOLANOIDSCREEN_BOTTOM_POS &&
+                       ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
                 HardwareInterface::getInstance()->set_speed_preset(
-                    HardwareInterface::HI_TRAVEL_SPEED_PRESET::HI_TSP_MOVE);
+                        HardwareInterface::HI_TRAVEL_SPEED_PRESET::HI_TSP_MOVE);
                 solcal_move = 1;
 
                 LOG_F(WARNING, "SOLANOID CALIBRATION SCREEN - MAGNET BOTTOM POSITION");
                 // MOVE HOME POS
                 // READ CONFIG VALUES
                 solcal_pos = ConfigParser::getInstance()->getInt_nocheck(
-                    ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_BOTTOM_POS);
+                        ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_BOTTOM_POS);
                 HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, false);
                 HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, false);
-            }
-            else if (ev.event == guicommunicator::GUI_ELEMENT::SOLANOIDSCREEN_MVUP &&
-                     ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED)
-            {
+            } else if (ev.event == guicommunicator::GUI_ELEMENT::SOLANOIDSCREEN_MVUP &&
+                       ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
                 // INCREASE POSITION
                 solcal_pos += 5;
-                if (solcal_pos >= 255)
-                {
+                if (solcal_pos >= 255) {
                     solcal_pos = 255;
                 }
                 LOG_F(WARNING, "SOLANOID CALIBRATION SCREEN - NEW POS %i FOR SOLANOID_MODE %i", solcal_pos,
                       solcal_move);
                 // SAVE NEW VALUE AND WRITE NEW VALUE TO SERVO
                 /// WORKS ONLY ON PRODUCATION HARDWARE EQUIPPED WITH THE SERVO
-                if (solcal_move == 0 && HardwareInterface::getInstance()->is_production_hardware())
-                {
+                if (solcal_move == 0 && HardwareInterface::getInstance()->is_production_hardware()) {
                     ConfigParser::getInstance()->setInt(ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_UPPER_POS,
                                                         solcal_pos, CONFIG_FILE_PATH);
                     HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, true);
                     HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, true);
-                }
-                else if (solcal_move == 1 && HardwareInterface::getInstance()->is_production_hardware())
-                {
+                } else if (solcal_move == 1 && HardwareInterface::getInstance()->is_production_hardware()) {
                     ConfigParser::getInstance()->setInt(ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_BOTTOM_POS,
                                                         solcal_pos, CONFIG_FILE_PATH);
                     HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, false);
                     HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, false);
                 }
-            }
-            else if (ev.event == guicommunicator::GUI_ELEMENT::SOLANOIDSCREEN_MVDONW &&
-                     ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED)
-            {
+            } else if (ev.event == guicommunicator::GUI_ELEMENT::SOLANOIDSCREEN_MVDONW &&
+                       ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
                 // INCREASE POSITION
                 solcal_pos -= 5;
-                if (solcal_pos < 0)
-                {
+                if (solcal_pos < 0) {
                     solcal_pos = 0;
                 }
                 LOG_F(WARNING, "SOLANOID CALIBRATION SCREEN - NEW POS %i FOR SOLANOID_MODE %i", solcal_pos,
                       solcal_move);
                 // SAVE NEW VALUE AND WRITE NEW VALUE TO SERVO
                 /// WORKS ONLY ON PRODUCATION HARDWARE EQUIPPED WITH THE SERVO
-                if (solcal_move == 0 && HardwareInterface::getInstance()->is_production_hardware())
-                {
+                if (solcal_move == 0 && HardwareInterface::getInstance()->is_production_hardware()) {
                     ConfigParser::getInstance()->setInt(ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_UPPER_POS,
                                                         solcal_pos, CONFIG_FILE_PATH);
                     HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, true);
                     HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_B, true);
-                }
-                else if (solcal_move == 1 && HardwareInterface::getInstance()->is_production_hardware())
-                {
+                } else if (solcal_move == 1 && HardwareInterface::getInstance()->is_production_hardware()) {
                     ConfigParser::getInstance()->setInt(ConfigParser::CFG_ENTRY::HARDWARE_MARLIN_SERVO_COIL_BOTTOM_POS,
                                                         solcal_pos, CONFIG_FILE_PATH);
                     HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, false);

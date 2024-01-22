@@ -207,7 +207,7 @@ void ConfigParser::loadDefaults(std::string _type_str)
 
 	if (_type_str == "DK")
 	{
-		config_store[ConfigParser::CFG_ENTRY::NETWORK_BACKEND_URL] = "http://atomicchess.de:3000";
+		config_store[ConfigParser::CFG_ENTRY::NETWORK_BACKEND_URL] = "http://atomicchess.de";
 		config_store[ConfigParser::CFG_ENTRY::NETWORK_HEARTBEAT_INTERVAL_SECS] = "5";
         config_store[ConfigParser::CFG_ENTRY::NETWORK_ENABLE_UDP_DISCOVERABLE] = "0";
         config_store[ConfigParser::CFG_ENTRY::NETWORK_UDP_DISCOVERABLE_USER_DATA] = "ATCTABLE";
@@ -281,7 +281,7 @@ void ConfigParser::loadDefaults(std::string _type_str)
 
 
 	}else if (_type_str == "PROD_V1"){
-		config_store[ConfigParser::CFG_ENTRY::NETWORK_BACKEND_URL] = "http://atomicchess.de:3000";
+		config_store[ConfigParser::CFG_ENTRY::NETWORK_BACKEND_URL] = "http://atomicchess.de";
 		config_store[ConfigParser::CFG_ENTRY::NETWORK_HEARTBEAT_INTERVAL_SECS] = "5";
         config_store[ConfigParser::CFG_ENTRY::NETWORK_ENABLE_UDP_DISCOVERABLE] = "0";
         config_store[ConfigParser::CFG_ENTRY::NETWORK_UDP_DISCOVERABLE_USER_DATA] = "ATCTABLE";
@@ -354,7 +354,7 @@ void ConfigParser::loadDefaults(std::string _type_str)
 
         config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_EXTENTION_DGT3000_INTERFACE_ENABLED] = "0";
     }else if (_type_str == "VIRT"){
-        config_store[ConfigParser::CFG_ENTRY::NETWORK_BACKEND_URL] = "http://atomicchess.de:3000";
+        config_store[ConfigParser::CFG_ENTRY::NETWORK_BACKEND_URL] = "http://atomicchess.de";
         config_store[ConfigParser::CFG_ENTRY::NETWORK_HEARTBEAT_INTERVAL_SECS] = "5";
         config_store[ConfigParser::CFG_ENTRY::NETWORK_ENABLE_UDP_DISCOVERABLE] = "0";
         config_store[ConfigParser::CFG_ENTRY::NETWORK_UDP_DISCOVERABLE_USER_DATA] = "ATCTABLE";
@@ -427,7 +427,7 @@ void ConfigParser::loadDefaults(std::string _type_str)
 
         config_store[ConfigParser::CFG_ENTRY::USER_RESERVED_EXTENTION_DGT3000_INTERFACE_ENABLED] = "0";
     }else if (_type_str == "PROD_V2"){
-        config_store[ConfigParser::CFG_ENTRY::NETWORK_BACKEND_URL] = "http://atomicchess.de:3000";
+        config_store[ConfigParser::CFG_ENTRY::NETWORK_BACKEND_URL] = "http://atomicchess.de";
         config_store[ConfigParser::CFG_ENTRY::NETWORK_HEARTBEAT_INTERVAL_SECS] = "5";
         config_store[ConfigParser::CFG_ENTRY::NETWORK_ENABLE_UDP_DISCOVERABLE] = "1";
         config_store[ConfigParser::CFG_ENTRY::NETWORK_UDP_DISCOVERABLE_USER_DATA] = "ATCTABLE";
@@ -492,7 +492,7 @@ void ConfigParser::loadDefaults(std::string _type_str)
 
     // PROD_V3
     }else if (_type_str == "PROD_V3"){
-        config_store[ConfigParser::CFG_ENTRY::NETWORK_BACKEND_URL] = "http://atomicchess.de:3000";
+        config_store[ConfigParser::CFG_ENTRY::NETWORK_BACKEND_URL] = "http://atomicchess.de";
         config_store[ConfigParser::CFG_ENTRY::NETWORK_HEARTBEAT_INTERVAL_SECS] = "5";
         config_store[ConfigParser::CFG_ENTRY::NETWORK_ENABLE_UDP_DISCOVERABLE] = "1";
         config_store[ConfigParser::CFG_ENTRY::NETWORK_UDP_DISCOVERABLE_USER_DATA] = "ATCTABLE";

@@ -1,0 +1,7 @@
+config BR2_PACKAGE_ATCGUI
+    bool "ATC_GUI"
+    help
+        This package provied the AtomicChessGui Application based on QT5
+
+        http://marcelochsendorf.com
+

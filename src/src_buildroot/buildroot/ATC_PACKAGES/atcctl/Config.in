@@ -1,0 +1,8 @@
+config BR2_PACKAGE_ATCCTL
+    bool "ATC_CONTROLLER"
+    help
+        This package contains the main control software for a ATC Table.
+        The controller controls all hardware and interacts with the Server and the UI (ATCGUI Package)
+
+        http://marcelochsendorf.com
+

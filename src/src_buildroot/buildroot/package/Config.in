@@ -1,11 +1,8 @@
-menu "AtomicChessPackages"
-	source "package/atcgui/Config.in"
-	source "package/atctp/Config.in"
-	source "package/atcctl/Config.in"
-    source "package/atcdgt3000/Config.in"
-endmenu
+
 
 menu "Target packages"
+
+	
 
 	source "package/busybox/Config.in"
 	source "package/skeleton/Config.in"

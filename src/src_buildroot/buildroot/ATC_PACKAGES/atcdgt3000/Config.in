@@ -1,0 +1,7 @@
+config BR2_PACKAGE_ATCDGT3000
+    bool "ATC_GT3000"
+    help
+        This package contains the DGT3000 chess clock extention
+
+        http://marcelochsendorf.com
+
