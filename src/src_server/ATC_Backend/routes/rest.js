@@ -551,7 +551,7 @@ router.get('/get_board_by_player',function (req,res,next) {
                     return;
                 }
 
-                cfen = gs_simplified.current_board;
+                cfen = gs_simplified.current_board.fen;
 
                 res.json({err:gs_err, data:{game_data:{current_board: {fen: cfen}}}});
             });
