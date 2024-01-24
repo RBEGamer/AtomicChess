@@ -225,7 +225,7 @@
   var move_index = -1;
   var current_board = null;
   var loaded_game_id = null;
-
+  var last_fen = "";
 
 
   //SORTING TIMESTAMP
@@ -390,7 +390,10 @@
 
         if(current_board != null){
           //debugger;
-          current_board = pgnBoard('current_board', { position: data.game_data.current_board.fen, locale: 'en', pieceStyle: 'wikipedia', theme:'falken' });
+          if(last_fen !== data.game_data.current_board.fen){
+            last_fen = data.game_data.current_board.fen;
+            current_board = pgnBoard('current_board', { position: data.game_data.current_board.fen, locale: 'en', pieceStyle: 'wikipedia', theme:'falken' });
+          }
         }
 
       }
