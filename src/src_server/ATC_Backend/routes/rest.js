@@ -514,6 +514,56 @@ router.get('/get_game',function (req,res,next) {
     }
 });
 
+
+
+// /get_board_by_player?pid= data.game_data.current_board.fen
+/**
+ # @INPUT_QUERY
+ - pid (=virtual_profile_id)
+ # @PROCESSING
+ - returns the current player board
+ # @RETURN
+ - err - if an error occurs
+ - data.game_data.current_board.fen
+ */
+router.get('/get_board_by_player',function (req,res,next) {
+
+    var cfen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
+    try{
+        var pid = req.queryString("pid");
+        if(!pid || pid === ""){
+            res.json({err:"pid not set",data:{game_data:{current_board: {fen: cfen}}}});
+            return;
+        }
+
+        profile_handling.get_profile_virtual_id(pid,function (lag_err,lag_res){
+            if(lag_err || !lag_res){
+                res.json({err:lag_err, data:{game_data:{current_board: {fen: cfen}}}});
+                return;
+            }
+            const hwid = lag_res.hwid;
+
+            // GET CURRENT BOARD
+            game_handling.get_player_active_game_state(hwid,function (gs_err,gs_res, gs_simplified) {
+                //CHECK IF GAME IN GENERAL RUNNING
+                if(gs_err){
+                    res.json({err:gs_err, data:{game_data:{current_board: {fen: cfen}}}});
+                    return;
+                }
+
+                cfen = gs_simplified.current_board;
+
+                res.json({err:gs_err, data:{game_data:{current_board: {fen: cfen}}}});
+            });
+        });
+    }catch (e) {
+        res.json({err:e, data:{game_data:{current_board: {fen: cfen}}}});
+        return;
+    }
+});
+
+
+
 /**
  # @INPUT_QUERY
  - pid (=virtual_profile_id)

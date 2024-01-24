@@ -123,6 +123,7 @@
               <table>
                 <tr><td><button type="button" onclick="open_logs()" class="btn btn-fh">PLAYER LOGS</button></td>
                   <td><button type="button" onclick="open_settings()" class="btn btn-fh">PLAYER SETTINGS</button></td>
+                  <td><button type="button" onclick="open_monitor()" class="btn btn-fh">WATCH CURRENT BOARD</button></td>
                 </tr>
               </table>
 
@@ -251,6 +252,10 @@
 
   function open_settings(){
     window.location.href = "/config?pid=" + getParameterByName('pid');
+  }
+
+  function open_monitor(){
+    window.location.href = "/monitor?pid=" + getParameterByName('pid');
   }
 
 

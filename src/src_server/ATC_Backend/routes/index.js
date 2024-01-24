@@ -65,7 +65,9 @@ router.get('/create_session', function(req, res, next) {
   res.render('create_session', { title: 'SESSION MANAGEMENT' });
 });
 
-
+router.get('/monitor', function(req, res, next) {
+  res.render('monitor_viewer', { title: 'WATCH CURRENT GAME' });
+});
 
 
 
