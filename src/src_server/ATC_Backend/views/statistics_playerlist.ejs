@@ -257,6 +257,7 @@
             if (!data || data.err || !data.data|| !Array.isArray(data.data)) {
                 return;
             }
+            console.log(data.data);
             //SORT GAMES BY TIMESTAMP
             data.data.sort(compare_created_timestamp);
 
