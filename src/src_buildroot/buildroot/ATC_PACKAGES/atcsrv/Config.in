@@ -1,0 +1,7 @@
+config BR2_PACKAGE_ATCSRV
+    bool "ATC_SERVER"
+    help
+        This package contains a simplified server written in c++ to allow offline usage of the server
+
+        http://marcelochsendorf.com
+

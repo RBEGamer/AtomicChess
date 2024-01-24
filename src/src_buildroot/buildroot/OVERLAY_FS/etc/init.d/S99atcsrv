@@ -1,0 +1,45 @@
+#!/bin/sh
+# /etc/init.d/S99atcsrv ATCProject Marcel Ochsendorf marcelochsendorf.com
+#
+# atc        Starts ATC pacakges.
+#
+
+
+
+umask 077
+
+start() {
+	printf "Starting ATC SERVER"
+	touch /usr/ATC/ATC_LOCK_SRV
+    /usr/ATC/start_atc_server.sh &
+	echo "OK"
+}
+stop() {
+	printf "Stopping ATC SERVER"
+	rm -f /usr/ATC/	touch /usr/ATC/ATC_LOCK_SRV
+	killall atc_server
+	echo "OK"
+}
+restart() {
+	stop
+	start
+}
+
+case "$1" in
+  start)
+	start
+	;;
+  stop)
+	stop
+	;;
+  restart|reload)
+	restart
+	;;
+  *)
+	echo "Usage: $0 {start|stop|restart}"
+	exit 1
+esac
+
+exit $?
+
+
