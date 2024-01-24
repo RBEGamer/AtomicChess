@@ -544,16 +544,16 @@ router.get('/get_board_by_player',function (req,res,next) {
             const hwid = lag_res.hwid;
             console.log(hwid);
             // GET CURRENT BOARD
-            game_handling.get_player_active_game_state(hwid,function (gs_err,gs_res, gs_simplified) {
+            game_handling.get_player_active_game(hwid,function (gs_err,gs_res) {
                 //CHECK IF GAME IN GENERAL RUNNING
                 if(gs_err){
                     res.json({err:gs_err, data:{game_data:{current_board: {fen: cfen}}}});
                     return;
                 }
 
-                console.log(gs_simplified);
-                if(gs_simplified && gs_simplified.current_board && gs_simplified.current_board.fen){
-                    cfen = gs_simplified.current_board.fen;
+                console.log(gs_res);
+                if(gs_res && gs_res.current_board && gs_res.current_board.fen){
+                    cfen = gs_res.current_board.fen;
                 }
 
 

@@ -14,7 +14,7 @@ services:
     image: atcbackend:latest
     build: 
       context: ../ATC_Backend/
-    #network_mode: "host"
+    network_mode: "host"
     restart: always
     ports:
       - 3000:3000
@@ -65,66 +65,22 @@ services:
 
 
 
-  AtomicChessAutoPlayer:
-    #depends_on:
-    #  - AtomicChessBackend
-    #container_name: atcautoplayer
-    build:
-      context: ../ATC_AutoPlayer/
-    image: atcautoplayer:latest
-    #network_mode: "host"
-    #links:
-    #  - "AtomicChessBackend:AtomicChessBackend"
-    restart: "always"
-    
-    scale: 5
-    environment:
-      - PRODUCTION
-      - BACKEND_IP=127.0.0.1:3000 #HOST IP:PORT OF BACKEND EXAMPLE 127.0.0.1:3000 USING ONLY HTTP
-      #- USE_HOSTNAME_HWID=TRUE # USE THE LOCAL MACHINE HOSTNAME AS HWID
-      #- PLAYER_TYPE_HUMAN=1 # SIMULATE A HUMAN PLAYER TYPE
-
-  #AtomicChessAutoPlayerHuman:
-    #depends_on:
-    #  - AtomicChessBackend
-    #container_name: atcautoplayer
-   # build:
-    #  context: ../ATC_AutoPlayer/
-   # image: atcautoplayer:latest
-    #network_mode: "host"
-    #links:
-    #  - "AtomicChessBackend:AtomicChessBackend"
-   # restart: "always"
-
-    #environment:
-     # - PRODUCTION
-      #- BACKEND_IP=127.0.0.1:3000 #HOST IP:PORT OF BACKEND EXAMPLE 127.0.0.1:3000 USING ONLY HTTP
-      #- USE_HOSTNAME_HWID=TRUE # USE THE LOCAL MACHINE HOSTNAME AS HWID
-     # - PLAYER_TYPE_HUMAN=1 # SIMULATE A HUMAN PLAYER TYPE
-
-
- # AtomicChessAutoPlayerSpanwer:
- #   depends_on:
- #     - AtomicChessBackend
- #   links:
- #     - "AtomicChessBackend:AtomicChessBackend"
- #   container_name: atcautoplayerspawner
- #   build:
- #     context: ../ATC_AutoPlayerSpawner/
- #   image: atcautoplayerspawner:latest
- #   #network_mode: "host"
- #   restart: "no"
- #   volumes:
- #   - /var/run/docker.sock:/var/run/docker.sock
- #   environment:
- #     - PRODUCTION
- #     - BACKEND_IP=AtomicChessBackend:3000
-
-
- # watchtower:
- #   image: v2tec/watchtower
- #   volumes:
- #     - /var/run/docker.sock:/var/run/docker.sock
- #     - /root/.docker/config.json:"$(pwd)/watchtower_config.json"
- #   command: --interval 30
-
+#  AtomicChessAutoPlayer:
+#    #depends_on:
+#    #  - AtomicChessBackend
+#    #container_name: atcautoplayer
+#    build:
+#      context: ../ATC_AutoPlayer/
+#    image: atcautoplayer:latest
+#    network_mode: "host"
+#    #links:
+#    #  - "AtomicChessBackend:AtomicChessBackend"
+#    restart: "always"
+#    deploy:
+#      replicas: 5
+#
+#    environment:
+#      - PRODUCTION
+#      - BACKEND_IP=127.0.0.1:3000 #HOST IP:PORT OF BACKEND EXAMPLE 127.0.0.1:3000 USING ONLY HTTP
+#      #- USE_HOSTNAME_HWID=TRUE # USE THE LOCAL MACHINE HOSTNAME AS HWID
+#      #- PLAYER_TYPE_HUMAN=1 # SIMULATE A HUMAN PLAYER TYPE

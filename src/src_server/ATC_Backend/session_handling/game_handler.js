@@ -565,6 +565,7 @@ module.exports = {
     cancel_match_for_player,
     list_all_games,
     get_game,
+    get_player_active_game,
     //EXPOSED VARIABLED
     GAME_STATE,
     PLAYER_TURN_STATE

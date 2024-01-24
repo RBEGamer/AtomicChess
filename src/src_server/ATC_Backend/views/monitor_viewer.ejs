@@ -61,7 +61,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
-  <a class="navbar-brand" href="/"><img width="64px"  src="/img/icons/chess_icon.png"><b>AtomicChess -  STATISTICS</b></a>
+  <a class="navbar-brand" href="/"><img width="64px"  src="/img/icons/chess_icon.png"><b>AtomicChess -  WATCH PLAYER BOARD</b></a>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -163,22 +163,22 @@
 
     $.getJSON('/rest/get_board_by_player?pid=' +_id,function (data) {
       //PROCESS GOT GAME LIST RESULT
-      //debugger;
+     // debugger;
 
-      if(!data || data.err || !data.game_data){
+      if(!data || data.err || !data.data ||!data.data.game_data){
         return;
       }
 
-      console.log(data);
+      console.log(data.data);
       //SHOW ID
 
       //DISPLAY CURRENT BOARD
-      if(data.game_data.current_board.fen){
+      if(data.data.game_data.current_board.fen){
 
-        if(last_fen === data.game_data.current_board.fen){
+        if(last_fen === data.data.game_data.current_board.fen){
           return;
         }
-        last_fen = data.game_data.current_board.fen;
+        last_fen = data.data.game_data.current_board.fen;
 
         //CREATE BOARD INSTANCE FIRST TIME
         if(!_update_only) {

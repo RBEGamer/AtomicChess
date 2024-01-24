@@ -222,28 +222,24 @@
     }
 
 
-    function create_player_table(_arr,_table_holder_id, _display_len, _prefix,_headline){
+    function create_player_table(_arr, _table_holder_id, _display_len, _prefix,_headline){
       if(!_arr){return;}
 
-      var max_items = 0;
-      if (_arr.length < _display_len) {
-        max_items = _arr.length;
-      } else if (_display_len > _arr.length) {
-        max_items = _arr.length;
-      }
 
 
+        debugger;
       //CREATE TABLE TABLE
       var tmp_html = "<div class=\"table-responsive-sm\"><table class=\"table\">";
       tmp_html += "<thead><tr><th scope=\"col\">"+_headline+"</th></tr></thead>";
       tmp_html += "<tbody>";
       //POPULATE TABLE BODY WITH ENTRIES
-      for (let i = 0; i < max_items; i++) {
+      for (let i = 0; i < _arr.length; i++) {
         const entry =_arr[i];
         if(!String(entry.friendly_name).includes(_prefix)){continue;}
         tmp_html += "<tr>";
         tmp_html += "<th scope=\"row\"><a class='fhcolor_text' href='/profile?pid=" + entry.virtual_player_id + "'>" + entry.friendly_name + "</a></th>";
         tmp_html += "</tr>";
+        if(i > _display_len){break;}
       }
       tmp_html += "</tbody></table></div>";
       $("#" + String(_table_holder_id)).html(tmp_html);
@@ -263,7 +259,7 @@
 
             //LIMIT TABLE LIST COUNT
             var max_items = 10;
-
+       // debugger;
           create_player_table( data.data,"playerlist_ai", max_items,"AI_", "AI PLAYER");
           create_player_table( data.data,"playerlist_table", max_items,"TABLE_", "TABLE PLAYER");
           create_player_table( data.data,"playerlist_virt", max_items, "VIRT_", "VIRTUAL PLAYER");
