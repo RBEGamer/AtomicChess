@@ -542,7 +542,7 @@ router.get('/get_board_by_player',function (req,res,next) {
                 return;
             }
             const hwid = lag_res.hwid;
-
+            console.log(hwid);
             // GET CURRENT BOARD
             game_handling.get_player_active_game_state(hwid,function (gs_err,gs_res, gs_simplified) {
                 //CHECK IF GAME IN GENERAL RUNNING
@@ -551,7 +551,11 @@ router.get('/get_board_by_player',function (req,res,next) {
                     return;
                 }
 
-                cfen = gs_simplified.current_board.fen;
+                console.log(gs_simplified);
+                if(gs_simplified && gs_simplified.current_board && gs_simplified.current_board.fen){
+                    cfen = gs_simplified.current_board.fen;
+                }
+
 
                 res.json({err:gs_err, data:{game_data:{current_board: {fen: cfen}}}});
             });
