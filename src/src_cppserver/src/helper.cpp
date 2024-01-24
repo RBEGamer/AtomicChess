@@ -15,3 +15,33 @@ char *getCmdOption(char **begin, char **end, const std::string &option) {
     return 0;
 }
 
+
+std::string sanitize_r(const std::string& _i){
+    std::string  tmp = _i;
+    sanitize(tmp);
+    return tmp;
+}
+void sanitize(std::string &stringValue)
+{
+    // Add backslashes.
+    for(auto i = stringValue.begin() ;  ;) {
+        auto const pos = std::find_if(
+                i,
+                stringValue.end(),
+                [](char const c) { return '\\' == c || '\'' == c || '"' == c; });
+        if (pos == stringValue.end()) {
+            break;
+        }
+        i = std::next(stringValue.insert(pos, '\\'), 2);
+    }
+
+    // Removes others.
+    stringValue.erase(
+            std::remove_if(
+                    stringValue.begin(),
+                    stringValue.end(),
+                    [](char const c) {
+                        return '\n' == c || '\r' == c || '\0' == c || '\x1A' == c;
+                    }),
+            stringValue.end());
+}

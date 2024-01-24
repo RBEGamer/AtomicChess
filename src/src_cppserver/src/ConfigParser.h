@@ -27,7 +27,9 @@ public:
 	{
         HTTP_HOST,
         HTTP_PORT,
-        DB_FILEPATH
+        DB_FILEPATH,
+        STATIC_HTML_PATH,
+        INITIAL_BOARD_FEN
 	};
 	
 	static ConfigParser* getInstance();

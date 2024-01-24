@@ -158,6 +158,10 @@ void ConfigParser::loadDefaults(std::string _type_str)
     config_store[ConfigParser::CFG_ENTRY::HTTP_HOST] = "0.0.0.0";
     config_store[ConfigParser::CFG_ENTRY::HTTP_PORT] = "3000";
     config_store[ConfigParser::CFG_ENTRY::DB_FILEPATH] = "atcserver.sqlite";
+    config_store[ConfigParser::CFG_ENTRY::STATIC_HTML_PATH] = "html_static/public";
+    config_store[ConfigParser::CFG_ENTRY::INITIAL_BOARD_FEN] = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+
+
 
 
 }
