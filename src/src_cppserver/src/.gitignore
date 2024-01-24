@@ -42,3 +42,10 @@ install_manifest.txt
 compile_commands.json
 CTestTestfile.cmake
 _deps
+
+atcserver.sqlite
+atcserver_error_log.log
+atcserver_log.log
+atc_server
+
+cmake-build-*

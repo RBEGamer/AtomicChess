@@ -198,7 +198,6 @@ private:
 	const std::string URL_SET_MAKE_MOVE = "/rest/make_move";
 	const std::string URL_UPLOAD_CONFIG = "/rest/set_user_config";
     const std::string URL_DOWNLOAD_CONFIG = "/rest/get_user_config";
-	
 	const std::string URL_UPLOAD_LOG = "/rest/store_user_log";
 	const std::string URL_ABORT_GAME = "/rest/abort_game";
 	

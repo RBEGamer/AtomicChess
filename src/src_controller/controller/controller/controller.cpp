@@ -47,7 +47,10 @@ typedef std::chrono::system_clock::time_point TimePoint;
 #include "GCodeSender.h"
 
 //---------------------- CONFIG DEFINED --------------------------- //
+#ifndef ATC_CONTROLLER_VERSION
 #define ATC_CONTROLLER_VERSION "{{VERSION}}"
+#endif
+
 #define DEFAULT_CONFIG_FILE_PATH "./atccontrollerconfig.ini"
 #define LOG_FILE_PATH "/tmp/atc_controller_log.log"
 #define LOG_FILE_PATH_ERROR "/tmp/atc_controller_error_log.log"
@@ -253,6 +256,7 @@ int main(int argc, char *argv[]) {
     if (cmdOptionExists(argv, argv + argc, "-help")) {
         std::cout << "---- ATC_CONTROLLER HELP ----" << std::endl;
         std::cout << "-help                   | prints this message" << std::endl;
+        std::cout << "-version                | prints a version message" << std::endl;
         std::cout << "-writeconfig            | overrides existing or creates new config file with defaults"
                   << std::endl;
         std::cout << "-writeconfig -hwvirtual | selects the virtual hardware which enables testing without hardware"
@@ -574,7 +578,7 @@ int main(int argc, char *argv[]) {
     // NOW TRY TO CONNECT TO THE SERVER, WE USE SOME HARDCODED FALL BACK URLs
     std::string ALTERNATIVE_BACKEND_URL[] = {
             ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::NETWORK_BACKEND_URL), "http://atomicchess.de",
-            "http://atomicchess.de:3000"};
+            "http://atomicchess.de:3000", "http://127.0.0.1:3000"};
     // CHECK IF GAMESERVER IS REACHABLE ELSE TRY AND ITERATE THOUGH THE OTHER HARDCODED URLS
     volatile int abu_counter = 0;
     volatile bool abu_result = true;
@@ -592,6 +596,9 @@ int main(int argc, char *argv[]) {
             break;
         }
     }
+
+    gui.createEvent(guicommunicator::GUI_ELEMENT::INFOSCREEN_HWID_LABEL, guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING, hwid + "|" + gamebackend.get_backend_base_url());
+
     // SET POINTER TO GAMEBACKEND FOR UPLOAD THE LOGFILES TO CLOUD IF CATCH A SIGNAL
     gamebackend_logupload = &gamebackend;
     // UPDATE GUI THAT NETWORK IS ONLINE
