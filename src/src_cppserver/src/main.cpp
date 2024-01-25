@@ -220,7 +220,7 @@ int main(int argc, char *argv[]) {
         };
         res.set_content(response_json.dump(), "application/json");
     });
-    
+
     svr.Get("/rest/login", [&db](const httplib::Request& req, httplib::Response &res) {
 
         bool err = false;
@@ -229,14 +229,16 @@ int main(int argc, char *argv[]) {
         const std::string hwid = sanitize_r(req.get_param_value("hwid"));
         const std::string playertype = sanitize_r(req.get_param_value("playertype"));
 
+        //GENERATE SID :)
+        std::string sid = hwid;
+        std::reverse(sid.begin(), sid.end());
+
         // CHECK INPUT
         if(hwid.empty()){
             err = true;
             reason = "hwid.size() <= 0";
         }else{
-            //GENERATE SID :)
-            std::string sid = hwid;
-            std::reverse(sid.begin(), sid.end());
+
 
             const int initial_gamestate = magic_enum::enum_integer(GAME_STATE::PS_IDLE);
             const int remote_player_is_white = 0;
@@ -265,22 +267,44 @@ int main(int argc, char *argv[]) {
         json11::Json response_json = json11::Json::object {
                 { "err", err },
                 { "status", reason },
-                { "sid", json11::Json::object {{ "hwid", hwid },
+                { "sid", "" + sid },
+                { "profile", json11::Json::object {{ "hwid", hwid },
                                                { "rank", 0 },
                                                { "elo_rank_readable", "NOOB"},
                                                {"friendly_name", "Player_" + hwid},
                                                {"virtual_player_id", "ID_" + hwid},
                                                {"player_type", playertype}}}
         };
-
-
-
-
         res.set_content(response_json.dump(), "application/json");
-
     });
 
+    svr.Get("/rest/heartbeat", [&db](const httplib::Request& req, httplib::Response &res) {
+        bool err = false;
+        std::string reason = "ok";
+        // GET PARAMETER
+        const std::string hwid = sanitize_r(req.get_param_value("hwid"));
+        const std::string sid = sanitize_r(req.get_param_value("sid"));
+        // CHECK INPUT
+        if(hwid.empty()){
+            err = true;
+            reason = "hwid.size() <= 0";
+        }else{
+            //CHECK SESSION EXISTS
+            SQLITE3_QUERY query = SQLITE3_QUERY(fmt::format("SELECT * FROM {} WHERE HWID='{}' AND SID='{}'", GAMEDATA_DATABASE_NAME, hwid, sid));
+            if(db.execute(query) && db.get_result_row_count() <= 0) {
+                err = true;
+                reason = "session invalid, please use login first";
+            }
+        }
 
+        json11::Json response_json = json11::Json::object {
+                { "err", err },
+                { "status", reason }
+        };
+        res.set_content(response_json.dump(), "application/json");
+    });
+
+    
     // TODO NEXT => SET PLAYERSTATE
 
     // START WEBSERVER
