@@ -96,6 +96,8 @@ enum class GAME_STATE {
 };
 
 
+
+
 int main(int argc, char *argv[]) {
     // REGISTER SIGNAL HANDLER
     signal(SIGINT, signal_callback_handler);
@@ -208,7 +210,7 @@ int main(int argc, char *argv[]) {
         const std::string hwid = sanitize_r(req.get_param_value("hwid"));
         const int initial_gamestate = magic_enum::enum_integer(GAME_STATE::PS_INVALID);
         SQLITE3_QUERY update_query = SQLITE3_QUERY(fmt::format("UPDATE {} SET SID='{}', game_state='{}', remote_player_is_white='{}', is_syncing_phase='{}', current_board_fen='{}' WHERE HWID='{}';", GAMEDATA_DATABASE_NAME, "", initial_gamestate, 0, 0, "", hwid)); // ? will be replaced after bind
-        if (db.execute(update_query)) { // execute query
+        if (db.execute(update_query) && db.commit()) { // execute query
             db.perror();
             err = true;
             reason = "db update error";
@@ -241,27 +243,27 @@ int main(int argc, char *argv[]) {
 
 
             const int initial_gamestate = magic_enum::enum_integer(GAME_STATE::PS_IDLE);
-            const int remote_player_is_white = 0;
+            const int remote_player_is_white = randomBoolean() * 1;
             const std::string initial_fen = ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::INITIAL_BOARD_FEN);
 
             //CREATE NEW USER IF NOT EXISTS
             SQLITE3_QUERY query = SQLITE3_QUERY(fmt::format("SELECT * FROM {} WHERE HWID='{}'", GAMEDATA_DATABASE_NAME, hwid));
             if(db.execute(query) && db.get_result_row_count() <= 0){
                 SQLITE3_QUERY insert_query = SQLITE3_QUERY(fmt::format("INSERT INTO {} VALUES ('{}', '{}', {}, {}, {}, '{}');", GAMEDATA_DATABASE_NAME, hwid, sid, initial_gamestate, remote_player_is_white, 0, initial_fen)); // ? will be replaced after bind
-                if (db.execute(insert_query)) { // execute query
+                if (db.execute(insert_query) && db.commit()) { // execute query
                     db.perror();
                     err = true;
                     reason = "db insert error";
                 }
             }else{
                 SQLITE3_QUERY update_query = SQLITE3_QUERY(fmt::format("UPDATE {} SET SID='{}', game_state='{}', remote_player_is_white='{}', is_syncing_phase='{}', current_board_fen='{}' WHERE HWID='{}';", GAMEDATA_DATABASE_NAME, sid, initial_gamestate, remote_player_is_white, 0, initial_fen, hwid)); // ? will be replaced after bind
-                if (db.execute(update_query)) { // execute query
+                if (db.execute(update_query) && db.commit()) { // execute query
                     db.perror();
                     err = true;
                     reason = "db update error";
                 }
             }
-            db.commit();
+
         }
 
         json11::Json response_json = json11::Json::object {
@@ -304,7 +306,50 @@ int main(int argc, char *argv[]) {
         res.set_content(response_json.dump(), "application/json");
     });
 
-    
+    svr.Get("/rest/set_player_state", [&db](const httplib::Request& req, httplib::Response &res) {
+        bool err = false;
+        std::string reason = "ok";
+        // GET PARAMETER
+        const std::string hwid = sanitize_r(req.get_param_value("hwid"));
+        const std::string sid = sanitize_r(req.get_param_value("sid"));
+        const std::string ps = sanitize_r(req.get_param_value("ps"));
+        // CHECK INPUT
+        if(hwid.empty()){
+            err = true;
+            reason = "hwid.size() <= 0";
+        }else{
+
+            auto val = magic_enum::enum_cast<GAME_STATE>(std::stoi(ps));
+            if (val.has_value()) {
+                if(val.value() == GAME_STATE::PS_IDLE || val.value() == GAME_STATE::PS_SEARCHING || val.value() == GAME_STATE::PS_SEARCHING_MANUAL){
+                    GAME_STATE gs = val.value();
+                    if(gs == GAME_STATE::PS_SEARCHING_MANUAL){
+                        gs = GAME_STATE::PS_SEARCHING;
+                    }
+                    SQLITE3_QUERY update_query = SQLITE3_QUERY(
+                            fmt::format("UPDATE {} SET game_state='{}' WHERE HWID='{}' AND SID='{}'",
+                                        GAMEDATA_DATABASE_NAME, magic_enum::enum_integer(gs), hwid, sid)); // ? will be replaced after bind
+                    if (db.execute(update_query) && db.commit()) { // execute query
+                        db.perror();
+                        err = true;
+                        reason = "db update error";
+                    }
+
+                }else{
+                    err = true;
+                    reason = "invalid ps parameter value";
+                }
+            }else{
+                err = true;
+                reason = "invalid ps parameter value";
+            }
+        }
+        json11::Json response_json = json11::Json::object {
+                { "err", err },
+                { "status", reason }
+        };
+        res.set_content(response_json.dump(), "application/json");
+    });
     // TODO NEXT => SET PLAYERSTATE
 
     // START WEBSERVER

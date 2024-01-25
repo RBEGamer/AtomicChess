@@ -8,13 +8,14 @@
 #include <string>
 #include <memory>
 #include <stdexcept>
+#include <random>
 
 char *getCmdOption(char **begin, char **end, const std::string &option);
 bool cmdOptionExists(char **begin, char **end, const std::string &option);
 
 void sanitize(std::string &stringValue);
 std::string sanitize_r(const std::string& _i);
-
+bool randomBoolean();
 
 
 

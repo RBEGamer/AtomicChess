@@ -131,14 +131,15 @@ html {
     background: black;
     overflow: hidden;
     background: #C33764;  /* fallback colour. Make sure this is just one solid colour. */
-    background: -webkit-linear-gradient(rgba(0,120,116,0.2), rgba(0,120,116,0.8));
-    background: linear-gradient(rgba(0,120,116,0.2), rgba(0,120,116,0.8)); /* The least supported option. */
+    background: -webkit-linear-gradient(rgba(0,120,116,0.2), rgba(0,120,116,0.8)),url("/img/atc_a.jpg");
+    background: linear-gradient(rgba(0,120,116,0.2), rgba(0,120,116,0.8)), url("/img/atc_a.jpg"); /* The least supported option. */
     background-size: 100%;
 }
 
 .grad_header_two {
     overflow: hidden;
     background: #C33764;  /* fallback colour. Make sure this is just one solid colour. */
+    background:url("/img/atc_a.jpg") no-repeat center;
     background-size: 100%;
 }
 .grad_img {

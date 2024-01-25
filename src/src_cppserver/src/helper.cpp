@@ -15,6 +15,12 @@ char *getCmdOption(char **begin, char **end, const std::string &option) {
     return 0;
 }
 
+bool randomBoolean() {
+    static std::default_random_engine generator(std::random_device{}());
+    // With p = 0.5 you get equal probability for true and false
+    static std::bernoulli_distribution distribution(0.5);
+    return distribution(generator);
+}
 
 std::string sanitize_r(const std::string& _i){
     std::string  tmp = _i;
