@@ -1,0 +1,23 @@
+<html>
+<head>
+<script>
+function setHref() {
+document.getElementById('modify-me').href = window.location.protocol + "//" + window.location.hostname + ":3000";
+document.getElementById('modify-me-1').href = window.location.protocol + "//" + window.location.hostname + ":8081";
+}
+</script>
+</head>
+
+<body onload="setHref()">
+<a href="/other/" id="modify-me">OPEN WEBCHESS</a>
+
+
+<br>
+
+<a href="/about.html" id="modify-me">OPEN ABOUT</a>
+<br>
+
+<a href="/about.html" id="modify-me-1">OPEN SOFTWARE UPDATE PAGE</a>
+
+</body>
+</html>
