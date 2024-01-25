@@ -27,6 +27,14 @@ define ATCSRV_INSTALL_TARGET_CMDS
 	@echo -- copy atc_srv_executable --
 	cp $(@D)/atc_server $(TARGET_DIR)/usr/ATC/atc_server
 	$(INSTALL) -D -m 0755 $(@D)/atc_server $(TARGET_DIR)/usr/ATC/atc_server
+
+	# COPY BUILD LIBS OVER
+	ls $(@D)
+	cp $(@D)/*.a $(TARGET_DIR)/usr/ATC/ || true
+	cp $(@D)/*.so* $(TARGET_DIR)/usr/lib/ || true
+
+	# COPY STATIC FILES OVER
+	cp -R $(@D)/html_static $(TARGET_DIR)/usr/ATC/ || true
 endef
 
 $(eval $(cmake-package))
