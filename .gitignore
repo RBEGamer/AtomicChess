@@ -15,3 +15,4 @@ src/src_dgt3000/src/cmake-build-debug/atc_dgt3000ext
 src/src_dgt3000/src/cmake-build-debug/.ninja_deps
 src/src_dgt3000/src/cmake-build-debug/.ninja_log
 *.log
+src/src_cppserver/src/atc_server
