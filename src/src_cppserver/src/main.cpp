@@ -403,7 +403,6 @@ int main(int argc, char *argv[]) {
         res.set_content(response_json.dump(), "application/json");
     });
 
-
     svr.Get("/rest/set_user_config", [&db](const httplib::Request &req, httplib::Response &res) {
         json11::Json response_json = json11::Json::object{
                 {"err",    false},
@@ -420,6 +419,13 @@ int main(int argc, char *argv[]) {
         res.set_content(response_json.dump(), "application/json");
     });
 
+    svr.Get("/rest/client_status", [&db](const httplib::Request &req, httplib::Response &res) {
+        json11::Json response_json = json11::Json::object{
+                {"err",    false},
+                {"status", "ok"},
+        };
+        res.set_content(response_json.dump(), "application/json");
+    });
 
 
     // TODO /rest/player_setup_confirmation => if in matchmaking state -> sqitch to game running
