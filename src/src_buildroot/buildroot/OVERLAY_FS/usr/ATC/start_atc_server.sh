@@ -6,7 +6,7 @@ while true; do
 	if test -f "$FILEA"; then
     	echo "STARTING ATC SERVER"
 		#/usr/ATC/atc_server 
-		/usr/ATC/atc_server --cfgfolderpath /usr/ATC/atc_config/ --statichtmlpath /usr/ATC/html_static || true
+		/usr/ATC/atc_server --cfgfolderpath /usr/ATC/atc_config/ --statichtmlpath /usr/ATC/html_static/public || true
 		sleep 10
 	else
 	    	exit 1
