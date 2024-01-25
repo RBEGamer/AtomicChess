@@ -3,10 +3,14 @@
 #include <format>
 
 #include <cstdio>
+
 #ifdef __MACH__
+
 #include <mach/clock.h>
 #include <mach/mach.h>
+
 #endif
+
 #include <ctime>
 #include <chrono>
 #include <algorithm>
@@ -30,7 +34,7 @@
 #define SYSTEM_TICK_DELAY 100
 
 #ifndef VERSION
-    #define VERSION "1.0.0"
+#define VERSION "1.0.0"
 #endif
 
 
@@ -59,7 +63,7 @@ TimePoint t1 = Clock::now();
     TimePoint t2 = Clock::now();
 #endif
 
-void sys_tick_delay(){
+void sys_tick_delay() {
 #ifdef __MACH__
     clock_serv_t cclock;
     mach_timespec_t mts;
@@ -69,8 +73,7 @@ void sys_tick_delay(){
     t2.tv_sec = mts.tv_sec;
     t2.tv_nsec = mts.tv_nsec;
     // IF TIME DIFFERENCE IS BIG ENOUGHT => CALL THE TIMER EVENT
-    if ((t2.tv_sec - t1.tv_sec) > SYSTEM_TICK_DELAY)
-    {
+    if ((t2.tv_sec - t1.tv_sec) > SYSTEM_TICK_DELAY) {
         host_get_clock_service(mach_host_self(), CALENDAR_CLOCK, &cclock);
         clock_get_time(cclock, &mts);
         mach_port_deallocate(mach_task_self(), cclock);
@@ -87,15 +90,13 @@ void sys_tick_delay(){
 
 
 enum class GAME_STATE {
-    PS_INVALID=0,
-    PS_IDLE=1,
-    PS_SEARCHING=4,
-    PS_SEARCHING_MANUAL =5,
+    PS_INVALID = 0,
+    PS_IDLE = 1,
+    PS_SEARCHING = 4,
+    PS_SEARCHING_MANUAL = 5,
     PS_PREPARING_INGAME = 6,
     PS_INGAME = 7
 };
-
-
 
 
 int main(int argc, char *argv[]) {
@@ -107,7 +108,9 @@ int main(int argc, char *argv[]) {
         std::cout << "---- ATC_SERVER HELP ----" << std::endl;
         std::cout << "--help                   | prints this message" << std::endl;
         std::cout << "--version                | prints a version message" << std::endl;
-        std::cout << "--cfgfolderpath          | set the ABS folder path for the config FORMAT: /xyz/folder/ which contains atcserverconfig.ini, if not specified ./atcserverconfig.ini is used" << std::endl;
+        std::cout
+                << "--cfgfolderpath          | set the ABS folder path for the config FORMAT: /xyz/folder/ which contains atcserverconfig.ini, if not specified ./atcserverconfig.ini is used"
+                << std::endl;
         std::cout << "--reset                  | resets game database" << std::endl;
         std::cout << "---- END ATC_SERVER HELP ----" << std::endl;
         return 0;
@@ -146,7 +149,7 @@ int main(int argc, char *argv[]) {
     LOG_SCOPE_F(INFO, "LOADING CONFIG FILE %s", CONFIG_FILE_PATH.c_str());
 
     // LOAD CONFIG FILE
-    if (!ConfigParser::getInstance()->loadConfigFile(CONFIG_FILE_PATH)){
+    if (!ConfigParser::getInstance()->loadConfigFile(CONFIG_FILE_PATH)) {
         ConfigParser::getInstance()->loadDefaults("");
         ConfigParser::getInstance()->createConfigFile(CONFIG_FILE_PATH, true);
         LOG_F(INFO, "WRITE NEW CONFIGFILE DUE MISSING ONE: atcserverconfig.ini");
@@ -166,13 +169,15 @@ int main(int argc, char *argv[]) {
     }
 
     // CREATE DATA TABLE IF NOT EXISTS
-   if (db.execute(fmt::format("CREATE TABLE IF NOT EXISTS {} (HWID TEXT NOT NULL UNIQUE,SID TEXT, game_state INTEGER,remote_player_is_white INTEGER, is_syncing_phase INTEGER,current_board_fen TEXT, PRIMARY KEY(HWID));", GAMEDATA_DATABASE_NAME).c_str())) {
+    if (db.execute(fmt::format(
+            "CREATE TABLE IF NOT EXISTS {} (HWID TEXT NOT NULL UNIQUE,SID TEXT, game_state INTEGER,remote_player_is_white INTEGER, is_syncing_phase INTEGER,current_board_fen TEXT, PRIMARY KEY(HWID));",
+            GAMEDATA_DATABASE_NAME).c_str())) {
         db.perror(); // in case of error, perror will print detail to stderr
-   }
+    }
     db.commit();
 
 
-   // INIT WEBSERVER
+    // INIT WEBSERVER
     httplib::Server svr;
 
     if (!svr.is_valid()) {
@@ -181,7 +186,7 @@ int main(int argc, char *argv[]) {
     }
     //SET WEBSERVER LOGGING
     svr.set_logger([](const httplib::Request &req, const httplib::Response &res) {
-        LOG_F(INFO, "%s", fmt::format("req: {} res {}", req.body, res.body).c_str());
+  //      LOG_F(INFO, "%s", fmt::format("req: {} res {}", req.body, res.body).c_str());
     });
     //SET ERROR HANDLER
     svr.set_error_handler([](const httplib::Request & /*req*/, httplib::Response &res) {
@@ -192,38 +197,42 @@ int main(int argc, char *argv[]) {
     });
 
     // SERVER STATIC FILES
-    auto ret = svr.set_mount_point("/public", ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::STATIC_HTML_PATH).c_str());
+    auto ret = svr.set_mount_point("/public",
+                                   ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::STATIC_HTML_PATH).c_str());
     if (!ret) {
         LOG_F(ERROR, "set STATIC_HTML_PATH path cant be accessed");
     }
 
     // REGISTER ROUTES
-    svr.Get("/", [](const httplib::Request& req, httplib::Response &res) {
+    svr.Get("/", [](const httplib::Request &req, httplib::Response &res) {
         res.set_redirect("/public/index.html");
     });
 
-    svr.Get("/rest/logout", [&db](const httplib::Request& req, httplib::Response &res) {
-
+    svr.Get("/rest/logout", [](const httplib::Request &req, httplib::Response &res) {
+        SQLITE3 db(ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::DB_FILEPATH)); // init database
         bool err = false;
         std::string reason = "ok";
         // RESET PLAYER STATE
         const std::string hwid = sanitize_r(req.get_param_value("hwid"));
         const int initial_gamestate = magic_enum::enum_integer(GAME_STATE::PS_INVALID);
-        SQLITE3_QUERY update_query = SQLITE3_QUERY(fmt::format("UPDATE {} SET SID='{}', game_state='{}', remote_player_is_white='{}', is_syncing_phase='{}', current_board_fen='{}' WHERE HWID='{}';", GAMEDATA_DATABASE_NAME, "", initial_gamestate, 0, 0, "", hwid)); // ? will be replaced after bind
+        SQLITE3_QUERY update_query = SQLITE3_QUERY(fmt::format(
+                "UPDATE {} SET SID='{}', game_state='{}', remote_player_is_white='{}', is_syncing_phase='{}', current_board_fen='{}' WHERE HWID='{}';",
+                GAMEDATA_DATABASE_NAME, "", initial_gamestate, 0, 0, "", hwid)); // ? will be replaced after bind
         if (db.execute(update_query) && db.commit()) { // execute query
             db.perror();
             err = true;
             reason = "db update error";
         }
 
-        json11::Json response_json = json11::Json::object {
-                { "err", err },
-                { "status", reason },
+        json11::Json response_json = json11::Json::object{
+                {"err",    err},
+                {"status", reason},
         };
         res.set_content(response_json.dump(), "application/json");
     });
 
-    svr.Get("/rest/login", [&db](const httplib::Request& req, httplib::Response &res) {
+    svr.Get("/rest/login", [](const httplib::Request &req, httplib::Response &res) {
+        SQLITE3 db(ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::DB_FILEPATH)); // init database
 
         bool err = false;
         std::string reason = "ok";
@@ -236,27 +245,35 @@ int main(int argc, char *argv[]) {
         std::reverse(sid.begin(), sid.end());
 
         // CHECK INPUT
-        if(hwid.empty()){
+        if (hwid.empty()) {
             err = true;
             reason = "hwid.size() <= 0";
-        }else{
+        } else {
 
 
             const int initial_gamestate = magic_enum::enum_integer(GAME_STATE::PS_IDLE);
             const int remote_player_is_white = randomBoolean() * 1;
-            const std::string initial_fen = ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::INITIAL_BOARD_FEN);
+            const std::string initial_fen = ConfigParser::getInstance()->get(
+                    ConfigParser::CFG_ENTRY::INITIAL_BOARD_FEN);
 
             //CREATE NEW USER IF NOT EXISTS
-            SQLITE3_QUERY query = SQLITE3_QUERY(fmt::format("SELECT * FROM {} WHERE HWID='{}'", GAMEDATA_DATABASE_NAME, hwid));
-            if(db.execute(query) && db.get_result_row_count() <= 0){
-                SQLITE3_QUERY insert_query = SQLITE3_QUERY(fmt::format("INSERT INTO {} VALUES ('{}', '{}', {}, {}, {}, '{}');", GAMEDATA_DATABASE_NAME, hwid, sid, initial_gamestate, remote_player_is_white, 0, initial_fen)); // ? will be replaced after bind
+            SQLITE3_QUERY query = SQLITE3_QUERY(
+                    fmt::format("SELECT * FROM {} WHERE HWID='{}'", GAMEDATA_DATABASE_NAME, hwid));
+            if (db.execute(query) && db.get_result_row_count() <= 0) {
+                SQLITE3_QUERY insert_query = SQLITE3_QUERY(
+                        fmt::format("INSERT INTO {} VALUES ('{}', '{}', {}, {}, {}, '{}');", GAMEDATA_DATABASE_NAME,
+                                    hwid, sid, initial_gamestate, remote_player_is_white, 0,
+                                    initial_fen)); // ? will be replaced after bind
                 if (db.execute(insert_query) && db.commit()) { // execute query
                     db.perror();
                     err = true;
                     reason = "db insert error";
                 }
-            }else{
-                SQLITE3_QUERY update_query = SQLITE3_QUERY(fmt::format("UPDATE {} SET SID='{}', game_state='{}', remote_player_is_white='{}', is_syncing_phase='{}', current_board_fen='{}' WHERE HWID='{}';", GAMEDATA_DATABASE_NAME, sid, initial_gamestate, remote_player_is_white, 0, initial_fen, hwid)); // ? will be replaced after bind
+            } else {
+                SQLITE3_QUERY update_query = SQLITE3_QUERY(fmt::format(
+                        "UPDATE {} SET SID='{}', game_state='{}', remote_player_is_white='{}', is_syncing_phase='{}', current_board_fen='{}' WHERE HWID='{}';",
+                        GAMEDATA_DATABASE_NAME, sid, initial_gamestate, remote_player_is_white, 0, initial_fen,
+                        hwid)); // ? will be replaced after bind
                 if (db.execute(update_query) && db.commit()) { // execute query
                     db.perror();
                     err = true;
@@ -266,47 +283,51 @@ int main(int argc, char *argv[]) {
 
         }
 
-        json11::Json response_json = json11::Json::object {
-                { "err", err },
-                { "status", reason },
-                { "sid", "" + sid },
-                { "profile", json11::Json::object {{ "hwid", hwid },
-                                               { "rank", 0 },
-                                               { "elo_rank_readable", "NOOB"},
-                                               {"friendly_name", "Player_" + hwid},
-                                               {"virtual_player_id", "ID_" + hwid},
-                                               {"player_type", playertype}}}
+        json11::Json response_json = json11::Json::object{
+                {"err",     err},
+                {"status",  reason},
+                {"sid",     "" + sid},
+                {"profile", json11::Json::object{{"hwid",              hwid},
+                                                 {"rank",              0},
+                                                 {"elo_rank_readable", "NOOB"},
+                                                 {"friendly_name",     "Player_" + hwid},
+                                                 {"virtual_player_id", "ID_" + hwid},
+                                                 {"player_type",       playertype}}}
         };
+
         res.set_content(response_json.dump(), "application/json");
     });
 
-    svr.Get("/rest/heartbeat", [&db](const httplib::Request& req, httplib::Response &res) {
+    svr.Get("/rest/heartbeat", [&db](const httplib::Request &req, httplib::Response &res) {
         bool err = false;
         std::string reason = "ok";
         // GET PARAMETER
         const std::string hwid = sanitize_r(req.get_param_value("hwid"));
         const std::string sid = sanitize_r(req.get_param_value("sid"));
         // CHECK INPUT
-        if(hwid.empty()){
+        if (hwid.empty()) {
             err = true;
             reason = "hwid.size() <= 0";
-        }else{
+        } else {
             //CHECK SESSION EXISTS
-            SQLITE3_QUERY query = SQLITE3_QUERY(fmt::format("SELECT * FROM {} WHERE HWID='{}' AND SID='{}'", GAMEDATA_DATABASE_NAME, hwid, sid));
-            if(db.execute(query) && db.get_result_row_count() <= 0) {
+            SQLITE3_QUERY query = SQLITE3_QUERY(
+                    fmt::format("SELECT * FROM {} WHERE HWID='{}' AND SID='{}'", GAMEDATA_DATABASE_NAME, hwid, sid));
+            if (db.execute(query) && db.get_result_row_count() <= 0) {
                 err = true;
                 reason = "session invalid, please use login first";
             }
         }
 
-        json11::Json response_json = json11::Json::object {
-                { "err", err },
-                { "status", reason }
+        json11::Json response_json = json11::Json::object{
+                {"err",    err},
+                {"status", reason}
         };
         res.set_content(response_json.dump(), "application/json");
     });
 
-    svr.Get("/rest/set_player_state", [&db](const httplib::Request& req, httplib::Response &res) {
+    svr.Get("/rest/set_player_state", [](const httplib::Request &req, httplib::Response &res) {
+        SQLITE3 db(ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::DB_FILEPATH)); // init database
+
         bool err = false;
         std::string reason = "ok";
         // GET PARAMETER
@@ -314,53 +335,186 @@ int main(int argc, char *argv[]) {
         const std::string sid = sanitize_r(req.get_param_value("sid"));
         const std::string ps = sanitize_r(req.get_param_value("ps"));
         // CHECK INPUT
-        if(hwid.empty()){
+        if (hwid.empty()) {
             err = true;
             reason = "hwid.size() <= 0";
-        }else{
+        } else {
 
             auto val = magic_enum::enum_cast<GAME_STATE>(std::stoi(ps));
             if (val.has_value()) {
-                if(val.value() == GAME_STATE::PS_IDLE || val.value() == GAME_STATE::PS_SEARCHING || val.value() == GAME_STATE::PS_SEARCHING_MANUAL){
+                if (val.value() == GAME_STATE::PS_IDLE || val.value() == GAME_STATE::PS_SEARCHING ||
+                    val.value() == GAME_STATE::PS_SEARCHING_MANUAL) {
                     GAME_STATE gs = val.value();
-                    if(gs == GAME_STATE::PS_SEARCHING_MANUAL){
+                    if (gs == GAME_STATE::PS_SEARCHING_MANUAL) {
                         gs = GAME_STATE::PS_SEARCHING;
                     }
-                    SQLITE3_QUERY update_query = SQLITE3_QUERY(
-                            fmt::format("UPDATE {} SET game_state='{}' WHERE HWID='{}' AND SID='{}'",
-                                        GAMEDATA_DATABASE_NAME, magic_enum::enum_integer(gs), hwid, sid)); // ? will be replaced after bind
+
+                    const std::string q = fmt::format(R"(UPDATE gamedata SET game_state=4 WHERE HWID=123;)",
+                                                GAMEDATA_DATABASE_NAME, magic_enum::enum_integer(gs), hwid,
+                                                sid);
+                    SQLITE3_QUERY update_query = SQLITE3_QUERY("UPDATE gamedata SET game_state=4 WHERE HWID=123"); // ? will be replaced after bind
                     if (db.execute(update_query) && db.commit()) { // execute query
                         db.perror();
                         err = true;
                         reason = "db update error";
                     }
 
-                }else{
+                } else {
                     err = true;
                     reason = "invalid ps parameter value";
                 }
-            }else{
+            } else {
                 err = true;
                 reason = "invalid ps parameter value";
             }
         }
-        json11::Json response_json = json11::Json::object {
-                { "err", err },
-                { "status", reason }
+        json11::Json response_json = json11::Json::object{
+                {"err",    err},
+                {"status", reason}
         };
         res.set_content(response_json.dump(), "application/json");
     });
-    // TODO NEXT => SET PLAYERSTATE
+
+    svr.Get("/rest/abort_game", [&db](const httplib::Request &req, httplib::Response &res) {
+        bool err = false;
+        std::string reason = "ok";
+        // GET PARAMETER
+        const std::string hwid = sanitize_r(req.get_param_value("hwid"));
+        const std::string sid = sanitize_r(req.get_param_value("sid"));
+        // CHECK INPUT
+        if (hwid.empty()) {
+            err = true;
+            reason = "hwid.size() <= 0";
+        } else {
+            SQLITE3_QUERY update_query = SQLITE3_QUERY(
+                    fmt::format("UPDATE {} SET game_state='{}' WHERE HWID='{}' AND SID='{}'",
+                                GAMEDATA_DATABASE_NAME, magic_enum::enum_integer(GAME_STATE::PS_IDLE), hwid,
+                                sid)); // ? will be replaced after bind
+            if (db.execute(update_query) && db.commit()) { // execute query
+                db.perror();
+                err = true;
+                reason = "db update error";
+            }
+        }
+        json11::Json response_json = json11::Json::object{
+                {"err",    err},
+                {"status", reason}
+        };
+        res.set_content(response_json.dump(), "application/json");
+    });
+
+
+    svr.Get("/rest/set_user_config", [&db](const httplib::Request &req, httplib::Response &res) {
+        json11::Json response_json = json11::Json::object{
+                {"err",    false},
+                {"status", "ok"},
+        };
+        res.set_content(response_json.dump(), "application/json");
+    });
+
+    svr.Get("/rest/store_user_log", [&db](const httplib::Request &req, httplib::Response &res) {
+        json11::Json response_json = json11::Json::object{
+                {"err",    false},
+                {"status", "ok"},
+        };
+        res.set_content(response_json.dump(), "application/json");
+    });
+
+
+
+    // TODO /rest/player_setup_confirmation => if in matchmaking state -> sqitch to game running
+
+    svr.Get("/rest/get_player_state", [&db](const httplib::Request &req, httplib::Response &res) {
+       // SQLITE3 db(ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::DB_FILEPATH)); // init database
+
+        bool err = false;
+        std::string reason = "ok";
+        // GET PARAMETER
+        const std::string hwid = sanitize_r(req.get_param_value("hwid"));
+        const std::string sid = sanitize_r(req.get_param_value("sid"));
+        const std::string simplified = sanitize_r(req.get_param_value("simplified"));
+
+
+        // MATCHMAKING VARIABLES
+        bool waiting_for_game = false;
+        GAME_STATE ps = GAME_STATE::PS_IDLE;
+        // GAMESTATE VARIABLES
+        bool game_running = false;
+        bool im_white_player = false;
+        bool is_my_turn = false;
+        bool is_syncing_phase = false;
+        const std::string initial_board = ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::INITIAL_BOARD_FEN);
+        std::string current_board_fen = initial_board;
+        bool is_board_valid = false;
+        bool is_game_over = false;
+        std::string move = ""; // ?
+        std::vector<std::string> legal_moves;
+
+
+        // CHECK INPUT
+        if (hwid.empty()) {
+            err = true;
+            reason = "hwid.size() <= 0";
+        } else {
+            //CHECK SESSION EXISTS
+            SQLITE3_QUERY query = SQLITE3_QUERY(
+                    fmt::format("SELECT * FROM {}", GAMEDATA_DATABASE_NAME, hwid, sid));
+            if (db.execute(query) && db.get_result_row_count() <= 0) {
+                err = true;
+                reason = "session invalid, please use login first";
+            }else{
+                // get column names
+                auto column_name = db.copy_column_names();
+                std::cout << "|";
+                for (auto &name : *column_name) {
+                    std::cout << name << "|";
+                }
+                std::cout << std::endl;
+
+
+                // result is stored in a vector of SQLITE_ROW_VECTOR
+                db.print_result();
+
+                auto result = db.copy_result();
+            }
+        }
+
+
+
+        json11::Json response_json = json11::Json::object{
+                {"err",               err},
+                {"status",            reason},
+                {"matchmaking_state", json11::Json::object{{"waiting_for_game", false},
+                                                           {"detailed",         json11::Json::object{
+                                                                   {"player_state", magic_enum::enum_integer(ps)}}}}},
+                {"game_state",        json11::Json::object{{"game_running", game_running},
+                                                           {"simplified",   json11::Json::object{{"im_white_player",  im_white_player},
+                                                                                                 {"is_my_turn",       is_my_turn},
+                                                                                                 {"is_syncing_phase", is_syncing_phase},
+                                                                                                 {"current_board",    json11::Json::object{{"fen",            current_board_fen},
+                                                                                                                                           {"initial_board",  initial_board},
+                                                                                                                                           {"is_board_valid", is_board_valid},
+                                                                                                                                           {"is_game_over",   is_game_over},
+                                                                                                                                           {"move",           move},
+                                                                                                                                           {"legal_moves",    legal_moves}}}}}}}
+        };
+        res.set_content(response_json.dump(), "application/json");
+    });
+
+
+
+    // PLAYER STATE
+
 
     // START WEBSERVER
     const std::string svr_host = ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::HTTP_HOST);
     const int svr_port = ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::HTTP_PORT);
     // USING A SEPARATE THREAD
-    auto httpThread = std::thread([&]() {svr.listen(svr_host.c_str(), svr_port); });
+    auto httpThread = std::thread([&]() { svr.listen(svr_host.c_str(), svr_port); });
     main_thread_running = true;
 
     LOG_F(ERROR, "MAIN LOOP ENTERED");
-    while (main_thread_running){
+    while (main_thread_running) {
 
     }
     httpThread.join();
@@ -368,7 +522,7 @@ int main(int argc, char *argv[]) {
     LOG_F(ERROR, "CLEANUP");
 
 
-     // WRITE LOGS TO FILESYSTEM
+    // WRITE LOGS TO FILESYSTEM
     loguru::flush();
     return 0;
 }

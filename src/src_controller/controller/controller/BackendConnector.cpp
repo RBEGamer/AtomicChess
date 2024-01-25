@@ -148,7 +148,7 @@ BackendConnector::PLAYER_STATUS BackendConnector::get_player_state()
 	if(root.find("status") != root.end() && root["status"].is_string()) {
 		status.err = root["status"].bool_value();
 	}
-	
+
 	//MATCHMAKING ->waiting_for_game
 	if(root["matchmaking_state"].is_object())
 	{
@@ -176,6 +176,7 @@ BackendConnector::PLAYER_STATUS BackendConnector::get_player_state()
 		}
 		
 	}
+
 	//GAME_STATE->game_running
 	if(root["game_state"].is_object())
 	{

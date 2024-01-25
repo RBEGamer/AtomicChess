@@ -169,7 +169,7 @@
   </div>
 
   <div class="col-lg-12 text-center text-lg-center my-auto">
-    <h4 class="text-justify text-center" id=""><span id="player_color">--- GAME ---</span></h4>
+    <h4 class="text-justify text-center" id=""><span id="player_name">-- PLAYER --</span><span id="player_color">--- GAME ---</span></h4>
   </div>
 
   <div class="col-12">
@@ -683,7 +683,7 @@
                   //$("#alert_message").html("<div class='alert alert-fh' role='alert'>!! YOU ARE PLAYING AGAINS A TABLE !! <a class='btn btn-warning' role='button' target='_blank' href='/redirect?destination=livestream'> => OPEN LIVESTREAM <= </a></div>");
                 }
               }
-              $("#player_name").prop("href","/statistics?gid="+_state.game_state.detailed.id);
+              
             }
 
 
@@ -716,11 +716,8 @@
               LAST_VALID_FEN =_state.game_state.simplified.current_board.ExtendetFen;
             }
             if(_state.game_state != null && _state.game_state.simplified != null && _state.game_state.simplified.current_board.is_game_over === true) {
-              if(got_game_id != ""){
-                window.location.href = "/statistics?list_count=10&gid=" + String(got_game_id);
-              }else{
-                window.location.href = "/statistics?list_count=10";
-              }
+              alert("GAME OVER");
+              window.location.reload();
             }
 
 
