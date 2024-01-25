@@ -1,17 +1,12 @@
 #include <iostream>
-#include <sqlite3.h>
-#include <format>
-
 #include <cstdio>
 
 #ifdef __MACH__
-
-#include <mach/clock.h>
-#include <mach/mach.h>
-
+    #include <mach/clock.h>
+    #include <mach/mach.h>
 #endif
 
-#include <ctime>
+
 #include <chrono>
 #include <algorithm>
 
@@ -108,13 +103,13 @@ int main(int argc, char *argv[]) {
         std::cout << "---- ATC_SERVER HELP ----" << std::endl;
         std::cout << "--help                   | prints this message" << std::endl;
         std::cout << "--version                | prints a version message" << std::endl;
-        std::cout
-                << "--cfgfolderpath          | set the ABS folder path for the config FORMAT: /xyz/folder/ which contains atcserverconfig.ini, if not specified ./atcserverconfig.ini is used"
-                << std::endl;
+        std::cout << "--cfgfolderpath          | set the ABS folder path for the config FORMAT: /xyz/folder/ which contains atcserverconfig.ini, if not specified ./atcserverconfig.ini is used" << std::endl;
+        std::cout << "--statichtmlpath         | set the ABS folder path for the static html files" << std::endl;
         std::cout << "--reset                  | resets game database" << std::endl;
         std::cout << "---- END ATC_SERVER HELP ----" << std::endl;
         return 0;
     }
+
     if (cmdOptionExists(argv, argv + argc, "--version")) {
         std::cout << "---- ATC_SERVER VERSION ----" << std::endl;
         std::cout << "atc_server version:" << VERSION << std::endl;
@@ -197,8 +192,12 @@ int main(int argc, char *argv[]) {
     });
 
     // SERVER STATIC FILES
-    auto ret = svr.set_mount_point("/public",
-                                   ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::STATIC_HTML_PATH).c_str());
+    std::string static_html_path = ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::STATIC_HTML_PATH);
+    if (cmdOptionExists(argv, argv + argc, "--statichtmlpath")) {
+        static_html_path = std::string(getCmdOption(argv, argv + argc, "--statichtmlpath"));
+        LOG_F(ERROR, "set STATIC_HTML_PATH using value of --statichtmlpath parameter");
+    }
+    auto ret = svr.set_mount_point("/public",static_html_path.c_str());
     if (!ret) {
         LOG_F(ERROR, "set STATIC_HTML_PATH path cant be accessed");
     }
@@ -403,7 +402,6 @@ int main(int argc, char *argv[]) {
         res.set_content(response_json.dump(), "application/json");
     });
 
-
     svr.Get("/rest/set_user_config", [&db](const httplib::Request &req, httplib::Response &res) {
         json11::Json response_json = json11::Json::object{
                 {"err",    false},
@@ -420,6 +418,13 @@ int main(int argc, char *argv[]) {
         res.set_content(response_json.dump(), "application/json");
     });
 
+    svr.Get("/rest/client_status", [&db](const httplib::Request &req, httplib::Response &res) {
+        json11::Json response_json = json11::Json::object{
+                {"err",    false},
+                {"status", "ok"},
+        };
+        res.set_content(response_json.dump(), "application/json");
+    });
 
 
     // TODO /rest/player_setup_confirmation => if in matchmaking state -> sqitch to game running
