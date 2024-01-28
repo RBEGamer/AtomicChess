@@ -578,7 +578,7 @@ int main(int argc, char *argv[]) {
     // NOW TRY TO CONNECT TO THE SERVER, WE USE SOME HARDCODED FALL BACK URLs
     std::string ALTERNATIVE_BACKEND_URL[] = {
             ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::NETWORK_BACKEND_URL), "http://atomicchess.de",
-            "http://atomicchess.de:3000", "http://127.0.0.1:3000"};
+            "http://atomicchess.de:3000", "http://127.0.0.1:9999", "http://127.0.0.1:3000", "http://127.0.0.1"};
     // CHECK IF GAMESERVER IS REACHABLE ELSE TRY AND ITERATE THOUGH THE OTHER HARDCODED URLS
     volatile int abu_counter = 0;
     volatile bool abu_result = true;
