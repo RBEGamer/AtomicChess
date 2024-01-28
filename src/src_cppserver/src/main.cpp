@@ -86,6 +86,10 @@ void sys_tick_delay() {
     }
 }
 
+enum class AI_ALGORITHMS {
+    RNG = 0,
+    FIRST = 1
+};
 
 enum class GAME_STATE {
     PS_INVALID = 0,
@@ -96,6 +100,7 @@ enum class GAME_STATE {
     PS_INGAME = 7,
     PS_GAME_OVER = 8
 };
+
 struct GAME_DB_ENTRY_READ {
     bool valid = false;
     std::string hwid;
@@ -113,12 +118,12 @@ struct GAME_DB_ENTRY_READ {
 
 bool update_game_db_entry(SQLITE3 &_db, const std::string &_hwid = "", const std::string &_sid = "",
                           const std::string &_game_state = "", const std::string &_remote_player_is_white = "",
-                          const std::string &_is_syncing_phase = "", const std::string& _current_board_fen = "") {
+                          const std::string &_is_syncing_phase = "", const std::string &_current_board_fen = "") {
 
     std::string q = fmt::format("UPDATE {} SET", GAMEDATA_DATABASE_NAME);
     bool updated = false;
     if (!_sid.empty()) {
-        q += fmt::format(" SID={},", _sid);
+        q += fmt::format(" SID='{}',", _sid);
         updated = true;
     }
 
@@ -138,7 +143,7 @@ bool update_game_db_entry(SQLITE3 &_db, const std::string &_hwid = "", const std
     }
 
     if (!_current_board_fen.empty()) {
-        q += fmt::format(" current_board_fen={},", _current_board_fen);
+        q += fmt::format(" current_board_fen='{}',", _current_board_fen);
         updated = true;
     }
 
@@ -173,7 +178,7 @@ get_game_db_entry(SQLITE3 &_db, const std::string &_hwid = "", const std::string
         q += "WHERE ";
     }
     if (!_hwid.empty()) {
-        q += fmt::format("HWID={} ", _hwid);
+        q += fmt::format("HWID='{}' ", _hwid);
     }
 
     if (!_hwid.empty() && !_sid.empty()) {
@@ -181,7 +186,7 @@ get_game_db_entry(SQLITE3 &_db, const std::string &_hwid = "", const std::string
     }
 
     if (!_sid.empty()) {
-        q += fmt::format("SID={} ", _sid);
+        q += fmt::format("SID='{}' ", _sid);
     }
 
 
@@ -214,6 +219,7 @@ get_game_db_entry(SQLITE3 &_db, const std::string &_hwid = "", const std::string
                 result_entry.game_running = true;
             } else if (result_entry.game_state == GAME_STATE::PS_GAME_OVER) {
                 result_entry.is_game_over = true;
+                result_entry.game_running = true;
             } else if (result_entry.game_state == GAME_STATE::PS_PREPARING_INGAME) {
                 result_entry.is_syncing_phase = true;
                 result_entry.game_running = true;
@@ -258,6 +264,19 @@ int main(int argc, char *argv[]) {
     loguru::add_file(LOG_FILE_PATH_ERROR, loguru::Truncate, loguru::Verbosity_WARNING);
     loguru::g_stderr_verbosity = 1;
     LOG_SCOPE_F(INFO, "ATC SERVER STARTED");
+
+
+
+    // SET SELECTED CHESS ENGINE ALGORITHM
+    AI_ALGORITHMS selected_ai_algorithm = AI_ALGORITHMS::RNG;
+    std::string chess_ai_algorithm = ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::AI_ALGORITHM);
+    if (chess_ai_algorithm == "RNG") {
+        selected_ai_algorithm = AI_ALGORITHMS::RNG;
+    }else if (chess_ai_algorithm == "FIRST") {
+        selected_ai_algorithm = AI_ALGORITHMS::FIRST;
+    }
+    LOG_SCOPE_F(INFO, "USER SELECTED ALGORITHM IS %s ! POSSIBLE ALGORITHMS ARE: RNG, FIRST", chess_ai_algorithm.c_str());
+
 
     // CREATE CONFIG FILE PATH
     std::string CONFIG_FILE_PATH = DEFAULT_CONFIG_FILE_PATH;
@@ -383,9 +402,13 @@ int main(int argc, char *argv[]) {
 
             const int initial_gamestate = magic_enum::enum_integer(GAME_STATE::PS_IDLE);
             const int remote_player_is_white = randomBoolean() * 1;
-            const std::string initial_fen = ConfigParser::getInstance()->get(
+            std::string initial_fen = ConfigParser::getInstance()->get(
                     ConfigParser::CFG_ENTRY::INITIAL_BOARD_FEN);
 
+            if (initial_fen.empty()) {
+                thc::ChessRules cr;
+                initial_fen = cr.ForsythPublish();
+            }
             //CREATE NEW USER IF NOT EXISTS
             SQLITE3_QUERY query = SQLITE3_QUERY("SELECT * FROM ? WHERE HWID=?");
             query.add_binding(GAMEDATA_DATABASE_NAME, hwid);
@@ -586,7 +609,7 @@ int main(int argc, char *argv[]) {
                 reason = "session invalid, please use login first";
             } else {
 
-                if(qres.at(0).is_syncing_phase){
+                if (qres.at(0).is_syncing_phase) {
                     update_game_db_entry(db, hwid, "",
                                          fmt::format("{}", magic_enum::enum_integer(GAME_STATE::PS_INGAME)), "",
                                          "", "");
@@ -600,6 +623,81 @@ int main(int argc, char *argv[]) {
         res.set_content(response_json.dump(), "application/json");
     });
 
+    svr.Get("/rest/make_move", [&db](const httplib::Request &req, httplib::Response &res) {
+        bool err = false;
+        std::string reason = "ok";
+        // GET PARAMETER
+        const std::string hwid = sanitize_r(req.get_param_value("hwid"));
+        const std::string sid = sanitize_r(req.get_param_value("sid"));
+        const std::string move = sanitize_r(req.get_param_value("move"));
+
+        // CHECK INPUT
+        if (hwid.empty()) {
+            err = true;
+            reason = "hwid.size() <= 0";
+        } else if (move.empty()) {
+            err = true;
+            reason = "move.size() <= 0";
+        } else {
+            auto qres = get_game_db_entry(db, hwid, sid);
+
+            if (qres.empty()) {
+                err = true;
+                reason = "session invalid, please use login first";
+            } else {
+
+                auto qres = get_game_db_entry(db, hwid, sid);
+
+                if (qres.empty()) {
+                    err = true;
+                    reason = "session invalid, please use login first";
+                } else if (!qres.at(0).game_running) {
+                    err = true;
+                    reason = "game not running";
+                } else if (qres.at(0).waiting_for_game) {
+                    err = true;
+                    reason = "waiting_for_game = game not running";
+                } else {
+                    // QUERY CURRENT GAME STATE FROM DATABASE
+                    const GAME_DB_ENTRY_READ gdbe = qres.at(0);
+
+                    thc::ChessRules cr;
+                    if (cr.Forsyth(gdbe.current_board_fen.c_str())) {
+                        if ((cr.WhiteToPlay() && gdbe.remote_player_is_white) ||
+                            (!cr.WhiteToPlay() && !gdbe.remote_player_is_white)) {
+
+                            //APPLY MOVE
+                            thc::Move mv;
+                            if (mv.TerseIn(&cr, move.c_str()) && mv.Valid()) {
+                                cr.PlayMove(mv);
+
+                                // UPDATE FEN IN DATABASE ENTRY
+                                update_game_db_entry(db, gdbe.hwid, "", "", "", "", cr.ForsythPublish());
+
+                            } else {
+                                err = true;
+                                reason = "move invalid";
+                            }
+                        } else {
+                            err = true;
+                            reason = "other players turn";
+                        }
+                    } else {
+                        err = true;
+                        reason = "fen not valid";
+                    }
+
+                }
+
+
+            }
+        }
+        json11::Json response_json = json11::Json::object{
+                {"err",    err},
+                {"status", reason}
+        };
+        res.set_content(response_json.dump(), "application/json");
+    });
 
     svr.Get("/rest/get_player_state", [&db](const httplib::Request &req, httplib::Response &res) {
 
@@ -619,7 +717,13 @@ int main(int argc, char *argv[]) {
                 bool im_white_player = false;
                 bool is_my_turn = false;
                 bool is_syncing_phase = false;
-                const std::string initial_board = ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::INITIAL_BOARD_FEN);
+
+                std::string initial_board = ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::INITIAL_BOARD_FEN);
+                if (initial_board.empty()) {
+                    thc::ChessRules cr;
+                    initial_board = cr.ForsythPublish();
+                }
+
                 std::string game_id;
                 std::string current_board_fen = initial_board;
                 std::string current_board_fen_simple;
@@ -674,10 +778,10 @@ int main(int argc, char *argv[]) {
                         }
 
                         //EXTRACT SIMPLIFIED FEN WITHOUT EXTRAC INFORMATION NEEDED FOR THE CHESS TABLE PARSING ALGORITHM
-                        if(cr.WhiteToPlay()){
-                            current_board_fen_simple =  current_board_fen.substr(0, current_board_fen.find(" w "));
-                        }else{
-                            current_board_fen_simple =  current_board_fen.substr(0, current_board_fen.find(" b "));
+                        if (cr.WhiteToPlay()) {
+                            current_board_fen_simple = current_board_fen.substr(0, current_board_fen.find(" w "));
+                        } else {
+                            current_board_fen_simple = current_board_fen.substr(0, current_board_fen.find(" b "));
                         }
                     }
                 }
@@ -690,13 +794,14 @@ int main(int argc, char *argv[]) {
                                                                    {"detailed",         json11::Json::object{
                                                                            {"player_state",
                                                                             magic_enum::enum_integer(ps)}}}}},
-                        {"game_state", json11::Json::object{{"game_running", game_running}, {"detailed",   json11::Json::object{{"id",  game_id}}},
+                        {"game_state",        json11::Json::object{{"game_running", game_running},
+                                                                   {"detailed",     json11::Json::object{{"id", game_id}}},
 
                                                                    {"simplified",   json11::Json::object{{"im_white_player",  im_white_player},
                                                                                                          {"is_my_turn",       is_my_turn},
                                                                                                          {"is_syncing_phase", is_syncing_phase},
                                                                                                          {"current_board",    json11::Json::object{{"fen",            current_board_fen_simple},
-                                                                                                                                                   {"ExtendetFen",            current_board_fen},
+                                                                                                                                                   {"ExtendetFen",    current_board_fen},
                                                                                                                                                    {"initial_board",  initial_board},
                                                                                                                                                    {"is_board_valid", is_board_valid},
                                                                                                                                                    {"is_game_over",   is_game_over},
@@ -734,12 +839,76 @@ int main(int argc, char *argv[]) {
                 update_game_db_entry(db, r.hwid, "",
                                      fmt::format("{}", magic_enum::enum_integer(GAME_STATE::PS_PREPARING_INGAME)), "",
                                      "", "");
-            }else if(r.is_syncing_phase) {
+            } else if (r.is_syncing_phase) {
+
+            } else if (r.is_game_over) {
+                update_game_db_entry(db, r.hwid, "",
+                                     fmt::format("{}", magic_enum::enum_integer(GAME_STATE::PS_IDLE)), "",
+                                     "", "");
+            } else if (r.game_running) {
 
 
-            } else if(r.game_running){
+                // CHECK IF AIs TURN
 
+                thc::ChessRules cr;
+                if (cr.Forsyth(r.current_board_fen.c_str())) {
+
+
+                    //GENERATE LEGAL MOVES
+                    std::vector<thc::Move> moves;
+                    cr.GenLegalMoveList(moves);
+
+
+                    if (moves.empty()) {
+                        update_game_db_entry(db, r.hwid, "",
+                                             fmt::format("{}", magic_enum::enum_integer(GAME_STATE::PS_GAME_OVER)), "",
+                                             "", "");
+
+
+
+                        // IS AI TURN
+                    } else if ((!cr.WhiteToPlay() && r.remote_player_is_white) ||
+                               (cr.WhiteToPlay() && !r.remote_player_is_white)) {
+
+
+                        thc::Move move_to_apply_by_ai;
+
+                        if (selected_ai_algorithm == AI_ALGORITHMS::RNG) {
+                            std::random_device rd; // obtain a random number from hardware
+                            std::mt19937 gen(rd()); // seed the generator
+                            if (!moves.empty()) {
+                                std::uniform_int_distribution<> distr(0, moves.size()-1); // define the range
+                                const int selected_move = distr(gen);
+                                move_to_apply_by_ai = moves.at(selected_move);
+                            }
+                        }else if (selected_ai_algorithm == AI_ALGORITHMS::FIRST) {
+                            if (!moves.empty()) {
+                                move_to_apply_by_ai = moves.at(0);
+                            }
+                        }
+
+
+
+
+
+                        if (move_to_apply_by_ai.Valid()) {
+                            cr.PlayMove(move_to_apply_by_ai);
+                            // UPDATE FEN IN DATABASE ENTRY
+                            update_game_db_entry(db, r.hwid, "", "", "", "", cr.ForsythPublish());
+                        }
+                    }
+                }
             }
+
+
+            // RESET GAME IF THERE IS ANY FEN ERROR
+            thc::ChessRules cr;
+            if (!cr.Forsyth(r.current_board_fen.c_str())) {
+                update_game_db_entry(db, r.hwid, "",
+                                     fmt::format("{}", magic_enum::enum_integer(GAME_STATE::PS_IDLE)), "",
+                                     "", "");
+            }
+
 
         }
     }

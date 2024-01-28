@@ -29,7 +29,9 @@ public:
         HTTP_PORT,
         DB_FILEPATH,
         STATIC_HTML_PATH,
-        INITIAL_BOARD_FEN
+        INITIAL_BOARD_FEN,
+        AI_ALGORITHM
+
 	};
 	
 	static ConfigParser* getInstance();

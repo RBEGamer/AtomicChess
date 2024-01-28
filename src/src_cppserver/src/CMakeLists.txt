@@ -17,12 +17,15 @@ set(CMAKE_CXX_STANDARD 17)
 FIND_PACKAGE (Threads)
 FIND_PACKAGE(SQLite3 REQUIRED)
 
-add_subdirectory(THIRDPARTY/fmt)
+add_subdirectory("${PROJECT_SOURCE_DIR}/THIRDPARTY/fmt")
 
 
 
 
 set(SOURCE_FILES SHARED/json11-master/json11.cpp SHARED/loguru-master/loguru.cpp)
+
+
+add_subdirectory("${PROJECT_SOURCE_DIR}/THIRDPARTY/BitChess")
 
 
 add_subdirectory("${PROJECT_SOURCE_DIR}/THIRDPARTY/thc-chess-library")
