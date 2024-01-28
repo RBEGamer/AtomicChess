@@ -2,8 +2,8 @@
 #include <cstdio>
 
 #ifdef __MACH__
-    #include <mach/clock.h>
-    #include <mach/mach.h>
+#include <mach/clock.h>
+#include <mach/mach.h>
 #endif
 
 
@@ -21,6 +21,10 @@
 #include "SQLITE3_QUERY.hpp"
 #include "SQLITE3.hpp"
 #include "ConfigParser.h"
+
+#include <thc.h>
+
+
 
 #define LOG_FILE_PATH_ERROR "./atcserver_error_log.log"
 #define LOG_FILE_PATH "./atcserver_log.log"
@@ -55,7 +59,7 @@ struct timespec t1;
 struct timespec t2;
 #else
 TimePoint t1 = Clock::now();
-    TimePoint t2 = Clock::now();
+TimePoint t2 = Clock::now();
 #endif
 
 void sys_tick_delay() {
@@ -75,10 +79,10 @@ void sys_tick_delay() {
         t1.tv_sec = mts.tv_sec;
         t1.tv_nsec = mts.tv_nsec;
 #else
-        t2 = Clock::now();
-        // IF TIME DIFFERENCE IS BIG ENOUGHT => CALL THE TIMER EVENT
-        if (CHRONO_DURATION_MS(t2, t1) > SYSTEM_TICK_DELAY) {
-            t1 = Clock::now();
+    t2 = Clock::now();
+    // IF TIME DIFFERENCE IS BIG ENOUGHT => CALL THE TIMER EVENT
+    if (CHRONO_DURATION_MS(t2, t1) > SYSTEM_TICK_DELAY) {
+        t1 = Clock::now();
 #endif
     }
 }
@@ -92,7 +96,58 @@ enum class GAME_STATE {
     PS_PREPARING_INGAME = 6,
     PS_INGAME = 7
 };
+struct GAME_DB_ENTRY {
+    bool valid = false;
+    GAME_STATE game_state = GAME_STATE::PS_INVALID;
+    bool remote_player_is_white = false;
+    bool is_syncing_phase = false;
+    std::string current_board_fen;
+};
 
+
+
+std::vector<GAME_DB_ENTRY> get_game_db_entry(SQLITE3& _db, const std::string& _hwid = "", const std::string& _sid = ""){
+    std::vector<GAME_DB_ENTRY> res;
+    std::string q = "SELECT game_state, remote_player_is_white, is_syncing_phase, current_board_fen FROM ?";
+
+    if(!_hwid.empty() || !_sid.empty()){
+        q += "WHERE ";
+    }
+    if(!_hwid.empty()){
+        q += fmt::format("HWID={} ", _hwid);
+    }
+
+    if(!_hwid.empty() && !_sid.empty()){
+        q += "AND ";
+    }
+
+    if(!_sid.empty()){
+        q += fmt::format("SID={} ", _sid);
+    }
+
+
+    SQLITE3_QUERY query = SQLITE3_QUERY(q);
+    query.add_binding( GAMEDATA_DATABASE_NAME);
+    if (!_db.execute(query) && !_db.get_result_row_count() <= 0) {
+
+#ifdef  DEBUG
+        _db.print_result();
+#endif
+
+        const auto qres = _db.copy_result();
+        for (auto e: *qres.get()) {
+            GAME_DB_ENTRY result_entry = GAME_DB_ENTRY();
+            result_entry.valid = true;
+            result_entry.game_state = magic_enum::enum_cast<GAME_STATE>(std::stoi(e.at(0))).value(); // game_state
+            result_entry.remote_player_is_white = std::stoi(e.at(1));
+            result_entry.is_syncing_phase = std::stoi(e.at(2));
+            result_entry.current_board_fen = e.at(3);
+            res.push_back(result_entry);
+        }
+    }
+
+    return res;
+}
 
 int main(int argc, char *argv[]) {
     // REGISTER SIGNAL HANDLER
@@ -103,7 +158,9 @@ int main(int argc, char *argv[]) {
         std::cout << "---- ATC_SERVER HELP ----" << std::endl;
         std::cout << "--help                   | prints this message" << std::endl;
         std::cout << "--version                | prints a version message" << std::endl;
-        std::cout << "--cfgfolderpath          | set the ABS folder path for the config FORMAT: /xyz/folder/ which contains atcserverconfig.ini, if not specified ./atcserverconfig.ini is used" << std::endl;
+        std::cout
+                << "--cfgfolderpath          | set the ABS folder path for the config FORMAT: /xyz/folder/ which contains atcserverconfig.ini, if not specified ./atcserverconfig.ini is used"
+                << std::endl;
         std::cout << "--statichtmlpath         | set the ABS folder path for the static html files" << std::endl;
         std::cout << "--reset                  | resets game database" << std::endl;
         std::cout << "---- END ATC_SERVER HELP ----" << std::endl;
@@ -153,8 +210,9 @@ int main(int argc, char *argv[]) {
 
 
     //LOAD DATABASE
-    SQLITE3 db(ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::DB_FILEPATH)); // init database
-
+    const std::string dbname = ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::DB_FILEPATH);
+    SQLITE3 db; // init database
+    db.open(dbname);
 
     //INIT DATABASE
     if (cmdOptionExists(argv, argv + argc, "--reset")) {
@@ -181,7 +239,7 @@ int main(int argc, char *argv[]) {
     }
     //SET WEBSERVER LOGGING
     svr.set_logger([](const httplib::Request &req, const httplib::Response &res) {
-  //      LOG_F(INFO, "%s", fmt::format("req: {} res {}", req.body, res.body).c_str());
+        //      LOG_F(INFO, "%s", fmt::format("req: {} res {}", req.body, res.body).c_str());
     });
     //SET ERROR HANDLER
     svr.set_error_handler([](const httplib::Request & /*req*/, httplib::Response &res) {
@@ -197,7 +255,7 @@ int main(int argc, char *argv[]) {
         static_html_path = std::string(getCmdOption(argv, argv + argc, "--statichtmlpath"));
         LOG_F(ERROR, "set STATIC_HTML_PATH using value of --statichtmlpath parameter");
     }
-    auto ret = svr.set_mount_point("/public",static_html_path.c_str());
+    auto ret = svr.set_mount_point("/public", static_html_path.c_str());
     if (!ret) {
         LOG_F(ERROR, "set STATIC_HTML_PATH path cant be accessed");
     }
@@ -207,8 +265,7 @@ int main(int argc, char *argv[]) {
         res.set_redirect("/public/index.html");
     });
 
-    svr.Get("/rest/logout", [](const httplib::Request &req, httplib::Response &res) {
-        SQLITE3 db(ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::DB_FILEPATH)); // init database
+    svr.Get("/rest/logout", [&db](const httplib::Request &req, httplib::Response &res) {
         bool err = false;
         std::string reason = "ok";
         // RESET PLAYER STATE
@@ -230,8 +287,7 @@ int main(int argc, char *argv[]) {
         res.set_content(response_json.dump(), "application/json");
     });
 
-    svr.Get("/rest/login", [](const httplib::Request &req, httplib::Response &res) {
-        SQLITE3 db(ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::DB_FILEPATH)); // init database
+    svr.Get("/rest/login", [&db](const httplib::Request &req, httplib::Response &res) {
 
         bool err = false;
         std::string reason = "ok";
@@ -256,30 +312,45 @@ int main(int argc, char *argv[]) {
                     ConfigParser::CFG_ENTRY::INITIAL_BOARD_FEN);
 
             //CREATE NEW USER IF NOT EXISTS
-            SQLITE3_QUERY query = SQLITE3_QUERY(
-                    fmt::format("SELECT * FROM {} WHERE HWID='{}'", GAMEDATA_DATABASE_NAME, hwid));
-            if (db.execute(query) && db.get_result_row_count() <= 0) {
-                SQLITE3_QUERY insert_query = SQLITE3_QUERY(
-                        fmt::format("INSERT INTO {} VALUES ('{}', '{}', {}, {}, {}, '{}');", GAMEDATA_DATABASE_NAME,
-                                    hwid, sid, initial_gamestate, remote_player_is_white, 0,
-                                    initial_fen)); // ? will be replaced after bind
-                if (db.execute(insert_query) && db.commit()) { // execute query
-                    db.perror();
-                    err = true;
-                    reason = "db insert error";
-                }
+            SQLITE3_QUERY query = SQLITE3_QUERY("SELECT * FROM ? WHERE HWID=?");
+            query.add_binding(GAMEDATA_DATABASE_NAME, hwid);
+
+            if (db.execute(query)) {
+                db.perror();
+                err = true;
+                reason = "db select * error";
             } else {
-                SQLITE3_QUERY update_query = SQLITE3_QUERY(fmt::format(
-                        "UPDATE {} SET SID='{}', game_state='{}', remote_player_is_white='{}', is_syncing_phase='{}', current_board_fen='{}' WHERE HWID='{}';",
-                        GAMEDATA_DATABASE_NAME, sid, initial_gamestate, remote_player_is_white, 0, initial_fen,
-                        hwid)); // ? will be replaced after bind
-                if (db.execute(update_query) && db.commit()) { // execute query
-                    db.perror();
-                    err = true;
-                    reason = "db update error";
+
+                const int r = db.copy_result()->size();
+                db.print_result();
+                db.commit();
+                query.reset_binding();
+                if (r <= 0) {
+                    query.set_query_template(
+                            "INSERT INTO ? VALUES (?, ?, ?, ?, ?, ?)"); // ? will be replaced after bind
+                    query.add_binding(GAMEDATA_DATABASE_NAME,
+                                      hwid, sid, fmt::format("{}", initial_gamestate),
+                                      fmt::format("{}", remote_player_is_white), fmt::format("{}", 0),
+                                      initial_fen);
+                    if (db.execute(query) || db.commit()) { // execute query adn commit new data
+                        db.perror();
+                        err = true;
+                        reason = "db insert error";
+                    }
+
+                } else {
+                    query.set_query_template(
+                            "UPDATE ? SET SID=?, game_state=?, remote_player_is_white=?, is_syncing_phase=?, current_board_fen=? WHERE HWID=?"); // ? will be replaced after bind
+                    query.add_binding(GAMEDATA_DATABASE_NAME, sid, fmt::format("{}", initial_gamestate),
+                                      fmt::format("{}", remote_player_is_white), fmt::format("{}", 0),
+                                      initial_fen, hwid);
+                    if (db.execute(query) || db.commit()) { // execute query
+                        db.perror();
+                        err = true;
+                        reason = "db update error";
+                    }
                 }
             }
-
         }
 
         json11::Json response_json = json11::Json::object{
@@ -310,7 +381,8 @@ int main(int argc, char *argv[]) {
         } else {
             //CHECK SESSION EXISTS
             SQLITE3_QUERY query = SQLITE3_QUERY(
-                    fmt::format("SELECT * FROM {} WHERE HWID='{}' AND SID='{}'", GAMEDATA_DATABASE_NAME, hwid, sid));
+                    fmt::format("SELECT * FROM {} WHERE HWID='{}' AND SID='{}'", GAMEDATA_DATABASE_NAME, hwid,
+                                sid));
             if (db.execute(query) && db.get_result_row_count() <= 0) {
                 err = true;
                 reason = "session invalid, please use login first";
@@ -324,8 +396,7 @@ int main(int argc, char *argv[]) {
         res.set_content(response_json.dump(), "application/json");
     });
 
-    svr.Get("/rest/set_player_state", [](const httplib::Request &req, httplib::Response &res) {
-        SQLITE3 db(ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::DB_FILEPATH)); // init database
+    svr.Get("/rest/set_player_state", [&db](const httplib::Request &req, httplib::Response &res) {
 
         bool err = false;
         std::string reason = "ok";
@@ -348,11 +419,12 @@ int main(int argc, char *argv[]) {
                         gs = GAME_STATE::PS_SEARCHING;
                     }
 
-                    const std::string q = fmt::format(R"(UPDATE gamedata SET game_state=4 WHERE HWID=123;)",
-                                                GAMEDATA_DATABASE_NAME, magic_enum::enum_integer(gs), hwid,
-                                                sid);
-                    SQLITE3_QUERY update_query = SQLITE3_QUERY("UPDATE gamedata SET game_state=4 WHERE HWID=123"); // ? will be replaced after bind
-                    if (db.execute(update_query) && db.commit()) { // execute query
+
+                    SQLITE3_QUERY update_query = SQLITE3_QUERY(
+                            "UPDATE ? SET game_state=? WHERE HWID=? AND SID=?"); // ? will be replaced after bind
+                    update_query.add_binding(GAMEDATA_DATABASE_NAME, fmt::format("{}", magic_enum::enum_integer(gs)),
+                                             hwid, sid);
+                    if (db.execute(update_query) || db.commit()) { // execute query
                         db.perror();
                         err = true;
                         reason = "db update error";
@@ -430,7 +502,6 @@ int main(int argc, char *argv[]) {
     // TODO /rest/player_setup_confirmation => if in matchmaking state -> sqitch to game running
 
     svr.Get("/rest/get_player_state", [&db](const httplib::Request &req, httplib::Response &res) {
-       // SQLITE3 db(ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::DB_FILEPATH)); // init database
 
         bool err = false;
         std::string reason = "ok";
@@ -461,37 +532,48 @@ int main(int argc, char *argv[]) {
             err = true;
             reason = "hwid.size() <= 0";
         } else {
-            //CHECK SESSION EXISTS
-            SQLITE3_QUERY query = SQLITE3_QUERY(
-                    fmt::format("SELECT * FROM {}", GAMEDATA_DATABASE_NAME, hwid, sid));
-            if (db.execute(query) && db.get_result_row_count() <= 0) {
+
+            auto qres = get_game_db_entry(db, hwid, sid);
+
+            if (qres.empty()) {
                 err = true;
                 reason = "session invalid, please use login first";
-            }else{
-                // get column names
-                auto column_name = db.copy_column_names();
-                std::cout << "|";
-                for (auto &name : *column_name) {
-                    std::cout << name << "|";
+            } else {
+
+                const GAME_DB_ENTRY gdbe = qres.at(0);
+
+                if (gdbe.game_state == GAME_STATE::PS_SEARCHING || gdbe.game_state == GAME_STATE::PS_SEARCHING_MANUAL) {
+                    waiting_for_game = true;
                 }
-                std::cout << std::endl;
+
+                im_white_player = gdbe.remote_player_is_white;
+                is_syncing_phase = gdbe.is_syncing_phase;
+                current_board_fen = gdbe.current_board_fen;
+
+                thc::ChessRules cr;
+                cr.Forsyth(gdbe.current_board_fen.c_str());
+                cr.WhiteToPlay();
+               // ChessPosition cpos(current_board_fen.c_str());
+                //if(cpos.get_active_color() == ChessPosition::Color::White && im_white_player || cpos.get_active_color() == ChessPosition::Color::Black && !im_white_player){
+                 //   is_my_turn = true;
+                //}else{
+                //    is_my_turn = false;
+               // }
 
 
-                // result is stored in a vector of SQLITE_ROW_VECTOR
-                db.print_result();
 
-                auto result = db.copy_result();
+
             }
         }
-
 
 
         json11::Json response_json = json11::Json::object{
                 {"err",               err},
                 {"status",            reason},
-                {"matchmaking_state", json11::Json::object{{"waiting_for_game", false},
+                {"matchmaking_state", json11::Json::object{{"waiting_for_game", waiting_for_game},
                                                            {"detailed",         json11::Json::object{
-                                                                   {"player_state", magic_enum::enum_integer(ps)}}}}},
+                                                                   {"player_state",
+                                                                    magic_enum::enum_integer(ps)}}}}},
                 {"game_state",        json11::Json::object{{"game_running", game_running},
                                                            {"simplified",   json11::Json::object{{"im_white_player",  im_white_player},
                                                                                                  {"is_my_turn",       is_my_turn},
@@ -516,11 +598,16 @@ int main(int argc, char *argv[]) {
     const int svr_port = ConfigParser::getInstance()->getInt_nocheck(ConfigParser::CFG_ENTRY::HTTP_PORT);
     // USING A SEPARATE THREAD
     auto httpThread = std::thread([&]() { svr.listen(svr_host.c_str(), svr_port); });
+
+
     main_thread_running = true;
 
     LOG_F(ERROR, "MAIN LOOP ENTERED");
     while (main_thread_running) {
+        auto qres = get_game_db_entry(db);
+        for (auto r: qres) {
 
+        }
     }
     httpThread.join();
 
@@ -531,3 +618,4 @@ int main(int argc, char *argv[]) {
     loguru::flush();
     return 0;
 }
+

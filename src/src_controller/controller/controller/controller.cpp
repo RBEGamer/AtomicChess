@@ -636,7 +636,7 @@ int main(int argc, char *argv[]) {
         LOG_F(INFO, "gamebackend - LOGOUT SUCCESS");
     } else {
         LOG_F(ERROR, "gamebackend - logout failed");
-        gui.show_error_message_on_gui("LOGOUT FAILED");
+        //gui.show_error_message_on_gui("LOGOUT FAILED");
     }
 
     // AUTOLOGIN => IF SET PERFORM AN AUTOLOGIN AND GOTO THE MAIN MENU
@@ -740,6 +740,7 @@ int main(int argc, char *argv[]) {
 #endif
 
             // IF A VALID SESSION
+            // IF A VALID SESSIONuse
             if (gamebackend.check_login_state()) {
                 // THE THE PLAYER STATUS
                 // WHICH CONTAINS ALL INFORMATION ABOUT THE CURRENT STATE OF GAME / MATCHMAKING / GENERAL STATE OF THE CLIENT
@@ -989,6 +990,9 @@ int main(int argc, char *argv[]) {
                                         guicommunicator::GUI_VALUE_TYPE::MAIN_MENU_SCREEN);
                     }
                 }
+            }else{
+                gamebackend.login(BackendConnector::PLAYER_TYPE::PT_HUMAN);
+                LOG_F(WARNING, "RENEW SESSION");
             }
         }
 
