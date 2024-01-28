@@ -20,13 +20,20 @@ FIND_PACKAGE(SQLite3 REQUIRED)
 add_subdirectory(THIRDPARTY/fmt)
 
 
+
+
 set(SOURCE_FILES SHARED/json11-master/json11.cpp SHARED/loguru-master/loguru.cpp)
+
+
+add_subdirectory("${PROJECT_SOURCE_DIR}/THIRDPARTY/thc-chess-library")
+include_directories(${THC_CHESS_INCLUDE})
+
 
 file(GLOB SOURCES *.h *.hpp *.cpp)
 add_executable(${PROJECT_NAME} ${SOURCE_FILES} ${SOURCES})
 
-TARGET_LINK_LIBRARIES(${PROJECT_NAME} ${SQLite3_LIBRARIES})
-TARGET_LINK_LIBRARIES(${PROJECT_NAME} fmt::fmt)
+
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} ${SQLite3_LIBRARIES} fmt::fmt thc_chess_static)
 
 # MAC COMPILE ON MAC OSX
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")

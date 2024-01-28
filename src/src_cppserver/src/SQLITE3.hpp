@@ -68,14 +68,7 @@ public:
         db = std::make_shared<sqlite3 *>();
         // open database if name is provided
         if (!db_name.empty()) {
-            int rc = sqlite3_open(db_name.c_str(), db.get());
-            if (rc != SQLITE_OK) { // check for error
-                error_no = OPEN_ERROR; // set error code
-
-                sqlite3_close(*db);
-                throw std::runtime_error("Unable to open database");
-            }
-            start_transaction();
+            SQLITE3::open(db_name);
         }
 
         // initialize result and column vector
@@ -147,7 +140,7 @@ public:
      * @param db_name name of the database to open
      * @return 0 upon success, 1 upon failure
      */
-    int open(std::string &db_name) {
+    int open(const std::string &db_name) {
         // close previous connection if needed
         if (*db) {
             sqlite3_close(*db);
@@ -157,7 +150,7 @@ public:
         }
 
         // open connection
-        int rc = sqlite3_open(db_name.c_str(), db.get());
+        int rc = sqlite3_open_v2(db_name.c_str(), db.get(), SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, nullptr);
 
         if (rc != SQLITE_OK) { // check for error
             error_no = OPEN_ERROR; // set error code
