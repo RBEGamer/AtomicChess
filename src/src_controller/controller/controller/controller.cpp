@@ -605,12 +605,7 @@ int main(int argc, char *argv[]) {
         // SHOW MESSAGEBOX IF THE CURRENT URL IS A DIFFERENT THAN IN THE CONFIG
         if (gamebackend.get_backend_base_url() !=
             ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::NETWORK_BACKEND_URL)) {
-            if (gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK,
-                                     "GAME_SERVER_URL_CHANGED:" + gamebackend.get_backend_base_url(), 100) !=
-                guicommunicator::GUI_MESSAGE_BOX_RESULT::MSGBOX_RES_OK) {
-                gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
-                                guicommunicator::GUI_VALUE_TYPE::PROCESSING_SCREEN);
-            }
+            gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,guicommunicator::GUI_VALUE_TYPE::PROCESSING_SCREEN);
         }
     } else {
         // CONNECTION FAILED => EXIT
@@ -677,8 +672,8 @@ int main(int argc, char *argv[]) {
                     gamebackend.upload_logfile(read_file_to_string(LOG_FILE_PATH_ERROR));
                 }
             } else {
-                gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK, "LOGIN_FAILED_HEARTBEAT",
-                                     4000);
+                //gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK, "LOGIN_FAILED_HEARTBEAT",
+                //                     4000);
                 LOG_F(ERROR, "GOT LOGIN_FAILED_HEARTBEAT START THREAD");
                 gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
                                 guicommunicator::GUI_VALUE_TYPE::LOGIN_SCREEN);
@@ -749,15 +744,15 @@ int main(int argc, char *argv[]) {
                     current_player_state.err == "err_session_check_failed" ||
                     current_player_state.err == "err_session_key_sid_check_failed") {
                     if (gamebackend.stop_heartbeat_thread()) {
-                        gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK,
-                                             "LOGOUT_FAILED_HEARTBEAT_STOP", 4000);
+                        //gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK,
+                        //                     "LOGOUT_FAILED_HEARTBEAT_STOP", 4000);
                         LOG_F(ERROR, "GOT LOGIN_FAILED_HEARTBEAT STOP THREAD");
                     }
 
                     gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
                                     guicommunicator::GUI_VALUE_TYPE::LOGIN_SCREEN);
                 } else if (current_player_state.err == "err_query_paramter_hwid_or_sid_or_not_set") {
-                    gui.show_error_message_on_gui("get_player_state - ERROR err_query_paramter_hwid_or_sid_or_not_set");
+                    //gui.show_error_message_on_gui("get_player_state - ERROR err_query_paramter_hwid_or_sid_or_not_set");
                     LOG_F(ERROR, "GOT err_query_paramter_hwid_or_sid_or_not_set");
                 }
 
@@ -793,8 +788,8 @@ int main(int argc, char *argv[]) {
                         // IF RETURNS FALSE => THE FEN IS INVALID
                         if (!board.boardFromFen(current_player_state.game_state.current_board_fen,
                                                 ChessBoard::BOARD_TPYE::TARGET_BOARD)) {
-                            gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK,
-                                                 "INVALID BOARD FEN - CANCEL GAME", 4000);
+                            //gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK,
+                            //                     "INVALID BOARD FEN - CANCEL GAME", 4000);
                             LOG_F(ERROR, "INVALID BOARD FEN - %s - CANCEL GAME",
                                   current_player_state.game_state.current_board_fen.c_str());
                             gamebackend.set_player_state(BackendConnector::PLAYER_STATE::PS_IDLE);
@@ -808,22 +803,12 @@ int main(int argc, char *argv[]) {
                             gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
                                             guicommunicator::GUI_VALUE_TYPE::GAME_SCREEN);
                         } else {
-                            // BOARD INIT FAILED => SHOW OPTION TO CONTIOUE
-                            if (gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_A_OK_CANCEL,
-                                                     "BOARD SETUP FAILED? CONTINUE", 4000) ==
-                                guicommunicator::GUI_MESSAGE_BOX_RESULT::MSGBOX_RES_OK) {
-                                // SEND BOARD INIT COMPLETE CALL
-                                gamebackend.set_player_setup_confirmation(
-                                        BackendConnector::PLAYER_SETUP_STATE::PSP_READY);
-                                gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
-                                                guicommunicator::GUI_VALUE_TYPE::GAME_SCREEN);
-                            } else {
                                 // RESET PLAYER STATE => ABORTS GAME
                                 gamebackend.set_player_state(BackendConnector::PLAYER_STATE::PS_IDLE);
                                 // GO BACK TO MAIN_MENU SCREEN
                                 gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
                                                 guicommunicator::GUI_VALUE_TYPE::MAIN_MENU_SCREEN);
-                            }
+
                         }
 
                         // ELSE IF THE OPPONEND TURN
