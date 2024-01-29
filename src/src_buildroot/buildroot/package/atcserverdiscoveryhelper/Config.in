@@ -1,0 +1,7 @@
+config BR2_PACKAGE_ATCSERVERDISCOVERYHELPER
+    bool "ATC_SERVERDISCOVERYHELPER"
+    help
+        This package contains a network helper daemon, to automatically detect atc servers in the network using udp broadcasts
+
+        http://marcelochsendorf.com
+

@@ -1,0 +1,7 @@
+config BR2_PACKAGE_ATCCHESSENGINESTOCKDORY
+    bool "ATC_CHESSENGINESTOCKDORY"
+    help
+        This package contains a UCI compatible chess  engine StockDory and can be used with the offline server.
+
+        https://github.com/TheBlackPlague/StockDory
+

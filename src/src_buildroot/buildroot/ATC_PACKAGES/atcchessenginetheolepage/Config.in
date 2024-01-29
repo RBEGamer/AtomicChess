@@ -1,0 +1,7 @@
+config BR2_PACKAGE_ATCCHESSENGINETHEOLEPAGE
+    bool "ATC_CHESSENGINETHEOLEPAGE"
+    help
+        This package contains a UCI compatible chess  engine from theoldpage and can be used with the offline server.
+
+        https://github.com/theolepage/chess
+

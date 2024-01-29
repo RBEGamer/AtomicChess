@@ -719,7 +719,7 @@ bool BackendConnector::get_heartbeat(BackendConnector::HB_THREAD_DATA _data)
 		json11::Json t = json11::Json::parse(tmp.body.c_str(), jp_err);
 		if (jp_err.empty())
 		{
-			if (((json11::Json::object)t.object_items())["status"].is_null())
+			if (((json11::Json::object)t.object_items())["status"].is_null() || ((json11::Json::object)t.object_items())["status"].string_value() == "ok")
 			{
 				return true;
 			}	

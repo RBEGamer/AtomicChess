@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="CMakePresetLoader"><![CDATA[{
+  "useNewFormat": true
+}]]></component>
+  <component name="CMakeReloadState">
+    <option name="reloaded" value="true" />
+  </component>
+  <component name="CMakeRunConfigurationManager">
+    <generated />
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" ENABLED="true" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c86c99dc-8c5b-4a4d-9885-8cd9d106dddc" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/src.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/query/cache-v2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/query/cmakeFiles-v1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/query/codemodel-v2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/query/toolchains-v1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/cache-v2-01fabb63ec362b024a6c.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/cmakeFiles-v1-ad433a4cf03d602a87a9.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-1b625d46f3b042f95cf1.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/directory-.-Debug-f5ebdc15457944623624.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/index-2024-01-29T12-47-20-0073.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-stockfish-Debug-4f358d854cf700eb8976.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/toolchains-v1-d37530156d1fc1d1b91b.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.27.8/CMakeCCompiler.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.27.8/CMakeCXXCompiler.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.27.8/CMakeDetermineCompilerABI_C.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.27.8/CMakeDetermineCompilerABI_CXX.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.27.8/CMakeSystem.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.27.8/CompilerIdC/CMakeCCompilerId.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.27.8/CompilerIdC/a.out" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.27.8/CompilerIdCXX/CMakeCXXCompilerId.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.27.8/CompilerIdCXX/a.out" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeConfigureLog.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TargetDirectories.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-environment.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/cmake.check_cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/rules.ninja" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/build.ninja" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/cmake_install.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/uciadapter/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/uciadapter/.gitlab-ci.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/uciadapter/CMakeLists.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/uciadapter/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/uciadapter/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/uciadapter/main.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/uciadapter/src/Process.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/uciadapter/src/ProcessLinux.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/uciadapter/src/ProcessLinux.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/uciadapter/src/ProcessWindows.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/uciadapter/src/ProcessWindows.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/uciadapter/src/UCI.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/uciadapter/src/UCI.hpp.in" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/uciadapter/tests/CMakeLists.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/uciadapter/tests/berserk.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/uciadapter/tests/berserk.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/uciadapter/tests/catch3/catch_amalgamated.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/uciadapter/tests/catch3/catch_amalgamated.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/uciadapter/tests/stockfish.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/uciadapter/tests/stockfish.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Config.in" beforeDir="false" afterPath="$PROJECT_DIR$/../../Config.in" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../OVERLAY_FS/BUILD_DATE" beforeDir="false" afterPath="$PROJECT_DIR$/../../../OVERLAY_FS/BUILD_DATE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../OVERLAY_FS/VERSION" beforeDir="false" afterPath="$PROJECT_DIR$/../../../OVERLAY_FS/VERSION" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../SWUPDATE/BUILD_DATE" beforeDir="false" afterPath="$PROJECT_DIR$/../../../SWUPDATE/BUILD_DATE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../SWUPDATE/VERSION" beforeDir="false" afterPath="$PROJECT_DIR$/../../../SWUPDATE/VERSION" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../SWUPDATE/sw-description" beforeDir="false" afterPath="$PROJECT_DIR$/../../../SWUPDATE/sw-description" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../SWUPDATE/sw-description.sig" beforeDir="false" afterPath="$PROJECT_DIR$/../../../SWUPDATE/sw-description.sig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../VERSIONING/BUILD_DATE" beforeDir="false" afterPath="$PROJECT_DIR$/../../../VERSIONING/BUILD_DATE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../VERSIONING/VERSION" beforeDir="false" afterPath="$PROJECT_DIR$/../../../VERSIONING/VERSION" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../config_backup" beforeDir="false" afterPath="$PROJECT_DIR$/../../../config_backup" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../src_cppserver/src/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/ConfigParser.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../src_cppserver/src/ConfigParser.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/ConfigParser.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../src_cppserver/src/ConfigParser.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/BitChess/.README.md.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/BitChess/.TODO.md.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/BitChess/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/BitChess/BitChess/.vscode/c_cpp_properties.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/BitChess/BitChess/.vscode/settings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/BitChess/BitChess/game/evaluation/evaluator.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/BitChess/BitChess/game/evaluation/search.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/BitChess/BitChess/game/game.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/BitChess/BitChess/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/BitChess/BitChess/position/move.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/BitChess/BitChess/position/pieces/pawn.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/BitChess/BitChess/position/pieces/pieces.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/BitChess/BitChess/position/pieces/pieces.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/BitChess/BitChess/position/position.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/BitChess/BitChess/util/bitboard.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/BitChess/BitChess/util/bitboard.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/BitChess/BitChess/util/movelookup.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/BitChess/BitChess/util/util.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/BitChess/BitChess/xboard.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/BitChess/BitChess/xboard.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/BitChess/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/BitChess/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/BitChess/test/all_tests.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/BitChess/test/position/pieces/test_king_movegen.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/BitChess/test/position/pieces/test_knight_movegen.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/BitChess/test/position/pieces/test_pawn_movegen.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/BitChess/test/util/test_bitboard.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/BitChess/test/util/test_index_to_algebraic.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/BitChess/test/util/test_movelookup_king.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/BitChess/test/util/test_movelookup_knight.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/BitChess/test/util/test_movelookup_pawn.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnfind/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnfind/Makefile.am" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnfind/acconfig.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnfind/aclocal.m4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnfind/config.h.in" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnfind/configure.in" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnfind/libmchess/ChessGame.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnfind/libmchess/ChessGame.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnfind/libmchess/ChessMove.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnfind/libmchess/ChessMove.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnfind/libmchess/ChessPiece.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnfind/libmchess/ChessPiece.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnfind/libmchess/ChessPosition.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnfind/libmchess/ChessPosition.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnfind/libmchess/ChessVector.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnfind/libmchess/ChessVector.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnfind/libmchess/Makefile.am" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnfind/libmchess/alg_parse.yy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnfind/libmchess/alg_parse_int.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnfind/libmchess/pgn_lex.ll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnfind/libmchess/pgn_lex_int.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnfind/libmchess/pgn_parse.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnfind/libmchess/pgn_parse.yy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnfind/libmchess/pgn_parse_int.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnfind/libmchess/snprintf.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnfind/libmchess/snprintf.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnfind/src/Makefile.am" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnfind/src/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/AUTHORS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/COPYING" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/ChangeLog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/INSTALL" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/Makefile.am" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/Makefile.in" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/NEWS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/PGNCommentText.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/PGNCommentText.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/PGNException.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/PGNException.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/PGNGame.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/PGNGame.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/PGNGameCollection.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/PGNGameCollection.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/PGNGameResult.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/PGNGameResult.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/PGNMove.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/PGNMove.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/PGNMoveList.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/PGNMoveList.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/PGNParser.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/PGNParser.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/PGNPiece.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/PGNPiece.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/PGNPly.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/PGNPly.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/PGNPosition.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/PGNPosition.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/PGNSquare.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/PGNSquare.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/PGNTag.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/PGNTag.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/PGNTagList.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/PGNTagList.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/README" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/RELEASE_NOTES" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/aclocal.m4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/autom4te.cache/output.0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/autom4te.cache/output.1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/autom4te.cache/requests" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/autom4te.cache/traces.0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/autom4te.cache/traces.1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/bootstrap" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/compile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/config.guess" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/config.h.in" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/config.sub" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/configure" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/configure.in" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/depcomp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/example_1/example_1.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/example_1/sample.pgn" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/example_2/example_2.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/example_2/sample.pgn" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/example_3/example_3.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/example_3/games.pgn" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/example_3/miniatures.pgn" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/example_3/sample.pgn" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/example_4/example_4.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/example_4/games.pgn" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/example_4/my2-0.pgn" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/example_4/my2-12.pgn" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/example_4/others.pgn" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/example_5/.kdev4/example_5.kdev4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/example_5/example_5.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/example_5/example_5.kdev4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/example_5/games.pgn" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/example_6/.kdev4/example_6.kdev4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/example_6/example_6.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/example_6/example_6.kdev4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/example_6/games.pgn" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/example_7/.kdev4/example_7.kdev4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/example_7/example_7.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/example_7/example_7.kdev4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/install" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/install-sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/ltmain.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/m4/libtool.m4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/m4/ltoptions.m4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/m4/ltsugar.m4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/m4/ltversion.m4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/m4/lt~obsolete.m4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/pgnlib/missing" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/thc-chess-library/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../src_cppserver/src/THIRDPARTY/thc-chess-library/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/atcserverconfig.ini" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../src_cppserver/src/atcserverconfig.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../src_cppserver/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../src_cppserver/src/main.cpp" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../../../.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectApplicationVersion">
+    <option name="ide" value="CLion" />
+    <option name="majorVersion" value="2023" />
+    <option name="minorVersion" value="3.2" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 0
+}]]></component>
+  <component name="ProjectId" id="2bd66w8DMshZzKuWHCD6VKlecfw" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "/home/marcel/AtomicChess/src/src_buildroot/buildroot/ATC_PACKAGES/atcstockfish/src",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c86c99dc-8c5b-4a4d-9885-8cd9d106dddc" name="Changes" comment="" />
+      <created>1706532436864</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1706532436864</updated>
+      <workItem from="1706532437958" duration="71000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VCPKGProject">
+    <isAutomaticCheckingOnLaunch value="false" />
+    <isAutomaticFoundErrors value="true" />
+    <isAutomaticReloadCMake value="true" />
+  </component>
+</project>

@@ -23,10 +23,10 @@
 #include "ConfigParser.h"
 
 #include <thc.h>
-#include "THIRDPARTY/BitChess/BitChess/position/position.hpp"
-#include "THIRDPARTY/BitChess/BitChess/position/move.hpp"
-#include "THIRDPARTY/BitChess/BitChess/game/evaluation/search.hpp"
 
+
+
+#include "THIRDPARTY/uciadapter/src/UCI.cpp"
 
 #define LOG_FILE_PATH_ERROR "./atcserver_error_log.log"
 #define LOG_FILE_PATH "./atcserver_log.log"
@@ -92,7 +92,7 @@ void sys_tick_delay() {
 enum class AI_ALGORITHMS {
     RNG = 0,
     FIRST = 1,
-    BITCHESS = 2
+    CUSTOM = 2
 };
 
 enum class GAME_STATE {
@@ -156,7 +156,7 @@ bool update_game_db_entry(SQLITE3 &_db, const std::string &_hwid = "", const std
 
 
     if (!_hwid.empty()) {
-        q += fmt::format(" WHERE HWID={}", _hwid);
+        q += fmt::format(" WHERE HWID='{}'", _hwid);
     }
 
 
@@ -271,17 +271,7 @@ int main(int argc, char *argv[]) {
 
 
 
-    // SET SELECTED CHESS ENGINE ALGORITHM
-    AI_ALGORITHMS selected_ai_algorithm = AI_ALGORITHMS::RNG;
-    std::string chess_ai_algorithm = ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::AI_ALGORITHM);
-    if (chess_ai_algorithm == "RNG") {
-        selected_ai_algorithm = AI_ALGORITHMS::RNG;
-    }else if (chess_ai_algorithm == "FIRST") {
-        selected_ai_algorithm = AI_ALGORITHMS::FIRST;
-    }else if (chess_ai_algorithm == "BITCHESS" || chess_ai_algorithm == "BS") {
-        selected_ai_algorithm = AI_ALGORITHMS::BITCHESS;
-    }
-    LOG_SCOPE_F(INFO, "USER SELECTED ALGORITHM IS %s ! POSSIBLE ALGORITHMS ARE: RNG, FIRST, BITCHESS", chess_ai_algorithm.c_str());
+
 
 
     // CREATE CONFIG FILE PATH
@@ -301,7 +291,7 @@ int main(int argc, char *argv[]) {
         CONFIG_FILE_PATH = fp + "atcserverconfig.ini";
     }
     LOG_SCOPE_F(INFO, "LOADING CONFIG FILE %s", CONFIG_FILE_PATH.c_str());
-
+    ConfigParser::getInstance()->loadDefaults("");
     // LOAD CONFIG FILE
     if (!ConfigParser::getInstance()->loadConfigFile(CONFIG_FILE_PATH)) {
         ConfigParser::getInstance()->loadDefaults("");
@@ -309,6 +299,42 @@ int main(int argc, char *argv[]) {
         LOG_F(INFO, "WRITE NEW CONFIGFILE DUE MISSING ONE: atcserverconfig.ini");
     }
     LOG_F(INFO, "CONFIG FILE LOADED");
+
+
+
+    // SET SELECTED CHESS ENGINE ALGORITHM
+    AI_ALGORITHMS selected_ai_algorithm = AI_ALGORITHMS::RNG;
+    std::string chess_ai_algorithm = ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::AI_ALGORITHM);
+    if (chess_ai_algorithm == "RNG") {
+        selected_ai_algorithm = AI_ALGORITHMS::RNG;
+    } else if (chess_ai_algorithm == "FIRST") {
+        selected_ai_algorithm = AI_ALGORITHMS::FIRST;
+    } else if (chess_ai_algorithm == "CUSTOM") {
+        selected_ai_algorithm = AI_ALGORITHMS::CUSTOM;
+    }
+    LOG_SCOPE_F(INFO, "USER SELECTED ALGORITHM IS %s ! POSSIBLE ALGORITHMS ARE: RNG, FIRST, CUSTOM",
+                chess_ai_algorithm.c_str());
+
+
+
+    //IF CUSTOM UCI ENGINE WAS CHOOSEN THE INITIALISATION
+    uciadapter::UCI *custom_uci_engine = nullptr;
+    if (selected_ai_algorithm == AI_ALGORITHMS::CUSTOM) {
+        LOG_SCOPE_F(INFO, "CUSTOM CHESS ENGINE WAS CHOOSEN");
+        if (custom_uci_engine) {
+            delete custom_uci_engine;
+        }
+        const std::string engine_path = ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::UCI_ENGINE_FILEPATH);
+        LOG_SCOPE_F(INFO, "ENGINE EXECUTABLE PATH %s", engine_path.c_str());
+        if (engine_path.empty()) {
+            LOG_SCOPE_F(ERROR, "ENGINE EXECUTABLE PATH IS EMPTRY. PLEASE SET UCI_ENGINE_FILEPATH IN FILEPATH");
+            exit(2);
+        }
+        custom_uci_engine = new uciadapter::UCI(engine_path);
+        LOG_SCOPE_F(INFO, "LOADED ENGINE  %s", custom_uci_engine->GetName().c_str());
+    }
+
+
 
 
     //LOAD DATABASE
@@ -883,30 +909,39 @@ int main(int argc, char *argv[]) {
                             std::random_device rd; // obtain a random number from hardware
                             std::mt19937 gen(rd()); // seed the generator
                             if (!moves.empty()) {
-                                std::uniform_int_distribution<> distr(0, moves.size()-1); // define the range
+                                std::uniform_int_distribution<> distr(0, moves.size() - 1); // define the range
                                 const int selected_move = distr(gen);
                                 move_to_apply_by_ai = moves.at(selected_move);
                             }
-                        }else if (selected_ai_algorithm == AI_ALGORITHMS::FIRST) {
+                        } else if (selected_ai_algorithm == AI_ALGORITHMS::FIRST) {
                             if (!moves.empty()) {
                                 move_to_apply_by_ai = moves.at(0);
                             }
-                        }else if (selected_ai_algorithm == AI_ALGORITHMS::BITCHESS) {
-                            bitchess::Position bcpos(r.current_board_fen);
-                            bitchess::Search bcsearch;
-                            bitchess::Move bcmove;
 
-                            if(r.remote_player_is_white){
-                                bcmove = bcsearch.get_next_move(bcpos, bitchess::Colour::BLACK);
-                            }else{
-                                bcmove = bcsearch.get_next_move(bcpos, bitchess::Colour::WHITE);
+                        } else if (selected_ai_algorithm == AI_ALGORITHMS::CUSTOM) {
+                            if(!custom_uci_engine){
+                                LOG_F(ERROR, "custom_uci_engine pointer is null");
                             }
-                            move_to_apply_by_ai.TerseIn(&cr, bcmove.get_in_coordinate().c_str());
+                            //
+                            custom_uci_engine->ucinewgame();
+                            custom_uci_engine->position(r.current_board_fen);
+                            custom_uci_engine->go(uciadapter::Go());
+                            custom_uci_engine->SyncAfter(2);
+                            auto mvres = custom_uci_engine->GetLines();
 
+                            if(!mvres.empty()){
+                                auto best_moves = mvres.begin()->second.pv;
+                                if(!best_moves.empty()){
+                                    move_to_apply_by_ai.TerseIn(&cr, best_moves.at(0).c_str());
+                                }
+
+                            }
+                            custom_uci_engine->stop();
                         }
 
                         //apply selected move
                         if (move_to_apply_by_ai.Valid()) {
+                            LOG_F(INFO, "MOVE: %s FOR %s", move_to_apply_by_ai.TerseOut().c_str(), r.hwid.c_str());
                             cr.PlayMove(move_to_apply_by_ai);
                             // UPDATE FEN IN DATABASE ENTRY
                             update_game_db_entry(db, r.hwid, "", "", "", "", cr.ForsythPublish());
@@ -916,12 +951,21 @@ int main(int argc, char *argv[]) {
             }
 
 
-            // RESET GAME IF THERE IS ANY FEN ERROR
+            // RESET GAME IF THERE IS ANY FEN OR MOVE ERROR
             thc::ChessRules cr;
+            std::vector<thc::Move> move_test;
+
             if (!cr.Forsyth(r.current_board_fen.c_str())) {
                 update_game_db_entry(db, r.hwid, "",
                                      fmt::format("{}", magic_enum::enum_integer(GAME_STATE::PS_IDLE)), "",
                                      "", "");
+            }else{
+                cr.GenLegalMoveList(move_test);
+                if(move_test.empty()){
+                    update_game_db_entry(db, r.hwid, "",
+                                         fmt::format("{}", magic_enum::enum_integer(GAME_STATE::PS_IDLE)), "",
+                                         "", "");
+                }
             }
 
 

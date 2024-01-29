@@ -1,0 +1,300 @@
+
+base_depth-1.perft
+real	0m0,139s
+user	0m0,123s
+sys	0m0,016s
+
+base_depth-2.perft
+real	0m0,089s
+user	0m0,089s
+sys	0m0,000s
+
+base_depth-3.perft
+real	0m0,118s
+user	0m0,118s
+sys	0m0,000s
+
+base_depth-4.perft
+real	0m0,760s
+user	0m0,756s
+sys	0m0,004s
+
+base_depth-5.perft
+real	0m17,195s
+user	0m17,186s
+sys	0m0,008s
+
+castling_base_depth-1.perft
+real	0m0,104s
+user	0m0,092s
+sys	0m0,012s
+
+castling_base_depth-2.perft
+real	0m0,096s
+user	0m0,084s
+sys	0m0,012s
+
+castling_base_depth-3.perft
+real	0m0,146s
+user	0m0,146s
+sys	0m0,000s
+
+castling_base_depth-4.perft
+real	0m1,472s
+user	0m1,467s
+sys	0m0,005s
+
+castling_base_depth-5.perft
+real	0m37,766s
+user	0m37,758s
+sys	0m0,005s
+
+castling_error_depth-1.perft
+real	0m0,137s
+user	0m0,115s
+sys	0m0,016s
+
+castling_error_depth-2.perft
+real	0m0,226s
+user	0m0,216s
+sys	0m0,005s
+
+castling_error_depth-3.perft
+real	0m0,202s
+user	0m0,184s
+sys	0m0,014s
+
+castling_error_depth-4.perft
+real	0m1,390s
+user	0m1,380s
+sys	0m0,008s
+
+castling_error_depth-5.perft
+real	0m24,341s
+user	0m24,325s
+sys	0m0,004s
+
+castling_rook_depth-1.perft
+real	0m0,130s
+user	0m0,124s
+sys	0m0,004s
+
+castling_rook_depth-2.perft
+real	0m0,109s
+user	0m0,090s
+sys	0m0,020s
+
+castling_rook_depth-3.perft
+real	0m0,124s
+user	0m0,108s
+sys	0m0,016s
+
+castling_rook_depth-4.perft
+real	0m0,368s
+user	0m0,364s
+sys	0m0,004s
+
+castling_rook_depth-5.perft
+real	0m4,452s
+user	0m4,448s
+sys	0m0,004s
+
+check_promotion_depth-1.perft
+real	0m0,120s
+user	0m0,113s
+sys	0m0,004s
+
+check_promotion_depth-2.perft
+real	0m0,115s
+user	0m0,107s
+sys	0m0,008s
+
+check_promotion_depth-3.perft
+real	0m0,123s
+user	0m0,123s
+sys	0m0,000s
+
+check_promotion_depth-4.perft
+real	0m0,276s
+user	0m0,269s
+sys	0m0,004s
+
+check_promotion_depth-5.perft
+real	0m2,872s
+user	0m2,867s
+sys	0m0,006s
+
+en_passant_choice_depth-1.perft
+real	0m0,117s
+user	0m0,113s
+sys	0m0,004s
+
+en_passant_choice_depth-2.perft
+real	0m0,113s
+user	0m0,096s
+sys	0m0,016s
+
+en_passant_choice_depth-3.perft
+real	0m0,143s
+user	0m0,143s
+sys	0m0,000s
+
+en_passant_choice_depth-4.perft
+real	0m0,912s
+user	0m0,908s
+sys	0m0,004s
+
+en_passant_choice_depth-5.perft
+real	0m14,372s
+user	0m14,355s
+sys	0m0,008s
+
+facing_rook_depth-1.perft
+real	0m0,119s
+user	0m0,114s
+sys	0m0,004s
+
+facing_rook_depth-2.perft
+real	0m0,112s
+user	0m0,108s
+sys	0m0,004s
+
+facing_rook_depth-3.perft
+real	0m0,119s
+user	0m0,111s
+sys	0m0,008s
+
+facing_rook_depth-4.perft
+real	0m0,282s
+user	0m0,273s
+sys	0m0,009s
+
+facing_rook_depth-5.perft
+real	0m3,188s
+user	0m3,184s
+sys	0m0,004s
+
+mat_depth-1.perft
+real	0m0,111s
+user	0m0,111s
+sys	0m0,000s
+
+mat_depth-2.perft
+real	0m0,117s
+user	0m0,117s
+sys	0m0,000s
+
+mat_depth-3.perft
+real	0m0,112s
+user	0m0,105s
+sys	0m0,004s
+
+mat_depth-4.perft
+real	0m0,106s
+user	0m0,098s
+sys	0m0,008s
+
+mat_depth-5.perft
+real	0m0,107s
+user	0m0,103s
+sys	0m0,004s
+
+pawn_army_depth-1.perft
+real	0m0,105s
+user	0m0,096s
+sys	0m0,009s
+
+pawn_army_depth-2.perft
+real	0m0,102s
+user	0m0,103s
+sys	0m0,000s
+
+pawn_army_depth-3.perft
+real	0m0,106s
+user	0m0,097s
+sys	0m0,009s
+
+pawn_army_depth-4.perft
+real	0m0,129s
+user	0m0,125s
+sys	0m0,004s
+
+pawn_army_depth-5.perft
+real	0m0,435s
+user	0m0,427s
+sys	0m0,008s
+
+pawn_vs_rook_depth-1.perft
+real	0m0,106s
+user	0m0,102s
+sys	0m0,004s
+
+pawn_vs_rook_depth-2.perft
+real	0m0,110s
+user	0m0,098s
+sys	0m0,012s
+
+pawn_vs_rook_depth-3.perft
+real	0m0,142s
+user	0m0,138s
+sys	0m0,004s
+
+pawn_vs_rook_depth-4.perft
+real	0m0,165s
+user	0m0,156s
+sys	0m0,009s
+
+pawn_vs_rook_depth-5.perft
+real	0m0,956s
+user	0m0,952s
+sys	0m0,004s
+
+provided_0.perft
+real	0m28,588s
+user	0m28,578s
+sys	0m0,008s
+
+provided_11.perft
+real	0m0,209s
+user	0m0,200s
+sys	0m0,008s
+
+provided_1.perft
+real	0m0,111s
+user	0m0,111s
+sys	0m0,000s
+
+provided_2.perft
+real	0m0,518s
+user	0m0,517s
+sys	0m0,000s
+
+provided_3.perft
+real	0m0,117s
+user	0m0,117s
+sys	0m0,000s
+
+provided_4.perft
+real	0m0,105s
+user	0m0,104s
+sys	0m0,001s
+
+provided_5.perft
+real	0m0,146s
+user	0m0,138s
+sys	0m0,008s
+
+provided_6.perft
+real	0m0,110s
+user	0m0,096s
+sys	0m0,013s
+
+provided_7.perft
+real	0m0,109s
+user	0m0,097s
+sys	0m0,012s
+
+provided_8.perft
+real	0m0,119s
+user	0m0,113s
+sys	0m0,004s

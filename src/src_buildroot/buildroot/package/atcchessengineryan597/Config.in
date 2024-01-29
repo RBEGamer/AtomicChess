@@ -1,0 +1,7 @@
+config BR2_PACKAGE_ATCCHESSENGINERYAN597
+    bool "ATC_CHESSENGINERYAN597"
+    help
+        This package contains a UCI compatible chess  engine from ryan597 and can be used with the offline server.
+
+        https://github.com/ryan597/chessengine
+

@@ -30,7 +30,8 @@ public:
         DB_FILEPATH,
         STATIC_HTML_PATH,
         INITIAL_BOARD_FEN,
-        AI_ALGORITHM
+        AI_ALGORITHM,
+        UCI_ENGINE_FILEPATH,
 
 	};
 	

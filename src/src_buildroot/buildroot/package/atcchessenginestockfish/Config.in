@@ -1,0 +1,8 @@
+config BR2_PACKAGE_ATCCHESSENGINESTOCKFISH
+    bool "ATC_ATCCHESSENGINESTOCKFISH"
+    help
+        This package contains a UCI compatible chess  engine Stockfish-16 and can be used with the offline server.
+
+        https://github.com/official-stockfish/Stockfish/releases/tag/sf_16
+        https://github.com/official-stockfish/Stockfish
+

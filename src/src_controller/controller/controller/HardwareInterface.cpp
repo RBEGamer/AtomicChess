@@ -30,7 +30,7 @@ HardwareInterface::HardwareInterface() {
     } else if (hwrevstr == "VIRT") {
         hwrev = HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_VIRT;
     } else {
-        init_complete = false;
+        init_complete = true;
         return;
     }
     LOG_F(INFO, "HardwareInterface::HardwareInterface got hwrev ");
@@ -217,7 +217,7 @@ bool HardwareInterface::is_simulates_hardware() {
 }
 
 
-bool HardwareInterface::setTurnStateLight(HardwareInterface::HI_TURN_STATE_LIGHT _state) {
+    bool HardwareInterface::setTurnStateLight(HardwareInterface::HI_TURN_STATE_LIGHT _state) {
     if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_DK) {
         if (iocontroller != nullptr) {
             iocontroller->setTurnStateLight(static_cast<IOController::TURN_STATE_LIGHT>(_state));
@@ -230,10 +230,8 @@ bool HardwareInterface::setTurnStateLight(HardwareInterface::HI_TURN_STATE_LIGHT
         if (userboardcontroller_interface != nullptr) {
             userboardcontroller_interface->set_led(_state);
         }
-
-        return true;
     }
-    return false;
+    return true;
 }
 
     bool HardwareInterface::setCoilState(HI_COIL _coil, bool _state) {
@@ -289,7 +287,14 @@ bool HardwareInterface::setTurnStateLight(HardwareInterface::HI_TURN_STATE_LIGHT
             }
         } else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_VIRT) {
             LOG_F(INFO, "HardwareInterface::ScanNFC() return an invalid figure due HWREV_VIRT");
-
+            ChessPiece::FIGURE fig;
+            fig.color = ChessPiece::COLOR::COLOR_UNKNOWN;
+            fig.type = ChessPiece::TYPE::TYPE_INVALID;
+            fig.figure_number = -1;
+            fig.unique_id = -1;
+            fig.is_empty = true;
+            fig.figure_read_failed = false;
+            return fig;
 
         } else if (hwrev == HardwareInterface::HI_HARDWARE_REVISION::HI_HWREV_PROD_V3) {
             if (userboardcontroller_interface != nullptr) {

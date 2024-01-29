@@ -1,0 +1,74 @@
+name: C++ build
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build-Debug:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: "install lcov for coverage"
+      run: sudo apt install lcov
+
+    - name: "checkout repo"
+      uses: actions/checkout@v4
+
+    - name: "build Debug"
+      uses: ./.github/actions
+      with:
+        build_type: Debug
+
+    - name: "test Debug"
+      working-directory: ./build_Debug
+      run: make test
+
+    - name: "code coverage"
+      working-directory: ./build_Debug
+      run: make coverage
+
+    - name: "comment coverage"
+      uses: romeovs/lcov-reporter-action@v0.3.1
+      with:
+        lcov-file: ./build_Debug/coverage.info
+        delete-old-comments: true
+        filter-changed-files: true
+        title: "Code Coverage Report"
+      if: ${{ github.event_name == 'pull_request' }}
+
+
+  build-Release:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: "checkout repo"
+      uses: actions/checkout@v4
+
+    - name: "build Release"
+      uses: ./.github/actions
+      with:
+        build_type: Release
+
+    - name: "test Release"
+      working-directory: ./build_Release
+      run: make test
+
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+    - name: "checkout repo"
+      uses: actions/checkout@v4
+
+    - name: "build Release"
+      uses: ./.github/actions
+      with:
+        build_type: Release
+
+    - name: "test Release"
+      working-directory: ./build_Release
+      run: ctest --output-on-failure

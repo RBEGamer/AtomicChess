@@ -1,0 +1,107 @@
+[Event "Paris"]
+[Site "Paris"]
+[Date "1821.??.??"]
+[Round "?"]
+[White "De Labourdonnais, Louis"]
+[Black "Cochrane, James"]
+[Result "0-1"]
+[WhiteElo ""]
+[BlackElo ""]
+[ECO "C37"]
+
+1.e4 e5 2.f4 exf4 3.Nf3 g5 4.Bc4 g4 5.Ne5 Qh4+ 6.Kf1 f3 7.g3 Qh3+ 8.Kf2 Qg2+
+9.Ke3 Bh6+ 10.Kd3 d5 11.Bxd5 Na6 12.c3 c6 13.Bxf7+ Ke7 14.Bb3 Nc5+ 15.Kc2 Nxe4
+16.Qf1 Bf5 17.Qxg2 Nf2+ 18.d3 fxg2 19.Rg1 Rd8 20.Bxh6 Nxh6 21.Rxg2 Nxd3 22.Nxd3 Bxd3+
+23.Kc1 Rhf8 24.Nd2 Nf5 25.Bd1 Ne3 26.Rg1 Bf1 27.b3 Rf2 28.Rxf1 Nxf1 29.Nxf1 Rxd1+
+30.Kxd1 Rxf1+  0-1
+
+[Event "France"]
+[Site "France"]
+[Date "1830.??.??"]
+[Round "?"]
+[White "De la Bourdonnais, Louis"]
+[Black "Pelling"]
+[Result "1-0"]
+[WhiteElo ""]
+[BlackElo ""]
+[ECO "C21"]
+
+1.e4 e5 2.d4 exd4 3.Bc4 c5 4.Nf3 d6 5.c3 dxc3 6.O-O Be6 7.Bxe6 fxe6 8.Qb3 Qd7
+9.Ng5 d5 10.exd5 exd5 11.Re1+ Be7 12.Ne6 Kf7 13.Qxc3 Nf6 14.h4 Re8 15.Bf4 Bd6
+16.Qg3 Nh5 17.Qg4  1-0
+
+[Event "France"]
+[Site "France"]
+[Date "1830.??.??"]
+[Round "?"]
+[White "De la Bourdonnais, Louis"]
+[Black "D'Arblay"]
+[Result "1-0"]
+[WhiteElo ""]
+[BlackElo ""]
+[ECO "C39"]
+
+1.e4 e5 2.f4 exf4 3.Nf3 g5 4.h4 g4 5.Ng5 Nc6 6.Bc4 Ne5 7.Bb3 h6 8.d4 hxg5
+9.dxe5 Rxh4 10.Rf1 g3 11.Nc3 Bb4 12.Qd5 Bxc3+ 13.bxc3 Qe7 14.Ba3 d6 15.exd6 Qe6
+16.Qd4 Qf6 17.e5 Qf5 18.dxc7 Be6 19.Ba4+ Bd7 20.O-O-O  1-0
+
+[Event "London m1"]
+[Site "London"]
+[Date "1834.??.??"]
+[Round "1"]
+[White "De Labourdonnais, Louis"]
+[Black "McDonnell, Alexander"]
+[Result "1/2-1/2"]
+[WhiteElo ""]
+[BlackElo ""]
+[ECO "B22"]
+
+1.e4 e5 2.d4 exd4 3.Nf3 c5 4.Bc4 Nc6 5.c3 Qf6 6.O-O d6 7.cxd4 cxd4 8.Ng5 Nh6
+9.f4 Be7 10.e5 Qg6 11.exd6 Qxd6 12.Na3 O-O 13.Bd3 Bf5 14.Nc4 Qg6 15.Nf3 Bxd3
+16.Nce5 Bc2 17.Nxg6 Bxd1 18.Nxe7+ Nxe7 19.Rxd1 Nhf5 20.g4 Ne3 21.Bxe3 dxe3
+22.Rd7 Rfe8 23.Re1 Ng6 24.f5 Nf4 25.Rd4 Nh3+ 26.Kg2 Nf2 27.Rc4 Rad8 28.h3 h6
+29.Re2 b5 30.Rd4 Rxd4 31.Nxd4 a6 32.Kf3 Nxh3 33.Rxe3 Ng5+ 34.Kf4 Rxe3 35.Kxe3 g6
+36.fxg6 fxg6 37.Nc6 Ne6 38.Ke4 Kf7 39.Ke5 h5 40.gxh5 gxh5 41.Kf5 Nc7 42.b3 Ke8
+43.a4 bxa4 44.bxa4 Nd5 45.Kg5 Ne7 46.Nb8 a5 47.Na6 Ng6 48.Kxh5 Nf4+ 49.Kg5 Ne6+
+50.Kf5 Kd7 51.Ke5 Nd8  1/2-1/2
+
+[Event "London m1"]
+[Site "London"]
+[Date "1834.??.??"]
+[Round "2"]
+[White "De Labourdonnais, Louis"]
+[Black "McDonnell, Alexander"]
+[Result "1/2-1/2"]
+[WhiteElo ""]
+[BlackElo ""]
+[ECO "C44"]
+
+1.e4 e5 2.Nf3 Nc6 3.d4 exd4 4.Bc4 Qf6 5.c3 d3 6.Qxd3 d6 7.O-O Qg6 8.Bf4 Be7
+9.Nbd2 h5 10.Rfe1 Bh3 11.Nh4 Bxh4 12.Qxh3 Bf6 13.e5 dxe5 14.Bxe5 Bxe5 15.f4 Nge7
+16.fxe5 Qg4 17.Qxg4 hxg4 18.Nb3 Ng6 19.e6 f5 20.Rad1 Nge5 21.Bd3 Rh5 22.Bc2 Ke7
+23.Nd4 Kf6 24.Rf1 Ne7 25.b4 Rah8 26.Ne2 Rxh2 27.Ng3 g6 28.Bb3 Kg5 29.Rde1 Nd3
+30.Re3 Nf4 31.Rf2 R2h7 32.Rd2 Nh5 33.Nxh5 Rxh5 34.Kf2 f4 35.Re5+ Nf5 36.e7 Re8
+37.Rd7 Rh7 38.Rxc7 Rhxe7 39.Rcxe7 Rxe7 40.Rxe7 Nxe7 41.a4 Kf5 42.a5 Ke5 43.Bd1 g3+
+44.Kf3 Nd5 45.Bc2 g5 46.b5 Nxc3 47.b6 axb6 48.axb6 Nb5 49.Kg4 Nd6 50.Bd3 Ne4
+51.Be2 Kd5 52.Bf3 Ke5 53.Be2 Kf6 54.Bf3 Nf2+ 55.Kh5 g4 56.Bxg4 Ke7 57.Bc8 Kd6
+58.Bxb7 Kc5  1/2-1/2
+
+[Event "London m1"]
+[Site "London"]
+[Date "1834.??.??"]
+[Round "3"]
+[White "De Labourdonnais, Louis"]
+[Black "McDonnell, Alexander"]
+[Result "1/2-1/2"]
+[WhiteElo ""]
+[BlackElo ""]
+[ECO "C44"]
+
+1.e4 e5 2.Nf3 Nc6 3.d4 exd4 4.Bc4 Qf6 5.O-O d6 6.c3 d3 7.Qxd3 Qg6 8.Bf4 Be7
+9.Nbd2 Nh6 10.Rae1 O-O 11.Nd4 Ne5 12.Bxe5 dxe5 13.N4f3 Bd6 14.h3 Kh8 15.Nh4 Qh5
+16.Qg3 f5 17.Nxf5 Nxf5 18.exf5 Bxf5 19.Ne4 Bxe4 20.Rxe4 Rf6 21.Rh4 Qf5 22.Qe3 Qd7
+23.Bd3 g6 24.Be4 Raf8 25.Qg3 Qg7 26.b4 a5 27.a3 axb4 28.axb4 c5 29.Rb1 cxb4
+30.cxb4 Bc7 31.Kh1 Rb6 32.b5 Bd8 33.Rg4 g5 34.Bf3 h5 35.Re4 g4 36.hxg4 hxg4
+37.Qxg4 Rh6+ 38.Kg1 Qh7 39.g3 Rg8 40.Qc8 Bb6 41.Qc3 Rxg3+ 42.Kf1 Bd4 43.Qc8+ Rg8
+44.Qc4 Rh1+ 45.Ke2 Rxb1 46.Rxd4 Rb2+ 47.Rd2 Rxd2+ 48.Kxd2 Rd8+ 49.Ke2 Qh6
+50.Qc3 Qg7 51.Be4 Kg8 52.Qb3+ Kf8 53.Qf3+ Qf7 54.Bxb7 Qxf3+ 55.Kxf3  1/2-1/2

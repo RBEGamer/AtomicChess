@@ -1,0 +1,8 @@
+archlinux:
+  image: "archlinux:latest"
+  before_script:
+    - pacman -Sy base-devel cmake wget --noconfirm --needed
+  script:
+    - mkdir build && cd build && cmake -DCOMPILE_TESTS:BOOL=ON ../ && make && cd ../
+    - ./tests/stockfish.sh && ./tests/berserk.sh
+    - cd build && ctest

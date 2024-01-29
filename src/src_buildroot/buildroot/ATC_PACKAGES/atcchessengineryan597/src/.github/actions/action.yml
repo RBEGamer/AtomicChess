@@ -1,0 +1,31 @@
+name: C++ build
+description: build source files
+inputs:
+  build_type:
+    description: 'cmake build type'
+    required: false
+    default: 'Debug'
+
+runs:
+  using: "composite"
+  steps:
+
+    - name: "check cache CPM"
+      id: cache-cpm
+      uses: actions/cache@v3
+      with:
+        path: |
+          cmake/CPM.cmake
+          cmake/CodeCoverage.cmake
+          cmake/catch2/**
+          ${{ inputs.build_type }}/_deps/**
+        key: ${{ hashFiles('CMakeLists.txt') }}--cpm
+
+    - name: "generate build files for ${{inputs.build_type}}"
+      run: cmake -S . -B build_${{inputs.build_type}} -DCMAKE_BUILD_TYPE=${{inputs.build_type}} -DCPM_SOURCE_CACHE=cmake -DBUILD_TESTING=on
+      shell: bash
+
+    - name: "cmake build targets"
+      run: cmake --build build_${{inputs.build_type}} -j8
+      shell: bash
+

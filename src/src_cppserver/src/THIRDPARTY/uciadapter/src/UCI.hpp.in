@@ -1,0 +1,133 @@
+#pragma once
+
+#ifndef @COMPILE_PLATFORM@
+#define @COMPILE_PLATFORM@
+#endif
+#ifdef UNIX
+#include "ProcessLinux.hpp"
+#define INIT_PROCESS(p)                                                        \
+  { p = static_cast<Process *>(new ProcessLinux()); }
+#endif
+#ifdef WIN32
+#include "ProcessWindows.hpp"
+#define INIT_PROCESS(p)                                                        \
+  { p = static_cast<Process *>(new ProcessWindows()); }
+#endif
+#include <chrono>
+#include <sstream>
+#include <thread>
+#include <unordered_map>
+#include <vector>
+
+#define IS_OPT_PARAM(str)                                                      \
+  (((str) == "name") || ((str) == "type") || ((str) == "default") ||                  \
+   ((str) == "min")  || ((str) == "max")  || ((str) == "var"))
+
+namespace uciadapter {
+
+/// @brief Empty string and option if not specified
+typedef struct Option {
+  std::string name;
+  std::string type;
+  std::string default_value;
+  std::string min;
+  std::string max;
+  std::string var;
+} Option;
+
+/// @brief All long are initiated to -1 if not set
+class Info {
+public:
+  long depth;
+  long seldepth;
+  long multipv;
+  long score_cp;
+  long score_mate;
+  long score_lowerbound;
+  long score_upperbound;
+  long cp;
+  long nodes;
+  long nps;
+  long tbhits;
+  long time;
+  long hashfull;
+  long cpuload;
+  long currmovenumber;
+  std::vector<std::string> pv;
+  std::string currmove;
+  Info();
+};
+
+/// @brief Calling go(Go()) will perform a Command("go"). Just leave unused
+/// parameters untouched
+class Go {
+public:
+  std::string searchmoves;
+  std::string ponder;
+  int wtime, btime, winc, binc, movestogo, depth, nodes, mate, movetime;
+  bool infinite;
+  Go();
+};
+
+class UCI {
+  Process *p;
+  /// @brief Reset on each call to go()
+  std::string buffer;
+  /// @brief Reset on each call to go()
+  std::string bestmove, ponder;
+  /// @brief Setup on engine startup
+  std::string name, author;
+  /// @brief Setup on engine startup
+  std::vector<Option> options;
+  /// @brief Setup on engine startup
+  bool uciok;
+  bool registration_required;
+  bool copyprotection_failed;
+  bool registered;
+  void ParseId(std::string);
+  void ParseOption(std::string);
+  void ParseInfo(std::string);
+  /// @brief Reset on each call to go()
+  std::unordered_map<int, Info> lines;
+  /// @brief Reset on each call to go()
+  std::vector<std::string> infostrings;
+  /// @brief Reset on each call to go()
+  std::vector<std::string> refutations;
+  void Sync();
+
+public:
+  UCI(std::string);
+  ~UCI();
+  std::string GetBuffer();
+  std::string GetName();
+  std::string GetAuthor();
+  std::string GetBestMove();
+  std::vector<Option> GetOptions();
+  std::unordered_map<int, Info> GetLines();
+  std::vector<std::string> GetInfoStrings();
+  bool IsRegistrationRequired();
+  bool IsRegistered();
+  void Command(std::string);
+  void SyncAfter(int);
+
+  // UCI API (all in lower case)
+  void ucinewgame();
+  void stop();
+  void position(std::string, std::string);
+  void setoption(std::string, std::string);
+  void position(std::string);
+  void register_now(std::string, std::string);
+  void register_later();
+  void debug(bool);
+  void ponderhit();
+  void quit();
+  void go(Go);
+};
+
+struct EngineError : public std::exception {
+  std::string msg;
+  EngineError(std::string reason) { msg = "Engine error: " + reason; }
+  const char *what() const throw() { return msg.c_str(); }
+};
+
+} // namespace uciadapter

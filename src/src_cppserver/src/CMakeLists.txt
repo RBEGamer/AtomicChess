@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.16)
 project(atc_server)
 set(PROJECT_NAME atc_server)
 
@@ -26,21 +26,21 @@ add_subdirectory("${PROJECT_SOURCE_DIR}/THIRDPARTY/fmt")
 set(SOURCE_FILES SHARED/json11-master/json11.cpp SHARED/loguru-master/loguru.cpp)
 
 
-add_subdirectory("${PROJECT_SOURCE_DIR}/THIRDPARTY/BitChess")
-include_directories(${THC_BitCHESS_SRCS})
-file(GLOB_RECURSE THC_BitCHESS_SRCS_S  ${THC_BitCHESS_SRCS}/BitChess/*.cpp ${THC_BitCHESS_SRCS}/BitChess/*.hpp)
-
 
 add_subdirectory("${PROJECT_SOURCE_DIR}/THIRDPARTY/thc-chess-library")
 include_directories(${THC_CHESS_INCLUDE})
 
+add_subdirectory("${PROJECT_SOURCE_DIR}/THIRDPARTY/uciadapter")
+include_directories(${UCIADAPTER_INCLUDE_DIR})
+
 
 
 file(GLOB SOURCES *.h *.hpp *.cpp)
-add_executable(${PROJECT_NAME} ${SOURCE_FILES} ${SOURCES} ${THC_BitCHESS_SRCS_S})
+
+add_executable(${PROJECT_NAME} ${SOURCE_FILES} ${SOURCES})
 
 
-TARGET_LINK_LIBRARIES(${PROJECT_NAME} ${SQLite3_LIBRARIES} fmt::fmt thc_chess_static)
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} ${SQLite3_LIBRARIES} fmt::fmt thc_chess_static uciadapter)
 
 # MAC COMPILE ON MAC OSX
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")

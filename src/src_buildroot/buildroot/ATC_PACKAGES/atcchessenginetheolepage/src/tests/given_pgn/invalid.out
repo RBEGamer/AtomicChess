@@ -1,0 +1,67 @@
+[move]	board::PieceType: 5
+[move]	board::PieceType: 5
+[move]	board::PieceType: 5
+[move]	board::PieceType: 5
+[piece_taken]	 piece: 5 file: 6 rank: 4
+[move]	board::PieceType: 3
+[move]	board::PieceType: 5
+[move]	board::PieceType: 3
+[piece_taken]	 piece: 5 file: 4 rank: 5
+[move]	board::PieceType: 1
+[check]	: color: 0
+[move]	board::PieceType: 0
+[move]	board::PieceType: 5
+[move]	board::PieceType: 4
+[move]	board::PieceType: 4
+[move]	board::PieceType: 5
+[move]	board::PieceType: 3
+[move]	board::PieceType: 4
+[move]	board::PieceType: 1
+[move]	board::PieceType: 5
+[move]	board::PieceType: 5
+[move]	board::PieceType: 5
+[move]	board::PieceType: 4
+[move]	board::PieceType: 0
+[move]	board::PieceType: 5
+[move]	board::PieceType: 4
+[move]	board::PieceType: 3
+[move]	board::PieceType: 3
+[piece_taken]	 piece: 4 file: 3 rank: 6
+[check]	: color: 1
+[move]	board::PieceType: 4
+[piece_taken]	 piece: 3 file: 3 rank: 6
+[move]	board::PieceType: 4
+[move]	board::PieceType: 3
+[move]	board::PieceType: 3
+[piece_taken]	 piece: 5 file: 6 rank: 4
+[move]	board::PieceType: 1
+[move]	board::PieceType: 1
+[move]	board::PieceType: 0
+[queenside castling]	color: 1
+[move]	board::PieceType: 4
+[move]	board::PieceType: 1
+[move]	board::PieceType: 1
+[move]	board::PieceType: 4
+[piece_taken]	 piece: 5 file: 4 rank: 4
+[move]	board::PieceType: 1
+[move]	board::PieceType: 3
+[move]	board::PieceType: 5
+[move]	board::PieceType: 4
+[move]	board::PieceType: 1
+[move]	board::PieceType: 5
+[move]	board::PieceType: 3
+[move]	board::PieceType: 3
+[piece_taken]	 piece: 5 file: 5 rank: 5
+[move]	board::PieceType: 3
+[piece_taken]	 piece: 2 file: 4 rank: 8
+[move]	board::PieceType: 3
+[piece_taken]	 piece: 4 file: 7 rank: 3
+[move]	board::PieceType: 3
+[move]	board::PieceType: 1
+[move]	board::PieceType: 4
+[move]	board::PieceType: 4
+[move]	board::PieceType: 2
+[move]	board::PieceType: 1
+[check]	: color: 0
+[disqualified]	: color: 0
+[game_finished]	

@@ -1,0 +1,104 @@
+[move]	board::PieceType: 4
+[move]	board::PieceType: 4
+[move]	board::PieceType: 5
+[move]	board::PieceType: 5
+[move]	board::PieceType: 4
+[move]	board::PieceType: 3
+[move]	board::PieceType: 5
+[move]	board::PieceType: 5
+[move]	board::PieceType: 5
+[move]	board::PieceType: 3
+[move]	board::PieceType: 3
+[move]	board::PieceType: 0
+[kingside castling]	color: 1
+[move]	board::PieceType: 1
+[move]	board::PieceType: 4
+[move]	board::PieceType: 3
+[move]	board::PieceType: 5
+[move]	board::PieceType: 5
+[move]	board::PieceType: 5
+[move]	board::PieceType: 3
+[move]	board::PieceType: 5
+[move]	board::PieceType: 5
+[move]	board::PieceType: 4
+[move]	board::PieceType: 0
+[queenside castling]	color: 0
+[move]	board::PieceType: 4
+[move]	board::PieceType: 5
+[piece_taken]	 piece: 5 file: 6 rank: 5
+[move]	board::PieceType: 5
+[piece_taken]	 piece: 5 file: 6 rank: 5
+[move]	board::PieceType: 5
+[move]	board::PieceType: 4
+[move]	board::PieceType: 3
+[move]	board::PieceType: 4
+[move]	board::PieceType: 5
+[move]	board::PieceType: 3
+[move]	board::PieceType: 4
+[move]	board::PieceType: 4
+[move]	board::PieceType: 3
+[move]	board::PieceType: 2
+[move]	board::PieceType: 3
+[move]	board::PieceType: 5
+[move]	board::PieceType: 2
+[move]	board::PieceType: 5
+[move]	board::PieceType: 5
+[move]	board::PieceType: 4
+[check]	: color: 0
+[move]	board::PieceType: 0
+[move]	board::PieceType: 2
+[piece_taken]	 piece: 2 file: 5 rank: 1
+[check]	: color: 0
+[move]	board::PieceType: 2
+[piece_taken]	 piece: 2 file: 5 rank: 1
+[move]	board::PieceType: 4
+[move]	board::PieceType: 1
+[move]	board::PieceType: 4
+[piece_taken]	 piece: 3 file: 6 rank: 3
+[move]	board::PieceType: 1
+[piece_taken]	 piece: 4 file: 6 rank: 3
+[move]	board::PieceType: 5
+[piece_taken]	 piece: 5 file: 7 rank: 4
+[move]	board::PieceType: 1
+[piece_taken]	 piece: 5 file: 7 rank: 4
+[move]	board::PieceType: 4
+[move]	board::PieceType: 4
+[move]	board::PieceType: 4
+[piece_taken]	 piece: 3 file: 8 rank: 6
+[move]	board::PieceType: 1
+[move]	board::PieceType: 1
+[move]	board::PieceType: 1
+[piece_taken]	 piece: 4 file: 8 rank: 6
+[move]	board::PieceType: 3
+[piece_taken]	 piece: 4 file: 3 rank: 3
+[move]	board::PieceType: 5
+[piece_taken]	 piece: 3 file: 3 rank: 3
+[move]	board::PieceType: 3
+[move]	board::PieceType: 5
+[move]	board::PieceType: 3
+[piece_taken]	 piece: 4 file: 5 rank: 6
+[move]	board::PieceType: 2
+[piece_taken]	 piece: 3 file: 5 rank: 6
+[move]	board::PieceType: 1
+[move]	board::PieceType: 2
+[piece_taken]	 piece: 5 file: 7 rank: 6
+[check]	: color: 1
+[move]	board::PieceType: 5
+[piece_taken]	 piece: 2 file: 7 rank: 6
+[move]	board::PieceType: 1
+[piece_taken]	 piece: 5 file: 7 rank: 6
+[check]	: color: 1
+[move]	board::PieceType: 0
+[move]	board::PieceType: 1
+[check]	: color: 1
+[move]	board::PieceType: 0
+[move]	board::PieceType: 1
+[check]	: color: 1
+[move]	board::PieceType: 0
+[move]	board::PieceType: 1
+[check]	: color: 1
+[move]	board::PieceType: 0
+[move]	board::PieceType: 1
+[check]	: color: 1
+[draw]	
+[game_finished]	
