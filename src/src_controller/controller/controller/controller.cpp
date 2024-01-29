@@ -586,9 +586,7 @@ int main(int argc, char *argv[]) {
         gamebackend.set_backend_base_url(ALTERNATIVE_BACKEND_URL[abu_counter]);
         LOG_F(WARNING, "gamebackend - change backendurl due prev not abariable");
         LOG_F(WARNING, "%s", ALTERNATIVE_BACKEND_URL[abu_counter].c_str());
-#ifdef DEBUG
-        gui.show_error_message_on_gui("" + gamebackend.get_backend_base_url() + "");
-#endif
+
         abu_counter++;
         // MARK SEARCH FAILED
         if (abu_counter >= 6) {
