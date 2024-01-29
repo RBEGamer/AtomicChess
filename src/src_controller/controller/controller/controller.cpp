@@ -446,59 +446,56 @@ int main(int argc, char *argv[]) {
     // SARTING GUI COMMUNICATOR PROCESS
     guicommunicator gui;
     // USE GUICOMMUNICATOR ONLY IF WE HAVE REAL HARDWARE
-    if (!HardwareInterface::getInstance()->is_simulates_hardware()) {
-        LOG_F(INFO, "guicommunicator startig ipc thread");
-        gui.start_recieve_thread(); // START RECEIEVE WEBSERVER
 
-        // USER_GENERAL_EN_ATCGUI_COMMUNICATION
-        bool cfg_res = false;
-        if (ConfigParser::getInstance()->getBool(ConfigParser::CFG_ENTRY::GENERAL_EN_ATCGUI_COMMUNICATION, cfg_res)) {
-            gui.enable_qt_communication(cfg_res);
-        }
-        // WAIT FOR GUI TO BECOME REACHABLE
-        int gui_wait_counter = 0;
-        // TRY X TIMES BEFORE RETURN AN ERROR
-        const int GUI_WAIT_COUNTER_MAX = 100;
-        while (!gui.check_guicommunicator_reachable()) {
-            gui_wait_counter++;
-            if (gui_wait_counter > GUI_WAIT_COUNTER_MAX) {
-                break;
-            }
-        }
-        if (gui_wait_counter > GUI_WAIT_COUNTER_MAX) {
-            LOG_F(WARNING, "guicommunicator check_guicommunicator_reachable check failed");
-#ifdef DEBUG
-            std::raise(SIGINT);
-#endif
-        }
-        // RESET THE UI TO A CLEAN STATE
-        gui.createEvent(guicommunicator::GUI_ELEMENT::QT_UI_RESET, guicommunicator::GUI_VALUE_TYPE::ENABLED);
+    LOG_F(INFO, "guicommunicator startig ipc thread");
+    gui.start_recieve_thread(); // START RECEIEVE WEBSERVER
 
-        // ROTATE SCREEN IF NEEDED
-        if (ConfigParser::getInstance()->getBool_nocheck(ConfigParser::CFG_ENTRY::HARDWARE_QTUI_FLIP_ORIENTATION) &&
-            !cmdOptionExists(argv, argv + argc, "-preventflipscreen")) {
-            gui.createEvent(guicommunicator::GUI_ELEMENT::QT_UI_SET_ORIENTATION_180,
-                            guicommunicator::GUI_VALUE_TYPE::ENABLED);
-            flip_screen_state = true;
-        } else {
-            gui.createEvent(guicommunicator::GUI_ELEMENT::QT_UI_SET_ORIENTATION_0,
-                            guicommunicator::GUI_VALUE_TYPE::ENABLED);
-            flip_screen_state = false;
-        }
-        // SET PROCESSING SCREEN
-        gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::PROCESSING_SCREEN);
-        // CHECK VERSION ON GUI SIDE
-        if (gui.check_guicommunicator_version()) {
-            LOG_F(WARNING, "guicommunicator version check failed");
-        }
-        // DETERM THE HWID BY USING THE MAC ADDRESS OF THE OUTGOING INTERNFACE NAME
-        // DISPLAY FIRMARE VERSION NUMBER
-        gui.createEvent(guicommunicator::GUI_ELEMENT::INFOSCREEN_HWID_LABEL,
-                        guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING,
-                        hwid + "|" + ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::HWARDWARE_REVISION));
-        gui.createEvent(guicommunicator::GUI_ELEMENT::INFOSCREEN_RANK_LABEL,
-                        guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING, fwver + "|" + hwrev + "|" + bootpart);
+    // USER_GENERAL_EN_ATCGUI_COMMUNICATION
+    bool cfg_res = false;
+    if (ConfigParser::getInstance()->getBool(ConfigParser::CFG_ENTRY::GENERAL_EN_ATCGUI_COMMUNICATION, cfg_res)) {
+        gui.enable_qt_communication(cfg_res);
     }
+    // WAIT FOR GUI TO BECOME REACHABLE
+    int gui_wait_counter = 0;
+    // TRY X TIMES BEFORE RETURN AN ERROR
+    const int GUI_WAIT_COUNTER_MAX = 100;
+    while (!gui.check_guicommunicator_reachable()) {
+        gui_wait_counter++;
+        if (gui_wait_counter > GUI_WAIT_COUNTER_MAX) {
+            break;
+        }
+    }
+    if (gui_wait_counter > GUI_WAIT_COUNTER_MAX) {
+        LOG_F(WARNING, "guicommunicator check_guicommunicator_reachable check failed");
+    }
+    // RESET THE UI TO A CLEAN STATE
+    gui.createEvent(guicommunicator::GUI_ELEMENT::QT_UI_RESET, guicommunicator::GUI_VALUE_TYPE::ENABLED);
+
+    // ROTATE SCREEN IF NEEDED
+    if (ConfigParser::getInstance()->getBool_nocheck(ConfigParser::CFG_ENTRY::HARDWARE_QTUI_FLIP_ORIENTATION) &&
+        !cmdOptionExists(argv, argv + argc, "-preventflipscreen")) {
+        gui.createEvent(guicommunicator::GUI_ELEMENT::QT_UI_SET_ORIENTATION_180,
+                        guicommunicator::GUI_VALUE_TYPE::ENABLED);
+        flip_screen_state = true;
+    } else {
+        gui.createEvent(guicommunicator::GUI_ELEMENT::QT_UI_SET_ORIENTATION_0,
+                        guicommunicator::GUI_VALUE_TYPE::ENABLED);
+        flip_screen_state = false;
+    }
+    // SET PROCESSING SCREEN
+    gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU, guicommunicator::GUI_VALUE_TYPE::PROCESSING_SCREEN);
+    // CHECK VERSION ON GUI SIDE
+    if (gui.check_guicommunicator_version()) {
+        LOG_F(WARNING, "guicommunicator version check failed");
+    }
+    // DETERM THE HWID BY USING THE MAC ADDRESS OF THE OUTGOING INTERNFACE NAME
+    // DISPLAY FIRMARE VERSION NUMBER
+    gui.createEvent(guicommunicator::GUI_ELEMENT::INFOSCREEN_HWID_LABEL,
+                    guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING,
+                    hwid + "|" + ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::HWARDWARE_REVISION));
+    gui.createEvent(guicommunicator::GUI_ELEMENT::INFOSCREEN_RANK_LABEL,
+                    guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING, fwver + "|" + hwrev + "|" + bootpart);
+
 
     // INIT CHESSBOARD
     if (dgten) {
@@ -595,7 +592,9 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    gui.createEvent(guicommunicator::GUI_ELEMENT::INFOSCREEN_HWID_LABEL, guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING, hwid + "|" + gamebackend.get_backend_base_url());
+    gui.createEvent(guicommunicator::GUI_ELEMENT::INFOSCREEN_HWID_LABEL,
+                    guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING,
+                    hwid + "|" + gamebackend.get_backend_base_url());
 
     // SET POINTER TO GAMEBACKEND FOR UPLOAD THE LOGFILES TO CLOUD IF CATCH A SIGNAL
     gamebackend_logupload = &gamebackend;
@@ -605,7 +604,8 @@ int main(int argc, char *argv[]) {
         // SHOW MESSAGEBOX IF THE CURRENT URL IS A DIFFERENT THAN IN THE CONFIG
         if (gamebackend.get_backend_base_url() !=
             ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::NETWORK_BACKEND_URL)) {
-            gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,guicommunicator::GUI_VALUE_TYPE::PROCESSING_SCREEN);
+            gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
+                            guicommunicator::GUI_VALUE_TYPE::PROCESSING_SCREEN);
         }
     } else {
         // CONNECTION FAILED => EXIT
@@ -803,11 +803,11 @@ int main(int argc, char *argv[]) {
                             gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
                                             guicommunicator::GUI_VALUE_TYPE::GAME_SCREEN);
                         } else {
-                                // RESET PLAYER STATE => ABORTS GAME
-                                gamebackend.set_player_state(BackendConnector::PLAYER_STATE::PS_IDLE);
-                                // GO BACK TO MAIN_MENU SCREEN
-                                gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
-                                                guicommunicator::GUI_VALUE_TYPE::MAIN_MENU_SCREEN);
+                            // RESET PLAYER STATE => ABORTS GAME
+                            gamebackend.set_player_state(BackendConnector::PLAYER_STATE::PS_IDLE);
+                            // GO BACK TO MAIN_MENU SCREEN
+                            gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
+                                            guicommunicator::GUI_VALUE_TYPE::MAIN_MENU_SCREEN);
 
                         }
 
@@ -860,7 +860,8 @@ int main(int argc, char *argv[]) {
                             randommove_override) {
                             if (!current_player_state.game_state.legal_moves.empty()) {
                                 // GET RANDOM MOVE
-                                const int rnd_idnex = (int) (std::rand() % (current_player_state.game_state.legal_moves.size() - 1));
+                                const int rnd_idnex = (int) (std::rand() %
+                                                             (current_player_state.game_state.legal_moves.size() - 1));
                                 gamebackend.set_make_move(current_player_state.game_state.legal_moves.at(rnd_idnex));
                             } else {
                                 autoplayer_failed = true;
@@ -973,7 +974,7 @@ int main(int argc, char *argv[]) {
                                         guicommunicator::GUI_VALUE_TYPE::MAIN_MENU_SCREEN);
                     }
                 }
-            }else{
+            } else {
                 gamebackend.login(BackendConnector::PLAYER_TYPE::PT_HUMAN);
                 LOG_F(WARNING, "RENEW SESSION");
             }
@@ -1275,7 +1276,8 @@ int main(int argc, char *argv[]) {
                 // SET PLAYERSTATE TO OPEN FO A MATCH
                 if (!gamebackend.set_player_state(BackendConnector::PLAYER_STATE::PS_SEARCHING)) {
                     gui.show_error_message_on_gui("ENABLE MATCHMAKING FAILED");
-                    gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,guicommunicator::GUI_VALUE_TYPE::MAIN_MENU_SCREEN);
+                    gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
+                                    guicommunicator::GUI_VALUE_TYPE::MAIN_MENU_SCREEN);
                     LOG_F(WARNING, "ENABLE MATCHMAKING FAILED TRIGGERED BY USER BUTTON");
                 }
             } else if (ev.event == guicommunicator::GUI_ELEMENT::MAINMENU_START_AUTOMOVE_MATCH_BTN &&
@@ -1287,7 +1289,8 @@ int main(int argc, char *argv[]) {
                 // SET PLAYERSTATE TO OPEN FO A MATCH
                 if (!gamebackend.set_player_state(BackendConnector::PLAYER_STATE::PS_SEARCHING)) {
                     gui.show_error_message_on_gui("ENABLE MATCHMAKING FAILED");
-                    gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,guicommunicator::GUI_VALUE_TYPE::MAIN_MENU_SCREEN);
+                    gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
+                                    guicommunicator::GUI_VALUE_TYPE::MAIN_MENU_SCREEN);
                     LOG_F(WARNING, "ENABLE MATCHMAKING FAILED TRIGGERED BY USER BUTTON");
                 }
             } else if (ev.event == guicommunicator::GUI_ELEMENT::MAINMENU_START_AI_MATCH_BTN &&
@@ -1298,7 +1301,8 @@ int main(int argc, char *argv[]) {
                 // SET PLAYERSTATE TO OPEN FO A MATCH
                 if (!gamebackend.set_player_state(BackendConnector::PLAYER_STATE::PS_IDLE)) {
                     LOG_F(WARNING, "DISABLE MATCHMAKING FAILED TRIGGERED BY USER BUTTON");
-                    gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,guicommunicator::GUI_VALUE_TYPE::MAIN_MENU_SCREEN);
+                    gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
+                                    guicommunicator::GUI_VALUE_TYPE::MAIN_MENU_SCREEN);
                 }
             } else if (ev.event == guicommunicator::GUI_ELEMENT::GAMESCREEN_ABORT_GAME &&
                        ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
