@@ -1286,7 +1286,7 @@ inline auto equal2(const char* lhs, const char* rhs) -> bool {
   return memcmp(lhs, rhs, 2) == 0;
 }
 
-// Copies two characters from src to dst.
+// Copies two characters from BitChess to dst.
 template <typename Char>
 FMT_CONSTEXPR20 FMT_INLINE void copy2(Char* dst, const char* src) {
   if (!is_constant_evaluated() && sizeof(Char) == sizeof(char)) {

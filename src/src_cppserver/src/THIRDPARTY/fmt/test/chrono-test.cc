@@ -167,7 +167,7 @@ TEST(chrono_test, format_tm) {
 }
 
 // MSVC:
-//  minkernel\crts\ucrt\src\appcrt\time\wcsftime.cpp(971) : Assertion failed:
+//  minkernel\crts\ucrt\BitChess\appcrt\time\wcsftime.cpp(971) : Assertion failed:
 //  timeptr->tm_year >= -1900 && timeptr->tm_year <= 8099
 #ifndef _WIN32
 TEST(chrono_test, format_tm_future) {

@@ -294,7 +294,7 @@ TEST(compile_test, compile_format_string_literal) {
 // MSVS 2022 19.32.31332.0, 19.37.32826.1 - compile-test.cc(362,3): fatal error
 // C1001: Internal compiler error.
 //  (compiler file
-//  'D:\a\_work\1\s\src\vctools\Compiler\CxxFE\sl\p1\c\constexpr\constexpr.cpp',
+//  'D:\a\_work\1\s\BitChess\vctools\Compiler\CxxFE\sl\p1\c\constexpr\constexpr.cpp',
 //  line 8635)
 #if FMT_USE_CONSTEVAL &&                                     \
     (!FMT_MSC_VERSION ||                                     \

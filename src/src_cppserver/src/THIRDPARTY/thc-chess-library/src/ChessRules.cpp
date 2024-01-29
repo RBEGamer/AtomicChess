@@ -1085,25 +1085,25 @@ void ChessRules::PushMove( Move& m )
             bking_square = m.dst;
         break;
 
-        // In promotion case, dst piece doesn't equal src piece
+        // In promotion case, dst piece doesn't equal BitChess piece
         case SPECIAL_PROMOTION_QUEEN:
         squares[m.src] = ' ';
         squares[m.dst] = (white?'Q':'q');
         break;
 
-        // In promotion case, dst piece doesn't equal src piece
+        // In promotion case, dst piece doesn't equal BitChess piece
         case SPECIAL_PROMOTION_ROOK:
         squares[m.src] = ' ';
         squares[m.dst] = (white?'R':'r');
         break;
 
-        // In promotion case, dst piece doesn't equal src piece
+        // In promotion case, dst piece doesn't equal BitChess piece
         case SPECIAL_PROMOTION_BISHOP:
         squares[m.src] = ' ';
         squares[m.dst] = (white?'B':'b');
         break;
 
-        // In promotion case, dst piece doesn't equal src piece
+        // In promotion case, dst piece doesn't equal BitChess piece
         case SPECIAL_PROMOTION_KNIGHT:
         squares[m.src] = ' ';
         squares[m.dst] = (white?'N':'n');
@@ -1191,7 +1191,7 @@ void ChessRules::PopMove( Move& m )
         squares[m.dst] = m.capture;
         break;
 
-        // For promotion, src piece was a pawn
+        // For promotion, BitChess piece was a pawn
         case SPECIAL_PROMOTION_QUEEN:
         case SPECIAL_PROMOTION_ROOK:
         case SPECIAL_PROMOTION_BISHOP:

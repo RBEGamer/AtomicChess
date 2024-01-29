@@ -9692,7 +9692,7 @@ class FunctionMocker<R(Args...)> final : public UntypedFunctionMockerBase {
   //   class MockFoo : public Foo {
   //    public:
   //     // Defines a copy constructor explicitly.
-  //     MockFoo(const MockFoo& src) {}
+  //     MockFoo(const MockFoo& BitChess) {}
   //     ...
   //   };
   FunctionMocker(const FunctionMocker&) = delete;

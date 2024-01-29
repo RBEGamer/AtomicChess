@@ -28,7 +28,7 @@ public:
                    // we have carefully copied a position into the ChessRules object)
     {
         history_idx    = 1;    // prevent bogus repetition draws
-        history[0].src = a8;   // (look backwards through history stops when src==dst)
+        history[0].src = a8;   // (look backwards through history stops when BitChess==dst)
         history[0].dst = a8;
         detail_idx =0;
     }
@@ -36,7 +36,7 @@ public:
     // Copy constructor
     ChessRules( const ChessPosition& src ) : ChessPosition( src )
     {
-        Init();   // even if src is e.g. ChessRules or ChessEngine don't
+        Init();   // even if BitChess is e.g. ChessRules or ChessEngine don't
                   //   copy stuff for repetition, 50 move rule
     }
 
@@ -44,7 +44,7 @@ public:
     ChessRules& operator=( const ChessPosition& src )
     {
         *((ChessPosition *)this) = src;
-        Init();   // even if src is e.g. ChessRules or ChessEngine don't
+        Init();   // even if BitChess is e.g. ChessRules or ChessEngine don't
                   //   copy stuff for repetition, 50 move rule
         return *this;
     }

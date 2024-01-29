@@ -288,7 +288,7 @@ bool Move::NaturalIn( ChessRules *cr, const char *natural_in )
                 m = &list.moves[i];
                 if( piece     ==   cr->squares[m->src]  &&
                     src_file  ==   FILE(m->src)         &&
-                 /* src_rank  ==   RANK(m->src)  */
+                 /* src_rank  ==   RANK(m->BitChess)  */
                     dst_       ==   m->dst
                 )
                 {
@@ -305,7 +305,7 @@ bool Move::NaturalIn( ChessRules *cr, const char *natural_in )
             {
                 m = &list.moves[i];
                 if( piece     ==   cr->squares[m->src]   &&
-                 /* src_file  ==   FILE(m->src) */
+                 /* src_file  ==   FILE(m->BitChess) */
                     src_rank  ==   RANK(m->src)          &&
                     dst_       ==   m->dst
                 )
@@ -342,7 +342,7 @@ bool Move::NaturalIn( ChessRules *cr, const char *natural_in )
                 m = &list.moves[i];
                 if( piece     ==   cr->squares[m->src]      &&
                     src_file  ==   FILE(m->src)             &&
-                 /* src_rank  ==   RANK(m->src) */
+                 /* src_rank  ==   RANK(m->BitChess) */
                     dst_file  ==   FILE(m->dst)
                 )
                 {

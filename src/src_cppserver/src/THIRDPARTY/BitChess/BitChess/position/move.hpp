@@ -8,7 +8,7 @@
 #ifndef POSITION_MOVE_HPP_
 #define POSITION_MOVE_HPP_
 
-#include "util/util.hpp"
+#include "../util/util.hpp"
 
 #include <iostream>
 

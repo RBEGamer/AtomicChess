@@ -23,6 +23,9 @@
 #include "ConfigParser.h"
 
 #include <thc.h>
+#include "THIRDPARTY/BitChess/BitChess/position/position.hpp"
+#include "THIRDPARTY/BitChess/BitChess/position/move.hpp"
+#include "THIRDPARTY/BitChess/BitChess/game/evaluation/search.hpp"
 
 
 #define LOG_FILE_PATH_ERROR "./atcserver_error_log.log"
@@ -88,7 +91,8 @@ void sys_tick_delay() {
 
 enum class AI_ALGORITHMS {
     RNG = 0,
-    FIRST = 1
+    FIRST = 1,
+    BITCHESS = 2
 };
 
 enum class GAME_STATE {
@@ -274,8 +278,10 @@ int main(int argc, char *argv[]) {
         selected_ai_algorithm = AI_ALGORITHMS::RNG;
     }else if (chess_ai_algorithm == "FIRST") {
         selected_ai_algorithm = AI_ALGORITHMS::FIRST;
+    }else if (chess_ai_algorithm == "BITCHESS" || chess_ai_algorithm == "BS") {
+        selected_ai_algorithm = AI_ALGORITHMS::BITCHESS;
     }
-    LOG_SCOPE_F(INFO, "USER SELECTED ALGORITHM IS %s ! POSSIBLE ALGORITHMS ARE: RNG, FIRST", chess_ai_algorithm.c_str());
+    LOG_SCOPE_F(INFO, "USER SELECTED ALGORITHM IS %s ! POSSIBLE ALGORITHMS ARE: RNG, FIRST, BITCHESS", chess_ai_algorithm.c_str());
 
 
     // CREATE CONFIG FILE PATH
@@ -885,12 +891,21 @@ int main(int argc, char *argv[]) {
                             if (!moves.empty()) {
                                 move_to_apply_by_ai = moves.at(0);
                             }
+                        }else if (selected_ai_algorithm == AI_ALGORITHMS::BITCHESS) {
+                            bitchess::Position bcpos(r.current_board_fen);
+                            bitchess::Search bcsearch;
+                            bitchess::Move bcmove;
+
+                            if(r.remote_player_is_white){
+                                bcmove = bcsearch.get_next_move(bcpos, bitchess::Colour::BLACK);
+                            }else{
+                                bcmove = bcsearch.get_next_move(bcpos, bitchess::Colour::WHITE);
+                            }
+                            move_to_apply_by_ai.TerseIn(&cr, bcmove.get_in_coordinate().c_str());
+
                         }
 
-
-
-
-
+                        //apply selected move
                         if (move_to_apply_by_ai.Valid()) {
                             cr.PlayMove(move_to_apply_by_ai);
                             // UPDATE FEN IN DATABASE ENTRY

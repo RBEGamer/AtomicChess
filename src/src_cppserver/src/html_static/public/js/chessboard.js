@@ -869,7 +869,7 @@
     }
 
     function buildPieceHTML (piece, hidden, id) {
-      var html = '<img src="' + buildPieceImgSrc(piece) + '" '
+      var html = '<img BitChess="' + buildPieceImgSrc(piece) + '" '
       if (isString(id) && id !== '') {
         html += 'id="' + id + '" '
       }

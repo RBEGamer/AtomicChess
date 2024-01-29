@@ -11,6 +11,8 @@
 #include <map>
 #include <array>
 #include <vector>
+#include "../util/util.hpp"
+#include "move.hpp"
 
 namespace bitchess {
 
@@ -37,14 +39,14 @@ public:
 	 * @return a map organised by colour and piece type, e.g. in the starting position
 	 * get_piece_counts()[white][king] = 1, get_piece_counts()[black][pawn] = 8.
 	 */
-	std::map<Colour,std::map<PieceType, int>> get_piece_counts();
+	std::map<Colour,std::map<bitchess::PieceType::PieceType, int>> get_piece_counts();
 
 	/**
 	 * Gets a list of legal moves that can be played by the side_to_move in this position.
 	 * @param side_to_move Side currently on move.
 	 * @return a vector of legal moves.
 	 */
-	std::vector<Move> get_all_legal_moves(Colour side_to_move);
+	std::vector<bitchess::Move> get_all_legal_moves(Colour side_to_move);
 
 
 private:
@@ -57,8 +59,8 @@ private:
 	 */
 	std::vector<Move> test_checks(Colour side_to_move, std::vector<Move> &move_list);
 
-	std::map<Colour, std::map<PieceType,pieces::Piece>> map_pieces; //a map of the pieces
-	std::array<*pieces::Piece,64> array_pieces; //an array representing board squares of the pieces.
+	std::map<Colour, std::map<bitchess::PieceType::PieceType,bitchess::PieceType::PieceType>> map_pieces; //a map of the pieces
+	std::array<bitchess::PieceType::PieceType*,64> array_pieces; //an array representing board squares of the pieces.
 
 };
 

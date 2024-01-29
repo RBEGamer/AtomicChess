@@ -539,38 +539,38 @@ unsigned short ChessPosition::Compress( CompressedPosition &dst ) const
 
     // White captures enpassant on a6,b6...h6
     bool swap = false;
-    if( src.white && a6<=src.enpassant_target && src.enpassant_target<=h6 )
+    if( BitChess.white && a6<=BitChess.enpassant_target && BitChess.enpassant_target<=h6 )
     {
-        int idx = src.enpassant_target+8; //idx = SOUTH(src.enpassant_target)
-        if( src.enpassant_target==a6 && src.squares[idx+1]=='P' )
+        int idx = BitChess.enpassant_target+8; //idx = SOUTH(BitChess.enpassant_target)
+        if( BitChess.enpassant_target==a6 && BitChess.squares[idx+1]=='P' )
             swap = true;
-        else if( src.enpassant_target==h6 && src.squares[idx-1]=='P' )
+        else if( BitChess.enpassant_target==h6 && BitChess.squares[idx-1]=='P' )
             swap = true;
-        else if( src.squares[idx-1]=='P' || src.squares[idx+1]=='P' )
-            // BUG! src.enpassant_target can be a6 or h6 in this clause
+        else if( BitChess.squares[idx-1]=='P' || BitChess.squares[idx+1]=='P' )
+            // BUG! BitChess.enpassant_target can be a6 or h6 in this clause
             swap = true;
         if( swap )
         {
-            src.squares[idx] = src.squares[idx-24]; // store 1st rank
-            src.squares[idx-24] = 'p';              // indicate ep
+            BitChess.squares[idx] = BitChess.squares[idx-24]; // store 1st rank
+            BitChess.squares[idx-24] = 'p';              // indicate ep
         }
     }
 
     // Black captures enpassant on a3,b3...h3
-    else if( !src.white && a3<=src.enpassant_target && src.enpassant_target<=h3 )
+    else if( !BitChess.white && a3<=BitChess.enpassant_target && BitChess.enpassant_target<=h3 )
     {
-        int idx = src.enpassant_target-8; //idx = NORTH(src.enpassant_target)
-        if( src.enpassant_target==a3 && src.squares[idx+1]=='p' )
+        int idx = BitChess.enpassant_target-8; //idx = NORTH(BitChess.enpassant_target)
+        if( BitChess.enpassant_target==a3 && BitChess.squares[idx+1]=='p' )
             swap = true;
-        else if( src.enpassant_target==h3 && src.squares[idx-1]=='p' )
+        else if( BitChess.enpassant_target==h3 && BitChess.squares[idx-1]=='p' )
             swap = true;
-        else if( src.squares[idx-1]=='p' || src.squares[idx+1]=='p' )
-            // BUG! src.enpassant_target can be a3 or h3 in this clause
+        else if( BitChess.squares[idx-1]=='p' || BitChess.squares[idx+1]=='p' )
+            // BUG! BitChess.enpassant_target can be a3 or h3 in this clause
             swap = true;
         if( swap )
         {
-            src.squares[idx] = src.squares[idx+24]; // store 1st rank
-            src.squares[idx+24] = 'P';              // indicate ep
+            BitChess.squares[idx] = BitChess.squares[idx+24]; // store 1st rank
+            BitChess.squares[idx+24] = 'P';              // indicate ep
         }
     }
     #endif

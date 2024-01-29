@@ -47,10 +47,10 @@ int main()
     // Step 2)
     if( ok )
     {
-        bool match = files_match( "../src/thc.cpp", "../src/thc-regen.cpp" );
-        printf( "File ../src/thc.cpp does %s regenerated file ../src/thc-regen.cpp as intended\n", match ? "match":"not match" );
-        match = files_match( "../src/thc.h", "../src/thc-regen.h" );
-        printf( "File ../src/thc.h does %s regenerated file ../src/thc-regen.h as intended\n", match ? "match":"not match" );
+        bool match = files_match( "../BitChess/thc.cpp", "../BitChess/thc-regen.cpp" );
+        printf( "File ../BitChess/thc.cpp does %s regenerated file ../BitChess/thc-regen.cpp as intended\n", match ? "match":"not match" );
+        match = files_match( "../BitChess/thc.h", "../BitChess/thc-regen.h" );
+        printf( "File ../BitChess/thc.h does %s regenerated file ../BitChess/thc-regen.h as intended\n", match ? "match":"not match" );
     }
 
     // Step 3)
@@ -100,18 +100,18 @@ bool regenerate_h_file()
 
     const char *hdr_files[]=
     {
-        "../src/ChessDefs.h",
-        "../src/Move.h",
-        "../src/ChessPositionRaw.h",
-        "../src/ChessPosition.h",
-        "../src/ChessRules.h",
-        "../src/ChessEvaluation.h"
+        "../BitChess/ChessDefs.h",
+        "../BitChess/Move.h",
+        "../BitChess/ChessPositionRaw.h",
+        "../BitChess/ChessPosition.h",
+        "../BitChess/ChessRules.h",
+        "../BitChess/ChessEvaluation.h"
     };
 
-    std::ofstream out("../src/thc-regen.h");
+    std::ofstream out("../BitChess/thc-regen.h");
     if( !out )
     {
-        printf( "Cannot open ../src/thc-regen.h\n" );
+        printf( "Cannot open ../BitChess/thc-regen.h\n" );
         return false;
     }
 
@@ -189,20 +189,20 @@ bool regenerate_cpp_file()
 
     const char *cpp_files[]=
     {
-        "../src/Portability.cpp",
-        "../src/PrivateChessDefs.h",
-        "../src/HashLookup.h",
-        "../src/ChessPosition.cpp",
-        "../src/ChessRules.cpp",
-        "../src/ChessEvaluation.cpp",
-        "../src/Move.cpp",
-        "../src/PrivateChessDefs.cpp"
+        "../BitChess/Portability.cpp",
+        "../BitChess/PrivateChessDefs.h",
+        "../BitChess/HashLookup.h",
+        "../BitChess/ChessPosition.cpp",
+        "../BitChess/ChessRules.cpp",
+        "../BitChess/ChessEvaluation.cpp",
+        "../BitChess/Move.cpp",
+        "../BitChess/PrivateChessDefs.cpp"
     };
 
-    std::ofstream out("../src/thc-regen.cpp");
+    std::ofstream out("../BitChess/thc-regen.cpp");
     if( !out )
     {
-        printf( "Cannot open ../src/thc-regen.cpp\n" );
+        printf( "Cannot open ../BitChess/thc-regen.cpp\n" );
         return false;
     }
 
@@ -235,10 +235,10 @@ bool regenerate_cpp_file()
             {
                 util::putline(out,"// " + line);
                 keep = false;
-                std::ifstream in2("../src/GeneratedLookupTables.h");
+                std::ifstream in2("../BitChess/GeneratedLookupTables.h");
                 if( !in2 )
                 {
-                    printf( "Cannot open ../src/GeneratedLookupTables.h\n" );
+                    printf( "Cannot open ../BitChess/GeneratedLookupTables.h\n" );
                     return false;
                 }
                 for(;;)
