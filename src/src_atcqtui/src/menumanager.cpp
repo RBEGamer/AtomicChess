@@ -94,8 +94,9 @@ void MenuManager::go_menu_back(){
         return;
     }
     QString tmp = menu_visist_history.pop();
-    qInfo() << tmp << " ---------------------";
+   // qInfo() << tmp << " ---------------------";
     switch_menu(tmp);
+    guiconnection.createEvent(guicommunicator::GUI_ELEMENT::BACK_BUTTON_EVENT, guicommunicator::GUI_VALUE_TYPE::CLICKED);
 }
 
 void MenuManager::lb_info_btn(){
@@ -103,11 +104,15 @@ void MenuManager::lb_info_btn(){
 }
 
 //ENABLES A SPECIFIC MENU AND HIDES ALL OTHER
-void MenuManager::switch_menu(QString _screen){
+void MenuManager::switch_menu(QString _screen, bool _force){
     //SAVE ONLY THE CURRENT SCREEN TO THE QUEUE IF WE MOVE A LEVEL UP IN SCREEN TREE
     if(menu_levels.contains(_screen) && menu_levels.contains(current_menu_opened) && menu_levels[_screen] > menu_levels[current_menu_opened]){
     menu_visist_history.push(current_menu_opened);
     qInfo()<< "added to history" << current_menu_opened << "-------------------------";
+    }
+
+    if(_screen.contains("mm_container") || _screen.contains("processing_container") || _screen.contains("game_container") || _screen.contains("mmem_container")){
+        last_non_processing_menu_opened = _screen;
     }
     current_menu_opened = _screen;
     //HIDE ALL MENU
@@ -148,22 +153,22 @@ void MenuManager::switch_menu(QString _screen){
 
 }
 //ENABLES A SPECIFIC MENU 
-void MenuManager::switch_menu(guicommunicator::GUI_VALUE_TYPE _screen){
+void MenuManager::switch_menu(guicommunicator::GUI_VALUE_TYPE _screen, bool _force){
     switch (_screen) {
-        case guicommunicator::GUI_VALUE_TYPE::MAIN_MENU_SCREEN:{switch_menu("mm_container");break;}
-        case guicommunicator::GUI_VALUE_TYPE::LOGIN_SCREEN:{switch_menu("ls_container");break;}
-        case guicommunicator::GUI_VALUE_TYPE::SETTINGS_SCREEN:{switch_menu("ss_container");break;}
-        case guicommunicator::GUI_VALUE_TYPE::INFO_SCREEN:{switch_menu("is_container");break;}
-        case guicommunicator::GUI_VALUE_TYPE::ERROR_MESSAGE:{switch_menu("es_container");break;}
-        case guicommunicator::GUI_VALUE_TYPE::MESSAGEBOX_TYPE_A:{switch_menu("msgta_container");break;}
-        case guicommunicator::GUI_VALUE_TYPE::MESSAGEBOX_TYPE_B:{switch_menu("msgtb_container");break;}
-        case guicommunicator::GUI_VALUE_TYPE::PROCESSING_SCREEN:{switch_menu("processing_container");break;}
-        case guicommunicator::GUI_VALUE_TYPE::DEBUG_SCREEN:{switch_menu("debug_container");break;}
-        case guicommunicator::GUI_VALUE_TYPE::GAME_SCREEN:{switch_menu("game_container");break;}
-        case guicommunicator::GUI_VALUE_TYPE::PLAYER_SEARCH_SCREEN:{switch_menu("showavariableplayer_container");break;}
-        case guicommunicator::GUI_VALUE_TYPE::PLAYER_ENTER_MANUAL_MOVE_SCREEN:{switch_menu("mmem_container");break;}
-        case guicommunicator::GUI_VALUE_TYPE::CALIBRATION_SCREEN:{switch_menu("calibration_container");break;}
-        case guicommunicator::GUI_VALUE_TYPE::SOLANOID_CALIBRATION_SCREEN:{switch_menu("solanoidcal_container");break;}
+        case guicommunicator::GUI_VALUE_TYPE::MAIN_MENU_SCREEN:{switch_menu("mm_container", _force);break;}
+        case guicommunicator::GUI_VALUE_TYPE::LOGIN_SCREEN:{switch_menu("ls_container", _force);break;}
+        case guicommunicator::GUI_VALUE_TYPE::SETTINGS_SCREEN:{switch_menu("ss_container", _force);break;}
+        case guicommunicator::GUI_VALUE_TYPE::INFO_SCREEN:{switch_menu("is_container", _force);break;}
+        case guicommunicator::GUI_VALUE_TYPE::ERROR_MESSAGE:{switch_menu("es_container", _force);break;}
+        case guicommunicator::GUI_VALUE_TYPE::MESSAGEBOX_TYPE_A:{switch_menu("msgta_container", _force);break;}
+        case guicommunicator::GUI_VALUE_TYPE::MESSAGEBOX_TYPE_B:{switch_menu("msgtb_container", _force);break;}
+        case guicommunicator::GUI_VALUE_TYPE::PROCESSING_SCREEN:{switch_menu("processing_container", _force);break;}
+        case guicommunicator::GUI_VALUE_TYPE::DEBUG_SCREEN:{switch_menu("debug_container", _force);break;}
+        case guicommunicator::GUI_VALUE_TYPE::GAME_SCREEN:{switch_menu("game_container", _force);break;}
+        case guicommunicator::GUI_VALUE_TYPE::PLAYER_SEARCH_SCREEN:{switch_menu("showavariableplayer_container", _force);break;}
+        case guicommunicator::GUI_VALUE_TYPE::PLAYER_ENTER_MANUAL_MOVE_SCREEN:{switch_menu("mmem_container", _force);break;}
+        case guicommunicator::GUI_VALUE_TYPE::CALIBRATION_SCREEN:{switch_menu("calibration_container", _force);break;}
+        case guicommunicator::GUI_VALUE_TYPE::SOLANOID_CALIBRATION_SCREEN:{switch_menu("solanoidcal_container", _force);break;}
 
 
         default:break;
@@ -179,7 +184,7 @@ void MenuManager::updateProgress()
 
     //SWITCH MAIN MENU REQUEST
     if(ev.event == guicommunicator::GUI_ELEMENT::SWITCH_MENU){
-        switch_menu(ev.type);
+        switch_menu(ev.type, ev.force_switch);
     }else if(ev.event == guicommunicator::GUI_ELEMENT::INFOSCREEN_HWID_LABEL){
         set_label_text("is_container","is_hwid_label",QString::fromStdString(ev.value));
     }else if(ev.event == guicommunicator::GUI_ELEMENT::INFOSCREEN_SESSIONID_LABEL){
@@ -189,7 +194,7 @@ void MenuManager::updateProgress()
     }else if(ev.event == guicommunicator::GUI_ELEMENT::INFOSCREEN_PLAYERINFO_LABEL){
         set_label_text("is_container","is_playerinfo_label",QString::fromStdString(ev.value));
     }else if(ev.event == guicommunicator::GUI_ELEMENT::QT_UI_ERROR){
-        switch_menu(ev.type);
+        switch_menu(ev.type, ev.force_switch);
         set_label_text("es_container","es_lasterr_label",QString::fromStdString(ev.value));
     }else if(ev.event == guicommunicator::GUI_ELEMENT::NETWORK_STATUS){
         if(ev.type == guicommunicator::GUI_VALUE_TYPE::ONLINE){
@@ -243,17 +248,10 @@ void MenuManager::updateProgress()
         }else{
            set_sfp_inidcator(false);
         }
+    }else if(ev.event == guicommunicator::GUI_ELEMENT::INFOSCREEN_RANK_LABEL){
+        //set_label_text("mmem_container","is_playerinfo_label",QString::fromStdString(ev.value));
     }
 
-
-
-
-
-
-    /*
-     * user_entered_move = "";
-    set_label_text("mmem_container","mmem_chosen_move_label",user_entered_move);
-     * */
 }
 
 
@@ -326,6 +324,8 @@ void MenuManager::ls_login_btn(bool _with_scan){
 
 
 }
+
+
 
 
 

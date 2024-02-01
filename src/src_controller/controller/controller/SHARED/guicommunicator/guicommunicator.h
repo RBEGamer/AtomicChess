@@ -158,7 +158,9 @@ public:
     QT_UI_SET_ORIENTATION_180 = 60,
 
     MAINMENU_START_AUTOMOVE_MATCH_BTN = 61,
-    MATCHMAKING_INDICATOR = 62
+    MATCHMAKING_INDICATOR = 62,
+
+    BACK_BUTTON_EVENT = 63,
 };
 
 	enum class GUI_MESSAGE_BOX_TYPE
@@ -188,9 +190,10 @@ public:
 	SWITCH_SCREEN = 8,
 	PLAYER_ID = 9,   // THE PLAYER ID USED ON BEGIN_MATCH_WITH_PLAYER ELEMENT
 
-	RES1 = 10,
-	RE2 = 11,
+    CHESS_COLOR_WHITE = 10,
+    CHESS_COLOR_BLACK = 11,
 	RES3 = 12,
+   
 	//MENUS
 	LOGIN_SCREEN = 13,
 	MAIN_MENU_SCREEN = 14,
@@ -206,8 +209,6 @@ public:
     MESSAGEBOX_TYPE_B = 24,
     PROCESSING_SCREEN = 25,
     DEBUG_SCREEN = 26,
-    CHESS_COLOR_WHITE = 27,
-    CHESS_COLOR_BLACK = 28,
     PLAYER_ENTER_MANUAL_MOVE_SCREEN = 29,
     CALIBRATION_SCREEN = 30,
     SOLANOID_CALIBRATION_SCREEN = 31
@@ -220,6 +221,7 @@ public:
         GUI_VALUE_TYPE type;
         std::string value;
         int ack;
+        bool force_switch;
         int ispageswitchevent;
 
         bool is_event_valid;
@@ -230,13 +232,17 @@ public:
     ~guicommunicator();
 
 
-	
+#ifndef USES_QT
+     GUI_EVENT last_screen_change_event;
+#endif
 	
 	
 	void enable_qt_communication(bool _en);
 
     void createEvent(GUI_ELEMENT _event, GUI_VALUE_TYPE _type, std::string _value); //sends a event though ZeroMQ using protocol buffer
-    
+    #ifndef USES_QT
+    void createEvent(GUI_EVENT _event);
+    #endif
     void createEventLocal(GUI_ELEMENT _event, GUI_VALUE_TYPE _type, std::string _value);
     void createEventLocal(GUI_ELEMENT _event, GUI_VALUE_TYPE _type);
 

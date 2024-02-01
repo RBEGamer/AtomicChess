@@ -110,11 +110,12 @@ public slots:
 private:
     void show_error(QString _err);
     guicommunicator guiconnection;
-    void switch_menu(guicommunicator::GUI_VALUE_TYPE _screen);
-    void switch_menu(QString _screen);
+    void switch_menu(guicommunicator::GUI_VALUE_TYPE _screen, bool _force = false);
+    void switch_menu(QString _screen, bool _force = false);
     void set_visible_element(QString _name, bool _state);
     void set_headline_text(QString _name);
     void updateProgress();
+    QString last_non_processing_menu_opened = "";
     QString last_menu_opened = "";
     QString current_menu_opened = "";
     QString user_entered_move ="";

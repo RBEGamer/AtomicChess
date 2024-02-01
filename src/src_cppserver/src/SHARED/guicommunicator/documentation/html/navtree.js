@@ -445,12 +445,12 @@ function navTo(o,root,hash,relpath)
 
 function showSyncOff(n,relpath)
 {
-    n.html('<img BitChess="'+relpath+'sync_off.png" title="'+SYNCOFFMSG+'"/>');
+    n.html('<img src="'+relpath+'sync_off.png" title="'+SYNCOFFMSG+'"/>');
 }
 
 function showSyncOn(n,relpath)
 {
-    n.html('<img BitChess="'+relpath+'sync_on.png" title="'+SYNCONMSG+'"/>');
+    n.html('<img src="'+relpath+'sync_on.png" title="'+SYNCONMSG+'"/>');
 }
 
 function toggleSyncButton(relpath)

@@ -4,6 +4,11 @@ cp -Rf ../src_shared/SHARED ./controller/controller
 echo "COPY TO BUILDROOT PACKAGE"
 pwd
 ls
+
+rm -Rf ./controller/controller/atc_controller || true
+#rm -Rf ./controller/controller/atccontrollerconfig* || true
+rm -Rf ./controller/controller/cmake-build* || true
+rm -Rf ./controller/controller/build/ || true
 echo "COPY ./controller/controller TO ../src_buildroot/buildroot/ATC_PACKAGES/atcctl"
 cp -rf ./controller/controller ../src_buildroot/buildroot/ATC_PACKAGES/atcctl
 

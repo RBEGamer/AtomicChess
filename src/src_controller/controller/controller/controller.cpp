@@ -497,6 +497,7 @@ int main(int argc, char *argv[]) {
                     guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING, fwver + "|" + hwrev + "|" + bootpart);
 
 
+
     // INIT CHESSBOARD
     if (dgten) {
         dgt3000if.set_dgt3000_text("init board");
@@ -546,7 +547,7 @@ int main(int argc, char *argv[]) {
     }
 
     //-------------- SEARCH FOR LOCAL ATC SERVER IN NETZWORK -------------------------- //
-    std::string start_backend_url = ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::NETWORK_BACKEND_URL);
+    std::string automatic_discovered_server_ip = ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::NETWORK_BACKEND_URL);
     if (ConfigParser::getInstance()->getBool_nocheck(ConfigParser::CFG_ENTRY::NETWORK_UDP_DISCOVER_ATC_SERVER_ENABLE)) {
         UDPServerDiscovery server_disc = UDPServerDiscovery();
         const std::string sds_epc = ConfigParser::getInstance()->get(
@@ -556,31 +557,29 @@ int main(int argc, char *argv[]) {
         if (!reip.empty()) {
             reip = "http://" + reip + ":" +
                    ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::NETWORK_UDP_DISCOVER_ATC_SERVER_PORT);
-            start_backend_url = reip;
+            automatic_discovered_server_ip = reip;
             LOG_F(INFO, "GOT IP PROM UDP_ATC_SERVER_DISCOVERY SERVICE");
-            LOG_F(INFO, start_backend_url.c_str());
+            LOG_F(INFO, automatic_discovered_server_ip.c_str());
         }
     }
 
     // CREATE GAME BACKEND INSTANCE => THIS IS THE CONNECTION TO THE GAME SERVER
-
-    BackendConnector gamebackend(start_backend_url,
-                                 ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::GENERAL_HWID_INTERFACE),
-                                 hwid);
+    BackendConnector gamebackend(ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::NETWORK_BACKEND_URL),ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::GENERAL_HWID_INTERFACE), hwid);
     // SET HEARTBEAT INTERVAL
-    int gamebackend_heartbeat_interval = 5;
+    int gamebackend_heartbeat_interval = 10;
     ConfigParser::getInstance()->getInt(ConfigParser::CFG_ENTRY::NETWORK_HEARTBEAT_INTERVAL_SECS,
                                         gamebackend_heartbeat_interval);
     gamebackend.setHearbeatCallInterval(gamebackend_heartbeat_interval);
     // NOW TRY TO CONNECT TO THE SERVER, WE USE SOME HARDCODED FALL BACK URLs
     std::string ALTERNATIVE_BACKEND_URL[] = {
-            ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::NETWORK_BACKEND_URL), "http://atomicchess.de",
-            "http://atomicchess.de:3000", "http://127.0.0.1:9999", "http://127.0.0.1:3000", "http://127.0.0.1"};
+            ConfigParser::getInstance()->get(ConfigParser::CFG_ENTRY::NETWORK_BACKEND_URL), "http://atomicchess.de",automatic_discovered_server_ip, "http://127.0.0.1:9999", "http://127.0.0.1:3000", "http://127.0.0.1"};
     // CHECK IF GAMESERVER IS REACHABLE ELSE TRY AND ITERATE THOUGH THE OTHER HARDCODED URLS
     volatile int abu_counter = 0;
     volatile bool abu_result = true;
     while (!gamebackend.check_connection()) {
-        gamebackend.set_backend_base_url(ALTERNATIVE_BACKEND_URL[abu_counter]);
+        const std::string ip = ALTERNATIVE_BACKEND_URL[abu_counter];
+        if(ip.empty()){ continue;}
+        gamebackend.set_backend_base_url(ip);
         LOG_F(WARNING, "gamebackend - change backendurl due prev not abariable");
         LOG_F(WARNING, "%s", ALTERNATIVE_BACKEND_URL[abu_counter].c_str());
 
@@ -613,6 +612,7 @@ int main(int argc, char *argv[]) {
         gui.show_error_message_on_gui(
                 "Cant connect to game server. (ERR01) [" + gamebackend.get_backend_base_url() + "]");
 
+
         std::raise(SIGINT);
     }
 
@@ -629,7 +629,7 @@ int main(int argc, char *argv[]) {
         LOG_F(INFO, "gamebackend - LOGOUT SUCCESS");
     } else {
         LOG_F(ERROR, "gamebackend - logout failed");
-        //gui.show_error_message_on_gui("LOGOUT FAILED");
+        gui.createEvent(guicommunicator::GUI_ELEMENT::INFOSCREEN_PLAYERINFO_LABEL,guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING, "LOGOUT FAILED");
     }
 
     // AUTOLOGIN => IF SET PERFORM AN AUTOLOGIN AND GOTO THE MAIN MENU
@@ -672,8 +672,7 @@ int main(int argc, char *argv[]) {
                     gamebackend.upload_logfile(read_file_to_string(LOG_FILE_PATH_ERROR));
                 }
             } else {
-                //gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK, "LOGIN_FAILED_HEARTBEAT",
-                //                     4000);
+                gui.createEvent(guicommunicator::GUI_ELEMENT::INFOSCREEN_PLAYERINFO_LABEL,guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING, "LOGIN FAILED: HEARTBEAT");
                 LOG_F(ERROR, "GOT LOGIN_FAILED_HEARTBEAT START THREAD");
                 gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
                                 guicommunicator::GUI_VALUE_TYPE::LOGIN_SCREEN);
@@ -744,15 +743,14 @@ int main(int argc, char *argv[]) {
                     current_player_state.err == "err_session_check_failed" ||
                     current_player_state.err == "err_session_key_sid_check_failed") {
                     if (gamebackend.stop_heartbeat_thread()) {
-                        //gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK,
-                        //                     "LOGOUT_FAILED_HEARTBEAT_STOP", 4000);
+                        gui.createEvent(guicommunicator::GUI_ELEMENT::INFOSCREEN_PLAYERINFO_LABEL,guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING, "LOGOUT_FAILED_HEARTBEAT_STOP");
                         LOG_F(ERROR, "GOT LOGIN_FAILED_HEARTBEAT STOP THREAD");
                     }
 
                     gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
                                     guicommunicator::GUI_VALUE_TYPE::LOGIN_SCREEN);
                 } else if (current_player_state.err == "err_query_paramter_hwid_or_sid_or_not_set") {
-                    //gui.show_error_message_on_gui("get_player_state - ERROR err_query_paramter_hwid_or_sid_or_not_set");
+                    gui.createEvent(guicommunicator::GUI_ELEMENT::INFOSCREEN_PLAYERINFO_LABEL,guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING, "get_player_state - ERROR err_query_paramter_hwid_or_sid_or_not_set");
                     LOG_F(ERROR, "GOT err_query_paramter_hwid_or_sid_or_not_set");
                 }
 
@@ -788,8 +786,7 @@ int main(int argc, char *argv[]) {
                         // IF RETURNS FALSE => THE FEN IS INVALID
                         if (!board.boardFromFen(current_player_state.game_state.current_board_fen,
                                                 ChessBoard::BOARD_TPYE::TARGET_BOARD)) {
-                            //gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK,
-                            //                     "INVALID BOARD FEN - CANCEL GAME", 4000);
+                            gui.createEvent(guicommunicator::GUI_ELEMENT::INFOSCREEN_PLAYERINFO_LABEL,guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING, "INVALID BOARD FEN - CANCEL GAME");
                             LOG_F(ERROR, "INVALID BOARD FEN - %s - CANCEL GAME",
                                   current_player_state.game_state.current_board_fen.c_str());
                             gamebackend.set_player_state(BackendConnector::PLAYER_STATE::PS_IDLE);
@@ -860,8 +857,7 @@ int main(int argc, char *argv[]) {
                             randommove_override) {
                             if (!current_player_state.game_state.legal_moves.empty()) {
                                 // GET RANDOM MOVE
-                                const int rnd_idnex = (int) (std::rand() %
-                                                             (current_player_state.game_state.legal_moves.size() - 1));
+                                const int rnd_idnex = (int) (std::rand() % (current_player_state.game_state.legal_moves.size() - 1));
                                 gamebackend.set_make_move(current_player_state.game_state.legal_moves.at(rnd_idnex));
                             } else {
                                 autoplayer_failed = true;
@@ -878,6 +874,7 @@ int main(int argc, char *argv[]) {
                             if (!ConfigParser::getInstance()->getInt(
                                     ConfigParser::CFG_ENTRY::USER_RESERVED_AUTO_SCAN_BOARD_TIME_IF_USERS_TURN,
                                     make_move_scan_timer)) {
+                                make_move_scan_timer = -1;
                                 make_move_scan_timer = -1;
                             }
 
@@ -987,7 +984,7 @@ int main(int argc, char *argv[]) {
                 if (dgt_btn_state.play_btn) {
                     if (!gamebackend.set_player_state(BackendConnector::PLAYER_STATE::PS_SEARCHING)) {
                         dgt3000if.set_dgt3000_text("SEARCHING");
-                        gui.show_error_message_on_gui("ENABLE MATCHMAKING FAILED");
+                        gui.createEvent(guicommunicator::GUI_ELEMENT::INFOSCREEN_PLAYERINFO_LABEL,guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING, "ENABLE MATCHMAKING FAILED");
                         LOG_F(WARNING, "ENABLE MATCHMAKING FAILED TRIGGERED BY USER BUTTON");
                     }
                 }
@@ -1011,6 +1008,28 @@ int main(int argc, char *argv[]) {
             //-----------------------------------------------------------
             //---------------- PROCESS EVENTS ---------------------------
             //-----------------------------------------------------------
+            // TODO HIT2024 HOTFIX TO ALLOW SMOOTH MENU CHANGES
+            // SENDS LAST CONTAINER ROLLBACK EVENT IF USER SENDS BACKBUTTON EVENT
+            if(ev.event == guicommunicator::GUI_ELEMENT::BACK_BUTTON_EVENT) {
+                //TODO LAST EVENT RESEND CURRENT GUI
+
+
+                if(current_player_state.game_state.is_my_turn){
+                    gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,guicommunicator::GUI_VALUE_TYPE::PLAYER_ENTER_MANUAL_MOVE_SCREEN);
+                    gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,guicommunicator::GUI_VALUE_TYPE::PLAYER_ENTER_MANUAL_MOVE_SCREEN);
+                }else{
+
+
+                guicommunicator::GUI_EVENT rbev = gui.last_screen_change_event;
+                if(rbev.is_event_valid) {
+                    rbev.force_switch = true;
+                    gui.createEvent(rbev);
+                }
+                }
+            }
+
+
+
             if (ev.event == guicommunicator::GUI_ELEMENT::BEGIN_BTN_SCAN &&
                 ev.type == guicommunicator::GUI_VALUE_TYPE::CLICKED) {
                 //-----------------------------------------------------------
@@ -1052,14 +1071,13 @@ int main(int argc, char *argv[]) {
                             gamebackend.set_player_state(BackendConnector::PLAYER_STATE::PS_SEARCHING);
                         }
                     } else {
-                        gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK,
-                                             "LOGIN_FAILED_HEARTBEAT", 4000);
+                        gui.createEvent(guicommunicator::GUI_ELEMENT::INFOSCREEN_PLAYERINFO_LABEL,guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING, "LOGIN_FAILED_HEARTBEAT");
                         LOG_F(ERROR, "GOT LOGIN_FAILED_HEARTBEAT START THREAD");
                         gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
                                         guicommunicator::GUI_VALUE_TYPE::LOGIN_SCREEN);
                     }
                 } else {
-                    gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK, "LOGIN_FAILED", 4000);
+                    gui.createEvent(guicommunicator::GUI_ELEMENT::INFOSCREEN_PLAYERINFO_LABEL,guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING, "LOGIN_FAILED");
                     LOG_F(ERROR, "GOT LOGIN FAILED");
                     gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
                                     guicommunicator::GUI_VALUE_TYPE::LOGIN_SCREEN);
@@ -1099,8 +1117,7 @@ int main(int argc, char *argv[]) {
                         board_init_err = board.initBoard(false);
                         if (board_init_err == ChessBoard::BOARD_ERROR::FIGURES_MISSING) {
                             // FIGURE IS MISSING ON BOARD
-                            gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK,
-                                                 "FIGURES MISSING - PLEASE CHECK ON BOARD", 10000);
+                            gui.createEvent(guicommunicator::GUI_ELEMENT::INFOSCREEN_PLAYERINFO_LABEL,guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING, "FIGURES MISSING - PLEASE CHECK ON BOARD");
                             gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
                                             guicommunicator::GUI_VALUE_TYPE::LOGIN_SCREEN);
                         } else if (board_init_err == ChessBoard::BOARD_ERROR::INIT_COMPLETE) {
@@ -1116,20 +1133,18 @@ int main(int argc, char *argv[]) {
                             }
                         } else {
                             // UNKNOWN ERROR => GO BACK LOGIN SCREEN
-                            gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK,
-                                                 "BOARD INIT FAILED UNKNOWN ERROR", 10000);
+                            gui.createEvent(guicommunicator::GUI_ELEMENT::INFOSCREEN_PLAYERINFO_LABEL,guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING, "BOARD INIT FAILED UNKNOWN ERROR");
                             gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
                                             guicommunicator::GUI_VALUE_TYPE::LOGIN_SCREEN);
                         }
                     } else {
-                        gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK,
-                                             "LOGIN_FAILED_HEARTBEAT", 4000);
+                        gui.createEvent(guicommunicator::GUI_ELEMENT::INFOSCREEN_PLAYERINFO_LABEL,guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING, "LOGIN_FAILED_HEARTBEAT");
                         LOG_F(ERROR, "GOT LOGIN_FAILED_HEARTBEAT START THREAD");
                         gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
                                         guicommunicator::GUI_VALUE_TYPE::LOGIN_SCREEN);
                     }
                 } else {
-                    gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK, "LOGIN_FAILED", 4000);
+                    gui.createEvent(guicommunicator::GUI_ELEMENT::INFOSCREEN_PLAYERINFO_LABEL,guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING, "LOGIN_FAILED");
                     LOG_F(ERROR, "GOT LOGIN FAILED");
                     gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
                                     guicommunicator::GUI_VALUE_TYPE::LOGIN_SCREEN);
@@ -1147,12 +1162,10 @@ int main(int argc, char *argv[]) {
                 // CHECK FOR FIGURE MISSING ERROR
                 if (board_init_err == ChessBoard::BOARD_ERROR::FIGURES_MISSING) {
                     // gui.show_error_message_on_gui("FIGURES MISSING");
-                    gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK,
-                                         "FIGURES MISSING - PLEASE CHECK ON BOARD", 10000);
+                    gui.createEvent(guicommunicator::GUI_ELEMENT::INFOSCREEN_PLAYERINFO_LABEL,guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING, "FIGURES MISSING - PLEASE CHECK ON BOARD");
                 } else if (board_init_err != ChessBoard::BOARD_ERROR::INIT_COMPLETE) {
                     // gui.show_error_message_on_gui("BOARD INIT FAILED UNKNOWN ERROR");
-                    gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK,
-                                         "BOARD INIT FAILED UNKNOWN ERROR", 10000);
+                    gui.createEvent(guicommunicator::GUI_ELEMENT::INFOSCREEN_PLAYERINFO_LABEL,guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING, "BOARD INIT FAILED UNKNOWN ERROR");
                 }
                 gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
                                 guicommunicator::GUI_VALUE_TYPE::SETTINGS_SCREEN);
@@ -1164,10 +1177,9 @@ int main(int argc, char *argv[]) {
                 gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
                                 guicommunicator::GUI_VALUE_TYPE::PROCESSING_SCREEN);
                 if (board.calibrate_home_pos() == ChessBoard::BOARD_ERROR::NO_ERROR) {
-                    gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK,
-                                         "TABLE REACHED HOME POSITION", 10000);
+                    gui.createEvent(guicommunicator::GUI_ELEMENT::INFOSCREEN_PLAYERINFO_LABEL,guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING, "TABLE REACHED HOME POSITION");
                 } else {
-                    gui.show_error_message_on_gui("board.initBoard() FAILED");
+                    gui.createEvent(guicommunicator::GUI_ELEMENT::INFOSCREEN_PLAYERINFO_LABEL,guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING, "board.initBoard() FAILED");
                 }
                 HardwareInterface::getInstance()->setCoilState(HardwareInterface::HI_COIL::HI_COIL_A, false);
                 gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
@@ -1180,8 +1192,7 @@ int main(int argc, char *argv[]) {
                 gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
                                 guicommunicator::GUI_VALUE_TYPE::PROCESSING_SCREEN);
                 ConfigParser::getInstance()->createConfigFile(CONFIG_FILE_PATH, true);
-                gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK, "LOADED DEFAULT CONFIG",
-                                     10000);
+                gui.createEvent(guicommunicator::GUI_ELEMENT::INFOSCREEN_PLAYERINFO_LABEL,guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING, "LOADED DEFAULT CONFIG");
                 gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
                                 guicommunicator::GUI_VALUE_TYPE::SETTINGS_SCREEN);
             } else if (ev.event == guicommunicator::GUI_ELEMENT::DEBUG_FUNCTION_C &&
@@ -1189,8 +1200,7 @@ int main(int argc, char *argv[]) {
                 //--------------------------------------------------------
                 //----------------DEBUG - MAKE MOVE --------------
                 //--------------------------------------------------------
-                gui.show_message_box(guicommunicator::GUI_MESSAGE_BOX_TYPE::MSGBOX_B_OK,
-                                     "MOVE TEST POPULATE CHESSBOARD IN START POSITION", 10000);
+                gui.createEvent(guicommunicator::GUI_ELEMENT::INFOSCREEN_PLAYERINFO_LABEL,guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING, "MOVE TEST POPULATE CHESSBOARD IN START POSITION");
                 board.test_make_move_func();
                 gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
                                 guicommunicator::GUI_VALUE_TYPE::DEBUG_SCREEN);
@@ -1275,7 +1285,7 @@ int main(int argc, char *argv[]) {
                 randommove_override = false;
                 // SET PLAYERSTATE TO OPEN FO A MATCH
                 if (!gamebackend.set_player_state(BackendConnector::PLAYER_STATE::PS_SEARCHING)) {
-                    gui.show_error_message_on_gui("ENABLE MATCHMAKING FAILED");
+                    gui.createEvent(guicommunicator::GUI_ELEMENT::INFOSCREEN_PLAYERINFO_LABEL,guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING, "ENABLE MATCHMAKING FAILED");
                     gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
                                     guicommunicator::GUI_VALUE_TYPE::MAIN_MENU_SCREEN);
                     LOG_F(WARNING, "ENABLE MATCHMAKING FAILED TRIGGERED BY USER BUTTON");
@@ -1288,7 +1298,7 @@ int main(int argc, char *argv[]) {
                 randommove_override = true;
                 // SET PLAYERSTATE TO OPEN FO A MATCH
                 if (!gamebackend.set_player_state(BackendConnector::PLAYER_STATE::PS_SEARCHING)) {
-                    gui.show_error_message_on_gui("ENABLE MATCHMAKING FAILED");
+                    gui.createEvent(guicommunicator::GUI_ELEMENT::INFOSCREEN_PLAYERINFO_LABEL,guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING, "ENABLE MATCHMAKING FAILED");
                     gui.createEvent(guicommunicator::GUI_ELEMENT::SWITCH_MENU,
                                     guicommunicator::GUI_VALUE_TYPE::MAIN_MENU_SCREEN);
                     LOG_F(WARNING, "ENABLE MATCHMAKING FAILED TRIGGERED BY USER BUTTON");
@@ -1601,7 +1611,7 @@ int main(int argc, char *argv[]) {
                 // INVALID SAVE COMMAND
                 if (cal_move == -1) {
 
-                    gui.show_error_message_on_gui("CALIBRATION SAVE FAILED -> PLEASE SELECT CONRNER");
+                    gui.createEvent(guicommunicator::GUI_ELEMENT::INFOSCREEN_PLAYERINFO_LABEL,guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING, "CALIBRATION SAVE FAILED -> PLEASE SELECT CONRNER");
 
                     // SAVE H1
                 } else if (cal_move == 0) {
@@ -1609,7 +1619,7 @@ int main(int argc, char *argv[]) {
                                                         CONFIG_FILE_PATH);
                     ConfigParser::getInstance()->setInt(ConfigParser::CFG_ENTRY::MECHANIC_H1_OFFSET_MM_Y, cal_pos_y,
                                                         CONFIG_FILE_PATH);
-                    gui.show_error_message_on_gui("CALIBRATION SAVED FOR H1");
+                    gui.createEvent(guicommunicator::GUI_ELEMENT::INFOSCREEN_PLAYERINFO_LABEL,guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING, "CALIBRATION SAVED FOR H1");
                     LOG_F(INFO, "CALIBRATION SAVED FOR H1 H1_OFFSET_MM_X %i H1_OFFSET_MM_Y %i", cal_pos_x, cal_pos_y);
                     // SAVE A8
                 } else if (cal_move == 1) {
@@ -1622,7 +1632,7 @@ int main(int argc, char *argv[]) {
                     ConfigParser::getInstance()->setInt(ConfigParser::CFG_ENTRY::MECHANIC_CHESS_FIELD_WIDTH_Y,
                                                         cal_pos_y,
                                                         CONFIG_FILE_PATH); //= FW*8 WRITE BOARD WITH = NEEDED FOR ChessBoardClass
-                    gui.show_error_message_on_gui("CALIBRATION SAVED FOR A8");
+                    gui.createEvent(guicommunicator::GUI_ELEMENT::INFOSCREEN_PLAYERINFO_LABEL,guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING, "CALIBRATION SAVED FOR A8");
                     LOG_F(INFO, "CALIBRATION SAVED FOR A8 FILED_WIDTH, BOARD_WIDTH X:%i Y:%i", cal_pos_x, cal_pos_y);
 
                 } else if (cal_move == 2) {
@@ -1630,7 +1640,7 @@ int main(int argc, char *argv[]) {
                                                         cal_pos_x, CONFIG_FILE_PATH);
                     ConfigParser::getInstance()->setInt(ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_BLACK_FIRST_Y_OFFSET,
                                                         cal_pos_y, CONFIG_FILE_PATH);
-                    gui.show_error_message_on_gui("CALIBRATION SAVED FOR PARK POSITION BLACK 1");
+                    gui.createEvent(guicommunicator::GUI_ELEMENT::INFOSCREEN_PLAYERINFO_LABEL,guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING, "CALIBRATION SAVED FOR PARK POSITION BLACK 1");
                     LOG_F(INFO,
                           "CALIBRATION SAVED FOR PARK POS BLACK 1 MECHANIC_PARK_POS_BLACK_X_LINE %i MECHANIC_PARK_POS_BLACK_FIRST_Y_OFFSET %i",
                           cal_pos_x, cal_pos_y);
@@ -1641,7 +1651,7 @@ int main(int argc, char *argv[]) {
                                                         cal_pos_x, CONFIG_FILE_PATH);
                     ConfigParser::getInstance()->setInt(ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_WHITE_FIRST_Y_OFFSET,
                                                         cal_pos_y, CONFIG_FILE_PATH);
-                    gui.show_error_message_on_gui("CALIBRATION SAVED FOR PARK POSITION WHITE 1");
+                    gui.createEvent(guicommunicator::GUI_ELEMENT::INFOSCREEN_PLAYERINFO_LABEL,guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING, "CALIBRATION SAVED FOR PARK POSITION WHITE 1");
                     LOG_F(INFO,
                           "CALIBRATION SAVED FOR PARK POS WHITE 1 MECHANIC_PARK_POS_WHITE_X_LINE %i MECHANIC_PARK_POS_WHITE_FIRST_Y_OFFSET %i",
                           cal_pos_x, cal_pos_y);
@@ -1655,7 +1665,7 @@ int main(int argc, char *argv[]) {
                     // SAVE PARK POS CELL OFFSET
                     ConfigParser::getInstance()->setInt(ConfigParser::CFG_ENTRY::MECHANIC_PARK_POS_CELL_SIZE,
                                                         park_positions_length, CONFIG_FILE_PATH);
-                    gui.show_error_message_on_gui("CALIBRATION SAVED FOR PARK POSITION CELL SIZE");
+                    gui.createEvent(guicommunicator::GUI_ELEMENT::INFOSCREEN_PLAYERINFO_LABEL,guicommunicator::GUI_VALUE_TYPE::USER_INPUT_STRING, "CALIBRATION SAVED FOR PARK POSITION CELL SIZE");
                     LOG_F(INFO,
                           "CALIBRATION SAVED FOR PARK POS WHITE 1 MECHANIC_PARK_POS_WHITE_X_LINE %i MECHANIC_PARK_POS_WHITE_FIRST_Y_OFFSET %i",
                           cal_pos_x, cal_pos_y);
@@ -1753,3 +1763,4 @@ int main(int argc, char *argv[]) {
 
     return 0;
 }
+

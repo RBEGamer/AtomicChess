@@ -90,6 +90,27 @@ void guicommunicator::createEventLocal(GUI_ELEMENT _event, GUI_VALUE_TYPE _type)
 	createEventLocal(_event,_type,"");
 }
 
+#ifndef USES_QT
+void guicommunicator::createEvent(GUI_EVENT _event){
+	const std::string tmp = guievent2Json(_event);
+
+		
+	if (en_qt_communication)
+	{
+		//MAKE REQUEST
+		httplib::Client cli(EVENT_URL_COMPLETE);
+		httplib::Result res = cli.Post(EVENT_URL_SETEVENT,tmp,"application/json");
+		if(res && res->status >= 200 && res->status < 300) {
+        const int status_code = res->status;
+        //CHECK STATUS CODE 200 IS VALID
+        const std::string body = res->body;
+		int i = 0;
+    	}
+    
+	}
+}
+#endif
+
 void guicommunicator::createEvent(GUI_ELEMENT _event, GUI_VALUE_TYPE _type, std::string _value) {
 
 	std::string tmp; //EVENT STRING
@@ -100,6 +121,9 @@ void guicommunicator::createEvent(GUI_ELEMENT _event, GUI_VALUE_TYPE _type, std:
 	tmp_event.type = _type;
 	tmp_event.value = _value;
 	
+	
+
+            
 	
 	tmp_event.ispageswitchevent = false;
 	//HARDCODES STUFF TODO REMOVE
@@ -116,6 +140,13 @@ void guicommunicator::createEvent(GUI_ELEMENT _event, GUI_VALUE_TYPE _type, std:
 #else
 	tmp_event.ack = 1;
 #endif // USES_QT
+
+
+#ifndef USES_QT
+	if(tmp_event.event >= guicommunicator::GUI_ELEMENT::SWITCH_MENU){
+		last_screen_change_event = tmp_event;
+	}
+#endif
 
 	tmp = guievent2Json(tmp_event);
 	
@@ -139,11 +170,7 @@ void guicommunicator::createEvent(GUI_ELEMENT _event, GUI_VALUE_TYPE _type, std:
     	}
     
 	}
-    #ifndef USES_QT
-    //MAKE REQUEST TO THE WEBAPPLICATION
-    //httplib::Client cli(EVENT_URL_COMPLETE_WEBGL);
-    //cli.Post(EVENT_URL_SETEVENT, tmp, "application/json");
-	#endif
+
 }
 
 
@@ -158,6 +185,7 @@ std::string guicommunicator::guievent2Json(GUI_EVENT _ev)
 	root["ack"] = _ev.ack;
 	root["ispageswitchevent"] = _ev.ispageswitchevent;
 	root["is_event_valid"] = _ev.is_event_valid;
+	root["force_switch"] = _ev.force_switch;
 	
 	
 	std::string json_str = json11::Json(root).dump();
@@ -243,6 +271,14 @@ guicommunicator::GUI_EVENT guicommunicator::json2Guievent(json11::Json::object _
 	else
 	{
 		tmp.is_event_valid = false;
+	}
+
+	if(_jsobj.find("force_switch") != _jsobj.end() && !_jsobj["force_switch"].is_null()) {
+		tmp.force_switch = _jsobj["force_switch"].int_value();
+	}
+	else
+	{
+		tmp.force_switch = false;
 	}
 	
 	//ispageswitchevent
