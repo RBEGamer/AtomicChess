@@ -32,6 +32,7 @@ public:
         INITIAL_BOARD_FEN,
         AI_ALGORITHM,
         UCI_ENGINE_FILEPATH,
+        RESET_GAME_DATABASE_ON_START
 
 	};
 	

@@ -162,6 +162,9 @@ void ConfigParser::loadDefaults(std::string _type_str)
     config_store[ConfigParser::CFG_ENTRY::INITIAL_BOARD_FEN] = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
     config_store[ConfigParser::CFG_ENTRY::AI_ALGORITHM] = "RNG";
     config_store[ConfigParser::CFG_ENTRY::UCI_ENGINE_FILEPATH] = "";
+    config_store[ConfigParser::CFG_ENTRY::RESET_GAME_DATABASE_ON_START] = "1";
+
+
 }
 
 

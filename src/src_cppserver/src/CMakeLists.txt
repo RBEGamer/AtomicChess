@@ -23,7 +23,11 @@ add_subdirectory("${PROJECT_SOURCE_DIR}/THIRDPARTY/fmt")
 
 
 
-set(SOURCE_FILES SHARED/json11-master/json11.cpp SHARED/loguru-master/loguru.cpp)
+set(SOURCE_FILES SHARED/json11-master/json11.cpp SHARED/loguru-master/loguru.cpp
+        db_adapter.cpp
+        db_adapter.h
+        game_state.cpp
+        game_state.h)
 
 
 
