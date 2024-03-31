@@ -105,20 +105,3 @@ year = {2021}
 
 * chess.com & lichess.org integration
 * possible target position lights
-* rewrite gameserver(ai player in c++ and integrate into buildroot
-
-## TODO
-* rm dk hardware workaround in controller software
-* implement natural moves if possible => e.g. rook
-* cad: fixed nfc antenna position. only move magnet
-* fix wifi dhcp issues in buildroot image
-* fix/create io controller pcb with cm4 module
-* fix ABORT GAME button in UI
-* implement TCP stream SerialInterface and enable gensio again
-* implement webui on table for editing the config
-* modify server to arm images
-* translate/redesign homepage
-* add DGT3000 as package into buildroot
-* convert DGT3000 code to cmake
-* rm buildroot testpackage
-* move servo down before each home/travel
